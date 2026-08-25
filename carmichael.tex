@@ -1,0 +1,437 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{newtxtext,newtxmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{remark}[lemma]{Remark}
+\newtheorem*{theoremA}{Theorem}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\llog}{\log\log}
+\newcommand{\lllog}{\log\log\log}
+
+\begin{document}
+
+\title[Constructing Carmichael numbers deterministically]{A deterministic quasi-polylogarithmic algorithm\\ for constructing Carmichael numbers}
+
+\author{Dan Brown$^*$}
+\email{jdb1729@gmail.com}
+\thanks{$^*$Author of \emph{The Da Vinci Code}.}
+\thanks{In memory of Abraham Anthony ``Mickey'' Br\"umleve (August 24, 1986 -- December 5, 2019): A thinker, a visionary, and a source of fantastic ideas.}
+
+\date{August 24, 2026}
+
+\begin{abstract}
+We describe a deterministic algorithm that, given a large integer $n$,
+outputs a Carmichael number $m \in (n, n^{1+o(1)}]$ together with its
+complete prime factorization, in time
+$\exp\bigl(O(\llog n \cdot \lllog n)\bigr) = (\log n)^{O(\lllog n)}$.
+The correctness proof uses no unproved hypothesis and no randomness. By
+contrast, the fastest known deterministic algorithm producing a proven
+prime greater than $n$ takes time $n^{1/2+o(1)}$. The construction
+assembles effective results of Alford, Granville and Pomerance with a
+subset-product search carried out by dynamic programming over the group
+$(\Z/L\Z)^\times$ for a highly composite modulus $L$ of quasi-polylogarithmic
+size. The output certificate is verifiable in polylogarithmic time.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Given $n$, how quickly can one produce, with proof, a number larger than
+$n$ of a prescribed multiplicative type? For primes this is a well-known
+open problem: a random search succeeds in expected polylogarithmic time,
+but the best deterministic bound is $n^{1/2+o(1)}$, obtained by binary
+search against the prime counting function computed by the analytic
+method of Lagarias and Odlyzko \cite{LO}; see the Polymath project
+\cite{Pol} for the state of the art and for the obstructions near the
+exponent $1/2$.
+
+This note concerns Carmichael numbers: composite $m$ such that
+$a^m \equiv a \pmod{m}$ for every integer $a$. By Korselt's criterion
+\cite{Kor}, $m$ is Carmichael if and only if $m$ is composite, squarefree,
+and $p-1 \mid m-1$ for every prime $p \mid m$. The criterion refers only
+to the prime factors of $m$, and those factors can be small. This opens a
+route that is unavailable for primes: build $m$ as a product of many
+small primes chosen so that Korselt's criterion holds automatically. The
+existence machinery is exactly that of Alford, Granville and Pomerance
+\cite{AGP} in their proof that there are infinitely many Carmichael
+numbers. Our observation is that, for the parameters relevant here, every
+object in their proof is small enough to be found by exhaustive
+deterministic search, and their existence statements are effective.
+
+\begin{theoremA}
+There is a deterministic algorithm and a constant $n_0$, computable in
+principle, such that for every $n \ge n_0$ the algorithm outputs an
+integer $m \in (n, n^{1+o(1)}]$ together with its prime factorization,
+$m$ is a Carmichael number, and the running time is
+\[
+\exp\bigl(O(\llog n \cdot \lllog n)\bigr).
+\]
+The factorization constitutes a certificate of the Carmichael property
+verifiable in deterministic polylogarithmic time.
+\end{theoremA}
+
+To read the time bound: the input has $\log n$ bits, so a
+polylogarithmic-time algorithm (the ideal) would run in time
+$(\log n)^{O(1)}$. Our bound exceeds that by only a factor of $\lllog n$
+in the exponent, and it is smaller than $\exp((\log n)^{c})$ for every $c>0$ ---
+in particular smaller than any fixed positive power of $n$. We are not
+aware of any previously published deterministic time bound, at
+any subexponential level, for producing a Carmichael number beyond a
+given bound.
+
+An outline of the construction is as follows. Using
+Lemma~\ref{lem:smooth} we build a modulus $L$, a product of a few dozen
+small primes $q$ chosen so that every $q-1$ has only very small prime
+factors. Using Lemma~\ref{lem:pigeon} we find a multiplier $k$ such that
+many numbers of the form $dk+1$, with $d$ running over divisors of $L$,
+are prime; such primes $p$ satisfy $p - 1 \mid kL$ by design. Any
+product $m$ of distinct such primes with $m \equiv 1 \pmod{kL}$ is then
+automatically a Carmichael number by Korselt's criterion, and
+Lemma~\ref{lem:vebk} guarantees that products with $m \equiv 1$ are
+plentiful enough for an exhaustive search to find them until their
+accumulated product exceeds $n$.
+
+Related work: the recognition problem (deciding whether a
+given $n$ is Carmichael) was recently shown to be in P \cite{SW};
+large-scale computations of Carmichael numbers by subset products
+\cite{LN, AGHS} use the same skeleton as our algorithm with randomized
+and heuristic searches in place of the exhaustive steps; and Larsen
+\cite{Lar} proved an effective analogue of Bertrand's postulate for
+Carmichael numbers, discussed in Remark~\ref{rem:larsen}.
+
+Throughout, $\ell_2 = \llog n$ and $\ell_3 = \lllog n$ (natural
+logarithms), $P^+(k)$ is the largest prime factor of $k$, and running
+time counts bit operations. $C_1$ denotes an effective absolute constant.
+
+\section{Ingredients}
+
+All four inputs below are unconditional, and effective in the sense that
+their constants are computable in principle.
+
+\begin{lemma}[Smooth shifted primes; \cite{AGP}, Theorem 3 and p.~707--708]
+\label{lem:smooth}
+Let $\pi(x,y) = \#\{p \le x \text{ prime} : P^+(p-1) \le y\}$. For every
+$E < 5/12$ there are computable constants $\gamma(E) > 0$ and $x_1(E)$
+such that $\pi(x, x^{1-E}) \ge \gamma(E)\,\pi(x)$ for all $x \ge x_1(E)$.
+\end{lemma}
+
+That is, a definite fraction of the primes $p$ up to $x$ have the
+property that $p-1$ factors entirely into primes of size at most
+$x^{2/3}$ (taking $E = 1/3$, which we fix from now on; write
+$\gamma = \gamma(1/3)$). We use such primes as the building blocks of
+our modulus $L$ because the smoothness of the $q-1$ keeps the group
+exponent $\lambda(L)$ small, which is what makes
+Lemma~\ref{lem:vebk} below effective with very short sequences.
+
+\begin{lemma}[Pigeonhole over shifts; \cite{AGP}, Theorem 3.1]
+\label{lem:pigeon}
+For each $B$ in the class $\mathcal{B}$ of \cite{AGP} there are computable
+constants $z_3(B)$ and $D_B$ with the following property. If
+$x > z_3(B)$, if $L$ is squarefree with no prime factor exceeding
+$x^{(1-B)/2}$, and if $\sum_{q \mid L} 1/q \le (1-B)/32$ (sum over
+primes), then there is a positive integer $k \le x^{1-B}$ with
+$(k,L)=1$ such that
+\[
+\#\{d \mid L : dk+1 \le x,\ dk+1 \text{ prime}\}
+\;\ge\; \frac{2^{-D_B-2}}{\log x}\,\#\{d \mid L : d \le x^{B}\}.
+\]
+Moreover every $B < 5/12$ lies in $\mathcal{B}$, effectively.
+\end{lemma}
+
+We fix $B = 2/5$ and write $D = D_{2/5}$. Numbers of the form $dk+1$
+with $d \mid L$ have no reason to avoid being prime, and the lemma
+confirms that for at least one small multiplier $k$ a decent proportion
+of them (one in roughly $\log x$, up to a constant) are indeed prime. These are the primes our Carmichael number will be made
+of: each satisfies $p - 1 = dk$, which divides $kL$, and that is
+exactly the divisibility Korselt's criterion requires.
+
+\begin{lemma}[van Emde Boas--Kruyswijk \cite{EK}; see \cite{AGP}, Theorem 1.1]
+\label{lem:vebk}
+Let $G$ be a finite abelian group whose maximal element order is $m^*$.
+Any sequence of more than $m^*\bigl(1 + \log(|G|/m^*)\bigr)$ elements of
+$G$ contains a nonempty subsequence whose product is the identity.
+\end{lemma}
+
+What is striking here is how few elements suffice for a sub-collection
+with product equal to the identity: not on the order of the group size
+$|G|$, but on the order of the largest order $m^*$ of a single element,
+times a logarithm. For our group $G = (\Z/L\Z)^\times$ the size $|G|$ is huge
+but $m^*$ divides $\lambda(L)$, which the smoothness in
+Lemma~\ref{lem:smooth} keeps tiny; this gap is the engine of the whole
+construction, exactly as in \cite{AGP}.
+
+\begin{lemma}[AKS \cite{AKS}]
+\label{lem:aks}
+Primality of an $N$-bit integer is decidable deterministically in time
+polynomial in $N$.
+\end{lemma}
+
+\section{The algorithm}
+\label{sec:algo}
+
+Input: $n \ge n_0$.
+
+\begin{enumerate}
+\item[\textbf{1.}] \textbf{Scales.} Set
+$z = \lceil C_1 \ell_2 \ell_3 \rceil$ with
+$C_1 = \max(16/\gamma,\,10^3)$, then $y = \lceil z^{2/3} \rceil$ and
+$T = \lceil 3\ell_2 \rceil$.
+
+\item[\textbf{2.}] \textbf{Moduli.} By a sieve up to $z$ and trial
+division of each $q-1$, list the primes
+$q \in (\sqrt{z},\, z]$ with $P^+(q-1) \le y$. Let $Q$ be the $T$
+largest, $L = \prod_{q \in Q} q$, and $x = \lceil L^5 \rceil$.
+
+\item[\textbf{3.}] \textbf{Shift scan.} For $k = 1, 2, \dots$ with
+$(k, L) = 1$: enumerate the $2^T$ divisors $d$ of $L$ as subset products
+of $Q$, and test each $dk+1 \le x$ for primality
+(Lemma~\ref{lem:aks}). Let
+$P_k = \{dk+1 : d \mid L,\ dk+1 \le x,\ dk+1 \text{ prime},\ dk+1 > z\}$.
+Stop at the first $k$ with $|P_k| \ge (\log n)^{1.2}$; write
+$P = P_k$.
+
+\item[\textbf{4.}] \textbf{Extraction.} Compute
+$\lambda(L) = \operatorname{lcm}\{q - 1 : q \in Q\}$ (each $q-1$ is
+fully factored) and set $N^* = \lceil \lambda(L)(1 + \log L)\rceil + 1$.
+Set $m = 1$. While $m \le n$: take the next $N^*$ unused elements of
+$P$; by dynamic programming over residues modulo $L$ (process the
+elements one at a time, keep one witness subset per reachable residue,
+and use a per-element snapshot so that each element is used at most
+once) find a nonempty subset $S$ with
+$\prod_{p \in S} p \equiv 1 \pmod{L}$; replace $m$ by
+$m \prod_{p \in S} p$ and mark the elements of $S$ used.
+
+\item[\textbf{5.}] \textbf{Output and certificate.} Output $m$ and the
+list of primes used. Verify: the factors are distinct and prime, their
+product is $m$, the count of factors is at least $3$, and
+$p - 1 \mid m - 1$ for each factor $p$.
+\end{enumerate}
+
+Three of the five steps are searches, each guaranteed a target ---
+Lemma~\ref{lem:smooth} for step 2, Lemma~\ref{lem:pigeon} for step 3,
+Lemma~\ref{lem:vebk} for step 4 --- so for $n \ge n_0$ no link of the
+kill chain comes up empty.
+
+\section{Proof of the theorem}
+
+\begin{lemma}[Step 2 succeeds]
+For $n$ large, at least $T$ primes $q \in (\sqrt z, z]$ satisfy
+$P^+(q-1) \le y$.
+\end{lemma}
+
+\begin{proof}
+Apply Lemma~\ref{lem:smooth} at scale $z$ (this requires
+$z \ge x_1(1/3)$, absorbed into $n_0$): at least $\gamma\,\pi(z)$ primes
+$q \le z$ have $P^+(q-1) \le z^{2/3} \le y$, so at least
+$\gamma\,\pi(z) - \pi(\sqrt z) \ge \tfrac{\gamma}{2}\pi(z)$ of them lie
+in $(\sqrt z, z]$. Since $\pi(z) \ge z/\log z \ge (C_1/2)\,\ell_2$ for
+large $n$, this count is at least
+$\tfrac{\gamma}{2}\cdot\tfrac{C_1}{2}\,\ell_2 = \tfrac{\gamma C_1}{4}\,\ell_2
+\ge 4\ell_2 \ge T$, using $C_1 \ge 16/\gamma$.
+\end{proof}
+
+\begin{lemma}[Step 3 halts]
+\label{lem:halt}
+The scan accepts some $k \le x^{3/5}$.
+\end{lemma}
+
+\begin{proof}
+We check the hypotheses of Lemma~\ref{lem:pigeon} for $B = 2/5$. $L$ is
+squarefree and its prime factors are at most $z$, while
+$x^{(1-B)/2} = x^{0.3} \ge 2^{1.5\,T} > z$ (as $L \ge 2^T$). Also
+$\sum_{q \in Q} 1/q \le T/\sqrt z \to 0$, so the sum is at most
+$(1-B)/32 = 0.01875$ for large $n$; and $x > z_3(2/5)$ for large $n$.
+Lemma~\ref{lem:pigeon} yields $k \le x^{3/5}$, $(k,L) = 1$, with
+\[
+\#\{d \mid L : dk+1 \le x \text{ prime}\}
+\ \ge\ \frac{2^{-D-2}}{\log x}\; \#\{d \mid L : d \le x^{2/5}\}.
+\]
+Every divisor of $L$ is at most $L \le x^{2/5}$, so the last factor
+equals $2^{T} \ge (\log n)^{3\log 2} = (\log n)^{2.07\ldots}$. Since
+$2^{D+2}\log x = O(\ell_2 \ell_3)$, the right side is
+$(\log n)^{2.07 - o(1)}$; discarding the at most $\pi(z)$ elements with
+$dk+1 \le z$ leaves more than $(\log n)^{1.2}$ for large $n$. The scan
+tests precisely this count, so it accepts at this $k$ if it has not
+stopped earlier.
+\end{proof}
+
+\begin{lemma}[Step 4 always finds a subset, and the pool suffices]
+\label{lem:pool}
+Each round of step 4 finds a nonempty $S$ with
+$\prod_{p\in S} p \equiv 1 \pmod L$, and the loop ends before $P$ is
+exhausted.
+\end{lemma}
+
+\begin{proof}
+The elements of $P$ are distinct primes (distinct $d$ give distinct
+$dk+1$) exceeding $z \ge \max Q$, hence coprime to $L$; they are
+elements of $G = (\Z/L\Z)^\times$. The maximal order of an element of
+$G$ divides $\lambda(L)$, and
+$N^* > \lambda(L)(1 + \log(|G|/\lambda(L)))$, so by
+Lemma~\ref{lem:vebk} any $N^*$ elements contain a nonempty subsequence
+with product $1$. The dynamic program records a witness subset for every
+residue reachable by a nonempty subset of the current pool, so it
+recovers such an $S$.
+
+For the pool size: each $q - 1$ ($q \in Q$) is $y$-smooth, so
+$\lambda(L)$ divides $\prod_{p \le y} p^{\lfloor \log_p z\rfloor}$ and
+$\log \lambda(L) \le \pi(y)\log z = O(z^{2/3}) = O((\ell_2\ell_3)^{2/3})$,
+whence $N^* = \exp\bigl(O((\ell_2\ell_3)^{2/3})\bigr) = (\log n)^{o(1)}$.
+Each round multiplies $m$ by a product congruent to $1$ modulo $L$ and
+larger than $1$, hence at least $L + 1$; since each $q > \sqrt z$ gives
+$\log L \ge \tfrac{T}{2}\log z \ge \ell_2 \ell_3$ for large $n$, the
+loop ends after at most $\lceil \log n / \log(L+1) \rceil \le
+\log n/(\ell_2\ell_3)$ rounds. Total consumption is at most
+$N^* \log n/(\ell_2 \ell_3) = (\log n)^{1+o(1)}/(\ell_2\ell_3)
+< (\log n)^{1.2} \le |P|$.
+\end{proof}
+
+\begin{lemma}
+The output $m$ is a Carmichael number, and $m \in (n, n^{1+o(1)}]$.
+\end{lemma}
+
+\begin{proof}
+$m > n$ by the loop condition. The subsets $S_i$ are disjoint and their
+elements are distinct primes, so $m$ is squarefree. Every factor $p$
+satisfies $p = dk+1$ with $d \mid L$, so $p - 1 = dk \mid kL$. Each
+$p \equiv 1 \pmod k$ gives $m \equiv 1 \pmod k$; each round's product is
+$\equiv 1 \pmod L$, so $m \equiv 1 \pmod L$; and $(k, L) = 1$, so
+$m \equiv 1 \pmod{kL}$. Hence $p - 1 \mid kL \mid m - 1$ for every
+$p \mid m$. All factors are at most $x = e^{O(\ell_2\ell_3)}$, so $m$
+has at least $\log n/\log x \ge 3$ factors for large $n$; in particular
+$m$ is composite, and Korselt's criterion applies. Finally, before its
+last round the loop had $m \le n$, and one round multiplies $m$ by at
+most $x^{N^*} = \exp\bigl(O(\ell_2\ell_3)\,(\log n)^{o(1)}\bigr)
+= n^{o(1)}$.
+\end{proof}
+
+\begin{lemma}[Running time]
+The algorithm runs in time $\exp\bigl(O(\ell_2\ell_3)\bigr)$, and the
+certificate of step 5 is verifiable in time $(\log n)^{2+o(1)}$.
+\end{lemma}
+
+\begin{proof}
+Step 2 costs $\operatorname{poly}(z)$. Step 3 examines at most
+$x^{3/5} = e^{3\log L}$ shifts, each costing
+$2^T \operatorname{poly}(\log x)$ by Lemma~\ref{lem:aks}; in total
+$e^{O(\ell_2\ell_3)}$. Each round of step 4 costs at most
+$L \cdot N^*$ dictionary operations on $O(\log L)$-bit keys, i.e.
+$e^{O(\ell_2\ell_3)}$, and there are at most $\log n$ rounds. Assembling
+$m$ and checking the certificate involves $(\log n)^{1+o(1)}$ factors of
+$(\log n)^{O(\ell_3)}$ bits against an $O(\log n)$-bit $m$, which is
+$(\log n)^{2+o(1)}$ bit operations.
+\end{proof}
+
+This proves the theorem. \qed
+
+\section{Remarks}
+
+\begin{remark}[The threshold]
+$n_0$ collects $x_1(E)$, $z_3(B)$, $D_B$ and the finitely many
+``for $n$ large'' comparisons above. The constants of \cite{AGP} are
+computable in principle; we are not aware of numerical values in the
+literature, either for their Theorem 5 or for the constants used here.
+Making $n_0$ numeric would require explicit
+versions of the zero-density inputs to \cite{AGP}, along the lines of
+the explicit Bombieri--Vinogradov literature.
+\end{remark}
+
+\begin{remark}[Short intervals]
+\label{rem:larsen}
+The algorithm overshoots $n$ by a factor $n^{o(1)}$ and cannot aim into
+a window such as $(n, 2n]$. Larsen \cite{Lar} proved, effectively, that
+$[x,\, x + x/(\log x)^{1/(2+\delta)}]$ contains Carmichael numbers for
+large $x$, with building blocks of size
+$\exp((\llog x)^{2+o(1)})$; his proof appears amenable to the same
+treatment and would give a deterministic
+$\exp((\llog n)^{2+o(1)})$-time construction inside such windows. We
+have not carried this out.
+\end{remark}
+
+\begin{remark}[Comparison with primes]
+Producing a proven prime exceeding $n$ in deterministic
+polylogarithmic time is open even under the Riemann Hypothesis, and the
+record $n^{1/2+o(1)}$ \cite{LO, Pol} has stood since 1987. The theorem
+separates the two construction problems: the Carmichael property is a
+conjunction of conditions on small prime factors, verifiable and
+assemblable at scale $\exp(O(\ell_2 \ell_3))$, whereas primality of $m$
+is a single condition at scale $m$.
+\end{remark}
+
+\begin{remark}[Practice]
+A simplified variant (reservoir $\{q : q - 1 \mid \operatorname{lcm}(1..K)\}$,
+no shift scan; the abundance of that reservoir is conjectural, which is
+why the proof above uses the shifted reservoir of \cite{AGP}) produces
+certified Carmichael numbers above $10^{150}$ in a few seconds of
+interpreted code, e.g.\ a 219-digit example with 70 prime factors all
+below $2 \cdot 10^{5}$. For $n = 10^{20}$ it returns the 65-digit
+Carmichael number
+\[
+m = 32053309583031266791428889135359834328765733228091969901544344081
+\]
+with the 28 prime factors $13 \cdot 19 \cdot 23 \cdot 29 \cdot 31 \cdot
+37 \cdot 43 \cdot 61 \cdot 67 \cdot 71 \cdot 73 \cdot 89 \cdot 127
+\cdot 181 \cdot 199 \cdot 211 \cdot 281 \cdot 331 \cdot 397 \cdot 463
+\cdot 617 \cdot 631 \cdot 991 \cdot 1321 \cdot 2311 \cdot 2521 \cdot
+4621 \cdot 9241$. An implementation is available from the author.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{AGP} W.~R. Alford, A. Granville, C. Pomerance,
+\emph{There are infinitely many Carmichael numbers},
+Ann. of Math. (2) \textbf{140} (1994), 703--722.
+\href{https://doi.org/10.2307/2118576}{doi:10.2307/2118576}.
+
+\bibitem{AKS} M. Agrawal, N. Kayal, N. Saxena,
+\emph{PRIMES is in P},
+Ann. of Math. (2) \textbf{160} (2004), 781--793.
+\href{https://doi.org/10.4007/annals.2004.160.781}{doi:10.4007/annals.2004.160.781}.
+
+\bibitem{AGHS} W.~R. Alford, J. Grantham, S. Hayman, A. Shallue,
+\emph{Constructing Carmichael numbers through improved subset-product
+algorithms}, Math. Comp. \textbf{83} (2014), 899--915.
+\href{https://doi.org/10.1090/S0025-5718-2013-02737-8}{doi:10.1090/S0025-5718-2013-02737-8}.
+
+\bibitem{Kor} A. Korselt,
+\emph{Probl\`eme chinois},
+L'interm\'ediaire des math\'ematiciens \textbf{6} (1899), 142--143.
+
+\bibitem{LO} J.~C. Lagarias, A.~M. Odlyzko,
+\emph{Computing $\pi(x)$: an analytic method},
+J. Algorithms \textbf{8} (1987), 173--191.
+\href{https://doi.org/10.1016/0196-6774(87)90037-X}{doi:10.1016/0196-6774(87)90037-X}.
+
+\bibitem{Lar} D. Larsen,
+\emph{Bertrand's postulate for Carmichael numbers},
+Int. Math. Res. Not. IMRN \textbf{2023}, no.~15, 13072--13098.
+\href{https://doi.org/10.1093/imrn/rnac203}{doi:10.1093/imrn/rnac203}.
+
+\bibitem{LN} G. L\"oh, W. Niebuhr,
+\emph{A new algorithm for constructing large Carmichael numbers},
+Math. Comp. \textbf{65} (1996), 823--836.
+\href{https://doi.org/10.1090/S0025-5718-96-00692-8}{doi:10.1090/S0025-5718-96-00692-8}.
+
+\bibitem{Pol} D.~H.~J. Polymath,
+\emph{Deterministic methods to find primes},
+Math. Comp. \textbf{81} (2012), 1233--1246.
+\href{https://doi.org/10.1090/S0025-5718-2011-02542-1}{doi:10.1090/S0025-5718-2011-02542-1}.
+
+\bibitem{SW} A. Shallue, J. Webster,
+\emph{Algorithms for Carmichael numbers},
+\href{https://arxiv.org/abs/2506.09903}{arXiv:2506.09903} (2025).
+
+\bibitem{EK} P. van Emde Boas, D. Kruyswijk,
+\emph{A combinatorial problem on finite abelian groups III},
+Report ZW-1969-008, Mathematisch Centrum, Amsterdam, 1969.
+\href{https://ir.cwi.nl/pub/7217}{ir.cwi.nl/pub/7217}.
+
+\end{thebibliography}
+\end{document}
