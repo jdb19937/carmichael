@@ -1,13 +1,11 @@
-PAPER = carmichael
-
 .PHONY: all clean
 
-all: $(PAPER).pdf
+all: carmichael.pdf primes-near-carmichael.pdf
 
 # two passes so cross-references and hyperlinks resolve
-$(PAPER).pdf: $(PAPER).tex
-	pdflatex -interaction=nonstopmode $(PAPER).tex
-	pdflatex -interaction=nonstopmode $(PAPER).tex
+%.pdf: %.tex
+	pdflatex -interaction=nonstopmode $<
+	pdflatex -interaction=nonstopmode $<
 
 clean:
-	rm -f $(PAPER).aux $(PAPER).log $(PAPER).out $(PAPER).toc
+	rm -f *.aux *.log *.out *.toc

@@ -1,0 +1,549 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{newtxtext,newtxmath}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\llog}{\log\log}
+\newcommand{\lllog}{\log\log\log}
+\newcommand{\CC}{C}
+
+\begin{document}
+
+\title[Primes near Carmichael numbers]{Primes near Carmichael numbers:\\ a trade-off theorem and its barriers}
+
+\author{Dan Brown$^*$}
+\email{jdb1729@gmail.com}
+\thanks{$^*$Author of \emph{The Da Vinci Code}.}
+
+\date{August 24, 2026}
+
+\begin{abstract}
+Let $\CC(X)$ denote the number of Carmichael numbers up to $X$. We prove an
+unconditional trade-off: if $\CC(X) - \CC(X/2) \ge X^{\theta}$, then some
+Carmichael number $m \in (X/2, X]$ has a prime within $m^{1.23 - \theta +
+\varepsilon}$ of it. Consequently any counting bound $\CC(X) \ge X^{0.706}$
+would yield primes nearer to (some) Carmichael numbers than the
+Baker--Harman--Pintz exponent $0.525$ guarantees near arbitrary points, with no
+new prime-gap input; under the Erd\H{o}s--Pomerance abundance conjecture the
+exponent drops to $0.23 + \varepsilon$, and under the Lindel\"of hypothesis to
+$\varepsilon$. We complement this with two negative results. First, a barrier:
+since $\CC(X) \le X^{1 - (1+o(1))\lllog X/\llog X}$ unconditionally, no
+pigeonhole of this type --- under any abundance assumption and any
+variance-strength bound on primeless neighborhoods, including those available
+under the Riemann Hypothesis --- can place a prime within
+$\exp\bigl((1-\varepsilon)\,\lllog m \cdot \log m/\llog m\bigr)$ of a Carmichael
+number; in particular polylogarithmic proximity is out of reach for the method. Second, an
+algorithmic accounting: a deterministic prime-finding algorithm whose
+correctness certificate is a counting inequality of this type must test
+$X^{1+o(1)}$ candidates, so it cannot compete with the trivial
+$X^{0.525+o(1)}$ scan, let alone the $X^{1/2+o(1)}$ record of Lagarias and
+Odlyzko. On the positive side, the Alford--Granville--Pomerance
+equidistribution theorem underlying the companion construction is itself a
+prime-existence theorem for a thin explicit set: it yields, unconditionally
+and effectively, a deterministic algorithm finding a prime in $(N/2, N]$ in
+time $N^{7/12+o(1)}$ --- to our knowledge new, and the
+third-fastest proven method. Its exponent is $1 - 1/A$ for any admissible
+zero-density exponent $A$, hence $N^{1/2+\varepsilon}$ under the density
+hypothesis and never below $N^{1/2}$, since $A \le 2$ is impossible.
+Empirically, Carmichael numbers are not measurably
+closer to primes than random odd numbers of the same size, although the
+primes near them are confined to a sparse, predictable set of admissible
+offsets.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:intro}
+
+A companion paper \cite{Bro} constructs, deterministically and unconditionally,
+a Carmichael number exceeding a given bound $n$ in time quasi-polylogarithmic in
+$n$. By contrast, the fastest deterministic algorithm known to produce a
+\emph{prime} exceeding $n$ runs in time $n^{1/2+o(1)}$ \cite{LO, Pol}. This
+prompts a natural question: \emph{must primes lie close to
+Carmichael numbers?} If Carmichael numbers --- which we can find quickly ---
+were provably accompanied by nearby primes, one could find primes by searching
+their neighborhoods, and any proximity exponent below $1/2$ would beat the
+record.
+
+This note is an after-action report on the most natural proof strategy, a
+pigeonhole against prime-gap moments: what it delivers, and where it is
+stopped. Write $p_1 < p_2 < \cdots$ for the
+primes, $d_n = p_{n+1} - p_n$, and let
+\[
+E_H(X) \;=\; \{\, x \in (X/2,\, X] : \text{no prime in } [x - H,\, x + H] \,\}.
+\]
+Write $\CC(X)$ for the number of Carmichael numbers up to $X$, and
+$\ell_2 = \llog X$, $\ell_3 = \lllog X$.
+
+Our inputs are classical and recent bounds on both sides of the pigeonhole.
+For the gaps: Selberg \cite{Sel} proved, under the Riemann Hypothesis, that
+$\sum_{p_n \le x} d_n^2 \ll x \log^3 x$; unconditionally, Heath-Brown
+\cite{HB} obtained the exponent $23/18$, improved through work of Peck and
+Maynard to $5/4$, and by Stadlmann \cite{Sta} to
+\begin{equation}
+\label{eq:sta}
+\sum_{p_n \le x} d_n^2 \;\ll_\varepsilon\; x^{1.23 + \varepsilon};
+\end{equation}
+under the Lindel\"of hypothesis Yu obtained exponent $1 + \varepsilon$ (see the
+introduction of \cite{Sta} for this history). For the Carmichael counts:
+$\CC(X) \ge X^{1/3}$ for large $X$ (Harman \cite{Har}, refining
+Alford--Granville--Pomerance \cite{AGP}), while unconditionally
+\begin{equation}
+\label{eq:pom}
+\CC(X) \;\le\; X^{\,1 - (1+o(1))\,\ell_3/\ell_2}
+\end{equation}
+(Pomerance \cite{Pom}), and the standard conjecture of Erd\H{o}s and Pomerance
+(see \cite{Erd, GP}) asserts that \eqref{eq:pom} is an equality.
+
+\section{The trade-off theorem}
+\label{sec:tradeoff}
+
+\begin{lemma}
+\label{lem:E}
+For $1 \le H \le X/8$ and every $\varepsilon > 0$,
+\[
+|E_H(X)| \;\le\; \frac{1}{2H} \sum_{p_n \le 2X} d_n^2
+\;\ll_\varepsilon\; \frac{X^{1.23+\varepsilon}}{H}.
+\]
+Under the Riemann Hypothesis, if additionally $H \ge 12 \log X$, then
+$|E_H(X)| \ll X \log^3 X / H$.
+\end{lemma}
+
+\begin{proof}
+If $x \in E_H(X)$ then the consecutive primes $p_n < x < p_{n+1}$ that bracket
+$x$ satisfy $p_{n+1} - x > H$ and $x - p_n > H$, so $d_n > 2H$; moreover
+$p_n < X$ and $p_{n+1} \le x + d_n \le 2X$ once $d_n \le X$ (gaps below $2X$
+of length $> X$ do not exist for large $X$ by Bertrand's postulate). Each such
+gap contains fewer than $d_n$ integers $x$, whence
+$|E_H(X)| \le \sum_{d_n > 2H,\, p_n \le 2X} d_n \le (2H)^{-1} \sum_{p_n \le 2X}
+d_n^2$, and \eqref{eq:sta} gives the first bound.
+
+For the second: Selberg's theorem \cite{Sel} gives, under RH,
+$\int_{X/2}^{X} \bigl(\psi(x+H) - \psi(x) - H\bigr)^2\, dx \ll H X \log^2 X$
+(we use the form with a $\log^3$-safe constant; any bound
+$\ll HX\log^{O(1)}X$ serves). If $x \in E_H(X)$ then the interval
+$(x, x+H]$ contains no primes, only prime powers $p^j$, $j \ge 2$, of which
+there are at most $H X^{-1/2} + 2$, each contributing at most $\log 2X$ to
+$\psi$; thus $\psi(x+H) - \psi(x) \le (H X^{-1/2} + 2)\log 2X \le H/2$ for
+$H \ge 12 \log X$ and $X$ large, so the integrand is at least $H^2/4$ on
+$E_H(X)$. Comparing measures gives $|E_H(X)| \ll X \log^3 X / H$.
+\end{proof}
+
+\begin{theorem}
+\label{thm:tradeoff}
+Let $0 < \theta \le 1$ and $\varepsilon > 0$, and suppose
+$\CC(X) - \CC(X/2) \ge X^{\theta}$ for all large $X$. Then there are
+infinitely many Carmichael numbers $m$ admitting a prime $p$ with
+\[
+|p - m| \;\le\; m^{\,1.23 - \theta + \varepsilon}.
+\]
+\end{theorem}
+
+\begin{proof}
+Set $H = X^{1.23 - \theta + \varepsilon}$ (if the exponent is $\ge 1$ the claim
+is trivial by Bertrand's postulate, so assume it is $< 1$). By
+Lemma~\ref{lem:E}, $|E_H(X)| \ll X^{1.23 + \varepsilon/2}/H =
+X^{\theta - \varepsilon/2} < X^{\theta} \le \CC(X) - \CC(X/2)$ for large $X$.
+Hence some Carmichael $m \in (X/2, X]$ lies outside $E_H(X)$ and has a prime
+within $H = X^{1.23-\theta+\varepsilon} \le (2m)^{1.23-\theta+\varepsilon} \le
+m^{1.23-\theta+2\varepsilon}$ for large $X$; taking $X = 2^j \to \infty$
+produces infinitely many such $m$, and relabelling $\varepsilon$ finishes.
+\end{proof}
+
+\begin{corollary}[unconditional threshold]
+\label{cor:threshold}
+If $\CC(X) - \CC(X/2) \ge X^{\theta}$ with $\theta > 1.23 - 0.525 = 0.705$,
+then infinitely many Carmichael numbers have primes within
+$m^{1.23 - \theta + \varepsilon}$, closer than the exponent $0.525$
+that Baker--Harman--Pintz \cite{BHP} guarantees for arbitrary points.
+\end{corollary}
+
+The current record is $\theta = 1/3$ \cite{Har}, so
+Corollary~\ref{cor:threshold} is presently empty: for $\theta \le 0.705$ the
+theorem returns exponents worse than $0.525$. Its content is a
+\emph{reduction}: closing the gap from $0.33$ to $0.706$ in Carmichael
+counting --- a problem entirely on the composite side, where the
+Alford--Granville--Pomerance machinery keeps improving --- would
+automatically produce primes abnormally close to Carmichael numbers, with
+prime-gap technology frozen at \eqref{eq:sta}.
+
+\begin{corollary}[under abundance]
+\label{cor:abundance}
+Assume $\CC(X) - \CC(X/2) \ge X^{1-\delta}$ for every $\delta > 0$ (a weak
+form of the Erd\H{o}s--Pomerance conjecture). Then for every
+$\varepsilon > 0$ there are infinitely many Carmichael $m$ with a prime
+within $m^{0.23 + \varepsilon}$. Under the Lindel\"of hypothesis the exponent
+improves to $\varepsilon$, for every $\varepsilon > 0$.
+\end{corollary}
+
+\begin{corollary}[under RH and abundance]
+\label{cor:rh}
+Assume RH and the asymptotic form
+$\CC(X) - \CC(X/2) \ge X \exp\bigl(-(1+\varepsilon)\,\ell_3 \log X/\ell_2\bigr)$
+of the Erd\H{o}s--Pomerance conjecture. Then infinitely many Carmichael $m$
+have a prime within
+$\exp\bigl((1+2\varepsilon)\,\lllog m \cdot \log m/\llog m\bigr) = m^{o(1)}$.
+\end{corollary}
+
+\begin{proof}
+Take $H = \log^3 X \cdot \exp\bigl((1+\varepsilon)\ell_3 \log X/\ell_2\bigr)$
+in the RH part of Lemma~\ref{lem:E}.
+\end{proof}
+
+\section{Two barriers}
+\label{sec:barriers}
+
+The exponents of Corollaries~\ref{cor:abundance}--\ref{cor:rh} are the floor
+of the method.
+
+\begin{proposition}[pigeonhole barrier]
+\label{prop:barrier}
+Let $B(X, H)$ be any provable upper bound for $|E_H(X)|$ of the shape
+$B(X,H) \ge X (\log X)^{-A}$ for fixed $A$ whenever
+$H \le (\log X)^{A}$ --- as is the case for every bound derived from a
+variance (second-moment) estimate for primes in short intervals, including
+Selberg's RH bound. Then the inequality $B(X,H) < \CC(X)$ required by the
+pigeonhole fails for all such $H$, unconditionally: by \eqref{eq:pom},
+$\CC(X) \le X^{1-(1+o(1))\ell_3/\ell_2} < X(\log X)^{-A}$ for every fixed $A$
+and large $X$. Consequently no pigeonhole against Carmichael counts --- with
+\emph{any} strength of abundance input, since \eqref{eq:pom} is an upper
+bound --- can certify a prime within polylogarithmic distance of a Carmichael
+number; the least $H$ it can certify is
+$\exp\bigl((1-o(1))\,\ell_3 \log X/\ell_2\bigr)$, matching
+Corollary~\ref{cor:rh}.
+\end{proposition}
+
+\begin{proof}
+Immediate from \eqref{eq:pom} and the displayed shapes: for
+$H \le (\log X)^A$ one has $B(X,H) \ge X(\log X)^{-A} > \CC(X)$, so the
+pigeonhole cannot close. The floor statement follows by solving
+$X \log^{O(1)} X/H < X^{1-(1+o(1))\ell_3/\ell_2}$ for $H$.
+\end{proof}
+
+Thus the interesting regime of Theorem~\ref{thm:tradeoff} is polynomial
+proximity $m^{c}$; polylogarithmic proximity is denied territory for
+counting methods, and entry requires either gap-tail
+bounds far beyond second moments (Cram\'er-model strength: the obstruction
+identified by the Polymath project \cite{Pol}), or
+structural information about Carmichael positions, such as equidistribution of
+subset products of the \cite{AGP} prime pool in short intervals, which lies
+beyond current exponential-sum technology.
+
+The second barrier concerns the intended algorithmic use.
+
+\begin{proposition}[cost of counting certificates]
+\label{prop:cost}
+Consider a deterministic algorithm which outputs a prime by testing candidates
+drawn from $R$ neighborhoods of radius $H$ centred at points of $(X/2, X]$
+(Carmichael or otherwise), and whose correctness proof is the counting
+inequality $R > B(X,H)$ with $B$ a provable bound for $|E_H(X)|$ as above.
+In the worst case the algorithm performs at least $B(X,H) \cdot H / \log X$
+primality tests. With the unconditional bound \eqref{eq:sta} this is
+$\gg X^{1.23 - o(1)}$; with Selberg's RH bound it is $\gg X (\log X)^{2}$.
+In both cases the cost exceeds $X$, so such an algorithm is slower than the
+trivial scan of a single interval of length $X^{0.525}$ \cite{BHP}, and far
+slower than the $X^{1/2+o(1)}$ algorithm of Lagarias--Odlyzko \cite{LO}.
+\end{proposition}
+
+\begin{proof}
+The certificate guarantees only that the \emph{union} of the $R$
+neighborhoods meets the primes; it identifies no neighborhood in particular,
+and any $R - 1$ of them may be barren, since $B$ is the best available bound
+on how many barren centres exist and $R$ must exceed it. An adversarial
+configuration consistent with the certificate places the guaranteed prime
+among the last candidates examined, whichever order the algorithm chooses, so
+the worst case examines a constant fraction of the
+$\asymp R H/\log X$ prime-candidates in the union: at least
+$B(X,H)\, H/\log X$ tests. The two instantiations are
+$B \cdot H \gg X^{1.23-o(1)}$ and $B \cdot H \gg X \log^{3} X$.
+\end{proof}
+
+Proposition~\ref{prop:cost} is a strong negative for the motivating program:
+\emph{no} certified-by-counting neighborhood search --- around Carmichael
+numbers or any other quickly-constructible markers --- can approach the
+$X^{1/2}$ record, because the certificate itself forces super-linear work. A
+competitive algorithm must certify success pointwise (an interval theorem such
+as \cite{BHP}), or by computation (the analytic method \cite{LO}), or by the
+kind of parity/algebraic certificate proposed by the Polymath project
+\cite{Pol}, whose Conjecture~1.1 remains the door: deciding in time
+$N^{1/2-c}$ whether an interval of length $N^{1/2+c}$ contains a prime would
+break the barrier. We record one quantitative remark on the obstruction
+identified there. The Polymath method computes, in time $N^{1/2-c+o(1)}$, the
+parity of the number of primes in a window in every residue class modulo every
+prime $r \le N^{c/10}$; it wins immediately unless every such class count is
+even. The following shows that trivial counting cannot exclude that
+conspiracy.
+
+\begin{lemma}[even-pairing is cheap to sustain]
+\label{lem:pairing}
+Let $p_1 < \cdots < p_s$ be primes in an interval of length $\le N$, and
+suppose that for every prime $r \le R$ every residue class modulo $r$
+contains an even number of the $p_i$. Then $\pi(R) \le s \log_2 N$.
+\end{lemma}
+
+\begin{proof}
+Fix $r$. Pairing the $p_i$ within classes gives at least $s/2$ disjoint
+pairs with $r \mid p_i - p_j$. Summing over $r \le R$ counts at least
+$(s/2)\pi(R)$ incidences $(\{p_i, p_j\}, r)$ with $r \mid p_i - p_j$; each of
+the at most $s^2/2$ pairs contributes at most $\omega(p_i - p_j) \le \log_2 N$
+incidences. Hence $(s/2)\pi(R) \le (s^2/2)\log_2 N$.
+\end{proof}
+
+A window of length $N^{1/2+c}$ has $s \le N^{1/2+c}$ primes, so
+Lemma~\ref{lem:pairing} only forbids the conspiracy for
+$R \gg s \log N$ --- vastly beyond the $N^{c/10}$ budget the method can
+afford. Ruling it out below that range is a question about primes in
+arithmetic progressions \emph{within short intervals}, where the conductor of
+the associated $L$-functions consumes exactly the gain: the same wall as
+Proposition~\ref{prop:barrier}, seen from a third side.
+
+\section{The AGP pigeonhole as a prime-finding theorem}
+\label{sec:agpset}
+
+The negative results above concern primes \emph{near} Carmichael numbers. We
+close the circle with a positive observation about the machinery itself: the
+theorem of Alford--Granville--Pomerance that supplies the prime pool for the
+companion construction (\cite{AGP}, Theorem~3.1; quoted as Lemma~2.2 of
+\cite{Bro}) is, read directly, a prime-existence statement for a thin explicit
+set, and hence a deterministic prime-finding algorithm. We have not found this
+observation in the literature.
+
+Fix $B < 5/12$ and let $D_B$, $z_3(B)$ be the effective constants of
+\cite{AGP}, Theorem~3.1. Given $x$, set $T = \lceil D_B + 2 + \log_2 \log x
+\rceil$ and let $L$ be the product of the first $T$ primes exceeding
+$64T/(1-B)$. Then $L$ is squarefree, its prime factors lie below
+$x^{(1-B)/2}$, $\sum_{q \mid L} 1/q \le (1-B)/32$, and $L \le x^{B}$ for
+large $x$, so the theorem applies: some $k \le x^{1-B}$ with $(k, L) = 1$
+satisfies
+\[
+\#\{\, d \mid L : dk + 1 \le x \ \text{prime} \,\}
+\;\ge\; \frac{2^{-D_B-2}}{\log x}\, 2^{T} \;\ge\; 1 .
+\]
+Thus the explicit set
+$S_x = \{\, dk+1 \le x : d \mid L,\ k \le x^{1-B},\ (k,L)=1 \,\}$, of
+cardinality at most $2^{T} x^{1-B} = x^{1-B+o(1)}$, provably contains a
+prime, and enumerating it with the AKS test finds one in deterministic time
+$x^{1-B+o(1)}$.
+
+As stated, the pigeonhole does not control the \emph{size} of the primes it
+produces, so it finds \emph{a} prime cheaply rather than a prime exceeding a
+given bound. The dyadic form needed for prime-finding proper follows,
+however, directly from the actual equidistribution theorem of \cite{AGP}
+(their Theorem~3.1), which is stronger than the pigeonhole consequence
+quoted above: it is a \emph{two-sided} relative-error asymptotic,
+\[
+\Bigl| \pi(y; d, a) - \frac{\pi(y)}{\varphi(d)} \Bigr|
+\;\le\; \varepsilon\, \frac{\pi(y)}{\varphi(d)},
+\]
+pointwise for every $d \le x^{1/A - \delta}$ not divisible by a member of a
+set of at most $D_{\varepsilon,\delta}$ bad integers, valid for all
+$y \ge d\, x^{1 - 1/A + \delta}$, where $A$ is any admissible zero-density
+exponent (\cite{AGP}, eq.~(3.1)); \cite{AGP} note that their proof of this
+statement is effective. Subtracting the asymptotic at $y = d x^{1-B}$ and at
+$y = x/2$ (both in range when $B \le 1/A - \delta$ and
+$d \ge 0.55\, x^{B}$) counts primes $p \equiv 1 \bmod d$ with
+$p \in (x/2,\, dx^{1-B}]$, hence with cofactor $k = (p-1)/d \le x^{1-B}$;
+summing over the divisors of $L$ in the dyadic block $(0.55\,x^B, x^B]$ that
+avoid the bad set, and pigeonholing over $k \le x^{1-B}$, yields a shift $k$
+for which some $dk + 1 \in (x/2, x]$ is prime, provided the block contains
+$\gg 2^{D} \log x$ good divisors. That supply is arranged constructively:
+take $T = O(D + \log\log x)$ primes in an interval $(Q, 2Q)$ with
+$Q^{T/2} \approx x^{1/A - \delta}$; the $\binom{T}{T/2}$ subset products of
+size $T/2$ spread over $T/2$ dyadic blocks, so some block receives
+$\ge 2^{T}/T^2$ of them, and discarding divisors met by the bad set costs a
+further factor $2^{-D}$ at most. (The hypotheses $(k, L) = 1$ and
+$\sum_{q \mid L} 1/q$ small in the quoted pigeonhole are needed for the
+Carmichael application, not here.) This proves:
+
+\begin{theorem}[unconditional]
+\label{prop:agpset}
+For every fixed $B < 5/12$ there is a deterministic algorithm that, given
+$N$, outputs a prime in $(N/2, N]$ in time $N^{1-B+o(1)}$; in particular in
+time $N^{7/12 + o(1)}$. The constants are effectively computable, and the
+exponent is $1 - 1/A + o(1)$ for any admissible zero-density exponent $A$ in
+\textup{(3.1)} of \cite{AGP}.
+\end{theorem}
+
+Three remarks. First, the exponent slots into the known ladder as follows:
+Lagarias--Odlyzko $N^{1/2+o(1)}$ \cite{LO}; the Baker--Harman--Pintz
+interval scan $N^{0.525+o(1)}$ \cite{BHP}; Proposition~\ref{prop:agpset} at
+$N^{7/12} = N^{0.5834}$; the Meissel--Lehmer binary search and the
+Heath-Brown $a^3 + 2b^3$ scan, both $N^{2/3+o(1)}$ (see \cite{Pol}). The new
+entry is the only one of a multiplicative species --- a union of
+$\log^{O(1)} N$ values $d \mid L$ sampled along $N^{1-B}$ shifts --- and the
+only one whose exponent is a dial rather than a constant. Second, the dial:
+the mechanism $B < 1/A$ is stated by \cite{AGP} themselves (``if
+$A \in \mathcal{A}$, then all $B < 1/A$ are in $\mathcal{B}$''), with
+Huxley's $A = 12/5$ giving $5/12$. The Guth--Maynard improvement of the
+zero-density exponent to $A = 30/13$ would lift $B$ to $13/30$ and the
+exponent of Theorem~\ref{prop:agpset} to $N^{17/30+o(1)}$ --- their
+short-interval exponent, reached by a purely multiplicative route ---
+provided $30/13$ is admissible in the hybrid $q$-aspect sense of
+\textup{(3.1)} of \cite{AGP}, which is proved there for the $t$-aspect and
+remains to be checked for conductors. Progress toward the density
+hypothesis ($A \to 2^{+}$) pushes the exponent to $N^{1/2+\varepsilon}$, at
+which point an elementary scan matches the analytic record --- and there it
+stops, unconditionally: \cite{AGP} observe that \textup{(3.1)} cannot hold
+for any $A \le 2$, because $L(s,\chi)$ really does have $\asymp Td\log(Td)$
+zeros up to height $T$ on the critical line. The infimum of the exponent
+$1 - 1/A$ over \emph{all possible} zero-density inputs is therefore exactly
+$1/2$: the route can match the record in the limit and can never beat it.
+Nor can level-of-distribution technology rescue it. The divisor family
+$\{d \mid L\}$ is necessarily sparse ($\tau(L) = N^{o(1)}$), so the
+pigeonhole needs \emph{pointwise} control with bounded exceptions ---
+zero-density territory, capped as above. The theorems that go beyond level
+$1/2$ bound errors absolutely, at the scale of a dense family: this
+includes the well-factorable theorem of Bombieri--Friedlander--%
+Iwaniec, which does apply here --- indicator weights on the divisors
+of a smooth $L$ are the archetype of well-factorable weights --- but its
+error term $x/\log^A x$ swamps our thin main term $x^{1-B+o(1)}$; and a
+relative-error average theorem for thin families at level beyond $1/2$
+would, applied to a singleton family, exceed what GRH gives pointwise.
+Sparse needs pointwise; pointwise caps at $1/2$; dense forfeits the gain:
+the same square-root wall as Propositions~\ref{prop:barrier} and
+\ref{prop:cost}, probed along yet another axis of approach and holding.
+Third, the machinery is dual-use. Built to construct Carmichael numbers, it
+acquires primes directly: Sections~\ref{sec:tradeoff}--\ref{sec:barriers}
+close the route through proximity, and the pigeonhole at its heart is a
+prime-existence theorem outright.
+
+\section{Empirical results}
+\label{sec:empirical}
+
+The theorems above are consistent with what one actually observes.
+Normalising the distance from $m$ to the nearest prime by $\log m$
+(so a ``random odd number'' baseline is $\tfrac12$ in the mean):
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+population & $n$ & mean $d/\log m$ & median \\
+\midrule
+all Carmichael $m \le 10^8$ (exact census) & 255 & 0.550 & 0.454 \\
+\quad matched random odd composites & 12750 & 0.482 & 0.354 \\
+\addlinespace
+constructed Carmichael, $23$--$77$ digits & 1000 & 0.483 & 0.343 \\
+\quad matched random odd & 1000 & 0.494 & 0.359 \\
+\quad matched random $\equiv 1 \bmod 720720$ & 1000 & 0.508 & 0.360 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\smallskip
+Carmichael numbers are not closer to primes than random numbers of their size;
+at small scales they are, if anything, slightly farther. What their structure
+does control is \emph{where} the nearby primes sit: writing $m \equiv 1
+\pmod{L}$ with $\lambda$-structure as in \cite{Bro}, a candidate $m + c$
+avoids every small prime $r \mid \lambda(L)$ unless $r \mid c + 1$. In all
+$1000$ constructed cases the nearest prime occupied such an admissible offset
+($\gcd(c \pm 1, 3\cdot5\cdot7\cdot11\cdot13) = 1$), and a search that skips
+inadmissible offsets found a certified prime above $10^{40}$ in a median of
+$12$ (maximum $152$) Baillie--PSW tests per neighborhood over $1000$
+engagements, without a miss. This is a constant-factor convenience, exactly as the
+theory predicts: the Mertens boost $\prod_{r \mid \lambda} r/(r-1)$ on
+admissible offsets is cancelled, on average, by their sparsity. Scripts
+reproducing all computations in this section are available from the author.
+
+\section{Related work and closing remarks}
+\label{sec:related}
+
+Pintz, Steiger and Szemer\'edi \cite{PSS} exhibited an infinite set of primes,
+of counting density $\gg x^{2/3}/\log x$, whose membership can be decided in
+deterministic polynomial time; but their \emph{generation} procedure is
+randomized, and no deterministic procedure is known that produces an element
+of their set (or any prime) beyond a given bound $n$ in time $n^{o(1)}$. The
+companion paper \cite{Bro} achieves precisely this on the composite side, for
+Carmichael numbers; the present note quantifies why that success does not
+transfer to primes through proximity: the transfer is throttled by Carmichael
+\emph{counting} (Theorem~\ref{thm:tradeoff} and
+Corollary~\ref{cor:threshold}), capped below polynomial proximity by the
+Pomerance upper bound (Proposition~\ref{prop:barrier}), and in its algorithmic
+form defeated by the cost of counting certificates
+(Proposition~\ref{prop:cost}).
+
+We close by lasing the one target this analysis designates:
+\emph{any improvement of Harman's $\CC(X) \ge X^{0.33}$ past $X^{0.706}$
+makes Corollary~\ref{cor:threshold} nonvacuous}, yielding primes provably
+closer to (infinitely many) Carmichael numbers than they are known to be to
+anything else. Conversely, improvements in the gap moment \eqref{eq:sta}
+lower the $0.706$ threshold toward the abundance conjecture's $\theta \to 1$;
+the two literatures meet in the middle of this trade-off.
+
+\begin{thebibliography}{99}
+
+\bibitem{AGP} W.~R. Alford, A. Granville, C. Pomerance,
+\emph{There are infinitely many Carmichael numbers},
+Ann. of Math. (2) \textbf{140} (1994), 703--722.
+\href{https://doi.org/10.2307/2118576}{doi:10.2307/2118576}.
+
+\bibitem{BHP} R.~C. Baker, G. Harman, J. Pintz,
+\emph{The difference between consecutive primes, II},
+Proc. London Math. Soc. (3) \textbf{83} (2001), 532--562.
+\href{https://doi.org/10.1112/plms/83.3.532}{doi:10.1112/plms/83.3.532}.
+
+\bibitem{Bro} D. Brown,
+\emph{A deterministic quasi-polylogarithmic algorithm for constructing
+Carmichael numbers}, preprint (2026).
+
+\bibitem{Erd} P. Erd\H{o}s,
+\emph{On pseudoprimes and Carmichael numbers},
+Publ. Math. Debrecen \textbf{4} (1956), 201--206.
+\href{https://doi.org/10.5486/PMD.1956.4.3-4.16}{doi:10.5486/PMD.1956.4.3-4.16}.
+
+\bibitem{GP} A. Granville, C. Pomerance,
+\emph{Two contradictory conjectures concerning Carmichael numbers},
+Math. Comp. \textbf{71} (2002), 883--908.
+\href{https://doi.org/10.1090/S0025-5718-01-01355-2}{doi:10.1090/S0025-5718-01-01355-2}.
+
+\bibitem{Har} G. Harman,
+\emph{On the number of Carmichael numbers up to $x$},
+Bull. London Math. Soc. \textbf{37} (2005), 641--650.
+\href{https://doi.org/10.1112/S0024609305004686}{doi:10.1112/S0024609305004686}.
+
+\bibitem{HB} D.~R. Heath-Brown,
+\emph{The differences between consecutive primes, III},
+J. London Math. Soc. (2) \textbf{20} (1979), 177--178.
+\href{https://doi.org/10.1112/jlms/s2-20.2.177}{doi:10.1112/jlms/s2-20.2.177}.
+
+\bibitem{LO} J.~C. Lagarias, A.~M. Odlyzko,
+\emph{Computing $\pi(x)$: an analytic method},
+J. Algorithms \textbf{8} (1987), 173--191.
+\href{https://doi.org/10.1016/0196-6774(87)90037-X}{doi:10.1016/0196-6774(87)90037-X}.
+
+\bibitem{PSS} J. Pintz, W.~L. Steiger, E. Szemer\'edi,
+\emph{Infinite sets of primes with fast primality tests and quick generation
+of large primes}, Math. Comp. \textbf{53} (1989), 399--406.
+\href{https://doi.org/10.1090/S0025-5718-1989-0968154-X}{doi:10.1090/S0025-5718-1989-0968154-X}.
+
+\bibitem{Pol} D.~H.~J. Polymath,
+\emph{Deterministic methods to find primes},
+Math. Comp. \textbf{81} (2012), 1233--1246.
+\href{https://doi.org/10.1090/S0025-5718-2011-02542-1}{doi:10.1090/S0025-5718-2011-02542-1}.
+
+\bibitem{Pom} C. Pomerance,
+\emph{On the distribution of pseudoprimes},
+Math. Comp. \textbf{37} (1981), 587--593.
+\href{https://doi.org/10.1090/S0025-5718-1981-0628717-0}{doi:10.1090/S0025-5718-1981-0628717-0}.
+
+\bibitem{Sel} A. Selberg,
+\emph{On the normal density of primes in small intervals, and the difference
+between consecutive primes}, Arch. Math. Naturvid. \textbf{47} (1943), 87--105.
+
+\bibitem{Sta} J. Stadlmann,
+\emph{On the mean square gap between primes},
+\href{https://arxiv.org/abs/2212.10867}{arXiv:2212.10867} (2022).
+
+\end{thebibliography}
+\end{document}
