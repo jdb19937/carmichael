@@ -41,22 +41,44 @@ variable (C₁ : ℝ) (n : ℕ)
 /-- Step 1: `z = ⌈C₁ ℓ₂ ℓ₃⌉`. -/
 noncomputable def zscale : ℕ := ⌈C₁ * ell2 n * ell3 n⌉₊
 
-/-- Step 1: `y = ⌈z^{2/3}⌉`. -/
+/-- Step 1, generic in the AGP smoothness parameter `E`:
+`y = ⌈z^{1-E}⌉`. -/
+noncomputable def yscaleE (E : ℝ) : ℕ :=
+  ⌈(zscale C₁ n : ℝ) ^ ((1 : ℝ) - E)⌉₊
+
+/-- Step 1: `y = ⌈z^{2/3}⌉` (the paper's `E = 1/3` instance). -/
 noncomputable def yscale : ℕ := ⌈(zscale C₁ n : ℝ) ^ ((2 : ℝ) / 3)⌉₊
+
+theorem yscale_eq_yscaleE : yscale C₁ n = yscaleE C₁ n (1 / 3) := by
+  unfold yscale yscaleE
+  norm_num
 
 /-- Step 1: `T = ⌈3 ℓ₂⌉`. -/
 noncomputable def Tscale : ℕ := ⌈(3 : ℝ) * ell2 n⌉₊
 
 open Classical in
+/-- Step 2 reservoir, generic in `E`: the primes `q ∈ (z^{99/100}, z]` with
+`q - 1` smooth up to `yscaleE E`. -/
+noncomputable def goodPrimesE (E : ℝ) : Finset ℕ :=
+  (Finset.range (zscale C₁ n + 1)).filter
+    (fun q => q.Prime ∧ (zscale C₁ n : ℝ) ^ ((99 : ℝ) / 100) < (q : ℝ) ∧
+      SmoothUpTo (yscaleE C₁ n E) (q - 1))
+
+open Classical in
 /-- Step 2 reservoir: the primes `q ∈ (z^{99/100}, z]` with `q - 1` being
-`y`-smooth. The floor `z^{99/100}` (rather than `√z`) keeps the reciprocal
-sum `∑ 1/q` below the `3/160` demanded by AGP Theorem 3.1, via Mertens.
-The algorithm takes `Q` to be the `T` largest of these; the proofs only use
-that `Q` is a subset of this reservoir of cardinality `T`. -/
+`y`-smooth. The floor `z^{99/100}` keeps the reciprocal sum `∑ 1/q` below
+the `3/160` demanded by AGP Theorem 3.1, via Mertens. The algorithm takes
+`Q` to be the `T` largest of these; the proofs only use that `Q` is a
+subset of this reservoir of cardinality `T`. This is the paper's `E = 1/3`
+instance of `goodPrimesE`. -/
 noncomputable def goodPrimes : Finset ℕ :=
   (Finset.range (zscale C₁ n + 1)).filter
     (fun q => q.Prime ∧ (zscale C₁ n : ℝ) ^ ((99 : ℝ) / 100) < (q : ℝ) ∧
       SmoothUpTo (yscale C₁ n) (q - 1))
+
+theorem goodPrimes_eq_goodPrimesE : goodPrimes C₁ n = goodPrimesE C₁ n (1 / 3) := by
+  unfold goodPrimes goodPrimesE
+  rw [yscale_eq_yscaleE]
 
 end Scales
 

@@ -1,8 +1,6 @@
 /-
-The assumption pack: the results of Section 2 of the paper that remain
-assumed. After the resolution pass of 2026-08-25, only the two deep
-Alford--Granville--Pomerance inputs survive as fields; the other cited
-inputs are now proved:
+The assumption pack: the two deep Alford--Granville--Pomerance inputs of
+Section 2 of the paper. Every other cited input is proved:
 
 * Korselt's criterion [Kor]           — proved in `Carmichael/Korselt.lean`;
 * van Emde Boas--Kruyswijk [EK]       — proved in `Carmichael/ZeroSum.lean`
@@ -64,9 +62,9 @@ namespace Assumptions
 
 variable (A : Assumptions)
 
-/-- Step 1 of the algorithm: `C₁ = max(48/γ, 10³)`. The `48` (paper revision
-of 2026-08-25; formerly `16`) makes room for the elementary Chebyshev
-constant in `chebyshev_lower` (`π(z) ≥ z/(3 log z)`). -/
+/-- Step 1 of the algorithm: `C₁ = max(48/γ, 10³)`. The `48` makes room for
+the elementary Chebyshev constant in `chebyshev_lower`
+(`π(z) ≥ z/(3 log z)`). -/
 noncomputable def C₁ : ℝ := max (48 / A.gamma) 1000
 
 lemma C₁_pos : 0 < A.C₁ := lt_of_lt_of_le (by norm_num) (le_max_right _ _)

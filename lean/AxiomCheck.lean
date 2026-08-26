@@ -4,6 +4,7 @@
 picks up `sorryAx`, `Lean.ofReduceBool` (native_decide), or a custom axiom.
 Uses only core Lean commands — no custom metaprogramming. -/
 import Carmichael.Main
+import Carmichael.MainWeak
 
 /-- info: 'Carmichael.main_theorem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -48,3 +49,19 @@ import Carmichael.Main
 /-- info: 'Mertens.sum_mangoldt_div_eq_log' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms Mertens.sum_mangoldt_div_eq_log
+
+/-- info: 'Carmichael.main_theorem_weak' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.main_theorem_weak
+
+/-- info: 'Carmichael.smooth_shifted_weak' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.smooth_shifted_weak
+
+/-- info: 'Carmichael.twin_type_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.twin_type_bound
+
+/-- info: 'Carmichael.selberg_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.selberg_bound
