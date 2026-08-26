@@ -23,7 +23,7 @@
 \thanks{$^*$Author of \emph{The Da Vinci Code}.}
 \thanks{In memory of Abraham Anthony ``Mickey'' Br\"umleve (August 24, 1986 -- December 5, 2019): A thinker, a visionary, and a source of fantastic ideas.}
 
-\date{August 24, 2026}
+\date{August 25, 2026}
 
 \begin{abstract}
 We describe a deterministic algorithm that, given a large integer $n$,
@@ -112,7 +112,7 @@ time counts bit operations. $C_1$ denotes an effective absolute constant.
 
 \section{Components}
 
-All four inputs below are unconditional, and effective in the sense that
+All five inputs below are unconditional, and effective in the sense that
 their constants are computable in principle.
 
 \begin{lemma}[Smooth shifted primes; \cite{AGP}, Theorem 3 and p.~707--708]
@@ -145,6 +145,16 @@ $(k,L)=1$ such that
 Moreover every $B < 5/12$ lies in $\mathcal{B}$, effectively.
 \end{lemma}
 
+\begin{lemma}[Mertens' second theorem, effective; \cite{RS}, (3.17)--(3.20)]
+\label{lem:mertens}
+There is an absolute constant $M$ such that, with an effective implied
+constant,
+$\sum_{p \le t} 1/p = \llog t + M + O(1/\log^2 t)$ (sum over primes).
+\end{lemma}
+
+We use this only to bound the reciprocal sum of the primes selected in
+step 2, which Lemma~\ref{lem:pigeon} requires to be small.
+
 We fix $B = 2/5$ and write $D = D_{2/5}$. Numbers of the form $dk+1$
 with $d \mid L$ have no reason to avoid being prime, and the lemma
 confirms that for at least one small multiplier $k$ a decent proportion
@@ -173,6 +183,11 @@ Primality of an $N$-bit integer is decidable deterministically in time
 polynomial in $N$.
 \end{lemma}
 
+The time bound of the Theorem absorbs
+$\sqrt{x} = e^{O(\ell_2 \ell_3)}$, so trial division could replace
+Lemma~\ref{lem:aks} throughout the construction; the certificate's
+polylogarithmic-time verification is its only essential use.
+
 \section{The algorithm}
 \label{sec:algo}
 
@@ -181,12 +196,12 @@ Input: $n \ge n_0$.
 \begin{enumerate}
 \item[\textbf{1.}] \textbf{Scales.} Set
 $z = \lceil C_1 \ell_2 \ell_3 \rceil$ with
-$C_1 = \max(16/\gamma,\,10^3)$, then $y = \lceil z^{2/3} \rceil$ and
+$C_1 = \max(48/\gamma,\,10^3)$, then $y = \lceil z^{2/3} \rceil$ and
 $T = \lceil 3\ell_2 \rceil$.
 
 \item[\textbf{2.}] \textbf{Moduli.} By a sieve up to $z$ and trial
 division of each $q-1$, list the primes
-$q \in (\sqrt{z},\, z]$ with $P^+(q-1) \le y$. Let $Q$ be the $T$
+$q \in (z^{99/100},\, z]$ with $P^+(q-1) \le y$. Let $Q$ be the $T$
 largest, $L = \prod_{q \in Q} q$, and $x = \lceil L^5 \rceil$.
 
 \item[\textbf{3.}] \textbf{Shift scan.} For $k = 1, 2, \dots$ with
@@ -222,7 +237,7 @@ kill chain comes up empty.
 \section{Proof of the theorem}
 
 \begin{lemma}[Step 2 succeeds]
-For $n$ large, at least $T$ primes $q \in (\sqrt z, z]$ satisfy
+For $n$ large, at least $T$ primes $q \in (z^{99/100}, z]$ satisfy
 $P^+(q-1) \le y$.
 \end{lemma}
 
@@ -230,11 +245,15 @@ $P^+(q-1) \le y$.
 Apply Lemma~\ref{lem:smooth} at scale $z$ (this requires
 $z \ge x_1(1/3)$, absorbed into $n_0$): at least $\gamma\,\pi(z)$ primes
 $q \le z$ have $P^+(q-1) \le z^{2/3} \le y$, so at least
-$\gamma\,\pi(z) - \pi(\sqrt z) \ge \tfrac{\gamma}{2}\pi(z)$ of them lie
-in $(\sqrt z, z]$. Since $\pi(z) \ge z/\log z \ge (C_1/2)\,\ell_2$ for
+$\gamma\,\pi(z) - \pi(z^{99/100}) \ge \gamma\,\pi(z) - z^{99/100}
+\ge \tfrac{\gamma}{2}\pi(z)$ of them lie
+in $(z^{99/100}, z]$ for $n$ large, since
+$z^{99/100}\log z = o(z)$ and $\pi(z) \ge z/(3\log z)$, Chebyshev's
+estimate sufficing throughout. Since
+$\pi(z) \ge z/(3\log z) \ge (C_1/6)\,\ell_2$ for
 large $n$, this count is at least
-$\tfrac{\gamma}{2}\cdot\tfrac{C_1}{2}\,\ell_2 = \tfrac{\gamma C_1}{4}\,\ell_2
-\ge 4\ell_2 \ge T$, using $C_1 \ge 16/\gamma$.
+$\tfrac{\gamma}{2}\cdot\tfrac{C_1}{6}\,\ell_2 = \tfrac{\gamma C_1}{12}\,\ell_2
+\ge 4\ell_2 \ge T$, using $C_1 \ge 48/\gamma$.
 \end{proof}
 
 \begin{lemma}[Step 3 halts]
@@ -245,9 +264,16 @@ The scan accepts some $k \le x^{3/5}$.
 \begin{proof}
 We check the hypotheses of Lemma~\ref{lem:pigeon} for $B = 2/5$. $L$ is
 squarefree and its prime factors are at most $z$, while
-$x^{(1-B)/2} = x^{0.3} \ge 2^{1.5\,T} > z$ (as $L \ge 2^T$). Also
-$\sum_{q \in Q} 1/q \le T/\sqrt z \to 0$, so the sum is at most
-$(1-B)/32 = 0.01875$ for large $n$; and $x > z_3(2/5)$ for large $n$.
+$x^{(1-B)/2} = x^{0.3} \ge 2^{1.5\,T} > z$ (as $L \ge 2^T$). Also, every $q \in Q$ lies in $(z^{99/100}, z]$, so by
+Lemma~\ref{lem:mertens}
+\[
+\sum_{q \in Q} \frac{1}{q}
+\;\le \sum_{z^{99/100} < p \le z} \frac{1}{p}
+\;=\; \log\tfrac{100}{99} + O\!\bigl(1/\log^2 z\bigr)
+\;\le\; \tfrac{1}{99} + o(1),
+\]
+which is at most $(1-B)/32 = 0.01875$ for large $n$; and $x > z_3(2/5)$
+for large $n$.
 Lemma~\ref{lem:pigeon} yields $k \le x^{3/5}$, $(k,L) = 1$, with
 \[
 \#\{d \mid L : dk+1 \le x \text{ prime}\}
@@ -285,8 +311,8 @@ $\lambda(L)$ divides $\prod_{p \le y} p^{\lfloor \log_p z\rfloor}$ and
 $\log \lambda(L) \le \pi(y)\log z = O(z^{2/3}) = O((\ell_2\ell_3)^{2/3})$,
 whence $N^* = \exp\bigl(O((\ell_2\ell_3)^{2/3})\bigr) = (\log n)^{o(1)}$.
 Each round multiplies $m$ by a product congruent to $1$ modulo $L$ and
-larger than $1$, hence at least $L + 1$; since each $q > \sqrt z$ gives
-$\log L \ge \tfrac{T}{2}\log z \ge \ell_2 \ell_3$ for large $n$, the
+larger than $1$, hence at least $L + 1$; since each $q > z^{99/100}$ gives
+$\log L \ge \tfrac{99}{100}\,T\log z \ge \ell_2 \ell_3$ for large $n$, the
 loop ends after at most $\lceil \log n / \log(L+1) \rceil \le
 \log n/(\ell_2\ell_3)$ rounds. Total consumption is at most
 $N^* \log n/(\ell_2 \ell_3) = (\log n)^{1+o(1)}/(\ell_2\ell_3)
@@ -383,6 +409,24 @@ with the 28 prime factors $13 \cdot 19 \cdot 23 \cdot 29 \cdot 31 \cdot
 4621 \cdot 9241$. An implementation is available from the author.
 \end{remark}
 
+\begin{remark}[Formal verification]
+\label{rem:lean}
+The theorem has been machine-verified in Lean~4 over Mathlib, in
+operation-count form: taking Theorems 3 and 3.1 of \cite{AGP} as
+hypotheses (their effective constants as parameters), the kernel-checked
+formalization proves that for every $\varepsilon > 0$ and all large $n$ a
+Carmichael number $m \in (n, n^{1+\varepsilon}]$ exists together with
+its complete prime factorization, and that an explicit operation budget
+mirroring the five steps of Section~\ref{sec:algo}, with every primality
+test charged as trial division, is at most $e^{100\,\ell_2\ell_3}$.
+Korselt's criterion, Lemma~\ref{lem:mertens}, Lemma~\ref{lem:vebk} (to
+our knowledge the first mechanization of the van Emde Boas--Kruyswijk
+bound in any proof assistant), and the Chebyshev estimate used in
+Section 4 are all proved inside the formalization, so the two cited
+theorems of \cite{AGP} are its only unproved inputs. The formalization is
+available from the author.
+\end{remark}
+
 \begin{thebibliography}{9}
 
 \bibitem{AGP} W.~R. Alford, A. Granville, C. Pomerance,
@@ -418,6 +462,11 @@ Int. Math. Res. Not. IMRN \textbf{2023}, no.~15, 13072--13098.
 \emph{A new algorithm for constructing large Carmichael numbers},
 Math. Comp. \textbf{65} (1996), 823--836.
 \href{https://doi.org/10.1090/S0025-5718-96-00692-8}{doi:10.1090/S0025-5718-96-00692-8}.
+
+\bibitem{RS} J.~B. Rosser, L. Schoenfeld,
+\emph{Approximate formulas for some functions of prime numbers},
+Illinois J. Math. \textbf{6} (1962), 64--94.
+\href{https://doi.org/10.1215/ijm/1255631807}{doi:10.1215/ijm/1255631807}.
 
 \bibitem{Pol} D.~H.~J. Polymath,
 \emph{Deterministic methods to find primes},
