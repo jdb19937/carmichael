@@ -43,20 +43,23 @@ lemma le_C₁weak_mul_gammaWeak : (48 : ℝ) ≤ C₁weak * gammaWeak :=
   (div_le_iff₀ gammaWeak_pos).mp (le_max_left _ _)
 
 open Classical in
-/-- The weak assumption pack: AGP Theorem 3.1 at `B = 2/5` is the sole
-assumed input (Theorem 3 is replaced by the proved `smooth_shifted_weak`). -/
+/-- The weak assumption pack: AGP Theorem 3.1 at `B = 21/100` is the sole
+assumed input (Theorem 3 is replaced by the proved `smooth_shifted_weak`).
+The exponents are `(1 - B)/2 = 79/200` (prime-factor bound), `1 - B = 79/100`
+(shift bound) and `B = 21/100` (divisor window); the reciprocal-sum budget is
+the verbatim `3/160`. -/
 structure AssumptionsWeak where
-  /-- The constant `D = D_{2/5}` of [AGP, Theorem 3.1]. -/
+  /-- The constant `D = D_{21/100}` of [AGP, Theorem 3.1]. -/
   D : ℝ
-  /-- The threshold `z₃ = z₃(2/5)` of [AGP, Theorem 3.1]. -/
+  /-- The threshold `z₃ = z₃(21/100)` of [AGP, Theorem 3.1]. -/
   z₃ : ℕ
-  /-- [AGP, Theorem 3.1] at `B = 2/5`. -/
+  /-- [AGP, Theorem 3.1] at `B = 21/100`. -/
   pigeonhole : ∀ x L : ℕ, z₃ < x → 1 < L → Squarefree L →
-    (∀ q : ℕ, q.Prime → q ∣ L → (q : ℝ) ≤ (x : ℝ) ^ ((3 : ℝ) / 10)) →
+    (∀ q : ℕ, q.Prime → q ∣ L → (q : ℝ) ≤ (x : ℝ) ^ ((79 : ℝ) / 200)) →
     (∑ q ∈ L.primeFactors, (1 : ℝ) / q) ≤ 3 / 160 →
-    ∃ k : ℕ, 0 < k ∧ (k : ℝ) ≤ (x : ℝ) ^ ((3 : ℝ) / 5) ∧ k.Coprime L ∧
+    ∃ k : ℕ, 0 < k ∧ (k : ℝ) ≤ (x : ℝ) ^ ((79 : ℝ) / 100) ∧ k.Coprime L ∧
       (2 : ℝ) ^ (-D - 2) / Real.log x *
-        ((L.divisors.filter (fun d : ℕ => (d : ℝ) ≤ (x : ℝ) ^ ((2 : ℝ) / 5))).card : ℝ)
+        ((L.divisors.filter (fun d : ℕ => (d : ℝ) ≤ (x : ℝ) ^ ((21 : ℝ) / 100))).card : ℝ)
       ≤ ((L.divisors.filter (fun d => d * k + 1 ≤ x ∧ (d * k + 1).Prime)).card : ℝ)
 
 end Carmichael

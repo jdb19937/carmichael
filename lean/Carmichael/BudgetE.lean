@@ -27,8 +27,9 @@ so the statement is machine-model independent.
 
 Summands, using `L ≤ z^T` and `x = L^5 ≤ z^{5T}`:
 * step 2: sieve and trial division up to `z`;
-* step 3: at most `x^{3/5} ≤ z^{3T}` shifts × `2^T` divisors, at trial
-  division cost `2 · z^{5T/2} ≥ √x + 1` per candidate;
+* step 3: at most `x^{79/100} ≤ z^{79T/20}` shifts (the shift range of AGP
+  Theorem 3.1 at `B = 21/100`) × `2^T` divisors, at trial division cost
+  `2 · z^{5T/2} ≥ √x + 1` per candidate;
 * step 4: at most `log n` rounds, each at most `L · N*` dictionary
   operations, with `N* ≤ exp(z^{1-E} log z)(1 + T log z) + 2`;
 * step 5a: certificate primality checks: at most `log n` factors, each
@@ -39,7 +40,7 @@ noncomputable def opBudgetE (C₁ E : ℝ) (n : ℕ) : ℝ :=
   let z : ℝ := (zscale C₁ n : ℝ)
   let T : ℝ := (Tscale n : ℝ)
   z ^ (2 : ℝ)
-    + z ^ (3 * T) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
+    + z ^ (79 * T / 20) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
     + Real.log n * z ^ T *
         (Real.exp (z ^ ((1 : ℝ) - E) * Real.log z) * (1 + T * Real.log z) + 2) *
         (T * Real.log z)
@@ -78,7 +79,7 @@ private lemma budgetE_bound
     (hz_ub : z ≤ 2 * (c * ℓ2 * ℓ3))
     (hT_lb : 3 * ℓ2 ≤ T)
     (hT_ub : T ≤ 4 * ℓ2) :
-    z ^ (2 : ℝ) + z ^ (3 * T) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
+    z ^ (2 : ℝ) + z ^ (79 * T / 20) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
       + lgn * z ^ T *
           (Real.exp (z ^ ((1 : ℝ) - E) * Real.log z) * (1 + T * Real.log z) + 2) *
           (T * Real.log z)
@@ -131,12 +132,13 @@ private lemma budgetE_bound
     rw [Real.rpow_def_of_pos hzpos]
     apply Real.exp_le_exp.mpr
     linarith only [hlz, hstar]
-  -- Summand 2: `z^{3T} 2^T (2 z^{5T/2}) ≤ exp(71 ℓ₂ ℓ₃)`.
-  have t2a : z ^ (3 * T) ≤ Real.exp (36 * (ℓ2 * ℓ3)) := by
+  -- Summand 2: `z^{79T/20} 2^T (2 z^{5T/2}) ≤ exp(83 ℓ₂ ℓ₃)`.
+  have t2a : z ^ (79 * T / 20) ≤ Real.exp (48 * (ℓ2 * ℓ3)) := by
     rw [Real.rpow_def_of_pos hzpos]
     apply Real.exp_le_exp.mpr
-    have h := mul_le_mul hlz (show 3 * T ≤ 12 * ℓ2 by linarith only [hT_ub])
-      (by linarith only [hT1] : (0 : ℝ) ≤ 3 * T) (by linarith only [h3] : (0 : ℝ) ≤ 3 * ℓ3)
+    have h := mul_le_mul hlz (show 79 * T / 20 ≤ 16 * ℓ2 by linarith only [hT_ub, h2pos])
+      (by linarith only [hT1] : (0 : ℝ) ≤ 79 * T / 20)
+      (by linarith only [h3] : (0 : ℝ) ≤ 3 * ℓ3)
     linarith only [h]
   have t2b : (2 : ℝ) ^ T ≤ Real.exp (4 * (ℓ2 * ℓ3)) := by
     rw [Real.rpow_def_of_pos (by norm_num : (0 : ℝ) < 2)]
@@ -160,10 +162,10 @@ private lemma budgetE_bound
   have t2c_nn : (0 : ℝ) ≤ 2 * z ^ (5 * T / 2) := by
     have h := Real.rpow_nonneg hzpos.le (5 * T / 2)
     linarith only [h]
-  have term2 : z ^ (3 * T) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
-      ≤ Real.exp (71 * (ℓ2 * ℓ3)) := by
-    have step : z ^ (3 * T) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
-        ≤ Real.exp (36 * (ℓ2 * ℓ3)) * Real.exp (4 * (ℓ2 * ℓ3))
+  have term2 : z ^ (79 * T / 20) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
+      ≤ Real.exp (83 * (ℓ2 * ℓ3)) := by
+    have step : z ^ (79 * T / 20) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
+        ≤ Real.exp (48 * (ℓ2 * ℓ3)) * Real.exp (4 * (ℓ2 * ℓ3))
             * Real.exp (31 * (ℓ2 * ℓ3)) :=
       mul_le_mul
         (mul_le_mul t2a t2b (Real.rpow_nonneg (by norm_num) _) (Real.exp_pos _).le)
@@ -308,8 +310,8 @@ private lemma budgetE_bound
     Real.exp_le_exp.mpr (mul_le_mul_of_nonneg_right hst hMpos.le)
   have b1 : z ^ (2 : ℝ) ≤ Real.exp (98 * (ℓ2 * ℓ3)) :=
     term1.trans (mono 6 98 (by norm_num))
-  have b2 : z ^ (3 * T) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
-      ≤ Real.exp (98 * (ℓ2 * ℓ3)) := term2.trans (mono 71 98 (by norm_num))
+  have b2 : z ^ (79 * T / 20) * (2 : ℝ) ^ T * (2 * z ^ (5 * T / 2))
+      ≤ Real.exp (98 * (ℓ2 * ℓ3)) := term2.trans (mono 83 98 (by norm_num))
   have b3 : lgn * z ^ T *
       (Real.exp (z ^ ((1 : ℝ) - E) * Real.log z) * (1 + T * Real.log z) + 2) *
       (T * Real.log z) ≤ Real.exp (98 * (ℓ2 * ℓ3)) :=

@@ -5,6 +5,7 @@ picks up `sorryAx`, `Lean.ofReduceBool` (native_decide), or a custom axiom.
 Uses only core Lean commands — no custom metaprogramming. -/
 import Carmichael.Main
 import Carmichael.MainWeak
+import Carmichael.Unconditional
 
 /-- info: 'Carmichael.main_theorem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -65,3 +66,27 @@ import Carmichael.MainWeak
 /-- info: 'Carmichael.selberg_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms Carmichael.selberg_bound
+
+/-- info: 'Carmichael.main_theorem_weak_of_logged' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.main_theorem_weak_of_logged
+
+/-- info: 'Carmichael.main_theorem_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.main_theorem_unconditional
+
+/-- info: 'Carmichael.pigeonhole_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.pigeonhole_unconditional
+
+/-- info: 'Carmichael.LoggedDensity.loggedDensity' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.LoggedDensity.loggedDensity
+
+/-- info: 'Carmichael.ZeroDensity.logfree_of_logged' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.ZeroDensity.logfree_of_logged
+
+/-- info: 'Carmichael.CensusMid.midCensusHyp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.CensusMid.midCensusHyp

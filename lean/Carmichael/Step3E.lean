@@ -1,6 +1,6 @@
 /-
 E-generic version of Lemma 4.2 of the paper (Step 3 halts), proved from an
-explicit AGP pigeonhole hypothesis (Theorem 3.1 at B = 2/5) together with the
+explicit AGP pigeonhole hypothesis (Theorem 3.1 at B = 21/100) together with the
 Mertens-type bound `primeRecipSum_sub_le` (proved in `Carmichael/RecipSum.lean`),
 which controls the reciprocal sum of the reservoir primes `q ∈ (z^{99/100}, z]`.
 
@@ -80,20 +80,20 @@ private lemma eventually_quad_le_exp (K : ℝ) :
 
 set_option maxHeartbeats 4000000 in
 /-- Lemma 4.2 (Step 3 halts), E-generic version: for `n` large and any
-admissible `Q ⊆ goodPrimesE C₁ n E`, some shift `k ≤ x^{3/5}` coprime to `L`
+admissible `Q ⊆ goodPrimesE C₁ n E`, some shift `k ≤ x^{79/100}` coprime to `L`
 yields a pool of at least `(log n)^{1.2}` primes `dk + 1 ∈ (z, x]` with
 `d ∣ L`. -/
 theorem step3_haltsE (C₁ D E : ℝ) (z₃ : ℕ)
     (hE : 0 < E) (hE2 : E ≤ 1 / 2) (h1000 : (1000 : ℝ) ≤ C₁)
     (hpigeon : ∀ x L : ℕ, z₃ < x → 1 < L → Squarefree L →
-      (∀ q : ℕ, q.Prime → q ∣ L → (q : ℝ) ≤ (x : ℝ) ^ ((3 : ℝ) / 10)) →
+      (∀ q : ℕ, q.Prime → q ∣ L → (q : ℝ) ≤ (x : ℝ) ^ ((79 : ℝ) / 200)) →
       (∑ q ∈ L.primeFactors, (1 : ℝ) / q) ≤ 3 / 160 →
-      ∃ k : ℕ, 0 < k ∧ (k : ℝ) ≤ (x : ℝ) ^ ((3 : ℝ) / 5) ∧ k.Coprime L ∧
+      ∃ k : ℕ, 0 < k ∧ (k : ℝ) ≤ (x : ℝ) ^ ((79 : ℝ) / 100) ∧ k.Coprime L ∧
         (2 : ℝ) ^ (-D - 2) / Real.log x *
-          ((L.divisors.filter (fun d : ℕ => (d : ℝ) ≤ (x : ℝ) ^ ((2 : ℝ) / 5))).card : ℝ)
+          ((L.divisors.filter (fun d : ℕ => (d : ℝ) ≤ (x : ℝ) ^ ((21 : ℝ) / 100))).card : ℝ)
         ≤ ((L.divisors.filter (fun d => d * k + 1 ≤ x ∧ (d * k + 1).Prime)).card : ℝ)) :
     ∀ᶠ n : ℕ in Filter.atTop, ∀ Q ⊆ goodPrimesE C₁ n E, Q.card = Tscale n →
-      ∃ k : ℕ, 0 < k ∧ (k : ℝ) ≤ (xceil Q : ℝ) ^ ((3 : ℝ) / 5) ∧
+      ∃ k : ℕ, 0 < k ∧ (k : ℝ) ≤ (xceil Q : ℝ) ^ ((79 : ℝ) / 100) ∧
         k.Coprime (Lmod Q) ∧
         (Real.log n) ^ (1.2 : ℝ) ≤ ((pool Q (zscale C₁ n) k).card : ℝ) := by
   classical
@@ -312,7 +312,7 @@ theorem step3_haltsE (C₁ D E : ℝ) (z₃ : ℕ)
       mul_le_mul hlog2_lb.le (by linarith [hT_lb]) (by linarith [ha0])
         (le_trans (by norm_num) hlog2_lb.le)
     linarith [hlogz_ub, hb_le_a, ha0, h6]
-  have hqbound : ∀ q : ℕ, q.Prime → q ∣ Lmod Q →
+  have hqbound310 : ∀ q : ℕ, q.Prime → q ∣ Lmod Q →
       (q : ℝ) ≤ (xceil Q : ℝ) ^ ((3 : ℝ) / 10) := by
     intro q hqp hqd
     have hqQ : q ∈ Q := by
@@ -326,26 +326,37 @@ theorem step3_haltsE (C₁ D E : ℝ) (z₃ : ℕ)
       _ ≤ (Lmod Q : ℝ) ^ ((3 : ℝ) / 2) :=
           Real.rpow_le_rpow (by positivity) hL2TR (by norm_num)
       _ = (xceil Q : ℝ) ^ ((3 : ℝ) / 10) := hxr310.symm
+  -- hence at most x^{79/200}, the prime-factor bound of Theorem 3.1 at B = 21/100
+  have hx1R : (1 : ℝ) ≤ (xceil Q : ℝ) := by
+    have h : (1 : ℕ) ≤ xceil Q := by omega
+    exact_mod_cast h
+  have hqbound : ∀ q : ℕ, q.Prime → q ∣ Lmod Q →
+      (q : ℝ) ≤ (xceil Q : ℝ) ^ ((79 : ℝ) / 200) := by
+    intro q hqp hqd
+    calc (q : ℝ) ≤ (xceil Q : ℝ) ^ ((3 : ℝ) / 10) := hqbound310 q hqp hqd
+      _ ≤ (xceil Q : ℝ) ^ ((79 : ℝ) / 200) :=
+          Real.rpow_le_rpow_of_exponent_le hx1R (by norm_num)
   have hsumL : ∑ q ∈ (Lmod Q).primeFactors, (1 : ℝ) / q ≤ 3 / 160 := by
     rw [hPF]; exact hsum_Q
   -- apply AGP Theorem 3.1
   obtain ⟨k, hk0, hkx, hkL, hcount⟩ :=
     hpigeon (xceil Q) (Lmod Q) hz₃x hL1 hsqL hqbound hsumL
   refine ⟨k, hk0, hkx, hkL, ?_⟩
-  -- all divisors of L are at most x^{2/5}, so the pigeonhole filter keeps them all
+  -- all divisors of L are at most L ≤ L^{21/20} = x^{21/100}, so the pigeonhole
+  -- filter keeps them all
   have hfilter_all : (Lmod Q).divisors.filter
-      (fun d : ℕ => (d : ℝ) ≤ (xceil Q : ℝ) ^ ((2 : ℝ) / 5)) = (Lmod Q).divisors := by
+      (fun d : ℕ => (d : ℝ) ≤ (xceil Q : ℝ) ^ ((21 : ℝ) / 100)) = (Lmod Q).divisors := by
     apply Finset.filter_true_of_mem
     intro c hc
     have hdL : c ≤ Lmod Q := Nat.divisor_le hc
-    have hx25 : (xceil Q : ℝ) ^ ((2 : ℝ) / 5) = (Lmod Q : ℝ) ^ (2 : ℝ) := by
+    have hx21 : (xceil Q : ℝ) ^ ((21 : ℝ) / 100) = (Lmod Q : ℝ) ^ ((21 : ℝ) / 20) := by
       rw [hxR, ← Real.rpow_natCast (Lmod Q : ℝ) 5, ← Real.rpow_mul hL0R.le]
       norm_num
     have h1 : (c : ℝ) ≤ (Lmod Q : ℝ) := by exact_mod_cast hdL
-    have h2 : (Lmod Q : ℝ) ≤ (Lmod Q : ℝ) ^ (2 : ℝ) := by
+    have h2 : (Lmod Q : ℝ) ≤ (Lmod Q : ℝ) ^ ((21 : ℝ) / 20) := by
       nth_rewrite 1 [← Real.rpow_one (Lmod Q : ℝ)]
       exact Real.rpow_le_rpow_of_exponent_le hL1R (by norm_num)
-    rw [hx25]
+    rw [hx21]
     linarith
   -- L has exactly 2^T divisors
   have hdivcard : (Lmod Q).divisors.card = 2 ^ Tscale n := by
