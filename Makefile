@@ -1,6 +1,6 @@
 .PHONY: all clean verify
 
-all: carmichael.pdf primes-near-carmichael.pdf
+all: carmichael.pdf
 
 # machine-verify the main theorem: full Lean build (kernel-checks every
 # proof), then AxiomCheck.lean asserts in-Lean (via #guard_msgs) that each

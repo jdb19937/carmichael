@@ -218,7 +218,7 @@ $T = \lceil 3\ell_2 \rceil$.
 \item[\textbf{2.}] \textbf{Moduli.} By trial division (a sieve would do
 equally), list the primes $q \in (z^{99/100},\, z]$ with
 $P^+(q-1) \le y$, factoring each $q-1$ by trial division. Let $Q$ be the $T$
-largest, $L = \prod_{q \in Q} q$, and $x = \lceil L^5 \rceil$.
+largest, $L = \prod_{q \in Q} q$, and $x = L^5$.
 
 \item[\textbf{3.}] \textbf{Shift scan.} For $k = 1, 2, \dots$ with
 $(k, L) = 1$: enumerate the $2^T$ divisors $d$ of $L$ as subset products
@@ -252,6 +252,7 @@ Lemma~\ref{lem:vebk} for step 4 --- so for $n \ge n_0$ no link of the
 kill chain comes up empty.
 
 \section{Proof of the theorem}
+\label{sec:proof}
 
 \begin{lemma}[Step 2 succeeds]
 For $n$ large, at least $T$ primes $q \in (z^{99/100}, z]$ satisfy
@@ -332,8 +333,8 @@ $\log \lambda(L) \le \pi(y)\log z = O(z^{2/3}) = O((\ell_2\ell_3)^{2/3})$,
 whence $N^* = \exp\bigl(O((\ell_2\ell_3)^{2/3})\bigr) = (\log n)^{o(1)}$.
 Each round multiplies $m$ by a product congruent to $1$ modulo $L$ and
 larger than $1$, hence at least $L + 1$; since each $q > z^{99/100}$ gives
-$\log L \ge \tfrac{99}{100}\,T\log z \ge \ell_2 \ell_3$ for large $n$, the
-loop ends after at most $\lceil \log n / \log(L+1) \rceil \le
+$\log L \ge \tfrac{99}{100}\,T\log z \ge 2\ell_2 \ell_3$ for large $n$, the
+loop ends after at most $\log n / \log(L+1) + 1 \le
 \log n/(\ell_2\ell_3)$ rounds. Total consumption is at most
 $N^* \log n/(\ell_2 \ell_3) = (\log n)^{1+o(1)}/(\ell_2\ell_3)
 < (\log n)^{1.2} \le |P|$.
@@ -477,22 +478,23 @@ The machine implements Section~\ref{sec:algo} with two differences. The
 two results cited from \cite{AGP} are replaced by weaker statements
 proved inside the formalization from a zero-density estimate for
 Dirichlet $L$-functions established there: Lemma~\ref{lem:smooth} for
-some exponent $E \in (0, 1/2]$ rather than every $E < 5/12$, so the
+some exponent $E \in (0, 1/2]$ in place of every $E < 5/12$, so the
 machine uses $y = \lceil z^{1-E} \rceil$ for that $E$, and
-Lemma~\ref{lem:pigeon} at $B = 21/100$ (the least value for which
-$L = x^{1/5} \le x^{B}$), so the scan bound becomes $k \le x^{79/100}$.
+Lemma~\ref{lem:pigeon} at $B = 21/100$ in place of $2/5$ (any
+$B \ge 1/5$ serves, since every divisor of $L = x^{1/5}$ is at most
+$x^{B}$), so the scan bound becomes $k \le x^{79/100}$.
 And every primality test, including the certificate check of step 5, is
 trial division, which the time bound absorbs; the polylogarithmic
 verification of the certificate rests on Lemma~\ref{lem:aks} and is not
 formalized. The constants $C_1$ and $E$ enter the machine through the
 axiom of choice, so ``computable in principle'' is a claim about the
-proof above, not about the formalization. Two intermediate layers are
+proof above; the formalization asserts existence only. Two intermediate layers are
 also proved and audited: the existence statement alone, and the
 algorithm as a Lean function with an explicit operation count at most
 $e^{100\,\ell_2\ell_3}$. Korselt's criterion, Lemma~\ref{lem:mertens},
 Lemma~\ref{lem:vebk} (to our knowledge the first mechanization of the
 van Emde Boas--Kruyswijk bound in any proof assistant), and the
-Chebyshev estimate used in Section~4 are all proved inside the
+Chebyshev estimate used in Section~\ref{sec:proof} are all proved inside the
 formalization. The repository is
 \url{https://github.com/jdb19937/carmichael}.
 \end{remark}
