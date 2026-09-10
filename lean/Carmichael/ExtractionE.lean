@@ -866,4 +866,169 @@ theorem extractionE (C₁ E : ℝ) (hE : 0 < E) (hE2 : E ≤ 1 / 2)
       rw [heq] at hcast
       exact hcast
 
+set_option maxHeartbeats 800000 in
+/-- The two inputs of the algorithm's extraction loop, exposed for the
+algorithmic main theorem (Route A): the modulus is at least `2`, `N* ≥ 1`,
+every pool element is a prime `≤ x` coprime to `L`, the pool supplies
+`⌊log_{L+1} n⌋ + 1` rounds of `N*` elements, and every `N*`-subset of the
+pool contains a nonempty subset with product `≡ 1 (mod L)` (van Emde
+Boas–Kruyswijk). This is the first part of the proof of `extractionE`. -/
+theorem extraction_inputsE (C₁ E : ℝ) (hE : 0 < E) (hE2 : E ≤ 1 / 2)
+    (h1000 : (1000 : ℝ) ≤ C₁) :
+    ∀ᶠ n : ℕ in Filter.atTop, ∀ Q ⊆ goodPrimesE C₁ n E, Q.card = Tscale n →
+      ∀ k : ℕ, 0 < k → k.Coprime (Lmod Q) →
+      (Real.log n) ^ (1.2 : ℝ) ≤ ((pool Q (zscale C₁ n) k).card : ℝ) →
+      2 ≤ Lmod Q ∧ 1 ≤ Nstar Q ∧
+      (∀ p ∈ pool Q (zscale C₁ n) k, p.Prime ∧ p ≤ xceil Q ∧ p.Coprime (Lmod Q)) ∧
+      (Nat.log (Lmod Q + 1) n + 1) * Nstar Q ≤ (pool Q (zscale C₁ n) k).card ∧
+      ∀ W ⊆ pool Q (zscale C₁ n) k, W.card = Nstar Q →
+        ∃ S ⊆ W, S.Nonempty ∧ (∏ p ∈ S, p) ≡ 1 [MOD Lmod Q] := by
+  classical
+  filter_upwards [eventually_ge_atTop 2,
+    tendsto_ell2_atTop.eventually_ge_atTop 50,
+    tendsto_ell3_atTop.eventually_ge_atTop 1,
+    star_boundE C₁ E hE hE2 h1000] with n hn2 ha50 hb1 hstar
+  intro Q hQsub hQcard k hk hkcop hpool
+  set a := ell2 n with hadef
+  set b := ell3 n with hbdef
+  have hba : b = Real.log a := rfl
+  have hzdef : zscale C₁ n = ⌈C₁ * a * b⌉₊ := rfl
+  have hTdef : Tscale n = ⌈(3:ℝ) * a⌉₊ := rfl
+  clear_value a b
+  have ha0 : (0:ℝ) < a := by linarith
+  have hb0 : (0:ℝ) < b := by linarith
+  have hCa : (1000:ℝ) * 50 ≤ C₁ * a := mul_le_mul h1000 ha50 (by norm_num) (by linarith)
+  have hCab : (1000:ℝ) * 50 * 1 ≤ C₁ * a * b :=
+    mul_le_mul hCa hb1 (by norm_num) (le_trans (by norm_num) hCa)
+  have hz_real : C₁ * a * b ≤ (zscale C₁ n : ℝ) := by
+    rw [hzdef]
+    exact Nat.le_ceil _
+  have hz1 : 1 ≤ zscale C₁ n := by
+    have h : (1:ℝ) ≤ (zscale C₁ n : ℝ) := le_trans (by linarith) hz_real
+    exact_mod_cast h
+  have hCb : (1000:ℝ) * 1 ≤ C₁ * b := mul_le_mul h1000 hb1 (by norm_num) (by linarith)
+  have ha_le_Cab : a ≤ C₁ * a * b := by nlinarith [hCb, ha0]
+  have hlogz_low : b ≤ Real.log (zscale C₁ n : ℝ) := by
+    rw [hba]
+    exact Real.log_le_log ha0 (le_trans ha_le_Cab hz_real)
+  -- T facts
+  have hT3a : 3 * a ≤ (Tscale n : ℝ) := by
+    rw [hTdef]
+    exact Nat.le_ceil _
+  have hT1 : 1 ≤ Tscale n := by
+    have h : (1:ℝ) ≤ (Tscale n : ℝ) := by linarith
+    exact_mod_cast h
+  -- facts about the primes of Q
+  have hQfacts : ∀ q ∈ Q, q.Prime ∧ q ≤ zscale C₁ n ∧
+      Real.sqrt (zscale C₁ n) < (q : ℝ) ∧ SmoothUpTo (yscaleE C₁ n E) (q - 1) := by
+    intro q hq
+    have hmem := hQsub hq
+    rw [goodPrimesE, Finset.mem_filter, Finset.mem_range] at hmem
+    have hz2 : 1 ≤ zscale C₁ n := by
+      have := hmem.2.1.two_le
+      have := hmem.1
+      omega
+    have h1z : (1 : ℝ) ≤ (zscale C₁ n : ℝ) := by exact_mod_cast hz2
+    refine ⟨hmem.2.1, by omega, ?_, hmem.2.2.2⟩
+    calc Real.sqrt (zscale C₁ n : ℝ)
+        = (zscale C₁ n : ℝ) ^ ((1 : ℝ) / 2) := Real.sqrt_eq_rpow _
+      _ ≤ (zscale C₁ n : ℝ) ^ ((99 : ℝ) / 100) :=
+          Real.rpow_le_rpow_of_exponent_le h1z (by norm_num)
+      _ < (q : ℝ) := hmem.2.2.1
+  have hQprime : ∀ q ∈ Q, q.Prime := fun q hq => (hQfacts q hq).1
+  have hQne : Q.Nonempty := Finset.card_pos.mp (by rw [hQcard]; omega)
+  have hL2 : 2 ≤ Lmod Q := by
+    obtain ⟨q₀, hq₀⟩ := hQne
+    calc 2 ≤ q₀ := (hQprime q₀ hq₀).two_le
+      _ ≤ Lmod Q := by
+        rw [Lmod]
+        exact Finset.single_le_prod' (f := fun q => q)
+          (fun q hq => (hQprime q hq).one_lt.le) hq₀
+  have hLpos : (0:ℝ) < (Lmod Q : ℝ) := by
+    have : (2:ℝ) ≤ (Lmod Q : ℝ) := by exact_mod_cast hL2
+    linarith
+  -- lower bound on log L
+  have hlogL_ge : 1.5 * a * b ≤ Real.log (Lmod Q) := by
+    have h := log_Lmod_ge hz1 (fun q hq => (hQfacts q hq).2.2.1)
+    rw [hQcard] at h
+    calc 1.5 * a * b = (3 * a) * (b / 2) := by ring
+      _ ≤ (Tscale n : ℝ) * (Real.log (zscale C₁ n) / 2) := by
+        apply mul_le_mul hT3a (by linarith) (by linarith) (by positivity)
+      _ ≤ Real.log (Lmod Q) := h
+  have hcpos : (0:ℝ) < 1.5 * a * b := by nlinarith
+  have hlogL1_ge : 1.5 * a * b ≤ Real.log ((Lmod Q : ℝ) + 1) :=
+    le_trans hlogL_ge (Real.log_le_log hLpos (by linarith))
+  -- λ and N* bounds
+  have hlam_le : (lambdaL Q : ℝ) ≤ (zscale C₁ n : ℝ) ^ (yscaleE C₁ n E + 1) := by
+    have h := lambdaL_le_pow hz1
+      (fun q hq => ⟨(hQfacts q hq).1, (hQfacts q hq).2.1, (hQfacts q hq).2.2.2⟩)
+    exact_mod_cast h
+  have hlogL_le : Real.log (Lmod Q) ≤ (Tscale n : ℝ) * Real.log (zscale C₁ n) := by
+    have h := log_Lmod_le (fun q hq => (hQfacts q hq).2.1)
+      (fun q hq => (hQprime q hq).one_lt.le)
+    rwa [hQcard] at h
+  have hNstar_le : (Nstar Q : ℝ) ≤ (zscale C₁ n : ℝ) ^ (yscaleE C₁ n E + 1) *
+      (1 + (Tscale n : ℝ) * Real.log (zscale C₁ n)) + 2 := by
+    refine le_trans (Nstar_le Q) ?_
+    have h0 : (0:ℝ) ≤ 1 + Real.log (Lmod Q) := by
+      have := Real.log_natCast_nonneg (Lmod Q)
+      linarith
+    have h1 : (lambdaL Q : ℝ) * (1 + Real.log (Lmod Q)) ≤
+        (zscale C₁ n : ℝ) ^ (yscaleE C₁ n E + 1) *
+          (1 + (Tscale n : ℝ) * Real.log (zscale C₁ n)) :=
+      mul_le_mul hlam_le (by linarith) h0 (by positivity)
+    linarith
+  -- log n facts
+  have hn1 : 1 ≤ n := by omega
+  have hlogn_pos : (0:ℝ) < Real.log n := by
+    apply Real.log_pos
+    have h : 1 < n := by omega
+    exact_mod_cast h
+  have hexp_a : Real.exp a = Real.log n := by
+    rw [hadef]
+    exact Real.exp_log hlogn_pos
+  have hrpow : (Real.log n) ^ (1.2:ℝ) = Real.exp (1.2 * a) := by
+    rw [Real.rpow_def_of_pos hlogn_pos, hadef]
+    congr 1
+    simp only [ell2]
+    ring
+  -- round-count bound
+  have hrle : (Nat.log (Lmod Q + 1) n : ℝ) ≤ Real.exp a / (1.5 * a * b) := by
+    have h := natLog_le_div hn1 hcpos hlogL1_ge
+    rwa [← hexp_a] at h
+  -- the budget: the greedy loop consumes at most the pool
+  have hbudget : (Nat.log (Lmod Q + 1) n + 1) * Nstar Q ≤ (pool Q (zscale C₁ n) k).card := by
+    have hP1nn : (0:ℝ) ≤ Real.exp a / (1.5 * a * b) + 1 := by
+      have := div_nonneg (Real.exp_nonneg a) hcpos.le
+      linarith
+    have hcast : (((Nat.log (Lmod Q + 1) n + 1) * Nstar Q : ℕ) : ℝ) ≤
+        ((pool Q (zscale C₁ n) k).card : ℝ) := by
+      push_cast
+      calc ((Nat.log (Lmod Q + 1) n : ℝ) + 1) * (Nstar Q : ℝ)
+          ≤ (Real.exp a / (1.5 * a * b) + 1) *
+            ((zscale C₁ n : ℝ) ^ (yscaleE C₁ n E + 1) *
+              (1 + (Tscale n : ℝ) * Real.log (zscale C₁ n)) + 2) :=
+            mul_le_mul (by linarith) hNstar_le (Nat.cast_nonneg _) hP1nn
+        _ ≤ Real.exp (1.2 * a) := hstar
+        _ = (Real.log n) ^ (1.2:ℝ) := hrpow.symm
+        _ ≤ ((pool Q (zscale C₁ n) k).card : ℝ) := hpool
+    exact_mod_cast hcast
+  -- one round of extraction is always possible
+  have hQ_le_z : ∀ q ∈ Q, q ≤ zscale C₁ n ∧ q.Prime :=
+    fun q hq => ⟨(hQfacts q hq).2.1, (hQfacts q hq).1⟩
+  have hextract : ∀ W ⊆ pool Q (zscale C₁ n) k, W.card = Nstar Q →
+      ∃ S ⊆ W, S.Nonempty ∧ (∏ p ∈ S, p) ≡ 1 [MOD Lmod Q] := by
+    intro W hW hWcard
+    refine round_extract hL2 (exponent_dvd_lambda hQprime hL2) (lambdaL_ne_zero hQprime)
+      (fun p hp => pool_coprime hQ_le_z (hW hp)) ?_
+    rw [hWcard]
+    exact lt_Nstar Q
+  -- assemble the five inputs
+  have hN1 : 1 ≤ Nstar Q := by
+    rw [Nstar]
+    omega
+  exact ⟨hL2, hN1,
+    fun p hp => ⟨(pool_mem_facts hp).1, (pool_mem_facts hp).2.2, pool_coprime hQ_le_z hp⟩,
+    hbudget, hextract⟩
+
 end Carmichael

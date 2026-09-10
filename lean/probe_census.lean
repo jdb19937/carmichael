@@ -1,0 +1,63 @@
+import Carmichael.PartialFractions
+import Carmichael.ZeroCount
+import Mathlib.NumberTheory.LSeries.Dirichlet
+import Mathlib.NumberTheory.DirichletCharacter.Orthogonality
+
+open Complex DirichletCharacter
+
+#check @Complex.im_tsum
+#check @Complex.ofReal_tsum
+#check @tendsto_rpow_neg_atTop
+#check @Real.log_le_sub_one_of_pos
+#check @Real.summable_nat_rpow
+#check @Finset.sum_range_sub'
+#check @Finset.sum_Ico_eq_sum_range
+#check @Finset.diag_union_offDiag
+#check @Finset.sum_diag
+#check @Finset.offDiag_card
+#check @Finset.equivFin
+#check @Complex.norm_natCast_cpow_of_pos
+#check @Summable.map
+#check @Complex.conj_cpow
+#check @Real.log_two_lt_d9
+#check @Nat.sum_divisorsAntidiagonal
+#check @LSeries.convolution_def
+#check @LSeriesSummable_one_iff
+#check @Finset.sum_mul_sum
+#check @Real.rpow_le_rpow_of_exponent_le
+#check @Real.rpow_le_rpow_left_iff
+#check @Real.div_rpow
+#check @Real.log_rpow
+#check @Real.rpow_natCast
+#check @Complex.cpow_neg
+#check @Complex.ofReal_div
+#check @Complex.div_re
+#check @Complex.normSq_pos
+#check @Summable.hasSum
+#check @HasSum.tendsto_sum_nat
+#check @Real.tsum_le_of_sum_le
+#check @Summable.tsum_finsetSum
+#check @tsum_nonneg
+#check @tsum_le_tsum
+#check @Summable.of_nonneg_of_le
+#check @Complex.exp_conj
+#check @Complex.cpow_def_of_ne_zero
+#check @Complex.ofReal_log
+#check @Complex.natCast_log
+#check @ArithmeticFunction.vonMangoldt_apply_one
+#check (ArithmeticFunction.vonMangoldt 0 : ℝ)
+example : ArithmeticFunction.vonMangoldt 0 = 0 := ArithmeticFunction.map_zero _
+#check @Finset.sum_product'
+#check @DirichletCharacter.changeLevel_eq_one_iff
+#check @eq_inv_of_mul_eq_one_left
+#check @MulChar.ext
+#check @Complex.ofReal_mul
+#check @Complex.ofReal_inj
+#check @Nat.floor_le
+#check @Real.rpow_le_rpow_of_exponent_le
+#check @Finset.sum_le_card_nsmul
+#check @Real.log_le_log
+#check @Real.log_pow
+#check @map_inv
+#check @Real.rpow_two
+#check @Nat.le_floor

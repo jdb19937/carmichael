@@ -6,6 +6,8 @@ Uses only core Lean commands — no custom metaprogramming. -/
 import Carmichael.Main
 import Carmichael.MainWeak
 import Carmichael.Unconditional
+import Carmichael.MainAlgorithmic
+import Carmichael.MainTM
 
 /-- info: 'Carmichael.main_theorem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -90,3 +92,15 @@ import Carmichael.Unconditional
 /-- info: 'Carmichael.CensusMid.midCensusHyp' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms Carmichael.CensusMid.midCensusHyp
+
+/-- info: 'Carmichael.main_theorem_algorithmic' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.main_theorem_algorithmic
+
+/-- info: 'Carmichael.search_successW' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Carmichael.search_successW
+
+/-- info: 'carmichael_search_TM' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms carmichael_search_TM
