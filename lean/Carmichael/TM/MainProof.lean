@@ -7,13 +7,13 @@ on every input `n` within `searchBound C₁ K n + 1` steps.  In the window the
 step bound is `exp(O(ℓ₂ ℓ₃))`, hence T8a's `exists_timeFun_of_ExpB` produces a
 time function of the input length bounded by
 `exp(C · log N · log log N)`; Route A's `search_successW` supplies the
-correctness clauses.  `carmichael_search_TM_of` packages everything for
-`MainTM.lean`, generically in the output encoding so that the root-level
-`encodeOutput` of `MainTM.lean` can be substituted with `rfl`.
+correctness clauses.  `main_theorem_of` packages everything for
+`Main.lean`, generically in the output encoding so that the root-level
+`encodeOutput` of `Main.lean` can be substituted with `rfl`.
 -/
 import Carmichael.TM.Step5
 import Carmichael.TM.Overhead
-import Carmichael.MainAlgorithmic
+import Carmichael.SearchAlg
 
 set_option autoImplicit false
 
@@ -265,9 +265,9 @@ theorem searchFun_spec (ε : ℝ) (hε : 0 < ε) : ∃ n₀ : ℕ, ∀ n ≥ n�
 
 /-! ### The final assembly -/
 
-/-- The theorem of `MainTM.lean`, generic in the output encoding: any `eo` with
+/-- The theorem of `Main.lean`, generic in the output encoding: any `eo` with
 the body of `encodeOutput` qualifies. -/
-theorem carmichael_search_TM_of (eo : ℕ × List ℕ → List Γ')
+theorem main_theorem_of (eo : ℕ × List ℕ → List Γ')
     (heo : ∀ m S, eo (m, S) = (encodeNat m).map inclusionBoolΓ' ++ Γ'.comma ::
       S.flatMap (fun p => (encodeNat p).map inclusionBoolΓ' ++ [Γ'.comma])) :
     ∃ (f : ℕ → ℕ × List ℕ)

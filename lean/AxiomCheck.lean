@@ -3,15 +3,15 @@
 `lake env lean AxiomCheck.lean` exits nonzero if any declaration below
 picks up `sorryAx`, `Lean.ofReduceBool` (native_decide), or a custom axiom.
 Uses only core Lean commands — no custom metaprogramming. -/
+import Carmichael.ExistsOfAssumptions
+import Carmichael.ExistsOfAssumptionsWeak
+import Carmichael.Exists
+import Carmichael.SearchAlg
 import Carmichael.Main
-import Carmichael.MainWeak
-import Carmichael.Unconditional
-import Carmichael.MainAlgorithmic
-import Carmichael.MainTM
 
-/-- info: 'Carmichael.main_theorem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'Carmichael.carmichael_exists_of_assumptions' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
-#print axioms Carmichael.main_theorem
+#print axioms Carmichael.carmichael_exists_of_assumptions
 
 /-- info: 'Carmichael.step2_succeeds' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -53,9 +53,9 @@ import Carmichael.MainTM
 #guard_msgs in
 #print axioms Mertens.sum_mangoldt_div_eq_log
 
-/-- info: 'Carmichael.main_theorem_weak' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'Carmichael.carmichael_exists_of_assumptionsWeak' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
-#print axioms Carmichael.main_theorem_weak
+#print axioms Carmichael.carmichael_exists_of_assumptionsWeak
 
 /-- info: 'Carmichael.smooth_shifted_weak' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -69,13 +69,13 @@ import Carmichael.MainTM
 #guard_msgs in
 #print axioms Carmichael.selberg_bound
 
-/-- info: 'Carmichael.main_theorem_weak_of_logged' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'Carmichael.carmichael_exists_of_loggedDensity' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
-#print axioms Carmichael.main_theorem_weak_of_logged
+#print axioms Carmichael.carmichael_exists_of_loggedDensity
 
-/-- info: 'Carmichael.main_theorem_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'Carmichael.carmichael_exists' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
-#print axioms Carmichael.main_theorem_unconditional
+#print axioms Carmichael.carmichael_exists
 
 /-- info: 'Carmichael.pigeonhole_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -93,14 +93,14 @@ import Carmichael.MainTM
 #guard_msgs in
 #print axioms Carmichael.CensusMid.midCensusHyp
 
-/-- info: 'Carmichael.main_theorem_algorithmic' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'Carmichael.carmichael_search_alg' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
-#print axioms Carmichael.main_theorem_algorithmic
+#print axioms Carmichael.carmichael_search_alg
 
 /-- info: 'Carmichael.search_successW' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms Carmichael.search_successW
 
-/-- info: 'carmichael_search_TM' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'main_theorem' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
-#print axioms carmichael_search_TM
+#print axioms main_theorem

@@ -2,7 +2,7 @@
 Route T, sortie T8a: the overhead toolkit for the final assembly.
 
 Pure real analysis and `ℕ` arithmetic, no machine code. Three services for
-`Carmichael/TM/Main.lean`:
+`Carmichael/TM/MainProof.lean`:
 
 * **Input length.** Mathlib's `encodeNat n` has exactly `⌊log₂ n⌋ + 1` bits
   for `n ≥ 1` (and none for `n = 0`), so "input length `≥ N`" means

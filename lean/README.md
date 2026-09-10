@@ -4,11 +4,11 @@ A Lean 4 / Mathlib formalization of the main theorem of *"A deterministic
 quasi-polylogarithmic algorithm for constructing Carmichael numbers"*
 (`../carmichael.tex`), in two forms:
 
-* **`main_theorem`** (paper-faithful, `E = 1/3`): assuming AGP Theorems 3
+* **`carmichael_exists_of_assumptions`** (paper-faithful, `E = 1/3`): assuming AGP Theorems 3
   and 3.1, a Carmichael number `m ∈ (n, n^{1+ε}]` exists together with its
   prime factorization, and the exhaustive search of the paper's Section 3
   performs at most `exp(100·ℓ₂ℓ₃)` primitive operations.
-* **`main_theorem_weak`** (one assumption): the same conclusion at the
+* **`carmichael_exists_of_assumptionsWeak`** (one assumption): the same conclusion at the
   sieve-delivered smoothness exponent `Eweak`, assuming ONLY AGP
   Theorem 3.1 — Theorem 3 is replaced by the in-project
   `smooth_shifted_weak`, proved via the Selberg sieve (fundamental theorem
@@ -18,7 +18,7 @@ quasi-polylogarithmic algorithm for constructing Carmichael numbers"*
 ## The theorem
 
 ```
-theorem main_theorem (A : Assumptions) (ε : ℝ) (hε : 0 < ε) :
+theorem carmichael_exists_of_assumptions (A : Assumptions) (ε : ℝ) (hε : 0 < ε) :
     ∃ C : ℝ, 0 < C ∧ ∀ᶠ n : ℕ in atTop,
       (∃ m S, (∀ p ∈ S, p.Prime) ∧ 3 ≤ S.card ∧ m = ∏ p ∈ S, p ∧
         IsCarmichael m ∧ n < m ∧ (m : ℝ) ≤ (n : ℝ) ^ (1 + ε)) ∧
@@ -46,13 +46,14 @@ Pomerance, *Annals of Math.* 140 (1994): Theorem 3 at `E = 1/3`
 | `Carmichael/Extraction.lean` | Paper Lemma 4.3 (subset product ≡ 1 mod L in `(n, n·x^{N*}]`) | proved |
 | `Carmichael/Output.lean` | Paper Lemma 4.4 (output is Carmichael, in `(n, n^{1+ε}]`) | proved |
 | `Carmichael/Budget.lean` | Paper Lemma 4.5: `opBudget ≤ exp(100·ℓ₂ℓ₃)` | proved |
-| `Carmichael/Main.lean` | The main theorem, composing the five lemmas | proved |
+| `Carmichael/ExistsOfAssumptions.lean` | `carmichael_exists_of_assumptions`, composing the five lemmas | proved |
+| `Carmichael/Main.lean` | `main_theorem`: the machine form (Mathlib `TM2ComputableInTime`), proved in `Carmichael/TM/MainProof.lean` | proved |
 | `Carmichael/SelbergBound.lean` | Fundamental theorem of the Selberg sieve (completing Mathlib's `NumberTheory.SelbergSieve`) | proved |
 | `Carmichael/TwinSieve.lean` | Uniform twin-type bound `#{q ≤ t : q, mq+1 prime} ≤ C₀(m/φ(m))²t/log²t` | proved |
 | `Carmichael/TotientSum.lean`, `TotientSumSq.lean`, `DivisorMean.lean` | Totient and divisor-power mean values | proved |
 | `Carmichael/SmoothShifted.lean` | Weak AGP Theorem 3 (`smooth_shifted_weak`): a positive proportion of `p ≤ x` have `p−1` free of prime factors `> x^{1−E}` | proved |
 | `Carmichael/LogPow.lean`, `Step2E/Step3E/ExtractionE/OutputE/BudgetE.lean` | E-generic forms of the step lemmas | proved |
-| `Carmichael/WeakE.lean`, `MainWeak.lean` | Weak-exponent constants, `AssumptionsWeak` (AGP 3.1 only), `main_theorem_weak` | proved |
+| `Carmichael/WeakE.lean`, `ExistsOfAssumptionsWeak.lean` | Weak-exponent constants, `AssumptionsWeak` (AGP 3.1 only), `carmichael_exists_of_assumptionsWeak` | proved |
 | `Contrib/` | Vendored third-party proofs: Mertens' first theorem + Euler–Maclaurin helper, ported from PrimeNumberTheoremAnd via anthropics/zeta-23-lean (Apache 2.0, provenance headers in files) | vendored |
 | `AxiomCheck.lean` | `#guard_msgs` axiom-closure harness (15 declarations) | check |
 
@@ -83,7 +84,7 @@ Human half (~250 lines, statements only — proofs never need reading):
 1. `Carmichael/Defs.lean` — `IsCarmichael` and the Section-3 objects;
 2. `Carmichael/Assumptions.lean` — the two AGP fields against AGP 1994
    (the only place a transcription error could invalidate the result);
-3. `Carmichael/Main.lean` — the theorem statement;
+3. `Carmichael/ExistsOfAssumptions.lean` — the theorem statement;
 4. `Carmichael/Budget.lean` — the `opBudget` definition vs the algorithm's
    loop structure (the operation-count convention);
 5. `AxiomCheck.lean` — the audited declaration list.

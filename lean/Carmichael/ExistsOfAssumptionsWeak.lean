@@ -19,7 +19,7 @@ namespace Carmichael
 open Filter
 
 /-- Main theorem, weak form: one assumed input (AGP Theorem 3.1). -/
-theorem main_theorem_weak (A : AssumptionsWeak) :
+theorem carmichael_exists_of_assumptionsWeak (A : AssumptionsWeak) :
     ∃ C : ℝ, 0 < C ∧ ∀ ε : ℝ, 0 < ε →
       ∀ᶠ n : ℕ in atTop,
         (∃ m : ℕ, ∃ S : Finset ℕ,

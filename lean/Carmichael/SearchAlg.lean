@@ -9,7 +9,7 @@ window `InWindow` (in particular at the paper's exact scales
 most `exp(100 ℓ₂ ℓ₃)` operations, for all large `n`, with no hypothesis
 (Route Z discharges AGP Theorem 3.1).
 
-Proof pattern (mirrors `main_theorem_weak`): `filter_upwards` over the four
+Proof pattern (mirrors `carmichael_exists_of_assumptionsWeak`): `filter_upwards` over the four
 windowed step theorems (`step2_succeedsW`, `step3_haltsW`,
 `extraction_inputsW`, `output_carmichaelW`) and the budget
 (`costPieces_leW`), then chain the algorithm's specifications
@@ -23,7 +23,7 @@ import Carmichael.Step2W
 import Carmichael.Step3W
 import Carmichael.ExtractionW
 import Carmichael.OutputW
-import Carmichael.Unconditional
+import Carmichael.Exists
 
 set_option autoImplicit false
 
@@ -295,7 +295,7 @@ private lemma carmichaelSearch_eventually (ε : ℝ) (hε : 0 < ε) :
   exact h (scalesOf C₁alg Eweak n) hW hθlo hθhi
 
 /-- **Mickey's theorem, algorithmic form, no hypotheses.** -/
-theorem main_theorem_algorithmic :
+theorem carmichael_search_alg :
     (∃ C : ℝ, 0 < C ∧ ∃ n₀ : ℕ, ∀ n ≥ n₀,
         ((carmichaelSearch n).2 : ℝ) ≤ Real.exp (C * ell2 n * ell3 n)) ∧
     (∀ ε : ℝ, 0 < ε → ∃ n₀ : ℕ, ∀ n ≥ n₀,

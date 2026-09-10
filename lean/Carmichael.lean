@@ -5,7 +5,7 @@ import Carmichael.PrimeCount
 import Carmichael.RecipSum
 import Carmichael.ZeroSum
 import Carmichael.Lemmas
-import Carmichael.Main
+import Carmichael.ExistsOfAssumptions
 import Carmichael.SelbergBound
 import Carmichael.TotientSum
 import Carmichael.DivisorMean
@@ -19,8 +19,8 @@ import Carmichael.OutputE
 import Carmichael.BudgetE
 import Carmichael.SmoothShifted
 import Carmichael.WeakE
-import Carmichael.MainWeak
-import Carmichael.Unconditional
+import Carmichael.ExistsOfAssumptionsWeak
+import Carmichael.Exists
 import Carmichael.DefsW
 import Carmichael.Step2W
 import Carmichael.Step3W
@@ -30,7 +30,7 @@ import Carmichael.Algorithm
 import Carmichael.AlgScan
 import Carmichael.AlgExtract
 import Carmichael.AlgBudget
-import Carmichael.MainAlgorithmic
+import Carmichael.SearchAlg
 import Carmichael.ScalesTM
 import Carmichael.TM.Frag
 import Carmichael.TM.Arith
@@ -47,5 +47,5 @@ import Carmichael.TM.Step4
 import Carmichael.TM.Steps23
 import Carmichael.TM.Overhead
 import Carmichael.TM.Step5
-import Carmichael.TM.Main
-import Carmichael.MainTM
+import Carmichael.TM.MainProof
+import Carmichael.Main

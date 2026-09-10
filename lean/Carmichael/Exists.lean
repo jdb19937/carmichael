@@ -7,15 +7,15 @@ quasipolylogarithmic time — with NO hypotheses.
 hypothesis pack `AssumptionsWeak`.  The pigeonhole is conditional on
 `T21.DensityInputs`; its log-free field is discharged by
 `ZeroDensity.logfree_of_logged` and its logged field by
-`LoggedDensity.loggedDensity`, so `main_theorem_unconditional` has no
+`LoggedDensity.loggedDensity`, so `carmichael_exists` has no
 hypothesis at all: every analytic input (explicit formula, log-free and
 logged zero densities, exceptional-zero census, zero-free region,
 Brun–Titchmarsh, Chebyshev) is proved in this repository from Mathlib.
 
-`main_theorem_weak_of_logged` is the intermediate form with the logged
+`carmichael_exists_of_loggedDensity` is the intermediate form with the logged
 density as its single hypothesis.
 -/
-import Carmichael.MainWeak
+import Carmichael.ExistsOfAssumptionsWeak
 import Carmichael.BMembership21
 import Carmichael.ZeroDensity
 import Carmichael.LoggedDensity
@@ -38,7 +38,7 @@ noncomputable def assumptionsWeak_of_logged (hlog : LoggedDensity) : Assumptions
     pigeonhole := h.choose_spec.choose_spec }
 
 /-- **Mickey's theorem, conditional only on the logged zero density.** -/
-theorem main_theorem_weak_of_logged (hlog : LoggedDensity) :
+theorem carmichael_exists_of_loggedDensity (hlog : LoggedDensity) :
     ∃ C : ℝ, 0 < C ∧ ∀ ε : ℝ, 0 < ε →
       ∀ᶠ n : ℕ in atTop,
         (∃ m : ℕ, ∃ S : Finset ℕ,
@@ -46,7 +46,7 @@ theorem main_theorem_weak_of_logged (hlog : LoggedDensity) :
           IsCarmichael m ∧
           n < m ∧ (m : ℝ) ≤ (n : ℝ) ^ (1 + ε)) ∧
         opBudgetE C₁weak Eweak n ≤ Real.exp (C * ell2 n * ell3 n) :=
-  main_theorem_weak (assumptionsWeak_of_logged hlog)
+  carmichael_exists_of_assumptionsWeak (assumptionsWeak_of_logged hlog)
 
 /-- The weak assumption pack, with no hypothesis. -/
 noncomputable def assumptionsWeak_routeZ : AssumptionsWeak :=
@@ -68,7 +68,7 @@ there is a Carmichael number `m ∈ (n, n^{1+ε}]`, given with its complete prim
 factorization, and the operation budget of the search (every primality test
 charged as trial division) is at most `exp (C · log log n · log log log n)`
 for an absolute constant `C`. -/
-theorem main_theorem_unconditional :
+theorem carmichael_exists :
     ∃ C : ℝ, 0 < C ∧ ∀ ε : ℝ, 0 < ε →
       ∀ᶠ n : ℕ in atTop,
         (∃ m : ℕ, ∃ S : Finset ℕ,
@@ -76,6 +76,6 @@ theorem main_theorem_unconditional :
           IsCarmichael m ∧
           n < m ∧ (m : ℝ) ≤ (n : ℝ) ^ (1 + ε)) ∧
         opBudgetE C₁weak Eweak n ≤ Real.exp (C * ell2 n * ell3 n) :=
-  main_theorem_weak_of_logged LoggedDensity.loggedDensity
+  carmichael_exists_of_loggedDensity LoggedDensity.loggedDensity
 
 end Carmichael
