@@ -325,7 +325,7 @@ theorem norm_LFunction_le_convexity_nonprincipal' {χ : DirichletCharacter ℂ N
         apply mul_le_mul_of_nonneg_left hτ (by norm_num)
     _ = 100000 * (2 : ℝ) ^ (2 ^ 800 : ℕ) * (N:ℝ) ^ ((1:ℝ)/800)
           * ((N:ℝ) * (|s.im| + 2)) ^ (max ((1 - s.re)/2) 0)
-          * Real.log ((N:ℝ) * (|s.im| + 3)) := by ring
+          * Real.log ((N:ℝ) * (|s.im| + 3)) := by simp only [mul_assoc]
 
 end Imprimitive
 

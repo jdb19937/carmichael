@@ -268,7 +268,7 @@ lemma integral_one_div_one_add_abs {u v : ℝ} (hu : u ≤ 0) (hv : 0 ≤ v) :
         = ∫ x in (1 - 0 : ℝ)..(1 - u), 1 / x := by
       have := intervalIntegral.integral_comp_sub_left (a := u) (b := (0:ℝ))
         (fun x : ℝ => 1 / x) 1
-      simpa using this
+      simp
     rw [hcomp]
     have h0 : (0 : ℝ) ∉ [[(1 - 0 : ℝ), 1 - u]] := by
       rw [Set.mem_uIcc]
@@ -289,7 +289,7 @@ lemma integral_one_div_one_add_abs {u v : ℝ} (hu : u ≤ 0) (hv : 0 ≤ v) :
         = ∫ x in (1 + 0 : ℝ)..(1 + v), 1 / x := by
       have := intervalIntegral.integral_comp_add_left (a := (0:ℝ)) (b := v)
         (fun x : ℝ => 1 / x) 1
-      simpa using this
+      simp
     rw [hcomp]
     have h0 : (0 : ℝ) ∉ [[(1 + 0 : ℝ), 1 + v]] := by
       rw [Set.mem_uIcc]
@@ -504,7 +504,7 @@ lemma exists_le_avg_off_finset {F : ℝ → ℝ} {a b M : ℝ} (hab : a < b)
   have hpos : 0 < MeasureTheory.volume (Function.support G ∩ Ioc a b) := by
     have h1 : MeasureTheory.volume (Ioc a b \ (B : Set ℝ))
         = MeasureTheory.volume (Ioc a b) := by
-      apply MeasureTheory.measure_diff_null hBnull
+      apply MeasureTheory.measure_sdiff_null hBnull
     have h2 : MeasureTheory.volume (Ioc a b) = ENNReal.ofReal (b - a) := Real.volume_Ioc
     calc (0 : ENNReal) < ENNReal.ofReal (b - a) := by
           rw [ENNReal.ofReal_pos]; linarith
@@ -716,7 +716,7 @@ lemma kerErr_near (hy : 100 ≤ y) (hc1 : 1 ≤ c) (hc2 : c ≤ 2) (hT : 2 ≤ T
   have hn0 : (0:ℝ) < (n : ℝ) := by exact_mod_cast hn1
   have hnley : (n : ℝ) ≤ 2 * y := by
     rcases hn with rfl | rfl
-    · push_cast; linarith
+    · linarith
     · push_cast; linarith [hfl100]
   have hu0 : 0 < y / (n : ℝ) := by positivity
   have hu2 : y / (n : ℝ) ≤ 2 := by
@@ -2860,7 +2860,7 @@ theorem rectInt_chain {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A) {y : ℝ} 
         (by rw [im_coord]; exact h0m) (by rw [im_coord]; linarith)
         (by rw [re_coord, im_coord, im_coord]; exact hintL)
         (by rw [re_coord, im_coord, im_coord]; exact hintR)
-      simp only [re_coord, im_coord] at hvs
+      simp only [re_coord] at hvs
       rw [hvs]
       -- the lower part by induction, the top strip directly
       have hstrip := rectInt_strip hf hy hσ hσc hcc (t_lo := τ m)
@@ -2869,7 +2869,7 @@ theorem rectInt_chain {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A) {y : ℝ} 
         ring
       -- frame nonvanishing for the top strip
       · intro s hs
-        simp only [rectFrame, Set.mem_setOf_eq] at hs
+        simp only [rectFrame, Set.mem_ofPred_eq] at hs
         rcases hs with ⟨hsre, hsim | hsim⟩ | ⟨hsim, hsre | hsre⟩
         · -- bottom edge at height τ m
           rw [im_coord] at hsim
@@ -2998,7 +2998,7 @@ set_option maxHeartbeats 1000000 in
 /-- **Fusion**: the chained strip sums equal a single sum over the box zeros
 strictly inside the big rectangle. -/
 theorem chain_sum_eq_box {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
-    (g : ℂ → ℂ) {σ₁ cc U : ℝ} (hσ : 9/16 ≤ σ₁) (hσc : σ₁ < cc) (hcc : cc ≤ 5/4)
+    (g : ℂ → ℂ) {σ₁ cc U : ℝ} (hσ : 9/16 ≤ σ₁) (_hσc : σ₁ < cc) (hcc : cc ≤ 5/4)
     (τ : ℕ → ℝ) (m : ℕ)
     (hmono : ∀ j < m, τ j < τ (j+1))
     (hgap : ∀ j < m, τ (j+1) - τ j ≤ 1)
@@ -3201,7 +3201,6 @@ theorem weight_sum_le {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A) {U : ℝ}
             exact hgeoP ρ hρ.1 hρ.2)
         have h4 : |(k:ℝ)+1/2| = (k:ℝ)+1/2 := abs_of_nonneg (by positivity)
         rw [h4] at h1
-        push_cast at h1
         linarith [hlogk]
       have hneg_mass : ∑ ρ ∈ (Z.filter (fun ρ => ⌊|ρ.im|⌋₊ = k)).filter
           (fun ρ => ¬ 0 ≤ ρ.im), (analyticOrderNatAt f ρ : ℝ) ≤ 224 * LA := by
@@ -3214,7 +3213,6 @@ theorem weight_sum_le {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A) {U : ℝ}
           rw [abs_neg]
           exact abs_of_nonneg (by positivity)
         rw [h4] at h1
-        push_cast at h1
         linarith [hlogk]
       linarith [hsplit, hpos_mass, hneg_mass]
     calc ∑ ρ ∈ Z.filter (fun ρ => ⌊|ρ.im|⌋₊ = k),
@@ -3262,7 +3260,7 @@ lemma intervalIntegrable_finsetSum {ι : Type*} (s : Finset ι) {F : ι → ℝ 
     IntervalIntegrable (fun x => ∑ i ∈ s, F i x) MeasureTheory.volume a b := by
   classical
   induction s using Finset.induction_on with
-  | empty => simpa using intervalIntegrable_const (c := (0:ℝ))
+  | empty => simp
   | insert i s hi ih =>
       have h1 : (fun x => ∑ j ∈ insert i s, F j x)
           = fun x => F i x + ∑ j ∈ s, F j x := by
@@ -3370,7 +3368,6 @@ theorem exists_good_sigma {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
         have := hmid k hk
         rw [← ht₀def] at this
         nlinarith
-      push_cast at h1
       linarith
     calc ∑ ρ ∈ diskZeros f t₀, (analyticOrderNatAt f ρ : ℝ) / (1 + |ρ.im|)
         ≤ ∑ ρ ∈ diskZeros f t₀,
@@ -3437,7 +3434,7 @@ theorem exists_good_sigma {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
         (f := fun t : ℝ => 1 / (1 + |t|))
         (fun k _ => continuous_one_div_one_add_abs.intervalIntegrable _ _)
       simp only [Nat.cast_zero, Nat.cast_succ] at this ⊢
-      convert this using 2 <;> push_cast <;> ring
+      convert this using 2; ring
     have hbig : (∫ t in a..(a + M/2), 1 / (1 + |t|)) ≤ 2 * Real.log (1 + (T+2)) := by
       exact integral_one_div_one_add_abs_le ha0 hM1 (by linarith) hM2
     have hlog2 : Real.log (1 + (T+2)) ≤ LT := by
@@ -3463,10 +3460,10 @@ theorem exists_good_sigma {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
           ((analyticOrderNatAt f ρ : ℝ) / (1 + |ρ.im|))
             * ∫ σ in (9/16 : ℝ)..(5/8), |σ - ρ.re| ^ (-(1:ℝ)/2) := by
       rw [hHdef]
-      rw [intervalIntegral.integral_finset_sum]
+      rw [intervalIntegral.integral_finsetSum]
       · apply Finset.sum_congr rfl
         intro k _
-        rw [intervalIntegral.integral_finset_sum]
+        rw [intervalIntegral.integral_finsetSum]
         · apply Finset.sum_congr rfl
           intro ρ _
           rw [intervalIntegral.integral_const_mul]
@@ -3599,7 +3596,7 @@ lemma integral_inv_dist_le {σ₁ : ℝ} {ρ : ℂ} (hne : ρ.re ≠ σ₁) {t�
     rw [Filter.EventuallyLE, MeasureTheory.ae_iff]
     apply MeasureTheory.measure_mono_null _ hnull
     intro t ht
-    simp only [Set.mem_setOf_eq] at ht
+    simp only [Set.mem_ofPred_eq] at ht
     simp only [Set.mem_singleton_iff]
     by_contra htne
     exact ht (hptw t htne)
@@ -3819,7 +3816,7 @@ lemma edge_interval_bound {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
     apply Continuous.add
     · exact continuous_const.mul continuous_one_div_one_add_abs
     · apply Continuous.mul continuous_const
-      apply continuous_finset_sum
+      apply continuous_finsetSum
       intro ρ hρ
       exact continuous_const.mul (hcontdist ρ hρ)
   have hmono : (∫ t in (t₀-1/4)..(t₀+1/4),
@@ -3864,7 +3861,7 @@ lemma edge_interval_bound {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
     · exact (continuous_const.mul continuous_one_div_one_add_abs).intervalIntegrable _ _
     · apply Continuous.intervalIntegrable
       apply Continuous.mul continuous_const
-      apply continuous_finset_sum
+      apply continuous_finsetSum
       intro ρ hρ
       exact continuous_const.mul (hcontdist ρ hρ)
   -- per-ρ window integral
@@ -4013,7 +4010,7 @@ theorem left_edge_le {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
           exact ⟨by linarith, by linarith⟩)
     symm
     simp only [Nat.cast_zero, Nat.cast_succ] at this ⊢
-    convert this using 2 <;> push_cast <;> ring
+    convert this using 2; ring
   -- step 3: per-interval bound
   have hstep3 : ∀ k ∈ Finset.range M,
       (∫ t in (a + k/2)..(a + (k+1)/2),
@@ -4091,7 +4088,7 @@ theorem left_edge_le {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A)
         (f := fun t : ℝ => 1 / (1 + |t|))
         (fun k _ => continuous_one_div_one_add_abs.intervalIntegrable _ _)
       simp only [Nat.cast_zero, Nat.cast_succ] at this ⊢
-      convert this using 2 <;> push_cast <;> ring
+      convert this using 2; ring
     rw [hadj]
     have hbig := integral_one_div_one_add_abs_le ha0 hM1 (by linarith) hM2
     have hlog2 : Real.log (1 + (T+2)) ≤ LT := by
@@ -4229,7 +4226,7 @@ section HorizEdge
 /-- Continuity of the strip integrand along a horizontal segment. -/
 lemma contOn_horiz_stripInt {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A) {y : ℝ}
     (hy : 0 < y) {t₀ : ℝ} {a b : ℝ} (ha : 1/4 ≤ a) (hb : b ≤ 15/4)
-    (hab : a ≤ b) (ht₀ : t₀ ≠ 0)
+    (_hab : a ≤ b) (ht₀ : t₀ ≠ 0)
     (hnz : ∀ x ∈ Set.Icc a b, f ((x:ℂ) + t₀*I) ≠ 0) :
     ContinuousOn (fun x : ℝ =>
       (deriv f ((x:ℂ)+t₀*I) / f ((x:ℂ)+t₀*I))
@@ -4867,7 +4864,6 @@ lemma band_mass_le {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A) {T : ℝ} (hT
           · intro _; rfl
           · intro _; exact hρ.2)
         simpa using this)
-    push_cast at h1
     linarith
   have hneg : ∑ ρ ∈ Z.filter (fun ρ => ¬ 0 ≤ ρ.im),
       (analyticOrderNatAt f ρ : ℝ) ≤ 112 * Real.log (A * (T+4)) := by
@@ -4880,7 +4876,6 @@ lemma band_mass_le {f : ℂ → ℂ} {A : ℝ} (hf : DiskData f A) {T : ℝ} (hT
           · intro h3; norm_num at h3)
         have h3 : ((-1 : ℝ) * (T + 1/2)) = -(T + 1/2) := by ring
         rwa [h3] at h2)
-    push_cast at h1
     linarith
   linarith
 
@@ -6022,7 +6017,7 @@ lemma half_dist_le_abs_sin (x : ℝ) :
   linarith
 
 /-- Lower bound for `g` on horizontal lines via the sine of the ordinate. -/
-lemma norm_gFun_ge_sin {σ t : ℝ} (h1 : 9/16 ≤ σ) (h2 : σ ≤ 5/4) :
+lemma norm_gFun_ge_sin {σ t : ℝ} (_h1 : 9/16 ≤ σ) (h2 : σ ≤ 5/4) :
     (4/5) * |Real.sin (t * Real.log 2)| ≤ ‖gFun ((σ:ℂ) + t*I)‖ := by
   have hL2 : Complex.log 2 = (Real.log 2 : ℂ) := by
     rw [show (2:ℂ) = ((2:ℝ):ℂ) by norm_num, Complex.ofReal_log (by norm_num)]
@@ -6078,7 +6073,7 @@ lemma norm_gFun_ge_sin {σ t : ℝ} (h1 : 9/16 ≤ σ) (h2 : σ ≤ 5/4) :
     _ ≤ ‖gFun ((σ:ℂ) + t*I)‖ := Complex.abs_im_le_norm _
 
 /-- Quantitative sine bound at pigeonholed heights. -/
-lemma abs_sin_log_two_ge {T t₀ δ₀ : ℝ} (hT : 2 ≤ T) (ht₀1 : T ≤ t₀)
+lemma abs_sin_log_two_ge {T t₀ δ₀ : ℝ} (_hT : 2 ≤ T) (ht₀1 : T ≤ t₀)
     (ht₀2 : t₀ ≤ T+1) (hδ₀ : 0 < δ₀)
     (hgap : ∀ j : ℤ, (j = round (T / (π / Real.log 2)) - 1 ∨
         j = round (T / (π / Real.log 2)) ∨ j = round (T / (π / Real.log 2)) + 1) →

@@ -2884,7 +2884,7 @@ a nontrivial primitive `χ` within `η` of `1 + iτ` forces the prime window
 sums over `(Xone, Xtwo]` to be large in mean square along `du/u`. -/
 theorem kderiv_detection {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q}
     (hχ : χ.IsPrimitive) (hq : 2 ≤ q) {W τ η : ℝ}
-    (hqW : (q : ℝ) ≤ W) (hτW : |τ| + 2 ≤ W) (hW : Real.exp 500 ≤ W)
+    (hqW : (q : ℝ) ≤ W) (hτW : |τ| + 2 ≤ W) (_hW : Real.exp 500 ≤ W)
     (hη0 : 0 < η) (hηup : η ≤ 1/5000)
     (hηlow : 1 ≤ 12 * η * Real.log W)
     (hzero : ∃ ρ : ℂ, DirichletCharacter.LFunction χ ρ = 0 ∧

@@ -38,7 +38,7 @@ noncomputable def goodPrimesW (z w y : ℕ) : Finset ℕ :=
 
 /-- The exact scales of `Defs.lean` lie in the window (for `n` large enough
 that `ℓ₂ ℓ₃ ≥ 1`, `E ≤ 1/2`, `C₁ ≥ 1`). -/
-theorem inWindow_exact (C₁ E : ℝ) (hC : (1 : ℝ) ≤ C₁) (hE : 0 < E) (hE2 : E ≤ 1 / 2)
+theorem inWindow_exact (C₁ E : ℝ) (hC : (1 : ℝ) ≤ C₁) (_hE : 0 < E) (hE2 : E ≤ 1 / 2)
     (n : ℕ) (h2 : (1 : ℝ) ≤ ell2 n) (h3 : (1 : ℝ) ≤ ell3 n) :
     InWindow C₁ E n (zscale C₁ n) ⌊(zscale C₁ n : ℝ) ^ ((99 : ℝ) / 100)⌋₊
       (yscaleE C₁ n E) (Tscale n) := by

@@ -132,7 +132,7 @@ theorem toNat_addBits (xs ys : List Bool) (c : Bool) :
     cases b <;> cases c <;> simp [toNat, sumBit, maj] <;> omega
   | case4 a xs b ys c ih =>
     simp only [addBits, toNat]; rw [ih]
-    cases a <;> cases b <;> cases c <;> simp [toNat, sumBit, maj] <;> omega
+    cases a <;> cases b <;> cases c <;> simp [sumBit, maj] <;> omega
 
 theorem addBits_length (xs ys : List Bool) (c : Bool) :
     (addBits xs ys c).length ≤ max xs.length ys.length + 1 := by

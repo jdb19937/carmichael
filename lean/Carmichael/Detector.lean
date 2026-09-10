@@ -708,6 +708,7 @@ lemma natCast_prod_cpow (S : Finset ℕ) (w : ℂ) :
       rw [Finset.prod_cons, Finset.prod_cons, Nat.cast_mul,
         Complex.natCast_mul_natCast_cpow, ih]
 
+omit [NeZero N] in
 lemma Gker_char_term_eq_zero {t : ℕ} (ht : t ≠ 0) (χ : DirichletCharacter ℂ N) (s : ℂ) :
     ∀ e ∉ t.divisors,
       LSeries.term (fun e => ((Gker t e : ℝ) : ℂ) * χ e) s e = 0 := by
@@ -719,10 +720,12 @@ lemma Gker_char_term_eq_zero {t : ℕ} (ht : t ≠ 0) (χ : DirichletCharacter �
     rw [Gker, if_neg h]
     simp
 
+omit [NeZero N] in
 lemma LSeriesSummable_Gker_char {t : ℕ} (ht : t ≠ 0) (χ : DirichletCharacter ℂ N) (s : ℂ) :
     LSeriesSummable (fun e => ((Gker t e : ℝ) : ℂ) * χ e) s :=
   summable_of_ne_finset_zero (Gker_char_term_eq_zero ht χ s)
 
+omit [NeZero N] in
 /-- The L-series of the twisted kernel is the finite Euler factor. -/
 lemma LSeries_Gker_char {t : ℕ} (ht : Squarefree t) (χ : DirichletCharacter ℂ N) (s : ℂ) :
     LSeries (fun e => ((Gker t e : ℝ) : ℂ) * χ e) s = eulerT χ s t := by
@@ -750,6 +753,7 @@ lemma LSeries_Gker_char {t : ℕ} (ht : Squarefree t) (χ : DirichletCharacter �
       ← Finset.prod_mul_distrib]
   rw [Finset.sum_congr rfl hterm, sum_divisors_ite_squarefree_prod ht.ne_zero _, eulerT]
 
+omit [NeZero N] in
 lemma LSeriesSummable_char_psi {t : ℕ} (ht : t ≠ 0) (χ : DirichletCharacter ℂ N) {s : ℂ}
     (hs : 1 < s.re) : LSeriesSummable (fun k => χ k * ((psi t k : ℝ) : ℂ)) s := by
   refine LSeriesSummable_of_bounded_of_one_lt_re (m := (t : ℝ)) (fun n _ => ?_) hs
@@ -822,6 +826,7 @@ noncomputable def Mr (χ : DirichletCharacter ℂ N) (z1 z2 : ℝ) (r : ℕ) (s 
     ((bvLam z1 z2 δ * fmp (Nat.gcd r δ) : ℝ) : ℂ) * χ δ * (δ : ℂ) ^ (-s)
       * eulerT χ s (tOf δ r)
 
+omit [NeZero N] in
 /-- Step B of blueprint Lemma 3.1 (pointwise): the coefficient
 `a(n)·ψ_r(n)·χ(n)` is a finite combination of point-mass convolutions. -/
 lemma bvA_psi_char_eq_sum {r : ℕ} (hr : Squarefree r) {z1 z2 : ℝ} (hz1 : 0 < z1)
@@ -967,6 +972,7 @@ theorem LSeries_bvA_psi_eq_LFunction_mul_Mr {r : ℕ} (hr : Squarefree r) {z1 z2
 
 /-! ### Blueprint Lemma 3.4(c),(d): size bounds for `M_r` -/
 
+omit [NeZero N] in
 lemma norm_eulerT_le (χ : DirichletCharacter ℂ N) {s : ℂ} (hs : 0 ≤ s.re) (t : ℕ) :
     ‖eulerT χ s t‖ ≤ ∏ p ∈ t.primeFactors, ((p : ℝ) + 1) := by
   rw [eulerT]
@@ -985,7 +991,7 @@ lemma norm_eulerT_le (χ : DirichletCharacter ℂ N) {s : ℂ} (hs : 0 ≤ s.re)
       simp [hs]
     rw [h1]
     calc (p : ℝ) * ‖χ (p : ZMod N)‖ * ‖((p : ℕ) : ℂ) ^ (-s)‖
-        ≤ (p : ℝ) * 1 * 1 := by gcongr <;> positivity
+        ≤ (p : ℝ) * 1 * 1 := by gcongr
       _ = (p : ℝ) := by ring
   calc ‖1 + ((fmp p - 1 : ℝ) : ℂ) * χ p * (p : ℂ) ^ (-s)‖
       ≤ ‖(1 : ℂ)‖ + ‖((fmp p - 1 : ℝ) : ℂ) * χ p * (p : ℂ) ^ (-s)‖ := norm_add_le _ _
@@ -1011,6 +1017,7 @@ lemma prod_primeFactors_add_one_le {r : ℕ} (hr : Squarefree r) :
         exact_mod_cast (Nat.prime_of_mem_primeFactors hp).two_le
     _ = (r : ℝ) ^ 2 := by rw [h4]; ring
 
+omit [NeZero N] in
 /-- **Blueprint Lemma 3.4(c)** (crude mollifier bound): `‖M_r(s,χ)‖ ≤ z₂·r³`
 for `Re s ≥ 0`. -/
 theorem norm_Mr_le {r : ℕ} (hr : Squarefree r) {z1 z2 : ℝ} (hz1 : 0 < z1) (hz12 : z1 < z2)
@@ -1071,6 +1078,7 @@ theorem norm_Mr_le {r : ℕ} (hr : Squarefree r) {z1 z2 : ℝ} (hz1 : 0 < z1) (h
     _ ≤ z2 * (r : ℝ) ^ 3 := by
         refine mul_le_mul_of_nonneg_right (Nat.floor_le hz2) (by positivity)
 
+omit [NeZero N] in
 /-- Summed form of Lemma 3.4(c): `∑'_{r ≤ R} r⁻¹·‖M_r(s,χ)‖ ≤ z₂·R³`. -/
 theorem sum_inv_mul_norm_Mr_le (χ : DirichletCharacter ℂ N) {z1 z2 R : ℝ}
     (hz1 : 0 < z1) (hz12 : z1 < z2) {s : ℂ} (hs : 0 ≤ s.re) (hR : 1 ≤ R) :
@@ -1159,6 +1167,7 @@ lemma sum_inv_multiples_le {r M : ℕ} (hr : 1 ≤ r) {z2 : ℝ} (hM : (M : ℝ)
         _ ≤ z2 := hM
   linarith
 
+omit [NeZero N] in
 /-- **Blueprint Lemma 3.4(d)**: at `s = 1` and the principal character,
 `‖M_r(1, χ₀)‖ ≤ (φ(r)/r)·(1 + log z₂)` (squarefree `r` coprime to the modulus;
 only `δ` divisible by `r` survive, since the Euler factor at `s = 1` vanishes
@@ -1246,6 +1255,7 @@ theorem norm_Mr_one_principal_le {r : ℕ} (hr : Squarefree r) (hrN : r.Coprime 
           (sum_inv_multiples_le hr1 (Nat.floor_le (by linarith)) hz2) (by positivity)
     _ = ((r.totient : ℝ) / r) * (1 + Real.log z2) := by ring
 
+omit [NeZero N] in
 /-- Summed form of Lemma 3.4(d):
 `∑'_{r ≤ R} r⁻¹·‖M_r(1,χ₀)‖ ≤ Φ_R·(1 + log z₂)` with `Φ_R = ∑' φ(r)/r²`. -/
 theorem sum_inv_mul_norm_Mr_one_le {z1 z2 : ℝ} (R : ℝ)

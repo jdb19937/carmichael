@@ -1132,7 +1132,7 @@ theorem anchor_identity {N : ℕ} [NeZero N] (χ : DirichletCharacter ℂ N)
     refine Summable.of_nonneg_of_le
       (fun n => integral_nonneg fun u => norm_nonneg _) hbnd ?_
     have hb : Summable (fun n : ℕ => ((n : ℝ) ^ 2)⁻¹) := by
-      simpa using Real.summable_one_div_nat_pow.mpr (by norm_num : 1 < 2)
+      simp
     have := (hb.mul_left ((r : ℝ) * X ^ 3)).mul_right CG
     refine this.congr fun n => ?_
     ring
@@ -1898,7 +1898,7 @@ lemma tsum_detector_split {N : ℕ} [NeZero N] (χ : DirichletCharacter ℂ N)
         linarith
       rw [if_pos hgt, if_neg hn1, add_zero]
     · rw [if_neg hgt, zero_add]
-      push_neg at hgt
+      push Not at hgt
       match n with
       | 0 => simp [bvA_zero]
       | 1 =>

@@ -265,7 +265,7 @@ private lemma costPieces_bound
 
 /-- The budget `costPieces` of `Alg.search` at any scales in the window is
 `exp(O(ℓ₂ ℓ₃))`. -/
-theorem costPieces_leW (C₁ E : ℝ) (hE : 0 < E) (hE2 : E ≤ 1 / 2)
+theorem costPieces_leW (C₁ E : ℝ) (hE : 0 < E) (_hE2 : E ≤ 1 / 2)
     (h1000 : (1000 : ℝ) ≤ C₁) :
     ∀ᶠ n : ℕ in Filter.atTop, ∀ z w y T : ℕ, InWindow C₁ E n z w y T →
       ∀ L x k P S : ℕ,
