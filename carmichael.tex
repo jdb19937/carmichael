@@ -5,6 +5,21 @@
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{listings}
+\usepackage{upquote}
+\lstdefinelanguage{Lean}{
+  morekeywords={def,theorem,open},
+  sensitive=true,
+  morecomment=[l]{--},
+}
+\lstset{language=Lean, basicstyle=\small\fontfamily{lmtt}\selectfont\upshape, keywordstyle=\bfseries,
+  columns=fullflexible, keepspaces=true, breaklines=false,
+  xleftmargin=1em, aboveskip=6pt, belowskip=6pt,
+  literate={ℕ}{{$\mathbb{N}$}}1 {ℝ}{{$\mathbb{R}$}}1 {ℤ}{{$\mathbb{Z}$}}1
+    {→}{{$\rightarrow$}}1 {×}{{$\times$}}1 {∃}{{$\exists$}}1 {∀}{{$\forall$}}1
+    {ε}{{$\varepsilon$}}1 {≤}{{$\le$}}1 {≥}{{$\ge$}}1 {∧}{{$\wedge$}}1
+    {¬}{{$\neg$}}1 {∣}{{$\mid$}}1 {∈}{{$\in$}}1 {₀}{{$_0$}}1 {Γ}{{$\Gamma$}}1
+}
 
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{remark}[lemma]{Remark}
@@ -23,7 +38,7 @@
 \thanks{$^*$Author of \emph{The Da Vinci Code}.}
 \thanks{In memory of Abraham Anthony ``Mickey'' Br\"umleve (August 24, 1986 -- December 5, 2019): A thinker, a visionary, and a source of fantastic ideas.}
 
-\date{August 25, 2026}
+\date{September 9, 2026}
 
 \begin{abstract}
 We describe a deterministic algorithm that, given a large integer $n$,
@@ -200,9 +215,9 @@ $z = \lceil C_1 \ell_2 \ell_3 \rceil$ with
 $C_1 = \max(48/\gamma,\,10^3)$, then $y = \lceil z^{2/3} \rceil$ and
 $T = \lceil 3\ell_2 \rceil$.
 
-\item[\textbf{2.}] \textbf{Moduli.} By a sieve up to $z$ and trial
-division of each $q-1$, list the primes
-$q \in (z^{99/100},\, z]$ with $P^+(q-1) \le y$. Let $Q$ be the $T$
+\item[\textbf{2.}] \textbf{Moduli.} By trial division (a sieve would do
+equally), list the primes $q \in (z^{99/100},\, z]$ with
+$P^+(q-1) \le y$, factoring each $q-1$ by trial division. Let $Q$ be the $T$
 largest, $L = \prod_{q \in Q} q$, and $x = \lceil L^5 \rceil$.
 
 \item[\textbf{3.}] \textbf{Shift scan.} For $k = 1, 2, \dots$ with
@@ -213,16 +228,17 @@ $P_k = \{dk+1 : d \mid L,\ dk+1 \le x,\ dk+1 \text{ prime},\ dk+1 > z\}$.
 Stop at the first $k$ with $|P_k| \ge (\log n)^{1.2}$; write
 $P = P_k$.
 
-\item[\textbf{4.}] \textbf{Extraction.} Compute
-$\lambda(L) = \operatorname{lcm}\{q - 1 : q \in Q\}$ (each $q-1$ is
-fully factored) and set $N^* = \lceil \lambda(L)(1 + \log L)\rceil + 1$.
-Set $m = 1$. While $m \le n$: take the next $N^*$ unused elements of
-$P$; by dynamic programming over residues modulo $L$ (process the
-elements one at a time, keep one witness subset per reachable residue,
-and use a per-element snapshot so that each element is used at most
-once) find a nonempty subset $S$ with
-$\prod_{p \in S} p \equiv 1 \pmod{L}$; replace $m$ by
-$m \prod_{p \in S} p$ and mark the elements of $S$ used.
+\item[\textbf{4.}] \textbf{Extraction.} Set $m = 1$ and start with an
+empty table indexed by the residues modulo $L$. Process the elements
+$p$ of $P$ in order. For each $p$: take a snapshot of the table; write
+the witness $\{p\}$ at residue $p \bmod L$ if that entry is empty; then
+for every residue $r$ whose snapshot entry is a witness $W$, write
+$W \cup \{p\}$ at residue $rp \bmod L$ if that entry is empty. (One
+witness subset per reachable residue, first writer kept; the snapshot
+ensures no witness uses $p$ twice.) Whenever residue $1$ acquires a
+witness $S$: replace $m$ by $m\prod_{p\in S} p$, empty the table, and
+continue with the elements of $P$ not yet processed. Stop as soon as
+$m > n$.
 
 \item[\textbf{5.}] \textbf{Output and certificate.} Output $m$ and the
 list of primes used. Verify: the factors are distinct and prime, their
@@ -291,9 +307,11 @@ stopped earlier.
 
 \begin{lemma}[Step 4 always finds a subset, and the pool suffices]
 \label{lem:pool}
-Each round of step 4 finds a nonempty $S$ with
-$\prod_{p\in S} p \equiv 1 \pmod L$, and the loop ends before $P$ is
-exhausted.
+Let $\lambda(L) = \operatorname{lcm}\{q - 1 : q \in Q\}$ and
+$N^* = \lceil \lambda(L)(1 + \log L)\rceil + 1$. After each reset of the
+table in step 4 (and at the start), residue $1$ acquires a witness $S$
+with $\prod_{p\in S} p \equiv 1 \pmod L$ within the next $N^*$ elements
+of $P$, and the loop ends before $P$ is exhausted.
 \end{lemma}
 
 \begin{proof}
@@ -303,9 +321,10 @@ elements of $G = (\Z/L\Z)^\times$. The maximal order of an element of
 $G$ divides $\lambda(L)$, and
 $N^* > \lambda(L)(1 + \log(|G|/\lambda(L)))$, so by
 Lemma~\ref{lem:vebk} any $N^*$ elements contain a nonempty subsequence
-with product $1$. The dynamic program records a witness subset for every
-residue reachable by a nonempty subset of the current pool, so it
-recovers such an $S$.
+with product $1$. By induction on the elements processed since the last
+reset, the table holds a witness for every residue reachable as a
+product of a nonempty subset of those elements, so residue $1$ is
+witnessed within $N^*$ elements.
 
 For the pool size: each $q - 1$ ($q \in Q$) is $y$-smooth, so
 $\lambda(L)$ divides $\prod_{p \le y} p^{\lfloor \log_p z\rfloor}$ and
@@ -412,20 +431,70 @@ with the 28 prime factors $13 \cdot 19 \cdot 23 \cdot 29 \cdot 31 \cdot
 
 \begin{remark}[Formal verification]
 \label{rem:lean}
-The theorem has been machine-verified in Lean~4 over Mathlib, in
-operation-count form: taking Theorems 3 and 3.1 of \cite{AGP} as
-hypotheses (their effective constants as parameters), the kernel-checked
-formalization proves that for every $\varepsilon > 0$ and all large $n$ a
-Carmichael number $m \in (n, n^{1+\varepsilon}]$ exists together with
-its complete prime factorization, and that an explicit operation budget
-mirroring the five steps of Section~\ref{sec:algo}, with every primality
-test charged as trial division, is at most $e^{100\,\ell_2\ell_3}$.
-Korselt's criterion, Lemma~\ref{lem:mertens}, Lemma~\ref{lem:vebk} (to
-our knowledge the first mechanization of the van Emde Boas--Kruyswijk
-bound in any proof assistant), and the Chebyshev estimate used in
-Section 4 are all proved inside the formalization, so the two cited
-theorems of \cite{AGP} are its only unproved inputs. The formalization is
-available from the author.
+The theorem has been machine-verified in Lean~4 over Mathlib, with no
+hypothesis beyond Lean's three standard axioms, in the following form:
+there is an explicit Turing machine in Mathlib's multi-stack model
+(\texttt{Turing.FinTM2}; eight stacks over Mathlib's alphabet
+$\Gamma'$) which, given $n$ in binary, outputs a Carmichael number
+$m \in (n, n^{1+\varepsilon}]$ together with its complete prime
+factorization, within $\exp(C \log N \cdot \llog N)$ steps for inputs
+of $N = \lfloor \log_2 n \rfloor + 1$ bits --- that is,
+$\exp(O(\ell_2\ell_3))$ --- and the kernel-checked constant is
+$C = 2000$. The statement, verbatim from \texttt{Carmichael/Main.lean}
+of the repository (the file contains nothing else), is:
+
+\begin{lstlisting}
+def encodeOutput : ℕ × List ℕ → List Γ'
+  | (m, S) => (encodeNat m).map inclusionBoolΓ' ++ Γ'.comma ::
+      S.flatMap (fun p => (encodeNat p).map inclusionBoolΓ' ++ [Γ'.comma])
+
+theorem main_theorem :
+    ∃ (f : ℕ → ℕ × List ℕ)
+      (h : TM2ComputableInTime encodingNatΓ'.encode encodeOutput f),
+      (∃ C : ℝ, 0 < C ∧ ∃ N₀ : ℕ, ∀ N ≥ N₀,
+          (h.time N : ℝ) ≤ Real.exp (C * Real.log N * Real.log (Real.log N))) ∧
+      (∀ ε : ℝ, 0 < ε → ∃ n₀ : ℕ, ∀ n ≥ n₀,
+          (f n).2.Nodup ∧ (∀ p ∈ (f n).2, p.Prime) ∧ 3 ≤ (f n).2.length ∧
+          (f n).1 = (f n).2.prod ∧
+          (1 < (f n).1 ∧ ¬ (f n).1.Prime ∧
+            ∀ a : ℤ, ((f n).1 : ℤ) ∣ a ^ (f n).1 - a) ∧
+          n < (f n).1 ∧ ((f n).1 : ℝ) ≤ (n : ℝ) ^ (1 + ε)) :=
+  Carmichael.TM.main_theorem_of encodeOutput (fun _ _ => rfl)
+\end{lstlisting}
+
+Here \texttt{TM2ComputableInTime} is Mathlib's notion: a machine, a
+time function of the input length, and a proof that on every input the
+machine halts with the encoded output within that time;
+\texttt{encodingNat}$\Gamma'$ is Mathlib's binary encoding of $\mathbb{N}$, and
+\texttt{Nodup}, \texttt{Prime}, \texttt{prod} are Mathlib's. Korselt's
+criterion is not invoked: the Carmichael property appears inlined as
+``composite and $m \mid a^m - a$ for every integer $a$.'' Mathlib
+charges one step per transition of the finite control, and the
+polynomial overhead of a stack machine over bit operations is absorbed
+in $C$.
+
+The machine implements Section~\ref{sec:algo} with two differences. The
+two results cited from \cite{AGP} are replaced by weaker statements
+proved inside the formalization from a zero-density estimate for
+Dirichlet $L$-functions established there: Lemma~\ref{lem:smooth} for
+some exponent $E \in (0, 1/2]$ rather than every $E < 5/12$, so the
+machine uses $y = \lceil z^{1-E} \rceil$ for that $E$, and
+Lemma~\ref{lem:pigeon} at $B = 21/100$ (the least value for which
+$L = x^{1/5} \le x^{B}$), so the scan bound becomes $k \le x^{79/100}$.
+And every primality test, including the certificate check of step 5, is
+trial division, which the time bound absorbs; the polylogarithmic
+verification of the certificate rests on Lemma~\ref{lem:aks} and is not
+formalized. The constants $C_1$ and $E$ enter the machine through the
+axiom of choice, so ``computable in principle'' is a claim about the
+proof above, not about the formalization. Two intermediate layers are
+also proved and audited: the existence statement alone, and the
+algorithm as a Lean function with an explicit operation count at most
+$e^{100\,\ell_2\ell_3}$. Korselt's criterion, Lemma~\ref{lem:mertens},
+Lemma~\ref{lem:vebk} (to our knowledge the first mechanization of the
+van Emde Boas--Kruyswijk bound in any proof assistant), and the
+Chebyshev estimate used in Section~4 are all proved inside the
+formalization. The repository is
+\url{https://github.com/jdb19937/carmichael}.
 \end{remark}
 
 \begin{thebibliography}{9}
