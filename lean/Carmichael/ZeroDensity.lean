@@ -40,7 +40,7 @@ STATEMENTS.
     `σ ∈ [9/10, 99/100]`: `∑_χ N ≤ CH·(400(K+1))^K·(d t^{c₀})^((9/2)(1−σ))`, no threshold.
     `logfree_of_logged_of_mertens (hM : MertensHyp) (h : LoggedDensity) : LogFreeDensity`
     with `c₀' := c₀`, `γ₂ := 2(γm + γζ) + 1120·D₀² + CH·(400(K+1))^K + 1`.
-§6  Mertens discharged (from the vendored `Contrib.Mertens`, `∑_{n≤x} Λ(n)/n = log x + O(1)`
+§6  Mertens discharged (from the vendored `Carmichael.Mertens`, `∑_{n≤x} Λ(n)/n = log x + O(1)`
     with `|O(1)| ≤ log 4 + 4`): `abel_identity` (discrete Abel summation
     `∑_{0<i≤N} Λ(i)/(i log i) = T(N)/log N + ∑_{1≤i<N} (1/log i − 1/log(i+1)) T(i)`),
     `sum_prime_inv_le` (`∑_{p≤N} 1/p ≤ log log N + 1 + 2(log 4 + 4)/log 2 − log log 2`, using
@@ -97,7 +97,7 @@ import Carmichael.BVL2
 import Carmichael.DensityInterface
 import Carmichael.ZetaZeroFree
 import Mathlib.Algebra.Order.Field.GeomSum
-import Contrib.Mertens
+import Carmichael.Mertens
 
 set_option autoImplicit false
 

@@ -9,7 +9,7 @@ Section 2 of the paper. Every other cited input is proved:
   (`π(z) ≥ z/(3 log z)` eventually, from Mathlib's ψ-estimates; the paper's
   constant `C₁ = max(48/γ, 10³)` is sized for the elementary constant 3);
 * Mertens' second-theorem consequence — proved in `Carmichael/RecipSum.lean`
-  from Mertens' first theorem, which is vendored in `Contrib/Mertens.lean`
+  from Mertens' first theorem, which is vendored in `Carmichael/Mertens.lean`
   (ported from PrimeNumberTheoremAnd via anthropics/zeta-23-lean, Apache 2.0);
 * AKS [AKS]                           — eliminated: the operation budget
   charges trial division (`√x` per test), which the bound `exp(O(ℓ₂ℓ₃))`

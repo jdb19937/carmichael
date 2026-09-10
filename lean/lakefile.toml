@@ -1,6 +1,6 @@
 name = "carmichael"
 version = "0.1.0"
-defaultTargets = ["Carmichael", "Contrib", "AxiomCheck"]
+defaultTargets = ["Carmichael", "AxiomCheck"]
 
 [[require]]
 name = "mathlib"
@@ -8,15 +8,12 @@ scope = "leanprover-community"
 rev = "v4.33.1"
 
 # autoImplicit off: a typo'd identifier in a theorem statement must be an
-# error, never a silently auto-bound variable
+# error, never a silently auto-bound variable.  Carmichael/Mertens.lean and
+# Carmichael/EulerMaclaurin.lean are third-party (Apache 2.0, ported from
+# PrimeNumberTheoremAnd via anthropics/zeta-23-lean); provenance in their headers
 [[lean_lib]]
 name = "Carmichael"
 leanOptions = { autoImplicit = false }
-
-# Third-party vendored proofs (see Contrib/*.lean headers for provenance;
-# Apache 2.0, ported from PrimeNumberTheoremAnd via anthropics/zeta-23-lean)
-[[lean_lib]]
-name = "Contrib"
 
 # The axiom-closure assertions (#guard_msgs) run at elaboration, so putting
 # this in the default build makes `lake build` itself attest the axiom claim

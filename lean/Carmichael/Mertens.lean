@@ -1,7 +1,7 @@
 /-
 Ported from https://github.com/AlexKontorovich/PrimeNumberTheoremAnd
 at commit 10e1218932db7e2432aa5881d750acb819e91f19, file
-PrimeNumberTheoremAnd/Mertens.lean.
+PrimeNumberTheoremAnd/Mertens.lean, via anthropics/zeta-23-lean.
 Copyright the PrimeNumberTheoremAnd contributors; Apache License 2.0
 (http://www.apache.org/licenses/LICENSE-2.0).
 Original authors per that project's blueprint (Euler–Maclaurin and Mertens
@@ -17,9 +17,8 @@ Declarations ported (source lines 1–371):
 
 Local modifications:
   * the source's `section EulerMaclaurin` (B1 ... sum_eq_integral_add_integral_deriv)
-    now lives in Zeta23/FromPNTPlus/EulerMaclaurin.lean (re-ported from upstream
-    v4.32.2, where that section was split out of Mertens.lean into its own file),
-    imported here;
+    is in Carmichael/EulerMaclaurin.lean (ported from upstream v4.32.2, where
+    that section is its own file), imported here;
   * dropped `import Architect` and all `@[blueprint ...]` attributes and
     `blueprint_comment` blocks (blueprint tooling we do not vendor); statement
     text retained as plain docstrings on the main theorems;
@@ -42,7 +41,7 @@ import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.NumberTheory.Harmonic.GammaDeriv
 import Mathlib.Analysis.Asymptotics.Lemmas
 import Mathlib.Algebra.Group.Submonoid.BigOperators
-import Contrib.EulerMaclaurin
+import Carmichael.EulerMaclaurin
 
 
 

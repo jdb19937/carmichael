@@ -56,7 +56,7 @@ guarded by `AxiomCheck.lean`.
 
 ## Files
 
-`Carmichael/` holds 75 modules and `Carmichael/TM/` 16, about 83,000 lines
+`Carmichael/` holds 77 modules and `Carmichael/TM/` 16, about 83,000 lines
 in all. Grouped by role:
 
 **Statement, definitions, assembly**
@@ -80,7 +80,7 @@ in all. Grouped by role:
 | `ZeroSum.lean` | the van Emde Boas–Kruyswijk zero-sum theorem (AGP's character-theoretic proof); to our knowledge the first formalization in any prover |
 | `PrimeCount.lean` | Chebyshev: `π(z) ≥ z/(3 log z)` eventually, from Mathlib's bounds on `ψ` |
 | `RecipSum.lean` | `∑_{w<p≤z} 1/p` from Mertens' first theorem |
-| `Contrib/` | vendored Mertens' first theorem and an Euler–Maclaurin helper, ported from PrimeNumberTheoremAnd via anthropics/zeta-23-lean (Apache 2.0, provenance headers in the files) |
+| `Mertens.lean`, `EulerMaclaurin.lean` | vendored Mertens' first theorem and its Euler–Maclaurin helper, ported from PrimeNumberTheoremAnd via anthropics/zeta-23-lean (Apache 2.0; provenance and modifications in the file headers) |
 
 **The five step lemmas of the paper's Section 4**, in three forms: exact
 scales (`Step2`, `Step3`, `Extraction`, `Output`, `Budget`), generic
@@ -172,7 +172,7 @@ transcription of AGP 1994 could go wrong.
 
 ```
 lake exe cache get   # prebuilt Mathlib (~5 GB)
-lake build           # Carmichael, Contrib and AxiomCheck; zero sorries, zero warnings
+lake build           # Carmichael and AxiomCheck; zero sorries, zero warnings
 ```
 
 Pinned: Lean `v4.33.1`, Mathlib `v4.33.1`.

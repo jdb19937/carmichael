@@ -1,9 +1,9 @@
 /-
 Bound on the prime reciprocal sum over an interval (w, z], derived from the
-vendored Mertens' first theorem (Contrib/Mertens.lean).
+vendored Mertens' first theorem (Carmichael/Mertens.lean).
 -/
 import Carmichael.Defs
-import Contrib.Mertens
+import Carmichael.Mertens
 
 namespace Carmichael
 
