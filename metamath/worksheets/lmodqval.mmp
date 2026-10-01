@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=lmodqval  LOC_AFTER=?
+
+* Value of Lmod: the product of the elements of Q (Lean: Lmod).
+
+s1::id |- ( Q e. ( ~P NN0 i^i Fin ) -> Q e. ( ~P NN0 i^i Fin ) )
+i2::elfpw
+s3:s1,i2:sylib |- ( Q e. ( ~P NN0 i^i Fin ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+s4:s3:simpld |- ( Q e. ( ~P NN0 i^i Fin ) -> Q C_ NN0 )
+s5:s3:simprd |- ( Q e. ( ~P NN0 i^i Fin ) -> Q e. Fin )
+s6:s4:adantr |- ( ( Q e. ( ~P NN0 i^i Fin ) /\ q e. Q ) -> Q C_ NN0 )
+s7::simpr |- ( ( Q e. ( ~P NN0 i^i Fin ) /\ q e. Q ) -> q e. Q )
+s8:s6,s7:sseldd |- ( ( Q e. ( ~P NN0 i^i Fin ) /\ q e. Q ) -> q e. NN0 )
+s9:s5,s8:fprodnn0cl |- ( Q e. ( ~P NN0 i^i Fin ) -> prod_ q e. Q q e. NN0 )
+s10:s9:elexd |- ( Q e. ( ~P NN0 i^i Fin ) -> prod_ q e. Q q e. _V )
+s11::df-lmodq |- Lmod = ( s e. ( ~P NN0 i^i Fin ) |-> prod_ q e. s q )
+s12:s11:a1i |- ( Q e. ( ~P NN0 i^i Fin ) -> Lmod = ( s e. ( ~P NN0 i^i Fin ) |-> prod_ q e. s q ) )
+s13::simpr |- ( ( Q e. ( ~P NN0 i^i Fin ) /\ s = Q ) -> s = Q )
+c1:s13:prodeq1d |- ( ( Q e. ( ~P NN0 i^i Fin ) /\ s = Q ) -> prod_ q e. s q = prod_ q e. Q q )
+qed:s12,c1,s1,s10:fvmptd |- ( Q e. ( ~P NN0 i^i Fin ) -> ( Lmod ` Q ) = prod_ q e. Q q )
+$)

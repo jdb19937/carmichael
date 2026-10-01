@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=majfs  LOC_AFTER=?
+
+* majBit is a step function of bwFold.
+
+s1::simpll |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 2o ) -> a e. 2o )
+s2::simplr |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 2o ) -> b e. 2o )
+s3::simpr |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 2o ) -> c e. 2o )
+s4::1oel2o |- 1o e. 2o
+s5:s4:a1i |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 2o ) -> 1o e. 2o )
+s6::0el2o |- (/) e. 2o
+s7:s6:a1i |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 2o ) -> (/) e. 2o )
+s8:s5,s7:ifcld |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 2o ) -> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) e. 2o )
+s9::eqid |- ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) = ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) )
+s10:s8,s9:fmptd |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) : 2o --> 2o )
+i11::fssxp
+s12:s10,i11:syl |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) C_ ( 2o X. 2o ) )
+s13::bw2oss3o |- 2o C_ 3o
+s14::ssid |- 3o C_ 3o
+i15::xpss12
+s16:s13,s13,i15:mp2an |- ( 2o X. 2o ) C_ ( 3o X. 3o )
+s17:s16:a1i |- ( ( a e. 2o /\ b e. 2o ) -> ( 2o X. 2o ) C_ ( 3o X. 3o ) )
+s18:s12,s17:sstrd |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) C_ ( 3o X. 3o ) )
+s19::bw3oex |- 3o e. _V
+i20::xpexg
+s21:s19,s19,i20:mp2an |- ( 3o X. 3o ) e. _V
+i22::elpw2g
+s23:s21,i22:ax-mp |- ( ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) e. ~P ( 3o X. 3o ) <-> ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) C_ ( 3o X. 3o ) )
+s24:s18,s23:sylibr |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) e. ~P ( 3o X. 3o ) )
+s25:s24:rgen2 |- A. a e. 2o A. b e. 2o ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) e. ~P ( 3o X. 3o )
+s26::df-majbit |- majBit = ( a e. 2o , b e. 2o |-> ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) )
+s27:s26:fmpo |- ( A. a e. 2o A. b e. 2o ( c e. 2o |-> if ( ( ( a = 1o /\ b = 1o ) \/ ( c = 1o /\ ( a = 1o \/ b = 1o ) ) ) , 1o , (/) ) ) e. ~P ( 3o X. 3o ) <-> majBit : ( 2o X. 2o ) --> ~P ( 3o X. 3o ) )
+s28:s25,s27:mpbi |- majBit : ( 2o X. 2o ) --> ~P ( 3o X. 3o )
+i29::fssxp
+s30:s28,i29:ax-mp |- majBit C_ ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) )
+s31::2oex |- 2o e. _V
+i32::xpexg
+s33:s31,s31,i32:mp2an |- ( 2o X. 2o ) e. _V
+s34:s21:pwex |- ~P ( 3o X. 3o ) e. _V
+i35::xpexg
+s36:s33,s34,i35:mp2an |- ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) e. _V
+i37::elpw2g
+s38:s36,i37:ax-mp |- ( majBit e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) <-> majBit C_ ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) )
+qed:s30,s38:mpbir |- majBit e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) )
+$)

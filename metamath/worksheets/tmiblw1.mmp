@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=tmiblw1  LOC_AFTER=?
+
+* The word ` bitlen ` scans: the reversed ` M + 1 ` low bits of ` F ` start with the bit ` M ` , followed by the reversed ` M ` low bits.
+
+s1::simpl |- ( ( F e. NN0 /\ M e. NN0 ) -> F e. NN0 )
+s2::simpr |- ( ( F e. NN0 /\ M e. NN0 ) -> M e. NN0 )
+s3:s1:nn0zd |- ( ( F e. NN0 /\ M e. NN0 ) -> F e. ZZ )
+i4::peano2nn0
+s5:s2,i4:syl |- ( ( F e. NN0 /\ M e. NN0 ) -> ( M + 1 ) e. NN0 )
+s6:s5:nn0zd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( M + 1 ) e. ZZ )
+i7::uzid
+s8:s6,i7:syl |- ( ( F e. NN0 /\ M e. NN0 ) -> ( M + 1 ) e. ( ZZ>= ` ( M + 1 ) ) )
+s9:s2:nn0zd |- ( ( F e. NN0 /\ M e. NN0 ) -> M e. ZZ )
+i10::uzid
+s11:s9,i10:syl |- ( ( F e. NN0 /\ M e. NN0 ) -> M e. ( ZZ>= ` M ) )
+i12::bwrdmod
+s13:s3,s5,s8,i12:syl3anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( F mod ( 2 ^ ( M + 1 ) ) ) bwrd ( M + 1 ) ) = ( F bwrd ( M + 1 ) ) )
+i14::bwrdp1
+s15:s3,s2,i14:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( F bwrd ( M + 1 ) ) = ( ( F bwrd M ) ++ <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) )
+i16::bwrdmod
+s17:s3,s2,s11,i16:syl3anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( F mod ( 2 ^ M ) ) bwrd M ) = ( F bwrd M ) )
+i18::bwrdcl
+s19:s3,s2,i18:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( F bwrd M ) e. Word 2o )
+s20::1oel2o |- 1o e. 2o
+s21:s20:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> 1o e. 2o )
+s22::0el2o |- (/) e. 2o
+s23:s22:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> (/) e. 2o )
+s24:s21,s23:ifcld |- ( ( F e. NN0 /\ M e. NN0 ) -> if ( M e. ( bits ` F ) , 1o , (/) ) e. 2o )
+s25:s24:s1cld |- ( ( F e. NN0 /\ M e. NN0 ) -> <" if ( M e. ( bits ` F ) , 1o , (/) ) "> e. Word 2o )
+i26::revccat
+s27:s19,s25,i26:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` ( ( F bwrd M ) ++ <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) ) = ( ( reverse ` <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) ++ ( reverse ` ( F bwrd M ) ) ) )
+s28::revs1 |- ( reverse ` <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) = <" if ( M e. ( bits ` F ) , 1o , (/) ) ">
+s29:s28:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) = <" if ( M e. ( bits ` F ) , 1o , (/) ) "> )
+s30:s13,s15:eqtrd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( F mod ( 2 ^ ( M + 1 ) ) ) bwrd ( M + 1 ) ) = ( ( F bwrd M ) ++ <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) )
+s31:s30:fveq2d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` ( ( F mod ( 2 ^ ( M + 1 ) ) ) bwrd ( M + 1 ) ) ) = ( reverse ` ( ( F bwrd M ) ++ <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) ) )
+s32:s17:fveq2d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` ( ( F mod ( 2 ^ M ) ) bwrd M ) ) = ( reverse ` ( F bwrd M ) ) )
+s33:s29,s32:oveq12d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( reverse ` <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) ++ ( reverse ` ( ( F mod ( 2 ^ M ) ) bwrd M ) ) ) = ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( reverse ` ( F bwrd M ) ) ) )
+s34:s31,s27:eqtrd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` ( ( F mod ( 2 ^ ( M + 1 ) ) ) bwrd ( M + 1 ) ) ) = ( ( reverse ` <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) ++ ( reverse ` ( F bwrd M ) ) ) )
+s35:s29:oveq1d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( reverse ` <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ) ++ ( reverse ` ( F bwrd M ) ) ) = ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( reverse ` ( F bwrd M ) ) ) )
+s36:s17:fveq2d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` ( ( F mod ( 2 ^ M ) ) bwrd M ) ) = ( reverse ` ( F bwrd M ) ) )
+s37:s36:oveq2d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( reverse ` ( ( F mod ( 2 ^ M ) ) bwrd M ) ) ) = ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( reverse ` ( F bwrd M ) ) ) )
+s38:s34,s35:eqtrd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` ( ( F mod ( 2 ^ ( M + 1 ) ) ) bwrd ( M + 1 ) ) ) = ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( reverse ` ( F bwrd M ) ) ) )
+qed:s38,s37:eqtr4d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( reverse ` ( ( F mod ( 2 ^ ( M + 1 ) ) ) bwrd ( M + 1 ) ) ) = ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( reverse ` ( ( F mod ( 2 ^ M ) ) bwrd M ) ) ) )
+$)

@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=dtmabs  LOC_AFTER=?
+
+* The termwise majorant of a Dirichlet series with bounded coefficients.
+
+s1::simpl1 |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> A : NN --> CC )
+s2::simpl2 |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> C e. RR )
+s3::simpl3 |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> A. m e. NN ( abs ` ( A ` m ) ) <_ C )
+s4::simprl1 |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> K e. NN )
+s5::simprl2 |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> T e. RR )
+s6::simprl3 |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> Z e. CC )
+s7::simprr |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> T <_ ( Re ` Z ) )
+s8:s1,s4:ffvelcdmd |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( A ` K ) e. CC )
+s9:s8:abscld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( abs ` ( A ` K ) ) e. RR )
+s10:s8:absge0d |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> 0 <_ ( abs ` ( A ` K ) ) )
+s11::fveq2 |- ( m = K -> ( A ` m ) = ( A ` K ) )
+s12:s11:fveq2d |- ( m = K -> ( abs ` ( A ` m ) ) = ( abs ` ( A ` K ) ) )
+s13:s12:breq1d |- ( m = K -> ( ( abs ` ( A ` m ) ) <_ C <-> ( abs ` ( A ` K ) ) <_ C ) )
+s14:s13,s3,s4:rspcdva |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( abs ` ( A ` K ) ) <_ C )
+s15:s4:nnrpd |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> K e. RR+ )
+i16::rpcnd
+s17:s15,i16:syl |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> K e. CC )
+s18:s6:negcld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> -u Z e. CC )
+i19::cxpcl
+s20:s17,s18,i19:syl2anc |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( K ^c -u Z ) e. CC )
+i21::cxpnnabs
+s22:s4,s6,i21:syl2anc |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( abs ` ( K ^c -u Z ) ) = ( K ^c -u ( Re ` Z ) ) )
+i23::recl
+s24:s6,i23:syl |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( Re ` Z ) e. RR )
+s25:s24:renegcld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> -u ( Re ` Z ) e. RR )
+s26:s5:renegcld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> -u T e. RR )
+i27::rpcxpcl
+s28:s15,s25,i27:syl2anc |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( K ^c -u ( Re ` Z ) ) e. RR+ )
+s29:s28:rpred |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( K ^c -u ( Re ` Z ) ) e. RR )
+i30::rpcxpcl
+s31:s15,s26,i30:syl2anc |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( K ^c -u T ) e. RR+ )
+s32:s31:rpred |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( K ^c -u T ) e. RR )
+s33:s4,s5,s6:3jca |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( K e. NN /\ T e. RR /\ Z e. CC ) )
+i34::cxpnnle
+s35:s33,s7,i34:syl2anc |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( K ^c -u ( Re ` Z ) ) <_ ( K ^c -u T ) )
+s36:s22,s35:eqbrtrd |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( abs ` ( K ^c -u Z ) ) <_ ( K ^c -u T ) )
+s37:s20:abscld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( abs ` ( K ^c -u Z ) ) e. RR )
+s38:s20:absge0d |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> 0 <_ ( abs ` ( K ^c -u Z ) ) )
+s39:s9,s2,s37,s32,s10,s38,s14,s36:lemul12ad |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( ( abs ` ( A ` K ) ) x. ( abs ` ( K ^c -u Z ) ) ) <_ ( C x. ( K ^c -u T ) ) )
+s40:s8,s20:absmuld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( abs ` ( ( A ` K ) x. ( K ^c -u Z ) ) ) = ( ( abs ` ( A ` K ) ) x. ( abs ` ( K ^c -u Z ) ) ) )
+qed:s40,s39:eqbrtrd |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ ( ( K e. NN /\ T e. RR /\ Z e. CC ) /\ T <_ ( Re ` Z ) ) ) -> ( abs ` ( ( A ` K ) x. ( K ^c -u Z ) ) ) <_ ( C x. ( K ^c -u T ) ) )
+$)

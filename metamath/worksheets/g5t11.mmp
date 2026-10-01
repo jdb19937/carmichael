@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=g5t11  LOC_AFTER=?
+
+* lineq through the fast path: both inequalities of an equation from an equation hypothesis.
+
+s1::simp1 |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> A e. RR )
+s2::simp2 |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> B e. RR )
+s3::simp3 |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> A = ( 2 x. B ) )
+s4:s1,s3:eqled |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> A <_ ( 2 x. B ) )
+i5::leid
+s6::1re |- 1 e. RR
+s7:s6,i5:ax-mp |- 1 <_ 1
+s8:s7:a1i |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> 1 <_ 1 )
+s9:s6:a1i |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> 1 e. RR )
+s10::2re |- 2 e. RR
+s11:s10:a1i |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> 2 e. RR )
+s12:s11,s2:remulcld |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 2 x. B ) e. RR )
+s13:s1,s9,s12,s9,s4,s8:le2addd |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( A + 1 ) <_ ( ( 2 x. B ) + 1 ) )
+s14:s3:eqcomd |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 2 x. B ) = A )
+s15:s12,s14:eqled |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 2 x. B ) <_ A )
+s16:s7:a1i |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> 1 <_ 1 )
+s17:s12,s9,s1,s9,s15,s16:le2addd |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( ( 2 x. B ) + 1 ) <_ ( A + 1 ) )
+s18:s13,s17:jca |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( ( A + 1 ) <_ ( ( 2 x. B ) + 1 ) /\ ( ( 2 x. B ) + 1 ) <_ ( A + 1 ) ) )
+s19:s1,s9:readdcld |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( A + 1 ) e. RR )
+s20:s12,s9:readdcld |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( ( 2 x. B ) + 1 ) e. RR )
+s21:s19,s20:letri3d |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( ( A + 1 ) = ( ( 2 x. B ) + 1 ) <-> ( ( A + 1 ) <_ ( ( 2 x. B ) + 1 ) /\ ( ( 2 x. B ) + 1 ) <_ ( A + 1 ) ) ) )
+qed:s18,s21:mpbird |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( A + 1 ) = ( ( 2 x. B ) + 1 ) )
+$)

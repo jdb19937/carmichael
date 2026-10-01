@@ -1,0 +1,61 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgs0lem1  LOC_AFTER=?
+
+* Lemma for dchrgs0: for A not coprime to N, the quotient of N by the gcd is a proper divisor of N.
+
+s1::simp1 |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N e. NN )
+s2::simp2 |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> A e. ZZ )
+s3::simp3 |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> -. ( A gcd N ) = 1 )
+s4:s1:nnzd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N e. ZZ )
+i5::gcdcl
+s6:s2,s4,i5:syl2anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) e. NN0 )
+s7:s1:nnne0d |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N =/= 0 )
+s8:s7:neneqd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> -. N = 0 )
+s9:s8:intnand |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> -. ( A = 0 /\ N = 0 ) )
+i10::gcdeq0
+s11:s2,s4,i10:syl2anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( A gcd N ) = 0 <-> ( A = 0 /\ N = 0 ) ) )
+s12:s9,s11:mtbird |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> -. ( A gcd N ) = 0 )
+s13:s12:neqned |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) =/= 0 )
+s14:s6,s13:jca |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( A gcd N ) e. NN0 /\ ( A gcd N ) =/= 0 ) )
+i15::elnnne0
+s16:s14,i15:sylibr |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) e. NN )
+i17::gcddvds
+s18:s2,s4,i17:syl2anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( A gcd N ) || A /\ ( A gcd N ) || N ) )
+s19:s18:simpld |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) || A )
+s20:s18:simprd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) || N )
+i21::nndivdvds
+s22:s1,s16,i21:syl2anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( A gcd N ) || N <-> ( N / ( A gcd N ) ) e. NN ) )
+s23:s20,s22:mpbid |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( N / ( A gcd N ) ) e. NN )
+s24:s1:nncnd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N e. CC )
+s25:s16:nncnd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) e. CC )
+i26::divcan2
+s27:s24,s25,s13,i26:syl3anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( A gcd N ) x. ( N / ( A gcd N ) ) ) = N )
+s28:s16:nnzd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) e. ZZ )
+s29:s23:nnzd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( N / ( A gcd N ) ) e. ZZ )
+i30::dvdsmul2
+s31:s28,s29,i30:syl2anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( N / ( A gcd N ) ) || ( ( A gcd N ) x. ( N / ( A gcd N ) ) ) )
+s32:s31,s27:breqtrd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( N / ( A gcd N ) ) || N )
+s33:s1:nnred |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N e. RR )
+s34:s16:nnred |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) e. RR )
+s35:s16:nngt0d |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> 0 < ( A gcd N ) )
+s36:s34,s35:jca |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( A gcd N ) e. RR /\ 0 < ( A gcd N ) ) )
+i37::ltdivmul
+s38:s33,s33,s36,i37:syl3anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( N / ( A gcd N ) ) < N <-> N < ( ( A gcd N ) x. N ) ) )
+s39:s1:nngt0d |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> 0 < N )
+i40::ltmulgt11
+s41:s33,s34,s39,i40:syl3anc |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( 1 < ( A gcd N ) <-> N < ( N x. ( A gcd N ) ) ) )
+i42::nngt1ne1
+s43:s16,i42:syl |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( 1 < ( A gcd N ) <-> ( A gcd N ) =/= 1 ) )
+s45:s3:neqned |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) =/= 1 )
+i46::nngt1ne1
+s47:s16,i46:syl |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( 1 < ( A gcd N ) <-> ( A gcd N ) =/= 1 ) )
+s48:s45,s47:mpbird |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> 1 < ( A gcd N ) )
+s49:s48,s41:mpbid |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N < ( N x. ( A gcd N ) ) )
+s50:s1:nncnd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N e. CC )
+s51:s16:nncnd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( A gcd N ) e. CC )
+s52:s50,s51:mulcomd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( N x. ( A gcd N ) ) = ( ( A gcd N ) x. N ) )
+s53:s49,s52:breqtrd |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> N < ( ( A gcd N ) x. N ) )
+s54:s53,s38:mpbird |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( N / ( A gcd N ) ) < N )
+s55:s16,s19,s20:3jca |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( A gcd N ) e. NN /\ ( A gcd N ) || A /\ ( A gcd N ) || N ) )
+s56:s23,s32,s54:3jca |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( N / ( A gcd N ) ) e. NN /\ ( N / ( A gcd N ) ) || N /\ ( N / ( A gcd N ) ) < N ) )
+qed:s55,s56:jca |- ( ( N e. NN /\ A e. ZZ /\ -. ( A gcd N ) = 1 ) -> ( ( ( A gcd N ) e. NN /\ ( A gcd N ) || A /\ ( A gcd N ) || N ) /\ ( ( N / ( A gcd N ) ) e. NN /\ ( N / ( A gcd N ) ) || N /\ ( N / ( A gcd N ) ) < N ) ) )
+$)

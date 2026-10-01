@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=reservoirval  LOC_AFTER=?
+
+* The value of ~ df-reservoir .  Lean: reservoir.
+
+s1::simpr |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> Y e. NN )
+s2::simpl |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> ( Z e. NN /\ V e. NN0 ) )
+s3:s2:simpld |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> Z e. NN )
+s4:s2:simprd |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> V e. NN0 )
+s5::simpl |- ( ( z = Z /\ w = V ) -> z = Z )
+s6::simpr |- ( ( z = Z /\ w = V ) -> w = V )
+c1:s6:oveq1d |- ( ( z = Z /\ w = V ) -> ( w ResGo y ) = ( V ResGo y ) )
+c2:c1:fveq1d |- ( ( z = Z /\ w = V ) -> ( ( w ResGo y ) ` 2 ) = ( ( V ResGo y ) ` 2 ) )
+c3:s5:oveq1d |- ( ( z = Z /\ w = V ) -> ( z - 1 ) = ( Z - 1 ) )
+c4:c2,c3:fveq12d |- ( ( z = Z /\ w = V ) -> ( ( ( w ResGo y ) ` 2 ) ` ( z - 1 ) ) = ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) )
+c5:c4:mpteq2dv |- ( ( z = Z /\ w = V ) -> ( y e. NN |-> ( ( ( w ResGo y ) ` 2 ) ` ( z - 1 ) ) ) = ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) )
+s7::df-reservoir |- Reservoir = ( z e. NN , w e. NN0 |-> ( y e. NN |-> ( ( ( w ResGo y ) ` 2 ) ` ( z - 1 ) ) ) )
+s8::nnex |- NN e. _V
+s9:s8:a1i |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> NN e. _V )
+i10::mptexg
+s11:s9,i10:syl |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) e. _V )
+s12:c5,s7:ovmpoga |- ( ( Z e. NN /\ V e. NN0 /\ ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) e. _V ) -> ( Z Reservoir V ) = ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) )
+s13:s3,s4,s11,s12:syl3anc |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> ( Z Reservoir V ) = ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) )
+s14:s13:fveq1d |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> ( ( Z Reservoir V ) ` Y ) = ( ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) ` Y ) )
+s15::id |- ( y = Y -> y = Y )
+c6:s15:oveq2d |- ( y = Y -> ( V ResGo y ) = ( V ResGo Y ) )
+c7:c6:fveq1d |- ( y = Y -> ( ( V ResGo y ) ` 2 ) = ( ( V ResGo Y ) ` 2 ) )
+c8:c7:fveq1d |- ( y = Y -> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) = ( ( ( V ResGo Y ) ` 2 ) ` ( Z - 1 ) ) )
+s16::eqid |- ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) = ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) )
+s17::fvex |- ( ( ( V ResGo Y ) ` 2 ) ` ( Z - 1 ) ) e. _V
+s18:s17:a1i |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> ( ( ( V ResGo Y ) ` 2 ) ` ( Z - 1 ) ) e. _V )
+s19:c8,s16:fvmptg |- ( ( Y e. NN /\ ( ( ( V ResGo Y ) ` 2 ) ` ( Z - 1 ) ) e. _V ) -> ( ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) ` Y ) = ( ( ( V ResGo Y ) ` 2 ) ` ( Z - 1 ) ) )
+s20:s1,s18,s19:syl2anc |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> ( ( y e. NN |-> ( ( ( V ResGo y ) ` 2 ) ` ( Z - 1 ) ) ) ` Y ) = ( ( ( V ResGo Y ) ` 2 ) ` ( Z - 1 ) ) )
+qed:s14,s20:eqtrd |- ( ( ( Z e. NN /\ V e. NN0 ) /\ Y e. NN ) -> ( ( Z Reservoir V ) ` Y ) = ( ( ( V ResGo Y ) ` 2 ) ` ( Z - 1 ) ) )
+$)

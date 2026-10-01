@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=drplen  LOC_AFTER=?
+
+* The T-element tail of a word has T elements (Lean: List.length_drop).
+
+s1::simpl |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> V e. Word S )
+s2::simpr |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> T e. ( 0 ... ( # ` V ) ) )
+s3::drpfz |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( # ` V ) - T ) e. ( 0 ... ( # ` V ) ) )
+i4::swrdrlen
+s5:s1,s3,i4:syl2anc |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) ) = ( ( # ` V ) - ( ( # ` V ) - T ) ) )
+i6::lencl
+s7:s1,i6:syl |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. NN0 )
+s8:s7:nn0cnd |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. CC )
+i9::elfznn0
+s10:s2,i9:syl |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> T e. NN0 )
+s11:s10:nn0cnd |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> T e. CC )
+s12:s8,s11:nncand |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( # ` V ) - ( ( # ` V ) - T ) ) = T )
+qed:s5,s12:eqtrd |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) ) = T )
+$)

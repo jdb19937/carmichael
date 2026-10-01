@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=ttwsplit  LOC_AFTER=?
+
+* A word is its prefix up to ` J ` , its letter at ` J ` and its rest after ` J ` (Lean ` List.take_append_drop ` , ` List.drop_eq_getElem_cons ` ).
+
+s1::simpl |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> V e. Word S )
+s2::simpr |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> J e. ( 0 ..^ ( # ` V ) ) )
+i3::elfzofz
+s4:s2,i3:syl |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> J e. ( 0 ... ( # ` V ) ) )
+i5::fzofzp1
+s6:s2,i5:syl |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( J + 1 ) e. ( 0 ... ( # ` V ) ) )
+i7::elfzonn0
+s8:s2,i7:syl |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> J e. NN0 )
+i9::fzonn0p1
+s10:s8,i9:syl |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> J e. ( 0 ..^ ( J + 1 ) ) )
+i11::elfzofz
+s12:s10,i11:syl |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> J e. ( 0 ... ( J + 1 ) ) )
+i13::lencl
+s14:s1,i13:syl |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( # ` V ) e. NN0 )
+i15::nn0fz0
+s16:s14,i15:sylib |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( # ` V ) e. ( 0 ... ( # ` V ) ) )
+s17:s12,s6,s16:3jca |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( J e. ( 0 ... ( J + 1 ) ) /\ ( J + 1 ) e. ( 0 ... ( # ` V ) ) /\ ( # ` V ) e. ( 0 ... ( # ` V ) ) ) )
+i18::ccatswrd
+s19:s1,s17,i18:syl2anc |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( ( V substr <. J , ( J + 1 ) >. ) ++ ( V substr <. ( J + 1 ) , ( # ` V ) >. ) ) = ( V substr <. J , ( # ` V ) >. ) )
+i20::swrds1
+s21:s1,s2,i20:syl2anc |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( V substr <. J , ( J + 1 ) >. ) = <" ( V ` J ) "> )
+s22:s21:oveq1d |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( ( V substr <. J , ( J + 1 ) >. ) ++ ( V substr <. ( J + 1 ) , ( # ` V ) >. ) ) = ( <" ( V ` J ) "> ++ ( V substr <. ( J + 1 ) , ( # ` V ) >. ) ) )
+s23:s22,s19:eqtr3d |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( <" ( V ` J ) "> ++ ( V substr <. ( J + 1 ) , ( # ` V ) >. ) ) = ( V substr <. J , ( # ` V ) >. ) )
+i24::pfxcctswrd
+s25:s1,s4,i24:syl2anc |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( ( V prefix J ) ++ ( V substr <. J , ( # ` V ) >. ) ) = V )
+s26:s23:oveq2d |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( ( V prefix J ) ++ ( <" ( V ` J ) "> ++ ( V substr <. ( J + 1 ) , ( # ` V ) >. ) ) ) = ( ( V prefix J ) ++ ( V substr <. J , ( # ` V ) >. ) ) )
+s27:s26,s25:eqtrd |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> ( ( V prefix J ) ++ ( <" ( V ` J ) "> ++ ( V substr <. ( J + 1 ) , ( # ` V ) >. ) ) ) = V )
+qed:s27:eqcomd |- ( ( V e. Word S /\ J e. ( 0 ..^ ( # ` V ) ) ) -> V = ( ( V prefix J ) ++ ( <" ( V ` J ) "> ++ ( V substr <. ( J + 1 ) , ( # ` V ) >. ) ) ) )
+$)

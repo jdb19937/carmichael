@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=isprimetdval  LOC_AFTER=?
+
+* The value of ~ df-isprimetd .  Lean: isPrimeTD.
+
+s1::id |- ( M e. NN0 -> M e. NN0 )
+s2::id |- ( m = M -> m = M )
+c1:s2:breq1d |- ( m = M -> ( m < 2 <-> M < 2 ) )
+c2:s2:oveq1d |- ( m = M -> ( m PrimeGo 2 ) = ( M PrimeGo 2 ) )
+c3:c2,s2:fveq12d |- ( m = M -> ( ( m PrimeGo 2 ) ` m ) = ( ( M PrimeGo 2 ) ` M ) )
+c4:c3:fveq2d |- ( m = M -> ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) = ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) )
+c5:s2:oveq1d |- ( m = M -> ( m PrimeGo 2 ) = ( M PrimeGo 2 ) )
+c6:c5,s2:fveq12d |- ( m = M -> ( ( m PrimeGo 2 ) ` m ) = ( ( M PrimeGo 2 ) ` M ) )
+c7:c6:fveq2d |- ( m = M -> ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) = ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) )
+c8:c7:oveq1d |- ( m = M -> ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) = ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) )
+c9:c4,c8:opeq12d |- ( m = M -> <. ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) , ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) >. = <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. )
+c10:c1,c9:ifbieq2d |- ( m = M -> if ( m < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) , ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) >. ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s3::df-isprimetd |- IsPrimeTD = ( m e. NN0 |-> if ( m < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) , ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) >. ) )
+s4::opex |- <. (/) , 1 >. e. _V
+s5:s4:a1i |- ( M e. NN0 -> <. (/) , 1 >. e. _V )
+s6::opex |- <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. e. _V
+s7:s6:a1i |- ( M e. NN0 -> <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. e. _V )
+s8:s5,s7:ifcld |- ( M e. NN0 -> if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) e. _V )
+s9:c10,s3:fvmptg |- ( ( M e. NN0 /\ if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) e. _V ) -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+qed:s1,s8,s9:syl2anc |- ( M e. NN0 -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+$)

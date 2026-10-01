@@ -1,0 +1,89 @@
+$( <MM> <PROOF_ASST> THEOREM=tmip2enc  LOC_AFTER=?
+
+* The stack word of ` 2 ^ F ` : ` F ` zero bits then a one (Lean ` encodeNat_two_pow ` ).
+
+s1::id |- ( F e. NN0 -> F e. NN0 )
+s2::2nn0 |- 2 e. NN0
+s3:s2:a1i |- ( F e. NN0 -> 2 e. NN0 )
+i4::nn0expcl
+s5:s3,s1,i4:syl2anc |- ( F e. NN0 -> ( 2 ^ F ) e. NN0 )
+s6:s5:nn0zd |- ( F e. NN0 -> ( 2 ^ F ) e. ZZ )
+s7::2nn |- 2 e. NN
+s8:s7:a1i |- ( F e. NN0 -> 2 e. NN )
+i9::nnexpcl
+s10:s8,s1,i9:syl2anc |- ( F e. NN0 -> ( 2 ^ F ) e. NN )
+s11:s10:nnrpd |- ( F e. NN0 -> ( 2 ^ F ) e. RR+ )
+i12::encnatgamval
+s13:s5,i12:syl |- ( F e. NN0 -> ( encNatGam ` ( 2 ^ F ) ) = ( inclBool o. ( encodeNat ` ( 2 ^ F ) ) ) )
+i14::encnatbwrd
+s15:s5,i14:syl |- ( F e. NN0 -> ( encodeNat ` ( 2 ^ F ) ) = ( ( 2 ^ F ) bwrd ( bl ` ( 2 ^ F ) ) ) )
+i16::blp2
+s17:s1,i16:syl |- ( F e. NN0 -> ( bl ` ( 2 ^ F ) ) = ( F + 1 ) )
+s18:s17:oveq2d |- ( F e. NN0 -> ( ( 2 ^ F ) bwrd ( bl ` ( 2 ^ F ) ) ) = ( ( 2 ^ F ) bwrd ( F + 1 ) ) )
+s19:s15,s18:eqtrd |- ( F e. NN0 -> ( encodeNat ` ( 2 ^ F ) ) = ( ( 2 ^ F ) bwrd ( F + 1 ) ) )
+i20::bwrdp1
+s21:s6,s1,i20:syl2anc |- ( F e. NN0 -> ( ( 2 ^ F ) bwrd ( F + 1 ) ) = ( ( ( 2 ^ F ) bwrd F ) ++ <" if ( F e. ( bits ` ( 2 ^ F ) ) , 1o , (/) ) "> ) )
+s22:s1:nn0zd |- ( F e. NN0 -> F e. ZZ )
+i23::uzid
+s24:s22,i23:syl |- ( F e. NN0 -> F e. ( ZZ>= ` F ) )
+i25::bwrdmod
+s26:s6,s1,s24,i25:syl3anc |- ( F e. NN0 -> ( ( ( 2 ^ F ) mod ( 2 ^ F ) ) bwrd F ) = ( ( 2 ^ F ) bwrd F ) )
+i27::modid0
+s28:s11,i27:syl |- ( F e. NN0 -> ( ( 2 ^ F ) mod ( 2 ^ F ) ) = 0 )
+s29:s28:oveq1d |- ( F e. NN0 -> ( ( ( 2 ^ F ) mod ( 2 ^ F ) ) bwrd F ) = ( 0 bwrd F ) )
+s30:s29,s26:eqtr3d |- ( F e. NN0 -> ( ( 2 ^ F ) bwrd F ) = ( 0 bwrd F ) )
+i31::bwrep0
+s32:s1,i31:syl |- ( F e. NN0 -> ( (/) repeatS F ) = ( 0 bwrd F ) )
+s33:s32:eqcomd |- ( F e. NN0 -> ( 0 bwrd F ) = ( (/) repeatS F ) )
+s34:s30,s33:eqtrd |- ( F e. NN0 -> ( ( 2 ^ F ) bwrd F ) = ( (/) repeatS F ) )
+i35::bitsval2
+s36:s6,s1,i35:syl2anc |- ( F e. NN0 -> ( F e. ( bits ` ( 2 ^ F ) ) <-> -. 2 || ( |_ ` ( ( 2 ^ F ) / ( 2 ^ F ) ) ) ) )
+s37:s10:nncnd |- ( F e. NN0 -> ( 2 ^ F ) e. CC )
+s38:s10:nnne0d |- ( F e. NN0 -> ( 2 ^ F ) =/= 0 )
+i39::divid
+s40:s37,s38,i39:syl2anc |- ( F e. NN0 -> ( ( 2 ^ F ) / ( 2 ^ F ) ) = 1 )
+s41:s40:fveq2d |- ( F e. NN0 -> ( |_ ` ( ( 2 ^ F ) / ( 2 ^ F ) ) ) = ( |_ ` 1 ) )
+s42::1z |- 1 e. ZZ
+s43:s42:a1i |- ( F e. NN0 -> 1 e. ZZ )
+i44::flid
+s45:s43,i44:syl |- ( F e. NN0 -> ( |_ ` 1 ) = 1 )
+s46:s41,s45:eqtrd |- ( F e. NN0 -> ( |_ ` ( ( 2 ^ F ) / ( 2 ^ F ) ) ) = 1 )
+s47:s46:breq2d |- ( F e. NN0 -> ( 2 || ( |_ ` ( ( 2 ^ F ) / ( 2 ^ F ) ) ) <-> 2 || 1 ) )
+s48::n2dvds1 |- -. 2 || 1
+s49:s48:a1i |- ( F e. NN0 -> -. 2 || 1 )
+s50:s47,s49:mtbird |- ( F e. NN0 -> -. 2 || ( |_ ` ( ( 2 ^ F ) / ( 2 ^ F ) ) ) )
+s51:s50,s36:mpbird |- ( F e. NN0 -> F e. ( bits ` ( 2 ^ F ) ) )
+s52:s51:iftrued |- ( F e. NN0 -> if ( F e. ( bits ` ( 2 ^ F ) ) , 1o , (/) ) = 1o )
+s53:s52:s1eqd |- ( F e. NN0 -> <" if ( F e. ( bits ` ( 2 ^ F ) ) , 1o , (/) ) "> = <" 1o "> )
+s54:s34,s53:oveq12d |- ( F e. NN0 -> ( ( ( 2 ^ F ) bwrd F ) ++ <" if ( F e. ( bits ` ( 2 ^ F ) ) , 1o , (/) ) "> ) = ( ( (/) repeatS F ) ++ <" 1o "> ) )
+s55:s19,s21:eqtrd |- ( F e. NN0 -> ( encodeNat ` ( 2 ^ F ) ) = ( ( ( 2 ^ F ) bwrd F ) ++ <" if ( F e. ( bits ` ( 2 ^ F ) ) , 1o , (/) ) "> ) )
+s56:s55,s54:eqtrd |- ( F e. NN0 -> ( encodeNat ` ( 2 ^ F ) ) = ( ( (/) repeatS F ) ++ <" 1o "> ) )
+s57::0el2o |- (/) e. 2o
+s58:s57:a1i |- ( F e. NN0 -> (/) e. 2o )
+s59::1oel2o |- 1o e. 2o
+s60:s59:a1i |- ( F e. NN0 -> 1o e. 2o )
+s61::inclboolf |- inclBool : 2o --> Gamma'
+s62:s61:a1i |- ( F e. NN0 -> inclBool : 2o --> Gamma' )
+i63::repsw
+s64:s58,s1,i63:syl2anc |- ( F e. NN0 -> ( (/) repeatS F ) e. Word 2o )
+s65:s60:s1cld |- ( F e. NN0 -> <" 1o "> e. Word 2o )
+i66::ccatco
+s67:s64,s65,s62,i66:syl3anc |- ( F e. NN0 -> ( inclBool o. ( ( (/) repeatS F ) ++ <" 1o "> ) ) = ( ( inclBool o. ( (/) repeatS F ) ) ++ ( inclBool o. <" 1o "> ) ) )
+i68::repsco
+s69:s58,s1,s62,i68:syl3anc |- ( F e. NN0 -> ( inclBool o. ( (/) repeatS F ) ) = ( ( inclBool ` (/) ) repeatS F ) )
+i70::inclboolfv
+s71:s58,i70:syl |- ( F e. NN0 -> ( inclBool ` (/) ) = <. 1 , (/) >. )
+s72:s71:oveq1d |- ( F e. NN0 -> ( ( inclBool ` (/) ) repeatS F ) = ( <. 1 , (/) >. repeatS F ) )
+s73:s69,s72:eqtrd |- ( F e. NN0 -> ( inclBool o. ( (/) repeatS F ) ) = ( <. 1 , (/) >. repeatS F ) )
+i74::s1co
+s75:s60,s62,i74:syl2anc |- ( F e. NN0 -> ( inclBool o. <" 1o "> ) = <" ( inclBool ` 1o ) "> )
+i76::inclboolfv
+s77:s60,i76:syl |- ( F e. NN0 -> ( inclBool ` 1o ) = <. 1 , 1o >. )
+s78:s77:s1eqd |- ( F e. NN0 -> <" ( inclBool ` 1o ) "> = <" <. 1 , 1o >. "> )
+s79:s75,s78:eqtrd |- ( F e. NN0 -> ( inclBool o. <" 1o "> ) = <" <. 1 , 1o >. "> )
+s80:s73,s79:oveq12d |- ( F e. NN0 -> ( ( inclBool o. ( (/) repeatS F ) ) ++ ( inclBool o. <" 1o "> ) ) = ( ( <. 1 , (/) >. repeatS F ) ++ <" <. 1 , 1o >. "> ) )
+s81:s67,s80:eqtrd |- ( F e. NN0 -> ( inclBool o. ( ( (/) repeatS F ) ++ <" 1o "> ) ) = ( ( <. 1 , (/) >. repeatS F ) ++ <" <. 1 , 1o >. "> ) )
+s82:s56:coeq2d |- ( F e. NN0 -> ( inclBool o. ( encodeNat ` ( 2 ^ F ) ) ) = ( inclBool o. ( ( (/) repeatS F ) ++ <" 1o "> ) ) )
+s83:s82,s81:eqtrd |- ( F e. NN0 -> ( inclBool o. ( encodeNat ` ( 2 ^ F ) ) ) = ( ( <. 1 , (/) >. repeatS F ) ++ <" <. 1 , 1o >. "> ) )
+qed:s13,s83:eqtrd |- ( F e. NN0 -> ( encNatGam ` ( 2 ^ F ) ) = ( ( <. 1 , (/) >. repeatS F ) ++ <" <. 1 , 1o >. "> ) )
+$)

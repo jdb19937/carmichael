@@ -1,0 +1,103 @@
+$( <MM> <PROOF_ASST> THEOREM=etaord  LOC_AFTER=?
+
+* The Abel-summed eta function has finite order at every point of the right half-plane (Lean ` analyticOrderAt_etaFun_ne_top ` ; ~ hp0ordf ).
+
+s1::id |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> P e. ( `' Re " ( 0 (,) +oo ) ) )
+s2::0re |- 0 e. RR
+s3:s2:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 e. RR )
+s4::0le0 |- 0 <_ 0
+s5:s4:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 <_ 0 )
+s6:s3,s5:jca |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 0 e. RR /\ 0 <_ 0 ) )
+i7::etahol
+s8:s6,i7:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) ) ) )
+s9::negeq |- ( z = a -> -u z = -u a )
+s10:s9:oveq2d |- ( z = a -> ( k ^c -u z ) = ( k ^c -u a ) )
+s11::negeq |- ( z = a -> -u z = -u a )
+s12:s11:oveq2d |- ( z = a -> ( ( k + 1 ) ^c -u z ) = ( ( k + 1 ) ^c -u a ) )
+s13:s10,s12:oveq12d |- ( z = a -> ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) = ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) )
+s14:s13:oveq2d |- ( z = a -> ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) = ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) )
+s15:s14:sumeq2sdv |- ( z = a -> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) = sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) )
+s16:s15:cbvmptv |- ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) = ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) )
+s17:s16:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) = ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) )
+s18:s17:eqcomd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) = ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) )
+i19::simpl
+s20:s8,i19:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) )
+s21:s18,s20:eqeltrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) )
+i22::simpr
+s23:s8,i22:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) ) )
+s24:s17:oveq2d |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( CC _D ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) ) = ( CC _D ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ) )
+s25:s24:dmeqd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> dom ( CC _D ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) ) = dom ( CC _D ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ) )
+s26:s23,s25:sseqtrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ) )
+s27:s21,s26:jca |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ) ) )
+s28::0re |- 0 e. RR
+s29:s28:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 e. RR )
+i30::etactr
+s31:s29,i30:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 1 / 4 ) <_ ( abs ` ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) ) )
+s32:s17:fveq1d |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) = ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) )
+s33:s32:fveq2d |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( abs ` ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) ) = ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) ) )
+s34:s31,s33:breqtrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 1 / 4 ) <_ ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) ) )
+s35::it0e0 |- ( _i x. 0 ) = 0
+s36:s35:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( _i x. 0 ) = 0 )
+s37:s36:oveq2d |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 2 + ( _i x. 0 ) ) = ( 2 + 0 ) )
+s38::2cnd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 2 e. CC )
+s39:s38:addridd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 2 + 0 ) = 2 )
+s40:s37,s39:eqtrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 2 + ( _i x. 0 ) ) = 2 )
+s41:s40:fveq2d |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) = ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) )
+s42:s41:fveq2d |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` ( 2 + ( _i x. 0 ) ) ) ) = ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) ) )
+s43:s34,s42:breqtrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 1 / 4 ) <_ ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) ) )
+s44::0re |- 0 e. RR
+s45:s44:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 e. RR )
+i46::elhp2
+s47:s45,i46:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 2 e. ( `' Re " ( 0 (,) +oo ) ) <-> ( 2 e. CC /\ 0 < ( Re ` 2 ) ) ) )
+s48::2re |- 2 e. RR
+s49:s48:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 2 e. RR )
+s50:s49:rered |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( Re ` 2 ) = 2 )
+s51::2cnd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 2 e. CC )
+s52::2pos |- 0 < 2
+s53:s52:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 < 2 )
+s54:s53,s50:breqtrrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 < ( Re ` 2 ) )
+s55:s51,s54:jca |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 2 e. CC /\ 0 < ( Re ` 2 ) ) )
+s56:s55,s47:mpbird |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 2 e. ( `' Re " ( 0 (,) +oo ) ) )
+i57::simpl
+s58:s27,i57:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) )
+i59::cncff
+s60:s58,i59:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) : ( `' Re " ( 0 (,) +oo ) ) --> CC )
+s61:s60,s56:ffvelcdmd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) e. CC )
+s62:s61:abscld |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) ) e. RR )
+i63::ltmuldiv
+s64::0re |- 0 e. RR
+s65::1re |- 1 e. RR
+s66::4re |- 4 e. RR
+s67::4pos |- 0 < 4
+s68:s66,s67:pm3.2i |- ( 4 e. RR /\ 0 < 4 )
+s69:s64,s65,s68,i63:mp3an |- ( ( 0 x. 4 ) < 1 <-> 0 < ( 1 / 4 ) )
+s70::0lt1 |- 0 < 1
+s71::4cn |- 4 e. CC
+s72:s71:mul02i |- ( 0 x. 4 ) = 0
+s73:s72,s70:eqbrtri |- ( 0 x. 4 ) < 1
+s74:s73,s69:mpbi |- 0 < ( 1 / 4 )
+s75:s74:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 < ( 1 / 4 ) )
+s76:s64:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 e. RR )
+i77::rpre
+i78::rpdivcl
+s79::1rp |- 1 e. RR+
+i80::nnrp
+s81::4nn |- 4 e. NN
+s82:s81,i80:ax-mp |- 4 e. RR+
+s83:s79,s82,i78:mp2an |- ( 1 / 4 ) e. RR+
+s84:s83,i77:ax-mp |- ( 1 / 4 ) e. RR
+s85:s84:a1i |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( 1 / 4 ) e. RR )
+s86:s76,s85,s62,s75,s43:ltletrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> 0 < ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) ) )
+i87::absgt0
+s88:s61,i87:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) =/= 0 <-> 0 < ( abs ` ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) ) ) )
+s89:s86,s88:mpbird |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) =/= 0 )
+s90:s27,s89:jca |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ) ) /\ ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) =/= 0 ) )
+s91:s90,s1:jca |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ) ) /\ ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` 2 ) =/= 0 ) /\ P e. ( `' Re " ( 0 (,) +oo ) ) ) )
+i92::hp0ordf
+s93:s91,i92:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) holord P ) e. NN0 /\ E. g ( ( g e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D g ) ) /\ ( g ` P ) =/= 0 /\ A. z e. ( `' Re " ( 0 (,) +oo ) ) ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) ` z ) = ( ( ( z - P ) ^ ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) holord P ) ) x. ( g ` z ) ) ) ) )
+i94::simpl
+s95:s93,i94:syl |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) holord P ) e. NN0 )
+s96:s17:oveq1d |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) holord P ) = ( ( a e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u a ) - ( ( k + 1 ) ^c -u a ) ) ) ) holord P ) )
+s97:s96,s95:eqeltrd |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) holord P ) e. NN0 )
+qed:s97:idi |- ( P e. ( `' Re " ( 0 (,) +oo ) ) -> ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u z ) - ( ( k + 1 ) ^c -u z ) ) ) ) holord P ) e. NN0 )
+$)

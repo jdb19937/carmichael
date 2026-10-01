@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2sacl6  LOC_AFTER=?
+
+* Closure of stepAux for halt.
+
+s1::simp1 |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( T e. V /\ N e. _om ) )
+s2::simp2 |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) )
+s3::simp3 |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+s4:s1:simpld |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> T e. V )
+s5:s1:simprd |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> N e. _om )
+i6::tm2layssstmt
+s7:s4,s5,i6:syl2anc |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) C_ ( TM2Stmt ` T ) )
+i8::xp1st
+s9:s3,i8:syl |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( 1st ` P ) e. ( 2nd ` T ) )
+i10::xp2nd
+s11:s3,i10:syl |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( 2nd ` P ) e. ( TM2Stk ` T ) )
+s12:s9,s11:jca |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( ( 1st ` P ) e. ( 2nd ` T ) /\ ( 2nd ` P ) e. ( TM2Stk ` T ) ) )
+i13::1st2nd2
+s14:s3,i13:syl |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> P = <. ( 1st ` P ) , ( 2nd ` P ) >. )
+s15:s14:oveq2d |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( TM2sa ` T ) P ) = ( <. 6 , (/) >. ( TM2sa ` T ) <. ( 1st ` P ) , ( 2nd ` P ) >. ) )
+i16::tm2sahalt
+s17:s4,s12,i16:syl2anc |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( TM2sa ` T ) <. ( 1st ` P ) , ( 2nd ` P ) >. ) = <. ( inr ` (/) ) , <. ( 1st ` P ) , ( 2nd ` P ) >. >. )
+s18:s15,s17:eqtrd |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( TM2sa ` T ) P ) = <. ( inr ` (/) ) , <. ( 1st ` P ) , ( 2nd ` P ) >. >. )
+s19::0lt1o |- (/) e. 1o
+i20::djurcl
+s21:s19,i20:ax-mp |- ( inr ` (/) ) e. ( ( 2nd ` ( 1st ` T ) ) |_| 1o )
+s22:s21:a1i |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( inr ` (/) ) e. ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+i23::opelxpi
+s24:s9,s11,i23:syl2anc |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> <. ( 1st ` P ) , ( 2nd ` P ) >. e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i25::opelxpi
+s26:s22,s24,i25:syl2anc |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> <. ( inr ` (/) ) , <. ( 1st ` P ) , ( 2nd ` P ) >. >. e. ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+i27::tm2cfgval
+s28:s4,i27:syl |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( TM2Cfg ` T ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+s29:s26,s28:eleqtrrd |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> <. ( inr ` (/) ) , <. ( 1st ` P ) , ( 2nd ` P ) >. >. e. ( TM2Cfg ` T ) )
+qed:s18,s29:eqeltrd |- ( ( ( T e. V /\ N e. _om ) /\ A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( TM2sa ` T ) P ) e. ( TM2Cfg ` T ) )
+$)

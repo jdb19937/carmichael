@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=psiapval2  LOC_AFTER=?
+
+* psi in a residue class as a plain sum of the von Mangoldt function over the class (Lean: psiAP_eq_sum_filter).
+
+s1::psiapval |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = sum_ n e. ( 1 ... ( |_ ` Y ) ) if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) )
+s2::oveq1 |- ( n = m -> ( n mod Q ) = ( m mod Q ) )
+s3:s2:eqeq1d |- ( n = m -> ( ( n mod Q ) = ( A mod Q ) <-> ( m mod Q ) = ( A mod Q ) ) )
+s4::fveq2 |- ( n = m -> ( Lam ` n ) = ( Lam ` m ) )
+s5:s3,s4:ifbieq1d |- ( n = m -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) = if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) )
+s6:s5:cbvsumv |- sum_ n e. ( 1 ... ( |_ ` Y ) ) if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) = sum_ m e. ( 1 ... ( |_ ` Y ) ) if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 )
+s7:s1,s6:eqtrdi |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = sum_ m e. ( 1 ... ( |_ ` Y ) ) if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) )
+s8::ssrab2 |- { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } C_ ( 1 ... ( |_ ` Y ) )
+s9:s8:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } C_ ( 1 ... ( |_ ` Y ) ) )
+s10:s3:elrab |- ( m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } <-> ( m e. ( 1 ... ( |_ ` Y ) ) /\ ( m mod Q ) = ( A mod Q ) ) )
+s11::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } )
+s12:s11,s10:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> ( m e. ( 1 ... ( |_ ` Y ) ) /\ ( m mod Q ) = ( A mod Q ) ) )
+s13:s12:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> m e. ( 1 ... ( |_ ` Y ) ) )
+i14::elfznn
+s15:s13,i14:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> m e. NN )
+i16::psiaplem1
+s17:s15,i16:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) e. ( 0 [,) +oo ) )
+i18::elrege0
+s19:s17,i18:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> ( if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) e. RR /\ 0 <_ if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) ) )
+s20:s19:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) e. RR )
+s21:s19:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> 0 <_ if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) )
+s22:s20:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) e. CC )
+s23::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) ) -> m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) )
+i24::eldif
+s25:s23,i24:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) ) -> ( m e. ( 1 ... ( |_ ` Y ) ) /\ -. m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) )
+s26:s25:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) ) -> m e. ( 1 ... ( |_ ` Y ) ) )
+s27:s25:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) ) -> -. m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } )
+s28:s3:elrab3 |- ( m e. ( 1 ... ( |_ ` Y ) ) -> ( m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } <-> ( m mod Q ) = ( A mod Q ) ) )
+s29:s26,s28:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) ) -> ( m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } <-> ( m mod Q ) = ( A mod Q ) ) )
+s30:s27,s29:mtbid |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) ) -> -. ( m mod Q ) = ( A mod Q ) )
+s31:s30:iffalsed |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. ( ( 1 ... ( |_ ` Y ) ) \ { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) ) -> if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) = 0 )
+s32::fzfid |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( 1 ... ( |_ ` Y ) ) e. Fin )
+s33:s9,s22,s31,s32:fsumss |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) = sum_ m e. ( 1 ... ( |_ ` Y ) ) if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) )
+s34:s12:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> ( m mod Q ) = ( A mod Q ) )
+s35:s34:iftrued |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ) -> if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) = ( Lam ` m ) )
+s36:s35:sumeq2dv |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) = sum_ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ( Lam ` m ) )
+s37:s33,s36:eqtr3d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ m e. ( 1 ... ( |_ ` Y ) ) if ( ( m mod Q ) = ( A mod Q ) , ( Lam ` m ) , 0 ) = sum_ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ( Lam ` m ) )
+qed:s7,s37:eqtrd |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = sum_ m e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n mod Q ) = ( A mod Q ) } ( Lam ` m ) )
+$)

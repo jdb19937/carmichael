@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=root1abs  LOC_AFTER=?
+
+* Integer powers of the root of unity have modulus 1 (Mathlib ZMod.stdAddChar has values on the unit circle).
+
+s1::simpl |- ( ( N e. NN /\ K e. ZZ ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ K e. ZZ ) -> K e. ZZ )
+i3::root1cl
+s4:s1,i3:syl |- ( ( N e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / N ) ) e. CC /\ ( -u 1 ^c ( 2 / N ) ) =/= 0 ) )
+s5:s4:simpld |- ( ( N e. NN /\ K e. ZZ ) -> ( -u 1 ^c ( 2 / N ) ) e. CC )
+s6:s4:simprd |- ( ( N e. NN /\ K e. ZZ ) -> ( -u 1 ^c ( 2 / N ) ) =/= 0 )
+i7::root1ef
+s8:s1,i7:syl |- ( ( N e. NN /\ K e. ZZ ) -> ( -u 1 ^c ( 2 / N ) ) = ( exp ` ( ( 2 / N ) x. ( _i x. _pi ) ) ) )
+s9::2re |- 2 e. RR
+s10:s1:nnred |- ( ( N e. NN /\ K e. ZZ ) -> N e. RR )
+s11:s1:nnne0d |- ( ( N e. NN /\ K e. ZZ ) -> N =/= 0 )
+s13::2re |- 2 e. RR
+s14:s13:a1i |- ( ( N e. NN /\ K e. ZZ ) -> 2 e. RR )
+s15:s1:nnred |- ( ( N e. NN /\ K e. ZZ ) -> N e. RR )
+s16:s1:nnne0d |- ( ( N e. NN /\ K e. ZZ ) -> N =/= 0 )
+s17:s14,s15,s16:redivcld |- ( ( N e. NN /\ K e. ZZ ) -> ( 2 / N ) e. RR )
+s18::pire |- _pi e. RR
+s19:s18:a1i |- ( ( N e. NN /\ K e. ZZ ) -> _pi e. RR )
+s20:s17,s19:remulcld |- ( ( N e. NN /\ K e. ZZ ) -> ( ( 2 / N ) x. _pi ) e. RR )
+s21:s17:recnd |- ( ( N e. NN /\ K e. ZZ ) -> ( 2 / N ) e. CC )
+s22::ax-icn |- _i e. CC
+s23:s22:a1i |- ( ( N e. NN /\ K e. ZZ ) -> _i e. CC )
+s24::picn |- _pi e. CC
+s25:s24:a1i |- ( ( N e. NN /\ K e. ZZ ) -> _pi e. CC )
+s26:s21,s23,s25:mul12d |- ( ( N e. NN /\ K e. ZZ ) -> ( ( 2 / N ) x. ( _i x. _pi ) ) = ( _i x. ( ( 2 / N ) x. _pi ) ) )
+s27:s26:fveq2d |- ( ( N e. NN /\ K e. ZZ ) -> ( exp ` ( ( 2 / N ) x. ( _i x. _pi ) ) ) = ( exp ` ( _i x. ( ( 2 / N ) x. _pi ) ) ) )
+s28:s8,s27:eqtrd |- ( ( N e. NN /\ K e. ZZ ) -> ( -u 1 ^c ( 2 / N ) ) = ( exp ` ( _i x. ( ( 2 / N ) x. _pi ) ) ) )
+s29:s28:fveq2d |- ( ( N e. NN /\ K e. ZZ ) -> ( abs ` ( -u 1 ^c ( 2 / N ) ) ) = ( abs ` ( exp ` ( _i x. ( ( 2 / N ) x. _pi ) ) ) ) )
+i30::absefi
+s31:s20,i30:syl |- ( ( N e. NN /\ K e. ZZ ) -> ( abs ` ( exp ` ( _i x. ( ( 2 / N ) x. _pi ) ) ) ) = 1 )
+s32:s29,s31:eqtrd |- ( ( N e. NN /\ K e. ZZ ) -> ( abs ` ( -u 1 ^c ( 2 / N ) ) ) = 1 )
+i33::absexpz
+s34:s5,s6,s2,i33:syl3anc |- ( ( N e. NN /\ K e. ZZ ) -> ( abs ` ( ( -u 1 ^c ( 2 / N ) ) ^ K ) ) = ( ( abs ` ( -u 1 ^c ( 2 / N ) ) ) ^ K ) )
+s35:s32:oveq1d |- ( ( N e. NN /\ K e. ZZ ) -> ( ( abs ` ( -u 1 ^c ( 2 / N ) ) ) ^ K ) = ( 1 ^ K ) )
+i36::1exp
+s37:s2,i36:syl |- ( ( N e. NN /\ K e. ZZ ) -> ( 1 ^ K ) = 1 )
+s38:s35,s37:eqtrd |- ( ( N e. NN /\ K e. ZZ ) -> ( ( abs ` ( -u 1 ^c ( 2 / N ) ) ) ^ K ) = 1 )
+qed:s34,s38:eqtrd |- ( ( N e. NN /\ K e. ZZ ) -> ( abs ` ( ( -u 1 ^c ( 2 / N ) ) ^ K ) ) = 1 )
+$)

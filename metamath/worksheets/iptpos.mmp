@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=iptpos  LOC_AFTER=?
+
+* Lean's ` isPrimeTD_cost_pos ` : the trial-division primality test charges at least once (~ isprimetdval ).
+
+s1::isprimetdval |- ( M e. NN0 -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s2::simpr |- ( ( M e. NN0 /\ M < 2 ) -> M < 2 )
+s3:s1:adantr |- ( ( M e. NN0 /\ M < 2 ) -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s4:s2:iftrued |- ( ( M e. NN0 /\ M < 2 ) -> if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) = <. (/) , 1 >. )
+s5:s3,s4:eqtrd |- ( ( M e. NN0 /\ M < 2 ) -> ( IsPrimeTD ` M ) = <. (/) , 1 >. )
+s6::0ex |- (/) e. _V
+s7:s6:a1i |- ( ( M e. NN0 /\ M < 2 ) -> (/) e. _V )
+s8::1ex |- 1 e. _V
+s9:s8:a1i |- ( ( M e. NN0 /\ M < 2 ) -> 1 e. _V )
+s10:s5:fveq2d |- ( ( M e. NN0 /\ M < 2 ) -> ( 2nd ` ( IsPrimeTD ` M ) ) = ( 2nd ` <. (/) , 1 >. ) )
+i11::op2ndg
+s12:s7,s9,i11:syl2anc |- ( ( M e. NN0 /\ M < 2 ) -> ( 2nd ` <. (/) , 1 >. ) = 1 )
+s13:s10,s12:eqtrd |- ( ( M e. NN0 /\ M < 2 ) -> ( 2nd ` ( IsPrimeTD ` M ) ) = 1 )
+s14::1re |- 1 e. RR
+s15:s14:leidi |- 1 <_ 1
+s16:s15:a1i |- ( ( M e. NN0 /\ M < 2 ) -> 1 <_ 1 )
+s17:s13,s16:breqtrrd |- ( ( M e. NN0 /\ M < 2 ) -> 1 <_ ( 2nd ` ( IsPrimeTD ` M ) ) )
+s18::simpr |- ( ( M e. NN0 /\ -. M < 2 ) -> -. M < 2 )
+s19:s1:adantr |- ( ( M e. NN0 /\ -. M < 2 ) -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s20:s18:iffalsed |- ( ( M e. NN0 /\ -. M < 2 ) -> if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) = <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. )
+s21:s19,s20:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( IsPrimeTD ` M ) = <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. )
+s22::fvex |- ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) e. _V
+s23:s22:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) e. _V )
+s24::ovex |- ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) e. _V
+s25:s24:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) e. _V )
+s26:s21:fveq2d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2nd ` ( IsPrimeTD ` M ) ) = ( 2nd ` <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+i27::op2ndg
+s28:s23,s25,i27:syl2anc |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2nd ` <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) = ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) )
+s29:s26,s28:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2nd ` ( IsPrimeTD ` M ) ) = ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) )
+s30::simpl |- ( ( M e. NN0 /\ -. M < 2 ) -> M e. NN0 )
+s31::2nn0 |- 2 e. NN0
+s32:s31:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 e. NN0 )
+s33:s30,s32:jca |- ( ( M e. NN0 /\ -. M < 2 ) -> ( M e. NN0 /\ 2 e. NN0 ) )
+i34::primegocl
+s35:s33,s30,i34:syl2anc |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( M PrimeGo 2 ) ` M ) e. ( 2o X. NN0 ) )
+i36::xp2nd
+s37:s35,i36:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) e. NN0 )
+i38::nn0p1nn
+s39:s37,i38:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) e. NN )
+i40::nnge1
+s41:s39,i40:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> 1 <_ ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) )
+s42:s41,s29:breqtrrd |- ( ( M e. NN0 /\ -. M < 2 ) -> 1 <_ ( 2nd ` ( IsPrimeTD ` M ) ) )
+qed:s17,s42:pm2.61dan |- ( M e. NN0 -> 1 <_ ( 2nd ` ( IsPrimeTD ` M ) ) )
+$)

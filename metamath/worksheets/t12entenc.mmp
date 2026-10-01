@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=t12entenc  LOC_AFTER=?
+
+* The entries of the list ` W ` of numbers, each ` encodeNat p ` followed by a comma, are the flattened word of ~ df-encout (Lean: ` encodeOutput_eq ` , ` entries ( S.map encodeNat ) ` ).
+
+s1::id |- ( W e. Word NN0 -> W e. Word NN0 )
+s2::encnatgamf |- encNatGam : NN0 --> Word Gamma'
+i3::ffn
+s4:s2,i3:ax-mp |- encNatGam Fn NN0
+i5::dffn5
+s6:s4,i5:mpbi |- encNatGam = ( p e. NN0 |-> ( encNatGam ` p ) )
+s7:s6:a1i |- ( W e. Word NN0 -> encNatGam = ( p e. NN0 |-> ( encNatGam ` p ) ) )
+s8::eqidd |- ( W e. Word NN0 -> ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) = ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) )
+s9::simpr |- ( ( W e. Word NN0 /\ p e. NN0 ) -> p e. NN0 )
+i10::encnatgamval
+s11:s9,i10:syl |- ( ( W e. Word NN0 /\ p e. NN0 ) -> ( encNatGam ` p ) = ( inclBool o. ( encodeNat ` p ) ) )
+i12::encnatcl
+s13:s9,i12:syl |- ( ( W e. Word NN0 /\ p e. NN0 ) -> ( encodeNat ` p ) e. Word 2o )
+i14::tmcibw
+s15:s13,i14:syl |- ( ( W e. Word NN0 /\ p e. NN0 ) -> ( inclBool o. ( encodeNat ` p ) ) e. Word ( { 1 } X. 2o ) )
+s16:s11,s15:eqeltrd |- ( ( W e. Word NN0 /\ p e. NN0 ) -> ( encNatGam ` p ) e. Word ( { 1 } X. 2o ) )
+s17::oveq1 |- ( w = ( encNatGam ` p ) -> ( w ++ <" 4 "> ) = ( ( encNatGam ` p ) ++ <" 4 "> ) )
+s18:s16,s7,s8,s17:fmptco |- ( W e. Word NN0 -> ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) = ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) )
+s19::coass |- ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) o. W ) = ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. W ) )
+s20:s18:coeq1d |- ( W e. Word NN0 -> ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) o. W ) = ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. W ) )
+s21:s19:a1i |- ( W e. Word NN0 -> ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) o. W ) = ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. W ) ) )
+s22:s21,s20:eqtr3d |- ( W e. Word NN0 -> ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. W ) ) = ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. W ) )
+i23::tm2lencgam
+s24:s1,i23:syl |- ( W e. Word NN0 -> ( encNatGam o. W ) e. Word Word ( { 1 } X. 2o ) )
+i25::tm2lentval
+s26:s24,i25:syl |- ( W e. Word NN0 -> ( entries ` ( encNatGam o. W ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. W ) ) ) )
+s27:s22:oveq2d |- ( W e. Word NN0 -> ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. W ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. W ) ) )
+qed:s26,s27:eqtrd |- ( W e. Word NN0 -> ( entries ` ( encNatGam o. W ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. W ) ) )
+$)

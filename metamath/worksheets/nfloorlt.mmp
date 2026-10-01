@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=nfloorlt  LOC_AFTER=?
+
+* A real number is less than its natural floor plus one (Lean: Nat.lt_floor_add_one).
+
+s1::nfloorval |- ( X e. RR -> ( Nfloor ` X ) = if ( X < 0 , 0 , ( |_ ` X ) ) )
+s2::simpr |- ( ( X e. RR /\ X < 0 ) -> X < 0 )
+s3:s2:iftrued |- ( ( X e. RR /\ X < 0 ) -> if ( X < 0 , 0 , ( |_ ` X ) ) = 0 )
+s4::simpl |- ( ( X e. RR /\ X < 0 ) -> X e. RR )
+s5::0red |- ( ( X e. RR /\ X < 0 ) -> 0 e. RR )
+s6::1red |- ( ( X e. RR /\ X < 0 ) -> 1 e. RR )
+s7::0lt1 |- 0 < 1
+s8:s7:a1i |- ( ( X e. RR /\ X < 0 ) -> 0 < 1 )
+s9:s4,s5,s6,s2,s8:lttrd |- ( ( X e. RR /\ X < 0 ) -> X < 1 )
+s10::0p1e1 |- ( 0 + 1 ) = 1
+s11:s10:a1i |- ( ( X e. RR /\ X < 0 ) -> ( 0 + 1 ) = 1 )
+s12:s9,s11:breqtrrd |- ( ( X e. RR /\ X < 0 ) -> X < ( 0 + 1 ) )
+s13:s3:oveq1d |- ( ( X e. RR /\ X < 0 ) -> ( if ( X < 0 , 0 , ( |_ ` X ) ) + 1 ) = ( 0 + 1 ) )
+s14:s12,s13:breqtrrd |- ( ( X e. RR /\ X < 0 ) -> X < ( if ( X < 0 , 0 , ( |_ ` X ) ) + 1 ) )
+s15::simpr |- ( ( X e. RR /\ -. X < 0 ) -> -. X < 0 )
+s16:s15:iffalsed |- ( ( X e. RR /\ -. X < 0 ) -> if ( X < 0 , 0 , ( |_ ` X ) ) = ( |_ ` X ) )
+s17::simpl |- ( ( X e. RR /\ -. X < 0 ) -> X e. RR )
+i18::flltp1
+s19:s17,i18:syl |- ( ( X e. RR /\ -. X < 0 ) -> X < ( ( |_ ` X ) + 1 ) )
+s20:s16:oveq1d |- ( ( X e. RR /\ -. X < 0 ) -> ( if ( X < 0 , 0 , ( |_ ` X ) ) + 1 ) = ( ( |_ ` X ) + 1 ) )
+s21:s19,s20:breqtrrd |- ( ( X e. RR /\ -. X < 0 ) -> X < ( if ( X < 0 , 0 , ( |_ ` X ) ) + 1 ) )
+s22:s14,s21:pm2.61dan |- ( X e. RR -> X < ( if ( X < 0 , 0 , ( |_ ` X ) ) + 1 ) )
+s23:s1:oveq1d |- ( X e. RR -> ( ( Nfloor ` X ) + 1 ) = ( if ( X < 0 , 0 , ( |_ ` X ) ) + 1 ) )
+qed:s22,s23:breqtrrd |- ( X e. RR -> X < ( ( Nfloor ` X ) + 1 ) )
+$)

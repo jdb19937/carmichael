@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=okproj  LOC_AFTER=?
+
+* The three projections of a successful search result (Lean: the some (m, S) pattern).
+
+s1::simpl |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( M e. _V /\ S e. _V /\ K e. _V ) )
+s2:s1:simp1d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> M e. _V )
+s3::simpl |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( M e. _V /\ S e. _V /\ K e. _V ) )
+s4:s3:simp2d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> S e. _V )
+s5::simpl |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( M e. _V /\ S e. _V /\ K e. _V ) )
+s6:s5:simp3d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> K e. _V )
+s7::simpr |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> D = <. ( inl ` <. M , S >. ) , K >. )
+s8::opex |- <. M , S >. e. _V
+s9:s8:a1i |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> <. M , S >. e. _V )
+s10::fvex |- ( inl ` <. M , S >. ) e. _V
+s11:s10:a1i |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( inl ` <. M , S >. ) e. _V )
+s12:s7:fveq2d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 1st ` D ) = ( 1st ` <. ( inl ` <. M , S >. ) , K >. ) )
+i13::op1stg
+s14:s11,s6,i13:syl2anc |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 1st ` <. ( inl ` <. M , S >. ) , K >. ) = ( inl ` <. M , S >. ) )
+s15:s12,s14:eqtrd |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 1st ` D ) = ( inl ` <. M , S >. ) )
+s16::0ex |- (/) e. _V
+i17::inlneinr
+s18:s9,s16,i17:sylancl |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( inl ` <. M , S >. ) =/= ( inr ` (/) ) )
+s19:s15,s18:eqnetrd |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 1st ` D ) =/= ( inr ` (/) ) )
+s20:s15:fveq2d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` ( 1st ` D ) ) = ( 2nd ` ( inl ` <. M , S >. ) ) )
+i21::inlval
+s22:s9,i21:syl |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( inl ` <. M , S >. ) = <. (/) , <. M , S >. >. )
+s23:s22:fveq2d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` ( inl ` <. M , S >. ) ) = ( 2nd ` <. (/) , <. M , S >. >. ) )
+s24::0ex |- (/) e. _V
+s25:s24:a1i |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> (/) e. _V )
+i26::op2ndg
+s27:s25,s9,i26:syl2anc |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` <. (/) , <. M , S >. >. ) = <. M , S >. )
+s28:s20,s23:eqtrd |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` ( 1st ` D ) ) = ( 2nd ` <. (/) , <. M , S >. >. ) )
+s29:s28,s27:eqtrd |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` ( 1st ` D ) ) = <. M , S >. )
+s30:s29:fveq2d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 1st ` ( 2nd ` ( 1st ` D ) ) ) = ( 1st ` <. M , S >. ) )
+i31::op1stg
+s32:s2,s4,i31:syl2anc |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 1st ` <. M , S >. ) = M )
+s33:s30,s32:eqtrd |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 1st ` ( 2nd ` ( 1st ` D ) ) ) = M )
+s34:s29:fveq2d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` ( 2nd ` ( 1st ` D ) ) ) = ( 2nd ` <. M , S >. ) )
+i35::op2ndg
+s36:s2,s4,i35:syl2anc |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` <. M , S >. ) = S )
+s37:s34,s36:eqtrd |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` ( 2nd ` ( 1st ` D ) ) ) = S )
+s38:s7:fveq2d |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` D ) = ( 2nd ` <. ( inl ` <. M , S >. ) , K >. ) )
+i39::op2ndg
+s40:s11,s6,i39:syl2anc |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` <. ( inl ` <. M , S >. ) , K >. ) = K )
+s41:s38,s40:eqtrd |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( 2nd ` D ) = K )
+s42:s33,s37:jca |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( ( 1st ` ( 2nd ` ( 1st ` D ) ) ) = M /\ ( 2nd ` ( 2nd ` ( 1st ` D ) ) ) = S ) )
+qed:s19,s42,s41:3jca |- ( ( ( M e. _V /\ S e. _V /\ K e. _V ) /\ D = <. ( inl ` <. M , S >. ) , K >. ) -> ( ( 1st ` D ) =/= ( inr ` (/) ) /\ ( ( 1st ` ( 2nd ` ( 1st ` D ) ) ) = M /\ ( 2nd ` ( 2nd ` ( 1st ` D ) ) ) = S ) /\ ( 2nd ` D ) = K ) )
+$)

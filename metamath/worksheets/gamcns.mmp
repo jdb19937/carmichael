@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=gamcns  LOC_AFTER=?
+
+* The Gamma function is continuous on a subset of the open right half-plane inside lgamgulm's disc: ` exp o. log_G ` ( ~ eflgam , ~ lgamcns ).
+
+h1::gamcns.r |- ( ph -> R e. NN )
+h2::gamcns.u |- U = { b e. CC | ( ( abs ` b ) <_ R /\ A. l e. NN0 ( 1 / R ) <_ ( abs ` ( b + l ) ) ) }
+h3::gamcns.s |- ( ph -> S C_ U )
+h4::gamcns.h |- ( ph -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s1::efcn |- exp e. ( CC -cn-> CC )
+s2:s1:a1i |- ( ph -> exp e. ( CC -cn-> CC ) )
+s3:1,2,3,4:lgamcns |- ( ph -> ( z e. S |-> ( log_G ` z ) ) e. ( S -cn-> CC ) )
+s4:s2,s3:cncfmpt1f |- ( ph -> ( z e. S |-> ( exp ` ( log_G ` z ) ) ) e. ( S -cn-> CC ) )
+s5:4:adantr |- ( ( ph /\ z e. S ) -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s6::simpr |- ( ( ph /\ z e. S ) -> z e. S )
+s7:s5,s6:sseldd |- ( ( ph /\ z e. S ) -> z e. ( `' Re " ( 0 (,) +oo ) ) )
+s8::0re |- 0 e. RR
+i9::elhp2
+s10:s8,i9:ax-mp |- ( z e. ( `' Re " ( 0 (,) +oo ) ) <-> ( z e. CC /\ 0 < ( Re ` z ) ) )
+s11:s10:a1i |- ( ( ph /\ z e. S ) -> ( z e. ( `' Re " ( 0 (,) +oo ) ) <-> ( z e. CC /\ 0 < ( Re ` z ) ) ) )
+s12:s7,s11:mpbid |- ( ( ph /\ z e. S ) -> ( z e. CC /\ 0 < ( Re ` z ) ) )
+i13::simpl
+s14:s12,i13:syl |- ( ( ph /\ z e. S ) -> z e. CC )
+i15::simpr
+s16:s12,i15:syl |- ( ( ph /\ z e. S ) -> 0 < ( Re ` z ) )
+i17::zrenn
+s18:s12,i17:syl |- ( ( ph /\ z e. S ) -> z e. ( CC \ ( ZZ \ NN ) ) )
+i19::hp0logdm
+s20:s7,i19:syl |- ( ( ph /\ z e. S ) -> z e. ( CC \ ( -oo (,] 0 ) ) )
+s21::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s22:s21:logdmn0 |- ( z e. ( CC \ ( -oo (,] 0 ) ) -> z =/= 0 )
+s23:s20,s22:syl |- ( ( ph /\ z e. S ) -> z =/= 0 )
+i24::eflgam
+s25:s18,i24:syl |- ( ( ph /\ z e. S ) -> ( exp ` ( log_G ` z ) ) = ( _G ` z ) )
+s26:s25:mpteq2dva |- ( ph -> ( z e. S |-> ( exp ` ( log_G ` z ) ) ) = ( z e. S |-> ( _G ` z ) ) )
+qed:s26,s4:eqeltrrd |- ( ph -> ( z e. S |-> ( _G ` z ) ) e. ( S -cn-> CC ) )
+$)

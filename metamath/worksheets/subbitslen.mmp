@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=subbitslen  LOC_AFTER=?
+
+* The difference word has the length of the longer operand (Lean: subBits_length).
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> C e. 2o )
+s4::subbitsval |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBits Y ) ` C ) = ( ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+s5:s4:fveq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( X subBits Y ) ` C ) ) = ( # ` ( ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) )
+i6::tonatcl
+s7:s1,i6:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` X ) e. NN0 )
+s8:s7:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` X ) e. ZZ )
+i9::tonatcl
+s10:s2,i9:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` Y ) e. NN0 )
+s11:s10:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` Y ) e. ZZ )
+i12::bwbncl
+s13:s3,i12:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` C ) e. NN0 )
+s14:s13:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` C ) e. ZZ )
+s15:s11,s14:zaddcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( toNat ` Y ) + ( bToNat ` C ) ) e. ZZ )
+s16:s8,s15:zsubcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) e. ZZ )
+i17::lencl
+s18:s2,i17:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` Y ) e. NN0 )
+i19::lencl
+s20:s1,i19:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` X ) e. NN0 )
+s21:s18,s20:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) e. NN0 )
+i22::bwrdlen
+s23:s16,s21,i22:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+qed:s5,s23:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( X subBits Y ) ` C ) ) = if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+$)

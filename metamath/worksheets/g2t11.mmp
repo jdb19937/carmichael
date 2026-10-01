@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=g2t11  LOC_AFTER=?
+
+* The external-closure escape of tools/fsum.py: the caller records the closure of ` ( F ` k ) ` on the child closure, which the module then uses for ` fsumadd ` .
+
+s1::simpl |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> F : ( 1 ... N ) --> CC )
+s3::simpr |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i4::elfznn
+s5:s3,i4:syl |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s6:s2:adantr |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ k e. ( 1 ... N ) ) -> F : ( 1 ... N ) --> CC )
+s7::simpr |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i8::ffvelcdm
+s9:s6,s7,i8:syl2anc |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ k e. ( 1 ... N ) ) -> ( F ` k ) e. CC )
+s10::fzfid |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> ( 1 ... N ) e. Fin )
+s11::ax-1cn |- 1 e. CC
+s12:s11:a1i |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ k e. ( 1 ... N ) ) -> 1 e. CC )
+qed:s10,s9,s12:fsumadd |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> sum_ k e. ( 1 ... N ) ( ( F ` k ) + 1 ) = ( sum_ k e. ( 1 ... N ) ( F ` k ) + sum_ k e. ( 1 ... N ) 1 ) )
+$)

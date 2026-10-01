@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=gtest17  LOC_AFTER=?
+
+* finite-sum test: fsummulc2, a constant factor moved into the sum.
+
+s1::simpl |- ( ( N e. NN /\ C e. CC ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ C e. CC ) -> C e. CC )
+s3::fzfid |- ( ( N e. NN /\ C e. CC ) -> ( 1 ... N ) e. Fin )
+s4::simpr |- ( ( ( N e. NN /\ C e. CC ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i5::elfznn
+s6:s4,i5:syl |- ( ( ( N e. NN /\ C e. CC ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s7:s6:nnrpd |- ( ( ( N e. NN /\ C e. CC ) /\ k e. ( 1 ... N ) ) -> k e. RR+ )
+s8:s7:rpred |- ( ( ( N e. NN /\ C e. CC ) /\ k e. ( 1 ... N ) ) -> k e. RR )
+s9:s8:recnd |- ( ( ( N e. NN /\ C e. CC ) /\ k e. ( 1 ... N ) ) -> k e. CC )
+qed:s3,s2,s9:fsummulc2 |- ( ( N e. NN /\ C e. CC ) -> ( C x. sum_ k e. ( 1 ... N ) k ) = sum_ k e. ( 1 ... N ) ( C x. k ) )
+$)

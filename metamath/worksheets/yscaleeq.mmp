@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=yscaleeq  LOC_AFTER=?
+
+* yscale is yscaleE at E = 1 / 3 (Lean: yscale_eq_yscaleE; the paper's instance).
+
+s1::simpl |- ( ( C e. RR /\ N e. NN0 ) -> C e. RR )
+s2::simpr |- ( ( C e. RR /\ N e. NN0 ) -> N e. NN0 )
+s3::yscaleval |- ( ( C e. RR /\ N e. NN0 ) -> ( C yscale N ) = ( Nceil ` ( ( C zscale N ) ^c ( 2 / 3 ) ) ) )
+s4::1re |- 1 e. RR
+s5::3re |- 3 e. RR
+s6::3ne0 |- 3 =/= 0
+s7:s4,s5,s6:redivcli |- ( 1 / 3 ) e. RR
+s8:s7:a1i |- ( ( C e. RR /\ N e. NN0 ) -> ( 1 / 3 ) e. RR )
+i9::yscaleeval
+s10:s1,s2,s8,i9:syl3anc |- ( ( C e. RR /\ N e. NN0 ) -> ( ( C yscaleE N ) ` ( 1 / 3 ) ) = ( Nceil ` ( ( C zscale N ) ^c ( 1 - ( 1 / 3 ) ) ) ) )
+s11::3cn |- 3 e. CC
+i12::divid
+s13:s11,s6,i12:mp2an |- ( 3 / 3 ) = 1
+s14:s13:eqcomi |- 1 = ( 3 / 3 )
+s15:s14:oveq1i |- ( 1 - ( 1 / 3 ) ) = ( ( 3 / 3 ) - ( 1 / 3 ) )
+s16::ax-1cn |- 1 e. CC
+s17:s11,s6:pm3.2i |- ( 3 e. CC /\ 3 =/= 0 )
+i18::divsubdir
+s19:s11,s16,s17,i18:mp3an |- ( ( 3 - 1 ) / 3 ) = ( ( 3 / 3 ) - ( 1 / 3 ) )
+s20::3m1e2 |- ( 3 - 1 ) = 2
+s21:s20:oveq1i |- ( ( 3 - 1 ) / 3 ) = ( 2 / 3 )
+s22:s19,s21:eqtr3i |- ( ( 3 / 3 ) - ( 1 / 3 ) ) = ( 2 / 3 )
+s23:s15,s22:eqtri |- ( 1 - ( 1 / 3 ) ) = ( 2 / 3 )
+s24:s23:oveq2i |- ( ( C zscale N ) ^c ( 1 - ( 1 / 3 ) ) ) = ( ( C zscale N ) ^c ( 2 / 3 ) )
+s25:s24:fveq2i |- ( Nceil ` ( ( C zscale N ) ^c ( 1 - ( 1 / 3 ) ) ) ) = ( Nceil ` ( ( C zscale N ) ^c ( 2 / 3 ) ) )
+s26:s25:a1i |- ( ( C e. RR /\ N e. NN0 ) -> ( Nceil ` ( ( C zscale N ) ^c ( 1 - ( 1 / 3 ) ) ) ) = ( Nceil ` ( ( C zscale N ) ^c ( 2 / 3 ) ) ) )
+s27:s10,s26:eqtrd |- ( ( C e. RR /\ N e. NN0 ) -> ( ( C yscaleE N ) ` ( 1 / 3 ) ) = ( Nceil ` ( ( C zscale N ) ^c ( 2 / 3 ) ) ) )
+qed:s3,s27:eqtr4d |- ( ( C e. RR /\ N e. NN0 ) -> ( C yscale N ) = ( ( C yscaleE N ) ` ( 1 / 3 ) ) )
+$)

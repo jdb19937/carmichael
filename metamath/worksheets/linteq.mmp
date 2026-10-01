@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=linteq  LOC_AFTER=?
+
+* The line integral along a segment depends only on the values of the function on it.
+
+s1::simplll |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> A e. CC )
+s2::simpllr |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> B e. CC )
+s3::simplrl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> F e. V )
+s4::simplrr |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> G e. V )
+s5::simpr |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) )
+i6::lintval
+s7:s3,s1,s2,i6:syl3anc |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> ( F lint <. A , B >. ) = S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+i8::lintval
+s9:s4,s1,s2,i8:syl3anc |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> ( G lint <. A , B >. ) = S. ( 0 (,) 1 ) ( ( G ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+s10::simpr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> t e. ( 0 (,) 1 ) )
+s11::ioossicc |- ( 0 (,) 1 ) C_ ( 0 [,] 1 )
+s12:s11:a1i |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> ( 0 (,) 1 ) C_ ( 0 [,] 1 ) )
+s13:s12,s10:sseldd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> t e. ( 0 [,] 1 ) )
+s14:s1:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> A e. CC )
+s15:s2:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> B e. CC )
+i16::cseglin
+s17:s14,s15,s13,i16:syl3anc |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> ( A + ( t x. ( B - A ) ) ) e. ( A cseg B ) )
+s18::fveq2 |- ( z = ( A + ( t x. ( B - A ) ) ) -> ( F ` z ) = ( F ` ( A + ( t x. ( B - A ) ) ) ) )
+s19::fveq2 |- ( z = ( A + ( t x. ( B - A ) ) ) -> ( G ` z ) = ( G ` ( A + ( t x. ( B - A ) ) ) ) )
+s20:s18,s19:eqeq12d |- ( z = ( A + ( t x. ( B - A ) ) ) -> ( ( F ` z ) = ( G ` z ) <-> ( F ` ( A + ( t x. ( B - A ) ) ) ) = ( G ` ( A + ( t x. ( B - A ) ) ) ) ) )
+s21:s5:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) )
+s22:s20,s21,s17:rspcdva |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> ( F ` ( A + ( t x. ( B - A ) ) ) ) = ( G ` ( A + ( t x. ( B - A ) ) ) ) )
+s23:s22:oveq1d |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) /\ t e. ( 0 (,) 1 ) ) -> ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) = ( ( G ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) )
+s24:s23:itgeq2dv |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t = S. ( 0 (,) 1 ) ( ( G ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+s25:s7,s24:eqtrd |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> ( F lint <. A , B >. ) = S. ( 0 (,) 1 ) ( ( G ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+qed:s25,s9:eqtr4d |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. V /\ G e. V ) ) /\ A. z e. ( A cseg B ) ( F ` z ) = ( G ` z ) ) -> ( F lint <. A , B >. ) = ( G lint <. A , B >. ) )
+$)

@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=progsh  LOC_AFTER=?
+
+* The progression sieve satisfies the hypothesis of the fundamental theorem of the Selberg sieve.
+
+s1::simp1 |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M e. ( ZZ>= ` 2 ) )
+i2::eluz2nn
+s3:s1,i2:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M e. NN )
+s4::simp2 |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> Z e. NN )
+s5::simp3 |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> N e. NN0 )
+s6::fzfid |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( 1 ... N ) e. Fin )
+s7::ssrab2 |- { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } C_ ( 1 ... N )
+s8:s7:a1i |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } C_ ( 1 ... N ) )
+s9:s6,s8:ssfid |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } e. Fin )
+s10::fz1ssnn |- ( 1 ... N ) C_ NN
+s11:s10:a1i |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( 1 ... N ) C_ NN )
+s12:s8,s11:sstrd |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } C_ NN )
+s13::1red |- ( ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) /\ c e. NN ) -> 1 e. RR )
+s14::eqid |- ( c e. NN |-> 1 ) = ( c e. NN |-> 1 )
+s15:s13,s14:fmptd |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( c e. NN |-> 1 ) : NN --> RR )
+s16:s9,s12,s15:3jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } e. Fin /\ { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } C_ NN /\ ( c e. NN |-> 1 ) : NN --> RR ) )
+s17::eqidd |- ( c = k -> 1 = 1 )
+s18::eqid |- ( c e. NN |-> 1 ) = ( c e. NN |-> 1 )
+s19:s17,s18:fvmptg |- ( ( k e. NN /\ 1 e. _V ) -> ( ( c e. NN |-> 1 ) ` k ) = 1 )
+s20::1ex |- 1 e. _V
+s21::id |- ( k e. NN -> k e. NN )
+s22:s20:a1i |- ( k e. NN -> 1 e. _V )
+s23:s21,s22,s19:syl2anc |- ( k e. NN -> ( ( c e. NN |-> 1 ) ` k ) = 1 )
+s24::0le1 |- 0 <_ 1
+s25:s24:a1i |- ( k e. NN -> 0 <_ 1 )
+s26:s25,s23:breqtrrd |- ( k e. NN -> 0 <_ ( ( c e. NN |-> 1 ) ` k ) )
+s27:s26:rgen |- A. k e. NN 0 <_ ( ( c e. NN |-> 1 ) ` k )
+s28:s27:a1i |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> A. k e. NN 0 <_ ( ( c e. NN |-> 1 ) ` k ) )
+s29:s5:nn0red |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> N e. RR )
+s30:s3:nnred |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M e. RR )
+s31:s3:nnne0d |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M =/= 0 )
+s32:s29,s30,s31:redivcld |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( N / M ) e. RR )
+s33:s4:nnred |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> Z e. RR )
+s34::2nn0 |- 2 e. NN0
+s35:s34:a1i |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> 2 e. NN0 )
+s36:s33,s35:reexpcld |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( Z ^ 2 ) e. RR )
+s37:s4:nnge1d |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> 1 <_ Z )
+i38::expge1
+s39:s33,s35,s37,i38:syl3anc |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> 1 <_ ( Z ^ 2 ) )
+s40:s36,s39:jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( Z ^ 2 ) e. RR /\ 1 <_ ( Z ^ 2 ) ) )
+s41:s28,s32,s40:3jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( A. k e. NN 0 <_ ( ( c e. NN |-> 1 ) ` k ) /\ ( N / M ) e. RR /\ ( ( Z ^ 2 ) e. RR /\ 1 <_ ( Z ^ 2 ) ) ) )
+s42::progpnn |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p e. NN /\ ( mmu ` prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p ) =/= 0 ) /\ { q e. Prime | q || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p } = { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } ) )
+s43:s42:simpld |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p e. NN /\ ( mmu ` prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p ) =/= 0 ) )
+s44::progvcl |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) : NN --> RR )
+s45::progv1 |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` 1 ) = 1 )
+s46::progvmul |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` ( a x. b ) ) = ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` a ) x. ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` b ) ) ) )
+s47::progvprm |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> A. s e. Prime ( s || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p -> ( 0 < ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) < 1 ) ) )
+s48:s46,s47:jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` ( a x. b ) ) = ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` a ) x. ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` b ) ) ) /\ A. s e. Prime ( s || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p -> ( 0 < ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) < 1 ) ) ) )
+s49:s44,s45,s48:3jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) : NN --> RR /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` 1 ) = 1 /\ ( A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` ( a x. b ) ) = ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` a ) x. ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` b ) ) ) /\ A. s e. Prime ( s || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p -> ( 0 < ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) < 1 ) ) ) ) )
+s50:s16,s41:jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } e. Fin /\ { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } C_ NN /\ ( c e. NN |-> 1 ) : NN --> RR ) /\ ( A. k e. NN 0 <_ ( ( c e. NN |-> 1 ) ` k ) /\ ( N / M ) e. RR /\ ( ( Z ^ 2 ) e. RR /\ 1 <_ ( Z ^ 2 ) ) ) ) )
+s51:s43,s49:jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p e. NN /\ ( mmu ` prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p ) =/= 0 ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) : NN --> RR /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` 1 ) = 1 /\ ( A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` ( a x. b ) ) = ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` a ) x. ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` b ) ) ) /\ A. s e. Prime ( s || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p -> ( 0 < ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) < 1 ) ) ) ) ) )
+qed:s50,s51:jca |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( ( { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } e. Fin /\ { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } C_ NN /\ ( c e. NN |-> 1 ) : NN --> RR ) /\ ( A. k e. NN 0 <_ ( ( c e. NN |-> 1 ) ` k ) /\ ( N / M ) e. RR /\ ( ( Z ^ 2 ) e. RR /\ 1 <_ ( Z ^ 2 ) ) ) ) /\ ( ( prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p e. NN /\ ( mmu ` prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p ) =/= 0 ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) : NN --> RR /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` 1 ) = 1 /\ ( A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` ( a x. b ) ) = ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` a ) x. ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` b ) ) ) /\ A. s e. Prime ( s || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p -> ( 0 < ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) < 1 ) ) ) ) ) ) )
+$)

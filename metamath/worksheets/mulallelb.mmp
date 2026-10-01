@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=mulallelb  LOC_AFTER=?
+
+* Base of the induction for mulallel.
+
+s1::simpl |- ( ( Q e. NN0 /\ X e. NN0 ) -> Q e. NN0 )
+i2::mulall0
+s3:s1,i2:syl |- ( ( Q e. NN0 /\ X e. NN0 ) -> ( Q MulAll (/) ) = <. (/) , 0 >. )
+s4::0ex |- (/) e. _V
+s5:s4:a1i |- ( ( Q e. NN0 /\ X e. NN0 ) -> (/) e. _V )
+s6::c0ex |- 0 e. _V
+s7:s6:a1i |- ( ( Q e. NN0 /\ X e. NN0 ) -> 0 e. _V )
+s8:s3:fveq2d |- ( ( Q e. NN0 /\ X e. NN0 ) -> ( 1st ` ( Q MulAll (/) ) ) = ( 1st ` <. (/) , 0 >. ) )
+i9::op1stg
+s10:s5,s7,i9:syl2anc |- ( ( Q e. NN0 /\ X e. NN0 ) -> ( 1st ` <. (/) , 0 >. ) = (/) )
+s11:s8,s10:eqtrd |- ( ( Q e. NN0 /\ X e. NN0 ) -> ( 1st ` ( Q MulAll (/) ) ) = (/) )
+s12:s11:rneqd |- ( ( Q e. NN0 /\ X e. NN0 ) -> ran ( 1st ` ( Q MulAll (/) ) ) = ran (/) )
+s13::rn0 |- ran (/) = (/)
+s14:s13:a1i |- ( ( Q e. NN0 /\ X e. NN0 ) -> ran (/) = (/) )
+s15:s12,s14:eqtrd |- ( ( Q e. NN0 /\ X e. NN0 ) -> ran ( 1st ` ( Q MulAll (/) ) ) = (/) )
+s16:s15:eleq2d |- ( ( Q e. NN0 /\ X e. NN0 ) -> ( X e. ran ( 1st ` ( Q MulAll (/) ) ) <-> X e. (/) ) )
+s17::noel |- -. X e. (/)
+s18:s17:a1i |- ( ( Q e. NN0 /\ X e. NN0 ) -> -. X e. (/) )
+s19:s16,s18:mtbird |- ( ( Q e. NN0 /\ X e. NN0 ) -> -. X e. ran ( 1st ` ( Q MulAll (/) ) ) )
+s20::rn0 |- ran (/) = (/)
+s21:s20:a1i |- ( ( Q e. NN0 /\ X e. NN0 ) -> ran (/) = (/) )
+s22:s21:rexeqdv |- ( ( Q e. NN0 /\ X e. NN0 ) -> ( E. d e. ran (/) X = ( d x. Q ) <-> E. d e. (/) X = ( d x. Q ) ) )
+s23::rex0 |- -. E. d e. (/) X = ( d x. Q )
+s24:s23:a1i |- ( ( Q e. NN0 /\ X e. NN0 ) -> -. E. d e. (/) X = ( d x. Q ) )
+s25:s22,s24:mtbird |- ( ( Q e. NN0 /\ X e. NN0 ) -> -. E. d e. ran (/) X = ( d x. Q ) )
+qed:s19,s25:2falsed |- ( ( Q e. NN0 /\ X e. NN0 ) -> ( X e. ran ( 1st ` ( Q MulAll (/) ) ) <-> E. d e. ran (/) X = ( d x. Q ) ) )
+$)

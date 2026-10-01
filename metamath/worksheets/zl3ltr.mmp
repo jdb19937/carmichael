@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3ltr  LOC_AFTER=?
+
+* Translation of the integrand of a segment integral is translation of the segment.
+
+s1::simpl1 |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> P e. CC )
+s2::simpl2 |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> Q e. CC )
+s3::simpl3 |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> S e. CC )
+s4::simpr |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> G : CC --> CC )
+s5::cnex |- CC e. _V
+s6:s5:a1i |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> CC e. _V )
+i7::fex
+s8:s4,s6,i7:syl2anc |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> G e. _V )
+s9:s1,s3:addcld |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> ( P + S ) e. CC )
+s10:s2,s3:addcld |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> ( Q + S ) e. CC )
+s11::mptex |- ( y e. CC |-> ( G ` ( y + S ) ) ) e. _V
+s12:s11:a1i |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> ( y e. CC |-> ( G ` ( y + S ) ) ) e. _V )
+i13::lintval
+s14:s12,s1,s2,i13:syl3anc |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> ( ( y e. CC |-> ( G ` ( y + S ) ) ) lint <. P , Q >. ) = S. ( 0 (,) 1 ) ( ( ( y e. CC |-> ( G ` ( y + S ) ) ) ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) _d t )
+i15::lintval
+s16:s8,s9,s10,i15:syl3anc |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> ( G lint <. ( P + S ) , ( Q + S ) >. ) = S. ( 0 (,) 1 ) ( ( G ` ( ( P + S ) + ( t x. ( ( Q + S ) - ( P + S ) ) ) ) ) x. ( ( Q + S ) - ( P + S ) ) ) _d t )
+s17::simpr |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> t e. ( 0 (,) 1 ) )
+i18::elioore
+s19:s17,i18:syl |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> t e. RR )
+s20:s19:recnd |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> t e. CC )
+s21:s1:adantr |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> P e. CC )
+s22:s2:adantr |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> Q e. CC )
+s23:s3:adantr |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> S e. CC )
+s24:s22,s21:subcld |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( Q - P ) e. CC )
+s25:s20,s24:mulcld |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( t x. ( Q - P ) ) e. CC )
+s26:s21,s25:addcld |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) e. CC )
+s27:s26,s23:addcld |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( P + ( t x. ( Q - P ) ) ) + S ) e. CC )
+s28::id |- ( y = ( P + ( t x. ( Q - P ) ) ) -> y = ( P + ( t x. ( Q - P ) ) ) )
+s29:s28:oveq1d |- ( y = ( P + ( t x. ( Q - P ) ) ) -> ( y + S ) = ( ( P + ( t x. ( Q - P ) ) ) + S ) )
+s30:s29:fveq2d |- ( y = ( P + ( t x. ( Q - P ) ) ) -> ( G ` ( y + S ) ) = ( G ` ( ( P + ( t x. ( Q - P ) ) ) + S ) ) )
+s31::eqid |- ( y e. CC |-> ( G ` ( y + S ) ) ) = ( y e. CC |-> ( G ` ( y + S ) ) )
+s32::fvex |- ( G ` ( ( P + ( t x. ( Q - P ) ) ) + S ) ) e. _V
+s33:s30,s31,s32:fvmpt |- ( ( P + ( t x. ( Q - P ) ) ) e. CC -> ( ( y e. CC |-> ( G ` ( y + S ) ) ) ` ( P + ( t x. ( Q - P ) ) ) ) = ( G ` ( ( P + ( t x. ( Q - P ) ) ) + S ) ) )
+s34:s26,s33:syl |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( y e. CC |-> ( G ` ( y + S ) ) ) ` ( P + ( t x. ( Q - P ) ) ) ) = ( G ` ( ( P + ( t x. ( Q - P ) ) ) + S ) ) )
+s35:s22,s21,s23:pnpcan2d |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( Q + S ) - ( P + S ) ) = ( Q - P ) )
+s36:s35:oveq2d |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( t x. ( ( Q + S ) - ( P + S ) ) ) = ( t x. ( Q - P ) ) )
+s37:s36:oveq2d |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( P + S ) + ( t x. ( ( Q + S ) - ( P + S ) ) ) ) = ( ( P + S ) + ( t x. ( Q - P ) ) ) )
+s38:s21,s23,s25:add32d |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( P + S ) + ( t x. ( Q - P ) ) ) = ( ( P + ( t x. ( Q - P ) ) ) + S ) )
+s39:s37,s38:eqtrd |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( P + S ) + ( t x. ( ( Q + S ) - ( P + S ) ) ) ) = ( ( P + ( t x. ( Q - P ) ) ) + S ) )
+s40:s39:fveq2d |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( G ` ( ( P + S ) + ( t x. ( ( Q + S ) - ( P + S ) ) ) ) ) = ( G ` ( ( P + ( t x. ( Q - P ) ) ) + S ) ) )
+s41:s34,s40:eqtr4d |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( y e. CC |-> ( G ` ( y + S ) ) ) ` ( P + ( t x. ( Q - P ) ) ) ) = ( G ` ( ( P + S ) + ( t x. ( ( Q + S ) - ( P + S ) ) ) ) ) )
+s42:s35:eqcomd |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( Q - P ) = ( ( Q + S ) - ( P + S ) ) )
+s43:s41,s42:oveq12d |- ( ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( ( y e. CC |-> ( G ` ( y + S ) ) ) ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) = ( ( G ` ( ( P + S ) + ( t x. ( ( Q + S ) - ( P + S ) ) ) ) ) x. ( ( Q + S ) - ( P + S ) ) ) )
+s44:s43:itgeq2dv |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> S. ( 0 (,) 1 ) ( ( ( y e. CC |-> ( G ` ( y + S ) ) ) ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) _d t = S. ( 0 (,) 1 ) ( ( G ` ( ( P + S ) + ( t x. ( ( Q + S ) - ( P + S ) ) ) ) ) x. ( ( Q + S ) - ( P + S ) ) ) _d t )
+s45:s44,s16:eqtr4d |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> S. ( 0 (,) 1 ) ( ( ( y e. CC |-> ( G ` ( y + S ) ) ) ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) _d t = ( G lint <. ( P + S ) , ( Q + S ) >. ) )
+qed:s14,s45:eqtrd |- ( ( ( P e. CC /\ Q e. CC /\ S e. CC ) /\ G : CC --> CC ) -> ( ( y e. CC |-> ( G ` ( y + S ) ) ) lint <. P , Q >. ) = ( G lint <. ( P + S ) , ( Q + S ) >. ) )
+$)

@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2load  LOC_AFTER=?
+
+* load f q is a statement when q is.
+
+s1::simp1 |- ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) -> T e. V )
+s2::simp3 |- ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) -> Q e. ( TM2Stmt ` T ) )
+i3::tm2stmtel
+s4:s1,i3:syl |- ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) -> ( Q e. ( TM2Stmt ` T ) <-> E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s5:s2,s4:mpbid |- ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) -> E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) )
+s6:s1:adantr |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> T e. V )
+s7::simprl |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> n e. _om )
+s8::simprr |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) )
+s9::fvex |- ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) e. _V
+s10:s9:a1i |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) e. _V )
+s11:s6,s10:jca |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> ( T e. V /\ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) e. _V ) )
+s12::simpl2 |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) )
+s13:s12,s8:jca |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+i14::tm2layload
+s15:s11,s13,i14:syl2anc |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> <. 3 , <. F , Q >. >. e. ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+i16::tm2laysuc
+s17:s7,i16:syl |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc n ) = ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s18:s15,s17:eleqtrrd |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> <. 3 , <. F , Q >. >. e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc n ) )
+i19::peano2
+s20:s7,i19:syl |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> suc n e. _om )
+i21::tm2layssstmt
+s22:s6,s20,i21:syl2anc |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc n ) C_ ( TM2Stmt ` T ) )
+s23:s22,s18:sseldd |- ( ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> <. 3 , <. F , Q >. >. e. ( TM2Stmt ` T ) )
+qed:s5,s23:rexlimddv |- ( ( T e. V /\ F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) -> <. 3 , <. F , Q >. >. e. ( TM2Stmt ` T ) )
+$)

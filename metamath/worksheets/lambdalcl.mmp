@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=lambdalcl  LOC_AFTER=?
+
+* Closure of lambdaL: a positive integer when Q is a finite set of primes.
+
+s1::id |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P Prime i^i Fin ) )
+i2::elfpw
+s3:s1,i2:sylib |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s4:s3:simpld |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ Prime )
+s5:s3:simprd |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. Fin )
+s6::prmssnn |- Prime C_ NN
+s7::nnssnn0 |- NN C_ NN0
+s8:s6,s7:sstri |- Prime C_ NN0
+s9:s8:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ NN0 )
+s10:s4,s9:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ NN0 )
+s11:s10,s5:jca |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i12::elfpw
+s13:s11,i12:sylibr |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P NN0 i^i Fin ) )
+i14::lambdalval
+s15:s13,i14:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( lambdaL ` Q ) = ( _lcm ` ran ( q e. Q |-> ( q - 1 ) ) ) )
+s16:s4:adantr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> Q C_ Prime )
+s17::simpr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. Q )
+s18:s16,s17:sseldd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. Prime )
+i19::prmuz2
+s20:s18,i19:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. ( ZZ>= ` 2 ) )
+i21::uz2m1nn
+s22:s20,i21:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> ( q - 1 ) e. NN )
+s23:s22:ralrimiva |- ( Q e. ( ~P Prime i^i Fin ) -> A. q e. Q ( q - 1 ) e. NN )
+s24::eqid |- ( q e. Q |-> ( q - 1 ) ) = ( q e. Q |-> ( q - 1 ) )
+s25:s24:rnmptss |- ( A. q e. Q ( q - 1 ) e. NN -> ran ( q e. Q |-> ( q - 1 ) ) C_ NN )
+s26:s23,s25:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ran ( q e. Q |-> ( q - 1 ) ) C_ NN )
+i27::mptfi
+s28:s5,i27:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( q e. Q |-> ( q - 1 ) ) e. Fin )
+i29::rnfi
+s30:s28,i29:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ran ( q e. Q |-> ( q - 1 ) ) e. Fin )
+i31::lcmfnncl
+s32:s26,s30,i31:syl2anc |- ( Q e. ( ~P Prime i^i Fin ) -> ( _lcm ` ran ( q e. Q |-> ( q - 1 ) ) ) e. NN )
+qed:s15,s32:eqeltrd |- ( Q e. ( ~P Prime i^i Fin ) -> ( lambdaL ` Q ) e. NN )
+$)

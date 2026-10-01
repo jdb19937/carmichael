@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=exstv  LOC_AFTER=?
+
+* Value of ~ df-exst : the state sequence is a ` seq ` of ~ df-exstop over the pool.
+
+s1::id |- ( l = L -> l = L )
+c1:s1:oveq1d |- ( l = L -> ( l ExStOp n ) = ( L ExStOp n ) )
+c2:c1:seqeq2d |- ( l = L -> seq 0 ( ( l ExStOp n ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) = seq 0 ( ( L ExStOp n ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) )
+c3:c2:mpoeq3dv |- ( l = L -> ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( l ExStOp n ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) = ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp n ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) )
+s2::id |- ( n = G -> n = G )
+c4:s2:oveq2d |- ( n = G -> ( L ExStOp n ) = ( L ExStOp G ) )
+c5:c4:seqeq2d |- ( n = G -> seq 0 ( ( L ExStOp n ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) = seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) )
+c6:c5:mpoeq3dv |- ( n = G -> ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp n ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) = ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) )
+s3::df-exst |- ExSt = ( l e. NN , n e. NN0 |-> ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( l ExStOp n ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) )
+s4:c3,c6,s3:ovmpog |- ( ( L e. NN /\ G e. NN0 /\ ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) e. _V ) -> ( L ExSt G ) = ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) )
+s5::df-tbl |- Tbl = ( ( Word NN0 |_| 1o ) ^m NN0 )
+s6::ovex |- ( ( Word NN0 |_| 1o ) ^m NN0 ) e. _V
+s7:s5,s6:eqeltri |- Tbl e. _V
+s8::2oex |- 2o e. _V
+s9:s7,s8:xpex |- ( Tbl X. 2o ) e. _V
+s10::nn0ex |- NN0 e. _V
+i11::wrdexg
+s12:s10,i11:ax-mp |- Word NN0 e. _V
+s13:s12,s9:xpex |- ( Word NN0 X. ( Tbl X. 2o ) ) e. _V
+s14::nn0ex |- NN0 e. _V
+s15:s14,s13:xpex |- ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) e. _V
+s16:s12,s15:mpoex |- ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) e. _V
+s17:s16:a1i |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) e. _V )
+s18::simpl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> ( L e. NN /\ G e. NN0 ) )
+s19:s18:simpld |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> L e. NN )
+s20:s18:simprd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> G e. NN0 )
+s21::simpr |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) )
+s22:s21:simpld |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> W e. Word NN0 )
+s23:s21:simprd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) )
+s24:s19,s20,s17,s4:syl3anc |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> ( L ExSt G ) = ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) )
+s25:s24:oveqd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> ( W ( L ExSt G ) Z ) = ( W ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) Z ) )
+s26::id |- ( p = W -> p = W )
+c7:s26:fveq1d |- ( p = W -> ( p ` ( k - 1 ) ) = ( W ` ( k - 1 ) ) )
+c8:c7:ifeq2d |- ( p = W -> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) = if ( k = 0 , x , ( W ` ( k - 1 ) ) ) )
+c9:c8:mpteq2dv |- ( p = W -> ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) = ( k e. NN0 |-> if ( k = 0 , x , ( W ` ( k - 1 ) ) ) ) )
+c10:c9:seqeq3d |- ( p = W -> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) = seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( W ` ( k - 1 ) ) ) ) ) )
+s27::id |- ( x = Z -> x = Z )
+c11:s27:ifeq1d |- ( x = Z -> if ( k = 0 , x , ( W ` ( k - 1 ) ) ) = if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) )
+c12:c11:mpteq2dv |- ( x = Z -> ( k e. NN0 |-> if ( k = 0 , x , ( W ` ( k - 1 ) ) ) ) = ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) )
+c13:c12:seqeq3d |- ( x = Z -> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( W ` ( k - 1 ) ) ) ) ) = seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) ) )
+s28::eqid |- ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) = ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) )
+s29:c10,c13,s28:ovmpog |- ( ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) ) e. _V ) -> ( W ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) Z ) = seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) ) )
+s30::seqex |- seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) ) e. _V
+s31:s30:a1i |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) ) e. _V )
+s32:s22,s23,s31,s29:syl3anc |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> ( W ( p e. Word NN0 , x e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) |-> seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , x , ( p ` ( k - 1 ) ) ) ) ) ) Z ) = seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) ) )
+qed:s25,s32:eqtrd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( W e. Word NN0 /\ Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) ) ) -> ( W ( L ExSt G ) Z ) = seq 0 ( ( L ExStOp G ) , ( k e. NN0 |-> if ( k = 0 , Z , ( W ` ( k - 1 ) ) ) ) ) )
+$)

@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=evcxpge  LOC_AFTER=?
+
+* Eventually a positive constant is below any positive real power of ell2 (the explicit-threshold lemma extrwrpow pulled back along ell2; Lean: tendsto_rpow_atTop composed with tendsto_ell2_atTopW).
+
+s1::simpl |- ( ( B e. RR+ /\ G e. RR+ ) -> B e. RR+ )
+s2::simpr |- ( ( B e. RR+ /\ G e. RR+ ) -> G e. RR+ )
+s3:s2:rpreccld |- ( ( B e. RR+ /\ G e. RR+ ) -> ( 1 / G ) e. RR+ )
+s4:s3:rpred |- ( ( B e. RR+ /\ G e. RR+ ) -> ( 1 / G ) e. RR )
+s5:s1,s4:rpcxpcld |- ( ( B e. RR+ /\ G e. RR+ ) -> ( B ^c ( 1 / G ) ) e. RR+ )
+s6:s5:rpred |- ( ( B e. RR+ /\ G e. RR+ ) -> ( B ^c ( 1 / G ) ) e. RR )
+i7::ell2ge
+s8:s6,i7:syl |- ( ( B e. RR+ /\ G e. RR+ ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) )
+s9::evge3 |- E. m e. NN0 A. n e. ( ZZ>= ` m ) n e. ( ZZ>= ` 3 )
+s10:s9:a1i |- ( ( B e. RR+ /\ G e. RR+ ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) n e. ( ZZ>= ` 3 ) )
+s11:s8,s10:evan2 |- ( ( B e. RR+ /\ G e. RR+ ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) )
+s12::simpll |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> B e. RR+ )
+s13::simplr |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> G e. RR+ )
+s14::simprl |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) )
+s15::simprr |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> n e. ( ZZ>= ` 3 ) )
+i16::uzuzle23
+s17:s15,i16:syl |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> n e. ( ZZ>= ` 2 ) )
+i18::ell2cl
+s19:s17,i18:syl |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( ell2 ` n ) e. RR )
+s20:s12,s13,s19:3jca |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( B e. RR+ /\ G e. RR+ /\ ( ell2 ` n ) e. RR ) )
+i21::extrwrpow
+s22:s20,s14,i21:syl2anc |- ( ( ( B e. RR+ /\ G e. RR+ ) /\ ( ( B ^c ( 1 / G ) ) <_ ( ell2 ` n ) /\ n e. ( ZZ>= ` 3 ) ) ) -> B <_ ( ( ell2 ` n ) ^c G ) )
+qed:s11,s22:evimd |- ( ( B e. RR+ /\ G e. RR+ ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) B <_ ( ( ell2 ` n ) ^c G ) )
+$)

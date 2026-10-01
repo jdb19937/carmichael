@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=s3sfp  LOC_AFTER=?
+
+* A subset of the windowed reservoir is a finite set of primes.
+
+s1::simpl |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) )
+s2::simpr |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> S C_ ( ( Z goodPrimesW W ) ` Y ) )
+i3::goodprimeswfi
+s4:s1,i3:syl |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> ( ( Z goodPrimesW W ) ` Y ) e. ( ~P Prime i^i Fin ) )
+i5::elfpw
+s6:s4,i5:sylib |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> ( ( ( Z goodPrimesW W ) ` Y ) C_ Prime /\ ( ( Z goodPrimesW W ) ` Y ) e. Fin ) )
+s7:s6:simpld |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> ( ( Z goodPrimesW W ) ` Y ) C_ Prime )
+s8:s6:simprd |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> ( ( Z goodPrimesW W ) ` Y ) e. Fin )
+s9:s2,s7:sstrd |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> S C_ Prime )
+i10::ssfi
+s11:s8,s2,i10:syl2anc |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> S e. Fin )
+s12:s9,s11:jca |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> ( S C_ Prime /\ S e. Fin ) )
+i13::elfpw
+qed:s12,i13:sylibr |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) -> S e. ( ~P Prime i^i Fin ) )
+$)

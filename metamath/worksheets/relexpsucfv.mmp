@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=relexpsucfv  LOC_AFTER=?
+
+* The ( N + 1 )-th iterate of a function is the function applied to the N-th iterate (Lean's Function.iterate_succ_apply').
+
+1::simp1l   |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> B e. V )
+2::simp1r   |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> G : B --> B )
+3::simp2    |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> N e. NN0 )
+4::simp3    |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> X e. B )
+5a::frel
+5:2,5a:syl  |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> Rel G )
+6:5,3:relexpsucld |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( G ^r ( N + 1 ) ) = ( G o. ( G ^r N ) ) )
+7:6:fveq1d  |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( ( G ^r ( N + 1 ) ) ` X ) = ( ( G o. ( G ^r N ) ) ` X ) )
+8::simp1    |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( B e. V /\ G : B --> B ) )
+9a::relexpfd
+9:3,9a:syl  |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( ( B e. V /\ G : B --> B ) -> ( G ^r N ) : B --> B ) )
+10:8,9:mpd  |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( G ^r N ) : B --> B )
+11a::fvco3
+11:10,4,11a:syl2anc |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( ( G o. ( G ^r N ) ) ` X ) = ( G ` ( ( G ^r N ) ` X ) ) )
+qed:7,11:eqtrd |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( ( G ^r ( N + 1 ) ) ` X ) = ( G ` ( ( G ^r N ) ` X ) ) )
+$)

@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=cenprodv  LOC_AFTER=?
+
+* The product character ` chi1 . conj chi2 ` mod ` U V ` at an integer ` A ` : ` chi1 ( A ) x. * chi2 ( A ) ` (Lean Census ` prodChar_apply ` ; ZF2 ~ dchrindmulval with the inverse character, ~ dchrinv ).
+
+s1::simp1 |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( U e. NN /\ V e. NN ) )
+s2::simp2 |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) )
+s3::simp3 |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> A e. ZZ )
+s4:s1:simpld |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> U e. NN )
+s5:s1:simprd |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> V e. NN )
+s6:s2:simpld |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> X e. ( Base ` ( DChr ` U ) ) )
+s7:s2:simprd |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> Z e. ( Base ` ( DChr ` V ) ) )
+i8::dchrabl
+s9:s5,i8:syl |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( DChr ` V ) e. Abel )
+i10::ablgrp
+s11:s9,i10:syl |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( DChr ` V ) e. Grp )
+s12::eqid |- ( Base ` ( DChr ` V ) ) = ( Base ` ( DChr ` V ) )
+s13::eqid |- ( invg ` ( DChr ` V ) ) = ( invg ` ( DChr ` V ) )
+s14:s12,s13:grpinvcl |- ( ( ( DChr ` V ) e. Grp /\ Z e. ( Base ` ( DChr ` V ) ) ) -> ( ( invg ` ( DChr ` V ) ) ` Z ) e. ( Base ` ( DChr ` V ) ) )
+s15:s11,s7,s14:syl2anc |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( invg ` ( DChr ` V ) ) ` Z ) e. ( Base ` ( DChr ` V ) ) )
+s16:s4,s5:jca |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( U e. NN /\ V e. NN ) )
+s17:s6,s15:jca |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( X e. ( Base ` ( DChr ` U ) ) /\ ( ( invg ` ( DChr ` V ) ) ` Z ) e. ( Base ` ( DChr ` V ) ) ) )
+i18::dchrindmulval
+s19:s16,s17,s3,i18:syl3anc |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( ( ( U DChrInd ( U x. V ) ) ` X ) ( +g ` ( DChr ` ( U x. V ) ) ) ( ( V DChrInd ( U x. V ) ) ` ( ( invg ` ( DChr ` V ) ) ` Z ) ) ) ` ( ( ZRHom ` ( Z/nZ ` ( U x. V ) ) ) ` A ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` U ) ) ` A ) ) x. ( ( ( invg ` ( DChr ` V ) ) ` Z ) ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) ) )
+s20::eqid |- ( DChr ` V ) = ( DChr ` V )
+s21:s20,s12,s7,s13:dchrinv |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( invg ` ( DChr ` V ) ) ` Z ) = ( * o. Z ) )
+s22:s21:fveq1d |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( ( invg ` ( DChr ` V ) ) ` Z ) ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) = ( ( * o. Z ) ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) )
+s23::eqid |- ( DChr ` V ) = ( DChr ` V )
+s24::eqid |- ( Z/nZ ` V ) = ( Z/nZ ` V )
+s25::eqid |- ( Base ` ( Z/nZ ` V ) ) = ( Base ` ( Z/nZ ` V ) )
+s26:s23,s24,s12,s25,s7:dchrf |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> Z : ( Base ` ( Z/nZ ` V ) ) --> CC )
+s27::eqid |- ( Z/nZ ` V ) = ( Z/nZ ` V )
+s28::eqid |- ( Base ` ( Z/nZ ` V ) ) = ( Base ` ( Z/nZ ` V ) )
+s29::eqid |- ( ZRHom ` ( Z/nZ ` V ) ) = ( ZRHom ` ( Z/nZ ` V ) )
+s30:s27,s28,s29:znzrhfo |- ( V e. NN0 -> ( ZRHom ` ( Z/nZ ` V ) ) : ZZ -onto-> ( Base ` ( Z/nZ ` V ) ) )
+s31:s5:nnnn0d |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> V e. NN0 )
+s32:s31,s30:syl |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ZRHom ` ( Z/nZ ` V ) ) : ZZ -onto-> ( Base ` ( Z/nZ ` V ) ) )
+i33::fof
+s34:s32,i33:syl |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ZRHom ` ( Z/nZ ` V ) ) : ZZ --> ( Base ` ( Z/nZ ` V ) ) )
+s35:s34,s3:ffvelcdmd |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) e. ( Base ` ( Z/nZ ` V ) ) )
+i36::fvco3
+s37:s26,s35,i36:syl2anc |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( * o. Z ) ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) = ( * ` ( Z ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) ) )
+s38:s22,s37:eqtrd |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( ( invg ` ( DChr ` V ) ) ` Z ) ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) = ( * ` ( Z ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) ) )
+s39:s38:oveq2d |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( X ` ( ( ZRHom ` ( Z/nZ ` U ) ) ` A ) ) x. ( ( ( invg ` ( DChr ` V ) ) ` Z ) ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` U ) ) ` A ) ) x. ( * ` ( Z ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) ) ) )
+qed:s19,s39:eqtrd |- ( ( ( U e. NN /\ V e. NN ) /\ ( X e. ( Base ` ( DChr ` U ) ) /\ Z e. ( Base ` ( DChr ` V ) ) ) /\ A e. ZZ ) -> ( ( ( ( U DChrInd ( U x. V ) ) ` X ) ( +g ` ( DChr ` ( U x. V ) ) ) ( ( V DChrInd ( U x. V ) ) ` ( ( invg ` ( DChr ` V ) ) ` Z ) ) ) ` ( ( ZRHom ` ( Z/nZ ` ( U x. V ) ) ) ` A ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` U ) ) ` A ) ) x. ( * ` ( Z ` ( ( ZRHom ` ( Z/nZ ` V ) ) ` A ) ) ) ) )
+$)

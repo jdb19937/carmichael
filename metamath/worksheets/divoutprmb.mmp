@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutprmb  LOC_AFTER=?
+
+* Base of the induction for divoutprm.
+
+s1::simpll |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> D e. NN )
+s2::simpr |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> r e. NN0 )
+i3::divout0
+s4:s1,s2,i3:syl2anc |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> ( ( D DivOut r ) ` 0 ) = <. r , 0 >. )
+s5:s2:elexd |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> r e. _V )
+s6::c0ex |- 0 e. _V
+s7:s6:a1i |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> 0 e. _V )
+s8:s4:fveq2d |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = ( 1st ` <. r , 0 >. ) )
+i9::op1stg
+s10:s5,s7,i9:syl2anc |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> ( 1st ` <. r , 0 >. ) = r )
+s11:s8,s10:eqtrd |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = r )
+s12:s11:adantr |- ( ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) /\ P || r ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = r )
+s13::simpr |- ( ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) /\ P || r ) -> P || r )
+s14:s12,s13:breqtrrd |- ( ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) /\ P || r ) -> P || ( 1st ` ( ( D DivOut r ) ` 0 ) ) )
+s15:s14:orcd |- ( ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) /\ P || r ) -> ( P || ( 1st ` ( ( D DivOut r ) ` 0 ) ) \/ P || D ) )
+s16:s15:ex |- ( ( ( D e. NN /\ P e. Prime ) /\ r e. NN0 ) -> ( P || r -> ( P || ( 1st ` ( ( D DivOut r ) ` 0 ) ) \/ P || D ) ) )
+qed:s16:ralrimiva |- ( ( D e. NN /\ P e. Prime ) -> A. r e. NN0 ( P || r -> ( P || ( 1st ` ( ( D DivOut r ) ` 0 ) ) \/ P || D ) ) )
+$)

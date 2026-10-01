@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=tttbles  LOC_AFTER=?
+
+* The table on a stack as the word of its slot list: Lean's ` encTblAsc_eq ` , ` encTblDesc_eq ` ( ` encSlots ( ( List.range L ).map t ) ` and its reverse).
+
+s1::simpl |- ( ( A e. Tbl /\ L e. NN0 ) -> A e. Tbl )
+s2::simpr |- ( ( A e. Tbl /\ L e. NN0 ) -> L e. NN0 )
+s3::id |- ( ( A e. Tbl /\ L e. NN0 ) -> ( A e. Tbl /\ L e. NN0 ) )
+i4::tttblw
+s5:s3,i4:syl |- ( ( A e. Tbl /\ L e. NN0 ) -> ( ( A |` ( 0 ..^ L ) ) e. Word ( Word NN0 |_| 1o ) /\ ( # ` ( A |` ( 0 ..^ L ) ) ) = L ) )
+s6:s5:simpld |- ( ( A e. Tbl /\ L e. NN0 ) -> ( A |` ( 0 ..^ L ) ) e. Word ( Word NN0 |_| 1o ) )
+i7::ttabtbav
+s8:s2,s1,i7:syl2anc |- ( ( A e. Tbl /\ L e. NN0 ) -> ( L encTblAsc A ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( A |` ( 0 ..^ L ) ) ) ) )
+i9::ttsesv
+s10:s6,i9:syl |- ( ( A e. Tbl /\ L e. NN0 ) -> ( encSlots ` ( A |` ( 0 ..^ L ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( A |` ( 0 ..^ L ) ) ) ) )
+s11:s8,s10:eqtr4d |- ( ( A e. Tbl /\ L e. NN0 ) -> ( L encTblAsc A ) = ( encSlots ` ( A |` ( 0 ..^ L ) ) ) )
+s12::id |- ( l = L -> l = L )
+c1:s12:oveq2d |- ( l = L -> ( 0 ..^ l ) = ( 0 ..^ L ) )
+c2:c1:reseq2d |- ( l = L -> ( t |` ( 0 ..^ l ) ) = ( t |` ( 0 ..^ L ) ) )
+c3:c2:fveq2d |- ( l = L -> ( reverse ` ( t |` ( 0 ..^ l ) ) ) = ( reverse ` ( t |` ( 0 ..^ L ) ) ) )
+c4:c3:coeq2d |- ( l = L -> ( encSlot o. ( reverse ` ( t |` ( 0 ..^ l ) ) ) ) = ( encSlot o. ( reverse ` ( t |` ( 0 ..^ L ) ) ) ) )
+c5:c4:oveq2d |- ( l = L -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( t |` ( 0 ..^ l ) ) ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( t |` ( 0 ..^ L ) ) ) ) ) )
+s13::id |- ( t = A -> t = A )
+c6:s13:reseq1d |- ( t = A -> ( t |` ( 0 ..^ L ) ) = ( A |` ( 0 ..^ L ) ) )
+c7:c6:fveq2d |- ( t = A -> ( reverse ` ( t |` ( 0 ..^ L ) ) ) = ( reverse ` ( A |` ( 0 ..^ L ) ) ) )
+c8:c7:coeq2d |- ( t = A -> ( encSlot o. ( reverse ` ( t |` ( 0 ..^ L ) ) ) ) = ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) )
+c9:c8:oveq2d |- ( t = A -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( t |` ( 0 ..^ L ) ) ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) )
+s14::df-tm2enctbld |- encTblDesc = ( l e. NN0 , t e. Tbl |-> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( t |` ( 0 ..^ l ) ) ) ) ) )
+s15:c5,c9,s14:ovmpog |- ( ( L e. NN0 /\ A e. Tbl /\ ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) e. _V ) -> ( L encTblDesc A ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) )
+s16::ovex |- ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) e. _V
+s17:s16:a1i |- ( ( A e. Tbl /\ L e. NN0 ) -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) e. _V )
+s18:s2,s1,s17,s15:syl3anc |- ( ( A e. Tbl /\ L e. NN0 ) -> ( L encTblDesc A ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) )
+i19::revcl
+s20:s6,i19:syl |- ( ( A e. Tbl /\ L e. NN0 ) -> ( reverse ` ( A |` ( 0 ..^ L ) ) ) e. Word ( Word NN0 |_| 1o ) )
+i21::ttsesv
+s22:s20,i21:syl |- ( ( A e. Tbl /\ L e. NN0 ) -> ( encSlots ` ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) )
+s23:s18,s22:eqtr4d |- ( ( A e. Tbl /\ L e. NN0 ) -> ( L encTblDesc A ) = ( encSlots ` ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) )
+qed:s11,s23:jca |- ( ( A e. Tbl /\ L e. NN0 ) -> ( ( L encTblAsc A ) = ( encSlots ` ( A |` ( 0 ..^ L ) ) ) /\ ( L encTblDesc A ) = ( encSlots ` ( reverse ` ( A |` ( 0 ..^ L ) ) ) ) ) )
+$)

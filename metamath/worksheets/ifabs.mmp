@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=ifabs  LOC_AFTER=?
+
+* The absolute value of an indicator term.
+
+s1::id |- ( ph -> ph )
+s2:s1:iftrued |- ( ph -> if ( ph , A , 0 ) = A )
+s3::id |- ( ph -> ph )
+s4:s3:iftrued |- ( ph -> if ( ph , ( abs ` A ) , 0 ) = ( abs ` A ) )
+s5:s2:fveq2d |- ( ph -> ( abs ` if ( ph , A , 0 ) ) = ( abs ` A ) )
+s6:s4:eqcomd |- ( ph -> ( abs ` A ) = if ( ph , ( abs ` A ) , 0 ) )
+s7:s5,s6:eqtrd |- ( ph -> ( abs ` if ( ph , A , 0 ) ) = if ( ph , ( abs ` A ) , 0 ) )
+s8::id |- ( -. ph -> -. ph )
+s9:s8:iffalsed |- ( -. ph -> if ( ph , A , 0 ) = 0 )
+s10::id |- ( -. ph -> -. ph )
+s11:s10:iffalsed |- ( -. ph -> if ( ph , ( abs ` A ) , 0 ) = 0 )
+s12::abs0 |- ( abs ` 0 ) = 0
+s13:s12:a1i |- ( -. ph -> ( abs ` 0 ) = 0 )
+s14:s9:fveq2d |- ( -. ph -> ( abs ` if ( ph , A , 0 ) ) = ( abs ` 0 ) )
+s15:s14,s13:eqtrd |- ( -. ph -> ( abs ` if ( ph , A , 0 ) ) = 0 )
+s16:s11:eqcomd |- ( -. ph -> 0 = if ( ph , ( abs ` A ) , 0 ) )
+s17:s15,s16:eqtrd |- ( -. ph -> ( abs ` if ( ph , A , 0 ) ) = if ( ph , ( abs ` A ) , 0 ) )
+qed:s7,s17:pm2.61i |- ( abs ` if ( ph , A , 0 ) ) = if ( ph , ( abs ` A ) , 0 )
+$)

@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=sqre  LOC_AFTER=?
+
+* The real and imaginary parts of the corners of the square of half-side ` R ` about ` C ` .
+
+s1::simpl |- ( ( C e. CC /\ R e. RR ) -> C e. CC )
+s2::simpr |- ( ( C e. CC /\ R e. RR ) -> R e. RR )
+s3:s2:recnd |- ( ( C e. CC /\ R e. RR ) -> R e. CC )
+s4::ax-icn |- _i e. CC
+s5:s4:a1i |- ( ( C e. CC /\ R e. RR ) -> _i e. CC )
+s6:s5,s3:mulcld |- ( ( C e. CC /\ R e. RR ) -> ( _i x. R ) e. CC )
+s7:s3,s6:addcld |- ( ( C e. CC /\ R e. RR ) -> ( R + ( _i x. R ) ) e. CC )
+s8:s2,s2:crred |- ( ( C e. CC /\ R e. RR ) -> ( Re ` ( R + ( _i x. R ) ) ) = R )
+s9:s2,s2:crimd |- ( ( C e. CC /\ R e. RR ) -> ( Im ` ( R + ( _i x. R ) ) ) = R )
+s10:s1,s7:resubd |- ( ( C e. CC /\ R e. RR ) -> ( Re ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) - ( Re ` ( R + ( _i x. R ) ) ) ) )
+s11:s8:oveq2d |- ( ( C e. CC /\ R e. RR ) -> ( ( Re ` C ) - ( Re ` ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) - R ) )
+s12:s10,s11:eqtrd |- ( ( C e. CC /\ R e. RR ) -> ( Re ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) - R ) )
+s13:s1,s7:readdd |- ( ( C e. CC /\ R e. RR ) -> ( Re ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) + ( Re ` ( R + ( _i x. R ) ) ) ) )
+s14:s8:oveq2d |- ( ( C e. CC /\ R e. RR ) -> ( ( Re ` C ) + ( Re ` ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) + R ) )
+s15:s13,s14:eqtrd |- ( ( C e. CC /\ R e. RR ) -> ( Re ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) + R ) )
+s16:s1,s7:imsubd |- ( ( C e. CC /\ R e. RR ) -> ( Im ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) - ( Im ` ( R + ( _i x. R ) ) ) ) )
+s17:s9:oveq2d |- ( ( C e. CC /\ R e. RR ) -> ( ( Im ` C ) - ( Im ` ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) - R ) )
+s18:s16,s17:eqtrd |- ( ( C e. CC /\ R e. RR ) -> ( Im ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) - R ) )
+s19:s1,s7:imaddd |- ( ( C e. CC /\ R e. RR ) -> ( Im ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) + ( Im ` ( R + ( _i x. R ) ) ) ) )
+s20:s9:oveq2d |- ( ( C e. CC /\ R e. RR ) -> ( ( Im ` C ) + ( Im ` ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) + R ) )
+s21:s19,s20:eqtrd |- ( ( C e. CC /\ R e. RR ) -> ( Im ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) + R ) )
+s22:s12,s15:jca |- ( ( C e. CC /\ R e. RR ) -> ( ( Re ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) - R ) /\ ( Re ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) + R ) ) )
+s23:s18,s21:jca |- ( ( C e. CC /\ R e. RR ) -> ( ( Im ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) - R ) /\ ( Im ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) + R ) ) )
+qed:s22,s23:jca |- ( ( C e. CC /\ R e. RR ) -> ( ( ( Re ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) - R ) /\ ( Re ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Re ` C ) + R ) ) /\ ( ( Im ` ( C - ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) - R ) /\ ( Im ` ( C + ( R + ( _i x. R ) ) ) ) = ( ( Im ` C ) + R ) ) ) )
+$)

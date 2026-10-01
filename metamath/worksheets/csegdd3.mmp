@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=csegdd3  LOC_AFTER=?
+
+* A vertical segment to the left of P has P - z in the slit plane.
+
+s1::simpl |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) )
+s2::simpr |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) )
+i3::simp1
+s4:s1,i3:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> A e. CC )
+i5::simp2
+s6:s1,i5:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> B e. CC )
+i7::simpl
+s8:s2,i7:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> P e. CC )
+i9::simpr
+s10:s2,i9:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> ( Re ` A ) < ( Re ` P ) )
+i11::csegvre
+s12:s1,i11:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> A. u e. ( A cseg B ) ( Re ` u ) = ( Re ` A ) )
+s13::simpr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> u e. ( A cseg B ) )
+s14:s4:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> A e. CC )
+s15:s6:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> B e. CC )
+s16:s8:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> P e. CC )
+s17:s10:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Re ` A ) < ( Re ` P ) )
+i18::csegcl
+s19:s14,s15,i18:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( A cseg B ) C_ CC )
+s20:s19,s13:sseldd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> u e. CC )
+s21:s12:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> A. u e. ( A cseg B ) ( Re ` u ) = ( Re ` A ) )
+i22::rspa
+s23:s21,s13,i22:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Re ` u ) = ( Re ` A ) )
+s24:s16,s20:subcld |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( P - u ) e. CC )
+i25::resub
+s26:s16,s20,i25:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Re ` ( P - u ) ) = ( ( Re ` P ) - ( Re ` u ) ) )
+s27:s23:oveq2d |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( ( Re ` P ) - ( Re ` u ) ) = ( ( Re ` P ) - ( Re ` A ) ) )
+s28:s26,s27:eqtrd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Re ` ( P - u ) ) = ( ( Re ` P ) - ( Re ` A ) ) )
+i29::recl
+s30:s14,i29:syl |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Re ` A ) e. RR )
+i31::recl
+s32:s16,i31:syl |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Re ` P ) e. RR )
+s33:s30,s32:posdifd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( ( Re ` A ) < ( Re ` P ) <-> 0 < ( ( Re ` P ) - ( Re ` A ) ) ) )
+s34:s17,s33:mpbid |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> 0 < ( ( Re ` P ) - ( Re ` A ) ) )
+s35:s34,s28:breqtrrd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> 0 < ( Re ` ( P - u ) ) )
+i36::elslitre
+s37:s24,s35,i36:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) )
+qed:s37:ralrimiva |- ( ( ( A e. CC /\ B e. CC /\ ( Re ` A ) = ( Re ` B ) ) /\ ( P e. CC /\ ( Re ` A ) < ( Re ` P ) ) ) -> A. u e. ( A cseg B ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) )
+$)

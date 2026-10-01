@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=algrncs  LOC_AFTER=?
+
+* The entries of a cons (Lean: List.mem_cons, as a range).
+
+s1::simpl |- ( ( P e. V /\ W e. Word V ) -> P e. V )
+s2::simpr |- ( ( P e. V /\ W e. Word V ) -> W e. Word V )
+i3::s1cl
+s4:s1,i3:syl |- ( ( P e. V /\ W e. Word V ) -> <" P "> e. Word V )
+i5::ccatrn
+s6:s4,s2,i5:syl2anc |- ( ( P e. V /\ W e. Word V ) -> ran ( <" P "> ++ W ) = ( ran <" P "> u. ran W ) )
+i7::s1rn
+s8:s1,i7:syl |- ( ( P e. V /\ W e. Word V ) -> ran <" P "> = { P } )
+s9:s8:uneq1d |- ( ( P e. V /\ W e. Word V ) -> ( ran <" P "> u. ran W ) = ( { P } u. ran W ) )
+qed:s6,s9:eqtrd |- ( ( P e. V /\ W e. Word V ) -> ran ( <" P "> ++ W ) = ( { P } u. ran W ) )
+$)

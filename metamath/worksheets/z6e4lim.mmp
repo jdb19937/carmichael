@@ -1,0 +1,238 @@
+$( <MM> <PROOF_ASST> THEOREM=z6e4lim  LOC_AFTER=?
+
+* The exponential ` 2 ^ ( - t / 4 ) ` tends to ` 0 ` ( ~ cxp2lim at the base ` 2 ^ ( 1 / 4 ) > 1 ` ).
+
+s1::1re |- 1 e. RR
+i2::rpre
+i3::rpdivcl
+s4::1rp |- 1 e. RR+
+i5::nnrp
+s6::4nn |- 4 e. NN
+s7:s6,i5:ax-mp |- 4 e. RR+
+s8:s4,s7,i3:mp2an |- ( 1 / 4 ) e. RR+
+s9:s8,i2:ax-mp |- ( 1 / 4 ) e. RR
+s10::2rp |- 2 e. RR+
+i11::rpcxpcl
+s12:s10,s9,i11:mp2an |- ( 2 ^c ( 1 / 4 ) ) e. RR+
+i13::rpre
+s14:s12,i13:ax-mp |- ( 2 ^c ( 1 / 4 ) ) e. RR
+i15::ltmuldiv
+s16::0re |- 0 e. RR
+s17::1re |- 1 e. RR
+s18::4re |- 4 e. RR
+s19::4pos |- 0 < 4
+s20:s18,s19:pm3.2i |- ( 4 e. RR /\ 0 < 4 )
+s21:s16,s17,s20,i15:mp3an |- ( ( 0 x. 4 ) < 1 <-> 0 < ( 1 / 4 ) )
+s22::0lt1 |- 0 < 1
+s23::4cn |- 4 e. CC
+s24:s23:mul02i |- ( 0 x. 4 ) = 0
+s25:s24,s22:eqbrtri |- ( 0 x. 4 ) < 1
+s26:s25,s21:mpbi |- 0 < ( 1 / 4 )
+s27::2re |- 2 e. RR
+s28::1lt2 |- 1 < 2
+s29:s27,s28:pm3.2i |- ( 2 e. RR /\ 1 < 2 )
+s30::0re |- 0 e. RR
+s31:s30,s9:pm3.2i |- ( 0 e. RR /\ ( 1 / 4 ) e. RR )
+i32::cxplt
+s33:s29,s31,i32:mp2an |- ( 0 < ( 1 / 4 ) <-> ( 2 ^c 0 ) < ( 2 ^c ( 1 / 4 ) ) )
+s34:s26,s33:mpbi |- ( 2 ^c 0 ) < ( 2 ^c ( 1 / 4 ) )
+s35::2cn |- 2 e. CC
+i36::cxp0
+s37:s35,i36:ax-mp |- ( 2 ^c 0 ) = 1
+s38:s37,s34:eqbrtrri |- 1 < ( 2 ^c ( 1 / 4 ) )
+s39::0re |- 0 e. RR
+i40::cxp2lim
+s41:s39,s14,s38,i40:mp3an |- ( t e. RR+ |-> ( ( t ^c 0 ) / ( ( 2 ^c ( 1 / 4 ) ) ^c t ) ) ) ~~>r 0
+s42::id |- ( t e. RR+ -> t e. RR+ )
+s43:s42:rpcnd |- ( t e. RR+ -> t e. CC )
+s44:s42:rpred |- ( t e. RR+ -> t e. RR )
+s45:s43:cxp0d |- ( t e. RR+ -> ( t ^c 0 ) = 1 )
+s46::2rp |- 2 e. RR+
+s47:s46:a1i |- ( t e. RR+ -> 2 e. RR+ )
+s48:s9:a1i |- ( t e. RR+ -> ( 1 / 4 ) e. RR )
+s49:s47,s48,s43:cxpmuld |- ( t e. RR+ -> ( 2 ^c ( ( 1 / 4 ) x. t ) ) = ( ( 2 ^c ( 1 / 4 ) ) ^c t ) )
+s50::0le0 |- 0 <_ 0
+s51:s50:a1i |- ( t e. RR+ -> 0 <_ 0 )
+s52:s23:mul01i |- ( 4 x. 0 ) = 0
+s53:s52:a1i |- ( t e. RR+ -> ( 4 x. 0 ) = 0 )
+s54:s23:a1i |- ( t e. RR+ -> 4 e. CC )
+s55:s44:recnd |- ( t e. RR+ -> t e. CC )
+s56::4ne0 |- 4 =/= 0
+s57:s56:a1i |- ( t e. RR+ -> 4 =/= 0 )
+s58:s55,s54,s57:divcld |- ( t e. RR+ -> ( t / 4 ) e. CC )
+i59::rpcn
+i60::rpdivcl
+i61::nnrp
+s62:s8,i59:ax-mp |- ( 1 / 4 ) e. CC
+s63:s62:a1i |- ( t e. RR+ -> ( 1 / 4 ) e. CC )
+s64:s63,s55:mulcld |- ( t e. RR+ -> ( ( 1 / 4 ) x. t ) e. CC )
+s65:s54,s58,s64:subdid |- ( t e. RR+ -> ( 4 x. ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) ) = ( ( 4 x. ( t / 4 ) ) - ( 4 x. ( ( 1 / 4 ) x. t ) ) ) )
+s66:s54,s58:mulcld |- ( t e. RR+ -> ( 4 x. ( t / 4 ) ) e. CC )
+s67:s54,s64:mulcld |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) e. CC )
+s68:s66,s67:negsubd |- ( t e. RR+ -> ( ( 4 x. ( t / 4 ) ) + -u ( 4 x. ( ( 1 / 4 ) x. t ) ) ) = ( ( 4 x. ( t / 4 ) ) - ( 4 x. ( ( 1 / 4 ) x. t ) ) ) )
+s69:s68:eqcomd |- ( t e. RR+ -> ( ( 4 x. ( t / 4 ) ) - ( 4 x. ( ( 1 / 4 ) x. t ) ) ) = ( ( 4 x. ( t / 4 ) ) + -u ( 4 x. ( ( 1 / 4 ) x. t ) ) ) )
+s70:s54,s64:mulneg1d |- ( t e. RR+ -> ( -u 4 x. ( ( 1 / 4 ) x. t ) ) = -u ( 4 x. ( ( 1 / 4 ) x. t ) ) )
+s71:s70:eqcomd |- ( t e. RR+ -> -u ( 4 x. ( ( 1 / 4 ) x. t ) ) = ( -u 4 x. ( ( 1 / 4 ) x. t ) ) )
+s72:s71:oveq2d |- ( t e. RR+ -> ( ( 4 x. ( t / 4 ) ) + -u ( 4 x. ( ( 1 / 4 ) x. t ) ) ) = ( ( 4 x. ( t / 4 ) ) + ( -u 4 x. ( ( 1 / 4 ) x. t ) ) ) )
+i73::divrec2
+s74:s55,s54,s57,i73:syl3anc |- ( t e. RR+ -> ( t / 4 ) = ( ( 1 / 4 ) x. t ) )
+s75:s74:oveq2d |- ( t e. RR+ -> ( 4 x. ( t / 4 ) ) = ( 4 x. ( ( 1 / 4 ) x. t ) ) )
+s76:s54,s63,s55:mulassd |- ( t e. RR+ -> ( ( 4 x. ( 1 / 4 ) ) x. t ) = ( 4 x. ( ( 1 / 4 ) x. t ) ) )
+s77:s76:eqcomd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = ( ( 4 x. ( 1 / 4 ) ) x. t ) )
+s78::ax-1cn |- 1 e. CC
+s79:s23,s78,s23,s56:divassi |- ( ( 4 x. 1 ) / 4 ) = ( 4 x. ( 1 / 4 ) )
+s80:s79:eqcomi |- ( 4 x. ( 1 / 4 ) ) = ( ( 4 x. 1 ) / 4 )
+s81:s23:mulridi |- ( 4 x. 1 ) = 4
+s82:s81:oveq1i |- ( ( 4 x. 1 ) / 4 ) = ( 4 / 4 )
+s83:s23,s23,s78,s56:divmuli |- ( ( 4 / 4 ) = 1 <-> ( 4 x. 1 ) = 4 )
+s84:s81,s83:mpbir |- ( 4 / 4 ) = 1
+s85:s82,s84:eqtri |- ( ( 4 x. 1 ) / 4 ) = 1
+s86:s80,s85:eqtri |- ( 4 x. ( 1 / 4 ) ) = 1
+s87:s86:a1i |- ( t e. RR+ -> ( 4 x. ( 1 / 4 ) ) = 1 )
+s88:s87:oveq1d |- ( t e. RR+ -> ( ( 4 x. ( 1 / 4 ) ) x. t ) = ( 1 x. t ) )
+s89:s55:mullidd |- ( t e. RR+ -> ( 1 x. t ) = t )
+s90:s78:a1i |- ( t e. RR+ -> 1 e. CC )
+s91:s90,s55:mulcld |- ( t e. RR+ -> ( 1 x. t ) e. CC )
+s92:s91:addlidd |- ( t e. RR+ -> ( 0 + ( 1 x. t ) ) = ( 1 x. t ) )
+s93:s92:eqcomd |- ( t e. RR+ -> ( 1 x. t ) = ( 0 + ( 1 x. t ) ) )
+s94:s55:mullidd |- ( t e. RR+ -> ( 1 x. t ) = t )
+s95:s94:eqcomd |- ( t e. RR+ -> t = ( 1 x. t ) )
+s96:s95,s93:eqtrd |- ( t e. RR+ -> t = ( 0 + ( 1 x. t ) ) )
+s97:s77,s88:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = ( 1 x. t ) )
+s98:s97,s89:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = t )
+s99:s98,s96:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = ( 0 + ( 1 x. t ) ) )
+s100:s75,s99:eqtrd |- ( t e. RR+ -> ( 4 x. ( t / 4 ) ) = ( 0 + ( 1 x. t ) ) )
+s101:s23:negcli |- -u 4 e. CC
+s102:s101:a1i |- ( t e. RR+ -> -u 4 e. CC )
+s103:s102,s63,s55:mulassd |- ( t e. RR+ -> ( ( -u 4 x. ( 1 / 4 ) ) x. t ) = ( -u 4 x. ( ( 1 / 4 ) x. t ) ) )
+s104:s103:eqcomd |- ( t e. RR+ -> ( -u 4 x. ( ( 1 / 4 ) x. t ) ) = ( ( -u 4 x. ( 1 / 4 ) ) x. t ) )
+i105::rpcn
+i106::rpdivcl
+i107::nnrp
+s108:s23,s62:mulneg1i |- ( -u 4 x. ( 1 / 4 ) ) = -u ( 4 x. ( 1 / 4 ) )
+s109:s86:negeqi |- -u ( 4 x. ( 1 / 4 ) ) = -u 1
+s110:s108,s109:eqtri |- ( -u 4 x. ( 1 / 4 ) ) = -u 1
+s111:s110:a1i |- ( t e. RR+ -> ( -u 4 x. ( 1 / 4 ) ) = -u 1 )
+s112:s111:oveq1d |- ( t e. RR+ -> ( ( -u 4 x. ( 1 / 4 ) ) x. t ) = ( -u 1 x. t ) )
+s113:s78:negcli |- -u 1 e. CC
+s114:s113:a1i |- ( t e. RR+ -> -u 1 e. CC )
+s115:s114,s55:mulcld |- ( t e. RR+ -> ( -u 1 x. t ) e. CC )
+s116:s115:addlidd |- ( t e. RR+ -> ( 0 + ( -u 1 x. t ) ) = ( -u 1 x. t ) )
+s117:s116:eqcomd |- ( t e. RR+ -> ( -u 1 x. t ) = ( 0 + ( -u 1 x. t ) ) )
+s118:s104,s112:eqtrd |- ( t e. RR+ -> ( -u 4 x. ( ( 1 / 4 ) x. t ) ) = ( -u 1 x. t ) )
+s119:s118,s117:eqtrd |- ( t e. RR+ -> ( -u 4 x. ( ( 1 / 4 ) x. t ) ) = ( 0 + ( -u 1 x. t ) ) )
+s120:s100,s119:oveq12d |- ( t e. RR+ -> ( ( 4 x. ( t / 4 ) ) + ( -u 4 x. ( ( 1 / 4 ) x. t ) ) ) = ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) )
+s121::0cn |- 0 e. CC
+s122:s121:a1i |- ( t e. RR+ -> 0 e. CC )
+s123:s122,s91,s122,s115:add4d |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = ( ( 0 + 0 ) + ( ( 1 x. t ) + ( -u 1 x. t ) ) ) )
+s124:s121:addlidi |- ( 0 + 0 ) = 0
+s125:s124:a1i |- ( t e. RR+ -> ( 0 + 0 ) = 0 )
+s126:s90,s114,s55:adddird |- ( t e. RR+ -> ( ( 1 + -u 1 ) x. t ) = ( ( 1 x. t ) + ( -u 1 x. t ) ) )
+s127:s126:eqcomd |- ( t e. RR+ -> ( ( 1 x. t ) + ( -u 1 x. t ) ) = ( ( 1 + -u 1 ) x. t ) )
+s128:s78:negidi |- ( 1 + -u 1 ) = 0
+s129:s128:a1i |- ( t e. RR+ -> ( 1 + -u 1 ) = 0 )
+s130:s129:oveq1d |- ( t e. RR+ -> ( ( 1 + -u 1 ) x. t ) = ( 0 x. t ) )
+s131:s127,s130:eqtrd |- ( t e. RR+ -> ( ( 1 x. t ) + ( -u 1 x. t ) ) = ( 0 x. t ) )
+s132:s125,s131:oveq12d |- ( t e. RR+ -> ( ( 0 + 0 ) + ( ( 1 x. t ) + ( -u 1 x. t ) ) ) = ( 0 + ( 0 x. t ) ) )
+s133:s123,s132:eqtrd |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = ( 0 + ( 0 x. t ) ) )
+s134:s55:mul02d |- ( t e. RR+ -> ( 0 x. t ) = 0 )
+s135:s134:oveq2d |- ( t e. RR+ -> ( 0 + ( 0 x. t ) ) = ( 0 + 0 ) )
+s136:s122:addridd |- ( t e. RR+ -> ( 0 + 0 ) = 0 )
+s137:s133,s135:eqtrd |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = ( 0 + 0 ) )
+s138:s137,s136:eqtrd |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = 0 )
+s139:s65,s69:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) ) = ( ( 4 x. ( t / 4 ) ) + -u ( 4 x. ( ( 1 / 4 ) x. t ) ) ) )
+s140:s139,s72:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) ) = ( ( 4 x. ( t / 4 ) ) + ( -u 4 x. ( ( 1 / 4 ) x. t ) ) ) )
+s141:s140,s120:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) ) = ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) )
+s142:s141,s138:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) ) = 0 )
+s143:s53,s142:eqtr4d |- ( t e. RR+ -> ( 4 x. 0 ) = ( 4 x. ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) ) )
+s144:s58,s64:subcld |- ( t e. RR+ -> ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) e. CC )
+s145:s122,s144,s54,s57,s143:mulcanad |- ( t e. RR+ -> 0 = ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) )
+s146:s51,s145:breqtrd |- ( t e. RR+ -> 0 <_ ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) )
+i147::rpre
+i148::rpdivcl
+i149::nnrp
+s150:s9:a1i |- ( t e. RR+ -> ( 1 / 4 ) e. RR )
+s151:s150,s44:remulcld |- ( t e. RR+ -> ( ( 1 / 4 ) x. t ) e. RR )
+i152::nnrp
+s153:s7:a1i |- ( t e. RR+ -> 4 e. RR+ )
+s154:s44,s153:rerpdivcld |- ( t e. RR+ -> ( t / 4 ) e. RR )
+s155:s154,s151:subge0d |- ( t e. RR+ -> ( 0 <_ ( ( t / 4 ) - ( ( 1 / 4 ) x. t ) ) <-> ( ( 1 / 4 ) x. t ) <_ ( t / 4 ) ) )
+s156:s146,s155:mpbid |- ( t e. RR+ -> ( ( 1 / 4 ) x. t ) <_ ( t / 4 ) )
+s157:s52:a1i |- ( t e. RR+ -> ( 4 x. 0 ) = 0 )
+s158:s54,s64,s58:subdid |- ( t e. RR+ -> ( 4 x. ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) ) = ( ( 4 x. ( ( 1 / 4 ) x. t ) ) - ( 4 x. ( t / 4 ) ) ) )
+s159:s67,s66:negsubd |- ( t e. RR+ -> ( ( 4 x. ( ( 1 / 4 ) x. t ) ) + -u ( 4 x. ( t / 4 ) ) ) = ( ( 4 x. ( ( 1 / 4 ) x. t ) ) - ( 4 x. ( t / 4 ) ) ) )
+s160:s159:eqcomd |- ( t e. RR+ -> ( ( 4 x. ( ( 1 / 4 ) x. t ) ) - ( 4 x. ( t / 4 ) ) ) = ( ( 4 x. ( ( 1 / 4 ) x. t ) ) + -u ( 4 x. ( t / 4 ) ) ) )
+s161:s54,s58:mulneg1d |- ( t e. RR+ -> ( -u 4 x. ( t / 4 ) ) = -u ( 4 x. ( t / 4 ) ) )
+s162:s161:eqcomd |- ( t e. RR+ -> -u ( 4 x. ( t / 4 ) ) = ( -u 4 x. ( t / 4 ) ) )
+s163:s162:oveq2d |- ( t e. RR+ -> ( ( 4 x. ( ( 1 / 4 ) x. t ) ) + -u ( 4 x. ( t / 4 ) ) ) = ( ( 4 x. ( ( 1 / 4 ) x. t ) ) + ( -u 4 x. ( t / 4 ) ) ) )
+s164:s54,s63,s55:mulassd |- ( t e. RR+ -> ( ( 4 x. ( 1 / 4 ) ) x. t ) = ( 4 x. ( ( 1 / 4 ) x. t ) ) )
+s165:s164:eqcomd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = ( ( 4 x. ( 1 / 4 ) ) x. t ) )
+s166:s86:a1i |- ( t e. RR+ -> ( 4 x. ( 1 / 4 ) ) = 1 )
+s167:s166:oveq1d |- ( t e. RR+ -> ( ( 4 x. ( 1 / 4 ) ) x. t ) = ( 1 x. t ) )
+s168:s55:mullidd |- ( t e. RR+ -> ( 1 x. t ) = t )
+s169:s91:addlidd |- ( t e. RR+ -> ( 0 + ( 1 x. t ) ) = ( 1 x. t ) )
+s170:s169:eqcomd |- ( t e. RR+ -> ( 1 x. t ) = ( 0 + ( 1 x. t ) ) )
+s171:s55:mullidd |- ( t e. RR+ -> ( 1 x. t ) = t )
+s172:s171:eqcomd |- ( t e. RR+ -> t = ( 1 x. t ) )
+s173:s172,s170:eqtrd |- ( t e. RR+ -> t = ( 0 + ( 1 x. t ) ) )
+s174:s165,s167:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = ( 1 x. t ) )
+s175:s174,s168:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = t )
+s176:s175,s173:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( 1 / 4 ) x. t ) ) = ( 0 + ( 1 x. t ) ) )
+i177::divrec2
+s178:s55,s54,s57,i177:syl3anc |- ( t e. RR+ -> ( t / 4 ) = ( ( 1 / 4 ) x. t ) )
+s179:s178:oveq2d |- ( t e. RR+ -> ( -u 4 x. ( t / 4 ) ) = ( -u 4 x. ( ( 1 / 4 ) x. t ) ) )
+s180:s102,s63,s55:mulassd |- ( t e. RR+ -> ( ( -u 4 x. ( 1 / 4 ) ) x. t ) = ( -u 4 x. ( ( 1 / 4 ) x. t ) ) )
+s181:s180:eqcomd |- ( t e. RR+ -> ( -u 4 x. ( ( 1 / 4 ) x. t ) ) = ( ( -u 4 x. ( 1 / 4 ) ) x. t ) )
+s182:s110:a1i |- ( t e. RR+ -> ( -u 4 x. ( 1 / 4 ) ) = -u 1 )
+s183:s182:oveq1d |- ( t e. RR+ -> ( ( -u 4 x. ( 1 / 4 ) ) x. t ) = ( -u 1 x. t ) )
+s184:s115:addlidd |- ( t e. RR+ -> ( 0 + ( -u 1 x. t ) ) = ( -u 1 x. t ) )
+s185:s184:eqcomd |- ( t e. RR+ -> ( -u 1 x. t ) = ( 0 + ( -u 1 x. t ) ) )
+s186:s181,s183:eqtrd |- ( t e. RR+ -> ( -u 4 x. ( ( 1 / 4 ) x. t ) ) = ( -u 1 x. t ) )
+s187:s186,s185:eqtrd |- ( t e. RR+ -> ( -u 4 x. ( ( 1 / 4 ) x. t ) ) = ( 0 + ( -u 1 x. t ) ) )
+s188:s179,s187:eqtrd |- ( t e. RR+ -> ( -u 4 x. ( t / 4 ) ) = ( 0 + ( -u 1 x. t ) ) )
+s189:s176,s188:oveq12d |- ( t e. RR+ -> ( ( 4 x. ( ( 1 / 4 ) x. t ) ) + ( -u 4 x. ( t / 4 ) ) ) = ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) )
+s190:s122,s91,s122,s115:add4d |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = ( ( 0 + 0 ) + ( ( 1 x. t ) + ( -u 1 x. t ) ) ) )
+s191:s124:a1i |- ( t e. RR+ -> ( 0 + 0 ) = 0 )
+s192:s90,s114,s55:adddird |- ( t e. RR+ -> ( ( 1 + -u 1 ) x. t ) = ( ( 1 x. t ) + ( -u 1 x. t ) ) )
+s193:s192:eqcomd |- ( t e. RR+ -> ( ( 1 x. t ) + ( -u 1 x. t ) ) = ( ( 1 + -u 1 ) x. t ) )
+s194:s128:a1i |- ( t e. RR+ -> ( 1 + -u 1 ) = 0 )
+s195:s194:oveq1d |- ( t e. RR+ -> ( ( 1 + -u 1 ) x. t ) = ( 0 x. t ) )
+s196:s193,s195:eqtrd |- ( t e. RR+ -> ( ( 1 x. t ) + ( -u 1 x. t ) ) = ( 0 x. t ) )
+s197:s191,s196:oveq12d |- ( t e. RR+ -> ( ( 0 + 0 ) + ( ( 1 x. t ) + ( -u 1 x. t ) ) ) = ( 0 + ( 0 x. t ) ) )
+s198:s190,s197:eqtrd |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = ( 0 + ( 0 x. t ) ) )
+s199:s55:mul02d |- ( t e. RR+ -> ( 0 x. t ) = 0 )
+s200:s199:oveq2d |- ( t e. RR+ -> ( 0 + ( 0 x. t ) ) = ( 0 + 0 ) )
+s201:s122:addridd |- ( t e. RR+ -> ( 0 + 0 ) = 0 )
+s202:s198,s200:eqtrd |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = ( 0 + 0 ) )
+s203:s202,s201:eqtrd |- ( t e. RR+ -> ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) = 0 )
+s204:s158,s160:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) ) = ( ( 4 x. ( ( 1 / 4 ) x. t ) ) + -u ( 4 x. ( t / 4 ) ) ) )
+s205:s204,s163:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) ) = ( ( 4 x. ( ( 1 / 4 ) x. t ) ) + ( -u 4 x. ( t / 4 ) ) ) )
+s206:s205,s189:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) ) = ( ( 0 + ( 1 x. t ) ) + ( 0 + ( -u 1 x. t ) ) ) )
+s207:s206,s203:eqtrd |- ( t e. RR+ -> ( 4 x. ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) ) = 0 )
+s208:s157,s207:eqtr4d |- ( t e. RR+ -> ( 4 x. 0 ) = ( 4 x. ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) ) )
+s209:s64,s58:subcld |- ( t e. RR+ -> ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) e. CC )
+s210:s122,s209,s54,s57,s208:mulcanad |- ( t e. RR+ -> 0 = ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) )
+s211:s51,s210:breqtrd |- ( t e. RR+ -> 0 <_ ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) )
+s212:s151,s154:subge0d |- ( t e. RR+ -> ( 0 <_ ( ( ( 1 / 4 ) x. t ) - ( t / 4 ) ) <-> ( t / 4 ) <_ ( ( 1 / 4 ) x. t ) ) )
+s213:s211,s212:mpbid |- ( t e. RR+ -> ( t / 4 ) <_ ( ( 1 / 4 ) x. t ) )
+s214:s156,s213:jca |- ( t e. RR+ -> ( ( ( 1 / 4 ) x. t ) <_ ( t / 4 ) /\ ( t / 4 ) <_ ( ( 1 / 4 ) x. t ) ) )
+s215:s151,s154:letri3d |- ( t e. RR+ -> ( ( ( 1 / 4 ) x. t ) = ( t / 4 ) <-> ( ( ( 1 / 4 ) x. t ) <_ ( t / 4 ) /\ ( t / 4 ) <_ ( ( 1 / 4 ) x. t ) ) ) )
+s216:s214,s215:mpbird |- ( t e. RR+ -> ( ( 1 / 4 ) x. t ) = ( t / 4 ) )
+s217:s216:oveq2d |- ( t e. RR+ -> ( 2 ^c ( ( 1 / 4 ) x. t ) ) = ( 2 ^c ( t / 4 ) ) )
+s218:s217,s49:eqtr3d |- ( t e. RR+ -> ( 2 ^c ( t / 4 ) ) = ( ( 2 ^c ( 1 / 4 ) ) ^c t ) )
+s219::2cn |- 2 e. CC
+s220:s219:a1i |- ( t e. RR+ -> 2 e. CC )
+s221::2ne0 |- 2 =/= 0
+s222:s221:a1i |- ( t e. RR+ -> 2 =/= 0 )
+s223::4cn |- 4 e. CC
+s224:s223:a1i |- ( t e. RR+ -> 4 e. CC )
+s225::4ne0 |- 4 =/= 0
+s226:s225:a1i |- ( t e. RR+ -> 4 =/= 0 )
+s227:s43,s224,s226:divcld |- ( t e. RR+ -> ( t / 4 ) e. CC )
+s228:s220,s222,s227:cxpnegd |- ( t e. RR+ -> ( 2 ^c -u ( t / 4 ) ) = ( 1 / ( 2 ^c ( t / 4 ) ) ) )
+s229:s218:eqcomd |- ( t e. RR+ -> ( ( 2 ^c ( 1 / 4 ) ) ^c t ) = ( 2 ^c ( t / 4 ) ) )
+s230:s45,s229:oveq12d |- ( t e. RR+ -> ( ( t ^c 0 ) / ( ( 2 ^c ( 1 / 4 ) ) ^c t ) ) = ( 1 / ( 2 ^c ( t / 4 ) ) ) )
+s231:s230,s228:eqtr4d |- ( t e. RR+ -> ( ( t ^c 0 ) / ( ( 2 ^c ( 1 / 4 ) ) ^c t ) ) = ( 2 ^c -u ( t / 4 ) ) )
+s232:s231:mpteq2ia |- ( t e. RR+ |-> ( ( t ^c 0 ) / ( ( 2 ^c ( 1 / 4 ) ) ^c t ) ) ) = ( t e. RR+ |-> ( 2 ^c -u ( t / 4 ) ) )
+qed:s232,s41:eqbrtrri |- ( t e. RR+ |-> ( 2 ^c -u ( t / 4 ) ) ) ~~>r 0
+$)

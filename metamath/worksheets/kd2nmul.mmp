@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=kd2nmul  LOC_AFTER=?
+
+* Lean ` KDerivDetect.nat_mul_pow_le_pow ` : ` N a^N <_ b^N ` for ` 2 a <_ b ` , ` 0 <_ a ` ( ~ bernneq3 ).
+
+s1::simp1 |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( A e. RR /\ 0 <_ A ) )
+s2::simp2 |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( B e. RR /\ ( 2 x. A ) <_ B ) )
+s3:s1:simpld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> A e. RR )
+s4:s1:simprd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> 0 <_ A )
+s5:s2:simpld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> B e. RR )
+s6:s2:simprd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( 2 x. A ) <_ B )
+s7::simp3 |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> N e. NN0 )
+s8::2z |- 2 e. ZZ
+i9::uzid
+s10:s8,i9:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s11:s10:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> 2 e. ( ZZ>= ` 2 ) )
+i12::bernneq3
+s13:s11,s7,i12:syl2anc |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> N < ( 2 ^ N ) )
+s14:s7:nn0red |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> N e. RR )
+s15::2re |- 2 e. RR
+s16:s15:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> 2 e. RR )
+s17:s16,s7:reexpcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( 2 ^ N ) e. RR )
+s18:s3,s7:reexpcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( A ^ N ) e. RR )
+s19:s14,s17,s13:ltled |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> N <_ ( 2 ^ N ) )
+s20:s3,s7,s4:expge0d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> 0 <_ ( A ^ N ) )
+s21:s14,s17,s18,s20,s19:lemul1ad |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( N x. ( A ^ N ) ) <_ ( ( 2 ^ N ) x. ( A ^ N ) ) )
+s22::2cn |- 2 e. CC
+s23:s22:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> 2 e. CC )
+s24:s3:recnd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> A e. CC )
+s25:s23,s24,s7:mulexpd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( ( 2 x. A ) ^ N ) = ( ( 2 ^ N ) x. ( A ^ N ) ) )
+s26:s16,s3:remulcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( 2 x. A ) e. RR )
+s27::0le2 |- 0 <_ 2
+s28:s27:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> 0 <_ 2 )
+s29:s16,s3,s28,s4:mulge0d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> 0 <_ ( 2 x. A ) )
+s30:s26,s5,s7,s29,s6:leexp1ad |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( ( 2 x. A ) ^ N ) <_ ( B ^ N ) )
+s31:s25,s30:eqbrtrrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( ( 2 ^ N ) x. ( A ^ N ) ) <_ ( B ^ N ) )
+s32:s14,s18:remulcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( N x. ( A ^ N ) ) e. RR )
+s33:s17,s18:remulcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( ( 2 ^ N ) x. ( A ^ N ) ) e. RR )
+s34:s5,s7:reexpcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( B ^ N ) e. RR )
+s35:s32,s33,s34,s21,s31:letrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( N x. ( A ^ N ) ) <_ ( B ^ N ) )
+qed:s35:idi |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( B e. RR /\ ( 2 x. A ) <_ B ) /\ N e. NN0 ) -> ( N x. ( A ^ N ) ) <_ ( B ^ N ) )
+$)

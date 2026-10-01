@@ -1,0 +1,69 @@
+$( <MM> <PROOF_ASST> THEOREM=slitq  LOC_AFTER=?
+
+* A quotient ` U / V ` with ` abs ( U - V ) < M <_ abs V ` lies in the slit plane: its distance from ` 1 ` is below ` 1 ` .
+
+s1::simpl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( U e. CC /\ V e. CC ) )
+s2::simpr |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) )
+i3::simpl
+s4:s1,i3:syl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> U e. CC )
+i5::simpr
+s6:s1,i5:syl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> V e. CC )
+i7::simp1
+s8:s2,i7:syl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> M e. RR+ )
+i9::simp2
+s10:s2,i9:syl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> M <_ ( abs ` V ) )
+i11::simp3
+s12:s2,i11:syl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( U - V ) ) < M )
+s13:s8:rpred |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> M e. RR )
+s14:s8:rpgt0d |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> 0 < M )
+s15:s6:abscld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` V ) e. RR )
+s16::0red |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> 0 e. RR )
+s17:s16,s13,s15,s14,s10:ltletrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> 0 < ( abs ` V ) )
+i18::absgt0
+s19:s6,i18:syl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( V =/= 0 <-> 0 < ( abs ` V ) ) )
+s20:s17,s19:mpbird |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> V =/= 0 )
+s21:s4,s6,s20:divcld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( U / V ) e. CC )
+s22::1cnd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> 1 e. CC )
+s23:s4,s6,s6,s20:divsubdird |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( U - V ) / V ) = ( ( U / V ) - ( V / V ) ) )
+s24:s6,s20:dividd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( V / V ) = 1 )
+s25:s24:oveq2d |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( U / V ) - ( V / V ) ) = ( ( U / V ) - 1 ) )
+s26:s23,s25:eqtrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( U - V ) / V ) = ( ( U / V ) - 1 ) )
+s27:s4,s6:subcld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( U - V ) e. CC )
+s28:s27,s6,s20:absdivd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( ( U - V ) / V ) ) = ( ( abs ` ( U - V ) ) / ( abs ` V ) ) )
+s29:s26:fveq2d |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( ( U - V ) / V ) ) = ( abs ` ( ( U / V ) - 1 ) ) )
+s30:s29,s28:eqtr3d |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( ( U / V ) - 1 ) ) = ( ( abs ` ( U - V ) ) / ( abs ` V ) ) )
+s31:s15,s17:elrpd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` V ) e. RR+ )
+s32:s27:abscld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( U - V ) ) e. RR )
+s33:s32,s13,s15,s12,s10:ltletrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( U - V ) ) < ( abs ` V ) )
+s34:s15:recnd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` V ) e. CC )
+s35:s34:mulridd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( abs ` V ) x. 1 ) = ( abs ` V ) )
+s36:s35:eqcomd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` V ) = ( ( abs ` V ) x. 1 ) )
+s37:s33,s36:breqtrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( U - V ) ) < ( ( abs ` V ) x. 1 ) )
+s38::1red |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> 1 e. RR )
+s39:s32,s38,s31:ltdivmuld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( ( abs ` ( U - V ) ) / ( abs ` V ) ) < 1 <-> ( abs ` ( U - V ) ) < ( ( abs ` V ) x. 1 ) ) )
+s40:s37,s39:mpbird |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( abs ` ( U - V ) ) / ( abs ` V ) ) < 1 )
+s41:s30,s40:eqbrtrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( ( U / V ) - 1 ) ) < 1 )
+s42:s22,s21:subcld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( 1 - ( U / V ) ) e. CC )
+i43::releabs
+s44:s42,i43:syl |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( Re ` ( 1 - ( U / V ) ) ) <_ ( abs ` ( 1 - ( U / V ) ) ) )
+i45::resub
+s46:s22,s21,i45:syl2anc |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( Re ` ( 1 - ( U / V ) ) ) = ( ( Re ` 1 ) - ( Re ` ( U / V ) ) ) )
+s47::re1 |- ( Re ` 1 ) = 1
+s48:s47:a1i |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( Re ` 1 ) = 1 )
+s49:s48:oveq1d |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( Re ` 1 ) - ( Re ` ( U / V ) ) ) = ( 1 - ( Re ` ( U / V ) ) ) )
+s50:s46,s49:eqtrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( Re ` ( 1 - ( U / V ) ) ) = ( 1 - ( Re ` ( U / V ) ) ) )
+s51:s22,s21:abssubd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( 1 - ( U / V ) ) ) = ( abs ` ( ( U / V ) - 1 ) ) )
+s52:s50,s44:eqbrtrrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( 1 - ( Re ` ( U / V ) ) ) <_ ( abs ` ( 1 - ( U / V ) ) ) )
+s53:s52,s51:breqtrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( 1 - ( Re ` ( U / V ) ) ) <_ ( abs ` ( ( U / V ) - 1 ) ) )
+s54:s21:recld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( Re ` ( U / V ) ) e. RR )
+s55::1red |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> 1 e. RR )
+s56:s55,s54:resubcld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( 1 - ( Re ` ( U / V ) ) ) e. RR )
+s57:s21,s22:subcld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( ( U / V ) - 1 ) e. CC )
+s58:s57:abscld |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( abs ` ( ( U / V ) - 1 ) ) e. RR )
+s59:s56,s58,s55,s53,s41:lelttrd |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( 1 - ( Re ` ( U / V ) ) ) < 1 )
+i60::ltsubpos
+s61:s54,s55,i60:syl2anc |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( 0 < ( Re ` ( U / V ) ) <-> ( 1 - ( Re ` ( U / V ) ) ) < 1 ) )
+s62:s59,s61:mpbird |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> 0 < ( Re ` ( U / V ) ) )
+i63::elslitre
+qed:s21,s62,i63:syl2anc |- ( ( ( U e. CC /\ V e. CC ) /\ ( M e. RR+ /\ M <_ ( abs ` V ) /\ ( abs ` ( U - V ) ) < M ) ) -> ( U / V ) e. ( CC \ ( -oo (,] 0 ) ) )
+$)

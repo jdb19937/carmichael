@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=algcsnz  LOC_AFTER=?
+
+* A word with a letter prepended is nonempty (Lean: List.cons_ne_nil).
+
+s1::simpl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> P e. NN0 )
+i2::s1cl
+s3:s1,i2:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> <" P "> e. Word NN0 )
+s4::simpr |- ( ( P e. NN0 /\ W e. Word NN0 ) -> W e. Word NN0 )
+i5::ccat0
+s6:s3,s4,i5:syl2anc |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( <" P "> ++ W ) = (/) <-> ( <" P "> = (/) /\ W = (/) ) ) )
+s7::s1nz |- <" P "> =/= (/)
+i8::neneq
+s9:s7,i8:ax-mp |- -. <" P "> = (/)
+s10:s9:a1i |- ( ( P e. NN0 /\ W e. Word NN0 ) -> -. <" P "> = (/) )
+s11:s10:intnanrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> -. ( <" P "> = (/) /\ W = (/) ) )
+s12:s6,s11:mtbird |- ( ( P e. NN0 /\ W e. Word NN0 ) -> -. ( <" P "> ++ W ) = (/) )
+qed:s12:neqned |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( <" P "> ++ W ) =/= (/) )
+$)

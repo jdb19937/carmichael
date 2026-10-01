@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=algdjun  LOC_AFTER=?
+
+* Elimination of a disjoint union with a one-element right summand: an element that is not ` none ` is ` some ` of its second projection, and that projection lies in the left summand.  This is what turns Lean's ` match t r with | some W => ... ` into ` ( 2nd ` ( t ` r ) ) ` in ~ df-dpgos and ~ df-extractgos .
+
+s1::simpl |- ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) -> X e. ( A |_| 1o ) )
+s2::simpr |- ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) -> X =/= ( inr ` (/) ) )
+s3::djuss |- ( A |_| 1o ) C_ ( { (/) , 1o } X. ( A u. 1o ) )
+s4:s3:a1i |- ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) -> ( A |_| 1o ) C_ ( { (/) , 1o } X. ( A u. 1o ) ) )
+s5:s4,s1:sseldd |- ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) -> X e. ( { (/) , 1o } X. ( A u. 1o ) ) )
+i6::1st2nd2
+s7:s5,i6:syl |- ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) -> X = <. ( 1st ` X ) , ( 2nd ` X ) >. )
+i8::eldju1st
+s9:s1,i8:syl |- ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) -> ( ( 1st ` X ) = (/) \/ ( 1st ` X ) = 1o ) )
+s10:s1:adantr |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> X e. ( A |_| 1o ) )
+s11::simpr |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> ( 1st ` X ) = (/) )
+i12::eldju2ndl
+s13:s10,s11,i12:syl2anc |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> ( 2nd ` X ) e. A )
+s14:s7:adantr |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> X = <. ( 1st ` X ) , ( 2nd ` X ) >. )
+s15:s11:opeq1d |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> <. ( 1st ` X ) , ( 2nd ` X ) >. = <. (/) , ( 2nd ` X ) >. )
+s16::fvex |- ( 2nd ` X ) e. _V
+s17:s16:a1i |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> ( 2nd ` X ) e. _V )
+i18::inlval
+s19:s17,i18:syl |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> ( inl ` ( 2nd ` X ) ) = <. (/) , ( 2nd ` X ) >. )
+s20:s14,s15:eqtrd |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> X = <. (/) , ( 2nd ` X ) >. )
+s21:s20,s19:eqtr4d |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> X = ( inl ` ( 2nd ` X ) ) )
+s22:s13,s21:jca |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = (/) ) -> ( ( 2nd ` X ) e. A /\ X = ( inl ` ( 2nd ` X ) ) ) )
+s23:s1:adantr |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> X e. ( A |_| 1o ) )
+s24::simpr |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> ( 1st ` X ) = 1o )
+s25::1n0 |- 1o =/= (/)
+s26:s25:a1i |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> 1o =/= (/) )
+s27:s24,s26:eqnetrd |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> ( 1st ` X ) =/= (/) )
+i28::eldju2ndr
+s29:s23,s27,i28:syl2anc |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> ( 2nd ` X ) e. 1o )
+s30::el1o |- ( ( 2nd ` X ) e. 1o <-> ( 2nd ` X ) = (/) )
+s31:s30:a1i |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> ( ( 2nd ` X ) e. 1o <-> ( 2nd ` X ) = (/) ) )
+s32:s29,s31:mpbid |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> ( 2nd ` X ) = (/) )
+s33:s7:adantr |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> X = <. ( 1st ` X ) , ( 2nd ` X ) >. )
+s34:s24,s32:opeq12d |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> <. ( 1st ` X ) , ( 2nd ` X ) >. = <. 1o , (/) >. )
+s35::0ex |- (/) e. _V
+s36:s35:a1i |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> (/) e. _V )
+i37::inrval
+s38:s36,i37:syl |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> ( inr ` (/) ) = <. 1o , (/) >. )
+s39:s33,s34:eqtrd |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> X = <. 1o , (/) >. )
+s40:s39,s38:eqtr4d |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> X = ( inr ` (/) ) )
+s41:s2:adantr |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> X =/= ( inr ` (/) ) )
+s42:s41:neneqd |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> -. X = ( inr ` (/) ) )
+s43:s40,s42:pm2.21dd |- ( ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) /\ ( 1st ` X ) = 1o ) -> ( ( 2nd ` X ) e. A /\ X = ( inl ` ( 2nd ` X ) ) ) )
+qed:s22,s43,s9:mpjaodan |- ( ( X e. ( A |_| 1o ) /\ X =/= ( inr ` (/) ) ) -> ( ( 2nd ` X ) e. A /\ X = ( inl ` ( 2nd ` X ) ) ) )
+$)

@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=ell2rp  LOC_AFTER=?
+
+* ell2 N is a positive real for N >= 3 (log N > 1 since _e < 3; ScalesTM.lean hl2pos).
+
+s1::id |- ( N e. ( ZZ>= ` 3 ) -> N e. ( ZZ>= ` 3 ) )
+i2::uzuzle23
+s3:s1,i2:syl |- ( N e. ( ZZ>= ` 3 ) -> N e. ( ZZ>= ` 2 ) )
+i4::eluz2nn
+s5:s3,i4:syl |- ( N e. ( ZZ>= ` 3 ) -> N e. NN )
+s6:s5:nnnn0d |- ( N e. ( ZZ>= ` 3 ) -> N e. NN0 )
+s7:s5:nnrpd |- ( N e. ( ZZ>= ` 3 ) -> N e. RR+ )
+i8::eluz2gt1
+s9:s3,i8:syl |- ( N e. ( ZZ>= ` 3 ) -> 1 < N )
+i10::loggt0b
+s11:s7,i10:syl |- ( N e. ( ZZ>= ` 3 ) -> ( 0 < ( log ` N ) <-> 1 < N ) )
+s12:s9,s11:mpbird |- ( N e. ( ZZ>= ` 3 ) -> 0 < ( log ` N ) )
+i13::relogcl
+s14:s7,i13:syl |- ( N e. ( ZZ>= ` 3 ) -> ( log ` N ) e. RR )
+s15:s14,s12:elrpd |- ( N e. ( ZZ>= ` 3 ) -> ( log ` N ) e. RR+ )
+i16::ell2val
+s17:s6,i16:syl |- ( N e. ( ZZ>= ` 3 ) -> ( ell2 ` N ) = ( log ` ( log ` N ) ) )
+s18::ere |- _e e. RR
+s19:s18:a1i |- ( N e. ( ZZ>= ` 3 ) -> _e e. RR )
+s20::3re |- 3 e. RR
+s21:s20:a1i |- ( N e. ( ZZ>= ` 3 ) -> 3 e. RR )
+s22:s7:rpred |- ( N e. ( ZZ>= ` 3 ) -> N e. RR )
+s23::egt2lt3 |- ( 2 < _e /\ _e < 3 )
+s24:s23:simpri |- _e < 3
+s25:s24:a1i |- ( N e. ( ZZ>= ` 3 ) -> _e < 3 )
+i26::eluzle
+s27:s1,i26:syl |- ( N e. ( ZZ>= ` 3 ) -> 3 <_ N )
+s28:s19,s21,s22,s25,s27:ltletrd |- ( N e. ( ZZ>= ` 3 ) -> _e < N )
+s29::epr |- _e e. RR+
+s30:s29:a1i |- ( N e. ( ZZ>= ` 3 ) -> _e e. RR+ )
+i31::logltb
+s32:s30,s7,i31:syl2anc |- ( N e. ( ZZ>= ` 3 ) -> ( _e < N <-> ( log ` _e ) < ( log ` N ) ) )
+s33:s28,s32:mpbid |- ( N e. ( ZZ>= ` 3 ) -> ( log ` _e ) < ( log ` N ) )
+s34::loge |- ( log ` _e ) = 1
+s35:s34:a1i |- ( N e. ( ZZ>= ` 3 ) -> ( log ` _e ) = 1 )
+s36:s35,s33:eqbrtrrd |- ( N e. ( ZZ>= ` 3 ) -> 1 < ( log ` N ) )
+i37::loggt0b
+s38:s15,i37:syl |- ( N e. ( ZZ>= ` 3 ) -> ( 0 < ( log ` ( log ` N ) ) <-> 1 < ( log ` N ) ) )
+s39:s36,s38:mpbird |- ( N e. ( ZZ>= ` 3 ) -> 0 < ( log ` ( log ` N ) ) )
+i40::relogcl
+s41:s15,i40:syl |- ( N e. ( ZZ>= ` 3 ) -> ( log ` ( log ` N ) ) e. RR )
+s42:s41,s39:elrpd |- ( N e. ( ZZ>= ` 3 ) -> ( log ` ( log ` N ) ) e. RR+ )
+qed:s17,s42:eqeltrd |- ( N e. ( ZZ>= ` 3 ) -> ( ell2 ` N ) e. RR+ )
+$)

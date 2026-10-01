@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=smshle  LOC_AFTER=?
+
+* The smooth-shifted density at one exponent gives it at every smaller exponent (Lean: smooth_shifted_of_le of SearchAlg.lean).
+
+s1::simpl |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) -> ( X e. NN /\ G e. RR ) )
+s2:s1:simpld |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) -> X e. NN )
+s3:s1:simprd |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) -> G e. RR )
+s4::simpr |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) -> ( E e. RR /\ B e. RR /\ E <_ B ) )
+s5:s2:adantr |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> X e. NN )
+s6::simpr |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> x e. ( ZZ>= ` X ) )
+i7::eluznn
+s8:s5,s6,i7:syl2anc |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> x e. NN )
+s9:s4:adantr |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( E e. RR /\ B e. RR /\ E <_ B ) )
+s10:s9,s8:jca |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( ( E e. RR /\ B e. RR /\ E <_ B ) /\ x e. NN ) )
+i11::smshss
+s12:s10,i11:syl |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } C_ { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } )
+s13::fzfi |- ( 0 ... x ) e. Fin
+s14:s13:a1i |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( 0 ... x ) e. Fin )
+i15::rabfi
+s16:s14,i15:syl |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } e. Fin )
+i17::rabfi
+s18:s14,i17:syl |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } e. Fin )
+i19::hashssle
+s20:s16,s12,i19:syl2anc |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) )
+s21:s3:adantr |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> G e. RR )
+s22:s8:nnred |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> x e. RR )
+i23::ppicl
+s24:s22,i23:syl |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( ppi ` x ) e. NN0 )
+s25:s24:nn0red |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( ppi ` x ) e. RR )
+s26:s21,s25:remulcld |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( G x. ( ppi ` x ) ) e. RR )
+i27::hashcl
+s28:s18,i27:syl |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) e. NN0 )
+s29:s28:nn0red |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) e. RR )
+i30::hashcl
+s31:s16,i30:syl |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) e. NN0 )
+s32:s31:nn0red |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) e. RR )
+s33:s26:adantr |- ( ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) /\ ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( G x. ( ppi ` x ) ) e. RR )
+s34:s29:adantr |- ( ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) /\ ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) e. RR )
+s35:s32:adantr |- ( ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) /\ ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) e. RR )
+s36::simpr |- ( ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) /\ ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) )
+s37:s20:adantr |- ( ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) /\ ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) )
+s38:s33,s34,s35,s36,s37:letrd |- ( ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) /\ ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) )
+s39:s38:ex |- ( ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) /\ x e. ( ZZ>= ` X ) ) -> ( ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) -> ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) ) )
+s40:s39:ralimdva |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) -> ( A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) -> A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) ) )
+s41::simp1 |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) /\ A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( X e. NN /\ G e. RR ) )
+s42::simp2 |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) /\ A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( E e. RR /\ B e. RR /\ E <_ B ) )
+s43:s41,s42:jca |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) /\ A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) ) )
+s44::simp3 |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) /\ A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) )
+s45:s43,s40:syl |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) /\ A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> ( A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) -> A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) ) )
+qed:s44,s45:mpd |- ( ( ( X e. NN /\ G e. RR ) /\ ( E e. RR /\ B e. RR /\ E <_ B ) /\ A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - B ) ) ) ) } ) ) -> A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) )
+$)

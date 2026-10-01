@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=ldencbv  LOC_AFTER=?
+
+* The zero-count sum in LOGGED's letters: ` x q r -> y p o ` (closed, ~ cbvsumv , ~ cbvrabv ).
+
+s1::id |- ( x = y -> x = y )
+c1:s1:oveq2d |- ( x = y -> ( N DChrLF x ) = ( N DChrLF y ) )
+c2:c1:fveq1d |- ( x = y -> ( ( N DChrLF x ) ` r ) = ( ( N DChrLF y ) ` r ) )
+c3:c2:eqeq1d |- ( x = y -> ( ( ( N DChrLF x ) ` r ) = 0 <-> ( ( N DChrLF y ) ` r ) = 0 ) )
+c4:c3:anbi2d |- ( x = y -> ( ( r =/= 1 /\ ( ( N DChrLF x ) ` r ) = 0 ) <-> ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) ) )
+c5:c4:rabbidv |- ( x = y -> { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF x ) ` r ) = 0 ) } = { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } )
+c6:s1:oveq2d |- ( x = y -> ( N DChrLF x ) = ( N DChrLF y ) )
+c7:c6:oveq1d |- ( x = y -> ( ( N DChrLF x ) holord q ) = ( ( N DChrLF y ) holord q ) )
+c8:c7:adantr |- ( ( x = y /\ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF x ) ` r ) = 0 ) } ) -> ( ( N DChrLF x ) holord q ) = ( ( N DChrLF y ) holord q ) )
+c9:c5,c8:sumeq12dv |- ( x = y -> sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF x ) ` r ) = 0 ) } ( ( N DChrLF x ) holord q ) = sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord q ) )
+s2:c9:cbvsumv |- sum_ x e. ( Base ` ( DChr ` N ) ) sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF x ) ` r ) = 0 ) } ( ( N DChrLF x ) holord q ) = sum_ y e. ( Base ` ( DChr ` N ) ) sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord q )
+s3::id |- ( q = p -> q = p )
+c10:s3:oveq2d |- ( q = p -> ( ( N DChrLF y ) holord q ) = ( ( N DChrLF y ) holord p ) )
+s4:c10:cbvsumv |- sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord q ) = sum_ p e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord p )
+s5::id |- ( r = o -> r = o )
+c11:s5:neeq1d |- ( r = o -> ( r =/= 1 <-> o =/= 1 ) )
+c12:s5:fveq2d |- ( r = o -> ( ( N DChrLF y ) ` r ) = ( ( N DChrLF y ) ` o ) )
+c13:c12:eqeq1d |- ( r = o -> ( ( ( N DChrLF y ) ` r ) = 0 <-> ( ( N DChrLF y ) ` o ) = 0 ) )
+c14:c11,c13:anbi12d |- ( r = o -> ( ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) <-> ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) ) )
+s6:c14:cbvrabv |- { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } = { o e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) }
+s7:s6:sumeq1i |- sum_ p e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord p ) = sum_ p e. { o e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) } ( ( N DChrLF y ) holord p )
+s8:s4,s7:eqtri |- sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord q ) = sum_ p e. { o e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) } ( ( N DChrLF y ) holord p )
+s9:s8:a1i |- ( y e. ( Base ` ( DChr ` N ) ) -> sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord q ) = sum_ p e. { o e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) } ( ( N DChrLF y ) holord p ) )
+s10:s9:sumeq2i |- sum_ y e. ( Base ` ( DChr ` N ) ) sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF y ) ` r ) = 0 ) } ( ( N DChrLF y ) holord q ) = sum_ y e. ( Base ` ( DChr ` N ) ) sum_ p e. { o e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) } ( ( N DChrLF y ) holord p )
+s11:s2,s10:eqtri |- sum_ x e. ( Base ` ( DChr ` N ) ) sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF x ) ` r ) = 0 ) } ( ( N DChrLF x ) holord q ) = sum_ y e. ( Base ` ( DChr ` N ) ) sum_ p e. { o e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) } ( ( N DChrLF y ) holord p )
+qed:s11:idi |- sum_ x e. ( Base ` ( DChr ` N ) ) sum_ q e. { r e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( r =/= 1 /\ ( ( N DChrLF x ) ` r ) = 0 ) } ( ( N DChrLF x ) holord q ) = sum_ y e. ( Base ` ( DChr ` N ) ) sum_ p e. { o e. ( ( S + ( _i x. -u T ) ) crect ( 1 + ( _i x. T ) ) ) | ( o =/= 1 /\ ( ( N DChrLF y ) ` o ) = 0 ) } ( ( N DChrLF y ) holord p )
+$)

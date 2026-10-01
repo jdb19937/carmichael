@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=zl2npow  LOC_AFTER=?
+
+* The modulus of the power normalizer: ` | e ^ ( Z C ) | = e ^ ( Re Z C ) ` for real ` C ` ( Lean ` norm_exp_mul_ofReal ` ).
+
+s1::simpl |- ( ( Z e. CC /\ C e. RR ) -> Z e. CC )
+s2::simpr |- ( ( Z e. CC /\ C e. RR ) -> C e. RR )
+s3:s2:recnd |- ( ( Z e. CC /\ C e. RR ) -> C e. CC )
+s4:s1,s3:mulcld |- ( ( Z e. CC /\ C e. RR ) -> ( Z x. C ) e. CC )
+i5::absef
+s6:s4,i5:syl |- ( ( Z e. CC /\ C e. RR ) -> ( abs ` ( exp ` ( Z x. C ) ) ) = ( exp ` ( Re ` ( Z x. C ) ) ) )
+s7:s1,s3:mulcomd |- ( ( Z e. CC /\ C e. RR ) -> ( Z x. C ) = ( C x. Z ) )
+s8:s7:fveq2d |- ( ( Z e. CC /\ C e. RR ) -> ( Re ` ( Z x. C ) ) = ( Re ` ( C x. Z ) ) )
+i9::remul2
+s10:s2,s1,i9:syl2anc |- ( ( Z e. CC /\ C e. RR ) -> ( Re ` ( C x. Z ) ) = ( C x. ( Re ` Z ) ) )
+s11:s1:recld |- ( ( Z e. CC /\ C e. RR ) -> ( Re ` Z ) e. RR )
+s12:s11:recnd |- ( ( Z e. CC /\ C e. RR ) -> ( Re ` Z ) e. CC )
+s13:s3,s12:mulcomd |- ( ( Z e. CC /\ C e. RR ) -> ( C x. ( Re ` Z ) ) = ( ( Re ` Z ) x. C ) )
+s14:s8,s10:eqtrd |- ( ( Z e. CC /\ C e. RR ) -> ( Re ` ( Z x. C ) ) = ( C x. ( Re ` Z ) ) )
+s15:s14,s13:eqtrd |- ( ( Z e. CC /\ C e. RR ) -> ( Re ` ( Z x. C ) ) = ( ( Re ` Z ) x. C ) )
+s16:s15:fveq2d |- ( ( Z e. CC /\ C e. RR ) -> ( exp ` ( Re ` ( Z x. C ) ) ) = ( exp ` ( ( Re ` Z ) x. C ) ) )
+qed:s6,s16:eqtrd |- ( ( Z e. CC /\ C e. RR ) -> ( abs ` ( exp ` ( Z x. C ) ) ) = ( exp ` ( ( Re ` Z ) x. C ) ) )
+$)

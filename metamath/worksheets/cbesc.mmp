@@ -1,0 +1,124 @@
+$( <MM> <PROOF_ASST> THEOREM=cbesc  LOC_AFTER=?
+
+* A constant factor of at most eight costs a quarter of M in the exponent (the pattern Lean AlgBudget.lean writes with ` mulE ` and h2c, h4c, h5c, h7c or h8 seven times).
+
+h1::cbesc.1 |- ( ph -> M e. RR )
+h2::cbesc.2 |- ( ph -> ; 1 2 <_ M )
+h3::cbesc.3 |- ( ph -> P e. RR )
+h4::cbesc.4 |- ( ph -> R e. RR )
+h5::cbesc.5 |- ( ph -> ( ( 1 / 4 ) + P ) <_ R )
+h6::cbesc.6 |- ( ph -> K e. RR )
+h7::cbesc.7 |- ( ph -> 0 <_ K )
+h8::cbesc.8 |- ( ph -> K <_ 8 )
+h9::cbesc.9 |- ( ph -> X e. RR )
+h10::cbesc.10 |- ( ph -> 0 <_ X )
+h11::cbesc.11 |- ( ph -> X <_ ( exp ` ( P x. M ) ) )
+s1::1nn0 |- 1 e. NN0
+s2::2nn0 |- 2 e. NN0
+s3:s1,s2:deccl |- ; 1 2 e. NN0
+s4:s3:nn0rei |- ; 1 2 e. RR
+s5:s4:a1i |- ( ph -> ; 1 2 e. RR )
+s6:1,s5:subge0d |- ( ph -> ( 0 <_ ( M - ; 1 2 ) <-> ; 1 2 <_ M ) )
+s7:2,s6:mpbird |- ( ph -> 0 <_ ( M - ; 1 2 ) )
+s8::2nn |- 2 e. NN
+s9:s1,s8:decnncl |- ; 1 2 e. NN
+s10:s9:nngt0i |- 0 < ; 1 2
+s11:s10:a1i |- ( ph -> 0 < ; 1 2 )
+s12:1,s5:resubcld |- ( ph -> ( M - ; 1 2 ) e. RR )
+s13:s12,s5,s7,s11:addgegt0d |- ( ph -> 0 < ( ( M - ; 1 2 ) + ; 1 2 ) )
+s14:1:recnd |- ( ph -> M e. CC )
+s15:s3:nn0cni |- ; 1 2 e. CC
+s16:s15:a1i |- ( ph -> ; 1 2 e. CC )
+s17:s14,s16:negsubd |- ( ph -> ( M + -u ; 1 2 ) = ( M - ; 1 2 ) )
+s18:s17:eqcomd |- ( ph -> ( M - ; 1 2 ) = ( M + -u ; 1 2 ) )
+s19:s16:mulm1d |- ( ph -> ( -u 1 x. ; 1 2 ) = -u ; 1 2 )
+s20:s19:eqcomd |- ( ph -> -u ; 1 2 = ( -u 1 x. ; 1 2 ) )
+s21:s20:oveq2d |- ( ph -> ( M + -u ; 1 2 ) = ( M + ( -u 1 x. ; 1 2 ) ) )
+s22::ax-1cn |- 1 e. CC
+s23:s22:a1i |- ( ph -> 1 e. CC )
+s24:s23,s14:mulcld |- ( ph -> ( 1 x. M ) e. CC )
+s25:s24:addlidd |- ( ph -> ( 0 + ( 1 x. M ) ) = ( 1 x. M ) )
+s26:s25:eqcomd |- ( ph -> ( 1 x. M ) = ( 0 + ( 1 x. M ) ) )
+s27:s14:mullidd |- ( ph -> ( 1 x. M ) = M )
+s28:s27:eqcomd |- ( ph -> M = ( 1 x. M ) )
+s29:s28,s26:eqtrd |- ( ph -> M = ( 0 + ( 1 x. M ) ) )
+s30:s15:mullidi |- ( 1 x. ; 1 2 ) = ; 1 2
+s31:s22,s15:mulneg1i |- ( -u 1 x. ; 1 2 ) = -u ( 1 x. ; 1 2 )
+s32:s30:negeqi |- -u ( 1 x. ; 1 2 ) = -u ; 1 2
+s33:s31,s32:eqtri |- ( -u 1 x. ; 1 2 ) = -u ; 1 2
+s34:s33:a1i |- ( ph -> ( -u 1 x. ; 1 2 ) = -u ; 1 2 )
+s35:s29,s34:oveq12d |- ( ph -> ( M + ( -u 1 x. ; 1 2 ) ) = ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) )
+s36::0cn |- 0 e. CC
+s37:s36:a1i |- ( ph -> 0 e. CC )
+s38:s15:negcli |- -u ; 1 2 e. CC
+s39:s38:a1i |- ( ph -> -u ; 1 2 e. CC )
+s40:s37,s24,s39:add32d |- ( ph -> ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) = ( ( 0 + -u ; 1 2 ) + ( 1 x. M ) ) )
+s41:s38:addlidi |- ( 0 + -u ; 1 2 ) = -u ; 1 2
+s42:s41:a1i |- ( ph -> ( 0 + -u ; 1 2 ) = -u ; 1 2 )
+s43:s42:oveq1d |- ( ph -> ( ( 0 + -u ; 1 2 ) + ( 1 x. M ) ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s44:s40,s43:eqtrd |- ( ph -> ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s45:s18,s21:eqtrd |- ( ph -> ( M - ; 1 2 ) = ( M + ( -u 1 x. ; 1 2 ) ) )
+s46:s45,s35:eqtrd |- ( ph -> ( M - ; 1 2 ) = ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) )
+s47:s46,s44:eqtrd |- ( ph -> ( M - ; 1 2 ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s48::eqidd |- ( ph -> ; 1 2 = ; 1 2 )
+s49:s47,s48:oveq12d |- ( ph -> ( ( M - ; 1 2 ) + ; 1 2 ) = ( ( -u ; 1 2 + ( 1 x. M ) ) + ; 1 2 ) )
+s50:s39,s24,s16:add32d |- ( ph -> ( ( -u ; 1 2 + ( 1 x. M ) ) + ; 1 2 ) = ( ( -u ; 1 2 + ; 1 2 ) + ( 1 x. M ) ) )
+s51:s38,s15:addcomi |- ( -u ; 1 2 + ; 1 2 ) = ( ; 1 2 + -u ; 1 2 )
+s52:s15:negidi |- ( ; 1 2 + -u ; 1 2 ) = 0
+s53:s51,s52:eqtri |- ( -u ; 1 2 + ; 1 2 ) = 0
+s54:s53:a1i |- ( ph -> ( -u ; 1 2 + ; 1 2 ) = 0 )
+s55:s54:oveq1d |- ( ph -> ( ( -u ; 1 2 + ; 1 2 ) + ( 1 x. M ) ) = ( 0 + ( 1 x. M ) ) )
+s56:s50,s55:eqtrd |- ( ph -> ( ( -u ; 1 2 + ( 1 x. M ) ) + ; 1 2 ) = ( 0 + ( 1 x. M ) ) )
+s57:s49,s56:eqtrd |- ( ph -> ( ( M - ; 1 2 ) + ; 1 2 ) = ( 0 + ( 1 x. M ) ) )
+s58:s14,s37:negsubd |- ( ph -> ( M + -u 0 ) = ( M - 0 ) )
+s59:s58:eqcomd |- ( ph -> ( M - 0 ) = ( M + -u 0 ) )
+s60:s37:mulm1d |- ( ph -> ( -u 1 x. 0 ) = -u 0 )
+s61:s60:eqcomd |- ( ph -> -u 0 = ( -u 1 x. 0 ) )
+s62:s61:oveq2d |- ( ph -> ( M + -u 0 ) = ( M + ( -u 1 x. 0 ) ) )
+s63:s24:addlidd |- ( ph -> ( 0 + ( 1 x. M ) ) = ( 1 x. M ) )
+s64:s63:eqcomd |- ( ph -> ( 1 x. M ) = ( 0 + ( 1 x. M ) ) )
+s65:s14:mullidd |- ( ph -> ( 1 x. M ) = M )
+s66:s65:eqcomd |- ( ph -> M = ( 1 x. M ) )
+s67:s66,s64:eqtrd |- ( ph -> M = ( 0 + ( 1 x. M ) ) )
+s68:s22:negcli |- -u 1 e. CC
+s69:s68:mul01i |- ( -u 1 x. 0 ) = 0
+s70:s69:a1i |- ( ph -> ( -u 1 x. 0 ) = 0 )
+s71:s67,s70:oveq12d |- ( ph -> ( M + ( -u 1 x. 0 ) ) = ( ( 0 + ( 1 x. M ) ) + 0 ) )
+s72:s37,s24,s37:add32d |- ( ph -> ( ( 0 + ( 1 x. M ) ) + 0 ) = ( ( 0 + 0 ) + ( 1 x. M ) ) )
+s73:s36:addlidi |- ( 0 + 0 ) = 0
+s74:s73:a1i |- ( ph -> ( 0 + 0 ) = 0 )
+s75:s74:oveq1d |- ( ph -> ( ( 0 + 0 ) + ( 1 x. M ) ) = ( 0 + ( 1 x. M ) ) )
+s76:s72,s75:eqtrd |- ( ph -> ( ( 0 + ( 1 x. M ) ) + 0 ) = ( 0 + ( 1 x. M ) ) )
+s77:s59,s62:eqtrd |- ( ph -> ( M - 0 ) = ( M + ( -u 1 x. 0 ) ) )
+s78:s77,s71:eqtrd |- ( ph -> ( M - 0 ) = ( ( 0 + ( 1 x. M ) ) + 0 ) )
+s79:s78,s76:eqtrd |- ( ph -> ( M - 0 ) = ( 0 + ( 1 x. M ) ) )
+s80:s57,s79:eqtr4d |- ( ph -> ( ( M - ; 1 2 ) + ; 1 2 ) = ( M - 0 ) )
+s81:s13,s80:breqtrd |- ( ph -> 0 < ( M - 0 ) )
+s82::0re |- 0 e. RR
+s83:s82:a1i |- ( ph -> 0 e. RR )
+s84::0red |- ( ph -> 0 e. RR )
+s85:1,s83:resubcld |- ( ph -> ( M - 0 ) e. RR )
+s86:s84,s85,s81:ltled |- ( ph -> 0 <_ ( M - 0 ) )
+s87:1,s83:subge0d |- ( ph -> ( 0 <_ ( M - 0 ) <-> 0 <_ M ) )
+s88:s86,s87:mpbid |- ( ph -> 0 <_ M )
+s89:1,2:cbe8 |- ( ph -> 8 <_ ( exp ` ( ( 1 / 4 ) x. M ) ) )
+i90::rpre
+i91::rpdivcl
+s92::1rp |- 1 e. RR+
+i93::nnrp
+s94::4nn |- 4 e. NN
+s95:s94,i93:ax-mp |- 4 e. RR+
+s96:s92,s95,i91:mp2an |- ( 1 / 4 ) e. RR+
+s97:s96,i90:ax-mp |- ( 1 / 4 ) e. RR
+s98:s97:a1i |- ( ph -> ( 1 / 4 ) e. RR )
+s99::8re |- 8 e. RR
+s100:s99:a1i |- ( ph -> 8 e. RR )
+i101::rpre
+i102::rpdivcl
+i103::nnrp
+s104:s97:a1i |- ( ph -> ( 1 / 4 ) e. RR )
+s105:s104,1:remulcld |- ( ph -> ( ( 1 / 4 ) x. M ) e. RR )
+s106:s105:reefcld |- ( ph -> ( exp ` ( ( 1 / 4 ) x. M ) ) e. RR )
+s107:6,s100,s106,8,s89:letrd |- ( ph -> K <_ ( exp ` ( ( 1 / 4 ) x. M ) ) )
+qed:1,s88,s98,3,4,5,6,7,s107,9,10,11:cbemul |- ( ph -> ( K x. X ) <_ ( exp ` ( R x. M ) ) )
+$)

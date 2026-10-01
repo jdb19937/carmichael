@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=cxpnegle  LOC_AFTER=?
+
+* A negative power of a positive real is antitone in the base.
+
+s1::simpl1 |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> X e. RR+ )
+s2::simpl2 |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> Y e. RR+ )
+s3::simpl3 |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> T e. RR )
+s4::simprl |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> 0 <_ T )
+s5::simprr |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> X <_ Y )
+s6:s1:rpred |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> X e. RR )
+s7:s2:rpred |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> Y e. RR )
+s8:s1:rpge0d |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> 0 <_ X )
+i9::rpcxpcl
+s10:s1,s3,i9:syl2anc |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( X ^c T ) e. RR+ )
+i11::rpcxpcl
+s12:s2,s3,i11:syl2anc |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( Y ^c T ) e. RR+ )
+s13:s6,s7,s3:3jca |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( X e. RR /\ Y e. RR /\ T e. RR ) )
+s14:s8,s4:jca |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( 0 <_ X /\ 0 <_ T ) )
+i15::cxple2a
+s16:s13,s14,s5,i15:syl3anc |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( X ^c T ) <_ ( Y ^c T ) )
+s17:s10:rpred |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( X ^c T ) e. RR )
+s18:s10:rpgt0d |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> 0 < ( X ^c T ) )
+s19:s17,s18:jca |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( ( X ^c T ) e. RR /\ 0 < ( X ^c T ) ) )
+s20:s12:rpred |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( Y ^c T ) e. RR )
+s21:s12:rpgt0d |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> 0 < ( Y ^c T ) )
+s22:s20,s21:jca |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( ( Y ^c T ) e. RR /\ 0 < ( Y ^c T ) ) )
+i23::lerec
+s24:s19,s22,i23:syl2anc |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( ( X ^c T ) <_ ( Y ^c T ) <-> ( 1 / ( Y ^c T ) ) <_ ( 1 / ( X ^c T ) ) ) )
+s25:s16,s24:mpbid |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( 1 / ( Y ^c T ) ) <_ ( 1 / ( X ^c T ) ) )
+s26:s3:recnd |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> T e. CC )
+s27:s2:rpcnd |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> Y e. CC )
+s28:s2:rpne0d |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> Y =/= 0 )
+i29::cxpneg
+s30:s27,s28,s26,i29:syl3anc |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( Y ^c -u T ) = ( 1 / ( Y ^c T ) ) )
+s31:s1:rpcnd |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> X e. CC )
+s32:s1:rpne0d |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> X =/= 0 )
+i33::cxpneg
+s34:s31,s32,s26,i33:syl3anc |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( X ^c -u T ) = ( 1 / ( X ^c T ) ) )
+s35:s30,s25:eqbrtrd |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( Y ^c -u T ) <_ ( 1 / ( X ^c T ) ) )
+s36:s34:eqcomd |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( 1 / ( X ^c T ) ) = ( X ^c -u T ) )
+qed:s35,s36:breqtrd |- ( ( ( X e. RR+ /\ Y e. RR+ /\ T e. RR ) /\ ( 0 <_ T /\ X <_ Y ) ) -> ( Y ^c -u T ) <_ ( X ^c -u T ) )
+$)

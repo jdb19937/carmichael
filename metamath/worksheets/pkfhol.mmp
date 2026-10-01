@@ -1,0 +1,76 @@
+$( <MM> <PROOF_ASST> THEOREM=pkfhol  LOC_AFTER=?
+
+* The Perron integrand ` ( U ^c z ) / z ` is holomorphic on the plane minus the origin ( ~ dvmptdiv , ~ dvcxp2 ).
+
+s1::id |- ( U e. RR+ -> U e. RR+ )
+s2::ssid |- ( CC \ { 0 } ) C_ ( CC \ { 0 } )
+s3:s2:a1i |- ( U e. RR+ -> ( CC \ { 0 } ) C_ ( CC \ { 0 } ) )
+s4:s1,s3:jca |- ( U e. RR+ -> ( U e. RR+ /\ ( CC \ { 0 } ) C_ ( CC \ { 0 } ) ) )
+i5::pkfcn
+s6:s4,i5:syl |- ( U e. RR+ -> ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) )
+s7::cnelprrecn |- CC e. { RR , CC }
+s8:s7:a1i |- ( U e. RR+ -> CC e. { RR , CC } )
+s9::cnrestid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s10:s9:eqcomi |- ( TopOpen ` CCfld ) = ( ( TopOpen ` CCfld ) |`t CC )
+s11::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s12::0cn |- 0 e. CC
+s13:s12:a1i |- ( U e. RR+ -> 0 e. CC )
+i14::cnopnsn
+s15:s13,i14:syl |- ( U e. RR+ -> ( CC \ { 0 } ) e. ( TopOpen ` CCfld ) )
+s16::difss |- ( CC \ { 0 } ) C_ CC
+s17:s16:a1i |- ( U e. RR+ -> ( CC \ { 0 } ) C_ CC )
+s18:s1:adantr |- ( ( U e. RR+ /\ z e. CC ) -> U e. RR+ )
+i19::relogcl
+s20:s18,i19:syl |- ( ( U e. RR+ /\ z e. CC ) -> ( log ` U ) e. RR )
+s21:s20:recnd |- ( ( U e. RR+ /\ z e. CC ) -> ( log ` U ) e. CC )
+s22:s1:adantr |- ( ( U e. RR+ /\ z e. CC ) -> U e. RR+ )
+s23:s22:rpcnd |- ( ( U e. RR+ /\ z e. CC ) -> U e. CC )
+s24::simpr |- ( ( U e. RR+ /\ z e. CC ) -> z e. CC )
+s25:s23,s24:cxpcld |- ( ( U e. RR+ /\ z e. CC ) -> ( U ^c z ) e. CC )
+s26:s21,s25:mulcld |- ( ( U e. RR+ /\ z e. CC ) -> ( ( log ` U ) x. ( U ^c z ) ) e. CC )
+i27::dvcxp2
+s28:s1,i27:syl |- ( U e. RR+ -> ( CC _D ( z e. CC |-> ( U ^c z ) ) ) = ( z e. CC |-> ( ( log ` U ) x. ( U ^c z ) ) ) )
+s29:s8,s25,s26,s28,s17,s10,s11,s15:dvmptres |- ( U e. RR+ -> ( CC _D ( z e. ( CC \ { 0 } ) |-> ( U ^c z ) ) ) = ( z e. ( CC \ { 0 } ) |-> ( ( log ` U ) x. ( U ^c z ) ) ) )
+s30::ax-1cn |- 1 e. CC
+s31:s30:a1i |- ( ( U e. RR+ /\ z e. CC ) -> 1 e. CC )
+s32:s8:dvmptid |- ( U e. RR+ -> ( CC _D ( z e. CC |-> z ) ) = ( z e. CC |-> 1 ) )
+s33::simpr |- ( ( U e. RR+ /\ z e. CC ) -> z e. CC )
+s34:s8,s33,s31,s32,s17,s10,s11,s15:dvmptres |- ( U e. RR+ -> ( CC _D ( z e. ( CC \ { 0 } ) |-> z ) ) = ( z e. ( CC \ { 0 } ) |-> 1 ) )
+s35::simpr |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> z e. ( CC \ { 0 } ) )
+i36::eldifi
+s37:s35,i36:syl |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> z e. CC )
+s38:s1:adantr |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> U e. RR+ )
+s39:s38:rpcnd |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> U e. CC )
+s40:s39,s37:cxpcld |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( U ^c z ) e. CC )
+s41:s1:adantr |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> U e. RR+ )
+i42::relogcl
+s43:s41,i42:syl |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( log ` U ) e. RR )
+s44:s43:recnd |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( log ` U ) e. CC )
+s45:s44,s40:mulcld |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( ( log ` U ) x. ( U ^c z ) ) e. CC )
+s46::ax-1cn |- 1 e. CC
+s47:s46:a1i |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> 1 e. CC )
+s48:s8,s40,s45,s29,s35,s47,s34:dvmptdiv |- ( U e. RR+ -> ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ) = ( z e. ( CC \ { 0 } ) |-> ( ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) / ( z ^ 2 ) ) ) )
+i49::eldifsn
+s50:s35,i49:sylib |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( z e. CC /\ z =/= 0 ) )
+i51::simpr
+s52:s50,i51:syl |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> z =/= 0 )
+s53:s45,s37:mulcld |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) e. CC )
+s54:s47,s40:mulcld |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( 1 x. ( U ^c z ) ) e. CC )
+s55:s53,s54:subcld |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) e. CC )
+s56::2nn0 |- 2 e. NN0
+s57:s56:a1i |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> 2 e. NN0 )
+s58:s37,s57:expcld |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( z ^ 2 ) e. CC )
+s59::2z |- 2 e. ZZ
+s60:s59:a1i |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> 2 e. ZZ )
+s61:s37,s52,s60:expne0d |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( z ^ 2 ) =/= 0 )
+s62:s55,s58,s61:divcld |- ( ( U e. RR+ /\ z e. ( CC \ { 0 } ) ) -> ( ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) / ( z ^ 2 ) ) e. CC )
+s63::eqid |- ( z e. ( CC \ { 0 } ) |-> ( ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) / ( z ^ 2 ) ) ) = ( z e. ( CC \ { 0 } ) |-> ( ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) / ( z ^ 2 ) ) )
+s64:s62,s63:fmptd |- ( U e. RR+ -> ( z e. ( CC \ { 0 } ) |-> ( ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) / ( z ^ 2 ) ) ) : ( CC \ { 0 } ) --> CC )
+i65::fdm
+s66:s64,i65:syl |- ( U e. RR+ -> dom ( z e. ( CC \ { 0 } ) |-> ( ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) / ( z ^ 2 ) ) ) = ( CC \ { 0 } ) )
+s67:s48:dmeqd |- ( U e. RR+ -> dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ) = dom ( z e. ( CC \ { 0 } ) |-> ( ( ( ( ( log ` U ) x. ( U ^c z ) ) x. z ) - ( 1 x. ( U ^c z ) ) ) / ( z ^ 2 ) ) ) )
+s68:s67,s66:eqtrd |- ( U e. RR+ -> dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ) = ( CC \ { 0 } ) )
+s69:s68:eqcomd |- ( U e. RR+ -> ( CC \ { 0 } ) = dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ) )
+s70:s69:eqimssd |- ( U e. RR+ -> ( CC \ { 0 } ) C_ dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ) )
+qed:s6,s70:jca |- ( U e. RR+ -> ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ) ) )
+$)

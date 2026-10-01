@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=fzprsp  LOC_AFTER=?
+
+* Split a finite product over ` ( 1 ... N ) ` at an index ` M ` in ` NN0 ` below ` N `.  The case ` M = 0 ` is allowed, where the first factor is the empty product.
+
+h1::fzprsp.k |- ( ( ph /\ k e. ( 1 ... N ) ) -> B e. CC )
+h2::fzprsp.m |- ( ph -> M e. NN0 )
+h3::fzprsp.n |- ( ph -> N e. ( ZZ>= ` M ) )
+i1::nn0re
+s2:2,i1:syl |- ( ph -> M e. RR )
+s3:s2:ltp1d |- ( ph -> M < ( M + 1 ) )
+i4::fzdisj
+s5:s3,i4:syl |- ( ph -> ( ( 1 ... M ) i^i ( ( M + 1 ) ... N ) ) = (/) )
+i6::nn0p1nn
+s7:2,i6:syl |- ( ph -> ( M + 1 ) e. NN )
+s8::nnuz |- NN = ( ZZ>= ` 1 )
+s9:s8:a1i |- ( ph -> NN = ( ZZ>= ` 1 ) )
+s10:s7,s9:eleqtrd |- ( ph -> ( M + 1 ) e. ( ZZ>= ` 1 ) )
+i11::fzsplit2
+s12:s10,3,i11:syl2anc |- ( ph -> ( 1 ... N ) = ( ( 1 ... M ) u. ( ( M + 1 ) ... N ) ) )
+s13::fzfid |- ( ph -> ( 1 ... N ) e. Fin )
+qed:s5,s12,s13,1:fprodsplit |- ( ph -> prod_ k e. ( 1 ... N ) B = ( prod_ k e. ( 1 ... M ) B x. prod_ k e. ( ( M + 1 ) ... N ) B ) )
+$)

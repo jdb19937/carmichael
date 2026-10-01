@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=nlogvald  LOC_AFTER=?
+
+* Value of Nlog in the main case: the floor of the logarithm to the base B.
+
+s1::simpl |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> B e. ( ZZ>= ` 2 ) )
+s2::simpr |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> N e. NN )
+i3::eluz2nn
+s4:s1,i3:syl |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> B e. NN )
+s5:s4:nnnn0d |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> B e. NN0 )
+s6:s2:nnnn0d |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> N e. NN0 )
+i7::nlogval
+s8:s5,s6,i7:syl2anc |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B Nlog N ) = if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) )
+i9::eluz2
+s10:s1,i9:sylib |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( 2 e. ZZ /\ B e. ZZ /\ 2 <_ B ) )
+s11:s10:simp3d |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> 2 <_ B )
+s12:s2:nnge1d |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> 1 <_ N )
+s13:s11,s12:jca |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( 2 <_ B /\ 1 <_ N ) )
+s14:s13:iftrued |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) = ( |_ ` ( B logb N ) ) )
+qed:s8,s14:eqtrd |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B Nlog N ) = ( |_ ` ( B logb N ) ) )
+$)

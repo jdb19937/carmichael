@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=gourdvbr  LOC_AFTER=?
+
+* The complex derivative at a point of the domain is the limit of the difference quotient.
+
+s1::simp1 |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> F e. ( D -cn-> CC ) )
+s2::simp2 |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> Z e. dom ( CC _D F ) )
+s3::simp3 |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> C = ( ( CC _D F ) ` Z ) )
+i4::cncff
+s5:s1,i4:syl |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> F : D --> CC )
+i6::cncfrss
+s7:s1,i6:syl |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> D C_ CC )
+s8::dvfcn |- ( CC _D F ) : dom ( CC _D F ) --> CC
+s9:s8:a1i |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> ( CC _D F ) : dom ( CC _D F ) --> CC )
+i10::ffun
+s11:s9,i10:syl |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> Fun ( CC _D F ) )
+i12::funfvbrb
+s13:s11,i12:syl |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> ( Z e. dom ( CC _D F ) <-> Z ( CC _D F ) ( ( CC _D F ) ` Z ) ) )
+s14:s2,s13:mpbid |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> Z ( CC _D F ) ( ( CC _D F ) ` Z ) )
+s15:s14,s3:breqtrrd |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> Z ( CC _D F ) C )
+s16::eqid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( ( TopOpen ` CCfld ) |`t CC )
+s17::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s18::eqid |- ( w e. ( D \ { Z } ) |-> ( ( ( F ` w ) - ( F ` Z ) ) / ( w - Z ) ) ) = ( w e. ( D \ { Z } ) |-> ( ( ( F ` w ) - ( F ` Z ) ) / ( w - Z ) ) )
+s19::ssid |- CC C_ CC
+s20:s19:a1i |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> CC C_ CC )
+s21:s16,s17,s18,s20,s5,s7:eldv |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> ( Z ( CC _D F ) C <-> ( Z e. ( ( int ` ( ( TopOpen ` CCfld ) |`t CC ) ) ` D ) /\ C e. ( ( w e. ( D \ { Z } ) |-> ( ( ( F ` w ) - ( F ` Z ) ) / ( w - Z ) ) ) limCC Z ) ) ) )
+s22:s21,s15:mpbid |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> ( Z e. ( ( int ` ( ( TopOpen ` CCfld ) |`t CC ) ) ` D ) /\ C e. ( ( w e. ( D \ { Z } ) |-> ( ( ( F ` w ) - ( F ` Z ) ) / ( w - Z ) ) ) limCC Z ) ) )
+qed:s22:simprd |- ( ( F e. ( D -cn-> CC ) /\ Z e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` Z ) ) -> C e. ( ( w e. ( D \ { Z } ) |-> ( ( ( F ` w ) - ( F ` Z ) ) / ( w - Z ) ) ) limCC Z ) )
+$)

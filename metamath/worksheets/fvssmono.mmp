@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=fvssmono  LOC_AFTER=?
+
+* A function on _om whose values increase at each successor is monotone under inclusion of indices.
+
+1::simp1    |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> A. n e. _om ( F ` n ) C_ ( F ` suc n ) )
+2::simp2    |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> M e. _om )
+3::simp3    |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> N e. _om )
+4a::nnon
+4:2,4a:syl  |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> M e. On )
+5a::nnon
+5:3,5a:syl  |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> N e. On )
+6a::onsseleq
+6:4,5,6a:syl2anc |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> ( M C_ N <-> ( M e. N \/ M = N ) ) )
+7a::fvssmonolem
+7:3,7a:syl  |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) -> A. m e. N ( F ` m ) C_ ( F ` N ) ) )
+8:1,7:mpd   |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> A. m e. N ( F ` m ) C_ ( F ` N ) )
+9::fveq2    |- ( m = M -> ( F ` m ) = ( F ` M ) )
+10:9:sseq1d |- ( m = M -> ( ( F ` m ) C_ ( F ` N ) <-> ( F ` M ) C_ ( F ` N ) ) )
+11:10:rspccv |- ( A. m e. N ( F ` m ) C_ ( F ` N ) -> ( M e. N -> ( F ` M ) C_ ( F ` N ) ) )
+12:8,11:syl |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> ( M e. N -> ( F ` M ) C_ ( F ` N ) ) )
+13::fveq2   |- ( M = N -> ( F ` M ) = ( F ` N ) )
+14:13:eqimssd |- ( M = N -> ( F ` M ) C_ ( F ` N ) )
+15:14:a1i   |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> ( M = N -> ( F ` M ) C_ ( F ` N ) ) )
+16:12,15:jaod |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> ( ( M e. N \/ M = N ) -> ( F ` M ) C_ ( F ` N ) ) )
+qed:6,16:sylbid |- ( ( A. n e. _om ( F ` n ) C_ ( F ` suc n ) /\ M e. _om /\ N e. _om ) -> ( M C_ N -> ( F ` M ) C_ ( F ` N ) ) )
+$)

@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcnbit  LOC_AFTER=?
+
+* A real number is not a pair whose second component is a bit: the second component of a real is ` 0R ` (~ df-r ), which is neither ` (/) ` nor ` 1o ` .  The alphabet ` Gamma' ` mixes the numerals ` 0 2 3 4 ` with the bit letters ` <. 1 , b >. ` (~ df-gamma ); this is the only structural fact about set.mm's numbers the machine layer uses (blueprint D3).
+
+s1::simpll |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> A e. RR )
+s2::simplr |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> B e. 2o )
+s3::simpr |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> A = <. C , B >. )
+s4::df-r |- RR = ( R. X. { 0R } )
+s5:s1,s4:eleqtrdi |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> A e. ( R. X. { 0R } ) )
+s6:s3,s5:eqeltrrd |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> <. C , B >. e. ( R. X. { 0R } ) )
+s7::opelxp |- ( <. C , B >. e. ( R. X. { 0R } ) <-> ( C e. R. /\ B e. { 0R } ) )
+s8:s6,s7:sylib |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> ( C e. R. /\ B e. { 0R } ) )
+s9:s8:simprd |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> B e. { 0R } )
+i10::elsni
+s11:s9,i10:syl |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> B = 0R )
+s12:s11,s2:eqeltrrd |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> 0R e. 2o )
+i13::bwel2o
+s14:s12,i13:syl |- ( ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) -> ( 0R = (/) \/ 0R = 1o ) )
+s15::enrer |- ~R Er ( P. X. P. )
+s16::1pr |- 1P e. P.
+i17::opelxpi
+s18:s16,s16,i17:mp2an |- <. 1P , 1P >. e. ( P. X. P. )
+i19::ecref
+s20:s15,s18,i19:mp2an |- <. 1P , 1P >. e. [ <. 1P , 1P >. ] ~R
+s21::df-0r |- 0R = [ <. 1P , 1P >. ] ~R
+s22:s20,s21:eleqtrri |- <. 1P , 1P >. e. 0R
+s23::eleq2 |- ( 0R = (/) -> ( <. 1P , 1P >. e. 0R <-> <. 1P , 1P >. e. (/) ) )
+s24:s22,s23:mpbii |- ( 0R = (/) -> <. 1P , 1P >. e. (/) )
+s25::noel |- -. <. 1P , 1P >. e. (/)
+s26:s25,s24:mto |- -. 0R = (/)
+s27::eleq2 |- ( 0R = 1o -> ( <. 1P , 1P >. e. 0R <-> <. 1P , 1P >. e. 1o ) )
+s28:s22,s27:mpbii |- ( 0R = 1o -> <. 1P , 1P >. e. 1o )
+s29::df1o2 |- 1o = { (/) }
+s30:s28,s29:eleqtrdi |- ( 0R = 1o -> <. 1P , 1P >. e. { (/) } )
+i31::elsni
+s32:s30,i31:syl |- ( 0R = 1o -> <. 1P , 1P >. = (/) )
+s33::1pr |- 1P e. P.
+s34:s33:elexi |- 1P e. _V
+s35:s34,s34:opnzi |- <. 1P , 1P >. =/= (/)
+s36::df-ne |- ( <. 1P , 1P >. =/= (/) <-> -. <. 1P , 1P >. = (/) )
+s37:s35,s36:mpbi |- -. <. 1P , 1P >. = (/)
+s38:s37,s32:mto |- -. 0R = 1o
+s39:s26,s38:pm3.2i |- ( -. 0R = (/) /\ -. 0R = 1o )
+s40::ioran |- ( -. ( 0R = (/) \/ 0R = 1o ) <-> ( -. 0R = (/) /\ -. 0R = 1o ) )
+s41:s39,s40:mpbir |- -. ( 0R = (/) \/ 0R = 1o )
+s42:s41,s14:mto |- -. ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. )
+s43::imnan |- ( ( ( A e. RR /\ B e. 2o ) -> -. A = <. C , B >. ) <-> -. ( ( A e. RR /\ B e. 2o ) /\ A = <. C , B >. ) )
+qed:s42,s43:mpbir |- ( ( A e. RR /\ B e. 2o ) -> -. A = <. C , B >. )
+$)

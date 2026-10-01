@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=t15typ  LOC_AFTER=?
+
+* The projections of the type triple of the concrete machine.
+
+s1::df-tmgam |- TMGam = ( ( 0 ..^ 8 ) X. { Gamma' } )
+s2::ovex |- ( 0 ..^ 8 ) e. _V
+s3::snex |- { Gamma' } e. _V
+s4:s2,s3:xpex |- ( ( 0 ..^ 8 ) X. { Gamma' } ) e. _V
+s5:s1,s4:eqeltri |- TMGam e. _V
+s6::df-tmlab |- TMLab = ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) )
+s7::nn0ex |- NN0 e. _V
+i8::wrdexg
+s9:s7,i8:ax-mp |- Word NN0 e. _V
+s10:s9:mptex |- ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) ) e. _V
+s11:s6,s10:eqeltri |- TMLab e. _V
+s12::df-tmlbl |- ( TMLbl C K ) = ( TMLab " { w e. Word ( 0 ... ( ( C + K ) + ; ; 1 0 1 ) ) | ( # ` w ) <_ ; 3 0 } )
+s13:s11:imaex |- ( TMLab " { w e. Word ( 0 ... ( ( C + K ) + ; ; 1 0 1 ) ) | ( # ` w ) <_ ; 3 0 } ) e. _V
+s14:s12,s13:eqeltri |- ( TMLbl C K ) e. _V
+s15::tmstfi |- TMSt e. Fin
+s16:s15:elexi |- TMSt e. _V
+s17::opex |- <. TMGam , ( TMLbl C K ) >. e. _V
+s18::df-tmty |- ( TMTy C K ) = <. <. TMGam , ( TMLbl C K ) >. , TMSt >.
+s19:s18:fveq2i |- ( 1st ` ( TMTy C K ) ) = ( 1st ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. )
+i20::op1stg
+s21:s17,s16,i20:mp2an |- ( 1st ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) = <. TMGam , ( TMLbl C K ) >.
+s22:s19,s21:eqtri |- ( 1st ` ( TMTy C K ) ) = <. TMGam , ( TMLbl C K ) >.
+s23:s22:fveq2i |- ( 1st ` ( 1st ` ( TMTy C K ) ) ) = ( 1st ` <. TMGam , ( TMLbl C K ) >. )
+i24::op1stg
+s25:s5,s14,i24:mp2an |- ( 1st ` <. TMGam , ( TMLbl C K ) >. ) = TMGam
+s26:s23,s25:eqtri |- ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam
+s27:s22:fveq2i |- ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( 2nd ` <. TMGam , ( TMLbl C K ) >. )
+i28::op2ndg
+s29:s5,s14,i28:mp2an |- ( 2nd ` <. TMGam , ( TMLbl C K ) >. ) = ( TMLbl C K )
+s30:s27,s29:eqtri |- ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K )
+s31:s18:fveq2i |- ( 2nd ` ( TMTy C K ) ) = ( 2nd ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. )
+i32::op2ndg
+s33:s17,s16,i32:mp2an |- ( 2nd ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) = TMSt
+s34:s31,s33:eqtri |- ( 2nd ` ( TMTy C K ) ) = TMSt
+qed:s26,s30,s34:3pm3.2i |- ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K ) /\ ( 2nd ` ( TMTy C K ) ) = TMSt )
+$)

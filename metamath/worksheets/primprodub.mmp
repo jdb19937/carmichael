@@ -1,0 +1,61 @@
+$( <MM> <PROOF_ASST> THEOREM=primprodub  LOC_AFTER=?
+
+* The product of 1 + C / ( p x. ( p - 1 ) ) over the primes up to M is at most exp C.
+
+s1::ppsub |- ( ( M e. NN /\ C e. RR+ ) -> ( ( 1 ... M ) i^i Prime ) C_ ( 2 ... M ) )
+s2::simpr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. ( ( 1 ... M ) i^i Prime ) )
+i3::elinel2
+s4:s2,i3:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. Prime )
+s5:s4:iftrued |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) = ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s6:s5:prodeq2dv |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( ( 1 ... M ) i^i Prime ) if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) = prod_ p e. ( ( 1 ... M ) i^i Prime ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s7::simplr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> C e. RR+ )
+i8::prmuz2
+s9:s4,i8:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. ( ZZ>= ` 2 ) )
+i10::uz2m1rp
+s11:s9,i10:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( p x. ( p - 1 ) ) e. RR+ )
+s12:s7,s11:rpdivcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( C / ( p x. ( p - 1 ) ) ) e. RR+ )
+s13:s12:rpcnd |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( C / ( p x. ( p - 1 ) ) ) e. CC )
+s14::1cnd |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> 1 e. CC )
+s15:s14,s13:addcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) e. CC )
+s16:s5,s15:eqeltrd |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) e. CC )
+s17::simpr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 2 ... M ) \ ( ( 1 ... M ) i^i Prime ) ) ) -> p e. ( ( 2 ... M ) \ ( ( 1 ... M ) i^i Prime ) ) )
+i18::ppnotprm
+s19:s17,i18:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 2 ... M ) \ ( ( 1 ... M ) i^i Prime ) ) ) -> -. p e. Prime )
+s20:s19:iffalsed |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 2 ... M ) \ ( ( 1 ... M ) i^i Prime ) ) ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) = 1 )
+s21::fzfi |- ( 2 ... M ) e. Fin
+s22:s21:a1i |- ( ( M e. NN /\ C e. RR+ ) -> ( 2 ... M ) e. Fin )
+s23:s1,s16,s20,s22:fprodss |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( ( 1 ... M ) i^i Prime ) if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) = prod_ p e. ( 2 ... M ) if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) )
+s24::simpr |- ( ( M e. NN /\ C e. RR+ ) -> C e. RR+ )
+s25:s24:adantr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> C e. RR+ )
+s26::simpr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> p e. ( 2 ... M ) )
+i27::fz2m1rp
+s28:s26,i27:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( p x. ( p - 1 ) ) e. RR+ )
+s29:s25,s28:rpdivcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( C / ( p x. ( p - 1 ) ) ) e. RR+ )
+s30:s29:rpred |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( C / ( p x. ( p - 1 ) ) ) e. RR )
+s31:s29:rpge0d |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> 0 <_ ( C / ( p x. ( p - 1 ) ) ) )
+s32::1red |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> 1 e. RR )
+s33::0le1 |- 0 <_ 1
+s34:s33:a1i |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> 0 <_ 1 )
+s35:s32,s30:readdcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) e. RR )
+s36:s32,s30,s34,s31:addge0d |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> 0 <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s37:s35,s32:ifcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) e. RR )
+s38::breq2 |- ( ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) = if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) -> ( 0 <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) <-> 0 <_ if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) ) )
+s39::breq2 |- ( 1 = if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) -> ( 0 <_ 1 <-> 0 <_ if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) ) )
+s40:s36:adantr |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ p e. Prime ) -> 0 <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s41:s34:adantr |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> 0 <_ 1 )
+s42:s38,s39,s40,s41:ifbothda |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> 0 <_ if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) )
+s43::ppifle |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s44::nfv |- F/ p ( M e. NN /\ C e. RR+ )
+s45:s44,s22,s37,s42,s35,s43:fprodle |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( 2 ... M ) if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) <_ prod_ p e. ( 2 ... M ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s46::cbvprodv |- prod_ p e. ( 2 ... M ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) = prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) )
+s47:s46:a1i |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( 2 ... M ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) = prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) )
+s48::prodefub |- ( ( M e. NN /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) )
+s49:s47,s48:eqbrtrd |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( 2 ... M ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) <_ ( exp ` C ) )
+s50:s22,s37:fprodrecl |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( 2 ... M ) if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) e. RR )
+s51:s22,s35:fprodrecl |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( 2 ... M ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) e. RR )
+s52:s24:rpred |- ( ( M e. NN /\ C e. RR+ ) -> C e. RR )
+s53:s52:reefcld |- ( ( M e. NN /\ C e. RR+ ) -> ( exp ` C ) e. RR )
+s54:s50,s51,s53,s45,s49:letrd |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( 2 ... M ) if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) <_ ( exp ` C ) )
+s55:s6,s23:eqtr3d |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( ( 1 ... M ) i^i Prime ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) = prod_ p e. ( 2 ... M ) if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) )
+qed:s55,s54:eqbrtrd |- ( ( M e. NN /\ C e. RR+ ) -> prod_ p e. ( ( 1 ... M ) i^i Prime ) ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) <_ ( exp ` C ) )
+$)

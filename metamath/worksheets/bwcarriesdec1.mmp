@@ -1,0 +1,111 @@
+$( <MM> <PROOF_ASST> THEOREM=bwcarriesdec1  LOC_AFTER=?
+
+* The run decomposition of the carry chain: L is its carries true letters followed by the rest.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+i6::carriesle
+s7:s1,i6:syl |- ( L e. Word 2o -> ( carries ` L ) <_ ( # ` L ) )
+i8::carriescl
+s9:s1,i8:syl |- ( L e. Word 2o -> ( carries ` L ) e. NN0 )
+i10::lencl
+s11:s1,i10:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+i12::elfz2nn0
+s13:s9,s11,s7,i12:syl3anbrc |- ( L e. Word 2o -> ( carries ` L ) e. ( 0 ... ( # ` L ) ) )
+s14:s11:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s15:s14:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+s16:s15:leidd |- ( L e. Word 2o -> ( # ` L ) <_ ( # ` L ) )
+i17::elfz2nn0
+s18:s11,s11,s16,i17:syl3anbrc |- ( L e. Word 2o -> ( # ` L ) e. ( 0 ... ( # ` L ) ) )
+i19::ccatpfx
+s20:s1,s13,s18,i19:syl3anc |- ( L e. Word 2o -> ( ( L prefix ( carries ` L ) ) ++ ( L substr <. ( carries ` L ) , ( # ` L ) >. ) ) = ( L prefix ( # ` L ) ) )
+i21::pfxid
+s22:s1,i21:syl |- ( L e. Word 2o -> ( L prefix ( # ` L ) ) = L )
+s23:s20,s22:eqtrd |- ( L e. Word 2o -> ( ( L prefix ( carries ` L ) ) ++ ( L substr <. ( carries ` L ) , ( # ` L ) >. ) ) = L )
+i24::pfxcl
+s25:s1,i24:syl |- ( L e. Word 2o -> ( L prefix ( carries ` L ) ) e. Word 2o )
+i26::pfxlen
+s27:s1,s13,i26:syl2anc |- ( L e. Word 2o -> ( # ` ( L prefix ( carries ` L ) ) ) = ( carries ` L ) )
+s28:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+s29:s28:znegcld |- ( L e. Word 2o -> -u ( toNat ` L ) e. ZZ )
+s30::1z |- 1 e. ZZ
+s31:s30:a1i |- ( L e. Word 2o -> 1 e. ZZ )
+s32:s29,s31:zsubcld |- ( L e. Word 2o -> ( -u ( toNat ` L ) - 1 ) e. ZZ )
+i33::carriesdvds
+s34:s1,i33:syl |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) || ( ( toNat ` L ) + 1 ) )
+s35::2z |- 2 e. ZZ
+s36:s35:a1i |- ( L e. Word 2o -> 2 e. ZZ )
+s37:s36,s9:zexpcld |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) e. ZZ )
+s38:s30:a1i |- ( L e. Word 2o -> 1 e. ZZ )
+s39:s28,s38:zaddcld |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. ZZ )
+i40::dvdsnegb
+s41:s37,s39,i40:syl2anc |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) || ( ( toNat ` L ) + 1 ) <-> ( 2 ^ ( carries ` L ) ) || -u ( ( toNat ` L ) + 1 ) ) )
+s42:s34,s41:mpbid |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) || -u ( ( toNat ` L ) + 1 ) )
+s43:s28:zred |- ( L e. Word 2o -> ( toNat ` L ) e. RR )
+s44:s43:recnd |- ( L e. Word 2o -> ( toNat ` L ) e. CC )
+s45::1cnd |- ( L e. Word 2o -> 1 e. CC )
+i46::negdi2
+s47:s44,s45,i46:syl2anc |- ( L e. Word 2o -> -u ( ( toNat ` L ) + 1 ) = ( -u ( toNat ` L ) - 1 ) )
+s48:s42,s47:breqtrd |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) || ( -u ( toNat ` L ) - 1 ) )
+i49::bitsuz
+s50:s32,s9,i49:syl2anc |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) || ( -u ( toNat ` L ) - 1 ) <-> ( bits ` ( -u ( toNat ` L ) - 1 ) ) C_ ( ZZ>= ` ( carries ` L ) ) ) )
+s51:s48,s50:mpbid |- ( L e. Word 2o -> ( bits ` ( -u ( toNat ` L ) - 1 ) ) C_ ( ZZ>= ` ( carries ` L ) ) )
+i52::bitscmp
+s53:s28,i52:syl |- ( L e. Word 2o -> ( NN0 \ ( bits ` ( toNat ` L ) ) ) = ( bits ` ( -u ( toNat ` L ) - 1 ) ) )
+s54::simpr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i e. ( 0 ..^ ( carries ` L ) ) )
+s55:s1:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> L e. Word 2o )
+s56:s13:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( carries ` L ) e. ( 0 ... ( # ` L ) ) )
+i57::pfxfv
+s58:s55,s56,s54,i57:syl3anc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( ( L prefix ( carries ` L ) ) ` i ) = ( L ` i ) )
+i59::elfzonn0
+s60:s54,i59:syl |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i e. NN0 )
+i61::elfzolt2
+s62:s54,i61:syl |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i < ( carries ` L ) )
+s63:s60:nn0zd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i e. ZZ )
+s64:s63:zred |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i e. RR )
+s65:s9:nn0zd |- ( L e. Word 2o -> ( carries ` L ) e. ZZ )
+s66:s65:zred |- ( L e. Word 2o -> ( carries ` L ) e. RR )
+s67:s66:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( carries ` L ) e. RR )
+s68:s15:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( # ` L ) e. RR )
+s69:s7:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( carries ` L ) <_ ( # ` L ) )
+s70:s64,s67,s68,s62,s69:ltletrd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i < ( # ` L ) )
+s71:s14:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( # ` L ) e. ZZ )
+i72::elfzo0z
+s73:s60,s71,s70,i72:syl3anbrc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i e. ( 0 ..^ ( # ` L ) ) )
+s74:s1:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> L e. Word 2o )
+i75::bwfvb
+s76:s74,s73,i75:syl2anc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( ( L ` i ) = 1o <-> i e. ( bits ` ( toNat ` L ) ) ) )
+s77:s66:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( carries ` L ) e. RR )
+s78:s64,s77:ltnled |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( i < ( carries ` L ) <-> -. ( carries ` L ) <_ i ) )
+s79:s62,s78:mpbid |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> -. ( carries ` L ) <_ i )
+s80:s51:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( bits ` ( -u ( toNat ` L ) - 1 ) ) C_ ( ZZ>= ` ( carries ` L ) ) )
+s81:s80:sseld |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( i e. ( bits ` ( -u ( toNat ` L ) - 1 ) ) -> i e. ( ZZ>= ` ( carries ` L ) ) ) )
+i82::eluzle
+s83:s81,i82:syl6 |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( i e. ( bits ` ( -u ( toNat ` L ) - 1 ) ) -> ( carries ` L ) <_ i ) )
+s84:s79,s83:mtod |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> -. i e. ( bits ` ( -u ( toNat ` L ) - 1 ) ) )
+s85:s60,s84:eldifd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i e. ( NN0 \ ( bits ` ( -u ( toNat ` L ) - 1 ) ) ) )
+s86:s53:eqcomd |- ( L e. Word 2o -> ( bits ` ( -u ( toNat ` L ) - 1 ) ) = ( NN0 \ ( bits ` ( toNat ` L ) ) ) )
+s87:s86:difeq2d |- ( L e. Word 2o -> ( NN0 \ ( bits ` ( -u ( toNat ` L ) - 1 ) ) ) = ( NN0 \ ( NN0 \ ( bits ` ( toNat ` L ) ) ) ) )
+s88::bitsss |- ( bits ` ( toNat ` L ) ) C_ NN0
+s89:s88:a1i |- ( L e. Word 2o -> ( bits ` ( toNat ` L ) ) C_ NN0 )
+i90::dfss4
+s91:s89,i90:sylib |- ( L e. Word 2o -> ( NN0 \ ( NN0 \ ( bits ` ( toNat ` L ) ) ) ) = ( bits ` ( toNat ` L ) ) )
+s92:s87,s91:eqtrd |- ( L e. Word 2o -> ( NN0 \ ( bits ` ( -u ( toNat ` L ) - 1 ) ) ) = ( bits ` ( toNat ` L ) ) )
+s93:s92:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( NN0 \ ( bits ` ( -u ( toNat ` L ) - 1 ) ) ) = ( bits ` ( toNat ` L ) ) )
+s94:s85,s93:eleqtrd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> i e. ( bits ` ( toNat ` L ) ) )
+s95:s94,s76:mpbird |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( L ` i ) = 1o )
+s96:s58,s95:eqtrd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( carries ` L ) ) ) -> ( ( L prefix ( carries ` L ) ) ` i ) = 1o )
+s97:s96:ralrimiva |- ( L e. Word 2o -> A. i e. ( 0 ..^ ( carries ` L ) ) ( ( L prefix ( carries ` L ) ) ` i ) = 1o )
+s98:s25,s27,s97:3jca |- ( L e. Word 2o -> ( ( L prefix ( carries ` L ) ) e. Word 2o /\ ( # ` ( L prefix ( carries ` L ) ) ) = ( carries ` L ) /\ A. i e. ( 0 ..^ ( carries ` L ) ) ( ( L prefix ( carries ` L ) ) ` i ) = 1o ) )
+s99::1oel2o |- 1o e. 2o
+s100:s99:a1i |- ( L e. Word 2o -> 1o e. 2o )
+i101::repsdf2
+s102:s100,s9,i101:syl2anc |- ( L e. Word 2o -> ( ( L prefix ( carries ` L ) ) = ( 1o repeatS ( carries ` L ) ) <-> ( ( L prefix ( carries ` L ) ) e. Word 2o /\ ( # ` ( L prefix ( carries ` L ) ) ) = ( carries ` L ) /\ A. i e. ( 0 ..^ ( carries ` L ) ) ( ( L prefix ( carries ` L ) ) ` i ) = 1o ) ) )
+s103:s98,s102:mpbird |- ( L e. Word 2o -> ( L prefix ( carries ` L ) ) = ( 1o repeatS ( carries ` L ) ) )
+s104:s103:oveq1d |- ( L e. Word 2o -> ( ( L prefix ( carries ` L ) ) ++ ( L substr <. ( carries ` L ) , ( # ` L ) >. ) ) = ( ( 1o repeatS ( carries ` L ) ) ++ ( L substr <. ( carries ` L ) , ( # ` L ) >. ) ) )
+s105:s104,s23:eqtr3d |- ( L e. Word 2o -> ( ( 1o repeatS ( carries ` L ) ) ++ ( L substr <. ( carries ` L ) , ( # ` L ) >. ) ) = L )
+qed:s105:eqcomd |- ( L e. Word 2o -> L = ( ( 1o repeatS ( carries ` L ) ) ++ ( L substr <. ( carries ` L ) , ( # ` L ) >. ) ) )
+$)

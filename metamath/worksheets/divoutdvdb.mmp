@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutdvdb  LOC_AFTER=?
+
+* Base of the induction for divoutdvd.
+
+s1::simpl |- ( ( D e. NN /\ r e. NN0 ) -> D e. NN )
+s2::simpr |- ( ( D e. NN /\ r e. NN0 ) -> r e. NN0 )
+i3::divout0
+s4:s1,s2,i3:syl2anc |- ( ( D e. NN /\ r e. NN0 ) -> ( ( D DivOut r ) ` 0 ) = <. r , 0 >. )
+s5:s2:elexd |- ( ( D e. NN /\ r e. NN0 ) -> r e. _V )
+s6::c0ex |- 0 e. _V
+s7:s6:a1i |- ( ( D e. NN /\ r e. NN0 ) -> 0 e. _V )
+s8:s4:fveq2d |- ( ( D e. NN /\ r e. NN0 ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = ( 1st ` <. r , 0 >. ) )
+i9::op1stg
+s10:s5,s7,i9:syl2anc |- ( ( D e. NN /\ r e. NN0 ) -> ( 1st ` <. r , 0 >. ) = r )
+s11:s8,s10:eqtrd |- ( ( D e. NN /\ r e. NN0 ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = r )
+s12:s2:nn0zd |- ( ( D e. NN /\ r e. NN0 ) -> r e. ZZ )
+i13::iddvds
+s14:s12,i13:syl |- ( ( D e. NN /\ r e. NN0 ) -> r || r )
+s15:s11,s14:eqbrtrd |- ( ( D e. NN /\ r e. NN0 ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) || r )
+qed:s15:ralrimiva |- ( D e. NN -> A. r e. NN0 ( 1st ` ( ( D DivOut r ) ` 0 ) ) || r )
+$)

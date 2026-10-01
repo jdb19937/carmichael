@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=incbitslenge  LOC_AFTER=?
+
+* incBits L is at least as long as L.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+s6::incbitslen2 |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+s7::simpr |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) )
+s8:s7:iftrued |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) = ( ( # ` L ) + 1 ) )
+i9::lencl
+s10:s1,i9:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s11:s10:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s12:s11:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+s13:s12:adantr |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. RR )
+s14:s13:lep1d |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) <_ ( ( # ` L ) + 1 ) )
+s15:s14,s8:breqtrrd |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) <_ if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+s16::simpr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) )
+s17:s16:iffalsed |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) = ( # ` L ) )
+s18:s12:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. RR )
+s19:s18:leidd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) <_ ( # ` L ) )
+s20:s19,s17:breqtrrd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) <_ if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+s21:s15,s20:pm2.61dan |- ( L e. Word 2o -> ( # ` L ) <_ if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+qed:s21,s6:breqtrrd |- ( L e. Word 2o -> ( # ` L ) <_ ( # ` ( incBits ` L ) ) )
+$)

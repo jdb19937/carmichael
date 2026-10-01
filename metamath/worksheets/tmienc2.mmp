@@ -1,0 +1,90 @@
+$( <MM> <PROOF_ASST> THEOREM=tmienc2  LOC_AFTER=?
+
+* The stack word of ` pushNum x 2 ` (Lean ` encodeNatGamma 2 ++ comma :: _ ` ): the two bits of ` 2 ` , least significant first, then the terminator.
+
+s1::0nn0 |- 0 e. NN0
+s2:s1:a1i |- ( X e. Word Gamma' -> 0 e. NN0 )
+s3::1nn0 |- 1 e. NN0
+s4:s3:a1i |- ( X e. Word Gamma' -> 1 e. NN0 )
+i5::encnatsuc
+s6:s2,i5:syl |- ( X e. Word Gamma' -> ( encodeNat ` ( 0 + 1 ) ) = ( incBits ` ( encodeNat ` 0 ) ) )
+s7::0p1e1 |- ( 0 + 1 ) = 1
+s8:s7:a1i |- ( X e. Word Gamma' -> ( 0 + 1 ) = 1 )
+s9:s8:fveq2d |- ( X e. Word Gamma' -> ( encodeNat ` ( 0 + 1 ) ) = ( encodeNat ` 1 ) )
+s10::encnat0 |- ( encodeNat ` 0 ) = (/)
+s11:s10:a1i |- ( X e. Word Gamma' -> ( encodeNat ` 0 ) = (/) )
+s12:s11:fveq2d |- ( X e. Word Gamma' -> ( incBits ` ( encodeNat ` 0 ) ) = ( incBits ` (/) ) )
+s13:s9,s6:eqtr3d |- ( X e. Word Gamma' -> ( encodeNat ` 1 ) = ( incBits ` ( encodeNat ` 0 ) ) )
+s14:s13,s12:eqtrd |- ( X e. Word Gamma' -> ( encodeNat ` 1 ) = ( incBits ` (/) ) )
+s15::incbitsnil |- ( incBits ` (/) ) = <" 1o ">
+s16:s15:a1i |- ( X e. Word Gamma' -> ( incBits ` (/) ) = <" 1o "> )
+s17:s14,s16:eqtrd |- ( X e. Word Gamma' -> ( encodeNat ` 1 ) = <" 1o "> )
+i18::encnatsuc
+s19:s4,i18:syl |- ( X e. Word Gamma' -> ( encodeNat ` ( 1 + 1 ) ) = ( incBits ` ( encodeNat ` 1 ) ) )
+s20::1p1e2 |- ( 1 + 1 ) = 2
+s21:s20:a1i |- ( X e. Word Gamma' -> ( 1 + 1 ) = 2 )
+s22:s21:fveq2d |- ( X e. Word Gamma' -> ( encodeNat ` ( 1 + 1 ) ) = ( encodeNat ` 2 ) )
+s23:s17:fveq2d |- ( X e. Word Gamma' -> ( incBits ` ( encodeNat ` 1 ) ) = ( incBits ` <" 1o "> ) )
+s24::1oel2o |- 1o e. 2o
+s25:s24:a1i |- ( X e. Word Gamma' -> 1o e. 2o )
+s26:s25:s1cld |- ( X e. Word Gamma' -> <" 1o "> e. Word 2o )
+i27::ccatrid
+s28:s26,i27:syl |- ( X e. Word Gamma' -> ( <" 1o "> ++ (/) ) = <" 1o "> )
+s29:s28:fveq2d |- ( X e. Word Gamma' -> ( incBits ` ( <" 1o "> ++ (/) ) ) = ( incBits ` <" 1o "> ) )
+s30::wrd0 |- (/) e. Word 2o
+s31:s30:a1i |- ( X e. Word Gamma' -> (/) e. Word 2o )
+i32::incbitscons1
+s33:s31,i32:syl |- ( X e. Word Gamma' -> ( incBits ` ( <" 1o "> ++ (/) ) ) = ( <" (/) "> ++ ( incBits ` (/) ) ) )
+s34::incbitsnil |- ( incBits ` (/) ) = <" 1o ">
+s35:s34:a1i |- ( X e. Word Gamma' -> ( incBits ` (/) ) = <" 1o "> )
+s36:s35:oveq2d |- ( X e. Word Gamma' -> ( <" (/) "> ++ ( incBits ` (/) ) ) = ( <" (/) "> ++ <" 1o "> ) )
+s37:s29,s33:eqtr3d |- ( X e. Word Gamma' -> ( incBits ` <" 1o "> ) = ( <" (/) "> ++ ( incBits ` (/) ) ) )
+s38:s37,s36:eqtrd |- ( X e. Word Gamma' -> ( incBits ` <" 1o "> ) = ( <" (/) "> ++ <" 1o "> ) )
+s39:s22,s19:eqtr3d |- ( X e. Word Gamma' -> ( encodeNat ` 2 ) = ( incBits ` ( encodeNat ` 1 ) ) )
+s40:s39,s23:eqtrd |- ( X e. Word Gamma' -> ( encodeNat ` 2 ) = ( incBits ` <" 1o "> ) )
+s41:s40,s38:eqtrd |- ( X e. Word Gamma' -> ( encodeNat ` 2 ) = ( <" (/) "> ++ <" 1o "> ) )
+s42::2nn0 |- 2 e. NN0
+s43:s42:a1i |- ( X e. Word Gamma' -> 2 e. NN0 )
+i44::encnatgamval
+s45:s43,i44:syl |- ( X e. Word Gamma' -> ( encNatGam ` 2 ) = ( inclBool o. ( encodeNat ` 2 ) ) )
+s46:s41:coeq2d |- ( X e. Word Gamma' -> ( inclBool o. ( encodeNat ` 2 ) ) = ( inclBool o. ( <" (/) "> ++ <" 1o "> ) ) )
+s47:s45,s46:eqtrd |- ( X e. Word Gamma' -> ( encNatGam ` 2 ) = ( inclBool o. ( <" (/) "> ++ <" 1o "> ) ) )
+s48::0el2o |- (/) e. 2o
+s49:s48:a1i |- ( X e. Word Gamma' -> (/) e. 2o )
+s50:s49:s1cld |- ( X e. Word Gamma' -> <" (/) "> e. Word 2o )
+s51::inclboolf |- inclBool : 2o --> Gamma'
+s52:s51:a1i |- ( X e. Word Gamma' -> inclBool : 2o --> Gamma' )
+i53::ccatco
+s54:s50,s26,s52,i53:syl3anc |- ( X e. Word Gamma' -> ( inclBool o. ( <" (/) "> ++ <" 1o "> ) ) = ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. <" 1o "> ) ) )
+i55::s1co
+s56:s49,s52,i55:syl2anc |- ( X e. Word Gamma' -> ( inclBool o. <" (/) "> ) = <" ( inclBool ` (/) ) "> )
+i57::inclboolfv
+s58:s49,i57:syl |- ( X e. Word Gamma' -> ( inclBool ` (/) ) = <. 1 , (/) >. )
+s59:s58:s1eqd |- ( X e. Word Gamma' -> <" ( inclBool ` (/) ) "> = <" <. 1 , (/) >. "> )
+s60:s56,s59:eqtrd |- ( X e. Word Gamma' -> ( inclBool o. <" (/) "> ) = <" <. 1 , (/) >. "> )
+i61::s1co
+s62:s25,s52,i61:syl2anc |- ( X e. Word Gamma' -> ( inclBool o. <" 1o "> ) = <" ( inclBool ` 1o ) "> )
+i63::inclboolfv
+s64:s25,i63:syl |- ( X e. Word Gamma' -> ( inclBool ` 1o ) = <. 1 , 1o >. )
+s65:s64:s1eqd |- ( X e. Word Gamma' -> <" ( inclBool ` 1o ) "> = <" <. 1 , 1o >. "> )
+s66:s62,s65:eqtrd |- ( X e. Word Gamma' -> ( inclBool o. <" 1o "> ) = <" <. 1 , 1o >. "> )
+s67:s60,s66:oveq12d |- ( X e. Word Gamma' -> ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. <" 1o "> ) ) = ( <" <. 1 , (/) >. "> ++ <" <. 1 , 1o >. "> ) )
+s68:s54,s67:eqtrd |- ( X e. Word Gamma' -> ( inclBool o. ( <" (/) "> ++ <" 1o "> ) ) = ( <" <. 1 , (/) >. "> ++ <" <. 1 , 1o >. "> ) )
+s69:s47,s68:eqtrd |- ( X e. Word Gamma' -> ( encNatGam ` 2 ) = ( <" <. 1 , (/) >. "> ++ <" <. 1 , 1o >. "> ) )
+s70:s69:oveq1d |- ( X e. Word Gamma' -> ( ( encNatGam ` 2 ) ++ ( <" 4 "> ++ X ) ) = ( ( <" <. 1 , (/) >. "> ++ <" <. 1 , 1o >. "> ) ++ ( <" 4 "> ++ X ) ) )
+i71::bitgamma
+s72:s49,i71:syl |- ( X e. Word Gamma' -> <. 1 , (/) >. e. Gamma' )
+s73:s72:s1cld |- ( X e. Word Gamma' -> <" <. 1 , (/) >. "> e. Word Gamma' )
+i74::bitgamma
+s75:s25,i74:syl |- ( X e. Word Gamma' -> <. 1 , 1o >. e. Gamma' )
+s76:s75:s1cld |- ( X e. Word Gamma' -> <" <. 1 , 1o >. "> e. Word Gamma' )
+s77::id |- ( X e. Word Gamma' -> X e. Word Gamma' )
+s78::gamma4 |- 4 e. Gamma'
+s79:s78:a1i |- ( X e. Word Gamma' -> 4 e. Gamma' )
+s80:s79:s1cld |- ( X e. Word Gamma' -> <" 4 "> e. Word Gamma' )
+i81::ccatcl
+s82:s80,s77,i81:syl2anc |- ( X e. Word Gamma' -> ( <" 4 "> ++ X ) e. Word Gamma' )
+i83::ccatass
+s84:s73,s76,s82,i83:syl3anc |- ( X e. Word Gamma' -> ( ( <" <. 1 , (/) >. "> ++ <" <. 1 , 1o >. "> ) ++ ( <" 4 "> ++ X ) ) = ( <" <. 1 , (/) >. "> ++ ( <" <. 1 , 1o >. "> ++ ( <" 4 "> ++ X ) ) ) )
+qed:s70,s84:eqtrd |- ( X e. Word Gamma' -> ( ( encNatGam ` 2 ) ++ ( <" 4 "> ++ X ) ) = ( <" <. 1 , (/) >. "> ++ ( <" <. 1 , 1o >. "> ++ ( <" 4 "> ++ X ) ) ) )
+$)

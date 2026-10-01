@@ -1,0 +1,336 @@
+$( <MM> <PROOF_ASST> THEOREM=ttdpbcx  LOC_AFTER=?
+
+* The stage sum of Lean's ` dpBodyF_runs ` is at most ` dpBodyC ` (atoms ` B ` , ` S ` ).
+
+s1::simpl |- ( ( B e. NN0 /\ S e. NN0 ) -> B e. NN0 )
+s2::simpr |- ( ( B e. NN0 /\ S e. NN0 ) -> S e. NN0 )
+s3:s1:nn0zd |- ( ( B e. NN0 /\ S e. NN0 ) -> B e. ZZ )
+s4:s3:zred |- ( ( B e. NN0 /\ S e. NN0 ) -> B e. RR )
+s5:s1:nn0ge0d |- ( ( B e. NN0 /\ S e. NN0 ) -> 0 <_ B )
+s6:s2:nn0zd |- ( ( B e. NN0 /\ S e. NN0 ) -> S e. ZZ )
+s7:s6:zred |- ( ( B e. NN0 /\ S e. NN0 ) -> S e. RR )
+s8:s2:nn0ge0d |- ( ( B e. NN0 /\ S e. NN0 ) -> 0 <_ S )
+s9::2pos |- 0 < 2
+s10:s9:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> 0 < 2 )
+s11::eqidd |- ( ( B e. NN0 /\ S e. NN0 ) -> 2 = 2 )
+s12::5nn0 |- 5 e. NN0
+s13::6nn0 |- 6 e. NN0
+s14:s12,s13:deccl |- ; 5 6 e. NN0
+s15:s14:nn0cni |- ; 5 6 e. CC
+s16:s15:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 5 6 e. CC )
+s17:s4:recnd |- ( ( B e. NN0 /\ S e. NN0 ) -> B e. CC )
+s18:s16,s17:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 5 6 x. B ) e. CC )
+s19::7nn0 |- 7 e. NN0
+s20:s13,s19:deccl |- ; 6 7 e. NN0
+s21:s20:nn0cni |- ; 6 7 e. CC
+s22:s21:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 6 7 e. CC )
+s23:s18,s22:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 x. B ) + ; 6 7 ) e. CC )
+s24:s7:recnd |- ( ( B e. NN0 /\ S e. NN0 ) -> S e. CC )
+s25:s23,s24:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) e. CC )
+s26::2nn0 |- 2 e. NN0
+s27:s26,s12:deccl |- ; 2 5 e. NN0
+s28:s27:nn0cni |- ; 2 5 e. CC
+s29:s28:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 2 5 e. CC )
+s30::2cn |- 2 e. CC
+s31:s30:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> 2 e. CC )
+s32:s31,s17:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 2 x. B ) e. CC )
+s33:s29,s32:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 2 5 x. ( 2 x. B ) ) e. CC )
+s34::3nn0 |- 3 e. NN0
+s35:s12,s34:deccl |- ; 5 3 e. NN0
+s36:s35:nn0cni |- ; 5 3 e. CC
+s37:s36:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 5 3 e. CC )
+s38:s33,s37:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) e. CC )
+s39::6cn |- 6 e. CC
+s40:s39:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> 6 e. CC )
+s41:s40,s17:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 6 x. B ) e. CC )
+s42::1nn0 |- 1 e. NN0
+s43::0nn0 |- 0 e. NN0
+s44:s42,s43:deccl |- ; 1 0 e. NN0
+s45:s44:nn0cni |- ; 1 0 e. CC
+s46:s45:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 1 0 e. CC )
+s47:s41,s46:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 6 x. B ) + ; 1 0 ) e. CC )
+s48:s24,s47:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( S + ( ( 6 x. B ) + ; 1 0 ) ) e. CC )
+s49:s38,s48:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) e. CC )
+s50:s49,s31:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) e. CC )
+s51:s25,s50:negsubd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) + -u ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) )
+s52:s51:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) + -u ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) )
+s53:s50:mulm1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = -u ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) )
+s54:s53:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) = ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) )
+s55:s54:oveq2d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) + -u ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) + ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) ) )
+s56:s18:addlidd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ( ; 5 6 x. B ) ) = ( ; 5 6 x. B ) )
+s57:s56:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 5 6 x. B ) = ( 0 + ( ; 5 6 x. B ) ) )
+s58::eqidd |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 6 7 = ; 6 7 )
+s59:s57,s58:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 x. B ) + ; 6 7 ) = ( ( 0 + ( ; 5 6 x. B ) ) + ; 6 7 ) )
+s60::0cn |- 0 e. CC
+s61:s60:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> 0 e. CC )
+s62:s61,s18,s22:add32d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( ; 5 6 x. B ) ) + ; 6 7 ) = ( ( 0 + ; 6 7 ) + ( ; 5 6 x. B ) ) )
+s63:s21:addlidi |- ( 0 + ; 6 7 ) = ; 6 7
+s64:s63:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ; 6 7 ) = ; 6 7 )
+s65:s64:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ; 6 7 ) + ( ; 5 6 x. B ) ) = ( ; 6 7 + ( ; 5 6 x. B ) ) )
+s66:s62,s65:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( ; 5 6 x. B ) ) + ; 6 7 ) = ( ; 6 7 + ( ; 5 6 x. B ) ) )
+s67:s59,s66:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 x. B ) + ; 6 7 ) = ( ; 6 7 + ( ; 5 6 x. B ) ) )
+s68::ax-1cn |- 1 e. CC
+s69:s68:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> 1 e. CC )
+s70:s69,s24:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 1 x. S ) e. CC )
+s71:s70:addlidd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ( 1 x. S ) ) = ( 1 x. S ) )
+s72:s71:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 1 x. S ) = ( 0 + ( 1 x. S ) ) )
+s73:s24:mullidd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 1 x. S ) = S )
+s74:s73:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> S = ( 1 x. S ) )
+s75:s74,s72:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> S = ( 0 + ( 1 x. S ) ) )
+s76:s67,s75:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) = ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 0 + ( 1 x. S ) ) ) )
+s77:s22,s18:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 6 7 + ( ; 5 6 x. B ) ) e. CC )
+s78:s77,s61,s70:addassd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + 0 ) + ( 1 x. S ) ) = ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 0 + ( 1 x. S ) ) ) )
+s79:s78:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 0 + ( 1 x. S ) ) ) = ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + 0 ) + ( 1 x. S ) ) )
+s80:s22,s18,s61:add32d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + 0 ) = ( ( ; 6 7 + 0 ) + ( ; 5 6 x. B ) ) )
+s81:s21:addridi |- ( ; 6 7 + 0 ) = ; 6 7
+s82:s81:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 6 7 + 0 ) = ; 6 7 )
+s83:s82:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + 0 ) + ( ; 5 6 x. B ) ) = ( ; 6 7 + ( ; 5 6 x. B ) ) )
+s84:s80,s83:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + 0 ) = ( ; 6 7 + ( ; 5 6 x. B ) ) )
+s85:s84:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + 0 ) + ( 1 x. S ) ) = ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) )
+s86:s79,s85:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 0 + ( 1 x. S ) ) ) = ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) )
+s87:s76,s86:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) = ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) )
+s88:s68:negcli |- -u 1 e. CC
+s89:s88:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u 1 e. CC )
+s90:s89,s49,s31:adddid |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( -u 1 x. ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) ) + ( -u 1 x. 2 ) ) )
+s91:s89,s38,s48:adddid |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) ) = ( ( -u 1 x. ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) ) + ( -u 1 x. ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) ) )
+s92:s89,s33,s37:adddid |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) ) = ( ( -u 1 x. ( ; 2 5 x. ( 2 x. B ) ) ) + ( -u 1 x. ; 5 3 ) ) )
+s93:s89,s29,s32:mulassd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. ; 2 5 ) x. ( 2 x. B ) ) = ( -u 1 x. ( ; 2 5 x. ( 2 x. B ) ) ) )
+s94:s93:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ; 2 5 x. ( 2 x. B ) ) ) = ( ( -u 1 x. ; 2 5 ) x. ( 2 x. B ) ) )
+s95:s28:mullidi |- ( 1 x. ; 2 5 ) = ; 2 5
+s96:s68,s28:mulneg1i |- ( -u 1 x. ; 2 5 ) = -u ( 1 x. ; 2 5 )
+s97:s95:negeqi |- -u ( 1 x. ; 2 5 ) = -u ; 2 5
+s98:s96,s97:eqtri |- ( -u 1 x. ; 2 5 ) = -u ; 2 5
+s99:s98:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ; 2 5 ) = -u ; 2 5 )
+s100:s99:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. ; 2 5 ) x. ( 2 x. B ) ) = ( -u ; 2 5 x. ( 2 x. B ) ) )
+s101:s28:negcli |- -u ; 2 5 e. CC
+s102:s101:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ; 2 5 e. CC )
+s103:s102,s31,s17:mulassd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 2 5 x. 2 ) x. B ) = ( -u ; 2 5 x. ( 2 x. B ) ) )
+s104:s103:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 2 5 x. ( 2 x. B ) ) = ( ( -u ; 2 5 x. 2 ) x. B ) )
+s105::2t2e4 |- ( 2 x. 2 ) = 4
+s106:s105:oveq1i |- ( ( 2 x. 2 ) + 1 ) = ( 4 + 1 )
+s107::4p1e5 |- ( 4 + 1 ) = 5
+s108:s106,s107:eqtri |- ( ( 2 x. 2 ) + 1 ) = 5
+s109::eqid |- ; 2 5 = ; 2 5
+s110::5t2e10 |- ( 5 x. 2 ) = ; 1 0
+s111:s26,s26,s12,s109,s43,s42,s108,s110:decmul1c |- ( ; 2 5 x. 2 ) = ; 5 0
+s112:s28,s30:mulneg1i |- ( -u ; 2 5 x. 2 ) = -u ( ; 2 5 x. 2 )
+s113:s111:negeqi |- -u ( ; 2 5 x. 2 ) = -u ; 5 0
+s114:s112,s113:eqtri |- ( -u ; 2 5 x. 2 ) = -u ; 5 0
+s115:s114:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 2 5 x. 2 ) = -u ; 5 0 )
+s116:s115:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 2 5 x. 2 ) x. B ) = ( -u ; 5 0 x. B ) )
+s117:s12,s43:deccl |- ; 5 0 e. NN0
+s118:s117:nn0cni |- ; 5 0 e. CC
+s119:s118:negcli |- -u ; 5 0 e. CC
+s120:s119:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ; 5 0 e. CC )
+s121:s120,s17:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 5 0 x. B ) e. CC )
+s122:s121:addlidd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ( -u ; 5 0 x. B ) ) = ( -u ; 5 0 x. B ) )
+s123:s122:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 5 0 x. B ) = ( 0 + ( -u ; 5 0 x. B ) ) )
+s124:s104,s116:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 2 5 x. ( 2 x. B ) ) = ( -u ; 5 0 x. B ) )
+s125:s124,s123:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 2 5 x. ( 2 x. B ) ) = ( 0 + ( -u ; 5 0 x. B ) ) )
+s126:s94,s100:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ; 2 5 x. ( 2 x. B ) ) ) = ( -u ; 2 5 x. ( 2 x. B ) ) )
+s127:s126,s125:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ; 2 5 x. ( 2 x. B ) ) ) = ( 0 + ( -u ; 5 0 x. B ) ) )
+s128:s36:mullidi |- ( 1 x. ; 5 3 ) = ; 5 3
+s129:s68,s36:mulneg1i |- ( -u 1 x. ; 5 3 ) = -u ( 1 x. ; 5 3 )
+s130:s128:negeqi |- -u ( 1 x. ; 5 3 ) = -u ; 5 3
+s131:s129,s130:eqtri |- ( -u 1 x. ; 5 3 ) = -u ; 5 3
+s132:s131:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ; 5 3 ) = -u ; 5 3 )
+s133:s127,s132:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. ( ; 2 5 x. ( 2 x. B ) ) ) + ( -u 1 x. ; 5 3 ) ) = ( ( 0 + ( -u ; 5 0 x. B ) ) + -u ; 5 3 ) )
+s134:s36:negcli |- -u ; 5 3 e. CC
+s135:s134:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ; 5 3 e. CC )
+s136:s61,s121,s135:add32d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( -u ; 5 0 x. B ) ) + -u ; 5 3 ) = ( ( 0 + -u ; 5 3 ) + ( -u ; 5 0 x. B ) ) )
+s137:s134:addlidi |- ( 0 + -u ; 5 3 ) = -u ; 5 3
+s138:s137:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + -u ; 5 3 ) = -u ; 5 3 )
+s139:s138:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + -u ; 5 3 ) + ( -u ; 5 0 x. B ) ) = ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) )
+s140:s136,s139:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( -u ; 5 0 x. B ) ) + -u ; 5 3 ) = ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) )
+s141:s92,s133:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) ) = ( ( 0 + ( -u ; 5 0 x. B ) ) + -u ; 5 3 ) )
+s142:s141,s140:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) ) = ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) )
+s143:s89,s24,s47:adddid |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) = ( ( -u 1 x. S ) + ( -u 1 x. ( ( 6 x. B ) + ; 1 0 ) ) ) )
+s144:s89,s24:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. S ) e. CC )
+s145:s144:addlidd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ( -u 1 x. S ) ) = ( -u 1 x. S ) )
+s146:s145:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. S ) = ( 0 + ( -u 1 x. S ) ) )
+s147:s89,s41,s46:adddid |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( 6 x. B ) + ; 1 0 ) ) = ( ( -u 1 x. ( 6 x. B ) ) + ( -u 1 x. ; 1 0 ) ) )
+s148:s89,s40,s17:mulassd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. 6 ) x. B ) = ( -u 1 x. ( 6 x. B ) ) )
+s149:s148:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( 6 x. B ) ) = ( ( -u 1 x. 6 ) x. B ) )
+s150:s39:mullidi |- ( 1 x. 6 ) = 6
+s151:s68,s39:mulneg1i |- ( -u 1 x. 6 ) = -u ( 1 x. 6 )
+s152:s150:negeqi |- -u ( 1 x. 6 ) = -u 6
+s153:s151,s152:eqtri |- ( -u 1 x. 6 ) = -u 6
+s154:s153:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. 6 ) = -u 6 )
+s155:s154:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. 6 ) x. B ) = ( -u 6 x. B ) )
+s156:s39:negcli |- -u 6 e. CC
+s157:s156:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u 6 e. CC )
+s158:s157,s17:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 6 x. B ) e. CC )
+s159:s158:addlidd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ( -u 6 x. B ) ) = ( -u 6 x. B ) )
+s160:s159:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 6 x. B ) = ( 0 + ( -u 6 x. B ) ) )
+s161:s149,s155:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( 6 x. B ) ) = ( -u 6 x. B ) )
+s162:s161,s160:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( 6 x. B ) ) = ( 0 + ( -u 6 x. B ) ) )
+s163:s45:mullidi |- ( 1 x. ; 1 0 ) = ; 1 0
+s164:s68,s45:mulneg1i |- ( -u 1 x. ; 1 0 ) = -u ( 1 x. ; 1 0 )
+s165:s163:negeqi |- -u ( 1 x. ; 1 0 ) = -u ; 1 0
+s166:s164,s165:eqtri |- ( -u 1 x. ; 1 0 ) = -u ; 1 0
+s167:s166:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ; 1 0 ) = -u ; 1 0 )
+s168:s162,s167:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. ( 6 x. B ) ) + ( -u 1 x. ; 1 0 ) ) = ( ( 0 + ( -u 6 x. B ) ) + -u ; 1 0 ) )
+s169:s45:negcli |- -u ; 1 0 e. CC
+s170:s169:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ; 1 0 e. CC )
+s171:s61,s158,s170:add32d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( -u 6 x. B ) ) + -u ; 1 0 ) = ( ( 0 + -u ; 1 0 ) + ( -u 6 x. B ) ) )
+s172:s169:addlidi |- ( 0 + -u ; 1 0 ) = -u ; 1 0
+s173:s172:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + -u ; 1 0 ) = -u ; 1 0 )
+s174:s173:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + -u ; 1 0 ) + ( -u 6 x. B ) ) = ( -u ; 1 0 + ( -u 6 x. B ) ) )
+s175:s171,s174:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( -u 6 x. B ) ) + -u ; 1 0 ) = ( -u ; 1 0 + ( -u 6 x. B ) ) )
+s176:s147,s168:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( 6 x. B ) + ; 1 0 ) ) = ( ( 0 + ( -u 6 x. B ) ) + -u ; 1 0 ) )
+s177:s176,s175:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( 6 x. B ) + ; 1 0 ) ) = ( -u ; 1 0 + ( -u 6 x. B ) ) )
+s178:s146,s177:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. S ) + ( -u 1 x. ( ( 6 x. B ) + ; 1 0 ) ) ) = ( ( 0 + ( -u 1 x. S ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) )
+s179:s170,s158:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 1 0 + ( -u 6 x. B ) ) e. CC )
+s180:s61,s144,s179:add32d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( -u 1 x. S ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) = ( ( 0 + ( -u ; 1 0 + ( -u 6 x. B ) ) ) + ( -u 1 x. S ) ) )
+s181:s61,s170,s158:addassd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + -u ; 1 0 ) + ( -u 6 x. B ) ) = ( 0 + ( -u ; 1 0 + ( -u 6 x. B ) ) ) )
+s182:s181:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ( -u ; 1 0 + ( -u 6 x. B ) ) ) = ( ( 0 + -u ; 1 0 ) + ( -u 6 x. B ) ) )
+s183:s172:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + -u ; 1 0 ) = -u ; 1 0 )
+s184:s183:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + -u ; 1 0 ) + ( -u 6 x. B ) ) = ( -u ; 1 0 + ( -u 6 x. B ) ) )
+s185:s182,s184:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 + ( -u ; 1 0 + ( -u 6 x. B ) ) ) = ( -u ; 1 0 + ( -u 6 x. B ) ) )
+s186:s185:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( -u ; 1 0 + ( -u 6 x. B ) ) ) + ( -u 1 x. S ) ) = ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) )
+s187:s180,s186:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 0 + ( -u 1 x. S ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) = ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) )
+s188:s143,s178:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) = ( ( 0 + ( -u 1 x. S ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) )
+s189:s188,s187:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) = ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) )
+s190:s142,s189:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) ) + ( -u 1 x. ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) ) = ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) ) )
+s191:s135,s121:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) e. CC )
+s192:s191,s179,s144:addassd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) + ( -u 1 x. S ) ) = ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) ) )
+s193:s192:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) ) = ( ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) + ( -u 1 x. S ) ) )
+s194:s135,s121,s170,s158:add4d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) = ( ( -u ; 5 3 + -u ; 1 0 ) + ( ( -u ; 5 0 x. B ) + ( -u 6 x. B ) ) ) )
+s195:s36,s45:negdii |- -u ( ; 5 3 + ; 1 0 ) = ( -u ; 5 3 + -u ; 1 0 )
+s196:s195:eqcomi |- ( -u ; 5 3 + -u ; 1 0 ) = -u ( ; 5 3 + ; 1 0 )
+s197::eqid |- ; 5 3 = ; 5 3
+s198::eqid |- ; 1 0 = ; 1 0
+s199::5p1e6 |- ( 5 + 1 ) = 6
+s200::3cn |- 3 e. CC
+s201:s200:addridi |- ( 3 + 0 ) = 3
+s202:s12,s34,s42,s43,s197,s198,s199,s201:decadd |- ( ; 5 3 + ; 1 0 ) = ; 6 3
+s203:s202:negeqi |- -u ( ; 5 3 + ; 1 0 ) = -u ; 6 3
+s204:s196,s203:eqtri |- ( -u ; 5 3 + -u ; 1 0 ) = -u ; 6 3
+s205:s204:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 5 3 + -u ; 1 0 ) = -u ; 6 3 )
+s206:s120,s157,s17:adddird |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 0 + -u 6 ) x. B ) = ( ( -u ; 5 0 x. B ) + ( -u 6 x. B ) ) )
+s207:s206:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 0 x. B ) + ( -u 6 x. B ) ) = ( ( -u ; 5 0 + -u 6 ) x. B ) )
+s208:s118,s39:negdii |- -u ( ; 5 0 + 6 ) = ( -u ; 5 0 + -u 6 )
+s209:s208:eqcomi |- ( -u ; 5 0 + -u 6 ) = -u ( ; 5 0 + 6 )
+s210::eqid |- ; 5 0 = ; 5 0
+s211:s39:addlidi |- ( 0 + 6 ) = 6
+s212:s12,s43,s13,s210,s211:decaddi |- ( ; 5 0 + 6 ) = ; 5 6
+s213:s212:negeqi |- -u ( ; 5 0 + 6 ) = -u ; 5 6
+s214:s209,s213:eqtri |- ( -u ; 5 0 + -u 6 ) = -u ; 5 6
+s215:s214:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 5 0 + -u 6 ) = -u ; 5 6 )
+s216:s215:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 0 + -u 6 ) x. B ) = ( -u ; 5 6 x. B ) )
+s217:s207,s216:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 0 x. B ) + ( -u 6 x. B ) ) = ( -u ; 5 6 x. B ) )
+s218:s205,s217:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 3 + -u ; 1 0 ) + ( ( -u ; 5 0 x. B ) + ( -u 6 x. B ) ) ) = ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) )
+s219:s194,s218:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) = ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) )
+s220:s219:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( -u ; 1 0 + ( -u 6 x. B ) ) ) + ( -u 1 x. S ) ) = ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) )
+s221:s193,s220:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) ) = ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) )
+s222:s91,s190:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) ) = ( ( -u ; 5 3 + ( -u ; 5 0 x. B ) ) + ( ( -u ; 1 0 + ( -u 6 x. B ) ) + ( -u 1 x. S ) ) ) )
+s223:s222,s221:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) ) = ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) )
+s224:s30:mullidi |- ( 1 x. 2 ) = 2
+s225:s68,s30:mulneg1i |- ( -u 1 x. 2 ) = -u ( 1 x. 2 )
+s226:s224:negeqi |- -u ( 1 x. 2 ) = -u 2
+s227:s225,s226:eqtri |- ( -u 1 x. 2 ) = -u 2
+s228:s227:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. 2 ) = -u 2 )
+s229:s223,s228:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u 1 x. ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) ) + ( -u 1 x. 2 ) ) = ( ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) + -u 2 ) )
+s230:s13,s34:deccl |- ; 6 3 e. NN0
+s231:s230:nn0cni |- ; 6 3 e. CC
+s232:s231:negcli |- -u ; 6 3 e. CC
+s233:s232:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ; 6 3 e. CC )
+s234:s15:negcli |- -u ; 5 6 e. CC
+s235:s234:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ; 5 6 e. CC )
+s236:s235,s17:mulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 5 6 x. B ) e. CC )
+s237:s233,s236:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) e. CC )
+s238:s30:negcli |- -u 2 e. CC
+s239:s238:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u 2 e. CC )
+s240:s237,s144,s239:add32d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) + -u 2 ) = ( ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + -u 2 ) + ( -u 1 x. S ) ) )
+s241:s233,s236,s239:add32d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + -u 2 ) = ( ( -u ; 6 3 + -u 2 ) + ( -u ; 5 6 x. B ) ) )
+s242:s231,s30:negdii |- -u ( ; 6 3 + 2 ) = ( -u ; 6 3 + -u 2 )
+s243:s242:eqcomi |- ( -u ; 6 3 + -u 2 ) = -u ( ; 6 3 + 2 )
+s244::eqid |- ; 6 3 = ; 6 3
+s245::3p2e5 |- ( 3 + 2 ) = 5
+s246:s13,s34,s26,s244,s245:decaddi |- ( ; 6 3 + 2 ) = ; 6 5
+s247:s246:negeqi |- -u ( ; 6 3 + 2 ) = -u ; 6 5
+s248:s243,s247:eqtri |- ( -u ; 6 3 + -u 2 ) = -u ; 6 5
+s249:s248:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 6 3 + -u 2 ) = -u ; 6 5 )
+s250:s249:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 6 3 + -u 2 ) + ( -u ; 5 6 x. B ) ) = ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) )
+s251:s241,s250:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + -u 2 ) = ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) )
+s252:s251:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + -u 2 ) + ( -u 1 x. S ) ) = ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) )
+s253:s240,s252:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) + -u 2 ) = ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) )
+s254:s90,s229:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( ( -u ; 6 3 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) + -u 2 ) )
+s255:s254,s253:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) )
+s256:s87,s255:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) + ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) ) = ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) + ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) ) )
+s257:s13,s12:deccl |- ; 6 5 e. NN0
+s258:s257:nn0cni |- ; 6 5 e. CC
+s259:s258:negcli |- -u ; 6 5 e. CC
+s260:s259:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> -u ; 6 5 e. CC )
+s261:s260,s236:addcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) e. CC )
+s262:s77,s70,s261,s144:add4d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) + ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) ) = ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) ) + ( ( 1 x. S ) + ( -u 1 x. S ) ) ) )
+s263:s22,s18,s260,s236:add4d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) ) = ( ( ; 6 7 + -u ; 6 5 ) + ( ( ; 5 6 x. B ) + ( -u ; 5 6 x. B ) ) ) )
+s264:s21,s258:negsubi |- ( ; 6 7 + -u ; 6 5 ) = ( ; 6 7 - ; 6 5 )
+s265::eqid |- ; 6 5 = ; 6 5
+s266::5p2e7 |- ( 5 + 2 ) = 7
+s267:s13,s12,s26,s265,s266:decaddi |- ( ; 6 5 + 2 ) = ; 6 7
+s268:s21,s258,s30,s267:subaddrii |- ( ; 6 7 - ; 6 5 ) = 2
+s269:s264,s268:eqtri |- ( ; 6 7 + -u ; 6 5 ) = 2
+s270:s269:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 6 7 + -u ; 6 5 ) = 2 )
+s271:s16,s235,s17:adddird |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 + -u ; 5 6 ) x. B ) = ( ( ; 5 6 x. B ) + ( -u ; 5 6 x. B ) ) )
+s272:s271:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 x. B ) + ( -u ; 5 6 x. B ) ) = ( ( ; 5 6 + -u ; 5 6 ) x. B ) )
+s273:s15:negidi |- ( ; 5 6 + -u ; 5 6 ) = 0
+s274:s273:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 5 6 + -u ; 5 6 ) = 0 )
+s275:s274:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 + -u ; 5 6 ) x. B ) = ( 0 x. B ) )
+s276:s272,s275:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 x. B ) + ( -u ; 5 6 x. B ) ) = ( 0 x. B ) )
+s277:s270,s276:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + -u ; 6 5 ) + ( ( ; 5 6 x. B ) + ( -u ; 5 6 x. B ) ) ) = ( 2 + ( 0 x. B ) ) )
+s278:s263,s277:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) ) = ( 2 + ( 0 x. B ) ) )
+s279:s17:mul02d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 x. B ) = 0 )
+s280:s279:oveq2d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 2 + ( 0 x. B ) ) = ( 2 + 0 ) )
+s281:s31:addridd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 2 + 0 ) = 2 )
+s282:s278,s280:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) ) = ( 2 + 0 ) )
+s283:s282,s281:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) ) = 2 )
+s284:s69,s89,s24:adddird |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 1 + -u 1 ) x. S ) = ( ( 1 x. S ) + ( -u 1 x. S ) ) )
+s285:s284:eqcomd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 1 x. S ) + ( -u 1 x. S ) ) = ( ( 1 + -u 1 ) x. S ) )
+s286:s68:negidi |- ( 1 + -u 1 ) = 0
+s287:s286:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 1 + -u 1 ) = 0 )
+s288:s287:oveq1d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 1 + -u 1 ) x. S ) = ( 0 x. S ) )
+s289:s285,s288:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 1 x. S ) + ( -u 1 x. S ) ) = ( 0 x. S ) )
+s290:s283,s289:oveq12d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) ) + ( ( 1 x. S ) + ( -u 1 x. S ) ) ) = ( 2 + ( 0 x. S ) ) )
+s291:s262,s290:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) + ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) ) = ( 2 + ( 0 x. S ) ) )
+s292:s24:mul02d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 x. S ) = 0 )
+s293:s292:oveq2d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 2 + ( 0 x. S ) ) = ( 2 + 0 ) )
+s294:s31:addridd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 2 + 0 ) = 2 )
+s295:s291,s293:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) + ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) ) = ( 2 + 0 ) )
+s296:s295,s294:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) + ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) ) = 2 )
+s297:s52,s55:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) + ( -u 1 x. ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) ) )
+s298:s297,s256:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = ( ( ( ; 6 7 + ( ; 5 6 x. B ) ) + ( 1 x. S ) ) + ( ( -u ; 6 5 + ( -u ; 5 6 x. B ) ) + ( -u 1 x. S ) ) ) )
+s299:s298,s296:eqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) = 2 )
+s300:s11,s299:eqtr4d |- ( ( B e. NN0 /\ S e. NN0 ) -> 2 = ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) )
+s301:s10,s300:breqtrd |- ( ( B e. NN0 /\ S e. NN0 ) -> 0 < ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) )
+s302:s27:nn0rei |- ; 2 5 e. RR
+s303:s302:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 2 5 e. RR )
+s304::2re |- 2 e. RR
+s305:s304:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> 2 e. RR )
+s306:s305,s4:remulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 2 x. B ) e. RR )
+s307:s303,s306:remulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 2 5 x. ( 2 x. B ) ) e. RR )
+s308:s35:nn0rei |- ; 5 3 e. RR
+s309:s308:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 5 3 e. RR )
+s310:s307,s309:readdcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) e. RR )
+s311::6re |- 6 e. RR
+s312:s311:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> 6 e. RR )
+s313:s312,s4:remulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 6 x. B ) e. RR )
+s314:s44:nn0rei |- ; 1 0 e. RR
+s315:s314:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 1 0 e. RR )
+s316:s313,s315:readdcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( 6 x. B ) + ; 1 0 ) e. RR )
+s317:s7,s316:readdcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( S + ( ( 6 x. B ) + ; 1 0 ) ) e. RR )
+s318:s310,s317:readdcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) e. RR )
+s319:s318,s305:readdcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) e. RR )
+s320:s14:nn0rei |- ; 5 6 e. RR
+s321:s320:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 5 6 e. RR )
+s322:s321,s4:remulcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ; 5 6 x. B ) e. RR )
+s323:s20:nn0rei |- ; 6 7 e. RR
+s324:s323:a1i |- ( ( B e. NN0 /\ S e. NN0 ) -> ; 6 7 e. RR )
+s325:s322,s324:readdcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ; 5 6 x. B ) + ; 6 7 ) e. RR )
+s326:s325,s7:readdcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) e. RR )
+s327::0red |- ( ( B e. NN0 /\ S e. NN0 ) -> 0 e. RR )
+s328:s326,s319:resubcld |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) e. RR )
+s329:s327,s328,s301:ltled |- ( ( B e. NN0 /\ S e. NN0 ) -> 0 <_ ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) )
+s330:s326,s319:subge0d |- ( ( B e. NN0 /\ S e. NN0 ) -> ( 0 <_ ( ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) - ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) ) <-> ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) <_ ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) ) )
+qed:s329,s330:mpbid |- ( ( B e. NN0 /\ S e. NN0 ) -> ( ( ( ( ; 2 5 x. ( 2 x. B ) ) + ; 5 3 ) + ( S + ( ( 6 x. B ) + ; 1 0 ) ) ) + 2 ) <_ ( ( ( ; 5 6 x. B ) + ; 6 7 ) + S ) )
+$)

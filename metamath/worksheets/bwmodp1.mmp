@@ -1,0 +1,12 @@
+$( <MM> <PROOF_ASST> THEOREM=bwmodp1  LOC_AFTER=?
+
+* The residue modulo 2 ^ ( I + 1 ) is the residue modulo 2 ^ I plus the I-th digit at its weight.
+
+s1::simpl |- ( ( A e. ZZ /\ I e. NN0 ) -> A e. ZZ )
+s2::simpr |- ( ( A e. ZZ /\ I e. NN0 ) -> I e. NN0 )
+s3::bitsinv1lem |- ( ( A e. ZZ /\ I e. NN0 ) -> ( A mod ( 2 ^ ( I + 1 ) ) ) = ( ( A mod ( 2 ^ I ) ) + if ( I e. ( bits ` A ) , ( 2 ^ I ) , 0 ) ) )
+i4::bwifbn
+s5:s2,i4:syl |- ( ( A e. ZZ /\ I e. NN0 ) -> if ( I e. ( bits ` A ) , ( 2 ^ I ) , 0 ) = ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` A ) , 1o , (/) ) ) ) )
+s6:s5:oveq2d |- ( ( A e. ZZ /\ I e. NN0 ) -> ( ( A mod ( 2 ^ I ) ) + if ( I e. ( bits ` A ) , ( 2 ^ I ) , 0 ) ) = ( ( A mod ( 2 ^ I ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` A ) , 1o , (/) ) ) ) ) )
+qed:s3,s6:eqtrd |- ( ( A e. ZZ /\ I e. NN0 ) -> ( A mod ( 2 ^ ( I + 1 ) ) ) = ( ( A mod ( 2 ^ I ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` A ) , 1o , (/) ) ) ) ) )
+$)

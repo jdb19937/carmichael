@@ -1,0 +1,78 @@
+$( <MM> <PROOF_ASST> THEOREM=mertens1ge  LOC_AFTER=?
+
+* Mertens estimate, lower half with an explicit constant: log X - 2 is at most the sum of ( Lam ` d ) / d over d up to X.
+
+s1::simpl |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ 1 <_ X ) -> 1 <_ X )
+s3::0red |- ( ( X e. RR /\ 1 <_ X ) -> 0 e. RR )
+s4::1red |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. RR )
+s5::0lt1 |- 0 < 1
+s6:s5:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 0 < 1 )
+s7:s3,s4,s1,s6,s2:ltletrd |- ( ( X e. RR /\ 1 <_ X ) -> 0 < X )
+s8:s1,s7:elrpd |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR+ )
+s9:s3,s1,s7:ltled |- ( ( X e. RR /\ 1 <_ X ) -> 0 <_ X )
+s10:s1:recnd |- ( ( X e. RR /\ 1 <_ X ) -> X e. CC )
+s11::fzfid |- ( ( X e. RR /\ 1 <_ X ) -> ( 1 ... ( |_ ` X ) ) e. Fin )
+s12::simpr |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d e. ( 1 ... ( |_ ` X ) ) )
+i13::elfznn
+s14:s12,i13:syl |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d e. NN )
+s15:s14:nnrpd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d e. RR+ )
+s16:s14:nncnd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d e. CC )
+s17:s14:nnne0d |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d =/= 0 )
+i18::vmacl
+s19:s14,i18:syl |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( Lam ` d ) e. RR )
+i20::vmage0
+s21:s14,i20:syl |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> 0 <_ ( Lam ` d ) )
+s22:s19:recnd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( Lam ` d ) e. CC )
+s23:s19,s21:jca |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) e. RR /\ 0 <_ ( Lam ` d ) ) )
+s24:s1:adantr |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> X e. RR )
+s25:s24,s15:rerpdivcld |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( X / d ) e. RR )
+s26:s19,s15:rerpdivcld |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) / d ) e. RR )
+s27:s26:recnd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) / d ) e. CC )
+i28::reflcl
+s29:s25,i28:syl |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( |_ ` ( X / d ) ) e. RR )
+s30:s29:recnd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( |_ ` ( X / d ) ) e. CC )
+s31:s19,s25:remulcld |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) x. ( X / d ) ) e. RR )
+s32:s31:recnd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) x. ( X / d ) ) e. CC )
+s33:s19,s29:remulcld |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) e. RR )
+s34:s33:recnd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) e. CC )
+s35:s24:recnd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> X e. CC )
+i36::div12
+s37:s35,s22,s16,s17,i36:syl112anc |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( X x. ( ( Lam ` d ) / d ) ) = ( ( Lam ` d ) x. ( X / d ) ) )
+s38:s11,s10,s27:fsummulc2 |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) = sum_ d e. ( 1 ... ( |_ ` X ) ) ( X x. ( ( Lam ` d ) / d ) ) )
+s39:s37:sumeq2dv |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( X x. ( ( Lam ` d ) / d ) ) = sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( X / d ) ) )
+s40:s38,s39:eqtrd |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) = sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( X / d ) ) )
+i41::logfac2
+s42:s1,s9,i41:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` ( ! ` ( |_ ` X ) ) ) = sum_ k e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` k ) x. ( |_ ` ( X / k ) ) ) )
+s43::fveq2 |- ( k = d -> ( Lam ` k ) = ( Lam ` d ) )
+s44::oveq2 |- ( k = d -> ( X / k ) = ( X / d ) )
+s45:s44:fveq2d |- ( k = d -> ( |_ ` ( X / k ) ) = ( |_ ` ( X / d ) ) )
+s46:s43,s45:oveq12d |- ( k = d -> ( ( Lam ` k ) x. ( |_ ` ( X / k ) ) ) = ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) )
+s47:s46:cbvsumv |- sum_ k e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` k ) x. ( |_ ` ( X / k ) ) ) = sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) )
+s48:s47:a1i |- ( ( X e. RR /\ 1 <_ X ) -> sum_ k e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` k ) x. ( |_ ` ( X / k ) ) ) = sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) )
+s49:s42,s48:eqtrd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` ( ! ` ( |_ ` X ) ) ) = sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) )
+s50:s11,s26:fsumrecl |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) e. RR )
+s51:s11,s31:fsumrecl |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( X / d ) ) e. RR )
+s52:s11,s33:fsumrecl |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) e. RR )
+i53::relogcl
+s54:s8,i53:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) e. RR )
+s55:s1,s50:remulcld |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) e. RR )
+i56::flle
+s57:s25,i56:syl |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( |_ ` ( X / d ) ) <_ ( X / d ) )
+s58:s29,s25,s23:3jca |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( |_ ` ( X / d ) ) e. RR /\ ( X / d ) e. RR /\ ( ( Lam ` d ) e. RR /\ 0 <_ ( Lam ` d ) ) ) )
+i59::lemul2a
+s60:s58,s57,i59:syl2anc |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) <_ ( ( Lam ` d ) x. ( X / d ) ) )
+s61:s11,s33,s31,s60:fsumle |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) <_ sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( X / d ) ) )
+i62::logfaclbnd
+s63:s8,i62:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. ( ( log ` X ) - 2 ) ) <_ ( log ` ( ! ` ( |_ ` X ) ) ) )
+s64::2re |- 2 e. RR
+s65:s64:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 2 e. RR )
+s66:s54,s65:resubcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` X ) - 2 ) e. RR )
+s67:s1,s66:remulcld |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. ( ( log ` X ) - 2 ) ) e. RR )
+s68:s63,s49:breqtrd |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. ( ( log ` X ) - 2 ) ) <_ sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( |_ ` ( X / d ) ) ) )
+s69:s67,s52,s51,s68,s61:letrd |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. ( ( log ` X ) - 2 ) ) <_ sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) x. ( X / d ) ) )
+s70:s69,s40:breqtrrd |- ( ( X e. RR /\ 1 <_ X ) -> ( X x. ( ( log ` X ) - 2 ) ) <_ ( X x. sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) )
+i71::lemul2
+s72:s66,s50,s1,s7,i71:syl112anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` X ) - 2 ) <_ sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) <-> ( X x. ( ( log ` X ) - 2 ) ) <_ ( X x. sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) ) )
+qed:s70,s72:mpbird |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` X ) - 2 ) <_ sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) )
+$)

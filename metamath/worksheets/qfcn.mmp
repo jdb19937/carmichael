@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=qfcn  LOC_AFTER=?
+
+* The Cauchy kernel of a continuous function is continuous off the pole.
+
+s1::simp1 |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> F e. ( D -cn-> CC ) )
+s2::simp2 |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> E C_ D )
+s3::simp3 |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( P e. CC /\ E C_ ( CC \ { P } ) ) )
+i4::simpl
+s5:s3,i4:syl |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> P e. CC )
+i6::simpr
+s7:s3,i6:syl |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> E C_ ( CC \ { P } ) )
+i8::cncff
+s9:s1,i8:syl |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> F : D --> CC )
+i10::rescncf
+s11:s2,s1,i10:sylc |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( F |` E ) e. ( E -cn-> CC ) )
+s12:s9,s2:feqresmpt |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( F |` E ) = ( z e. E |-> ( F ` z ) ) )
+s13:s12,s11:eqeltrrd |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( z e. E |-> ( F ` z ) ) e. ( E -cn-> CC ) )
+i14::rinvcnss
+s15:s5,s7,i14:syl2anc |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( z e. E |-> ( 1 / ( z - P ) ) ) e. ( E -cn-> CC ) )
+s16::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s17:s16:mulcn |- x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s18:s17:a1i |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s19:s16,s18,s13,s15:cncfmpt2f |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( z e. E |-> ( ( F ` z ) x. ( 1 / ( z - P ) ) ) ) e. ( E -cn-> CC ) )
+s20::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> z e. E )
+s21:s2:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> E C_ D )
+s22:s21,s20:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> z e. D )
+s23:s9:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> F : D --> CC )
+s24:s23,s22:ffvelcdmd |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> ( F ` z ) e. CC )
+s25:s7:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> E C_ ( CC \ { P } ) )
+s26:s25,s20:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> z e. ( CC \ { P } ) )
+i27::eldifsn
+s28:s26,i27:sylib |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> ( z e. CC /\ z =/= P ) )
+i29::simpl
+s30:s28,i29:syl |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> z e. CC )
+i31::simpr
+s32:s28,i31:syl |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> z =/= P )
+s33:s5:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> P e. CC )
+s34:s30,s33:subcld |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> ( z - P ) e. CC )
+s35:s30,s33,s32:subne0d |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> ( z - P ) =/= 0 )
+s36:s24,s34,s35:divrecd |- ( ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) /\ z e. E ) -> ( ( F ` z ) / ( z - P ) ) = ( ( F ` z ) x. ( 1 / ( z - P ) ) ) )
+s37:s36:mpteq2dva |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( z e. E |-> ( ( F ` z ) / ( z - P ) ) ) = ( z e. E |-> ( ( F ` z ) x. ( 1 / ( z - P ) ) ) ) )
+qed:s37,s19:eqeltrd |- ( ( F e. ( D -cn-> CC ) /\ E C_ D /\ ( P e. CC /\ E C_ ( CC \ { P } ) ) ) -> ( z e. E |-> ( ( F ` z ) / ( z - P ) ) ) e. ( E -cn-> CC ) )
+$)

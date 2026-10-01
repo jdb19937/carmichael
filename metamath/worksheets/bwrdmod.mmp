@@ -1,0 +1,60 @@
+$( <MM> <PROOF_ASST> THEOREM=bwrdmod  LOC_AFTER=?
+
+* The low digits of a residue modulo a higher power of two are those of the number.
+
+s1::simp1 |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> N e. ZZ )
+s2::simp2 |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> M e. NN0 )
+s3::simp3 |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> K e. ( ZZ>= ` M ) )
+i4::eluzelz
+s5:s3,i4:syl |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> K e. ZZ )
+i6::eluznn0
+s7:s2,s3,i6:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> K e. NN0 )
+s8::2nn |- 2 e. NN
+s9:s8:a1i |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> 2 e. NN )
+i10::nnexpcl
+s11:s9,s7,i10:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( 2 ^ K ) e. NN )
+i12::zmodcl
+s13:s1,s11,i12:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( N mod ( 2 ^ K ) ) e. NN0 )
+s14:s13:nn0zd |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( N mod ( 2 ^ K ) ) e. ZZ )
+i15::bwrdcl
+s16:s14,s2,i15:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( ( N mod ( 2 ^ K ) ) bwrd M ) e. Word 2o )
+i17::bwrdcl
+s18:s1,s2,i17:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( N bwrd M ) e. Word 2o )
+i19::bwrdlen
+s20:s14,s2,i19:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) = M )
+i21::bwrdlen
+s22:s1,s2,i21:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( # ` ( N bwrd M ) ) = M )
+s23:s20,s22:eqtr4d |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) = ( # ` ( N bwrd M ) ) )
+i24::bitsmod
+s25:s1,s7,i24:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( bits ` ( N mod ( 2 ^ K ) ) ) = ( ( bits ` N ) i^i ( 0 ..^ K ) ) )
+i26::fzoss2
+s27:s3,i26:syl |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( 0 ..^ M ) C_ ( 0 ..^ K ) )
+s28::simpr |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) )
+s29:s20:adantr |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) = M )
+s30:s29:oveq2d |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) = ( 0 ..^ M ) )
+s31:s28,s30:eleqtrd |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> i e. ( 0 ..^ M ) )
+s32:s14:adantr |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( N mod ( 2 ^ K ) ) e. ZZ )
+s33:s1:adantr |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> N e. ZZ )
+s34:s2:adantr |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> M e. NN0 )
+i35::bwrdfv
+s36:s32,s34,s31,i35:syl3anc |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( ( ( N mod ( 2 ^ K ) ) bwrd M ) ` i ) = if ( i e. ( bits ` ( N mod ( 2 ^ K ) ) ) , 1o , (/) ) )
+i37::bwrdfv
+s38:s33,s34,s31,i37:syl3anc |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( ( N bwrd M ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s39:s25:adantr |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( bits ` ( N mod ( 2 ^ K ) ) ) = ( ( bits ` N ) i^i ( 0 ..^ K ) ) )
+s40:s39:eleq2d |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( i e. ( bits ` ( N mod ( 2 ^ K ) ) ) <-> i e. ( ( bits ` N ) i^i ( 0 ..^ K ) ) ) )
+s41::elin |- ( i e. ( ( bits ` N ) i^i ( 0 ..^ K ) ) <-> ( i e. ( bits ` N ) /\ i e. ( 0 ..^ K ) ) )
+s42:s41:a1i |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( i e. ( ( bits ` N ) i^i ( 0 ..^ K ) ) <-> ( i e. ( bits ` N ) /\ i e. ( 0 ..^ K ) ) ) )
+s43:s27:adantr |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( 0 ..^ M ) C_ ( 0 ..^ K ) )
+s44:s43,s31:sseldd |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> i e. ( 0 ..^ K ) )
+s45:s44:biantrud |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( i e. ( bits ` N ) <-> ( i e. ( bits ` N ) /\ i e. ( 0 ..^ K ) ) ) )
+s46:s40,s42:bitrd |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( i e. ( bits ` ( N mod ( 2 ^ K ) ) ) <-> ( i e. ( bits ` N ) /\ i e. ( 0 ..^ K ) ) ) )
+s47:s46,s45:bitr4d |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( i e. ( bits ` ( N mod ( 2 ^ K ) ) ) <-> i e. ( bits ` N ) ) )
+s48:s47:ifbid |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> if ( i e. ( bits ` ( N mod ( 2 ^ K ) ) ) , 1o , (/) ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s49:s36,s48:eqtrd |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( ( ( N mod ( 2 ^ K ) ) bwrd M ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s50:s49,s38:eqtr4d |- ( ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) /\ i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ) -> ( ( ( N mod ( 2 ^ K ) ) bwrd M ) ` i ) = ( ( N bwrd M ) ` i ) )
+s51:s50:ralrimiva |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> A. i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ( ( ( N mod ( 2 ^ K ) ) bwrd M ) ` i ) = ( ( N bwrd M ) ` i ) )
+s52:s23,s51:jca |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) = ( # ` ( N bwrd M ) ) /\ A. i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ( ( ( N mod ( 2 ^ K ) ) bwrd M ) ` i ) = ( ( N bwrd M ) ` i ) ) )
+i53::eqwrd
+s54:s16,s18,i53:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( ( ( N mod ( 2 ^ K ) ) bwrd M ) = ( N bwrd M ) <-> ( ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) = ( # ` ( N bwrd M ) ) /\ A. i e. ( 0 ..^ ( # ` ( ( N mod ( 2 ^ K ) ) bwrd M ) ) ) ( ( ( N mod ( 2 ^ K ) ) bwrd M ) ` i ) = ( ( N bwrd M ) ` i ) ) ) )
+qed:s52,s54:mpbird |- ( ( N e. ZZ /\ M e. NN0 /\ K e. ( ZZ>= ` M ) ) -> ( ( N mod ( 2 ^ K ) ) bwrd M ) = ( N bwrd M ) )
+$)

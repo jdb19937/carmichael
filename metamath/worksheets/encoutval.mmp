@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=encoutval  LOC_AFTER=?
+
+* Value of encodeOutput on a number M and a list S of numbers.
+
+s1::simpl |- ( ( m = M /\ s = S ) -> m = M )
+s2::simpr |- ( ( m = M /\ s = S ) -> s = S )
+c1:s1:fveq2d |- ( ( m = M /\ s = S ) -> ( encNatGam ` m ) = ( encNatGam ` M ) )
+c2:s2:coeq2d |- ( ( m = M /\ s = S ) -> ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. s ) = ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) )
+c3:c2:oveq2d |- ( ( m = M /\ s = S ) -> ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. s ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) )
+c4:c3:oveq2d |- ( ( m = M /\ s = S ) -> ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. s ) ) ) = ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) )
+c5:c1,c4:oveq12d |- ( ( m = M /\ s = S ) -> ( ( encNatGam ` m ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. s ) ) ) ) = ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) )
+s3::df-encout |- encodeOutput = ( m e. NN0 , s e. Word NN0 |-> ( ( encNatGam ` m ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. s ) ) ) ) )
+s4::ovex |- ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) e. _V
+qed:c5,s3,s4:ovmpoa |- ( ( M e. NN0 /\ S e. Word NN0 ) -> ( M encodeOutput S ) = ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) )
+$)

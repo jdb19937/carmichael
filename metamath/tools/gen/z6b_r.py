@@ -1,0 +1,247 @@
+"""Sortie Z6b, section 5: the rectangle identity z6rect (Lean rectInt_Ghat_principal, every character at once).
+Run: MM_DB=sorties/z6b.mm LIN_FAST=1 python3 tools/gen/z6b_r.py [LABEL ...]"""
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from z6blib import *
+from tm import sub
+from cl import split_imp, lift
+from z6a_e3 import conjs, build, unpack, c_
+from z6a_mlib import cbvm, toqed, mpval, holeq, HOLG, TOP
+from z6b_k import u5mem, hpzpt, zin5
+import lin
+from lin import linarith
+import num
+
+only = sys.argv[1:]
+
+
+def want(lab):
+    return not only or lab in only
+
+
+MSm = '( s e. CC |-> %s )' % MRr('R', 's')
+
+
+def dfacts(w, a, f):
+    """XPD e. RR+ , the M_r mapping CC --> CC"""
+    st = mkst(w, a)
+    dr = f['D e. RR']; d1 = f['1 < D']
+    drp = st([dr, linarith(w, a, [d1], '0 < D', leaves={'D': dr})], 'elrpd', 'D e. RR+')
+    xrp = st([drp, c_(w, a, num.real(w, '( 6 / 5 )'), '( 6 / 5 ) e. RR')], 'rpcxpcld', '%s e. RR+' % XPD)
+    zz = st([st([dr, d1], 'jca', '( D e. RR /\\ 1 < D )'), w.inst('zdz12')], 'syl', '( %s e. RR+ /\\ %s e. RR+ /\\ %s < %s )' % (Z1D, Z2D, Z1D, Z2D))
+    z1rp = st([zz], 'simp1d', '%s e. RR+' % Z1D); z2rp = st([zz], 'simp2d', '%s e. RR+' % Z2D); z12 = st([zz], 'simp3d', '%s < %s' % (Z1D, Z2D))
+    HAB = sub(HAB0, {'A': Z1D, 'B': Z2D})
+    hab = st([st([st([z1rp], 'rpred', '%s e. RR' % Z1D), st([z1rp], 'rpgt0d', '0 < %s' % Z1D)], 'jca', '( %s e. RR /\\ 0 < %s )' % (Z1D, Z1D)),
+              st([st([z2rp], 'rpred', '%s e. RR' % Z2D), z12], 'jca', '( %s e. RR /\\ %s < %s )' % (Z2D, Z1D, Z2D))], 'jca', HAB)
+    mh = st([st([st([hab, f['R e. NN']], 'jca', '( %s /\\ R e. NN )' % HAB), f['C : NN --> CC']], 'jca', '( ( %s /\\ R e. NN ) /\\ C : NN --> CC )' % HAB),
+             w.inst('z6mrhol')], 'syl', HOLG(MSm, 'CC'))
+    mff = st([st([mh], 'simpld', '%s e. ( CC -cn-> CC )' % MSm), w.inst('cncff')], 'syl', '%s : CC --> CC' % MSm)
+    return {'xrp': xrp, 'mff': mff, 'z1rp': z1rp, 'z2rp': z2rp, 'hab': hab, 'drp': drp}
+
+
+def mrcc(w, a, mff, X, xc):
+    """( a -> MRr ( R , X ) e. CC ) and its value step"""
+    st = mkst(w, a)
+    v, _ = mpval(w, a, 's', 'CC', MRr('R', 's'), X, xc)
+    return st([v, st([mff, xc], 'ffvelcdmd', '( %s ` %s ) e. CC' % (MSm, X))], 'eqeltrrd', '%s e. CC' % MRr('R', X))
+
+
+def z6rect():
+    w = W('z6rect', 'The rectangle identity (Lean ` rectInt_Ghat_principal ` , one statement for every character): the boundary integral of '
+          '` GR ( R ) ` over ` [ CL , 3 ] x [ -u T , T ] ` , ` T >_ | Im S | + 1 ` , is ` 2 pi i ` times the residue '
+          '` _G ( 1 - S ) X ^ ( 1 - S ) E ( 1 ) M_r ( 1 ) ` : on the frame ` GR = Gone / ( w - ( 1 - S ) ) ` (~ z6ffv ), and ~ z6cau2 with '
+          'the continuity-only point ` 0 ` (~ z6ff ).')
+    a = ante('z6rect'); f = unpack(w, a); st = mkst(w, a)
+    sc = f['S e. CC']; lo = f['( ; 9 9 / ; ; 1 0 0 ) <_ ( Re ` S )']; hi = f['( Re ` S ) <_ 1']; ne1 = f['S =/= 1']
+    tr = f['T e. RR']; ty = f['%s <_ T' % Y5]
+    d = dfacts(w, a, f)
+    rs = st([sc], 'recld', '( Re ` S ) e. RR'); is_ = st([sc], 'imcld', '( Im ` S ) e. RR')
+    ais = st([sc], 'imcld', '( Im ` S ) e. RR')
+    abs_ = st([st([is_], 'recnd', '( Im ` S ) e. CC')], 'abscld', '( abs ` ( Im ` S ) ) e. RR')
+    le1 = st([is_], 'leabsd', '( Im ` S ) <_ ( abs ` ( Im ` S ) )')
+    nle = st([st([st([is_], 'renegcld', '-u ( Im ` S ) e. RR')], 'leabsd', '-u ( Im ` S ) <_ ( abs ` -u ( Im ` S ) )'),
+              st([st([is_], 'recnd', '( Im ` S ) e. CC')], 'absnegd', '( abs ` -u ( Im ` S ) ) = ( abs ` ( Im ` S ) )')], 'breqtrd',
+             '-u ( Im ` S ) <_ ( abs ` ( Im ` S ) )')
+    ag0 = st([st([is_], 'recnd', '( Im ` S ) e. CC')], 'absge0d', '0 <_ ( abs ` ( Im ` S ) )')
+    L = {'( Re ` S )': rs, '( Im ` S )': is_, '( abs ` ( Im ` S ) )': abs_, 'T': tr}
+    lin_ = lambda hyps, goal: linarith(w, a, hyps, goal, leaves=L)
+    c100 = c_(w, a, num.real(w, '( 1 / ; ; 1 0 0 )'), '( 1 / ; ; 1 0 0 ) e. RR')
+    clr = st([c100, rs], 'resubcld', '%s e. RR' % CL)
+    ntr = st([tr], 'renegcld', '-u T e. RR')
+    three = c_(w, a, w.s([], '3re', '3 e. RR'), '3 e. RR')
+    A0 = '( %s + ( _i x. -u T ) )' % CL; B0 = '( 3 + ( _i x. T ) )'; P = '( 1 - S )'
+    RC = '( %s crect %s )' % (A0, B0)
+    ic = c_(w, a, w.s([], 'ax-icn', '_i e. CC'), '_i e. CC')
+    a0c = st([st([clr], 'recnd', '%s e. CC' % CL), st([ic, st([ntr], 'recnd', '-u T e. CC')], 'mulcld', '( _i x. -u T ) e. CC')], 'addcld', '%s e. CC' % A0)
+    b0c = st([c_(w, a, w.s([], '3cn', '3 e. CC'), '3 e. CC'), st([ic, st([tr], 'recnd', 'T e. CC')], 'mulcld', '( _i x. T ) e. CC')], 'addcld', '%s e. CC' % B0)
+    one = c_(w, a, w.s([], 'ax-1cn', '1 e. CC'), '1 e. CC')
+    pc = st([one, sc], 'subcld', '%s e. CC' % P)
+    eq = {}
+    eq[('Re', A0)] = (st([clr, ntr], 'crred', '( Re ` %s ) = %s' % (A0, CL)), CL)
+    eq[('Im', A0)] = (st([clr, ntr], 'crimd', '( Im ` %s ) = -u T' % A0), '-u T')
+    eq[('Re', B0)] = (st([three, tr], 'crred', '( Re ` %s ) = 3' % B0), '3')
+    eq[('Im', B0)] = (st([three, tr], 'crimd', '( Im ` %s ) = T' % B0), 'T')
+    XP_ = '( 1 - ( Re ` S ) )'; YP_ = '( 0 - ( Im ` S ) )'
+    eq[('Re', P)] = (st([st([one, sc], 'resubd', '( Re ` %s ) = ( ( Re ` 1 ) - ( Re ` S ) )' % P),
+                         st([c_(w, a, w.s([], 're1', '( Re ` 1 ) = 1'), '( Re ` 1 ) = 1')], 'oveq1d', '( ( Re ` 1 ) - ( Re ` S ) ) = %s' % XP_)], 'eqtrd',
+                        '( Re ` %s ) = %s' % (P, XP_)), XP_)
+    eq[('Im', P)] = (st([st([one, sc], 'imsubd', '( Im ` %s ) = ( ( Im ` 1 ) - ( Im ` S ) )' % P),
+                         st([c_(w, a, w.s([], 'im1', '( Im ` 1 ) = 0'), '( Im ` 1 ) = 0')], 'oveq1d', '( ( Im ` 1 ) - ( Im ` S ) ) = %s' % YP_)], 'eqtrd',
+                        '( Im ` %s ) = %s' % (P, YP_)), YP_)
+    eq[('Re', '0')] = (c_(w, a, w.s([], 're0', '( Re ` 0 ) = 0'), '( Re ` 0 ) = 0'), '0')
+    eq[('Im', '0')] = (c_(w, a, w.s([], 'im0', '( Im ` 0 ) = 0'), '( Im ` 0 ) = 0'), '0')
+
+    def lt(k, X, Y, hyps):
+        """( a -> ( k ` X ) < ( k ` Y ) ) by lin on the values"""
+        ex, vx = eq[(k, X)]; ey, vy = eq[(k, Y)]
+        s0 = lin_(hyps, '%s < %s' % (vx, vy))
+        s1 = st([ex, s0], 'eqbrtrd', '( %s ` %s ) < %s' % (k, X, vy))
+        s2 = st([s1, ey], 'breqtrrd', '( %s ` %s ) < ( %s ` %s )' % (k, X, k, Y))
+        f['( %s ` %s ) < ( %s ` %s )' % (k, X, k, Y)] = s2
+        return s2
+    H = [lo, hi, le1, nle, ag0, ty]
+    for Z in (P, '0'):
+        lt('Re', A0, Z, H); lt('Re', Z, B0, H); lt('Im', A0, Z, H); lt('Im', Z, B0, H)
+    f['%s e. CC' % A0] = a0c; f['%s e. CC' % B0] = b0c; f['%s e. CC' % P] = pc; f['0 e. CC'] = c_(w, a, w.s([], '0cn', '0 e. CC'), '0 e. CC')
+    f['%s =/= 0' % P] = st([one, sc, st([ne1], 'necomd', '1 =/= S')], 'subne0d', '%s =/= 0' % P)
+    rpos = lin_([lo], '0 < ( Re ` S )'); f['0 < ( Re ` S )'] = rpos
+    ff, _ = applyn(w, a, 'z6ff', {}, f)
+    ffcn = st([ff], 'simpld', '%s e. ( %s -cn-> CC )' % (FF, U5)); ffdv = st([ff], 'simprd', '( %s \\ { 0 } ) C_ dom ( CC _D %s )' % (U5, FF))
+    f['%s e. ( %s -cn-> CC )' % (FF, U5)] = ffcn
+    # points of the rectangle
+    nrs = st([rs], 'renegcld', '-u ( Re ` S ) e. RR')
+
+    def inrect(ctx, um):
+        """from ( ctx -> u e. RC ): u e. CC , CL <_ Re u , u e. U5 , -u 1 < Re u"""
+        t = mkst(w, ctx)
+        el = t([lift(w, a0c, ctx), lift(w, b0c, ctx), w.inst('elcrect')], 'syl2anc',
+               '( u e. %s <-> ( u e. CC /\\ ( Re ` u ) e. ( ( Re ` %s ) [,] ( Re ` %s ) ) /\\ ( Im ` u ) e. ( ( Im ` %s ) [,] ( Im ` %s ) ) ) )' % (RC, A0, B0, A0, B0))
+        m3 = t([um, el], 'mpbid', '( u e. CC /\\ ( Re ` u ) e. ( ( Re ` %s ) [,] ( Re ` %s ) ) /\\ ( Im ` u ) e. ( ( Im ` %s ) [,] ( Im ` %s ) ) )' % (A0, B0, A0, B0))
+        uc = t([m3], 'simp1d', 'u e. CC')
+        ri = t([m3], 'simp2d', '( Re ` u ) e. ( ( Re ` %s ) [,] ( Re ` %s ) )' % (A0, B0))
+        ra = t([lift(w, a0c, ctx)], 'recld', '( Re ` %s ) e. RR' % A0); rb = t([lift(w, b0c, ctx)], 'recld', '( Re ` %s ) e. RR' % B0)
+        gl = t([t([ra], 'rexrd', '( Re ` %s ) e. RR*' % A0), t([rb], 'rexrd', '( Re ` %s ) e. RR*' % B0), ri, w.inst('iccgelb')], 'syl3anc',
+               '( Re ` %s ) <_ ( Re ` u )' % A0)
+        cl_ = t([t([lift(w, eq[('Re', A0)][0], ctx)], 'eqcomd', '%s = ( Re ` %s )' % (CL, A0)), gl], 'eqbrtrd', '%s <_ ( Re ` u )' % CL)
+        ru = t([uc], 'recld', '( Re ` u ) e. RR')
+        LL = {'( Re ` S )': lift(w, rs, ctx), '( Re ` u )': ru}
+        gs = linarith(w, ctx, [cl_], '-u ( Re ` S ) < ( Re ` u )', leaves=LL)
+        g1 = linarith(w, ctx, [cl_, lift(w, hi, ctx)], '-u 1 < ( Re ` u )', leaves=LL)
+        bi = t([lift(w, nrs, ctx), w.inst('elhp2')], 'syl', '( u e. %s <-> ( u e. CC /\\ -u ( Re ` S ) < ( Re ` u ) ) )' % U5)
+        uu = t([t([uc, gs], 'jca', '( u e. CC /\\ -u ( Re ` S ) < ( Re ` u ) )'), bi], 'mpbird', 'u e. %s' % U5)
+        return uc, cl_, uu, g1, gs
+    b1 = '( %s /\\ u e. %s )' % (a, RC)
+    _, _, uu1, _, _ = inrect(b1, w.s([], 'simpr', '( %s -> u e. %s )' % (b1, RC)))
+    rcu = st([w.s([uu1], 'ex', '( %s -> ( u e. %s -> u e. %s ) )' % (a, RC, U5))], 'ssrdv', '%s C_ %s' % (RC, U5))
+    f['%s C_ %s' % (RC, U5)] = rcu
+    f['( %s \\ { 0 } ) C_ dom ( CC _D %s )' % (RC, FF)] = st([st([rcu], 'ssdifd', '( %s \\ { 0 } ) C_ ( %s \\ { 0 } )' % (RC, U5)), ffdv], 'sstrd',
+                                                              '( %s \\ { 0 } ) C_ dom ( CC _D %s )' % (RC, FF))
+    cau, cauc = applyn(w, a, 'z6cau2', {'A': A0, 'B': B0, 'P': P, 'Q': '0', 'F': FF, 'D': U5}, f)
+    CM = '( z e. ( %s \\ { %s } ) |-> ( ( %s ` z ) / ( z - %s ) ) )' % (RC, P, FF, P)
+    # FF ` P
+    pu = st([st([pc, st([lin_([lo, hi], '-u ( Re ` S ) < %s' % XP_), eq[('Re', P)][0]], 'breqtrrd', '-u ( Re ` S ) < ( Re ` %s )' % P)], 'jca',
+                '( %s e. CC /\\ -u ( Re ` S ) < ( Re ` %s ) )' % (P, P)), st([nrs, w.inst('elhp2')], 'syl',
+                                                                           '( %s e. %s <-> ( %s e. CC /\\ -u ( Re ` S ) < ( Re ` %s ) ) )' % (P, U5, P, P))], 'mpbird', '%s e. %s' % (P, U5))
+    pdg, _ = applyn(w, a, 'z6pdg', {}, f)
+    f['%s e. %s' % (P, U5)] = pu; f['%s e. %s' % (P, DG)] = pdg
+    ffp, _ = applyn(w, a, 'z6ffv', {'W': P}, f)
+    spp = st([sc, one], 'pncan3d', '( S + %s ) = 1' % P)
+    e1 = f['( E ` 1 ) = %s' % RESV]
+    r1, v1 = w.rewrite(HMX(P), {'( S + %s )' % P: ('1', spp)}, a)
+    r2, v2 = w.rewrite(v1, {'( E ` 1 )': (RESV, e1)}, a)
+    hp = st([r1, r2], 'eqtrd', '%s = %s' % (HMX(P), v2))
+    xc = st([d['xrp']], 'rpcnd', '%s e. CC' % XPD)
+    xpc = st([xc, pc], 'cxpcld', '( %s ^c %s ) e. CC' % (XPD, P))
+    gpc = st([pdg, w.inst('gamcl')], 'syl', '( _G ` %s ) e. CC' % P)
+    # E ( 1 ) e. CC
+    ecn = f['E e. ( %s -cn-> CC )' % HPZ]
+    oneh = st([st([one, st([c_(w, a, w.s([], '0lt1', '0 < 1'), '0 < 1'), c_(w, a, w.s([], 're1', '( Re ` 1 ) = 1'), '( Re ` 1 ) = 1')], 'breqtrrd', '0 < ( Re ` 1 )')],
+                  'jca', '( 1 e. CC /\\ 0 < ( Re ` 1 ) )'), st([c_(w, a, w.s([], '0re', '0 e. RR'), '0 e. RR'), w.inst('elhp2')], 'syl',
+                                                            '( 1 e. %s <-> ( 1 e. CC /\\ 0 < ( Re ` 1 ) ) )' % HPZ)], 'mpbird', '1 e. %s' % HPZ)
+    ef = st([ecn, w.inst('cncff')], 'syl', 'E : %s --> CC' % HPZ)
+    e1c = st([ef, oneh], 'ffvelcdmd', '( E ` 1 ) e. CC')
+    resc = st([e1, e1c], 'eqeltrrd', '%s e. CC' % RESV) if False else st([e1, e1c], 'eqeltrrd', '%s e. CC' % RESV)
+    m1c = mrcc(w, a, d['mff'], '1', one)
+    rmc = st([resc, m1c], 'mulcld', '( %s x. %s ) e. CC' % (RESV, MRr('R', '1')))
+    GP = '( _G ` %s )' % P; XPP = '( %s ^c %s )' % (XPD, P); RM = '( %s x. %s )' % (RESV, MRr('R', '1'))
+    ass = st([st([gpc, xpc, rmc], 'mulassd', '( ( %s x. %s ) x. %s ) = ( %s x. ( %s x. %s ) )' % (GP, XPP, RM, GP, XPP, RM))], 'eqcomd',
+             '( %s x. ( %s x. %s ) ) = ( ( %s x. %s ) x. %s )' % (GP, XPP, RM, GP, XPP, RM))
+    ffpv = st([st([ffp, st([hp], 'oveq2d', '( %s x. %s ) = ( %s x. %s )' % (GP, HMX(P), GP, v2))], 'eqtrd', '( %s ` %s ) = ( %s x. %s )' % (FF, P, GP, v2)), ass],
+              'eqtrd', '( %s ` %s ) = %s' % (FF, P, RES5))
+    cauk = st([cau, st([ffpv], 'oveq2d', '( %s x. ( %s ` %s ) ) = %s' % (TPI, FF, P, K5))], 'eqtrd', '( %s rectint <. %s , %s >. ) = %s' % (CM, A0, B0, K5))
+    # the frame: GR = CM on RC \ { P , 0 }
+    need('crectfrd')
+    frm, frc = applyn(w, a, 'crectfrd', {'A': A0, 'B': B0, 'P': P, 'Q': '0'}, f)
+    E_ = '( %s \\ { %s , 0 } )' % (RC, P)
+    rcs = st([a0c, b0c, w.inst('crectss')], 'syl2anc', '%s C_ CC' % RC)
+    cnex = c_(w, a, w.s([], 'cnex', 'CC e. _V'), 'CC e. _V')
+    dscc = c_(w, a, w.s([w.s([], 'inss1', '%s C_ %s' % (DS, DG)), w.s([], 'difss', '%s C_ CC' % DG)], 'sstri', '%s C_ CC' % DS), '%s C_ CC' % DS)
+    grv = st([st([cnex, dscc], 'ssexd', '%s e. _V' % DS)], 'mptexd', '%s e. _V' % GR('R'))
+    cmv = st([st([cnex, st([st([], 'difssd', '( %s \\ { %s } ) C_ %s' % (RC, P, RC)), rcs], 'sstrd', '( %s \\ { %s } ) C_ CC' % (RC, P))], 'ssexd',
+                 '( %s \\ { %s } ) e. _V' % (RC, P))], 'mptexd', '%s e. _V' % CM)
+    b = '( %s /\\ u e. %s )' % (a, E_); t = mkst(w, b)
+    um = t([], 'simpr', 'u e. %s' % E_)
+    e3 = t([um, c_(w, b, w.s([], 'eldifpr', '( u e. %s <-> ( u e. %s /\\ u =/= %s /\\ u =/= 0 ) )' % (E_, RC, P)),
+                   '( u e. %s <-> ( u e. %s /\\ u =/= %s /\\ u =/= 0 ) )' % (E_, RC, P))], 'mpbid', '( u e. %s /\\ u =/= %s /\\ u =/= 0 )' % (RC, P))
+    urc = t([e3], 'simp1d', 'u e. %s' % RC); unp = t([e3], 'simp2d', 'u =/= %s' % P); un0 = t([e3], 'simp3d', 'u =/= 0')
+    uc, _, uu, g1, gs = inrect(b, urc)
+    udg = t([t([uc, t([g1, un0], 'jca', '( -u 1 < ( Re ` u ) /\\ u =/= 0 )')], 'jca', '( u e. CC /\\ ( -u 1 < ( Re ` u ) /\\ u =/= 0 ) )'), w.inst('z6rdg')], 'syl',
+            'u e. %s' % DG)
+    UP = '( %s \\ { %s } )' % (U5, P)
+    uup = t([t([uu, unp], 'jca', '( u e. %s /\\ u =/= %s )' % (U5, P)), c_(w, b, w.s([], 'eldifsn', '( u e. %s <-> ( u e. %s /\\ u =/= %s ) )' % (UP, U5, P)),
+                                                                    '( u e. %s <-> ( u e. %s /\\ u =/= %s ) )' % (UP, U5, P))], 'mpbird', 'u e. %s' % UP)
+    uds = t([t([udg, uup], 'jca', '( u e. %s /\\ u e. %s )' % (DG, UP)), c_(w, b, w.s([], 'elin', '( u e. %s <-> ( u e. %s /\\ u e. %s ) )' % (DS, DG, UP)),
+                                                                          '( u e. %s <-> ( u e. %s /\\ u e. %s ) )' % (DS, DG, UP))], 'mpbird', 'u e. %s' % DS)
+    grb = '( ( ( _G ` w ) x. ( %s ^c w ) ) x. ( ( ( E ` ( S + w ) ) / ( ( S + w ) - 1 ) ) x. %s ) )' % (XPD, MRr('R', '( S + w )'))
+    gv, gval = mpval(w, b, 'w', DS, grb, 'u', uds)
+    RCP = '( %s \\ { %s } )' % (RC, P)
+    urcp = t([t([urc, unp], 'jca', '( u e. %s /\\ u =/= %s )' % (RC, P)), c_(w, b, w.s([], 'eldifsn', '( u e. %s <-> ( u e. %s /\\ u =/= %s ) )' % (RCP, RC, P)),
+                                                                        '( u e. %s <-> ( u e. %s /\\ u =/= %s ) )' % (RCP, RC, P))], 'mpbird', 'u e. %s' % RCP)
+    cv, cval = mpval(w, b, 'z', RCP, '( ( %s ` z ) / ( z - %s ) )' % (FF, P), 'u', urcp)
+    fb = {HV5: lift(w, build(w, a, HV5, f), b)}
+    fb['u e. %s' % U5] = uu; fb['u e. %s' % DG] = udg; fb['u =/= 0'] = un0
+    fu, _ = applyn(w, b, 'z6ffv', {'W': 'u'}, fb)
+    # algebra
+    scb = lift(w, sc, b)
+    Dn = '( ( S + u ) - 1 )'
+    dq = t([t([uc, c_(w, b, w.s([], 'ax-1cn', '1 e. CC'), '1 e. CC'), scb], 'subsub3d', '( u - %s ) = ( ( u + S ) - 1 )' % P),
+            t([t([uc, scb], 'addcomd', '( u + S ) = ( S + u )')], 'oveq1d', '( ( u + S ) - 1 ) = %s' % Dn)], 'eqtrd', '( u - %s ) = %s' % (P, Dn))
+    dn0 = t([dq, t([uc, lift(w, pc, b), unp], 'subne0d', '( u - %s ) =/= 0' % P)], 'eqnetrrd', '%s =/= 0' % Dn)
+    Gu = '( _G ` u )'; Xu = '( %s ^c u )' % XPD; Eu = '( E ` ( S + u ) )'; Mu = MRr('R', '( S + u )')
+    gc = t([udg, w.inst('gamcl')], 'syl', '%s e. CC' % Gu)
+    xuc = t([lift(w, xc, b), uc], 'cxpcld', '%s e. CC' % Xu)
+    suh = hpzpt(w, b, 'u', uc, gs, scb, rev=True)
+    euc = t([lift(w, ef, b), suh], 'ffvelcdmd', '%s e. CC' % Eu)
+    suc = t([scb, uc], 'addcld', '( S + u ) e. CC')
+    muc = mrcc(w, b, lift(w, d['mff'], b), '( S + u )', suc)
+    emc = t([euc, muc], 'mulcld', '( %s x. %s ) e. CC' % (Eu, Mu))
+    dnc = t([suc, c_(w, b, w.s([], 'ax-1cn', '1 e. CC'), '1 e. CC')], 'subcld', '%s e. CC' % Dn)
+    EM = '( %s x. %s )' % (Eu, Mu); GX = '( %s x. %s )' % (Gu, Xu)
+    s1 = t([t([gc, xuc, emc], 'mulassd', '( %s x. %s ) = ( %s x. ( %s x. %s ) )' % (GX, EM, Gu, Xu, EM))], 'eqcomd', '( %s x. ( %s x. %s ) ) = ( %s x. %s )' % (Gu, Xu, EM, GX, EM))
+    q1 = t([cv, t([fu, dq], 'oveq12d', '( ( %s ` u ) / ( u - %s ) ) = ( ( %s x. %s ) / %s )' % (FF, P, Gu, HMX('u'), Dn))], 'eqtrd',
+           '( %s ` u ) = ( ( %s x. %s ) / %s )' % (CM, Gu, HMX('u'), Dn))
+    q2 = t([q1, t([s1], 'oveq1d', '( ( %s x. %s ) / %s ) = ( ( %s x. %s ) / %s )' % (Gu, HMX('u'), Dn, GX, EM, Dn))], 'eqtrd', '( %s ` u ) = ( ( %s x. %s ) / %s )' % (CM, GX, EM, Dn))
+    gxc = t([gc, xuc], 'mulcld', '%s e. CC' % GX)
+    q3 = t([q2, t([gxc, emc, dnc, dn0], 'divassd', '( ( %s x. %s ) / %s ) = ( %s x. ( %s / %s ) )' % (GX, EM, Dn, GX, EM, Dn))], 'eqtrd',
+           '( %s ` u ) = ( %s x. ( %s / %s ) )' % (CM, GX, EM, Dn))
+    q4 = t([q3, t([t([euc, muc, dnc, dn0], 'div23d', '( %s / %s ) = ( ( %s / %s ) x. %s )' % (EM, Dn, Eu, Dn, Mu))], 'oveq2d',
+                  '( %s x. ( %s / %s ) ) = ( %s x. ( ( %s / %s ) x. %s ) )' % (GX, EM, Dn, GX, Eu, Dn, Mu))], 'eqtrd',
+           '( %s ` u ) = ( %s x. ( ( %s / %s ) x. %s ) )' % (CM, GX, Eu, Dn, Mu))
+    assert gval == '( %s x. ( ( %s / %s ) x. %s ) )' % (GX, Eu, Dn, Mu), gval
+    pw = t([gv, q4], 'eqtr4d', '( %s ` u ) = ( %s ` u )' % (GR('R'), CM))
+    ral = st([pw], 'ralrimiva', 'A. u e. %s ( %s ` u ) = ( %s ` u )' % (E_, GR('R'), CM))
+    FRM = frc.split(' C_ ')[0]
+    h1 = st([st([a0c, b0c], 'jca', '( %s e. CC /\\ %s e. CC )' % (A0, B0)), frm], 'jca', '( ( %s e. CC /\\ %s e. CC ) /\\ %s )' % (A0, B0, frc))
+    req = st([h1, st([grv, cmv], 'jca', '( %s e. _V /\\ %s e. _V )' % (GR('R'), CM)), ral, w.inst('rectinteqe')], 'syl3anc',
+             '%s = ( %s rectint <. %s , %s >. )' % (RECT5('T'), CM, A0, B0))
+    w.qed([req, cauk], 'eqtrd', STATEMENTS['z6rect'])
+    return w
+
+
+if __name__ == '__main__':
+    lin.FASTPATH = True
+    for fn in [z6rect]:
+        if want(fn.__name__):
+            if not run(fn()):
+                break

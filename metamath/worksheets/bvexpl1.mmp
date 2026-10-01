@@ -1,0 +1,50 @@
+$( <MM> <PROOF_ASST> THEOREM=bvexpl1  LOC_AFTER=?
+
+* 1 - exp ( -u A ) <= A for A >= 0 (zdmlogl1 at exp A; the case A = 0 apart).
+
+s1::simpl |- ( ( A e. RR /\ 0 <_ A ) -> A e. RR )
+s2::simpr |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ A )
+s3:s1:recnd |- ( ( A e. RR /\ 0 <_ A ) -> A e. CC )
+s4:s1:adantr |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> A e. RR )
+s5:s3:adantr |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> A e. CC )
+s6::simpr |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> 0 < A )
+s7:s4,s6:elrpd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> A e. RR+ )
+s8:s4:reefcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> ( exp ` A ) e. RR )
+i9::efgt1
+s10:s7,i9:syl |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> 1 < ( exp ` A ) )
+i11::zdmlogl1
+s12:s8,s10,i11:syl2anc |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> ( 1 - ( 1 / ( exp ` A ) ) ) <_ ( log ` ( exp ` A ) ) )
+i13::relogef
+s14:s4,i13:syl |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> ( log ` ( exp ` A ) ) = A )
+i15::efneg
+s16:s5,i15:syl |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> ( exp ` -u A ) = ( 1 / ( exp ` A ) ) )
+s17:s16:oveq2d |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> ( 1 - ( exp ` -u A ) ) = ( 1 - ( 1 / ( exp ` A ) ) ) )
+s18:s12,s14:breqtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> ( 1 - ( 1 / ( exp ` A ) ) ) <_ A )
+s19:s17,s18:eqbrtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 < A ) -> ( 1 - ( exp ` -u A ) ) <_ A )
+s20::simpr |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> 0 = A )
+s21:s20:negeqd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> -u 0 = -u A )
+s22:s21:eqcomd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> -u A = -u 0 )
+s23::neg0 |- -u 0 = 0
+s24:s23:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> -u 0 = 0 )
+s25:s22,s24:eqtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> -u A = 0 )
+s26:s25:fveq2d |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( exp ` -u A ) = ( exp ` 0 ) )
+s27::ef0 |- ( exp ` 0 ) = 1
+s28:s27:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( exp ` 0 ) = 1 )
+s29:s26,s28:eqtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( exp ` -u A ) = 1 )
+s30:s29:oveq2d |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( 1 - ( exp ` -u A ) ) = ( 1 - 1 ) )
+s31::1m1e0 |- ( 1 - 1 ) = 0
+s32:s31:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( 1 - 1 ) = 0 )
+s33:s30,s32:eqtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( 1 - ( exp ` -u A ) ) = 0 )
+s34:s33,s20:eqtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( 1 - ( exp ` -u A ) ) = A )
+s35:s1:adantr |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> A e. RR )
+s36:s35:renegcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> -u A e. RR )
+s37:s36:reefcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( exp ` -u A ) e. RR )
+s38::1red |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> 1 e. RR )
+s39:s38,s37:resubcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( 1 - ( exp ` -u A ) ) e. RR )
+s40:s39,s34:eqled |- ( ( ( A e. RR /\ 0 <_ A ) /\ 0 = A ) -> ( 1 - ( exp ` -u A ) ) <_ A )
+s41::0red |- ( ( A e. RR /\ 0 <_ A ) -> 0 e. RR )
+i42::leloe
+s43:s41,s1,i42:syl2anc |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 <_ A <-> ( 0 < A \/ 0 = A ) ) )
+s44:s2,s43:mpbid |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 < A \/ 0 = A ) )
+qed:s19,s40,s44:mpjaodan |- ( ( A e. RR /\ 0 <_ A ) -> ( 1 - ( exp ` -u A ) ) <_ A )
+$)

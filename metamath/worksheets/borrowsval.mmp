@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=borrowsval  LOC_AFTER=?
+
+* Value of borrows: the 2-adic valuation of toNat L, or the length when the value is 0.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::fvex |- ( # ` L ) e. _V
+s3:s2:a1i |- ( L e. Word 2o -> ( # ` L ) e. _V )
+s4::ovex |- ( 2 pCnt ( toNat ` L ) ) e. _V
+s5:s4:a1i |- ( L e. Word 2o -> ( 2 pCnt ( toNat ` L ) ) e. _V )
+i6::ifexg
+s7:s3,s5,i6:syl2anc |- ( L e. Word 2o -> if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) e. _V )
+s8::id |- ( l = L -> l = L )
+c1:s8:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c2:c1:eqeq1d |- ( l = L -> ( ( toNat ` l ) = 0 <-> ( toNat ` L ) = 0 ) )
+c3:s8:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c4:s8:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c5:c4:oveq2d |- ( l = L -> ( 2 pCnt ( toNat ` l ) ) = ( 2 pCnt ( toNat ` L ) ) )
+c6:c2,c3,c5:ifbieq12d |- ( l = L -> if ( ( toNat ` l ) = 0 , ( # ` l ) , ( 2 pCnt ( toNat ` l ) ) ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s9::df-borrows |- borrows = ( l e. Word 2o |-> if ( ( toNat ` l ) = 0 , ( # ` l ) , ( 2 pCnt ( toNat ` l ) ) ) )
+s10:c6,s9:fvmptg |- ( ( L e. Word 2o /\ if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) e. _V ) -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+qed:s1,s7,s10:syl2anc |- ( L e. Word 2o -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+$)

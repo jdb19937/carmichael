@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=dpgocasesb  LOC_AFTER=?
+
+* Base of the induction for dpgocases.
+
+s1::simpr |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) -> a e. Tbl )
+s2:s1:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> a e. Tbl )
+s3::simpr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> c e. NN0 )
+s4::id |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) )
+s5:s4:adantr |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) -> ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) )
+s6:s5:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) )
+s7::simpl |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) )
+i8::dpgo0
+s9:s7,i8:syl |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) = <. a , 0 >. )
+s10:s2:elexd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> a e. _V )
+s11::c0ex |- 0 e. _V
+s12:s11:a1i |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> 0 e. _V )
+s13:s9:fveq2d |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) = ( 1st ` <. a , 0 >. ) )
+i14::op1stg
+s15:s10,s12,i14:syl2anc |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( 1st ` <. a , 0 >. ) = a )
+s16:s13,s15:eqtrd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) = a )
+s17:s16:fveq1d |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) = ( a ` c ) )
+s18:s17:eqcomd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( a ` c ) = ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) )
+s19:s18:orcd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( ( a ` c ) = ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) \/ E. r e. ( 0 ..^ 0 ) ( ( ( T ` r ) =/= ( inr ` (/) ) /\ c = ( ( r x. P ) mod L ) ) /\ ( 2nd ` ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) ) = ( <" P "> ++ ( 2nd ` ( T ` r ) ) ) ) ) )
+s20:s19:a1d |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) /\ c e. NN0 ) -> ( ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) =/= ( inr ` (/) ) -> ( ( a ` c ) = ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) \/ E. r e. ( 0 ..^ 0 ) ( ( ( T ` r ) =/= ( inr ` (/) ) /\ c = ( ( r x. P ) mod L ) ) /\ ( 2nd ` ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) ) = ( <" P "> ++ ( 2nd ` ( T ` r ) ) ) ) ) ) )
+s21:s20:ralrimiva |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ a e. Tbl ) -> A. c e. NN0 ( ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) =/= ( inr ` (/) ) -> ( ( a ` c ) = ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) \/ E. r e. ( 0 ..^ 0 ) ( ( ( T ` r ) =/= ( inr ` (/) ) /\ c = ( ( r x. P ) mod L ) ) /\ ( 2nd ` ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) ) = ( <" P "> ++ ( 2nd ` ( T ` r ) ) ) ) ) ) )
+qed:s21:ralrimiva |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> A. a e. Tbl A. c e. NN0 ( ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) =/= ( inr ` (/) ) -> ( ( a ` c ) = ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) \/ E. r e. ( 0 ..^ 0 ) ( ( ( T ` r ) =/= ( inr ` (/) ) /\ c = ( ( r x. P ) mod L ) ) /\ ( 2nd ` ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` 0 ) ` a ) ) ` c ) ) = ( <" P "> ++ ( 2nd ` ( T ` r ) ) ) ) ) ) )
+$)

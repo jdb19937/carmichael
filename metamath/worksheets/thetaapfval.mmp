@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=thetaapfval  LOC_AFTER=?
+
+* Value of the function thetaAP at a modulus.
+
+s1::oveq2 |- ( q = Q -> ( n mod q ) = ( n mod Q ) )
+s2::oveq2 |- ( q = Q -> ( a mod q ) = ( a mod Q ) )
+s3:s1,s2:eqeq12d |- ( q = Q -> ( ( n mod q ) = ( a mod q ) <-> ( n mod Q ) = ( a mod Q ) ) )
+s4:s3:anbi2d |- ( q = Q -> ( ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) <-> ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) ) )
+s5:s4:rabbidv |- ( q = Q -> { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } = { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } )
+s6:s5:sumeq1d |- ( q = Q -> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } ( log ` p ) = sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) )
+s7:s6:mpoeq3dv |- ( q = Q -> ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } ( log ` p ) ) = ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) ) )
+s8::df-thetaap |- thetaAP = ( q e. NN |-> ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } ( log ` p ) ) )
+s9::zex |- ZZ e. _V
+s10::reex |- RR e. _V
+s11::mpoexga |- ( ( ZZ e. _V /\ RR e. _V ) -> ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) ) e. _V )
+s12:s9,s10,s11:mp2an |- ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) ) e. _V
+qed:s7,s8,s12:fvmpt |- ( Q e. NN -> ( thetaAP ` Q ) = ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) ) )
+$)

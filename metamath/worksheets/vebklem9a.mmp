@@ -1,0 +1,80 @@
+$( <MM> <PROOF_ASST> THEOREM=vebklem9a  LOC_AFTER=?
+
+* Lemma for vebkz: ( 1 - 1 / E ) ^ K <= exp ( - K / E ) for E >= 2.
+
+1::simpl    |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> E e. ( ZZ>= ` 2 ) )
+2::simpr    |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> K e. NN0 )
+3a::eluz2nn
+3:1,3a:syl  |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> E e. NN )
+4:3:nnrpd   |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> E e. RR+ )
+5:3:nnred   |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> E e. RR )
+6a::uz2m1nn
+6:1,6a:syl  |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( E - 1 ) e. NN )
+7:6:nnrpd   |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( E - 1 ) e. RR+ )
+8a::logdiflbnd
+8:7,8a:syl  |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( 1 / ( ( E - 1 ) + 1 ) ) <_ ( ( log ` ( ( E - 1 ) + 1 ) ) - ( log ` ( E - 1 ) ) ) )
+9:5:recnd   |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> E e. CC )
+10a::npcan1
+10:9,10a:syl |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( E - 1 ) + 1 ) = E )
+11:10:oveq2d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( 1 / ( ( E - 1 ) + 1 ) ) = ( 1 / E ) )
+12:10:fveq2d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` ( ( E - 1 ) + 1 ) ) = ( log ` E ) )
+13:12:oveq1d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( log ` ( ( E - 1 ) + 1 ) ) - ( log ` ( E - 1 ) ) ) = ( ( log ` E ) - ( log ` ( E - 1 ) ) ) )
+14:8,11,13:3brtr3d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( 1 / E ) <_ ( ( log ` E ) - ( log ` ( E - 1 ) ) ) )
+15:7,4:relogdivd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` ( ( E - 1 ) / E ) ) = ( ( log ` ( E - 1 ) ) - ( log ` E ) ) )
+16:7,4:rpdivcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( E - 1 ) / E ) e. RR+ )
+17:4:relogcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` E ) e. RR )
+18:7:relogcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` ( E - 1 ) ) e. RR )
+19::1re     |- 1 e. RR
+20:19:a1i   |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> 1 e. RR )
+21:20,4:rerpdivcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( 1 / E ) e. RR )
+22:17,18:resubcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( log ` E ) - ( log ` ( E - 1 ) ) ) e. RR )
+23a:21,22:lenegd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( 1 / E ) <_ ( ( log ` E ) - ( log ` ( E - 1 ) ) ) <-> -u ( ( log ` E ) - ( log ` ( E - 1 ) ) ) <_ -u ( 1 / E ) ) )
+23:14,23a:mpbid |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> -u ( ( log ` E ) - ( log ` ( E - 1 ) ) ) <_ -u ( 1 / E ) )
+24:17:recnd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` E ) e. CC )
+25:18:recnd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` ( E - 1 ) ) e. CC )
+26:24,25:negsubdi2d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> -u ( ( log ` E ) - ( log ` ( E - 1 ) ) ) = ( ( log ` ( E - 1 ) ) - ( log ` E ) ) )
+27:26,23:eqbrtrrd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( log ` ( E - 1 ) ) - ( log ` E ) ) <_ -u ( 1 / E ) )
+28:15,27:eqbrtrd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` ( ( E - 1 ) / E ) ) <_ -u ( 1 / E ) )
+29:16:relogcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( log ` ( ( E - 1 ) / E ) ) e. RR )
+30:21:renegcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> -u ( 1 / E ) e. RR )
+31:2:nn0red |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> K e. RR )
+32:2:nn0ge0d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> 0 <_ K )
+33:31,32:jca |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( K e. RR /\ 0 <_ K ) )
+34:29,30,33:3jca |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( log ` ( ( E - 1 ) / E ) ) e. RR /\ -u ( 1 / E ) e. RR /\ ( K e. RR /\ 0 <_ K ) ) )
+35a::lemul2a
+35:34,28,35a:syl2anc |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( K x. ( log ` ( ( E - 1 ) / E ) ) ) <_ ( K x. -u ( 1 / E ) ) )
+36:31,29:remulcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( K x. ( log ` ( ( E - 1 ) / E ) ) ) e. RR )
+37:31,30:remulcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( K x. -u ( 1 / E ) ) e. RR )
+38a::efle
+38:36,37,38a:syl2anc |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( K x. ( log ` ( ( E - 1 ) / E ) ) ) <_ ( K x. -u ( 1 / E ) ) <-> ( exp ` ( K x. ( log ` ( ( E - 1 ) / E ) ) ) ) <_ ( exp ` ( K x. -u ( 1 / E ) ) ) ) )
+39:35,38:mpbid |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( exp ` ( K x. ( log ` ( ( E - 1 ) / E ) ) ) ) <_ ( exp ` ( K x. -u ( 1 / E ) ) ) )
+40:2:nn0zd  |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> K e. ZZ )
+41a::reexplog
+41:16,40,41a:syl2anc |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( ( E - 1 ) / E ) ^ K ) = ( exp ` ( K x. ( log ` ( ( E - 1 ) / E ) ) ) ) )
+42:9:mulridd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( E x. 1 ) = E )
+43:42:oveq1d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( E x. 1 ) - 1 ) = ( E - 1 ) )
+44::ax-1cn  |- 1 e. CC
+45:44:a1i   |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> 1 e. CC )
+46:4:rpne0d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> E =/= 0 )
+47a:9,45:mulcld |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( E x. 1 ) e. CC )
+47b:9,46:jca |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( E e. CC /\ E =/= 0 ) )
+47c::divsubdir
+47:47a,45,47b,47c:syl3anc |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( ( E x. 1 ) - 1 ) / E ) = ( ( ( E x. 1 ) / E ) - ( 1 / E ) ) )
+48:45,9,46:divcan3d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( E x. 1 ) / E ) = 1 )
+49:48:oveq1d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( ( E x. 1 ) / E ) - ( 1 / E ) ) = ( 1 - ( 1 / E ) ) )
+50:47,49:eqtrd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( ( E x. 1 ) - 1 ) / E ) = ( 1 - ( 1 / E ) ) )
+51:43:oveq1d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( ( E x. 1 ) - 1 ) / E ) = ( ( E - 1 ) / E ) )
+52:51,50:eqtr3d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( E - 1 ) / E ) = ( 1 - ( 1 / E ) ) )
+53:52:oveq1d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( ( E - 1 ) / E ) ^ K ) = ( ( 1 - ( 1 / E ) ) ^ K ) )
+54:53,41:eqtr3d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) = ( exp ` ( K x. ( log ` ( ( E - 1 ) / E ) ) ) ) )
+55:31:recnd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> K e. CC )
+56:21:recnd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( 1 / E ) e. CC )
+57:55,56:mulneg2d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( K x. -u ( 1 / E ) ) = -u ( K x. ( 1 / E ) ) )
+58a::divrec
+58:55,9,46,58a:syl3anc |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( K / E ) = ( K x. ( 1 / E ) ) )
+59:58:negeqd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> -u ( K / E ) = -u ( K x. ( 1 / E ) ) )
+60:57,59:eqtr4d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( K x. -u ( 1 / E ) ) = -u ( K / E ) )
+61:60:fveq2d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( exp ` ( K x. -u ( 1 / E ) ) ) = ( exp ` -u ( K / E ) ) )
+61r:61:eqcomd |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( exp ` -u ( K / E ) ) = ( exp ` ( K x. -u ( 1 / E ) ) ) )
+qed:39,54,61r:3brtr4d |- ( ( E e. ( ZZ>= ` 2 ) /\ K e. NN0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) <_ ( exp ` -u ( K / E ) ) )
+$)

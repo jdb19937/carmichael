@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=progssge  LOC_AFTER=?
+
+* The Selberg bounding sum of the progression sieve is at least ( phi ( M ) / M ) log Z.
+
+s1::simp1 |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M e. ( ZZ>= ` 2 ) )
+i2::eluz2nn
+s3:s1,i2:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M e. NN )
+s4::simp2 |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> Z e. NN )
+s5::progsh |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( ( { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } e. Fin /\ { i e. ( 1 ... N ) | ( i mod M ) = ( 1 mod M ) } C_ NN /\ ( c e. NN |-> 1 ) : NN --> RR ) /\ ( A. k e. NN 0 <_ ( ( c e. NN |-> 1 ) ` k ) /\ ( N / M ) e. RR /\ ( ( Z ^ 2 ) e. RR /\ 1 <_ ( Z ^ 2 ) ) ) ) /\ ( ( prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p e. NN /\ ( mmu ` prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p ) =/= 0 ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) : NN --> RR /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` 1 ) = 1 /\ ( A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` ( a x. b ) ) = ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` a ) x. ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` b ) ) ) /\ A. s e. Prime ( s || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p -> ( 0 < ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) /\ ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` s ) < 1 ) ) ) ) ) ) )
+i6::ssrp
+s7:s5,i6:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> sum_ l e. { x e. NN | x || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p } if ( ( l ^ 2 ) <_ ( Z ^ 2 ) , ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` l ) x. prod_ q e. { r e. Prime | r || l } ( 1 / ( 1 - ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` q ) ) ) ) , 0 ) e. RR+ )
+s8:s7:rpred |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> sum_ l e. { x e. NN | x || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p } if ( ( l ^ 2 ) <_ ( Z ^ 2 ) , ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` l ) x. prod_ q e. { r e. Prime | r || l } ( 1 / ( 1 - ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` q ) ) ) ) , 0 ) e. RR )
+i9::cophrm
+s10:s3,s4,i9:syl2anc |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( ( phi ` M ) / M ) x. ( log ` Z ) ) <_ sum_ j e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / j ) )
+s11::oveq2 |- ( j = w -> ( 1 / j ) = ( 1 / w ) )
+s12:s11:cbvsumv |- sum_ j e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / j ) = sum_ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / w )
+s13:s12:a1i |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> sum_ j e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / j ) = sum_ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / w ) )
+s14:s10,s13:breqtrd |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( ( phi ` M ) / M ) x. ( log ` Z ) ) <_ sum_ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / w ) )
+s15::progsum |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> sum_ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / w ) <_ sum_ l e. { x e. NN | x || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p } if ( ( l ^ 2 ) <_ ( Z ^ 2 ) , ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` l ) x. prod_ q e. { r e. Prime | r || l } ( 1 / ( 1 - ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` q ) ) ) ) , 0 ) )
+s16::fzfid |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( 1 ... Z ) e. Fin )
+s17::ssrab2 |- { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } C_ ( 1 ... Z )
+s18:s17:a1i |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } C_ ( 1 ... Z ) )
+s19:s16,s18:ssfid |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } e. Fin )
+s20::simpr |- ( ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) /\ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ) -> w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } )
+i21::elrabi
+s22:s20,i21:syl |- ( ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) /\ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ) -> w e. ( 1 ... Z ) )
+i23::elfznn
+s24:s22,i23:syl |- ( ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) /\ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ) -> w e. NN )
+i25::nnrp
+s26:s24,i25:syl |- ( ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) /\ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ) -> w e. RR+ )
+s27:s26:rpreccld |- ( ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) /\ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ) -> ( 1 / w ) e. RR+ )
+s28:s27:rpred |- ( ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) /\ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ) -> ( 1 / w ) e. RR )
+s29:s19,s28:fsumrecl |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> sum_ w e. { x e. ( 1 ... Z ) | ( x gcd M ) = 1 } ( 1 / w ) e. RR )
+i30::phicld
+s31:s3,i30:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( phi ` M ) e. NN )
+s32:s31:nnred |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( phi ` M ) e. RR )
+s33:s3:nnred |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M e. RR )
+s34:s3:nnne0d |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> M =/= 0 )
+s35:s32,s33,s34:redivcld |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( phi ` M ) / M ) e. RR )
+i36::nnrp
+s37:s4,i36:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> Z e. RR+ )
+s38:s37:relogcld |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( log ` Z ) e. RR )
+s39:s35,s38:remulcld |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( ( phi ` M ) / M ) x. ( log ` Z ) ) e. RR )
+qed:s39,s29,s8,s14,s15:letrd |- ( ( M e. ( ZZ>= ` 2 ) /\ Z e. NN /\ N e. NN0 ) -> ( ( ( phi ` M ) / M ) x. ( log ` Z ) ) <_ sum_ l e. { x e. NN | x || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || M ) } p } if ( ( l ^ 2 ) <_ ( Z ^ 2 ) , ( ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` l ) x. prod_ q e. { r e. Prime | r || l } ( 1 / ( 1 - ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` q ) ) ) ) , 0 ) )
+$)

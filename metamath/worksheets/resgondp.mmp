@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=resgondp  LOC_AFTER=?
+
+* The reservoir loop is duplicate-free (Lean: resGo_nodup).
+
+s1::simpl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ ( Q e. NN /\ F e. NN0 ) ) -> ( Z e. NN0 /\ Y e. NN ) )
+s2::simprl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ ( Q e. NN /\ F e. NN0 ) ) -> Q e. NN )
+s3::simprr |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ ( Q e. NN /\ F e. NN0 ) ) -> F e. NN0 )
+i4::resgondpl
+s5:s3,i4:syl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ ( Q e. NN /\ F e. NN0 ) ) -> ( ( Z e. NN0 /\ Y e. NN ) -> A. q e. NN Fun `' ( 1st ` ( ( ( Z ResGo Y ) ` q ) ` F ) ) ) )
+s6:s5,s1:mpd |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ ( Q e. NN /\ F e. NN0 ) ) -> A. q e. NN Fun `' ( 1st ` ( ( ( Z ResGo Y ) ` q ) ` F ) ) )
+s7::id |- ( q = Q -> q = Q )
+c1:s7:fveq2d |- ( q = Q -> ( ( Z ResGo Y ) ` q ) = ( ( Z ResGo Y ) ` Q ) )
+c2:c1:fveq1d |- ( q = Q -> ( ( ( Z ResGo Y ) ` q ) ` F ) = ( ( ( Z ResGo Y ) ` Q ) ` F ) )
+c3:c2:fveq2d |- ( q = Q -> ( 1st ` ( ( ( Z ResGo Y ) ` q ) ` F ) ) = ( 1st ` ( ( ( Z ResGo Y ) ` Q ) ` F ) ) )
+c4:c3:cnveqd |- ( q = Q -> `' ( 1st ` ( ( ( Z ResGo Y ) ` q ) ` F ) ) = `' ( 1st ` ( ( ( Z ResGo Y ) ` Q ) ` F ) ) )
+c5:c4:funeqd |- ( q = Q -> ( Fun `' ( 1st ` ( ( ( Z ResGo Y ) ` q ) ` F ) ) <-> Fun `' ( 1st ` ( ( ( Z ResGo Y ) ` Q ) ` F ) ) ) )
+qed:c5,s6,s2:rspcdva |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ ( Q e. NN /\ F e. NN0 ) ) -> Fun `' ( 1st ` ( ( ( Z ResGo Y ) ` Q ) ` F ) ) )
+$)

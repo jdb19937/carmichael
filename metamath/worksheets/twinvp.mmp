@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=twinvp  LOC_AFTER=?
+
+* The twin-sieve density at a prime is 2 over that prime.
+
+s1::id |- ( D e. Prime -> D e. Prime )
+i2::prmnn
+s3:s1,i2:syl |- ( D e. Prime -> D e. NN )
+s4::simpr |- ( ( D e. Prime /\ g e. Prime ) -> g e. Prime )
+i5::prmuz2
+s6:s4,i5:syl |- ( ( D e. Prime /\ g e. Prime ) -> g e. ( ZZ>= ` 2 ) )
+s7:s1:adantr |- ( ( D e. Prime /\ g e. Prime ) -> D e. Prime )
+i8::dvdsprm
+s9:s6,s7,i8:syl2anc |- ( ( D e. Prime /\ g e. Prime ) -> ( g || D <-> g = D ) )
+s10:s9:rabbidva |- ( D e. Prime -> { g e. Prime | g || D } = { g e. Prime | g = D } )
+i11::rabsn
+s12:s1,i11:syl |- ( D e. Prime -> { g e. Prime | g = D } = { D } )
+s13:s10,s12:eqtrd |- ( D e. Prime -> { g e. Prime | g || D } = { D } )
+i14::prodeq1
+s15:s13,i14:syl |- ( D e. Prime -> prod_ f e. { g e. Prime | g || D } ( 2 / f ) = prod_ f e. { D } ( 2 / f ) )
+s16::2re |- 2 e. RR
+s17:s16:a1i |- ( D e. Prime -> 2 e. RR )
+s18:s3:nnrpd |- ( D e. Prime -> D e. RR+ )
+s19:s17,s18:rerpdivcld |- ( D e. Prime -> ( 2 / D ) e. RR )
+s20:s19:recnd |- ( D e. Prime -> ( 2 / D ) e. CC )
+s21:s3:nnred |- ( D e. Prime -> D e. RR )
+s22:s21:elexd |- ( D e. Prime -> D e. _V )
+s23:s22,s20:jca |- ( D e. Prime -> ( D e. _V /\ ( 2 / D ) e. CC ) )
+s24::oveq2 |- ( f = D -> ( 2 / f ) = ( 2 / D ) )
+s25:s24:prodsn |- ( ( D e. _V /\ ( 2 / D ) e. CC ) -> prod_ f e. { D } ( 2 / f ) = ( 2 / D ) )
+s26:s25:a1i |- ( D e. Prime -> ( ( D e. _V /\ ( 2 / D ) e. CC ) -> prod_ f e. { D } ( 2 / f ) = ( 2 / D ) ) )
+s27:s23,s26:mpd |- ( D e. Prime -> prod_ f e. { D } ( 2 / f ) = ( 2 / D ) )
+i28::twinvval
+s29:s3,i28:syl |- ( D e. Prime -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 2 / f ) ) ` D ) = prod_ f e. { g e. Prime | g || D } ( 2 / f ) )
+s30:s15,s27:eqtrd |- ( D e. Prime -> prod_ f e. { g e. Prime | g || D } ( 2 / f ) = ( 2 / D ) )
+qed:s29,s30:eqtrd |- ( D e. Prime -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 2 / f ) ) ` D ) = ( 2 / D ) )
+$)

@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=flsqle  LOC_AFTER=?
+
+* The integer square root of a nonnegative real at least 1 is at most that real.
+
+s1::simp1 |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> A e. RR )
+s2::simp2 |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> 0 <_ A )
+s3::simp3 |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> 1 <_ ( |_ ` ( sqrt ` A ) ) )
+s4:s1,s2:jca |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( A e. RR /\ 0 <_ A ) )
+i5::flsqrt2
+s6:s4,i5:syl |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( ( |_ ` ( sqrt ` A ) ) e. NN0 /\ ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) <_ A /\ A < ( ( ( |_ ` ( sqrt ` A ) ) + 1 ) ^ 2 ) ) )
+s7:s6:simp1d |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) e. NN0 )
+s8:s6:simp2d |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) <_ A )
+s9:s7:nn0red |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) e. RR )
+s10:s7:nn0ge0d |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> 0 <_ ( |_ ` ( sqrt ` A ) ) )
+s11:s9:recnd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) e. CC )
+s12:s11:sqvald |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) = ( ( |_ ` ( sqrt ` A ) ) x. ( |_ ` ( sqrt ` A ) ) ) )
+s13::1red |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> 1 e. RR )
+s14:s9,s10:jca |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( ( |_ ` ( sqrt ` A ) ) e. RR /\ 0 <_ ( |_ ` ( sqrt ` A ) ) ) )
+s15:s13,s9,s14:3jca |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( 1 e. RR /\ ( |_ ` ( sqrt ` A ) ) e. RR /\ ( ( |_ ` ( sqrt ` A ) ) e. RR /\ 0 <_ ( |_ ` ( sqrt ` A ) ) ) ) )
+s16:s15,s3:jca |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( ( 1 e. RR /\ ( |_ ` ( sqrt ` A ) ) e. RR /\ ( ( |_ ` ( sqrt ` A ) ) e. RR /\ 0 <_ ( |_ ` ( sqrt ` A ) ) ) ) /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) )
+i17::lemul1a
+s18:s16,i17:syl |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( 1 x. ( |_ ` ( sqrt ` A ) ) ) <_ ( ( |_ ` ( sqrt ` A ) ) x. ( |_ ` ( sqrt ` A ) ) ) )
+s19:s9:recnd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) e. CC )
+s20:s19:mullidd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( 1 x. ( |_ ` ( sqrt ` A ) ) ) = ( |_ ` ( sqrt ` A ) ) )
+s21:s20:eqcomd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) = ( 1 x. ( |_ ` ( sqrt ` A ) ) ) )
+s22:s21,s18:eqbrtrd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) <_ ( ( |_ ` ( sqrt ` A ) ) x. ( |_ ` ( sqrt ` A ) ) ) )
+s23:s12:eqcomd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( ( |_ ` ( sqrt ` A ) ) x. ( |_ ` ( sqrt ` A ) ) ) = ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) )
+s24:s22,s23:breqtrd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) <_ ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) )
+s25::2nn0 |- 2 e. NN0
+s26:s25:a1i |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> 2 e. NN0 )
+s27:s9,s26:reexpcld |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) e. RR )
+qed:s9,s27,s1,s24,s8:letrd |- ( ( A e. RR /\ 0 <_ A /\ 1 <_ ( |_ ` ( sqrt ` A ) ) ) -> ( |_ ` ( sqrt ` A ) ) <_ A )
+$)

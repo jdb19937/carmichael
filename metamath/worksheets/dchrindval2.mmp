@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrindval2  LOC_AFTER=?
+
+* Value of the induced character at the class of an integer A: X at the class of A mod N when A is coprime to M, and 0 otherwise.
+
+s1::simpl |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N e. NN /\ M e. NN /\ N || M ) )
+s2:s1:simp1d |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s3:s1:simp2d |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> M e. NN )
+s4::simpr |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+i5::dchrindval
+s6:s2,s3,s4,i5:syl3anc |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrInd M ) ` X ) = ( k e. ( Base ` ( Z/nZ ` M ) ) |-> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) ) )
+s7:s6:adantr |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( N DChrInd M ) ` X ) = ( k e. ( Base ` ( Z/nZ ` M ) ) |-> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) ) )
+s8:s7:fveq1d |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( ( N DChrInd M ) ` X ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) = ( ( k e. ( Base ` ( Z/nZ ` M ) ) |-> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) )
+s9:s3:adantr |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> M e. NN )
+s10::simpr |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> A e. ZZ )
+s11:s9:nnnn0d |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> M e. NN0 )
+s12::eqid |- ( Z/nZ ` M ) = ( Z/nZ ` M )
+s13::eqid |- ( Base ` ( Z/nZ ` M ) ) = ( Base ` ( Z/nZ ` M ) )
+s14::eqid |- ( ZRHom ` ( Z/nZ ` M ) ) = ( ZRHom ` ( Z/nZ ` M ) )
+s15:s12,s13,s14:znzrhfo |- ( M e. NN0 -> ( ZRHom ` ( Z/nZ ` M ) ) : ZZ -onto-> ( Base ` ( Z/nZ ` M ) ) )
+s16:s11,s15:syl |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ZRHom ` ( Z/nZ ` M ) ) : ZZ -onto-> ( Base ` ( Z/nZ ` M ) ) )
+i17::fof
+s18:s16,i17:syl |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ZRHom ` ( Z/nZ ` M ) ) : ZZ --> ( Base ` ( Z/nZ ` M ) ) )
+s19:s18,s10:ffvelcdmd |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Base ` ( Z/nZ ` M ) ) )
+s20::fvex |- ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) e. _V
+s21::c0ex |- 0 e. _V
+s22:s20,s21:ifex |- if ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) , 0 ) e. _V
+s23:s22:a1i |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> if ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) , 0 ) e. _V )
+s24::id |- ( k = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) -> k = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) )
+m1:s24:eleq1d |- ( k = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) -> ( k e. ( Unit ` ( Z/nZ ` M ) ) <-> ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) ) )
+m2:s24:fveq2d |- ( k = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) -> ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) = ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) )
+m3:m2:fveq2d |- ( k = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) -> ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) = ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) )
+m4:m3:fveq2d |- ( k = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) )
+m5:m1,m4:ifbieq1d |- ( k = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) -> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) = if ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) , 0 ) )
+s25::eqid |- ( k e. ( Base ` ( Z/nZ ` M ) ) |-> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) ) = ( k e. ( Base ` ( Z/nZ ` M ) ) |-> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) )
+s26:m5,s25:fvmptg |- ( ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Base ` ( Z/nZ ` M ) ) /\ if ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) , 0 ) e. _V ) -> ( ( k e. ( Base ` ( Z/nZ ` M ) ) |-> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) = if ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) , 0 ) )
+s27:s19,s23,s26:syl2anc |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( k e. ( Base ` ( Z/nZ ` M ) ) |-> if ( k e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` k ) ) ) , 0 ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) = if ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) , 0 ) )
+s28::eqid |- ( Unit ` ( Z/nZ ` M ) ) = ( Unit ` ( Z/nZ ` M ) )
+s29:s12,s28,s14:znunit |- ( ( M e. NN0 /\ A e. ZZ ) -> ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) <-> ( A gcd M ) = 1 ) )
+s30:s11,s10,s29:syl2anc |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) <-> ( A gcd M ) = 1 ) )
+s31:s1:adantr |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( N e. NN /\ M e. NN /\ N || M ) )
+s32:s4:adantr |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> X e. ( Base ` ( DChr ` N ) ) )
+s33:s31,s32,s19:3jca |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) /\ ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Base ` ( Z/nZ ` M ) ) ) )
+s34::eqidd |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) = ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) )
+i35::dchrindlem5
+s36:s33,s10,s34,i35:syl3anc |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) )
+s37:s30,s36:ifbieq1d |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> if ( ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) e. ( Unit ` ( Z/nZ ` M ) ) , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` ( `' ( ( ZRHom ` ( Z/nZ ` M ) ) |` ( 0 ..^ M ) ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) ) ) , 0 ) = if ( ( A gcd M ) = 1 , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) , 0 ) )
+qed:s8,s27,s37:3eqtrd |- ( ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ ) -> ( ( ( N DChrInd M ) ` X ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` A ) ) = if ( ( A gcd M ) = 1 , ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) , 0 ) )
+$)

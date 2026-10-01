@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=lmodwrd  LOC_AFTER=?
+
+* The modulus of the entries of a duplicate-free word is the product of the word (Lean: Lmod_toFinset).
+
+s1::simpl |- ( ( W e. Word NN0 /\ Fun `' W ) -> W e. Word NN0 )
+s2::simpr |- ( ( W e. Word NN0 /\ Fun `' W ) -> Fun `' W )
+i3::algwrdfi
+s4:s1,i3:syl |- ( ( W e. Word NN0 /\ Fun `' W ) -> ran W e. Fin )
+i5::wrdf
+s6:s1,i5:syl |- ( ( W e. Word NN0 /\ Fun `' W ) -> W : ( 0 ..^ ( # ` W ) ) --> NN0 )
+i7::frn
+s8:s6,i7:syl |- ( ( W e. Word NN0 /\ Fun `' W ) -> ran W C_ NN0 )
+s9::nn0ex |- NN0 e. _V
+s10:s9:elpw2 |- ( ran W e. ~P NN0 <-> ran W C_ NN0 )
+s11:s10:a1i |- ( ( W e. Word NN0 /\ Fun `' W ) -> ( ran W e. ~P NN0 <-> ran W C_ NN0 ) )
+s12:s11,s8:mpbird |- ( ( W e. Word NN0 /\ Fun `' W ) -> ran W e. ~P NN0 )
+s13:s12,s4:elind |- ( ( W e. Word NN0 /\ Fun `' W ) -> ran W e. ( ~P NN0 i^i Fin ) )
+i14::lmodqval
+s15:s13,i14:syl |- ( ( W e. Word NN0 /\ Fun `' W ) -> ( Lmod ` ran W ) = prod_ q e. ran W q )
+i16::algprodrn
+s17:s1,s2,i16:syl2anc |- ( ( W e. Word NN0 /\ Fun `' W ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) = prod_ q e. ran W q )
+qed:s15,s17:eqtr4d |- ( ( W e. Word NN0 /\ Fun `' W ) -> ( Lmod ` ran W ) = prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) )
+$)

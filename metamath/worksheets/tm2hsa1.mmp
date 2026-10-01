@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hsa1  LOC_AFTER=?
+
+* One step of a machine from a labelled configuration whose state-and-stacks part is not given as an explicit pair.  Lean: ` step_label ` .
+
+s1::simpl |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( T e. V /\ M e. W ) )
+s2::simprl |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> A e. ( 2nd ` ( 1st ` T ) ) )
+s3::simprr |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i4::1st2nd2
+s5:s3,i4:syl |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> U = <. ( 1st ` U ) , ( 2nd ` U ) >. )
+i6::xp1st
+s7:s3,i6:syl |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( 1st ` U ) e. ( 2nd ` T ) )
+i8::xp2nd
+s9:s3,i8:syl |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( 2nd ` U ) e. ( TM2Stk ` T ) )
+s10:s7,s9:jca |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( ( 1st ` U ) e. ( 2nd ` T ) /\ ( 2nd ` U ) e. ( TM2Stk ` T ) ) )
+s11:s2,s10:jca |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( A e. ( 2nd ` ( 1st ` T ) ) /\ ( ( 1st ` U ) e. ( 2nd ` T ) /\ ( 2nd ` U ) e. ( TM2Stk ` T ) ) ) )
+i12::tm2stepsome
+s13:s1,s11,i12:syl2anc |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( ( T TM2step M ) ` <. ( inl ` A ) , <. ( 1st ` U ) , ( 2nd ` U ) >. >. ) = ( inl ` ( ( M ` A ) ( TM2sa ` T ) <. ( 1st ` U ) , ( 2nd ` U ) >. ) ) )
+s14:s5:opeq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> <. ( inl ` A ) , U >. = <. ( inl ` A ) , <. ( 1st ` U ) , ( 2nd ` U ) >. >. )
+s15:s14:fveq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( ( T TM2step M ) ` <. ( inl ` A ) , U >. ) = ( ( T TM2step M ) ` <. ( inl ` A ) , <. ( 1st ` U ) , ( 2nd ` U ) >. >. ) )
+s16:s5:oveq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( ( M ` A ) ( TM2sa ` T ) U ) = ( ( M ` A ) ( TM2sa ` T ) <. ( 1st ` U ) , ( 2nd ` U ) >. ) )
+s17:s16:fveq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( inl ` ( ( M ` A ) ( TM2sa ` T ) U ) ) = ( inl ` ( ( M ` A ) ( TM2sa ` T ) <. ( 1st ` U ) , ( 2nd ` U ) >. ) ) )
+s18:s15,s13:eqtrd |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( ( T TM2step M ) ` <. ( inl ` A ) , U >. ) = ( inl ` ( ( M ` A ) ( TM2sa ` T ) <. ( 1st ` U ) , ( 2nd ` U ) >. ) ) )
+qed:s18,s17:eqtr4d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` ( 1st ` T ) ) /\ U e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( ( T TM2step M ) ` <. ( inl ` A ) , U >. ) = ( inl ` ( ( M ` A ) ( TM2sa ` T ) U ) ) )
+$)

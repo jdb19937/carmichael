@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=smoothgodvd  LOC_AFTER=?
+
+* The smoothness loop returns a divisor of its input (Lean: smoothGo_dvd).
+
+s1::simp1 |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> D e. NN )
+s2::simp2 |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> R e. NN0 )
+s3::simp3 |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> F e. NN0 )
+i4::smoothgodvdl
+s5:s3,i4:syl |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> A. d e. NN A. r e. NN0 ( 1st ` ( ( d SmoothGo r ) ` F ) ) || r )
+s6::id |- ( d = D -> d = D )
+c1:s6:oveq1d |- ( d = D -> ( d SmoothGo r ) = ( D SmoothGo r ) )
+c2:c1:fveq1d |- ( d = D -> ( ( d SmoothGo r ) ` F ) = ( ( D SmoothGo r ) ` F ) )
+c3:c2:fveq2d |- ( d = D -> ( 1st ` ( ( d SmoothGo r ) ` F ) ) = ( 1st ` ( ( D SmoothGo r ) ` F ) ) )
+c4:c3:breq1d |- ( d = D -> ( ( 1st ` ( ( d SmoothGo r ) ` F ) ) || r <-> ( 1st ` ( ( D SmoothGo r ) ` F ) ) || r ) )
+c5:c4:ralbidv |- ( d = D -> ( A. r e. NN0 ( 1st ` ( ( d SmoothGo r ) ` F ) ) || r <-> A. r e. NN0 ( 1st ` ( ( D SmoothGo r ) ` F ) ) || r ) )
+s7:c5,s5,s1:rspcdva |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> A. r e. NN0 ( 1st ` ( ( D SmoothGo r ) ` F ) ) || r )
+s8::id |- ( r = R -> r = R )
+c6:s8:oveq2d |- ( r = R -> ( D SmoothGo r ) = ( D SmoothGo R ) )
+c7:c6:fveq1d |- ( r = R -> ( ( D SmoothGo r ) ` F ) = ( ( D SmoothGo R ) ` F ) )
+c8:c7:fveq2d |- ( r = R -> ( 1st ` ( ( D SmoothGo r ) ` F ) ) = ( 1st ` ( ( D SmoothGo R ) ` F ) ) )
+c9:c8,s8:breq12d |- ( r = R -> ( ( 1st ` ( ( D SmoothGo r ) ` F ) ) || r <-> ( 1st ` ( ( D SmoothGo R ) ` F ) ) || R ) )
+qed:c9,s7,s2:rspcdva |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> ( 1st ` ( ( D SmoothGo R ) ` F ) ) || R )
+$)

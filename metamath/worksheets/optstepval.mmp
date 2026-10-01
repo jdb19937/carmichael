@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=optstepval  LOC_AFTER=?
+
+* Value of the option-lifted step function at an optional state.
+
+1::optstepfval |- ( F e. V -> ( OptStep ` F ) = ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+2:1:adantr  |- ( ( F e. V /\ X e. ( dom F |_| 1o ) ) -> ( OptStep ` F ) = ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+3::eqeq1    |- ( x = X -> ( x = ( inr ` (/) ) <-> X = ( inr ` (/) ) ) )
+4::fveq2    |- ( x = X -> ( 2nd ` x ) = ( 2nd ` X ) )
+5:4:fveq2d  |- ( x = X -> ( F ` ( 2nd ` x ) ) = ( F ` ( 2nd ` X ) ) )
+6:3,5:ifbieq2d |- ( x = X -> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) = if ( X = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` X ) ) ) )
+7:6:adantl  |- ( ( ( F e. V /\ X e. ( dom F |_| 1o ) ) /\ x = X ) -> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) = if ( X = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` X ) ) ) )
+8::simpr    |- ( ( F e. V /\ X e. ( dom F |_| 1o ) ) -> X e. ( dom F |_| 1o ) )
+9::fvex     |- ( inr ` (/) ) e. _V
+10::fvex    |- ( F ` ( 2nd ` X ) ) e. _V
+11:9,10:ifex |- if ( X = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` X ) ) ) e. _V
+12:11:a1i   |- ( ( F e. V /\ X e. ( dom F |_| 1o ) ) -> if ( X = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` X ) ) ) e. _V )
+qed:2,7,8,12:fvmptd |- ( ( F e. V /\ X e. ( dom F |_| 1o ) ) -> ( ( OptStep ` F ) ` X ) = if ( X = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` X ) ) ) )
+$)

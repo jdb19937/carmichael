@@ -1,0 +1,84 @@
+$( <MM> <PROOF_ASST> THEOREM=lsamgm  LOC_AFTER=?
+
+* AM-GM with a weight: 2 X Y <_ T X ^ 2 + Y ^ 2 / T for T > 0 (LargeSieve points_large_sieve, hAMGM).
+
+s1::simpl |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( X e. RR /\ Y e. RR ) )
+s2:s1:simpld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> X e. RR )
+s3:s1:simprd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> Y e. RR )
+s4::simpr |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> T e. RR+ )
+s5::ax-icn |- _i e. CC
+s6::picn |- _pi e. CC
+s7:s5,s6:mulcli |- ( _i x. _pi ) e. CC
+s8::2cn |- 2 e. CC
+s9:s8,s7:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s10:s9:a1i |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s11::ax-icn |- _i e. CC
+s12:s11:a1i |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> _i e. CC )
+s13::pirp |- _pi e. RR+
+s14:s13:a1i |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> _pi e. RR+ )
+s15:s4:rpred |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> T e. RR )
+s16:s15,s2:remulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. X ) e. RR )
+s17:s16,s3:resubcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) - Y ) e. RR )
+i18::sqge0
+s19:s17,i18:syl |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> 0 <_ ( ( ( T x. X ) - Y ) ^ 2 ) )
+s20:s15:recnd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> T e. CC )
+s21:s2:recnd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> X e. CC )
+s22:s20,s21:mulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. X ) e. CC )
+s23:s3:recnd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> Y e. CC )
+i24::binom2sub
+s25:s22,s23,i24:syl2anc |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( T x. X ) - Y ) ^ 2 ) = ( ( ( ( T x. X ) ^ 2 ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) + ( Y ^ 2 ) ) )
+s26::2nn0 |- 2 e. NN0
+s27:s26:a1i |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> 2 e. NN0 )
+s28:s22,s27:expcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) ^ 2 ) e. CC )
+s29:s23,s27:expcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( Y ^ 2 ) e. CC )
+s30::2cn |- 2 e. CC
+s31:s30:a1i |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> 2 e. CC )
+s32:s22,s23:mulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) x. Y ) e. CC )
+s33:s31,s32:mulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( 2 x. ( ( T x. X ) x. Y ) ) e. CC )
+s34:s28,s29,s33:addsubd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) = ( ( ( ( T x. X ) ^ 2 ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) + ( Y ^ 2 ) ) )
+s35:s34:eqcomd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( ( T x. X ) ^ 2 ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) + ( Y ^ 2 ) ) = ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) )
+s36:s25,s35:eqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( T x. X ) - Y ) ^ 2 ) = ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) )
+s37:s19,s36:breqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> 0 <_ ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) )
+s38:s16,s27:reexpcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) ^ 2 ) e. RR )
+s39:s3,s27:reexpcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( Y ^ 2 ) e. RR )
+s40:s38,s39:readdcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) e. RR )
+s41::2re |- 2 e. RR
+s42:s41:a1i |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> 2 e. RR )
+s43:s16,s3:remulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) x. Y ) e. RR )
+s44:s42,s43:remulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( 2 x. ( ( T x. X ) x. Y ) ) e. RR )
+s45:s40,s44:subge0d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( 0 <_ ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) - ( 2 x. ( ( T x. X ) x. Y ) ) ) <-> ( 2 x. ( ( T x. X ) x. Y ) ) <_ ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) ) )
+s46:s37,s45:mpbid |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( 2 x. ( ( T x. X ) x. Y ) ) <_ ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) )
+s47:s4:rpne0d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> T =/= 0 )
+s48::2cnd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> 2 e. CC )
+s49:s48,s21,s23:mulassd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( 2 x. X ) x. Y ) = ( 2 x. ( X x. Y ) ) )
+s50:s49:oveq2d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. ( ( 2 x. X ) x. Y ) ) = ( T x. ( 2 x. ( X x. Y ) ) ) )
+s51::2cnd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> 2 e. CC )
+s52:s21,s23:mulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( X x. Y ) e. CC )
+s53:s20,s51,s52:mul12d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. ( 2 x. ( X x. Y ) ) ) = ( 2 x. ( T x. ( X x. Y ) ) ) )
+s54:s20,s21,s23:mulassd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) x. Y ) = ( T x. ( X x. Y ) ) )
+s55:s54:eqcomd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. ( X x. Y ) ) = ( ( T x. X ) x. Y ) )
+s56:s55:oveq2d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( 2 x. ( T x. ( X x. Y ) ) ) = ( 2 x. ( ( T x. X ) x. Y ) ) )
+s57:s50,s53:eqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. ( ( 2 x. X ) x. Y ) ) = ( 2 x. ( T x. ( X x. Y ) ) ) )
+s58:s57,s56:eqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. ( ( 2 x. X ) x. Y ) ) = ( 2 x. ( ( T x. X ) x. Y ) ) )
+s59:s58,s46:eqbrtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. ( ( 2 x. X ) x. Y ) ) <_ ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) )
+s60:s42,s2:remulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( 2 x. X ) e. RR )
+s61:s60,s3:remulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( 2 x. X ) x. Y ) e. RR )
+s62:s61,s40,s4:lemuldiv2d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. ( ( 2 x. X ) x. Y ) ) <_ ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) <-> ( ( 2 x. X ) x. Y ) <_ ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) / T ) ) )
+s63:s59,s62:mpbid |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( 2 x. X ) x. Y ) <_ ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) / T ) )
+s64:s21,s27:expcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( X ^ 2 ) e. CC )
+s65:s28,s29,s20,s47:divdird |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) / T ) = ( ( ( ( T x. X ) ^ 2 ) / T ) + ( ( Y ^ 2 ) / T ) ) )
+s66:s20,s21:sqmuld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) ^ 2 ) = ( ( T ^ 2 ) x. ( X ^ 2 ) ) )
+s67:s20:sqvald |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T ^ 2 ) = ( T x. T ) )
+s68:s67:oveq1d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T ^ 2 ) x. ( X ^ 2 ) ) = ( ( T x. T ) x. ( X ^ 2 ) ) )
+s69:s66,s68:eqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) ^ 2 ) = ( ( T x. T ) x. ( X ^ 2 ) ) )
+s70:s20,s20,s64:mulassd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. T ) x. ( X ^ 2 ) ) = ( T x. ( T x. ( X ^ 2 ) ) ) )
+s71:s69,s70:eqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. X ) ^ 2 ) = ( T x. ( T x. ( X ^ 2 ) ) ) )
+s72:s71:oveq1d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( T x. X ) ^ 2 ) / T ) = ( ( T x. ( T x. ( X ^ 2 ) ) ) / T ) )
+s73:s20,s64:mulcld |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( T x. ( X ^ 2 ) ) e. CC )
+s74:s73,s20,s47:divcan3d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( T x. ( T x. ( X ^ 2 ) ) ) / T ) = ( T x. ( X ^ 2 ) ) )
+s75:s72,s74:eqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( T x. X ) ^ 2 ) / T ) = ( T x. ( X ^ 2 ) ) )
+s76:s29,s20,s47:divrec2d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( Y ^ 2 ) / T ) = ( ( 1 / T ) x. ( Y ^ 2 ) ) )
+s77:s75,s76:oveq12d |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( ( T x. X ) ^ 2 ) / T ) + ( ( Y ^ 2 ) / T ) ) = ( ( T x. ( X ^ 2 ) ) + ( ( 1 / T ) x. ( Y ^ 2 ) ) ) )
+s78:s65,s77:eqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( ( ( T x. X ) ^ 2 ) + ( Y ^ 2 ) ) / T ) = ( ( T x. ( X ^ 2 ) ) + ( ( 1 / T ) x. ( Y ^ 2 ) ) ) )
+qed:s63,s78:breqtrd |- ( ( ( X e. RR /\ Y e. RR ) /\ T e. RR+ ) -> ( ( 2 x. X ) x. Y ) <_ ( ( T x. ( X ^ 2 ) ) + ( ( 1 / T ) x. ( Y ^ 2 ) ) ) )
+$)

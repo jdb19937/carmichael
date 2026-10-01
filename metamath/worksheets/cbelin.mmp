@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=cbelin  LOC_AFTER=?
+
+* A quantity below 1 + P M is below exp ( P M ) : the route used for the linear summand T + 2 of step 3 of the cost budget (Lean AlgBudget.lean, ` hT2E ` , from Real.add_one_le_exp).
+
+h1::cbelin.1 |- ( ph -> M e. RR )
+h2::cbelin.2 |- ( ph -> 0 < M )
+h3::cbelin.3 |- ( ph -> P e. RR )
+h4::cbelin.4 |- ( ph -> 0 < P )
+h5::cbelin.5 |- ( ph -> X e. RR )
+h6::cbelin.6 |- ( ph -> X <_ ( 1 + ( P x. M ) ) )
+s1:3,4:elrpd |- ( ph -> P e. RR+ )
+s2:1,2:elrpd |- ( ph -> M e. RR+ )
+s3:s1,s2:rpmulcld |- ( ph -> ( P x. M ) e. RR+ )
+i4::efgt1p
+s5:s3,i4:syl |- ( ph -> ( 1 + ( P x. M ) ) < ( exp ` ( P x. M ) ) )
+s6::1red |- ( ph -> 1 e. RR )
+s7:3,1:remulcld |- ( ph -> ( P x. M ) e. RR )
+s8:s6,s7:readdcld |- ( ph -> ( 1 + ( P x. M ) ) e. RR )
+s9:s7:reefcld |- ( ph -> ( exp ` ( P x. M ) ) e. RR )
+s10:5,s8,s9,6,s5:lelttrd |- ( ph -> X < ( exp ` ( P x. M ) ) )
+qed:s10:ltled |- ( ph -> X <_ ( exp ` ( P x. M ) ) )
+$)

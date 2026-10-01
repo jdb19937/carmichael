@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=prmprodub  LOC_AFTER=?
+
+* Lmod Q <_ Z ^ ( # Q ) when every prime of Q is at most Z (Lean: Step3W.lean hLzT).
+
+s1::simp1 |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Q e. ( ~P Prime i^i Fin ) )
+s2::simp2 |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Z e. NN0 )
+s3::simp3 |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> A. p e. Q p <_ Z )
+i4::elfpw
+s5:s1,i4:sylib |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s6:s5:simpld |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Q C_ Prime )
+s7:s5:simprd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Q e. Fin )
+s8::prmssnn |- Prime C_ NN
+s9::nnssnn0 |- NN C_ NN0
+s10:s8,s9:sstri |- Prime C_ NN0
+s11:s10:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Prime C_ NN0 )
+s12:s6,s11:sstrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Q C_ NN0 )
+s13:s12,s7:jca |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i14::elfpw
+s15:s13,i14:sylibr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Q e. ( ~P NN0 i^i Fin ) )
+s16::nnssz |- NN C_ ZZ
+s17:s8,s16:sstri |- Prime C_ ZZ
+s18:s17:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Prime C_ ZZ )
+s19:s6,s18:sstrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Q C_ ZZ )
+s20::nfv |- F/ q ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z )
+s21::simpr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> q e. Q )
+s22:s6:adantr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> Q C_ Prime )
+s23:s22,s21:sseldd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> q e. Prime )
+i24::prmnn
+s25:s23,i24:syl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> q e. NN )
+s26:s25:nnred |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> q e. RR )
+s27:s25:nnnn0d |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> q e. NN0 )
+s28:s27:nn0ge0d |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> 0 <_ q )
+s29:s2:nn0red |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Z e. RR )
+s30:s29:adantr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> Z e. RR )
+s31::id |- ( p = q -> p = q )
+c1:s31:breq1d |- ( p = q -> ( p <_ Z <-> q <_ Z ) )
+s32:s3:adantr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> A. p e. Q p <_ Z )
+s33:c1,s32,s21:rspcdva |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) /\ q e. Q ) -> q <_ Z )
+s34:s20,s7,s26,s28,s30,s33:fprodle |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> prod_ q e. Q q <_ prod_ q e. Q Z )
+s35:s2:nn0cnd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> Z e. CC )
+i36::fprodconst
+s37:s7,s35,i36:syl2anc |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> prod_ q e. Q Z = ( Z ^ ( # ` Q ) ) )
+s38:s34,s37:breqtrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> prod_ q e. Q q <_ ( Z ^ ( # ` Q ) ) )
+i39::lmodqval
+s40:s15,i39:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> ( Lmod ` Q ) = prod_ q e. Q q )
+qed:s40,s38:eqbrtrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. Q p <_ Z ) -> ( Lmod ` Q ) <_ ( Z ^ ( # ` Q ) ) )
+$)

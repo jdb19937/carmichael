@@ -1,0 +1,69 @@
+$( <MM> <PROOF_ASST> THEOREM=pwpf1o  LOC_AFTER=?
+
+* Adjoining a new element is a bijection from the powerset onto the new subsets.
+
+s1::eqid |- ( u e. ~P y |-> ( u u. { z } ) ) = ( u e. ~P y |-> ( u u. { z } ) )
+s2::simpr |- ( ( -. z e. y /\ u e. ~P y ) -> u e. ~P y )
+i3::elpwi
+s4:s2,i3:syl |- ( ( -. z e. y /\ u e. ~P y ) -> u C_ y )
+i5::unss1
+s6:s4,i5:syl |- ( ( -. z e. y /\ u e. ~P y ) -> ( u u. { z } ) C_ ( y u. { z } ) )
+s7::vex |- u e. _V
+s8:s7:a1i |- ( ( -. z e. y /\ u e. ~P y ) -> u e. _V )
+s9::snex |- { z } e. _V
+s10:s9:a1i |- ( ( -. z e. y /\ u e. ~P y ) -> { z } e. _V )
+s11:s8,s10:unexd |- ( ( -. z e. y /\ u e. ~P y ) -> ( u u. { z } ) e. _V )
+s12:s11,s6:elpwd |- ( ( -. z e. y /\ u e. ~P y ) -> ( u u. { z } ) e. ~P ( y u. { z } ) )
+s13::snid |- z e. { z }
+s14:s13:a1i |- ( ( -. z e. y /\ u e. ~P y ) -> z e. { z } )
+s15::ssun2 |- { z } C_ ( u u. { z } )
+s16:s15:a1i |- ( ( -. z e. y /\ u e. ~P y ) -> { z } C_ ( u u. { z } ) )
+s17:s16,s14:sseldd |- ( ( -. z e. y /\ u e. ~P y ) -> z e. ( u u. { z } ) )
+s18::simpl |- ( ( -. z e. y /\ u e. ~P y ) -> -. z e. y )
+s19::simpr |- ( ( ( -. z e. y /\ u e. ~P y ) /\ ( u u. { z } ) e. ~P y ) -> ( u u. { z } ) e. ~P y )
+i20::elpwi
+s21:s19,i20:syl |- ( ( ( -. z e. y /\ u e. ~P y ) /\ ( u u. { z } ) e. ~P y ) -> ( u u. { z } ) C_ y )
+s22:s17:adantr |- ( ( ( -. z e. y /\ u e. ~P y ) /\ ( u u. { z } ) e. ~P y ) -> z e. ( u u. { z } ) )
+s23:s21,s22:sseldd |- ( ( ( -. z e. y /\ u e. ~P y ) /\ ( u u. { z } ) e. ~P y ) -> z e. y )
+s24:s18,s23:mtand |- ( ( -. z e. y /\ u e. ~P y ) -> -. ( u u. { z } ) e. ~P y )
+s25:s12,s24:eldifd |- ( ( -. z e. y /\ u e. ~P y ) -> ( u u. { z } ) e. ( ~P ( y u. { z } ) \ ~P y ) )
+s26::simpr |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> t e. ( ~P ( y u. { z } ) \ ~P y ) )
+i27::eldifi
+s28:s26,i27:syl |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> t e. ~P ( y u. { z } ) )
+i29::elpwi
+s30:s28,i29:syl |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> t C_ ( y u. { z } ) )
+i31::ssdif
+s32:s30,i31:syl |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> ( t \ { z } ) C_ ( ( y u. { z } ) \ { z } ) )
+s33::simpl |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> -. z e. y )
+i34::pwpdifsn
+s35:s33,i34:syl |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> ( ( y u. { z } ) \ { z } ) = y )
+s36:s32,s35:sseqtrd |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> ( t \ { z } ) C_ y )
+s37::vex |- t e. _V
+s38:s37:a1i |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> t e. _V )
+s39:s38:difexd |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> ( t \ { z } ) e. _V )
+s40:s39,s36:elpwd |- ( ( -. z e. y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) -> ( t \ { z } ) e. ~P y )
+s41::simprl |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> u e. ~P y )
+s42::simprr |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> t e. ( ~P ( y u. { z } ) \ ~P y ) )
+s43::simpl |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> -. z e. y )
+i44::elpwunsn
+s45:s42,i44:syl |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> z e. t )
+i46::elpwi
+s47:s41,i46:syl |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> u C_ y )
+s48:s47,s43:ssneldd |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> -. z e. u )
+s49::simpr |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ u = ( t \ { z } ) ) -> u = ( t \ { z } ) )
+s50:s49:uneq1d |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ u = ( t \ { z } ) ) -> ( u u. { z } ) = ( ( t \ { z } ) u. { z } ) )
+s51:s45:adantr |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ u = ( t \ { z } ) ) -> z e. t )
+i52::difsnid
+s53:s51,i52:syl |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ u = ( t \ { z } ) ) -> ( ( t \ { z } ) u. { z } ) = t )
+s54:s50,s53:eqtr2d |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ u = ( t \ { z } ) ) -> t = ( u u. { z } ) )
+s55::simpr |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ t = ( u u. { z } ) ) -> t = ( u u. { z } ) )
+s56:s55:difeq1d |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ t = ( u u. { z } ) ) -> ( t \ { z } ) = ( ( u u. { z } ) \ { z } ) )
+s57:s48:adantr |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ t = ( u u. { z } ) ) -> -. z e. u )
+i58::pwpdifsn
+s59:s57,i58:syl |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ t = ( u u. { z } ) ) -> ( ( u u. { z } ) \ { z } ) = u )
+s60:s56,s59:eqtr2d |- ( ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) /\ t = ( u u. { z } ) ) -> u = ( t \ { z } ) )
+s61:s54:ex |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> ( u = ( t \ { z } ) -> t = ( u u. { z } ) ) )
+s62:s60:ex |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> ( t = ( u u. { z } ) -> u = ( t \ { z } ) ) )
+s63:s61,s62:impbid |- ( ( -. z e. y /\ ( u e. ~P y /\ t e. ( ~P ( y u. { z } ) \ ~P y ) ) ) -> ( u = ( t \ { z } ) <-> t = ( u u. { z } ) ) )
+qed:s1,s25,s40,s63:f1o2d |- ( -. z e. y -> ( u e. ~P y |-> ( u u. { z } ) ) : ~P y -1-1-onto-> ( ~P ( y u. { z } ) \ ~P y ) )
+$)

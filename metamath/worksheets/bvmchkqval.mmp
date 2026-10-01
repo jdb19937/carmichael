@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=bvmchkqval  LOC_AFTER=?
+
+* The value of the restricted Moebius check sum: ( Q ( mChkQ ` S ) X ) is the sum over n <= X coprime to Q of mmu ( n ) n ^c -u S log ( X / n ).
+
+s1::simp1 |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> S e. RR )
+s2::simp2 |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> Q e. NN )
+s3::simp3 |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> X e. RR )
+s4::id |- ( s = S -> s = S )
+c1:s4:negeqd |- ( s = S -> -u s = -u S )
+c2:c1:oveq2d |- ( s = S -> ( n ^c -u s ) = ( n ^c -u S ) )
+c3:c2:oveq2d |- ( s = S -> ( ( mmu ` n ) x. ( n ^c -u s ) ) = ( ( mmu ` n ) x. ( n ^c -u S ) ) )
+c4:c3:oveq1d |- ( s = S -> ( ( ( mmu ` n ) x. ( n ^c -u s ) ) x. ( log ` ( x / n ) ) ) = ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) )
+c5:c4:ifeq1d |- ( s = S -> if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u s ) ) x. ( log ` ( x / n ) ) ) , 0 ) = if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) )
+c6:c5:sumeq2sdv |- ( s = S -> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u s ) ) x. ( log ` ( x / n ) ) ) , 0 ) = sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) )
+c7:c6:mpoeq3dv |- ( s = S -> ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u s ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) = ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) )
+s5::df-mchkq |- mChkQ = ( s e. RR |-> ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u s ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) )
+s6::nnex |- NN e. _V
+s7::reex |- RR e. _V
+i8::mpoexga
+s9:s6,s7,i8:mp2an |- ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) e. _V
+s10:c7,s5,s9:fvmpt |- ( S e. RR -> ( mChkQ ` S ) = ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) )
+s11:s1,s10:syl |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> ( mChkQ ` S ) = ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) )
+s12:s11:oveqd |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> ( Q ( mChkQ ` S ) X ) = ( Q ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) X ) )
+s13::simpl |- ( ( q = Q /\ x = X ) -> q = Q )
+s14::simpr |- ( ( q = Q /\ x = X ) -> x = X )
+c8:s14:fveq2d |- ( ( q = Q /\ x = X ) -> ( |_ ` x ) = ( |_ ` X ) )
+c9:c8:oveq2d |- ( ( q = Q /\ x = X ) -> ( 1 ... ( |_ ` x ) ) = ( 1 ... ( |_ ` X ) ) )
+c10:s13:oveq2d |- ( ( q = Q /\ x = X ) -> ( n gcd q ) = ( n gcd Q ) )
+c11:c10:eqeq1d |- ( ( q = Q /\ x = X ) -> ( ( n gcd q ) = 1 <-> ( n gcd Q ) = 1 ) )
+c12:s14:oveq1d |- ( ( q = Q /\ x = X ) -> ( x / n ) = ( X / n ) )
+c13:c12:fveq2d |- ( ( q = Q /\ x = X ) -> ( log ` ( x / n ) ) = ( log ` ( X / n ) ) )
+c14:c13:oveq2d |- ( ( q = Q /\ x = X ) -> ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) = ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) )
+c15:c11,c14:ifbieq1d |- ( ( q = Q /\ x = X ) -> if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) = if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+c16:c15:adantr |- ( ( ( q = Q /\ x = X ) /\ n e. ( 1 ... ( |_ ` x ) ) ) -> if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) = if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+c17:c9,c16:sumeq12dv |- ( ( q = Q /\ x = X ) -> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) = sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+s15::eqid |- ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) = ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) )
+s16:c17,s15:ovmpoga |- ( ( Q e. NN /\ X e. RR /\ sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) e. _V ) -> ( Q ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) X ) = sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+s17::sumex |- sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) e. _V
+s18:s17:a1i |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) e. _V )
+s19:s2,s3,s18,s16:syl3anc |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> ( Q ( q e. NN , x e. RR |-> sum_ n e. ( 1 ... ( |_ ` x ) ) if ( ( n gcd q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( x / n ) ) ) , 0 ) ) X ) = sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+qed:s12,s19:eqtrd |- ( ( S e. RR /\ Q e. NN /\ X e. RR ) -> ( Q ( mChkQ ` S ) X ) = sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+$)

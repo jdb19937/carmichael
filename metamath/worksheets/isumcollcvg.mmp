@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=isumcollcvg  LOC_AFTER=?
+
+* Convergence of a series is unchanged by collapsing the zero terms off the range of a strictly increasing map (isercoll at the level of dom ~~>).
+
+h1::isumcollcvg.g |- ( ph -> G : NN --> NN )
+h2::isumcollcvg.i |- ( ( ph /\ k e. NN ) -> ( G ` k ) < ( G ` ( k + 1 ) ) )
+h3::isumcollcvg.0 |- ( ( ph /\ n e. ( NN \ ran G ) ) -> ( F ` n ) = 0 )
+h4::isumcollcvg.f |- ( ( ph /\ n e. NN ) -> ( F ` n ) e. CC )
+h5::isumcollcvg.h |- ( ( ph /\ k e. NN ) -> ( H ` k ) = ( F ` ( G ` k ) ) )
+s1::nnuz |- NN = ( ZZ>= ` 1 )
+s2::climdm |- ( seq 1 ( + , H ) e. dom ~~> <-> seq 1 ( + , H ) ~~> ( ~~> ` seq 1 ( + , H ) ) )
+s3:s2:a1i |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> ( seq 1 ( + , H ) e. dom ~~> <-> seq 1 ( + , H ) ~~> ( ~~> ` seq 1 ( + , H ) ) ) )
+s4::simpr |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> seq 1 ( + , H ) e. dom ~~> )
+s5:s4,s3:mpbid |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> seq 1 ( + , H ) ~~> ( ~~> ` seq 1 ( + , H ) ) )
+s6::1zzd |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> 1 e. ZZ )
+s7:1:adantr |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> G : NN --> NN )
+s8:2:adantlr |- ( ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) /\ k e. NN ) -> ( G ` k ) < ( G ` ( k + 1 ) ) )
+s9:3:adantlr |- ( ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) /\ n e. ( NN \ ran G ) ) -> ( F ` n ) = 0 )
+s10:4:adantlr |- ( ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) /\ n e. NN ) -> ( F ` n ) e. CC )
+s11:5:adantlr |- ( ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) /\ k e. NN ) -> ( H ` k ) = ( F ` ( G ` k ) ) )
+s12:s1,s6,s7,s8,s9,s10,s11:isercoll |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> ( seq 1 ( + , H ) ~~> ( ~~> ` seq 1 ( + , H ) ) <-> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , H ) ) ) )
+s13:s5,s12:mpbid |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , H ) ) )
+s14::climrel |- Rel ~~>
+s15:s14:a1i |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> Rel ~~> )
+i16::releldm
+s17:s15,s13,i16:syl2anc |- ( ( ph /\ seq 1 ( + , H ) e. dom ~~> ) -> seq 1 ( + , F ) e. dom ~~> )
+s18:s17:ex |- ( ph -> ( seq 1 ( + , H ) e. dom ~~> -> seq 1 ( + , F ) e. dom ~~> ) )
+s19::climdm |- ( seq 1 ( + , F ) e. dom ~~> <-> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , F ) ) )
+s20:s19:a1i |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> ( seq 1 ( + , F ) e. dom ~~> <-> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , F ) ) ) )
+s21::simpr |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , F ) e. dom ~~> )
+s22:s21,s20:mpbid |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , F ) ) )
+s23::1zzd |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> 1 e. ZZ )
+s24:1:adantr |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> G : NN --> NN )
+s25:2:adantlr |- ( ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> ( G ` k ) < ( G ` ( k + 1 ) ) )
+s26:3:adantlr |- ( ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. ( NN \ ran G ) ) -> ( F ` n ) = 0 )
+s27:4:adantlr |- ( ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( F ` n ) e. CC )
+s28:5:adantlr |- ( ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> ( H ` k ) = ( F ` ( G ` k ) ) )
+s29:s1,s23,s24,s25,s26,s27,s28:isercoll |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> ( seq 1 ( + , H ) ~~> ( ~~> ` seq 1 ( + , F ) ) <-> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , F ) ) ) )
+s30:s22,s29:mpbird |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , H ) ~~> ( ~~> ` seq 1 ( + , F ) ) )
+s31::climrel |- Rel ~~>
+s32:s31:a1i |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> Rel ~~> )
+i33::releldm
+s34:s32,s30,i33:syl2anc |- ( ( ph /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , H ) e. dom ~~> )
+s35:s34:ex |- ( ph -> ( seq 1 ( + , F ) e. dom ~~> -> seq 1 ( + , H ) e. dom ~~> ) )
+qed:s18,s35:impbid |- ( ph -> ( seq 1 ( + , H ) e. dom ~~> <-> seq 1 ( + , F ) e. dom ~~> ) )
+$)

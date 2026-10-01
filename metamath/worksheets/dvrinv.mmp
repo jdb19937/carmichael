@@ -1,0 +1,65 @@
+$( <MM> <PROOF_ASST> THEOREM=dvrinv  LOC_AFTER=?
+
+* The derivative of 1 / ( z - P ) on the complex plane with P removed.
+
+s1::id |- ( P e. CC -> P e. CC )
+s2::cnelprrecn |- CC e. { RR , CC }
+s3:s2:a1i |- ( P e. CC -> CC e. { RR , CC } )
+s4::ax-1cn |- 1 e. CC
+s5:s4:a1i |- ( P e. CC -> 1 e. CC )
+s6::0cnd |- ( P e. CC -> 0 e. CC )
+s7:s3,s5:dvmptc |- ( P e. CC -> ( CC _D ( z e. CC |-> 1 ) ) = ( z e. CC |-> 0 ) )
+s8:s3:dvmptid |- ( P e. CC -> ( CC _D ( z e. CC |-> z ) ) = ( z e. CC |-> 1 ) )
+s9:s1:adantr |- ( ( P e. CC /\ z e. CC ) -> P e. CC )
+s10::simpr |- ( ( P e. CC /\ z e. CC ) -> z e. CC )
+s11:s5:adantr |- ( ( P e. CC /\ z e. CC ) -> 1 e. CC )
+s12:s6:adantr |- ( ( P e. CC /\ z e. CC ) -> 0 e. CC )
+s13:s3,s1:dvmptc |- ( P e. CC -> ( CC _D ( z e. CC |-> P ) ) = ( z e. CC |-> 0 ) )
+s14:s3,s10,s11,s8,s9,s12,s13:dvmptsub |- ( P e. CC -> ( CC _D ( z e. CC |-> ( z - P ) ) ) = ( z e. CC |-> ( 1 - 0 ) ) )
+s15::1m0e1 |- ( 1 - 0 ) = 1
+s16:s15:a1i |- ( ( P e. CC /\ z e. CC ) -> ( 1 - 0 ) = 1 )
+s17:s16:mpteq2dva |- ( P e. CC -> ( z e. CC |-> ( 1 - 0 ) ) = ( z e. CC |-> 1 ) )
+s18:s14,s17:eqtrd |- ( P e. CC -> ( CC _D ( z e. CC |-> ( z - P ) ) ) = ( z e. CC |-> 1 ) )
+s19::difss |- ( CC \ { P } ) C_ CC
+s20:s19:a1i |- ( P e. CC -> ( CC \ { P } ) C_ CC )
+s21::eqid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( ( TopOpen ` CCfld ) |`t CC )
+s22::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+i23::cnopnsnr
+s24:s1,i23:syl |- ( P e. CC -> ( CC \ { P } ) e. ( ( TopOpen ` CCfld ) |`t CC ) )
+s25:s3,s11,s12,s7,s20,s21,s22,s24:dvmptres |- ( P e. CC -> ( CC _D ( z e. ( CC \ { P } ) |-> 1 ) ) = ( z e. ( CC \ { P } ) |-> 0 ) )
+s26:s10,s9:subcld |- ( ( P e. CC /\ z e. CC ) -> ( z - P ) e. CC )
+s27:s3,s26,s11,s18,s20,s21,s22,s24:dvmptres |- ( P e. CC -> ( CC _D ( z e. ( CC \ { P } ) |-> ( z - P ) ) ) = ( z e. ( CC \ { P } ) |-> 1 ) )
+s28::simpr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> z e. ( CC \ { P } ) )
+i29::eldifi
+s30:s28,i29:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> z e. CC )
+s31:s1:adantr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> P e. CC )
+i32::eldifsn
+s33:s28,i32:sylib |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z e. CC /\ z =/= P ) )
+i34::simpr
+s35:s33,i34:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> z =/= P )
+s36:s30,s31:subcld |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z - P ) e. CC )
+s37:s30,s31,s35:subne0d |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z - P ) =/= 0 )
+s38:s36,s37:jca |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( z - P ) e. CC /\ ( z - P ) =/= 0 ) )
+i39::eldifsn
+s40:s38,i39:sylibr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z - P ) e. ( CC \ { 0 } ) )
+s41:s5:adantr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> 1 e. CC )
+s42:s6:adantr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> 0 e. CC )
+s43:s3,s41,s42,s25,s40,s41,s27:dvmptdiv |- ( P e. CC -> ( CC _D ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) ) = ( z e. ( CC \ { P } ) |-> ( ( ( 0 x. ( z - P ) ) - ( 1 x. 1 ) ) / ( ( z - P ) ^ 2 ) ) ) )
+s44:s36:mul02d |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( 0 x. ( z - P ) ) = 0 )
+s45:s41:mullidd |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( 1 x. 1 ) = 1 )
+s46:s44,s45:oveq12d |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( 0 x. ( z - P ) ) - ( 1 x. 1 ) ) = ( 0 - 1 ) )
+s47::df-neg |- -u 1 = ( 0 - 1 )
+s48:s47:eqcomi |- ( 0 - 1 ) = -u 1
+s49:s48:a1i |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( 0 - 1 ) = -u 1 )
+s50:s46,s49:eqtrd |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( 0 x. ( z - P ) ) - ( 1 x. 1 ) ) = -u 1 )
+s51:s36:sqcld |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( z - P ) ^ 2 ) e. CC )
+i52::sqne0
+s53:s36,i52:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( ( z - P ) ^ 2 ) =/= 0 <-> ( z - P ) =/= 0 ) )
+s54:s37,s53:mpbird |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( z - P ) ^ 2 ) =/= 0 )
+s55:s50:oveq1d |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( ( 0 x. ( z - P ) ) - ( 1 x. 1 ) ) / ( ( z - P ) ^ 2 ) ) = ( -u 1 / ( ( z - P ) ^ 2 ) ) )
+s56:s41,s51,s54:divnegd |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> -u ( 1 / ( ( z - P ) ^ 2 ) ) = ( -u 1 / ( ( z - P ) ^ 2 ) ) )
+s57:s56:eqcomd |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( -u 1 / ( ( z - P ) ^ 2 ) ) = -u ( 1 / ( ( z - P ) ^ 2 ) ) )
+s58:s55,s57:eqtrd |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( ( 0 x. ( z - P ) ) - ( 1 x. 1 ) ) / ( ( z - P ) ^ 2 ) ) = -u ( 1 / ( ( z - P ) ^ 2 ) ) )
+s59:s58:mpteq2dva |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> ( ( ( 0 x. ( z - P ) ) - ( 1 x. 1 ) ) / ( ( z - P ) ^ 2 ) ) ) = ( z e. ( CC \ { P } ) |-> -u ( 1 / ( ( z - P ) ^ 2 ) ) ) )
+qed:s43,s59:eqtrd |- ( P e. CC -> ( CC _D ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) ) = ( z e. ( CC \ { P } ) |-> -u ( 1 / ( ( z - P ) ^ 2 ) ) ) )
+$)

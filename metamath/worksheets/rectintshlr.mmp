@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=rectintshlr  LOC_AFTER=?
+
+* The line-shift identity with a residue, with the left edge traversed upwards: Carmichael.shift_lines_residue of DetectionShift.lean.  X is the limit of the right vertical edge integrals and W that of the left ones, each an _i times the improper integral along the line.
+
+h1::rectintshlr.a |- ( ph -> A e. RR )
+h2::rectintshlr.b |- ( ph -> B e. RR )
+h3::rectintshlr.f |- ( ph -> F e. ( D -cn-> CC ) )
+h4::rectintshlr.k |- ( ph -> K e. CC )
+h5::rectintshlr.s |- ( ph -> S C_ RR )
+h6::rectintshlr.u |- ( ph -> sup ( S , RR* , < ) = +oo )
+h7::rectintshlr.e |- ( ( ph /\ t e. S ) -> ( ( A + ( _i x. -u t ) ) cseg ( A + ( _i x. t ) ) ) C_ D )
+h8::rectintshlr.r |- ( ( ph /\ t e. S ) -> ( F rectint <. ( A + ( _i x. -u t ) ) , ( B + ( _i x. t ) ) >. ) = K )
+h9::rectintshlr.1 |- ( ph -> ( t e. S |-> ( F lint <. ( A + ( _i x. -u t ) ) , ( B + ( _i x. -u t ) ) >. ) ) ~~>r 0 )
+h10::rectintshlr.2 |- ( ph -> ( t e. S |-> ( F lint <. ( B + ( _i x. -u t ) ) , ( B + ( _i x. t ) ) >. ) ) ~~>r X )
+h11::rectintshlr.3 |- ( ph -> ( t e. S |-> ( F lint <. ( B + ( _i x. t ) ) , ( A + ( _i x. t ) ) >. ) ) ~~>r 0 )
+h12::rectintshlr.4 |- ( ph -> ( t e. S |-> ( F lint <. ( A + ( _i x. -u t ) ) , ( A + ( _i x. t ) ) >. ) ) ~~>r W )
+i1::elex
+s2:3,i1:syl |- ( ph -> F e. _V )
+s3:1:adantr |- ( ( ph /\ t e. S ) -> A e. RR )
+s4:5:adantr |- ( ( ph /\ t e. S ) -> S C_ RR )
+s5::simpr |- ( ( ph /\ t e. S ) -> t e. S )
+s6:s4,s5:sseldd |- ( ( ph /\ t e. S ) -> t e. RR )
+i7::renegcl
+s8:s6,i7:syl |- ( ( ph /\ t e. S ) -> -u t e. RR )
+s9:s3:recnd |- ( ( ph /\ t e. S ) -> A e. CC )
+s10:s6:recnd |- ( ( ph /\ t e. S ) -> t e. CC )
+s11:s8:recnd |- ( ( ph /\ t e. S ) -> -u t e. CC )
+s12::ax-icn |- _i e. CC
+s13:s12:a1i |- ( ( ph /\ t e. S ) -> _i e. CC )
+s14:s13,s11:mulcld |- ( ( ph /\ t e. S ) -> ( _i x. -u t ) e. CC )
+s15:s9,s14:addcld |- ( ( ph /\ t e. S ) -> ( A + ( _i x. -u t ) ) e. CC )
+s16:s13,s10:mulcld |- ( ( ph /\ t e. S ) -> ( _i x. t ) e. CC )
+s17:s9,s16:addcld |- ( ( ph /\ t e. S ) -> ( A + ( _i x. t ) ) e. CC )
+s18:3:adantr |- ( ( ph /\ t e. S ) -> F e. ( D -cn-> CC ) )
+s19:s15,s17:jca |- ( ( ph /\ t e. S ) -> ( ( A + ( _i x. -u t ) ) e. CC /\ ( A + ( _i x. t ) ) e. CC ) )
+s20:s18,7:jca |- ( ( ph /\ t e. S ) -> ( F e. ( D -cn-> CC ) /\ ( ( A + ( _i x. -u t ) ) cseg ( A + ( _i x. t ) ) ) C_ D ) )
+s21:s19,s20:jca |- ( ( ph /\ t e. S ) -> ( ( ( A + ( _i x. -u t ) ) e. CC /\ ( A + ( _i x. t ) ) e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( ( A + ( _i x. -u t ) ) cseg ( A + ( _i x. t ) ) ) C_ D ) ) )
+i22::lintrev
+s23:s21,i22:syl |- ( ( ph /\ t e. S ) -> ( F lint <. ( A + ( _i x. t ) ) , ( A + ( _i x. -u t ) ) >. ) = -u ( F lint <. ( A + ( _i x. -u t ) ) , ( A + ( _i x. t ) ) >. ) )
+s24:s23:mpteq2dva |- ( ph -> ( t e. S |-> ( F lint <. ( A + ( _i x. t ) ) , ( A + ( _i x. -u t ) ) >. ) ) = ( t e. S |-> -u ( F lint <. ( A + ( _i x. -u t ) ) , ( A + ( _i x. t ) ) >. ) ) )
+s25::ovex |- ( F lint <. ( A + ( _i x. -u t ) ) , ( A + ( _i x. t ) ) >. ) e. _V
+s26:s25:a1i |- ( ( ph /\ t e. S ) -> ( F lint <. ( A + ( _i x. -u t ) ) , ( A + ( _i x. t ) ) >. ) e. _V )
+s27:s26,12:rlimneg |- ( ph -> ( t e. S |-> -u ( F lint <. ( A + ( _i x. -u t ) ) , ( A + ( _i x. t ) ) >. ) ) ~~>r -u W )
+s28:s24,s27:eqbrtrd |- ( ph -> ( t e. S |-> ( F lint <. ( A + ( _i x. t ) ) , ( A + ( _i x. -u t ) ) >. ) ) ~~>r -u W )
+s29:1,2,s2,4,5,6,8,9,10,11,s28:rectintshl |- ( ph -> ( X + -u W ) = K )
+i30::rlimcl
+s31:10,i30:syl |- ( ph -> X e. CC )
+i32::rlimcl
+s33:12,i32:syl |- ( ph -> W e. CC )
+s34:s31,s33:negsubd |- ( ph -> ( X + -u W ) = ( X - W ) )
+qed:s34,s29:eqtr3d |- ( ph -> ( X - W ) = K )
+$)

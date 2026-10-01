@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=cxplogcvg  LOC_AFTER=?
+
+* The sequence ` log n n ^c -u E ` tends to zero for ` E > 0 ` .
+
+s1::id |- ( E e. RR+ -> E e. RR+ )
+s2:s1:rpcnd |- ( E e. RR+ -> E e. CC )
+i3::cxploglim
+s4:s1,i3:syl |- ( E e. RR+ -> ( n e. RR+ |-> ( ( log ` n ) / ( n ^c E ) ) ) ~~>r 0 )
+s5::simpr |- ( ( E e. RR+ /\ n e. RR+ ) -> n e. RR+ )
+s6:s2:adantr |- ( ( E e. RR+ /\ n e. RR+ ) -> E e. CC )
+s7:s5:rpcnd |- ( ( E e. RR+ /\ n e. RR+ ) -> n e. CC )
+s8:s5:rpne0d |- ( ( E e. RR+ /\ n e. RR+ ) -> n =/= 0 )
+s9:s5:relogcld |- ( ( E e. RR+ /\ n e. RR+ ) -> ( log ` n ) e. RR )
+s10:s9:recnd |- ( ( E e. RR+ /\ n e. RR+ ) -> ( log ` n ) e. CC )
+s11:s7,s6:cxpcld |- ( ( E e. RR+ /\ n e. RR+ ) -> ( n ^c E ) e. CC )
+s12:s7,s8,s6:cxpne0d |- ( ( E e. RR+ /\ n e. RR+ ) -> ( n ^c E ) =/= 0 )
+s13:s10,s11,s12:divrecd |- ( ( E e. RR+ /\ n e. RR+ ) -> ( ( log ` n ) / ( n ^c E ) ) = ( ( log ` n ) x. ( 1 / ( n ^c E ) ) ) )
+s14:s7,s8,s6:cxpnegd |- ( ( E e. RR+ /\ n e. RR+ ) -> ( n ^c -u E ) = ( 1 / ( n ^c E ) ) )
+s15:s14:oveq2d |- ( ( E e. RR+ /\ n e. RR+ ) -> ( ( log ` n ) x. ( n ^c -u E ) ) = ( ( log ` n ) x. ( 1 / ( n ^c E ) ) ) )
+s16:s13,s15:eqtr4d |- ( ( E e. RR+ /\ n e. RR+ ) -> ( ( log ` n ) / ( n ^c E ) ) = ( ( log ` n ) x. ( n ^c -u E ) ) )
+s17:s16:mpteq2dva |- ( E e. RR+ -> ( n e. RR+ |-> ( ( log ` n ) / ( n ^c E ) ) ) = ( n e. RR+ |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) )
+s18:s17,s4:eqbrtrrd |- ( E e. RR+ -> ( n e. RR+ |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) ~~>r 0 )
+s19::simpr |- ( ( E e. RR+ /\ n e. NN ) -> n e. NN )
+s20:s2:adantr |- ( ( E e. RR+ /\ n e. NN ) -> E e. CC )
+s21:s19:nncnd |- ( ( E e. RR+ /\ n e. NN ) -> n e. CC )
+s22:s20:negcld |- ( ( E e. RR+ /\ n e. NN ) -> -u E e. CC )
+s23:s21,s22:cxpcld |- ( ( E e. RR+ /\ n e. NN ) -> ( n ^c -u E ) e. CC )
+s24:s19:nnrpd |- ( ( E e. RR+ /\ n e. NN ) -> n e. RR+ )
+s25:s24:relogcld |- ( ( E e. RR+ /\ n e. NN ) -> ( log ` n ) e. RR )
+s26:s25:recnd |- ( ( E e. RR+ /\ n e. NN ) -> ( log ` n ) e. CC )
+s27:s26,s23:mulcld |- ( ( E e. RR+ /\ n e. NN ) -> ( ( log ` n ) x. ( n ^c -u E ) ) e. CC )
+i28::rlimres
+s29:s18,i28:syl |- ( E e. RR+ -> ( ( n e. RR+ |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) |` NN ) ~~>r 0 )
+s30::nnrp |- ( x e. NN -> x e. RR+ )
+s31:s30:ssriv |- NN C_ RR+
+i32::resmpt
+s33:s31,i32:ax-mp |- ( ( n e. RR+ |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) |` NN ) = ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) )
+s34:s33:a1i |- ( E e. RR+ -> ( ( n e. RR+ |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) |` NN ) = ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) )
+s35:s34,s29:eqbrtrrd |- ( E e. RR+ -> ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) ~~>r 0 )
+s36::eqid |- ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) = ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) )
+s37:s27,s36:fmptd |- ( E e. RR+ -> ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) : NN --> CC )
+s38::nnuz |- NN = ( ZZ>= ` 1 )
+s39::1zzd |- ( E e. RR+ -> 1 e. ZZ )
+s40:s38,s39,s37:rlimclim |- ( E e. RR+ -> ( ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) ~~>r 0 <-> ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) ~~> 0 ) )
+qed:s35,s40:mpbid |- ( E e. RR+ -> ( n e. NN |-> ( ( log ` n ) x. ( n ^c -u E ) ) ) ~~> 0 )
+$)

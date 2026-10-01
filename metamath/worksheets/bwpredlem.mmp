@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=bwpredlem  LOC_AFTER=?
+
+* A word whose value is half a power of two at its length is not empty.
+
+s1::simpl |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) )
+s3::simpr |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( # ` L ) = 0 )
+s4:s3:oveq2d |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( 2 ^ ( # ` L ) ) = ( 2 ^ 0 ) )
+s5::2cn |- 2 e. CC
+i6::exp0
+s7:s5,i6:ax-mp |- ( 2 ^ 0 ) = 1
+s8:s7:a1i |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( 2 ^ 0 ) = 1 )
+s9:s2:adantr |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) )
+s10:s9,s4,s8:3eqtrd |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( 2 x. ( toNat ` L ) ) = 1 )
+s11::2t0e0 |- ( 2 x. 0 ) = 0
+s12:s11:oveq1i |- ( ( 2 x. 0 ) + 1 ) = ( 0 + 1 )
+s13::0p1e1 |- ( 0 + 1 ) = 1
+s14:s12,s13:eqtri |- ( ( 2 x. 0 ) + 1 ) = 1
+s15:s14:a1i |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( ( 2 x. 0 ) + 1 ) = 1 )
+s16:s15,s10:eqtr4d |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( ( 2 x. 0 ) + 1 ) = ( 2 x. ( toNat ` L ) ) )
+s17::0z |- 0 e. ZZ
+s18:s17:a1i |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> 0 e. ZZ )
+i19::tonatcl
+s20:s1,i19:syl |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( toNat ` L ) e. NN0 )
+s21:s20:nn0zd |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( toNat ` L ) e. ZZ )
+s22:s21:adantr |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> ( toNat ` L ) e. ZZ )
+i23::bwoddne
+s24:s18,s22,i23:syl2anc |- ( ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) /\ ( # ` L ) = 0 ) -> -. ( ( 2 x. 0 ) + 1 ) = ( 2 x. ( toNat ` L ) ) )
+s25:s16,s24:pm2.65da |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> -. ( # ` L ) = 0 )
+s26:s25:neqned |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) =/= 0 )
+i27::lencl
+s28:s1,i27:syl |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. NN0 )
+i29::elnnne0
+qed:s28,s26,i29:sylanbrc |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. NN )
+$)

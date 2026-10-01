@@ -1,0 +1,50 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hun  LOC_AFTER=?
+
+* A case split on the precondition of a Hoare triple of the machine layer: a branch statement sends the two halves of the precondition to the two branches, and this glues them.  Lean: ` Frag.ite_runs ` .
+
+s1::simp1 |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) )
+s2::simp2 |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> C ( T TM2Hoare M ) <. D , N >. )
+s3::simp3 |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> S ( T TM2Hoare M ) <. D , N >. )
+s4:s1,s2:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) )
+i5::simpl
+s6:s1,i5:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> T e. V )
+i7::tm2hmvv
+s8:s1,i7:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> M e. _V )
+s9:s6,s8:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( T e. V /\ M e. _V ) )
+s10:s9,s2:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( ( T e. V /\ M e. _V ) /\ C ( T TM2Hoare M ) <. D , N >. ) )
+i11::tm2hrtyp
+s12:s10,i11:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) )
+i13::tm2hrbr2
+s14:s9,s12,i13:syl2anc |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( C ( T TM2Hoare M ) <. D , N >. <-> A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+s15:s14,s2:mpbid |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) )
+s16:s1,s3:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ S ( T TM2Hoare M ) <. D , N >. ) )
+i17::simpl
+s18:s1,i17:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> T e. V )
+i19::tm2hmvv
+s20:s1,i19:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> M e. _V )
+s21:s18,s20:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( T e. V /\ M e. _V ) )
+s22:s21,s3:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( ( T e. V /\ M e. _V ) /\ S ( T TM2Hoare M ) <. D , N >. ) )
+i23::tm2hrtyp
+s24:s22,i23:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( S C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) )
+i25::tm2hrbr2
+s26:s21,s24,i25:syl2anc |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( S ( T TM2Hoare M ) <. D , N >. <-> A. u e. S E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+s27:s26,s3:mpbid |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> A. u e. S E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) )
+s28:s12:simp1d |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> C C_ ( TM2Cfg ` T ) )
+s29:s12:simp2d |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> D C_ ( TM2Cfg ` T ) )
+s30:s12:simp3d |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> N e. NN0 )
+s31:s24:simp1d |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> S C_ ( TM2Cfg ` T ) )
+s32:s28,s31:unssd |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( C u. S ) C_ ( TM2Cfg ` T ) )
+s33:s32,s29,s30:3jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( ( C u. S ) C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) )
+s34:s15,s27:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) /\ A. u e. S E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+s35::ralunb |- ( A. u e. ( C u. S ) E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) <-> ( A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) /\ A. u e. S E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+s36:s35:a1i |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( A. u e. ( C u. S ) E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) <-> ( A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) /\ A. u e. S E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) ) )
+s37:s36,s34:mpbird |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> A. u e. ( C u. S ) E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) )
+i38::simpl
+s39:s1,i38:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> T e. V )
+i40::tm2hmvv
+s41:s1,i40:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> M e. _V )
+s42:s39,s41:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( T e. V /\ M e. _V ) )
+i43::tm2hrbr2
+s44:s42,s33,i43:syl2anc |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( ( C u. S ) ( T TM2Hoare M ) <. D , N >. <-> A. u e. ( C u. S ) E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+qed:s44,s37:mpbird |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. /\ S ( T TM2Hoare M ) <. D , N >. ) -> ( C u. S ) ( T TM2Hoare M ) <. D , N >. )
+$)

@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=zsercvgz  LOC_AFTER=?
+
+* The zeta series ` sum_ n ^c -u Z ` converges for complex ` Z ` with ` 1 < Re Z ` ( ~ zsercvg at ` Re Z ` and ~ abscvgcvg ).
+
+s1::simpl |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> Z e. CC )
+s2::simpr |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> 1 < ( Re ` Z ) )
+s3:s1:recld |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( Re ` Z ) e. RR )
+s4:s1:negcld |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> -u Z e. CC )
+s5::simpr |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> k e. NN )
+s6::oveq1 |- ( n = k -> ( n ^c -u ( Re ` Z ) ) = ( k ^c -u ( Re ` Z ) ) )
+s7::ovex |- ( k ^c -u ( Re ` Z ) ) e. _V
+s8:s7:a1i |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( k ^c -u ( Re ` Z ) ) e. _V )
+s9::eqid |- ( n e. NN |-> ( n ^c -u ( Re ` Z ) ) ) = ( n e. NN |-> ( n ^c -u ( Re ` Z ) ) )
+s10:s6,s9:fvmptg |- ( ( k e. NN /\ ( k ^c -u ( Re ` Z ) ) e. _V ) -> ( ( n e. NN |-> ( n ^c -u ( Re ` Z ) ) ) ` k ) = ( k ^c -u ( Re ` Z ) ) )
+s11:s5,s8,s10:syl2anc |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( n e. NN |-> ( n ^c -u ( Re ` Z ) ) ) ` k ) = ( k ^c -u ( Re ` Z ) ) )
+s12::oveq1 |- ( n = k -> ( n ^c -u Z ) = ( k ^c -u Z ) )
+s13::ovex |- ( k ^c -u Z ) e. _V
+s14:s13:a1i |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( k ^c -u Z ) e. _V )
+s15::eqid |- ( n e. NN |-> ( n ^c -u Z ) ) = ( n e. NN |-> ( n ^c -u Z ) )
+s16:s12,s15:fvmptg |- ( ( k e. NN /\ ( k ^c -u Z ) e. _V ) -> ( ( n e. NN |-> ( n ^c -u Z ) ) ` k ) = ( k ^c -u Z ) )
+s17:s5,s14,s16:syl2anc |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( n e. NN |-> ( n ^c -u Z ) ) ` k ) = ( k ^c -u Z ) )
+s18:s1:adantr |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> Z e. CC )
+i19::cxpnnabs
+s20:s5,s18,i19:syl2anc |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( abs ` ( k ^c -u Z ) ) = ( k ^c -u ( Re ` Z ) ) )
+s21:s17:fveq2d |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( abs ` ( ( n e. NN |-> ( n ^c -u Z ) ) ` k ) ) = ( abs ` ( k ^c -u Z ) ) )
+s22:s21,s20:eqtrd |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( abs ` ( ( n e. NN |-> ( n ^c -u Z ) ) ` k ) ) = ( k ^c -u ( Re ` Z ) ) )
+s23:s11,s22:eqtr4d |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( n e. NN |-> ( n ^c -u ( Re ` Z ) ) ) ` k ) = ( abs ` ( ( n e. NN |-> ( n ^c -u Z ) ) ` k ) ) )
+s24:s1:adantr |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> Z e. CC )
+s25:s24:negcld |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> -u Z e. CC )
+s26:s5:nncnd |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> k e. CC )
+s27:s26,s25:cxpcld |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( k ^c -u Z ) e. CC )
+s28:s17,s27:eqeltrd |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( n e. NN |-> ( n ^c -u Z ) ) ` k ) e. CC )
+s29:s3,s2:jca |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( ( Re ` Z ) e. RR /\ 1 < ( Re ` Z ) ) )
+i30::zsercvg
+s31:s29,i30:syl |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> seq 1 ( + , ( n e. NN |-> ( n ^c -u ( Re ` Z ) ) ) ) e. dom ~~> )
+s32::nnuz |- NN = ( ZZ>= ` 1 )
+s33::1z |- 1 e. ZZ
+s34:s33:a1i |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> 1 e. ZZ )
+s35::1nn |- 1 e. NN
+s36:s35:a1i |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> 1 e. NN )
+qed:s32,s34,s23,s28,s31:abscvgcvg |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> seq 1 ( + , ( n e. NN |-> ( n ^c -u Z ) ) ) e. dom ~~> )
+$)

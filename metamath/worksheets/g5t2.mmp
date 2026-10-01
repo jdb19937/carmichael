@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=g5t2  LOC_AFTER=?
+
+* Fast path: a strict goal through ltmul2dd and ltletrd.
+
+s1::simpl |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> L e. RR )
+s2::simpr |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ; ; 1 0 0 <_ L )
+s3::1nn |- 1 e. NN
+s4:s3:decnncl2 |- ; 1 0 e. NN
+s5:s4:decnncl2 |- ; ; 1 0 0 e. NN
+s6:s5:nngt0i |- 0 < ; ; 1 0 0
+s7:s6:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> 0 < ; ; 1 0 0 )
+s8::0re |- 0 e. RR
+s9:s8:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> 0 e. RR )
+s10::1nn0 |- 1 e. NN0
+s11::0nn0 |- 0 e. NN0
+s12:s10,s11:deccl |- ; 1 0 e. NN0
+s13:s12,s11:deccl |- ; ; 1 0 0 e. NN0
+s14:s13:nn0rei |- ; ; 1 0 0 e. RR
+s15:s14:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ; ; 1 0 0 e. RR )
+s16:s9,s15,s1,s7,s2:ltletrd |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> 0 < L )
+i17::rpdivcl
+s18::2rp |- 2 e. RR+
+s19::5rp |- 5 e. RR+
+s20:s18,s19,i17:mp2an |- ( 2 / 5 ) e. RR+
+s21:s20:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( 2 / 5 ) e. RR+ )
+s22:s9,s1,s21,s16:ltmul2dd |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( ( 2 / 5 ) x. 0 ) < ( ( 2 / 5 ) x. L ) )
+i23::rpcn
+i24::rpdivcl
+s25:s20,i23:ax-mp |- ( 2 / 5 ) e. CC
+s26:s25:mul01i |- ( ( 2 / 5 ) x. 0 ) = 0
+s27:s26:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( ( 2 / 5 ) x. 0 ) = 0 )
+qed:s27,s22:eqbrtrrd |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> 0 < ( ( 2 / 5 ) x. L ) )
+$)

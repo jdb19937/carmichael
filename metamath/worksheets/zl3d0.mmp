@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3d0  LOC_AFTER=?
+
+* Off the imaginary axis ` e ^ ( 2 pi w ) =/= 1 `.
+
+s1::simpl |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> A e. CC )
+s2::simpr |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> ( Re ` A ) =/= 0 )
+s3:s1:adantr |- ( ( ( A e. CC /\ ( Re ` A ) =/= 0 ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> A e. CC )
+s4::simpr |- ( ( ( A e. CC /\ ( Re ` A ) =/= 0 ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 )
+i5::zl3ez
+s6:s3,s4,i5:syl2anc |- ( ( ( A e. CC /\ ( Re ` A ) =/= 0 ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( Re ` A ) = 0 /\ ( Im ` A ) e. ZZ ) )
+i7::simpl
+s8:s6,i7:syl |- ( ( ( A e. CC /\ ( Re ` A ) =/= 0 ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( Re ` A ) = 0 )
+s9:s8:ex |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> ( ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 -> ( Re ` A ) = 0 ) )
+s10:s9:necon3d |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> ( ( Re ` A ) =/= 0 -> ( exp ` ( ( 2 x. _pi ) x. A ) ) =/= 1 ) )
+s11:s2,s10:mpd |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> ( exp ` ( ( 2 x. _pi ) x. A ) ) =/= 1 )
+s12::id |- ( v = A -> v = A )
+s13:s12:oveq2d |- ( v = A -> ( ( 2 x. _pi ) x. v ) = ( ( 2 x. _pi ) x. A ) )
+s14:s13:fveq2d |- ( v = A -> ( exp ` ( ( 2 x. _pi ) x. v ) ) = ( exp ` ( ( 2 x. _pi ) x. A ) ) )
+s15:s14:neeq1d |- ( v = A -> ( ( exp ` ( ( 2 x. _pi ) x. v ) ) =/= 1 <-> ( exp ` ( ( 2 x. _pi ) x. A ) ) =/= 1 ) )
+s16:s15:elrab |- ( A e. { v e. CC | ( exp ` ( ( 2 x. _pi ) x. v ) ) =/= 1 } <-> ( A e. CC /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) =/= 1 ) )
+s17:s1,s11:jca |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> ( A e. CC /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) =/= 1 ) )
+s18:s17,s16:sylibr |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> A e. { v e. CC | ( exp ` ( ( 2 x. _pi ) x. v ) ) =/= 1 } )
+qed:s18:idi |- ( ( A e. CC /\ ( Re ` A ) =/= 0 ) -> A e. { v e. CC | ( exp ` ( ( 2 x. _pi ) x. v ) ) =/= 1 } )
+$)

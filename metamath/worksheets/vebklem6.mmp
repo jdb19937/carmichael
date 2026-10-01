@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=vebklem6  LOC_AFTER=?
+
+* Lemma for vebkz: orthogonality of Dirichlet characters mod N, evaluated at an integer A: the sum over all characters is phi ( N ) if A == 1 mod N and 0 otherwise.
+
+1::simpl    |- ( ( N e. NN /\ A e. ZZ ) -> N e. NN )
+2::simpr    |- ( ( N e. NN /\ A e. ZZ ) -> A e. ZZ )
+3::eqid     |- ( DChr ` N ) = ( DChr ` N )
+4::eqid     |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+5::eqid     |- ( Z/nZ ` N ) = ( Z/nZ ` N )
+6::eqid     |- ( 1r ` ( Z/nZ ` N ) ) = ( 1r ` ( Z/nZ ` N ) )
+7::eqid     |- ( Base ` ( Z/nZ ` N ) ) = ( Base ` ( Z/nZ ` N ) )
+8::eqid     |- ( ZRHom ` ( Z/nZ ` N ) ) = ( ZRHom ` ( Z/nZ ` N ) )
+9:1:nnnn0d  |- ( ( N e. NN /\ A e. ZZ ) -> N e. NN0 )
+10a:5,7,8:znzrhfo |- ( N e. NN0 -> ( ZRHom ` ( Z/nZ ` N ) ) : ZZ -onto-> ( Base ` ( Z/nZ ` N ) ) )
+10:9,10a:syl |- ( ( N e. NN /\ A e. ZZ ) -> ( ZRHom ` ( Z/nZ ` N ) ) : ZZ -onto-> ( Base ` ( Z/nZ ` N ) ) )
+11a::fof
+11:10,11a:syl |- ( ( N e. NN /\ A e. ZZ ) -> ( ZRHom ` ( Z/nZ ` N ) ) : ZZ --> ( Base ` ( Z/nZ ` N ) ) )
+12:11,2:ffvelcdmd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) e. ( Base ` ( Z/nZ ` N ) ) )
+13:3,4,5,6,7,1,12:sumdchr |- ( ( N e. NN /\ A e. ZZ ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) = if ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) = ( 1r ` ( Z/nZ ` N ) ) , ( phi ` N ) , 0 ) )
+14a:5:zncrng |- ( N e. NN0 -> ( Z/nZ ` N ) e. CRing )
+14:9,14a:syl |- ( ( N e. NN /\ A e. ZZ ) -> ( Z/nZ ` N ) e. CRing )
+15:14:crngringd |- ( ( N e. NN /\ A e. ZZ ) -> ( Z/nZ ` N ) e. Ring )
+16a:8,6:zrh1 |- ( ( Z/nZ ` N ) e. Ring -> ( ( ZRHom ` ( Z/nZ ` N ) ) ` 1 ) = ( 1r ` ( Z/nZ ` N ) ) )
+16:15,16a:syl |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ZRHom ` ( Z/nZ ` N ) ) ` 1 ) = ( 1r ` ( Z/nZ ` N ) ) )
+17:16:eqeq2d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) = ( ( ZRHom ` ( Z/nZ ` N ) ) ` 1 ) <-> ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) = ( 1r ` ( Z/nZ ` N ) ) ) )
+18::1z      |- 1 e. ZZ
+19:18:a1i   |- ( ( N e. NN /\ A e. ZZ ) -> 1 e. ZZ )
+20a:5,8:zndvds |- ( ( N e. NN0 /\ A e. ZZ /\ 1 e. ZZ ) -> ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) = ( ( ZRHom ` ( Z/nZ ` N ) ) ` 1 ) <-> N || ( A - 1 ) ) )
+20:9,2,19,20a:syl3anc |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) = ( ( ZRHom ` ( Z/nZ ` N ) ) ` 1 ) <-> N || ( A - 1 ) ) )
+21:17,20:bitr3d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) = ( 1r ` ( Z/nZ ` N ) ) <-> N || ( A - 1 ) ) )
+22:21:ifbid |- ( ( N e. NN /\ A e. ZZ ) -> if ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) = ( 1r ` ( Z/nZ ` N ) ) , ( phi ` N ) , 0 ) = if ( N || ( A - 1 ) , ( phi ` N ) , 0 ) )
+qed:13,22:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) = if ( N || ( A - 1 ) , ( phi ` N ) , 0 ) )
+$)

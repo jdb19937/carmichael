@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=korselt2  LOC_AFTER=?
+
+* If P is prime and ( P - 1 ) divides ( N - 1 ), then P divides A ^ N - A
+  for every integer A. The step of Korselt's criterion at one prime.
+
+1::simpl1   |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> P e. Prime )
+2::simpl2   |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> N e. NN )
+3::simpl3   |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( P - 1 ) || ( N - 1 ) )
+4::simpr    |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> A e. ZZ )
+5a::prmuz2
+5:1,5a:syl  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> P e. ( ZZ>= ` 2 ) )
+6a::uz2m1nn
+6:5,6a:syl  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( P - 1 ) e. NN )
+7:6:nnzd    |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( P - 1 ) e. ZZ )
+8:6:nnne0d  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( P - 1 ) =/= 0 )
+9a::nnm1nn0
+9:2,9a:syl  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( N - 1 ) e. NN0 )
+10:9:nn0zd  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( N - 1 ) e. ZZ )
+11a::dvdsval2
+11:7,8,10,11a:syl3anc |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( P - 1 ) || ( N - 1 ) <-> ( ( N - 1 ) / ( P - 1 ) ) e. ZZ ) )
+12:3,11:mpbid |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( N - 1 ) / ( P - 1 ) ) e. ZZ )
+13:9:nn0red |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( N - 1 ) e. RR )
+14:9:nn0ge0d |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> 0 <_ ( N - 1 ) )
+15:6:nnred  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( P - 1 ) e. RR )
+16:6:nngt0d |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> 0 < ( P - 1 ) )
+17a::divge0
+17:13,14,15,16,17a:syl22anc |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> 0 <_ ( ( N - 1 ) / ( P - 1 ) ) )
+18a::elnn0z
+18:12,17,18a:sylanbrc |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( N - 1 ) / ( P - 1 ) ) e. NN0 )
+19a::korselt1
+19:1,4,18,19a:syl3anc |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( A ^ ( ( ( P - 1 ) x. ( ( N - 1 ) / ( P - 1 ) ) ) + 1 ) ) mod P ) = ( A mod P ) )
+20:9:nn0cnd |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( N - 1 ) e. CC )
+21:6:nncnd  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( P - 1 ) e. CC )
+22a::divcan2
+22:20,21,8,22a:syl3anc |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( P - 1 ) x. ( ( N - 1 ) / ( P - 1 ) ) ) = ( N - 1 ) )
+23:22:oveq1d |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( ( P - 1 ) x. ( ( N - 1 ) / ( P - 1 ) ) ) + 1 ) = ( ( N - 1 ) + 1 ) )
+24:2:nncnd  |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> N e. CC )
+25a::npcan1
+25:24,25a:syl |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( N - 1 ) + 1 ) = N )
+26:23,25:eqtrd |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( ( P - 1 ) x. ( ( N - 1 ) / ( P - 1 ) ) ) + 1 ) = N )
+27:26:oveq2d |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( A ^ ( ( ( P - 1 ) x. ( ( N - 1 ) / ( P - 1 ) ) ) + 1 ) ) = ( A ^ N ) )
+28:27:oveq1d |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( A ^ ( ( ( P - 1 ) x. ( ( N - 1 ) / ( P - 1 ) ) ) + 1 ) ) mod P ) = ( ( A ^ N ) mod P ) )
+29:28,19:eqtr3d |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( A ^ N ) mod P ) = ( A mod P ) )
+30a::prmnn
+30:1,30a:syl |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> P e. NN )
+31:2:nnnn0d |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> N e. NN0 )
+32a::zexpcl
+32:4,31,32a:syl2anc |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( A ^ N ) e. ZZ )
+33a::moddvds
+33:30,32,4,33a:syl3anc |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> ( ( ( A ^ N ) mod P ) = ( A mod P ) <-> P || ( ( A ^ N ) - A ) ) )
+qed:29,33:mpbid |- ( ( ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) /\ A e. ZZ ) -> P || ( ( A ^ N ) - A ) )
+$)

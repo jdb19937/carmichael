@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=sqfprm  LOC_AFTER=?
+
+* A prime is squarefree: its Moebius value is nonzero.
+
+1::simpl    |- ( ( P e. Prime /\ p e. Prime ) -> P e. Prime )
+2::simpr    |- ( ( P e. Prime /\ p e. Prime ) -> p e. Prime )
+3a::prmnn
+3:2,3a:syl  |- ( ( P e. Prime /\ p e. Prime ) -> p e. NN )
+4a::nnsqcl
+4:3,4a:syl  |- ( ( P e. Prime /\ p e. Prime ) -> ( p ^ 2 ) e. NN )
+5a::dvdsprime
+5:1,4,5a:syl2anc |- ( ( P e. Prime /\ p e. Prime ) -> ( ( p ^ 2 ) || P <-> ( ( p ^ 2 ) = P \/ ( p ^ 2 ) = 1 ) ) )
+6a::prmuz2
+6:2,6a:syl  |- ( ( P e. Prime /\ p e. Prime ) -> p e. ( ZZ>= ` 2 ) )
+7a::nprm
+7:6,6,7a:syl2anc |- ( ( P e. Prime /\ p e. Prime ) -> -. ( p x. p ) e. Prime )
+8:3:nncnd   |- ( ( P e. Prime /\ p e. Prime ) -> p e. CC )
+9a::sqval
+9:8,9a:syl  |- ( ( P e. Prime /\ p e. Prime ) -> ( p ^ 2 ) = ( p x. p ) )
+10:9:eqeq1d |- ( ( P e. Prime /\ p e. Prime ) -> ( ( p ^ 2 ) = P <-> ( p x. p ) = P ) )
+11a::eleq1a
+11:1,11a:syl |- ( ( P e. Prime /\ p e. Prime ) -> ( ( p x. p ) = P -> ( p x. p ) e. Prime ) )
+12:7,11:mtod |- ( ( P e. Prime /\ p e. Prime ) -> -. ( p x. p ) = P )
+13:12,10:mtbird |- ( ( P e. Prime /\ p e. Prime ) -> -. ( p ^ 2 ) = P )
+14:3:nnred  |- ( ( P e. Prime /\ p e. Prime ) -> p e. RR )
+15:3:nnnn0d |- ( ( P e. Prime /\ p e. Prime ) -> p e. NN0 )
+16:15:nn0ge0d |- ( ( P e. Prime /\ p e. Prime ) -> 0 <_ p )
+17::1re     |- 1 e. RR
+18:17:a1i   |- ( ( P e. Prime /\ p e. Prime ) -> 1 e. RR )
+19::0le1    |- 0 <_ 1
+20:19:a1i   |- ( ( P e. Prime /\ p e. Prime ) -> 0 <_ 1 )
+21a::sq11
+21:14,16,18,20,21a:syl22anc |- ( ( P e. Prime /\ p e. Prime ) -> ( ( p ^ 2 ) = ( 1 ^ 2 ) <-> p = 1 ) )
+22::sq1     |- ( 1 ^ 2 ) = 1
+23:22:eqeq2i |- ( ( p ^ 2 ) = ( 1 ^ 2 ) <-> ( p ^ 2 ) = 1 )
+24:23:bicomi |- ( ( p ^ 2 ) = 1 <-> ( p ^ 2 ) = ( 1 ^ 2 ) )
+25:24,21:bitrid |- ( ( P e. Prime /\ p e. Prime ) -> ( ( p ^ 2 ) = 1 <-> p = 1 ) )
+26::1nprm   |- -. 1 e. Prime
+27:26:a1i   |- ( ( P e. Prime /\ p e. Prime ) -> -. 1 e. Prime )
+28a::nelne2
+28:2,27,28a:syl2anc |- ( ( P e. Prime /\ p e. Prime ) -> p =/= 1 )
+29:28:neneqd |- ( ( P e. Prime /\ p e. Prime ) -> -. p = 1 )
+30:29,25:mtbird |- ( ( P e. Prime /\ p e. Prime ) -> -. ( p ^ 2 ) = 1 )
+31:13,30:jca |- ( ( P e. Prime /\ p e. Prime ) -> ( -. ( p ^ 2 ) = P /\ -. ( p ^ 2 ) = 1 ) )
+32::ioran   |- ( -. ( ( p ^ 2 ) = P \/ ( p ^ 2 ) = 1 ) <-> ( -. ( p ^ 2 ) = P /\ -. ( p ^ 2 ) = 1 ) )
+33:31,32:sylibr |- ( ( P e. Prime /\ p e. Prime ) -> -. ( ( p ^ 2 ) = P \/ ( p ^ 2 ) = 1 ) )
+34:33,5:mtbird |- ( ( P e. Prime /\ p e. Prime ) -> -. ( p ^ 2 ) || P )
+35:34:ralrimiva |- ( P e. Prime -> A. p e. Prime -. ( p ^ 2 ) || P )
+36::ralnex  |- ( A. p e. Prime -. ( p ^ 2 ) || P <-> -. E. p e. Prime ( p ^ 2 ) || P )
+37:35,36:sylib |- ( P e. Prime -> -. E. p e. Prime ( p ^ 2 ) || P )
+
+38::prmnn |- ( P e. Prime -> P e. NN )
+39a::isnsqf
+39:38,39a:syl |- ( P e. Prime -> ( ( mmu ` P ) = 0 <-> E. p e. Prime ( p ^ 2 ) || P ) )
+40:37,39:mtbird |- ( P e. Prime -> -. ( mmu ` P ) = 0 )
+qed:40:neqned |- ( P e. Prime -> ( mmu ` P ) =/= 0 )
+$)

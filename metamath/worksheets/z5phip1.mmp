@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=z5phip1  LOC_AFTER=?
+
+* Lean sum_totient_div_sq_le_P1 (Detection.lean, the true replacement of the false I9(c)): sum_ ( r e. RSet ) phi ( r ) / r ^ 2 <_ sum_ ( r e. RSet ) 1 / r = P ( 1 ), from phi ( r ) <_ r.
+
+s1::simpl |- ( ( N e. V /\ Y e. RR ) -> N e. V )
+s2::simpr |- ( ( N e. V /\ Y e. RR ) -> Y e. RR )
+i3::z5rsetfi
+s4:s1,s2,i3:syl2anc |- ( ( N e. V /\ Y e. RR ) -> ( ( N RSet Y ) C_ ( 1 ... ( |_ ` Y ) ) /\ ( N RSet Y ) e. Fin ) )
+s5:s4:simpld |- ( ( N e. V /\ Y e. RR ) -> ( N RSet Y ) C_ ( 1 ... ( |_ ` Y ) ) )
+s6:s5:adantr |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( N RSet Y ) C_ ( 1 ... ( |_ ` Y ) ) )
+s7::simpr |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> r e. ( N RSet Y ) )
+s8:s6,s7:sseldd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> r e. ( 1 ... ( |_ ` Y ) ) )
+i9::elfznn
+s10:s8,i9:syl |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> r e. NN )
+s11:s10:nnred |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> r e. RR )
+s12:s10:nncnd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> r e. CC )
+s13:s10:nnne0d |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> r =/= 0 )
+s14:s10:nnrpd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> r e. RR+ )
+s15::2z |- 2 e. ZZ
+s16:s15:a1i |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> 2 e. ZZ )
+s17:s14,s16:rpexpcld |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( r ^ 2 ) e. RR+ )
+i18::phicl
+s19:s10,i18:syl |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( phi ` r ) e. NN )
+s20:s19:nnred |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( phi ` r ) e. RR )
+i21::z5phile
+s22:s10,i21:syl |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( phi ` r ) <_ r )
+s23:s20,s11,s17,s22:lediv1dd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( ( phi ` r ) / ( r ^ 2 ) ) <_ ( r / ( r ^ 2 ) ) )
+s24:s12:sqvald |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( r ^ 2 ) = ( r x. r ) )
+s25:s24:oveq2d |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( r / ( r ^ 2 ) ) = ( r / ( r x. r ) ) )
+s26:s12,s12,s12,s13,s13:divdiv1d |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( ( r / r ) / r ) = ( r / ( r x. r ) ) )
+s27:s26:eqcomd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( r / ( r x. r ) ) = ( ( r / r ) / r ) )
+s28:s12,s13:dividd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( r / r ) = 1 )
+s29:s28:oveq1d |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( ( r / r ) / r ) = ( 1 / r ) )
+s30:s27,s29:eqtrd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( r / ( r x. r ) ) = ( 1 / r ) )
+s31:s25,s30:eqtrd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( r / ( r ^ 2 ) ) = ( 1 / r ) )
+s32:s23,s31:breqtrd |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( ( phi ` r ) / ( r ^ 2 ) ) <_ ( 1 / r ) )
+s33:s4:simprd |- ( ( N e. V /\ Y e. RR ) -> ( N RSet Y ) e. Fin )
+s34:s20,s17:rerpdivcld |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( ( phi ` r ) / ( r ^ 2 ) ) e. RR )
+s35:s10:nnrecred |- ( ( ( N e. V /\ Y e. RR ) /\ r e. ( N RSet Y ) ) -> ( 1 / r ) e. RR )
+qed:s33,s34,s35,s32:fsumle |- ( ( N e. V /\ Y e. RR ) -> sum_ r e. ( N RSet Y ) ( ( phi ` r ) / ( r ^ 2 ) ) <_ sum_ r e. ( N RSet Y ) ( 1 / r ) )
+$)

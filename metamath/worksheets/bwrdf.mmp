@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=bwrdf  LOC_AFTER=?
+
+* The digits word is a function on the positions into the Booleans.
+
+s1::simpl |- ( ( N e. ZZ /\ M e. NN0 ) -> N e. ZZ )
+s2::simpr |- ( ( N e. ZZ /\ M e. NN0 ) -> M e. NN0 )
+s3::bwrdval |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N bwrd M ) = ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) )
+s4::1oel2o |- 1o e. 2o
+s5:s4:a1i |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> 1o e. 2o )
+s6::0el2o |- (/) e. 2o
+s7:s6:a1i |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> (/) e. 2o )
+s8:s5,s7:ifcld |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> if ( i e. ( bits ` N ) , 1o , (/) ) e. 2o )
+s9::eqid |- ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) = ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) )
+s10:s8,s9:fmptd |- ( ( N e. ZZ /\ M e. NN0 ) -> ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) : ( 0 ..^ M ) --> 2o )
+s11:s3:feq1d |- ( ( N e. ZZ /\ M e. NN0 ) -> ( ( N bwrd M ) : ( 0 ..^ M ) --> 2o <-> ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) : ( 0 ..^ M ) --> 2o ) )
+qed:s10,s11:mpbird |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N bwrd M ) : ( 0 ..^ M ) --> 2o )
+$)

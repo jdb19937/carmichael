@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=subbitspad  LOC_AFTER=?
+
+* Padding the second operand of subBits with a false letter does not change the result when it is the shorter.
+
+s1::simpl1 |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> X e. Word 2o )
+s2::simpl2 |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> Y e. Word 2o )
+s3::simpl3 |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> C e. 2o )
+s4::simpr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` Y ) < ( # ` X ) )
+i5::subbitsval
+s6:s1,s2,s3,i5:syl3anc |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( ( X subBits Y ) ` C ) = ( ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+s7::0el2o |- (/) e. 2o
+s8:s7:a1i |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> (/) e. 2o )
+i9::s1cl
+s10:s8,i9:syl |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> <" (/) "> e. Word 2o )
+i11::ccatcl
+s12:s2,s10,i11:syl2anc |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( Y ++ <" (/) "> ) e. Word 2o )
+i13::subbitsval
+s14:s1,s12,s3,i13:syl3anc |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( ( X subBits ( Y ++ <" (/) "> ) ) ` C ) = ( ( ( toNat ` X ) - ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` ( Y ++ <" (/) "> ) ) , ( # ` ( Y ++ <" (/) "> ) ) , ( # ` X ) ) ) )
+i15::tonatpad
+s16:s2,i15:syl |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( toNat ` ( Y ++ <" (/) "> ) ) = ( toNat ` Y ) )
+i17::bwmaxpad
+s18:s1,s2,s4,i17:syl3anc |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> if ( ( # ` X ) <_ ( # ` ( Y ++ <" (/) "> ) ) , ( # ` ( Y ++ <" (/) "> ) ) , ( # ` X ) ) = if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+c1:s16:oveq1d |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) = ( ( toNat ` Y ) + ( bToNat ` C ) ) )
+c2:c1:oveq2d |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( ( toNat ` X ) - ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) ) = ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) )
+c3:c2,s18:oveq12d |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( ( ( toNat ` X ) - ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` ( Y ++ <" (/) "> ) ) , ( # ` ( Y ++ <" (/) "> ) ) , ( # ` X ) ) ) = ( ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+s19:s14,c3:eqtrd |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( ( X subBits ( Y ++ <" (/) "> ) ) ` C ) = ( ( ( toNat ` X ) - ( ( toNat ` Y ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+qed:s6,s19:eqtr4d |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( # ` Y ) < ( # ` X ) ) -> ( ( X subBits Y ) ` C ) = ( ( X subBits ( Y ++ <" (/) "> ) ) ` C ) )
+$)

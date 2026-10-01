@@ -1,0 +1,80 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcflty  LOC_AFTER=?
+
+* The ` Bool ` fields of the state record are tests of the machine (Lean ` fun v => v.carry ` , ` v.da ` , ` v.db ` , ` v.flag ` ).
+
+s1::fvex |- ( 1st ` v ) e. _V
+s2::df-tmcar |- TMcar = ( v e. TMSt |-> ( 1st ` v ) )
+s3:s1,s2:fnmpti |- TMcar Fn TMSt
+s4::tmccarcl |- ( v e. TMSt -> ( TMcar ` v ) e. 2o )
+s5:s4:rgen |- A. v e. TMSt ( TMcar ` v ) e. 2o
+s6::ffnfv |- ( TMcar : TMSt --> 2o <-> ( TMcar Fn TMSt /\ A. v e. TMSt ( TMcar ` v ) e. 2o ) )
+s7:s3,s5,s6:mpbir2an |- TMcar : TMSt --> 2o
+s8::id |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) = TMSt )
+s9:s8:feq2d |- ( ( 2nd ` T ) = TMSt -> ( TMcar : ( 2nd ` T ) --> 2o <-> TMcar : TMSt --> 2o ) )
+s10:s7:a1i |- ( ( 2nd ` T ) = TMSt -> TMcar : TMSt --> 2o )
+s11:s9,s10:mpbird |- ( ( 2nd ` T ) = TMSt -> TMcar : ( 2nd ` T ) --> 2o )
+s12::2oex |- 2o e. _V
+s13:s12:a1i |- ( ( 2nd ` T ) = TMSt -> 2o e. _V )
+s14::fvex |- ( 2nd ` T ) e. _V
+s15:s14:a1i |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) e. _V )
+i16::elmapg
+s17:s13,s15,i16:syl2anc |- ( ( 2nd ` T ) = TMSt -> ( TMcar e. ( 2o ^m ( 2nd ` T ) ) <-> TMcar : ( 2nd ` T ) --> 2o ) )
+s18:s17,s11:mpbird |- ( ( 2nd ` T ) = TMSt -> TMcar e. ( 2o ^m ( 2nd ` T ) ) )
+s19::fvex |- ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) e. _V
+s20::df-tmda |- TMda = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) )
+s21:s19,s20:fnmpti |- TMda Fn TMSt
+s22::tmcdacl |- ( v e. TMSt -> ( TMda ` v ) e. 2o )
+s23:s22:rgen |- A. v e. TMSt ( TMda ` v ) e. 2o
+s24::ffnfv |- ( TMda : TMSt --> 2o <-> ( TMda Fn TMSt /\ A. v e. TMSt ( TMda ` v ) e. 2o ) )
+s25:s21,s23,s24:mpbir2an |- TMda : TMSt --> 2o
+s26::id |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) = TMSt )
+s27:s26:feq2d |- ( ( 2nd ` T ) = TMSt -> ( TMda : ( 2nd ` T ) --> 2o <-> TMda : TMSt --> 2o ) )
+s28:s25:a1i |- ( ( 2nd ` T ) = TMSt -> TMda : TMSt --> 2o )
+s29:s27,s28:mpbird |- ( ( 2nd ` T ) = TMSt -> TMda : ( 2nd ` T ) --> 2o )
+s30::2oex |- 2o e. _V
+s31:s30:a1i |- ( ( 2nd ` T ) = TMSt -> 2o e. _V )
+s32::fvex |- ( 2nd ` T ) e. _V
+s33:s32:a1i |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) e. _V )
+i34::elmapg
+s35:s31,s33,i34:syl2anc |- ( ( 2nd ` T ) = TMSt -> ( TMda e. ( 2o ^m ( 2nd ` T ) ) <-> TMda : ( 2nd ` T ) --> 2o ) )
+s36:s35,s29:mpbird |- ( ( 2nd ` T ) = TMSt -> TMda e. ( 2o ^m ( 2nd ` T ) ) )
+s37::fvex |- ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) e. _V
+s38::df-tmdb |- TMdb = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) )
+s39:s37,s38:fnmpti |- TMdb Fn TMSt
+s40::tmcdbcl |- ( v e. TMSt -> ( TMdb ` v ) e. 2o )
+s41:s40:rgen |- A. v e. TMSt ( TMdb ` v ) e. 2o
+s42::ffnfv |- ( TMdb : TMSt --> 2o <-> ( TMdb Fn TMSt /\ A. v e. TMSt ( TMdb ` v ) e. 2o ) )
+s43:s39,s41,s42:mpbir2an |- TMdb : TMSt --> 2o
+s44::id |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) = TMSt )
+s45:s44:feq2d |- ( ( 2nd ` T ) = TMSt -> ( TMdb : ( 2nd ` T ) --> 2o <-> TMdb : TMSt --> 2o ) )
+s46:s43:a1i |- ( ( 2nd ` T ) = TMSt -> TMdb : TMSt --> 2o )
+s47:s45,s46:mpbird |- ( ( 2nd ` T ) = TMSt -> TMdb : ( 2nd ` T ) --> 2o )
+s48::2oex |- 2o e. _V
+s49:s48:a1i |- ( ( 2nd ` T ) = TMSt -> 2o e. _V )
+s50::fvex |- ( 2nd ` T ) e. _V
+s51:s50:a1i |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) e. _V )
+i52::elmapg
+s53:s49,s51,i52:syl2anc |- ( ( 2nd ` T ) = TMSt -> ( TMdb e. ( 2o ^m ( 2nd ` T ) ) <-> TMdb : ( 2nd ` T ) --> 2o ) )
+s54:s53,s47:mpbird |- ( ( 2nd ` T ) = TMSt -> TMdb e. ( 2o ^m ( 2nd ` T ) ) )
+s55::fvex |- ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) e. _V
+s56::df-tmfl |- TMfl = ( v e. TMSt |-> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) )
+s57:s55,s56:fnmpti |- TMfl Fn TMSt
+s58::tmcflcl |- ( v e. TMSt -> ( TMfl ` v ) e. 2o )
+s59:s58:rgen |- A. v e. TMSt ( TMfl ` v ) e. 2o
+s60::ffnfv |- ( TMfl : TMSt --> 2o <-> ( TMfl Fn TMSt /\ A. v e. TMSt ( TMfl ` v ) e. 2o ) )
+s61:s57,s59,s60:mpbir2an |- TMfl : TMSt --> 2o
+s62::id |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) = TMSt )
+s63:s62:feq2d |- ( ( 2nd ` T ) = TMSt -> ( TMfl : ( 2nd ` T ) --> 2o <-> TMfl : TMSt --> 2o ) )
+s64:s61:a1i |- ( ( 2nd ` T ) = TMSt -> TMfl : TMSt --> 2o )
+s65:s63,s64:mpbird |- ( ( 2nd ` T ) = TMSt -> TMfl : ( 2nd ` T ) --> 2o )
+s66::2oex |- 2o e. _V
+s67:s66:a1i |- ( ( 2nd ` T ) = TMSt -> 2o e. _V )
+s68::fvex |- ( 2nd ` T ) e. _V
+s69:s68:a1i |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) e. _V )
+i70::elmapg
+s71:s67,s69,i70:syl2anc |- ( ( 2nd ` T ) = TMSt -> ( TMfl e. ( 2o ^m ( 2nd ` T ) ) <-> TMfl : ( 2nd ` T ) --> 2o ) )
+s72:s71,s65:mpbird |- ( ( 2nd ` T ) = TMSt -> TMfl e. ( 2o ^m ( 2nd ` T ) ) )
+s73:s18,s36:jca |- ( ( 2nd ` T ) = TMSt -> ( TMcar e. ( 2o ^m ( 2nd ` T ) ) /\ TMda e. ( 2o ^m ( 2nd ` T ) ) ) )
+s74:s54,s72:jca |- ( ( 2nd ` T ) = TMSt -> ( TMdb e. ( 2o ^m ( 2nd ` T ) ) /\ TMfl e. ( 2o ^m ( 2nd ` T ) ) ) )
+qed:s73,s74:jca |- ( ( 2nd ` T ) = TMSt -> ( ( TMcar e. ( 2o ^m ( 2nd ` T ) ) /\ TMda e. ( 2o ^m ( 2nd ` T ) ) ) /\ ( TMdb e. ( 2o ^m ( 2nd ` T ) ) /\ TMfl e. ( 2o ^m ( 2nd ` T ) ) ) ) )
+$)

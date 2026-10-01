@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=goodprimeswval  LOC_AFTER=?
+
+* Value of goodPrimesW: the primes q <_ Z above W with q - 1 smooth up to Y (Lean: goodPrimesW).
+
+s1::simp1 |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> Z e. NN0 )
+s2::simp2 |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> W e. NN0 )
+s3::simp3 |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> Y e. NN0 )
+i4::goodprimeswfval
+s5:s1,s2,i4:syl2anc |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> ( Z goodPrimesW W ) = ( y e. NN0 |-> { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } ) )
+s6::simpr |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ y = Y ) -> y = Y )
+c1:s6:breq2d |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ y = Y ) -> ( p <_ y <-> p <_ Y ) )
+c2:c1:imbi2d |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ y = Y ) -> ( ( p || ( q - 1 ) -> p <_ y ) <-> ( p || ( q - 1 ) -> p <_ Y ) ) )
+c3:c2:ralbidv |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ y = Y ) -> ( A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) <-> A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) )
+c4:c3:3anbi3d |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ y = Y ) -> ( ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) <-> ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) ) )
+c5:c4:rabbidv |- ( ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ y = Y ) -> { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } = { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } )
+s7::ovex |- ( 0 ... Z ) e. _V
+s8:s7:rabex |- { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } e. _V
+s9:s8:a1i |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } e. _V )
+qed:s5,c5,s3,s9:fvmptd |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> ( ( Z goodPrimesW W ) ` Y ) = { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } )
+$)

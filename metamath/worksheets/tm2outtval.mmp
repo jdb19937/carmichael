@@ -1,0 +1,66 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2outtval  LOC_AFTER=?
+
+* Value of TM2OutputsInTime: the relation between input words and optional output words reached within N steps.
+
+s1::simpl |- ( ( m = M /\ n = N ) -> m = M )
+s2::simpr |- ( ( m = M /\ n = N ) -> n = N )
+c1:s1:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` m ) = ( 1st ` M ) )
+c2:c1:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 1st ` m ) ) = ( 1st ` ( 1st ` M ) ) )
+c3:c2:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 1st ` ( 1st ` m ) ) ) = ( 1st ` ( 1st ` ( 1st ` M ) ) ) )
+c4:c3:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) = ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) )
+c5:s1:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` m ) = ( 1st ` M ) )
+c6:c5:fveq2d |- ( ( m = M /\ n = N ) -> ( 2nd ` ( 1st ` m ) ) = ( 2nd ` ( 1st ` M ) ) )
+c7:c6:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 2nd ` ( 1st ` m ) ) ) = ( 1st ` ( 2nd ` ( 1st ` M ) ) ) )
+c8:c4,c7:fveq12d |- ( ( m = M /\ n = N ) -> ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) = ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) )
+c9::wrdeq |- ( ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) = ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) -> Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) = Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) )
+c10:c8,c9:syl |- ( ( m = M /\ n = N ) -> Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) = Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) )
+c11:c10:eleq2d |- ( ( m = M /\ n = N ) -> ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) <-> a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) ) )
+c12:s1:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` m ) = ( 1st ` M ) )
+c13:c12:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 1st ` m ) ) = ( 1st ` ( 1st ` M ) ) )
+c14:c13:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 1st ` ( 1st ` m ) ) ) = ( 1st ` ( 1st ` ( 1st ` M ) ) ) )
+c15:c14:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) = ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) )
+c16:s1:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` m ) = ( 1st ` M ) )
+c17:c16:fveq2d |- ( ( m = M /\ n = N ) -> ( 2nd ` ( 1st ` m ) ) = ( 2nd ` ( 1st ` M ) ) )
+c18:c17:fveq2d |- ( ( m = M /\ n = N ) -> ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) )
+c19:c15,c18:fveq12d |- ( ( m = M /\ n = N ) -> ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) = ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) )
+c20::wrdeq |- ( ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) = ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) -> Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) = Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) )
+c21:c19,c20:syl |- ( ( m = M /\ n = N ) -> Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) = Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) )
+c22::djueq1 |- ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) = Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) -> ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) |_| 1o ) = ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) )
+c23:c21,c22:syl |- ( ( m = M /\ n = N ) -> ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) |_| 1o ) = ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) )
+c24:c23:eleq2d |- ( ( m = M /\ n = N ) -> ( b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) |_| 1o ) <-> b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) )
+c25:c11,c24:anbi12d |- ( ( m = M /\ n = N ) -> ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) |_| 1o ) ) <-> ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) ) )
+c26:s1:oveq1d |- ( ( m = M /\ n = N ) -> ( m TM2init a ) = ( M TM2init a ) )
+c27:s1:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` m ) = ( 1st ` M ) )
+c28:c27:fveq2d |- ( ( m = M /\ n = N ) -> ( 1st ` ( 1st ` m ) ) = ( 1st ` ( 1st ` M ) ) )
+c29:s1:fveq2d |- ( ( m = M /\ n = N ) -> ( 2nd ` m ) = ( 2nd ` M ) )
+c30:c29:fveq2d |- ( ( m = M /\ n = N ) -> ( 2nd ` ( 2nd ` m ) ) = ( 2nd ` ( 2nd ` M ) ) )
+c31:c28,c30:oveq12d |- ( ( m = M /\ n = N ) -> ( ( 1st ` ( 1st ` m ) ) TM2step ( 2nd ` ( 2nd ` m ) ) ) = ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) )
+c32:c31,s2:oveq12d |- ( ( m = M /\ n = N ) -> ( ( ( 1st ` ( 1st ` m ) ) TM2step ( 2nd ` ( 2nd ` m ) ) ) EvalsToInTime n ) = ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) )
+c33:s1:oveq1d |- ( ( m = M /\ n = N ) -> ( m TM2halt ( 2nd ` b ) ) = ( M TM2halt ( 2nd ` b ) ) )
+c34:c33:fveq2d |- ( ( m = M /\ n = N ) -> ( inl ` ( m TM2halt ( 2nd ` b ) ) ) = ( inl ` ( M TM2halt ( 2nd ` b ) ) ) )
+c35:c34:ifeq2d |- ( ( m = M /\ n = N ) -> if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( m TM2halt ( 2nd ` b ) ) ) ) = if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) )
+c36:c26,c32,c35:breq123d |- ( ( m = M /\ n = N ) -> ( ( m TM2init a ) ( ( ( 1st ` ( 1st ` m ) ) TM2step ( 2nd ` ( 2nd ` m ) ) ) EvalsToInTime n ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( m TM2halt ( 2nd ` b ) ) ) ) <-> ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) )
+c37:c25,c36:anbi12d |- ( ( m = M /\ n = N ) -> ( ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) |_| 1o ) ) /\ ( m TM2init a ) ( ( ( 1st ` ( 1st ` m ) ) TM2step ( 2nd ` ( 2nd ` m ) ) ) EvalsToInTime n ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( m TM2halt ( 2nd ` b ) ) ) ) ) <-> ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) ) )
+c38:c37:opabbidv |- ( ( m = M /\ n = N ) -> { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) |_| 1o ) ) /\ ( m TM2init a ) ( ( ( 1st ` ( 1st ` m ) ) TM2step ( 2nd ` ( 2nd ` m ) ) ) EvalsToInTime n ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( m TM2halt ( 2nd ` b ) ) ) ) ) } = { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) } )
+s3::df-tm2outt |- TM2OutputsInTime = ( m e. _V , n e. NN0 |-> { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` m ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) ) |_| 1o ) ) /\ ( m TM2init a ) ( ( ( 1st ` ( 1st ` m ) ) TM2step ( 2nd ` ( 2nd ` m ) ) ) EvalsToInTime n ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( m TM2halt ( 2nd ` b ) ) ) ) ) } )
+s4:c38,s3:ovmpoga |- ( ( M e. _V /\ N e. NN0 /\ { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) } e. _V ) -> ( M TM2OutputsInTime N ) = { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) } )
+s5::opabssxp |- { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) } C_ ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) X. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) )
+s6::fvex |- ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) e. _V
+i7::wrdexg
+s8:s6,i7:ax-mp |- Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) e. _V
+s9::fvex |- ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) e. _V
+i10::wrdexg
+s11:s9,i10:ax-mp |- Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) e. _V
+s12::1oex |- 1o e. _V
+i13::djuex
+s14:s11,s12,i13:mp2an |- ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) e. _V
+i15::xpexg
+s16:s8,s14,i15:mp2an |- ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) X. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) e. _V
+i17::ssexg
+s18:s5,s16,i17:mp2an |- { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) } e. _V
+s19::elex |- ( M e. V -> M e. _V )
+s20:s19:adantr |- ( ( M e. V /\ N e. NN0 ) -> M e. _V )
+s21::simpr |- ( ( M e. V /\ N e. NN0 ) -> N e. NN0 )
+s22:s18:a1i |- ( ( M e. V /\ N e. NN0 ) -> { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) } e. _V )
+qed:s20,s21,s22,s4:syl3anc |- ( ( M e. V /\ N e. NN0 ) -> ( M TM2OutputsInTime N ) = { <. a , b >. | ( ( a e. Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 1st ` ( 2nd ` ( 1st ` M ) ) ) ) /\ b e. ( Word ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) ` ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) |_| 1o ) ) /\ ( M TM2init a ) ( ( ( 1st ` ( 1st ` M ) ) TM2step ( 2nd ` ( 2nd ` M ) ) ) EvalsToInTime N ) if ( b = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( M TM2halt ( 2nd ` b ) ) ) ) ) } )
+$)

@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=prmprodndvds  LOC_AFTER=?
+
+* A prime outside Q does not divide the product over Q.
+
+s1::simp1 |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Q e. ( ~P Prime i^i Fin ) )
+s2::simp2 |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> P e. Prime )
+s3::simp3 |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> -. P e. Q )
+i4::elfpw
+s5:s1,i4:sylib |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s6:s5:simpld |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Q C_ Prime )
+s7:s5:simprd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Q e. Fin )
+s8::prmssnn |- Prime C_ NN
+s9::nnssnn0 |- NN C_ NN0
+s10:s8,s9:sstri |- Prime C_ NN0
+s11:s10:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Prime C_ NN0 )
+s12:s6,s11:sstrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Q C_ NN0 )
+s13:s12,s7:jca |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i14::elfpw
+s15:s13,i14:sylibr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Q e. ( ~P NN0 i^i Fin ) )
+s16::nnssz |- NN C_ ZZ
+s17:s8,s16:sstri |- Prime C_ ZZ
+s18:s17:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Prime C_ ZZ )
+s19:s6,s18:sstrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> Q C_ ZZ )
+i20::prmprodset
+s21:s1,i20:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> { p e. Prime | p || ( Lmod ` Q ) } = Q )
+i22::lmodqval
+s23:s15,i22:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> ( Lmod ` Q ) = prod_ q e. Q q )
+i24::rabdvdseq
+s25:s23,i24:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> { p e. Prime | p || ( Lmod ` Q ) } = { p e. Prime | p || prod_ q e. Q q } )
+s26:s25:eqcomd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> { p e. Prime | p || prod_ q e. Q q } = { p e. Prime | p || ( Lmod ` Q ) } )
+s27:s26,s21:eqtrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> { p e. Prime | p || prod_ q e. Q q } = Q )
+s28::id |- ( p = P -> p = P )
+c1:s28:breq1d |- ( p = P -> ( p || prod_ q e. Q q <-> P || prod_ q e. Q q ) )
+s29:c1:elrab |- ( P e. { p e. Prime | p || prod_ q e. Q q } <-> ( P e. Prime /\ P || prod_ q e. Q q ) )
+s30:s2:adantr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) /\ P || prod_ q e. Q q ) -> P e. Prime )
+s31::simpr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) /\ P || prod_ q e. Q q ) -> P || prod_ q e. Q q )
+s32:s30,s31:jca |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) /\ P || prod_ q e. Q q ) -> ( P e. Prime /\ P || prod_ q e. Q q ) )
+s33:s29:a1i |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) /\ P || prod_ q e. Q q ) -> ( P e. { p e. Prime | p || prod_ q e. Q q } <-> ( P e. Prime /\ P || prod_ q e. Q q ) ) )
+s34:s32,s33:mpbird |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) /\ P || prod_ q e. Q q ) -> P e. { p e. Prime | p || prod_ q e. Q q } )
+s35:s27:adantr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) /\ P || prod_ q e. Q q ) -> { p e. Prime | p || prod_ q e. Q q } = Q )
+s36:s34,s35:eleqtrd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) /\ P || prod_ q e. Q q ) -> P e. Q )
+qed:s36,s3:mtand |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Prime /\ -. P e. Q ) -> -. P || prod_ q e. Q q )
+$)

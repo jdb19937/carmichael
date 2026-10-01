@@ -1,0 +1,60 @@
+$( <MM> <PROOF_ASST> THEOREM=z5prin  LOC_AFTER=?
+
+* The principal character mod N as a function on NN, n |-> if ( ( n , N ) = 1 , 1 , 0 ) (Lean (1 : DirichletCharacter CC N), MulChar.one_apply): complex, of absolute value at most 1, and 1 at the primes coprime to N.
+
+s1::1cnd |- ( ( N e. NN /\ n e. NN ) -> 1 e. CC )
+s2::0cnd |- ( ( N e. NN /\ n e. NN ) -> 0 e. CC )
+s3:s1,s2:ifcld |- ( ( N e. NN /\ n e. NN ) -> if ( ( n gcd N ) = 1 , 1 , 0 ) e. CC )
+s4:s3:fmpttd |- ( N e. NN -> ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) : NN --> CC )
+s5::simpr |- ( ( N e. NN /\ j e. NN ) -> j e. NN )
+s6::1ex |- 1 e. _V
+s7:s6:a1i |- ( ( N e. NN /\ j e. NN ) -> 1 e. _V )
+s8::c0ex |- 0 e. _V
+s9:s8:a1i |- ( ( N e. NN /\ j e. NN ) -> 0 e. _V )
+s10:s7,s9:ifexd |- ( ( N e. NN /\ j e. NN ) -> if ( ( j gcd N ) = 1 , 1 , 0 ) e. _V )
+s11::id |- ( n = j -> n = j )
+c1:s11:oveq1d |- ( n = j -> ( n gcd N ) = ( j gcd N ) )
+c2:c1:eqeq1d |- ( n = j -> ( ( n gcd N ) = 1 <-> ( j gcd N ) = 1 ) )
+c3:c2:ifbid |- ( n = j -> if ( ( n gcd N ) = 1 , 1 , 0 ) = if ( ( j gcd N ) = 1 , 1 , 0 ) )
+s12::eqid |- ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) = ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) )
+s13:c3,s12:fvmptg |- ( ( j e. NN /\ if ( ( j gcd N ) = 1 , 1 , 0 ) e. _V ) -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` j ) = if ( ( j gcd N ) = 1 , 1 , 0 ) )
+s14:s5,s10,s13:syl2anc |- ( ( N e. NN /\ j e. NN ) -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` j ) = if ( ( j gcd N ) = 1 , 1 , 0 ) )
+s15::abs1 |- ( abs ` 1 ) = 1
+s16::1le1 |- 1 <_ 1
+s17:s15,s16:eqbrtri |- ( abs ` 1 ) <_ 1
+s18:s17:a1i |- ( ( ( N e. NN /\ j e. NN ) /\ ( j gcd N ) = 1 ) -> ( abs ` 1 ) <_ 1 )
+s19::abs0 |- ( abs ` 0 ) = 0
+s20::0le1 |- 0 <_ 1
+s21:s19,s20:eqbrtri |- ( abs ` 0 ) <_ 1
+s22:s21:a1i |- ( ( ( N e. NN /\ j e. NN ) /\ -. ( j gcd N ) = 1 ) -> ( abs ` 0 ) <_ 1 )
+s23::fveq2 |- ( 1 = if ( ( j gcd N ) = 1 , 1 , 0 ) -> ( abs ` 1 ) = ( abs ` if ( ( j gcd N ) = 1 , 1 , 0 ) ) )
+s24:s23:breq1d |- ( 1 = if ( ( j gcd N ) = 1 , 1 , 0 ) -> ( ( abs ` 1 ) <_ 1 <-> ( abs ` if ( ( j gcd N ) = 1 , 1 , 0 ) ) <_ 1 ) )
+s25::fveq2 |- ( 0 = if ( ( j gcd N ) = 1 , 1 , 0 ) -> ( abs ` 0 ) = ( abs ` if ( ( j gcd N ) = 1 , 1 , 0 ) ) )
+s26:s25:breq1d |- ( 0 = if ( ( j gcd N ) = 1 , 1 , 0 ) -> ( ( abs ` 0 ) <_ 1 <-> ( abs ` if ( ( j gcd N ) = 1 , 1 , 0 ) ) <_ 1 ) )
+s27:s24,s26,s18,s22:ifbothda |- ( ( N e. NN /\ j e. NN ) -> ( abs ` if ( ( j gcd N ) = 1 , 1 , 0 ) ) <_ 1 )
+s28:s14:fveq2d |- ( ( N e. NN /\ j e. NN ) -> ( abs ` ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` j ) ) = ( abs ` if ( ( j gcd N ) = 1 , 1 , 0 ) ) )
+s29:s28,s27:eqbrtrd |- ( ( N e. NN /\ j e. NN ) -> ( abs ` ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` j ) ) <_ 1 )
+s30:s29:ralrimiva |- ( N e. NN -> A. j e. NN ( abs ` ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` j ) ) <_ 1 )
+s31::simplr |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> c e. Prime )
+i32::prmnn
+s33:s31,i32:syl |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> c e. NN )
+s34::1ex |- 1 e. _V
+s35:s34:a1i |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> 1 e. _V )
+s36::c0ex |- 0 e. _V
+s37:s36:a1i |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> 0 e. _V )
+s38:s35,s37:ifexd |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> if ( ( c gcd N ) = 1 , 1 , 0 ) e. _V )
+s39::id |- ( n = c -> n = c )
+c4:s39:oveq1d |- ( n = c -> ( n gcd N ) = ( c gcd N ) )
+c5:c4:eqeq1d |- ( n = c -> ( ( n gcd N ) = 1 <-> ( c gcd N ) = 1 ) )
+c6:c5:ifbid |- ( n = c -> if ( ( n gcd N ) = 1 , 1 , 0 ) = if ( ( c gcd N ) = 1 , 1 , 0 ) )
+s40::eqid |- ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) = ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) )
+s41:c6,s40:fvmptg |- ( ( c e. NN /\ if ( ( c gcd N ) = 1 , 1 , 0 ) e. _V ) -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` c ) = if ( ( c gcd N ) = 1 , 1 , 0 ) )
+s42:s33,s38,s41:syl2anc |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` c ) = if ( ( c gcd N ) = 1 , 1 , 0 ) )
+s43::simpr |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> ( c gcd N ) = 1 )
+s44:s43:iftrued |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> if ( ( c gcd N ) = 1 , 1 , 0 ) = 1 )
+s45:s42,s44:eqtrd |- ( ( ( N e. NN /\ c e. Prime ) /\ ( c gcd N ) = 1 ) -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` c ) = 1 )
+s46:s45:ex |- ( ( N e. NN /\ c e. Prime ) -> ( ( c gcd N ) = 1 -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` c ) = 1 ) )
+s47:s46:ralrimiva |- ( N e. NN -> A. c e. Prime ( ( c gcd N ) = 1 -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` c ) = 1 ) )
+s48:s4,s30:jca |- ( N e. NN -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) : NN --> CC /\ A. j e. NN ( abs ` ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` j ) ) <_ 1 ) )
+qed:s48,s47:jca |- ( N e. NN -> ( ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) : NN --> CC /\ A. j e. NN ( abs ` ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` j ) ) <_ 1 ) /\ A. c e. Prime ( ( c gcd N ) = 1 -> ( ( n e. NN |-> if ( ( n gcd N ) = 1 , 1 , 0 ) ) ` c ) = 1 ) ) )
+$)

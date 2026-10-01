@@ -1,0 +1,61 @@
+$( <MM> <PROOF_ASST> THEOREM=zrisre  LOC_AFTER=?
+
+* The real part of a convergent complex series is the sum of the real parts, which converges ( ~ climre , ~ fsumre , ~ isumclim ).
+
+s1::id |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> F : NN --> CC )
+s4::id |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) )
+i5::simpr
+s6:s4,i5:syl |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , F ) e. dom ~~> )
+s7::simpr |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> k e. NN )
+s8:s3:adantr |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> F : NN --> CC )
+s9:s8,s7:ffvelcdmd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> ( F ` k ) e. CC )
+s10::nnuz |- NN = ( ZZ>= ` 1 )
+s11::1zzd |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> 1 e. ZZ )
+s12::eqidd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> ( F ` k ) = ( F ` k ) )
+s13:s10,s11,s12,s9,s6:isumclim2 |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , F ) ~~> sum_ k e. NN ( F ` k ) )
+s14::seqex |- seq 1 ( + , ( Re o. F ) ) e. _V
+s15:s14:a1i |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , ( Re o. F ) ) e. _V )
+s16::simpr |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> n e. NN )
+s17::simpr |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> j e. ( 1 ... n ) )
+i18::elfznn
+s19:s17,i18:syl |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> j e. NN )
+s20:s3:adantr |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> F : NN --> CC )
+s21:s20:adantr |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> F : NN --> CC )
+s22:s21,s19:ffvelcdmd |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> ( F ` j ) e. CC )
+s23::eqidd |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> ( F ` j ) = ( F ` j ) )
+i24::elnnuz
+s25:s16,i24:sylib |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> n e. ( ZZ>= ` 1 ) )
+s26:s23,s25,s22:fsumser |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> sum_ j e. ( 1 ... n ) ( F ` j ) = ( seq 1 ( + , F ) ` n ) )
+s27:s3:adantr |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> F : NN --> CC )
+s28:s27:adantr |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> F : NN --> CC )
+i29::fvco3
+s30:s28,s19,i29:syl2anc |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> ( ( Re o. F ) ` j ) = ( Re ` ( F ` j ) ) )
+s31:s22:recld |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> ( Re ` ( F ` j ) ) e. RR )
+s32:s31:recnd |- ( ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) /\ j e. ( 1 ... n ) ) -> ( Re ` ( F ` j ) ) e. CC )
+s33:s30,s25,s32:fsumser |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> sum_ j e. ( 1 ... n ) ( Re ` ( F ` j ) ) = ( seq 1 ( + , ( Re o. F ) ) ` n ) )
+s34::fzfid |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( 1 ... n ) e. Fin )
+s35:s34,s22:fsumre |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( Re ` sum_ j e. ( 1 ... n ) ( F ` j ) ) = sum_ j e. ( 1 ... n ) ( Re ` ( F ` j ) ) )
+s36:s26:fveq2d |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( Re ` sum_ j e. ( 1 ... n ) ( F ` j ) ) = ( Re ` ( seq 1 ( + , F ) ` n ) ) )
+s37:s33:eqcomd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( seq 1 ( + , ( Re o. F ) ) ` n ) = sum_ j e. ( 1 ... n ) ( Re ` ( F ` j ) ) )
+s38:s35:eqcomd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> sum_ j e. ( 1 ... n ) ( Re ` ( F ` j ) ) = ( Re ` sum_ j e. ( 1 ... n ) ( F ` j ) ) )
+s39:s38,s36:eqtrd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> sum_ j e. ( 1 ... n ) ( Re ` ( F ` j ) ) = ( Re ` ( seq 1 ( + , F ) ` n ) ) )
+s40:s37,s39:eqtrd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( seq 1 ( + , ( Re o. F ) ) ` n ) = ( Re ` ( seq 1 ( + , F ) ` n ) ) )
+s41::fzfid |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( 1 ... n ) e. Fin )
+s42:s41,s22:fsumcl |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> sum_ j e. ( 1 ... n ) ( F ` j ) e. CC )
+s43:s26,s42:eqeltrrd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ n e. NN ) -> ( seq 1 ( + , F ) ` n ) e. CC )
+s44:s10,s13,s15,s11,s43,s40:climre |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , ( Re o. F ) ) ~~> ( Re ` sum_ k e. NN ( F ` k ) ) )
+s45::climrel |- Rel ~~>
+s46:s45:releldmi |- ( seq 1 ( + , ( Re o. F ) ) ~~> ( Re ` sum_ k e. NN ( F ` k ) ) -> seq 1 ( + , ( Re o. F ) ) e. dom ~~> )
+s47:s44,s46:syl |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> seq 1 ( + , ( Re o. F ) ) e. dom ~~> )
+s48:s3:adantr |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> F : NN --> CC )
+i49::fvco3
+s50:s48,s7,i49:syl2anc |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> ( ( Re o. F ) ` k ) = ( Re ` ( F ` k ) ) )
+s51:s9:recld |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> ( Re ` ( F ` k ) ) e. RR )
+s52:s51:recnd |- ( ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) /\ k e. NN ) -> ( Re ` ( F ` k ) ) e. CC )
+s53:s10,s11,s50,s52,s44:isumclim |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> sum_ k e. NN ( Re ` ( F ` k ) ) = ( Re ` sum_ k e. NN ( F ` k ) ) )
+s54:s53:eqcomd |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> ( Re ` sum_ k e. NN ( F ` k ) ) = sum_ k e. NN ( Re ` ( F ` k ) ) )
+s55:s54,s47:jca |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> ( ( Re ` sum_ k e. NN ( F ` k ) ) = sum_ k e. NN ( Re ` ( F ` k ) ) /\ seq 1 ( + , ( Re o. F ) ) e. dom ~~> ) )
+qed:s55:idi |- ( ( F : NN --> CC /\ seq 1 ( + , F ) e. dom ~~> ) -> ( ( Re ` sum_ k e. NN ( F ` k ) ) = sum_ k e. NN ( Re ` ( F ` k ) ) /\ seq 1 ( + , ( Re o. F ) ) e. dom ~~> ) )
+$)

@@ -1,0 +1,83 @@
+$( <MM> <PROOF_ASST> THEOREM=zdmpsum1  LOC_AFTER=?
+
+* The prime reciprocal sum is dominated by the 1 / log-weighted von Mangoldt sum over ( 2 ... N ).
+
+s1::simpr |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> p e. ( ( 1 ... N ) i^i Prime ) )
+i2::elinel2
+s3:s1,i2:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> p e. Prime )
+i4::prmnn
+s5:s3,i4:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> p e. NN )
+s6:s5:nnred |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> p e. RR )
+s7:s5:nncnd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> p e. CC )
+s8:s5:nnne0d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> p =/= 0 )
+i9::prmgt1
+s10:s3,i9:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> 1 < p )
+i11::rplogcl
+s12:s6,s10,i11:syl2anc |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( log ` p ) e. RR+ )
+s13:s12:rpreccld |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( 1 / ( log ` p ) ) e. RR+ )
+s14:s13:rpred |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( 1 / ( log ` p ) ) e. RR )
+s15:s13:rpcnd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( 1 / ( log ` p ) ) e. CC )
+s16:s12:rpcnd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( log ` p ) e. CC )
+s17:s12:rpne0d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( log ` p ) =/= 0 )
+i18::vmaprm
+s19:s3,i18:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( Lam ` p ) = ( log ` p ) )
+s20:s19:oveq1d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( Lam ` p ) / p ) = ( ( log ` p ) / p ) )
+s21:s20:oveq2d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) = ( ( 1 / ( log ` p ) ) x. ( ( log ` p ) / p ) ) )
+s22::1cnd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> 1 e. CC )
+s23:s22,s16,s16,s7,s17,s8:divmuldivd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( 1 / ( log ` p ) ) x. ( ( log ` p ) / p ) ) = ( ( 1 x. ( log ` p ) ) / ( ( log ` p ) x. p ) ) )
+s24:s16:mullidd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( 1 x. ( log ` p ) ) = ( log ` p ) )
+s25:s16:mulridd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( log ` p ) x. 1 ) = ( log ` p ) )
+s26:s24,s25:eqtr4d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( 1 x. ( log ` p ) ) = ( ( log ` p ) x. 1 ) )
+s27:s26:oveq1d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( 1 x. ( log ` p ) ) / ( ( log ` p ) x. p ) ) = ( ( ( log ` p ) x. 1 ) / ( ( log ` p ) x. p ) ) )
+s28::1cnd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> 1 e. CC )
+s29:s28,s7,s8,s16,s17:divcan5d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( ( log ` p ) x. 1 ) / ( ( log ` p ) x. p ) ) = ( 1 / p ) )
+s30:s21,s23:eqtrd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) = ( ( 1 x. ( log ` p ) ) / ( ( log ` p ) x. p ) ) )
+s31:s27,s29:eqtrd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( 1 x. ( log ` p ) ) / ( ( log ` p ) x. p ) ) = ( 1 / p ) )
+s32:s30,s31:eqtrd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) = ( 1 / p ) )
+s33:s32:eqcomd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( ( 1 ... N ) i^i Prime ) ) -> ( 1 / p ) = ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) )
+s34:s33:sumeq2dv |- ( N e. ( ZZ>= ` 2 ) -> sum_ p e. ( ( 1 ... N ) i^i Prime ) ( 1 / p ) = sum_ p e. ( ( 1 ... N ) i^i Prime ) ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) )
+s35::simpr |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. ( 2 ... N ) )
+i36::elfzuz
+s37:s35,i36:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. ( ZZ>= ` 2 ) )
+i38::eluz2nn
+s39:s37,i38:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. NN )
+s40:s39:nnzd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. ZZ )
+s41:s39:nnred |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. RR )
+s42:s39:nncnd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. CC )
+i43::eluz2gt1
+s44:s37,i43:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> 1 < p )
+i45::eluzle
+s46:s37,i45:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> 2 <_ p )
+i47::rplogcl
+s48:s41,s44,i47:syl2anc |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( log ` p ) e. RR+ )
+s49:s48:rpreccld |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( 1 / ( log ` p ) ) e. RR+ )
+s50:s49:rpred |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( 1 / ( log ` p ) ) e. RR )
+s51:s49:rpcnd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( 1 / ( log ` p ) ) e. CC )
+i52::vmacl
+s53:s39,i52:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( Lam ` p ) e. RR )
+s54:s39:nnrpd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. RR+ )
+s55:s53,s54:rerpdivcld |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( ( Lam ` p ) / p ) e. RR )
+i56::vmacl
+s57:s39,i56:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( Lam ` p ) e. RR )
+s58:s39:nnrpd |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> p e. RR+ )
+i59::vmage0
+s60:s39,i59:syl |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> 0 <_ ( Lam ` p ) )
+s61:s57,s58,s60:divge0d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> 0 <_ ( ( Lam ` p ) / p ) )
+s62:s50,s55:remulcld |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) e. RR )
+s63:s49:rpge0d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> 0 <_ ( 1 / ( log ` p ) ) )
+s64:s50,s55,s63,s61:mulge0d |- ( ( N e. ( ZZ>= ` 2 ) /\ p e. ( 2 ... N ) ) -> 0 <_ ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) )
+s65::fzfid |- ( N e. ( ZZ>= ` 2 ) -> ( 2 ... N ) e. Fin )
+s66::zdmprss |- ( ( 1 ... N ) i^i Prime ) C_ ( 2 ... N )
+s67:s66:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( ( 1 ... N ) i^i Prime ) C_ ( 2 ... N ) )
+s68:s65,s62,s64,s67:fsumless |- ( N e. ( ZZ>= ` 2 ) -> sum_ p e. ( ( 1 ... N ) i^i Prime ) ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) <_ sum_ p e. ( 2 ... N ) ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) )
+s69::id |- ( p = i -> p = i )
+c1:s69:fveq2d |- ( p = i -> ( log ` p ) = ( log ` i ) )
+c2:c1:oveq2d |- ( p = i -> ( 1 / ( log ` p ) ) = ( 1 / ( log ` i ) ) )
+c3:s69:fveq2d |- ( p = i -> ( Lam ` p ) = ( Lam ` i ) )
+c4:c3,s69:oveq12d |- ( p = i -> ( ( Lam ` p ) / p ) = ( ( Lam ` i ) / i ) )
+c5:c2,c4:oveq12d |- ( p = i -> ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) = ( ( 1 / ( log ` i ) ) x. ( ( Lam ` i ) / i ) ) )
+s70:c5:cbvsumv |- sum_ p e. ( 2 ... N ) ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) = sum_ i e. ( 2 ... N ) ( ( 1 / ( log ` i ) ) x. ( ( Lam ` i ) / i ) )
+s71:s70:a1i |- ( N e. ( ZZ>= ` 2 ) -> sum_ p e. ( 2 ... N ) ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) = sum_ i e. ( 2 ... N ) ( ( 1 / ( log ` i ) ) x. ( ( Lam ` i ) / i ) ) )
+s72:s68,s71:breqtrd |- ( N e. ( ZZ>= ` 2 ) -> sum_ p e. ( ( 1 ... N ) i^i Prime ) ( ( 1 / ( log ` p ) ) x. ( ( Lam ` p ) / p ) ) <_ sum_ i e. ( 2 ... N ) ( ( 1 / ( log ` i ) ) x. ( ( Lam ` i ) / i ) ) )
+qed:s34,s72:eqbrtrd |- ( N e. ( ZZ>= ` 2 ) -> sum_ p e. ( ( 1 ... N ) i^i Prime ) ( 1 / p ) <_ sum_ i e. ( 2 ... N ) ( ( 1 / ( log ` i ) ) x. ( ( Lam ` i ) / i ) ) )
+$)

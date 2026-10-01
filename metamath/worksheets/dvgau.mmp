@@ -1,0 +1,54 @@
+$( <MM> <PROOF_ASST> THEOREM=dvgau  LOC_AFTER=?
+
+* The derivative of the Gaussian normaliser on the whole plane.
+
+s1::simpl |- ( ( E e. CC /\ Q e. CC ) -> E e. CC )
+s2::simpr |- ( ( E e. CC /\ Q e. CC ) -> Q e. CC )
+s3::cnelprrecn |- CC e. { RR , CC }
+s4:s3:a1i |- ( ( E e. CC /\ Q e. CC ) -> CC e. { RR , CC } )
+s5::simpr |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> z e. CC )
+s6::2nn |- 2 e. NN
+s7:s6:a1i |- ( ( E e. CC /\ Q e. CC ) -> 2 e. NN )
+i8::dvexp
+s9:s7,i8:syl |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( z e. CC |-> ( z ^ 2 ) ) ) = ( z e. CC |-> ( 2 x. ( z ^ ( 2 - 1 ) ) ) ) )
+s10::2m1e1 |- ( 2 - 1 ) = 1
+s11:s10:a1i |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( 2 - 1 ) = 1 )
+s12:s11:oveq2d |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( z ^ ( 2 - 1 ) ) = ( z ^ 1 ) )
+i13::exp1
+s14:s5,i13:syl |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( z ^ 1 ) = z )
+s15:s12,s14:eqtrd |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( z ^ ( 2 - 1 ) ) = z )
+s16:s15:oveq2d |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( 2 x. ( z ^ ( 2 - 1 ) ) ) = ( 2 x. z ) )
+s17:s16:mpteq2dva |- ( ( E e. CC /\ Q e. CC ) -> ( z e. CC |-> ( 2 x. ( z ^ ( 2 - 1 ) ) ) ) = ( z e. CC |-> ( 2 x. z ) ) )
+s18:s9,s17:eqtrd |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( z e. CC |-> ( z ^ 2 ) ) ) = ( z e. CC |-> ( 2 x. z ) ) )
+s19:s5:sqcld |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( z ^ 2 ) e. CC )
+s20::2cnd |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> 2 e. CC )
+s21:s20,s5:mulcld |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( 2 x. z ) e. CC )
+s22:s2:adantr |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> Q e. CC )
+s23::0cnd |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> 0 e. CC )
+s24:s23:idi |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> 0 e. CC )
+i25::dvmptc
+s26:s4,s2,i25:syl2anc |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( z e. CC |-> Q ) ) = ( z e. CC |-> 0 ) )
+s27:s4,s19,s21,s18,s22,s24,s26:dvmptsub |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( z e. CC |-> ( ( z ^ 2 ) - Q ) ) ) = ( z e. CC |-> ( ( 2 x. z ) - 0 ) ) )
+s28:s21:subid1d |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( ( 2 x. z ) - 0 ) = ( 2 x. z ) )
+s29:s28:mpteq2dva |- ( ( E e. CC /\ Q e. CC ) -> ( z e. CC |-> ( ( 2 x. z ) - 0 ) ) = ( z e. CC |-> ( 2 x. z ) ) )
+s30:s27,s29:eqtrd |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( z e. CC |-> ( ( z ^ 2 ) - Q ) ) ) = ( z e. CC |-> ( 2 x. z ) ) )
+s31:s19,s22:subcld |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( ( z ^ 2 ) - Q ) e. CC )
+s32:s4,s31,s21,s30,s1:dvmptcmul |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( z e. CC |-> ( E x. ( ( z ^ 2 ) - Q ) ) ) ) = ( z e. CC |-> ( E x. ( 2 x. z ) ) ) )
+s33:s1:adantr |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> E e. CC )
+s34:s33,s31:mulcld |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( E x. ( ( z ^ 2 ) - Q ) ) e. CC )
+s35:s33,s21:mulcld |- ( ( ( E e. CC /\ Q e. CC ) /\ z e. CC ) -> ( E x. ( 2 x. z ) ) e. CC )
+s36::simpr |- ( ( ( E e. CC /\ Q e. CC ) /\ y e. CC ) -> y e. CC )
+i37::efcl
+s38:s36,i37:syl |- ( ( ( E e. CC /\ Q e. CC ) /\ y e. CC ) -> ( exp ` y ) e. CC )
+s39::eff |- exp : CC --> CC
+s40:s39:a1i |- ( ( E e. CC /\ Q e. CC ) -> exp : CC --> CC )
+s41:s40:feqmptd |- ( ( E e. CC /\ Q e. CC ) -> exp = ( y e. CC |-> ( exp ` y ) ) )
+s42::dvef |- ( CC _D exp ) = exp
+s43:s42:a1i |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D exp ) = exp )
+s44:s41:oveq2d |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D exp ) = ( CC _D ( y e. CC |-> ( exp ` y ) ) ) )
+s45:s44:eqcomd |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = ( CC _D exp ) )
+s46:s45,s43:eqtrd |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = exp )
+s47:s46,s41:eqtrd |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = ( y e. CC |-> ( exp ` y ) ) )
+s48::fveq2 |- ( y = ( E x. ( ( z ^ 2 ) - Q ) ) -> ( exp ` y ) = ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) )
+qed:s4,s4,s34,s35,s38,s38,s32,s47,s48,s48:dvmptco |- ( ( E e. CC /\ Q e. CC ) -> ( CC _D ( z e. CC |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) = ( z e. CC |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) ) )
+$)

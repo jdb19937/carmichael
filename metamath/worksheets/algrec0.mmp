@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=algrec0  LOC_AFTER=?
+
+* The base of the recursion of ~ df-algrec : level ` 0 ` is the given base function.  Lean: the ` | _, 0 => ` clause of every recursion of Algorithm.lean is read off this.
+
+s1::simpl |- ( ( B e. _V /\ S e. _V ) -> B e. _V )
+s2::simpr |- ( ( B e. _V /\ S e. _V ) -> S e. _V )
+s3::simpl |- ( ( b = B /\ s = S ) -> b = B )
+s4::simpr |- ( ( b = B /\ s = S ) -> s = S )
+c1:s3:ifeq1d |- ( ( b = B /\ s = S ) -> if ( k = 0 , b , ( k - 1 ) ) = if ( k = 0 , B , ( k - 1 ) ) )
+c2:c1:mpteq2dv |- ( ( b = B /\ s = S ) -> ( k e. NN0 |-> if ( k = 0 , b , ( k - 1 ) ) ) = ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) )
+c3::eqidd |- ( ( b = B /\ s = S ) -> 0 = 0 )
+c4:c3,s4,c2:seqeq123d |- ( ( b = B /\ s = S ) -> seq 0 ( s , ( k e. NN0 |-> if ( k = 0 , b , ( k - 1 ) ) ) ) = seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) )
+s5::df-algrec |- AlgRec = ( b e. _V , s e. _V |-> seq 0 ( s , ( k e. NN0 |-> if ( k = 0 , b , ( k - 1 ) ) ) ) )
+s6::seqex |- seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) e. _V
+s7:s6:a1i |- ( ( B e. _V /\ S e. _V ) -> seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) e. _V )
+s8:c4,s5:ovmpoga |- ( ( B e. _V /\ S e. _V /\ seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) e. _V ) -> ( B AlgRec S ) = seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) )
+s9:s1,s2,s7,s8:syl3anc |- ( ( B e. _V /\ S e. _V ) -> ( B AlgRec S ) = seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) )
+s10:s9:fveq1d |- ( ( B e. _V /\ S e. _V ) -> ( ( B AlgRec S ) ` 0 ) = ( seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) ` 0 ) )
+s11::0z |- 0 e. ZZ
+s12::seq1 |- ( 0 e. ZZ -> ( seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) ` 0 ) = ( ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ` 0 ) )
+s13:s11,s12:ax-mp |- ( seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) ` 0 ) = ( ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ` 0 )
+s14:s13:a1i |- ( ( B e. _V /\ S e. _V ) -> ( seq 0 ( S , ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ) ` 0 ) = ( ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ` 0 ) )
+s15::id |- ( k = 0 -> k = 0 )
+c5:s15:eqeq1d |- ( k = 0 -> ( k = 0 <-> 0 = 0 ) )
+c6:s15:oveq1d |- ( k = 0 -> ( k - 1 ) = ( 0 - 1 ) )
+c7:c5,c6:ifbieq2d |- ( k = 0 -> if ( k = 0 , B , ( k - 1 ) ) = if ( 0 = 0 , B , ( 0 - 1 ) ) )
+s16::eqid |- ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) = ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) )
+s17::0nn0 |- 0 e. NN0
+s18:s17:a1i |- ( ( B e. _V /\ S e. _V ) -> 0 e. NN0 )
+s19::ovex |- ( 0 - 1 ) e. _V
+s20:s19:a1i |- ( ( B e. _V /\ S e. _V ) -> ( 0 - 1 ) e. _V )
+s21:s1,s20:ifcld |- ( ( B e. _V /\ S e. _V ) -> if ( 0 = 0 , B , ( 0 - 1 ) ) e. _V )
+s22:c7,s16:fvmptg |- ( ( 0 e. NN0 /\ if ( 0 = 0 , B , ( 0 - 1 ) ) e. _V ) -> ( ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ` 0 ) = if ( 0 = 0 , B , ( 0 - 1 ) ) )
+s23:s18,s21,s22:syl2anc |- ( ( B e. _V /\ S e. _V ) -> ( ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ` 0 ) = if ( 0 = 0 , B , ( 0 - 1 ) ) )
+s24::eqid |- 0 = 0
+s25:s24:a1i |- ( ( B e. _V /\ S e. _V ) -> 0 = 0 )
+s26:s25:iftrued |- ( ( B e. _V /\ S e. _V ) -> if ( 0 = 0 , B , ( 0 - 1 ) ) = B )
+s27:s10,s14:eqtrd |- ( ( B e. _V /\ S e. _V ) -> ( ( B AlgRec S ) ` 0 ) = ( ( k e. NN0 |-> if ( k = 0 , B , ( k - 1 ) ) ) ` 0 ) )
+s28:s27,s23:eqtrd |- ( ( B e. _V /\ S e. _V ) -> ( ( B AlgRec S ) ` 0 ) = if ( 0 = 0 , B , ( 0 - 1 ) ) )
+qed:s28,s26:eqtrd |- ( ( B e. _V /\ S e. _V ) -> ( ( B AlgRec S ) ` 0 ) = B )
+$)

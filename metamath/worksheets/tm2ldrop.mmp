@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2ldrop  LOC_AFTER=?
+
+* Dropping ` J ` letters of a word: the ` J ` -th letter, then the rest.  Lean: ` List.drop_eq_getElem_cons ` .
+
+s1::simpl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> L e. Word V )
+s2::simpr |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ..^ ( # ` L ) ) )
+i3::elfzonn0
+s4:s2,i3:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. NN0 )
+i5::nn0fz0
+s6:s4,i5:sylib |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ... J ) )
+i7::fzp1elp1
+s8:s6,i7:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( J + 1 ) e. ( 0 ... ( J + 1 ) ) )
+i9::fzelp1
+s10:s6,i9:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ... ( J + 1 ) ) )
+i11::fzofzp1
+s12:s2,i11:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( J + 1 ) e. ( 0 ... ( # ` L ) ) )
+i13::lencl
+s14:s1,i13:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` L ) e. NN0 )
+i15::nn0fz0
+s16:s14,i15:sylib |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` L ) e. ( 0 ... ( # ` L ) ) )
+s17:s10,s12,s16:3jca |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( J e. ( 0 ... ( J + 1 ) ) /\ ( J + 1 ) e. ( 0 ... ( # ` L ) ) /\ ( # ` L ) e. ( 0 ... ( # ` L ) ) ) )
+i18::ccatswrd
+s19:s1,s17,i18:syl2anc |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L substr <. J , ( J + 1 ) >. ) ++ ( L substr <. ( J + 1 ) , ( # ` L ) >. ) ) = ( L substr <. J , ( # ` L ) >. ) )
+i20::swrds1
+s21:s1,s2,i20:syl2anc |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L substr <. J , ( J + 1 ) >. ) = <" ( L ` J ) "> )
+s22:s21:oveq1d |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L substr <. J , ( J + 1 ) >. ) ++ ( L substr <. ( J + 1 ) , ( # ` L ) >. ) ) = ( <" ( L ` J ) "> ++ ( L substr <. ( J + 1 ) , ( # ` L ) >. ) ) )
+qed:s19,s22:eqtr3d |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L substr <. J , ( # ` L ) >. ) = ( <" ( L ` J ) "> ++ ( L substr <. ( J + 1 ) , ( # ` L ) >. ) ) )
+$)

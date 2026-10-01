@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=tmctn0c  LOC_AFTER=?
+
+* The value of a bit word is zero exactly when its first bit is zero and the rest is zero (the step of the zero-scan fold, Lean ` zeroBits ` on a cons).
+
+s1::simpl |- ( ( B e. 2o /\ L e. Word 2o ) -> B e. 2o )
+s2::simpr |- ( ( B e. 2o /\ L e. Word 2o ) -> L e. Word 2o )
+i3::tonatcons
+s4:s1,s2,i3:syl2anc |- ( ( B e. 2o /\ L e. Word 2o ) -> ( toNat ` ( <" B "> ++ L ) ) = ( ( bToNat ` B ) + ( 2 x. ( toNat ` L ) ) ) )
+s5:s4:eqeq1d |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( toNat ` ( <" B "> ++ L ) ) = 0 <-> ( ( bToNat ` B ) + ( 2 x. ( toNat ` L ) ) ) = 0 ) )
+i6::bwbncl
+s7:s1,i6:syl |- ( ( B e. 2o /\ L e. Word 2o ) -> ( bToNat ` B ) e. NN0 )
+s8:s7:nn0red |- ( ( B e. 2o /\ L e. Word 2o ) -> ( bToNat ` B ) e. RR )
+s9:s7:nn0ge0d |- ( ( B e. 2o /\ L e. Word 2o ) -> 0 <_ ( bToNat ` B ) )
+i10::tonatcl
+s11:s2,i10:syl |- ( ( B e. 2o /\ L e. Word 2o ) -> ( toNat ` L ) e. NN0 )
+s12::2nn0 |- 2 e. NN0
+s13:s12:a1i |- ( ( B e. 2o /\ L e. Word 2o ) -> 2 e. NN0 )
+i14::nn0mulcl
+s15:s13,s11,i14:syl2anc |- ( ( B e. 2o /\ L e. Word 2o ) -> ( 2 x. ( toNat ` L ) ) e. NN0 )
+s16:s15:nn0red |- ( ( B e. 2o /\ L e. Word 2o ) -> ( 2 x. ( toNat ` L ) ) e. RR )
+s17:s15:nn0ge0d |- ( ( B e. 2o /\ L e. Word 2o ) -> 0 <_ ( 2 x. ( toNat ` L ) ) )
+s18:s8,s9:jca |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( bToNat ` B ) e. RR /\ 0 <_ ( bToNat ` B ) ) )
+s19:s16,s17:jca |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( 2 x. ( toNat ` L ) ) e. RR /\ 0 <_ ( 2 x. ( toNat ` L ) ) ) )
+i20::add20
+s21:s18,s19,i20:syl2anc |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( ( bToNat ` B ) + ( 2 x. ( toNat ` L ) ) ) = 0 <-> ( ( bToNat ` B ) = 0 /\ ( 2 x. ( toNat ` L ) ) = 0 ) ) )
+s22::2cn |- 2 e. CC
+s23:s22:a1i |- ( ( B e. 2o /\ L e. Word 2o ) -> 2 e. CC )
+s24:s11:nn0cnd |- ( ( B e. 2o /\ L e. Word 2o ) -> ( toNat ` L ) e. CC )
+i25::mul0or
+s26:s23,s24,i25:syl2anc |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( 2 x. ( toNat ` L ) ) = 0 <-> ( 2 = 0 \/ ( toNat ` L ) = 0 ) ) )
+s27::2ne0 |- 2 =/= 0
+s28::df-ne |- ( 2 =/= 0 <-> -. 2 = 0 )
+s29:s27,s28:mpbi |- -. 2 = 0
+s30:s29:biorfi |- ( ( toNat ` L ) = 0 <-> ( 2 = 0 \/ ( toNat ` L ) = 0 ) )
+s31:s30:a1i |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( toNat ` L ) = 0 <-> ( 2 = 0 \/ ( toNat ` L ) = 0 ) ) )
+s32:s26,s31:bitr4d |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( 2 x. ( toNat ` L ) ) = 0 <-> ( toNat ` L ) = 0 ) )
+i33::bwbneq0
+s34:s1,i33:syl |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( bToNat ` B ) = 0 <-> B = (/) ) )
+s35:s34,s32:anbi12d |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( ( bToNat ` B ) = 0 /\ ( 2 x. ( toNat ` L ) ) = 0 ) <-> ( B = (/) /\ ( toNat ` L ) = 0 ) ) )
+s36:s5,s21:bitrd |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( toNat ` ( <" B "> ++ L ) ) = 0 <-> ( ( bToNat ` B ) = 0 /\ ( 2 x. ( toNat ` L ) ) = 0 ) ) )
+qed:s36,s35:bitrd |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( toNat ` ( <" B "> ++ L ) ) = 0 <-> ( B = (/) /\ ( toNat ` L ) = 0 ) ) )
+$)

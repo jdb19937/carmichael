@@ -1,0 +1,82 @@
+$( <MM> <PROOF_ASST> THEOREM=holpowp  LOC_AFTER=?
+
+* The power of ( y - P ) is holomorphic on an open subset E of the plane.
+
+s1::simpll |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> E e. ( TopOpen ` CCfld ) )
+s2::simplr |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> E C_ CC )
+s3::simprl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> P e. CC )
+s4::simprr |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> N e. NN )
+s5:s4:nnnn0d |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> N e. NN0 )
+s6::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s7::cnrestid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s8:s7:eqcomi |- ( TopOpen ` CCfld ) = ( ( TopOpen ` CCfld ) |`t CC )
+s9:s6:cnfldtop |- ( TopOpen ` CCfld ) e. Top
+s10:s9:a1i |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( TopOpen ` CCfld ) e. Top )
+s11::unicntop |- CC = U. ( TopOpen ` CCfld )
+s12:s6:subcn |- - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s13:s12:a1i |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s14::ssid |- CC C_ CC
+s15:s14:a1i |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> CC C_ CC )
+i16::cncfmptid
+s17:s2,s15,i16:syl2anc |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( y e. E |-> y ) e. ( E -cn-> CC ) )
+s18::ssid |- CC C_ CC
+s19:s18:a1i |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> CC C_ CC )
+i20::cncfmptc
+s21:s3,s2,s19,i20:syl3anc |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( y e. E |-> P ) e. ( E -cn-> CC ) )
+s22:s6,s13,s17,s21:cncfmpt2f |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( y e. E |-> ( y - P ) ) e. ( E -cn-> CC ) )
+i23::cncfexpb
+s24:s22,s5,i23:syl2anc |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( y e. E |-> ( ( y - P ) ^ N ) ) e. ( E -cn-> CC ) )
+s25::cnelprrecn |- CC e. { RR , CC }
+s26:s25:a1i |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> CC e. { RR , CC } )
+s27::simpr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. CC ) -> y e. CC )
+s28::1cnd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. CC ) -> 1 e. CC )
+s29:s3:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. CC ) -> P e. CC )
+s30::0cnd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. CC ) -> 0 e. CC )
+s31:s26:dvmptid |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( CC _D ( y e. CC |-> y ) ) = ( y e. CC |-> 1 ) )
+s32:s26,s3:dvmptc |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( CC _D ( y e. CC |-> P ) ) = ( y e. CC |-> 0 ) )
+s33:s26,s27,s28,s31,s29,s30,s32:dvmptsub |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( CC _D ( y e. CC |-> ( y - P ) ) ) = ( y e. CC |-> ( 1 - 0 ) ) )
+s34:s27,s29:subcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. CC ) -> ( y - P ) e. CC )
+s35:s28,s30:subcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. CC ) -> ( 1 - 0 ) e. CC )
+s36:s26,s34,s35,s33,s2,s8,s6,s1:dvmptres |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( CC _D ( y e. E |-> ( y - P ) ) ) = ( y e. E |-> ( 1 - 0 ) ) )
+s37::simpr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> y e. E )
+s38:s2:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> E C_ CC )
+s39:s38,s37:sseldd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> y e. CC )
+s40:s3:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> P e. CC )
+s41:s39,s40:subcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> ( y - P ) e. CC )
+s42::1cnd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> 1 e. CC )
+s43::0cnd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> 0 e. CC )
+s44:s42,s43:subcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> ( 1 - 0 ) e. CC )
+s45::simpr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> v e. CC )
+s46:s5:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> N e. NN0 )
+s47:s45,s46:expcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> ( v ^ N ) e. CC )
+s48:s4:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> N e. NN )
+s49:s48:nncnd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> N e. CC )
+s50:s4:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> N e. NN )
+i51::nnm1nn0
+s52:s50,i51:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> ( N - 1 ) e. NN0 )
+s53:s45,s52:expcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> ( v ^ ( N - 1 ) ) e. CC )
+s54:s49,s53:mulcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ v e. CC ) -> ( N x. ( v ^ ( N - 1 ) ) ) e. CC )
+i55::dvexp
+s56:s4,i55:syl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( CC _D ( v e. CC |-> ( v ^ N ) ) ) = ( v e. CC |-> ( N x. ( v ^ ( N - 1 ) ) ) ) )
+s57::oveq1 |- ( v = ( y - P ) -> ( v ^ N ) = ( ( y - P ) ^ N ) )
+s58::oveq1 |- ( v = ( y - P ) -> ( v ^ ( N - 1 ) ) = ( ( y - P ) ^ ( N - 1 ) ) )
+s59:s58:oveq2d |- ( v = ( y - P ) -> ( N x. ( v ^ ( N - 1 ) ) ) = ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) )
+s60:s26,s26,s41,s44,s47,s54,s36,s56,s57,s59:dvmptco |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( CC _D ( y e. E |-> ( ( y - P ) ^ N ) ) ) = ( y e. E |-> ( ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) x. ( 1 - 0 ) ) ) )
+s61:s4:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> N e. NN )
+s62:s61:nncnd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> N e. CC )
+s63:s4:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> N e. NN )
+i64::nnm1nn0
+s65:s63,i64:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> ( N - 1 ) e. NN0 )
+s66:s41,s65:expcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> ( ( y - P ) ^ ( N - 1 ) ) e. CC )
+s67:s62,s66:mulcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) e. CC )
+s68:s67,s44:mulcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) /\ y e. E ) -> ( ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) x. ( 1 - 0 ) ) e. CC )
+s69::eqid |- ( y e. E |-> ( ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) x. ( 1 - 0 ) ) ) = ( y e. E |-> ( ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) x. ( 1 - 0 ) ) )
+s70:s68,s69:fmptd |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( y e. E |-> ( ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) x. ( 1 - 0 ) ) ) : E --> CC )
+i71::fdm
+s72:s70,i71:syl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> dom ( y e. E |-> ( ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) x. ( 1 - 0 ) ) ) = E )
+s73:s60:dmeqd |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> dom ( CC _D ( y e. E |-> ( ( y - P ) ^ N ) ) ) = dom ( y e. E |-> ( ( N x. ( ( y - P ) ^ ( N - 1 ) ) ) x. ( 1 - 0 ) ) ) )
+s74:s73,s72:eqtrd |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> dom ( CC _D ( y e. E |-> ( ( y - P ) ^ N ) ) ) = E )
+s75:s74:eqcomd |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> E = dom ( CC _D ( y e. E |-> ( ( y - P ) ^ N ) ) ) )
+s76:s75:eqimssd |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> E C_ dom ( CC _D ( y e. E |-> ( ( y - P ) ^ N ) ) ) )
+qed:s24,s76:jca |- ( ( ( E e. ( TopOpen ` CCfld ) /\ E C_ CC ) /\ ( P e. CC /\ N e. NN ) ) -> ( ( y e. E |-> ( ( y - P ) ^ N ) ) e. ( E -cn-> CC ) /\ E C_ dom ( CC _D ( y e. E |-> ( ( y - P ) ^ N ) ) ) ) )
+$)

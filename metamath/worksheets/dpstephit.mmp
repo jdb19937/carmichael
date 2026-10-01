@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=dpstephit  LOC_AFTER=?
+
+* A DP step propagates every snapshot entry (Lean: dpStep_hit).
+
+s1::simpl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) )
+s2:s1:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( L e. NN /\ P e. NN0 ) )
+s3:s2:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> L e. NN )
+s4:s1:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( L e. NN /\ P e. NN0 ) )
+s5:s4:simprd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> P e. NN0 )
+s6:s1:simprd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> T e. Tbl )
+s7:s3:nnnn0d |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> L e. NN0 )
+s8::simpr |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) )
+i9::dpstepacl
+s10:s1,i9:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) e. Tbl )
+s11:s7,s10:jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( L e. NN0 /\ ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) e. Tbl ) )
+s12:s1,s11,s8:3jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( L e. NN0 /\ ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) )
+i13::dpgohit
+s14:s12,i13:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) ` ( ( R x. P ) mod L ) ) =/= ( inr ` (/) ) )
+i15::dpstepval
+s16:s1,i15:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( L DpStep P ) ` T ) = <. ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) , ( ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) + 1 ) >. )
+s17::fvex |- ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) e. _V
+s18:s17:a1i |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) e. _V )
+s19::ovex |- ( ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) + 1 ) e. _V
+s20:s19:a1i |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) + 1 ) e. _V )
+s21:s16:fveq2d |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( 1st ` ( ( L DpStep P ) ` T ) ) = ( 1st ` <. ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) , ( ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) + 1 ) >. ) )
+i22::op1stg
+s23:s18,s20,i22:syl2anc |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( 1st ` <. ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) , ( ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) + 1 ) >. ) = ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) )
+s24:s21,s23:eqtrd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( 1st ` ( ( L DpStep P ) ` T ) ) = ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) )
+s25:s24:fveq1d |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( 1st ` ( ( L DpStep P ) ` T ) ) ` ( ( R x. P ) mod L ) ) = ( ( 1st ` ( ( ( ( L DpGo P ) ` T ) ` L ) ` ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) ) ) ` ( ( R x. P ) mod L ) ) )
+qed:s25,s14:eqnetrd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( R e. NN0 /\ R < L /\ ( T ` R ) =/= ( inr ` (/) ) ) ) -> ( ( 1st ` ( ( L DpStep P ) ` T ) ) ` ( ( R x. P ) mod L ) ) =/= ( inr ` (/) ) )
+$)

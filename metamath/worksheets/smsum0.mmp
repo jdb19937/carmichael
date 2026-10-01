@@ -1,0 +1,86 @@
+$( <MM> <PROOF_ASST> THEOREM=smsum0  LOC_AFTER=?
+
+* The base case of the smooth Euler-product bound: only 1 is smooth for the empty set of primes.
+
+s1::simpr |- ( ( (/) C_ Prime /\ W e. NN ) -> W e. NN )
+s2::simpr |- ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) -> v e. ( 1 ... W ) )
+i3::elfznn
+s4:s2,i3:syl |- ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) -> v e. NN )
+s5::simpr |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> { r e. Prime | r || v } C_ (/) )
+i6::ss0
+s7:s5,i6:syl |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> { r e. Prime | r || v } = (/) )
+s8::rabeq0 |- ( { r e. Prime | r || v } = (/) <-> A. r e. Prime -. r || v )
+s9:s8:a1i |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> ( { r e. Prime | r || v } = (/) <-> A. r e. Prime -. r || v ) )
+s10:s9,s7:mpbid |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> A. r e. Prime -. r || v )
+s11::ralnex |- ( A. r e. Prime -. r || v <-> -. E. r e. Prime r || v )
+s12:s11:a1i |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> ( A. r e. Prime -. r || v <-> -. E. r e. Prime r || v ) )
+s13:s12,s10:mpbid |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> -. E. r e. Prime r || v )
+s14:s4:adantr |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> v e. NN )
+s15:s14:adantr |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> v e. NN )
+s16::simpr |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> 1 < v )
+s17:s15,s16:jca |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> ( v e. NN /\ 1 < v ) )
+s18::eluz2b2 |- ( v e. ( ZZ>= ` 2 ) <-> ( v e. NN /\ 1 < v ) )
+s19:s18:a1i |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> ( v e. ( ZZ>= ` 2 ) <-> ( v e. NN /\ 1 < v ) ) )
+s20:s17,s19:mpbird |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> v e. ( ZZ>= ` 2 ) )
+i21::exprmfct
+s22:s20,i21:syl |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> E. p e. Prime p || v )
+s23::breq1 |- ( p = r -> ( p || v <-> r || v ) )
+s24:s23:cbvrexvw |- ( E. p e. Prime p || v <-> E. r e. Prime r || v )
+s25:s24:a1i |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> ( E. p e. Prime p || v <-> E. r e. Prime r || v ) )
+s26:s25,s22:mpbid |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> E. r e. Prime r || v )
+s27:s13:adantr |- ( ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) /\ 1 < v ) -> -. E. r e. Prime r || v )
+s28:s26,s27:pm2.65da |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> -. 1 < v )
+s29:s4:adantr |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> v e. NN )
+i30::nngt1ne1
+s31:s29,i30:syl |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> ( 1 < v <-> v =/= 1 ) )
+s32:s31,s28:mtbid |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> -. v =/= 1 )
+i33::nne
+s34:s32,i33:sylib |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ { r e. Prime | r || v } C_ (/) ) -> v = 1 )
+s35:s34:ex |- ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) -> ( { r e. Prime | r || v } C_ (/) -> v = 1 ) )
+s36::simpr |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ v = 1 ) -> v = 1 )
+s37:s36:breq2d |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ v = 1 ) -> ( r || v <-> r || 1 ) )
+s38:s37:rabbidv |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ v = 1 ) -> { r e. Prime | r || v } = { r e. Prime | r || 1 } )
+s39::nprmdvds1 |- ( r e. Prime -> -. r || 1 )
+s40:s39:rgen |- A. r e. Prime -. r || 1
+s41::rabeq0 |- ( { r e. Prime | r || 1 } = (/) <-> A. r e. Prime -. r || 1 )
+s42:s41,s40:mpbir |- { r e. Prime | r || 1 } = (/)
+s43:s42:a1i |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ v = 1 ) -> { r e. Prime | r || 1 } = (/) )
+s44:s38,s43:eqtrd |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ v = 1 ) -> { r e. Prime | r || v } = (/) )
+s45::ssid |- (/) C_ (/)
+s46:s45:a1i |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ v = 1 ) -> (/) C_ (/) )
+s47:s44,s46:eqsstrd |- ( ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) /\ v = 1 ) -> { r e. Prime | r || v } C_ (/) )
+s48:s47:ex |- ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) -> ( v = 1 -> { r e. Prime | r || v } C_ (/) ) )
+s49:s35,s48:impbid |- ( ( ( (/) C_ Prime /\ W e. NN ) /\ v e. ( 1 ... W ) ) -> ( { r e. Prime | r || v } C_ (/) <-> v = 1 ) )
+s50:s49:rabbidva |- ( ( (/) C_ Prime /\ W e. NN ) -> { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ (/) } = { v e. ( 1 ... W ) | v = 1 } )
+s51::1nn |- 1 e. NN
+s52:s51:a1i |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 e. NN )
+i53::nnge1
+s54:s1,i53:syl |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 <_ W )
+s55:s52,s1,s54:3jca |- ( ( (/) C_ Prime /\ W e. NN ) -> ( 1 e. NN /\ W e. NN /\ 1 <_ W ) )
+s56::elfz1b |- ( 1 e. ( 1 ... W ) <-> ( 1 e. NN /\ W e. NN /\ 1 <_ W ) )
+s57:s56:a1i |- ( ( (/) C_ Prime /\ W e. NN ) -> ( 1 e. ( 1 ... W ) <-> ( 1 e. NN /\ W e. NN /\ 1 <_ W ) ) )
+s58:s55,s57:mpbird |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 e. ( 1 ... W ) )
+i59::rabsn
+s60:s58,i59:syl |- ( ( (/) C_ Prime /\ W e. NN ) -> { v e. ( 1 ... W ) | v = 1 } = { 1 } )
+s61:s50,s60:eqtrd |- ( ( (/) C_ Prime /\ W e. NN ) -> { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ (/) } = { 1 } )
+s62::ax-1cn |- 1 e. CC
+s63:s62:a1i |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 e. CC )
+s64::1div1e1 |- ( 1 / 1 ) = 1
+s65:s64:a1i |- ( ( (/) C_ Prime /\ W e. NN ) -> ( 1 / 1 ) = 1 )
+s66:s65,s63:eqeltrd |- ( ( (/) C_ Prime /\ W e. NN ) -> ( 1 / 1 ) e. CC )
+s67:s58,s66:jca |- ( ( (/) C_ Prime /\ W e. NN ) -> ( 1 e. ( 1 ... W ) /\ ( 1 / 1 ) e. CC ) )
+s68::oveq2 |- ( j = 1 -> ( 1 / j ) = ( 1 / 1 ) )
+s69:s68:sumsn |- ( ( 1 e. ( 1 ... W ) /\ ( 1 / 1 ) e. CC ) -> sum_ j e. { 1 } ( 1 / j ) = ( 1 / 1 ) )
+s70:s69:a1i |- ( ( (/) C_ Prime /\ W e. NN ) -> ( ( 1 e. ( 1 ... W ) /\ ( 1 / 1 ) e. CC ) -> sum_ j e. { 1 } ( 1 / j ) = ( 1 / 1 ) ) )
+s71:s67,s70:mpd |- ( ( (/) C_ Prime /\ W e. NN ) -> sum_ j e. { 1 } ( 1 / j ) = ( 1 / 1 ) )
+s72:s71,s65:eqtrd |- ( ( (/) C_ Prime /\ W e. NN ) -> sum_ j e. { 1 } ( 1 / j ) = 1 )
+s73:s61:sumeq1d |- ( ( (/) C_ Prime /\ W e. NN ) -> sum_ j e. { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ (/) } ( 1 / j ) = sum_ j e. { 1 } ( 1 / j ) )
+s74:s73,s72:eqtrd |- ( ( (/) C_ Prime /\ W e. NN ) -> sum_ j e. { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ (/) } ( 1 / j ) = 1 )
+s75::prod0 |- prod_ p e. (/) ( 1 / ( 1 - ( 1 / p ) ) ) = 1
+s76:s75:a1i |- ( ( (/) C_ Prime /\ W e. NN ) -> prod_ p e. (/) ( 1 / ( 1 - ( 1 / p ) ) ) = 1 )
+s77::1red |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 e. RR )
+s78:s77:leidd |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 <_ 1 )
+s79:s76:eqcomd |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 = prod_ p e. (/) ( 1 / ( 1 - ( 1 / p ) ) ) )
+s80:s78,s79:breqtrd |- ( ( (/) C_ Prime /\ W e. NN ) -> 1 <_ prod_ p e. (/) ( 1 / ( 1 - ( 1 / p ) ) ) )
+qed:s74,s80:eqbrtrd |- ( ( (/) C_ Prime /\ W e. NN ) -> sum_ j e. { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ (/) } ( 1 / j ) <_ prod_ p e. (/) ( 1 / ( 1 - ( 1 / p ) ) ) )
+$)

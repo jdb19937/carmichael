@@ -1,0 +1,109 @@
+$( <MM> <PROOF_ASST> THEOREM=lgamtcn  LOC_AFTER=?
+
+* Each term of the log-Gamma series is continuous on a subset of the open right half-plane.
+
+s1::simpl |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s2::simpr |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> K e. NN )
+s3::ref |- Re : CC --> RR
+i4::fdm
+s5:s3,i4:ax-mp |- dom Re = CC
+s6::cnvimass |- ( `' Re " ( 0 (,) +oo ) ) C_ dom Re
+s7:s6,s5:sseqtri |- ( `' Re " ( 0 (,) +oo ) ) C_ CC
+s8:s7:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( `' Re " ( 0 (,) +oo ) ) C_ CC )
+s9:s1,s8:sstrd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> S C_ CC )
+s10::ssid |- CC C_ CC
+s11:s10:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> CC C_ CC )
+s12::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+i13::cncfmptid
+s14:s9,s11,i13:syl2anc |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> z ) e. ( S -cn-> CC ) )
+s15:s2:nnrpd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> K e. RR+ )
+s16:s2:peano2nnd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( K + 1 ) e. NN )
+s17:s16:nnrpd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( K + 1 ) e. RR+ )
+s18:s17,s15:rpdivcld |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( ( K + 1 ) / K ) e. RR+ )
+i19::relogcl
+s20:s18,i19:syl |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( log ` ( ( K + 1 ) / K ) ) e. RR )
+s21:s20:recnd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( log ` ( ( K + 1 ) / K ) ) e. CC )
+i22::cncfmptc
+s23:s21,s9,s11,i22:syl3anc |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( log ` ( ( K + 1 ) / K ) ) ) e. ( S -cn-> CC ) )
+s24:s14,s23:mulcncf |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( z x. ( log ` ( ( K + 1 ) / K ) ) ) ) e. ( S -cn-> CC ) )
+s25:s15:rpcnd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> K e. CC )
+s26:s15:rpne0d |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> K =/= 0 )
+s27::eqid |- ( x e. CC |-> ( x / K ) ) = ( x e. CC |-> ( x / K ) )
+s28:s27:divccncf |- ( ( K e. CC /\ K =/= 0 ) -> ( x e. CC |-> ( x / K ) ) e. ( CC -cn-> CC ) )
+s29:s25,s26,s28:syl2anc |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( x e. CC |-> ( x / K ) ) e. ( CC -cn-> CC ) )
+s30:s29,s14:cncfmpt1f |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( ( x e. CC |-> ( x / K ) ) ` z ) ) e. ( S -cn-> CC ) )
+s31::simpr |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> z e. S )
+s32:s1:adantr |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s33:s32,s31:sseldd |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> z e. ( `' Re " ( 0 (,) +oo ) ) )
+s34::0re |- 0 e. RR
+i35::elhp2
+s36:s34,i35:ax-mp |- ( z e. ( `' Re " ( 0 (,) +oo ) ) <-> ( z e. CC /\ 0 < ( Re ` z ) ) )
+s37:s36:a1i |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( z e. ( `' Re " ( 0 (,) +oo ) ) <-> ( z e. CC /\ 0 < ( Re ` z ) ) ) )
+s38:s33,s37:mpbid |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( z e. CC /\ 0 < ( Re ` z ) ) )
+i39::simpl
+s40:s38,i39:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> z e. CC )
+i41::simpr
+s42:s38,i41:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> 0 < ( Re ` z ) )
+i43::zrenn
+s44:s38,i43:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> z e. ( CC \ ( ZZ \ NN ) ) )
+i45::hp0logdm
+s46:s33,i45:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> z e. ( CC \ ( -oo (,] 0 ) ) )
+s47::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s48:s47:logdmn0 |- ( z e. ( CC \ ( -oo (,] 0 ) ) -> z =/= 0 )
+s49:s46,s48:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> z =/= 0 )
+s50::oveq1 |- ( x = z -> ( x / K ) = ( z / K ) )
+s51::eqid |- ( x e. CC |-> ( x / K ) ) = ( x e. CC |-> ( x / K ) )
+s52::ovex |- ( z / K ) e. _V
+s53:s50,s51,s52:fvmpt |- ( z e. CC -> ( ( x e. CC |-> ( x / K ) ) ` z ) = ( z / K ) )
+s54:s40,s53:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( x e. CC |-> ( x / K ) ) ` z ) = ( z / K ) )
+s55:s54:mpteq2dva |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( ( x e. CC |-> ( x / K ) ) ` z ) ) = ( z e. S |-> ( z / K ) ) )
+s56:s55,s30:eqeltrrd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( z / K ) ) e. ( S -cn-> CC ) )
+s57::ax-1cn |- 1 e. CC
+s58:s57:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> 1 e. CC )
+i59::cncfmptc
+s60:s58,s9,s11,i59:syl3anc |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> 1 ) e. ( S -cn-> CC ) )
+s61:s12:addcn |- + e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s62:s61:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> + e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s63:s12,s62,s56,s60:cncfmpt2f |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( ( z / K ) + 1 ) ) e. ( S -cn-> CC ) )
+s64:s2:adantr |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> K e. NN )
+i65::hp0divp1
+s66:s33,s64,i65:syl2anc |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( z / K ) + 1 ) e. ( `' Re " ( 0 (,) +oo ) ) )
+s67::0re |- 0 e. RR
+i68::elhp2
+s69:s67,i68:ax-mp |- ( ( ( z / K ) + 1 ) e. ( `' Re " ( 0 (,) +oo ) ) <-> ( ( ( z / K ) + 1 ) e. CC /\ 0 < ( Re ` ( ( z / K ) + 1 ) ) ) )
+s70:s69:a1i |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( ( z / K ) + 1 ) e. ( `' Re " ( 0 (,) +oo ) ) <-> ( ( ( z / K ) + 1 ) e. CC /\ 0 < ( Re ` ( ( z / K ) + 1 ) ) ) ) )
+s71:s66,s70:mpbid |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( ( z / K ) + 1 ) e. CC /\ 0 < ( Re ` ( ( z / K ) + 1 ) ) ) )
+i72::simpl
+s73:s71,i72:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( z / K ) + 1 ) e. CC )
+i74::simpr
+s75:s71,i74:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> 0 < ( Re ` ( ( z / K ) + 1 ) ) )
+i76::zrenn
+s77:s71,i76:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( z / K ) + 1 ) e. ( CC \ ( ZZ \ NN ) ) )
+i78::hp0logdm
+s79:s66,i78:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( z / K ) + 1 ) e. ( CC \ ( -oo (,] 0 ) ) )
+s80::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s81:s80:logdmn0 |- ( ( ( z / K ) + 1 ) e. ( CC \ ( -oo (,] 0 ) ) -> ( ( z / K ) + 1 ) =/= 0 )
+s82:s79,s81:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( z / K ) + 1 ) =/= 0 )
+s83::difss |- ( CC \ ( -oo (,] 0 ) ) C_ CC
+s84:s83:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( CC \ ( -oo (,] 0 ) ) C_ CC )
+s85::eqid |- ( z e. S |-> ( ( z / K ) + 1 ) ) = ( z e. S |-> ( ( z / K ) + 1 ) )
+s86:s79,s85:fmptd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( ( z / K ) + 1 ) ) : S --> ( CC \ ( -oo (,] 0 ) ) )
+i87::cncfcdm
+s88:s84,s63,i87:syl2anc |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( ( z e. S |-> ( ( z / K ) + 1 ) ) e. ( S -cn-> ( CC \ ( -oo (,] 0 ) ) ) <-> ( z e. S |-> ( ( z / K ) + 1 ) ) : S --> ( CC \ ( -oo (,] 0 ) ) ) )
+s89:s86,s88:mpbird |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( ( z / K ) + 1 ) ) e. ( S -cn-> ( CC \ ( -oo (,] 0 ) ) ) )
+s90::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s91:s90:logcn |- ( log |` ( CC \ ( -oo (,] 0 ) ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC )
+s92:s91:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( log |` ( CC \ ( -oo (,] 0 ) ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC ) )
+s93:s89,s92:cncfco |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) o. ( z e. S |-> ( ( z / K ) + 1 ) ) ) e. ( S -cn-> CC ) )
+i94::cncff
+s95:s92,i94:syl |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( log |` ( CC \ ( -oo (,] 0 ) ) ) : ( CC \ ( -oo (,] 0 ) ) --> CC )
+s96:s95,s79:cofmpt |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) o. ( z e. S |-> ( ( z / K ) + 1 ) ) ) = ( z e. S |-> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` ( ( z / K ) + 1 ) ) ) )
+i97::fvres
+s98:s79,i97:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) /\ z e. S ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` ( ( z / K ) + 1 ) ) = ( log ` ( ( z / K ) + 1 ) ) )
+s99:s98:mpteq2dva |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` ( ( z / K ) + 1 ) ) ) = ( z e. S |-> ( log ` ( ( z / K ) + 1 ) ) ) )
+s100:s96,s99:eqtrd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) o. ( z e. S |-> ( ( z / K ) + 1 ) ) ) = ( z e. S |-> ( log ` ( ( z / K ) + 1 ) ) ) )
+s101:s100,s93:eqeltrrd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( log ` ( ( z / K ) + 1 ) ) ) e. ( S -cn-> CC ) )
+s102:s12:subcn |- - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s103:s102:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+qed:s12,s103,s24,s101:cncfmpt2f |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ K e. NN ) -> ( z e. S |-> ( ( z x. ( log ` ( ( K + 1 ) / K ) ) ) - ( log ` ( ( z / K ) + 1 ) ) ) ) e. ( S -cn-> CC ) )
+$)

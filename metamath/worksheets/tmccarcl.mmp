@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=tmccarcl  LOC_AFTER=?
+
+* Closure of the ` car ` field of a machine state (Lean: the type of ` St.car ` ).
+
+s1::id |- ( V e. TMSt -> V e. TMSt )
+s2::df-tmcar |- TMcar = ( v e. TMSt |-> ( 1st ` v ) )
+s3:s2:a1i |- ( V e. TMSt -> TMcar = ( v e. TMSt |-> ( 1st ` v ) ) )
+s4::fveq2 |- ( v = V -> ( 1st ` v ) = ( 1st ` V ) )
+s5:s4:adantl |- ( ( V e. TMSt /\ v = V ) -> ( 1st ` v ) = ( 1st ` V ) )
+s6::fvexd |- ( V e. TMSt -> ( 1st ` V ) e. _V )
+s7:s3,s5,s1,s6:fvmptd |- ( V e. TMSt -> ( TMcar ` V ) = ( 1st ` V ) )
+s8::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s9:s1,s8:eleqtrdi |- ( V e. TMSt -> V e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) ) )
+i10::xp1st
+s11:s9,i10:syl |- ( V e. TMSt -> ( 1st ` V ) e. 2o )
+qed:s7,s11:eqeltrd |- ( V e. TMSt -> ( TMcar ` V ) e. 2o )
+$)

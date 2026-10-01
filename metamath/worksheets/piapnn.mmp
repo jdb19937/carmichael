@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=piapnn  LOC_AFTER=?
+
+* The prime count in a residue class at a natural number, over ( 0 ... Z ) (Lean: piAP_natCast_eq_card).
+
+s1::simp3 |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> Z e. NN0 )
+s2:s1:nn0red |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> Z e. RR )
+s3:s1:nn0zd |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> Z e. ZZ )
+s4::simp1 |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> Q e. NN )
+s5::simp2 |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> A e. ZZ )
+i6::piapval
+s7:s4,s5,s2,i6:syl3anc |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> ( A ( piAP ` Q ) Z ) = ( # ` { n e. ( 1 ... ( |_ ` Z ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ) )
+i8::flid
+s9:s3,i8:syl |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> ( |_ ` Z ) = Z )
+s10:s9:oveq2d |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> ( 1 ... ( |_ ` Z ) ) = ( 1 ... Z ) )
+s11:s10:rabeqdv |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> { n e. ( 1 ... ( |_ ` Z ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } = { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } )
+s12::nn0uz |- NN0 = ( ZZ>= ` 0 )
+s13:s1,s12:eleqtrdi |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> Z e. ( ZZ>= ` 0 ) )
+i14::fzpred
+s15:s13,i14:syl |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> ( 0 ... Z ) = ( { 0 } u. ( ( 0 + 1 ) ... Z ) ) )
+s16::0p1e1 |- ( 0 + 1 ) = 1
+s17:s16:oveq1i |- ( ( 0 + 1 ) ... Z ) = ( 1 ... Z )
+s18:s17:uneq2i |- ( { 0 } u. ( ( 0 + 1 ) ... Z ) ) = ( { 0 } u. ( 1 ... Z ) )
+s19:s15,s18:eqtrdi |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> ( 0 ... Z ) = ( { 0 } u. ( 1 ... Z ) ) )
+s20:s19:rabeqdv |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> { n e. ( 0 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } = { n e. ( { 0 } u. ( 1 ... Z ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } )
+s21::rabun2 |- { n e. ( { 0 } u. ( 1 ... Z ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } = ( { n e. { 0 } | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } u. { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } )
+s22::0nprm |- -. 0 e. Prime
+s23:s22:intnanr |- -. ( 0 e. Prime /\ ( 0 mod Q ) = ( A mod Q ) )
+s24::eleq1 |- ( n = 0 -> ( n e. Prime <-> 0 e. Prime ) )
+s25::oveq1 |- ( n = 0 -> ( n mod Q ) = ( 0 mod Q ) )
+s26:s25:eqeq1d |- ( n = 0 -> ( ( n mod Q ) = ( A mod Q ) <-> ( 0 mod Q ) = ( A mod Q ) ) )
+s27:s24,s26:anbi12d |- ( n = 0 -> ( ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) <-> ( 0 e. Prime /\ ( 0 mod Q ) = ( A mod Q ) ) ) )
+s28:s27:notbid |- ( n = 0 -> ( -. ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) <-> -. ( 0 e. Prime /\ ( 0 mod Q ) = ( A mod Q ) ) ) )
+s29::c0ex |- 0 e. _V
+s30:s29,s28:ralsn |- ( A. n e. { 0 } -. ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) <-> -. ( 0 e. Prime /\ ( 0 mod Q ) = ( A mod Q ) ) )
+s31:s23,s30:mpbir |- A. n e. { 0 } -. ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) )
+i32::rabeq0
+s33:s31,i32:mpbir |- { n e. { 0 } | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } = (/)
+s34:s33:uneq1i |- ( { n e. { 0 } | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } u. { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ) = ( (/) u. { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } )
+s35::0un |- ( (/) u. { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ) = { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) }
+s36:s21,s34,s35:3eqtri |- { n e. ( { 0 } u. ( 1 ... Z ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } = { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) }
+s37:s20,s36:eqtr2di |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> { n e. ( 1 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } = { n e. ( 0 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } )
+s38:s11,s37:eqtrd |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> { n e. ( 1 ... ( |_ ` Z ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } = { n e. ( 0 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } )
+s39:s38:fveq2d |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> ( # ` { n e. ( 1 ... ( |_ ` Z ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ) = ( # ` { n e. ( 0 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ) )
+qed:s7,s39:eqtrd |- ( ( Q e. NN /\ A e. ZZ /\ Z e. NN0 ) -> ( A ( piAP ` Q ) Z ) = ( # ` { n e. ( 0 ... Z ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ) )
+$)

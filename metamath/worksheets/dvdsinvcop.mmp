@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=dvdsinvcop  LOC_AFTER=?
+
+* An integer with an inverse mod Q is coprime to Q.
+
+s1::simp1 |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> Q e. NN )
+s2::simp2 |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( A e. ZZ /\ B e. ZZ ) )
+s3:s2:simpld |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> A e. ZZ )
+s4::simp2 |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( A e. ZZ /\ B e. ZZ ) )
+s5:s4:simprd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> B e. ZZ )
+s6::simp3 |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> Q || ( ( A x. B ) - 1 ) )
+s7:s1:nnzd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> Q e. ZZ )
+i8::gcdcl
+s9:s5,s7,i8:syl2anc |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) e. NN0 )
+s10:s9:nn0zd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) e. ZZ )
+i11::gcddvds
+s12:s5,s7,i11:syl2anc |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( B gcd Q ) || B /\ ( B gcd Q ) || Q ) )
+s13:s12:simpld |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) || B )
+s14:s12:simprd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) || Q )
+s15:s3,s5:zmulcld |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( A x. B ) e. ZZ )
+s16::1zzd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> 1 e. ZZ )
+s17:s15,s16:zsubcld |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( A x. B ) - 1 ) e. ZZ )
+i18::dvdsmultr2
+s19:s10,s3,s5,i18:syl3anc |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( B gcd Q ) || B -> ( B gcd Q ) || ( A x. B ) ) )
+s20:s13,s19:mpd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) || ( A x. B ) )
+s21:s14,s6:jca |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( B gcd Q ) || Q /\ Q || ( ( A x. B ) - 1 ) ) )
+i22::dvdstr
+s23:s10,s7,s17,i22:syl3anc |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( ( B gcd Q ) || Q /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) || ( ( A x. B ) - 1 ) ) )
+s24:s21,s23:mpd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) || ( ( A x. B ) - 1 ) )
+s25::1zzd |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> 1 e. ZZ )
+s26:s10,s15,s25:3jca |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( B gcd Q ) e. ZZ /\ ( A x. B ) e. ZZ /\ 1 e. ZZ ) )
+i27::dvdssub2
+s28:s26,s24,i27:syl2anc |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( B gcd Q ) || ( A x. B ) <-> ( B gcd Q ) || 1 ) )
+s29:s20,s28:mpbid |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) || 1 )
+i30::dvds1
+s31:s9,i30:syl |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( ( B gcd Q ) || 1 <-> ( B gcd Q ) = 1 ) )
+qed:s29,s31:mpbid |- ( ( Q e. NN /\ ( A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) ) -> ( B gcd Q ) = 1 )
+$)

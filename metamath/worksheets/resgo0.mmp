@@ -1,0 +1,71 @@
+$( <MM> <PROOF_ASST> THEOREM=resgo0  LOC_AFTER=?
+
+* The base of the recursion of ~ df-resgo , Lean's first equation lemma.  Lean: resGo, the reservoir loop of step 2.
+
+s1::simpr |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> Q e. NN )
+s2::simpl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( Z e. NN0 /\ Y e. NN ) )
+s3:s2:simpld |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> Z e. NN0 )
+s4:s2:simprd |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> Y e. NN )
+s5::simpl |- ( ( z = Z /\ y = Y ) -> z = Z )
+s6::simpr |- ( ( z = Z /\ y = Y ) -> y = Y )
+c1:s5,s6:oveq12d |- ( ( z = Z /\ y = Y ) -> ( z ResGoS y ) = ( Z ResGoS Y ) )
+c2:c1:oveq2d |- ( ( z = Z /\ y = Y ) -> ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) = ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) )
+c3:c2:fveq1d |- ( ( z = Z /\ y = Y ) -> ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) = ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) )
+c4:c3:fveq1d |- ( ( z = Z /\ y = Y ) -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) )
+c5:c4:mpteq2dv |- ( ( z = Z /\ y = Y ) -> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) )
+c6:c5:mpteq2dv |- ( ( z = Z /\ y = Y ) -> ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) ) ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) )
+s7::df-resgo |- ResGo = ( z e. NN0 , y e. NN |-> ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) ) ) )
+s8::nnex |- NN e. _V
+s9:s8:a1i |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> NN e. _V )
+i10::mptexg
+s11:s9,i10:syl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) e. _V )
+s12:c6,s7:ovmpoga |- ( ( Z e. NN0 /\ Y e. NN /\ ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) e. _V ) -> ( Z ResGo Y ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) )
+s13:s3,s4,s11,s12:syl3anc |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( Z ResGo Y ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) )
+s14:s13:fveq1d |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( Z ResGo Y ) ` Q ) = ( ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) ` Q ) )
+s15::id |- ( q = Q -> q = Q )
+c7:s15:fveq2d |- ( q = Q -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) )
+c8:c7:mpteq2dv |- ( q = Q -> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s16::eqid |- ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) )
+s17::nn0ex |- NN0 e. _V
+s18:s17:a1i |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> NN0 e. _V )
+i19::mptexg
+s20:s18,i19:syl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) e. _V )
+s21:c8,s16:fvmptg |- ( ( Q e. NN /\ ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) e. _V ) -> ( ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) ` Q ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s22:s1,s20,s21:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) ` Q ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s23:s14,s22:eqtrd |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( Z ResGo Y ) ` Q ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s24:s23:fveq1d |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( Z ResGo Y ) ` Q ) ` 0 ) = ( ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) ` 0 ) )
+s25::id |- ( f = 0 -> f = 0 )
+c9:s25:fveq2d |- ( f = 0 -> ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) = ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) )
+c10:c9:fveq1d |- ( f = 0 -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) )
+s26::eqid |- ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) )
+s27::0nn0 |- 0 e. NN0
+s28:s27:a1i |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> 0 e. NN0 )
+s29::fvex |- ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) e. _V
+s30:s29:a1i |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) e. _V )
+s31:c10,s26:fvmptg |- ( ( 0 e. NN0 /\ ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) e. _V ) -> ( ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) ` 0 ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) )
+s32:s28,s30,s31:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) ` 0 ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) )
+s33:s24,s32:eqtrd |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( Z ResGo Y ) ` Q ) ` 0 ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) )
+i34::mptexg
+s35:s9,i34:syl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( g e. NN |-> <. (/) , 0 >. ) e. _V )
+i36::resgosf
+s37:s3,s4:jca |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( Z e. NN0 /\ Y e. NN ) )
+s38:s37,i36:syl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( Z ResGoS Y ) : ( ( ( Word NN0 X. NN0 ) ^m NN ) X. NN0 ) --> ( ( Word NN0 X. NN0 ) ^m NN ) )
+s39::ovex |- ( ( Word NN0 X. NN0 ) ^m NN ) e. _V
+s40:s39:a1i |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( Word NN0 X. NN0 ) ^m NN ) e. _V )
+i41::xpexg
+s42:s40,s18,i41:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( Word NN0 X. NN0 ) ^m NN ) X. NN0 ) e. _V )
+i43::fex
+s44:s38,s42,i43:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( Z ResGoS Y ) e. _V )
+i45::algrec0
+s46:s35,s44,i45:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) = ( g e. NN |-> <. (/) , 0 >. ) )
+s47:s46:fveq1d |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` 0 ) ` Q ) = ( ( g e. NN |-> <. (/) , 0 >. ) ` Q ) )
+s48::id |- ( g = Q -> g = Q )
+s49::eqidd |- ( g = Q -> <. (/) , 0 >. = <. (/) , 0 >. )
+s50::eqid |- ( g e. NN |-> <. (/) , 0 >. ) = ( g e. NN |-> <. (/) , 0 >. )
+s51::opex |- <. (/) , 0 >. e. _V
+s52:s51:a1i |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> <. (/) , 0 >. e. _V )
+s53:s49,s50:fvmptg |- ( ( Q e. NN /\ <. (/) , 0 >. e. _V ) -> ( ( g e. NN |-> <. (/) , 0 >. ) ` Q ) = <. (/) , 0 >. )
+s54:s1,s52,s53:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( g e. NN |-> <. (/) , 0 >. ) ` Q ) = <. (/) , 0 >. )
+s55:s33,s47:eqtrd |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( Z ResGo Y ) ` Q ) ` 0 ) = ( ( g e. NN |-> <. (/) , 0 >. ) ` Q ) )
+qed:s55,s54:eqtrd |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( ( ( Z ResGo Y ) ` Q ) ` 0 ) = <. (/) , 0 >. )
+$)

@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=nfloorval  LOC_AFTER=?
+
+* Value of Nfloor (Mathlib's Nat.floor): the integer floor for nonnegative arguments, 0 otherwise.
+
+s1::id |- ( x = X -> x = X )
+c1:s1:breq1d |- ( x = X -> ( x < 0 <-> X < 0 ) )
+c2:s1:fveq2d |- ( x = X -> ( |_ ` x ) = ( |_ ` X ) )
+c3:c1,c2:ifbieq2d |- ( x = X -> if ( x < 0 , 0 , ( |_ ` x ) ) = if ( X < 0 , 0 , ( |_ ` X ) ) )
+s2::df-nfloor |- Nfloor = ( x e. RR |-> if ( x < 0 , 0 , ( |_ ` x ) ) )
+s3::c0ex |- 0 e. _V
+s4::fvex |- ( |_ ` X ) e. _V
+s5:s3,s4:ifex |- if ( X < 0 , 0 , ( |_ ` X ) ) e. _V
+qed:c3,s2,s5:fvmpt |- ( X e. RR -> ( Nfloor ` X ) = if ( X < 0 , 0 , ( |_ ` X ) ) )
+$)

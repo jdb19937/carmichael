@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=tmc2oif  LOC_AFTER=?
+
+* A bit is the decision of the proposition it is true for.
+
+s1::simpl |- ( ( A e. 2o /\ ( A = 1o <-> ph ) ) -> A e. 2o )
+s2::simpr |- ( ( A e. 2o /\ ( A = 1o <-> ph ) ) -> ( A = 1o <-> ph ) )
+s3:s2:adantr |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ ph ) -> ( A = 1o <-> ph ) )
+s4::simpr |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ ph ) -> ph )
+s5:s3,s4:mpbird |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ ph ) -> A = 1o )
+s6::simpr |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ ph ) -> ph )
+i7::iftrue
+s8:s6,i7:syl |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ ph ) -> if ( ph , 1o , (/) ) = 1o )
+s9:s5,s8:eqtr4d |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ ph ) -> A = if ( ph , 1o , (/) ) )
+s10:s2:adantr |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> ( A = 1o <-> ph ) )
+s11::simpr |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> -. ph )
+s12:s10,s11:mtbird |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> -. A = 1o )
+s13:s1:adantr |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> A e. 2o )
+i14::bwel2on
+s15:s13,i14:syl |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> ( -. A = 1o <-> A = (/) ) )
+s16:s12,s15:mpbid |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> A = (/) )
+s17::simpr |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> -. ph )
+i18::iffalse
+s19:s17,i18:syl |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> if ( ph , 1o , (/) ) = (/) )
+s20:s16,s19:eqtr4d |- ( ( ( A e. 2o /\ ( A = 1o <-> ph ) ) /\ -. ph ) -> A = if ( ph , 1o , (/) ) )
+qed:s9,s20:pm2.61dan |- ( ( A e. 2o /\ ( A = 1o <-> ph ) ) -> A = if ( ph , 1o , (/) ) )
+$)

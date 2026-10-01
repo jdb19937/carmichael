@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=muabs1  LOC_AFTER=?
+
+* The Moebius value at a squarefree argument has absolute value one.
+
+s1::simpl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> N e. NN )
+i2::prmdvdsfi
+s3:s1,i2:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> { p e. Prime | p || N } e. Fin )
+i4::hashcl
+s5:s3,i4:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( # ` { p e. Prime | p || N } ) e. NN0 )
+s6:s5:nn0zd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( # ` { p e. Prime | p || N } ) e. ZZ )
+s7::id |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( N e. NN /\ ( mmu ` N ) =/= 0 ) )
+i8::muval2
+s9:s7,i8:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( mmu ` N ) = ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) )
+s10::neg1cn |- -u 1 e. CC
+s11:s10:a1i |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> -u 1 e. CC )
+i12::absexp
+s13:s11,s5,i12:syl2anc |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( abs ` ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ) = ( ( abs ` -u 1 ) ^ ( # ` { p e. Prime | p || N } ) ) )
+s14::ax-1cn |- 1 e. CC
+i15::absneg
+s16:s14,i15:ax-mp |- ( abs ` -u 1 ) = ( abs ` 1 )
+s17::abs1 |- ( abs ` 1 ) = 1
+s18:s16,s17:eqtri |- ( abs ` -u 1 ) = 1
+s19:s18:a1i |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( abs ` -u 1 ) = 1 )
+s20:s19:oveq1d |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( abs ` -u 1 ) ^ ( # ` { p e. Prime | p || N } ) ) = ( 1 ^ ( # ` { p e. Prime | p || N } ) ) )
+i21::1exp
+s22:s6,i21:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( 1 ^ ( # ` { p e. Prime | p || N } ) ) = 1 )
+s23:s9:fveq2d |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( abs ` ( mmu ` N ) ) = ( abs ` ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ) )
+s24:s20,s22:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( abs ` -u 1 ) ^ ( # ` { p e. Prime | p || N } ) ) = 1 )
+s25:s13,s24:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( abs ` ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ) = 1 )
+qed:s23,s25:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( abs ` ( mmu ` N ) ) = 1 )
+$)

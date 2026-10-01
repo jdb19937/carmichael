@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgscl  LOC_AFTER=?
+
+* The Gauss sum is a complex number.
+
+s1::dchrgsval2 |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrGS X ) = sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ a ) ) )
+s2::fzofi |- ( 0 ..^ N ) e. Fin
+s3:s2:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( 0 ..^ N ) e. Fin )
+s4::eqid |- ( DChr ` N ) = ( DChr ` N )
+s5::eqid |- ( Z/nZ ` N ) = ( Z/nZ ` N )
+s6::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s7::eqid |- ( ZRHom ` ( Z/nZ ` N ) ) = ( ZRHom ` ( Z/nZ ` N ) )
+s8::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s9:s8:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s10::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> a e. ( 0 ..^ N ) )
+i11::elfzoelz
+s12:s10,i11:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> a e. ZZ )
+s13:s4,s5,s6,s7,s9,s12:dchrzrhcl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) e. CC )
+s14::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s15:s14:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> N e. NN )
+i16::root1expcl
+s17:s15,s12,i16:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ a ) e. CC )
+s18:s13,s17:mulcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ a ) ) e. CC )
+s19:s3,s18:fsumcl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ a ) ) e. CC )
+qed:s1,s19:eqeltrd |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrGS X ) e. CC )
+$)

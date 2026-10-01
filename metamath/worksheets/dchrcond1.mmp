@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrcond1  LOC_AFTER=?
+
+* The conductor of the trivial character is 1 (Mathlib conductor_one): the trivial character is induced from the (trivial) character mod 1.
+
+s1::id |- ( N e. NN -> N e. NN )
+s2::eqid |- ( DChr ` N ) = ( DChr ` N )
+s3:s2:dchrabl |- ( N e. NN -> ( DChr ` N ) e. Abel )
+s4:s1,s3:syl |- ( N e. NN -> ( DChr ` N ) e. Abel )
+s5:s4:ablgrpd |- ( N e. NN -> ( DChr ` N ) e. Grp )
+s6::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s7::eqid |- ( 0g ` ( DChr ` N ) ) = ( 0g ` ( DChr ` N ) )
+s8:s6,s7:grpidcl |- ( ( DChr ` N ) e. Grp -> ( 0g ` ( DChr ` N ) ) e. ( Base ` ( DChr ` N ) ) )
+s9:s5,s8:syl |- ( N e. NN -> ( 0g ` ( DChr ` N ) ) e. ( Base ` ( DChr ` N ) ) )
+s10::1nn |- 1 e. NN
+s11:s10:a1i |- ( N e. NN -> 1 e. NN )
+s12::eqid |- ( DChr ` 1 ) = ( DChr ` 1 )
+s13:s12:dchrabl |- ( 1 e. NN -> ( DChr ` 1 ) e. Abel )
+s14:s11,s13:syl |- ( N e. NN -> ( DChr ` 1 ) e. Abel )
+s15:s14:ablgrpd |- ( N e. NN -> ( DChr ` 1 ) e. Grp )
+s16::eqid |- ( Base ` ( DChr ` 1 ) ) = ( Base ` ( DChr ` 1 ) )
+s17::eqid |- ( 0g ` ( DChr ` 1 ) ) = ( 0g ` ( DChr ` 1 ) )
+s18:s16,s17:grpidcl |- ( ( DChr ` 1 ) e. Grp -> ( 0g ` ( DChr ` 1 ) ) e. ( Base ` ( DChr ` 1 ) ) )
+s19:s15,s18:syl |- ( N e. NN -> ( 0g ` ( DChr ` 1 ) ) e. ( Base ` ( DChr ` 1 ) ) )
+s20:s1,s9:jca |- ( N e. NN -> ( N e. NN /\ ( 0g ` ( DChr ` N ) ) e. ( Base ` ( DChr ` N ) ) ) )
+s21:s1:nnzd |- ( N e. NN -> N e. ZZ )
+i22::1dvds
+s23:s21,i22:syl |- ( N e. NN -> 1 || N )
+s24::1nn |- 1 e. NN
+s25:s24:a1i |- ( N e. NN -> 1 e. NN )
+i26::dchrind1
+s27:s25,s1,s23,i26:syl3anc |- ( N e. NN -> ( ( 1 DChrInd N ) ` ( 0g ` ( DChr ` 1 ) ) ) = ( 0g ` ( DChr ` N ) ) )
+s28:s27:eqcomd |- ( N e. NN -> ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` ( 0g ` ( DChr ` 1 ) ) ) )
+s29::fveq2 |- ( y = ( 0g ` ( DChr ` 1 ) ) -> ( ( 1 DChrInd N ) ` y ) = ( ( 1 DChrInd N ) ` ( 0g ` ( DChr ` 1 ) ) ) )
+s30:s29:eqeq2d |- ( y = ( 0g ` ( DChr ` 1 ) ) -> ( ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` y ) <-> ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` ( 0g ` ( DChr ` 1 ) ) ) ) )
+s31:s30:rspcev |- ( ( ( 0g ` ( DChr ` 1 ) ) e. ( Base ` ( DChr ` 1 ) ) /\ ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` ( 0g ` ( DChr ` 1 ) ) ) ) -> E. y e. ( Base ` ( DChr ` 1 ) ) ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` y ) )
+s32:s19,s28,s31:syl2anc |- ( N e. NN -> E. y e. ( Base ` ( DChr ` 1 ) ) ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` y ) )
+s33::1nn |- 1 e. NN
+s34:s33:a1i |- ( N e. NN -> 1 e. NN )
+s35:s23,s32:jca |- ( N e. NN -> ( 1 || N /\ E. y e. ( Base ` ( DChr ` 1 ) ) ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` y ) ) )
+s36:s34,s35:jca |- ( N e. NN -> ( 1 e. NN /\ ( 1 || N /\ E. y e. ( Base ` ( DChr ` 1 ) ) ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` y ) ) ) )
+s37::dchrcondel |- ( 1 e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) ( 0g ` ( DChr ` N ) ) = ( ( d DChrInd N ) ` y ) ) } <-> ( 1 e. NN /\ ( 1 || N /\ E. y e. ( Base ` ( DChr ` 1 ) ) ( 0g ` ( DChr ` N ) ) = ( ( 1 DChrInd N ) ` y ) ) ) )
+s38:s36,s37:sylibr |- ( N e. NN -> 1 e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) ( 0g ` ( DChr ` N ) ) = ( ( d DChrInd N ) ` y ) ) } )
+i39::dchrcondle
+s41:s20,s38:jca |- ( N e. NN -> ( ( N e. NN /\ ( 0g ` ( DChr ` N ) ) e. ( Base ` ( DChr ` N ) ) ) /\ 1 e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) ( 0g ` ( DChr ` N ) ) = ( ( d DChrInd N ) ` y ) ) } ) )
+i42::dchrcondle
+s43:s41,i42:syl |- ( N e. NN -> ( N DChrCond ( 0g ` ( DChr ` N ) ) ) <_ 1 )
+i44::dchrcondnn
+s45:s20,i44:syl |- ( N e. NN -> ( N DChrCond ( 0g ` ( DChr ` N ) ) ) e. NN )
+s46:s45:nnge1d |- ( N e. NN -> 1 <_ ( N DChrCond ( 0g ` ( DChr ` N ) ) ) )
+s47:s45:nnred |- ( N e. NN -> ( N DChrCond ( 0g ` ( DChr ` N ) ) ) e. RR )
+s48::1re |- 1 e. RR
+s49:s48:a1i |- ( N e. NN -> 1 e. RR )
+i50::letri3
+s51:s47,s49,i50:syl2anc |- ( N e. NN -> ( ( N DChrCond ( 0g ` ( DChr ` N ) ) ) = 1 <-> ( ( N DChrCond ( 0g ` ( DChr ` N ) ) ) <_ 1 /\ 1 <_ ( N DChrCond ( 0g ` ( DChr ` N ) ) ) ) ) )
+s52:s43,s46:jca |- ( N e. NN -> ( ( N DChrCond ( 0g ` ( DChr ` N ) ) ) <_ 1 /\ 1 <_ ( N DChrCond ( 0g ` ( DChr ` N ) ) ) ) )
+qed:s52,s51:mpbird |- ( N e. NN -> ( N DChrCond ( 0g ` ( DChr ` N ) ) ) = 1 )
+$)

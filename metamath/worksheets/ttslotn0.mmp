@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=ttslotn0  LOC_AFTER=?
+
+* The word of a slot is not empty: ` ket ` or a list ending in ` bra ` .
+
+s1::id |- ( O e. ( Word NN0 |_| 1o ) -> O e. ( Word NN0 |_| 1o ) )
+i2::ttabslotv
+s3:s1,i2:syl |- ( O e. ( Word NN0 |_| 1o ) -> ( encSlot ` O ) = if ( O = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` O ) ) ) )
+s4::neeq1 |- ( <" 3 "> = if ( O = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` O ) ) ) -> ( <" 3 "> =/= (/) <-> if ( O = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` O ) ) ) =/= (/) ) )
+s5::neeq1 |- ( ( encList ` ( 2nd ` O ) ) = if ( O = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` O ) ) ) -> ( ( encList ` ( 2nd ` O ) ) =/= (/) <-> if ( O = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` O ) ) ) =/= (/) ) )
+s6::s1nz |- <" 3 "> =/= (/)
+s7:s6:a1i |- ( ( O e. ( Word NN0 |_| 1o ) /\ O = ( inr ` (/) ) ) -> <" 3 "> =/= (/) )
+s8::simpl |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> O e. ( Word NN0 |_| 1o ) )
+i9::ttabopt
+s10:s8,i9:syl |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> ( 2nd ` O ) e. Word NN0 )
+i11::tm2lencval
+s12:s10,i11:syl |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> ( encList ` ( 2nd ` O ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( 2nd ` O ) ) ) ++ <" 2 "> ) )
+s13::encnatgamcl |- ( p e. NN0 -> ( encNatGam ` p ) e. Word Gamma' )
+s14::gamma4 |- 4 e. Gamma'
+i15::s1cl
+s16:s14,i15:ax-mp |- <" 4 "> e. Word Gamma'
+s17:s16:a1i |- ( p e. NN0 -> <" 4 "> e. Word Gamma' )
+i18::ccatcl
+s19:s13,s17,i18:syl2anc |- ( p e. NN0 -> ( ( encNatGam ` p ) ++ <" 4 "> ) e. Word Gamma' )
+s20:s19:fmpti |- ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) : NN0 --> Word Gamma'
+s21:s20:a1i |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) : NN0 --> Word Gamma' )
+i22::wrdco
+s23:s10,s21,i22:syl2anc |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( 2nd ` O ) ) e. Word Word Gamma' )
+i24::gsumgamcl
+s25:s23,i24:syl |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( 2nd ` O ) ) ) e. Word Gamma' )
+i26::ccatws1n0
+s27:s25,i26:syl |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( 2nd ` O ) ) ) ++ <" 2 "> ) =/= (/) )
+s28:s12,s27:eqnetrd |- ( ( O e. ( Word NN0 |_| 1o ) /\ -. O = ( inr ` (/) ) ) -> ( encList ` ( 2nd ` O ) ) =/= (/) )
+s29:s4,s5,s7,s28:ifbothda |- ( O e. ( Word NN0 |_| 1o ) -> if ( O = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` O ) ) ) =/= (/) )
+qed:s3,s29:eqnetrd |- ( O e. ( Word NN0 |_| 1o ) -> ( encSlot ` O ) =/= (/) )
+$)

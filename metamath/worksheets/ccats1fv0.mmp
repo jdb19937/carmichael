@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=ccats1fv0  LOC_AFTER=?
+
+* The first letter of a word whose first letter is explicit.
+
+s1::simpl |- ( ( Y e. A /\ W e. Word A ) -> Y e. A )
+s2::simpr |- ( ( Y e. A /\ W e. Word A ) -> W e. Word A )
+s3:s1:s1cld |- ( ( Y e. A /\ W e. Word A ) -> <" Y "> e. Word A )
+s4::s1len |- ( # ` <" Y "> ) = 1
+s5:s4:a1i |- ( ( Y e. A /\ W e. Word A ) -> ( # ` <" Y "> ) = 1 )
+s6::0lt1 |- 0 < 1
+s7:s6:a1i |- ( ( Y e. A /\ W e. Word A ) -> 0 < 1 )
+s8:s7,s5:breqtrrd |- ( ( Y e. A /\ W e. Word A ) -> 0 < ( # ` <" Y "> ) )
+i9::ccatfv0
+s10:s3,s2,s8,i9:syl3anc |- ( ( Y e. A /\ W e. Word A ) -> ( ( <" Y "> ++ W ) ` 0 ) = ( <" Y "> ` 0 ) )
+i11::s1fv
+s12:s1,i11:syl |- ( ( Y e. A /\ W e. Word A ) -> ( <" Y "> ` 0 ) = Y )
+qed:s10,s12:eqtrd |- ( ( Y e. A /\ W e. Word A ) -> ( ( <" Y "> ++ W ) ` 0 ) = Y )
+$)

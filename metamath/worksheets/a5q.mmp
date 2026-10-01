@@ -1,0 +1,91 @@
+$( <MM> <PROOF_ASST> THEOREM=a5q  LOC_AFTER=?
+
+* The T largest elements of the reservoir form a duplicate-free word of good primes (Lean: hQnodup, hQlen, hQsub, hQcard, hQgood of SearchAlg.lean).
+
+h1::a5q.1 |- ( ph -> ( Z e. NN /\ W e. NN0 /\ Y e. NN ) )
+h2::a5q.2 |- ( ph -> T e. NN0 )
+h3::a5q.3 |- ( ph -> R = ( ( Z Reservoir W ) ` Y ) )
+h4::a5q.4 |- ( ph -> I = ( # ` ( 1st ` R ) ) )
+h5::a5q.5 |- ( ph -> Q = ( ( 1st ` R ) substr <. ( I - T ) , I >. ) )
+h6::a5q.6 |- ( ph -> T <_ I )
+s1:1:simp1d |- ( ph -> Z e. NN )
+s2:1:simp2d |- ( ph -> W e. NN0 )
+s3:1:simp3d |- ( ph -> Y e. NN )
+s4:s1:nnnn0d |- ( ph -> Z e. NN0 )
+s5:s3:nnnn0d |- ( ph -> Y e. NN0 )
+s6:s1,s2:jca |- ( ph -> ( Z e. NN /\ W e. NN0 ) )
+i7::reservoircl
+s8:s6,s3,i7:syl2anc |- ( ph -> ( ( Z Reservoir W ) ` Y ) e. ( Word NN0 X. NN0 ) )
+s9:3,s8:eqeltrd |- ( ph -> R e. ( Word NN0 X. NN0 ) )
+i10::xp1st
+s11:s9,i10:syl |- ( ph -> ( 1st ` R ) e. Word NN0 )
+i12::lencl
+s13:s11,i12:syl |- ( ph -> ( # ` ( 1st ` R ) ) e. NN0 )
+s14:6,4:breqtrd |- ( ph -> T <_ ( # ` ( 1st ` R ) ) )
+s15:2,s13,s14:3jca |- ( ph -> ( T e. NN0 /\ ( # ` ( 1st ` R ) ) e. NN0 /\ T <_ ( # ` ( 1st ` R ) ) ) )
+i16::elfz2nn0
+s17:s15,i16:sylibr |- ( ph -> T e. ( 0 ... ( # ` ( 1st ` R ) ) ) )
+s18:4:oveq1d |- ( ph -> ( I - T ) = ( ( # ` ( 1st ` R ) ) - T ) )
+s19:s18,4:opeq12d |- ( ph -> <. ( I - T ) , I >. = <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. )
+s20:s19:oveq2d |- ( ph -> ( ( 1st ` R ) substr <. ( I - T ) , I >. ) = ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) )
+s21:5,s20:eqtrd |- ( ph -> Q = ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) )
+s22:s11,s17:jca |- ( ph -> ( ( 1st ` R ) e. Word NN0 /\ T e. ( 0 ... ( # ` ( 1st ` R ) ) ) ) )
+i23::drpcl
+s24:s22,i23:syl |- ( ph -> ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) e. Word NN0 )
+i25::drplen
+s26:s22,i25:syl |- ( ph -> ( # ` ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) ) = T )
+i27::drprn
+s28:s22,i27:syl |- ( ph -> ran ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) C_ ran ( 1st ` R ) )
+i29::resspecw
+s30:1,i29:syl |- ( ph -> ( Fun `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) /\ ran ( 1st ` ( ( Z Reservoir W ) ` Y ) ) = ( ( Z goodPrimesW W ) ` Y ) ) )
+s31:3:fveq2d |- ( ph -> ( 1st ` R ) = ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s32:s30:simpld |- ( ph -> Fun `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s33:s31:cnveqd |- ( ph -> `' ( 1st ` R ) = `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s34:s33:funeqd |- ( ph -> ( Fun `' ( 1st ` R ) <-> Fun `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) ) )
+s35:s32,s34:mpbird |- ( ph -> Fun `' ( 1st ` R ) )
+s36:s31:rneqd |- ( ph -> ran ( 1st ` R ) = ran ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s37:s30:simprd |- ( ph -> ran ( 1st ` ( ( Z Reservoir W ) ` Y ) ) = ( ( Z goodPrimesW W ) ` Y ) )
+s38:s36,s37:eqtrd |- ( ph -> ran ( 1st ` R ) = ( ( Z goodPrimesW W ) ` Y ) )
+s39:s11,s35:jca |- ( ph -> ( ( 1st ` R ) e. Word NN0 /\ Fun `' ( 1st ` R ) ) )
+s40:s39,s17:jca |- ( ph -> ( ( ( 1st ` R ) e. Word NN0 /\ Fun `' ( 1st ` R ) ) /\ T e. ( 0 ... ( # ` ( 1st ` R ) ) ) ) )
+i41::drpndp
+s42:s40,i41:syl |- ( ph -> Fun `' ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) )
+s43:s21,s24:eqeltrd |- ( ph -> Q e. Word NN0 )
+s44:s21:cnveqd |- ( ph -> `' Q = `' ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) )
+s45:s44:funeqd |- ( ph -> ( Fun `' Q <-> Fun `' ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) ) )
+s46:s42,s45:mpbird |- ( ph -> Fun `' Q )
+s47:s21:fveq2d |- ( ph -> ( # ` Q ) = ( # ` ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) ) )
+s48:s47,s26:eqtrd |- ( ph -> ( # ` Q ) = T )
+s49:s21:rneqd |- ( ph -> ran Q = ran ( ( 1st ` R ) substr <. ( ( # ` ( 1st ` R ) ) - T ) , ( # ` ( 1st ` R ) ) >. ) )
+s50:s49,s28:eqsstrd |- ( ph -> ran Q C_ ran ( 1st ` R ) )
+s51:s50,s38:sseqtrd |- ( ph -> ran Q C_ ( ( Z goodPrimesW W ) ` Y ) )
+s52:s43,s46:jca |- ( ph -> ( Q e. Word NN0 /\ Fun `' Q ) )
+i53::algwrdcard
+s54:s52,i53:syl |- ( ph -> ( # ` ran Q ) = ( # ` Q ) )
+s55:s54,s48:eqtrd |- ( ph -> ( # ` ran Q ) = T )
+s56:s4,s2,s5:3jca |- ( ph -> ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) )
+s57:s56,s51:jca |- ( ph -> ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ ran Q C_ ( ( Z goodPrimesW W ) ` Y ) ) )
+i58::s3sfp
+s59:s57,i58:syl |- ( ph -> ran Q e. ( ~P Prime i^i Fin ) )
+s60:s51:adantr |- ( ( ph /\ c e. ran Q ) -> ran Q C_ ( ( Z goodPrimesW W ) ` Y ) )
+s61::simpr |- ( ( ph /\ c e. ran Q ) -> c e. ran Q )
+s62:s60,s61:sseldd |- ( ( ph /\ c e. ran Q ) -> c e. ( ( Z goodPrimesW W ) ` Y ) )
+s63:s4,s2,s5:3jca |- ( ph -> ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) )
+s64:s63:adantr |- ( ( ph /\ c e. ran Q ) -> ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) )
+i65::elgoodprimesw
+s66:s64,i65:syl |- ( ( ph /\ c e. ran Q ) -> ( c e. ( ( Z goodPrimesW W ) ` Y ) <-> ( c e. ( 0 ... Z ) /\ ( c e. Prime /\ W < c /\ A. p e. Prime ( p || ( c - 1 ) -> p <_ Y ) ) ) ) )
+s67:s62,s66:mpbid |- ( ( ph /\ c e. ran Q ) -> ( c e. ( 0 ... Z ) /\ ( c e. Prime /\ W < c /\ A. p e. Prime ( p || ( c - 1 ) -> p <_ Y ) ) ) )
+s68:s67:simprd |- ( ( ph /\ c e. ran Q ) -> ( c e. Prime /\ W < c /\ A. p e. Prime ( p || ( c - 1 ) -> p <_ Y ) ) )
+s69:s68:simp1d |- ( ( ph /\ c e. ran Q ) -> c e. Prime )
+s70:s67:simpld |- ( ( ph /\ c e. ran Q ) -> c e. ( 0 ... Z ) )
+i71::elfzle2
+s72:s70,i71:syl |- ( ( ph /\ c e. ran Q ) -> c <_ Z )
+s73:s69,s72:jca |- ( ( ph /\ c e. ran Q ) -> ( c e. Prime /\ c <_ Z ) )
+s74:s73:ralrimiva |- ( ph -> A. c e. ran Q ( c e. Prime /\ c <_ Z ) )
+s75:s43,s46:jca |- ( ph -> ( Q e. Word NN0 /\ Fun `' Q ) )
+s76:s48,s55:jca |- ( ph -> ( ( # ` Q ) = T /\ ( # ` ran Q ) = T ) )
+s77:s75,s76:jca |- ( ph -> ( ( Q e. Word NN0 /\ Fun `' Q ) /\ ( ( # ` Q ) = T /\ ( # ` ran Q ) = T ) ) )
+s78:s51,s59:jca |- ( ph -> ( ran Q C_ ( ( Z goodPrimesW W ) ` Y ) /\ ran Q e. ( ~P Prime i^i Fin ) ) )
+s79:s78,s74:jca |- ( ph -> ( ( ran Q C_ ( ( Z goodPrimesW W ) ` Y ) /\ ran Q e. ( ~P Prime i^i Fin ) ) /\ A. c e. ran Q ( c e. Prime /\ c <_ Z ) ) )
+qed:s77,s79:jca |- ( ph -> ( ( ( Q e. Word NN0 /\ Fun `' Q ) /\ ( ( # ` Q ) = T /\ ( # ` ran Q ) = T ) ) /\ ( ( ran Q C_ ( ( Z goodPrimesW W ) ` Y ) /\ ran Q e. ( ~P Prime i^i Fin ) ) /\ A. c e. ran Q ( c e. Prime /\ c <_ Z ) ) ) )
+$)

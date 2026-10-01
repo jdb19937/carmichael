@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=poolfval  LOC_AFTER=?
+
+* The curried value of pool: the mapping k |-> the pool of primes d * k + 1.
+
+s1::simpl |- ( ( s = Q /\ z = Z ) -> s = Q )
+s2::simpr |- ( ( s = Q /\ z = Z ) -> z = Z )
+c1:s1:fveq2d |- ( ( s = Q /\ z = Z ) -> ( Lmod ` s ) = ( Lmod ` Q ) )
+c2:c1:oveq2d |- ( ( s = Q /\ z = Z ) -> ( 1 ... ( Lmod ` s ) ) = ( 1 ... ( Lmod ` Q ) ) )
+c3:s1:fveq2d |- ( ( s = Q /\ z = Z ) -> ( Lmod ` s ) = ( Lmod ` Q ) )
+c4:c3:breq2d |- ( ( s = Q /\ z = Z ) -> ( m || ( Lmod ` s ) <-> m || ( Lmod ` Q ) ) )
+c5:c2,c4:rabeqbidv |- ( ( s = Q /\ z = Z ) -> { m e. ( 1 ... ( Lmod ` s ) ) | m || ( Lmod ` s ) } = { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } )
+c6:s1:fveq2d |- ( ( s = Q /\ z = Z ) -> ( xceil ` s ) = ( xceil ` Q ) )
+c7:c6:breq2d |- ( ( s = Q /\ z = Z ) -> ( ( ( d x. k ) + 1 ) <_ ( xceil ` s ) <-> ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) ) )
+c8:s2:breq1d |- ( ( s = Q /\ z = Z ) -> ( z < ( ( d x. k ) + 1 ) <-> Z < ( ( d x. k ) + 1 ) ) )
+c9::biidd |- ( ( s = Q /\ z = Z ) -> ( ( ( d x. k ) + 1 ) e. Prime <-> ( ( d x. k ) + 1 ) e. Prime ) )
+c10:c7,c9,c8:3anbi123d |- ( ( s = Q /\ z = Z ) -> ( ( ( ( d x. k ) + 1 ) <_ ( xceil ` s ) /\ ( ( d x. k ) + 1 ) e. Prime /\ z < ( ( d x. k ) + 1 ) ) <-> ( ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) /\ ( ( d x. k ) + 1 ) e. Prime /\ Z < ( ( d x. k ) + 1 ) ) ) )
+c11:c5,c10:rabeqbidv |- ( ( s = Q /\ z = Z ) -> { d e. { m e. ( 1 ... ( Lmod ` s ) ) | m || ( Lmod ` s ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` s ) /\ ( ( d x. k ) + 1 ) e. Prime /\ z < ( ( d x. k ) + 1 ) ) } = { d e. { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) /\ ( ( d x. k ) + 1 ) e. Prime /\ Z < ( ( d x. k ) + 1 ) ) } )
+s3::nfv |- F/ d ( s = Q /\ z = Z )
+s4:s3,c11:mpteq1df |- ( ( s = Q /\ z = Z ) -> ( d e. { d e. { m e. ( 1 ... ( Lmod ` s ) ) | m || ( Lmod ` s ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` s ) /\ ( ( d x. k ) + 1 ) e. Prime /\ z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) = ( d e. { d e. { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) /\ ( ( d x. k ) + 1 ) e. Prime /\ Z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) )
+c12:s4:rneqd |- ( ( s = Q /\ z = Z ) -> ran ( d e. { d e. { m e. ( 1 ... ( Lmod ` s ) ) | m || ( Lmod ` s ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` s ) /\ ( ( d x. k ) + 1 ) e. Prime /\ z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) = ran ( d e. { d e. { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) /\ ( ( d x. k ) + 1 ) e. Prime /\ Z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) )
+c13:c12:mpteq2dv |- ( ( s = Q /\ z = Z ) -> ( k e. NN0 |-> ran ( d e. { d e. { m e. ( 1 ... ( Lmod ` s ) ) | m || ( Lmod ` s ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` s ) /\ ( ( d x. k ) + 1 ) e. Prime /\ z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) ) = ( k e. NN0 |-> ran ( d e. { d e. { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) /\ ( ( d x. k ) + 1 ) e. Prime /\ Z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) ) )
+s5::df-pool |- pool = ( s e. ( ~P NN0 i^i Fin ) , z e. NN0 |-> ( k e. NN0 |-> ran ( d e. { d e. { m e. ( 1 ... ( Lmod ` s ) ) | m || ( Lmod ` s ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` s ) /\ ( ( d x. k ) + 1 ) e. Prime /\ z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) ) )
+s6::nn0ex |- NN0 e. _V
+s7:s6:mptex |- ( k e. NN0 |-> ran ( d e. { d e. { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) /\ ( ( d x. k ) + 1 ) e. Prime /\ Z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) ) e. _V
+qed:c13,s5,s7:ovmpoa |- ( ( Q e. ( ~P NN0 i^i Fin ) /\ Z e. NN0 ) -> ( Q pool Z ) = ( k e. NN0 |-> ran ( d e. { d e. { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } | ( ( ( d x. k ) + 1 ) <_ ( xceil ` Q ) /\ ( ( d x. k ) + 1 ) e. Prime /\ Z < ( ( d x. k ) + 1 ) ) } |-> ( ( d x. k ) + 1 ) ) ) )
+$)

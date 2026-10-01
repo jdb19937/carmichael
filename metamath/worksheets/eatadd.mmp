@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=eatadd  LOC_AFTER=?
+
+* The exponential e ( nu beta ) is additive in the frequency (LargeSieve eAt_add).
+
+s1::simp1 |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> M e. CC )
+s2::simp2 |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> K e. CC )
+s3::simp3 |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> B e. CC )
+s4::ax-icn |- _i e. CC
+s5::picn |- _pi e. CC
+s6:s4,s5:mulcli |- ( _i x. _pi ) e. CC
+s7::2cn |- 2 e. CC
+s8:s7,s6:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s9:s8:a1i |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s10:s1,s2,s3:adddird |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( ( M + K ) x. B ) = ( ( M x. B ) + ( K x. B ) ) )
+s11:s10:oveq2d |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( ( M + K ) x. B ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( ( M x. B ) + ( K x. B ) ) ) )
+s12:s1,s3:mulcld |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( M x. B ) e. CC )
+s13:s2,s3:mulcld |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( K x. B ) e. CC )
+s14:s9,s12,s13:adddid |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( ( M x. B ) + ( K x. B ) ) ) = ( ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) + ( ( 2 x. ( _i x. _pi ) ) x. ( K x. B ) ) ) )
+s15:s11,s14:eqtrd |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( ( M + K ) x. B ) ) = ( ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) + ( ( 2 x. ( _i x. _pi ) ) x. ( K x. B ) ) ) )
+s16:s15:fveq2d |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( M + K ) x. B ) ) ) = ( exp ` ( ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) + ( ( 2 x. ( _i x. _pi ) ) x. ( K x. B ) ) ) ) )
+s17:s9,s12:mulcld |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) e. CC )
+s18:s9,s13:mulcld |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( K x. B ) ) e. CC )
+i19::efadd
+s20:s17,s18,i19:syl2anc |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( exp ` ( ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) + ( ( 2 x. ( _i x. _pi ) ) x. ( K x. B ) ) ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( K x. B ) ) ) ) )
+qed:s16,s20:eqtrd |- ( ( M e. CC /\ K e. CC /\ B e. CC ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( M + K ) x. B ) ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( K x. B ) ) ) ) )
+$)

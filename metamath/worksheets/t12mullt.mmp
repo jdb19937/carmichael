@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=t12mullt  LOC_AFTER=?
+
+* The product of numbers below ` 2 ^ m ` and ` 2 ^ n ` is below ` 2 ^ ( m + n ) ` (~ ltmul12a , ~ expadd ).
+
+s1::simpl |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) )
+s2:s1:simpld |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( A e. NN0 /\ C e. NN0 ) )
+s3:s2:simpld |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> A e. NN0 )
+s4:s2:simprd |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> C e. NN0 )
+s5:s1:simprd |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( M e. NN0 /\ N e. NN0 ) )
+s6:s5:simpld |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> M e. NN0 )
+s7:s5:simprd |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> N e. NN0 )
+s8::simpr |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) )
+s9:s8:simpld |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> A < ( 2 ^ M ) )
+s10:s8:simprd |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> C < ( 2 ^ N ) )
+s11::2re |- 2 e. RR
+s12:s11:a1i |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> 2 e. RR )
+s13:s12,s6:reexpcld |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( 2 ^ M ) e. RR )
+s14::2re |- 2 e. RR
+s15:s14:a1i |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> 2 e. RR )
+s16:s15,s7:reexpcld |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( 2 ^ N ) e. RR )
+s17:s3:nn0red |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> A e. RR )
+s18:s17,s13:jca |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( A e. RR /\ ( 2 ^ M ) e. RR ) )
+s19:s3:nn0ge0d |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> 0 <_ A )
+s20:s19,s9:jca |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( 0 <_ A /\ A < ( 2 ^ M ) ) )
+s21:s18,s20:jca |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( ( A e. RR /\ ( 2 ^ M ) e. RR ) /\ ( 0 <_ A /\ A < ( 2 ^ M ) ) ) )
+s22:s4:nn0red |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> C e. RR )
+s23:s22,s16:jca |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( C e. RR /\ ( 2 ^ N ) e. RR ) )
+s24:s4:nn0ge0d |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> 0 <_ C )
+s25:s24,s10:jca |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( 0 <_ C /\ C < ( 2 ^ N ) ) )
+s26:s23,s25:jca |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( ( C e. RR /\ ( 2 ^ N ) e. RR ) /\ ( 0 <_ C /\ C < ( 2 ^ N ) ) ) )
+i27::ltmul12a
+s28:s21,s26,i27:syl2anc |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( A x. C ) < ( ( 2 ^ M ) x. ( 2 ^ N ) ) )
+s29::2cn |- 2 e. CC
+s30:s29:a1i |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> 2 e. CC )
+i31::expadd
+s32:s30,s6,s7,i31:syl3anc |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( 2 ^ ( M + N ) ) = ( ( 2 ^ M ) x. ( 2 ^ N ) ) )
+qed:s28,s32:breqtrrd |- ( ( ( ( A e. NN0 /\ C e. NN0 ) /\ ( M e. NN0 /\ N e. NN0 ) ) /\ ( A < ( 2 ^ M ) /\ C < ( 2 ^ N ) ) ) -> ( A x. C ) < ( 2 ^ ( M + N ) ) )
+$)

@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=csegdd1  LOC_AFTER=?
+
+* A horizontal segment off the height of P has z - P in the slit plane.
+
+s1::simpl |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) )
+s2::simpr |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) )
+i3::simp1
+s4:s1,i3:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> A e. CC )
+i5::simp2
+s6:s1,i5:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> B e. CC )
+i7::simpl
+s8:s2,i7:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> P e. CC )
+i9::simpr
+s10:s2,i9:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> ( Im ` A ) =/= ( Im ` P ) )
+i11::cseghim
+s12:s1,i11:syl |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> A. u e. ( A cseg B ) ( Im ` u ) = ( Im ` A ) )
+s13::simpr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> u e. ( A cseg B ) )
+s14:s4:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> A e. CC )
+s15:s6:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> B e. CC )
+s16:s8:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> P e. CC )
+s17:s10:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` A ) =/= ( Im ` P ) )
+i18::csegcl
+s19:s14,s15,i18:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( A cseg B ) C_ CC )
+s20:s19,s13:sseldd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> u e. CC )
+s21:s12:adantr |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> A. u e. ( A cseg B ) ( Im ` u ) = ( Im ` A ) )
+i22::rspa
+s23:s21,s13,i22:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` u ) = ( Im ` A ) )
+s24:s20,s16:subcld |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( u - P ) e. CC )
+i25::imsub
+s26:s20,s16,i25:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` ( u - P ) ) = ( ( Im ` u ) - ( Im ` P ) ) )
+s27:s23:oveq1d |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( ( Im ` u ) - ( Im ` P ) ) = ( ( Im ` A ) - ( Im ` P ) ) )
+s28:s26,s27:eqtrd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` ( u - P ) ) = ( ( Im ` A ) - ( Im ` P ) ) )
+i29::imcl
+s30:s14,i29:syl |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` A ) e. RR )
+s31:s30:recnd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` A ) e. CC )
+i32::imcl
+s33:s16,i32:syl |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` P ) e. RR )
+s34:s33:recnd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` P ) e. CC )
+s35:s31,s34,s17:subne0d |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( ( Im ` A ) - ( Im ` P ) ) =/= 0 )
+s36:s28,s35:eqnetrd |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( Im ` ( u - P ) ) =/= 0 )
+i37::elslitim
+s38:s24,s36,i37:syl2anc |- ( ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) /\ u e. ( A cseg B ) ) -> ( u - P ) e. ( CC \ ( -oo (,] 0 ) ) )
+qed:s38:ralrimiva |- ( ( ( A e. CC /\ B e. CC /\ ( Im ` A ) = ( Im ` B ) ) /\ ( P e. CC /\ ( Im ` A ) =/= ( Im ` P ) ) ) -> A. u e. ( A cseg B ) ( u - P ) e. ( CC \ ( -oo (,] 0 ) ) )
+$)

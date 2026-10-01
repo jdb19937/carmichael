@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=incbitscl  LOC_AFTER=?
+
+* Closure of incBits: a bit word.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+s6::incbitsval |- ( L e. Word 2o -> ( incBits ` L ) = ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) )
+s7:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+s8::1z |- 1 e. ZZ
+s9:s8:a1i |- ( L e. Word 2o -> 1 e. ZZ )
+s10:s7,s9:zaddcld |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. ZZ )
+i11::lencl
+s12:s1,i11:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s13::1nn0 |- 1 e. NN0
+s14:s13:a1i |- ( L e. Word 2o -> 1 e. NN0 )
+s15:s12,s14:nn0addcld |- ( L e. Word 2o -> ( ( # ` L ) + 1 ) e. NN0 )
+s16:s15,s12:ifcld |- ( L e. Word 2o -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) e. NN0 )
+i17::bwrdcl
+s18:s10,s16,i17:syl2anc |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) e. Word 2o )
+qed:s6,s18:eqeltrd |- ( L e. Word 2o -> ( incBits ` L ) e. Word 2o )
+$)

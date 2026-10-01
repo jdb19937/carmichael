@@ -1,0 +1,69 @@
+$( <MM> <PROOF_ASST> THEOREM=z6ehmulc  LOC_AFTER=?
+
+* Helper of z6mrhol: z6ehmul in closed form (holmul, then the bound variable t renamed to s).
+
+s1::holmul |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( ( t e. CC |-> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( t e. CC |-> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) ) ) ) )
+s2::nfmpt1 |- F/_ s ( s e. CC |-> A )
+s3::nfcv |- F/_ s t
+s4:s2,s3:nffv |- F/_ s ( ( s e. CC |-> A ) ` t )
+s5::nfmpt1 |- F/_ s ( s e. CC |-> B )
+s6::nfcv |- F/_ s t
+s7:s5,s6:nffv |- F/_ s ( ( s e. CC |-> B ) ` t )
+s8::nfcv |- F/_ s x.
+s9:s4,s8,s7:nfov |- F/_ s ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) )
+s10::nfcv |- F/_ t ( ( ( s e. CC |-> A ) ` s ) x. ( ( s e. CC |-> B ) ` s ) )
+s11::fveq2 |- ( t = s -> ( ( s e. CC |-> A ) ` t ) = ( ( s e. CC |-> A ) ` s ) )
+s12::fveq2 |- ( t = s -> ( ( s e. CC |-> B ) ` t ) = ( ( s e. CC |-> B ) ` s ) )
+s13:s11,s12:oveq12d |- ( t = s -> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) = ( ( ( s e. CC |-> A ) ` s ) x. ( ( s e. CC |-> B ) ` s ) ) )
+s14:s9,s10,s13:cbvmpt |- ( t e. CC |-> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) ) = ( s e. CC |-> ( ( ( s e. CC |-> A ) ` s ) x. ( ( s e. CC |-> B ) ` s ) ) )
+s15::simpl |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) )
+s16:s15:simpld |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( s e. CC |-> A ) e. ( CC -cn-> CC ) )
+i17::cncff
+s18:s16,i17:syl |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( s e. CC |-> A ) : CC --> CC )
+s19::eqid |- ( s e. CC |-> A ) = ( s e. CC |-> A )
+s20:s19:fmpt |- ( A. s e. CC A e. CC <-> ( s e. CC |-> A ) : CC --> CC )
+s21:s18,s20:sylibr |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> A. s e. CC A e. CC )
+s22:s21:r19.21bi |- ( ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) /\ s e. CC ) -> A e. CC )
+s23::simpr |- ( ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) /\ s e. CC ) -> s e. CC )
+s24::eqid |- ( s e. CC |-> A ) = ( s e. CC |-> A )
+s25:s24:fvmpt2 |- ( ( s e. CC /\ A e. CC ) -> ( ( s e. CC |-> A ) ` s ) = A )
+s26:s23,s22,s25:syl2anc |- ( ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) /\ s e. CC ) -> ( ( s e. CC |-> A ) ` s ) = A )
+s27::simpr |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) )
+s28:s27:simpld |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( s e. CC |-> B ) e. ( CC -cn-> CC ) )
+i29::cncff
+s30:s28,i29:syl |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( s e. CC |-> B ) : CC --> CC )
+s31::eqid |- ( s e. CC |-> B ) = ( s e. CC |-> B )
+s32:s31:fmpt |- ( A. s e. CC B e. CC <-> ( s e. CC |-> B ) : CC --> CC )
+s33:s30,s32:sylibr |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> A. s e. CC B e. CC )
+s34:s33:r19.21bi |- ( ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) /\ s e. CC ) -> B e. CC )
+s35::simpr |- ( ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) /\ s e. CC ) -> s e. CC )
+s36::eqid |- ( s e. CC |-> B ) = ( s e. CC |-> B )
+s37:s36:fvmpt2 |- ( ( s e. CC /\ B e. CC ) -> ( ( s e. CC |-> B ) ` s ) = B )
+s38:s35,s34,s37:syl2anc |- ( ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) /\ s e. CC ) -> ( ( s e. CC |-> B ) ` s ) = B )
+s39:s26,s38:oveq12d |- ( ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) /\ s e. CC ) -> ( ( ( s e. CC |-> A ) ` s ) x. ( ( s e. CC |-> B ) ` s ) ) = ( A x. B ) )
+s40::nfmpt1 |- F/_ s ( s e. CC |-> A )
+s41:s40:nfel1 |- F/ s ( s e. CC |-> A ) e. ( CC -cn-> CC )
+s42::nfcv |- F/_ s CC
+s43::nfcv |- F/_ s _D
+s44:s42,s43,s40:nfov |- F/_ s ( CC _D ( s e. CC |-> A ) )
+s45::nfcv |- F/_ s CC
+s46:s44:nfdm |- F/_ s dom ( CC _D ( s e. CC |-> A ) )
+s47:s45,s46:nfss |- F/ s CC C_ dom ( CC _D ( s e. CC |-> A ) )
+s48:s41,s47:nfan |- F/ s ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) )
+s49::nfmpt1 |- F/_ s ( s e. CC |-> B )
+s50:s49:nfel1 |- F/ s ( s e. CC |-> B ) e. ( CC -cn-> CC )
+s51::nfcv |- F/_ s CC
+s52::nfcv |- F/_ s _D
+s53:s51,s52,s49:nfov |- F/_ s ( CC _D ( s e. CC |-> B ) )
+s54::nfcv |- F/_ s CC
+s55:s53:nfdm |- F/_ s dom ( CC _D ( s e. CC |-> B ) )
+s56:s54,s55:nfss |- F/ s CC C_ dom ( CC _D ( s e. CC |-> B ) )
+s57:s50,s56:nfan |- F/ s ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) )
+s58:s48,s57:nfan |- F/ s ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) )
+s59:s58,s39:mpteq2da |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( s e. CC |-> ( ( ( s e. CC |-> A ) ` s ) x. ( ( s e. CC |-> B ) ` s ) ) ) = ( s e. CC |-> ( A x. B ) ) )
+s60:s14:a1i |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( t e. CC |-> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) ) = ( s e. CC |-> ( ( ( s e. CC |-> A ) ` s ) x. ( ( s e. CC |-> B ) ` s ) ) ) )
+s61:s60,s59:eqtrd |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( t e. CC |-> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) ) = ( s e. CC |-> ( A x. B ) ) )
+i62::z6ehtr
+s63:s61,i62:syl |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( ( ( t e. CC |-> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( t e. CC |-> ( ( ( s e. CC |-> A ) ` t ) x. ( ( s e. CC |-> B ) ` t ) ) ) ) ) <-> ( ( s e. CC |-> ( A x. B ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> ( A x. B ) ) ) ) ) )
+qed:s1,s63:mpbid |- ( ( ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) /\ ( ( s e. CC |-> B ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> B ) ) ) ) -> ( ( s e. CC |-> ( A x. B ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> ( A x. B ) ) ) ) )
+$)

@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=revfpush  LOC_AFTER=?
+
+* The push function of the reverse machine: the letter held in the state.
+
+s1::simpl |- ( ( Q e. ( A |_| 1o ) /\ Z e. A ) -> Q e. ( A |_| 1o ) )
+s2::id |- ( v = Q -> v = Q )
+c1:s2:eqeq1d |- ( v = Q -> ( v = ( inr ` (/) ) <-> Q = ( inr ` (/) ) ) )
+c2:s2:fveq2d |- ( v = Q -> ( 2nd ` v ) = ( 2nd ` Q ) )
+c3:c1,c2:ifbieq2d |- ( v = Q -> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) = if ( Q = ( inr ` (/) ) , Z , ( 2nd ` Q ) ) )
+s3::eqid |- ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) ) = ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) )
+s4:c3,s3:fvmptg |- ( ( Q e. ( A |_| 1o ) /\ if ( Q = ( inr ` (/) ) , Z , ( 2nd ` Q ) ) e. _V ) -> ( ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) ) ` Q ) = if ( Q = ( inr ` (/) ) , Z , ( 2nd ` Q ) ) )
+s5::simpr |- ( ( Q e. ( A |_| 1o ) /\ Z e. A ) -> Z e. A )
+s6:s5:elexd |- ( ( Q e. ( A |_| 1o ) /\ Z e. A ) -> Z e. _V )
+s7::fvex |- ( 2nd ` Q ) e. _V
+s8:s7:a1i |- ( ( Q e. ( A |_| 1o ) /\ Z e. A ) -> ( 2nd ` Q ) e. _V )
+i9::ifexg
+s10:s6,s8,i9:syl2anc |- ( ( Q e. ( A |_| 1o ) /\ Z e. A ) -> if ( Q = ( inr ` (/) ) , Z , ( 2nd ` Q ) ) e. _V )
+qed:s1,s10,s4:syl2anc |- ( ( Q e. ( A |_| 1o ) /\ Z e. A ) -> ( ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) ) ` Q ) = if ( Q = ( inr ` (/) ) , Z , ( 2nd ` Q ) ) )
+$)

@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=predrestcl  LOC_AFTER=?
+
+* Closure of predRest: a bit word.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+s4:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+s5:s4:zred |- ( L e. Word 2o -> ( toNat ` L ) e. RR )
+s6::1re |- 1 e. RR
+s7:s6:a1i |- ( L e. Word 2o -> 1 e. RR )
+s8:s5,s7:resubcld |- ( L e. Word 2o -> ( ( toNat ` L ) - 1 ) e. RR )
+s9::2rp |- 2 e. RR+
+s10:s9:a1i |- ( L e. Word 2o -> 2 e. RR+ )
+i11::borrowscl
+s12:s1,i11:syl |- ( L e. Word 2o -> ( borrows ` L ) e. NN0 )
+s13:s12:nn0zd |- ( L e. Word 2o -> ( borrows ` L ) e. ZZ )
+s14:s10,s13:rpexpcld |- ( L e. Word 2o -> ( 2 ^ ( borrows ` L ) ) e. RR+ )
+s15:s8,s14:rerpdivcld |- ( L e. Word 2o -> ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) e. RR )
+i16::flcl
+s17:s15,i16:syl |- ( L e. Word 2o -> ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) e. ZZ )
+i18::borrowsle2
+s19:s1,i18:syl |- ( L e. Word 2o -> ( borrows ` L ) <_ ( # ` ( predBits ` L ) ) )
+i20::predbitscl
+s21:s1,i20:syl |- ( L e. Word 2o -> ( predBits ` L ) e. Word 2o )
+i22::lencl
+s23:s21,i22:syl |- ( L e. Word 2o -> ( # ` ( predBits ` L ) ) e. NN0 )
+i24::nn0sub
+s25:s12,s23,i24:syl2anc |- ( L e. Word 2o -> ( ( borrows ` L ) <_ ( # ` ( predBits ` L ) ) <-> ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) e. NN0 ) )
+s26:s19,s25:mpbid |- ( L e. Word 2o -> ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) e. NN0 )
+s27::predrestval |- ( L e. Word 2o -> ( predRest ` L ) = ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) )
+i28::bwrdcl
+s29:s17,s26,i28:syl2anc |- ( L e. Word 2o -> ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) e. Word 2o )
+qed:s27,s29:eqeltrd |- ( L e. Word 2o -> ( predRest ` L ) e. Word 2o )
+$)

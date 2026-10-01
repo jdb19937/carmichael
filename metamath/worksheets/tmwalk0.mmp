@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=tmwalk0  LOC_AFTER=?
+
+* The walk along the empty address is the trie itself.
+
+s1::elex |- ( R e. V -> R e. _V )
+s2::0ex |- (/) e. _V
+s3:s2:a1i |- ( R e. V -> (/) e. _V )
+s4::fvexd |- ( R e. V -> ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` ( # ` (/) ) ) e. _V )
+s5::id |- ( r = R -> r = R )
+c5_1:s5:ifeq1d |- ( r = R -> if ( n = 0 , r , ( w ` ( n - 1 ) ) ) = if ( n = 0 , R , ( w ` ( n - 1 ) ) ) )
+c5_2:c5_1:mpteq2dv |- ( r = R -> ( n e. NN0 |-> if ( n = 0 , r , ( w ` ( n - 1 ) ) ) ) = ( n e. NN0 |-> if ( n = 0 , R , ( w ` ( n - 1 ) ) ) ) )
+c5_3:c5_2:seqeq3d |- ( r = R -> seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , r , ( w ` ( n - 1 ) ) ) ) ) = seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( w ` ( n - 1 ) ) ) ) ) )
+c5_4:c5_3:fveq1d |- ( r = R -> ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , r , ( w ` ( n - 1 ) ) ) ) ) ` ( # ` w ) ) = ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( w ` ( n - 1 ) ) ) ) ) ` ( # ` w ) ) )
+s6::id |- ( w = (/) -> w = (/) )
+c10_1:s6:fveq1d |- ( w = (/) -> ( w ` ( n - 1 ) ) = ( (/) ` ( n - 1 ) ) )
+c10_2:c10_1:ifeq2d |- ( w = (/) -> if ( n = 0 , R , ( w ` ( n - 1 ) ) ) = if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) )
+c10_3:c10_2:mpteq2dv |- ( w = (/) -> ( n e. NN0 |-> if ( n = 0 , R , ( w ` ( n - 1 ) ) ) ) = ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) )
+c10_4:c10_3:seqeq3d |- ( w = (/) -> seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( w ` ( n - 1 ) ) ) ) ) = seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) )
+c10_5:s6:fveq2d |- ( w = (/) -> ( # ` w ) = ( # ` (/) ) )
+c10_6:c10_4,c10_5:fveq12d |- ( w = (/) -> ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( w ` ( n - 1 ) ) ) ) ) ` ( # ` w ) ) = ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` ( # ` (/) ) ) )
+s7::df-tmwalk |- TMWalk = ( r e. _V , w e. _V |-> ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , r , ( w ` ( n - 1 ) ) ) ) ) ` ( # ` w ) ) )
+s8:c5_4,c10_6,s7:ovmpog |- ( ( R e. _V /\ (/) e. _V /\ ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` ( # ` (/) ) ) e. _V ) -> ( R TMWalk (/) ) = ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` ( # ` (/) ) ) )
+s9:s1,s3,s4,s8:syl3anc |- ( R e. V -> ( R TMWalk (/) ) = ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` ( # ` (/) ) ) )
+s10::hash0 |- ( # ` (/) ) = 0
+s11:s10:a1i |- ( R e. V -> ( # ` (/) ) = 0 )
+s12:s11:fveq2d |- ( R e. V -> ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` ( # ` (/) ) ) = ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` 0 ) )
+s13::0z |- 0 e. ZZ
+i14::seq1
+s15:s13,i14:ax-mp |- ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` 0 ) = ( ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ` 0 )
+s16:s15:a1i |- ( R e. V -> ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` 0 ) = ( ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ` 0 ) )
+s17::0nn0 |- 0 e. NN0
+s18:s17:a1i |- ( R e. V -> 0 e. NN0 )
+s19::elex |- ( R e. V -> R e. _V )
+s20::fvex |- ( (/) ` ( 0 - 1 ) ) e. _V
+s21:s20:a1i |- ( R e. V -> ( (/) ` ( 0 - 1 ) ) e. _V )
+s22:s19,s21:ifcld |- ( R e. V -> if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) e. _V )
+s23::id |- ( n = 0 -> n = 0 )
+c33_1:s23:eqeq1d |- ( n = 0 -> ( n = 0 <-> 0 = 0 ) )
+c33_2:s23:oveq1d |- ( n = 0 -> ( n - 1 ) = ( 0 - 1 ) )
+c33_3:c33_2:fveq2d |- ( n = 0 -> ( (/) ` ( n - 1 ) ) = ( (/) ` ( 0 - 1 ) ) )
+c33_4:c33_1,c33_3:ifbieq2d |- ( n = 0 -> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) = if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) )
+s24::eqid |- ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) = ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) )
+s25:c33_4,s24:fvmptg |- ( ( 0 e. NN0 /\ if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) e. _V ) -> ( ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ` 0 ) = if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) )
+s26:s18,s22,s25:syl2anc |- ( R e. V -> ( ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ` 0 ) = if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) )
+s27::eqid |- 0 = 0
+s28:s27:iftruei |- if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) = R
+s29:s28:a1i |- ( R e. V -> if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) = R )
+s30:s9,s12:eqtrd |- ( R e. V -> ( R TMWalk (/) ) = ( seq 0 ( ( a e. _V , b e. _V |-> ( a ` b ) ) , ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ) ` 0 ) )
+s31:s30,s16:eqtrd |- ( R e. V -> ( R TMWalk (/) ) = ( ( n e. NN0 |-> if ( n = 0 , R , ( (/) ` ( n - 1 ) ) ) ) ` 0 ) )
+s32:s31,s26:eqtrd |- ( R e. V -> ( R TMWalk (/) ) = if ( 0 = 0 , R , ( (/) ` ( 0 - 1 ) ) ) )
+qed:s32,s29:eqtrd |- ( R e. V -> ( R TMWalk (/) ) = R )
+$)

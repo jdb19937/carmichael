@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=csegval  LOC_AFTER=?
+
+* Value of the segment: the set of the points A + t ( B - A ) for t in the unit interval.
+
+s1::simpl |- ( ( a = A /\ b = B ) -> a = A )
+s2::simpr |- ( ( a = A /\ b = B ) -> b = B )
+c1:s2,s1:oveq12d |- ( ( a = A /\ b = B ) -> ( b - a ) = ( B - A ) )
+c2:c1:oveq2d |- ( ( a = A /\ b = B ) -> ( t x. ( b - a ) ) = ( t x. ( B - A ) ) )
+c3:s1,c2:oveq12d |- ( ( a = A /\ b = B ) -> ( a + ( t x. ( b - a ) ) ) = ( A + ( t x. ( B - A ) ) ) )
+c4:c3:mpteq2dv |- ( ( a = A /\ b = B ) -> ( t e. ( 0 [,] 1 ) |-> ( a + ( t x. ( b - a ) ) ) ) = ( t e. ( 0 [,] 1 ) |-> ( A + ( t x. ( B - A ) ) ) ) )
+c5:c4:rneqd |- ( ( a = A /\ b = B ) -> ran ( t e. ( 0 [,] 1 ) |-> ( a + ( t x. ( b - a ) ) ) ) = ran ( t e. ( 0 [,] 1 ) |-> ( A + ( t x. ( B - A ) ) ) ) )
+s3::df-cseg |- cseg = ( a e. CC , b e. CC |-> ran ( t e. ( 0 [,] 1 ) |-> ( a + ( t x. ( b - a ) ) ) ) )
+s4::ovex |- ( 0 [,] 1 ) e. _V
+i5::mptexg
+s6:s4,i5:ax-mp |- ( t e. ( 0 [,] 1 ) |-> ( A + ( t x. ( B - A ) ) ) ) e. _V
+i7::rnexg
+s8:s6,i7:ax-mp |- ran ( t e. ( 0 [,] 1 ) |-> ( A + ( t x. ( B - A ) ) ) ) e. _V
+s9:c5,s3:ovmpoga |- ( ( A e. CC /\ B e. CC /\ ran ( t e. ( 0 [,] 1 ) |-> ( A + ( t x. ( B - A ) ) ) ) e. _V ) -> ( A cseg B ) = ran ( t e. ( 0 [,] 1 ) |-> ( A + ( t x. ( B - A ) ) ) ) )
+qed:s8,s9:mp3an3 |- ( ( A e. CC /\ B e. CC ) -> ( A cseg B ) = ran ( t e. ( 0 [,] 1 ) |-> ( A + ( t x. ( B - A ) ) ) ) )
+$)

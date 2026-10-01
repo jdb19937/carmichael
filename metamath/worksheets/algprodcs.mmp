@@ -1,0 +1,95 @@
+$( <MM> <PROOF_ASST> THEOREM=algprodcs  LOC_AFTER=?
+
+* The product over a cons (Lean: List.prod_cons).
+
+s1::simpl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> P e. NN0 )
+s2::simpr |- ( ( P e. NN0 /\ W e. Word NN0 ) -> W e. Word NN0 )
+i3::s1cl
+s4:s1,i3:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> <" P "> e. Word NN0 )
+i5::ccatcl
+s6:s4,s2,i5:syl2anc |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( <" P "> ++ W ) e. Word NN0 )
+s7::alglencs |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` ( <" P "> ++ W ) ) = ( ( # ` W ) + 1 ) )
+i8::lencl
+s9:s2,i8:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` W ) e. NN0 )
+s10:s9:nn0cnd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` W ) e. CC )
+i11::lencl
+s12:s6,i11:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` ( <" P "> ++ W ) ) e. NN0 )
+s13:s12:nn0zd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` ( <" P "> ++ W ) ) e. ZZ )
+i14::fzoval
+s15:s13,i14:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( 0 ..^ ( # ` ( <" P "> ++ W ) ) ) = ( 0 ... ( ( # ` ( <" P "> ++ W ) ) - 1 ) ) )
+s16:s7:oveq1d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( # ` ( <" P "> ++ W ) ) - 1 ) = ( ( ( # ` W ) + 1 ) - 1 ) )
+s17::1cnd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> 1 e. CC )
+s18:s10,s17:pncand |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( ( # ` W ) + 1 ) - 1 ) = ( # ` W ) )
+s19:s16,s18:eqtrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( # ` ( <" P "> ++ W ) ) - 1 ) = ( # ` W ) )
+s20:s19:oveq2d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( 0 ... ( ( # ` ( <" P "> ++ W ) ) - 1 ) ) = ( 0 ... ( # ` W ) ) )
+s21:s15,s20:eqtrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( 0 ..^ ( # ` ( <" P "> ++ W ) ) ) = ( 0 ... ( # ` W ) ) )
+s22:s21:prodeq1d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ W ) ) ) ( ( <" P "> ++ W ) ` i ) = prod_ i e. ( 0 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) )
+s23::nn0uz |- NN0 = ( ZZ>= ` 0 )
+s24:s23:a1i |- ( ( P e. NN0 /\ W e. Word NN0 ) -> NN0 = ( ZZ>= ` 0 ) )
+s25:s9,s24:eleqtrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` W ) e. ( ZZ>= ` 0 ) )
+s26::simpr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 0 ... ( # ` W ) ) ) -> i e. ( 0 ... ( # ` W ) ) )
+s27:s21:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 0 ... ( # ` W ) ) ) -> ( 0 ..^ ( # ` ( <" P "> ++ W ) ) ) = ( 0 ... ( # ` W ) ) )
+s28:s26,s27:eleqtrrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 0 ... ( # ` W ) ) ) -> i e. ( 0 ..^ ( # ` ( <" P "> ++ W ) ) ) )
+s29:s6:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 0 ... ( # ` W ) ) ) -> ( <" P "> ++ W ) e. Word NN0 )
+i30::wrdsymbcl
+s31:s29,s28,i30:syl2anc |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 0 ... ( # ` W ) ) ) -> ( ( <" P "> ++ W ) ` i ) e. NN0 )
+s32:s31:nn0cnd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 0 ... ( # ` W ) ) ) -> ( ( <" P "> ++ W ) ` i ) e. CC )
+s33::id |- ( i = 0 -> i = 0 )
+s34:s33:fveq2d |- ( i = 0 -> ( ( <" P "> ++ W ) ` i ) = ( ( <" P "> ++ W ) ` 0 ) )
+s35:s25,s32,s34:fprod1p |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( 0 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) = ( ( ( <" P "> ++ W ) ` 0 ) x. prod_ i e. ( ( 0 + 1 ) ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) ) )
+s36::0p1e1 |- ( 0 + 1 ) = 1
+s37:s36:a1i |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( 0 + 1 ) = 1 )
+s38:s37:oveq1d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( 0 + 1 ) ... ( # ` W ) ) = ( 1 ... ( # ` W ) ) )
+s39:s38:prodeq1d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( ( 0 + 1 ) ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) = prod_ i e. ( 1 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) )
+s40::algcsfv0 |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( <" P "> ++ W ) ` 0 ) = P )
+s41:s40,s39:oveq12d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( ( <" P "> ++ W ) ` 0 ) x. prod_ i e. ( ( 0 + 1 ) ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) ) = ( P x. prod_ i e. ( 1 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) ) )
+s42:s35,s41:eqtrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( 0 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) = ( P x. prod_ i e. ( 1 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) ) )
+s43::simpr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> i e. ( 1 ... ( # ` W ) ) )
+i44::elfzelz
+s45:s43,i44:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> i e. ZZ )
+s46:s45:zcnd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> i e. CC )
+i47::elfzle1
+s48:s43,i47:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> 1 <_ i )
+i49::elfzle2
+s50:s43,i49:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> i <_ ( # ` W ) )
+s51::1zzd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> 1 e. ZZ )
+s52:s45,s51:zsubcld |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( i - 1 ) e. ZZ )
+s53:s45:zred |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> i e. RR )
+s54:s9:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( # ` W ) e. NN0 )
+s55:s54:nn0red |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( # ` W ) e. RR )
+s56::1red |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> 1 e. RR )
+s57:s53,s56:subge0d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( 0 <_ ( i - 1 ) <-> 1 <_ i ) )
+s58:s57,s48:mpbird |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> 0 <_ ( i - 1 ) )
+i59::elnn0z
+s60:s52,s58,i59:sylanbrc |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( i - 1 ) e. NN0 )
+s61::1red |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> 1 e. RR )
+s62:s61,s53,s55,s48,s50:letrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> 1 <_ ( # ` W ) )
+s63:s9:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( # ` W ) e. NN0 )
+i64::elnnnn0c
+s65:s63,s62,i64:sylanbrc |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( # ` W ) e. NN )
+s66:s52:zred |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( i - 1 ) e. RR )
+s67:s53:ltm1d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( i - 1 ) < i )
+s68:s66,s53,s55,s67,s50:ltletrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( i - 1 ) < ( # ` W ) )
+s69:s60,s65,s68:3jca |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( ( i - 1 ) e. NN0 /\ ( # ` W ) e. NN /\ ( i - 1 ) < ( # ` W ) ) )
+i70::elfzo0
+s71:s69,i70:sylibr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( i - 1 ) e. ( 0 ..^ ( # ` W ) ) )
+s72:s1:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> P e. NN0 )
+s73:s2:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> W e. Word NN0 )
+s74:s72,s73:jca |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( P e. NN0 /\ W e. Word NN0 ) )
+i75::algcsfvp1
+s76:s74,s71,i75:syl2anc |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( ( <" P "> ++ W ) ` ( ( i - 1 ) + 1 ) ) = ( W ` ( i - 1 ) ) )
+s77::1cnd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> 1 e. CC )
+s78:s46,s77:npcand |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( ( i - 1 ) + 1 ) = i )
+s79:s78:fveq2d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( ( <" P "> ++ W ) ` ( ( i - 1 ) + 1 ) ) = ( ( <" P "> ++ W ) ` i ) )
+s80:s79,s76:eqtr3d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ i e. ( 1 ... ( # ` W ) ) ) -> ( ( <" P "> ++ W ) ` i ) = ( W ` ( i - 1 ) ) )
+s81:s80:prodeq2dv |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( 1 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) = prod_ i e. ( 1 ... ( # ` W ) ) ( W ` ( i - 1 ) ) )
+i82::algprodsh
+s83:s2,i82:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( 1 ... ( # ` W ) ) ( W ` ( i - 1 ) ) = prod_ j e. ( 0 ..^ ( # ` W ) ) ( W ` j ) )
+s84::id |- ( j = i -> j = i )
+s85:s84:fveq2d |- ( j = i -> ( W ` j ) = ( W ` i ) )
+s86:s85:cbvprodv |- prod_ j e. ( 0 ..^ ( # ` W ) ) ( W ` j ) = prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i )
+s87:s86:a1i |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ j e. ( 0 ..^ ( # ` W ) ) ( W ` j ) = prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) )
+s88:s81,s83,s87:3eqtrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( 1 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) = prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) )
+s89:s88:oveq2d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( P x. prod_ i e. ( 1 ... ( # ` W ) ) ( ( <" P "> ++ W ) ` i ) ) = ( P x. prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) ) )
+qed:s22,s42,s89:3eqtrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ W ) ) ) ( ( <" P "> ++ W ) ` i ) = ( P x. prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) ) )
+$)

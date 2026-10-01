@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=cmpbitsfold  LOC_AFTER=?
+
+* The comparison is the cmpStep fold at the max length: the form the loop assembly instantiates.
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> C e. 3o )
+i4::lencl
+s5:s1,i4:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` X ) e. NN0 )
+s6:s5:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` X ) e. ZZ )
+s7:s6:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` X ) e. RR )
+i8::lencl
+s9:s2,i8:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` Y ) e. NN0 )
+s10:s9:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` Y ) e. ZZ )
+s11:s10:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` Y ) e. RR )
+i12::bwmaxle
+s13:s7,s11,i12:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( # ` X ) <_ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) /\ ( # ` Y ) <_ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+s14:s13:simpld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` X ) <_ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+s15:s13:simprd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( # ` Y ) <_ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+s16:s9,s5:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) e. NN0 )
+i17::tonatltpow
+s18:s1,s16,s14,i17:syl3anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` X ) < ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+i19::tonatltpow
+s20:s2,s16,s15,i19:syl3anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` Y ) < ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+s21::cmpbitsval |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( X cmpBits Y ) ` C ) = if ( ( toNat ` X ) = ( toNat ` Y ) , C , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) )
+i22::tonatcl
+s23:s1,i22:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` X ) e. NN0 )
+i24::tonatcl
+s25:s2,i24:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` Y ) e. NN0 )
+s26:s23,s25,s3:3jca |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( toNat ` X ) e. NN0 /\ ( toNat ` Y ) e. NN0 /\ C e. 3o ) )
+i27::bwcmpf
+s28:s26,s16,i27:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( cmpStep ( ( toNat ` X ) bwFold ( toNat ` Y ) ) C ) ` if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) = if ( ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) , C , ( ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) Ncmp ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) ) ) )
+s29::2nn |- 2 e. NN
+s30:s29:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> 2 e. NN )
+i31::nnexpcl
+s32:s30,s16,i31:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) e. NN )
+s33:s23:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` X ) e. ZZ )
+s34:s25:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` Y ) e. ZZ )
+i35::zmodidfzo
+s36:s33,s32,i35:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = ( toNat ` X ) <-> ( toNat ` X ) e. ( 0 ..^ ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) ) )
+s37::2z |- 2 e. ZZ
+s38:s37:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> 2 e. ZZ )
+s39:s38,s16:zexpcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) e. ZZ )
+i40::elfzo0z
+s41:s23,s39,s18,i40:syl3anbrc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` X ) e. ( 0 ..^ ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) )
+s42:s41,s36:mpbird |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = ( toNat ` X ) )
+i43::zmodidfzo
+s44:s34,s32,i43:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = ( toNat ` Y ) <-> ( toNat ` Y ) e. ( 0 ..^ ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) ) )
+i45::elfzo0z
+s46:s25,s39,s20,i45:syl3anbrc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` Y ) e. ( 0 ..^ ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) )
+s47:s46,s44:mpbird |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = ( toNat ` Y ) )
+s48:s42,s47:eqeq12d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) <-> ( toNat ` X ) = ( toNat ` Y ) ) )
+s49:s42,s47:oveq12d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) Ncmp ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) ) = ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) )
+s50:s48,s49:ifbieq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> if ( ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) , C , ( ( ( toNat ` X ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) Ncmp ( ( toNat ` Y ) mod ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) ) ) = if ( ( toNat ` X ) = ( toNat ` Y ) , C , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) )
+s51:s28,s50:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( cmpStep ( ( toNat ` X ) bwFold ( toNat ` Y ) ) C ) ` if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) = if ( ( toNat ` X ) = ( toNat ` Y ) , C , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) )
+qed:s21,s51:eqtr4d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( X cmpBits Y ) ` C ) = ( ( cmpStep ( ( toNat ` X ) bwFold ( toNat ` Y ) ) C ) ` if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+$)

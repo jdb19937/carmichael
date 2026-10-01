@@ -1,0 +1,55 @@
+$( <MM> <PROOF_ASST> THEOREM=gf1cvadd  LOC_AFTER=?
+
+* The sum of two convergent series converges ( ~ seradd , ~ climadd ).
+
+h1::gf1cvadd.1 |- ( ( ph /\ n e. NN ) -> ( F ` n ) e. CC )
+h2::gf1cvadd.2 |- ( ( ph /\ n e. NN ) -> ( G ` n ) e. CC )
+h3::gf1cvadd.3 |- ( ph -> seq 1 ( + , F ) e. dom ~~> )
+h4::gf1cvadd.4 |- ( ph -> seq 1 ( + , G ) e. dom ~~> )
+s1::climdm |- ( seq 1 ( + , F ) e. dom ~~> <-> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , F ) ) )
+s2:h3,s1:sylib |- ( ph -> seq 1 ( + , F ) ~~> ( ~~> ` seq 1 ( + , F ) ) )
+s3::climdm |- ( seq 1 ( + , G ) e. dom ~~> <-> seq 1 ( + , G ) ~~> ( ~~> ` seq 1 ( + , G ) ) )
+s4:h4,s3:sylib |- ( ph -> seq 1 ( + , G ) ~~> ( ~~> ` seq 1 ( + , G ) ) )
+s5::nnuz |- NN = ( ZZ>= ` 1 )
+s6::1z |- 1 e. ZZ
+s7:s6:a1i |- ( ph -> 1 e. ZZ )
+s8::simpr |- ( ( ph /\ k e. NN ) -> k e. NN )
+s9:s8,s5:eleqtrdi |- ( ( ph /\ k e. NN ) -> k e. ( ZZ>= ` 1 ) )
+s10::simpr |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> n e. ( 1 ... k ) )
+i11::elfznn
+s12:s10,i11:syl |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> n e. NN )
+s13::simpll |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ph )
+s14:s13,s12:jca |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( ph /\ n e. NN ) )
+s15:s14,h1:syl |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( F ` n ) e. CC )
+s16::simpr |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> n e. ( 1 ... k ) )
+i17::elfznn
+s18:s16,i17:syl |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> n e. NN )
+s19::simpll |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ph )
+s20:s19,s18:jca |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( ph /\ n e. NN ) )
+s21:s20,h2:syl |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( G ` n ) e. CC )
+s22:s15,s21:addcld |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( ( F ` n ) + ( G ` n ) ) e. CC )
+s23::eqidd |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) = ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) )
+s24::fveq2 |- ( m = n -> ( F ` m ) = ( F ` n ) )
+s25::fveq2 |- ( m = n -> ( G ` m ) = ( G ` n ) )
+s26:s24,s25:oveq12d |- ( m = n -> ( ( F ` m ) + ( G ` m ) ) = ( ( F ` n ) + ( G ` n ) ) )
+s27:s26:adantl |- ( ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) /\ m = n ) -> ( ( F ` m ) + ( G ` m ) ) = ( ( F ` n ) + ( G ` n ) ) )
+s28:s23,s27,s12,s22:fvmptd |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) ` n ) = ( ( F ` n ) + ( G ` n ) ) )
+s29:s9,s15,s21,s28:seradd |- ( ( ph /\ k e. NN ) -> ( seq 1 ( + , ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) ) ` k ) = ( ( seq 1 ( + , F ) ` k ) + ( seq 1 ( + , G ) ` k ) ) )
+s30::eqidd |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( F ` n ) = ( F ` n ) )
+s31:s30,s9,s15:fsumser |- ( ( ph /\ k e. NN ) -> sum_ n e. ( 1 ... k ) ( F ` n ) = ( seq 1 ( + , F ) ` k ) )
+s32::fzfid |- ( ( ph /\ k e. NN ) -> ( 1 ... k ) e. Fin )
+s33:s32,s15:fsumcl |- ( ( ph /\ k e. NN ) -> sum_ n e. ( 1 ... k ) ( F ` n ) e. CC )
+s34:s31,s33:eqeltrrd |- ( ( ph /\ k e. NN ) -> ( seq 1 ( + , F ) ` k ) e. CC )
+s35::eqidd |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( G ` n ) = ( G ` n ) )
+s36:s35,s9,s21:fsumser |- ( ( ph /\ k e. NN ) -> sum_ n e. ( 1 ... k ) ( G ` n ) = ( seq 1 ( + , G ) ` k ) )
+s37::fzfid |- ( ( ph /\ k e. NN ) -> ( 1 ... k ) e. Fin )
+s38:s37,s21:fsumcl |- ( ( ph /\ k e. NN ) -> sum_ n e. ( 1 ... k ) ( G ` n ) e. CC )
+s39:s36,s38:eqeltrrd |- ( ( ph /\ k e. NN ) -> ( seq 1 ( + , G ) ` k ) e. CC )
+s40::seqex |- seq 1 ( + , ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) ) e. _V
+s41:s40:a1i |- ( ph -> seq 1 ( + , ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) ) e. _V )
+s42:s5,s7,s2,s41,s4,s34,s39,s29:climadd |- ( ph -> seq 1 ( + , ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) ) ~~> ( ( ~~> ` seq 1 ( + , F ) ) + ( ~~> ` seq 1 ( + , G ) ) ) )
+s43::climrel |- Rel ~~>
+i44::releldm
+s45:s43,s42,i44:sylancr |- ( ph -> seq 1 ( + , ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) ) e. dom ~~> )
+qed:s45:idi |- ( ph -> seq 1 ( + , ( m e. NN |-> ( ( F ` m ) + ( G ` m ) ) ) ) e. dom ~~> )
+$)

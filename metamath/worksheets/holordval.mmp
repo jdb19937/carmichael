@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=holordval  LOC_AFTER=?
+
+* The value of the order of vanishing: the infimum in the extended reals of the exponents of the local factorisations of F at P .
+
+s1::simpl |- ( ( f = F /\ p = P ) -> f = F )
+s2::simpr |- ( ( f = F /\ p = P ) -> p = P )
+s3:s2:eleq1d |- ( ( f = F /\ p = P ) -> ( p e. d <-> P e. d ) )
+s4::biidd |- ( ( f = F /\ p = P ) -> ( ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) <-> ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) ) )
+s5:s2:fveq2d |- ( ( f = F /\ p = P ) -> ( g ` p ) = ( g ` P ) )
+s6:s5:neeq1d |- ( ( f = F /\ p = P ) -> ( ( g ` p ) =/= 0 <-> ( g ` P ) =/= 0 ) )
+s7:s1:fveq1d |- ( ( f = F /\ p = P ) -> ( f ` z ) = ( F ` z ) )
+s8:s2:oveq2d |- ( ( f = F /\ p = P ) -> ( z - p ) = ( z - P ) )
+s9:s8:oveq1d |- ( ( f = F /\ p = P ) -> ( ( z - p ) ^ n ) = ( ( z - P ) ^ n ) )
+s10:s9:oveq1d |- ( ( f = F /\ p = P ) -> ( ( ( z - p ) ^ n ) x. ( g ` z ) ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) )
+s11:s7,s10:eqeq12d |- ( ( f = F /\ p = P ) -> ( ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) <-> ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) )
+s12:s11:ralbidv |- ( ( f = F /\ p = P ) -> ( A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) <-> A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) )
+s13:s6,s12:anbi12d |- ( ( f = F /\ p = P ) -> ( ( ( g ` p ) =/= 0 /\ A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) ) <-> ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) )
+s14:s3,s4,s13:3anbi123d |- ( ( f = F /\ p = P ) -> ( ( p e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` p ) =/= 0 /\ A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) ) ) <-> ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) ) )
+s15:s14:exbidv |- ( ( f = F /\ p = P ) -> ( E. g ( p e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` p ) =/= 0 /\ A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) ) ) <-> E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) ) )
+s16:s15:rexbidv |- ( ( f = F /\ p = P ) -> ( E. d e. ( TopOpen ` CCfld ) E. g ( p e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` p ) =/= 0 /\ A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) ) ) <-> E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) ) )
+s17:s16:rabbidv |- ( ( f = F /\ p = P ) -> { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( p e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` p ) =/= 0 /\ A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) ) ) } = { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) } )
+s18:s17:infeq1d |- ( ( f = F /\ p = P ) -> inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( p e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` p ) =/= 0 /\ A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) = inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) )
+s19::df-holord |- holord = ( f e. _V , p e. CC |-> inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( p e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` p ) =/= 0 /\ A. z e. d ( f ` z ) = ( ( ( z - p ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) )
+s20:s18,s19:ovmpoga |- ( ( F e. _V /\ P e. CC /\ inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) e. _V ) -> ( F holord P ) = inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) )
+s21::simpl |- ( ( F e. V /\ P e. CC ) -> F e. V )
+s22:s21:elexd |- ( ( F e. V /\ P e. CC ) -> F e. _V )
+s23::simpr |- ( ( F e. V /\ P e. CC ) -> P e. CC )
+s24::xrltso |- < Or RR*
+s25:s24:infex |- inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) e. _V
+s26:s25:a1i |- ( ( F e. V /\ P e. CC ) -> inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) e. _V )
+qed:s22,s23,s26,s20:syl3anc |- ( ( F e. V /\ P e. CC ) -> ( F holord P ) = inf ( { n e. NN0 | E. d e. ( TopOpen ` CCfld ) E. g ( P e. d /\ ( g e. ( d -cn-> CC ) /\ d C_ dom ( CC _D g ) ) /\ ( ( g ` P ) =/= 0 /\ A. z e. d ( F ` z ) = ( ( ( z - P ) ^ n ) x. ( g ` z ) ) ) ) } , RR* , < ) )
+$)

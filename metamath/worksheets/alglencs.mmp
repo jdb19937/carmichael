@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=alglencs  LOC_AFTER=?
+
+* The length of a cons (Lean: List.length_cons).
+
+s1::simpl |- ( ( P e. V /\ W e. Word V ) -> P e. V )
+s2::simpr |- ( ( P e. V /\ W e. Word V ) -> W e. Word V )
+i3::s1cl
+s4:s1,i3:syl |- ( ( P e. V /\ W e. Word V ) -> <" P "> e. Word V )
+i5::ccatlen
+s6:s4,s2,i5:syl2anc |- ( ( P e. V /\ W e. Word V ) -> ( # ` ( <" P "> ++ W ) ) = ( ( # ` <" P "> ) + ( # ` W ) ) )
+s7::s1len |- ( # ` <" P "> ) = 1
+s8:s7:a1i |- ( ( P e. V /\ W e. Word V ) -> ( # ` <" P "> ) = 1 )
+s9:s8:oveq1d |- ( ( P e. V /\ W e. Word V ) -> ( ( # ` <" P "> ) + ( # ` W ) ) = ( 1 + ( # ` W ) )  )
+i10::lencl
+s11:s2,i10:syl |- ( ( P e. V /\ W e. Word V ) -> ( # ` W ) e. NN0 )
+s12:s11:nn0cnd |- ( ( P e. V /\ W e. Word V ) -> ( # ` W ) e. CC )
+s13::1cnd |- ( ( P e. V /\ W e. Word V ) -> 1 e. CC )
+s14:s13,s12:addcomd |- ( ( P e. V /\ W e. Word V ) -> ( 1 + ( # ` W ) ) = ( ( # ` W ) + 1 ) )
+qed:s6,s9,s14:3eqtrd |- ( ( P e. V /\ W e. Word V ) -> ( # ` ( <" P "> ++ W ) ) = ( ( # ` W ) + 1 ) )
+$)

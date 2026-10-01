@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=borrowsndvds  LOC_AFTER=?
+
+* 2 to the borrows plus one does not divide a nonzero toNat L.
+
+s1::simpl |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( toNat ` L ) =/= 0 )
+i3::tonatcl
+s4:s1,i3:syl |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( toNat ` L ) e. NN0 )
+i5::elnnne0
+s6:s4,s2,i5:sylanbrc |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( toNat ` L ) e. NN )
+i7::borrowsval
+s8:s1,i7:syl |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s9:s2:neneqd |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> -. ( toNat ` L ) = 0 )
+s10:s9:iffalsed |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) = ( 2 pCnt ( toNat ` L ) ) )
+s11:s8,s10:eqtrd |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( borrows ` L ) = ( 2 pCnt ( toNat ` L ) ) )
+s12::2prm |- 2 e. Prime
+s13:s12:a1i |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> 2 e. Prime )
+i14::pcndvds
+s15:s13,s6,i14:syl2anc |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> -. ( 2 ^ ( ( 2 pCnt ( toNat ` L ) ) + 1 ) ) || ( toNat ` L ) )
+s16:s11:oveq1d |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( ( borrows ` L ) + 1 ) = ( ( 2 pCnt ( toNat ` L ) ) + 1 ) )
+s17:s16:oveq2d |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( 2 ^ ( ( borrows ` L ) + 1 ) ) = ( 2 ^ ( ( 2 pCnt ( toNat ` L ) ) + 1 ) ) )
+s18:s17:breq1d |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> ( ( 2 ^ ( ( borrows ` L ) + 1 ) ) || ( toNat ` L ) <-> ( 2 ^ ( ( 2 pCnt ( toNat ` L ) ) + 1 ) ) || ( toNat ` L ) ) )
+qed:s15,s18:mtbird |- ( ( L e. Word 2o /\ ( toNat ` L ) =/= 0 ) -> -. ( 2 ^ ( ( borrows ` L ) + 1 ) ) || ( toNat ` L ) )
+$)

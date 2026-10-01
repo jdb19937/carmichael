@@ -1,0 +1,60 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcdbmk  LOC_AFTER=?
+
+* The ` db ` field of a record literal (Lean: the projection of ` St.equivProd ` on ` St.mk ` ).
+
+s1::simp1 |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) )
+i2::simp1
+s3:s1,i2:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> A e. 2o )
+i4::simp2
+s5:s1,i4:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> B e. ( 2o |_| 1o ) )
+i6::simp3
+s7:s1,i6:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> C e. ( 2o |_| 1o ) )
+s8::simp2 |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( D e. 2o /\ E e. 2o ) )
+s9:s8:simpld |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> D e. 2o )
+s10:s8:simprd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> E e. 2o )
+s11::simp3 |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( F e. 3o /\ G e. 2o ) )
+s12:s11:simpld |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> F e. 3o )
+s13:s11:simprd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> G e. 2o )
+s14:s12,s13:opelxpd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> <. F , G >. e. ( 3o X. 2o ) )
+s15:s10,s14:opelxpd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> <. E , <. F , G >. >. e. ( 2o X. ( 3o X. 2o ) ) )
+s16:s9,s15:opelxpd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> <. D , <. E , <. F , G >. >. >. e. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) )
+s17:s7,s16:opelxpd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> <. C , <. D , <. E , <. F , G >. >. >. >. e. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) )
+s18:s5,s17:opelxpd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s19:s3,s18:opelxpd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) ) )
+s20::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s21:s19,s20:eleqtrrdi |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. e. TMSt )
+s22::df-tmdb |- TMdb = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) )
+s23:s22:a1i |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> TMdb = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) )
+s24::fveq2 |- ( v = <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. -> ( 2nd ` v ) = ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) )
+s25:s24:fveq2d |- ( v = <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. -> ( 2nd ` ( 2nd ` v ) ) = ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) )
+s26:s25:fveq2d |- ( v = <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. -> ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) )
+s27:s26:fveq2d |- ( v = <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) )
+s28:s27:fveq2d |- ( v = <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) ) )
+s29:s28:adantl |- ( ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) /\ v = <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) ) )
+s30::fvexd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) ) e. _V )
+s31:s23,s29,s21,s30:fvmptd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( TMdb ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) ) )
+s32:s3,s18:jca |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( A e. 2o /\ <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) ) )
+i33::op2ndg
+s34:s32,i33:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) = <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. )
+s35:s5,s17:jca |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( B e. ( 2o |_| 1o ) /\ <. C , <. D , <. E , <. F , G >. >. >. >. e. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+i36::op2ndg
+s37:s35,i36:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. ) = <. C , <. D , <. E , <. F , G >. >. >. >. )
+s38:s34:fveq2d |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) = ( 2nd ` <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. ) )
+s39:s38,s37:eqtrd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) = <. C , <. D , <. E , <. F , G >. >. >. >. )
+s40:s7,s16:jca |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( C e. ( 2o |_| 1o ) /\ <. D , <. E , <. F , G >. >. >. e. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) )
+i41::op2ndg
+s42:s40,i41:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` <. C , <. D , <. E , <. F , G >. >. >. >. ) = <. D , <. E , <. F , G >. >. >. )
+s43:s39:fveq2d |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) = ( 2nd ` <. C , <. D , <. E , <. F , G >. >. >. >. ) )
+s44:s43,s42:eqtrd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) = <. D , <. E , <. F , G >. >. >. )
+s45:s9,s15:jca |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( D e. 2o /\ <. E , <. F , G >. >. e. ( 2o X. ( 3o X. 2o ) ) ) )
+i46::op2ndg
+s47:s45,i46:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` <. D , <. E , <. F , G >. >. >. ) = <. E , <. F , G >. >. )
+s48:s44:fveq2d |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) = ( 2nd ` <. D , <. E , <. F , G >. >. >. ) )
+s49:s48,s47:eqtrd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) = <. E , <. F , G >. >. )
+s50:s10,s14:jca |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( E e. 2o /\ <. F , G >. e. ( 3o X. 2o ) ) )
+i51::op1stg
+s52:s50,i51:syl |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 1st ` <. E , <. F , G >. >. ) = E )
+s53:s49:fveq2d |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) ) = ( 1st ` <. E , <. F , G >. >. ) )
+s54:s53,s52:eqtrd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) ) ) ) ) = E )
+qed:s31,s54:eqtrd |- ( ( ( A e. 2o /\ B e. ( 2o |_| 1o ) /\ C e. ( 2o |_| 1o ) ) /\ ( D e. 2o /\ E e. 2o ) /\ ( F e. 3o /\ G e. 2o ) ) -> ( TMdb ` <. A , <. B , <. C , <. D , <. E , <. F , G >. >. >. >. >. >. ) = E )
+$)

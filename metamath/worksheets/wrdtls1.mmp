@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=wrdtls1  LOC_AFTER=?
+
+* The tail of a word whose first letter is explicit.
+
+s1::simpl |- ( ( Y e. A /\ W e. Word A ) -> Y e. A )
+s2::simpr |- ( ( Y e. A /\ W e. Word A ) -> W e. Word A )
+s3:s1:s1cld |- ( ( Y e. A /\ W e. Word A ) -> <" Y "> e. Word A )
+s4::s1nz |- <" Y "> =/= (/)
+s5:s4:a1i |- ( ( Y e. A /\ W e. Word A ) -> <" Y "> =/= (/) )
+i6::wrdtlcc
+s7:s3,s5,s2,i6:syl3anc |- ( ( Y e. A /\ W e. Word A ) -> ( ( <" Y "> ++ W ) substr <. 1 , ( # ` ( <" Y "> ++ W ) ) >. ) = ( ( <" Y "> substr <. 1 , ( # ` <" Y "> ) >. ) ++ W ) )
+i8::s1tl
+s9:s1,i8:syl |- ( ( Y e. A /\ W e. Word A ) -> ( <" Y "> substr <. 1 , ( # ` <" Y "> ) >. ) = (/) )
+s10:s9:oveq1d |- ( ( Y e. A /\ W e. Word A ) -> ( ( <" Y "> substr <. 1 , ( # ` <" Y "> ) >. ) ++ W ) = ( (/) ++ W ) )
+i11::ccatlid
+s12:s2,i11:syl |- ( ( Y e. A /\ W e. Word A ) -> ( (/) ++ W ) = W )
+s13:s10,s12:eqtrd |- ( ( Y e. A /\ W e. Word A ) -> ( ( <" Y "> substr <. 1 , ( # ` <" Y "> ) >. ) ++ W ) = W )
+qed:s7,s13:eqtrd |- ( ( Y e. A /\ W e. Word A ) -> ( ( <" Y "> ++ W ) substr <. 1 , ( # ` ( <" Y "> ++ W ) ) >. ) = W )
+$)

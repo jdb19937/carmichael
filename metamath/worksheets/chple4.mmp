@@ -1,0 +1,71 @@
+$( <MM> <PROOF_ASST> THEOREM=chple4  LOC_AFTER=?
+
+* Chebyshev's upper bound for psi with the explicit constant ( log 4 ) + 4.
+
+s1::simpl |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ 1 <_ X ) -> 1 <_ X )
+s3::0red |- ( ( X e. RR /\ 1 <_ X ) -> 0 e. RR )
+s4::1red |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. RR )
+s5::0lt1 |- 0 < 1
+s6:s5:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 0 < 1 )
+s7:s3,s4,s1,s6,s2:ltletrd |- ( ( X e. RR /\ 1 <_ X ) -> 0 < X )
+s8:s1,s7:elrpd |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR+ )
+s9:s3,s1,s7:ltled |- ( ( X e. RR /\ 1 <_ X ) -> 0 <_ X )
+s10::4rp |- 4 e. RR+
+i11::relogcl
+s12:s10,i11:ax-mp |- ( log ` 4 ) e. RR
+s13::2rp |- 2 e. RR+
+s14::2z |- 2 e. ZZ
+i15::relogexp
+s16:s13,s14,i15:mp2an |- ( log ` ( 2 ^ 2 ) ) = ( 2 x. ( log ` 2 ) )
+s17::sq2 |- ( 2 ^ 2 ) = 4
+s18:s17:fveq2i |- ( log ` ( 2 ^ 2 ) ) = ( log ` 4 )
+s19:s18,s16:eqtr3i |- ( log ` 4 ) = ( 2 x. ( log ` 2 ) )
+s20:s12:a1i |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` 4 ) e. RR )
+i21::chpub
+s22:s1,s2,i21:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( psi ` X ) <_ ( ( theta ` X ) + ( ( sqrt ` X ) x. ( log ` X ) ) ) )
+i23::chtle4
+s24:s1,s2,i23:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( theta ` X ) <_ ( ( log ` 4 ) x. X ) )
+i25::sqrtlogle
+s26:s1,s2,i25:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) x. ( log ` X ) ) <_ X )
+i27::chtcl
+s28:s1,i27:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( theta ` X ) e. RR )
+i29::chpcl
+s30:s1,i29:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( psi ` X ) e. RR )
+i31::rpsqrtcl
+s32:s8,i31:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( sqrt ` X ) e. RR+ )
+s33:s32:rpred |- ( ( X e. RR /\ 1 <_ X ) -> ( sqrt ` X ) e. RR )
+i34::relogcl
+s35:s8,i34:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) e. RR )
+s36:s33,s35:remulcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) x. ( log ` X ) ) e. RR )
+s37:s20,s1:remulcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` 4 ) x. X ) e. RR )
+s38:s28,s36,s37,s1,s24,s26:le2addd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( theta ` X ) + ( ( sqrt ` X ) x. ( log ` X ) ) ) <_ ( ( ( log ` 4 ) x. X ) + X ) )
+s39:s20:recnd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` 4 ) e. CC )
+s40:s1:recnd |- ( ( X e. RR /\ 1 <_ X ) -> X e. CC )
+s41::1cnd |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. CC )
+s42:s39,s41,s40:adddird |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) + 1 ) x. X ) = ( ( ( log ` 4 ) x. X ) + ( 1 x. X ) ) )
+s43:s40:mullidd |- ( ( X e. RR /\ 1 <_ X ) -> ( 1 x. X ) = X )
+s44:s43:oveq2d |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) x. X ) + ( 1 x. X ) ) = ( ( ( log ` 4 ) x. X ) + X ) )
+s45:s42,s44:eqtrd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) + 1 ) x. X ) = ( ( ( log ` 4 ) x. X ) + X ) )
+s46::1red |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. RR )
+s47::4re |- 4 e. RR
+s48:s47:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 4 e. RR )
+s49::1re |- 1 e. RR
+s50::4re |- 4 e. RR
+s51::1lt4 |- 1 < 4
+s52:s49,s50,s51:ltleii |- 1 <_ 4
+s53:s52:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 1 <_ 4 )
+s54:s20,s46:readdcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` 4 ) + 1 ) e. RR )
+s55:s20,s48:readdcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` 4 ) + 4 ) e. RR )
+s56:s46,s48,s20,s53:leadd2dd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` 4 ) + 1 ) <_ ( ( log ` 4 ) + 4 ) )
+s57:s1,s9:jca |- ( ( X e. RR /\ 1 <_ X ) -> ( X e. RR /\ 0 <_ X ) )
+s58:s54,s55,s57:3jca |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) + 1 ) e. RR /\ ( ( log ` 4 ) + 4 ) e. RR /\ ( X e. RR /\ 0 <_ X ) ) )
+i59::lemul1a
+s60:s58,s56,i59:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) + 1 ) x. X ) <_ ( ( ( log ` 4 ) + 4 ) x. X ) )
+s61:s45,s60:eqbrtrrd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) x. X ) + X ) <_ ( ( ( log ` 4 ) + 4 ) x. X ) )
+s62:s28,s36:readdcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( theta ` X ) + ( ( sqrt ` X ) x. ( log ` X ) ) ) e. RR )
+s63:s37,s1:readdcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) x. X ) + X ) e. RR )
+s64:s55,s1:remulcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` 4 ) + 4 ) x. X ) e. RR )
+s65:s62,s63,s64,s38,s61:letrd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( theta ` X ) + ( ( sqrt ` X ) x. ( log ` X ) ) ) <_ ( ( ( log ` 4 ) + 4 ) x. X ) )
+qed:s30,s62,s64,s22,s65:letrd |- ( ( X e. RR /\ 1 <_ X ) -> ( psi ` X ) <_ ( ( ( log ` 4 ) + 4 ) x. X ) )
+$)

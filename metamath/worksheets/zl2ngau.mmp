@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=zl2ngau  LOC_AFTER=?
+
+* The modulus of the Gaussian normalizer: ` | e ^ ( ( Z - W ) ^ 2 ) | = e ^ ( ( Re Z - Re W ) ^ 2 - ( Im Z - Im W ) ^ 2 ) ` ( Lean ` norm_exp_sq_sub ` ).
+
+s1::simpl |- ( ( Z e. CC /\ W e. CC ) -> Z e. CC )
+s2::simpr |- ( ( Z e. CC /\ W e. CC ) -> W e. CC )
+s3:s1,s2:subcld |- ( ( Z e. CC /\ W e. CC ) -> ( Z - W ) e. CC )
+s4:s3:sqcld |- ( ( Z e. CC /\ W e. CC ) -> ( ( Z - W ) ^ 2 ) e. CC )
+i5::absef
+s6:s4,i5:syl |- ( ( Z e. CC /\ W e. CC ) -> ( abs ` ( exp ` ( ( Z - W ) ^ 2 ) ) ) = ( exp ` ( Re ` ( ( Z - W ) ^ 2 ) ) ) )
+s7:s3:sqvald |- ( ( Z e. CC /\ W e. CC ) -> ( ( Z - W ) ^ 2 ) = ( ( Z - W ) x. ( Z - W ) ) )
+s8:s7:fveq2d |- ( ( Z e. CC /\ W e. CC ) -> ( Re ` ( ( Z - W ) ^ 2 ) ) = ( Re ` ( ( Z - W ) x. ( Z - W ) ) ) )
+i9::remul
+s10:s3,s3,i9:syl2anc |- ( ( Z e. CC /\ W e. CC ) -> ( Re ` ( ( Z - W ) x. ( Z - W ) ) ) = ( ( ( Re ` ( Z - W ) ) x. ( Re ` ( Z - W ) ) ) - ( ( Im ` ( Z - W ) ) x. ( Im ` ( Z - W ) ) ) ) )
+s11:s1,s2:resubd |- ( ( Z e. CC /\ W e. CC ) -> ( Re ` ( Z - W ) ) = ( ( Re ` Z ) - ( Re ` W ) ) )
+s12:s1,s2:imsubd |- ( ( Z e. CC /\ W e. CC ) -> ( Im ` ( Z - W ) ) = ( ( Im ` Z ) - ( Im ` W ) ) )
+s13:s1:recld |- ( ( Z e. CC /\ W e. CC ) -> ( Re ` Z ) e. RR )
+s14:s2:recld |- ( ( Z e. CC /\ W e. CC ) -> ( Re ` W ) e. RR )
+s15:s13,s14:resubcld |- ( ( Z e. CC /\ W e. CC ) -> ( ( Re ` Z ) - ( Re ` W ) ) e. RR )
+s16:s15:recnd |- ( ( Z e. CC /\ W e. CC ) -> ( ( Re ` Z ) - ( Re ` W ) ) e. CC )
+s17:s1:imcld |- ( ( Z e. CC /\ W e. CC ) -> ( Im ` Z ) e. RR )
+s18:s2:imcld |- ( ( Z e. CC /\ W e. CC ) -> ( Im ` W ) e. RR )
+s19:s17,s18:resubcld |- ( ( Z e. CC /\ W e. CC ) -> ( ( Im ` Z ) - ( Im ` W ) ) e. RR )
+s20:s19:recnd |- ( ( Z e. CC /\ W e. CC ) -> ( ( Im ` Z ) - ( Im ` W ) ) e. CC )
+s21:s16:sqvald |- ( ( Z e. CC /\ W e. CC ) -> ( ( ( Re ` Z ) - ( Re ` W ) ) ^ 2 ) = ( ( ( Re ` Z ) - ( Re ` W ) ) x. ( ( Re ` Z ) - ( Re ` W ) ) ) )
+s22:s20:sqvald |- ( ( Z e. CC /\ W e. CC ) -> ( ( ( Im ` Z ) - ( Im ` W ) ) ^ 2 ) = ( ( ( Im ` Z ) - ( Im ` W ) ) x. ( ( Im ` Z ) - ( Im ` W ) ) ) )
+s23:s11,s11:oveq12d |- ( ( Z e. CC /\ W e. CC ) -> ( ( Re ` ( Z - W ) ) x. ( Re ` ( Z - W ) ) ) = ( ( ( Re ` Z ) - ( Re ` W ) ) x. ( ( Re ` Z ) - ( Re ` W ) ) ) )
+s24:s12,s12:oveq12d |- ( ( Z e. CC /\ W e. CC ) -> ( ( Im ` ( Z - W ) ) x. ( Im ` ( Z - W ) ) ) = ( ( ( Im ` Z ) - ( Im ` W ) ) x. ( ( Im ` Z ) - ( Im ` W ) ) ) )
+s25:s23,s21:eqtr4d |- ( ( Z e. CC /\ W e. CC ) -> ( ( Re ` ( Z - W ) ) x. ( Re ` ( Z - W ) ) ) = ( ( ( Re ` Z ) - ( Re ` W ) ) ^ 2 ) )
+s26:s24,s22:eqtr4d |- ( ( Z e. CC /\ W e. CC ) -> ( ( Im ` ( Z - W ) ) x. ( Im ` ( Z - W ) ) ) = ( ( ( Im ` Z ) - ( Im ` W ) ) ^ 2 ) )
+s27:s25,s26:oveq12d |- ( ( Z e. CC /\ W e. CC ) -> ( ( ( Re ` ( Z - W ) ) x. ( Re ` ( Z - W ) ) ) - ( ( Im ` ( Z - W ) ) x. ( Im ` ( Z - W ) ) ) ) = ( ( ( ( Re ` Z ) - ( Re ` W ) ) ^ 2 ) - ( ( ( Im ` Z ) - ( Im ` W ) ) ^ 2 ) ) )
+s28:s8,s10:eqtrd |- ( ( Z e. CC /\ W e. CC ) -> ( Re ` ( ( Z - W ) ^ 2 ) ) = ( ( ( Re ` ( Z - W ) ) x. ( Re ` ( Z - W ) ) ) - ( ( Im ` ( Z - W ) ) x. ( Im ` ( Z - W ) ) ) ) )
+s29:s28,s27:eqtrd |- ( ( Z e. CC /\ W e. CC ) -> ( Re ` ( ( Z - W ) ^ 2 ) ) = ( ( ( ( Re ` Z ) - ( Re ` W ) ) ^ 2 ) - ( ( ( Im ` Z ) - ( Im ` W ) ) ^ 2 ) ) )
+s30:s29:fveq2d |- ( ( Z e. CC /\ W e. CC ) -> ( exp ` ( Re ` ( ( Z - W ) ^ 2 ) ) ) = ( exp ` ( ( ( ( Re ` Z ) - ( Re ` W ) ) ^ 2 ) - ( ( ( Im ` Z ) - ( Im ` W ) ) ^ 2 ) ) ) )
+qed:s6,s30:eqtrd |- ( ( Z e. CC /\ W e. CC ) -> ( abs ` ( exp ` ( ( Z - W ) ^ 2 ) ) ) = ( exp ` ( ( ( ( Re ` Z ) - ( Re ` W ) ) ^ 2 ) - ( ( ( Im ` Z ) - ( Im ` W ) ) ^ 2 ) ) ) )
+$)

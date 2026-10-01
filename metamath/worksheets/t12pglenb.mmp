@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=t12pglenb  LOC_AFTER=?
+
+* Base of the induction for t12pglen.
+
+s1::simp1 |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> X e. NN0 )
+s2::simp2 |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> Z e. NN0 )
+s3:s1,s2:jca |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( X e. NN0 /\ Z e. NN0 ) )
+s4::simp3 |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> K e. NN0 )
+s5:s3,s4:jca |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( ( X e. NN0 /\ Z e. NN0 ) /\ K e. NN0 ) )
+i6::poolgo0
+s7:s5,i6:syl |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( ( ( X PoolGo Z ) ` K ) ` (/) ) = <. (/) , 0 >. )
+s8:s7:fveq2d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) = ( 1st ` <. (/) , 0 >. ) )
+s9::0ex |- (/) e. _V
+s10::c0ex |- 0 e. _V
+s11:s9,s10:op1st |- ( 1st ` <. (/) , 0 >. ) = (/)
+s12:s11:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 1st ` <. (/) , 0 >. ) = (/) )
+s13:s8,s12:eqtrd |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) = (/) )
+s14:s13:fveq2d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( # ` ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) ) = ( # ` (/) ) )
+s15::hash0 |- ( # ` (/) ) = 0
+s16::0nn0 |- 0 e. NN0
+s17:s15,s16:eqeltri |- ( # ` (/) ) e. NN0
+s18:s17:nn0rei |- ( # ` (/) ) e. RR
+s19:s18:leidi |- ( # ` (/) ) <_ ( # ` (/) )
+s20:s19:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( # ` (/) ) <_ ( # ` (/) ) )
+qed:s14,s20:eqbrtrd |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( # ` ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) ) <_ ( # ` (/) ) )
+$)

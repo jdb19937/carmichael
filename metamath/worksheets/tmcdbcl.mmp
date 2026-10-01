@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcdbcl  LOC_AFTER=?
+
+* Closure of the ` db ` field of a machine state (Lean: the type of ` St.db ` ).
+
+s1::id |- ( V e. TMSt -> V e. TMSt )
+s2::df-tmdb |- TMdb = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) )
+s3:s2:a1i |- ( V e. TMSt -> TMdb = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) )
+s4::fveq2 |- ( v = V -> ( 2nd ` v ) = ( 2nd ` V ) )
+s5:s4:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` v ) ) = ( 2nd ` ( 2nd ` V ) ) )
+s6:s5:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) )
+s7:s6:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) )
+s8:s7:fveq2d |- ( v = V -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) )
+s9:s8:adantl |- ( ( V e. TMSt /\ v = V ) -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) )
+s10::fvexd |- ( V e. TMSt -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) e. _V )
+s11:s3,s9,s1,s10:fvmptd |- ( V e. TMSt -> ( TMdb ` V ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) )
+s12::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s13:s1,s12:eleqtrdi |- ( V e. TMSt -> V e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) ) )
+i14::xp2nd
+s15:s13,i14:syl |- ( V e. TMSt -> ( 2nd ` V ) e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+i16::xp2nd
+s17:s15,i16:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` V ) ) e. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) )
+i18::xp2nd
+s19:s17,i18:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) e. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) )
+i20::xp2nd
+s21:s19,i20:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) e. ( 2o X. ( 3o X. 2o ) ) )
+i22::xp1st
+s23:s21,i22:syl |- ( V e. TMSt -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) e. 2o )
+qed:s11,s23:eqeltrd |- ( V e. TMSt -> ( TMdb ` V ) e. 2o )
+$)

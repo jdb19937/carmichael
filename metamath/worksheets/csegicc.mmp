@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=csegicc  LOC_AFTER=?
+
+* A segment between two points of a closed real interval lies in the interval.
+
+s1::simpl |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> ( M e. RR /\ N e. RR ) )
+s2::simprl |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> P e. ( M [,] N ) )
+s3::simprr |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> Q e. ( M [,] N ) )
+i4::iccssre
+s5:s1,i4:syl |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> ( M [,] N ) C_ RR )
+s6:s5,s2:sseldd |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> P e. RR )
+s7:s5,s3:sseldd |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> Q e. RR )
+s8:s6:recnd |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> P e. CC )
+s9:s7:recnd |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> Q e. CC )
+s10:s8:adantr |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> P e. CC )
+s11:s9:adantr |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> Q e. CC )
+s12::simpr |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> t e. ( 0 [,] 1 ) )
+i13::elunitcn
+s14:s12,i13:syl |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> t e. CC )
+i15::cvxid
+s16:s10,s11,s14,i15:syl3anc |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) = ( ( ( 1 - t ) x. P ) + ( t x. Q ) ) )
+s17:s1:adantr |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( M e. RR /\ N e. RR ) )
+s18:s2:adantr |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> P e. ( M [,] N ) )
+s19:s3:adantr |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> Q e. ( M [,] N ) )
+i20::icccvx
+s21:s17,i20:syl |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) /\ t e. ( 0 [,] 1 ) ) -> ( ( ( 1 - t ) x. P ) + ( t x. Q ) ) e. ( M [,] N ) ) )
+s22:s18,s19,s12,s21:mp3and |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( ( ( 1 - t ) x. P ) + ( t x. Q ) ) e. ( M [,] N ) )
+s23:s16,s22:eqeltrd |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) e. ( M [,] N ) )
+s24::eleq1 |- ( x = ( P + ( t x. ( Q - P ) ) ) -> ( x e. ( M [,] N ) <-> ( P + ( t x. ( Q - P ) ) ) e. ( M [,] N ) ) )
+s25:s23,s24:syl5ibrcom |- ( ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( x = ( P + ( t x. ( Q - P ) ) ) -> x e. ( M [,] N ) ) )
+s26:s25:rexlimdva |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> ( E. t e. ( 0 [,] 1 ) x = ( P + ( t x. ( Q - P ) ) ) -> x e. ( M [,] N ) ) )
+i27::csegel
+s28:s8,s9,i27:syl2anc |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> ( x e. ( P cseg Q ) <-> E. t e. ( 0 [,] 1 ) x = ( P + ( t x. ( Q - P ) ) ) ) )
+s29:s28,s26:sylbid |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> ( x e. ( P cseg Q ) -> x e. ( M [,] N ) ) )
+qed:s29:ssrdv |- ( ( ( M e. RR /\ N e. RR ) /\ ( P e. ( M [,] N ) /\ Q e. ( M [,] N ) ) ) -> ( P cseg Q ) C_ ( M [,] N ) )
+$)

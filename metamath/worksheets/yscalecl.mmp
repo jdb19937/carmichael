@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=yscalecl  LOC_AFTER=?
+
+* Closure of yscale: a nonnegative integer for N >= 3.
+
+s1::simpl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> C e. RR )
+s2::simpr |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> N e. ( ZZ>= ` 3 ) )
+i3::uzuzle23
+s4:s2,i3:syl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> N e. ( ZZ>= ` 2 ) )
+i5::eluz2nn
+s6:s4,i5:syl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> N e. NN )
+s7:s6:nnnn0d |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> N e. NN0 )
+i8::yscaleval
+s9:s1,s7,i8:syl2anc |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( C yscale N ) = ( Nceil ` ( ( C zscale N ) ^c ( 2 / 3 ) ) ) )
+i10::zscalecl
+s11:s1,s2,i10:syl2anc |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( C zscale N ) e. NN0 )
+s12:s11:nn0red |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( C zscale N ) e. RR )
+s13:s11:nn0ge0d |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> 0 <_ ( C zscale N ) )
+s14::2re |- 2 e. RR
+s15::3re |- 3 e. RR
+s16::3ne0 |- 3 =/= 0
+s17:s14,s15,s16:redivcli |- ( 2 / 3 ) e. RR
+s18:s17:a1i |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( 2 / 3 ) e. RR )
+i19::recxpcl
+s20:s12,s13,s18,i19:syl3anc |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( ( C zscale N ) ^c ( 2 / 3 ) ) e. RR )
+i21::nceilcl
+s22:s20,i21:syl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( Nceil ` ( ( C zscale N ) ^c ( 2 / 3 ) ) ) e. NN0 )
+qed:s9,s22:eqeltrd |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( C yscale N ) e. NN0 )
+$)

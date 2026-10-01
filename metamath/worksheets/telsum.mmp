@@ -1,0 +1,77 @@
+$( <MM> <PROOF_ASST> THEOREM=telsum  LOC_AFTER=?
+
+* The telescoping bound: sum_ j e. ( 2 ... M ) 1 / ( j x. ( j - 1 ) ) is at most 1.
+
+s1::simpr |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> j e. ( 2 ... M ) )
+i2::elfzelz
+s3:s1,i2:syl |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> j e. ZZ )
+i4::elfzle1
+s5:s1,i4:syl |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 2 <_ j )
+s6:s3:zred |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> j e. RR )
+s7::2pos |- 0 < 2
+s8:s7:a1i |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 0 < 2 )
+s9::0red |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 0 e. RR )
+s10::2re |- 2 e. RR
+s11:s10:a1i |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 2 e. RR )
+s12:s9,s11,s6,s8,s5:ltletrd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 0 < j )
+s13::elnnz |- ( j e. NN <-> ( j e. ZZ /\ 0 < j ) )
+s14:s13:a1i |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( j e. NN <-> ( j e. ZZ /\ 0 < j ) ) )
+s15:s3,s12:jca |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( j e. ZZ /\ 0 < j ) )
+s16:s14,s15:mpbird |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> j e. NN )
+s17:s16:nnred |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> j e. RR )
+s18:s16:nncnd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> j e. CC )
+s19:s16:nnne0d |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> j =/= 0 )
+i20::elfzle1
+s21:s1,i20:syl |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 2 <_ j )
+s22::1red |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 1 e. RR )
+s23:s22:recnd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 1 e. CC )
+s24:s17,s22:resubcld |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( j - 1 ) e. RR )
+s25:s11,s17,s22,s21:lesub1dd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( 2 - 1 ) <_ ( j - 1 ) )
+s26::2m1e1 |- ( 2 - 1 ) = 1
+s27:s26:a1i |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( 2 - 1 ) = 1 )
+s28:s27,s25:eqbrtrrd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 1 <_ ( j - 1 ) )
+s29::0lt1 |- 0 < 1
+s30:s29:a1i |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 0 < 1 )
+s31:s30,s28:ltletrd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> 0 < ( j - 1 ) )
+s32:s31:gt0ne0d |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( j - 1 ) =/= 0 )
+s33:s24:recnd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( j - 1 ) e. CC )
+i34::pncan
+s35:s18,s23,i34:syl2anc |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( j + 1 ) - 1 ) = j )
+s36:s35:oveq2d |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( 1 / ( ( j + 1 ) - 1 ) ) = ( 1 / j ) )
+s37:s36:oveq2d |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( 1 / ( j - 1 ) ) - ( 1 / ( ( j + 1 ) - 1 ) ) ) = ( ( 1 / ( j - 1 ) ) - ( 1 / j ) ) )
+s38:s23,s33,s23,s18,s32,s19:divsubdivd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( 1 / ( j - 1 ) ) - ( 1 / j ) ) = ( ( ( 1 x. j ) - ( 1 x. ( j - 1 ) ) ) / ( ( j - 1 ) x. j ) ) )
+s39:s18:mullidd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( 1 x. j ) = j )
+s40:s33:mullidd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( 1 x. ( j - 1 ) ) = ( j - 1 ) )
+s41:s39,s40:oveq12d |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( 1 x. j ) - ( 1 x. ( j - 1 ) ) ) = ( j - ( j - 1 ) ) )
+i42::nncan
+s43:s18,s23,i42:syl2anc |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( j - ( j - 1 ) ) = 1 )
+s44:s41,s43:eqtrd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( 1 x. j ) - ( 1 x. ( j - 1 ) ) ) = 1 )
+s45:s33,s18:mulcomd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( j - 1 ) x. j ) = ( j x. ( j - 1 ) ) )
+s46:s44,s45:oveq12d |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( ( 1 x. j ) - ( 1 x. ( j - 1 ) ) ) / ( ( j - 1 ) x. j ) ) = ( 1 / ( j x. ( j - 1 ) ) ) )
+s47:s38,s46:eqtrd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( 1 / ( j - 1 ) ) - ( 1 / j ) ) = ( 1 / ( j x. ( j - 1 ) ) ) )
+s48:s37,s47:eqtrd |- ( ( M e. NN /\ j e. ( 2 ... M ) ) -> ( ( 1 / ( j - 1 ) ) - ( 1 / ( ( j + 1 ) - 1 ) ) ) = ( 1 / ( j x. ( j - 1 ) ) ) )
+s49:s48:sumeq2dv |- ( M e. NN -> sum_ j e. ( 2 ... M ) ( ( 1 / ( j - 1 ) ) - ( 1 / ( ( j + 1 ) - 1 ) ) ) = sum_ j e. ( 2 ... M ) ( 1 / ( j x. ( j - 1 ) ) ) )
+s50::telsumlem |- ( M e. NN -> sum_ j e. ( 2 ... M ) ( ( 1 / ( j - 1 ) ) - ( 1 / ( ( j + 1 ) - 1 ) ) ) = ( ( 1 / ( 2 - 1 ) ) - ( 1 / ( ( M + 1 ) - 1 ) ) ) )
+s51:s49,s50:eqtr3d |- ( M e. NN -> sum_ j e. ( 2 ... M ) ( 1 / ( j x. ( j - 1 ) ) ) = ( ( 1 / ( 2 - 1 ) ) - ( 1 / ( ( M + 1 ) - 1 ) ) ) )
+s52::nncnd |- ( M e. NN -> M e. CC )
+s53::1red |- ( M e. NN -> 1 e. RR )
+s54:s53:recnd |- ( M e. NN -> 1 e. CC )
+i55::pncan
+s56:s52,s54,i55:syl2anc |- ( M e. NN -> ( ( M + 1 ) - 1 ) = M )
+s57:s56:oveq2d |- ( M e. NN -> ( 1 / ( ( M + 1 ) - 1 ) ) = ( 1 / M ) )
+s58::2m1e1 |- ( 2 - 1 ) = 1
+s59:s58:a1i |- ( M e. NN -> ( 2 - 1 ) = 1 )
+s60:s59:oveq2d |- ( M e. NN -> ( 1 / ( 2 - 1 ) ) = ( 1 / 1 ) )
+s61::1div1e1 |- ( 1 / 1 ) = 1
+s62:s61:a1i |- ( M e. NN -> ( 1 / 1 ) = 1 )
+s63:s60,s62:eqtrd |- ( M e. NN -> ( 1 / ( 2 - 1 ) ) = 1 )
+s64:s63,s57:oveq12d |- ( M e. NN -> ( ( 1 / ( 2 - 1 ) ) - ( 1 / ( ( M + 1 ) - 1 ) ) ) = ( 1 - ( 1 / M ) ) )
+s65:s51,s64:eqtrd |- ( M e. NN -> sum_ j e. ( 2 ... M ) ( 1 / ( j x. ( j - 1 ) ) ) = ( 1 - ( 1 / M ) ) )
+s66::nnrecre |- ( M e. NN -> ( 1 / M ) e. RR )
+s67::nnrecgt0 |- ( M e. NN -> 0 < ( 1 / M ) )
+s68:s67:ltled |- ( M e. NN -> 0 <_ ( 1 / M ) )
+i69::subge02
+s70:s53,s66,i69:syl2anc |- ( M e. NN -> ( 0 <_ ( 1 / M ) <-> ( 1 - ( 1 / M ) ) <_ 1 ) )
+s71:s70,s68:mpbid |- ( M e. NN -> ( 1 - ( 1 / M ) ) <_ 1 )
+qed:s65,s71:eqbrtrd |- ( M e. NN -> sum_ j e. ( 2 ... M ) ( 1 / ( j x. ( j - 1 ) ) ) <_ 1 )
+$)

@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=z5pfun1  LOC_AFTER=?
+
+* Lean Pfun_one: ( ( N PFun R ) ` 1 ) = sum_ r e. ( N RSet R ) 1 / r (Lean P1 N R), since psi_r ( 1 ) = mmu ( 1 ) phi ( 1 ) = 1.
+
+s1::simpl |- ( ( N e. V /\ R e. W ) -> N e. V )
+s2::simpr |- ( ( N e. V /\ R e. W ) -> R e. W )
+s3::1nn |- 1 e. NN
+s4:s3:a1i |- ( ( N e. V /\ R e. W ) -> 1 e. NN )
+i5::z5pfunval
+s6:s1,s2,s4,i5:syl21anc |- ( ( N e. V /\ R e. W ) -> ( ( N PFun R ) ` 1 ) = sum_ r e. ( N RSet R ) ( ( ( mmu ` ( r gcd 1 ) ) x. ( phi ` ( r gcd 1 ) ) ) / r ) )
+s7:s1:adantr |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> N e. V )
+s8:s2:adantr |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> R e. W )
+i9::z5elrset
+s10:s7,s8,i9:syl2anc |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( r e. ( N RSet R ) <-> ( r e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` r ) =/= 0 /\ ( r gcd N ) = 1 ) ) ) )
+s11::simpr |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. ( N RSet R ) )
+s12:s11,s10:mpbid |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( r e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` r ) =/= 0 /\ ( r gcd N ) = 1 ) ) )
+s13:s12:simpld |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. ( 1 ... ( |_ ` R ) ) )
+i14::elfznn
+s15:s13,i14:syl |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. NN )
+s16:s15:nnzd |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. ZZ )
+i17::gcd1
+s18:s16,i17:syl |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( r gcd 1 ) = 1 )
+c1:s18:fveq2d |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( mmu ` ( r gcd 1 ) ) = ( mmu ` 1 ) )
+c2:s18:fveq2d |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( phi ` ( r gcd 1 ) ) = ( phi ` 1 ) )
+c3:c1,c2:oveq12d |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( ( mmu ` ( r gcd 1 ) ) x. ( phi ` ( r gcd 1 ) ) ) = ( ( mmu ` 1 ) x. ( phi ` 1 ) ) )
+s19::muone |- ( mmu ` 1 ) = 1
+s20:s19:a1i |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( mmu ` 1 ) = 1 )
+s21::phi1 |- ( phi ` 1 ) = 1
+s22:s21:a1i |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( phi ` 1 ) = 1 )
+s23:s20,s22:oveq12d |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( ( mmu ` 1 ) x. ( phi ` 1 ) ) = ( 1 x. 1 ) )
+s24::1t1e1 |- ( 1 x. 1 ) = 1
+s25:s24:a1i |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( 1 x. 1 ) = 1 )
+s26:s23,s25:eqtrd |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( ( mmu ` 1 ) x. ( phi ` 1 ) ) = 1 )
+s27:c3,s26:eqtrd |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( ( mmu ` ( r gcd 1 ) ) x. ( phi ` ( r gcd 1 ) ) ) = 1 )
+s28:s27:oveq1d |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( ( ( mmu ` ( r gcd 1 ) ) x. ( phi ` ( r gcd 1 ) ) ) / r ) = ( 1 / r ) )
+s29:s28:sumeq2dv |- ( ( N e. V /\ R e. W ) -> sum_ r e. ( N RSet R ) ( ( ( mmu ` ( r gcd 1 ) ) x. ( phi ` ( r gcd 1 ) ) ) / r ) = sum_ r e. ( N RSet R ) ( 1 / r ) )
+qed:s6,s29:eqtrd |- ( ( N e. V /\ R e. W ) -> ( ( N PFun R ) ` 1 ) = sum_ r e. ( N RSet R ) ( 1 / r ) )
+$)

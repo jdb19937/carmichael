@@ -1,0 +1,82 @@
+$( <MM> <PROOF_ASST> THEOREM=g5t3  LOC_AFTER=?
+
+* Fast path: a literal against a quotient by a numeral (ltmuldivd).
+
+s1::simpl |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> L e. RR )
+s2::simpr |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ; ; 1 0 0 <_ L )
+i3::ltdivmul
+s4::5re |- 5 e. RR
+s5::1nn0 |- 1 e. NN0
+s6::0nn0 |- 0 e. NN0
+s7:s5,s6:deccl |- ; 1 0 e. NN0
+s8:s7,s6:deccl |- ; ; 1 0 0 e. NN0
+s9:s8:nn0rei |- ; ; 1 0 0 e. RR
+s10::2re |- 2 e. RR
+s11::2pos |- 0 < 2
+s12:s10,s11:pm3.2i |- ( 2 e. RR /\ 0 < 2 )
+s13:s4,s9,s12,i3:mp3an |- ( ( 5 / 2 ) < ; ; 1 0 0 <-> 5 < ( 2 x. ; ; 1 0 0 ) )
+i14::ltaddpos
+s15::9nn0 |- 9 e. NN0
+s16:s5,s15:deccl |- ; 1 9 e. NN0
+s17::5nn0 |- 5 e. NN0
+s18:s16,s17:deccl |- ; ; 1 9 5 e. NN0
+s19:s18:nn0rei |- ; ; 1 9 5 e. RR
+s20:s19,s4,i14:mp2an |- ( 0 < ; ; 1 9 5 <-> 5 < ( 5 + ; ; 1 9 5 ) )
+s21::5nn |- 5 e. NN
+s22:s16,s21:decnncl |- ; ; 1 9 5 e. NN
+s23:s22:nngt0i |- 0 < ; ; 1 9 5
+s24:s23,s20:mpbi |- 5 < ( 5 + ; ; 1 9 5 )
+s25::5cn |- 5 e. CC
+s26:s18:nn0cni |- ; ; 1 9 5 e. CC
+s27:s25,s26:addcomi |- ( 5 + ; ; 1 9 5 ) = ( ; ; 1 9 5 + 5 )
+s28::eqid |- ; ; 1 9 5 = ; ; 1 9 5
+s29::eqid |- ; 1 9 = ; 1 9
+s30::1p1e2 |- ( 1 + 1 ) = 2
+s31::9p1e10 |- ( 9 + 1 ) = ; 1 0
+s32:s5,s15,s5,s29,s30,s6,s31:decaddci |- ( ; 1 9 + 1 ) = ; 2 0
+s33::5p5e10 |- ( 5 + 5 ) = ; 1 0
+s34:s16,s17,s17,s28,s32,s6,s33:decaddci |- ( ; ; 1 9 5 + 5 ) = ; ; 2 0 0
+s35:s27,s34:eqtri |- ( 5 + ; ; 1 9 5 ) = ; ; 2 0 0
+s36:s24,s35:breqtri |- 5 < ; ; 2 0 0
+s37::2cn |- 2 e. CC
+s38:s8:nn0cni |- ; ; 1 0 0 e. CC
+s39:s37,s38:mulcomi |- ( 2 x. ; ; 1 0 0 ) = ( ; ; 1 0 0 x. 2 )
+s40::2nn0 |- 2 e. NN0
+s41::eqid |- ; ; 1 0 0 = ; ; 1 0 0
+s42::eqid |- ; 1 0 = ; 1 0
+s43:s37:mullidi |- ( 1 x. 2 ) = 2
+s44:s37:mul02i |- ( 0 x. 2 ) = 0
+s45:s40,s5,s6,s42,s43,s44:decmul1 |- ( ; 1 0 x. 2 ) = ; 2 0
+s46:s40,s7,s6,s41,s45,s44:decmul1 |- ( ; ; 1 0 0 x. 2 ) = ; ; 2 0 0
+s47:s39,s46:eqtri |- ( 2 x. ; ; 1 0 0 ) = ; ; 2 0 0
+s48:s36,s47:breqtrri |- 5 < ( 2 x. ; ; 1 0 0 )
+s49:s48,s13:mpbir |- ( 5 / 2 ) < ; ; 1 0 0
+s50:s49:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( 5 / 2 ) < ; ; 1 0 0 )
+i51::rpre
+i52::rpdivcl
+s53::5rp |- 5 e. RR+
+s54::2rp |- 2 e. RR+
+s55:s53,s54,i52:mp2an |- ( 5 / 2 ) e. RR+
+s56:s55,i51:ax-mp |- ( 5 / 2 ) e. RR
+s57:s56:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( 5 / 2 ) e. RR )
+s58:s9:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ; ; 1 0 0 e. RR )
+s59:s57,s58,s1,s50,s2:ltletrd |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( 5 / 2 ) < L )
+s60::ax-1cn |- 1 e. CC
+s61::2ne0 |- 2 =/= 0
+s62:s60,s25,s37,s61:div23i |- ( ( 1 x. 5 ) / 2 ) = ( ( 1 / 2 ) x. 5 )
+s63:s62:eqcomi |- ( ( 1 / 2 ) x. 5 ) = ( ( 1 x. 5 ) / 2 )
+s64:s25:mullidi |- ( 1 x. 5 ) = 5
+s65:s64:oveq1i |- ( ( 1 x. 5 ) / 2 ) = ( 5 / 2 )
+s66:s63,s65:eqtri |- ( ( 1 / 2 ) x. 5 ) = ( 5 / 2 )
+s67:s66:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( ( 1 / 2 ) x. 5 ) = ( 5 / 2 ) )
+s68:s67,s59:eqbrtrd |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( ( 1 / 2 ) x. 5 ) < L )
+i69::rpre
+i70::rpdivcl
+s71::1rp |- 1 e. RR+
+s72:s71,s54,i70:mp2an |- ( 1 / 2 ) e. RR+
+s73:s72,i69:ax-mp |- ( 1 / 2 ) e. RR
+s74:s73:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( 1 / 2 ) e. RR )
+s75:s53:a1i |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> 5 e. RR+ )
+s76:s74,s1,s75:ltmuldivd |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( ( ( 1 / 2 ) x. 5 ) < L <-> ( 1 / 2 ) < ( L / 5 ) ) )
+qed:s68,s76:mpbid |- ( ( L e. RR /\ ; ; 1 0 0 <_ L ) -> ( 1 / 2 ) < ( L / 5 ) )
+$)

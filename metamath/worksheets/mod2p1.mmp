@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=mod2p1  LOC_AFTER=?
+
+* The parity of ` K + 1 ` from the parity of ` K `: ` ( K + 1 ) mod 2 = 1 - ( K mod 2 ) `. The one parity computation behind the alternating coefficients of the eta series.
+
+s1::simpl |- ( ( K e. ZZ /\ 2 || K ) -> K e. ZZ )
+s2::simpr |- ( ( K e. ZZ /\ 2 || K ) -> 2 || K )
+i3::mod2eq0even
+s4:s1,i3:syl |- ( ( K e. ZZ /\ 2 || K ) -> ( ( K mod 2 ) = 0 <-> 2 || K ) )
+s5:s2,s4:mpbird |- ( ( K e. ZZ /\ 2 || K ) -> ( K mod 2 ) = 0 )
+s6:s2:notnotd |- ( ( K e. ZZ /\ 2 || K ) -> -. -. 2 || K )
+i7::oddp1even
+s8:s1,i7:syl |- ( ( K e. ZZ /\ 2 || K ) -> ( -. 2 || K <-> 2 || ( K + 1 ) ) )
+s9:s6,s8:mtbid |- ( ( K e. ZZ /\ 2 || K ) -> -. 2 || ( K + 1 ) )
+s10:s1:peano2zd |- ( ( K e. ZZ /\ 2 || K ) -> ( K + 1 ) e. ZZ )
+i11::mod2eq1n2dvds
+s12:s10,i11:syl |- ( ( K e. ZZ /\ 2 || K ) -> ( ( ( K + 1 ) mod 2 ) = 1 <-> -. 2 || ( K + 1 ) ) )
+s13:s9,s12:mpbird |- ( ( K e. ZZ /\ 2 || K ) -> ( ( K + 1 ) mod 2 ) = 1 )
+s14:s5:oveq2d |- ( ( K e. ZZ /\ 2 || K ) -> ( 1 - ( K mod 2 ) ) = ( 1 - 0 ) )
+s15::1m0e1 |- ( 1 - 0 ) = 1
+s16:s15:a1i |- ( ( K e. ZZ /\ 2 || K ) -> ( 1 - 0 ) = 1 )
+s17:s14,s16:eqtrd |- ( ( K e. ZZ /\ 2 || K ) -> ( 1 - ( K mod 2 ) ) = 1 )
+s18:s13,s17:eqtr4d |- ( ( K e. ZZ /\ 2 || K ) -> ( ( K + 1 ) mod 2 ) = ( 1 - ( K mod 2 ) ) )
+s19::simpl |- ( ( K e. ZZ /\ -. 2 || K ) -> K e. ZZ )
+s20::simpr |- ( ( K e. ZZ /\ -. 2 || K ) -> -. 2 || K )
+i21::mod2eq1n2dvds
+s22:s19,i21:syl |- ( ( K e. ZZ /\ -. 2 || K ) -> ( ( K mod 2 ) = 1 <-> -. 2 || K ) )
+s23:s20,s22:mpbird |- ( ( K e. ZZ /\ -. 2 || K ) -> ( K mod 2 ) = 1 )
+i24::oddp1even
+s25:s19,i24:syl |- ( ( K e. ZZ /\ -. 2 || K ) -> ( -. 2 || K <-> 2 || ( K + 1 ) ) )
+s26:s20,s25:mpbid |- ( ( K e. ZZ /\ -. 2 || K ) -> 2 || ( K + 1 ) )
+s27:s19:peano2zd |- ( ( K e. ZZ /\ -. 2 || K ) -> ( K + 1 ) e. ZZ )
+i28::mod2eq0even
+s29:s27,i28:syl |- ( ( K e. ZZ /\ -. 2 || K ) -> ( ( ( K + 1 ) mod 2 ) = 0 <-> 2 || ( K + 1 ) ) )
+s30:s26,s29:mpbird |- ( ( K e. ZZ /\ -. 2 || K ) -> ( ( K + 1 ) mod 2 ) = 0 )
+s31:s23:oveq2d |- ( ( K e. ZZ /\ -. 2 || K ) -> ( 1 - ( K mod 2 ) ) = ( 1 - 1 ) )
+s32::1m1e0 |- ( 1 - 1 ) = 0
+s33:s32:a1i |- ( ( K e. ZZ /\ -. 2 || K ) -> ( 1 - 1 ) = 0 )
+s34:s31,s33:eqtrd |- ( ( K e. ZZ /\ -. 2 || K ) -> ( 1 - ( K mod 2 ) ) = 0 )
+s35:s30,s34:eqtr4d |- ( ( K e. ZZ /\ -. 2 || K ) -> ( ( K + 1 ) mod 2 ) = ( 1 - ( K mod 2 ) ) )
+qed:s18,s35:pm2.61dan |- ( K e. ZZ -> ( ( K + 1 ) mod 2 ) = ( 1 - ( K mod 2 ) ) )
+$)

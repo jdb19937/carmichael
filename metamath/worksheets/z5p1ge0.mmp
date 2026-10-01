@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=z5p1ge0  LOC_AFTER=?
+
+* Lean P1_nonneg: 0 <_ sum_ r e. ( N RSet R ) 1 / r.
+
+s1::simpl |- ( ( N e. V /\ R e. W ) -> N e. V )
+s2::simpr |- ( ( N e. V /\ R e. W ) -> R e. W )
+i3::z5rsetfi
+s4:s1,s2,i3:syl2anc |- ( ( N e. V /\ R e. W ) -> ( ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) /\ ( N RSet R ) e. Fin ) )
+s5:s4:simprd |- ( ( N e. V /\ R e. W ) -> ( N RSet R ) e. Fin )
+s6:s1:adantr |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> N e. V )
+s7:s2:adantr |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> R e. W )
+i8::z5elrset
+s9:s6,s7,i8:syl2anc |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( r e. ( N RSet R ) <-> ( r e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` r ) =/= 0 /\ ( r gcd N ) = 1 ) ) ) )
+s10::simpr |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. ( N RSet R ) )
+s11:s10,s9:mpbid |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( r e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` r ) =/= 0 /\ ( r gcd N ) = 1 ) ) )
+s12:s11:simpld |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. ( 1 ... ( |_ ` R ) ) )
+i13::elfznn
+s14:s12,i13:syl |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. NN )
+s15:s14:nnrpd |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> r e. RR+ )
+s16:s15:rpreccld |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( 1 / r ) e. RR+ )
+s17:s16:rpred |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> ( 1 / r ) e. RR )
+s18:s16:rpge0d |- ( ( ( N e. V /\ R e. W ) /\ r e. ( N RSet R ) ) -> 0 <_ ( 1 / r ) )
+qed:s5,s17,s18:fsumge0 |- ( ( N e. V /\ R e. W ) -> 0 <_ sum_ r e. ( N RSet R ) ( 1 / r ) )
+$)

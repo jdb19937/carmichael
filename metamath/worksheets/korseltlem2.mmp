@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=korseltlem2  LOC_AFTER=?
+
+* Lemma for korselt: at a prime P not dividing N, the P-adic valuation of
+  N is 0, hence at most that of A ^ N - A.
+
+1::simp1    |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> P e. Prime )
+2::simp2    |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> N e. NN )
+3::simp3l   |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> A e. ZZ )
+4::simp3r   |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> -. P || N )
+5a::pceq0
+5:1,2,5a:syl2anc |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> ( ( P pCnt N ) = 0 <-> -. P || N ) )
+6:4,5:mpbird |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> ( P pCnt N ) = 0 )
+7:2:nnnn0d  |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> N e. NN0 )
+8a::zexpcl
+8:3,7,8a:syl2anc |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> ( A ^ N ) e. ZZ )
+9:8,3:zsubcld |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> ( ( A ^ N ) - A ) e. ZZ )
+10a::pcge0
+10:1,9,10a:syl2anc |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> 0 <_ ( P pCnt ( ( A ^ N ) - A ) ) )
+qed:6,10:eqbrtrd |- ( ( P e. Prime /\ N e. NN /\ ( A e. ZZ /\ -. P || N ) ) -> ( P pCnt N ) <_ ( P pCnt ( ( A ^ N ) - A ) ) )
+$)

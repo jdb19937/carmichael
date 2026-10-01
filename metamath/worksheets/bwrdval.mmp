@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=bwrdval  LOC_AFTER=?
+
+* Value of bwrd: the word of the M low binary digits of N, least significant first.
+
+s1::simpl |- ( ( N e. ZZ /\ M e. NN0 ) -> N e. ZZ )
+s2::simpr |- ( ( N e. ZZ /\ M e. NN0 ) -> M e. NN0 )
+s3::simpl |- ( ( n = N /\ m = M ) -> n = N )
+s4::simpr |- ( ( n = N /\ m = M ) -> m = M )
+c1:s4:oveq2d |- ( ( n = N /\ m = M ) -> ( 0 ..^ m ) = ( 0 ..^ M ) )
+c2:s3:fveq2d |- ( ( n = N /\ m = M ) -> ( bits ` n ) = ( bits ` N ) )
+c3:c2:eleq2d |- ( ( n = N /\ m = M ) -> ( i e. ( bits ` n ) <-> i e. ( bits ` N ) ) )
+c4:c3:ifbid |- ( ( n = N /\ m = M ) -> if ( i e. ( bits ` n ) , 1o , (/) ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+c5:c1,c4:mpteq12dv |- ( ( n = N /\ m = M ) -> ( i e. ( 0 ..^ m ) |-> if ( i e. ( bits ` n ) , 1o , (/) ) ) = ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) )
+s5::df-bwrd |- bwrd = ( n e. ZZ , m e. NN0 |-> ( i e. ( 0 ..^ m ) |-> if ( i e. ( bits ` n ) , 1o , (/) ) ) )
+s6::ovex |- ( 0 ..^ M ) e. _V
+s7:s6:a1i |- ( ( N e. ZZ /\ M e. NN0 ) -> ( 0 ..^ M ) e. _V )
+i8::mptexg
+s9:s7,i8:syl |- ( ( N e. ZZ /\ M e. NN0 ) -> ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) e. _V )
+s10:c5,s5:ovmpoga |- ( ( N e. ZZ /\ M e. NN0 /\ ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) e. _V ) -> ( N bwrd M ) = ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) )
+qed:s1,s2,s9,s10:syl3anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N bwrd M ) = ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) )
+$)

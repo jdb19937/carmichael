@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=csegid1  LOC_AFTER=?
+
+* The first endpoint lies in the segment.
+
+s1::simpl |- ( ( A e. CC /\ B e. CC ) -> A e. CC )
+s2::simpr |- ( ( A e. CC /\ B e. CC ) -> B e. CC )
+s3::0elunit |- 0 e. ( 0 [,] 1 )
+s4:s3:a1i |- ( ( A e. CC /\ B e. CC ) -> 0 e. ( 0 [,] 1 ) )
+i5::cseglin
+s6:s1,s2,s4,i5:syl3anc |- ( ( A e. CC /\ B e. CC ) -> ( A + ( 0 x. ( B - A ) ) ) e. ( A cseg B ) )
+s7:s2,s1:subcld |- ( ( A e. CC /\ B e. CC ) -> ( B - A ) e. CC )
+s8:s7:mul02d |- ( ( A e. CC /\ B e. CC ) -> ( 0 x. ( B - A ) ) = 0 )
+s9:s8:oveq2d |- ( ( A e. CC /\ B e. CC ) -> ( A + ( 0 x. ( B - A ) ) ) = ( A + 0 ) )
+s10:s1:addridd |- ( ( A e. CC /\ B e. CC ) -> ( A + 0 ) = A )
+s11:s9,s10:eqtrd |- ( ( A e. CC /\ B e. CC ) -> ( A + ( 0 x. ( B - A ) ) ) = A )
+qed:s11,s6:eqeltrrd |- ( ( A e. CC /\ B e. CC ) -> A e. ( A cseg B ) )
+$)

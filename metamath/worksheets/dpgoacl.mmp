@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=dpgoacl  LOC_AFTER=?
+
+* The accumulator the dpGo body hands to the recursive call is a table.
+
+s1::simpll |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> ( L e. NN /\ P e. NN0 ) )
+s2:s1:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> L e. NN )
+s3::simpll |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> ( L e. NN /\ P e. NN0 ) )
+s4:s3:simprd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> P e. NN0 )
+s5::simplr |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> T e. Tbl )
+s6::simprl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> F e. NN0 )
+s7::simprr |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> A e. Tbl )
+s8::simpr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> -. ( T ` F ) = ( inr ` (/) ) )
+i9::neqned
+s10:s8,i9:syl |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( T ` F ) =/= ( inr ` (/) ) )
+s11:s5:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> T e. Tbl )
+s12:s6:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> F e. NN0 )
+s13:s11,s12:jca |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( T e. Tbl /\ F e. NN0 ) )
+s14:s13,s10:jca |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( ( T e. Tbl /\ F e. NN0 ) /\ ( T ` F ) =/= ( inr ` (/) ) ) )
+i15::tblpay
+s16:s14,i15:syl |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( ( 2nd ` ( T ` F ) ) e. Word NN0 /\ ( T ` F ) = ( inl ` ( 2nd ` ( T ` F ) ) ) ) )
+s17:s4:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> P e. NN0 )
+i18::s1cl
+s19:s17,i18:syl |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> <" P "> e. Word NN0 )
+s20:s16:simpld |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( 2nd ` ( T ` F ) ) e. Word NN0 )
+s21:s19,s20:jca |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( <" P "> e. Word NN0 /\ ( 2nd ` ( T ` F ) ) e. Word NN0 ) )
+i22::ccatcl
+s23:s21,i22:syl |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) e. Word NN0 )
+s24:s6:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> F e. NN0 )
+s25:s24:nn0zd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> F e. ZZ )
+s26:s4:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> P e. NN0 )
+s27:s26:nn0zd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> P e. ZZ )
+s28:s25,s27:zmulcld |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( F x. P ) e. ZZ )
+s29:s2:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> L e. NN )
+i30::zmodcl
+s31:s28,s29,i30:syl2anc |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( ( F x. P ) mod L ) e. NN0 )
+s32:s7:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> A e. Tbl )
+s33:s32,s31:jca |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( A e. Tbl /\ ( ( F x. P ) mod L ) e. NN0 ) )
+s34:s33,s23:jca |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( ( A e. Tbl /\ ( ( F x. P ) mod L ) e. NN0 ) /\ ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) e. Word NN0 ) )
+i35::setifnonecl
+s36:s34,i35:syl |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) e. Tbl )
+s37::simpr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> -. ( T ` F ) = ( inr ` (/) ) )
+s38:s37:iffalsed |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) = ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) )
+s39:s38,s36:eqeltrd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ -. ( T ` F ) = ( inr ` (/) ) ) -> if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) e. Tbl )
+s40::simpr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ ( T ` F ) = ( inr ` (/) ) ) -> ( T ` F ) = ( inr ` (/) ) )
+s41:s40:iftrued |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ ( T ` F ) = ( inr ` (/) ) ) -> if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) = A )
+s42:s7:adantr |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ ( T ` F ) = ( inr ` (/) ) ) -> A e. Tbl )
+s43:s41,s42:eqeltrd |- ( ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) /\ ( T ` F ) = ( inr ` (/) ) ) -> if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) e. Tbl )
+qed:s43,s39:pm2.61dan |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) e. Tbl )
+$)

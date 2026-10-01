@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=tmccmc0  LOC_AFTER=?
+
+* The comparison before bit 0 is ` .eq ` .
+
+s1::simpl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> L' e. Word 2o )
+i3::tonatcl
+s4:s1,i3:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. NN0 )
+i5::tonatcl
+s6:s2,i5:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. NN0 )
+i7::lencl
+s8:s1,i7:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( # ` L ) e. NN0 )
+i9::lencl
+s10:s2,i9:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( # ` L' ) e. NN0 )
+s11::0nn0 |- 0 e. NN0
+s12:s11:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> 0 e. NN0 )
+s13::bw1oel3o |- 1o e. 3o
+s14:s13:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> 1o e. 3o )
+s15:s4,s6,s14:3jca |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) e. NN0 /\ ( toNat ` L' ) e. NN0 /\ 1o e. 3o ) )
+s16:s15,s12:jca |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( toNat ` L ) e. NN0 /\ ( toNat ` L' ) e. NN0 /\ 1o e. 3o ) /\ 0 e. NN0 ) )
+i17::bwcmpf
+s18:s16,i17:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( cmpStep ( ( toNat ` L ) bwFold ( toNat ` L' ) ) 1o ) ` 0 ) = if ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) , 1o , ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) Ncmp ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) ) )
+s19::2cn |- 2 e. CC
+s20:s19:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> 2 e. CC )
+i21::exp0
+s22:s20,i21:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( 2 ^ 0 ) = 1 )
+s23:s22:oveq2d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L ) mod 1 ) )
+s24:s4:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. ZZ )
+i25::zmod10
+s26:s24,i25:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod 1 ) = 0 )
+s27:s23,s26:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = 0 )
+s28:s22:oveq2d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L' ) mod 1 ) )
+s29:s6:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. ZZ )
+i30::zmod10
+s31:s29,i30:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod 1 ) = 0 )
+s32:s28,s31:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) = 0 )
+s33:s27,s32:eqtr4d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) )
+s34:s33:iftrued |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> if ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) , 1o , ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) Ncmp ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) ) = 1o )
+qed:s18,s34:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( cmpStep ( ( toNat ` L ) bwFold ( toNat ` L' ) ) 1o ) ` 0 ) = 1o )
+$)

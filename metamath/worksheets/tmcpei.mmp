@@ -1,0 +1,76 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcpei  LOC_AFTER=?
+
+* ` readBit ` on the terminator sets ` da ` from every state (Lean ` popBit_runs_end ` ).
+
+s1::id |- ( r e. TMSt -> r e. TMSt )
+s2::gamma4 |- 4 e. Gamma'
+s3:s2:a1i |- ( r e. TMSt -> 4 e. Gamma' )
+s4::4re |- 4 e. RR
+s5:s4:a1i |- ( r e. TMSt -> 4 e. RR )
+i6::tmcnbits
+s7:s5,i6:syl |- ( r e. TMSt -> -. 4 e. ( { 1 } X. 2o ) )
+i8::tmcrdbitn
+s9:s1,s3,s7,i8:syl3anc |- ( r e. TMSt -> ( TMrdBit ` <. r , ( inl ` 4 ) >. ) = <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. )
+i10::tmccarcl
+s11:s1,i10:syl |- ( r e. TMSt -> ( TMcar ` r ) e. 2o )
+i12::tmcracl
+s13:s1,i12:syl |- ( r e. TMSt -> ( TMra ` r ) e. ( 2o |_| 1o ) )
+i14::tmcrbcl
+s15:s1,i14:syl |- ( r e. TMSt -> ( TMrb ` r ) e. ( 2o |_| 1o ) )
+i16::tmcdacl
+s17:s1,i16:syl |- ( r e. TMSt -> ( TMda ` r ) e. 2o )
+i18::tmcdbcl
+s19:s1,i18:syl |- ( r e. TMSt -> ( TMdb ` r ) e. 2o )
+i20::tmccmpcl
+s21:s1,i20:syl |- ( r e. TMSt -> ( TMcmp ` r ) e. 3o )
+i22::tmcflcl
+s23:s1,i22:syl |- ( r e. TMSt -> ( TMfl ` r ) e. 2o )
+s24::0lt1o |- (/) e. 1o
+i25::djurcl
+s26:s24,i25:ax-mp |- ( inr ` (/) ) e. ( 2o |_| 1o )
+s27:s26:a1i |- ( r e. TMSt -> ( inr ` (/) ) e. ( 2o |_| 1o ) )
+s28::1oel2o |- 1o e. 2o
+s29:s28:a1i |- ( r e. TMSt -> 1o e. 2o )
+s30:s11,s27,s15:3jca |- ( r e. TMSt -> ( ( TMcar ` r ) e. 2o /\ ( inr ` (/) ) e. ( 2o |_| 1o ) /\ ( TMrb ` r ) e. ( 2o |_| 1o ) ) )
+s31:s29,s19:jca |- ( r e. TMSt -> ( 1o e. 2o /\ ( TMdb ` r ) e. 2o ) )
+s32:s21,s23:jca |- ( r e. TMSt -> ( ( TMcmp ` r ) e. 3o /\ ( TMfl ` r ) e. 2o ) )
+s33:s30,s31,s32:3jca |- ( r e. TMSt -> ( ( ( TMcar ` r ) e. 2o /\ ( inr ` (/) ) e. ( 2o |_| 1o ) /\ ( TMrb ` r ) e. ( 2o |_| 1o ) ) /\ ( 1o e. 2o /\ ( TMdb ` r ) e. 2o ) /\ ( ( TMcmp ` r ) e. 3o /\ ( TMfl ` r ) e. 2o ) ) )
+i34::tmcstmk
+s35:s33,i34:syl |- ( r e. TMSt -> <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. e. TMSt )
+i36::tmccarmk
+s37:s33,i36:syl |- ( r e. TMSt -> ( TMcar ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) = ( TMcar ` r ) )
+i38::tmcramk
+s39:s33,i38:syl |- ( r e. TMSt -> ( TMra ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) = ( inr ` (/) ) )
+i40::tmcrbmk
+s41:s33,i40:syl |- ( r e. TMSt -> ( TMrb ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) = ( TMrb ` r ) )
+i42::tmcdamk
+s43:s33,i42:syl |- ( r e. TMSt -> ( TMda ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) = 1o )
+i44::tmcdbmk
+s45:s33,i44:syl |- ( r e. TMSt -> ( TMdb ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) = ( TMdb ` r ) )
+i46::tmccmpmk
+s47:s33,i46:syl |- ( r e. TMSt -> ( TMcmp ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) = ( TMcmp ` r ) )
+i48::tmcflmk
+s49:s33,i48:syl |- ( r e. TMSt -> ( TMfl ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) = ( TMfl ` r ) )
+s50:s9,s35:eqeltrd |- ( r e. TMSt -> ( TMrdBit ` <. r , ( inl ` 4 ) >. ) e. TMSt )
+s51:s9:fveq2d |- ( r e. TMSt -> ( TMcar ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMcar ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) )
+s52:s51,s37:eqtrd |- ( r e. TMSt -> ( TMcar ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMcar ` r ) )
+s53:s9:fveq2d |- ( r e. TMSt -> ( TMra ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMra ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) )
+s54:s53,s39:eqtrd |- ( r e. TMSt -> ( TMra ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( inr ` (/) ) )
+s55:s9:fveq2d |- ( r e. TMSt -> ( TMrb ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMrb ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) )
+s56:s55,s41:eqtrd |- ( r e. TMSt -> ( TMrb ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMrb ` r ) )
+s57:s9:fveq2d |- ( r e. TMSt -> ( TMda ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMda ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) )
+s58:s57,s43:eqtrd |- ( r e. TMSt -> ( TMda ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = 1o )
+s59:s9:fveq2d |- ( r e. TMSt -> ( TMdb ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMdb ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) )
+s60:s59,s45:eqtrd |- ( r e. TMSt -> ( TMdb ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMdb ` r ) )
+s61:s9:fveq2d |- ( r e. TMSt -> ( TMcmp ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMcmp ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) )
+s62:s61,s47:eqtrd |- ( r e. TMSt -> ( TMcmp ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMcmp ` r ) )
+s63:s9:fveq2d |- ( r e. TMSt -> ( TMfl ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMfl ` <. ( TMcar ` r ) , <. ( inr ` (/) ) , <. ( TMrb ` r ) , <. 1o , <. ( TMdb ` r ) , <. ( TMcmp ` r ) , ( TMfl ` r ) >. >. >. >. >. >. ) )
+s64:s63,s49:eqtrd |- ( r e. TMSt -> ( TMfl ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = ( TMfl ` r ) )
+s65::id |- ( h = ( TMrdBit ` <. r , ( inl ` 4 ) >. ) -> h = ( TMrdBit ` <. r , ( inl ` 4 ) >. ) )
+c1:s65:fveq2d |- ( h = ( TMrdBit ` <. r , ( inl ` 4 ) >. ) -> ( TMda ` h ) = ( TMda ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) )
+c2:c1:eqeq1d |- ( h = ( TMrdBit ` <. r , ( inl ` 4 ) >. ) -> ( ( TMda ` h ) = 1o <-> ( TMda ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = 1o ) )
+s66:c2:elrab |- ( ( TMrdBit ` <. r , ( inl ` 4 ) >. ) e. { h e. TMSt | ( TMda ` h ) = 1o } <-> ( ( TMrdBit ` <. r , ( inl ` 4 ) >. ) e. TMSt /\ ( TMda ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = 1o ) )
+s67:s50,s58:jca |- ( r e. TMSt -> ( ( TMrdBit ` <. r , ( inl ` 4 ) >. ) e. TMSt /\ ( TMda ` ( TMrdBit ` <. r , ( inl ` 4 ) >. ) ) = 1o ) )
+s68:s67,s66:sylibr |- ( r e. TMSt -> ( TMrdBit ` <. r , ( inl ` 4 ) >. ) e. { h e. TMSt | ( TMda ` h ) = 1o } )
+qed:s68:rgen |- A. r e. TMSt ( TMrdBit ` <. r , ( inl ` 4 ) >. ) e. { h e. TMSt | ( TMda ` h ) = 1o }
+$)

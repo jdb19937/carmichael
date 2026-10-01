@@ -1,0 +1,50 @@
+$( <MM> <PROOF_ASST> THEOREM=ef1yc  LOC_AFTER=?
+
+* ` y ^ ( 1 + 1 / log y ) = e y <_ 3 y ` for ` 1 < y ` ( Lean ` rpow_one_add_inv_log ` and the consumers' ` y ^ c <_ 3 y ` ).
+
+s1::simpl |- ( ( Y e. RR /\ 1 < Y ) -> Y e. RR )
+s2::simpr |- ( ( Y e. RR /\ 1 < Y ) -> 1 < Y )
+s3::rplogcl |- ( ( Y e. RR /\ 1 < Y ) -> ( log ` Y ) e. RR+ )
+s4::1re |- 1 e. RR
+s5:s4:a1i |- ( ( Y e. RR /\ 1 < Y ) -> 1 e. RR )
+s6::0re |- 0 e. RR
+s7:s6:a1i |- ( ( Y e. RR /\ 1 < Y ) -> 0 e. RR )
+s8::0lt1 |- 0 < 1
+s9:s8:a1i |- ( ( Y e. RR /\ 1 < Y ) -> 0 < 1 )
+s10:s7,s5,s1,s9,s2:lttrd |- ( ( Y e. RR /\ 1 < Y ) -> 0 < Y )
+s11:s1,s10:elrpd |- ( ( Y e. RR /\ 1 < Y ) -> Y e. RR+ )
+s12:s11:rpcnd |- ( ( Y e. RR /\ 1 < Y ) -> Y e. CC )
+s13:s11:rpne0d |- ( ( Y e. RR /\ 1 < Y ) -> Y =/= 0 )
+s14:s3:rpcnd |- ( ( Y e. RR /\ 1 < Y ) -> ( log ` Y ) e. CC )
+s15:s3:rpne0d |- ( ( Y e. RR /\ 1 < Y ) -> ( log ` Y ) =/= 0 )
+s16:s14,s15:reccld |- ( ( Y e. RR /\ 1 < Y ) -> ( 1 / ( log ` Y ) ) e. CC )
+s17::ax-1cn |- 1 e. CC
+s18:s17:a1i |- ( ( Y e. RR /\ 1 < Y ) -> 1 e. CC )
+s19:s12,s13,s18,s16:cxpaddd |- ( ( Y e. RR /\ 1 < Y ) -> ( Y ^c ( 1 + ( 1 / ( log ` Y ) ) ) ) = ( ( Y ^c 1 ) x. ( Y ^c ( 1 / ( log ` Y ) ) ) ) )
+s20:s12:cxp1d |- ( ( Y e. RR /\ 1 < Y ) -> ( Y ^c 1 ) = Y )
+s21:s12,s13,s16:cxpefd |- ( ( Y e. RR /\ 1 < Y ) -> ( Y ^c ( 1 / ( log ` Y ) ) ) = ( exp ` ( ( 1 / ( log ` Y ) ) x. ( log ` Y ) ) ) )
+i22::recid2
+s23:s14,s15,i22:syl2anc |- ( ( Y e. RR /\ 1 < Y ) -> ( ( 1 / ( log ` Y ) ) x. ( log ` Y ) ) = 1 )
+s24:s23:fveq2d |- ( ( Y e. RR /\ 1 < Y ) -> ( exp ` ( ( 1 / ( log ` Y ) ) x. ( log ` Y ) ) ) = ( exp ` 1 ) )
+s25:s21,s24:eqtrd |- ( ( Y e. RR /\ 1 < Y ) -> ( Y ^c ( 1 / ( log ` Y ) ) ) = ( exp ` 1 ) )
+s26:s20,s25:oveq12d |- ( ( Y e. RR /\ 1 < Y ) -> ( ( Y ^c 1 ) x. ( Y ^c ( 1 / ( log ` Y ) ) ) ) = ( Y x. ( exp ` 1 ) ) )
+s27:s18:efcld |- ( ( Y e. RR /\ 1 < Y ) -> ( exp ` 1 ) e. CC )
+s28:s12,s27:mulcomd |- ( ( Y e. RR /\ 1 < Y ) -> ( Y x. ( exp ` 1 ) ) = ( ( exp ` 1 ) x. Y ) )
+s29:s19,s26:eqtrd |- ( ( Y e. RR /\ 1 < Y ) -> ( Y ^c ( 1 + ( 1 / ( log ` Y ) ) ) ) = ( Y x. ( exp ` 1 ) ) )
+s30:s29,s28:eqtrd |- ( ( Y e. RR /\ 1 < Y ) -> ( Y ^c ( 1 + ( 1 / ( log ` Y ) ) ) ) = ( ( exp ` 1 ) x. Y ) )
+s31:s5:reefcld |- ( ( Y e. RR /\ 1 < Y ) -> ( exp ` 1 ) e. RR )
+s32::egt2lt3 |- ( 2 < _e /\ _e < 3 )
+s33:s32:simpri |- _e < 3
+s34::ere |- _e e. RR
+s35::3re |- 3 e. RR
+s36:s34,s35,s33:ltleii |- _e <_ 3
+s37::df-e |- _e = ( exp ` 1 )
+s38:s37,s36:eqbrtrri |- ( exp ` 1 ) <_ 3
+s39:s38:a1i |- ( ( Y e. RR /\ 1 < Y ) -> ( exp ` 1 ) <_ 3 )
+s40::3re |- 3 e. RR
+s41:s40:a1i |- ( ( Y e. RR /\ 1 < Y ) -> 3 e. RR )
+s42:s11:rpge0d |- ( ( Y e. RR /\ 1 < Y ) -> 0 <_ Y )
+s43:s31,s41,s1,s42,s39:lemul1ad |- ( ( Y e. RR /\ 1 < Y ) -> ( ( exp ` 1 ) x. Y ) <_ ( 3 x. Y ) )
+s44:s30,s43:eqbrtrd |- ( ( Y e. RR /\ 1 < Y ) -> ( Y ^c ( 1 + ( 1 / ( log ` Y ) ) ) ) <_ ( 3 x. Y ) )
+qed:s30,s44:jca |- ( ( Y e. RR /\ 1 < Y ) -> ( ( Y ^c ( 1 + ( 1 / ( log ` Y ) ) ) ) = ( ( exp ` 1 ) x. Y ) /\ ( Y ^c ( 1 + ( 1 / ( log ` Y ) ) ) ) <_ ( 3 x. Y ) ) )
+$)

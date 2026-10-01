@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=bvare  LOC_AFTER=?
+
+* The Barban-Vehov divisor sum is real for 0 < A < B.
+
+s1::simpl |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> ( A e. RR+ /\ B e. RR+ /\ A < B ) )
+s2:s1:simp1d |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> A e. RR+ )
+s3:s1:simp2d |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> B e. RR+ )
+s4::simpr |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> N e. NN )
+i5::bvaval
+s6:s2,s3,s4,i5:syl21anc |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> ( ( A bvA B ) ` N ) = sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) )
+i7::dvdsfi
+s8:s4,i7:syl |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> { x e. NN | x || N } e. Fin )
+s9::breq1 |- ( x = d -> ( x || N <-> d || N ) )
+s10:s9:elrab |- ( d e. { x e. NN | x || N } <-> ( d e. NN /\ d || N ) )
+s11::simpr |- ( ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> d e. { x e. NN | x || N } )
+s12:s11,s10:sylib |- ( ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( d e. NN /\ d || N ) )
+s13:s12:simpld |- ( ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> d e. NN )
+s14:s1:adantr |- ( ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( A e. RR+ /\ B e. RR+ /\ A < B ) )
+i15::bvlamre
+s16:s14,s13,i15:syl2anc |- ( ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( ( A bvLam B ) ` d ) e. RR )
+s17:s8,s16:fsumrecl |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) e. RR )
+qed:s6,s17:eqeltrd |- ( ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ N e. NN ) -> ( ( A bvA B ) ` N ) e. RR )
+$)

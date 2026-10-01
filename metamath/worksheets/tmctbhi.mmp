@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=tmctbhi  LOC_AFTER=?
+
+* The ` S ` -level interface of the TTAB generics at the peek handlers ` readKet ` and ` readBlank ` : both typed at the generic alphabet, and from every state the peek of a letter ` z ` lands in the states whose flag is ` decide ( z = ket ) ` / ` decide ( z = blank ) ` (~ tmcrdketc , ~ tmcrdblkc ).
+
+s1::id |- ( ( 2nd ` T ) = TMSt -> ( 2nd ` T ) = TMSt )
+s2:s1:eqcomd |- ( ( 2nd ` T ) = TMSt -> TMSt = ( 2nd ` T ) )
+s3:s2:xpeq1d |- ( ( 2nd ` T ) = TMSt -> ( TMSt X. ( Gamma' |_| 1o ) ) = ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) )
+s4:s2,s3:oveq12d |- ( ( 2nd ` T ) = TMSt -> ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) = ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) ) )
+s5::tmcrdketf |- TMrdKet e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+s6:s5:a1i |- ( ( 2nd ` T ) = TMSt -> TMrdKet e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) )
+s7:s6,s4:eleqtrd |- ( ( 2nd ` T ) = TMSt -> TMrdKet e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) ) )
+s8::tmcrdblkf |- TMrdBlank e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+s9:s8:a1i |- ( ( 2nd ` T ) = TMSt -> TMrdBlank e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) )
+s10:s9,s4:eleqtrd |- ( ( 2nd ` T ) = TMSt -> TMrdBlank e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) ) )
+s11:s7,s10:jca |- ( ( 2nd ` T ) = TMSt -> ( TMrdKet e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) ) /\ TMrdBlank e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) ) ) )
+s12::simplr |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> r e. ( 2nd ` T ) )
+s13::simpll |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> ( 2nd ` T ) = TMSt )
+s14:s12,s13:eleqtrd |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> r e. TMSt )
+s15::simpr |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> z e. Gamma' )
+i16::tmcrdketc
+s17:s14,s15,i16:syl2anc |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> ( TMrdKet ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 3 , 1o , (/) ) } )
+s18:s17:ralrimiva |- ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) -> A. z e. Gamma' ( TMrdKet ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 3 , 1o , (/) ) } )
+s19:s18:ralrimiva |- ( ( 2nd ` T ) = TMSt -> A. r e. ( 2nd ` T ) A. z e. Gamma' ( TMrdKet ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 3 , 1o , (/) ) } )
+s20::simplr |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> r e. ( 2nd ` T ) )
+s21::simpll |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> ( 2nd ` T ) = TMSt )
+s22:s20,s21:eleqtrd |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> r e. TMSt )
+s23::simpr |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> z e. Gamma' )
+i24::tmcrdblkc
+s25:s22,s23,i24:syl2anc |- ( ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) /\ z e. Gamma' ) -> ( TMrdBlank ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 0 , 1o , (/) ) } )
+s26:s25:ralrimiva |- ( ( ( 2nd ` T ) = TMSt /\ r e. ( 2nd ` T ) ) -> A. z e. Gamma' ( TMrdBlank ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 0 , 1o , (/) ) } )
+s27:s26:ralrimiva |- ( ( 2nd ` T ) = TMSt -> A. r e. ( 2nd ` T ) A. z e. Gamma' ( TMrdBlank ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 0 , 1o , (/) ) } )
+qed:s11,s19,s27:3jca |- ( ( 2nd ` T ) = TMSt -> ( ( TMrdKet e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) ) /\ TMrdBlank e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( Gamma' |_| 1o ) ) ) ) /\ A. r e. ( 2nd ` T ) A. z e. Gamma' ( TMrdKet ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 3 , 1o , (/) ) } /\ A. r e. ( 2nd ` T ) A. z e. Gamma' ( TMrdBlank ` <. r , ( inl ` z ) >. ) e. { h e. TMSt | ( TMfl ` h ) = if ( z = 0 , 1o , (/) ) } ) )
+$)

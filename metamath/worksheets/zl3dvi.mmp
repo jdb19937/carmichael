@@ -1,0 +1,54 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3dvi  LOC_AFTER=?
+
+* The derivative of a function on a closed interval is the derivative of its restriction to the open interval ( ~ dvres twice, ~ iccntr ).
+
+s1::simpll |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> A e. RR )
+s2::simplr |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> B e. RR )
+s3::simpr |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> F : ( A [,] B ) --> CC )
+s4::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s5:s4:tgioo2 |- ( topGen ` ran (,) ) = ( ( TopOpen ` CCfld ) |`t RR )
+s6::ax-resscn |- RR C_ CC
+s7:s6:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> RR C_ CC )
+i8::iccssre
+s9:s1,s2,i8:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( A [,] B ) C_ RR )
+s10::ioossre |- ( A (,) B ) C_ RR
+s11:s10:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( A (,) B ) C_ RR )
+s12:s7,s3:jca |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR C_ CC /\ F : ( A [,] B ) --> CC ) )
+s13:s9,s9:jca |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( A [,] B ) C_ RR /\ ( A [,] B ) C_ RR ) )
+s14:s12,s13:jca |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( RR C_ CC /\ F : ( A [,] B ) --> CC ) /\ ( ( A [,] B ) C_ RR /\ ( A [,] B ) C_ RR ) ) )
+s15::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s16::eqid |- ( ( TopOpen ` CCfld ) |`t RR ) = ( ( TopOpen ` CCfld ) |`t RR )
+s17:s15,s16:dvres |- ( ( ( RR C_ CC /\ F : ( A [,] B ) --> CC ) /\ ( ( A [,] B ) C_ RR /\ ( A [,] B ) C_ RR ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) ) )
+s18:s14,s17:syl |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) ) )
+s19:s9,s11:jca |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( A [,] B ) C_ RR /\ ( A (,) B ) C_ RR ) )
+s20:s12,s19:jca |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( RR C_ CC /\ F : ( A [,] B ) --> CC ) /\ ( ( A [,] B ) C_ RR /\ ( A (,) B ) C_ RR ) ) )
+s21::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s22::eqid |- ( ( TopOpen ` CCfld ) |`t RR ) = ( ( TopOpen ` CCfld ) |`t RR )
+s23:s21,s22:dvres |- ( ( ( RR C_ CC /\ F : ( A [,] B ) --> CC ) /\ ( ( A [,] B ) C_ RR /\ ( A (,) B ) C_ RR ) ) -> ( RR _D ( F |` ( A (,) B ) ) ) = ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A (,) B ) ) ) )
+s24:s20,s23:syl |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR _D ( F |` ( A (,) B ) ) ) = ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A (,) B ) ) ) )
+s25:s5:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( topGen ` ran (,) ) = ( ( TopOpen ` CCfld ) |`t RR ) )
+s26:s25:fveq2d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( int ` ( topGen ` ran (,) ) ) = ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) )
+s27:s26:fveq1d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( int ` ( topGen ` ran (,) ) ) ` ( A [,] B ) ) = ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) )
+i28::iccntr
+s29:s1,s2,i28:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( int ` ( topGen ` ran (,) ) ) ` ( A [,] B ) ) = ( A (,) B ) )
+s30:s27,s29:eqtr3d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) = ( A (,) B ) )
+s31:s25:fveq2d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( int ` ( topGen ` ran (,) ) ) = ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) )
+s32:s31:fveq1d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( int ` ( topGen ` ran (,) ) ) ` ( A (,) B ) ) = ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A (,) B ) ) )
+s33::retop |- ( topGen ` ran (,) ) e. Top
+s34::iooretop |- ( A (,) B ) e. ( topGen ` ran (,) )
+i35::isopn3i
+s36:s33,s34,i35:mp2an |- ( ( int ` ( topGen ` ran (,) ) ) ` ( A (,) B ) ) = ( A (,) B )
+s37:s36:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( int ` ( topGen ` ran (,) ) ) ` ( A (,) B ) ) = ( A (,) B ) )
+s38:s32,s37:eqtr3d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A (,) B ) ) = ( A (,) B ) )
+i39::ffn
+s40:s3,i39:syl |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> F Fn ( A [,] B ) )
+i41::fnresdm
+s42:s40,i41:syl |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( F |` ( A [,] B ) ) = F )
+s43:s42:oveq2d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( RR _D F ) )
+s44:s43,s18:eqtr3d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR _D F ) = ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) ) )
+s45:s30:reseq2d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) ) = ( ( RR _D F ) |` ( A (,) B ) ) )
+s46:s44,s45:eqtrd |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR _D F ) = ( ( RR _D F ) |` ( A (,) B ) ) )
+s47:s38:reseq2d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A (,) B ) ) ) = ( ( RR _D F ) |` ( A (,) B ) ) )
+s48:s24,s47:eqtrd |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR _D ( F |` ( A (,) B ) ) ) = ( ( RR _D F ) |` ( A (,) B ) ) )
+qed:s46,s48:eqtr4d |- ( ( ( A e. RR /\ B e. RR ) /\ F : ( A [,] B ) --> CC ) -> ( RR _D F ) = ( RR _D ( F |` ( A (,) B ) ) ) )
+$)

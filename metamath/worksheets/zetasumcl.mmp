@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=zetasumcl  LOC_AFTER=?
+
+* The zeta series at a real exponent above one sums to a real number.
+
+s1::simpl |- ( ( S e. RR /\ 1 < S ) -> S e. RR )
+s2::simpr |- ( ( S e. RR /\ 1 < S ) -> 1 < S )
+s3:s1:recnd |- ( ( S e. RR /\ 1 < S ) -> S e. CC )
+s4:s1:renegcld |- ( ( S e. RR /\ 1 < S ) -> -u S e. RR )
+s5:s4:recnd |- ( ( S e. RR /\ 1 < S ) -> -u S e. CC )
+s6::simpr |- ( ( ( S e. RR /\ 1 < S ) /\ n e. NN ) -> n e. NN )
+s7::id |- ( t = n -> t = n )
+m1:s7:oveq1d |- ( t = n -> ( t ^c -u S ) = ( n ^c -u S ) )
+s8::eqid |- ( t e. NN |-> ( t ^c -u S ) ) = ( t e. NN |-> ( t ^c -u S ) )
+s9:m1,s8:fvmptg |- ( ( n e. NN /\ ( n ^c -u S ) e. _V ) -> ( ( t e. NN |-> ( t ^c -u S ) ) ` n ) = ( n ^c -u S ) )
+s10::ovexd |- ( ( ( S e. RR /\ 1 < S ) /\ n e. NN ) -> ( n ^c -u S ) e. _V )
+s11:s6,s10,s9:syl2anc |- ( ( ( S e. RR /\ 1 < S ) /\ n e. NN ) -> ( ( t e. NN |-> ( t ^c -u S ) ) ` n ) = ( n ^c -u S ) )
+s12:s6:nnrpd |- ( ( ( S e. RR /\ 1 < S ) /\ n e. NN ) -> n e. RR+ )
+s13:s4:adantr |- ( ( ( S e. RR /\ 1 < S ) /\ n e. NN ) -> -u S e. RR )
+s14:s12,s13:rpcxpcld |- ( ( ( S e. RR /\ 1 < S ) /\ n e. NN ) -> ( n ^c -u S ) e. RR+ )
+s15:s14:rpred |- ( ( ( S e. RR /\ 1 < S ) /\ n e. NN ) -> ( n ^c -u S ) e. RR )
+s16::nnuz |- NN = ( ZZ>= ` 1 )
+s17::1zzd |- ( ( S e. RR /\ 1 < S ) -> 1 e. ZZ )
+s18::zetacvg1 |- ( ( S e. RR /\ 1 < S ) -> seq 1 ( + , ( t e. NN |-> ( t ^c -u S ) ) ) e. dom ~~> )
+qed:s16,s17,s11,s15,s18:isumrecl |- ( ( S e. RR /\ 1 < S ) -> sum_ n e. NN ( n ^c -u S ) e. RR )
+$)

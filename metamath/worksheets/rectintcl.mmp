@@ -1,0 +1,74 @@
+$( <MM> <PROOF_ASST> THEOREM=rectintcl  LOC_AFTER=?
+
+* Closure of the boundary integral around a rectangle contained in the domain of continuity.
+
+s1::simp3l |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> F e. ( D -cn-> CC ) )
+s2::simp3r |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( A crect B ) C_ D )
+s3::simp1 |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( A e. CC /\ B e. CC ) )
+s4::simp2 |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) )
+s5:s3,s4:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) )
+i6::crectss
+s7:s3,i6:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( A crect B ) C_ CC )
+i8::crectcnr1
+s9:s5,i8:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> A e. ( A crect B ) )
+s10:s7,s9:sseldd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> A e. CC )
+i11::crectcnr2
+s12:s5,i11:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. ( A crect B ) )
+s13:s7,s12:sseldd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. CC )
+i14::crectcnr3
+s15:s5,i14:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> B e. ( A crect B ) )
+s16:s7,s15:sseldd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> B e. CC )
+i17::crectcnr4
+s18:s5,i17:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. ( A crect B ) )
+s19:s7,s18:sseldd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. CC )
+s20:s9,s12:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( A e. ( A crect B ) /\ ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. ( A crect B ) ) )
+s21:s3,s20:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( A e. CC /\ B e. CC ) /\ ( A e. ( A crect B ) /\ ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. ( A crect B ) ) ) )
+i22::crectcvx
+s23:s21,i22:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( A cseg ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) ) C_ ( A crect B ) )
+s24:s23,s2:sstrd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( A cseg ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) ) C_ D )
+s25:s12,s15:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. ( A crect B ) /\ B e. ( A crect B ) ) )
+s26:s3,s25:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( A e. CC /\ B e. CC ) /\ ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. ( A crect B ) /\ B e. ( A crect B ) ) ) )
+i27::crectcvx
+s28:s26,i27:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) cseg B ) C_ ( A crect B ) )
+s29:s28,s2:sstrd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) cseg B ) C_ D )
+s30:s15,s18:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( B e. ( A crect B ) /\ ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. ( A crect B ) ) )
+s31:s3,s30:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( A e. CC /\ B e. CC ) /\ ( B e. ( A crect B ) /\ ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. ( A crect B ) ) ) )
+i32::crectcvx
+s33:s31,i32:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( B cseg ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) ) C_ ( A crect B ) )
+s34:s33,s2:sstrd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( B cseg ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) ) C_ D )
+s35:s18,s9:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. ( A crect B ) /\ A e. ( A crect B ) ) )
+s36:s3,s35:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( A e. CC /\ B e. CC ) /\ ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. ( A crect B ) /\ A e. ( A crect B ) ) ) )
+i37::crectcvx
+s38:s36,i37:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) cseg A ) C_ ( A crect B ) )
+s39:s38,s2:sstrd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) cseg A ) C_ D )
+i40::simpl
+s41:s3,i40:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> A e. CC )
+i42::simpr
+s43:s3,i42:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> B e. CC )
+s44:s10,s13:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( A e. CC /\ ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. CC ) )
+s45:s1,s24:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F e. ( D -cn-> CC ) /\ ( A cseg ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) ) C_ D ) )
+s46:s44,s45:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( A e. CC /\ ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) ) C_ D ) ) )
+i47::lintcl
+s48:s46,i47:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F lint <. A , ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) >. ) e. CC )
+s49:s13,s16:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. CC /\ B e. CC ) )
+s50:s1,s29:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F e. ( D -cn-> CC ) /\ ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) cseg B ) C_ D ) )
+s51:s49,s50:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) cseg B ) C_ D ) ) )
+i52::lintcl
+s53:s51,i52:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F lint <. ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) , B >. ) e. CC )
+s54:s16,s19:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( B e. CC /\ ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. CC ) )
+s55:s1,s34:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F e. ( D -cn-> CC ) /\ ( B cseg ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) ) C_ D ) )
+s56:s54,s55:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( B e. CC /\ ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( B cseg ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) ) C_ D ) ) )
+i57::lintcl
+s58:s56,i57:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F lint <. B , ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) >. ) e. CC )
+s59:s19,s10:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. CC /\ A e. CC ) )
+s60:s1,s39:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F e. ( D -cn-> CC ) /\ ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) cseg A ) C_ D ) )
+s61:s59,s60:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) e. CC /\ A e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) cseg A ) C_ D ) ) )
+i62::lintcl
+s63:s61,i62:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F lint <. ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) , A >. ) e. CC )
+s64:s48,s53:addcld |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( F lint <. A , ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) >. ) + ( F lint <. ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) , B >. ) ) e. CC )
+s65:s58,s63:addcld |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( F lint <. B , ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) >. ) + ( F lint <. ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) , A >. ) ) e. CC )
+s66:s64,s65:addcld |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( ( ( F lint <. A , ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) >. ) + ( F lint <. ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) , B >. ) ) + ( ( F lint <. B , ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) >. ) + ( F lint <. ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) , A >. ) ) ) e. CC )
+i67::rectintval
+s68:s1,s41,s43,i67:syl3anc |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F rectint <. A , B >. ) = ( ( ( F lint <. A , ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) >. ) + ( F lint <. ( ( Re ` B ) + ( _i x. ( Im ` A ) ) ) , B >. ) ) + ( ( F lint <. B , ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) >. ) + ( F lint <. ( ( Re ` A ) + ( _i x. ( Im ` B ) ) ) , A >. ) ) ) )
+qed:s68,s66:eqeltrd |- ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) /\ ( F e. ( D -cn-> CC ) /\ ( A crect B ) C_ D ) ) -> ( F rectint <. A , B >. ) e. CC )
+$)

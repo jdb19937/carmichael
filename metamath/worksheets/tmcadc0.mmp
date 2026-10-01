@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcadc0  LOC_AFTER=?
+
+* The carry into bit 0 of an addition without carry-in is 0.
+
+s1::simpl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> L' e. Word 2o )
+i3::tonatcl
+s4:s1,i3:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. NN0 )
+i5::tonatcl
+s6:s2,i5:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. NN0 )
+i7::lencl
+s8:s1,i7:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( # ` L ) e. NN0 )
+i9::lencl
+s10:s2,i9:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( # ` L' ) e. NN0 )
+s11::0nn0 |- 0 e. NN0
+s12:s11:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> 0 e. NN0 )
+s13:s4:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. ZZ )
+s14:s6:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. ZZ )
+s15::0el2o |- (/) e. 2o
+s16:s15:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> (/) e. 2o )
+s17:s13,s14,s16:3jca |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) )
+s18:s17,s12:jca |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) /\ 0 e. NN0 ) )
+i19::bwcarry
+s20:s18,i19:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` 0 ) = if ( ( 2 ^ 0 ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) + ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) )
+s21::2cn |- 2 e. CC
+s22:s21:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> 2 e. CC )
+i23::exp0
+s24:s22,i23:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( 2 ^ 0 ) = 1 )
+s25:s24:oveq2d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L ) mod 1 ) )
+s26:s4:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. ZZ )
+i27::zmod10
+s28:s26,i27:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod 1 ) = 0 )
+s29:s25,s28:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = 0 )
+s30:s24:oveq2d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L' ) mod 1 ) )
+s31:s6:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. ZZ )
+i32::zmod10
+s33:s31,i32:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod 1 ) = 0 )
+s34:s30,s33:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) = 0 )
+s35:s29,s34:oveq12d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) + ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) = ( 0 + 0 ) )
+s36::bwbn0 |- ( bToNat ` (/) ) = 0
+s37:s36:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( bToNat ` (/) ) = 0 )
+s38:s35,s37:oveq12d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) + ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) + ( bToNat ` (/) ) ) = ( ( 0 + 0 ) + 0 ) )
+s39::00id |- ( 0 + 0 ) = 0
+s40:s39:oveq1i |- ( ( 0 + 0 ) + 0 ) = ( 0 + 0 )
+s41:s40,s39:eqtri |- ( ( 0 + 0 ) + 0 ) = 0
+s42:s41:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( 0 + 0 ) + 0 ) = 0 )
+s43:s38,s42:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) + ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) + ( bToNat ` (/) ) ) = 0 )
+s44:s24,s43:breq12d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( 2 ^ 0 ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) + ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) + ( bToNat ` (/) ) ) <-> 1 <_ 0 ) )
+s45::0lt1 |- 0 < 1
+s46::0re |- 0 e. RR
+s47::1re |- 1 e. RR
+s48:s46,s47:ltnlei |- ( 0 < 1 <-> -. 1 <_ 0 )
+s49:s45,s48:mpbi |- -. 1 <_ 0
+s50:s49:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> -. 1 <_ 0 )
+s51:s44,s50:mtbird |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> -. ( 2 ^ 0 ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) + ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) + ( bToNat ` (/) ) ) )
+s52:s51:iffalsed |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> if ( ( 2 ^ 0 ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) + ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) = (/) )
+qed:s20,s52:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` 0 ) = (/) )
+$)

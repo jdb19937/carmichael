@@ -1,0 +1,135 @@
+$( <MM> <PROOF_ASST> THEOREM=scalesofsc  LOC_AFTER=?
+
+* The scales of step 1 are a member of ~ df-scales once the reservoir bound ` z ` and the smoothness bound ` y ` are at least ` 1 `, which is what ~ df-search asks of its first argument.  A5 reads the two inequalities off the window.
+
+s1::simpr |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 1 <_ ( ( C yscaleE N ) ` E ) )
+s2::simpl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) )
+s3:s2:simpld |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) )
+s4:s2:simprd |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 1 <_ ( C zscale N ) )
+s5:s3:simpld |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( C e. RR /\ E e. RR ) )
+s6:s3:simprd |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> N e. ( ZZ>= ` 3 ) )
+s7:s5:simpld |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> C e. RR )
+s8:s5:simprd |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> E e. RR )
+s9::zscalecl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) ) -> ( C zscale N ) e. NN0 )
+s10:s7,s6,s9:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( C zscale N ) e. NN0 )
+s11::yscaleecl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ E e. RR ) -> ( ( C yscaleE N ) ` E ) e. NN0 )
+s12:s7,s6,s8,s11:syl3anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C yscaleE N ) ` E ) e. NN0 )
+s13:s10,s4:jca |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C zscale N ) e. NN0 /\ 1 <_ ( C zscale N ) ) )
+s14::elnnnn0c |- ( ( C zscale N ) e. NN <-> ( ( C zscale N ) e. NN0 /\ 1 <_ ( C zscale N ) ) )
+s15:s13,s14:sylibr |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( C zscale N ) e. NN )
+s16:s12,s1:jca |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( ( C yscaleE N ) ` E ) e. NN0 /\ 1 <_ ( ( C yscaleE N ) ` E ) ) )
+s17::elnnnn0c |- ( ( ( C yscaleE N ) ` E ) e. NN <-> ( ( ( C yscaleE N ) ` E ) e. NN0 /\ 1 <_ ( ( C yscaleE N ) ` E ) ) )
+s18:s16,s17:sylibr |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C yscaleE N ) ` E ) e. NN )
+s19::3nn0 |- 3 e. NN0
+s20:s19:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 3 e. NN0 )
+s21::eluznn0 |- ( ( 3 e. NN0 /\ N e. ( ZZ>= ` 3 ) ) -> N e. NN0 )
+s22:s20,s6,s21:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> N e. NN0 )
+s23::uzuzle23 |- ( N e. ( ZZ>= ` 3 ) -> N e. ( ZZ>= ` 2 ) )
+s24:s6,s23:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> N e. ( ZZ>= ` 2 ) )
+s25::tscalecl |- ( N e. ( ZZ>= ` 2 ) -> ( Tscale ` N ) e. NN0 )
+s26:s24,s25:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( Tscale ` N ) e. NN0 )
+s27:s22:nn0red |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> N e. RR )
+s28::eluzle |- ( N e. ( ZZ>= ` 3 ) -> 3 <_ N )
+s29:s6,s28:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 3 <_ N )
+s30::1red |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 1 e. RR )
+s31::3re |- 3 e. RR
+s32:s31:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 3 e. RR )
+s33::1lt3 |- 1 < 3
+s34:s33:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 1 < 3 )
+s35:s30,s32,s27,s34,s29:ltletrd |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 1 < N )
+s36::rplogcl |- ( ( N e. RR /\ 1 < N ) -> ( log ` N ) e. RR+ )
+s37:s27,s35,s36:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( log ` N ) e. RR+ )
+s38:s37:rpred |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( log ` N ) e. RR )
+s39:s37:rpge0d |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 0 <_ ( log ` N ) )
+s40::simpl |- ( ( c = C /\ e = E ) -> c = C )
+s41::simpr |- ( ( c = C /\ e = E ) -> e = E )
+c1:s40:oveq1d |- ( ( c = C /\ e = E ) -> ( c zscale n ) = ( C zscale n ) )
+c2:s40:oveq1d |- ( ( c = C /\ e = E ) -> ( c zscale n ) = ( C zscale n ) )
+c3:c2:oveq1d |- ( ( c = C /\ e = E ) -> ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) = ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) )
+c4:c3:fveq2d |- ( ( c = C /\ e = E ) -> ( Nfloor ` ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) = ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) )
+c5:c1,c4:opeq12d |- ( ( c = C /\ e = E ) -> <. ( c zscale n ) , ( Nfloor ` ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. = <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. )
+c6:s40:oveq1d |- ( ( c = C /\ e = E ) -> ( c yscaleE n ) = ( C yscaleE n ) )
+c7:c6,s41:fveq12d |- ( ( c = C /\ e = E ) -> ( ( c yscaleE n ) ` e ) = ( ( C yscaleE n ) ` E ) )
+c8:c7:opeq1d |- ( ( c = C /\ e = E ) -> <. ( ( c yscaleE n ) ` e ) , ( Tscale ` n ) >. = <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. )
+c9:c5,c8:opeq12d |- ( ( c = C /\ e = E ) -> <. <. ( c zscale n ) , ( Nfloor ` ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( c yscaleE n ) ` e ) , ( Tscale ` n ) >. >. = <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. )
+c10:c9:opeq1d |- ( ( c = C /\ e = E ) -> <. <. <. ( c zscale n ) , ( Nfloor ` ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( c yscaleE n ) ` e ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. = <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. )
+c11:c10:mpteq2dv |- ( ( c = C /\ e = E ) -> ( n e. NN0 |-> <. <. <. ( c zscale n ) , ( Nfloor ` ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( c yscaleE n ) ` e ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) = ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) )
+s42::df-scalesof |- ScalesOf = ( c e. RR , e e. RR |-> ( n e. NN0 |-> <. <. <. ( c zscale n ) , ( Nfloor ` ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( c yscaleE n ) ` e ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) )
+s43::nn0ex |- NN0 e. _V
+s44:s43:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> NN0 e. _V )
+s45::mptexg |- ( NN0 e. _V -> ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) e. _V )
+s46:s44,s45:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) e. _V )
+s47:c11,s42:ovmpoga |- ( ( C e. RR /\ E e. RR /\ ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) e. _V ) -> ( C ScalesOf E ) = ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) )
+s48:s7,s8,s46,s47:syl3anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( C ScalesOf E ) = ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) )
+s49:s48:fveq1d |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C ScalesOf E ) ` N ) = ( ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) ` N ) )
+s50::id |- ( n = N -> n = N )
+c12:s50:oveq2d |- ( n = N -> ( C zscale n ) = ( C zscale N ) )
+c13:s50:oveq2d |- ( n = N -> ( C zscale n ) = ( C zscale N ) )
+c14:c13:oveq1d |- ( n = N -> ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) = ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) )
+c15:c14:fveq2d |- ( n = N -> ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) = ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) )
+c16:c12,c15:opeq12d |- ( n = N -> <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. = <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. )
+c17:s50:oveq2d |- ( n = N -> ( C yscaleE n ) = ( C yscaleE N ) )
+c18:c17:fveq1d |- ( n = N -> ( ( C yscaleE n ) ` E ) = ( ( C yscaleE N ) ` E ) )
+c19:s50:fveq2d |- ( n = N -> ( Tscale ` n ) = ( Tscale ` N ) )
+c20:c18,c19:opeq12d |- ( n = N -> <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. = <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. )
+c21:c16,c20:opeq12d |- ( n = N -> <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. = <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. )
+c22:s50:fveq2d |- ( n = N -> ( log ` n ) = ( log ` N ) )
+c23:c22:oveq1d |- ( n = N -> ( ( log ` n ) ^c ( 6 / 5 ) ) = ( ( log ` N ) ^c ( 6 / 5 ) ) )
+c24:c23:fveq2d |- ( n = N -> ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) = ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) )
+c25:c21,c24:opeq12d |- ( n = N -> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. = <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. )
+s51::eqid |- ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) = ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. )
+s52::opex |- <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. e. _V
+s53:s52:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. e. _V )
+s54:c25,s51:fvmptg |- ( ( N e. NN0 /\ <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. e. _V ) -> ( ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) ` N ) = <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. )
+s55:s22,s53,s54:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( n e. NN0 |-> <. <. <. ( C zscale n ) , ( Nfloor ` ( ( C zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE n ) ` E ) , ( Tscale ` n ) >. >. , ( Nceil ` ( ( log ` n ) ^c ( 6 / 5 ) ) ) >. ) ` N ) = <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. )
+s56:s49,s55:eqtrd |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C ScalesOf E ) ` N ) = <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. )
+s57::nfloorcl |- ( ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) e. RR -> ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) e. NN0 )
+s58::recxpcl |- ( ( ( C zscale N ) e. RR /\ 0 <_ ( C zscale N ) /\ ( ; 9 9 / ; ; 1 0 0 ) e. RR ) -> ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) e. RR )
+s59:s15:nnred |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( C zscale N ) e. RR )
+s60:s15:nnnn0d |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( C zscale N ) e. NN0 )
+s61:s60:nn0ge0d |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> 0 <_ ( C zscale N ) )
+i62::rpre
+i63::rpdivcl
+i64::nnrp
+s65::9nn0 |- 9 e. NN0
+s66::9nn |- 9 e. NN
+s67:s65,s66:decnncl |- ; 9 9 e. NN
+s68:s67,i64:ax-mp |- ; 9 9 e. RR+
+i69::nnrp
+s70::1nn |- 1 e. NN
+s71:s70:decnncl2 |- ; 1 0 e. NN
+s72:s71:decnncl2 |- ; ; 1 0 0 e. NN
+s73:s72,i69:ax-mp |- ; ; 1 0 0 e. RR+
+s74:s68,s73,i63:mp2an |- ( ; 9 9 / ; ; 1 0 0 ) e. RR+
+s75:s74,i62:ax-mp |- ( ; 9 9 / ; ; 1 0 0 ) e. RR
+s76:s75:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ; 9 9 / ; ; 1 0 0 ) e. RR )
+s77:s59,s61,s76:3jca |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C zscale N ) e. RR /\ 0 <_ ( C zscale N ) /\ ( ; 9 9 / ; ; 1 0 0 ) e. RR ) )
+s78:s77,s58:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) e. RR )
+s79:s78,s57:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) e. NN0 )
+s80::opelxpi |- ( ( ( C zscale N ) e. NN /\ ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) e. NN0 ) -> <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. e. ( NN X. NN0 ) )
+s81:s15,s79,s80:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. e. ( NN X. NN0 ) )
+s82::opelxpi |- ( ( ( ( C yscaleE N ) ` E ) e. NN /\ ( Tscale ` N ) e. NN0 ) -> <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. e. ( NN X. NN0 ) )
+s83:s18,s26,s82:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. e. ( NN X. NN0 ) )
+s84::opelxpi |- ( ( <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. e. ( NN X. NN0 ) /\ <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. e. ( NN X. NN0 ) ) -> <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. e. ( ( NN X. NN0 ) X. ( NN X. NN0 ) ) )
+s85:s81,s83,s84:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. e. ( ( NN X. NN0 ) X. ( NN X. NN0 ) ) )
+s86::nceilcl |- ( ( ( log ` N ) ^c ( 6 / 5 ) ) e. RR -> ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) e. NN0 )
+s87::recxpcl |- ( ( ( log ` N ) e. RR /\ 0 <_ ( log ` N ) /\ ( 6 / 5 ) e. RR ) -> ( ( log ` N ) ^c ( 6 / 5 ) ) e. RR )
+i88::rpre
+i89::rpdivcl
+i90::nnrp
+s91::6nn |- 6 e. NN
+s92:s91,i90:ax-mp |- 6 e. RR+
+s93::5rp |- 5 e. RR+
+s94:s92,s93,i89:mp2an |- ( 6 / 5 ) e. RR+
+s95:s94,i88:ax-mp |- ( 6 / 5 ) e. RR
+s96:s95:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( 6 / 5 ) e. RR )
+s97:s38,s39,s96:3jca |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( log ` N ) e. RR /\ 0 <_ ( log ` N ) /\ ( 6 / 5 ) e. RR ) )
+s98:s97,s87:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( log ` N ) ^c ( 6 / 5 ) ) e. RR )
+s99:s98,s86:syl |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) e. NN0 )
+s100::opelxpi |- ( ( <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. e. ( ( NN X. NN0 ) X. ( NN X. NN0 ) ) /\ ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) e. NN0 ) -> <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. e. ( ( ( NN X. NN0 ) X. ( NN X. NN0 ) ) X. NN0 ) )
+s101:s85,s99,s100:syl2anc |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. e. ( ( ( NN X. NN0 ) X. ( NN X. NN0 ) ) X. NN0 ) )
+s102::df-scales |- Scales = ( ( ( NN X. NN0 ) X. ( NN X. NN0 ) ) X. NN0 )
+s103:s102:a1i |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> Scales = ( ( ( NN X. NN0 ) X. ( NN X. NN0 ) ) X. NN0 ) )
+s104:s101,s103:eleqtrrd |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> <. <. <. ( C zscale N ) , ( Nfloor ` ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) ) >. , <. ( ( C yscaleE N ) ` E ) , ( Tscale ` N ) >. >. , ( Nceil ` ( ( log ` N ) ^c ( 6 / 5 ) ) ) >. e. Scales )
+qed:s56,s104:eqeltrd |- ( ( ( ( ( C e. RR /\ E e. RR ) /\ N e. ( ZZ>= ` 3 ) ) /\ 1 <_ ( C zscale N ) ) /\ 1 <_ ( ( C yscaleE N ) ` E ) ) -> ( ( C ScalesOf E ) ` N ) e. Scales )
+$)

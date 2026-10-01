@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=t12ini  LOC_AFTER=?
+
+* The value of Lean's ` Frag.initStacks K W ` (the stacks of ~ df-tm2init ) at a stack index.
+
+s1::simpl |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> ( 1st ` ( 1st ` T ) ) = TMGam )
+s2::simprl |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> J e. ( 0 ..^ 8 ) )
+s3::simprr |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> W e. _V )
+i4::tmcdg
+s5:s1,i4:syl |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> dom ( 1st ` ( 1st ` T ) ) = ( 0 ..^ 8 ) )
+s6:s5:eqcomd |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> ( 0 ..^ 8 ) = dom ( 1st ` ( 1st ` T ) ) )
+s7:s2,s6:eleqtrd |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> J e. dom ( 1st ` ( 1st ` T ) ) )
+s8::0ex |- (/) e. _V
+s9:s8:a1i |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> (/) e. _V )
+s10:s3,s9:ifcld |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> if ( J = K , W , (/) ) e. _V )
+s11::eqeq1 |- ( k = J -> ( k = K <-> J = K ) )
+s12:s11:ifbid |- ( k = J -> if ( k = K , W , (/) ) = if ( J = K , W , (/) ) )
+s13::eqid |- ( k e. dom ( 1st ` ( 1st ` T ) ) |-> if ( k = K , W , (/) ) ) = ( k e. dom ( 1st ` ( 1st ` T ) ) |-> if ( k = K , W , (/) ) )
+s14:s12,s13:fvmptg |- ( ( J e. dom ( 1st ` ( 1st ` T ) ) /\ if ( J = K , W , (/) ) e. _V ) -> ( ( k e. dom ( 1st ` ( 1st ` T ) ) |-> if ( k = K , W , (/) ) ) ` J ) = if ( J = K , W , (/) ) )
+qed:s7,s10,s14:syl2anc |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( J e. ( 0 ..^ 8 ) /\ W e. _V ) ) -> ( ( k e. dom ( 1st ` ( 1st ` T ) ) |-> if ( k = K , W , (/) ) ) ` J ) = if ( J = K , W , (/) ) )
+$)

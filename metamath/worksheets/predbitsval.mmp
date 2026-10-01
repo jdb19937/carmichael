@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=predbitsval  LOC_AFTER=?
+
+* Value of predBits: the digits of toNat L - 1, at the length of L or one less when L is a single one at the top.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::id |- ( l = L -> l = L )
+c1:s2:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c2:c1:oveq1d |- ( l = L -> ( ( toNat ` l ) - 1 ) = ( ( toNat ` L ) - 1 ) )
+c3:s2:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c4:c3:oveq2d |- ( l = L -> ( 2 x. ( toNat ` l ) ) = ( 2 x. ( toNat ` L ) ) )
+c5:s2:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c6:c5:oveq2d |- ( l = L -> ( 2 ^ ( # ` l ) ) = ( 2 ^ ( # ` L ) ) )
+c7:c4,c6:eqeq12d |- ( l = L -> ( ( 2 x. ( toNat ` l ) ) = ( 2 ^ ( # ` l ) ) <-> ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) )
+c8:s2:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c9:c8:oveq1d |- ( l = L -> ( ( # ` l ) - 1 ) = ( ( # ` L ) - 1 ) )
+c10:s2:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c11:c7,c9,c10:ifbieq12d |- ( l = L -> if ( ( 2 x. ( toNat ` l ) ) = ( 2 ^ ( # ` l ) ) , ( ( # ` l ) - 1 ) , ( # ` l ) ) = if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) )
+c12:c2,c11:oveq12d |- ( l = L -> ( ( ( toNat ` l ) - 1 ) bwrd if ( ( 2 x. ( toNat ` l ) ) = ( 2 ^ ( # ` l ) ) , ( ( # ` l ) - 1 ) , ( # ` l ) ) ) = ( ( ( toNat ` L ) - 1 ) bwrd if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) ) )
+s3::df-predbits |- predBits = ( l e. Word 2o |-> ( ( ( toNat ` l ) - 1 ) bwrd if ( ( 2 x. ( toNat ` l ) ) = ( 2 ^ ( # ` l ) ) , ( ( # ` l ) - 1 ) , ( # ` l ) ) ) )
+s4::ovex |- ( ( ( toNat ` L ) - 1 ) bwrd if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) ) e. _V
+s5:s4:a1i |- ( L e. Word 2o -> ( ( ( toNat ` L ) - 1 ) bwrd if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) ) e. _V )
+s6:c12,s3:fvmptg |- ( ( L e. Word 2o /\ ( ( ( toNat ` L ) - 1 ) bwrd if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) ) e. _V ) -> ( predBits ` L ) = ( ( ( toNat ` L ) - 1 ) bwrd if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) ) )
+qed:s1,s5,s6:syl2anc |- ( L e. Word 2o -> ( predBits ` L ) = ( ( ( toNat ` L ) - 1 ) bwrd if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) ) )
+$)

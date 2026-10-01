@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcmapty  LOC_AFTER=?
+
+* A handler lambda ` fun v => X ` on the machine states, typed as a function into ` Y ` , is a member of ` ( Y ^m S ) ` : the form the statement constructors of ~ df-tm2stmt take (blueprint D2).
+
+s1::simp1 |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> ( 2nd ` T ) = TMSt )
+s2::simp2 |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> Y e. V )
+s3::simp3 |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> A. u e. TMSt X e. Y )
+s4::fmpt |- ( A. u e. TMSt X e. Y <-> ( u e. TMSt |-> X ) : TMSt --> Y )
+s5:s3,s4:sylib |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> ( u e. TMSt |-> X ) : TMSt --> Y )
+s6:s1:feq2d |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> ( ( u e. TMSt |-> X ) : ( 2nd ` T ) --> Y <-> ( u e. TMSt |-> X ) : TMSt --> Y ) )
+s7:s6,s5:mpbird |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> ( u e. TMSt |-> X ) : ( 2nd ` T ) --> Y )
+s8::fvexd |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> ( 2nd ` T ) e. _V )
+s9:s2,s8:elmapd |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> ( ( u e. TMSt |-> X ) e. ( Y ^m ( 2nd ` T ) ) <-> ( u e. TMSt |-> X ) : ( 2nd ` T ) --> Y ) )
+qed:s9,s7:mpbird |- ( ( ( 2nd ` T ) = TMSt /\ Y e. V /\ A. u e. TMSt X e. Y ) -> ( u e. TMSt |-> X ) e. ( Y ^m ( 2nd ` T ) ) )
+$)

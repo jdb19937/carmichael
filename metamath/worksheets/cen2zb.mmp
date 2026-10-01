@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=cen2zb  LOC_AFTER=?
+
+* A point of the box ` [ S , 1 ] x [ -V , V ] ` (as a ` crect ` ) has real part in ` [ S , 1 ] ` and imaginary part of absolute value at most ` V ` (Lean ` mem_zeroFinset ` ).
+
+s1::simpll |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> S e. RR )
+s2::simplr |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> V e. RR )
+s3::simpr |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) )
+s4::ax-icn |- _i e. CC
+s5:s4:a1i |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> _i e. CC )
+s6:s1:recnd |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> S e. CC )
+s7:s2:recnd |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> V e. CC )
+s8:s7:negcld |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> -u V e. CC )
+s9:s5,s8:mulcld |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( _i x. -u V ) e. CC )
+s10:s6,s9:addcld |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( S + ( _i x. -u V ) ) e. CC )
+s11::ax-1cn |- 1 e. CC
+s12:s11:a1i |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> 1 e. CC )
+s13:s5,s7:mulcld |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( _i x. V ) e. CC )
+s14:s12,s13:addcld |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( 1 + ( _i x. V ) ) e. CC )
+i15::elcrect
+s16:s10,s14,i15:syl2anc |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) <-> ( O e. CC /\ ( Re ` O ) e. ( ( Re ` ( S + ( _i x. -u V ) ) ) [,] ( Re ` ( 1 + ( _i x. V ) ) ) ) /\ ( Im ` O ) e. ( ( Im ` ( S + ( _i x. -u V ) ) ) [,] ( Im ` ( 1 + ( _i x. V ) ) ) ) ) ) )
+s17:s3,s16:mpbid |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( O e. CC /\ ( Re ` O ) e. ( ( Re ` ( S + ( _i x. -u V ) ) ) [,] ( Re ` ( 1 + ( _i x. V ) ) ) ) /\ ( Im ` O ) e. ( ( Im ` ( S + ( _i x. -u V ) ) ) [,] ( Im ` ( 1 + ( _i x. V ) ) ) ) ) )
+s18:s17:simp1d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> O e. CC )
+s19:s17:simp2d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Re ` O ) e. ( ( Re ` ( S + ( _i x. -u V ) ) ) [,] ( Re ` ( 1 + ( _i x. V ) ) ) ) )
+s20:s17:simp3d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Im ` O ) e. ( ( Im ` ( S + ( _i x. -u V ) ) ) [,] ( Im ` ( 1 + ( _i x. V ) ) ) ) )
+s21:s2:renegcld |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> -u V e. RR )
+s22:s1,s21:crred |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Re ` ( S + ( _i x. -u V ) ) ) = S )
+s23::1red |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> 1 e. RR )
+s24:s23,s2:crred |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Re ` ( 1 + ( _i x. V ) ) ) = 1 )
+s25:s1,s21:crimd |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Im ` ( S + ( _i x. -u V ) ) ) = -u V )
+s26::1red |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> 1 e. RR )
+s27:s26,s2:crimd |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Im ` ( 1 + ( _i x. V ) ) ) = V )
+s28:s22,s24:oveq12d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( ( Re ` ( S + ( _i x. -u V ) ) ) [,] ( Re ` ( 1 + ( _i x. V ) ) ) ) = ( S [,] 1 ) )
+s29:s19,s28:eleqtrd |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Re ` O ) e. ( S [,] 1 ) )
+s30:s25,s27:oveq12d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( ( Im ` ( S + ( _i x. -u V ) ) ) [,] ( Im ` ( 1 + ( _i x. V ) ) ) ) = ( -u V [,] V ) )
+s31:s20,s30:eleqtrd |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Im ` O ) e. ( -u V [,] V ) )
+s32::1red |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> 1 e. RR )
+i33::elicc2
+s34:s1,s32,i33:syl2anc |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( ( Re ` O ) e. ( S [,] 1 ) <-> ( ( Re ` O ) e. RR /\ S <_ ( Re ` O ) /\ ( Re ` O ) <_ 1 ) ) )
+s35:s29,s34:mpbid |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( ( Re ` O ) e. RR /\ S <_ ( Re ` O ) /\ ( Re ` O ) <_ 1 ) )
+i36::elicc2
+s37:s21,s2,i36:syl2anc |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( ( Im ` O ) e. ( -u V [,] V ) <-> ( ( Im ` O ) e. RR /\ -u V <_ ( Im ` O ) /\ ( Im ` O ) <_ V ) ) )
+s38:s31,s37:mpbid |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( ( Im ` O ) e. RR /\ -u V <_ ( Im ` O ) /\ ( Im ` O ) <_ V ) )
+s39:s38:simp1d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Im ` O ) e. RR )
+s40:s39,s2:absled |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( ( abs ` ( Im ` O ) ) <_ V <-> ( -u V <_ ( Im ` O ) /\ ( Im ` O ) <_ V ) ) )
+s41:s38:simp2d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> -u V <_ ( Im ` O ) )
+s42:s38:simp3d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Im ` O ) <_ V )
+s43:s41,s42:jca |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( -u V <_ ( Im ` O ) /\ ( Im ` O ) <_ V ) )
+s44:s43,s40:mpbird |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( abs ` ( Im ` O ) ) <_ V )
+s45:s35:simp2d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> S <_ ( Re ` O ) )
+s46:s35:simp3d |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( Re ` O ) <_ 1 )
+s47:s45,s46:jca |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( S <_ ( Re ` O ) /\ ( Re ` O ) <_ 1 ) )
+qed:s18,s47,s44:3jca |- ( ( ( S e. RR /\ V e. RR ) /\ O e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) ) -> ( O e. CC /\ ( S <_ ( Re ` O ) /\ ( Re ` O ) <_ 1 ) /\ ( abs ` ( Im ` O ) ) <_ V ) )
+$)

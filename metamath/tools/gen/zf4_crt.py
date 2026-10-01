@@ -1,0 +1,273 @@
+"""Sortie ZF4, batch 6: the CRT factorisation of the Gauss sum (LargeSieve
+stdAddChar_crt, gaussSum_crt) and its specialisation to a trivial first
+factor (the form norm_gaussSum_one_squarefree and
+norm_sq_gaussSum_changeLevel consume)."""
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..')); from tm import *
+from zf4lib import *
+only = sys.argv[1:]
+def run(w):
+    if only and w.label not in only: return True
+    return w.run()
+
+IPI = '( _i x. _pi )'
+def Q(n): return '( ( 2 / %s ) x. %s )' % (n, IPI)
+UV = '( U x. V )'; RU = R('U'); RV = R('V'); RUV = R(UV)
+LUV = LZ(UV); LU = LZ('U'); LV = LZ('V'); DU = DB('U'); DV = DB('V'); DUV = DB(UV)
+BEZ = '( A e. ZZ /\\ B e. ZZ /\\ ( ( A x. V ) + ( B x. U ) ) = 1 )'
+def rcl(w, ante, nst, n):
+    return w.s([nst, w.inst('root1cl')], 'syl', '( %s -> ( %s e. CC /\\ %s =/= 0 ) )' % (ante, R(n), R(n)))
+def elz(w, ante, mem, v): return w.s([mem, w.inst('elfzoelz')], 'syl', '( %s -> %s e. ZZ )' % (ante, v))
+def fin(w, ante, n): return w.s([w.s([], 'fzofi', '%s e. Fin' % FZO(n))], 'a1i', '( %s -> %s e. Fin )' % (ante, FZO(n)))
+
+# ---- root1pow
+A0 = '( U e. NN /\\ V e. NN /\\ K e. ZZ )'
+w = W('root1pow', 'The U-th root of unity is the V-th power of the ( U x. V )-th root of unity: its K-th power is the ( K x. V )-th power of the latter.')
+u = w.s([], 'simp1', '( %s -> U e. NN )' % A0); v = w.s([], 'simp2', '( %s -> V e. NN )' % A0); k = w.s([], 'simp3', '( %s -> K e. ZZ )' % A0)
+uvn = w.s([u, v], 'nnmulcld', '( %s -> %s e. NN )' % (A0, UV))
+ucn = w.s([u], 'nncnd', '( %s -> U e. CC )' % A0); une = w.s([u], 'nnne0d', '( %s -> U =/= 0 )' % A0)
+vcn = w.s([v], 'nncnd', '( %s -> V e. CC )' % A0); vne = w.s([v], 'nnne0d', '( %s -> V =/= 0 )' % A0)
+uvcn = w.s([uvn], 'nncnd', '( %s -> %s e. CC )' % (A0, UV)); uvne = w.s([uvn], 'nnne0d', '( %s -> %s =/= 0 )' % (A0, UV))
+two = w.s([], '2cnd', '( %s -> 2 e. CC )' % A0)
+efu = w.s([u, w.inst('root1ef')], 'syl', '( %s -> %s = ( exp ` %s ) )' % (A0, RU, Q('U')))
+efuv = w.s([uvn, w.inst('root1ef')], 'syl', '( %s -> %s = ( exp ` %s ) )' % (A0, RUV, Q(UV)))
+q2uv = w.s([two, uvcn, uvne], 'divcld', '( %s -> ( 2 / %s ) e. CC )' % (A0, UV)); q2u = w.s([two, ucn, une], 'divcld', '( %s -> ( 2 / U ) e. CC )' % A0)
+ipi = w.s([w.s([w.s([], 'ax-icn', '_i e. CC'), w.s([], 'picn', '_pi e. CC'), w.inst('mulcl')], 'mp2an', '%s e. CC' % IPI)], 'a1i', '( %s -> %s e. CC )' % (A0, IPI))
+quv = w.s([q2uv, ipi], 'mulcld', '( %s -> %s e. CC )' % (A0, Q(UV)))
+e1 = w.s([quv, w.s([v], 'nnzd', '( %s -> V e. ZZ )' % A0), w.inst('efexp')], 'syl2anc', '( %s -> ( exp ` ( V x. %s ) ) = ( ( exp ` %s ) ^ V ) )' % (A0, Q(UV), Q(UV)))
+as1 = w.s([w.s([vcn, q2uv, ipi], 'mulassd', '( %s -> ( ( V x. ( 2 / %s ) ) x. %s ) = ( V x. %s ) )' % (A0, UV, IPI, Q(UV)))], 'eqcomd', '( %s -> ( V x. %s ) = ( ( V x. ( 2 / %s ) ) x. %s ) )' % (A0, Q(UV), UV, IPI))
+dd = w.s([w.s([two, ucn, vcn, une, vne], 'divdiv1d', '( %s -> ( ( 2 / U ) / V ) = ( 2 / %s ) )' % (A0, UV))], 'eqcomd', '( %s -> ( 2 / %s ) = ( ( 2 / U ) / V ) )' % (A0, UV))
+dc = w.s([q2u, vcn, vne], 'divcan2d', '( %s -> ( V x. ( ( 2 / U ) / V ) ) = ( 2 / U ) )' % A0)
+v2 = w.s([w.s([dd], 'oveq2d', '( %s -> ( V x. ( 2 / %s ) ) = ( V x. ( ( 2 / U ) / V ) ) )' % (A0, UV)), dc], 'eqtrd', '( %s -> ( V x. ( 2 / %s ) ) = ( 2 / U ) )' % (A0, UV))
+vq = w.s([as1, w.s([v2], 'oveq1d', '( %s -> ( ( V x. ( 2 / %s ) ) x. %s ) = %s )' % (A0, UV, IPI, Q('U')))], 'eqtrd', '( %s -> ( V x. %s ) = %s )' % (A0, Q(UV), Q('U')))
+r1 = w.s([w.s([w.s([efuv], 'oveq1d', '( %s -> ( %s ^ V ) = ( ( exp ` %s ) ^ V ) )' % (A0, RUV, Q(UV))), w.s([e1], 'eqcomd', '( %s -> ( ( exp ` %s ) ^ V ) = ( exp ` ( V x. %s ) ) )' % (A0, Q(UV), Q(UV)))], 'eqtrd', '( %s -> ( %s ^ V ) = ( exp ` ( V x. %s ) ) )' % (A0, RUV, Q(UV))), w.s([w.s([vq], 'fveq2d', '( %s -> ( exp ` ( V x. %s ) ) = ( exp ` %s ) )' % (A0, Q(UV), Q('U'))), w.s([efu], 'eqcomd', '( %s -> ( exp ` %s ) = %s )' % (A0, Q('U'), RU))], 'eqtrd', '( %s -> ( exp ` ( V x. %s ) ) = %s )' % (A0, Q(UV), RU))], 'eqtrd', '( %s -> ( %s ^ V ) = %s )' % (A0, RUV, RU))
+r2 = w.s([w.s([r1], 'eqcomd', '( %s -> %s = ( %s ^ V ) )' % (A0, RU, RUV))], 'oveq1d', '( %s -> ( %s ^ K ) = ( ( %s ^ V ) ^ K ) )' % (A0, RU, RUV))
+em = w.s([w.s([rcl(w, A0, uvn, UV), w.s([w.s([v], 'nnzd', '( %s -> V e. ZZ )' % A0), k], 'jca', '( %s -> ( V e. ZZ /\\ K e. ZZ ) )' % A0), w.inst('expmulz')], 'syl2anc', '( %s -> ( %s ^ ( V x. K ) ) = ( ( %s ^ V ) ^ K ) )' % (A0, RUV, RUV))], 'eqcomd', '( %s -> ( ( %s ^ V ) ^ K ) = ( %s ^ ( V x. K ) ) )' % (A0, RUV, RUV))
+mc = w.s([w.s([vcn, w.s([k], 'zcnd', '( %s -> K e. CC )' % A0)], 'mulcomd', '( %s -> ( V x. K ) = ( K x. V ) )' % A0)], 'oveq2d', '( %s -> ( %s ^ ( V x. K ) ) = ( %s ^ ( K x. V ) ) )' % (A0, RUV, RUV))
+w.qed([r2, em, mc], '3eqtrd', '( %s -> ( %s ^ K ) = ( %s ^ ( K x. V ) ) )' % (A0, RU, RUV)); run(w)
+
+# ---- root1crt
+A0 = '( ( U e. NN /\\ V e. NN ) /\\ %s /\\ K e. ZZ )' % BEZ
+AK = '( A x. K )'; BK = '( B x. K )'; AV = '( A x. V )'; BU = '( B x. U )'; EXP = '( ( %s x. V ) + ( %s x. U ) )' % (AK, BK)
+RVU = R('( V x. U )')
+w = W('root1crt', 'The CRT factorisation of the additive character (Lean LargeSieve stdAddChar_crt): with A V + B U = 1, the K-th power of the ( U x. V )-th root of unity is the product of the ( A x. K )-th power of the U-th and the ( B x. K )-th power of the V-th root of unity.')
+uv = w.s([], 'simp1', '( %s -> ( U e. NN /\\ V e. NN ) )' % A0); u = w.s([uv], 'simpld', '( %s -> U e. NN )' % A0); v = w.s([uv], 'simprd', '( %s -> V e. NN )' % A0)
+bez = w.s([], 'simp2', '( %s -> %s )' % (A0, BEZ)); a = w.s([bez], 'simp1d', '( %s -> A e. ZZ )' % A0); b = w.s([bez], 'simp2d', '( %s -> B e. ZZ )' % A0); eq1 = w.s([bez], 'simp3d', '( %s -> ( %s + %s ) = 1 )' % (A0, AV, BU))
+k = w.s([], 'simp3', '( %s -> K e. ZZ )' % A0)
+akz = w.s([a, k], 'zmulcld', '( %s -> %s e. ZZ )' % (A0, AK)); bkz = w.s([b, k], 'zmulcld', '( %s -> %s e. ZZ )' % (A0, BK))
+p1 = w.s([u, v, akz, w.inst('root1pow')], 'syl3anc', '( %s -> ( %s ^ %s ) = ( %s ^ ( %s x. V ) ) )' % (A0, RU, AK, RUV, AK))
+p2 = w.s([v, u, bkz, w.inst('root1pow')], 'syl3anc', '( %s -> ( %s ^ %s ) = ( %s ^ ( %s x. U ) ) )' % (A0, RV, BK, RVU, BK))
+ucn = w.s([u], 'nncnd', '( %s -> U e. CC )' % A0); vcn = w.s([v], 'nncnd', '( %s -> V e. CC )' % A0)
+vu = w.s([w.s([w.s([w.s([vcn, ucn], 'mulcomd', '( %s -> ( V x. U ) = %s )' % (A0, UV))], 'oveq2d', '( %s -> ( 2 / ( V x. U ) ) = ( 2 / %s ) )' % (A0, UV))], 'oveq2d', '( %s -> %s = %s )' % (A0, RVU, RUV))], 'oveq1d', '( %s -> ( %s ^ ( %s x. U ) ) = ( %s ^ ( %s x. U ) ) )' % (A0, RVU, BK, RUV, BK))
+p2b = w.s([p2, vu], 'eqtrd', '( %s -> ( %s ^ %s ) = ( %s ^ ( %s x. U ) ) )' % (A0, RV, BK, RUV, BK))
+uvn = w.s([u, v], 'nnmulcld', '( %s -> %s e. NN )' % (A0, UV))
+akv = w.s([akz, w.s([v], 'nnzd', '( %s -> V e. ZZ )' % A0)], 'zmulcld', '( %s -> ( %s x. V ) e. ZZ )' % (A0, AK)); bku = w.s([bkz, w.s([u], 'nnzd', '( %s -> U e. ZZ )' % A0)], 'zmulcld', '( %s -> ( %s x. U ) e. ZZ )' % (A0, BK))
+ea = w.s([w.s([rcl(w, A0, uvn, UV), w.s([akv, bku], 'jca', '( %s -> ( ( %s x. V ) e. ZZ /\\ ( %s x. U ) e. ZZ ) )' % (A0, AK, BK)), w.inst('expaddz')], 'syl2anc', '( %s -> ( %s ^ %s ) = ( ( %s ^ ( %s x. V ) ) x. ( %s ^ ( %s x. U ) ) ) )' % (A0, RUV, EXP, RUV, AK, RUV, BK))], 'eqcomd', '( %s -> ( ( %s ^ ( %s x. V ) ) x. ( %s ^ ( %s x. U ) ) ) = ( %s ^ %s ) )' % (A0, RUV, AK, RUV, BK, RUV, EXP))
+prod = w.s([w.s([p1, p2b], 'oveq12d', '( %s -> ( ( %s ^ %s ) x. ( %s ^ %s ) ) = ( ( %s ^ ( %s x. V ) ) x. ( %s ^ ( %s x. U ) ) ) )' % (A0, RU, AK, RV, BK, RUV, AK, RUV, BK)), ea], 'eqtrd', '( %s -> ( ( %s ^ %s ) x. ( %s ^ %s ) ) = ( %s ^ %s ) )' % (A0, RU, AK, RV, BK, RUV, EXP))
+acn = w.s([a], 'zcnd', '( %s -> A e. CC )' % A0); bcn = w.s([b], 'zcnd', '( %s -> B e. CC )' % A0); kcn = w.s([k], 'zcnd', '( %s -> K e. CC )' % A0)
+m1 = w.s([acn, kcn, vcn], 'mul32d', '( %s -> ( %s x. V ) = ( %s x. K ) )' % (A0, AK, AV)); m2 = w.s([bcn, kcn, ucn], 'mul32d', '( %s -> ( %s x. U ) = ( %s x. K ) )' % (A0, BK, BU))
+avc = w.s([acn, vcn], 'mulcld', '( %s -> %s e. CC )' % (A0, AV)); buc = w.s([bcn, ucn], 'mulcld', '( %s -> %s e. CC )' % (A0, BU))
+ad = w.s([w.s([avc, buc, kcn], 'adddird', '( %s -> ( ( %s + %s ) x. K ) = ( ( %s x. K ) + ( %s x. K ) ) )' % (A0, AV, BU, AV, BU))], 'eqcomd', '( %s -> ( ( %s x. K ) + ( %s x. K ) ) = ( ( %s + %s ) x. K ) )' % (A0, AV, BU, AV, BU))
+e2 = w.s([w.s([w.s([m1, m2], 'oveq12d', '( %s -> %s = ( ( %s x. K ) + ( %s x. K ) ) )' % (A0, EXP, AV, BU)), ad], 'eqtrd', '( %s -> %s = ( ( %s + %s ) x. K ) )' % (A0, EXP, AV, BU)), w.s([w.s([eq1], 'oveq1d', '( %s -> ( ( %s + %s ) x. K ) = ( 1 x. K ) )' % (A0, AV, BU)), w.s([kcn], 'mullidd', '( %s -> ( 1 x. K ) = K )' % A0)], 'eqtrd', '( %s -> ( ( %s + %s ) x. K ) = K )' % (A0, AV, BU))], 'eqtrd', '( %s -> %s = K )' % (A0, EXP))
+w.qed([w.s([prod, w.s([e2], 'oveq2d', '( %s -> ( %s ^ %s ) = ( %s ^ K ) )' % (A0, RUV, EXP, RUV))], 'eqtrd', '( %s -> ( ( %s ^ %s ) x. ( %s ^ %s ) ) = ( %s ^ K ) )' % (A0, RU, AK, RV, BK, RUV))], 'eqcomd', '( %s -> ( %s ^ K ) = ( ( %s ^ %s ) x. ( %s ^ %s ) ) )' % (A0, RUV, RU, AK, RV, BK)); run(w)
+
+# ---- bezcop
+A0 = '( ( U e. NN /\\ V e. NN ) /\\ %s )' % BEZ
+w = W('bezcop', 'A Bezout pair A V + B U = 1 makes U, V coprime, A coprime to U and B coprime to V.')
+uv = w.s([], 'simpl', '( %s -> ( U e. NN /\\ V e. NN ) )' % A0); u = w.s([uv], 'simpld', '( %s -> U e. NN )' % A0); v = w.s([uv], 'simprd', '( %s -> V e. NN )' % A0)
+bez = w.s([], 'simpr', '( %s -> %s )' % (A0, BEZ)); a = w.s([bez], 'simp1d', '( %s -> A e. ZZ )' % A0); b = w.s([bez], 'simp2d', '( %s -> B e. ZZ )' % A0); eq1 = w.s([bez], 'simp3d', '( %s -> ( %s + %s ) = 1 )' % (A0, AV, BU))
+uz = w.s([u], 'nnzd', '( %s -> U e. ZZ )' % A0); vz = w.s([v], 'nnzd', '( %s -> V e. ZZ )' % A0)
+ucn = w.s([u], 'nncnd', '( %s -> U e. CC )' % A0); vcn = w.s([v], 'nncnd', '( %s -> V e. CC )' % A0); acn = w.s([a], 'zcnd', '( %s -> A e. CC )' % A0); bcn = w.s([b], 'zcnd', '( %s -> B e. CC )' % A0)
+ub = w.s([ucn, bcn], 'mulcomd', '( %s -> ( U x. B ) = %s )' % (A0, BU)); va = w.s([vcn, acn], 'mulcomd', '( %s -> ( V x. A ) = %s )' % (A0, AV))
+avc = w.s([acn, vcn], 'mulcld', '( %s -> %s e. CC )' % (A0, AV)); buc = w.s([bcn, ucn], 'mulcld', '( %s -> %s e. CC )' % (A0, BU))
+com = w.s([buc, avc], 'addcomd', '( %s -> ( %s + %s ) = ( %s + %s ) )' % (A0, BU, AV, AV, BU))
+# ( U gcd V ) = 1 from ( U x. B ) + ( V x. A ) = 1
+e1 = w.s([w.s([w.s([ub, va], 'oveq12d', '( %s -> ( ( U x. B ) + ( V x. A ) ) = ( %s + %s ) )' % (A0, BU, AV)), com], 'eqtrd', '( %s -> ( ( U x. B ) + ( V x. A ) ) = ( %s + %s ) )' % (A0, AV, BU)), eq1], 'eqtrd', '( %s -> ( ( U x. B ) + ( V x. A ) ) = 1 )' % A0)
+c1 = w.s([e1, w.s([w.s([uz, vz], 'jca', '( %s -> ( U e. ZZ /\\ V e. ZZ ) )' % A0), w.s([b, a], 'jca', '( %s -> ( B e. ZZ /\\ A e. ZZ ) )' % A0), w.inst('bezoutr1')], 'syl2anc', '( %s -> ( ( ( U x. B ) + ( V x. A ) ) = 1 -> ( U gcd V ) = 1 ) )' % A0)], 'mpd', '( %s -> ( U gcd V ) = 1 )' % A0)
+# ( A gcd U ) = 1 from ( A x. V ) + ( U x. B ) = 1
+e2 = w.s([w.s([ub], 'oveq2d', '( %s -> ( %s + ( U x. B ) ) = ( %s + %s ) )' % (A0, AV, AV, BU)), eq1], 'eqtrd', '( %s -> ( %s + ( U x. B ) ) = 1 )' % (A0, AV))
+c2 = w.s([e2, w.s([w.s([a, uz], 'jca', '( %s -> ( A e. ZZ /\\ U e. ZZ ) )' % A0), w.s([vz, b], 'jca', '( %s -> ( V e. ZZ /\\ B e. ZZ ) )' % A0), w.inst('bezoutr1')], 'syl2anc', '( %s -> ( ( %s + ( U x. B ) ) = 1 -> ( A gcd U ) = 1 ) )' % (A0, AV))], 'mpd', '( %s -> ( A gcd U ) = 1 )' % A0)
+# ( B gcd V ) = 1 from ( B x. U ) + ( V x. A ) = 1
+e3 = w.s([w.s([w.s([va], 'oveq2d', '( %s -> ( %s + ( V x. A ) ) = ( %s + %s ) )' % (A0, BU, BU, AV)), com], 'eqtrd', '( %s -> ( %s + ( V x. A ) ) = ( %s + %s ) )' % (A0, BU, AV, BU)), eq1], 'eqtrd', '( %s -> ( %s + ( V x. A ) ) = 1 )' % (A0, BU))
+c3 = w.s([e3, w.s([w.s([b, vz], 'jca', '( %s -> ( B e. ZZ /\\ V e. ZZ ) )' % A0), w.s([uz, a], 'jca', '( %s -> ( U e. ZZ /\\ A e. ZZ ) )' % A0), w.inst('bezoutr1')], 'syl2anc', '( %s -> ( ( %s + ( V x. A ) ) = 1 -> ( B gcd V ) = 1 ) )' % (A0, BU))], 'mpd', '( %s -> ( B gcd V ) = 1 )' % A0)
+w.qed([c1, c2, c3], '3jca', '( %s -> ( ( U gcd V ) = 1 /\\ ( A gcd U ) = 1 /\\ ( B gcd V ) = 1 ) )' % A0); run(w)
+
+# ---- fsumcrt: the CRT reindexing of a product sum
+HCRT = '( U e. NN /\\ V e. NN /\\ ( U gcd V ) = 1 )'
+FU = FZO('U'); FV = FZO('V'); S = FZO(UV); TT = '( %s X. %s )' % (FU, FV)
+A0 = '( %s /\\ ( F : %s --> CC /\\ G : %s --> CC ) )' % (HCRT, FU, FV)
+MAP = '( x e. %s |-> <. ( x mod U ) , ( x mod V ) >. )' % S
+D1 = '( ( F ` ( 1st ` z ) ) x. ( G ` ( 2nd ` z ) ) )'; GA = '<. ( a mod U ) , ( a mod V ) >.'
+TARGET = '( ( F ` ( a mod U ) ) x. ( G ` ( a mod V ) ) )'; FBGC = '( ( F ` b ) x. ( G ` c ) )'
+w = W('fsumcrt', 'The Chinese remainder theorem for a product sum: for coprime U, V the sum over ( 0 ..^ ( U x. V ) ) of F ( a mod U ) G ( a mod V ) is the product of the sums of F over ( 0 ..^ U ) and of G over ( 0 ..^ V ) (Lean Fintype.sum_bijective with ZMod.chineseRemainder and Fintype.sum_prod_type; set.mm crth).')
+h = w.s([], 'simpl', '( %s -> %s )' % (A0, HCRT)); u = w.s([h], 'simp1d', '( %s -> U e. NN )' % A0); v = w.s([h], 'simp2d', '( %s -> V e. NN )' % A0)
+fg = w.s([], 'simpr', '( %s -> ( F : %s --> CC /\\ G : %s --> CC ) )' % (A0, FU, FV)); f = w.s([fg], 'simpld', '( %s -> F : %s --> CC )' % (A0, FU)); g = w.s([fg], 'simprd', '( %s -> G : %s --> CC )' % (A0, FV))
+bij = w.s([w.s([], 'eqid', '%s = %s' % (S, S)), w.s([], 'eqid', '%s = %s' % (TT, TT)), w.s([], 'eqid', '%s = %s' % (MAP, MAP)), h], 'crth', '( %s -> %s : %s -1-1-onto-> %s )' % (A0, MAP, S, TT))
+# fsumxp
+zid = w.s([], 'id', '( z = <. b , c >. -> z = <. b , c >. )')
+vb = w.s([], 'vex', 'b e. _V'); vc = w.s([], 'vex', 'c e. _V')
+o1 = w.s([vb, vc], 'op1st', '( 1st ` <. b , c >. ) = b'); o2 = w.s([vb, vc], 'op2nd', '( 2nd ` <. b , c >. ) = c')
+f1 = w.s([w.s([w.s([zid], 'fveq2d', '( z = <. b , c >. -> ( 1st ` z ) = ( 1st ` <. b , c >. ) )'), o1], 'eqtrdi', '( z = <. b , c >. -> ( 1st ` z ) = b )')], 'fveq2d', '( z = <. b , c >. -> ( F ` ( 1st ` z ) ) = ( F ` b ) )')
+f2 = w.s([w.s([w.s([zid], 'fveq2d', '( z = <. b , c >. -> ( 2nd ` z ) = ( 2nd ` <. b , c >. ) )'), o2], 'eqtrdi', '( z = <. b , c >. -> ( 2nd ` z ) = c )')], 'fveq2d', '( z = <. b , c >. -> ( G ` ( 2nd ` z ) ) = ( G ` c ) )')
+sub = w.s([f1, f2], 'oveq12d', '( z = <. b , c >. -> %s = %s )' % (D1, FBGC))
+Abc = '( %s /\\ ( b e. %s /\\ c e. %s ) )' % (A0, FU, FV)
+fb = w.s([w.s([f], 'adantr', '( %s -> F : %s --> CC )' % (Abc, FU)), w.s([], 'simprl', '( %s -> b e. %s )' % (Abc, FU))], 'ffvelcdmd', '( %s -> ( F ` b ) e. CC )' % Abc)
+gc = w.s([w.s([g], 'adantr', '( %s -> G : %s --> CC )' % (Abc, FV)), w.s([], 'simprr', '( %s -> c e. %s )' % (Abc, FV))], 'ffvelcdmd', '( %s -> ( G ` c ) e. CC )' % Abc)
+fnu = fin(w, A0, 'U'); fnv = fin(w, A0, 'V')
+xp = w.s([sub, fnu, fnv, w.s([fb, gc], 'mulcld', '( %s -> %s e. CC )' % (Abc, FBGC))], 'fsumxp', '( %s -> sum_ b e. %s sum_ c e. %s %s = sum_ z e. %s %s )' % (A0, FU, FV, FBGC, TT, D1))
+# fsumf1o over the CRT bijection
+fns = fin(w, A0, UV)
+Aa = '( %s /\\ a e. %s )' % (A0, S); Aax = '( %s /\\ x = a )' % Aa
+xa = w.s([], 'simpr', '( %s -> x = a )' % Aax)
+sb = w.s([w.s([xa], 'oveq1d', '( %s -> ( x mod U ) = ( a mod U ) )' % Aax), w.s([xa], 'oveq1d', '( %s -> ( x mod V ) = ( a mod V ) )' % Aax)], 'opeq12d', '( %s -> <. ( x mod U ) , ( x mod V ) >. = %s )' % (Aax, GA))
+val = w.s([w.s([], 'eqidd', '( %s -> %s = %s )' % (Aa, MAP, MAP)), sb, w.s([], 'simpr', '( %s -> a e. %s )' % (Aa, S)), w.s([w.s([], 'opex', '%s e. _V' % GA)], 'a1i', '( %s -> %s e. _V )' % (Aa, GA))], 'fvmptd', '( %s -> ( %s ` a ) = %s )' % (Aa, MAP, GA))
+Az = '( %s /\\ z e. %s )' % (A0, TT)
+z1 = w.s([w.s([], 'simpr', '( %s -> z e. %s )' % (Az, TT)), w.inst('xp1st')], 'syl', '( %s -> ( 1st ` z ) e. %s )' % (Az, FU)); z2 = w.s([w.s([], 'simpr', '( %s -> z e. %s )' % (Az, TT)), w.inst('xp2nd')], 'syl', '( %s -> ( 2nd ` z ) e. %s )' % (Az, FV))
+bcl = w.s([w.s([w.s([f], 'adantr', '( %s -> F : %s --> CC )' % (Az, FU)), z1], 'ffvelcdmd', '( %s -> ( F ` ( 1st ` z ) ) e. CC )' % Az), w.s([w.s([g], 'adantr', '( %s -> G : %s --> CC )' % (Az, FV)), z2], 'ffvelcdmd', '( %s -> ( G ` ( 2nd ` z ) ) e. CC )' % Az)], 'mulcld', '( %s -> %s e. CC )' % (Az, D1))
+re, D2 = fsumf1o(w, A0, 'z', TT, D1, 'a', S, MAP, GA, fns, bij, val, bcl)
+assert D2 == '( ( F ` ( 1st ` %s ) ) x. ( G ` ( 2nd ` %s ) ) )' % (GA, GA), D2
+ox1 = w.s([], 'ovex', '( a mod U ) e. _V'); ox2 = w.s([], 'ovex', '( a mod V ) e. _V')
+q1 = w.s([w.s([ox1, ox2], 'op1st', '( 1st ` %s ) = ( a mod U )' % GA)], 'fveq2i', '( F ` ( 1st ` %s ) ) = ( F ` ( a mod U ) )' % GA)
+q2 = w.s([w.s([ox1, ox2], 'op2nd', '( 2nd ` %s ) = ( a mod V )' % GA)], 'fveq2i', '( G ` ( 2nd ` %s ) ) = ( G ` ( a mod V ) )' % GA)
+simp = w.s([w.s([w.s([q1, q2], 'oveq12i', '%s = %s' % (D2, TARGET))], 'a1i', '( %s -> %s = %s )' % (Aa, D2, TARGET))], 'sumeq2dv', '( %s -> sum_ a e. %s %s = sum_ a e. %s %s )' % (A0, S, D2, S, TARGET))
+Ab = '( %s /\\ b e. %s )' % (A0, FU); Ac = '( %s /\\ c e. %s )' % (A0, FV)
+fb1 = w.s([w.s([f], 'adantr', '( %s -> F : %s --> CC )' % (Ab, FU)), w.s([], 'simpr', '( %s -> b e. %s )' % (Ab, FU))], 'ffvelcdmd', '( %s -> ( F ` b ) e. CC )' % Ab)
+gc1 = w.s([w.s([g], 'adantr', '( %s -> G : %s --> CC )' % (Ac, FV)), w.s([], 'simpr', '( %s -> c e. %s )' % (Ac, FV))], 'ffvelcdmd', '( %s -> ( G ` c ) e. CC )' % Ac)
+m2 = w.s([fnu, fnv, fb1, gc1], 'fsum2mul', '( %s -> sum_ b e. %s sum_ c e. %s %s = ( sum_ b e. %s ( F ` b ) x. sum_ c e. %s ( G ` c ) ) )' % (A0, FU, FV, FBGC, FU, FV))
+w.qed([w.s([w.s([simp], 'eqcomd', '( %s -> sum_ a e. %s %s = sum_ a e. %s %s )' % (A0, S, TARGET, S, D2)), w.s([re], 'eqcomd', '( %s -> sum_ a e. %s %s = sum_ z e. %s %s )' % (A0, S, D2, TT, D1))], 'eqtrd', '( %s -> sum_ a e. %s %s = sum_ z e. %s %s )' % (A0, S, TARGET, TT, D1)), w.s([xp], 'eqcomd', '( %s -> sum_ z e. %s %s = sum_ b e. %s sum_ c e. %s %s )' % (A0, TT, D1, FU, FV, FBGC)), m2], '3eqtrd', '( %s -> sum_ a e. %s %s = ( sum_ b e. %s ( F ` b ) x. sum_ c e. %s ( G ` c ) ) )' % (A0, S, TARGET, FU, FV)); run(w)
+
+# ---- dchrgscrtlem: the summand of the CRT factorisation
+HCRT0 = '( ( U e. NN /\\ V e. NN ) /\\ ( X e. %s /\\ Z e. %s ) /\\ ( %s /\\ C e. ZZ ) )' % (DU, DV, BEZ)
+Y = '( %s %s %s )' % (IND('U', UV, 'X'), MUL(UV), IND('V', UV, 'Z'))
+AC = '( A x. C )'; BC = '( B x. C )'; AMU = '( a mod U )'; AMV = '( a mod V )'
+def f(t): return TERMR('X', 'U', t, AC)
+def g(t): return TERMR('Z', 'V', t, BC)
+Aa = '( %s /\\ a e. ZZ )' % HCRT0
+LHS = '( ( %s ` ( %s ` a ) ) x. %s )' % (Y, LUV, RP('( C x. a )', UV))
+w = W('dchrgscrtlem', 'Lemma for dchrgscrt (Lean hterm in gaussSum_crt): the summand of the Gauss sum of the product character splits as a product of a term depending on a mod U and one depending on a mod V.')
+h0 = w.s([], 'simpl', '( %s -> %s )' % (Aa, HCRT0)); az = w.s([], 'simpr', '( %s -> a e. ZZ )' % Aa)
+uv = w.s([h0], 'simp1d', '( %s -> ( U e. NN /\\ V e. NN ) )' % Aa); u = w.s([uv], 'simpld', '( %s -> U e. NN )' % Aa); v = w.s([uv], 'simprd', '( %s -> V e. NN )' % Aa)
+xz = w.s([h0], 'simp2d', '( %s -> ( X e. %s /\\ Z e. %s ) )' % (Aa, DU, DV)); x = w.s([xz], 'simpld', '( %s -> X e. %s )' % (Aa, DU)); z = w.s([xz], 'simprd', '( %s -> Z e. %s )' % (Aa, DV))
+bc = w.s([h0], 'simp3d', '( %s -> ( %s /\\ C e. ZZ ) )' % (Aa, BEZ)); bez = w.s([bc], 'simpld', '( %s -> %s )' % (Aa, BEZ)); c = w.s([bc], 'simprd', '( %s -> C e. ZZ )' % Aa)
+a = w.s([bez], 'simp1d', '( %s -> A e. ZZ )' % Aa); b = w.s([bez], 'simp2d', '( %s -> B e. ZZ )' % Aa)
+yv = w.s([uv, xz, az, w.inst('dchrindmulval')], 'syl3anc', '( %s -> ( %s ` ( %s ` a ) ) = ( %s x. %s ) )' % (Aa, Y, LUV, EV('X', 'U', 'a'), EV('Z', 'V', 'a')))
+caz = w.s([c, az], 'zmulcld', '( %s -> ( C x. a ) e. ZZ )' % Aa)
+rt = w.s([uv, bez, caz, w.inst('root1crt')], 'syl3anc', '( %s -> %s = ( %s x. %s ) )' % (Aa, RP('( C x. a )', UV), RP('( A x. ( C x. a ) )', 'U'), RP('( B x. ( C x. a ) )', 'V')))
+acn = w.s([a], 'zcnd', '( %s -> A e. CC )' % Aa); bcn = w.s([b], 'zcnd', '( %s -> B e. CC )' % Aa); ccn = w.s([c], 'zcnd', '( %s -> C e. CC )' % Aa); acna = w.s([az], 'zcnd', '( %s -> a e. CC )' % Aa)
+as1 = w.s([w.s([w.s([acn, ccn, acna], 'mulassd', '( %s -> ( %s x. a ) = ( A x. ( C x. a ) ) )' % (Aa, AC))], 'eqcomd', '( %s -> ( A x. ( C x. a ) ) = ( %s x. a ) )' % (Aa, AC))], 'oveq2d', '( %s -> %s = %s )' % (Aa, RP('( A x. ( C x. a ) )', 'U'), RP('( %s x. a )' % AC, 'U')))
+as2 = w.s([w.s([w.s([bcn, ccn, acna], 'mulassd', '( %s -> ( %s x. a ) = ( B x. ( C x. a ) ) )' % (Aa, BC))], 'eqcomd', '( %s -> ( B x. ( C x. a ) ) = ( %s x. a ) )' % (Aa, BC))], 'oveq2d', '( %s -> %s = %s )' % (Aa, RP('( B x. ( C x. a ) )', 'V'), RP('( %s x. a )' % BC, 'V')))
+rt2 = w.s([rt, w.s([as1, as2], 'oveq12d', '( %s -> ( %s x. %s ) = ( %s x. %s ) )' % (Aa, RP('( A x. ( C x. a ) )', 'U'), RP('( B x. ( C x. a ) )', 'V'), RP('( %s x. a )' % AC, 'U'), RP('( %s x. a )' % BC, 'V')))], 'eqtrd', '( %s -> %s = ( %s x. %s ) )' % (Aa, RP('( C x. a )', UV), RP('( %s x. a )' % AC, 'U'), RP('( %s x. a )' % BC, 'V')))
+# closures
+gu, zu, du, lu = dchyp(w, 'U'); gv, zv, dv, lv = dchyp(w, 'V')
+xa = w.s([gu, zu, du, lu, x, az], 'dchrzrhcl', '( %s -> %s e. CC )' % (Aa, EV('X', 'U', 'a'))); za = w.s([gv, zv, dv, lv, z, az], 'dchrzrhcl', '( %s -> %s e. CC )' % (Aa, EV('Z', 'V', 'a')))
+acz = w.s([a, c], 'zmulcld', '( %s -> %s e. ZZ )' % (Aa, AC)); bcz = w.s([b, c], 'zmulcld', '( %s -> %s e. ZZ )' % (Aa, BC))
+ru = w.s([u, w.s([acz, az], 'zmulcld', '( %s -> ( %s x. a ) e. ZZ )' % (Aa, AC)), w.inst('root1expcl')], 'syl2anc', '( %s -> %s e. CC )' % (Aa, RP('( %s x. a )' % AC, 'U')))
+rv = w.s([v, w.s([bcz, az], 'zmulcld', '( %s -> ( %s x. a ) e. ZZ )' % (Aa, BC)), w.inst('root1expcl')], 'syl2anc', '( %s -> %s e. CC )' % (Aa, RP('( %s x. a )' % BC, 'V')))
+m4 = w.s([xa, za, ru, rv], 'mul4d', '( %s -> ( ( %s x. %s ) x. ( %s x. %s ) ) = ( %s x. %s ) )' % (Aa, EV('X', 'U', 'a'), EV('Z', 'V', 'a'), RP('( %s x. a )' % AC, 'U'), RP('( %s x. a )' % BC, 'V'), f('a'), g('a')))
+# periodicity: f ( a mod U ) = f ( a ), g ( a mod V ) = g ( a )
+def per(nst, xst, n, xx, sh, shz, AM, name):
+    hc = w.s([nst, xst], 'jca', '( %s -> ( %s e. NN /\\ %s e. %s ) )' % (Aa, n, xx, DB(n)))
+    p1 = w.s([hc, az, w.inst('dchrzrhmod')], 'syl2anc', '( %s -> %s = %s )' % (Aa, EV(xx, n, AM), EV(xx, n, 'a')))
+    amz = w.s([w.s([az, nst, w.inst('zmodcl')], 'syl2anc', '( %s -> %s e. NN0 )' % (Aa, AM))], 'nn0zd', '( %s -> %s e. ZZ )' % (Aa, AM))
+    dv_ = w.s([nst, az, w.inst('zmoddvds')], 'syl2anc', '( %s -> %s || ( %s - a ) )' % (Aa, n, AM))
+    p2 = w.s([nst, w.s([amz, az, shz], '3jca', '( %s -> ( %s e. ZZ /\\ a e. ZZ /\\ %s e. ZZ ) )' % (Aa, AM, sh)), dv_, w.inst('root1dvdsmul2')], 'syl3anc', '( %s -> %s = %s )' % (Aa, RP('( %s x. %s )' % (sh, AM), n), RP('( %s x. a )' % sh, n)))
+    return w.s([p1, p2], 'oveq12d', '( %s -> %s = %s )' % (Aa, name(AM), name('a')))
+pu = per(u, x, 'U', 'X', AC, acz, AMU, f); pv = per(v, z, 'V', 'Z', BC, bcz, AMV, g)
+w.qed([w.s([yv, rt2], 'oveq12d', '( %s -> %s = ( ( %s x. %s ) x. ( %s x. %s ) ) )' % (Aa, LHS, EV('X', 'U', 'a'), EV('Z', 'V', 'a'), RP('( %s x. a )' % AC, 'U'), RP('( %s x. a )' % BC, 'V'))), m4, w.s([w.s([pu], 'eqcomd', '( %s -> %s = %s )' % (Aa, f('a'), f(AMU))), w.s([pv], 'eqcomd', '( %s -> %s = %s )' % (Aa, g('a'), g(AMV)))], 'oveq12d', '( %s -> ( %s x. %s ) = ( %s x. %s ) )' % (Aa, f('a'), g('a'), f(AMU), g(AMV)))], '3eqtrd', '( %s -> %s = ( %s x. %s ) )' % (Aa, LHS, f(AMU), g(AMV))); run(w)
+
+# ---- dchrgscrt
+FF = '( k e. %s |-> %s )' % (FU, f('k')); GG = '( k e. %s |-> %s )' % (FV, g('k'))
+A0 = HCRT0
+Aa = '( %s /\\ a e. %s )' % (A0, S)
+GRUV = GR(Y, UV, 'C'); GRU = GR('X', 'U', AC); GRV = GR('Z', 'V', BC)
+w = W('dchrgscrt', 'The CRT factorisation of the Gauss sum (Lean LargeSieve gaussSum_crt, with an explicit Bezout pair A V + B U = 1 in place of the existential unit shifts): the Gauss sum of the product of the characters X mod U and Z mod V induced to ( U x. V ), shifted by C, is the product of the Gauss sum of X shifted by A C and that of Z shifted by B C.')
+def mptv(ante, MP, body, t, tmem, val):
+    """( ante -> ( MP ` t ) = val ) for MP = ( k e. D |-> body ), val = body [ k := t ] (fvmptd)"""
+    At = '( %s /\\ k = %s )' % (ante, t)
+    cst, V = w.congr(body, {'k': t}, At, {'k': w.s([], 'simpr', '( %s -> k = %s )' % (At, t))})
+    assert V == val, (V, val)
+    return w.s([w.s([], 'eqidd', '( %s -> %s = %s )' % (ante, MP, MP)), cst, tmem, w.s([w.s([], 'ovex', '%s e. _V' % val)], 'a1i', '( %s -> %s e. _V )' % (ante, val))], 'fvmptd', '( %s -> ( %s ` %s ) = %s )' % (ante, MP, t, val))
+uv = w.s([], 'simp1', '( %s -> ( U e. NN /\\ V e. NN ) )' % A0); u = w.s([uv], 'simpld', '( %s -> U e. NN )' % A0); v = w.s([uv], 'simprd', '( %s -> V e. NN )' % A0)
+xz = w.s([], 'simp2', '( %s -> ( X e. %s /\\ Z e. %s ) )' % (A0, DU, DV)); x = w.s([xz], 'simpld', '( %s -> X e. %s )' % (A0, DU)); z = w.s([xz], 'simprd', '( %s -> Z e. %s )' % (A0, DV))
+bc = w.s([], 'simp3', '( %s -> ( %s /\\ C e. ZZ ) )' % (A0, BEZ)); bez = w.s([bc], 'simpld', '( %s -> %s )' % (A0, BEZ)); c = w.s([bc], 'simprd', '( %s -> C e. ZZ )' % A0)
+a = w.s([bez], 'simp1d', '( %s -> A e. ZZ )' % A0); b = w.s([bez], 'simp2d', '( %s -> B e. ZZ )' % A0)
+cop = w.s([w.s([uv, bez, w.inst('bezcop')], 'syl2anc', '( %s -> ( ( U gcd V ) = 1 /\\ ( A gcd U ) = 1 /\\ ( B gcd V ) = 1 ) )' % A0)], 'simp1d', '( %s -> ( U gcd V ) = 1 )' % A0)
+lem = w.s([w.inst('elfzoelz'), w.inst('dchrgscrtlem')], 'sylan2', '( %s -> %s = ( %s x. %s ) )' % (Aa, LHS, f(AMU), g(AMV)))
+az = elz(w, Aa, w.s([], 'simpr', '( %s -> a e. %s )' % (Aa, S)), 'a')
+ua = w.s([u], 'adantr', '( %s -> U e. NN )' % Aa); va = w.s([v], 'adantr', '( %s -> V e. NN )' % Aa)
+ffv = mptv(Aa, FF, f('k'), AMU, w.s([az, ua, w.inst('zmodfzo')], 'syl2anc', '( %s -> %s e. %s )' % (Aa, AMU, FU)), f(AMU))
+ggv = mptv(Aa, GG, g('k'), AMV, w.s([az, va, w.inst('zmodfzo')], 'syl2anc', '( %s -> %s e. %s )' % (Aa, AMV, FV)), g(AMV))
+T1 = '( ( %s ` %s ) x. ( %s ` %s ) )' % (FF, AMU, GG, AMV)
+s1 = w.s([w.s([lem, w.s([w.s([ffv, ggv], 'oveq12d', '( %s -> %s = ( %s x. %s ) )' % (Aa, T1, f(AMU), g(AMV)))], 'eqcomd', '( %s -> ( %s x. %s ) = %s )' % (Aa, f(AMU), g(AMV), T1))], 'eqtrd', '( %s -> %s = %s )' % (Aa, LHS, T1))], 'sumeq2dv', '( %s -> %s = sum_ a e. %s %s )' % (A0, GRUV, S, T1))
+# FF, GG are functions into CC
+Ak = '( %s /\\ k e. %s )' % (A0, FU); Akv = '( %s /\\ k e. %s )' % (A0, FV)
+gu, zu, du, lu = dchyp(w, 'U'); gv, zv, dv, lv = dchyp(w, 'V')
+kz = elz(w, Ak, w.s([], 'simpr', '( %s -> k e. %s )' % (Ak, FU)), 'k'); kzv = elz(w, Akv, w.s([], 'simpr', '( %s -> k e. %s )' % (Akv, FV)), 'k')
+acz = w.s([a, c], 'zmulcld', '( %s -> %s e. ZZ )' % (A0, AC)); bcz = w.s([b, c], 'zmulcld', '( %s -> %s e. ZZ )' % (A0, BC))
+fkcl = w.s([w.s([gu, zu, du, lu, w.s([x], 'adantr', '( %s -> X e. %s )' % (Ak, DU)), kz], 'dchrzrhcl', '( %s -> %s e. CC )' % (Ak, EV('X', 'U', 'k'))), w.s([w.s([u], 'adantr', '( %s -> U e. NN )' % Ak), w.s([w.s([acz], 'adantr', '( %s -> %s e. ZZ )' % (Ak, AC)), kz], 'zmulcld', '( %s -> ( %s x. k ) e. ZZ )' % (Ak, AC)), w.inst('root1expcl')], 'syl2anc', '( %s -> %s e. CC )' % (Ak, RP('( %s x. k )' % AC, 'U')))], 'mulcld', '( %s -> %s e. CC )' % (Ak, f('k')))
+gkcl = w.s([w.s([gv, zv, dv, lv, w.s([z], 'adantr', '( %s -> Z e. %s )' % (Akv, DV)), kzv], 'dchrzrhcl', '( %s -> %s e. CC )' % (Akv, EV('Z', 'V', 'k'))), w.s([w.s([v], 'adantr', '( %s -> V e. NN )' % Akv), w.s([w.s([bcz], 'adantr', '( %s -> %s e. ZZ )' % (Akv, BC)), kzv], 'zmulcld', '( %s -> ( %s x. k ) e. ZZ )' % (Akv, BC)), w.inst('root1expcl')], 'syl2anc', '( %s -> %s e. CC )' % (Akv, RP('( %s x. k )' % BC, 'V')))], 'mulcld', '( %s -> %s e. CC )' % (Akv, g('k')))
+ffn = w.s([fkcl, w.s([], 'eqid', '%s = %s' % (FF, FF))], 'fmptd', '( %s -> %s : %s --> CC )' % (A0, FF, FU))
+ggn = w.s([gkcl, w.s([], 'eqid', '%s = %s' % (GG, GG))], 'fmptd', '( %s -> %s : %s --> CC )' % (A0, GG, FV))
+fc = w.s([w.s([u, v, cop], '3jca', '( %s -> %s )' % (A0, HCRT)), w.s([ffn, ggn], 'jca', '( %s -> ( %s : %s --> CC /\\ %s : %s --> CC ) )' % (A0, FF, FU, GG, FV)), w.inst('fsumcrt')], 'syl2anc', '( %s -> sum_ a e. %s %s = ( sum_ b e. %s ( %s ` b ) x. sum_ c e. %s ( %s ` c ) ) )' % (A0, S, T1, FU, FF, FV, GG))
+# ( FF ` b ) = f ( b ), ( GG ` c ) = g ( c )
+Ab = '( %s /\\ b e. %s )' % (A0, FU); Ac = '( %s /\\ c e. %s )' % (A0, FV)
+fvb = mptv(Ab, FF, f('k'), 'b', w.s([], 'simpr', '( %s -> b e. %s )' % (Ab, FU)), f('b'))
+fvc = mptv(Ac, GG, g('k'), 'c', w.s([], 'simpr', '( %s -> c e. %s )' % (Ac, FV)), g('c'))
+sfb = w.s([fvb], 'sumeq2dv', '( %s -> sum_ b e. %s ( %s ` b ) = sum_ b e. %s %s )' % (A0, FU, FF, FU, f('b')))
+sgc = w.s([fvc], 'sumeq2dv', '( %s -> sum_ c e. %s ( %s ` c ) = sum_ c e. %s %s )' % (A0, FV, GG, FV, g('c')))
+cb1, FA = cbvsum(w, FU, f('b'), 'b', 'a'); cb2, GA_ = cbvsum(w, FV, g('c'), 'c', 'a')
+assert FA == f('a') and GA_ == g('a'), (FA, GA_)
+e1 = w.s([sfb, w.s([cb1], 'a1i', '( %s -> sum_ b e. %s %s = %s )' % (A0, FU, f('b'), GRU))], 'eqtrd', '( %s -> sum_ b e. %s ( %s ` b ) = %s )' % (A0, FU, FF, GRU))
+e2 = w.s([sgc, w.s([cb2], 'a1i', '( %s -> sum_ c e. %s %s = %s )' % (A0, FV, g('c'), GRV))], 'eqtrd', '( %s -> sum_ c e. %s ( %s ` c ) = %s )' % (A0, FV, GG, GRV))
+w.qed([s1, fc, w.s([e1, e2], 'oveq12d', '( %s -> ( sum_ b e. %s ( %s ` b ) x. sum_ c e. %s ( %s ` c ) ) = ( %s x. %s ) )' % (A0, FU, FF, FV, GG, GRU, GRV))], '3eqtrd', '( %s -> %s = ( %s x. %s ) )' % (A0, GRUV, GRU, GRV)); run(w)
+
+# ---- dchrgs1shift: the trivial character's Gauss sum is shift invariant
+A0 = '( N e. NN /\\ U e. ZZ /\\ %s )' % COP('U', 'N')
+ON = ONE('N'); T1 = GS('N', ON); L = LZ('N')
+w = W('dchrgs1shift', 'The Gauss sum of the trivial character shifted by a unit U is the Gauss sum itself (Lean hshiftA in norm_gaussSum_one_squarefree: gaussSum_mulShift_eq with inv_one and MulChar.one_apply_coe).')
+n = w.s([], 'simp1', '( %s -> N e. NN )' % A0); u = w.s([], 'simp2', '( %s -> U e. ZZ )' % A0); cop = w.s([], 'simp3', '( %s -> %s )' % (A0, COP('U', 'N')))
+g = w.s([], 'eqid', '( DChr ` N ) = ( DChr ` N )'); d = w.s([], 'eqid', '%s = %s' % (DB('N'), DB('N'))); i = w.s([], 'eqid', '%s = %s' % (INV('N'), INV('N'))); o = w.s([], 'eqid', '%s = %s' % (ON, ON))
+z = w.s([], 'eqid', '( Z/nZ ` N ) = ( Z/nZ ` N )'); zu = w.s([], 'eqid', '%s = %s' % (UZ('N'), UZ('N'))); l = w.s([], 'eqid', '%s = %s' % (L, L))
+grp = w.s([w.s([n, w.s([g], 'dchrabl', '( N e. NN -> ( DChr ` N ) e. Abel )')], 'syl', '( %s -> ( DChr ` N ) e. Abel )' % A0)], 'ablgrpd', '( %s -> ( DChr ` N ) e. Grp )' % A0)
+one = w.s([grp, w.s([d, o], 'grpidcl', '( ( DChr ` N ) e. Grp -> %s e. %s )' % (ON, DB('N')))], 'syl', '( %s -> %s e. %s )' % (A0, ON, DB('N')))
+hc = w.s([n, one], 'jca', '( %s -> ( N e. NN /\\ %s e. %s ) )' % (A0, ON, DB('N')))
+sh = w.s([hc, u, cop, w.inst('dchrgsshiftr')], 'syl3anc', '( %s -> %s = ( ( ( %s ` %s ) ` ( %s ` U ) ) x. %s ) )' % (A0, GR(ON, 'N', 'U'), INV('N'), ON, L, T1))
+inv1 = w.s([w.s([grp, w.s([o, i], 'grpinvid', '( ( DChr ` N ) e. Grp -> ( %s ` %s ) = %s )' % (INV('N'), ON, ON))], 'syl', '( %s -> ( %s ` %s ) = %s )' % (A0, INV('N'), ON, ON))], 'fveq1d', '( %s -> ( ( %s ` %s ) ` ( %s ` U ) ) = ( %s ` ( %s ` U ) ) )' % (A0, INV('N'), ON, L, ON, L))
+un = w.s([cop, w.s([w.s([n], 'nnnn0d', '( %s -> N e. NN0 )' % A0), u, w.s([z, zu, l], 'znunit', '( ( N e. NN0 /\\ U e. ZZ ) -> ( ( %s ` U ) e. %s <-> %s ) )' % (L, UZ('N'), COP('U', 'N')))], 'syl2anc', '( %s -> ( ( %s ` U ) e. %s <-> %s ) )' % (A0, L, UZ('N'), COP('U', 'N')))], 'mpbird', '( %s -> ( %s ` U ) e. %s )' % (A0, L, UZ('N')))
+d1 = w.s([g, z, o, zu, n, un], 'dchr1', '( %s -> ( %s ` ( %s ` U ) ) = 1 )' % (A0, ON, L))
+tc = w.s([hc, w.inst('dchrgscl')], 'syl', '( %s -> %s e. CC )' % (A0, T1))
+w.qed([sh, w.s([w.s([w.s([inv1, d1], 'eqtrd', '( %s -> ( ( %s ` %s ) ` ( %s ` U ) ) = 1 )' % (A0, INV('N'), ON, L))], 'oveq1d', '( %s -> ( ( ( %s ` %s ) ` ( %s ` U ) ) x. %s ) = ( 1 x. %s ) )' % (A0, INV('N'), ON, L, T1, T1)), w.s([tc], 'mullidd', '( %s -> ( 1 x. %s ) = %s )' % (A0, T1, T1))], 'eqtrd', '( %s -> ( ( ( %s ` %s ) ` ( %s ` U ) ) x. %s ) = %s )' % (A0, INV('N'), ON, L, T1, T1))], 'eqtrd', '( %s -> %s = %s )' % (A0, GR(ON, 'N', 'U'), T1)); run(w)
+
+# ---- dchrgscrt1: the CRT factorisation with a trivial first factor
+OU = ONE('U'); OUV = ONE(UV); INDZ = IND('V', UV, 'Z'); Y1 = '( %s %s %s )' % (IND('U', UV, OU), MUL(UV), INDZ)
+A0 = '( ( U e. NN /\\ V e. NN ) /\\ Z e. %s /\\ %s )' % (DV, BEZ)
+TUV = GS(UV, INDZ); TU = GS('U', OU)
+w = W('dchrgscrt1', 'The CRT factorisation of the Gauss sum of a character Z mod V induced to ( U x. V ), for a Bezout pair A V + B U = 1: it is the Gauss sum of the trivial character mod U times the Gauss sum of Z shifted by B (the form norm_gaussSum_one_squarefree and norm_sq_gaussSum_changeLevel consume).')
+uv = w.s([], 'simp1', '( %s -> ( U e. NN /\\ V e. NN ) )' % A0); u = w.s([uv], 'simpld', '( %s -> U e. NN )' % A0); v = w.s([uv], 'simprd', '( %s -> V e. NN )' % A0)
+z = w.s([], 'simp2', '( %s -> Z e. %s )' % (A0, DV)); bez = w.s([], 'simp3', '( %s -> %s )' % (A0, BEZ))
+a = w.s([bez], 'simp1d', '( %s -> A e. ZZ )' % A0); b = w.s([bez], 'simp2d', '( %s -> B e. ZZ )' % A0)
+uvn = w.s([u, v], 'nnmulcld', '( %s -> %s e. NN )' % (A0, UV))
+udv = w.s([w.s([u], 'nnzd', '( %s -> U e. ZZ )' % A0), w.s([v], 'nnzd', '( %s -> V e. ZZ )' % A0), w.inst('dvdsmul1')], 'syl2anc', '( %s -> U || %s )' % (A0, UV))
+vdv = w.s([w.s([u], 'nnzd', '( %s -> U e. ZZ )' % A0), w.s([v], 'nnzd', '( %s -> V e. ZZ )' % A0), w.inst('dvdsmul2')], 'syl2anc', '( %s -> V || %s )' % (A0, UV))
+gu = w.s([], 'eqid', '( DChr ` U ) = ( DChr ` U )'); du = w.s([], 'eqid', '%s = %s' % (DU, DU)); ou = w.s([], 'eqid', '%s = %s' % (OU, OU))
+grpu = w.s([w.s([u, w.s([gu], 'dchrabl', '( U e. NN -> ( DChr ` U ) e. Abel )')], 'syl', '( %s -> ( DChr ` U ) e. Abel )' % A0)], 'ablgrpd', '( %s -> ( DChr ` U ) e. Grp )' % A0)
+oneu = w.s([grpu, w.s([du, ou], 'grpidcl', '( ( DChr ` U ) e. Grp -> %s e. %s )' % (OU, DU))], 'syl', '( %s -> %s e. %s )' % (A0, OU, DU))
+guv = w.s([], 'eqid', '( DChr ` %s ) = ( DChr ` %s )' % (UV, UV)); duv = w.s([], 'eqid', '%s = %s' % (DUV, DUV)); ouv = w.s([], 'eqid', '%s = %s' % (OUV, OUV)); muv = w.s([], 'eqid', '%s = %s' % (MUL(UV), MUL(UV)))
+grpuv = w.s([w.s([uvn, w.s([guv], 'dchrabl', '( %s e. NN -> ( DChr ` %s ) e. Abel )' % (UV, UV))], 'syl', '( %s -> ( DChr ` %s ) e. Abel )' % (A0, UV))], 'ablgrpd', '( %s -> ( DChr ` %s ) e. Grp )' % (A0, UV))
+ind1 = w.s([u, uvn, udv, w.inst('dchrind1')], 'syl3anc', '( %s -> %s = %s )' % (A0, IND('U', UV, OU), OUV))
+indz = w.s([w.s([v, uvn, vdv], '3jca', '( %s -> ( V e. NN /\\ %s e. NN /\\ V || %s ) )' % (A0, UV, UV)), z, w.inst('dchrindcl')], 'syl2anc', '( %s -> %s e. %s )' % (A0, INDZ, DUV))
+lid = w.s([grpuv, indz, w.s([duv, muv, ouv], 'grplid', '( ( ( DChr ` %s ) e. Grp /\\ %s e. %s ) -> ( %s %s %s ) = %s )' % (UV, INDZ, DUV, OUV, MUL(UV), INDZ, INDZ))], 'syl2anc', '( %s -> ( %s %s %s ) = %s )' % (A0, OUV, MUL(UV), INDZ, INDZ))
+yeq = w.s([w.s([ind1], 'oveq1d', '( %s -> %s = ( %s %s %s ) )' % (A0, Y1, OUV, MUL(UV), INDZ)), lid], 'eqtrd', '( %s -> %s = %s )' % (A0, Y1, INDZ))
+v3 = w.s([uvn, indz, w.inst('dchrgsval3')], 'syl2anc', '( %s -> %s = %s )' % (A0, TUV, GR(INDZ, UV, '1')))
+crt = w.s([uv, w.s([oneu, z], 'jca', '( %s -> ( %s e. %s /\\ Z e. %s ) )' % (A0, OU, DU, DV)), w.s([bez, w.s([], '1zzd', '( %s -> 1 e. ZZ )' % A0)], 'jca', '( %s -> ( %s /\\ 1 e. ZZ ) )' % (A0, BEZ)), w.inst('dchrgscrt')], 'syl3anc', '( %s -> %s = ( %s x. %s ) )' % (A0, GR(Y1, UV, '1'), GR(OU, 'U', '( A x. 1 )'), GR('Z', 'V', '( B x. 1 )')))
+# GR( Y1 , 1 ) = GR( INDZ , 1 )
+Aa = '( %s /\\ a e. %s )' % (A0, FZO(UV))
+sy = w.s([w.s([w.s([w.s([yeq], 'adantr', '( %s -> %s = %s )' % (Aa, Y1, INDZ))], 'fveq1d', '( %s -> ( %s ` ( %s ` a ) ) = ( %s ` ( %s ` a ) ) )' % (Aa, Y1, LUV, INDZ, LUV))], 'oveq1d', '( %s -> %s = %s )' % (Aa, TERMR(Y1, UV, 'a', '1'), TERMR(INDZ, UV, 'a', '1')))], 'sumeq2dv', '( %s -> %s = %s )' % (A0, GR(Y1, UV, '1'), GR(INDZ, UV, '1')))
+# ( A x. 1 ) = A inside the sums
+def unshift(ante, xx, n, sh, shcn, fzo):
+    Aa_ = '( %s /\\ a e. %s )' % (ante, fzo)
+    m = w.s([w.s([shcn], 'mulridd', '( %s -> ( %s x. 1 ) = %s )' % (ante, sh, sh))], 'adantr', '( %s -> ( %s x. 1 ) = %s )' % (Aa_, sh, sh))
+    return w.s([w.s([w.s([w.s([m], 'oveq1d', '( %s -> ( ( %s x. 1 ) x. a ) = ( %s x. a ) )' % (Aa_, sh, sh))], 'oveq2d', '( %s -> %s = %s )' % (Aa_, RP('( ( %s x. 1 ) x. a )' % sh, n), RP('( %s x. a )' % sh, n)))], 'oveq2d', '( %s -> %s = %s )' % (Aa_, TERMR(xx, n, 'a', '( %s x. 1 )' % sh), TERMR(xx, n, 'a', sh)))], 'sumeq2dv', '( %s -> %s = %s )' % (ante, GR(xx, n, '( %s x. 1 )' % sh), GR(xx, n, sh)))
+ua = unshift(A0, OU, 'U', 'A', w.s([a], 'zcnd', '( %s -> A e. CC )' % A0), FU); ub = unshift(A0, 'Z', 'V', 'B', w.s([b], 'zcnd', '( %s -> B e. CC )' % A0), FV)
+copa = w.s([w.s([uv, bez, w.inst('bezcop')], 'syl2anc', '( %s -> ( ( U gcd V ) = 1 /\\ ( A gcd U ) = 1 /\\ ( B gcd V ) = 1 ) )' % A0)], 'simp2d', '( %s -> ( A gcd U ) = 1 )' % A0)
+s1 = w.s([u, a, copa, w.inst('dchrgs1shift')], 'syl3anc', '( %s -> %s = %s )' % (A0, GR(OU, 'U', 'A'), TU))
+w.qed([w.s([v3, w.s([sy], 'eqcomd', '( %s -> %s = %s )' % (A0, GR(INDZ, UV, '1'), GR(Y1, UV, '1')))], 'eqtrd', '( %s -> %s = %s )' % (A0, TUV, GR(Y1, UV, '1'))), crt, w.s([w.s([ua, s1], 'eqtrd', '( %s -> %s = %s )' % (A0, GR(OU, 'U', '( A x. 1 )'), TU)), ub], 'oveq12d', '( %s -> ( %s x. %s ) = ( %s x. %s ) )' % (A0, GR(OU, 'U', '( A x. 1 )'), GR('Z', 'V', '( B x. 1 )'), TU, GR('Z', 'V', 'B')))], '3eqtrd', '( %s -> %s = ( %s x. %s ) )' % (A0, TUV, TU, GR('Z', 'V', 'B'))); run(w)

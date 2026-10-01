@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=absreimle  LOC_AFTER=?
+
+* The absolute value of a complex number is at most the sum of the absolute values of its real and imaginary parts.
+
+s1::id |- ( A e. CC -> A e. CC )
+s2:s1:recld |- ( A e. CC -> ( Re ` A ) e. RR )
+s3:s1:imcld |- ( A e. CC -> ( Im ` A ) e. RR )
+s4:s2:recnd |- ( A e. CC -> ( Re ` A ) e. CC )
+s5:s3:recnd |- ( A e. CC -> ( Im ` A ) e. CC )
+s6::ax-icn |- _i e. CC
+s7:s6:a1i |- ( A e. CC -> _i e. CC )
+s8:s7,s5:mulcld |- ( A e. CC -> ( _i x. ( Im ` A ) ) e. CC )
+i9::replim
+s10:s1,i9:syl |- ( A e. CC -> A = ( ( Re ` A ) + ( _i x. ( Im ` A ) ) ) )
+s11:s4,s8:abstrid |- ( A e. CC -> ( abs ` ( ( Re ` A ) + ( _i x. ( Im ` A ) ) ) ) <_ ( ( abs ` ( Re ` A ) ) + ( abs ` ( _i x. ( Im ` A ) ) ) ) )
+s12:s7,s5:absmuld |- ( A e. CC -> ( abs ` ( _i x. ( Im ` A ) ) ) = ( ( abs ` _i ) x. ( abs ` ( Im ` A ) ) ) )
+s13::absi |- ( abs ` _i ) = 1
+s14:s13:a1i |- ( A e. CC -> ( abs ` _i ) = 1 )
+s15:s14:oveq1d |- ( A e. CC -> ( ( abs ` _i ) x. ( abs ` ( Im ` A ) ) ) = ( 1 x. ( abs ` ( Im ` A ) ) ) )
+s16:s5:abscld |- ( A e. CC -> ( abs ` ( Im ` A ) ) e. RR )
+s17:s16:recnd |- ( A e. CC -> ( abs ` ( Im ` A ) ) e. CC )
+s18:s5:abscld |- ( A e. CC -> ( abs ` ( Im ` A ) ) e. RR )
+s19:s18:recnd |- ( A e. CC -> ( abs ` ( Im ` A ) ) e. CC )
+s20:s19:mullidd |- ( A e. CC -> ( 1 x. ( abs ` ( Im ` A ) ) ) = ( abs ` ( Im ` A ) ) )
+s21:s15,s20:eqtrd |- ( A e. CC -> ( ( abs ` _i ) x. ( abs ` ( Im ` A ) ) ) = ( abs ` ( Im ` A ) ) )
+s22:s12,s21:eqtrd |- ( A e. CC -> ( abs ` ( _i x. ( Im ` A ) ) ) = ( abs ` ( Im ` A ) ) )
+s23:s22:oveq2d |- ( A e. CC -> ( ( abs ` ( Re ` A ) ) + ( abs ` ( _i x. ( Im ` A ) ) ) ) = ( ( abs ` ( Re ` A ) ) + ( abs ` ( Im ` A ) ) ) )
+s24:s11,s23:breqtrd |- ( A e. CC -> ( abs ` ( ( Re ` A ) + ( _i x. ( Im ` A ) ) ) ) <_ ( ( abs ` ( Re ` A ) ) + ( abs ` ( Im ` A ) ) ) )
+s25:s10:fveq2d |- ( A e. CC -> ( abs ` A ) = ( abs ` ( ( Re ` A ) + ( _i x. ( Im ` A ) ) ) ) )
+qed:s25,s24:eqbrtrd |- ( A e. CC -> ( abs ` A ) <_ ( ( abs ` ( Re ` A ) ) + ( abs ` ( Im ` A ) ) ) )
+$)

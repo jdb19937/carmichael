@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgsval  LOC_AFTER=?
+
+* Value of the Gauss sum of a Dirichlet character X mod N (Mathlib gaussSum chi ZMod.stdAddChar): the sum over the residues a in ( 0 ..^ N ) of X at the class of a times exp ( 2 _pi _i a / N ).
+
+s1::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3::df-dchrgs |- DChrGS = ( n e. NN , x e. ( Base ` ( DChr ` n ) ) |-> sum_ a e. ( 0 ..^ n ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` n ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / n ) ) ) ) )
+s4:s3:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> DChrGS = ( n e. NN , x e. ( Base ` ( DChr ` n ) ) |-> sum_ a e. ( 0 ..^ n ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` n ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / n ) ) ) ) ) )
+s5::simprl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> n = N )
+s6::simprr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> x = X )
+c1:s5:oveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( 0 ..^ n ) = ( 0 ..^ N ) )
+c2:s5:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( Z/nZ ` n ) = ( Z/nZ ` N ) )
+c3:c2:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ZRHom ` ( Z/nZ ` n ) ) = ( ZRHom ` ( Z/nZ ` N ) ) )
+c4:c3:fveq1d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ( ZRHom ` ( Z/nZ ` n ) ) ` a ) = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) )
+c5:s6,c4:fveq12d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( x ` ( ( ZRHom ` ( Z/nZ ` n ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+c6:s5:oveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( a / n ) = ( a / N ) )
+c7:c6:oveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( a / n ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) )
+c8:c7:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / n ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) ) )
+c9:c5,c8:oveq12d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ( x ` ( ( ZRHom ` ( Z/nZ ` n ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / n ) ) ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) ) ) )
+c10:c9:adantr |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) /\ a e. ( 0 ..^ n ) ) -> ( ( x ` ( ( ZRHom ` ( Z/nZ ` n ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / n ) ) ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) ) ) )
+c11:c1,c10:sumeq12dv |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> sum_ a e. ( 0 ..^ n ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` n ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / n ) ) ) ) = sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) ) ) )
+s7::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> n = N )
+s8:s7:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> ( DChr ` n ) = ( DChr ` N ) )
+s9:s8:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> ( Base ` ( DChr ` n ) ) = ( Base ` ( DChr ` N ) ) )
+s10::sumex |- sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) ) ) e. _V
+s11:s10:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) ) ) e. _V )
+qed:s4,c11,s9,s1,s2,s11:ovmpodx |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrGS X ) = sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( a / N ) ) ) ) )
+$)

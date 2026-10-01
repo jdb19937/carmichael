@@ -1,0 +1,75 @@
+$( <MM> <PROOF_ASST> THEOREM=lsind  LOC_AFTER=?
+
+* The integral over RR of a constant times the indicator of a closed interval (Lean integral_indicator_const with volume_Icc), with its integrability.
+
+s1::simp1 |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> U e. RR )
+s2::simp2 |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> V e. RR )
+s3::simp3 |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> K e. CC )
+i4::iccssre
+s5:s1,s2,i4:syl2anc |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( U [,] V ) C_ RR )
+i6::iccmbl
+s7:s1,s2,i6:syl2anc |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( U [,] V ) e. dom vol )
+s8:s1:adantr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ U <_ V ) -> U e. RR )
+s9:s2:adantr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ U <_ V ) -> V e. RR )
+s10::simpr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ U <_ V ) -> U <_ V )
+i11::ovolicc
+s12:s8,s9,s10,i11:syl3anc |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ U <_ V ) -> ( vol* ` ( U [,] V ) ) = ( V - U ) )
+s13::simpr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ U <_ V ) -> U <_ V )
+i14::iftrue
+s15:s13,i14:syl |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ U <_ V ) -> if ( U <_ V , ( V - U ) , 0 ) = ( V - U ) )
+s16:s12,s15:eqtr4d |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ U <_ V ) -> ( vol* ` ( U [,] V ) ) = if ( U <_ V , ( V - U ) , 0 ) )
+s17:s1:adantr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> U e. RR )
+s18:s2:adantr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> V e. RR )
+s19:s18,s17:ltnled |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> ( V < U <-> -. U <_ V ) )
+s20::simpr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> -. U <_ V )
+s21:s19,s20:mpbird |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> V < U )
+s22:s17:rexrd |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> U e. RR* )
+s23:s18:rexrd |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> V e. RR* )
+i24::icc0
+s25:s22,s23,i24:syl2anc |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> ( ( U [,] V ) = (/) <-> V < U ) )
+s26:s25,s21:mpbird |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> ( U [,] V ) = (/) )
+s27:s26:fveq2d |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> ( vol* ` ( U [,] V ) ) = ( vol* ` (/) ) )
+s28::ovol0 |- ( vol* ` (/) ) = 0
+s29:s28:a1i |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> ( vol* ` (/) ) = 0 )
+s30:s27,s29:eqtrd |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> ( vol* ` ( U [,] V ) ) = 0 )
+s31::simpr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> -. U <_ V )
+i32::iffalse
+s33:s31,i32:syl |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> if ( U <_ V , ( V - U ) , 0 ) = 0 )
+s34:s30,s33:eqtr4d |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ -. U <_ V ) -> ( vol* ` ( U [,] V ) ) = if ( U <_ V , ( V - U ) , 0 ) )
+s35:s16,s34:pm2.61dan |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( vol* ` ( U [,] V ) ) = if ( U <_ V , ( V - U ) , 0 ) )
+i36::mblvol
+s37:s7,i36:syl |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( vol ` ( U [,] V ) ) = ( vol* ` ( U [,] V ) ) )
+s38:s37,s35:eqtrd |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( vol ` ( U [,] V ) ) = if ( U <_ V , ( V - U ) , 0 ) )
+s39:s2,s1:resubcld |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( V - U ) e. RR )
+s40::0red |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> 0 e. RR )
+s41:s39,s40:ifcld |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> if ( U <_ V , ( V - U ) , 0 ) e. RR )
+s42:s38,s41:eqeltrd |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( vol ` ( U [,] V ) ) e. RR )
+i43::itgss2
+s44:s5,i43:syl |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> S. ( U [,] V ) K _d u = S. RR if ( u e. ( U [,] V ) , K , 0 ) _d u )
+i45::itgconst
+s46:s7,s42,s3,i45:syl3anc |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> S. ( U [,] V ) K _d u = ( K x. ( vol ` ( U [,] V ) ) ) )
+s47:s44,s46:eqtr3d |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> S. RR if ( u e. ( U [,] V ) , K , 0 ) _d u = ( K x. ( vol ` ( U [,] V ) ) ) )
+s48:s38:oveq2d |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( K x. ( vol ` ( U [,] V ) ) ) = ( K x. if ( U <_ V , ( V - U ) , 0 ) ) )
+s49:s47,s48:eqtrd |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> S. RR if ( u e. ( U [,] V ) , K , 0 ) _d u = ( K x. if ( U <_ V , ( V - U ) , 0 ) ) )
+i50::iblconst
+s51:s7,s42,s3,i50:syl3anc |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( ( U [,] V ) X. { K } ) e. L^1 )
+s52::fconstmpt |- ( ( U [,] V ) X. { K } ) = ( u e. ( U [,] V ) |-> K )
+s53:s52:a1i |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( ( U [,] V ) X. { K } ) = ( u e. ( U [,] V ) |-> K ) )
+s54:s53,s51:eqeltrrd |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( u e. ( U [,] V ) |-> K ) e. L^1 )
+s55::iftrue |- ( u e. ( U [,] V ) -> if ( u e. ( U [,] V ) , K , 0 ) = K )
+s56:s55:mpteq2ia |- ( u e. ( U [,] V ) |-> if ( u e. ( U [,] V ) , K , 0 ) ) = ( u e. ( U [,] V ) |-> K )
+s57:s56:a1i |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( u e. ( U [,] V ) |-> if ( u e. ( U [,] V ) , K , 0 ) ) = ( u e. ( U [,] V ) |-> K ) )
+s58:s57,s54:eqeltrd |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( u e. ( U [,] V ) |-> if ( u e. ( U [,] V ) , K , 0 ) ) e. L^1 )
+s59:s3:adantr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ u e. ( U [,] V ) ) -> K e. CC )
+s60::0cnd |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ u e. ( U [,] V ) ) -> 0 e. CC )
+s61:s59,s60:ifcld |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ u e. ( U [,] V ) ) -> if ( u e. ( U [,] V ) , K , 0 ) e. CC )
+s62::simpr |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ u e. ( RR \ ( U [,] V ) ) ) -> u e. ( RR \ ( U [,] V ) ) )
+i63::eldifn
+s64:s62,i63:syl |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ u e. ( RR \ ( U [,] V ) ) ) -> -. u e. ( U [,] V ) )
+i65::iffalse
+s66:s64,i65:syl |- ( ( ( U e. RR /\ V e. RR /\ K e. CC ) /\ u e. ( RR \ ( U [,] V ) ) ) -> if ( u e. ( U [,] V ) , K , 0 ) = 0 )
+s67::rembl |- RR e. dom vol
+s68:s67:a1i |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> RR e. dom vol )
+s69:s5,s68,s61,s66,s58:iblss2 |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( u e. RR |-> if ( u e. ( U [,] V ) , K , 0 ) ) e. L^1 )
+qed:s69,s49:jca |- ( ( U e. RR /\ V e. RR /\ K e. CC ) -> ( ( u e. RR |-> if ( u e. ( U [,] V ) , K , 0 ) ) e. L^1 /\ S. RR if ( u e. ( U [,] V ) , K , 0 ) _d u = ( K x. if ( U <_ V , ( V - U ) , 0 ) ) ) )
+$)

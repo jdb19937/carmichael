@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutpos  LOC_AFTER=?
+
+* The divide-out loop leaves a positive result (Lean: Nat.pos_of_dvd_of_pos at the call site).
+
+s1::simpl1 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> D e. NN )
+s2::simpl2 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> R e. NN0 )
+s3::simpl3 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> F e. NN0 )
+s4::simpr |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> 1 <_ R )
+s5:s1,s2,s3:3jca |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( D e. NN /\ R e. NN0 /\ F e. NN0 ) )
+i6::divoutdvd
+s7:s5,i6:syl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( 1st ` ( ( D DivOut R ) ` F ) ) || R )
+s8:s1,s2:jca |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( D e. NN /\ R e. NN0 ) )
+i9::divoutcl
+s10:s8,s3,i9:syl2anc |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( ( D DivOut R ) ` F ) e. ( NN0 X. NN0 ) )
+i11::xp1st
+s12:s10,i11:syl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( 1st ` ( ( D DivOut R ) ` F ) ) e. NN0 )
+i13::xp2nd
+s14:s10,i13:syl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( 2nd ` ( ( D DivOut R ) ` F ) ) e. NN0 )
+s15::simpr |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 )
+s16:s7:adantr |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> ( 1st ` ( ( D DivOut R ) ` F ) ) || R )
+s17:s15,s16:eqbrtrrd |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> 0 || R )
+s18:s2:adantr |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> R e. NN0 )
+s19:s18:nn0zd |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> R e. ZZ )
+i20::0dvds
+s21:s19,i20:syl |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> ( 0 || R <-> R = 0 ) )
+s22:s21,s17:mpbid |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> R = 0 )
+s23:s4:adantr |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> 1 <_ R )
+s24:s23,s22:breqtrd |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> 1 <_ 0 )
+s25::0lt1 |- 0 < 1
+s26:s25:a1i |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> 0 < 1 )
+s27::0re |- 0 e. RR
+s28:s27:a1i |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> 0 e. RR )
+s29::1re |- 1 e. RR
+s30:s29:a1i |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> 1 e. RR )
+s31:s28,s30:ltnled |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> ( 0 < 1 <-> -. 1 <_ 0 ) )
+s32:s26,s31:mpbid |- ( ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) /\ ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 ) -> -. 1 <_ 0 )
+s33:s24,s32:pm2.65da |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> -. ( 1st ` ( ( D DivOut R ) ` F ) ) = 0 )
+s34:s33:neqned |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( 1st ` ( ( D DivOut R ) ` F ) ) =/= 0 )
+i35::elnnne0
+s36:s12,s34,i35:sylanbrc |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> ( 1st ` ( ( D DivOut R ) ` F ) ) e. NN )
+qed:s36:nnge1d |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ 1 <_ R ) -> 1 <_ ( 1st ` ( ( D DivOut R ) ` F ) ) )
+$)

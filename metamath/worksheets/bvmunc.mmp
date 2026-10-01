@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=bvmunc  LOC_AFTER=?
+
+* The Moebius function vanishes on a product of two non-coprime numbers (a common prime p gives p ^ 2 || M K; muval1).
+
+s1::simpll |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> M e. NN )
+s2::simplr |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> K e. NN )
+s3::simpr |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> -. ( K gcd M ) = 1 )
+s4:s1:nnzd |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> M e. ZZ )
+s5:s2:nnzd |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> K e. ZZ )
+i6::gcdnncl
+s7:s2,s1,i6:syl2anc |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> ( K gcd M ) e. NN )
+s8:s3:neqned |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> ( K gcd M ) =/= 1 )
+s9:s7,s8:jca |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> ( ( K gcd M ) e. NN /\ ( K gcd M ) =/= 1 ) )
+i10::eluz2b3
+s11:s9,i10:sylibr |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> ( K gcd M ) e. ( ZZ>= ` 2 ) )
+i12::exprmfct
+s13:s11,i12:syl |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> E. p e. Prime p || ( K gcd M ) )
+s14::simplr |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p e. Prime )
+i15::prmnn
+s16:s14,i15:syl |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p e. NN )
+s17:s16:nnzd |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p e. ZZ )
+s18::simpr |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p || ( K gcd M ) )
+s19:s4:adantr |- ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) -> M e. ZZ )
+s20:s19:adantr |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> M e. ZZ )
+s21:s5:adantr |- ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) -> K e. ZZ )
+s22:s21:adantr |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> K e. ZZ )
+s23:s7:adantr |- ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) -> ( K gcd M ) e. NN )
+s24:s23:adantr |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( K gcd M ) e. NN )
+s25:s24:nnzd |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( K gcd M ) e. ZZ )
+i26::gcddvds
+s27:s22,s20,i26:syl2anc |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( ( K gcd M ) || K /\ ( K gcd M ) || M ) )
+s28:s27:simpld |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( K gcd M ) || K )
+s29:s18,s28:jca |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( p || ( K gcd M ) /\ ( K gcd M ) || K ) )
+i30::dvdstr
+s31:s17,s25,s22,i30:syl3anc |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( ( p || ( K gcd M ) /\ ( K gcd M ) || K ) -> p || K ) )
+s32:s29,s31:mpd |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p || K )
+s33:s27:simprd |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( K gcd M ) || M )
+s34:s18,s33:jca |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( p || ( K gcd M ) /\ ( K gcd M ) || M ) )
+i35::dvdstr
+s36:s17,s25,s20,i35:syl3anc |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( ( p || ( K gcd M ) /\ ( K gcd M ) || M ) -> p || M ) )
+s37:s34,s36:mpd |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p || M )
+s38:s17,s17:jca |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( p e. ZZ /\ p e. ZZ ) )
+s39:s20,s22:jca |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( M e. ZZ /\ K e. ZZ ) )
+s40:s37,s32:jca |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( p || M /\ p || K ) )
+i41::dvdsmul12
+s42:s38,s39,s40,i41:syl3anc |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( p x. p ) || ( M x. K ) )
+s43:s16:nncnd |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p e. CC )
+s44:s43:sqvald |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( p ^ 2 ) = ( p x. p ) )
+s45:s44,s42:eqbrtrd |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( p ^ 2 ) || ( M x. K ) )
+s46:s1:adantr |- ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) -> M e. NN )
+s47:s46:adantr |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> M e. NN )
+s48:s2:adantr |- ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) -> K e. NN )
+s49:s48:adantr |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> K e. NN )
+s50:s47,s49:nnmulcld |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( M x. K ) e. NN )
+i51::prmuz2
+s52:s14,i51:syl |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> p e. ( ZZ>= ` 2 ) )
+i53::muval1
+s54:s50,s52,s45,i53:syl3anc |- ( ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) /\ p || ( K gcd M ) ) -> ( mmu ` ( M x. K ) ) = 0 )
+s55:s54:ex |- ( ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) /\ p e. Prime ) -> ( p || ( K gcd M ) -> ( mmu ` ( M x. K ) ) = 0 ) )
+s56:s55:rexlimdva |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> ( E. p e. Prime p || ( K gcd M ) -> ( mmu ` ( M x. K ) ) = 0 ) )
+qed:s13,s56:mpd |- ( ( ( M e. NN /\ K e. NN ) /\ -. ( K gcd M ) = 1 ) -> ( mmu ` ( M x. K ) ) = 0 )
+$)

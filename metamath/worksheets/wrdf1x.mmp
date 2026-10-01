@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=wrdf1x  LOC_AFTER=?
+
+* A duplicate-free word is injective on its domain (Lean: List.Nodup as injectivity of the index map).
+
+s1::simpl |- ( ( V e. Word S /\ Fun `' V ) -> V e. Word S )
+s2::simpr |- ( ( V e. Word S /\ Fun `' V ) -> Fun `' V )
+i3::wrdf
+s4:s1,i3:syl |- ( ( V e. Word S /\ Fun `' V ) -> V : ( 0 ..^ ( # ` V ) ) --> S )
+s5:s4,s2:jca |- ( ( V e. Word S /\ Fun `' V ) -> ( V : ( 0 ..^ ( # ` V ) ) --> S /\ Fun `' V ) )
+s6::df-f1 |- ( V : ( 0 ..^ ( # ` V ) ) -1-1-> S <-> ( V : ( 0 ..^ ( # ` V ) ) --> S /\ Fun `' V ) )
+s7:s6:a1i |- ( ( V e. Word S /\ Fun `' V ) -> ( V : ( 0 ..^ ( # ` V ) ) -1-1-> S <-> ( V : ( 0 ..^ ( # ` V ) ) --> S /\ Fun `' V ) ) )
+s8:s5,s7:mpbird |- ( ( V e. Word S /\ Fun `' V ) -> V : ( 0 ..^ ( # ` V ) ) -1-1-> S )
+i9::wrddm
+s10:s1,i9:syl |- ( ( V e. Word S /\ Fun `' V ) -> dom V = ( 0 ..^ ( # ` V ) ) )
+i11::f1eq2
+s12:s10,i11:syl |- ( ( V e. Word S /\ Fun `' V ) -> ( V : dom V -1-1-> S <-> V : ( 0 ..^ ( # ` V ) ) -1-1-> S ) )
+qed:s8,s12:mpbird |- ( ( V e. Word S /\ Fun `' V ) -> V : dom V -1-1-> S )
+$)

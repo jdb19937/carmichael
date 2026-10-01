@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=borrowval  LOC_AFTER=?
+
+* Value of borrow: the borrow-out of a full subtractor.
+
+s1::simp1 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> A e. 2o )
+s2::simp2 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> B e. 2o )
+s3::simp3 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> C e. 2o )
+s4::simpl |- ( ( a = A /\ b = B ) -> a = A )
+s5::simpr |- ( ( a = A /\ b = B ) -> b = B )
+c1:s4:eqeq1d |- ( ( a = A /\ b = B ) -> ( a = 1o <-> A = 1o ) )
+c2:c1:notbid |- ( ( a = A /\ b = B ) -> ( -. a = 1o <-> -. A = 1o ) )
+c3:s5:eqeq1d |- ( ( a = A /\ b = B ) -> ( b = 1o <-> B = 1o ) )
+c4:c3:orbi1d |- ( ( a = A /\ b = B ) -> ( ( b = 1o \/ c = 1o ) <-> ( B = 1o \/ c = 1o ) ) )
+c5:c2,c4:anbi12d |- ( ( a = A /\ b = B ) -> ( ( -. a = 1o /\ ( b = 1o \/ c = 1o ) ) <-> ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) ) )
+c6:s5:eqeq1d |- ( ( a = A /\ b = B ) -> ( b = 1o <-> B = 1o ) )
+c7:c6:anbi1d |- ( ( a = A /\ b = B ) -> ( ( b = 1o /\ c = 1o ) <-> ( B = 1o /\ c = 1o ) ) )
+c8:c5,c7:orbi12d |- ( ( a = A /\ b = B ) -> ( ( ( -. a = 1o /\ ( b = 1o \/ c = 1o ) ) \/ ( b = 1o /\ c = 1o ) ) <-> ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) ) )
+c9:c8:ifbid |- ( ( a = A /\ b = B ) -> if ( ( ( -. a = 1o /\ ( b = 1o \/ c = 1o ) ) \/ ( b = 1o /\ c = 1o ) ) , 1o , (/) ) = if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) )
+c10:c9:mpteq2dv |- ( ( a = A /\ b = B ) -> ( c e. 2o |-> if ( ( ( -. a = 1o /\ ( b = 1o \/ c = 1o ) ) \/ ( b = 1o /\ c = 1o ) ) , 1o , (/) ) ) = ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) )
+s6::df-borrow |- borrow = ( a e. 2o , b e. 2o |-> ( c e. 2o |-> if ( ( ( -. a = 1o /\ ( b = 1o \/ c = 1o ) ) \/ ( b = 1o /\ c = 1o ) ) , 1o , (/) ) ) )
+s7::2oex |- 2o e. _V
+s8:s7:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> 2o e. _V )
+i9::mptexg
+s10:s8,i9:syl |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) e. _V )
+s11:c10,s6:ovmpoga |- ( ( A e. 2o /\ B e. 2o /\ ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) e. _V ) -> ( A borrow B ) = ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) )
+s12:s1,s2,s10,s11:syl3anc |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( A borrow B ) = ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) )
+s13:s12:fveq1d |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( ( A borrow B ) ` C ) = ( ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) ` C ) )
+s14::id |- ( c = C -> c = C )
+c11:s14:eqeq1d |- ( c = C -> ( c = 1o <-> C = 1o ) )
+c12:c11:orbi2d |- ( c = C -> ( ( B = 1o \/ c = 1o ) <-> ( B = 1o \/ C = 1o ) ) )
+c13:c12:anbi2d |- ( c = C -> ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) <-> ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) ) )
+c14:s14:eqeq1d |- ( c = C -> ( c = 1o <-> C = 1o ) )
+c15:c14:anbi2d |- ( c = C -> ( ( B = 1o /\ c = 1o ) <-> ( B = 1o /\ C = 1o ) ) )
+c16:c13,c15:orbi12d |- ( c = C -> ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) <-> ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) ) )
+c17:c16:ifbid |- ( c = C -> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) = if ( ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) , 1o , (/) ) )
+s15::eqid |- ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) = ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) )
+s16::1oel2o |- 1o e. 2o
+s17:s16:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> 1o e. 2o )
+s18::0el2o |- (/) e. 2o
+s19:s18:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> (/) e. 2o )
+s20:s17,s19:ifcld |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> if ( ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) , 1o , (/) ) e. 2o )
+s21:s20:elexd |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> if ( ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) , 1o , (/) ) e. _V )
+s22:c17,s15:fvmptg |- ( ( C e. 2o /\ if ( ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) , 1o , (/) ) e. _V ) -> ( ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) ` C ) = if ( ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) , 1o , (/) ) )
+s23:s3,s21,s22:syl2anc |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( ( c e. 2o |-> if ( ( ( -. A = 1o /\ ( B = 1o \/ c = 1o ) ) \/ ( B = 1o /\ c = 1o ) ) , 1o , (/) ) ) ` C ) = if ( ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) , 1o , (/) ) )
+qed:s13,s23:eqtrd |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( ( A borrow B ) ` C ) = if ( ( ( -. A = 1o /\ ( B = 1o \/ C = 1o ) ) \/ ( B = 1o /\ C = 1o ) ) , 1o , (/) ) )
+$)

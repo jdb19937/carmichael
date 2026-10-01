@@ -1,0 +1,65 @@
+$( <MM> <PROOF_ASST> THEOREM=ef1ilaf  LOC_AFTER=?
+
+* The integral of ` 1 / ( K t + H ) ` on an interval where ` K t + H > 0 ` : ` ( log ( K Q + H ) - log ( K P + H ) ) / K ` ( ~ ef1faf with ~ dvrelog ; the two pieces of Lean ` integral_one_div_one_add_abs ` ).
+
+s1::simpl |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( K e. RR /\ K =/= 0 /\ H e. RR ) )
+s2::simprl |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( P e. RR /\ Q e. RR /\ P <_ Q ) )
+s3::simprr |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) )
+s4::oveq2 |- ( u = t -> ( K x. u ) = ( K x. t ) )
+s5:s4:oveq1d |- ( u = t -> ( ( K x. u ) + H ) = ( ( K x. t ) + H ) )
+s6:s5:breq2d |- ( u = t -> ( 0 < ( ( K x. u ) + H ) <-> 0 < ( ( K x. t ) + H ) ) )
+s7:s6:cbvralvw |- ( A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) <-> A. t e. ( P [,] Q ) 0 < ( ( K x. t ) + H ) )
+s8:s7:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) <-> A. t e. ( P [,] Q ) 0 < ( ( K x. t ) + H ) ) )
+s9:s3,s8:mpbid |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> A. t e. ( P [,] Q ) 0 < ( ( K x. t ) + H ) )
+s10:s1,s2:jca |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( P e. RR /\ Q e. RR /\ P <_ Q ) ) )
+s11::relogf1o |- ( log |` RR+ ) : RR+ -1-1-onto-> RR
+s12:s11:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( log |` RR+ ) : RR+ -1-1-onto-> RR )
+i13::f1of
+s14:s12,i13:syl |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( log |` RR+ ) : RR+ --> RR )
+s15:s14:feqmptd |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( log |` RR+ ) = ( y e. RR+ |-> ( ( log |` RR+ ) ` y ) ) )
+s16::simpr |- ( ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) /\ y e. RR+ ) -> y e. RR+ )
+i17::fvres
+s18:s16,i17:syl |- ( ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) /\ y e. RR+ ) -> ( ( log |` RR+ ) ` y ) = ( log ` y ) )
+s19:s18:mpteq2dva |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( y e. RR+ |-> ( ( log |` RR+ ) ` y ) ) = ( y e. RR+ |-> ( log ` y ) ) )
+s20:s15,s19:eqtrd |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( log |` RR+ ) = ( y e. RR+ |-> ( log ` y ) ) )
+s21::dvrelog |- ( RR _D ( log |` RR+ ) ) = ( x e. RR+ |-> ( 1 / x ) )
+s22:s21:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( RR _D ( log |` RR+ ) ) = ( x e. RR+ |-> ( 1 / x ) ) )
+s23::oveq2 |- ( x = y -> ( 1 / x ) = ( 1 / y ) )
+s24:s23:cbvmptv |- ( x e. RR+ |-> ( 1 / x ) ) = ( y e. RR+ |-> ( 1 / y ) )
+s25:s20:eqcomd |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( y e. RR+ |-> ( log ` y ) ) = ( log |` RR+ ) )
+s26:s25:oveq2d |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( RR _D ( y e. RR+ |-> ( log ` y ) ) ) = ( RR _D ( log |` RR+ ) ) )
+s27:s24:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( x e. RR+ |-> ( 1 / x ) ) = ( y e. RR+ |-> ( 1 / y ) ) )
+s28:s22,s27:eqtrd |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( RR _D ( log |` RR+ ) ) = ( y e. RR+ |-> ( 1 / y ) ) )
+s29:s26,s28:eqtrd |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( RR _D ( y e. RR+ |-> ( log ` y ) ) ) = ( y e. RR+ |-> ( 1 / y ) ) )
+i30::relogcl
+s31:s16,i30:syl |- ( ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) /\ y e. RR+ ) -> ( log ` y ) e. RR )
+s32:s31:recnd |- ( ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) /\ y e. RR+ ) -> ( log ` y ) e. CC )
+s33::rpssre |- RR+ C_ RR
+s34:s33:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> RR+ C_ RR )
+s35::ax-resscn |- RR C_ CC
+s36:s35:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> RR C_ CC )
+s37:s34,s36:sstrd |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> RR+ C_ CC )
+s38::ax-1cn |- 1 e. CC
+s39:s38:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> 1 e. CC )
+s40::ssid |- CC C_ CC
+s41:s40:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> CC C_ CC )
+i42::cncfmptc
+s43:s39,s37,s41,i42:syl3anc |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( y e. RR+ |-> 1 ) e. ( RR+ -cn-> CC ) )
+s44::rpcndif0 |- ( y e. RR+ -> y e. ( CC \ { 0 } ) )
+s45:s44:ssriv |- RR+ C_ ( CC \ { 0 } )
+s46:s45:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> RR+ C_ ( CC \ { 0 } ) )
+s47::difss |- ( CC \ { 0 } ) C_ CC
+s48:s47:a1i |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( CC \ { 0 } ) C_ CC )
+i49::cncfmptid
+s50:s46,s48,i49:syl2anc |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( y e. RR+ |-> y ) e. ( RR+ -cn-> ( CC \ { 0 } ) ) )
+s51:s43,s50:divcncf |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( y e. RR+ |-> ( 1 / y ) ) e. ( RR+ -cn-> CC ) )
+s52::fveq2 |- ( y = ( ( K x. t ) + H ) -> ( log ` y ) = ( log ` ( ( K x. t ) + H ) ) )
+s53::oveq2 |- ( y = ( ( K x. t ) + H ) -> ( 1 / y ) = ( 1 / ( ( K x. t ) + H ) ) )
+s54::oveq2 |- ( t = P -> ( K x. t ) = ( K x. P ) )
+s55:s54:oveq1d |- ( t = P -> ( ( K x. t ) + H ) = ( ( K x. P ) + H ) )
+s56:s55:fveq2d |- ( t = P -> ( log ` ( ( K x. t ) + H ) ) = ( log ` ( ( K x. P ) + H ) ) )
+s57::oveq2 |- ( t = Q -> ( K x. t ) = ( K x. Q ) )
+s58:s57:oveq1d |- ( t = Q -> ( ( K x. t ) + H ) = ( ( K x. Q ) + H ) )
+s59:s58:fveq2d |- ( t = Q -> ( log ` ( ( K x. t ) + H ) ) = ( log ` ( ( K x. Q ) + H ) ) )
+qed:s10,s9,s32,s29,s51,s52,s53,s56,s59:ef1faf |- ( ( ( K e. RR /\ K =/= 0 /\ H e. RR ) /\ ( ( P e. RR /\ Q e. RR /\ P <_ Q ) /\ A. u e. ( P [,] Q ) 0 < ( ( K x. u ) + H ) ) ) -> ( ( t e. ( P (,) Q ) |-> ( 1 / ( ( K x. t ) + H ) ) ) e. L^1 /\ S. ( P (,) Q ) ( 1 / ( ( K x. t ) + H ) ) _d t = ( ( ( log ` ( ( K x. Q ) + H ) ) - ( log ` ( ( K x. P ) + H ) ) ) / K ) ) )
+$)

@@ -1,0 +1,111 @@
+$( <MM> <PROOF_ASST> THEOREM=docp  LOC_AFTER=?
+
+* Lean's ` divOut_cost_pos_iff ` : ` divOut d r f ` charges at least once exactly when the fuel is not zero and ` d ` divides ` r ` .
+
+s1::simp1 |- ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) -> G e. NN )
+s2::simp2 |- ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) -> F e. NN0 )
+s3::simp3 |- ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) -> H e. NN0 )
+s4:s1:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> G e. NN )
+s5:s2:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> F e. NN0 )
+s6::simpr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> H = 0 )
+s7:s6:fveq2d |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( ( G DivOut F ) ` H ) = ( ( G DivOut F ) ` 0 ) )
+i8::divout0
+s9:s4,s5,i8:syl2anc |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( ( G DivOut F ) ` 0 ) = <. F , 0 >. )
+s10:s7,s9:eqtrd |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( ( G DivOut F ) ` H ) = <. F , 0 >. )
+s11:s2:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> F e. NN0 )
+s12:s11:elexd |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> F e. _V )
+s13::c0ex |- 0 e. _V
+s14:s13:a1i |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> 0 e. _V )
+s15:s10:fveq2d |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( 2nd ` ( ( G DivOut F ) ` H ) ) = ( 2nd ` <. F , 0 >. ) )
+i16::op2ndg
+s17:s12,s14,i16:syl2anc |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( 2nd ` <. F , 0 >. ) = 0 )
+s18:s15,s17:eqtrd |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( 2nd ` ( ( G DivOut F ) ` H ) ) = 0 )
+s19:s18:breq2d |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> 0 < 0 ) )
+s20::0re |- 0 e. RR
+s21:s20:ltnri |- -. 0 < 0
+s22:s21:a1i |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> -. 0 < 0 )
+s23:s19,s22:mtbird |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> -. 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) )
+s24::simpr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> H = 0 )
+s25::nne |- ( -. H =/= 0 <-> H = 0 )
+s26:s24,s25:sylibr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> -. H =/= 0 )
+s27:s26:intnanrd |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> -. ( H =/= 0 /\ ( F mod G ) = 0 ) )
+s28:s23,s27:2falsed |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ H = 0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> ( H =/= 0 /\ ( F mod G ) = 0 ) ) )
+s29::simpr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> -. H = 0 )
+s30:s29:neqned |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> H =/= 0 )
+s31:s3:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> H e. NN0 )
+s32:s31,s30:jca |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( H e. NN0 /\ H =/= 0 ) )
+s33::elnnne0 |- ( H e. NN <-> ( H e. NN0 /\ H =/= 0 ) )
+s34:s32,s33:sylibr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> H e. NN )
+s35:s1:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> G e. NN )
+s36:s2:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> F e. NN0 )
+i37::nnm1nn0
+s38:s34,i37:syl |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( H - 1 ) e. NN0 )
+s39:s34:nncnd |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> H e. CC )
+s40::ax-1cn |- 1 e. CC
+s41:s40:a1i |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> 1 e. CC )
+s42:s39,s41:npcand |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( ( H - 1 ) + 1 ) = H )
+s43:s42:eqcomd |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> H = ( ( H - 1 ) + 1 ) )
+s44:s43:fveq2d |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( ( G DivOut F ) ` H ) = ( ( G DivOut F ) ` ( ( H - 1 ) + 1 ) ) )
+s45:s35,s36:jca |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( G e. NN /\ F e. NN0 ) )
+i46::divoutp1
+s47:s45,s38,i46:syl2anc |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( ( G DivOut F ) ` ( ( H - 1 ) + 1 ) ) = if ( ( F mod G ) = 0 , <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. , <. F , 0 >. ) )
+s48:s44,s47:eqtrd |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( ( G DivOut F ) ` H ) = if ( ( F mod G ) = 0 , <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. , <. F , 0 >. ) )
+s49::simpr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( F mod G ) = 0 )
+s50:s48:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( ( G DivOut F ) ` H ) = if ( ( F mod G ) = 0 , <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. , <. F , 0 >. ) )
+s51:s49:iftrued |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> if ( ( F mod G ) = 0 , <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. , <. F , 0 >. ) = <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. )
+s52:s50,s51:eqtrd |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( ( G DivOut F ) ` H ) = <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. )
+s53::fvex |- ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) e. _V
+s54:s53:a1i |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) e. _V )
+s55::ovex |- ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) e. _V
+s56:s55:a1i |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) e. _V )
+s57:s38:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( H - 1 ) e. NN0 )
+s58:s30:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> H =/= 0 )
+s59:s34:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> H e. NN )
+s60:s52:fveq2d |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( 2nd ` ( ( G DivOut F ) ` H ) ) = ( 2nd ` <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. ) )
+i61::op2ndg
+s62:s54,s56,i61:syl2anc |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( 2nd ` <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. ) = ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) )
+s63:s60,s62:eqtrd |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( 2nd ` ( ( G DivOut F ) ` H ) ) = ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) )
+s64:s63:breq2d |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> 0 < ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) ) )
+s65:s2:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> F e. NN0 )
+s66:s65:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> F e. NN0 )
+s67:s1:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> G e. NN )
+s68:s67:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> G e. NN )
+i69::fldivnn0
+s70:s66,s68,i69:syl2anc |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( |_ ` ( F / G ) ) e. NN0 )
+s71:s1:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> G e. NN )
+s72:s71:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> G e. NN )
+s73:s72,s70:jca |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( G e. NN /\ ( |_ ` ( F / G ) ) e. NN0 ) )
+i74::divoutcl
+s75:s73,s57,i74:syl2anc |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) e. ( NN0 X. NN0 ) )
+i76::xp2nd
+s77:s75,i76:syl |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) e. NN0 )
+i78::nn0p1nn
+s79:s77,i78:syl |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) e. NN )
+s80:s79:nngt0d |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> 0 < ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) )
+s81:s80,s64:mpbird |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) )
+s82:s58,s49:jca |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( H =/= 0 /\ ( F mod G ) = 0 ) )
+s83:s81,s82:2thd |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ ( F mod G ) = 0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> ( H =/= 0 /\ ( F mod G ) = 0 ) ) )
+s84::simpr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> -. ( F mod G ) = 0 )
+s85:s48:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> ( ( G DivOut F ) ` H ) = if ( ( F mod G ) = 0 , <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. , <. F , 0 >. ) )
+s86:s84:iffalsed |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> if ( ( F mod G ) = 0 , <. ( 1st ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) , ( ( 2nd ` ( ( G DivOut ( |_ ` ( F / G ) ) ) ` ( H - 1 ) ) ) + 1 ) >. , <. F , 0 >. ) = <. F , 0 >. )
+s87:s85,s86:eqtrd |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> ( ( G DivOut F ) ` H ) = <. F , 0 >. )
+s88:s2:adantr |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> F e. NN0 )
+s89:s88:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> F e. NN0 )
+s90:s89:elexd |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> F e. _V )
+s91::c0ex |- 0 e. _V
+s92:s91:a1i |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> 0 e. _V )
+s93:s30:adantr |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> H =/= 0 )
+s94:s87:fveq2d |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> ( 2nd ` ( ( G DivOut F ) ` H ) ) = ( 2nd ` <. F , 0 >. ) )
+i95::op2ndg
+s96:s90,s92,i95:syl2anc |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> ( 2nd ` <. F , 0 >. ) = 0 )
+s97:s94,s96:eqtrd |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> ( 2nd ` ( ( G DivOut F ) ` H ) ) = 0 )
+s98:s97:breq2d |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> 0 < 0 ) )
+s99::0re |- 0 e. RR
+s100:s99:ltnri |- -. 0 < 0
+s101:s100:a1i |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> -. 0 < 0 )
+s102:s98,s101:mtbird |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> -. 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) )
+s103:s84:intnand |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> -. ( H =/= 0 /\ ( F mod G ) = 0 ) )
+s104:s102,s103:2falsed |- ( ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) /\ -. ( F mod G ) = 0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> ( H =/= 0 /\ ( F mod G ) = 0 ) ) )
+s105:s83,s104:pm2.61dan |- ( ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) /\ -. H = 0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> ( H =/= 0 /\ ( F mod G ) = 0 ) ) )
+qed:s28,s105:pm2.61dan |- ( ( G e. NN /\ F e. NN0 /\ H e. NN0 ) -> ( 0 < ( 2nd ` ( ( G DivOut F ) ` H ) ) <-> ( H =/= 0 /\ ( F mod G ) = 0 ) ) )
+$)

@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=fzomodf1o  LOC_AFTER=?
+
+* Multiplication by a unit U mod N permutes the residues ( 0 ..^ N ) (Mathlib Units.mulLeft_bijective on ZMod N).
+
+s1::simp1 |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> N e. NN )
+s2::simp2 |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> U e. ZZ )
+s3:s2:adantr |- ( ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ x e. ( 0 ..^ N ) ) -> U e. ZZ )
+s4::simpr |- ( ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ x e. ( 0 ..^ N ) ) -> x e. ( 0 ..^ N ) )
+i5::elfzoelz
+s6:s4,i5:syl |- ( ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ x e. ( 0 ..^ N ) ) -> x e. ZZ )
+s7:s3,s6:zmulcld |- ( ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ x e. ( 0 ..^ N ) ) -> ( U x. x ) e. ZZ )
+s8:s1:adantr |- ( ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ x e. ( 0 ..^ N ) ) -> N e. NN )
+i9::zmodfzo
+s10:s7,s8,i9:syl2anc |- ( ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ x e. ( 0 ..^ N ) ) -> ( ( U x. x ) mod N ) e. ( 0 ..^ N ) )
+s11:s10:ralrimiva |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> A. x e. ( 0 ..^ N ) ( ( U x. x ) mod N ) e. ( 0 ..^ N ) )
+s12::fzomodf1olem |- ( ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ ( x e. ( 0 ..^ N ) /\ y e. ( 0 ..^ N ) ) ) -> ( ( ( U x. x ) mod N ) = ( ( U x. y ) mod N ) -> x = y ) )
+s13:s12:ralrimivva |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> A. x e. ( 0 ..^ N ) A. y e. ( 0 ..^ N ) ( ( ( U x. x ) mod N ) = ( ( U x. y ) mod N ) -> x = y ) )
+s14::oveq2 |- ( x = y -> ( U x. x ) = ( U x. y ) )
+s15:s14:oveq1d |- ( x = y -> ( ( U x. x ) mod N ) = ( ( U x. y ) mod N ) )
+s16::eqid |- ( x e. ( 0 ..^ N ) |-> ( ( U x. x ) mod N ) ) = ( x e. ( 0 ..^ N ) |-> ( ( U x. x ) mod N ) )
+s17:s16,s15:f1mpt |- ( ( x e. ( 0 ..^ N ) |-> ( ( U x. x ) mod N ) ) : ( 0 ..^ N ) -1-1-> ( 0 ..^ N ) <-> ( A. x e. ( 0 ..^ N ) ( ( U x. x ) mod N ) e. ( 0 ..^ N ) /\ A. x e. ( 0 ..^ N ) A. y e. ( 0 ..^ N ) ( ( ( U x. x ) mod N ) = ( ( U x. y ) mod N ) -> x = y ) ) )
+s18:s11,s13:jca |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( A. x e. ( 0 ..^ N ) ( ( U x. x ) mod N ) e. ( 0 ..^ N ) /\ A. x e. ( 0 ..^ N ) A. y e. ( 0 ..^ N ) ( ( ( U x. x ) mod N ) = ( ( U x. y ) mod N ) -> x = y ) ) )
+s19:s18,s17:sylibr |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( x e. ( 0 ..^ N ) |-> ( ( U x. x ) mod N ) ) : ( 0 ..^ N ) -1-1-> ( 0 ..^ N ) )
+s20::fzofi |- ( 0 ..^ N ) e. Fin
+i22::enrefg
+s23:s20,i22:ax-mp |- ( 0 ..^ N ) ~~ ( 0 ..^ N )
+i24::f1finf1o
+s25:s23,s20,i24:mp2an |- ( ( x e. ( 0 ..^ N ) |-> ( ( U x. x ) mod N ) ) : ( 0 ..^ N ) -1-1-> ( 0 ..^ N ) <-> ( x e. ( 0 ..^ N ) |-> ( ( U x. x ) mod N ) ) : ( 0 ..^ N ) -1-1-onto-> ( 0 ..^ N ) )
+qed:s19,s25:sylib |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( x e. ( 0 ..^ N ) |-> ( ( U x. x ) mod N ) ) : ( 0 ..^ N ) -1-1-onto-> ( 0 ..^ N ) )
+$)

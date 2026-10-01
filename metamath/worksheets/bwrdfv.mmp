@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=bwrdfv  LOC_AFTER=?
+
+* The I-th letter of the digits word is the I-th binary digit of N as a Boolean.
+
+s1::simp1 |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> N e. ZZ )
+s2::simp2 |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> M e. NN0 )
+s3::simp3 |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> I e. ( 0 ..^ M ) )
+i4::bwrdval
+s5:s1,s2,i4:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> ( N bwrd M ) = ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) )
+s6:s5:fveq1d |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> ( ( N bwrd M ) ` I ) = ( ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) ` I ) )
+s7::id |- ( i = I -> i = I )
+c1:s7:eleq1d |- ( i = I -> ( i e. ( bits ` N ) <-> I e. ( bits ` N ) ) )
+c2:c1:ifbid |- ( i = I -> if ( i e. ( bits ` N ) , 1o , (/) ) = if ( I e. ( bits ` N ) , 1o , (/) ) )
+s8::eqid |- ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) = ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) )
+s9::1oel2o |- 1o e. 2o
+s10:s9:a1i |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> 1o e. 2o )
+s11::0el2o |- (/) e. 2o
+s12:s11:a1i |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> (/) e. 2o )
+s13:s10,s12:ifcld |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> if ( I e. ( bits ` N ) , 1o , (/) ) e. 2o )
+s14:s13:elexd |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> if ( I e. ( bits ` N ) , 1o , (/) ) e. _V )
+s15:c2,s8:fvmptg |- ( ( I e. ( 0 ..^ M ) /\ if ( I e. ( bits ` N ) , 1o , (/) ) e. _V ) -> ( ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) ` I ) = if ( I e. ( bits ` N ) , 1o , (/) ) )
+s16:s3,s14,s15:syl2anc |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> ( ( i e. ( 0 ..^ M ) |-> if ( i e. ( bits ` N ) , 1o , (/) ) ) ` I ) = if ( I e. ( bits ` N ) , 1o , (/) ) )
+qed:s6,s16:eqtrd |- ( ( N e. ZZ /\ M e. NN0 /\ I e. ( 0 ..^ M ) ) -> ( ( N bwrd M ) ` I ) = if ( I e. ( bits ` N ) , 1o , (/) ) )
+$)

@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=algndpccr  LOC_AFTER=?
+
+* The concatenation of two duplicate-free words with disjoint entries has no repeats (Lean: List.nodup_append).
+
+s1::simpll |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> V e. Word NN0 )
+s2::simplr |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> W e. Word NN0 )
+s3::simprll |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> Fun `' V )
+s4::simprlr |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> Fun `' W )
+s5::simprr |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( ran V i^i ran W ) = (/) )
+i6::ccatcl
+s7:s1,s2,i6:syl2anc |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( V ++ W ) e. Word NN0 )
+i8::ccatrn
+s9:s1,s2,i8:syl2anc |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ran ( V ++ W ) = ( ran V u. ran W ) )
+i10::algwrdfi
+s11:s1,i10:syl |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ran V e. Fin )
+i12::algwrdfi
+s13:s2,i12:syl |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ran W e. Fin )
+i14::hashun
+s15:s11,s13,s5,i14:syl3anc |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( # ` ( ran V u. ran W ) ) = ( ( # ` ran V ) + ( # ` ran W ) ) )
+i16::algwrdcard
+s17:s1,s3,i16:syl2anc |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( # ` ran V ) = ( # ` V ) )
+i18::algwrdcard
+s19:s2,s4,i18:syl2anc |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( # ` ran W ) = ( # ` W ) )
+s20:s17,s19:oveq12d |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( ( # ` ran V ) + ( # ` ran W ) ) = ( ( # ` V ) + ( # ` W ) ) )
+i21::ccatlen
+s22:s1,s2,i21:syl2anc |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( # ` ( V ++ W ) ) = ( ( # ` V ) + ( # ` W ) ) )
+s23:s9:fveq2d |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( # ` ran ( V ++ W ) ) = ( # ` ( ran V u. ran W ) ) )
+s24:s23,s15,s20:3eqtrd |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( # ` ran ( V ++ W ) ) = ( ( # ` V ) + ( # ` W ) ) )
+s25:s24,s22:eqtr4d |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( # ` ran ( V ++ W ) ) = ( # ` ( V ++ W ) ) )
+i26::algndpcard
+s27:s7,i26:syl |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> ( Fun `' ( V ++ W ) <-> ( # ` ran ( V ++ W ) ) = ( # ` ( V ++ W ) ) ) )
+qed:s27,s25:mpbird |- ( ( ( V e. Word NN0 /\ W e. Word NN0 ) /\ ( ( Fun `' V /\ Fun `' W ) /\ ( ran V i^i ran W ) = (/) ) ) -> Fun `' ( V ++ W ) )
+$)

@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=bwmaxpad2  LOC_AFTER=?
+
+* Padding the shorter word does not change the larger length (mirror).
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` X ) < ( # ` Y ) )
+s4::0el2o |- (/) e. 2o
+s5:s4:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> (/) e. 2o )
+i6::s1cl
+s7:s5,i6:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> <" (/) "> e. Word 2o )
+i8::ccatlen
+s9:s1,s7,i8:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` ( X ++ <" (/) "> ) ) = ( ( # ` X ) + ( # ` <" (/) "> ) ) )
+s10::s1len |- ( # ` <" (/) "> ) = 1
+s11:s10:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` <" (/) "> ) = 1 )
+s12:s11:oveq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( ( # ` X ) + ( # ` <" (/) "> ) ) = ( ( # ` X ) + 1 ) )
+s13:s9,s12:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` ( X ++ <" (/) "> ) ) = ( ( # ` X ) + 1 ) )
+c1:s13:breq1d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( ( # ` ( X ++ <" (/) "> ) ) <_ ( # ` Y ) <-> ( ( # ` X ) + 1 ) <_ ( # ` Y ) ) )
+c2:c1,s13:ifbieq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> if ( ( # ` ( X ++ <" (/) "> ) ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` ( X ++ <" (/) "> ) ) ) = if ( ( ( # ` X ) + 1 ) <_ ( # ` Y ) , ( # ` Y ) , ( ( # ` X ) + 1 ) ) )
+i14::lencl
+s15:s1,i14:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` X ) e. NN0 )
+s16:s15:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` X ) e. ZZ )
+i17::lencl
+s18:s2,i17:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` Y ) e. NN0 )
+s19:s18:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` Y ) e. ZZ )
+i20::zltp1le
+s21:s16,s19,i20:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( ( # ` X ) < ( # ` Y ) <-> ( ( # ` X ) + 1 ) <_ ( # ` Y ) ) )
+s22:s3,s21:mpbid |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( ( # ` X ) + 1 ) <_ ( # ` Y ) )
+s23:s22:iftrued |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> if ( ( ( # ` X ) + 1 ) <_ ( # ` Y ) , ( # ` Y ) , ( ( # ` X ) + 1 ) ) = ( # ` Y ) )
+s24:s16:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` X ) e. RR )
+s25:s19:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` Y ) e. RR )
+s26:s24,s25,s3:ltled |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> ( # ` X ) <_ ( # ` Y ) )
+s27:s26:iftrued |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) = ( # ` Y ) )
+s28:c2,s23:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> if ( ( # ` ( X ++ <" (/) "> ) ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` ( X ++ <" (/) "> ) ) ) = ( # ` Y ) )
+qed:s28,s27:eqtr4d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` X ) < ( # ` Y ) ) -> if ( ( # ` ( X ++ <" (/) "> ) ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` ( X ++ <" (/) "> ) ) ) = if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+$)

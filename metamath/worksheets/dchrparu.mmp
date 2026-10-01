@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrparu  LOC_AFTER=?
+
+* The unit-group Parseval identity (LargeSieve parseval_units): the sum over all Dirichlet characters mod N of the squared modulus of the character-linear form of G is phi ( N ) times the sum of the squared moduli of G over the coprime residues.
+
+s1::simpl |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC )
+s3::eqid |- ( DChr ` N ) = ( DChr ` N )
+s4::eqid |- ( Z/nZ ` N ) = ( Z/nZ ` N )
+s5::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s6::eqid |- ( ZRHom ` ( Z/nZ ` N ) ) = ( ZRHom ` ( Z/nZ ` N ) )
+s7::fzofi |- ( 0 ..^ N ) e. Fin
+i8::rabfi
+s9:s7,i8:ax-mp |- { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } e. Fin
+s10:s9:a1i |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } e. Fin )
+s11::simpr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+i12::elrabi
+s13:s11,i12:syl |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. ( 0 ..^ N ) )
+i14::elfzoelz
+s15:s13,i14:syl |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. ZZ )
+s16::simplr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> x e. ( Base ` ( DChr ` N ) ) )
+s17:s3,s4,s5,s6,s16,s15:dchrzrhcl |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) e. CC )
+s18:s2:ad2antrr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC )
+s19::simpr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+s20:s18,s19:ffvelcdmd |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( G ` u ) e. CC )
+s21:s17,s20:mulcld |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) e. CC )
+s22:s10:adantr |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) -> { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } e. Fin )
+s23:s22,s21:fsumcl |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) -> sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) e. CC )
+i24::absvalsq
+s25:s23,i24:syl |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ x e. ( Base ` ( DChr ` N ) ) ) -> ( ( abs ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ^ 2 ) = ( sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) x. ( * ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ) )
+s26:s25:sumeq2dv |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( ( abs ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ^ 2 ) = sum_ x e. ( Base ` ( DChr ` N ) ) ( sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) x. ( * ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ) )
+s27::dchrparulem2 |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) x. ( * ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ) = sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) )
+s28::dchrparulem3 |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = ( ( phi ` N ) x. ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+s29:s28:sumeq2dv |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( phi ` N ) x. ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+i30::phicl
+s31:s1,i30:syl |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> ( phi ` N ) e. NN )
+s32:s31:nncnd |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> ( phi ` N ) e. CC )
+s33:s2:adantr |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC )
+s34::simpr |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+s35:s33,s34:ffvelcdmd |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( G ` u ) e. CC )
+s36:s35:cjcld |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( * ` ( G ` u ) ) e. CC )
+s37:s35,s36:mulcld |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( G ` u ) x. ( * ` ( G ` u ) ) ) e. CC )
+s38:s10,s32,s37:fsummulc2 |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> ( ( phi ` N ) x. sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) = sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( phi ` N ) x. ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+i39::absvalsq
+s40:s35,i39:syl |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( abs ` ( G ` u ) ) ^ 2 ) = ( ( G ` u ) x. ( * ` ( G ` u ) ) ) )
+s41:s40:sumeq2dv |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( abs ` ( G ` u ) ) ^ 2 ) = sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( G ` u ) x. ( * ` ( G ` u ) ) ) )
+s42:s41:oveq2d |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> ( ( phi ` N ) x. sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( abs ` ( G ` u ) ) ^ 2 ) ) = ( ( phi ` N ) x. sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+s43:s26,s27:eqtrd |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( ( abs ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ^ 2 ) = sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) )
+s44:s43,s29:eqtrd |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( ( abs ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ^ 2 ) = sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( phi ` N ) x. ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+s45:s44,s38:eqtr4d |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( ( abs ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ^ 2 ) = ( ( phi ` N ) x. sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+qed:s45,s42:eqtr4d |- ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) -> sum_ x e. ( Base ` ( DChr ` N ) ) ( ( abs ` sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( x ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( G ` u ) ) ) ^ 2 ) = ( ( phi ` N ) x. sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( abs ` ( G ` u ) ) ^ 2 ) ) )
+$)

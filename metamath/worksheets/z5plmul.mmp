@@ -1,0 +1,86 @@
+$( <MM> <PROOF_ASST> THEOREM=z5plmul  LOC_AFTER=?
+
+* Lean posLog_mul_le: log+ ( x c ) <_ log+ x + log c for 0 <_ x, 1 <_ c (log+ x written if ( 1 <_ x , log x , 0 )).
+
+s1::simpll |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> X e. RR )
+s2::simprl |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> C e. RR )
+s3::simprr |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> 1 <_ C )
+i4::logge0
+s5:s2,s3,i4:syl2anc |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> 0 <_ ( log ` C ) )
+s6::0lt1 |- 0 < 1
+s7:s6:a1i |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> 0 < 1 )
+s8::0re |- 0 e. RR
+s9:s8:a1i |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> 0 e. RR )
+s10::1re |- 1 e. RR
+s11:s10:a1i |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> 1 e. RR )
+s12:s9,s11,s2,s7,s3:ltletrd |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> 0 < C )
+s13:s2,s12:elrpd |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> C e. RR+ )
+s14:s13:relogcld |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> ( log ` C ) e. RR )
+s15:s1:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> X e. RR )
+s16::simpr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 1 <_ X )
+s17:s1:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> X e. RR )
+s18:s6:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 0 < 1 )
+s19:s8:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 0 e. RR )
+s20:s10:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 1 e. RR )
+s21:s19,s20,s17,s18,s16:ltletrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 0 < X )
+s22:s15,s21:elrpd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> X e. RR+ )
+s23:s1:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> X e. RR )
+s24::simpr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 1 <_ X )
+i25::logge0
+s26:s23,s24,i25:syl2anc |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 0 <_ ( log ` X ) )
+s27::simpr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 1 <_ X )
+i28::iftrue
+s29:s27,i28:syl |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = ( log ` X ) )
+s30:s26,s29:breqtrrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s31::0red |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ X ) -> 0 e. RR )
+s32:s31:leidd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ X ) -> 0 <_ 0 )
+s33::simpr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ X ) -> -. 1 <_ X )
+i34::iffalse
+s35:s33,i34:syl |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ X ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = 0 )
+s36:s32,s35:breqtrrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ X ) -> 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s37:s30,s36:pm2.61dan |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s38:s22:relogcld |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ X ) -> ( log ` X ) e. RR )
+s39::0red |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ X ) -> 0 e. RR )
+s40:s38,s39:ifclda |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> if ( 1 <_ X , ( log ` X ) , 0 ) e. RR )
+s41:s1:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> X e. RR )
+s42:s2:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> C e. RR )
+s43:s41,s42:remulcld |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> ( X x. C ) e. RR )
+s44::simpr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 1 <_ ( X x. C ) )
+s45:s6:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 0 < 1 )
+s46:s8:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 0 e. RR )
+s47:s10:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 1 e. RR )
+s48:s46,s47,s43,s45,s44:ltletrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 0 < ( X x. C ) )
+s49:s3:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 1 <_ C )
+s50::0le1 |- 0 <_ 1
+s51:s50:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 0 <_ 1 )
+s52:s8:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 0 e. RR )
+s53:s10:a1i |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 1 e. RR )
+s54:s52,s53,s42,s51,s49:letrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 0 <_ C )
+i55::prodgt02
+s56:s41,s42,s54,s48,i55:syl22anc |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 0 < X )
+s57:s41,s56:elrpd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> X e. RR+ )
+s58:s13:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> C e. RR+ )
+s59:s57,s58:relogmuld |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> ( log ` ( X x. C ) ) = ( ( log ` X ) + ( log ` C ) ) )
+s60::simpr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> 1 <_ ( X x. C ) )
+i61::iftrue
+s62:s60,i61:syl |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> if ( 1 <_ ( X x. C ) , ( log ` ( X x. C ) ) , 0 ) = ( log ` ( X x. C ) ) )
+s63:s62,s59:eqtrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> if ( 1 <_ ( X x. C ) , ( log ` ( X x. C ) ) , 0 ) = ( ( log ` X ) + ( log ` C ) ) )
+i64::z5plbnd
+s65:s57,i64:syl |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> ( 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) /\ ( log ` X ) <_ if ( 1 <_ X , ( log ` X ) , 0 ) ) )
+s66:s65:simprd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> ( log ` X ) <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s67:s57:relogcld |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> ( log ` X ) e. RR )
+s68:s40:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> if ( 1 <_ X , ( log ` X ) , 0 ) e. RR )
+s69:s14:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> ( log ` C ) e. RR )
+s70:s67,s68,s69,s66:leadd1dd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> ( ( log ` X ) + ( log ` C ) ) <_ ( if ( 1 <_ X , ( log ` X ) , 0 ) + ( log ` C ) ) )
+s71:s63,s70:eqbrtrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ 1 <_ ( X x. C ) ) -> if ( 1 <_ ( X x. C ) , ( log ` ( X x. C ) ) , 0 ) <_ ( if ( 1 <_ X , ( log ` X ) , 0 ) + ( log ` C ) ) )
+s72::simpr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> -. 1 <_ ( X x. C ) )
+i73::iffalse
+s74:s72,i73:syl |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> if ( 1 <_ ( X x. C ) , ( log ` ( X x. C ) ) , 0 ) = 0 )
+s75:s40:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> if ( 1 <_ X , ( log ` X ) , 0 ) e. RR )
+s76:s14:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> ( log ` C ) e. RR )
+s77:s37:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s78:s5:adantr |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> 0 <_ ( log ` C ) )
+s79:s75,s76,s77,s78:addge0d |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> 0 <_ ( if ( 1 <_ X , ( log ` X ) , 0 ) + ( log ` C ) ) )
+s80:s74,s79:eqbrtrd |- ( ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) /\ -. 1 <_ ( X x. C ) ) -> if ( 1 <_ ( X x. C ) , ( log ` ( X x. C ) ) , 0 ) <_ ( if ( 1 <_ X , ( log ` X ) , 0 ) + ( log ` C ) ) )
+qed:s71,s80:pm2.61dan |- ( ( ( X e. RR /\ 0 <_ X ) /\ ( C e. RR /\ 1 <_ C ) ) -> if ( 1 <_ ( X x. C ) , ( log ` ( X x. C ) ) , 0 ) <_ ( if ( 1 <_ X , ( log ` X ) , 0 ) + ( log ` C ) ) )
+$)

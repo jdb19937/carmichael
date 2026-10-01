@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=zscaleval  LOC_AFTER=?
+
+* Value of zscale: the natural ceiling of C * ell2 N * ell3 N (Lean: zscale).
+
+s1::simpl |- ( ( c = C /\ n = N ) -> c = C )
+s2::simpr |- ( ( c = C /\ n = N ) -> n = N )
+c1:s2:fveq2d |- ( ( c = C /\ n = N ) -> ( ell2 ` n ) = ( ell2 ` N ) )
+c2:s1,c1:oveq12d |- ( ( c = C /\ n = N ) -> ( c x. ( ell2 ` n ) ) = ( C x. ( ell2 ` N ) ) )
+c3:s2:fveq2d |- ( ( c = C /\ n = N ) -> ( ell3 ` n ) = ( ell3 ` N ) )
+c4:c2,c3:oveq12d |- ( ( c = C /\ n = N ) -> ( ( c x. ( ell2 ` n ) ) x. ( ell3 ` n ) ) = ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) )
+c5:c4:fveq2d |- ( ( c = C /\ n = N ) -> ( Nceil ` ( ( c x. ( ell2 ` n ) ) x. ( ell3 ` n ) ) ) = ( Nceil ` ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) )
+s3::df-zscale |- zscale = ( c e. RR , n e. NN0 |-> ( Nceil ` ( ( c x. ( ell2 ` n ) ) x. ( ell3 ` n ) ) ) )
+s4::fvex |- ( Nceil ` ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) e. _V
+qed:c5,s3,s4:ovmpoa |- ( ( C e. RR /\ N e. NN0 ) -> ( C zscale N ) = ( Nceil ` ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) )
+$)

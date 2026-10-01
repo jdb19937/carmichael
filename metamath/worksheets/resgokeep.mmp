@@ -1,0 +1,175 @@
+$( <MM> <PROOF_ASST> THEOREM=resgokeep  LOC_AFTER=?
+
+* The reservoir loop keeps exactly the smooth primes above the floor.
+
+s1::simpl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( Z e. NN0 /\ Y e. NN ) )
+s2:s1:simpld |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> Z e. NN0 )
+s3::simpl |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( Z e. NN0 /\ Y e. NN ) )
+s4:s3:simprd |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> Y e. NN )
+s5::simpr |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> Q e. NN )
+s6:s5:nnnn0d |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> Q e. NN0 )
+s7::simpr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> Z < Q )
+s8:s7:iftrued |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) )
+s9:s8:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) )
+s10::simpr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 1st ` ( IsPrimeTD ` Q ) ) = 1o )
+s11:s10:iftrued |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) = ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) )
+s12:s9,s11:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) )
+s13:s6:adantr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> Q e. NN0 )
+s14:s13:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. NN0 )
+i15::isprimetdspec
+s16:s14,i15:syl |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o <-> Q e. Prime ) )
+s17::simpr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 1st ` ( IsPrimeTD ` Q ) ) = 1o )
+s18:s16,s17:mpbid |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. Prime )
+i19::prmuz2
+s20:s18,i19:syl |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. ( ZZ>= ` 2 ) )
+i21::eluzle
+s22:s20,i21:syl |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 2 <_ Q )
+s23:s5:adantr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> Q e. NN )
+s24:s23:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. NN )
+s25:s24:nnred |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. RR )
+s26:s5:adantr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> Q e. NN )
+s27:s26:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. NN )
+i28::nnm1nn0
+s29:s27,i28:syl |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 1 ) e. NN0 )
+s30::2re |- 2 e. RR
+s31:s30:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 2 e. RR )
+s32:s25,s31:subge0d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 0 <_ ( Q - 2 ) <-> 2 <_ Q ) )
+s33:s22,s32:mpbird |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 0 <_ ( Q - 2 ) )
+s34:s25:recnd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. CC )
+s35::2cn |- 2 e. CC
+s36:s35:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 2 e. CC )
+s37:s34,s36:negsubd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q + -u 2 ) = ( Q - 2 ) )
+s38:s37:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 2 ) = ( Q + -u 2 ) )
+s39:s36:mulm1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( -u 1 x. 2 ) = -u 2 )
+s40:s39:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -u 2 = ( -u 1 x. 2 ) )
+s41:s40:oveq2d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q + -u 2 ) = ( Q + ( -u 1 x. 2 ) ) )
+s42::ax-1cn |- 1 e. CC
+s43:s42:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 1 e. CC )
+s44:s43,s34:mulcld |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 1 x. Q ) e. CC )
+s45:s44:addlidd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 0 + ( 1 x. Q ) ) = ( 1 x. Q ) )
+s46:s45:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 1 x. Q ) = ( 0 + ( 1 x. Q ) ) )
+s47:s34:mullidd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 1 x. Q ) = Q )
+s48:s47:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q = ( 1 x. Q ) )
+s49:s48,s46:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q = ( 0 + ( 1 x. Q ) ) )
+s50:s35:mullidi |- ( 1 x. 2 ) = 2
+s51:s42,s35:mulneg1i |- ( -u 1 x. 2 ) = -u ( 1 x. 2 )
+s52:s50:negeqi |- -u ( 1 x. 2 ) = -u 2
+s53:s51,s52:eqtri |- ( -u 1 x. 2 ) = -u 2
+s54:s53:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( -u 1 x. 2 ) = -u 2 )
+s55:s49,s54:oveq12d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q + ( -u 1 x. 2 ) ) = ( ( 0 + ( 1 x. Q ) ) + -u 2 ) )
+s56::0cn |- 0 e. CC
+s57:s56:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 0 e. CC )
+s58:s35:negcli |- -u 2 e. CC
+s59:s58:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -u 2 e. CC )
+s60:s57,s44,s59:add32d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 0 + ( 1 x. Q ) ) + -u 2 ) = ( ( 0 + -u 2 ) + ( 1 x. Q ) ) )
+s61:s58:addlidi |- ( 0 + -u 2 ) = -u 2
+s62:s61:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 0 + -u 2 ) = -u 2 )
+s63:s62:oveq1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 0 + -u 2 ) + ( 1 x. Q ) ) = ( -u 2 + ( 1 x. Q ) ) )
+s64:s60,s63:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 0 + ( 1 x. Q ) ) + -u 2 ) = ( -u 2 + ( 1 x. Q ) ) )
+s65:s38,s41:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 2 ) = ( Q + ( -u 1 x. 2 ) ) )
+s66:s65,s55:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 2 ) = ( ( 0 + ( 1 x. Q ) ) + -u 2 ) )
+s67:s66,s64:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 2 ) = ( -u 2 + ( 1 x. Q ) ) )
+s68:s34,s43:subcld |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 1 ) e. CC )
+s69:s68,s43:negsubd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Q - 1 ) + -u 1 ) = ( ( Q - 1 ) - 1 ) )
+s70:s69:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Q - 1 ) - 1 ) = ( ( Q - 1 ) + -u 1 ) )
+s71:s43:mulm1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( -u 1 x. 1 ) = -u 1 )
+s72:s71:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -u 1 = ( -u 1 x. 1 ) )
+s73:s72:oveq2d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Q - 1 ) + -u 1 ) = ( ( Q - 1 ) + ( -u 1 x. 1 ) ) )
+s74:s34,s43:negsubd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q + -u 1 ) = ( Q - 1 ) )
+s75:s74:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 1 ) = ( Q + -u 1 ) )
+s76:s43:mulm1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( -u 1 x. 1 ) = -u 1 )
+s77:s76:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -u 1 = ( -u 1 x. 1 ) )
+s78:s77:oveq2d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q + -u 1 ) = ( Q + ( -u 1 x. 1 ) ) )
+s79:s44:addlidd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 0 + ( 1 x. Q ) ) = ( 1 x. Q ) )
+s80:s79:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 1 x. Q ) = ( 0 + ( 1 x. Q ) ) )
+s81:s34:mullidd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 1 x. Q ) = Q )
+s82:s81:eqcomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q = ( 1 x. Q ) )
+s83:s82,s80:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q = ( 0 + ( 1 x. Q ) ) )
+s84:s42:mullidi |- ( 1 x. 1 ) = 1
+s85:s42,s42:mulneg1i |- ( -u 1 x. 1 ) = -u ( 1 x. 1 )
+s86:s84:negeqi |- -u ( 1 x. 1 ) = -u 1
+s87:s85,s86:eqtri |- ( -u 1 x. 1 ) = -u 1
+s88:s87:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( -u 1 x. 1 ) = -u 1 )
+s89:s83,s88:oveq12d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q + ( -u 1 x. 1 ) ) = ( ( 0 + ( 1 x. Q ) ) + -u 1 ) )
+s90:s42:negcli |- -u 1 e. CC
+s91:s90:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -u 1 e. CC )
+s92:s57,s44,s91:add32d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 0 + ( 1 x. Q ) ) + -u 1 ) = ( ( 0 + -u 1 ) + ( 1 x. Q ) ) )
+s93:s90:addlidi |- ( 0 + -u 1 ) = -u 1
+s94:s93:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 0 + -u 1 ) = -u 1 )
+s95:s94:oveq1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 0 + -u 1 ) + ( 1 x. Q ) ) = ( -u 1 + ( 1 x. Q ) ) )
+s96:s92,s95:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 0 + ( 1 x. Q ) ) + -u 1 ) = ( -u 1 + ( 1 x. Q ) ) )
+s97:s75,s78:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 1 ) = ( Q + ( -u 1 x. 1 ) ) )
+s98:s97,s89:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 1 ) = ( ( 0 + ( 1 x. Q ) ) + -u 1 ) )
+s99:s98,s96:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 1 ) = ( -u 1 + ( 1 x. Q ) ) )
+s100:s87:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( -u 1 x. 1 ) = -u 1 )
+s101:s99,s100:oveq12d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Q - 1 ) + ( -u 1 x. 1 ) ) = ( ( -u 1 + ( 1 x. Q ) ) + -u 1 ) )
+s102:s91,s44,s91:add32d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( -u 1 + ( 1 x. Q ) ) + -u 1 ) = ( ( -u 1 + -u 1 ) + ( 1 x. Q ) ) )
+s103:s42,s42:negdii |- -u ( 1 + 1 ) = ( -u 1 + -u 1 )
+s104:s103:eqcomi |- ( -u 1 + -u 1 ) = -u ( 1 + 1 )
+s105::1p1e2 |- ( 1 + 1 ) = 2
+s106:s105:negeqi |- -u ( 1 + 1 ) = -u 2
+s107:s104,s106:eqtri |- ( -u 1 + -u 1 ) = -u 2
+s108:s107:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( -u 1 + -u 1 ) = -u 2 )
+s109:s108:oveq1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( -u 1 + -u 1 ) + ( 1 x. Q ) ) = ( -u 2 + ( 1 x. Q ) ) )
+s110:s102,s109:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( -u 1 + ( 1 x. Q ) ) + -u 1 ) = ( -u 2 + ( 1 x. Q ) ) )
+s111:s70,s73:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Q - 1 ) - 1 ) = ( ( Q - 1 ) + ( -u 1 x. 1 ) ) )
+s112:s111,s101:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Q - 1 ) - 1 ) = ( ( -u 1 + ( 1 x. Q ) ) + -u 1 ) )
+s113:s112,s110:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Q - 1 ) - 1 ) = ( -u 2 + ( 1 x. Q ) ) )
+s114:s67,s113:eqtr4d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 2 ) = ( ( Q - 1 ) - 1 ) )
+s115:s33,s114:breqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 0 <_ ( ( Q - 1 ) - 1 ) )
+s116::1re |- 1 e. RR
+s117:s116:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 1 e. RR )
+s118:s25,s117:resubcld |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Q - 1 ) e. RR )
+s119:s118,s117:subge0d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( 0 <_ ( ( Q - 1 ) - 1 ) <-> 1 <_ ( Q - 1 ) ) )
+s120:s115,s119:mpbid |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> 1 <_ ( Q - 1 ) )
+s121:s4:adantr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> Y e. NN )
+s122:s121:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Y e. NN )
+s123:s122,s29:jca |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Y e. NN /\ ( Q - 1 ) e. NN0 ) )
+s124:s123,s120:jca |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Y e. NN /\ ( Q - 1 ) e. NN0 ) /\ 1 <_ ( Q - 1 ) ) )
+i125::smoothtdspec
+s126:s124,i125:syl |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) = 1o <-> A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) )
+s127:s12:eqeq1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) = 1o ) )
+s128:s127,s126:bitrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) )
+s129::simpr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> Z < Q )
+s130:s129:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Z < Q )
+s131:s130,s18:jca |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( Z < Q /\ Q e. Prime ) )
+s132:s131:biantrurd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) <-> ( ( Z < Q /\ Q e. Prime ) /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+s133::df-3an |- ( ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) <-> ( ( Z < Q /\ Q e. Prime ) /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) )
+s134:s133:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) <-> ( ( Z < Q /\ Q e. Prime ) /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+s135:s134:bicomd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( ( Z < Q /\ Q e. Prime ) /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) <-> ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+s136:s132,s135:bitrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) <-> ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+s137:s128,s136:bitrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+s138:s8:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) )
+s139::simpr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o )
+s140:s139:iffalsed |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) = (/) )
+s141:s138,s140:eqtrd |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = (/) )
+s142::1n0 |- 1o =/= (/)
+s143:s142:necomi |- (/) =/= 1o
+i144::neneq
+s145:s143,i144:ax-mp |- -. (/) = 1o
+s146:s145:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -. (/) = 1o )
+s147:s141:eqeq1d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> (/) = 1o ) )
+s148:s147,s146:mtbird |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -. if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o )
+s149:s6:adantr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> Q e. NN0 )
+s150:s149:adantr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> Q e. NN0 )
+i151::isprimetdspec
+s152:s150,i151:syl |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o <-> Q e. Prime ) )
+s153::simpr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o )
+s154:s152,s153:mtbid |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -. Q e. Prime )
+s155:s154:intn3an2d |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> -. ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) )
+s156:s148,s155:2falsed |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) /\ -. ( 1st ` ( IsPrimeTD ` Q ) ) = 1o ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+s157:s137,s156:pm2.61dan |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ Z < Q ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+s158::simpr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> -. Z < Q )
+s159:s158:iffalsed |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = (/) )
+s160::1n0 |- 1o =/= (/)
+s161:s160:necomi |- (/) =/= 1o
+i162::neneq
+s163:s161,i162:ax-mp |- -. (/) = 1o
+s164:s163:a1i |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> -. (/) = 1o )
+s165:s159:eqeq1d |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> (/) = 1o ) )
+s166:s165,s164:mtbird |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> -. if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o )
+s167::simpr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> -. Z < Q )
+s168:s167:intn3an1d |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> -. ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) )
+s169:s166,s168:2falsed |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ -. Z < Q ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+qed:s157,s169:pm2.61dan |- ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) -> ( if ( Z < Q , if ( ( 1st ` ( IsPrimeTD ` Q ) ) = 1o , ( 1st ` ( Y SmoothTD ( Q - 1 ) ) ) , (/) ) , (/) ) = 1o <-> ( Z < Q /\ Q e. Prime /\ A. p e. Prime ( p || ( Q - 1 ) -> p <_ Y ) ) ) )
+$)

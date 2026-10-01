@@ -1,0 +1,67 @@
+$( <MM> <PROOF_ASST> THEOREM=sgfle  LOC_AFTER=?
+
+* Lean's ` smoothGo_fst_le ` along the iterations: the number ` r_i = ( smoothGo d r i ).1 ` never exceeds ` r ` (~ sgstep , ~ dofle ).
+
+s1::simpl |- ( ( G e. NN /\ F e. NN0 ) -> G e. NN )
+s2::simpr |- ( ( G e. NN /\ F e. NN0 ) -> F e. NN0 )
+s3::id |- ( n = 0 -> n = 0 )
+c1:s3:fveq2d |- ( n = 0 -> ( ( G SmoothGo F ) ` n ) = ( ( G SmoothGo F ) ` 0 ) )
+c2:c1:fveq2d |- ( n = 0 -> ( 1st ` ( ( G SmoothGo F ) ` n ) ) = ( 1st ` ( ( G SmoothGo F ) ` 0 ) ) )
+c3:c2:breq1d |- ( n = 0 -> ( ( 1st ` ( ( G SmoothGo F ) ` n ) ) <_ F <-> ( 1st ` ( ( G SmoothGo F ) ` 0 ) ) <_ F ) )
+s4::id |- ( n = m -> n = m )
+c4:s4:fveq2d |- ( n = m -> ( ( G SmoothGo F ) ` n ) = ( ( G SmoothGo F ) ` m ) )
+c5:c4:fveq2d |- ( n = m -> ( 1st ` ( ( G SmoothGo F ) ` n ) ) = ( 1st ` ( ( G SmoothGo F ) ` m ) ) )
+c6:c5:breq1d |- ( n = m -> ( ( 1st ` ( ( G SmoothGo F ) ` n ) ) <_ F <-> ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) )
+s5::id |- ( n = ( m + 1 ) -> n = ( m + 1 ) )
+c7:s5:fveq2d |- ( n = ( m + 1 ) -> ( ( G SmoothGo F ) ` n ) = ( ( G SmoothGo F ) ` ( m + 1 ) ) )
+c8:c7:fveq2d |- ( n = ( m + 1 ) -> ( 1st ` ( ( G SmoothGo F ) ` n ) ) = ( 1st ` ( ( G SmoothGo F ) ` ( m + 1 ) ) ) )
+c9:c8:breq1d |- ( n = ( m + 1 ) -> ( ( 1st ` ( ( G SmoothGo F ) ` n ) ) <_ F <-> ( 1st ` ( ( G SmoothGo F ) ` ( m + 1 ) ) ) <_ F ) )
+s6::id |- ( n = I -> n = I )
+c10:s6:fveq2d |- ( n = I -> ( ( G SmoothGo F ) ` n ) = ( ( G SmoothGo F ) ` I ) )
+c11:c10:fveq2d |- ( n = I -> ( 1st ` ( ( G SmoothGo F ) ` n ) ) = ( 1st ` ( ( G SmoothGo F ) ` I ) ) )
+c12:c11:breq1d |- ( n = I -> ( ( 1st ` ( ( G SmoothGo F ) ` n ) ) <_ F <-> ( 1st ` ( ( G SmoothGo F ) ` I ) ) <_ F ) )
+i7::smoothgo0
+s8:s1,s2,i7:syl2anc |- ( ( G e. NN /\ F e. NN0 ) -> ( ( G SmoothGo F ) ` 0 ) = <. F , 0 >. )
+s9:s2:elexd |- ( ( G e. NN /\ F e. NN0 ) -> F e. _V )
+s10::c0ex |- 0 e. _V
+s11:s10:a1i |- ( ( G e. NN /\ F e. NN0 ) -> 0 e. _V )
+s12:s8:fveq2d |- ( ( G e. NN /\ F e. NN0 ) -> ( 1st ` ( ( G SmoothGo F ) ` 0 ) ) = ( 1st ` <. F , 0 >. ) )
+i13::op1stg
+s14:s9,s11,i13:syl2anc |- ( ( G e. NN /\ F e. NN0 ) -> ( 1st ` <. F , 0 >. ) = F )
+s15:s12,s14:eqtrd |- ( ( G e. NN /\ F e. NN0 ) -> ( 1st ` ( ( G SmoothGo F ) ` 0 ) ) = F )
+s16:s2:nn0red |- ( ( G e. NN /\ F e. NN0 ) -> F e. RR )
+s17:s16:leidd |- ( ( G e. NN /\ F e. NN0 ) -> F <_ F )
+s18:s15,s17:eqbrtrd |- ( ( G e. NN /\ F e. NN0 ) -> ( 1st ` ( ( G SmoothGo F ) ` 0 ) ) <_ F )
+s19::simplr |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> m e. NN0 )
+s20::simpr |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F )
+s21:s1:adantr |- ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) -> G e. NN )
+s22:s21:adantr |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> G e. NN )
+s23:s2:adantr |- ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) -> F e. NN0 )
+s24:s23:adantr |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> F e. NN0 )
+s25:s22,s24:jca |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( G e. NN /\ F e. NN0 ) )
+s26:s25,s19:jca |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) )
+i27::sgstep
+s28:s26,i27:syl |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( ( 1st ` ( ( G SmoothGo F ) ` ( m + 1 ) ) ) = ( 1st ` ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ) /\ ( 2nd ` ( ( G SmoothGo F ) ` ( m + 1 ) ) ) = ( ( ( 2nd ` ( ( G SmoothGo F ) ` m ) ) + ( 2nd ` ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ) ) + 1 ) ) )
+s29:s28:simpld |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( G SmoothGo F ) ` ( m + 1 ) ) ) = ( 1st ` ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ) )
+i30::nnnn0addcl
+s31:s22,s19,i30:syl2anc |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( G + m ) e. NN )
+s32:s22,s24:jca |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( G e. NN /\ F e. NN0 ) )
+i33::smoothgocl
+s34:s32,s19,i33:syl2anc |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( ( G SmoothGo F ) ` m ) e. ( NN0 X. NN0 ) )
+i35::xp1st
+s36:s34,i35:syl |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( G SmoothGo F ) ` m ) ) e. NN0 )
+s37:s31,s36,s36:3jca |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( ( G + m ) e. NN /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) e. NN0 /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) e. NN0 ) )
+i38::dofle
+s39:s37,i38:syl |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ) <_ ( 1st ` ( ( G SmoothGo F ) ` m ) ) )
+s40:s31,s36:jca |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( ( G + m ) e. NN /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) e. NN0 ) )
+i41::divoutcl
+s42:s40,s36,i41:syl2anc |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) e. ( NN0 X. NN0 ) )
+i43::xp1st
+s44:s42,i43:syl |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ) e. NN0 )
+s45:s44:nn0red |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ) e. RR )
+s46:s36:nn0red |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( G SmoothGo F ) ` m ) ) e. RR )
+s47:s24:nn0red |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> F e. RR )
+s48:s45,s46,s47,s39,s20:letrd |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( ( G + m ) DivOut ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ` ( 1st ` ( ( G SmoothGo F ) ` m ) ) ) ) <_ F )
+s49:s29,s48:eqbrtrd |- ( ( ( ( G e. NN /\ F e. NN0 ) /\ m e. NN0 ) /\ ( 1st ` ( ( G SmoothGo F ) ` m ) ) <_ F ) -> ( 1st ` ( ( G SmoothGo F ) ` ( m + 1 ) ) ) <_ F )
+qed:c3,c6,c9,c12,s18,s49:nn0indd |- ( ( ( G e. NN /\ F e. NN0 ) /\ I e. NN0 ) -> ( 1st ` ( ( G SmoothGo F ) ` I ) ) <_ F )
+$)

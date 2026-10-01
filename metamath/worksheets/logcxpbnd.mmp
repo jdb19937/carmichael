@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=logcxpbnd  LOC_AFTER=?
+
+* The logarithm is below any positive power, divided by the exponent.
+
+s1::simpl |- ( ( K e. NN /\ E e. RR+ ) -> K e. NN )
+s2::simpr |- ( ( K e. NN /\ E e. RR+ ) -> E e. RR+ )
+s3:s2:rpred |- ( ( K e. NN /\ E e. RR+ ) -> E e. RR )
+s4:s2:rpgt0d |- ( ( K e. NN /\ E e. RR+ ) -> 0 < E )
+s5:s2:rpge0d |- ( ( K e. NN /\ E e. RR+ ) -> 0 <_ E )
+s6:s1:nnrpd |- ( ( K e. NN /\ E e. RR+ ) -> K e. RR+ )
+s7:s1:nnred |- ( ( K e. NN /\ E e. RR+ ) -> K e. RR )
+s8:s1:nnge1d |- ( ( K e. NN /\ E e. RR+ ) -> 1 <_ K )
+s9::1re |- 1 e. RR
+s10:s9:a1i |- ( ( K e. NN /\ E e. RR+ ) -> 1 e. RR )
+s11::0le1 |- 0 <_ 1
+s12:s11:a1i |- ( ( K e. NN /\ E e. RR+ ) -> 0 <_ 1 )
+i13::rpcxpcl
+s14:s6,s3,i13:syl2anc |- ( ( K e. NN /\ E e. RR+ ) -> ( K ^c E ) e. RR+ )
+s15:s14:rpred |- ( ( K e. NN /\ E e. RR+ ) -> ( K ^c E ) e. RR )
+s16:s10,s7,s3:3jca |- ( ( K e. NN /\ E e. RR+ ) -> ( 1 e. RR /\ K e. RR /\ E e. RR ) )
+s17:s12,s5:jca |- ( ( K e. NN /\ E e. RR+ ) -> ( 0 <_ 1 /\ 0 <_ E ) )
+i18::cxple2a
+s19:s16,s17,s8,i18:syl3anc |- ( ( K e. NN /\ E e. RR+ ) -> ( 1 ^c E ) <_ ( K ^c E ) )
+i20::rpcnd
+s21:s2,i20:syl |- ( ( K e. NN /\ E e. RR+ ) -> E e. CC )
+i22::1cxp
+s23:s21,i22:syl |- ( ( K e. NN /\ E e. RR+ ) -> ( 1 ^c E ) = 1 )
+s24:s23,s19:eqbrtrrd |- ( ( K e. NN /\ E e. RR+ ) -> 1 <_ ( K ^c E ) )
+i25::loglet
+s26:s15,s24,i25:syl2anc |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( K ^c E ) ) <_ ( K ^c E ) )
+i27::logcxp
+s28:s6,s3,i27:syl2anc |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( K ^c E ) ) = ( E x. ( log ` K ) ) )
+s29:s28,s26:eqbrtrrd |- ( ( K e. NN /\ E e. RR+ ) -> ( E x. ( log ` K ) ) <_ ( K ^c E ) )
+i30::relogcl
+s31:s6,i30:syl |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` K ) e. RR )
+s32:s3,s4:jca |- ( ( K e. NN /\ E e. RR+ ) -> ( E e. RR /\ 0 < E ) )
+i33::lemuldiv2
+s34:s31,s15,s32,i33:syl3anc |- ( ( K e. NN /\ E e. RR+ ) -> ( ( E x. ( log ` K ) ) <_ ( K ^c E ) <-> ( log ` K ) <_ ( ( K ^c E ) / E ) ) )
+qed:s29,s34:mpbid |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` K ) <_ ( ( K ^c E ) / E ) )
+$)

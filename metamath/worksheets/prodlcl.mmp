@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=prodlcl  LOC_AFTER=?
+
+* The value of ~ df-prodl is a pair of a result and an operation count.  Lean: prodL, the product of a list.
+
+s1::id |- ( S e. Word NN0 -> S e. Word NN0 )
+s2::id |- ( l = S -> l = S )
+c1:s2:fveq2d |- ( l = S -> ( # ` l ) = ( # ` S ) )
+c2:c1:fveq2d |- ( l = S -> ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` l ) ) = ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) )
+c3:c2,s2:fveq12d |- ( l = S -> ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` l ) ) ` l ) = ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) ` S ) )
+s3::df-prodl |- ProdL = ( l e. Word NN0 |-> ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` l ) ) ` l ) )
+s4::fvex |- ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) ` S ) e. _V
+s5:s4:a1i |- ( S e. Word NN0 -> ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) ` S ) e. _V )
+s6:c3,s3:fvmptg |- ( ( S e. Word NN0 /\ ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) ` S ) e. _V ) -> ( ProdL ` S ) = ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) ` S ) )
+s7:s1,s5,s6:syl2anc |- ( S e. Word NN0 -> ( ProdL ` S ) = ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) ` S ) )
+i8::lencl
+s9:s1,i8:syl |- ( S e. Word NN0 -> ( # ` S ) e. NN0 )
+s10::ovex |- ( ( NN0 X. NN0 ) ^m Word NN0 ) e. _V
+s11:s10:a1i |- ( S e. Word NN0 -> ( ( NN0 X. NN0 ) ^m Word NN0 ) e. _V )
+s12::simpr |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> g e. Word NN0 )
+s13::1nn0 |- 1 e. NN0
+s14:s13:a1i |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> 1 e. NN0 )
+s15::0nn0 |- 0 e. NN0
+s16:s15:a1i |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> 0 e. NN0 )
+i17::opelxpi
+s18:s14,s16,i17:syl2anc |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> <. 1 , 0 >. e. ( NN0 X. NN0 ) )
+s19::eqid |- ( g e. Word NN0 |-> <. 1 , 0 >. ) = ( g e. Word NN0 |-> <. 1 , 0 >. )
+s20:s18,s19:fmptd |- ( S e. Word NN0 -> ( g e. Word NN0 |-> <. 1 , 0 >. ) : Word NN0 --> ( NN0 X. NN0 ) )
+s21::nn0ex |- NN0 e. _V
+s22:s21:a1i |- ( S e. Word NN0 -> NN0 e. _V )
+i23::xpexg
+s24:s22,s22,i23:syl2anc |- ( S e. Word NN0 -> ( NN0 X. NN0 ) e. _V )
+s25::wrdexi |- Word NN0 e. _V
+s26:s25:a1i |- ( S e. Word NN0 -> Word NN0 e. _V )
+i27::elmapg
+s28:s24,s26,i27:syl2anc |- ( S e. Word NN0 -> ( ( g e. Word NN0 |-> <. 1 , 0 >. ) e. ( ( NN0 X. NN0 ) ^m Word NN0 ) <-> ( g e. Word NN0 |-> <. 1 , 0 >. ) : Word NN0 --> ( NN0 X. NN0 ) ) )
+s29:s20,s28:mpbird |- ( S e. Word NN0 -> ( g e. Word NN0 |-> <. 1 , 0 >. ) e. ( ( NN0 X. NN0 ) ^m Word NN0 ) )
+s30::prodlsf |- ProdLS : ( ( ( NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( NN0 X. NN0 ) ^m Word NN0 )
+s31:s30:a1i |- ( S e. Word NN0 -> ProdLS : ( ( ( NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( NN0 X. NN0 ) ^m Word NN0 ) )
+s32:s11,s29,s31:3jca |- ( S e. Word NN0 -> ( ( ( NN0 X. NN0 ) ^m Word NN0 ) e. _V /\ ( g e. Word NN0 |-> <. 1 , 0 >. ) e. ( ( NN0 X. NN0 ) ^m Word NN0 ) /\ ProdLS : ( ( ( NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( NN0 X. NN0 ) ^m Word NN0 ) ) )
+i33::algrecmap
+s34:s32,s9,i33:syl2anc |- ( S e. Word NN0 -> ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) e. ( ( NN0 X. NN0 ) ^m Word NN0 ) )
+i35::elmapi
+s36:s34,i35:syl |- ( S e. Word NN0 -> ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) : Word NN0 --> ( NN0 X. NN0 ) )
+i37::ffvelcdm
+s38:s36,s1,i37:syl2anc |- ( S e. Word NN0 -> ( ( ( ( g e. Word NN0 |-> <. 1 , 0 >. ) AlgRec ProdLS ) ` ( # ` S ) ) ` S ) e. ( NN0 X. NN0 ) )
+qed:s7,s38:eqeltrd |- ( S e. Word NN0 -> ( ProdL ` S ) e. ( NN0 X. NN0 ) )
+$)

@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=nlogval  LOC_AFTER=?
+
+* Value of Nlog (Mathlib's Nat.log): the floor of the real logarithm to the base B for 2 <_ B and 1 <_ N, and 0 otherwise.
+
+s1::simpl |- ( ( b = B /\ n = N ) -> b = B )
+s2::simpr |- ( ( b = B /\ n = N ) -> n = N )
+s3:s1:breq2d |- ( ( b = B /\ n = N ) -> ( 2 <_ b <-> 2 <_ B ) )
+s4:s2:breq2d |- ( ( b = B /\ n = N ) -> ( 1 <_ n <-> 1 <_ N ) )
+s5:s3,s4:anbi12d |- ( ( b = B /\ n = N ) -> ( ( 2 <_ b /\ 1 <_ n ) <-> ( 2 <_ B /\ 1 <_ N ) ) )
+s6:s1,s2:oveq12d |- ( ( b = B /\ n = N ) -> ( b logb n ) = ( B logb N ) )
+s7:s6:fveq2d |- ( ( b = B /\ n = N ) -> ( |_ ` ( b logb n ) ) = ( |_ ` ( B logb N ) ) )
+s8:s5,s7:ifbieq1d |- ( ( b = B /\ n = N ) -> if ( ( 2 <_ b /\ 1 <_ n ) , ( |_ ` ( b logb n ) ) , 0 ) = if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) )
+s9::df-nlog |- Nlog = ( b e. NN0 , n e. NN0 |-> if ( ( 2 <_ b /\ 1 <_ n ) , ( |_ ` ( b logb n ) ) , 0 ) )
+s10::ifex |- if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) e. _V
+qed:s8,s9,s10:ovmpoa |- ( ( B e. NN0 /\ N e. NN0 ) -> ( B Nlog N ) = if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) )
+$)

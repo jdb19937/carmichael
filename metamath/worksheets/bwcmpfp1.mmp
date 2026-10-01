@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=bwcmpfp1  LOC_AFTER=?
+
+* The verdict after I + 1 bits is the comparator step on the two digits at I and the verdict after I bits (the recursive form, unconditionally; Lean: cmpStep_shift).
+
+s1::simpl1 |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> A e. NN0 )
+s2::simpl2 |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> B e. NN0 )
+s3::simpl3 |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> C e. 3o )
+s4::simpr |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> I e. NN0 )
+s5::1nn0 |- 1 e. NN0
+s6:s5:a1i |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> 1 e. NN0 )
+s7:s4,s6:nn0addcld |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( I + 1 ) e. NN0 )
+s8::simpl |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) )
+i9::bwcmpf
+s10:s8,s7,i9:syl2anc |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( cmpStep ( A bwFold B ) C ) ` ( I + 1 ) ) = if ( ( A mod ( 2 ^ ( I + 1 ) ) ) = ( B mod ( 2 ^ ( I + 1 ) ) ) , C , ( ( A mod ( 2 ^ ( I + 1 ) ) ) Ncmp ( B mod ( 2 ^ ( I + 1 ) ) ) ) ) )
+s11::bwcmplem |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> if ( ( A mod ( 2 ^ ( I + 1 ) ) ) = ( B mod ( 2 ^ ( I + 1 ) ) ) , C , ( ( A mod ( 2 ^ ( I + 1 ) ) ) Ncmp ( B mod ( 2 ^ ( I + 1 ) ) ) ) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) cmpStep if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) = ( B mod ( 2 ^ I ) ) , C , ( ( A mod ( 2 ^ I ) ) Ncmp ( B mod ( 2 ^ I ) ) ) ) ) )
+s12::bwcmpf |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( cmpStep ( A bwFold B ) C ) ` I ) = if ( ( A mod ( 2 ^ I ) ) = ( B mod ( 2 ^ I ) ) , C , ( ( A mod ( 2 ^ I ) ) Ncmp ( B mod ( 2 ^ I ) ) ) ) )
+s13:s12:fveq2d |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( if ( I e. ( bits ` A ) , 1o , (/) ) cmpStep if ( I e. ( bits ` B ) , 1o , (/) ) ) ` ( ( cmpStep ( A bwFold B ) C ) ` I ) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) cmpStep if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) = ( B mod ( 2 ^ I ) ) , C , ( ( A mod ( 2 ^ I ) ) Ncmp ( B mod ( 2 ^ I ) ) ) ) ) )
+s14:s10,s11:eqtrd |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( cmpStep ( A bwFold B ) C ) ` ( I + 1 ) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) cmpStep if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) = ( B mod ( 2 ^ I ) ) , C , ( ( A mod ( 2 ^ I ) ) Ncmp ( B mod ( 2 ^ I ) ) ) ) ) )
+qed:s14,s13:eqtr4d |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( cmpStep ( A bwFold B ) C ) ` ( I + 1 ) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) cmpStep if ( I e. ( bits ` B ) , 1o , (/) ) ) ` ( ( cmpStep ( A bwFold B ) C ) ` I ) ) )
+$)

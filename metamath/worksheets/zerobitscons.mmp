@@ -1,0 +1,73 @@
+$( <MM> <PROOF_ASST> THEOREM=zerobitscons  LOC_AFTER=?
+
+* Lean clause 2 of zeroBits: scanning a bit clears the flag when the bit is true.
+
+s1::simp1 |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> B e. 2o )
+s2::simp2 |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> L e. Word 2o )
+s3::simp3 |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> F e. 2o )
+i4::s1cl
+s5:s1,i4:syl |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> <" B "> e. Word 2o )
+i6::ccatcl
+s7:s5,s2,i6:syl2anc |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( <" B "> ++ L ) e. Word 2o )
+s8::1oel2o |- 1o e. 2o
+s9:s8:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 1o e. 2o )
+s10::0el2o |- (/) e. 2o
+s11:s10:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> (/) e. 2o )
+s12:s9,s11:ifcld |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) e. 2o )
+i13::zerobitsval
+s14:s7,s3,i13:syl2anc |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( <" B "> ++ L ) zeroBits F ) = if ( ( F = 1o /\ ( toNat ` ( <" B "> ++ L ) ) = 0 ) , 1o , (/) ) )
+i15::zerobitsval
+s16:s2,s12,i15:syl2anc |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( L zeroBits if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) ) = if ( ( if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) )
+i17::tonatcons
+s18:s1,s2,i17:syl2anc |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( toNat ` ( <" B "> ++ L ) ) = ( ( bToNat ` B ) + ( 2 x. ( toNat ` L ) ) ) )
+i19::bwbncl
+s20:s1,i19:syl |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( bToNat ` B ) e. NN0 )
+i21::tonatcl
+s22:s2,i21:syl |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( toNat ` L ) e. NN0 )
+s23::2nn0 |- 2 e. NN0
+s24:s23:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 2 e. NN0 )
+s25:s24,s22:nn0mulcld |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( 2 x. ( toNat ` L ) ) e. NN0 )
+s26:s18:eqeq1d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( toNat ` ( <" B "> ++ L ) ) = 0 <-> ( ( bToNat ` B ) + ( 2 x. ( toNat ` L ) ) ) = 0 ) )
+s27:s20:nn0zd |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( bToNat ` B ) e. ZZ )
+s28:s27:zred |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( bToNat ` B ) e. RR )
+s29::2re |- 2 e. RR
+s30:s29:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 2 e. RR )
+s31:s22:nn0zd |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( toNat ` L ) e. ZZ )
+s32:s31:zred |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( toNat ` L ) e. RR )
+s33:s30,s32:remulcld |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( 2 x. ( toNat ` L ) ) e. RR )
+s34:s20:nn0ge0d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 0 <_ ( bToNat ` B ) )
+s35::0le2 |- 0 <_ 2
+s36:s35:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 0 <_ 2 )
+s37:s22:nn0ge0d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 0 <_ ( toNat ` L ) )
+s38:s30,s32,s36,s37:mulge0d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 0 <_ ( 2 x. ( toNat ` L ) ) )
+i39::add20
+s40:s28,s33,s34,s38,i39:syl22anc |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( ( bToNat ` B ) + ( 2 x. ( toNat ` L ) ) ) = 0 <-> ( ( bToNat ` B ) = 0 /\ ( 2 x. ( toNat ` L ) ) = 0 ) ) )
+s41:s32:recnd |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( toNat ` L ) e. CC )
+s42::2cnd |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 2 e. CC )
+s43::2ne0 |- 2 =/= 0
+s44:s43:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 2 =/= 0 )
+s45::0cnd |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> 0 e. CC )
+s46:s41,s45,s42,s44:mulcand |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( 2 x. ( toNat ` L ) ) = ( 2 x. 0 ) <-> ( toNat ` L ) = 0 ) )
+s47:s42:mul01d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( 2 x. 0 ) = 0 )
+s48:s47:eqeq2d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( 2 x. ( toNat ` L ) ) = ( 2 x. 0 ) <-> ( 2 x. ( toNat ` L ) ) = 0 ) )
+s49:s48,s46:bitr3d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( 2 x. ( toNat ` L ) ) = 0 <-> ( toNat ` L ) = 0 ) )
+i50::bwbneq0
+s51:s1,i50:syl |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( bToNat ` B ) = 0 <-> B = (/) ) )
+i52::bwel2on
+s53:s1,i52:syl |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( -. B = 1o <-> B = (/) ) )
+s54:s51,s53:bitr4d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( bToNat ` B ) = 0 <-> -. B = 1o ) )
+s55:s54,s49:anbi12d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( ( bToNat ` B ) = 0 /\ ( 2 x. ( toNat ` L ) ) = 0 ) <-> ( -. B = 1o /\ ( toNat ` L ) = 0 ) ) )
+s56:s26,s40,s55:3bitrd |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( toNat ` ( <" B "> ++ L ) ) = 0 <-> ( -. B = 1o /\ ( toNat ` L ) = 0 ) ) )
+s57:s56:anbi2d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( F = 1o /\ ( toNat ` ( <" B "> ++ L ) ) = 0 ) <-> ( F = 1o /\ ( -. B = 1o /\ ( toNat ` L ) = 0 ) ) ) )
+s58::anass |- ( ( ( F = 1o /\ -. B = 1o ) /\ ( toNat ` L ) = 0 ) <-> ( F = 1o /\ ( -. B = 1o /\ ( toNat ` L ) = 0 ) ) )
+s59:s58:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( ( F = 1o /\ -. B = 1o ) /\ ( toNat ` L ) = 0 ) <-> ( F = 1o /\ ( -. B = 1o /\ ( toNat ` L ) = 0 ) ) ) )
+s60::1n0 |- 1o =/= (/)
+i61::iftrueb
+s62:s60,i61:ax-mp |- ( if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) = 1o <-> ( F = 1o /\ -. B = 1o ) )
+s63:s62:a1i |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) = 1o <-> ( F = 1o /\ -. B = 1o ) ) )
+s64:s63:anbi1d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) = 1o /\ ( toNat ` L ) = 0 ) <-> ( ( F = 1o /\ -. B = 1o ) /\ ( toNat ` L ) = 0 ) ) )
+s65:s57,s59:bitr4d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( F = 1o /\ ( toNat ` ( <" B "> ++ L ) ) = 0 ) <-> ( ( F = 1o /\ -. B = 1o ) /\ ( toNat ` L ) = 0 ) ) )
+s66:s65,s64:bitr4d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( F = 1o /\ ( toNat ` ( <" B "> ++ L ) ) = 0 ) <-> ( if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) = 1o /\ ( toNat ` L ) = 0 ) ) )
+s67:s66:ifbid |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> if ( ( F = 1o /\ ( toNat ` ( <" B "> ++ L ) ) = 0 ) , 1o , (/) ) = if ( ( if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) )
+qed:s14,s67,s16:3eqtr4d |- ( ( B e. 2o /\ L e. Word 2o /\ F e. 2o ) -> ( ( <" B "> ++ L ) zeroBits F ) = ( L zeroBits if ( ( F = 1o /\ -. B = 1o ) , 1o , (/) ) ) )
+$)

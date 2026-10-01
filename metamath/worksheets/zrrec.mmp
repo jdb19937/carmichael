@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=zrrec  LOC_AFTER=?
+
+* The real part of ` 1 / Z ` is ` Re Z / abs Z ^ 2 ` ( ~ recval , ~ redivd , ~ recj ).
+
+s1::id |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Z e. CC /\ Z =/= 0 ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( Z e. CC /\ Z =/= 0 ) -> Z e. CC )
+s4::id |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Z e. CC /\ Z =/= 0 ) )
+i5::simpr
+s6:s4,i5:syl |- ( ( Z e. CC /\ Z =/= 0 ) -> Z =/= 0 )
+s7:s3,s6:jca |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Z e. CC /\ Z =/= 0 ) )
+i8::recval
+s9:s7,i8:syl |- ( ( Z e. CC /\ Z =/= 0 ) -> ( 1 / Z ) = ( ( * ` Z ) / ( ( abs ` Z ) ^ 2 ) ) )
+s10:s3:abscld |- ( ( Z e. CC /\ Z =/= 0 ) -> ( abs ` Z ) e. RR )
+s11:s10:resqcld |- ( ( Z e. CC /\ Z =/= 0 ) -> ( ( abs ` Z ) ^ 2 ) e. RR )
+s12:s3,s6:absne0d |- ( ( Z e. CC /\ Z =/= 0 ) -> ( abs ` Z ) =/= 0 )
+s13:s3:abscld |- ( ( Z e. CC /\ Z =/= 0 ) -> ( abs ` Z ) e. RR )
+s14:s13:recnd |- ( ( Z e. CC /\ Z =/= 0 ) -> ( abs ` Z ) e. CC )
+i15::sqne0
+s16:s14,i15:syl |- ( ( Z e. CC /\ Z =/= 0 ) -> ( ( ( abs ` Z ) ^ 2 ) =/= 0 <-> ( abs ` Z ) =/= 0 ) )
+s17:s12,s16:mpbird |- ( ( Z e. CC /\ Z =/= 0 ) -> ( ( abs ` Z ) ^ 2 ) =/= 0 )
+s18:s3:cjcld |- ( ( Z e. CC /\ Z =/= 0 ) -> ( * ` Z ) e. CC )
+s19:s11,s18,s17:redivd |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Re ` ( ( * ` Z ) / ( ( abs ` Z ) ^ 2 ) ) ) = ( ( Re ` ( * ` Z ) ) / ( ( abs ` Z ) ^ 2 ) ) )
+s20:s3:recjd |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Re ` ( * ` Z ) ) = ( Re ` Z ) )
+s21:s20:oveq1d |- ( ( Z e. CC /\ Z =/= 0 ) -> ( ( Re ` ( * ` Z ) ) / ( ( abs ` Z ) ^ 2 ) ) = ( ( Re ` Z ) / ( ( abs ` Z ) ^ 2 ) ) )
+s22:s9:fveq2d |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Re ` ( 1 / Z ) ) = ( Re ` ( ( * ` Z ) / ( ( abs ` Z ) ^ 2 ) ) ) )
+s23:s22,s19:eqtrd |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Re ` ( 1 / Z ) ) = ( ( Re ` ( * ` Z ) ) / ( ( abs ` Z ) ^ 2 ) ) )
+s24:s23,s21:eqtrd |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Re ` ( 1 / Z ) ) = ( ( Re ` Z ) / ( ( abs ` Z ) ^ 2 ) ) )
+qed:s24:idi |- ( ( Z e. CC /\ Z =/= 0 ) -> ( Re ` ( 1 / Z ) ) = ( ( Re ` Z ) / ( ( abs ` Z ) ^ 2 ) ) )
+$)

@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2layss  LOC_AFTER=?
+
+* Monotonicity of the depth layers in the index.
+
+1::simp1    |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> T e. V )
+2::simp2    |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> M e. _om )
+3::simp3    |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> N e. _om )
+4a::nnon
+4:2,4a:syl  |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> M e. On )
+5a::nnon
+5:3,5a:syl  |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> N e. On )
+6a::onsseleq
+6:4,5,6a:syl2anc |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> ( M C_ N <-> ( M e. N \/ M = N ) ) )
+7a::tm2layel
+7:3,7a:syl  |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> ( T e. V -> A. m e. N ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+8:1,7:mpd   |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> A. m e. N ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) )
+9::fveq2    |- ( m = M -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) )
+10:9:sseq1d |- ( m = M -> ( ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) <-> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+11:10:rspccv |- ( A. m e. N ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) -> ( M e. N -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+12:8,11:syl |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> ( M e. N -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+13::fveq2   |- ( M = N -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) )
+14:13:eqimssd |- ( M = N -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) )
+15:14:a1i   |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> ( M = N -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+16:12,15:jaod |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> ( ( M e. N \/ M = N ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+qed:6,16:sylbid |- ( ( T e. V /\ M e. _om /\ N e. _om ) -> ( M C_ N -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` M ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+$)

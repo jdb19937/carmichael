@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=xb2pow  LOC_AFTER=?
+
+* Powers of two: T <_ C M gives 2 ^ T <_ exp ( C M ) (2 <_ e; Lean: ExpB.two_pow, ExpB.two_pow_nat).
+
+h1::xb2pow.1 |- ( ph -> M e. RR )
+h2::xb2pow.2 |- ( ph -> C e. RR )
+h3::xb2pow.3 |- ( ph -> T e. NN0 )
+h4::xb2pow.4 |- ( ph -> T <_ ( C x. M ) )
+s1::ere |- _e e. RR
+s2:s1:a1i |- ( ph -> _e e. RR )
+s3::egt2lt3 |- ( 2 < _e /\ _e < 3 )
+s4:s3:simpli |- 2 < _e
+s5::2re |- 2 e. RR
+s6::ere |- _e e. RR
+s7:s5,s6,s4:ltleii |- 2 <_ _e
+s8:s7:a1i |- ( ph -> 2 <_ _e )
+s9::2re |- 2 e. RR
+s10:s9:a1i |- ( ph -> 2 e. RR )
+s11::0le2 |- 0 <_ 2
+s12:s11:a1i |- ( ph -> 0 <_ 2 )
+s13:s10,s2,3,s12,s8:leexp1ad |- ( ph -> ( 2 ^ T ) <_ ( _e ^ T ) )
+s14::df-e |- _e = ( exp ` 1 )
+s15:s14:a1i |- ( ph -> _e = ( exp ` 1 ) )
+s16:s15:oveq1d |- ( ph -> ( _e ^ T ) = ( ( exp ` 1 ) ^ T ) )
+s17::ax-1cn |- 1 e. CC
+s18:s17:a1i |- ( ph -> 1 e. CC )
+s19:3:nn0zd |- ( ph -> T e. ZZ )
+i20::efexp
+s21:s18,s19,i20:syl2anc |- ( ph -> ( exp ` ( T x. 1 ) ) = ( ( exp ` 1 ) ^ T ) )
+s22:s19:zred |- ( ph -> T e. RR )
+s23:s22:recnd |- ( ph -> T e. CC )
+s24:s23:mulridd |- ( ph -> ( T x. 1 ) = T )
+s25:s24:fveq2d |- ( ph -> ( exp ` ( T x. 1 ) ) = ( exp ` T ) )
+s26:s25,s21:eqtr3d |- ( ph -> ( exp ` T ) = ( ( exp ` 1 ) ^ T ) )
+s27:s16,s26:eqtr4d |- ( ph -> ( _e ^ T ) = ( exp ` T ) )
+s28:2,1:remulcld |- ( ph -> ( C x. M ) e. RR )
+i29::efle
+s30:s22,s28,i29:syl2anc |- ( ph -> ( T <_ ( C x. M ) <-> ( exp ` T ) <_ ( exp ` ( C x. M ) ) ) )
+s31:4,s30:mpbid |- ( ph -> ( exp ` T ) <_ ( exp ` ( C x. M ) ) )
+s32:s27,s31:eqbrtrd |- ( ph -> ( _e ^ T ) <_ ( exp ` ( C x. M ) ) )
+s33:s10,3:reexpcld |- ( ph -> ( 2 ^ T ) e. RR )
+s34:s2,3:reexpcld |- ( ph -> ( _e ^ T ) e. RR )
+s35:s28:reefcld |- ( ph -> ( exp ` ( C x. M ) ) e. RR )
+qed:s33,s34,s35,s13,s32:letrd |- ( ph -> ( 2 ^ T ) <_ ( exp ` ( C x. M ) ) )
+$)

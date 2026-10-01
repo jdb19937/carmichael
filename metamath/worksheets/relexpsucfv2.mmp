@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=relexpsucfv2  LOC_AFTER=?
+
+* The ( N + 1 )-th iterate of a function is the N-th iterate of the function applied once (Lean's Function.iterate_succ_apply).
+
+s1::simp1r |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> G : B --> B )
+s2::simp2 |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> N e. NN0 )
+s3::simp3 |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> X e. B )
+i4::frel
+s5:s1,i4:syl |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> Rel G )
+s6:s5,s2:relexpsucrd |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( G ^r ( N + 1 ) ) = ( ( G ^r N ) o. G ) )
+s7:s6:fveq1d |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( ( G ^r ( N + 1 ) ) ` X ) = ( ( ( G ^r N ) o. G ) ` X ) )
+i8::fvco3
+s9:s1,s3,i8:syl2anc |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( ( ( G ^r N ) o. G ) ` X ) = ( ( G ^r N ) ` ( G ` X ) ) )
+qed:s7,s9:eqtrd |- ( ( ( B e. V /\ G : B --> B ) /\ N e. NN0 /\ X e. B ) -> ( ( G ^r ( N + 1 ) ) ` X ) = ( ( G ^r N ) ` ( G ` X ) ) )
+$)

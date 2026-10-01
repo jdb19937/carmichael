@@ -1,0 +1,126 @@
+$( <MM> <PROOF_ASST> THEOREM=incbitseq  LOC_AFTER=?
+
+* incBits L is the carry chain of false letters followed by incRest L (Lean: incBits_eq).
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+i6::carriesdvds
+s7:s1,i6:syl |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) || ( ( toNat ` L ) + 1 ) )
+s8::2nn |- 2 e. NN
+s9:s8:a1i |- ( L e. Word 2o -> 2 e. NN )
+i10::carriescl
+s11:s1,i10:syl |- ( L e. Word 2o -> ( carries ` L ) e. NN0 )
+i12::nnexpcl
+s13:s9,s11,i12:syl2anc |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) e. NN )
+i14::nndivdvds
+s15:s5,s13,i14:syl2anc |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) || ( ( toNat ` L ) + 1 ) <-> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. NN ) )
+s16:s7,s15:mpbid |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. NN )
+i17::carriesle
+s18:s1,i17:syl |- ( L e. Word 2o -> ( carries ` L ) <_ ( # ` L ) )
+i19::incbitslenge
+s20:s1,i19:syl |- ( L e. Word 2o -> ( # ` L ) <_ ( # ` ( incBits ` L ) ) )
+s21:s11:nn0zd |- ( L e. Word 2o -> ( carries ` L ) e. ZZ )
+s22:s21:zred |- ( L e. Word 2o -> ( carries ` L ) e. RR )
+i23::lencl
+s24:s1,i23:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s25:s24:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s26:s25:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+i27::incbitscl
+s28:s1,i27:syl |- ( L e. Word 2o -> ( incBits ` L ) e. Word 2o )
+i29::lencl
+s30:s28,i29:syl |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) e. NN0 )
+s31:s30:nn0zd |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) e. ZZ )
+s32:s31:zred |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) e. RR )
+s33:s22,s26,s32,s18,s20:letrd |- ( L e. Word 2o -> ( carries ` L ) <_ ( # ` ( incBits ` L ) ) )
+i34::nn0sub
+s35:s11,s30,i34:syl2anc |- ( L e. Word 2o -> ( ( carries ` L ) <_ ( # ` ( incBits ` L ) ) <-> ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) e. NN0 ) )
+s36:s33,s35:mpbid |- ( L e. Word 2o -> ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) e. NN0 )
+s37::increstval |- ( L e. Word 2o -> ( incRest ` L ) = ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) bwrd ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) )
+s38::0el2o |- (/) e. 2o
+s39:s38:a1i |- ( L e. Word 2o -> (/) e. 2o )
+i40::repsw
+s41:s39,s11,i40:syl2anc |- ( L e. Word 2o -> ( (/) repeatS ( carries ` L ) ) e. Word 2o )
+i42::increstcl
+s43:s1,i42:syl |- ( L e. Word 2o -> ( incRest ` L ) e. Word 2o )
+i44::ccatcl
+s45:s41,s43,i44:syl2anc |- ( L e. Word 2o -> ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) e. Word 2o )
+i46::ccatlen
+s47:s41,s43,i46:syl2anc |- ( L e. Word 2o -> ( # ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) = ( ( # ` ( (/) repeatS ( carries ` L ) ) ) + ( # ` ( incRest ` L ) ) ) )
+s48::0ex |- (/) e. _V
+s49:s48:a1i |- ( L e. Word 2o -> (/) e. _V )
+i50::repswlen
+s51:s49,s11,i50:syl2anc |- ( L e. Word 2o -> ( # ` ( (/) repeatS ( carries ` L ) ) ) = ( carries ` L ) )
+s52:s37:fveq2d |- ( L e. Word 2o -> ( # ` ( incRest ` L ) ) = ( # ` ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) bwrd ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) )
+s53:s16:nnnn0d |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. NN0 )
+s54:s53:nn0zd |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. ZZ )
+i55::bwrdlen
+s56:s54,s36,i55:syl2anc |- ( L e. Word 2o -> ( # ` ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) bwrd ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) = ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) )
+s57:s52,s56:eqtrd |- ( L e. Word 2o -> ( # ` ( incRest ` L ) ) = ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) )
+s58:s51,s57:oveq12d |- ( L e. Word 2o -> ( ( # ` ( (/) repeatS ( carries ` L ) ) ) + ( # ` ( incRest ` L ) ) ) = ( ( carries ` L ) + ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) )
+s59:s22:recnd |- ( L e. Word 2o -> ( carries ` L ) e. CC )
+s60:s32:recnd |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) e. CC )
+s61:s59,s60:pncan3d |- ( L e. Word 2o -> ( ( carries ` L ) + ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) = ( # ` ( incBits ` L ) ) )
+s62:s47,s58,s61:3eqtrd |- ( L e. Word 2o -> ( # ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) = ( # ` ( incBits ` L ) ) )
+s63:s62:eqcomd |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) = ( # ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) )
+s64::tonatincbits |- ( L e. Word 2o -> ( toNat ` ( incBits ` L ) ) = ( ( toNat ` L ) + 1 ) )
+i65::tonatrep0a
+s66:s43,s11,i65:syl2anc |- ( L e. Word 2o -> ( toNat ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) = ( ( 2 ^ ( carries ` L ) ) x. ( toNat ` ( incRest ` L ) ) ) )
+s67:s37:fveq2d |- ( L e. Word 2o -> ( toNat ` ( incRest ` L ) ) = ( toNat ` ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) bwrd ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) )
+i68::tonatlt
+s69:s28,i68:syl |- ( L e. Word 2o -> ( toNat ` ( incBits ` L ) ) < ( 2 ^ ( # ` ( incBits ` L ) ) ) )
+s70:s64,s69:eqbrtrrd |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) < ( 2 ^ ( # ` ( incBits ` L ) ) ) )
+s71:s61:eqcomd |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) = ( ( carries ` L ) + ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) )
+s72:s71:oveq2d |- ( L e. Word 2o -> ( 2 ^ ( # ` ( incBits ` L ) ) ) = ( 2 ^ ( ( carries ` L ) + ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) )
+s73::2cnd |- ( L e. Word 2o -> 2 e. CC )
+i74::expadd
+s75:s73,s11,s36,i74:syl3anc |- ( L e. Word 2o -> ( 2 ^ ( ( carries ` L ) + ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) = ( ( 2 ^ ( carries ` L ) ) x. ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) )
+s76::2cn |- 2 e. CC
+s77:s76:a1i |- ( L e. Word 2o -> 2 e. CC )
+s78:s77,s11:expcld |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) e. CC )
+s79:s77,s36:expcld |- ( L e. Word 2o -> ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) e. CC )
+s80:s78,s79:mulcomd |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) x. ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) = ( ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) )
+s81:s72,s75,s80:3eqtrd |- ( L e. Word 2o -> ( 2 ^ ( # ` ( incBits ` L ) ) ) = ( ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) )
+s82:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+s83:s82:zred |- ( L e. Word 2o -> ( toNat ` L ) e. RR )
+s84:s83:recnd |- ( L e. Word 2o -> ( toNat ` L ) e. CC )
+s85::ax-1cn |- 1 e. CC
+s86:s85:a1i |- ( L e. Word 2o -> 1 e. CC )
+s87:s84,s86:addcld |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. CC )
+s88::2rp |- 2 e. RR+
+s89:s88:a1i |- ( L e. Word 2o -> 2 e. RR+ )
+s90:s89,s21:rpexpcld |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) e. RR+ )
+s91:s90:rpne0d |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) =/= 0 )
+s92:s87,s78,s91:divcan1d |- ( L e. Word 2o -> ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) = ( ( toNat ` L ) + 1 ) )
+s93:s70,s81:breqtrd |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) < ( ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) )
+s94:s92,s93:eqbrtrd |- ( L e. Word 2o -> ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) < ( ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) )
+s95::2re |- 2 e. RR
+s96:s95:a1i |- ( L e. Word 2o -> 2 e. RR )
+s97:s96,s11:reexpcld |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) e. RR )
+s98::2pos |- 0 < 2
+s99:s98:a1i |- ( L e. Word 2o -> 0 < 2 )
+i100::expgt0
+s101:s96,s21,s99,i100:syl3anc |- ( L e. Word 2o -> 0 < ( 2 ^ ( carries ` L ) ) )
+s102:s97,s101:jca |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) e. RR /\ 0 < ( 2 ^ ( carries ` L ) ) ) )
+s103::1re |- 1 e. RR
+s104:s103:a1i |- ( L e. Word 2o -> 1 e. RR )
+s105:s83,s104:readdcld |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. RR )
+s106:s105,s90:rerpdivcld |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. RR )
+s107:s96,s36:reexpcld |- ( L e. Word 2o -> ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) e. RR )
+i108::ltmul1
+s109:s106,s107,s102,i108:syl3anc |- ( L e. Word 2o -> ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) < ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) <-> ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) < ( ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) x. ( 2 ^ ( carries ` L ) ) ) ) )
+s110:s94,s109:mpbird |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) < ( 2 ^ ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) )
+i111::tonatbwrd2
+s112:s53,s36,s110,i111:syl3anc |- ( L e. Word 2o -> ( toNat ` ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) bwrd ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) ) = ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) )
+s113:s67,s112:eqtrd |- ( L e. Word 2o -> ( toNat ` ( incRest ` L ) ) = ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) )
+s114:s113:oveq2d |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) x. ( toNat ` ( incRest ` L ) ) ) = ( ( 2 ^ ( carries ` L ) ) x. ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) ) )
+s115:s87,s78,s91:divcan2d |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) x. ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) ) = ( ( toNat ` L ) + 1 ) )
+s116:s66,s114,s115:3eqtrd |- ( L e. Word 2o -> ( toNat ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) = ( ( toNat ` L ) + 1 ) )
+s117:s64,s116:eqtr4d |- ( L e. Word 2o -> ( toNat ` ( incBits ` L ) ) = ( toNat ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) )
+s118:s63,s117:jca |- ( L e. Word 2o -> ( ( # ` ( incBits ` L ) ) = ( # ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) /\ ( toNat ` ( incBits ` L ) ) = ( toNat ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) ) )
+i119::bwuniq
+s120:s28,s45,i119:syl2anc |- ( L e. Word 2o -> ( ( incBits ` L ) = ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) <-> ( ( # ` ( incBits ` L ) ) = ( # ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) /\ ( toNat ` ( incBits ` L ) ) = ( toNat ` ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) ) ) ) )
+qed:s118,s120:mpbird |- ( L e. Word 2o -> ( incBits ` L ) = ( ( (/) repeatS ( carries ` L ) ) ++ ( incRest ` L ) ) )
+$)

@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=ppsub  LOC_AFTER=?
+
+* The primes up to M lie in ( 2 ... M ).
+
+s1::simpr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. ( ( 1 ... M ) i^i Prime ) )
+i2::elinel1
+s3:s1,i2:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. ( 1 ... M ) )
+i4::elinel2
+s5:s1,i4:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. Prime )
+i6::elfzelz
+s7:s3,i6:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. ZZ )
+i8::elfzle2
+s9:s3,i8:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p <_ M )
+i10::prmuz2
+s11:s5,i10:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. ( ZZ>= ` 2 ) )
+s12::eluz2 |- ( p e. ( ZZ>= ` 2 ) <-> ( 2 e. ZZ /\ p e. ZZ /\ 2 <_ p ) )
+s13:s12:a1i |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( p e. ( ZZ>= ` 2 ) <-> ( 2 e. ZZ /\ p e. ZZ /\ 2 <_ p ) ) )
+s14:s13,s11:mpbid |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( 2 e. ZZ /\ p e. ZZ /\ 2 <_ p ) )
+s15:s14:simp3d |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> 2 <_ p )
+s16::simpll |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> M e. NN )
+s17:s16:nnzd |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> M e. ZZ )
+s18::2z |- 2 e. ZZ
+s19:s18:a1i |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> 2 e. ZZ )
+i20::elfz
+s21:s7,s19,s17,i20:syl3anc |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( p e. ( 2 ... M ) <-> ( 2 <_ p /\ p <_ M ) ) )
+s22:s15,s9:jca |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> ( 2 <_ p /\ p <_ M ) )
+s23:s21,s22:mpbird |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( ( 1 ... M ) i^i Prime ) ) -> p e. ( 2 ... M ) )
+s24:s23:ex |- ( ( M e. NN /\ C e. RR+ ) -> ( p e. ( ( 1 ... M ) i^i Prime ) -> p e. ( 2 ... M ) ) )
+qed:s24:ssrdv |- ( ( M e. NN /\ C e. RR+ ) -> ( ( 1 ... M ) i^i Prime ) C_ ( 2 ... M ) )
+$)

@@ -1,0 +1,92 @@
+$( <MM> <PROOF_ASST> THEOREM=cen2sub  LOC_AFTER=?
+
+* A finite set has a subset of every size up to its own (Lean ` Finset.exists_subset_card_eq ` ; the image of ` 1 ... N ` under ~ fz1f1o ).
+
+s1::simp1 |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> A e. Fin )
+s2::simp2 |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> N e. NN0 )
+s3::simp3 |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> N <_ ( # ` A ) )
+s4::simpr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> A = (/) )
+s5:s4:fveq2d |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> ( # ` A ) = ( # ` (/) ) )
+s6::hash0 |- ( # ` (/) ) = 0
+s7:s6:a1i |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> ( # ` (/) ) = 0 )
+s8:s5,s7:eqtrd |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> ( # ` A ) = 0 )
+s9:s3:adantr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> N <_ ( # ` A ) )
+s10:s9,s8:breqtrd |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> N <_ 0 )
+s11:s2:adantr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> N e. NN0 )
+i12::nn0le0eq0
+s13:s11,i12:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> ( N <_ 0 <-> N = 0 ) )
+s14:s10,s13:mpbid |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> N = 0 )
+s15::hash0 |- ( # ` (/) ) = 0
+s16:s15:a1i |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> ( # ` (/) ) = 0 )
+s17:s16,s14:eqtr4d |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> ( # ` (/) ) = N )
+s18::0ss |- (/) C_ A
+s19:s18:a1i |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> (/) C_ A )
+s20:s19,s17:jca |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> ( (/) C_ A /\ ( # ` (/) ) = N ) )
+s21::0ex |- (/) e. _V
+s22:s21:a1i |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> (/) e. _V )
+s23::sseq1 |- ( s = (/) -> ( s C_ A <-> (/) C_ A ) )
+s24::fveq2 |- ( s = (/) -> ( # ` s ) = ( # ` (/) ) )
+s25:s24:eqeq1d |- ( s = (/) -> ( ( # ` s ) = N <-> ( # ` (/) ) = N ) )
+s26:s23,s25:anbi12d |- ( s = (/) -> ( ( s C_ A /\ ( # ` s ) = N ) <-> ( (/) C_ A /\ ( # ` (/) ) = N ) ) )
+s27:s26:spcegv |- ( (/) e. _V -> ( ( (/) C_ A /\ ( # ` (/) ) = N ) -> E. s ( s C_ A /\ ( # ` s ) = N ) ) )
+s28:s22,s20,s27:sylc |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ A = (/) ) -> E. s ( s C_ A /\ ( # ` s ) = N ) )
+s29:s28:ex |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> ( A = (/) -> E. s ( s C_ A /\ ( # ` s ) = N ) ) )
+s30::simpr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> f : ( 1 ... ( # ` A ) ) -1-1-onto-> A )
+i31::f1ofo
+s32:s30,i31:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> f : ( 1 ... ( # ` A ) ) -onto-> A )
+i33::forn
+s34:s32,i33:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ran f = A )
+s35::imassrn |- ( f " ( 1 ... N ) ) C_ ran f
+s36:s35:a1i |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( f " ( 1 ... N ) ) C_ ran f )
+s37:s36,s34:sseqtrd |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( f " ( 1 ... N ) ) C_ A )
+s38:s2:adantr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> N e. NN0 )
+s39:s38:nn0zd |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> N e. ZZ )
+s40:s1:adantr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> A e. Fin )
+i41::hashcl
+s42:s40,i41:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( # ` A ) e. NN0 )
+s43:s42:nn0zd |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( # ` A ) e. ZZ )
+s44:s3:adantr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> N <_ ( # ` A ) )
+s45:s39,s43,s44:3jca |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( N e. ZZ /\ ( # ` A ) e. ZZ /\ N <_ ( # ` A ) ) )
+s46::eluz2 |- ( ( # ` A ) e. ( ZZ>= ` N ) <-> ( N e. ZZ /\ ( # ` A ) e. ZZ /\ N <_ ( # ` A ) ) )
+s47:s45,s46:sylibr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( # ` A ) e. ( ZZ>= ` N ) )
+i48::fzss2
+s49:s47,i48:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( 1 ... N ) C_ ( 1 ... ( # ` A ) ) )
+i50::f1of1
+s51:s30,i50:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> f : ( 1 ... ( # ` A ) ) -1-1-> A )
+i52::f1ores
+s53:s51,s49,i52:syl2anc |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( f |` ( 1 ... N ) ) : ( 1 ... N ) -1-1-onto-> ( f " ( 1 ... N ) ) )
+s54::f1oeq1 |- ( h = ( f |` ( 1 ... N ) ) -> ( h : ( 1 ... N ) -1-1-onto-> ( f " ( 1 ... N ) ) <-> ( f |` ( 1 ... N ) ) : ( 1 ... N ) -1-1-onto-> ( f " ( 1 ... N ) ) ) )
+s55:s54:spcegv |- ( ( f |` ( 1 ... N ) ) e. _V -> ( ( f |` ( 1 ... N ) ) : ( 1 ... N ) -1-1-onto-> ( f " ( 1 ... N ) ) -> E. h h : ( 1 ... N ) -1-1-onto-> ( f " ( 1 ... N ) ) ) )
+s56::vex |- f e. _V
+i57::resexg
+s58:s56,i57:ax-mp |- ( f |` ( 1 ... N ) ) e. _V
+s59:s58:a1i |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( f |` ( 1 ... N ) ) e. _V )
+s60:s59,s53,s55:sylc |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> E. h h : ( 1 ... N ) -1-1-onto-> ( f " ( 1 ... N ) ) )
+s61::ovex |- ( 1 ... N ) e. _V
+i62::hasheqf1oi
+s63:s61,i62:ax-mp |- ( E. h h : ( 1 ... N ) -1-1-onto-> ( f " ( 1 ... N ) ) -> ( # ` ( 1 ... N ) ) = ( # ` ( f " ( 1 ... N ) ) ) )
+s64:s60,s63:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( # ` ( 1 ... N ) ) = ( # ` ( f " ( 1 ... N ) ) ) )
+s65:s64:eqcomd |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( # ` ( f " ( 1 ... N ) ) ) = ( # ` ( 1 ... N ) ) )
+s66:s2:adantr |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> N e. NN0 )
+i67::hashfz1
+s68:s66,i67:syl |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( # ` ( 1 ... N ) ) = N )
+s69:s65,s68:eqtrd |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( # ` ( f " ( 1 ... N ) ) ) = N )
+s70::vex |- f e. _V
+i71::imaexg
+s72:s70,i71:ax-mp |- ( f " ( 1 ... N ) ) e. _V
+s73:s72:a1i |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( f " ( 1 ... N ) ) e. _V )
+s74:s37,s69:jca |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> ( ( f " ( 1 ... N ) ) C_ A /\ ( # ` ( f " ( 1 ... N ) ) ) = N ) )
+s75::sseq1 |- ( s = ( f " ( 1 ... N ) ) -> ( s C_ A <-> ( f " ( 1 ... N ) ) C_ A ) )
+s76::fveq2 |- ( s = ( f " ( 1 ... N ) ) -> ( # ` s ) = ( # ` ( f " ( 1 ... N ) ) ) )
+s77:s76:eqeq1d |- ( s = ( f " ( 1 ... N ) ) -> ( ( # ` s ) = N <-> ( # ` ( f " ( 1 ... N ) ) ) = N ) )
+s78:s75,s77:anbi12d |- ( s = ( f " ( 1 ... N ) ) -> ( ( s C_ A /\ ( # ` s ) = N ) <-> ( ( f " ( 1 ... N ) ) C_ A /\ ( # ` ( f " ( 1 ... N ) ) ) = N ) ) )
+s79:s78:spcegv |- ( ( f " ( 1 ... N ) ) e. _V -> ( ( ( f " ( 1 ... N ) ) C_ A /\ ( # ` ( f " ( 1 ... N ) ) ) = N ) -> E. s ( s C_ A /\ ( # ` s ) = N ) ) )
+s80:s73,s74,s79:sylc |- ( ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) /\ f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> E. s ( s C_ A /\ ( # ` s ) = N ) )
+s81:s80:ex |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> ( f : ( 1 ... ( # ` A ) ) -1-1-onto-> A -> E. s ( s C_ A /\ ( # ` s ) = N ) ) )
+s82:s81:exlimdv |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> ( E. f f : ( 1 ... ( # ` A ) ) -1-1-onto-> A -> E. s ( s C_ A /\ ( # ` s ) = N ) ) )
+s83:s82:adantld |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> ( ( ( # ` A ) e. NN /\ E. f f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) -> E. s ( s C_ A /\ ( # ` s ) = N ) ) )
+i84::fz1f1o
+s85:s1,i84:syl |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> ( A = (/) \/ ( ( # ` A ) e. NN /\ E. f f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) ) )
+s86:s29,s83:jaod |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> ( ( A = (/) \/ ( ( # ` A ) e. NN /\ E. f f : ( 1 ... ( # ` A ) ) -1-1-onto-> A ) ) -> E. s ( s C_ A /\ ( # ` s ) = N ) ) )
+qed:s85,s86:mpd |- ( ( A e. Fin /\ N e. NN0 /\ N <_ ( # ` A ) ) -> E. s ( s C_ A /\ ( # ` s ) = N ) )
+$)

@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hrtyp  LOC_AFTER=?
+
+* The typing a Hoare triple of the machine layer carries: both classes are classes of configurations and the step bound is a nonnegative integer.  Lean leaves this to its type ascriptions.
+
+s1::simpl |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> ( T e. V /\ M e. W ) )
+s2::simpr |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> C ( T TM2Hoare M ) <. D , N >. )
+s3::df-br |- ( C ( T TM2Hoare M ) <. D , N >. <-> <. C , <. D , N >. >. e. ( T TM2Hoare M ) )
+s4:s2,s3:sylib |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> <. C , <. D , N >. >. e. ( T TM2Hoare M ) )
+i5::tm2hrval
+s6:s1,i5:syl |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> ( T TM2Hoare M ) = ( { <. c , y >. | A. u e. c E. i e. ( 0 ... ( 2nd ` y ) ) E. w e. ( 1st ` y ) ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) } i^i ( ~P ( TM2Cfg ` T ) X. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) ) )
+s7:s4,s6:eleqtrd |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> <. C , <. D , N >. >. e. ( { <. c , y >. | A. u e. c E. i e. ( 0 ... ( 2nd ` y ) ) E. w e. ( 1st ` y ) ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) } i^i ( ~P ( TM2Cfg ` T ) X. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) ) )
+s8::elin |- ( <. C , <. D , N >. >. e. ( { <. c , y >. | A. u e. c E. i e. ( 0 ... ( 2nd ` y ) ) E. w e. ( 1st ` y ) ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) } i^i ( ~P ( TM2Cfg ` T ) X. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) ) <-> ( <. C , <. D , N >. >. e. { <. c , y >. | A. u e. c E. i e. ( 0 ... ( 2nd ` y ) ) E. w e. ( 1st ` y ) ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) } /\ <. C , <. D , N >. >. e. ( ~P ( TM2Cfg ` T ) X. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) ) )
+s9:s7,s8:sylib |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> ( <. C , <. D , N >. >. e. { <. c , y >. | A. u e. c E. i e. ( 0 ... ( 2nd ` y ) ) E. w e. ( 1st ` y ) ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) } /\ <. C , <. D , N >. >. e. ( ~P ( TM2Cfg ` T ) X. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) ) )
+s10:s9:simprd |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> <. C , <. D , N >. >. e. ( ~P ( TM2Cfg ` T ) X. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) )
+s11::opelxp |- ( <. C , <. D , N >. >. e. ( ~P ( TM2Cfg ` T ) X. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) <-> ( C e. ~P ( TM2Cfg ` T ) /\ <. D , N >. e. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) )
+s12:s10,s11:sylib |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> ( C e. ~P ( TM2Cfg ` T ) /\ <. D , N >. e. ( ~P ( TM2Cfg ` T ) X. NN0 ) ) )
+s13:s12:simpld |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> C e. ~P ( TM2Cfg ` T ) )
+s14:s12:simprd |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> <. D , N >. e. ( ~P ( TM2Cfg ` T ) X. NN0 ) )
+s15::opelxp |- ( <. D , N >. e. ( ~P ( TM2Cfg ` T ) X. NN0 ) <-> ( D e. ~P ( TM2Cfg ` T ) /\ N e. NN0 ) )
+s16:s14,s15:sylib |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> ( D e. ~P ( TM2Cfg ` T ) /\ N e. NN0 ) )
+s17:s16:simpld |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> D e. ~P ( TM2Cfg ` T ) )
+s18:s16:simprd |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> N e. NN0 )
+i19::elpwi
+s20:s13,i19:syl |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> C C_ ( TM2Cfg ` T ) )
+i21::elpwi
+s22:s17,i21:syl |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> D C_ ( TM2Cfg ` T ) )
+qed:s20,s22,s18:3jca |- ( ( ( T e. V /\ M e. W ) /\ C ( T TM2Hoare M ) <. D , N >. ) -> ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) )
+$)

@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=korseltlem1  LOC_AFTER=?
+
+* Lemma for korselt: at a prime P with ( P - 1 ) || ( N - 1 ), the P-adic
+  valuation of the squarefree N is at most that of A ^ N - A.
+
+1::simp1    |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> P e. Prime )
+2::simp2l   |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> N e. NN )
+3::simp2r   |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( mmu ` N ) =/= 0 )
+4::simp3l   |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P - 1 ) || ( N - 1 ) )
+5::simp3r   |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> A e. ZZ )
+6a::sqfpc
+6:2,3,1,6a:syl3anc |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P pCnt N ) <_ 1 )
+7:1,2,4:3jca |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P e. Prime /\ N e. NN /\ ( P - 1 ) || ( N - 1 ) ) )
+8a::korselt2
+8:7,5,8a:syl2anc |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> P || ( ( A ^ N ) - A ) )
+9:2:nnnn0d  |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> N e. NN0 )
+10a::zexpcl
+10:5,9,10a:syl2anc |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( A ^ N ) e. ZZ )
+11:10,5:zsubcld |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( ( A ^ N ) - A ) e. ZZ )
+12a::prmnn
+12:1,12a:syl |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> P e. NN )
+13:12:nncnd |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> P e. CC )
+14a::exp1
+14:13,14a:syl |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P ^ 1 ) = P )
+15:14,8:eqbrtrd |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P ^ 1 ) || ( ( A ^ N ) - A ) )
+16::1nn0    |- 1 e. NN0
+16b:16:a1i  |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> 1 e. NN0 )
+17a::pcdvdsb
+17:1,11,16b,17a:syl3anc |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( 1 <_ ( P pCnt ( ( A ^ N ) - A ) ) <-> ( P ^ 1 ) || ( ( A ^ N ) - A ) ) )
+18:15,17:mpbird |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> 1 <_ ( P pCnt ( ( A ^ N ) - A ) ) )
+19a::nnq
+19:2,19a:syl |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> N e. QQ )
+20a::pcxcl
+20:1,19,20a:syl2anc |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P pCnt N ) e. RR* )
+21::1xr     |- 1 e. RR*
+22:21:a1i   |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> 1 e. RR* )
+23a::zq
+23:11,23a:syl |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( ( A ^ N ) - A ) e. QQ )
+24a::pcxcl
+24:1,23,24a:syl2anc |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P pCnt ( ( A ^ N ) - A ) ) e. RR* )
+qed:20,22,24,6,18:xrletrd |- ( ( P e. Prime /\ ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ ( ( P - 1 ) || ( N - 1 ) /\ A e. ZZ ) ) -> ( P pCnt N ) <_ ( P pCnt ( ( A ^ N ) - A ) ) )
+$)

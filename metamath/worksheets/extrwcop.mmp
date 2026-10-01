@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=extrwcop  LOC_AFTER=?
+
+* The product of a finite set of primes is coprime to a prime outside the set (Lean: Nat.Coprime.prod_left with Nat.coprime_primes).
+
+s1::simp3 |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> P e. Prime )
+s2::simp2 |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> S C_ Prime )
+s3::simp1 |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> S e. Fin )
+s4:s2:adantr |- ( ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) /\ j e. S ) -> S C_ Prime )
+s5::simpr |- ( ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) /\ j e. S ) -> j e. S )
+s6:s4,s5:sseldd |- ( ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) /\ j e. S ) -> j e. Prime )
+i7::prmnn
+s8:s6,i7:syl |- ( ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) /\ j e. S ) -> j e. NN )
+s9:s3,s8:fprodnncl |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> prod_ j e. S j e. NN )
+s10:s9:nnzd |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> prod_ j e. S j e. ZZ )
+s11::extrwpdv |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( P || prod_ j e. S j -> P e. S ) )
+s12:s11:con3d |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( -. P e. S -> -. P || prod_ j e. S j ) )
+i13::coprm
+s14:s1,s10,i13:syl2anc |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( -. P || prod_ j e. S j <-> ( P gcd prod_ j e. S j ) = 1 ) )
+s15:s14:biimpd |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( -. P || prod_ j e. S j -> ( P gcd prod_ j e. S j ) = 1 ) )
+s16:s12,s15:syld |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( -. P e. S -> ( P gcd prod_ j e. S j ) = 1 ) )
+i17::prmz
+s18:s1,i17:syl |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> P e. ZZ )
+i19::gcdcom
+s20:s10,s18,i19:syl2anc |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( prod_ j e. S j gcd P ) = ( P gcd prod_ j e. S j ) )
+s21:s20:eqeq1d |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( ( prod_ j e. S j gcd P ) = 1 <-> ( P gcd prod_ j e. S j ) = 1 ) )
+s22:s21:biimprd |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( ( P gcd prod_ j e. S j ) = 1 -> ( prod_ j e. S j gcd P ) = 1 ) )
+qed:s16,s22:syld |- ( ( S e. Fin /\ S C_ Prime /\ P e. Prime ) -> ( -. P e. S -> ( prod_ j e. S j gcd P ) = 1 ) )
+$)

@@ -1,0 +1,73 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3cx0  LOC_AFTER=?
+
+* For ` 0 < Re A ` the power ` x ^c A ` is continuous on ` [ 0 , +oo ) ` , the point ` 0 ` included ( ~ cxpcn3 ).
+
+s1::simpl |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> A e. CC )
+s2::simpr |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> 0 < ( Re ` A ) )
+s3::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s4:s3:cnfldtopon |- ( TopOpen ` CCfld ) e. ( TopOn ` CC )
+s5:s4:a1i |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( TopOpen ` CCfld ) e. ( TopOn ` CC ) )
+s6::rge0ssre |- ( 0 [,) +oo ) C_ RR
+s7::ax-resscn |- RR C_ CC
+s8:s6,s7:sstri |- ( 0 [,) +oo ) C_ CC
+s9:s8:a1i |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( 0 [,) +oo ) C_ CC )
+s10::ref |- Re : CC --> RR
+i11::fdm
+s12:s10,i11:ax-mp |- dom Re = CC
+s13::cnvimass |- ( `' Re " RR+ ) C_ dom Re
+s14:s13,s12:sseqtri |- ( `' Re " RR+ ) C_ CC
+s15:s14:a1i |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( `' Re " RR+ ) C_ CC )
+i16::resttopon
+s17:s5,s9,i16:syl2anc |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) e. ( TopOn ` ( 0 [,) +oo ) ) )
+i18::resttopon
+s19:s5,s15,i18:syl2anc |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( ( TopOpen ` CCfld ) |`t ( `' Re " RR+ ) ) e. ( TopOn ` ( `' Re " RR+ ) ) )
+s20::eqid |- ( `' Re " RR+ ) = ( `' Re " RR+ )
+s21::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s22::eqid |- ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) = ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) )
+s23::eqid |- ( ( TopOpen ` CCfld ) |`t ( `' Re " RR+ ) ) = ( ( TopOpen ` CCfld ) |`t ( `' Re " RR+ ) )
+s24:s20,s21,s22,s23:cxpcn3 |- ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) ) e. ( ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) tX ( ( TopOpen ` CCfld ) |`t ( `' Re " RR+ ) ) ) Cn ( TopOpen ` CCfld ) )
+s25::ref |- Re : CC --> RR
+i26::ffn
+s27:s25,i26:ax-mp |- Re Fn CC
+s28:s1:recld |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( Re ` A ) e. RR )
+s29:s28,s2:jca |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( ( Re ` A ) e. RR /\ 0 < ( Re ` A ) ) )
+s30::elrp |- ( ( Re ` A ) e. RR+ <-> ( ( Re ` A ) e. RR /\ 0 < ( Re ` A ) ) )
+s31:s29,s30:sylibr |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( Re ` A ) e. RR+ )
+s32:s1,s31:jca |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( A e. CC /\ ( Re ` A ) e. RR+ ) )
+i33::elpreima
+s34:s27,i33:ax-mp |- ( A e. ( `' Re " RR+ ) <-> ( A e. CC /\ ( Re ` A ) e. RR+ ) )
+s35:s32,s34:sylibr |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> A e. ( `' Re " RR+ ) )
+s36:s17:cnmptid |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( x e. ( 0 [,) +oo ) |-> x ) e. ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) ) )
+s37:s17,s19,s35:cnmptc |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( x e. ( 0 [,) +oo ) |-> A ) e. ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( ( TopOpen ` CCfld ) |`t ( `' Re " RR+ ) ) ) )
+s38:s24:a1i |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) ) e. ( ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) tX ( ( TopOpen ` CCfld ) |`t ( `' Re " RR+ ) ) ) Cn ( TopOpen ` CCfld ) ) )
+s39:s17,s36,s37,s38:cnmpt12f |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( x e. ( 0 [,) +oo ) |-> ( x ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) ) A ) ) e. ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( TopOpen ` CCfld ) ) )
+s40::oveq1 |- ( a = x -> ( a ^c b ) = ( x ^c b ) )
+s41::oveq2 |- ( b = A -> ( x ^c b ) = ( x ^c A ) )
+s42::eqid |- ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) ) = ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) )
+s43::ovex |- ( x ^c A ) e. _V
+s44:s40,s41,s42,s43:ovmpo |- ( ( x e. ( 0 [,) +oo ) /\ A e. ( `' Re " RR+ ) ) -> ( x ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) ) A ) = ( x ^c A ) )
+s45::simpr |- ( ( ( A e. CC /\ 0 < ( Re ` A ) ) /\ x e. ( 0 [,) +oo ) ) -> x e. ( 0 [,) +oo ) )
+s46:s35:adantr |- ( ( ( A e. CC /\ 0 < ( Re ` A ) ) /\ x e. ( 0 [,) +oo ) ) -> A e. ( `' Re " RR+ ) )
+s47:s45,s46,s44:syl2anc |- ( ( ( A e. CC /\ 0 < ( Re ` A ) ) /\ x e. ( 0 [,) +oo ) ) -> ( x ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) ) A ) = ( x ^c A ) )
+s48:s47:mpteq2dva |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( x e. ( 0 [,) +oo ) |-> ( x ( a e. ( 0 [,) +oo ) , b e. ( `' Re " RR+ ) |-> ( a ^c b ) ) A ) ) = ( x e. ( 0 [,) +oo ) |-> ( x ^c A ) ) )
+s49:s48,s39:eqeltrrd |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( x e. ( 0 [,) +oo ) |-> ( x ^c A ) ) e. ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( TopOpen ` CCfld ) ) )
+s50::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s51:s50:cnfldtopon |- ( TopOpen ` CCfld ) e. ( TopOn ` CC )
+i52::toponuni
+s53:s51,i52:ax-mp |- CC = U. ( TopOpen ` CCfld )
+s54::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s55:s54:cnfldtop |- ( TopOpen ` CCfld ) e. Top
+s56:s53:restid |- ( ( TopOpen ` CCfld ) e. Top -> ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld ) )
+s57:s55,s56:ax-mp |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s58::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s59::eqid |- ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) = ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) )
+s60::eqid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( ( TopOpen ` CCfld ) |`t CC )
+s61:s58,s59,s60:cncfcn |- ( ( ( 0 [,) +oo ) C_ CC /\ CC C_ CC ) -> ( ( 0 [,) +oo ) -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) )
+s62::ssid |- CC C_ CC
+s63:s62:a1i |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> CC C_ CC )
+s64:s9,s63,s61:syl2anc |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( ( 0 [,) +oo ) -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) )
+s65:s57:oveq2i |- ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) = ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( TopOpen ` CCfld ) )
+s66:s65:a1i |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) = ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( TopOpen ` CCfld ) ) )
+s67:s64,s66:eqtrd |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( ( 0 [,) +oo ) -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t ( 0 [,) +oo ) ) Cn ( TopOpen ` CCfld ) ) )
+qed:s49,s67:eleqtrrd |- ( ( A e. CC /\ 0 < ( Re ` A ) ) -> ( x e. ( 0 [,) +oo ) |-> ( x ^c A ) ) e. ( ( 0 [,) +oo ) -cn-> CC ) )
+$)

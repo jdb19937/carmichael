@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrtwsumlem  LOC_AFTER=?
+
+* Lemma for dchrtwsum: the character-twisted sum of the additive character at U u over the coprime residues u is the inverse character at U times the Gauss sum (Lean hinner).
+
+s1::simp1 |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s2:s1:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> N e. NN )
+s3:s1:simprd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> X e. ( Base ` ( DChr ` N ) ) )
+s4::simp2 |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> U e. ZZ )
+s5::simp3 |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( U gcd N ) = 1 )
+s6::simpr |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> u e. ( 0 ..^ N ) )
+i7::elfzoelz
+s8:s6,i7:syl |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> u e. ZZ )
+s9:s4:adantr |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> U e. ZZ )
+s10:s9,s8:zmulcld |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> ( U x. u ) e. ZZ )
+s11:s2:adantr |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> N e. NN )
+s12:s10:zcnd |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> ( U x. u ) e. CC )
+s13:s11:nncnd |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> N e. CC )
+s14:s11:nnne0d |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> N =/= 0 )
+s15:s12,s13,s14:divcld |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> ( ( U x. u ) / N ) e. CC )
+s16::ax-icn |- _i e. CC
+s17::picn |- _pi e. CC
+s18:s16,s17:mulcli |- ( _i x. _pi ) e. CC
+s19::2cn |- 2 e. CC
+s20:s19,s18:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s21:s20:a1i |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s22:s21,s15:mulcld |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) e. CC )
+s23:s22:efcld |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) /\ u e. ( 0 ..^ N ) ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) e. CC )
+s24:s2,s3,s23:dchrsumcr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) ) = sum_ u e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) ) )
+s25::id |- ( u = a -> u = a )
+va1:s25:fveq2d |- ( u = a -> ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) )
+va2:va1:fveq2d |- ( u = a -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+va3:s25:oveq2d |- ( u = a -> ( U x. u ) = ( U x. a ) )
+va4:va3:oveq1d |- ( u = a -> ( ( U x. u ) / N ) = ( ( U x. a ) / N ) )
+va5:va4:oveq2d |- ( u = a -> ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. a ) / N ) ) )
+va6:va5:fveq2d |- ( u = a -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. a ) / N ) ) ) )
+va7:va2,va6:oveq12d |- ( u = a -> ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. a ) / N ) ) ) ) )
+s26:va7:cbvsumv |- sum_ u e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) ) = sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. a ) / N ) ) ) )
+s27:s26:a1i |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> sum_ u e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) ) = sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. a ) / N ) ) ) ) )
+i28::dchrgsshift
+s29:s1,s4,s5,i28:syl3anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. a ) / N ) ) ) ) = ( ( ( ( invg ` ( DChr ` N ) ) ` X ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) x. ( N DChrGS X ) ) )
+s30:s24,s27:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) ) = sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. a ) / N ) ) ) ) )
+qed:s30,s29:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( U x. u ) / N ) ) ) ) = ( ( ( ( invg ` ( DChr ` N ) ) ` X ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) x. ( N DChrGS X ) ) )
+$)

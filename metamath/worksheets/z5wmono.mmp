@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=z5wmono  LOC_AFTER=?
+
+* The window integrand e ^ ( - K / e ^ t ) is nondecreasing in t for K >_ 0 (Lean hmono in exp_sub_exp_le_Wwin).
+
+s1::simpll |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> K e. RR )
+s2::simplr |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> 0 <_ K )
+s3::simpr |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( Y e. RR /\ Z e. RR /\ Y <_ Z ) )
+s4:s3:simp1d |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> Y e. RR )
+s5:s3:simp2d |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> Z e. RR )
+s6:s3:simp3d |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> Y <_ Z )
+s7:s4:rpefcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` Y ) e. RR+ )
+s8:s5:rpefcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` Z ) e. RR+ )
+i9::efle
+s10:s4,s5,i9:syl2anc |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( Y <_ Z <-> ( exp ` Y ) <_ ( exp ` Z ) ) )
+s11:s6,s10:mpbid |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` Y ) <_ ( exp ` Z ) )
+s12:s7,s8,s1,s2,s11:lediv2ad |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( K / ( exp ` Z ) ) <_ ( K / ( exp ` Y ) ) )
+s13:s1,s7:rerpdivcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( K / ( exp ` Y ) ) e. RR )
+s14:s1,s8:rerpdivcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( K / ( exp ` Z ) ) e. RR )
+s15:s14,s13:lenegd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( ( K / ( exp ` Z ) ) <_ ( K / ( exp ` Y ) ) <-> -u ( K / ( exp ` Y ) ) <_ -u ( K / ( exp ` Z ) ) ) )
+s16:s12,s15:mpbid |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> -u ( K / ( exp ` Y ) ) <_ -u ( K / ( exp ` Z ) ) )
+s17:s1:recnd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> K e. CC )
+s18:s7:rpcnd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` Y ) e. CC )
+s19:s7:rpne0d |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` Y ) =/= 0 )
+s20:s17,s18,s19:divnegd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> -u ( K / ( exp ` Y ) ) = ( -u K / ( exp ` Y ) ) )
+s21:s8:rpcnd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` Z ) e. CC )
+s22:s8:rpne0d |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` Z ) =/= 0 )
+s23:s17,s21,s22:divnegd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> -u ( K / ( exp ` Z ) ) = ( -u K / ( exp ` Z ) ) )
+s24:s16,s20,s23:3brtr3d |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( -u K / ( exp ` Y ) ) <_ ( -u K / ( exp ` Z ) ) )
+s25:s1:renegcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> -u K e. RR )
+s26:s25,s7:rerpdivcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( -u K / ( exp ` Y ) ) e. RR )
+s27:s1:renegcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> -u K e. RR )
+s28:s27,s8:rerpdivcld |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( -u K / ( exp ` Z ) ) e. RR )
+i29::efle
+s30:s26,s28,i29:syl2anc |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( ( -u K / ( exp ` Y ) ) <_ ( -u K / ( exp ` Z ) ) <-> ( exp ` ( -u K / ( exp ` Y ) ) ) <_ ( exp ` ( -u K / ( exp ` Z ) ) ) ) )
+qed:s24,s30:mpbid |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( Y e. RR /\ Z e. RR /\ Y <_ Z ) ) -> ( exp ` ( -u K / ( exp ` Y ) ) ) <_ ( exp ` ( -u K / ( exp ` Z ) ) ) )
+$)

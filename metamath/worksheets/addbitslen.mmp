@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=addbitslen  LOC_AFTER=?
+
+* The sum has at most one more digit than the longer summand (Lean: addBits_length).
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> C e. 2o )
+s4::addbitsval |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X addBits Y ) ` C ) = ( ( ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ++ ( addCarry ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) )
+s5:s4:fveq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( X addBits Y ) ` C ) ) = ( # ` ( ( ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ++ ( addCarry ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) )
+i6::tonatcl
+s7:s1,i6:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` X ) e. NN0 )
+s8:s7:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` X ) e. ZZ )
+i9::tonatcl
+s10:s2,i9:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` Y ) e. NN0 )
+s11:s10:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` Y ) e. ZZ )
+s12:s8,s11:zaddcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( toNat ` X ) + ( toNat ` Y ) ) e. ZZ )
+i13::bwbncl
+s14:s3,i13:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` C ) e. NN0 )
+s15:s14:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` C ) e. ZZ )
+s16:s12,s15:zaddcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) e. ZZ )
+i17::lencl
+s18:s2,i17:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` Y ) e. NN0 )
+i19::lencl
+s20:s1,i19:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` X ) e. NN0 )
+s21:s18,s20:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) e. NN0 )
+i22::bwrdcl
+s23:s16,s21,i22:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) e. Word 2o )
+s24::1oel2o |- 1o e. 2o
+s25:s24:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> 1o e. 2o )
+s26::0el2o |- (/) e. 2o
+s27:s26:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> (/) e. 2o )
+s28:s25,s27:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) e. 2o )
+i29::addcarrycl
+s30:s28,i29:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( addCarry ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. Word 2o )
+i31::ccatlen
+s32:s23,s30,i31:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ++ ( addCarry ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) = ( ( # ` ( ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) + ( # ` ( addCarry ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) )
+i33::bwrdlen
+s34:s16,s21,i33:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) = if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+i35::addcarrylen
+s36:s28,i35:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( addCarry ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) = ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) )
+s37:s34,s36:oveq12d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( # ` ( ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) ) + ( # ` ( addCarry ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) = ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) )
+s38:s5,s32,s37:3eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( X addBits Y ) ` C ) ) = ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) )
+i39::bwbnle1
+s40:s28,i39:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) <_ 1 )
+i41::bwbncl
+s42:s28,i41:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. NN0 )
+s43:s42:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. ZZ )
+s44:s43:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. RR )
+s45::1red |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> 1 e. RR )
+s46:s18:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` Y ) e. ZZ )
+s47:s46:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` Y ) e. RR )
+s48:s20:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` X ) e. ZZ )
+s49:s48:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` X ) e. RR )
+s50:s47,s49:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) e. RR )
+s51:s44,s45,s50,s40:leadd2dd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + ( bToNat ` if ( ( 2 ^ if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) <_ ( ( ( toNat ` X ) + ( toNat ` Y ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) <_ ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + 1 ) )
+qed:s38,s51:eqbrtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( # ` ( ( X addBits Y ) ` C ) ) <_ ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + 1 ) )
+$)

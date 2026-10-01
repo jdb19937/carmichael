@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=poolgondplb  LOC_AFTER=?
+
+* Base of the induction for poolgondpl.
+
+s1::id |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) )
+s2:s1:simp1d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> X e. NN0 )
+s3:s1:simp2d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> Z e. NN0 )
+s4:s1:simp3d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> K e. NN0 )
+s5:s2,s3:jca |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( X e. NN0 /\ Z e. NN0 ) )
+s6:s5,s4:jca |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( ( X e. NN0 /\ Z e. NN0 ) /\ K e. NN0 ) )
+i7::poolgo0
+s8:s6,i7:syl |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( ( ( X PoolGo Z ) ` K ) ` (/) ) = <. (/) , 0 >. )
+s9::0ex |- (/) e. _V
+s10:s9:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> (/) e. _V )
+s11::c0ex |- 0 e. _V
+s12:s11:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> 0 e. _V )
+s13:s8:fveq2d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) = ( 1st ` <. (/) , 0 >. ) )
+i14::op1stg
+s15:s10,s12,i14:syl2anc |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 1st ` <. (/) , 0 >. ) = (/) )
+s16:s13,s15:eqtrd |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) = (/) )
+s17:s16:cnveqd |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> `' ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) = `' (/) )
+s18:s17:funeqd |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( Fun `' ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) <-> Fun `' (/) ) )
+s19::algndp0 |- Fun `' (/)
+s20:s19:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> Fun `' (/) )
+s21:s20,s18:mpbird |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> Fun `' ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) )
+qed:s21:a1d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( Fun `' (/) -> Fun `' ( 1st ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) ) )
+$)

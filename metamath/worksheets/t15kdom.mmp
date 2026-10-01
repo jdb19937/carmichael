@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=t15kdom  LOC_AFTER=?
+
+* A stack index of the eight-stack machine.
+
+s1::simpl |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> ( 1st ` ( 1st ` T ) ) = TMGam )
+s2::simpr |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> K e. ( 0 ..^ 8 ) )
+s3::tmgamfn |- TMGam Fn ( 0 ..^ 8 )
+i4::fndm
+s5:s3,i4:ax-mp |- dom TMGam = ( 0 ..^ 8 )
+s6:s1:dmeqd |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> dom ( 1st ` ( 1st ` T ) ) = dom TMGam )
+s7:s6,s5:eqtrdi |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> dom ( 1st ` ( 1st ` T ) ) = ( 0 ..^ 8 ) )
+s8:s2,s7:eleqtrrd |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> K e. dom ( 1st ` ( 1st ` T ) ) )
+s9:s1:fveq1d |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> ( ( 1st ` ( 1st ` T ) ) ` K ) = ( TMGam ` K ) )
+i10::tmgamfv
+s11:s2,i10:syl |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> ( TMGam ` K ) = Gamma' )
+s12:s9,s11:eqtrd |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> ( ( 1st ` ( 1st ` T ) ) ` K ) = Gamma' )
+qed:s8,s12:jca |- ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) -> ( K e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 1st ` ( 1st ` T ) ) ` K ) = Gamma' ) )
+$)

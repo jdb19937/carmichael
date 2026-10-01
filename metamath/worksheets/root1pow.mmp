@@ -1,0 +1,60 @@
+$( <MM> <PROOF_ASST> THEOREM=root1pow  LOC_AFTER=?
+
+* The U-th root of unity is the V-th power of the ( U x. V )-th root of unity: its K-th power is the ( K x. V )-th power of the latter.
+
+s1::simp1 |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> U e. NN )
+s2::simp2 |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> V e. NN )
+s3::simp3 |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> K e. ZZ )
+s4:s1,s2:nnmulcld |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( U x. V ) e. NN )
+s5:s1:nncnd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> U e. CC )
+s6:s1:nnne0d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> U =/= 0 )
+s7:s2:nncnd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> V e. CC )
+s8:s2:nnne0d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> V =/= 0 )
+s9:s4:nncnd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( U x. V ) e. CC )
+s10:s4:nnne0d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( U x. V ) =/= 0 )
+s11::2cnd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> 2 e. CC )
+i12::root1ef
+s13:s1,i12:syl |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( -u 1 ^c ( 2 / U ) ) = ( exp ` ( ( 2 / U ) x. ( _i x. _pi ) ) ) )
+i14::root1ef
+s15:s4,i14:syl |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( -u 1 ^c ( 2 / ( U x. V ) ) ) = ( exp ` ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) )
+s16:s11,s9,s10:divcld |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( 2 / ( U x. V ) ) e. CC )
+s17:s11,s5,s6:divcld |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( 2 / U ) e. CC )
+s18::ax-icn |- _i e. CC
+s19::picn |- _pi e. CC
+i20::mulcl
+s21:s18,s19,i20:mp2an |- ( _i x. _pi ) e. CC
+s22:s21:a1i |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( _i x. _pi ) e. CC )
+s23:s16,s22:mulcld |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) e. CC )
+s24:s2:nnzd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> V e. ZZ )
+i25::efexp
+s26:s23,s24,i25:syl2anc |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( exp ` ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ) = ( ( exp ` ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ^ V ) )
+s27:s7,s16,s22:mulassd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( V x. ( 2 / ( U x. V ) ) ) x. ( _i x. _pi ) ) = ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) )
+s28:s27:eqcomd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) = ( ( V x. ( 2 / ( U x. V ) ) ) x. ( _i x. _pi ) ) )
+s29:s11,s5,s7,s6,s8:divdiv1d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( 2 / U ) / V ) = ( 2 / ( U x. V ) ) )
+s30:s29:eqcomd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( 2 / ( U x. V ) ) = ( ( 2 / U ) / V ) )
+s31:s17,s7,s8:divcan2d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( V x. ( ( 2 / U ) / V ) ) = ( 2 / U ) )
+s32:s30:oveq2d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( V x. ( 2 / ( U x. V ) ) ) = ( V x. ( ( 2 / U ) / V ) ) )
+s33:s32,s31:eqtrd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( V x. ( 2 / ( U x. V ) ) ) = ( 2 / U ) )
+s34:s33:oveq1d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( V x. ( 2 / ( U x. V ) ) ) x. ( _i x. _pi ) ) = ( ( 2 / U ) x. ( _i x. _pi ) ) )
+s35:s28,s34:eqtrd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) = ( ( 2 / U ) x. ( _i x. _pi ) ) )
+s36:s15:oveq1d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ V ) = ( ( exp ` ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ^ V ) )
+s37:s26:eqcomd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( exp ` ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ^ V ) = ( exp ` ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ) )
+s38:s36,s37:eqtrd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ V ) = ( exp ` ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ) )
+s39:s35:fveq2d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( exp ` ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ) = ( exp ` ( ( 2 / U ) x. ( _i x. _pi ) ) ) )
+s40:s13:eqcomd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( exp ` ( ( 2 / U ) x. ( _i x. _pi ) ) ) = ( -u 1 ^c ( 2 / U ) ) )
+s41:s39,s40:eqtrd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( exp ` ( V x. ( ( 2 / ( U x. V ) ) x. ( _i x. _pi ) ) ) ) = ( -u 1 ^c ( 2 / U ) ) )
+s42:s38,s41:eqtrd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ V ) = ( -u 1 ^c ( 2 / U ) ) )
+s43:s42:eqcomd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( -u 1 ^c ( 2 / U ) ) = ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ V ) )
+s44:s43:oveq1d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / U ) ) ^ K ) = ( ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ V ) ^ K ) )
+i45::root1cl
+s46:s4,i45:syl |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) e. CC /\ ( -u 1 ^c ( 2 / ( U x. V ) ) ) =/= 0 ) )
+s47:s2:nnzd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> V e. ZZ )
+s48:s47,s3:jca |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( V e. ZZ /\ K e. ZZ ) )
+i49::expmulz
+s50:s46,s48,i49:syl2anc |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ ( V x. K ) ) = ( ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ V ) ^ K ) )
+s51:s50:eqcomd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ V ) ^ K ) = ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ ( V x. K ) ) )
+s52:s3:zcnd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> K e. CC )
+s53:s7,s52:mulcomd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( V x. K ) = ( K x. V ) )
+s54:s53:oveq2d |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ ( V x. K ) ) = ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ ( K x. V ) ) )
+qed:s44,s51,s54:3eqtrd |- ( ( U e. NN /\ V e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / U ) ) ^ K ) = ( ( -u 1 ^c ( 2 / ( U x. V ) ) ) ^ ( K x. V ) ) )
+$)

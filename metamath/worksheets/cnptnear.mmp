@@ -1,0 +1,77 @@
+$( <MM> <PROOF_ASST> THEOREM=cnptnear  LOC_AFTER=?
+
+* An open subset of the complex plane contains, within any positive distance of each of its points, a point other than that point.
+
+s1::simpl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> ( E e. ( TopOpen ` CCfld ) /\ P e. E ) )
+s2::simpr |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> S e. RR+ )
+i3::simpl
+s4:s1,i3:syl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> E e. ( TopOpen ` CCfld ) )
+i5::simpr
+s6:s1,i5:syl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> P e. E )
+i7::cnopnbl
+s8:s1,i7:syl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> E. t e. RR+ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) )
+s9::unicntop |- CC = U. ( TopOpen ` CCfld )
+i10::elssuni
+s11:s4,i10:syl |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> E C_ U. ( TopOpen ` CCfld ) )
+s12:s9:eqcomi |- U. ( TopOpen ` CCfld ) = CC
+s13:s11,s12:sseqtrdi |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> E C_ CC )
+s14:s13,s6:sseldd |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> P e. CC )
+s15::simpr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) )
+i16::simpl
+s17:s15,i16:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> t e. RR+ )
+s18::simpr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) )
+i19::simpr
+s20:s18,i19:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) )
+s21:s2:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> S e. RR+ )
+i22::softmin
+s23:s21,s17,i22:syl2anc |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) e. RR+ /\ ( ( ( S x. t ) / ( S + t ) ) <_ S /\ ( ( S x. t ) / ( S + t ) ) <_ t ) ) )
+i24::simpl
+s25:s23,i24:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( S x. t ) / ( S + t ) ) e. RR+ )
+i26::simpr
+s27:s23,i26:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) <_ S /\ ( ( S x. t ) / ( S + t ) ) <_ t ) )
+s28:s25:rphalfcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) / 2 ) e. RR+ )
+s29:s28:rpred |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) / 2 ) e. RR )
+s30:s29:recnd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) / 2 ) e. CC )
+i31::rphalflt
+s32:s25,i31:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) / 2 ) < ( ( S x. t ) / ( S + t ) ) )
+s33:s25:rpred |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( S x. t ) / ( S + t ) ) e. RR )
+s34:s21:rpred |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> S e. RR )
+i35::simpl
+s36:s27,i35:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( S x. t ) / ( S + t ) ) <_ S )
+s37:s29,s33,s34,s32,s36:ltletrd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) / 2 ) < S )
+s38:s17:rpred |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> t e. RR )
+i39::simpr
+s40:s27,i39:syl |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( S x. t ) / ( S + t ) ) <_ t )
+s41:s29,s33,s38,s32,s40:ltletrd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) / 2 ) < t )
+s42:s14:adantr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> P e. CC )
+s43:s42,s30:addcld |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) e. CC )
+s44:s42,s30:pncan2d |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) = ( ( ( S x. t ) / ( S + t ) ) / 2 ) )
+s45:s44:fveq2d |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) = ( abs ` ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) )
+s46:s28:rpge0d |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> 0 <_ ( ( ( S x. t ) / ( S + t ) ) / 2 ) )
+s47:s29,s46:absidd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( abs ` ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) = ( ( ( S x. t ) / ( S + t ) ) / 2 ) )
+s48:s45,s47:eqtrd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) = ( ( ( S x. t ) / ( S + t ) ) / 2 ) )
+s49:s28:rpne0d |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( S x. t ) / ( S + t ) ) / 2 ) =/= 0 )
+s50:s44,s49:eqnetrd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) =/= 0 )
+i51::subeq0
+s52:s43,s42,i51:syl2anc |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) = 0 <-> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) = P ) )
+s53:s52:necon3bid |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) =/= 0 <-> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) =/= P ) )
+s54:s50,s53:mpbid |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) =/= P )
+s55::oveq1 |- ( z = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( z - P ) = ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) )
+s56:s55:fveq2d |- ( z = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( abs ` ( z - P ) ) = ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) )
+s57:s56:breq1d |- ( z = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( ( abs ` ( z - P ) ) < t <-> ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < t ) )
+s58::eleq1 |- ( z = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( z e. E <-> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) e. E ) )
+s59:s57,s58:imbi12d |- ( z = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( ( ( abs ` ( z - P ) ) < t -> z e. E ) <-> ( ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < t -> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) e. E ) ) )
+s60:s48,s41:eqbrtrd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < t )
+s61:s59,s20,s43:rspcdva |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < t -> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) e. E ) )
+s62:s60,s61:mpd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) e. E )
+s63:s48,s37:eqbrtrd |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < S )
+s64::neeq1 |- ( x = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( x =/= P <-> ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) =/= P ) )
+s65::oveq1 |- ( x = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( x - P ) = ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) )
+s66:s65:fveq2d |- ( x = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( abs ` ( x - P ) ) = ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) )
+s67:s66:breq1d |- ( x = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( ( abs ` ( x - P ) ) < S <-> ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < S ) )
+s68:s64,s67:anbi12d |- ( x = ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) -> ( ( x =/= P /\ ( abs ` ( x - P ) ) < S ) <-> ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) =/= P /\ ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < S ) ) )
+s69:s54,s63:jca |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) =/= P /\ ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < S ) )
+s70:s68:rspcev |- ( ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) e. E /\ ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) =/= P /\ ( abs ` ( ( P + ( ( ( S x. t ) / ( S + t ) ) / 2 ) ) - P ) ) < S ) ) -> E. x e. E ( x =/= P /\ ( abs ` ( x - P ) ) < S ) )
+s71:s62,s69,s70:syl2anc |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) /\ ( t e. RR+ /\ A. z e. CC ( ( abs ` ( z - P ) ) < t -> z e. E ) ) ) -> E. x e. E ( x =/= P /\ ( abs ` ( x - P ) ) < S ) )
+qed:s8,s71:rexlimddv |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ S e. RR+ ) -> E. x e. E ( x =/= P /\ ( abs ` ( x - P ) ) < S ) )
+$)

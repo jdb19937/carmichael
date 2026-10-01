@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=dsertdv  LOC_AFTER=?
+
+* The derivative of a term function of a Dirichlet series on the half-plane.
+
+s1::simpl |- ( ( A : NN --> CC /\ K e. NN ) -> A : NN --> CC )
+s2::simpr |- ( ( A : NN --> CC /\ K e. NN ) -> K e. NN )
+s3:s1,s2:ffvelcdmd |- ( ( A : NN --> CC /\ K e. NN ) -> ( A ` K ) e. CC )
+s4::cnelprrecn |- CC e. { RR , CC }
+s5:s4:a1i |- ( ( A : NN --> CC /\ K e. NN ) -> CC e. { RR , CC } )
+s6::hpss |- ( `' Re " ( T (,) +oo ) ) C_ CC
+s7:s6:a1i |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( `' Re " ( T (,) +oo ) ) C_ CC )
+s8::simpr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> z e. ( `' Re " ( T (,) +oo ) ) )
+s9:s7,s8:sseldd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> z e. CC )
+s10:s2:nncnd |- ( ( A : NN --> CC /\ K e. NN ) -> K e. CC )
+s11:s10:adantr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> K e. CC )
+s12:s9:negcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> -u z e. CC )
+i13::cxpcl
+s14:s11,s12,i13:syl2anc |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( K ^c -u z ) e. CC )
+s15:s2:nnrpd |- ( ( A : NN --> CC /\ K e. NN ) -> K e. RR+ )
+s16:s15:relogcld |- ( ( A : NN --> CC /\ K e. NN ) -> ( log ` K ) e. RR )
+s17:s16:recnd |- ( ( A : NN --> CC /\ K e. NN ) -> ( log ` K ) e. CC )
+s18:s17:adantr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( log ` K ) e. CC )
+s19:s18,s14:mulcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( log ` K ) x. ( K ^c -u z ) ) e. CC )
+s20:s19:negcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> -u ( ( log ` K ) x. ( K ^c -u z ) ) e. CC )
+s21:s2:nnrpd |- ( ( A : NN --> CC /\ K e. NN ) -> K e. RR+ )
+s22::hpopn |- ( `' Re " ( T (,) +oo ) ) e. ( TopOpen ` CCfld )
+s23:s22:a1i |- ( ( A : NN --> CC /\ K e. NN ) -> ( `' Re " ( T (,) +oo ) ) e. ( TopOpen ` CCfld ) )
+s24:s21,s23:jca |- ( ( A : NN --> CC /\ K e. NN ) -> ( K e. RR+ /\ ( `' Re " ( T (,) +oo ) ) e. ( TopOpen ` CCfld ) ) )
+i25::cxpnegdv
+s26:s24,i25:syl |- ( ( A : NN --> CC /\ K e. NN ) -> ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( K ^c -u z ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( log ` K ) x. ( K ^c -u z ) ) ) )
+s27:s5,s14,s20,s26,s3:dvmptcmul |- ( ( A : NN --> CC /\ K e. NN ) -> ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. -u ( ( log ` K ) x. ( K ^c -u z ) ) ) ) )
+s28:s3:adantr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( A ` K ) e. CC )
+s29:s28,s19:mulneg2d |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( A ` K ) x. -u ( ( log ` K ) x. ( K ^c -u z ) ) ) = -u ( ( A ` K ) x. ( ( log ` K ) x. ( K ^c -u z ) ) ) )
+s30:s28,s18,s14:mulassd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) = ( ( A ` K ) x. ( ( log ` K ) x. ( K ^c -u z ) ) ) )
+s31:s30:eqcomd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( A ` K ) x. ( ( log ` K ) x. ( K ^c -u z ) ) ) = ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) )
+s32:s31:negeqd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> -u ( ( A ` K ) x. ( ( log ` K ) x. ( K ^c -u z ) ) ) = -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) )
+s33:s29,s32:eqtrd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( A ` K ) x. -u ( ( log ` K ) x. ( K ^c -u z ) ) ) = -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) )
+s34:s33:mpteq2dva |- ( ( A : NN --> CC /\ K e. NN ) -> ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. -u ( ( log ` K ) x. ( K ^c -u z ) ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) )
+qed:s27,s34:eqtrd |- ( ( A : NN --> CC /\ K e. NN ) -> ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) )
+$)

@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=subborrownil  LOC_AFTER=?
+
+* Lean clause 1 of subBorrow: the borrow out of two empty words is the borrow in.
+
+s1::id |- ( C e. 2o -> C e. 2o )
+s2::wrd0 |- (/) e. Word 2o
+s3:s2:a1i |- ( C e. 2o -> (/) e. Word 2o )
+s4::tonat0 |- ( toNat ` (/) ) = 0
+s5:s4:a1i |- ( C e. 2o -> ( toNat ` (/) ) = 0 )
+s6::hash0 |- ( # ` (/) ) = 0
+s7:s6:a1i |- ( C e. 2o -> ( # ` (/) ) = 0 )
+s8::ifid |- if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = ( # ` (/) )
+s9:s8,s6:eqtri |- if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = 0
+s10:s9:a1i |- ( C e. 2o -> if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = 0 )
+i11::subborrowval
+s12:s3,s3,s1,i11:syl3anc |- ( C e. 2o -> ( ( (/) subBorrow (/) ) ` C ) = if ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) , 1o , (/) ) )
+i13::bwbncl
+s14:s1,i13:syl |- ( C e. 2o -> ( bToNat ` C ) e. NN0 )
+s15:s14:nn0zd |- ( C e. 2o -> ( bToNat ` C ) e. ZZ )
+s16:s15:zred |- ( C e. 2o -> ( bToNat ` C ) e. RR )
+s17:s16:recnd |- ( C e. 2o -> ( bToNat ` C ) e. CC )
+s18:s5:oveq1d |- ( C e. 2o -> ( ( toNat ` (/) ) + ( bToNat ` C ) ) = ( 0 + ( bToNat ` C ) ) )
+s19:s17:addlidd |- ( C e. 2o -> ( 0 + ( bToNat ` C ) ) = ( bToNat ` C ) )
+s20:s18,s19:eqtrd |- ( C e. 2o -> ( ( toNat ` (/) ) + ( bToNat ` C ) ) = ( bToNat ` C ) )
+s21:s5,s20:breq12d |- ( C e. 2o -> ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) <-> 0 < ( bToNat ` C ) ) )
+i22::zgt0ge1
+s23:s15,i22:syl |- ( C e. 2o -> ( 0 < ( bToNat ` C ) <-> 1 <_ ( bToNat ` C ) ) )
+i24::bwbnle1
+s25:s1,i24:syl |- ( C e. 2o -> ( bToNat ` C ) <_ 1 )
+s26::1red |- ( C e. 2o -> 1 e. RR )
+i27::letri3
+s28:s26,s16,i27:syl2anc |- ( C e. 2o -> ( 1 = ( bToNat ` C ) <-> ( 1 <_ ( bToNat ` C ) /\ ( bToNat ` C ) <_ 1 ) ) )
+s29:s25:biantrud |- ( C e. 2o -> ( 1 <_ ( bToNat ` C ) <-> ( 1 <_ ( bToNat ` C ) /\ ( bToNat ` C ) <_ 1 ) ) )
+s30:s29,s28:bitr4d |- ( C e. 2o -> ( 1 <_ ( bToNat ` C ) <-> 1 = ( bToNat ` C ) ) )
+s31::eqcom |- ( 1 = ( bToNat ` C ) <-> ( bToNat ` C ) = 1 )
+s32:s31:a1i |- ( C e. 2o -> ( 1 = ( bToNat ` C ) <-> ( bToNat ` C ) = 1 ) )
+i33::bwbneq1
+s34:s1,i33:syl |- ( C e. 2o -> ( ( bToNat ` C ) = 1 <-> C = 1o ) )
+s35:s21,s23:bitrd |- ( C e. 2o -> ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) <-> 1 <_ ( bToNat ` C ) ) )
+s36:s35,s30:bitrd |- ( C e. 2o -> ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) <-> 1 = ( bToNat ` C ) ) )
+s37:s36,s32:bitrd |- ( C e. 2o -> ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) <-> ( bToNat ` C ) = 1 ) )
+s38:s37,s34:bitrd |- ( C e. 2o -> ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) <-> C = 1o ) )
+s39:s38:ifbid |- ( C e. 2o -> if ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) , 1o , (/) ) = if ( C = 1o , 1o , (/) ) )
+s40::biidd |- ( C e. 2o -> ( C = 1o <-> C = 1o ) )
+s41::simpr |- ( ( C e. 2o /\ C = 1o ) -> C = 1o )
+s42:s40:adantr |- ( ( C e. 2o /\ C = 1o ) -> ( C = 1o <-> C = 1o ) )
+s43:s41,s42:mpbid |- ( ( C e. 2o /\ C = 1o ) -> C = 1o )
+s44:s43:iftrued |- ( ( C e. 2o /\ C = 1o ) -> if ( C = 1o , 1o , (/) ) = 1o )
+s45:s41,s44:eqtr4d |- ( ( C e. 2o /\ C = 1o ) -> C = if ( C = 1o , 1o , (/) ) )
+s46::simpr |- ( ( C e. 2o /\ -. C = 1o ) -> -. C = 1o )
+s47:s40:adantr |- ( ( C e. 2o /\ -. C = 1o ) -> ( C = 1o <-> C = 1o ) )
+s48:s46,s47:mtbid |- ( ( C e. 2o /\ -. C = 1o ) -> -. C = 1o )
+s49:s48:iffalsed |- ( ( C e. 2o /\ -. C = 1o ) -> if ( C = 1o , 1o , (/) ) = (/) )
+s50:s1:adantr |- ( ( C e. 2o /\ -. C = 1o ) -> C e. 2o )
+i51::bwel2on
+s52:s50,i51:syl |- ( ( C e. 2o /\ -. C = 1o ) -> ( -. C = 1o <-> C = (/) ) )
+s53:s46,s52:mpbid |- ( ( C e. 2o /\ -. C = 1o ) -> C = (/) )
+s54:s53,s49:eqtr4d |- ( ( C e. 2o /\ -. C = 1o ) -> C = if ( C = 1o , 1o , (/) ) )
+s55:s45,s54:pm2.61dan |- ( C e. 2o -> C = if ( C = 1o , 1o , (/) ) )
+s56:s39,s55:eqtr4d |- ( C e. 2o -> if ( ( toNat ` (/) ) < ( ( toNat ` (/) ) + ( bToNat ` C ) ) , 1o , (/) ) = C )
+qed:s12,s56:eqtrd |- ( C e. 2o -> ( ( (/) subBorrow (/) ) ` C ) = C )
+$)

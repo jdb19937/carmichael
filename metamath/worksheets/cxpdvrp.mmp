@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=cxpdvrp  LOC_AFTER=?
+
+* The primitive of the zeta integrand on the positive reals.
+
+s1::simpl |- ( ( T e. RR /\ 1 < T ) -> T e. RR )
+s2::simpr |- ( ( T e. RR /\ 1 < T ) -> 1 < T )
+s3:s1:recnd |- ( ( T e. RR /\ 1 < T ) -> T e. CC )
+s4::ax-1cn |- 1 e. CC
+s5:s4:a1i |- ( ( T e. RR /\ 1 < T ) -> 1 e. CC )
+s6::1re |- 1 e. RR
+s7:s6:a1i |- ( ( T e. RR /\ 1 < T ) -> 1 e. RR )
+s8:s5,s3:subcld |- ( ( T e. RR /\ 1 < T ) -> ( 1 - T ) e. CC )
+s9:s2:ltned |- ( ( T e. RR /\ 1 < T ) -> 1 =/= T )
+s10:s5,s3,s9:subne0d |- ( ( T e. RR /\ 1 < T ) -> ( 1 - T ) =/= 0 )
+i11::dvcxp1
+s12:s8,i11:syl |- ( ( T e. RR /\ 1 < T ) -> ( RR _D ( x e. RR+ |-> ( x ^c ( 1 - T ) ) ) ) = ( x e. RR+ |-> ( ( 1 - T ) x. ( x ^c ( ( 1 - T ) - 1 ) ) ) ) )
+s13::simpr |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> x e. RR+ )
+s14:s13:rpcnd |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> x e. CC )
+s15:s8:adantr |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( 1 - T ) e. CC )
+s16:s5:adantr |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> 1 e. CC )
+i17::cxpcl
+s18:s14,s15,i17:syl2anc |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( x ^c ( 1 - T ) ) e. CC )
+s19:s15,s16:subcld |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( ( 1 - T ) - 1 ) e. CC )
+i20::cxpcl
+s21:s14,s19,i20:syl2anc |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( x ^c ( ( 1 - T ) - 1 ) ) e. CC )
+s22:s15,s21:mulcld |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( ( 1 - T ) x. ( x ^c ( ( 1 - T ) - 1 ) ) ) e. CC )
+s23::prid1 |- RR e. { RR , CC }
+s24:s23:a1i |- ( ( T e. RR /\ 1 < T ) -> RR e. { RR , CC } )
+s25:s24,s18,s22,s12,s8,s10:dvmptdivc |- ( ( T e. RR /\ 1 < T ) -> ( RR _D ( x e. RR+ |-> ( ( x ^c ( 1 - T ) ) / ( 1 - T ) ) ) ) = ( x e. RR+ |-> ( ( ( 1 - T ) x. ( x ^c ( ( 1 - T ) - 1 ) ) ) / ( 1 - T ) ) ) )
+s26:s5,s3,s5:sub32d |- ( ( T e. RR /\ 1 < T ) -> ( ( 1 - T ) - 1 ) = ( ( 1 - 1 ) - T ) )
+s27::1m1e0 |- ( 1 - 1 ) = 0
+s28:s27:a1i |- ( ( T e. RR /\ 1 < T ) -> ( 1 - 1 ) = 0 )
+s29:s28:oveq1d |- ( ( T e. RR /\ 1 < T ) -> ( ( 1 - 1 ) - T ) = ( 0 - T ) )
+s30:s26,s29:eqtrd |- ( ( T e. RR /\ 1 < T ) -> ( ( 1 - T ) - 1 ) = ( 0 - T ) )
+s31::df-neg |- -u T = ( 0 - T )
+s32:s31:eqcomi |- ( 0 - T ) = -u T
+s33:s32:a1i |- ( ( T e. RR /\ 1 < T ) -> ( 0 - T ) = -u T )
+s34:s30,s33:eqtrd |- ( ( T e. RR /\ 1 < T ) -> ( ( 1 - T ) - 1 ) = -u T )
+s35:s34:adantr |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( ( 1 - T ) - 1 ) = -u T )
+s36:s35:oveq2d |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( x ^c ( ( 1 - T ) - 1 ) ) = ( x ^c -u T ) )
+s37:s10:adantr |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( 1 - T ) =/= 0 )
+s38:s21,s15,s37:divcan3d |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( ( ( 1 - T ) x. ( x ^c ( ( 1 - T ) - 1 ) ) ) / ( 1 - T ) ) = ( x ^c ( ( 1 - T ) - 1 ) ) )
+s39:s38,s36:eqtrd |- ( ( ( T e. RR /\ 1 < T ) /\ x e. RR+ ) -> ( ( ( 1 - T ) x. ( x ^c ( ( 1 - T ) - 1 ) ) ) / ( 1 - T ) ) = ( x ^c -u T ) )
+s40:s39:mpteq2dva |- ( ( T e. RR /\ 1 < T ) -> ( x e. RR+ |-> ( ( ( 1 - T ) x. ( x ^c ( ( 1 - T ) - 1 ) ) ) / ( 1 - T ) ) ) = ( x e. RR+ |-> ( x ^c -u T ) ) )
+qed:s25,s40:eqtrd |- ( ( T e. RR /\ 1 < T ) -> ( RR _D ( x e. RR+ |-> ( ( x ^c ( 1 - T ) ) / ( 1 - T ) ) ) ) = ( x e. RR+ |-> ( x ^c -u T ) ) )
+$)

@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=zl2cxv2  LOC_AFTER=?
+
+* The character on ` NN ` in terms of its primitive character: ` chi ( K ) = [ gcd ( K , N ) = 1 ] chi_1 ( K ) ` ( ~ dchrprimind , ~ dchrindval2 ; Mathlib ` changeLevel_primitiveCharacter ` ).
+
+s1::simpl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s2::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> K e. NN )
+i3::dchrcondnn
+s4:s1,i3:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( N DChrCond X ) e. NN )
+i5::dchrprimcl
+s6:s1,i5:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) )
+s7:s4,s6:jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( N DChrCond X ) e. NN /\ ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) ) )
+s8:s1:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> N e. NN )
+i9::dchrconddvdn
+s10:s1,i9:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( N DChrCond X ) || N )
+s11:s2:nnzd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> K e. ZZ )
+s12:s4,s8,s10:3jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( N DChrCond X ) e. NN /\ N e. NN /\ ( N DChrCond X ) || N ) )
+s13:s12,s6:jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( ( N DChrCond X ) e. NN /\ N e. NN /\ ( N DChrCond X ) || N ) /\ ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) ) )
+s14:s13,s11:jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( ( ( N DChrCond X ) e. NN /\ N e. NN /\ ( N DChrCond X ) || N ) /\ ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) ) /\ K e. ZZ ) )
+i15::dchrindval2
+s16:s14,i15:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` K ) ) = if ( ( K gcd N ) = 1 , ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` K ) ) , 0 ) )
+i17::dchrprimind
+s18:s1,i17:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) = X )
+s19:s18:fveq1d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` K ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` K ) ) )
+i20::zl1cxv
+s21:s1,s2,i20:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( a e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) ` K ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` K ) ) )
+i22::zl1cxv
+s23:s7,s2,i22:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( a e. NN |-> ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` a ) ) ) ` K ) = ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` K ) ) )
+s24:s23:ifeq1d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> if ( ( K gcd N ) = 1 , ( ( a e. NN |-> ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` a ) ) ) ` K ) , 0 ) = if ( ( K gcd N ) = 1 , ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` K ) ) , 0 ) )
+s25:s19:eqcomd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` K ) ) = ( ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` K ) ) )
+s26:s21,s25:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( a e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) ` K ) = ( ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` K ) ) )
+s27:s26,s16:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( a e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) ` K ) = if ( ( K gcd N ) = 1 , ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` K ) ) , 0 ) )
+qed:s27,s24:eqtr4d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ K e. NN ) -> ( ( a e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) ` K ) = if ( ( K gcd N ) = 1 , ( ( a e. NN |-> ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` a ) ) ) ` K ) , 0 ) )
+$)

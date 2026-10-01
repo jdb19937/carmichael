@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=wrdprmnd  LOC_AFTER=?
+
+* A prime outside a word of primes divides none of its entries.
+
+s1::simpr |- ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) -> q e. ran W )
+s2::simpl3 |- ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) -> -. P e. ran W )
+s3::simpl2 |- ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) -> P e. Prime )
+i4::nelne2
+s5:s1,s2,i4:syl2anc |- ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) -> q =/= P )
+s6::simpr |- ( ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) /\ q e. Prime ) -> q e. Prime )
+i7::prmuz2
+s8:s6,i7:syl |- ( ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) /\ q e. Prime ) -> q e. ( ZZ>= ` 2 ) )
+s9:s3:adantr |- ( ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) /\ q e. Prime ) -> P e. Prime )
+i10::dvdsprm
+s11:s8,s9,i10:syl2anc |- ( ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) /\ q e. Prime ) -> ( q || P <-> q = P ) )
+s12:s5:adantr |- ( ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) /\ q e. Prime ) -> q =/= P )
+i13::neneqd
+s14:s12,i13:syl |- ( ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) /\ q e. Prime ) -> -. q = P )
+s15:s11,s14:mtbird |- ( ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) /\ q e. Prime ) -> -. q || P )
+s16:s15:ex |- ( ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) /\ q e. ran W ) -> ( q e. Prime -> -. q || P ) )
+qed:s16:ralimdva |- ( ( W e. Word NN0 /\ P e. Prime /\ -. P e. ran W ) -> ( A. q e. ran W q e. Prime -> A. q e. ran W -. q || P ) )
+$)

@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=cxpnegcvg  LOC_AFTER=?
+
+* The sequence ` n ^c -u E ` tends to zero for ` E > 0 ` .
+
+s1::id |- ( E e. RR+ -> E e. RR+ )
+s2:s1:rpcnd |- ( E e. RR+ -> E e. CC )
+s3::1cnd |- ( E e. RR+ -> 1 e. CC )
+i4::divrcnv
+s5:s3,i4:syl |- ( E e. RR+ -> ( n e. RR+ |-> ( 1 / n ) ) ~~>r 0 )
+s6::simpr |- ( ( E e. RR+ /\ n e. RR+ ) -> n e. RR+ )
+s7:s6:rpreccld |- ( ( E e. RR+ /\ n e. RR+ ) -> ( 1 / n ) e. RR+ )
+s8:s7,s5,s1:rlimcxp |- ( E e. RR+ -> ( n e. RR+ |-> ( ( 1 / n ) ^c E ) ) ~~>r 0 )
+s9:s2:adantr |- ( ( E e. RR+ /\ n e. RR+ ) -> E e. CC )
+s10:s6,s9:cxprecd |- ( ( E e. RR+ /\ n e. RR+ ) -> ( ( 1 / n ) ^c E ) = ( 1 / ( n ^c E ) ) )
+s11:s6:rpcnd |- ( ( E e. RR+ /\ n e. RR+ ) -> n e. CC )
+s12:s6:rpne0d |- ( ( E e. RR+ /\ n e. RR+ ) -> n =/= 0 )
+s13:s11,s12,s9:cxpnegd |- ( ( E e. RR+ /\ n e. RR+ ) -> ( n ^c -u E ) = ( 1 / ( n ^c E ) ) )
+s14:s10,s13:eqtr4d |- ( ( E e. RR+ /\ n e. RR+ ) -> ( ( 1 / n ) ^c E ) = ( n ^c -u E ) )
+s15:s14:mpteq2dva |- ( E e. RR+ -> ( n e. RR+ |-> ( ( 1 / n ) ^c E ) ) = ( n e. RR+ |-> ( n ^c -u E ) ) )
+s16:s15,s8:eqbrtrrd |- ( E e. RR+ -> ( n e. RR+ |-> ( n ^c -u E ) ) ~~>r 0 )
+s17::simpr |- ( ( E e. RR+ /\ n e. NN ) -> n e. NN )
+s18:s2:adantr |- ( ( E e. RR+ /\ n e. NN ) -> E e. CC )
+s19:s17:nncnd |- ( ( E e. RR+ /\ n e. NN ) -> n e. CC )
+s20:s18:negcld |- ( ( E e. RR+ /\ n e. NN ) -> -u E e. CC )
+s21:s19,s20:cxpcld |- ( ( E e. RR+ /\ n e. NN ) -> ( n ^c -u E ) e. CC )
+i22::rlimres
+s23:s16,i22:syl |- ( E e. RR+ -> ( ( n e. RR+ |-> ( n ^c -u E ) ) |` NN ) ~~>r 0 )
+s24::nnrp |- ( x e. NN -> x e. RR+ )
+s25:s24:ssriv |- NN C_ RR+
+i26::resmpt
+s27:s25,i26:ax-mp |- ( ( n e. RR+ |-> ( n ^c -u E ) ) |` NN ) = ( n e. NN |-> ( n ^c -u E ) )
+s28:s27:a1i |- ( E e. RR+ -> ( ( n e. RR+ |-> ( n ^c -u E ) ) |` NN ) = ( n e. NN |-> ( n ^c -u E ) ) )
+s29:s28,s23:eqbrtrrd |- ( E e. RR+ -> ( n e. NN |-> ( n ^c -u E ) ) ~~>r 0 )
+s30::eqid |- ( n e. NN |-> ( n ^c -u E ) ) = ( n e. NN |-> ( n ^c -u E ) )
+s31:s21,s30:fmptd |- ( E e. RR+ -> ( n e. NN |-> ( n ^c -u E ) ) : NN --> CC )
+s32::nnuz |- NN = ( ZZ>= ` 1 )
+s33::1zzd |- ( E e. RR+ -> 1 e. ZZ )
+s34:s32,s33,s31:rlimclim |- ( E e. RR+ -> ( ( n e. NN |-> ( n ^c -u E ) ) ~~>r 0 <-> ( n e. NN |-> ( n ^c -u E ) ) ~~> 0 ) )
+qed:s29,s34:mpbid |- ( E e. RR+ -> ( n e. NN |-> ( n ^c -u E ) ) ~~> 0 )
+$)

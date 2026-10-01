@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=quadmod  LOC_AFTER=?
+
+* Divisibility of R ( M R + 1 ) by D depends only on R modulo D.
+
+s1::simp1 |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( D e. NN /\ M e. ZZ ) )
+s2:s1:simpld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> D e. NN )
+s3::simp1 |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( D e. NN /\ M e. ZZ ) )
+s4:s3:simprd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> M e. ZZ )
+s5::simp2 |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( R e. ZZ /\ N e. ZZ ) )
+s6:s5:simpld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> R e. ZZ )
+s7::simp2 |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( R e. ZZ /\ N e. ZZ ) )
+s8:s7:simprd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> N e. ZZ )
+s9::simp3 |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( R mod D ) = ( N mod D ) )
+s10:s2:nnrpd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> D e. RR+ )
+s11::eqidd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( M mod D ) = ( M mod D ) )
+s12:s4,s4,s6,s8,s10,s11,s9:modmul12d |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( ( M x. R ) mod D ) = ( ( M x. N ) mod D ) )
+s13:s4,s6:zmulcld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( M x. R ) e. ZZ )
+s14:s4,s8:zmulcld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( M x. N ) e. ZZ )
+s15:s13:zred |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( M x. R ) e. RR )
+s16:s14:zred |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( M x. N ) e. RR )
+s17::1red |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> 1 e. RR )
+s18::eqidd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( 1 mod D ) = ( 1 mod D ) )
+s19:s15,s16,s17,s17,s10,s12,s18:modadd12d |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( ( ( M x. R ) + 1 ) mod D ) = ( ( ( M x. N ) + 1 ) mod D ) )
+s20::1zzd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> 1 e. ZZ )
+s21:s13,s20:zaddcld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( ( M x. R ) + 1 ) e. ZZ )
+s22::1zzd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> 1 e. ZZ )
+s23:s14,s22:zaddcld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( ( M x. N ) + 1 ) e. ZZ )
+s24:s6,s8,s21,s23,s10,s9,s19:modmul12d |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( ( R x. ( ( M x. R ) + 1 ) ) mod D ) = ( ( N x. ( ( M x. N ) + 1 ) ) mod D ) )
+s25:s6,s21:zmulcld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( R x. ( ( M x. R ) + 1 ) ) e. ZZ )
+s26:s8,s23:zmulcld |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( N x. ( ( M x. N ) + 1 ) ) e. ZZ )
+i27::dvdsval3
+s28:s2,s25,i27:syl2anc |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( D || ( R x. ( ( M x. R ) + 1 ) ) <-> ( ( R x. ( ( M x. R ) + 1 ) ) mod D ) = 0 ) )
+i29::dvdsval3
+s30:s2,s26,i29:syl2anc |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( D || ( N x. ( ( M x. N ) + 1 ) ) <-> ( ( N x. ( ( M x. N ) + 1 ) ) mod D ) = 0 ) )
+s31:s24:eqeq1d |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( ( ( R x. ( ( M x. R ) + 1 ) ) mod D ) = 0 <-> ( ( N x. ( ( M x. N ) + 1 ) ) mod D ) = 0 ) )
+s32:s30:bicomd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( ( ( N x. ( ( M x. N ) + 1 ) ) mod D ) = 0 <-> D || ( N x. ( ( M x. N ) + 1 ) ) ) )
+qed:s28,s31,s32:3bitrd |- ( ( ( D e. NN /\ M e. ZZ ) /\ ( R e. ZZ /\ N e. ZZ ) /\ ( R mod D ) = ( N mod D ) ) -> ( D || ( R x. ( ( M x. R ) + 1 ) ) <-> D || ( N x. ( ( M x. N ) + 1 ) ) ) )
+$)

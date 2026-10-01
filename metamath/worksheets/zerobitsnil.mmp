@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=zerobitsnil  LOC_AFTER=?
+
+* Lean clause 1 of zeroBits: scanning nothing leaves the flag.
+
+s1::id |- ( F e. 2o -> F e. 2o )
+s2::wrd0 |- (/) e. Word 2o
+s3:s2:a1i |- ( F e. 2o -> (/) e. Word 2o )
+i4::zerobitsval
+s5:s3,s1,i4:syl2anc |- ( F e. 2o -> ( (/) zeroBits F ) = if ( ( F = 1o /\ ( toNat ` (/) ) = 0 ) , 1o , (/) ) )
+s6::tonat0 |- ( toNat ` (/) ) = 0
+s7:s6:a1i |- ( F e. 2o -> ( toNat ` (/) ) = 0 )
+s8:s7:biantrud |- ( F e. 2o -> ( F = 1o <-> ( F = 1o /\ ( toNat ` (/) ) = 0 ) ) )
+s9:s8:ifbid |- ( F e. 2o -> if ( F = 1o , 1o , (/) ) = if ( ( F = 1o /\ ( toNat ` (/) ) = 0 ) , 1o , (/) ) )
+s10::biidd |- ( F e. 2o -> ( F = 1o <-> F = 1o ) )
+s11::simpr |- ( ( F e. 2o /\ F = 1o ) -> F = 1o )
+s12:s10:adantr |- ( ( F e. 2o /\ F = 1o ) -> ( F = 1o <-> F = 1o ) )
+s13:s11,s12:mpbid |- ( ( F e. 2o /\ F = 1o ) -> F = 1o )
+s14:s13:iftrued |- ( ( F e. 2o /\ F = 1o ) -> if ( F = 1o , 1o , (/) ) = 1o )
+s15:s11,s14:eqtr4d |- ( ( F e. 2o /\ F = 1o ) -> F = if ( F = 1o , 1o , (/) ) )
+s16::simpr |- ( ( F e. 2o /\ -. F = 1o ) -> -. F = 1o )
+s17:s10:adantr |- ( ( F e. 2o /\ -. F = 1o ) -> ( F = 1o <-> F = 1o ) )
+s18:s16,s17:mtbid |- ( ( F e. 2o /\ -. F = 1o ) -> -. F = 1o )
+s19:s18:iffalsed |- ( ( F e. 2o /\ -. F = 1o ) -> if ( F = 1o , 1o , (/) ) = (/) )
+s20:s1:adantr |- ( ( F e. 2o /\ -. F = 1o ) -> F e. 2o )
+i21::bwel2on
+s22:s20,i21:syl |- ( ( F e. 2o /\ -. F = 1o ) -> ( -. F = 1o <-> F = (/) ) )
+s23:s16,s22:mpbid |- ( ( F e. 2o /\ -. F = 1o ) -> F = (/) )
+s24:s23,s19:eqtr4d |- ( ( F e. 2o /\ -. F = 1o ) -> F = if ( F = 1o , 1o , (/) ) )
+s25:s15,s24:pm2.61dan |- ( F e. 2o -> F = if ( F = 1o , 1o , (/) ) )
+s26:s5,s9:eqtr4d |- ( F e. 2o -> ( (/) zeroBits F ) = if ( F = 1o , 1o , (/) ) )
+qed:s26,s25:eqtr4d |- ( F e. 2o -> ( (/) zeroBits F ) = F )
+$)

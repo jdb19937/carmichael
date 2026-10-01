@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=bwfv  LOC_AFTER=?
+
+* A letter of a bit word is the binary digit of its value at that position, as a Boolean.
+
+s1::wrdsymbcl |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` I ) e. 2o )
+s2::bwfvb |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L ` I ) = 1o <-> I e. ( bits ` ( toNat ` L ) ) ) )
+s3::simpr |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ ( L ` I ) = 1o ) -> ( L ` I ) = 1o )
+s4:s2:adantr |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ ( L ` I ) = 1o ) -> ( ( L ` I ) = 1o <-> I e. ( bits ` ( toNat ` L ) ) ) )
+s5:s3,s4:mpbid |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ ( L ` I ) = 1o ) -> I e. ( bits ` ( toNat ` L ) ) )
+s6:s5:iftrued |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ ( L ` I ) = 1o ) -> if ( I e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) = 1o )
+s7:s3,s6:eqtr4d |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ ( L ` I ) = 1o ) -> ( L ` I ) = if ( I e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+s8::simpr |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> -. ( L ` I ) = 1o )
+s9:s2:adantr |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> ( ( L ` I ) = 1o <-> I e. ( bits ` ( toNat ` L ) ) ) )
+s10:s8,s9:mtbid |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> -. I e. ( bits ` ( toNat ` L ) ) )
+s11:s10:iffalsed |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> if ( I e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) = (/) )
+s12:s1:adantr |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> ( L ` I ) e. 2o )
+i13::bwel2on
+s14:s12,i13:syl |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> ( -. ( L ` I ) = 1o <-> ( L ` I ) = (/) ) )
+s15:s8,s14:mpbid |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> ( L ` I ) = (/) )
+s16:s15,s11:eqtr4d |- ( ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) /\ -. ( L ` I ) = 1o ) -> ( L ` I ) = if ( I e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+qed:s7,s16:pm2.61dan |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` I ) = if ( I e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+$)

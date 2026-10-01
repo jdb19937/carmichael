@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=gaucn  LOC_AFTER=?
+
+* The Gaussian normaliser is continuous on any set of complex numbers.
+
+s1::simp1 |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> E e. CC )
+s2::simp2 |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> Q e. CC )
+s3::simp3 |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> S C_ CC )
+s4::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s5::ssid |- CC C_ CC
+s6:s5:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> CC C_ CC )
+i7::cncfmptid
+s8:s3,s6,i7:syl2anc |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( z e. S |-> z ) e. ( S -cn-> CC ) )
+s9::2nn0 |- 2 e. NN0
+s10:s9:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> 2 e. NN0 )
+i11::cncfexpb
+s12:s8,s10,i11:syl2anc |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( z e. S |-> ( z ^ 2 ) ) e. ( S -cn-> CC ) )
+s13::ssid |- CC C_ CC
+s14:s13:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> CC C_ CC )
+i15::cncfmptc
+s16:s2,s3,s14,i15:syl3anc |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( z e. S |-> Q ) e. ( S -cn-> CC ) )
+s17:s4:subcn |- - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s18:s17:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s19:s4,s18,s12,s16:cncfmpt2f |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( z e. S |-> ( ( z ^ 2 ) - Q ) ) e. ( S -cn-> CC ) )
+s20::ssid |- CC C_ CC
+s21:s20:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> CC C_ CC )
+i22::cncfmptc
+s23:s1,s3,s21,i22:syl3anc |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( z e. S |-> E ) e. ( S -cn-> CC ) )
+s24:s4:mulcn |- x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s25:s24:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s26:s4,s25,s23,s19:cncfmpt2f |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( z e. S |-> ( E x. ( ( z ^ 2 ) - Q ) ) ) e. ( S -cn-> CC ) )
+s27::eff |- exp : CC --> CC
+s28:s27:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> exp : CC --> CC )
+s29:s28:feqmptd |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> exp = ( y e. CC |-> ( exp ` y ) ) )
+s30::efcn |- exp e. ( CC -cn-> CC )
+s31:s30:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> exp e. ( CC -cn-> CC ) )
+s32:s29,s31:eqeltrrd |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( y e. CC |-> ( exp ` y ) ) e. ( CC -cn-> CC ) )
+s33::nfv |- F/ z ( E e. CC /\ Q e. CC /\ S C_ CC )
+s34::ssid |- CC C_ CC
+s35:s34:a1i |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> CC C_ CC )
+s36::fveq2 |- ( y = ( E x. ( ( z ^ 2 ) - Q ) ) -> ( exp ` y ) = ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) )
+qed:s33,s26,s32,s35,s36:cncfcompt2 |- ( ( E e. CC /\ Q e. CC /\ S C_ CC ) -> ( z e. S |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) e. ( S -cn-> CC ) )
+$)

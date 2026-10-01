@@ -1,0 +1,151 @@
+$( <MM> <PROOF_ASST> THEOREM=isprimetdspec  LOC_AFTER=?
+
+* isPrimeTD decides primality (Lean: isPrimeTD_spec).
+
+s1::id |- ( M e. NN0 -> M e. NN0 )
+s2:s1:nn0red |- ( M e. NN0 -> M e. RR )
+i3::isprimetdval
+s4:s1,i3:syl |- ( M e. NN0 -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s5:s4:adantr |- ( ( M e. NN0 /\ M < 2 ) -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s6::simpr |- ( ( M e. NN0 /\ M < 2 ) -> M < 2 )
+s7:s6:iftrued |- ( ( M e. NN0 /\ M < 2 ) -> if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) = <. (/) , 1 >. )
+s8:s5,s7:eqtrd |- ( ( M e. NN0 /\ M < 2 ) -> ( IsPrimeTD ` M ) = <. (/) , 1 >. )
+s9:s4:adantr |- ( ( M e. NN0 /\ -. M < 2 ) -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s10::simpr |- ( ( M e. NN0 /\ -. M < 2 ) -> -. M < 2 )
+s11:s10:iffalsed |- ( ( M e. NN0 /\ -. M < 2 ) -> if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) = <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. )
+s12:s9,s11:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( IsPrimeTD ` M ) = <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. )
+s13::0ex |- (/) e. _V
+s14:s13:a1i |- ( ( M e. NN0 /\ M < 2 ) -> (/) e. _V )
+s15::1ex |- 1 e. _V
+s16:s15:a1i |- ( ( M e. NN0 /\ M < 2 ) -> 1 e. _V )
+s17:s8:fveq2d |- ( ( M e. NN0 /\ M < 2 ) -> ( 1st ` ( IsPrimeTD ` M ) ) = ( 1st ` <. (/) , 1 >. ) )
+i18::op1stg
+s19:s14,s16,i18:syl2anc |- ( ( M e. NN0 /\ M < 2 ) -> ( 1st ` <. (/) , 1 >. ) = (/) )
+s20:s17,s19:eqtrd |- ( ( M e. NN0 /\ M < 2 ) -> ( 1st ` ( IsPrimeTD ` M ) ) = (/) )
+s21:s20:eqeq1d |- ( ( M e. NN0 /\ M < 2 ) -> ( ( 1st ` ( IsPrimeTD ` M ) ) = 1o <-> (/) = 1o ) )
+s22::1n0 |- 1o =/= (/)
+s23:s22:necomi |- (/) =/= 1o
+i24::neneq
+s25:s23,i24:ax-mp |- -. (/) = 1o
+s26:s25:a1i |- ( ( M e. NN0 /\ M < 2 ) -> -. (/) = 1o )
+s27:s21,s26:mtbird |- ( ( M e. NN0 /\ M < 2 ) -> -. ( 1st ` ( IsPrimeTD ` M ) ) = 1o )
+s28::simpr |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> M e. Prime )
+i29::prmuz2
+s30:s28,i29:syl |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> M e. ( ZZ>= ` 2 ) )
+i31::eluz2
+s32:s30,i31:sylib |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> ( 2 e. ZZ /\ M e. ZZ /\ 2 <_ M ) )
+s33:s32:simp3d |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> 2 <_ M )
+s34:s2:ad2antrr |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> M e. RR )
+s35::2re |- 2 e. RR
+s36:s35:a1i |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> 2 e. RR )
+s37:s34,s36:lenltd |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> ( 2 <_ M <-> -. M < 2 ) )
+s38:s37,s33:mpbid |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> -. M < 2 )
+s39::simplr |- ( ( ( M e. NN0 /\ M < 2 ) /\ M e. Prime ) -> M < 2 )
+s40:s39,s38:pm2.65da |- ( ( M e. NN0 /\ M < 2 ) -> -. M e. Prime )
+s41:s27,s40:2falsed |- ( ( M e. NN0 /\ M < 2 ) -> ( ( 1st ` ( IsPrimeTD ` M ) ) = 1o <-> M e. Prime ) )
+s42:s1:adantr |- ( ( M e. NN0 /\ -. M < 2 ) -> M e. NN0 )
+s43:s2:adantr |- ( ( M e. NN0 /\ -. M < 2 ) -> M e. RR )
+s44::2re |- 2 e. RR
+s45:s44:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 e. RR )
+s46:s43,s45:lenltd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 <_ M <-> -. M < 2 ) )
+s47::simpr |- ( ( M e. NN0 /\ -. M < 2 ) -> -. M < 2 )
+s48:s46,s47:mpbird |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 <_ M )
+s49::2z |- 2 e. ZZ
+s50:s49:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 e. ZZ )
+s51:s42:nn0zd |- ( ( M e. NN0 /\ -. M < 2 ) -> M e. ZZ )
+s52:s50,s51,s48:3jca |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 e. ZZ /\ M e. ZZ /\ 2 <_ M ) )
+i53::eluz2
+s54:s52,i53:sylibr |- ( ( M e. NN0 /\ -. M < 2 ) -> M e. ( ZZ>= ` 2 ) )
+s55::2nn0 |- 2 e. NN0
+s56:s55:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 e. NN0 )
+s57:s42,s56:jca |- ( ( M e. NN0 /\ -. M < 2 ) -> ( M e. NN0 /\ 2 e. NN0 ) )
+i58::primegocl
+s59:s57,s42,i58:syl2anc |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( M PrimeGo 2 ) ` M ) e. ( 2o X. NN0 ) )
+i60::xp1st
+s61:s59,i60:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) e. 2o )
+i62::xp2nd
+s63:s59,i62:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) e. NN0 )
+i64::peano2nn0
+s65:s63,i64:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) e. NN0 )
+s66:s12:fveq2d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1st ` ( IsPrimeTD ` M ) ) = ( 1st ` <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+i67::op1stg
+s68:s61,s65,i67:syl2anc |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1st ` <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) = ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) )
+s69:s66,s68:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1st ` ( IsPrimeTD ` M ) ) = ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) )
+s70::2re |- 2 e. RR
+i71::leid
+s72:s70,i71:ax-mp |- 2 <_ 2
+s73:s72:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 <_ 2 )
+s74::2pos |- 0 < 2
+s75:s74:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 0 < 2 )
+s76::eqidd |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 = 2 )
+s77::2cn |- 2 e. CC
+s78:s77:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 e. CC )
+s79:s43:recnd |- ( ( M e. NN0 /\ -. M < 2 ) -> M e. CC )
+s80:s78,s79:addcld |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + M ) e. CC )
+s81:s80,s79:negsubd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + M ) + -u M ) = ( ( 2 + M ) - M ) )
+s82:s81:eqcomd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + M ) - M ) = ( ( 2 + M ) + -u M ) )
+s83:s79:mulm1d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( -u 1 x. M ) = -u M )
+s84:s83:eqcomd |- ( ( M e. NN0 /\ -. M < 2 ) -> -u M = ( -u 1 x. M ) )
+s85:s84:oveq2d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + M ) + -u M ) = ( ( 2 + M ) + ( -u 1 x. M ) ) )
+s86::eqidd |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 = 2 )
+s87::ax-1cn |- 1 e. CC
+s88:s87:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 1 e. CC )
+s89:s88,s79:mulcld |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1 x. M ) e. CC )
+s90:s89:addlidd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 0 + ( 1 x. M ) ) = ( 1 x. M ) )
+s91:s90:eqcomd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1 x. M ) = ( 0 + ( 1 x. M ) ) )
+s92:s79:mullidd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1 x. M ) = M )
+s93:s92:eqcomd |- ( ( M e. NN0 /\ -. M < 2 ) -> M = ( 1 x. M ) )
+s94:s93,s91:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> M = ( 0 + ( 1 x. M ) ) )
+s95:s86,s94:oveq12d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + M ) = ( 2 + ( 0 + ( 1 x. M ) ) ) )
+s96::0cn |- 0 e. CC
+s97:s96:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 0 e. CC )
+s98:s78,s97,s89:addassd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + 0 ) + ( 1 x. M ) ) = ( 2 + ( 0 + ( 1 x. M ) ) ) )
+s99:s98:eqcomd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + ( 0 + ( 1 x. M ) ) ) = ( ( 2 + 0 ) + ( 1 x. M ) ) )
+s100:s77:addridi |- ( 2 + 0 ) = 2
+s101:s100:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + 0 ) = 2 )
+s102:s101:oveq1d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + 0 ) + ( 1 x. M ) ) = ( 2 + ( 1 x. M ) ) )
+s103:s99,s102:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + ( 0 + ( 1 x. M ) ) ) = ( 2 + ( 1 x. M ) ) )
+s104:s95,s103:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + M ) = ( 2 + ( 1 x. M ) ) )
+s105:s87:negcli |- -u 1 e. CC
+s106:s105:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> -u 1 e. CC )
+s107:s106,s79:mulcld |- ( ( M e. NN0 /\ -. M < 2 ) -> ( -u 1 x. M ) e. CC )
+s108:s107:addlidd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 0 + ( -u 1 x. M ) ) = ( -u 1 x. M ) )
+s109:s108:eqcomd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( -u 1 x. M ) = ( 0 + ( -u 1 x. M ) ) )
+s110:s104,s109:oveq12d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + M ) + ( -u 1 x. M ) ) = ( ( 2 + ( 1 x. M ) ) + ( 0 + ( -u 1 x. M ) ) ) )
+s111:s78,s89,s97,s107:add4d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + ( 1 x. M ) ) + ( 0 + ( -u 1 x. M ) ) ) = ( ( 2 + 0 ) + ( ( 1 x. M ) + ( -u 1 x. M ) ) ) )
+s112:s100:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + 0 ) = 2 )
+s113:s88,s106,s79:adddird |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1 + -u 1 ) x. M ) = ( ( 1 x. M ) + ( -u 1 x. M ) ) )
+s114:s113:eqcomd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1 x. M ) + ( -u 1 x. M ) ) = ( ( 1 + -u 1 ) x. M ) )
+s115:s87:negidi |- ( 1 + -u 1 ) = 0
+s116:s115:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 1 + -u 1 ) = 0 )
+s117:s116:oveq1d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1 + -u 1 ) x. M ) = ( 0 x. M ) )
+s118:s114,s117:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1 x. M ) + ( -u 1 x. M ) ) = ( 0 x. M ) )
+s119:s112,s118:oveq12d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + 0 ) + ( ( 1 x. M ) + ( -u 1 x. M ) ) ) = ( 2 + ( 0 x. M ) ) )
+s120:s111,s119:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + ( 1 x. M ) ) + ( 0 + ( -u 1 x. M ) ) ) = ( 2 + ( 0 x. M ) ) )
+s121:s79:mul02d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 0 x. M ) = 0 )
+s122:s121:oveq2d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + ( 0 x. M ) ) = ( 2 + 0 ) )
+s123:s78:addridd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + 0 ) = 2 )
+s124:s120,s122:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + ( 1 x. M ) ) + ( 0 + ( -u 1 x. M ) ) ) = ( 2 + 0 ) )
+s125:s124,s123:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + ( 1 x. M ) ) + ( 0 + ( -u 1 x. M ) ) ) = 2 )
+s126:s82,s85:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + M ) - M ) = ( ( 2 + M ) + ( -u 1 x. M ) ) )
+s127:s126,s110:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + M ) - M ) = ( ( 2 + ( 1 x. M ) ) + ( 0 + ( -u 1 x. M ) ) ) )
+s128:s127,s125:eqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 2 + M ) - M ) = 2 )
+s129:s76,s128:eqtr4d |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 = ( ( 2 + M ) - M ) )
+s130:s75,s129:breqtrd |- ( ( M e. NN0 /\ -. M < 2 ) -> 0 < ( ( 2 + M ) - M ) )
+s131::2re |- 2 e. RR
+s132:s131:a1i |- ( ( M e. NN0 /\ -. M < 2 ) -> 2 e. RR )
+s133:s132,s43:readdcld |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 + M ) e. RR )
+s134:s43,s133:posdifd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( M < ( 2 + M ) <-> 0 < ( ( 2 + M ) - M ) ) )
+s135:s130,s134:mpbird |- ( ( M e. NN0 /\ -. M < 2 ) -> M < ( 2 + M ) )
+s136:s42,s56,s42:3jca |- ( ( M e. NN0 /\ -. M < 2 ) -> ( M e. NN0 /\ 2 e. NN0 /\ M e. NN0 ) )
+s137:s73,s135:jca |- ( ( M e. NN0 /\ -. M < 2 ) -> ( 2 <_ 2 /\ M < ( 2 + M ) ) )
+s138:s136,s137:jca |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( M e. NN0 /\ 2 e. NN0 /\ M e. NN0 ) /\ ( 2 <_ 2 /\ M < ( 2 + M ) ) ) )
+i139::primegospec
+s140:s138,i139:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) = 1o <-> A. e e. NN0 ( ( 2 <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) )
+i141::primetdbi
+s142:s54,i141:syl |- ( ( M e. NN0 /\ -. M < 2 ) -> ( A. e e. NN0 ( ( 2 <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) <-> M e. Prime ) )
+s143:s69:eqeq1d |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1st ` ( IsPrimeTD ` M ) ) = 1o <-> ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) = 1o ) )
+s144:s143,s140:bitrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1st ` ( IsPrimeTD ` M ) ) = 1o <-> A. e e. NN0 ( ( 2 <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) )
+s145:s144,s142:bitrd |- ( ( M e. NN0 /\ -. M < 2 ) -> ( ( 1st ` ( IsPrimeTD ` M ) ) = 1o <-> M e. Prime ) )
+qed:s41,s145:pm2.61dan |- ( M e. NN0 -> ( ( 1st ` ( IsPrimeTD ` M ) ) = 1o <-> M e. Prime ) )
+$)

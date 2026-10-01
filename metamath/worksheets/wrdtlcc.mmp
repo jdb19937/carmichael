@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=wrdtlcc  LOC_AFTER=?
+
+* The tail of a concatenation with a nonempty left factor: the step every scan loop of the machine layer takes on its input stack.
+
+s1::simp1 |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> U e. Word A )
+s2::simp2 |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> U =/= (/) )
+s3::simp3 |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> W e. Word A )
+i4::ccatcl
+s5:s1,s3,i4:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ++ W ) e. Word A )
+i6::ccatn0
+s7:s1,s2,s3,i6:syl3anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ++ W ) =/= (/) )
+i8::wrdhdtl
+s9:s5,s7,i8:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ++ W ) = ( <" ( ( U ++ W ) ` 0 ) "> ++ ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) ) )
+i10::lennncl
+s11:s1,s2,i10:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( # ` U ) e. NN )
+i12::nngt0
+s13:s11,i12:syl |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> 0 < ( # ` U ) )
+i14::ccatfv0
+s15:s1,s3,s13,i14:syl3anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( U ++ W ) ` 0 ) = ( U ` 0 ) )
+s16:s15:s1eqd |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> <" ( ( U ++ W ) ` 0 ) "> = <" ( U ` 0 ) "> )
+s17:s16:oveq1d |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( <" ( ( U ++ W ) ` 0 ) "> ++ ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) ) = ( <" ( U ` 0 ) "> ++ ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) ) )
+s18:s9,s17:eqtrd |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ++ W ) = ( <" ( U ` 0 ) "> ++ ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) ) )
+i19::wrdhdtl
+s20:s1,s2,i19:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> U = ( <" ( U ` 0 ) "> ++ ( U substr <. 1 , ( # ` U ) >. ) ) )
+s21:s20:oveq1d |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ++ W ) = ( ( <" ( U ` 0 ) "> ++ ( U substr <. 1 , ( # ` U ) >. ) ) ++ W ) )
+i22::wrdfv0
+s23:s1,s2,i22:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ` 0 ) e. A )
+s24:s23:s1cld |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> <" ( U ` 0 ) "> e. Word A )
+i25::swrdcl
+s26:s1,i25:syl |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U substr <. 1 , ( # ` U ) >. ) e. Word A )
+i27::ccatass
+s28:s24,s26,s3,i27:syl3anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( <" ( U ` 0 ) "> ++ ( U substr <. 1 , ( # ` U ) >. ) ) ++ W ) = ( <" ( U ` 0 ) "> ++ ( ( U substr <. 1 , ( # ` U ) >. ) ++ W ) ) )
+s29:s21,s28:eqtrd |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ++ W ) = ( <" ( U ` 0 ) "> ++ ( ( U substr <. 1 , ( # ` U ) >. ) ++ W ) ) )
+s30:s18,s29:eqtr3d |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( <" ( U ` 0 ) "> ++ ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) ) = ( <" ( U ` 0 ) "> ++ ( ( U substr <. 1 , ( # ` U ) >. ) ++ W ) ) )
+i31::swrdcl
+s32:s5,i31:syl |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) e. Word A )
+i33::ccatcl
+s34:s26,s3,i33:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( U substr <. 1 , ( # ` U ) >. ) ++ W ) e. Word A )
+i35::ccatlcan
+s36:s32,s34,s24,i35:syl3anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( <" ( U ` 0 ) "> ++ ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) ) = ( <" ( U ` 0 ) "> ++ ( ( U substr <. 1 , ( # ` U ) >. ) ++ W ) ) <-> ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) = ( ( U substr <. 1 , ( # ` U ) >. ) ++ W ) ) )
+qed:s36,s30:mpbid |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( U ++ W ) substr <. 1 , ( # ` ( U ++ W ) ) >. ) = ( ( U substr <. 1 , ( # ` U ) >. ) ++ W ) )
+$)

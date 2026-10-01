@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=algprodnn  LOC_AFTER=?
+
+* The product over a word of positive letters is positive (Lean: List.prod_pos).
+
+s1::simpl |- ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) -> W e. Word NN0 )
+s2::simpr |- ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) -> A. q e. ran W 1 <_ q )
+s3::fzofi |- ( 0 ..^ ( # ` W ) ) e. Fin
+s4:s3:a1i |- ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) -> ( 0 ..^ ( # ` W ) ) e. Fin )
+s5:s1:adantr |- ( ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> W e. Word NN0 )
+s6::simpr |- ( ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> i e. ( 0 ..^ ( # ` W ) ) )
+i7::wrdsymbcl
+s8:s5,s6,i7:syl2anc |- ( ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. NN0 )
+i9::algranfv
+s10:s5,s6,i9:syl2anc |- ( ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. ran W )
+s11:s2:adantr |- ( ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> A. q e. ran W 1 <_ q )
+s12:s11,s10:rspcdva |- ( ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> 1 <_ ( W ` i ) )
+i13::elnnnn0c
+s14:s8,s12,i13:sylanbrc |- ( ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. NN )
+qed:s4,s14:fprodnncl |- ( ( W e. Word NN0 /\ A. q e. ran W 1 <_ q ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) e. NN )
+$)

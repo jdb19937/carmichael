@@ -1,0 +1,87 @@
+$( <MM> <PROOF_ASST> THEOREM=tmipgp1  LOC_AFTER=?
+
+* One unit of fuel costs at least one iteration of ` primeGo ` (Lean ` primeIters_pos ` ).
+
+s1::simpll |- ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) -> M e. NN0 )
+s2::simplr |- ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) -> D e. NN0 )
+s3::simpr |- ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) -> F e. NN0 )
+s4:s1,s2:jca |- ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) -> ( M e. NN0 /\ D e. NN0 ) )
+i5::primegop1
+s6:s4,s3,i5:syl2anc |- ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = if ( M < ( D x. D ) , <. 1o , 1 >. , if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) ) )
+s7:s6:adantr |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = if ( M < ( D x. D ) , <. 1o , 1 >. , if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) ) )
+s8::simpr |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> M < ( D x. D ) )
+s9:s8:iftrued |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> if ( M < ( D x. D ) , <. 1o , 1 >. , if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) ) = <. 1o , 1 >. )
+s10:s7,s9:eqtrd |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = <. 1o , 1 >. )
+s11:s6:adantr |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = if ( M < ( D x. D ) , <. 1o , 1 >. , if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) ) )
+s12::simpr |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) -> -. M < ( D x. D ) )
+s13:s12:iffalsed |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) -> if ( M < ( D x. D ) , <. 1o , 1 >. , if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) ) = if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) )
+s14:s11,s13:eqtrd |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) )
+s15:s14:adantr |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) )
+s16::simpr |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> ( M mod D ) = 0 )
+s17:s16:iftrued |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) = <. (/) , 1 >. )
+s18:s15,s17:eqtrd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = <. (/) , 1 >. )
+s19:s14:adantr |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) )
+s20::simpr |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> -. ( M mod D ) = 0 )
+s21:s20:iffalsed |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> if ( ( M mod D ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) = <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. )
+s22:s19,s21:eqtrd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( ( M PrimeGo D ) ` ( F + 1 ) ) = <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. )
+s23::1oex |- 1o e. _V
+s24:s23:a1i |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> 1o e. _V )
+s25::1ex |- 1 e. _V
+s26:s25:a1i |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> 1 e. _V )
+s27:s10:fveq2d |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) = ( 2nd ` <. 1o , 1 >. ) )
+i28::op2ndg
+s29:s24,s26,i28:syl2anc |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> ( 2nd ` <. 1o , 1 >. ) = 1 )
+s30:s27,s29:eqtrd |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) = 1 )
+s31::1re |- 1 e. RR
+s32:s31:leidi |- 1 <_ 1
+s33:s32:a1i |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> 1 <_ 1 )
+s34:s30,s33:breqtrrd |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ M < ( D x. D ) ) -> 1 <_ ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) )
+s35::0ex |- (/) e. _V
+s36:s35:a1i |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> (/) e. _V )
+s37::1ex |- 1 e. _V
+s38:s37:a1i |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> 1 e. _V )
+s39:s18:fveq2d |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) = ( 2nd ` <. (/) , 1 >. ) )
+i40::op2ndg
+s41:s36,s38,i40:syl2anc |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> ( 2nd ` <. (/) , 1 >. ) = 1 )
+s42:s39,s41:eqtrd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) = 1 )
+s43::1re |- 1 e. RR
+s44:s43:leidi |- 1 <_ 1
+s45:s44:a1i |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> 1 <_ 1 )
+s46:s42,s45:breqtrrd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ ( M mod D ) = 0 ) -> 1 <_ ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) )
+s47:s2:ad2antrr |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> D e. NN0 )
+i48::peano2nn0
+s49:s47,i48:syl |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( D + 1 ) e. NN0 )
+s50:s1:ad2antrr |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> M e. NN0 )
+s51:s50,s49:jca |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( M e. NN0 /\ ( D + 1 ) e. NN0 ) )
+s52:s3:ad2antrr |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> F e. NN0 )
+i53::primegocl
+s54:s51,s52,i53:syl2anc |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( ( M PrimeGo ( D + 1 ) ) ` F ) e. ( 2o X. NN0 ) )
+i55::xp1st
+s56:s54,i55:syl |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) e. 2o )
+i57::xp2nd
+s58:s54,i57:syl |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) e. NN0 )
+i59::peano2nn0
+s60:s58,i59:syl |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) e. NN0 )
+s61:s22:fveq2d |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) = ( 2nd ` <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) )
+i62::op2ndg
+s63:s56,s60,i62:syl2anc |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 2nd ` <. ( 1st ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) , ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) >. ) = ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) )
+s64:s61,s63:eqtrd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) = ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) )
+s65:s58:nn0zd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) e. ZZ )
+s66:s65:zred |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) e. RR )
+s67:s58:nn0ge0d |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> 0 <_ ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) )
+i68::leid
+s69::1re |- 1 e. RR
+s70:s69,i68:ax-mp |- 1 <_ 1
+s71:s70:a1i |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> 1 <_ 1 )
+s72::0re |- 0 e. RR
+s73:s72:a1i |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> 0 e. RR )
+s74:s69:a1i |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> 1 e. RR )
+s75:s73,s74,s66,s74,s67,s71:le2addd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 0 + 1 ) <_ ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) )
+s76::ax-1cn |- 1 e. CC
+s77:s76:addlidi |- ( 0 + 1 ) = 1
+s78:s77:a1i |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> ( 0 + 1 ) = 1 )
+s79:s78,s75:eqbrtrrd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> 1 <_ ( ( 2nd ` ( ( M PrimeGo ( D + 1 ) ) ` F ) ) + 1 ) )
+s80:s64,s79:breqtrrd |- ( ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) /\ -. ( M mod D ) = 0 ) -> 1 <_ ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) )
+s81:s46,s80:pm2.61dan |- ( ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) /\ -. M < ( D x. D ) ) -> 1 <_ ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) )
+qed:s34,s81:pm2.61dan |- ( ( ( M e. NN0 /\ D e. NN0 ) /\ F e. NN0 ) -> 1 <_ ( 2nd ` ( ( M PrimeGo D ) ` ( F + 1 ) ) ) )
+$)

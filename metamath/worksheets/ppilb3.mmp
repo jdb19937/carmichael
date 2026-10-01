@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=ppilb3  LOC_AFTER=?
+
+* Chebyshev-type lower bound: for all sufficiently large integers z, pi(z) >= z / ( 3 log z ). Parallel to chebyshev_lower in PrimeCount.lean; here from the prime number theorem pnt.
+
+1::ppilb3lem2 |- E. y e. RR A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) )
+2::simpl    |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> y e. RR )
+3:2:recnd   |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> y e. CC )
+4:3:abscld  |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> ( abs ` y ) e. RR )
+5:3:absge0d |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> 0 <_ ( abs ` y ) )
+6a::flge0nn0
+6:4,5,6a:syl2anc |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> ( |_ ` ( abs ` y ) ) e. NN0 )
+7a::nn0p1nn
+7:6,7a:syl  |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> ( ( |_ ` ( abs ` y ) ) + 1 ) e. NN )
+8a::peano2nn
+8:7,8a:syl  |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) e. NN )
+9::ppilb3lem3 |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> A. z e. ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z ) )
+10::fveq2   |- ( m = ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) -> ( ZZ>= ` m ) = ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) )
+11:10:raleqdv |- ( m = ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) -> ( A. z e. ( ZZ>= ` m ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z ) <-> A. z e. ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z ) ) )
+12:11:rspcev |- ( ( ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) e. NN /\ A. z e. ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z ) ) -> E. m e. NN A. z e. ( ZZ>= ` m ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z ) )
+13:8,9,12:syl2anc |- ( ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) ) -> E. m e. NN A. z e. ( ZZ>= ` m ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z ) )
+14:13:rexlimiva |- ( E. y e. RR A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < ( 1 / 2 ) ) -> E. m e. NN A. z e. ( ZZ>= ` m ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z ) )
+qed:1,14:ax-mp |- E. m e. NN A. z e. ( ZZ>= ` m ) ( z / ( 3 x. ( log ` z ) ) ) <_ ( ppi ` z )
+$)

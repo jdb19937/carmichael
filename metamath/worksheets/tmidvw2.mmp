@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=tmidvw2  LOC_AFTER=?
+
+* Pushing a zero bit on the ` I ` -bit word of ` Q ` gives the ` I + 1 ` -bit word of ` 2 Q ` (the quotient of the shift-down loop doubles, Lean ` false :: ql ` ).
+
+s1::simpl |- ( ( Q e. ZZ /\ I e. NN0 ) -> Q e. ZZ )
+s2::simpr |- ( ( Q e. ZZ /\ I e. NN0 ) -> I e. NN0 )
+s3::2z |- 2 e. ZZ
+s4:s3:a1i |- ( ( Q e. ZZ /\ I e. NN0 ) -> 2 e. ZZ )
+s5:s4,s1:zmulcld |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( 2 x. Q ) e. ZZ )
+i6::bwrdcons
+s7:s5,s2,i6:syl2anc |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( ( 2 x. Q ) bwrd ( I + 1 ) ) = ( <" if ( 0 e. ( bits ` ( 2 x. Q ) ) , 1o , (/) ) "> ++ ( ( |_ ` ( ( 2 x. Q ) / 2 ) ) bwrd I ) ) )
+i8::bits0e
+s9:s1,i8:syl |- ( ( Q e. ZZ /\ I e. NN0 ) -> -. 0 e. ( bits ` ( 2 x. Q ) ) )
+s10:s9:iffalsed |- ( ( Q e. ZZ /\ I e. NN0 ) -> if ( 0 e. ( bits ` ( 2 x. Q ) ) , 1o , (/) ) = (/) )
+s11:s10:s1eqd |- ( ( Q e. ZZ /\ I e. NN0 ) -> <" if ( 0 e. ( bits ` ( 2 x. Q ) ) , 1o , (/) ) "> = <" (/) "> )
+s12:s1:zcnd |- ( ( Q e. ZZ /\ I e. NN0 ) -> Q e. CC )
+s13::2ne0 |- 2 =/= 0
+s14:s13:a1i |- ( ( Q e. ZZ /\ I e. NN0 ) -> 2 =/= 0 )
+s15::2cnd |- ( ( Q e. ZZ /\ I e. NN0 ) -> 2 e. CC )
+s16:s12,s15,s14:divcan3d |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( ( 2 x. Q ) / 2 ) = Q )
+s17:s16:fveq2d |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( |_ ` ( ( 2 x. Q ) / 2 ) ) = ( |_ ` Q ) )
+i18::flid
+s19:s1,i18:syl |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( |_ ` Q ) = Q )
+s20:s17,s19:eqtrd |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( |_ ` ( ( 2 x. Q ) / 2 ) ) = Q )
+s21:s20:oveq1d |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( ( |_ ` ( ( 2 x. Q ) / 2 ) ) bwrd I ) = ( Q bwrd I ) )
+s22:s11,s21:oveq12d |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( <" if ( 0 e. ( bits ` ( 2 x. Q ) ) , 1o , (/) ) "> ++ ( ( |_ ` ( ( 2 x. Q ) / 2 ) ) bwrd I ) ) = ( <" (/) "> ++ ( Q bwrd I ) ) )
+s23:s7,s22:eqtrd |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( ( 2 x. Q ) bwrd ( I + 1 ) ) = ( <" (/) "> ++ ( Q bwrd I ) ) )
+s24:s23:coeq2d |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( inclBool o. ( ( 2 x. Q ) bwrd ( I + 1 ) ) ) = ( inclBool o. ( <" (/) "> ++ ( Q bwrd I ) ) ) )
+s25::0el2o |- (/) e. 2o
+s26:s25:a1i |- ( ( Q e. ZZ /\ I e. NN0 ) -> (/) e. 2o )
+s27:s26:s1cld |- ( ( Q e. ZZ /\ I e. NN0 ) -> <" (/) "> e. Word 2o )
+i28::bwrdcl
+s29:s1,s2,i28:syl2anc |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( Q bwrd I ) e. Word 2o )
+i30::bwmapccat
+s31:s27,s29,i30:syl2anc |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( inclBool o. ( <" (/) "> ++ ( Q bwrd I ) ) ) = ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. ( Q bwrd I ) ) ) )
+s32::inclboolf |- inclBool : 2o --> Gamma'
+s33:s32:a1i |- ( ( Q e. ZZ /\ I e. NN0 ) -> inclBool : 2o --> Gamma' )
+i34::s1co
+s35:s26,s33,i34:syl2anc |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( inclBool o. <" (/) "> ) = <" ( inclBool ` (/) ) "> )
+i36::inclboolfv
+s37:s26,i36:syl |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( inclBool ` (/) ) = <. 1 , (/) >. )
+s38:s37:s1eqd |- ( ( Q e. ZZ /\ I e. NN0 ) -> <" ( inclBool ` (/) ) "> = <" <. 1 , (/) >. "> )
+s39:s35,s38:eqtrd |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( inclBool o. <" (/) "> ) = <" <. 1 , (/) >. "> )
+s40:s39:oveq1d |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. ( Q bwrd I ) ) ) = ( <" <. 1 , (/) >. "> ++ ( inclBool o. ( Q bwrd I ) ) ) )
+s41:s24,s31:eqtrd |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( inclBool o. ( ( 2 x. Q ) bwrd ( I + 1 ) ) ) = ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. ( Q bwrd I ) ) ) )
+s42:s41,s40:eqtrd |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( inclBool o. ( ( 2 x. Q ) bwrd ( I + 1 ) ) ) = ( <" <. 1 , (/) >. "> ++ ( inclBool o. ( Q bwrd I ) ) ) )
+qed:s42:eqcomd |- ( ( Q e. ZZ /\ I e. NN0 ) -> ( <" <. 1 , (/) >. "> ++ ( inclBool o. ( Q bwrd I ) ) ) = ( inclBool o. ( ( 2 x. Q ) bwrd ( I + 1 ) ) ) )
+$)

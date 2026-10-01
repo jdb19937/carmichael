@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=flsqrt2  LOC_AFTER=?
+
+* The integer square root of a nonnegative real is a nonnegative integer whose square is at most the argument, and the argument is below the square of its successor.
+
+s1::simpl |- ( ( A e. RR /\ 0 <_ A ) -> A e. RR )
+s2::simpr |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ A )
+s3:s1,s2:jca |- ( ( A e. RR /\ 0 <_ A ) -> ( A e. RR /\ 0 <_ A ) )
+i4::resqrtcl
+s5:s3,i4:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( sqrt ` A ) e. RR )
+i6::sqrtge0
+s7:s3,i6:syl |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ ( sqrt ` A ) )
+s8:s5,s7:jca |- ( ( A e. RR /\ 0 <_ A ) -> ( ( sqrt ` A ) e. RR /\ 0 <_ ( sqrt ` A ) ) )
+i9::flge0nn0
+s10:s8,i9:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( |_ ` ( sqrt ` A ) ) e. NN0 )
+s11:s10:nn0red |- ( ( A e. RR /\ 0 <_ A ) -> ( |_ ` ( sqrt ` A ) ) e. RR )
+s12:s10:nn0ge0d |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ ( |_ ` ( sqrt ` A ) ) )
+s13:s11,s12:jca |- ( ( A e. RR /\ 0 <_ A ) -> ( ( |_ ` ( sqrt ` A ) ) e. RR /\ 0 <_ ( |_ ` ( sqrt ` A ) ) ) )
+i14::flle
+s15:s5,i14:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( |_ ` ( sqrt ` A ) ) <_ ( sqrt ` A ) )
+i16::resqrtth
+s17:s3,i16:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( ( sqrt ` A ) ^ 2 ) = A )
+s18:s13,s8:jca |- ( ( A e. RR /\ 0 <_ A ) -> ( ( ( |_ ` ( sqrt ` A ) ) e. RR /\ 0 <_ ( |_ ` ( sqrt ` A ) ) ) /\ ( ( sqrt ` A ) e. RR /\ 0 <_ ( sqrt ` A ) ) ) )
+i19::le2sq
+s20:s18,i19:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( ( |_ ` ( sqrt ` A ) ) <_ ( sqrt ` A ) <-> ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) <_ ( ( sqrt ` A ) ^ 2 ) ) )
+s21:s20,s15:mpbid |- ( ( A e. RR /\ 0 <_ A ) -> ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) <_ ( ( sqrt ` A ) ^ 2 ) )
+s22:s21,s17:breqtrd |- ( ( A e. RR /\ 0 <_ A ) -> ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) <_ A )
+i23::flltp1
+s24:s5,i23:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( sqrt ` A ) < ( ( |_ ` ( sqrt ` A ) ) + 1 ) )
+s25::1red |- ( ( A e. RR /\ 0 <_ A ) -> 1 e. RR )
+s26::0le1 |- 0 <_ 1
+s27:s26:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ 1 )
+s28:s11,s25:readdcld |- ( ( A e. RR /\ 0 <_ A ) -> ( ( |_ ` ( sqrt ` A ) ) + 1 ) e. RR )
+s29:s11,s25,s12,s27:addge0d |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ ( ( |_ ` ( sqrt ` A ) ) + 1 ) )
+s30:s28,s29:jca |- ( ( A e. RR /\ 0 <_ A ) -> ( ( ( |_ ` ( sqrt ` A ) ) + 1 ) e. RR /\ 0 <_ ( ( |_ ` ( sqrt ` A ) ) + 1 ) ) )
+s31:s8,s30:jca |- ( ( A e. RR /\ 0 <_ A ) -> ( ( ( sqrt ` A ) e. RR /\ 0 <_ ( sqrt ` A ) ) /\ ( ( ( |_ ` ( sqrt ` A ) ) + 1 ) e. RR /\ 0 <_ ( ( |_ ` ( sqrt ` A ) ) + 1 ) ) ) )
+i32::lt2sq
+s33:s31,i32:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( ( sqrt ` A ) < ( ( |_ ` ( sqrt ` A ) ) + 1 ) <-> ( ( sqrt ` A ) ^ 2 ) < ( ( ( |_ ` ( sqrt ` A ) ) + 1 ) ^ 2 ) ) )
+s34:s33,s24:mpbid |- ( ( A e. RR /\ 0 <_ A ) -> ( ( sqrt ` A ) ^ 2 ) < ( ( ( |_ ` ( sqrt ` A ) ) + 1 ) ^ 2 ) )
+s35:s17:eqcomd |- ( ( A e. RR /\ 0 <_ A ) -> A = ( ( sqrt ` A ) ^ 2 ) )
+s36:s35,s34:eqbrtrd |- ( ( A e. RR /\ 0 <_ A ) -> A < ( ( ( |_ ` ( sqrt ` A ) ) + 1 ) ^ 2 ) )
+qed:s10,s22,s36:3jca |- ( ( A e. RR /\ 0 <_ A ) -> ( ( |_ ` ( sqrt ` A ) ) e. NN0 /\ ( ( |_ ` ( sqrt ` A ) ) ^ 2 ) <_ A /\ A < ( ( ( |_ ` ( sqrt ` A ) ) + 1 ) ^ 2 ) ) )
+$)

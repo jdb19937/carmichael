@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=rinv2cl  LOC_AFTER=?
+
+* The reciprocal of the square of Z - P is a complex number off P.
+
+s1::simpl |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> P e. CC )
+s2::simpr |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> Z e. ( CC \ { P } ) )
+i3::eldifsn
+s4:s2,i3:sylib |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> ( Z e. CC /\ Z =/= P ) )
+i5::simpl
+s6:s4,i5:syl |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> Z e. CC )
+i7::simpr
+s8:s4,i7:syl |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> Z =/= P )
+s9:s6,s1:subcld |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> ( Z - P ) e. CC )
+s10:s6,s1,s8:subne0d |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> ( Z - P ) =/= 0 )
+s11:s9:sqcld |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> ( ( Z - P ) ^ 2 ) e. CC )
+i12::sqne0
+s13:s9,i12:syl |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> ( ( ( Z - P ) ^ 2 ) =/= 0 <-> ( Z - P ) =/= 0 ) )
+s14:s13,s10:mpbird |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> ( ( Z - P ) ^ 2 ) =/= 0 )
+qed:s11,s14:reccld |- ( ( P e. CC /\ Z e. ( CC \ { P } ) ) -> ( 1 / ( ( Z - P ) ^ 2 ) ) e. CC )
+$)

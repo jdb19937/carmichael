@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=phirad  LOC_AFTER=?
+
+* The argument over its totient, as a product of p / ( p - 1 ) over the prime divisors.
+
+s1::id |- ( M e. NN -> M e. NN )
+s2:s1:nncnd |- ( M e. NN -> M e. CC )
+s3:s1:nnne0d |- ( M e. NN -> M =/= 0 )
+i4::phicl
+s5:s1,i4:syl |- ( M e. NN -> ( phi ` M ) e. NN )
+s6:s5:nncnd |- ( M e. NN -> ( phi ` M ) e. CC )
+s7:s5:nnne0d |- ( M e. NN -> ( phi ` M ) =/= 0 )
+i8::prmdvdsfi
+s9:s1,i8:syl |- ( M e. NN -> { p e. Prime | p || M } e. Fin )
+s10::cbvrabv |- { p e. Prime | p || M } = { q e. Prime | q || M }
+s11:s10:a1i |- ( M e. NN -> { p e. Prime | p || M } = { q e. Prime | q || M } )
+s12:s11,s9:eqeltrrd |- ( M e. NN -> { q e. Prime | q || M } e. Fin )
+s13::simpr |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. { q e. Prime | q || M } )
+i14::elrabi
+s15:s13,i14:syl |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. Prime )
+i16::prmnn
+s17:s15,i16:syl |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. NN )
+s18:s17:nncnd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. CC )
+s19:s17:nnne0d |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p =/= 0 )
+i20::prmuz2
+s21:s15,i20:syl |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. ( ZZ>= ` 2 ) )
+i22::uz2m1rp
+s23:s21,i22:syl |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( p x. ( p - 1 ) ) e. RR+ )
+s24::1cnd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> 1 e. CC )
+s25:s18,s24:subcld |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( p - 1 ) e. CC )
+s26:s23:rpne0d |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( p x. ( p - 1 ) ) =/= 0 )
+s27:s18,s25,s26:mulne0bbd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( p - 1 ) =/= 0 )
+s28:s12,s18:fprodcl |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } p e. CC )
+s29:s12,s18,s19:fprodn0 |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } p =/= 0 )
+s30:s12,s25:fprodcl |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } ( p - 1 ) e. CC )
+s31:s12,s25,s27:fprodn0 |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } ( p - 1 ) =/= 0 )
+s32:s12,s25,s18,s19:fproddiv |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } ( ( p - 1 ) / p ) = ( prod_ p e. { q e. Prime | q || M } ( p - 1 ) / prod_ p e. { q e. Prime | q || M } p ) )
+s33:s12,s18,s25,s27:fproddiv |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } ( p / ( p - 1 ) ) = ( prod_ p e. { q e. Prime | q || M } p / prod_ p e. { q e. Prime | q || M } ( p - 1 ) ) )
+s34::phiradlem |- ( M e. NN -> ( ( phi ` M ) / M ) = prod_ p e. { q e. Prime | q || M } ( ( p - 1 ) / p ) )
+s35:s34,s32:eqtrd |- ( M e. NN -> ( ( phi ` M ) / M ) = ( prod_ p e. { q e. Prime | q || M } ( p - 1 ) / prod_ p e. { q e. Prime | q || M } p ) )
+s36:s6,s2,s7,s3:recdivd |- ( M e. NN -> ( 1 / ( ( phi ` M ) / M ) ) = ( M / ( phi ` M ) ) )
+s37:s30,s28,s31,s29:recdivd |- ( M e. NN -> ( 1 / ( prod_ p e. { q e. Prime | q || M } ( p - 1 ) / prod_ p e. { q e. Prime | q || M } p ) ) = ( prod_ p e. { q e. Prime | q || M } p / prod_ p e. { q e. Prime | q || M } ( p - 1 ) ) )
+s38:s35:oveq2d |- ( M e. NN -> ( 1 / ( ( phi ` M ) / M ) ) = ( 1 / ( prod_ p e. { q e. Prime | q || M } ( p - 1 ) / prod_ p e. { q e. Prime | q || M } p ) ) )
+s39:s36:eqcomd |- ( M e. NN -> ( M / ( phi ` M ) ) = ( 1 / ( ( phi ` M ) / M ) ) )
+s40:s39,s38:eqtrd |- ( M e. NN -> ( M / ( phi ` M ) ) = ( 1 / ( prod_ p e. { q e. Prime | q || M } ( p - 1 ) / prod_ p e. { q e. Prime | q || M } p ) ) )
+s41:s40,s37:eqtrd |- ( M e. NN -> ( M / ( phi ` M ) ) = ( prod_ p e. { q e. Prime | q || M } p / prod_ p e. { q e. Prime | q || M } ( p - 1 ) ) )
+s42:s33:eqcomd |- ( M e. NN -> ( prod_ p e. { q e. Prime | q || M } p / prod_ p e. { q e. Prime | q || M } ( p - 1 ) ) = prod_ p e. { q e. Prime | q || M } ( p / ( p - 1 ) ) )
+qed:s41,s42:eqtrd |- ( M e. NN -> ( M / ( phi ` M ) ) = prod_ p e. { q e. Prime | q || M } ( p / ( p - 1 ) ) )
+$)

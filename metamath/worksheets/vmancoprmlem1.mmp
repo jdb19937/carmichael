@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=vmancoprmlem1  LOC_AFTER=?
+
+* Lemma for vmancoprm: two primes dividing a number with nonzero von Mangoldt value are equal.
+
+s1::simp1l |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> N e. NN )
+s2::simp1r |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> ( Lam ` N ) =/= 0 )
+s3::simp2l |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> P e. Prime )
+s4::simp2r |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> P || N )
+s5::simp3l |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> Q e. Prime )
+s6::simp3r |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> Q || N )
+i7::isppw2
+s8:s1,i7:syl |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> ( ( Lam ` N ) =/= 0 <-> E. p e. Prime E. k e. NN N = ( p ^ k ) ) )
+s9:s2,s8:mpbid |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> E. p e. Prime E. k e. NN N = ( p ^ k ) )
+s10::simpr |- ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) -> p e. Prime )
+s11:s10:adantr |- ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) -> p e. Prime )
+s12:s11:adantr |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> p e. Prime )
+s13::simpr |- ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) -> k e. NN )
+s14:s13:adantr |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> k e. NN )
+s15::simpr |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> N = ( p ^ k ) )
+s16:s3:ad3antrrr |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> P e. Prime )
+s17:s4:ad3antrrr |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> P || N )
+s18:s5:ad3antrrr |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> Q e. Prime )
+s19:s6:ad3antrrr |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> Q || N )
+s20:s17,s15:breqtrd |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> P || ( p ^ k ) )
+s21:s19,s15:breqtrd |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> Q || ( p ^ k ) )
+i22::prmdvdsexpb
+s23:s16,s12,s14,i22:syl3anc |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> ( P || ( p ^ k ) <-> P = p ) )
+i24::prmdvdsexpb
+s25:s18,s12,s14,i24:syl3anc |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> ( Q || ( p ^ k ) <-> Q = p ) )
+s26:s20,s23:mpbid |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> P = p )
+s27:s21,s25:mpbid |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> Q = p )
+s28:s26,s27:eqtr4d |- ( ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) /\ N = ( p ^ k ) ) -> P = Q )
+s29:s28:ex |- ( ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) /\ k e. NN ) -> ( N = ( p ^ k ) -> P = Q ) )
+s30:s29:rexlimdva |- ( ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) /\ p e. Prime ) -> ( E. k e. NN N = ( p ^ k ) -> P = Q ) )
+s31:s30:rexlimdva |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> ( E. p e. Prime E. k e. NN N = ( p ^ k ) -> P = Q ) )
+qed:s9,s31:mpd |- ( ( ( N e. NN /\ ( Lam ` N ) =/= 0 ) /\ ( P e. Prime /\ P || N ) /\ ( Q e. Prime /\ Q || N ) ) -> P = Q )
+$)

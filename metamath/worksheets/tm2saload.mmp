@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2saload  LOC_AFTER=?
+
+* Equation of stepAux for load: ` stepAux (load a q) v S = stepAux q (a v) S `.
+
+s1::simp1 |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> T e. V )
+s2::simp3 |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) )
+s3::simp2 |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) )
+s4:s3:simpld |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) )
+s5:s3:simprd |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> Q e. ( TM2Stmt ` T ) )
+s6:s2:simpld |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> A e. ( 2nd ` T ) )
+s7:s2:simprd |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> D e. ( TM2Stk ` T ) )
+i8::opelxpi
+s9:s6,s7,i8:syl2anc |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. A , D >. e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i10::tm2load
+s11:s1,s4,s5,i10:syl3anc |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. 3 , <. F , Q >. >. e. ( TM2Stmt ` T ) )
+i12::tm2safix
+s13:s1,s11,s9,i12:syl3anc |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 3 , <. F , Q >. >. ( TM2sa ` T ) <. A , D >. ) = ( <. 3 , <. F , Q >. >. ( T TM2cl ( TM2sa ` T ) ) <. A , D >. ) )
+s14::fvex |- ( TM2sa ` T ) e. _V
+s15:s14:a1i |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( TM2sa ` T ) e. _V )
+s16:s1,s15:jca |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( T e. V /\ ( TM2sa ` T ) e. _V ) )
+s17:s11,s9:jca |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 3 , <. F , Q >. >. e. ( TM2Stmt ` T ) /\ <. A , D >. e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+i18::tm2clload
+s19:s16,s3,s17,i18:syl3anc |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 3 , <. F , Q >. >. ( T TM2cl ( TM2sa ` T ) ) <. A , D >. ) = ( Q ( TM2sa ` T ) <. ( F ` ( 1st ` <. A , D >. ) ) , ( 2nd ` <. A , D >. ) >. ) )
+s20:s6:elexd |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> A e. _V )
+s21:s7:elexd |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> D e. _V )
+i22::op1stg
+s23:s20,s21,i22:syl2anc |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( 1st ` <. A , D >. ) = A )
+i24::op2ndg
+s25:s20,s21,i24:syl2anc |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( 2nd ` <. A , D >. ) = D )
+c1:s23:fveq2d |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( F ` ( 1st ` <. A , D >. ) ) = ( F ` A ) )
+c2:c1,s25:opeq12d |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. ( F ` ( 1st ` <. A , D >. ) ) , ( 2nd ` <. A , D >. ) >. = <. ( F ` A ) , D >. )
+c3:c2:oveq2d |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( Q ( TM2sa ` T ) <. ( F ` ( 1st ` <. A , D >. ) ) , ( 2nd ` <. A , D >. ) >. ) = ( Q ( TM2sa ` T ) <. ( F ` A ) , D >. ) )
+s26:s13,s19:eqtrd |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 3 , <. F , Q >. >. ( TM2sa ` T ) <. A , D >. ) = ( Q ( TM2sa ` T ) <. ( F ` ( 1st ` <. A , D >. ) ) , ( 2nd ` <. A , D >. ) >. ) )
+qed:s26,c3:eqtrd |- ( ( T e. V /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 3 , <. F , Q >. >. ( TM2sa ` T ) <. A , D >. ) = ( Q ( TM2sa ` T ) <. ( F ` A ) , D >. ) )
+$)

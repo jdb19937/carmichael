@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=subbitscons2  LOC_AFTER=?
+
+* Lean clause 3 of subBits: the first operand is empty.
+
+s1::simpll |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> B e. 2o )
+s2::simplr |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> C e. 2o )
+s3::simpr |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> Y e. Word 2o )
+s4::wrd0 |- (/) e. Word 2o
+s5:s4:a1i |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> (/) e. Word 2o )
+i6::s1cl
+s7:s1,i6:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> <" B "> e. Word 2o )
+i8::ccatcl
+s9:s7,s3,i8:syl2anc |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( <" B "> ++ Y ) e. Word 2o )
+i10::ccatlen
+s11:s7,s3,i10:syl2anc |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` ( <" B "> ++ Y ) ) = ( ( # ` <" B "> ) + ( # ` Y ) ) )
+s12::s1len |- ( # ` <" B "> ) = 1
+s13:s12:a1i |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` <" B "> ) = 1 )
+s14:s13:oveq1d |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( # ` <" B "> ) + ( # ` Y ) ) = ( 1 + ( # ` Y ) ) )
+s15::1cnd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> 1 e. CC )
+i16::lencl
+s17:s3,i16:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` Y ) e. NN0 )
+s18:s17:nn0zd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` Y ) e. ZZ )
+s19:s18:zred |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` Y ) e. RR )
+s20:s19:recnd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` Y ) e. CC )
+s21:s15,s20:addcomd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( 1 + ( # ` Y ) ) = ( ( # ` Y ) + 1 ) )
+s22:s11,s14,s21:3eqtrd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` ( <" B "> ++ Y ) ) = ( ( # ` Y ) + 1 ) )
+s23::hash0 |- ( # ` (/) ) = 0
+s24:s23:a1i |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` (/) ) = 0 )
+i25::nn0p1gt0
+s26:s17,i25:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> 0 < ( ( # ` Y ) + 1 ) )
+s27:s26,s22:breqtrrd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> 0 < ( # ` ( <" B "> ++ Y ) ) )
+s28:s24,s27:eqbrtrd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( # ` (/) ) < ( # ` ( <" B "> ++ Y ) ) )
+s29:s5,s9,s2:3jca |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) e. Word 2o /\ ( <" B "> ++ Y ) e. Word 2o /\ C e. 2o ) )
+i30::subbitspad2
+s31:s29,s28,i30:syl2anc |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( (/) subBits ( <" B "> ++ Y ) ) ` C ) = ( ( ( (/) ++ <" (/) "> ) subBits ( <" B "> ++ Y ) ) ` C ) )
+s32::0el2o |- (/) e. 2o
+s33:s32:a1i |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> (/) e. 2o )
+i34::s1cl
+s35:s33,i34:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> <" (/) "> e. Word 2o )
+i36::ccatlid
+s37:s35,i36:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) ++ <" (/) "> ) = <" (/) "> )
+i38::ccatrid
+s39:s35,i38:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( <" (/) "> ++ (/) ) = <" (/) "> )
+s40:s39:eqcomd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> <" (/) "> = ( <" (/) "> ++ (/) ) )
+s41:s37,s40:eqtrd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) ++ <" (/) "> ) = ( <" (/) "> ++ (/) ) )
+s42:s41:oveq1d |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( (/) ++ <" (/) "> ) subBits ( <" B "> ++ Y ) ) = ( ( <" (/) "> ++ (/) ) subBits ( <" B "> ++ Y ) ) )
+s43:s42:fveq1d |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( ( (/) ++ <" (/) "> ) subBits ( <" B "> ++ Y ) ) ` C ) = ( ( ( <" (/) "> ++ (/) ) subBits ( <" B "> ++ Y ) ) ` C ) )
+s44:s33,s1,s2:3jca |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) e. 2o /\ B e. 2o /\ C e. 2o ) )
+s45:s5,s3:jca |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) e. Word 2o /\ Y e. Word 2o ) )
+i46::subbitscons
+s47:s44,s45,i46:syl2anc |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( ( <" (/) "> ++ (/) ) subBits ( <" B "> ++ Y ) ) ` C ) = ( <" ( ( (/) sumBit B ) ` C ) "> ++ ( ( (/) subBits Y ) ` ( ( (/) borrow B ) ` C ) ) ) )
+qed:s31,s43,s47:3eqtrd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( (/) subBits ( <" B "> ++ Y ) ) ` C ) = ( <" ( ( (/) sumBit B ) ` C ) "> ++ ( ( (/) subBits Y ) ` ( ( (/) borrow B ) ` C ) ) ) )
+$)

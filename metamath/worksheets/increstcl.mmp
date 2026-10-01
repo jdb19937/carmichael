@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=increstcl  LOC_AFTER=?
+
+* Closure of incRest: a bit word.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+i6::carriesdvds
+s7:s1,i6:syl |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) || ( ( toNat ` L ) + 1 ) )
+s8::2nn |- 2 e. NN
+s9:s8:a1i |- ( L e. Word 2o -> 2 e. NN )
+i10::carriescl
+s11:s1,i10:syl |- ( L e. Word 2o -> ( carries ` L ) e. NN0 )
+i12::nnexpcl
+s13:s9,s11,i12:syl2anc |- ( L e. Word 2o -> ( 2 ^ ( carries ` L ) ) e. NN )
+i14::nndivdvds
+s15:s5,s13,i14:syl2anc |- ( L e. Word 2o -> ( ( 2 ^ ( carries ` L ) ) || ( ( toNat ` L ) + 1 ) <-> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. NN ) )
+s16:s7,s15:mpbid |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. NN )
+i17::carriesle
+s18:s1,i17:syl |- ( L e. Word 2o -> ( carries ` L ) <_ ( # ` L ) )
+i19::incbitslenge
+s20:s1,i19:syl |- ( L e. Word 2o -> ( # ` L ) <_ ( # ` ( incBits ` L ) ) )
+s21:s11:nn0zd |- ( L e. Word 2o -> ( carries ` L ) e. ZZ )
+s22:s21:zred |- ( L e. Word 2o -> ( carries ` L ) e. RR )
+i23::lencl
+s24:s1,i23:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s25:s24:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s26:s25:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+i27::incbitscl
+s28:s1,i27:syl |- ( L e. Word 2o -> ( incBits ` L ) e. Word 2o )
+i29::lencl
+s30:s28,i29:syl |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) e. NN0 )
+s31:s30:nn0zd |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) e. ZZ )
+s32:s31:zred |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) e. RR )
+s33:s22,s26,s32,s18,s20:letrd |- ( L e. Word 2o -> ( carries ` L ) <_ ( # ` ( incBits ` L ) ) )
+i34::nn0sub
+s35:s11,s30,i34:syl2anc |- ( L e. Word 2o -> ( ( carries ` L ) <_ ( # ` ( incBits ` L ) ) <-> ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) e. NN0 ) )
+s36:s33,s35:mpbid |- ( L e. Word 2o -> ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) e. NN0 )
+s37::increstval |- ( L e. Word 2o -> ( incRest ` L ) = ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) bwrd ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) )
+s38:s16:nnnn0d |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. NN0 )
+s39:s38:nn0zd |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) e. ZZ )
+i40::bwrdcl
+s41:s39,s36,i40:syl2anc |- ( L e. Word 2o -> ( ( ( ( toNat ` L ) + 1 ) / ( 2 ^ ( carries ` L ) ) ) bwrd ( ( # ` ( incBits ` L ) ) - ( carries ` L ) ) ) e. Word 2o )
+qed:s37,s41:eqeltrd |- ( L e. Word 2o -> ( incRest ` L ) e. Word 2o )
+$)

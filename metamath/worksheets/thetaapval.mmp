@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=thetaapval  LOC_AFTER=?
+
+* Value of theta in a residue class (Lean: thetaAP_def).
+
+s1::thetaapfval |- ( Q e. NN -> ( thetaAP ` Q ) = ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) ) )
+s2:s1:3ad2ant1 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( thetaAP ` Q ) = ( a e. ZZ , y e. RR |-> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) ) )
+s3::simprl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> a = A )
+s4::simprr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> y = Y )
+s5:s4:fveq2d |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> ( |_ ` y ) = ( |_ ` Y ) )
+s6:s5:oveq2d |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> ( 1 ... ( |_ ` y ) ) = ( 1 ... ( |_ ` Y ) ) )
+s7:s3:oveq1d |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> ( a mod Q ) = ( A mod Q ) )
+s8:s7:eqeq2d |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> ( ( n mod Q ) = ( a mod Q ) <-> ( n mod Q ) = ( A mod Q ) ) )
+s9:s8:anbi2d |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> ( ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) <-> ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) ) )
+s10:s6,s9:rabeqbidv |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } = { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } )
+s11:s10:sumeq1d |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ ( a = A /\ y = Y ) ) -> sum_ p e. { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ( log ` p ) = sum_ p e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ( log ` p ) )
+s12::simp2 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> A e. ZZ )
+s13::simp3 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> Y e. RR )
+s14::sumex |- sum_ p e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ( log ` p ) e. _V
+s15:s14:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ( log ` p ) e. _V )
+qed:s2,s11,s12,s13,s15:ovmpod |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( thetaAP ` Q ) Y ) = sum_ p e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ( log ` p ) )
+$)

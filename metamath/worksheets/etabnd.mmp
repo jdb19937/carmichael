@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=etabnd  LOC_AFTER=?
+
+* The bound on the eta function on ` Re z > 0 `: ` |eta ( z )| <_ |z| ( 1 + 1 / Re z ) ` ( ~ abbnd at ` B = 1 `).  Lean's ` norm_etaFun_le ` of Route Z's ZeroCount.lean.
+
+s1::mod2abs |- ( ( q e. NN |-> ( q mod 2 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( q mod 2 ) ) ` m ) ) <_ 1 )
+s2:s1:a1i |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( ( q e. NN |-> ( q mod 2 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( q mod 2 ) ) ` m ) ) <_ 1 ) )
+s3::id |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( Z e. CC /\ 0 < ( Re ` Z ) ) )
+s4:s2,s3:jca |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( ( ( q e. NN |-> ( q mod 2 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( q mod 2 ) ) ` m ) ) <_ 1 ) /\ ( Z e. CC /\ 0 < ( Re ` Z ) ) ) )
+i5::abbnd
+s6:s4,i5:syl |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( abs ` sum_ k e. NN ( ( ( q e. NN |-> ( q mod 2 ) ) ` k ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) ) <_ ( ( 1 x. ( abs ` Z ) ) x. ( 1 + ( 1 / ( Re ` Z ) ) ) ) )
+s7::simpr |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> k e. NN )
+s8::oveq1 |- ( q = k -> ( q mod 2 ) = ( k mod 2 ) )
+s9::eqid |- ( q e. NN |-> ( q mod 2 ) ) = ( q e. NN |-> ( q mod 2 ) )
+s10::ovex |- ( k mod 2 ) e. _V
+s11:s8,s9,s10:fvmpt |- ( k e. NN -> ( ( q e. NN |-> ( q mod 2 ) ) ` k ) = ( k mod 2 ) )
+s12:s7,s11:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( q e. NN |-> ( q mod 2 ) ) ` k ) = ( k mod 2 ) )
+s13:s12:oveq1d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( ( q e. NN |-> ( q mod 2 ) ) ` k ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) )
+s14:s13:sumeq2dv |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> sum_ k e. NN ( ( ( q e. NN |-> ( q mod 2 ) ) ` k ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) )
+s15:s14:fveq2d |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( abs ` sum_ k e. NN ( ( ( q e. NN |-> ( q mod 2 ) ) ` k ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) ) = ( abs ` sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) ) )
+s16::simpl |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> Z e. CC )
+s17:s16:abscld |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( abs ` Z ) e. RR )
+s18:s17:recnd |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( abs ` Z ) e. CC )
+s19:s18:mullidd |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( 1 x. ( abs ` Z ) ) = ( abs ` Z ) )
+s20:s19:oveq1d |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( ( 1 x. ( abs ` Z ) ) x. ( 1 + ( 1 / ( Re ` Z ) ) ) ) = ( ( abs ` Z ) x. ( 1 + ( 1 / ( Re ` Z ) ) ) ) )
+s21:s15,s6:eqbrtrrd |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( abs ` sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) ) <_ ( ( 1 x. ( abs ` Z ) ) x. ( 1 + ( 1 / ( Re ` Z ) ) ) ) )
+qed:s21,s20:breqtrd |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> ( abs ` sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) ) <_ ( ( abs ` Z ) x. ( 1 + ( 1 / ( Re ` Z ) ) ) ) )
+$)

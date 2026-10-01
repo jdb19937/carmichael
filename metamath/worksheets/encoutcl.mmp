@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=encoutcl  LOC_AFTER=?
+
+* Closure of encodeOutput: a word over Gamma'.
+
+s1::simpl |- ( ( M e. NN0 /\ S e. Word NN0 ) -> M e. NN0 )
+s2::simpr |- ( ( M e. NN0 /\ S e. Word NN0 ) -> S e. Word NN0 )
+s3::encoutval |- ( ( M e. NN0 /\ S e. Word NN0 ) -> ( M encodeOutput S ) = ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) )
+i4::encnatgamcl
+s5:s1,i4:syl |- ( ( M e. NN0 /\ S e. Word NN0 ) -> ( encNatGam ` M ) e. Word Gamma' )
+s6::gamma4 |- 4 e. Gamma'
+i7::s1cl
+s8:s6,i7:ax-mp |- <" 4 "> e. Word Gamma'
+s9:s8:a1i |- ( ( M e. NN0 /\ S e. Word NN0 ) -> <" 4 "> e. Word Gamma' )
+i10::encoutflatcl
+s11:s2,i10:syl |- ( ( M e. NN0 /\ S e. Word NN0 ) -> ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) e. Word Gamma' )
+i12::ccatcl
+s13:s9,s11,i12:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 ) -> ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) e. Word Gamma' )
+i14::ccatcl
+s15:s5,s13,i14:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 ) -> ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) e. Word Gamma' )
+qed:s3,s15:eqeltrd |- ( ( M e. NN0 /\ S e. Word NN0 ) -> ( M encodeOutput S ) e. Word Gamma' )
+$)

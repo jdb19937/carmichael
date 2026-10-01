@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=tmccmpcl  LOC_AFTER=?
+
+* Closure of the ` cmp ` field of a machine state (Lean: the type of ` St.cmp ` ).
+
+s1::id |- ( V e. TMSt -> V e. TMSt )
+s2::df-tmcmp |- TMcmp = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) )
+s3:s2:a1i |- ( V e. TMSt -> TMcmp = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) ) )
+s4::fveq2 |- ( v = V -> ( 2nd ` v ) = ( 2nd ` V ) )
+s5:s4:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` v ) ) = ( 2nd ` ( 2nd ` V ) ) )
+s6:s5:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) )
+s7:s6:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) )
+s8:s7:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) )
+s9:s8:fveq2d |- ( v = V -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) ) )
+s10:s9:adantl |- ( ( V e. TMSt /\ v = V ) -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) ) )
+s11::fvexd |- ( V e. TMSt -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) ) e. _V )
+s12:s3,s10,s1,s11:fvmptd |- ( V e. TMSt -> ( TMcmp ` V ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) ) )
+s13::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s14:s1,s13:eleqtrdi |- ( V e. TMSt -> V e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) ) )
+i15::xp2nd
+s16:s14,i15:syl |- ( V e. TMSt -> ( 2nd ` V ) e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+i17::xp2nd
+s18:s16,i17:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` V ) ) e. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) )
+i19::xp2nd
+s20:s18,i19:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) e. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) )
+i21::xp2nd
+s22:s20,i21:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) e. ( 2o X. ( 3o X. 2o ) ) )
+i23::xp2nd
+s24:s22,i23:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) e. ( 3o X. 2o ) )
+i25::xp1st
+s26:s24,i25:syl |- ( V e. TMSt -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) ) ) e. 3o )
+qed:s12,s26:eqeltrd |- ( V e. TMSt -> ( TMcmp ` V ) e. 3o )
+$)

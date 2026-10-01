@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=z5pfif  LOC_AFTER=?
+
+* Lean Finset.prod_filter in the form of psi_eq_prod and sum_abs_hBV_le: for R | M, the product over the primes of M of if ( p | R , C , 1 ) is the product of C over the primes of R.
+
+h1::z5pfif.1 |- ( ph -> M e. NN )
+h2::z5pfif.2 |- ( ph -> R e. NN )
+h3::z5pfif.3 |- ( ph -> R || M )
+h4::z5pfif.4 |- ( ( ph /\ p e. Prime ) -> C e. CC )
+s1::simpr |- ( ( ph /\ q e. Prime ) -> q e. Prime )
+i2::prmz
+s3:s1,i2:syl |- ( ( ph /\ q e. Prime ) -> q e. ZZ )
+s4:2:adantr |- ( ( ph /\ q e. Prime ) -> R e. NN )
+s5:s4:nnzd |- ( ( ph /\ q e. Prime ) -> R e. ZZ )
+s6:1:adantr |- ( ( ph /\ q e. Prime ) -> M e. NN )
+s7:s6:nnzd |- ( ( ph /\ q e. Prime ) -> M e. ZZ )
+i8::dvdstr
+s9:s3,s5,s7,i8:syl3anc |- ( ( ph /\ q e. Prime ) -> ( ( q || R /\ R || M ) -> q || M ) )
+s10:3:adantr |- ( ( ph /\ q e. Prime ) -> R || M )
+s11:s10,s9:mpan2d |- ( ( ph /\ q e. Prime ) -> ( q || R -> q || M ) )
+s12:s11:ss2rabdv |- ( ph -> { q e. Prime | q || R } C_ { q e. Prime | q || M } )
+s13::simpr |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> p e. { q e. Prime | q || R } )
+i14::elrabi
+s15:s13,i14:syl |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> p e. Prime )
+s16:s15,4:syldan |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> C e. CC )
+s17::1cnd |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> 1 e. CC )
+s18:s16,s17:ifcld |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> if ( p || R , C , 1 ) e. CC )
+s19::simpr |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) )
+s20:s19:eldifad |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> p e. { q e. Prime | q || M } )
+s21::simpr |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) )
+s22:s21:eldifbd |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> -. p e. { q e. Prime | q || R } )
+i23::elrabi
+s24:s20,i23:syl |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> p e. Prime )
+s25::breq1 |- ( q = p -> ( q || R <-> p || R ) )
+s26:s25:elrab |- ( p e. { q e. Prime | q || R } <-> ( p e. Prime /\ p || R ) )
+s27:s26:a1i |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> ( p e. { q e. Prime | q || R } <-> ( p e. Prime /\ p || R ) ) )
+s28:s22,s27:mtbid |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> -. ( p e. Prime /\ p || R ) )
+s29::imnan |- ( ( p e. Prime -> -. p || R ) <-> -. ( p e. Prime /\ p || R ) )
+s30:s28,s29:sylibr |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> ( p e. Prime -> -. p || R ) )
+s31:s24,s30:mpd |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> -. p || R )
+s32:s31:iffalsed |- ( ( ph /\ p e. ( { q e. Prime | q || M } \ { q e. Prime | q || R } ) ) -> if ( p || R , C , 1 ) = 1 )
+i33::pffinq
+s34:1,i33:syl |- ( ph -> { q e. Prime | q || M } e. Fin )
+s35:s12,s18,s32,s34:fprodss |- ( ph -> prod_ p e. { q e. Prime | q || R } if ( p || R , C , 1 ) = prod_ p e. { q e. Prime | q || M } if ( p || R , C , 1 ) )
+s36::simpr |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> p e. { q e. Prime | q || R } )
+s37:s26:a1i |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> ( p e. { q e. Prime | q || R } <-> ( p e. Prime /\ p || R ) ) )
+s38:s36,s37:mpbid |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> ( p e. Prime /\ p || R ) )
+s39:s38:simprd |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> p || R )
+s40:s39:iftrued |- ( ( ph /\ p e. { q e. Prime | q || R } ) -> if ( p || R , C , 1 ) = C )
+s41:s40:prodeq2dv |- ( ph -> prod_ p e. { q e. Prime | q || R } if ( p || R , C , 1 ) = prod_ p e. { q e. Prime | q || R } C )
+s42:s35:eqcomd |- ( ph -> prod_ p e. { q e. Prime | q || M } if ( p || R , C , 1 ) = prod_ p e. { q e. Prime | q || R } if ( p || R , C , 1 ) )
+qed:s42,s41:eqtrd |- ( ph -> prod_ p e. { q e. Prime | q || M } if ( p || R , C , 1 ) = prod_ p e. { q e. Prime | q || R } C )
+$)

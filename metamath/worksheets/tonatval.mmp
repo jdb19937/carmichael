@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatval  LOC_AFTER=?
+
+* Value of toNat: the sum of 2 ^ i over the positions i of L holding true (Lean: toNat, LSB first).
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::id |- ( l = L -> l = L )
+c1:s2:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c2:c1:oveq2d |- ( l = L -> ( 0 ..^ ( # ` l ) ) = ( 0 ..^ ( # ` L ) ) )
+c3:s2:fveq1d |- ( l = L -> ( l ` i ) = ( L ` i ) )
+c4:c3:eqeq1d |- ( l = L -> ( ( l ` i ) = 1o <-> ( L ` i ) = 1o ) )
+c5:c2,c4:rabeqbidv |- ( l = L -> { i e. ( 0 ..^ ( # ` l ) ) | ( l ` i ) = 1o } = { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } )
+c6:c5:sumeq1d |- ( l = L -> sum_ i e. { i e. ( 0 ..^ ( # ` l ) ) | ( l ` i ) = 1o } ( 2 ^ i ) = sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) )
+s3::df-tonat |- toNat = ( l e. Word 2o |-> sum_ i e. { i e. ( 0 ..^ ( # ` l ) ) | ( l ` i ) = 1o } ( 2 ^ i ) )
+s4::sumex |- sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) e. _V
+s5:s4:a1i |- ( L e. Word 2o -> sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) e. _V )
+s6:c6,s3:fvmptg |- ( ( L e. Word 2o /\ sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) e. _V ) -> ( toNat ` L ) = sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) )
+qed:s1,s5,s6:syl2anc |- ( L e. Word 2o -> ( toNat ` L ) = sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) )
+$)

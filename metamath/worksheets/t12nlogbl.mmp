@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=t12nlogbl  LOC_AFTER=?
+
+* Lean's ` Nat.log 2 a <_ bl a ` (~ df-bwbl : ` bl a = Nat.log 2 a + 1 ` for ` a =/= 0 ` , both ` 0 ` at ` 0 ` ).
+
+s1::id |- ( A e. NN -> A e. NN )
+i2::blnlog
+s3:s1,i2:syl |- ( A e. NN -> ( 2 Nlog A ) = ( ( bl ` A ) - 1 ) )
+s4:s1:nnnn0d |- ( A e. NN -> A e. NN0 )
+i5::blcl
+s6:s4,i5:syl |- ( A e. NN -> ( bl ` A ) e. NN0 )
+s7::2nn0 |- 2 e. NN0
+s8:s7:a1i |- ( A e. NN -> 2 e. NN0 )
+s9:s1:nnnn0d |- ( A e. NN -> A e. NN0 )
+i10::nlogcl
+s11:s8,s9,i10:syl2anc |- ( A e. NN -> ( 2 Nlog A ) e. NN0 )
+s12:s11:nn0zd |- ( A e. NN -> ( 2 Nlog A ) e. ZZ )
+s13:s12:zred |- ( A e. NN -> ( 2 Nlog A ) e. RR )
+s14:s13,s3:eqled |- ( A e. NN -> ( 2 Nlog A ) <_ ( ( bl ` A ) - 1 ) )
+s15::0le1 |- 0 <_ 1
+s16:s15:a1i |- ( A e. NN -> 0 <_ 1 )
+s17:s6:nn0zd |- ( A e. NN -> ( bl ` A ) e. ZZ )
+s18:s17:zred |- ( A e. NN -> ( bl ` A ) e. RR )
+s19::1re |- 1 e. RR
+s20:s19:a1i |- ( A e. NN -> 1 e. RR )
+s21:s18,s20:subge02d |- ( A e. NN -> ( 0 <_ 1 <-> ( ( bl ` A ) - 1 ) <_ ( bl ` A ) ) )
+s22:s16,s21:mpbid |- ( A e. NN -> ( ( bl ` A ) - 1 ) <_ ( bl ` A ) )
+s23:s18,s20:resubcld |- ( A e. NN -> ( ( bl ` A ) - 1 ) e. RR )
+s24:s13,s23,s18,s14,s22:letrd |- ( A e. NN -> ( 2 Nlog A ) <_ ( bl ` A ) )
+s25::id |- ( A = 0 -> A = 0 )
+s26:s25:oveq2d |- ( A = 0 -> ( 2 Nlog A ) = ( 2 Nlog 0 ) )
+s27::2nn0 |- 2 e. NN0
+s28:s27:a1i |- ( A = 0 -> 2 e. NN0 )
+s29::0nn0 |- 0 e. NN0
+s30:s29:a1i |- ( A = 0 -> 0 e. NN0 )
+s31:s28,s30:jca |- ( A = 0 -> ( 2 e. NN0 /\ 0 e. NN0 ) )
+s32::0re |- 0 e. RR
+s33::1re |- 1 e. RR
+s34:s32,s33:ltnlei |- ( 0 < 1 <-> -. 1 <_ 0 )
+s35::0lt1 |- 0 < 1
+s36:s34,s35:mpbi |- -. 1 <_ 0
+s37:s36:intnan |- -. ( 2 <_ 2 /\ 1 <_ 0 )
+s38:s37:a1i |- ( A = 0 -> -. ( 2 <_ 2 /\ 1 <_ 0 ) )
+s39:s31,s38:jca |- ( A = 0 -> ( ( 2 e. NN0 /\ 0 e. NN0 ) /\ -. ( 2 <_ 2 /\ 1 <_ 0 ) ) )
+i40::nlogz
+s41:s39,i40:syl |- ( A = 0 -> ( 2 Nlog 0 ) = 0 )
+s42:s26,s41:eqtrd |- ( A = 0 -> ( 2 Nlog A ) = 0 )
+s43::id |- ( A = 0 -> A = 0 )
+s44:s43:fveq2d |- ( A = 0 -> ( bl ` A ) = ( bl ` 0 ) )
+s45::bl0 |- ( bl ` 0 ) = 0
+s46:s45:a1i |- ( A = 0 -> ( bl ` 0 ) = 0 )
+s47:s44,s46:eqtrd |- ( A = 0 -> ( bl ` A ) = 0 )
+s48:s47:eqcomd |- ( A = 0 -> 0 = ( bl ` A ) )
+s49:s42,s48:eqtrd |- ( A = 0 -> ( 2 Nlog A ) = ( bl ` A ) )
+s50::0re |- 0 e. RR
+s51:s50:a1i |- ( A = 0 -> 0 e. RR )
+s52:s42,s51:eqeltrd |- ( A = 0 -> ( 2 Nlog A ) e. RR )
+s53:s52:leidd |- ( A = 0 -> ( 2 Nlog A ) <_ ( 2 Nlog A ) )
+s54:s53,s49:breqtrd |- ( A = 0 -> ( 2 Nlog A ) <_ ( bl ` A ) )
+s55:s24,s54:jaoi |- ( ( A e. NN \/ A = 0 ) -> ( 2 Nlog A ) <_ ( bl ` A ) )
+s56::elnn0 |- ( A e. NN0 <-> ( A e. NN \/ A = 0 ) )
+qed:s56,s55:sylbi |- ( A e. NN0 -> ( 2 Nlog A ) <_ ( bl ` A ) )
+$)

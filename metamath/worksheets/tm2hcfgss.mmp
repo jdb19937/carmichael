@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hcfgss  LOC_AFTER=?
+
+* The configurations at a given label with state-and-stacks in a given class are configurations.
+
+s1::simp1 |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> T e. V )
+s2::simp2 |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> A e. ( 2nd ` ( 1st ` T ) ) )
+s3::simp3 |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i4::djulcl
+s5:s2,i4:syl |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( inl ` A ) e. ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+s6:s5:snssd |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> { ( inl ` A ) } C_ ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+i7::xpss12
+s8:s6,s3,i7:syl2anc |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( { ( inl ` A ) } X. P ) C_ ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+i9::tm2cfgval
+s10:s1,i9:syl |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( TM2Cfg ` T ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+qed:s8,s10:sseqtrrd |- ( ( T e. V /\ A e. ( 2nd ` ( 1st ` T ) ) /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( { ( inl ` A ) } X. P ) C_ ( TM2Cfg ` T ) )
+$)

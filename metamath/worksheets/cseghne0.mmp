@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=cseghne0  LOC_AFTER=?
+
+* A horizontal segment off the real axis misses the origin: every point has the same nonzero imaginary part ( ~ cseghim ).
+
+s1::simpll |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> S e. RR )
+s2::simplr |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> S =/= 0 )
+s3::simprl |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> P e. RR )
+s4::simprr |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> Q e. RR )
+s5::ax-icn |- _i e. CC
+s6:s5:a1i |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> _i e. CC )
+s7:s1:recnd |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> S e. CC )
+s8:s6,s7:mulcld |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> ( _i x. S ) e. CC )
+s9:s3:recnd |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> P e. CC )
+s10:s9,s8:addcld |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> ( P + ( _i x. S ) ) e. CC )
+s11:s4:recnd |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> Q e. CC )
+s12:s11,s8:addcld |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> ( Q + ( _i x. S ) ) e. CC )
+i13::crim
+s14:s3,s1,i13:syl2anc |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> ( Im ` ( P + ( _i x. S ) ) ) = S )
+i15::crim
+s16:s4,s1,i15:syl2anc |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> ( Im ` ( Q + ( _i x. S ) ) ) = S )
+s17:s16:eqcomd |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> S = ( Im ` ( Q + ( _i x. S ) ) ) )
+s18:s14,s17:eqtrd |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> ( Im ` ( P + ( _i x. S ) ) ) = ( Im ` ( Q + ( _i x. S ) ) ) )
+i19::cseghim
+s20:s10,s12,s18,i19:syl3anc |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> A. u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ( Im ` u ) = ( Im ` ( P + ( _i x. S ) ) ) )
+s21::simpr |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) )
+s22:s10:adantr |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> ( P + ( _i x. S ) ) e. CC )
+s23:s12:adantr |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> ( Q + ( _i x. S ) ) e. CC )
+i24::csegcl
+s25:s22,s23,i24:syl2anc |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) C_ CC )
+s26:s25,s21:sseldd |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> u e. CC )
+s27:s20:adantr |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> A. u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ( Im ` u ) = ( Im ` ( P + ( _i x. S ) ) ) )
+i28::rspa
+s29:s27,s21,i28:syl2anc |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> ( Im ` u ) = ( Im ` ( P + ( _i x. S ) ) ) )
+s30:s14:adantr |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> ( Im ` ( P + ( _i x. S ) ) ) = S )
+s31:s29,s30:eqtrd |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> ( Im ` u ) = S )
+s32::simpr |- ( ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) /\ u = 0 ) -> u = 0 )
+s33:s32:fveq2d |- ( ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) /\ u = 0 ) -> ( Im ` u ) = ( Im ` 0 ) )
+s34::im0 |- ( Im ` 0 ) = 0
+s35:s34:a1i |- ( ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) /\ u = 0 ) -> ( Im ` 0 ) = 0 )
+s36:s33,s35:eqtrd |- ( ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) /\ u = 0 ) -> ( Im ` u ) = 0 )
+s37:s31:adantr |- ( ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) /\ u = 0 ) -> ( Im ` u ) = S )
+s38:s37,s36:eqtr3d |- ( ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) /\ u = 0 ) -> S = 0 )
+s39:s2:adantr |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> S =/= 0 )
+s40:s39:neneqd |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> -. S = 0 )
+s41:s40:adantr |- ( ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) /\ u = 0 ) -> -. S = 0 )
+s42:s38,s41:pm2.65da |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> -. u = 0 )
+s43:s42:neqned |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> u =/= 0 )
+i44::eldifsn
+s45:s26,s43,i44:sylanbrc |- ( ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) /\ u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) ) -> u e. ( CC \ { 0 } ) )
+qed:s45:ralrimiva |- ( ( ( S e. RR /\ S =/= 0 ) /\ ( P e. RR /\ Q e. RR ) ) -> A. u e. ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) u e. ( CC \ { 0 } ) )
+$)

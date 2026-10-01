@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=ttabtbav  LOC_AFTER=?
+
+* Value of ~ df-tm2enctbla .  Lean: ` encTblAsc ` .
+
+s1::id |- ( l = L -> l = L )
+c1:s1:oveq2d |- ( l = L -> ( 0 ..^ l ) = ( 0 ..^ L ) )
+c2:c1:reseq2d |- ( l = L -> ( t |` ( 0 ..^ l ) ) = ( t |` ( 0 ..^ L ) ) )
+c3:c2:coeq2d |- ( l = L -> ( encSlot o. ( t |` ( 0 ..^ l ) ) ) = ( encSlot o. ( t |` ( 0 ..^ L ) ) ) )
+c4:c3:oveq2d |- ( l = L -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( t |` ( 0 ..^ l ) ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( t |` ( 0 ..^ L ) ) ) ) )
+s2::id |- ( t = T -> t = T )
+c5:s2:reseq1d |- ( t = T -> ( t |` ( 0 ..^ L ) ) = ( T |` ( 0 ..^ L ) ) )
+c6:c5:coeq2d |- ( t = T -> ( encSlot o. ( t |` ( 0 ..^ L ) ) ) = ( encSlot o. ( T |` ( 0 ..^ L ) ) ) )
+c7:c6:oveq2d |- ( t = T -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( t |` ( 0 ..^ L ) ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) )
+s3::df-tm2enctbla |- encTblAsc = ( l e. NN0 , t e. Tbl |-> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( t |` ( 0 ..^ l ) ) ) ) )
+s4:c4,c7,s3:ovmpog |- ( ( L e. NN0 /\ T e. Tbl /\ ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) e. _V ) -> ( L encTblAsc T ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) )
+s5::ovex |- ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) e. _V
+s6:s5:a1i |- ( ( L e. NN0 /\ T e. Tbl ) -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) e. _V )
+s7::simpl |- ( ( L e. NN0 /\ T e. Tbl ) -> L e. NN0 )
+s8::simpr |- ( ( L e. NN0 /\ T e. Tbl ) -> T e. Tbl )
+qed:s7,s8,s6,s4:syl3anc |- ( ( L e. NN0 /\ T e. Tbl ) -> ( L encTblAsc T ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) )
+$)

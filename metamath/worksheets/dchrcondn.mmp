@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrcondn  LOC_AFTER=?
+
+* The level N belongs to the conductor set of X (Mathlib level_mem_conductorSet).
+
+s1::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3:s1:nnzd |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. ZZ )
+i4::iddvds
+s5:s3,i4:syl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N || N )
+i6::dchrindid
+s7:s1,s2,i6:syl2anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrInd N ) ` X ) = X )
+s8:s7:eqcomd |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X = ( ( N DChrInd N ) ` X ) )
+s9::fveq2 |- ( y = X -> ( ( N DChrInd N ) ` y ) = ( ( N DChrInd N ) ` X ) )
+s10:s9:eqeq2d |- ( y = X -> ( X = ( ( N DChrInd N ) ` y ) <-> X = ( ( N DChrInd N ) ` X ) ) )
+s11:s10:rspcev |- ( ( X e. ( Base ` ( DChr ` N ) ) /\ X = ( ( N DChrInd N ) ` X ) ) -> E. y e. ( Base ` ( DChr ` N ) ) X = ( ( N DChrInd N ) ` y ) )
+s12:s2,s8,s11:syl2anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> E. y e. ( Base ` ( DChr ` N ) ) X = ( ( N DChrInd N ) ` y ) )
+s13:s5,s12:jca |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N || N /\ E. y e. ( Base ` ( DChr ` N ) ) X = ( ( N DChrInd N ) ` y ) ) )
+s14:s1,s13:jca |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N e. NN /\ ( N || N /\ E. y e. ( Base ` ( DChr ` N ) ) X = ( ( N DChrInd N ) ` y ) ) ) )
+s15::dchrcondel |- ( N e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } <-> ( N e. NN /\ ( N || N /\ E. y e. ( Base ` ( DChr ` N ) ) X = ( ( N DChrInd N ) ` y ) ) ) )
+qed:s14,s15:sylibr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } )
+$)

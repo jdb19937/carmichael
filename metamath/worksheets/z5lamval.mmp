@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=z5lamval  LOC_AFTER=?
+
+* The value of the Barban-Vehov weight at K: ( ( A bvLam B ) ` K ) = mmu ( K ) ( log+ ( B / K ) - log+ ( A / K ) ) / log ( B / A ) (Lean bvLam, Detector.lean 198).
+
+s1::simpll |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> A e. V )
+s2::simplr |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> B e. W )
+i3::bvlamval
+s4:s1,s2,i3:syl2anc |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> ( A bvLam B ) = ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) )
+s5::simpr |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> K e. NN )
+s6::id |- ( z = K -> z = K )
+c1:s6:fveq2d |- ( z = K -> ( mmu ` z ) = ( mmu ` K ) )
+c2:s6:oveq2d |- ( z = K -> ( B / z ) = ( B / K ) )
+c3:c2:breq2d |- ( z = K -> ( 1 <_ ( B / z ) <-> 1 <_ ( B / K ) ) )
+c4:s6:oveq2d |- ( z = K -> ( B / z ) = ( B / K ) )
+c5:c4:fveq2d |- ( z = K -> ( log ` ( B / z ) ) = ( log ` ( B / K ) ) )
+c6:c3,c5:ifbieq1d |- ( z = K -> if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) = if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) )
+c7:s6:oveq2d |- ( z = K -> ( A / z ) = ( A / K ) )
+c8:c7:breq2d |- ( z = K -> ( 1 <_ ( A / z ) <-> 1 <_ ( A / K ) ) )
+c9:s6:oveq2d |- ( z = K -> ( A / z ) = ( A / K ) )
+c10:c9:fveq2d |- ( z = K -> ( log ` ( A / z ) ) = ( log ` ( A / K ) ) )
+c11:c8,c10:ifbieq1d |- ( z = K -> if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) = if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) )
+c12:c6,c11:oveq12d |- ( z = K -> ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) = ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) )
+c13:c1,c12:oveq12d |- ( z = K -> ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) = ( ( mmu ` K ) x. ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) ) )
+c14:c13:oveq1d |- ( z = K -> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) = ( ( ( mmu ` K ) x. ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) )
+s7::eqid |- ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) = ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) )
+s8:c14,s7:fvmptg |- ( ( K e. NN /\ ( ( ( mmu ` K ) x. ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) e. _V ) -> ( ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) ` K ) = ( ( ( mmu ` K ) x. ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) )
+s9::ovexd |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> ( ( ( mmu ` K ) x. ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) e. _V )
+s10:s5,s9,s8:syl2anc |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> ( ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) ` K ) = ( ( ( mmu ` K ) x. ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) )
+s11:s4:fveq1d |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> ( ( A bvLam B ) ` K ) = ( ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) ` K ) )
+qed:s11,s10:eqtrd |- ( ( ( A e. V /\ B e. W ) /\ K e. NN ) -> ( ( A bvLam B ) ` K ) = ( ( ( mmu ` K ) x. ( if ( 1 <_ ( B / K ) , ( log ` ( B / K ) ) , 0 ) - if ( 1 <_ ( A / K ) , ( log ` ( A / K ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) )
+$)

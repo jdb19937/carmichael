@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=evalsttlem  LOC_AFTER=?
+
+* Sufficient condition for evaluating in time: for F : A --> Option A and N <= M, the state X evaluates within M steps to the N-th iterate of the option-lifted step at some X. This is how a test program is certified: exhibit the step count and compute the iterate.
+
+1::simp1l   |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> A e. V )
+2::simp1r   |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> F : A --> ( A |_| 1o ) )
+3::simp2l   |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> M e. NN0 )
+4::simp2r   |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> N e. ( 0 ... M ) )
+5::simp3    |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> X e. A )
+6a::fex
+6:2,1,6a:syl2anc |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> F e. _V )
+7::simp1    |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( A e. V /\ F : A --> ( A |_| 1o ) ) )
+8a::optstepf
+8:7,8a:syl  |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( OptStep ` F ) : ( A |_| 1o ) --> ( A |_| 1o ) )
+9::1oex     |- 1o e. _V
+10:9:a1i    |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> 1o e. _V )
+11a::djuex
+11:1,10,11a:syl2anc |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( A |_| 1o ) e. _V )
+12:11,8:jca |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( A |_| 1o ) e. _V /\ ( OptStep ` F ) : ( A |_| 1o ) --> ( A |_| 1o ) ) )
+13::elfznn0 |- ( N e. ( 0 ... M ) -> N e. NN0 )
+14:4,13:syl |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> N e. NN0 )
+15a::relexpfd
+15:14,15a:syl |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( ( A |_| 1o ) e. _V /\ ( OptStep ` F ) : ( A |_| 1o ) --> ( A |_| 1o ) ) -> ( ( OptStep ` F ) ^r N ) : ( A |_| 1o ) --> ( A |_| 1o ) ) )
+16:12,15:mpd |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( OptStep ` F ) ^r N ) : ( A |_| 1o ) --> ( A |_| 1o ) )
+17a::djulcl
+17:5,17a:syl |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( inl ` X ) e. ( A |_| 1o ) )
+18:16,17:ffvelcdmd |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. ( A |_| 1o ) )
+19a::fdm
+19:2,19a:syl |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> dom F = A )
+20:19:eleq2d |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( X e. dom F <-> X e. A ) )
+21:5,20:mpbird |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> X e. dom F )
+22a::djueq1
+22:19,22a:syl |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( dom F |_| 1o ) = ( A |_| 1o ) )
+23:22:eleq2d |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. ( dom F |_| 1o ) <-> ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. ( A |_| 1o ) ) )
+24:18,23:mpbird |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. ( dom F |_| 1o ) )
+25:21,24:jca |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( X e. dom F /\ ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. ( dom F |_| 1o ) ) )
+26::oveq2   |- ( n = N -> ( ( OptStep ` F ) ^r n ) = ( ( OptStep ` F ) ^r N ) )
+27:26:fveq1d |- ( n = N -> ( ( ( OptStep ` F ) ^r n ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) )
+28:27:eqeq1d |- ( n = N -> ( ( ( ( OptStep ` F ) ^r n ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) <-> ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) ) )
+29::eqid    |- ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) )
+30:28:rspcev |- ( ( N e. ( 0 ... M ) /\ ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) ) -> E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) )
+31:29,30:mpan2 |- ( N e. ( 0 ... M ) -> E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) )
+32:4,31:syl |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) )
+33:25,32:jca |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( X e. dom F /\ ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) ) )
+34:5:elexd  |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> X e. _V )
+35::fvex    |- ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. _V
+36:35:a1i   |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. _V )
+37:34,36:jca |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( X e. _V /\ ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. _V ) )
+38a::evalsttbr
+38:6,3,37,38a:syl3anc |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> ( X ( F EvalsToInTime M ) ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) <-> ( ( X e. dom F /\ ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` X ) ) = ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) ) ) )
+qed:33,38:mpbird |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ ( M e. NN0 /\ N e. ( 0 ... M ) ) /\ X e. A ) -> X ( F EvalsToInTime M ) ( ( ( OptStep ` F ) ^r N ) ` ( inl ` X ) ) )
+$)

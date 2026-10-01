@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=sincases  LOC_AFTER=?
+
+* Every nonempty entry after a conditional update is old or the new one (Lean: setIfNone_cases).
+
+s1::simpl |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) -> ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) )
+s2::simprl |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) -> C e. NN0 )
+s3:s1:simp3d |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) -> S e. Word NN0 )
+s4:s1,s2:jca |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) -> ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ C e. NN0 ) )
+s5::sinapply |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ C e. NN0 ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) )
+s6:s4,s5:syl |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) )
+s7:s6:adantr |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) )
+s8::simpr |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) )
+s9:s8:iftrued |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) = ( inl ` S ) )
+s10:s7,s9:eqtrd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = ( inl ` S ) )
+s11:s10:fveq2d |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( 2nd ` ( ( ( T SetIfNone R ) ` S ) ` C ) ) = ( 2nd ` ( inl ` S ) ) )
+s12:s3:adantr |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> S e. Word NN0 )
+i13::alginl2
+s14:s12,i13:syl |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( 2nd ` ( inl ` S ) ) = S )
+s15:s11,s14:eqtrd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( 2nd ` ( ( ( T SetIfNone R ) ` S ) ` C ) ) = S )
+s16::simpr |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) )
+s17:s16:simprd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> C = R )
+s18:s17,s15:jca |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( C = R /\ ( 2nd ` ( ( ( T SetIfNone R ) ` S ) ` C ) ) = S ) )
+s19:s18:olcd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( T ` C ) = ( ( ( T SetIfNone R ) ` S ) ` C ) \/ ( C = R /\ ( 2nd ` ( ( ( T SetIfNone R ) ` S ) ` C ) ) = S ) ) )
+s20:s6:adantr |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) )
+s21::simpr |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) )
+s22:s21:iffalsed |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) = ( T ` C ) )
+s23:s20,s22:eqtrd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = ( T ` C ) )
+s24:s23:eqcomd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( T ` C ) = ( ( ( T SetIfNone R ) ` S ) ` C ) )
+s25:s24:orcd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) /\ -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( ( T ` C ) = ( ( ( T SetIfNone R ) ` S ) ` C ) \/ ( C = R /\ ( 2nd ` ( ( ( T SetIfNone R ) ` S ) ` C ) ) = S ) ) )
+qed:s19,s25:pm2.61dan |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( ( ( T SetIfNone R ) ` S ) ` C ) =/= ( inr ` (/) ) ) ) -> ( ( T ` C ) = ( ( ( T SetIfNone R ) ` S ) ` C ) \/ ( C = R /\ ( 2nd ` ( ( ( T SetIfNone R ) ` S ) ` C ) ) = S ) ) )
+$)

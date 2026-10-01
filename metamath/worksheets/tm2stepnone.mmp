@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stepnone  LOC_AFTER=?
+
+* The step function halts on a configuration without label: ` step <. none , v , S >. = none `.
+
+s1::simpl |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( T e. V /\ M e. W ) )
+s2:s1:simpld |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> T e. V )
+s3::simpr |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) )
+s4:s3:simpld |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> A e. ( 2nd ` T ) )
+s5:s3:simprd |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> D e. ( TM2Stk ` T ) )
+s6::0lt1o |- (/) e. 1o
+i7::djurcl
+s8:s6,i7:ax-mp |- ( inr ` (/) ) e. ( ( 2nd ` ( 1st ` T ) ) |_| 1o )
+s9:s8:a1i |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( inr ` (/) ) e. ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+i10::opelxpi
+s11:s4,s5,i10:syl2anc |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. A , D >. e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i12::opelxpi
+s13:s9,s11,i12:syl2anc |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. ( inr ` (/) ) , <. A , D >. >. e. ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+i14::tm2cfgval
+s15:s2,i14:syl |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( TM2Cfg ` T ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+s16:s13,s15:eleqtrrd |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. ( inr ` (/) ) , <. A , D >. >. e. ( TM2Cfg ` T ) )
+i17::tm2stepfv
+s18:s1,s16,i17:syl2anc |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( ( T TM2step M ) ` <. ( inr ` (/) ) , <. A , D >. >. ) = if ( ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ( TM2sa ` T ) ( 2nd ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ) )
+s19:s4:elexd |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> A e. _V )
+s20:s5:elexd |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> D e. _V )
+s21::fvex |- ( inr ` (/) ) e. _V
+s22:s21:a1i |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( inr ` (/) ) e. _V )
+s23::opex |- <. A , D >. e. _V
+s24:s23:a1i |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. A , D >. e. _V )
+i25::op1stg
+s26:s22,s24,i25:syl2anc |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) = ( inr ` (/) ) )
+i27::op1stg
+s28:s22,s24,i27:syl2anc |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) = ( inr ` (/) ) )
+i29::op2ndg
+s30:s22,s24,i29:syl2anc |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( 2nd ` <. ( inr ` (/) ) , <. A , D >. >. ) = <. A , D >. )
+c1:s28:eqeq1d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) = ( inr ` (/) ) <-> ( inr ` (/) ) = ( inr ` (/) ) ) )
+c2:s28:fveq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( 2nd ` ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) ) = ( 2nd ` ( inr ` (/) ) ) )
+c3:c2:fveq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( M ` ( 2nd ` ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) = ( M ` ( 2nd ` ( inr ` (/) ) ) ) )
+c4:c3,s30:oveq12d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( ( M ` ( 2nd ` ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ( TM2sa ` T ) ( 2nd ` <. ( inr ` (/) ) , <. A , D >. >. ) ) = ( ( M ` ( 2nd ` ( inr ` (/) ) ) ) ( TM2sa ` T ) <. A , D >. ) )
+c5:c4:fveq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( inl ` ( ( M ` ( 2nd ` ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ( TM2sa ` T ) ( 2nd ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) = ( inl ` ( ( M ` ( 2nd ` ( inr ` (/) ) ) ) ( TM2sa ` T ) <. A , D >. ) ) )
+c6:c1,c5:ifbieq2d |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> if ( ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ( TM2sa ` T ) ( 2nd ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ) = if ( ( inr ` (/) ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( inr ` (/) ) ) ) ( TM2sa ` T ) <. A , D >. ) ) ) )
+s31::eqid |- ( inr ` (/) ) = ( inr ` (/) )
+s32:s31:a1i |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( inr ` (/) ) = ( inr ` (/) ) )
+s33:s32:iftrued |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> if ( ( inr ` (/) ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( inr ` (/) ) ) ) ( TM2sa ` T ) <. A , D >. ) ) ) = ( inr ` (/) ) )
+s34:c6,s33:eqtrd |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> if ( ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ( TM2sa ` T ) ( 2nd ` <. ( inr ` (/) ) , <. A , D >. >. ) ) ) ) = ( inr ` (/) ) )
+qed:s18,s34:eqtrd |- ( ( ( T e. V /\ M e. W ) /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( ( T TM2step M ) ` <. ( inr ` (/) ) , <. A , D >. >. ) = ( inr ` (/) ) )
+$)

@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=predbitslen  LOC_AFTER=?
+
+* predBits L is at most as long as L (Lean: predBits_length).
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::predbitslen2 |- ( L e. Word 2o -> ( # ` ( predBits ` L ) ) = if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) )
+s3::simpr |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) )
+s4:s3:iftrued |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) = ( ( # ` L ) - 1 ) )
+i5::lencl
+s6:s1,i5:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s7:s6:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s8:s7:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+s9:s8:adantr |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. RR )
+s10:s9:lem1d |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( ( # ` L ) - 1 ) <_ ( # ` L ) )
+s11:s4,s10:eqbrtrd |- ( ( L e. Word 2o /\ ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) <_ ( # ` L ) )
+s12::simpr |- ( ( L e. Word 2o /\ -. ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> -. ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) )
+s13:s12:iffalsed |- ( ( L e. Word 2o /\ -. ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) = ( # ` L ) )
+s14:s8:adantr |- ( ( L e. Word 2o /\ -. ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. RR )
+s15:s14:leidd |- ( ( L e. Word 2o /\ -. ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) <_ ( # ` L ) )
+s16:s13,s15:eqbrtrd |- ( ( L e. Word 2o /\ -. ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) <_ ( # ` L ) )
+s17:s11,s16:pm2.61dan |- ( L e. Word 2o -> if ( ( 2 x. ( toNat ` L ) ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) - 1 ) , ( # ` L ) ) <_ ( # ` L ) )
+qed:s2,s17:eqbrtrd |- ( L e. Word 2o -> ( # ` ( predBits ` L ) ) <_ ( # ` L ) )
+$)

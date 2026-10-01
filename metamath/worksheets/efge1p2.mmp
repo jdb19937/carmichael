@@ -1,0 +1,56 @@
+$( <MM> <PROOF_ASST> THEOREM=efge1p2  LOC_AFTER=?
+
+* The second-order Taylor lower bound on the exponential, nonstrict and at every nonnegative argument: ~ efgt1p2 with the case ` A = 0 ` added.
+
+s1::simpl |- ( ( A e. RR /\ 0 <_ A ) -> A e. RR )
+s2::simpr |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ A )
+s3::simpl |- ( ( A e. RR /\ 0 < A ) -> A e. RR )
+s4::simpr |- ( ( A e. RR /\ 0 < A ) -> 0 < A )
+s5:s3,s4:elrpd |- ( ( A e. RR /\ 0 < A ) -> A e. RR+ )
+i6::efgt1p2
+s7:s5,i6:syl |- ( ( A e. RR /\ 0 < A ) -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) < ( exp ` A ) )
+s8::simpl |- ( ( A e. RR /\ 0 < A ) -> A e. RR )
+s9::1re |- 1 e. RR
+s10:s9:a1i |- ( ( A e. RR /\ 0 < A ) -> 1 e. RR )
+s11:s10,s8:readdcld |- ( ( A e. RR /\ 0 < A ) -> ( 1 + A ) e. RR )
+s12:s8:resqcld |- ( ( A e. RR /\ 0 < A ) -> ( A ^ 2 ) e. RR )
+s13:s12:rehalfcld |- ( ( A e. RR /\ 0 < A ) -> ( ( A ^ 2 ) / 2 ) e. RR )
+s14:s11,s13:readdcld |- ( ( A e. RR /\ 0 < A ) -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) e. RR )
+s15:s8:reefcld |- ( ( A e. RR /\ 0 < A ) -> ( exp ` A ) e. RR )
+s16:s14,s15,s7:ltled |- ( ( A e. RR /\ 0 < A ) -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) )
+s17:s16:ex |- ( A e. RR -> ( 0 < A -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) ) )
+s18:s17:adantr |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 < A -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) ) )
+s19::oveq2 |- ( A = 0 -> ( 1 + A ) = ( 1 + 0 ) )
+s20::oveq1 |- ( A = 0 -> ( A ^ 2 ) = ( 0 ^ 2 ) )
+s21:s20:oveq1d |- ( A = 0 -> ( ( A ^ 2 ) / 2 ) = ( ( 0 ^ 2 ) / 2 ) )
+s22:s19,s21:oveq12d |- ( A = 0 -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) = ( ( 1 + 0 ) + ( ( 0 ^ 2 ) / 2 ) ) )
+s23::fveq2 |- ( A = 0 -> ( exp ` A ) = ( exp ` 0 ) )
+s24:s22,s23:breq12d |- ( A = 0 -> ( ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) <-> ( ( 1 + 0 ) + ( ( 0 ^ 2 ) / 2 ) ) <_ ( exp ` 0 ) ) )
+s25::sq0 |- ( 0 ^ 2 ) = 0
+s26:s25:oveq1i |- ( ( 0 ^ 2 ) / 2 ) = ( 0 / 2 )
+s27::2cn |- 2 e. CC
+s28::2ne0 |- 2 =/= 0
+i29::div0
+s30:s27,s28,i29:mp2an |- ( 0 / 2 ) = 0
+s31:s26,s30:eqtri |- ( ( 0 ^ 2 ) / 2 ) = 0
+s32:s31:oveq2i |- ( ( 1 + 0 ) + ( ( 0 ^ 2 ) / 2 ) ) = ( ( 1 + 0 ) + 0 )
+s33::1p0e1 |- ( 1 + 0 ) = 1
+s34:s33:oveq1i |- ( ( 1 + 0 ) + 0 ) = ( 1 + 0 )
+s35:s34,s33:eqtri |- ( ( 1 + 0 ) + 0 ) = 1
+s36:s32,s35:eqtri |- ( ( 1 + 0 ) + ( ( 0 ^ 2 ) / 2 ) ) = 1
+s37::ef0 |- ( exp ` 0 ) = 1
+s38::1le1 |- 1 <_ 1
+s39:s36,s38:eqbrtri |- ( ( 1 + 0 ) + ( ( 0 ^ 2 ) / 2 ) ) <_ 1
+s40:s37:eqcomi |- 1 = ( exp ` 0 )
+s41:s39,s40:breqtri |- ( ( 1 + 0 ) + ( ( 0 ^ 2 ) / 2 ) ) <_ ( exp ` 0 )
+s42:s41,s24:mpbiri |- ( A = 0 -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) )
+s43:s42:eqcoms |- ( 0 = A -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) )
+s44:s43:a1i |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 = A -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) ) )
+s45::0re |- 0 e. RR
+s46:s45:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 0 e. RR )
+i47::leloe
+s48:s46,s1,i47:syl2anc |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 <_ A <-> ( 0 < A \/ 0 = A ) ) )
+s49:s2,s48:mpbid |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 < A \/ 0 = A ) )
+s50:s18,s44:jaod |- ( ( A e. RR /\ 0 <_ A ) -> ( ( 0 < A \/ 0 = A ) -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) ) )
+qed:s49,s50:mpd |- ( ( A e. RR /\ 0 <_ A ) -> ( ( 1 + A ) + ( ( A ^ 2 ) / 2 ) ) <_ ( exp ` A ) )
+$)

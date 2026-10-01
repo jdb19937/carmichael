@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=nlogcl  LOC_AFTER=?
+
+* Closure of Nlog: a nonnegative integer (Lean: Nat.log b n : Nat).
+
+s1::simpll |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> B e. NN0 )
+s2:s1:nn0zd |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> B e. ZZ )
+s3::simprl |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 2 <_ B )
+s4::2z |- 2 e. ZZ
+s5:s4:a1i |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 2 e. ZZ )
+s6:s5,s2,s3:3jca |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> ( 2 e. ZZ /\ B e. ZZ /\ 2 <_ B ) )
+i7::eluz2
+s8:s6,i7:sylibr |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> B e. ( ZZ>= ` 2 ) )
+s9::simplr |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> N e. NN0 )
+s10:s9:nn0zd |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> N e. ZZ )
+s11::simprr |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 1 <_ N )
+s12::1z |- 1 e. ZZ
+s13:s12:a1i |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 1 e. ZZ )
+s14:s13,s10,s11:3jca |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> ( 1 e. ZZ /\ N e. ZZ /\ 1 <_ N ) )
+i15::eluz2
+s16:s14,i15:sylibr |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> N e. ( ZZ>= ` 1 ) )
+i17::elnnuz
+s18:s16,i17:sylibr |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> N e. NN )
+i19::eluz2nn
+s20:s8,i19:syl |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> B e. NN )
+s21:s20:nnrpd |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> B e. RR+ )
+s22:s18:nnrpd |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> N e. RR+ )
+i23::eluz2gt1
+s24:s8,i23:syl |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 1 < B )
+s25::1red |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 1 e. RR )
+s26:s25,s24:gtned |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> B =/= 1 )
+i27::relogbcl
+s28:s21,s22,s26,i27:syl3anc |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> ( B logb N ) e. RR )
+s29:s18:nnge1d |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 1 <_ N )
+i30::logbge0b
+s31:s8,s22,i30:syl2anc |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> ( 0 <_ ( B logb N ) <-> 1 <_ N ) )
+s32:s31,s29:mpbird |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> 0 <_ ( B logb N ) )
+i33::flge0nn0
+s34:s28,s32,i33:syl2anc |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ ( 2 <_ B /\ 1 <_ N ) ) -> ( |_ ` ( B logb N ) ) e. NN0 )
+s35::0nn0 |- 0 e. NN0
+s36:s35:a1i |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ -. ( 2 <_ B /\ 1 <_ N ) ) -> 0 e. NN0 )
+s37:s34,s36:ifclda |- ( ( B e. NN0 /\ N e. NN0 ) -> if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) e. NN0 )
+s38::nlogval |- ( ( B e. NN0 /\ N e. NN0 ) -> ( B Nlog N ) = if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) )
+qed:s38,s37:eqeltrd |- ( ( B e. NN0 /\ N e. NN0 ) -> ( B Nlog N ) e. NN0 )
+$)

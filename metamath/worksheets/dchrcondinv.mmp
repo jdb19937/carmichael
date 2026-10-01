@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrcondinv  LOC_AFTER=?
+
+* The conductor of the inverse (conjugate) character equals the conductor of the character (Mathlib conductor_inv).
+
+s1::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3::eqid |- ( DChr ` N ) = ( DChr ` N )
+s4:s3:dchrabl |- ( N e. NN -> ( DChr ` N ) e. Abel )
+s5:s1,s4:syl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( DChr ` N ) e. Abel )
+s6:s5:ablgrpd |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( DChr ` N ) e. Grp )
+s7::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s8::eqid |- ( invg ` ( DChr ` N ) ) = ( invg ` ( DChr ` N ) )
+s9:s7,s8:grpinvcl |- ( ( ( DChr ` N ) e. Grp /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( invg ` ( DChr ` N ) ) ` X ) e. ( Base ` ( DChr ` N ) ) )
+s10:s6,s2,s9:syl2anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( invg ` ( DChr ` N ) ) ` X ) e. ( Base ` ( DChr ` N ) ) )
+s11::dchrcondinvle |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) <_ ( N DChrCond X ) )
+i12::dchrcondinvle
+s13:s1,s10,i12:syl2anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` ( ( invg ` ( DChr ` N ) ) ` X ) ) ) <_ ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) )
+s14:s7,s8:grpinvinv |- ( ( ( DChr ` N ) e. Grp /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( invg ` ( DChr ` N ) ) ` ( ( invg ` ( DChr ` N ) ) ` X ) ) = X )
+s15:s6,s2,s14:syl2anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( invg ` ( DChr ` N ) ) ` ( ( invg ` ( DChr ` N ) ) ` X ) ) = X )
+s16:s15:oveq2d |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` ( ( invg ` ( DChr ` N ) ) ` X ) ) ) = ( N DChrCond X ) )
+s17:s16,s13:eqbrtrrd |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond X ) <_ ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) )
+s18::dchrcondnn |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond X ) e. NN )
+i19::dchrcondnn
+s20:s1,s10,i19:syl2anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) e. NN )
+s21:s11,s17:jca |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) <_ ( N DChrCond X ) /\ ( N DChrCond X ) <_ ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) ) )
+s22:s20:nnred |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) e. RR )
+s23:s18:nnred |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond X ) e. RR )
+i24::letri3
+s25:s22,s23,i24:syl2anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) = ( N DChrCond X ) <-> ( ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) <_ ( N DChrCond X ) /\ ( N DChrCond X ) <_ ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) ) ) )
+qed:s21,s25:mpbird |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond ( ( invg ` ( DChr ` N ) ) ` X ) ) = ( N DChrCond X ) )
+$)

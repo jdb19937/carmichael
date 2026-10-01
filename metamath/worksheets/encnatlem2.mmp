@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatlem2  LOC_AFTER=?
+
+* Lemma for encodeNat: the length expression is a nonnegative integer.
+
+s1::simpr |- ( ( N e. NN0 /\ N = 0 ) -> N = 0 )
+s2:s1:iftrued |- ( ( N e. NN0 /\ N = 0 ) -> if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) = 0 )
+s3::0nn0 |- 0 e. NN0
+s4:s3:a1i |- ( ( N e. NN0 /\ N = 0 ) -> 0 e. NN0 )
+s5:s2,s4:eqeltrd |- ( ( N e. NN0 /\ N = 0 ) -> if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) e. NN0 )
+s6::simpr |- ( ( N e. NN0 /\ N =/= 0 ) -> N =/= 0 )
+s7:s6:neneqd |- ( ( N e. NN0 /\ N =/= 0 ) -> -. N = 0 )
+s8:s7:iffalsed |- ( ( N e. NN0 /\ N =/= 0 ) -> if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) = ( ( |_ ` ( 2 logb N ) ) + 1 ) )
+s9::elnnne0 |- ( N e. NN <-> ( N e. NN0 /\ N =/= 0 ) )
+s10:s9:biimpri |- ( ( N e. NN0 /\ N =/= 0 ) -> N e. NN )
+i11::encnatlem3
+s12:s10,i11:syl |- ( ( N e. NN0 /\ N =/= 0 ) -> ( |_ ` ( 2 logb N ) ) e. NN0 )
+i13::peano2nn0
+s14:s12,i13:syl |- ( ( N e. NN0 /\ N =/= 0 ) -> ( ( |_ ` ( 2 logb N ) ) + 1 ) e. NN0 )
+s15:s8,s14:eqeltrd |- ( ( N e. NN0 /\ N =/= 0 ) -> if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) e. NN0 )
+qed:s5,s15:pm2.61dane |- ( N e. NN0 -> if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) e. NN0 )
+$)

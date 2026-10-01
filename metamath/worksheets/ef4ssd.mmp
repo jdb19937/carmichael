@@ -1,0 +1,79 @@
+$( <MM> <PROOF_ASST> THEOREM=ef4ssd  LOC_AFTER=?
+
+* Lean ` sum_sub_sum_eq ` : the difference of the sums over two finite sets is the difference of the sums over the two set differences.
+
+h1::ef4ssd.1 |- ( ph -> A e. Fin )
+h2::ef4ssd.2 |- ( ph -> B e. Fin )
+h3::ef4ssd.3 |- ( ( ph /\ q e. ( A u. B ) ) -> C e. CC )
+s1::inindif |- ( ( A i^i B ) i^i ( A \ B ) ) = (/)
+s2::incom |- ( ( A \ B ) i^i ( A i^i B ) ) = ( ( A i^i B ) i^i ( A \ B ) )
+s3:s2,s1:eqtri |- ( ( A \ B ) i^i ( A i^i B ) ) = (/)
+s4:s3:a1i |- ( ph -> ( ( A \ B ) i^i ( A i^i B ) ) = (/) )
+s5::inundif |- ( ( A i^i B ) u. ( A \ B ) ) = A
+s6::uncom |- ( ( A \ B ) u. ( A i^i B ) ) = ( ( A i^i B ) u. ( A \ B ) )
+s7:s6,s5:eqtri |- ( ( A \ B ) u. ( A i^i B ) ) = A
+s8:s7:eqcomi |- A = ( ( A \ B ) u. ( A i^i B ) )
+s9:s8:a1i |- ( ph -> A = ( ( A \ B ) u. ( A i^i B ) ) )
+s10::simpr |- ( ( ph /\ q e. A ) -> q e. A )
+i11::elun1
+s12:s10,i11:syl |- ( ( ph /\ q e. A ) -> q e. ( A u. B ) )
+s13::simpl |- ( ( ph /\ q e. A ) -> ph )
+s14:s13,s12,h3:syl2anc |- ( ( ph /\ q e. A ) -> C e. CC )
+s15:s4,s9,h1,s14:fsumsplit |- ( ph -> sum_ q e. A C = ( sum_ q e. ( A \ B ) C + sum_ q e. ( A i^i B ) C ) )
+s16::inindif |- ( ( B i^i A ) i^i ( B \ A ) ) = (/)
+s17::incom |- ( ( B \ A ) i^i ( B i^i A ) ) = ( ( B i^i A ) i^i ( B \ A ) )
+s18:s17,s16:eqtri |- ( ( B \ A ) i^i ( B i^i A ) ) = (/)
+s19:s18:a1i |- ( ph -> ( ( B \ A ) i^i ( B i^i A ) ) = (/) )
+s20::inundif |- ( ( B i^i A ) u. ( B \ A ) ) = B
+s21::uncom |- ( ( B \ A ) u. ( B i^i A ) ) = ( ( B i^i A ) u. ( B \ A ) )
+s22:s21,s20:eqtri |- ( ( B \ A ) u. ( B i^i A ) ) = B
+s23:s22:eqcomi |- B = ( ( B \ A ) u. ( B i^i A ) )
+s24:s23:a1i |- ( ph -> B = ( ( B \ A ) u. ( B i^i A ) ) )
+s25::simpr |- ( ( ph /\ q e. B ) -> q e. B )
+i26::elun2
+s27:s25,i26:syl |- ( ( ph /\ q e. B ) -> q e. ( A u. B ) )
+s28::simpl |- ( ( ph /\ q e. B ) -> ph )
+s29:s28,s27,h3:syl2anc |- ( ( ph /\ q e. B ) -> C e. CC )
+s30:s19,s24,h2,s29:fsumsplit |- ( ph -> sum_ q e. B C = ( sum_ q e. ( B \ A ) C + sum_ q e. ( B i^i A ) C ) )
+s31::incom |- ( B i^i A ) = ( A i^i B )
+s32:s31:sumeq1i |- sum_ q e. ( B i^i A ) C = sum_ q e. ( A i^i B ) C
+s33:s32:a1i |- ( ph -> sum_ q e. ( B i^i A ) C = sum_ q e. ( A i^i B ) C )
+s34:s33:oveq2d |- ( ph -> ( sum_ q e. ( B \ A ) C + sum_ q e. ( B i^i A ) C ) = ( sum_ q e. ( B \ A ) C + sum_ q e. ( A i^i B ) C ) )
+s35:s30,s34:eqtrd |- ( ph -> sum_ q e. B C = ( sum_ q e. ( B \ A ) C + sum_ q e. ( A i^i B ) C ) )
+s36::difss |- ( A \ B ) C_ A
+s37:s36:a1i |- ( ph -> ( A \ B ) C_ A )
+s38:h1,s37:ssfid |- ( ph -> ( A \ B ) e. Fin )
+s39:s36:a1i |- ( ( ph /\ q e. ( A \ B ) ) -> ( A \ B ) C_ A )
+s40::simpr |- ( ( ph /\ q e. ( A \ B ) ) -> q e. ( A \ B ) )
+s41:s39,s40:sseldd |- ( ( ph /\ q e. ( A \ B ) ) -> q e. A )
+i42::elun1
+s43:s41,i42:syl |- ( ( ph /\ q e. ( A \ B ) ) -> q e. ( A u. B ) )
+s44::simpl |- ( ( ph /\ q e. ( A \ B ) ) -> ph )
+s45:s44,s43,h3:syl2anc |- ( ( ph /\ q e. ( A \ B ) ) -> C e. CC )
+s46:s38,s45:fsumcl |- ( ph -> sum_ q e. ( A \ B ) C e. CC )
+s47::difss |- ( B \ A ) C_ B
+s48:s47:a1i |- ( ph -> ( B \ A ) C_ B )
+s49:h2,s48:ssfid |- ( ph -> ( B \ A ) e. Fin )
+s50:s47:a1i |- ( ( ph /\ q e. ( B \ A ) ) -> ( B \ A ) C_ B )
+s51::simpr |- ( ( ph /\ q e. ( B \ A ) ) -> q e. ( B \ A ) )
+s52:s50,s51:sseldd |- ( ( ph /\ q e. ( B \ A ) ) -> q e. B )
+i53::elun2
+s54:s52,i53:syl |- ( ( ph /\ q e. ( B \ A ) ) -> q e. ( A u. B ) )
+s55::simpl |- ( ( ph /\ q e. ( B \ A ) ) -> ph )
+s56:s55,s54,h3:syl2anc |- ( ( ph /\ q e. ( B \ A ) ) -> C e. CC )
+s57:s49,s56:fsumcl |- ( ph -> sum_ q e. ( B \ A ) C e. CC )
+s58::inss1 |- ( A i^i B ) C_ A
+s59:s58:a1i |- ( ph -> ( A i^i B ) C_ A )
+s60:h1,s59:ssfid |- ( ph -> ( A i^i B ) e. Fin )
+s61:s58:a1i |- ( ( ph /\ q e. ( A i^i B ) ) -> ( A i^i B ) C_ A )
+s62::simpr |- ( ( ph /\ q e. ( A i^i B ) ) -> q e. ( A i^i B ) )
+s63:s61,s62:sseldd |- ( ( ph /\ q e. ( A i^i B ) ) -> q e. A )
+i64::elun1
+s65:s63,i64:syl |- ( ( ph /\ q e. ( A i^i B ) ) -> q e. ( A u. B ) )
+s66::simpl |- ( ( ph /\ q e. ( A i^i B ) ) -> ph )
+s67:s66,s65,h3:syl2anc |- ( ( ph /\ q e. ( A i^i B ) ) -> C e. CC )
+s68:s60,s67:fsumcl |- ( ph -> sum_ q e. ( A i^i B ) C e. CC )
+s69:s15,s35:oveq12d |- ( ph -> ( sum_ q e. A C - sum_ q e. B C ) = ( ( sum_ q e. ( A \ B ) C + sum_ q e. ( A i^i B ) C ) - ( sum_ q e. ( B \ A ) C + sum_ q e. ( A i^i B ) C ) ) )
+s70:s46,s57,s68:pnpcan2d |- ( ph -> ( ( sum_ q e. ( A \ B ) C + sum_ q e. ( A i^i B ) C ) - ( sum_ q e. ( B \ A ) C + sum_ q e. ( A i^i B ) C ) ) = ( sum_ q e. ( A \ B ) C - sum_ q e. ( B \ A ) C ) )
+qed:s69,s70:eqtrd |- ( ph -> ( sum_ q e. A C - sum_ q e. B C ) = ( sum_ q e. ( A \ B ) C - sum_ q e. ( B \ A ) C ) )
+$)

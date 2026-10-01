@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=relexpaddfv  LOC_AFTER=?
+
+* The iterate of a function at a sum of exponents: the outer iterate applied to the inner one.  The step-counting engine of the machine layer.
+
+s1::simp1l |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> B e. V )
+s2::simp1r |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> G : B --> B )
+s3::simp2l |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> N e. NN0 )
+s4::simp2r |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> M e. NN0 )
+s5::simp3 |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> X e. B )
+i6::fex
+s7:s2,s1,i6:syl2anc |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> G e. _V )
+i8::ffun
+s9:s2,i8:syl |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> Fun G )
+i10::funrel
+s11:s9,i10:syl |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> Rel G )
+s12:s11:a1d |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( ( N + M ) = 1 -> Rel G ) )
+s13:s4,s7,s12:3jca |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( M e. NN0 /\ G e. _V /\ ( ( N + M ) = 1 -> Rel G ) ) )
+s14:s3,s13:jca |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( N e. NN0 /\ ( M e. NN0 /\ G e. _V /\ ( ( N + M ) = 1 -> Rel G ) ) ) )
+i15::relexpaddg
+s16:s14,i15:syl |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( ( G ^r N ) o. ( G ^r M ) ) = ( G ^r ( N + M ) ) )
+s17:s16:eqcomd |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( G ^r ( N + M ) ) = ( ( G ^r N ) o. ( G ^r M ) ) )
+s18:s17:fveq1d |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( ( G ^r ( N + M ) ) ` X ) = ( ( ( G ^r N ) o. ( G ^r M ) ) ` X ) )
+s19:s1,s2:jca |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( B e. V /\ G : B --> B ) )
+i20::relexpfd
+s21:s4,i20:syl |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( ( B e. V /\ G : B --> B ) -> ( G ^r M ) : B --> B ) )
+s22:s19,s21:mpd |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( G ^r M ) : B --> B )
+i23::fvco3
+s24:s22,s5,i23:syl2anc |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( ( ( G ^r N ) o. ( G ^r M ) ) ` X ) = ( ( G ^r N ) ` ( ( G ^r M ) ` X ) ) )
+qed:s18,s24:eqtrd |- ( ( ( B e. V /\ G : B --> B ) /\ ( N e. NN0 /\ M e. NN0 ) /\ X e. B ) -> ( ( G ^r ( N + M ) ) ` X ) = ( ( G ^r N ) ` ( ( G ^r M ) ` X ) ) )
+$)

@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3fsc  LOC_AFTER=?
+
+* A finite sum of continuous functions is continuous ( ~ fsumcn through ~ cncfcn ).
+
+h1::zl3fsc.1 |- ( ph -> X C_ CC )
+h2::zl3fsc.2 |- ( ph -> A e. Fin )
+h3::zl3fsc.3 |- ( ( ph /\ k e. A ) -> ( x e. X |-> B ) e. ( X -cn-> CC ) )
+s1::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s2::eqid |- ( ( TopOpen ` CCfld ) |`t X ) = ( ( TopOpen ` CCfld ) |`t X )
+s3::eqid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( ( TopOpen ` CCfld ) |`t CC )
+s4:s1,s2,s3:cncfcn |- ( ( X C_ CC /\ CC C_ CC ) -> ( X -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) )
+s5::unicntop |- CC = U. ( TopOpen ` CCfld )
+s6:s5:restid |- ( ( TopOpen ` CCfld ) e. Top -> ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld ) )
+s7::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s8:s7:cnfldtop |- ( TopOpen ` CCfld ) e. Top
+s9:s6,s8:ax-mp |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s10::ssid |- CC C_ CC
+s11:s10:a1i |- ( ph -> CC C_ CC )
+s12:1,s11,s4:syl2anc |- ( ph -> ( X -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) )
+s13:s9:a1i |- ( ph -> ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld ) )
+s14:s13:oveq2d |- ( ph -> ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) = ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( TopOpen ` CCfld ) ) )
+s15:s12,s14:eqtrd |- ( ph -> ( X -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( TopOpen ` CCfld ) ) )
+s16:s15:adantr |- ( ( ph /\ k e. A ) -> ( X -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( TopOpen ` CCfld ) ) )
+s17:3,s16:eleqtrd |- ( ( ph /\ k e. A ) -> ( x e. X |-> B ) e. ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( TopOpen ` CCfld ) ) )
+s18::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s19:s18:cnfldtopon |- ( TopOpen ` CCfld ) e. ( TopOn ` CC )
+s20:s19:a1i |- ( ph -> ( TopOpen ` CCfld ) e. ( TopOn ` CC ) )
+i21::resttopon
+s22:s20,1,i21:syl2anc |- ( ph -> ( ( TopOpen ` CCfld ) |`t X ) e. ( TopOn ` X ) )
+s23::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s24:s23,s22,2,s17:fsumcn |- ( ph -> ( x e. X |-> sum_ k e. A B ) e. ( ( ( TopOpen ` CCfld ) |`t X ) Cn ( TopOpen ` CCfld ) ) )
+qed:s24,s15:eleqtrrd |- ( ph -> ( x e. X |-> sum_ k e. A B ) e. ( X -cn-> CC ) )
+$)

@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=divsubpq  LOC_AFTER=?
+
+* Splitting the Cauchy kernel at P into the two-pole kernel and the Cauchy kernel at Q.
+
+s1::simpl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( V e. CC /\ P e. CC /\ Q e. CC ) )
+i2::simp1
+s3:s1,i2:syl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> V e. CC )
+s4::simpl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( V e. CC /\ P e. CC /\ Q e. CC ) )
+i5::simp2
+s6:s4,i5:syl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> P e. CC )
+s7::simpl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( V e. CC /\ P e. CC /\ Q e. CC ) )
+i8::simp3
+s9:s7,i8:syl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> Q e. CC )
+s10::simpr |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) )
+i11::simp1
+s12:s10,i11:syl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> Z e. CC )
+s13::simpr |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) )
+i14::simp2
+s15:s13,i14:syl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( Z - P ) =/= 0 )
+s16::simpr |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) )
+i17::simp3
+s18:s16,i17:syl |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( Z - Q ) =/= 0 )
+s19:s12,s6:subcld |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( Z - P ) e. CC )
+s20:s12,s9:subcld |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( Z - Q ) e. CC )
+s21:s6,s9:subcld |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( P - Q ) e. CC )
+s22:s19,s20:mulcld |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( Z - P ) x. ( Z - Q ) ) e. CC )
+s23:s19,s20,s15,s18:mulne0d |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( Z - P ) x. ( Z - Q ) ) =/= 0 )
+s24:s21,s3,s22,s23:divassd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) = ( ( P - Q ) x. ( V / ( ( Z - P ) x. ( Z - Q ) ) ) ) )
+s25:s24:eqcomd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( P - Q ) x. ( V / ( ( Z - P ) x. ( Z - Q ) ) ) ) = ( ( ( P - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) )
+s26:s3,s20,s19,s18,s15:divcan5d |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( Z - P ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) = ( V / ( Z - Q ) ) )
+s27:s26:eqcomd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( V / ( Z - Q ) ) = ( ( ( Z - P ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) )
+s28:s25,s27:oveq12d |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) x. ( V / ( ( Z - P ) x. ( Z - Q ) ) ) ) + ( V / ( Z - Q ) ) ) = ( ( ( ( P - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) + ( ( ( Z - P ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) ) )
+s29:s21,s3:mulcld |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( P - Q ) x. V ) e. CC )
+s30:s19,s3:mulcld |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( Z - P ) x. V ) e. CC )
+s31:s29,s30,s22,s23:divdird |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( ( P - Q ) x. V ) + ( ( Z - P ) x. V ) ) / ( ( Z - P ) x. ( Z - Q ) ) ) = ( ( ( ( P - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) + ( ( ( Z - P ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) ) )
+s32:s31:eqcomd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( ( P - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) + ( ( ( Z - P ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) ) = ( ( ( ( P - Q ) x. V ) + ( ( Z - P ) x. V ) ) / ( ( Z - P ) x. ( Z - Q ) ) ) )
+s33:s21,s19,s3:adddird |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) + ( Z - P ) ) x. V ) = ( ( ( P - Q ) x. V ) + ( ( Z - P ) x. V ) ) )
+s34:s33:eqcomd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) x. V ) + ( ( Z - P ) x. V ) ) = ( ( ( P - Q ) + ( Z - P ) ) x. V ) )
+i35::npncan3
+s36:s6,s9,s12,i35:syl3anc |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( P - Q ) + ( Z - P ) ) = ( Z - Q ) )
+s37:s36:oveq1d |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) + ( Z - P ) ) x. V ) = ( ( Z - Q ) x. V ) )
+s38:s34,s37:eqtrd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) x. V ) + ( ( Z - P ) x. V ) ) = ( ( Z - Q ) x. V ) )
+s39:s20,s3:mulcomd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( Z - Q ) x. V ) = ( V x. ( Z - Q ) ) )
+s40:s39:oveq1d |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( Z - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) = ( ( V x. ( Z - Q ) ) / ( ( Z - P ) x. ( Z - Q ) ) ) )
+s41:s3,s19,s20,s15,s18:divcan5rd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( V x. ( Z - Q ) ) / ( ( Z - P ) x. ( Z - Q ) ) ) = ( V / ( Z - P ) ) )
+s42:s28,s32:eqtrd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) x. ( V / ( ( Z - P ) x. ( Z - Q ) ) ) ) + ( V / ( Z - Q ) ) ) = ( ( ( ( P - Q ) x. V ) + ( ( Z - P ) x. V ) ) / ( ( Z - P ) x. ( Z - Q ) ) ) )
+s43:s38:oveq1d |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( ( P - Q ) x. V ) + ( ( Z - P ) x. V ) ) / ( ( Z - P ) x. ( Z - Q ) ) ) = ( ( ( Z - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) )
+s44:s42,s43:eqtrd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( P - Q ) x. ( V / ( ( Z - P ) x. ( Z - Q ) ) ) ) + ( V / ( Z - Q ) ) ) = ( ( ( Z - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) )
+s45:s40,s41:eqtrd |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( ( ( Z - Q ) x. V ) / ( ( Z - P ) x. ( Z - Q ) ) ) = ( V / ( Z - P ) ) )
+qed:s44,s45:eqtr2d |- ( ( ( V e. CC /\ P e. CC /\ Q e. CC ) /\ ( Z e. CC /\ ( Z - P ) =/= 0 /\ ( Z - Q ) =/= 0 ) ) -> ( V / ( Z - P ) ) = ( ( ( P - Q ) x. ( V / ( ( Z - P ) x. ( Z - Q ) ) ) ) + ( V / ( Z - Q ) ) ) )
+$)

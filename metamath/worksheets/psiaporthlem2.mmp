@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=psiaporthlem2  LOC_AFTER=?
+
+* Lemma for psiaporth: orthogonality of Dirichlet characters in the form used for the residue class of A, with B an inverse of A.
+
+s1::simp1 |- ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) -> Q e. NN )
+s2::simp2 |- ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) -> B e. ZZ )
+s3::simp3 |- ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) -> N e. ZZ )
+s4::simpr |- ( ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) /\ x e. ( Base ` ( DChr ` Q ) ) ) -> x e. ( Base ` ( DChr ` Q ) ) )
+s5:s2:adantr |- ( ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) /\ x e. ( Base ` ( DChr ` Q ) ) ) -> B e. ZZ )
+s6:s3:adantr |- ( ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) /\ x e. ( Base ` ( DChr ` Q ) ) ) -> N e. ZZ )
+s7::eqid |- ( DChr ` Q ) = ( DChr ` Q )
+s8::eqid |- ( Z/nZ ` Q ) = ( Z/nZ ` Q )
+s9::eqid |- ( Base ` ( DChr ` Q ) ) = ( Base ` ( DChr ` Q ) )
+s10::eqid |- ( ZRHom ` ( Z/nZ ` Q ) ) = ( ZRHom ` ( Z/nZ ` Q ) )
+s11:s7,s8,s9,s10,s4,s5,s6:dchrzrhmul |- ( ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) /\ x e. ( Base ` ( DChr ` Q ) ) ) -> ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` ( B x. N ) ) ) = ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` B ) ) x. ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` N ) ) ) )
+s12:s11:eqcomd |- ( ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) /\ x e. ( Base ` ( DChr ` Q ) ) ) -> ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` B ) ) x. ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` N ) ) ) = ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` ( B x. N ) ) ) )
+s13:s12:sumeq2dv |- ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) -> sum_ x e. ( Base ` ( DChr ` Q ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` B ) ) x. ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` N ) ) ) = sum_ x e. ( Base ` ( DChr ` Q ) ) ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` ( B x. N ) ) ) )
+i14::zmulcl
+s15:s2,s3,i14:syl2anc |- ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) -> ( B x. N ) e. ZZ )
+i16::vebklem6
+s17:s1,s15,i16:syl2anc |- ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) -> sum_ x e. ( Base ` ( DChr ` Q ) ) ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` ( B x. N ) ) ) = if ( Q || ( ( B x. N ) - 1 ) , ( phi ` Q ) , 0 ) )
+qed:s13,s17:eqtrd |- ( ( Q e. NN /\ B e. ZZ /\ N e. ZZ ) -> sum_ x e. ( Base ` ( DChr ` Q ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` B ) ) x. ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` N ) ) ) = if ( Q || ( ( B x. N ) - 1 ) , ( phi ` Q ) , 0 ) )
+$)

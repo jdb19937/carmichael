@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=umc  LOC_AFTER=?
+
+* Instantiation of the upper Moebius hypothesis at a positive integer.
+
+s1::eqeq1 |- ( y = C -> ( y = 1 <-> C = 1 ) )
+s2:s1:ifbid |- ( y = C -> if ( y = 1 , 1 , 0 ) = if ( C = 1 , 1 , 0 ) )
+s3::breq2 |- ( y = C -> ( x || y <-> x || C ) )
+s4:s3:rabbidv |- ( y = C -> { x e. NN | x || y } = { x e. NN | x || C } )
+s5:s4:sumeq1d |- ( y = C -> sum_ e e. { x e. NN | x || y } ( U ` e ) = sum_ e e. { x e. NN | x || C } ( U ` e ) )
+s6:s2,s5:breq12d |- ( y = C -> ( if ( y = 1 , 1 , 0 ) <_ sum_ e e. { x e. NN | x || y } ( U ` e ) <-> if ( C = 1 , 1 , 0 ) <_ sum_ e e. { x e. NN | x || C } ( U ` e ) ) )
+s7::simpl |- ( ( A. y e. NN if ( y = 1 , 1 , 0 ) <_ sum_ e e. { x e. NN | x || y } ( U ` e ) /\ C e. NN ) -> A. y e. NN if ( y = 1 , 1 , 0 ) <_ sum_ e e. { x e. NN | x || y } ( U ` e ) )
+s8::simpr |- ( ( A. y e. NN if ( y = 1 , 1 , 0 ) <_ sum_ e e. { x e. NN | x || y } ( U ` e ) /\ C e. NN ) -> C e. NN )
+qed:s6,s7,s8:rspcdva |- ( ( A. y e. NN if ( y = 1 , 1 , 0 ) <_ sum_ e e. { x e. NN | x || y } ( U ` e ) /\ C e. NN ) -> if ( C = 1 , 1 , 0 ) <_ sum_ e e. { x e. NN | x || C } ( U ` e ) )
+$)

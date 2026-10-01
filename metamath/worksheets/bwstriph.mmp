@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=bwstriph  LOC_AFTER=?
+
+* A bit word is its canonical form followed by its high zeros.  Lean: ` stripHigh_append_replicate ` with ` stripHigh_eq_encodeNat ` ; by ~ bwuniq from ~ tonatrep0c and ~ tonatencnat .
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::encnatcl
+s5:s3,i4:syl |- ( L e. Word 2o -> ( encodeNat ` ( toNat ` L ) ) e. Word 2o )
+i6::lencl
+s7:s1,i6:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+i8::lencl
+s9:s5,i8:syl |- ( L e. Word 2o -> ( # ` ( encodeNat ` ( toNat ` L ) ) ) e. NN0 )
+i10::bwstriplen
+s11:s1,i10:syl |- ( L e. Word 2o -> ( # ` ( encodeNat ` ( toNat ` L ) ) ) <_ ( # ` L ) )
+i12::nn0sub
+s13:s9,s7,i12:syl2anc |- ( L e. Word 2o -> ( ( # ` ( encodeNat ` ( toNat ` L ) ) ) <_ ( # ` L ) <-> ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) e. NN0 ) )
+s14:s13,s11:mpbid |- ( L e. Word 2o -> ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) e. NN0 )
+i15::bwrep0
+s16:s14,i15:syl |- ( L e. Word 2o -> ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) = ( 0 bwrd ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s17::0z |- 0 e. ZZ
+s18:s17:a1i |- ( L e. Word 2o -> 0 e. ZZ )
+i19::bwrdcl
+s20:s18,s14,i19:syl2anc |- ( L e. Word 2o -> ( 0 bwrd ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) e. Word 2o )
+s21:s16,s20:eqeltrd |- ( L e. Word 2o -> ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) e. Word 2o )
+i22::ccatcl
+s23:s5,s21,i22:syl2anc |- ( L e. Word 2o -> ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) e. Word 2o )
+i24::bwuniq
+s25:s1,s23,i24:syl2anc |- ( L e. Word 2o -> ( L = ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) <-> ( ( # ` L ) = ( # ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) /\ ( toNat ` L ) = ( toNat ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) ) ) )
+i26::ccatlen
+s27:s5,s21,i26:syl2anc |- ( L e. Word 2o -> ( # ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) = ( ( # ` ( encodeNat ` ( toNat ` L ) ) ) + ( # ` ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) )
+s28::0ex |- (/) e. _V
+s29:s28:a1i |- ( L e. Word 2o -> (/) e. _V )
+i30::repswlen
+s31:s29,s14,i30:syl2anc |- ( L e. Word 2o -> ( # ` ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) = ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) )
+s32:s31:oveq2d |- ( L e. Word 2o -> ( ( # ` ( encodeNat ` ( toNat ` L ) ) ) + ( # ` ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) = ( ( # ` ( encodeNat ` ( toNat ` L ) ) ) + ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s33:s9:nn0cnd |- ( L e. Word 2o -> ( # ` ( encodeNat ` ( toNat ` L ) ) ) e. CC )
+s34:s7:nn0cnd |- ( L e. Word 2o -> ( # ` L ) e. CC )
+i35::pncan3
+s36:s33,s34,i35:syl2anc |- ( L e. Word 2o -> ( ( # ` ( encodeNat ` ( toNat ` L ) ) ) + ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) = ( # ` L ) )
+s37:s27,s32:eqtrd |- ( L e. Word 2o -> ( # ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) = ( ( # ` ( encodeNat ` ( toNat ` L ) ) ) + ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s38:s37,s36:eqtrd |- ( L e. Word 2o -> ( # ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) = ( # ` L ) )
+s39:s38:eqcomd |- ( L e. Word 2o -> ( # ` L ) = ( # ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) )
+i40::tonatrep0c
+s41:s5,s14,i40:syl2anc |- ( L e. Word 2o -> ( toNat ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) = ( toNat ` ( encodeNat ` ( toNat ` L ) ) ) )
+i42::tonatencnat
+s43:s3,i42:syl |- ( L e. Word 2o -> ( toNat ` ( encodeNat ` ( toNat ` L ) ) ) = ( toNat ` L ) )
+s44:s41,s43:eqtrd |- ( L e. Word 2o -> ( toNat ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) = ( toNat ` L ) )
+s45:s44:eqcomd |- ( L e. Word 2o -> ( toNat ` L ) = ( toNat ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) )
+s46:s39,s45:jca |- ( L e. Word 2o -> ( ( # ` L ) = ( # ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) /\ ( toNat ` L ) = ( toNat ` ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ) ) )
+qed:s25,s46:mpbird |- ( L e. Word 2o -> L = ( ( encodeNat ` ( toNat ` L ) ) ++ ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) )
+$)

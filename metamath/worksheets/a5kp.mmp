@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=a5kp  LOC_AFTER=?
+
+* The pool list of the algorithm enumerates the pool of the paper (Lean: poolAlg_spec at the exact ceiling).
+
+h1::a5kp.1 |- ( ph -> ( Q e. Word NN0 /\ Fun `' Q /\ A. q e. ran Q q e. Prime ) )
+h2::a5kp.2 |- ( ph -> ( Z e. NN0 /\ K e. NN0 ) )
+h3::a5kp.3 |- ( ph -> A = prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) )
+h4::a5kp.4 |- ( ph -> ( A ^ 5 ) e. NN0 )
+s1:1:simp1d |- ( ph -> Q e. Word NN0 )
+s2:1:simp2d |- ( ph -> Fun `' Q )
+s3:2:simpld |- ( ph -> Z e. NN0 )
+s4:2:simprd |- ( ph -> K e. NN0 )
+s5:3:oveq1d |- ( ph -> ( A ^ 5 ) = ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) )
+s6:s5:oveq2d |- ( ph -> ( Q PoolAlg ( A ^ 5 ) ) = ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) )
+s7:s6:fveq1d |- ( ph -> ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) = ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) )
+s8:s7:fveq1d |- ( ph -> ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) = ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) )
+s9:s8:fveq2d |- ( ph -> ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) = ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) )
+s10:1,2:jca |- ( ph -> ( ( Q e. Word NN0 /\ Fun `' Q /\ A. q e. ran Q q e. Prime ) /\ ( Z e. NN0 /\ K e. NN0 ) ) )
+i11::poolalgspec
+s12:s10,i11:syl |- ( ph -> ( Fun `' ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) /\ ran ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) = ( ( ran Q pool Z ) ` K ) ) )
+s13:s12:simpld |- ( ph -> Fun `' ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) )
+s14:s9:cnveqd |- ( ph -> `' ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) = `' ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) )
+s15:s14:funeqd |- ( ph -> ( Fun `' ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) <-> Fun `' ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) ) )
+s16:s13,s15:mpbird |- ( ph -> Fun `' ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) )
+s17:s9:rneqd |- ( ph -> ran ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) = ran ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) )
+s18:s12:simprd |- ( ph -> ran ( 1st ` ( ( ( Q PoolAlg ( prod_ i e. ( 0 ..^ ( # ` Q ) ) ( Q ` i ) ^ 5 ) ) ` Z ) ` K ) ) = ( ( ran Q pool Z ) ` K ) )
+s19:s17,s18:eqtrd |- ( ph -> ran ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) = ( ( ran Q pool Z ) ` K ) )
+s20:s1,4:jca |- ( ph -> ( Q e. Word NN0 /\ ( A ^ 5 ) e. NN0 ) )
+s21:s20,s3:jca |- ( ph -> ( ( Q e. Word NN0 /\ ( A ^ 5 ) e. NN0 ) /\ Z e. NN0 ) )
+s22:s21,s4:jca |- ( ph -> ( ( ( Q e. Word NN0 /\ ( A ^ 5 ) e. NN0 ) /\ Z e. NN0 ) /\ K e. NN0 ) )
+i23::poolalgcl
+s24:s22,i23:syl |- ( ph -> ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) e. ( Word NN0 X. NN0 ) )
+i25::xp1st
+s26:s24,i25:syl |- ( ph -> ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) e. Word NN0 )
+s27:s26,s16:jca |- ( ph -> ( ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) e. Word NN0 /\ Fun `' ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) )
+i28::algwrdcard
+s29:s27,i28:syl |- ( ph -> ( # ` ran ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) = ( # ` ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) )
+s30:s19:fveq2d |- ( ph -> ( # ` ran ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) = ( # ` ( ( ran Q pool Z ) ` K ) ) )
+s31:s29,s30:eqtr3d |- ( ph -> ( # ` ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) = ( # ` ( ( ran Q pool Z ) ` K ) ) )
+s32:s26,s16:jca |- ( ph -> ( ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) e. Word NN0 /\ Fun `' ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) )
+s33:s19,s31:jca |- ( ph -> ( ran ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) = ( ( ran Q pool Z ) ` K ) /\ ( # ` ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) = ( # ` ( ( ran Q pool Z ) ` K ) ) ) )
+qed:s32,s33:jca |- ( ph -> ( ( ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) e. Word NN0 /\ Fun `' ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) /\ ( ran ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) = ( ( ran Q pool Z ) ` K ) /\ ( # ` ( 1st ` ( ( ( Q PoolAlg ( A ^ 5 ) ) ` Z ) ` K ) ) ) = ( # ` ( ( ran Q pool Z ) ` K ) ) ) ) )
+$)

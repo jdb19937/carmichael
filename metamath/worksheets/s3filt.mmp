@@ -1,0 +1,212 @@
+$( <MM> <PROOF_ASST> THEOREM=s3filt  LOC_AFTER=?
+
+* Every divisor of L is at most x ^ ( 21 / 100 ) , so the pigeonhole filter keeps all of them (Lean: Step3W.lean hfilter_all).
+
+s1::id |- ( S e. ( ~P Prime i^i Fin ) -> S e. ( ~P Prime i^i Fin ) )
+i2::elfpw
+s3:s1,i2:sylib |- ( S e. ( ~P Prime i^i Fin ) -> ( S C_ Prime /\ S e. Fin ) )
+s4:s3:simprd |- ( S e. ( ~P Prime i^i Fin ) -> S e. Fin )
+i5::elfpw
+s6:s1,i5:sylib |- ( S e. ( ~P Prime i^i Fin ) -> ( S C_ Prime /\ S e. Fin ) )
+s7:s6:simpld |- ( S e. ( ~P Prime i^i Fin ) -> S C_ Prime )
+s8::prmssnn |- Prime C_ NN
+s9::nnssnn0 |- NN C_ NN0
+s10:s8,s9:sstri |- Prime C_ NN0
+s11:s10:a1i |- ( S e. ( ~P Prime i^i Fin ) -> Prime C_ NN0 )
+s12:s7,s11:sstrd |- ( S e. ( ~P Prime i^i Fin ) -> S C_ NN0 )
+s13:s12,s4:jca |- ( S e. ( ~P Prime i^i Fin ) -> ( S C_ NN0 /\ S e. Fin ) )
+i14::elfpw
+s15:s13,i14:sylibr |- ( S e. ( ~P Prime i^i Fin ) -> S e. ( ~P NN0 i^i Fin ) )
+i16::xceilval
+s17:s15,i16:syl |- ( S e. ( ~P Prime i^i Fin ) -> ( xceil ` S ) = ( ( Lmod ` S ) ^ 5 ) )
+i18::lmodqcl
+s19:s1,i18:syl |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) e. NN )
+s20:s19:nnrpd |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) e. RR+ )
+s21:s19:nnred |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) e. RR )
+s22:s19:nnge1d |- ( S e. ( ~P Prime i^i Fin ) -> 1 <_ ( Lmod ` S ) )
+s23::0red |- ( S e. ( ~P Prime i^i Fin ) -> 0 e. RR )
+s24::1red |- ( S e. ( ~P Prime i^i Fin ) -> 1 e. RR )
+s25::0le1 |- 0 <_ 1
+s26:s25:a1i |- ( S e. ( ~P Prime i^i Fin ) -> 0 <_ 1 )
+s27:s23,s24,s21,s26,s22:letrd |- ( S e. ( ~P Prime i^i Fin ) -> 0 <_ ( Lmod ` S ) )
+i28::rpre
+i29::rpdivcl
+i30::nnrp
+s31::2nn0 |- 2 e. NN0
+s32::1nn |- 1 e. NN
+s33:s31,s32:decnncl |- ; 2 1 e. NN
+s34:s33,i30:ax-mp |- ; 2 1 e. RR+
+i35::nnrp
+s36:s32:decnncl2 |- ; 1 0 e. NN
+s37:s36:decnncl2 |- ; ; 1 0 0 e. NN
+s38:s37,i35:ax-mp |- ; ; 1 0 0 e. RR+
+s39:s34,s38,i29:mp2an |- ( ; 2 1 / ; ; 1 0 0 ) e. RR+
+s40:s39,i28:ax-mp |- ( ; 2 1 / ; ; 1 0 0 ) e. RR
+s41:s40:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 1 / ; ; 1 0 0 ) e. RR )
+s42:s41:recnd |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 1 / ; ; 1 0 0 ) e. CC )
+i43::rpre
+i44::rpdivcl
+i45::nnrp
+i46::nnrp
+s47::2nn |- 2 e. NN
+s48:s47:decnncl2 |- ; 2 0 e. NN
+s49:s48,i46:ax-mp |- ; 2 0 e. RR+
+s50:s34,s49,i44:mp2an |- ( ; 2 1 / ; 2 0 ) e. RR+
+s51:s50,i43:ax-mp |- ( ; 2 1 / ; 2 0 ) e. RR
+s52:s51:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 1 / ; 2 0 ) e. RR )
+s53::5re |- 5 e. RR
+s54:s53:a1i |- ( S e. ( ~P Prime i^i Fin ) -> 5 e. RR )
+i55::cxpmul
+s56:s20,s54,s42,i55:syl3anc |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c ( 5 x. ( ; 2 1 / ; ; 1 0 0 ) ) ) = ( ( ( Lmod ` S ) ^c 5 ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s57:s21:recnd |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) e. CC )
+s58::5nn0 |- 5 e. NN0
+s59:s58:a1i |- ( S e. ( ~P Prime i^i Fin ) -> 5 e. NN0 )
+i60::cxpexp
+s61:s57,s59,i60:syl2anc |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c 5 ) = ( ( Lmod ` S ) ^ 5 ) )
+s62::q521100 |- ( 5 x. ( ; 2 1 / ; ; 1 0 0 ) ) = ( ; 2 1 / ; 2 0 )
+s63:s62:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( 5 x. ( ; 2 1 / ; ; 1 0 0 ) ) = ( ; 2 1 / ; 2 0 ) )
+s64:s63:oveq2d |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c ( 5 x. ( ; 2 1 / ; ; 1 0 0 ) ) ) = ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) )
+s65:s64:eqcomd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) = ( ( Lmod ` S ) ^c ( 5 x. ( ; 2 1 / ; ; 1 0 0 ) ) ) )
+s66:s61:oveq1d |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ( Lmod ` S ) ^c 5 ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) = ( ( ( Lmod ` S ) ^ 5 ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s67:s56,s66:eqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c ( 5 x. ( ; 2 1 / ; ; 1 0 0 ) ) ) = ( ( ( Lmod ` S ) ^ 5 ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s68:s17:oveq1d |- ( S e. ( ~P Prime i^i Fin ) -> ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) = ( ( ( Lmod ` S ) ^ 5 ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s69:s68:eqcomd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ( Lmod ` S ) ^ 5 ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) = ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s70:s65,s67:eqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) = ( ( ( Lmod ` S ) ^ 5 ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s71:s70,s69:eqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) = ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s72::1red |- ( S e. ( ~P Prime i^i Fin ) -> 1 e. RR )
+i73::rpgt0
+i74::rpdivcl
+s75::1rp |- 1 e. RR+
+i76::nnrp
+s77:s75,s49,i74:mp2an |- ( 1 / ; 2 0 ) e. RR+
+s78:s77,i73:ax-mp |- 0 < ( 1 / ; 2 0 )
+s79:s78:a1i |- ( S e. ( ~P Prime i^i Fin ) -> 0 < ( 1 / ; 2 0 ) )
+s80::0nn0 |- 0 e. NN0
+s81:s31,s80:deccl |- ; 2 0 e. NN0
+s82:s81:nn0cni |- ; 2 0 e. CC
+s83::ax-1cn |- 1 e. CC
+s84:s48:nnne0i |- ; 2 0 =/= 0
+s85:s82,s83,s82,s84:divassi |- ( ( ; 2 0 x. 1 ) / ; 2 0 ) = ( ; 2 0 x. ( 1 / ; 2 0 ) )
+s86:s85:eqcomi |- ( ; 2 0 x. ( 1 / ; 2 0 ) ) = ( ( ; 2 0 x. 1 ) / ; 2 0 )
+s87:s82:mulridi |- ( ; 2 0 x. 1 ) = ; 2 0
+s88:s87:oveq1i |- ( ( ; 2 0 x. 1 ) / ; 2 0 ) = ( ; 2 0 / ; 2 0 )
+s89:s82,s82,s83,s84:divmuli |- ( ( ; 2 0 / ; 2 0 ) = 1 <-> ( ; 2 0 x. 1 ) = ; 2 0 )
+s90:s87,s89:mpbir |- ( ; 2 0 / ; 2 0 ) = 1
+s91:s88,s90:eqtri |- ( ( ; 2 0 x. 1 ) / ; 2 0 ) = 1
+s92:s86,s91:eqtri |- ( ; 2 0 x. ( 1 / ; 2 0 ) ) = 1
+s93:s92:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( 1 / ; 2 0 ) ) = 1 )
+s94:s82:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ; 2 0 e. CC )
+i95::rpcn
+i96::rpdivcl
+i97::nnrp
+i98::nnrp
+s99:s50,i95:ax-mp |- ( ; 2 1 / ; 2 0 ) e. CC
+s100:s99:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 1 / ; 2 0 ) e. CC )
+s101:s83:a1i |- ( S e. ( ~P Prime i^i Fin ) -> 1 e. CC )
+s102:s94,s100,s101:subdid |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( ( ; 2 1 / ; 2 0 ) - 1 ) ) = ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) - ( ; 2 0 x. 1 ) ) )
+s103:s94,s100:mulcld |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) e. CC )
+s104:s94,s101:mulcld |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. 1 ) e. CC )
+s105:s103,s104:negsubd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) + -u ( ; 2 0 x. 1 ) ) = ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) - ( ; 2 0 x. 1 ) ) )
+s106:s105:eqcomd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) - ( ; 2 0 x. 1 ) ) = ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) + -u ( ; 2 0 x. 1 ) ) )
+s107:s94,s101:mulneg1d |- ( S e. ( ~P Prime i^i Fin ) -> ( -u ; 2 0 x. 1 ) = -u ( ; 2 0 x. 1 ) )
+s108:s107:eqcomd |- ( S e. ( ~P Prime i^i Fin ) -> -u ( ; 2 0 x. 1 ) = ( -u ; 2 0 x. 1 ) )
+s109:s108:oveq2d |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) + -u ( ; 2 0 x. 1 ) ) = ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) + ( -u ; 2 0 x. 1 ) ) )
+s110::1nn0 |- 1 e. NN0
+s111:s31,s110:deccl |- ; 2 1 e. NN0
+s112:s111:nn0cni |- ; 2 1 e. CC
+s113:s82,s112,s82,s84:divassi |- ( ( ; 2 0 x. ; 2 1 ) / ; 2 0 ) = ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) )
+s114:s113:eqcomi |- ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) = ( ( ; 2 0 x. ; 2 1 ) / ; 2 0 )
+s115::eqid |- ; 2 0 = ; 2 0
+s116::2t2e4 |- ( 2 x. 2 ) = 4
+s117::2cn |- 2 e. CC
+s118:s117:mul02i |- ( 0 x. 2 ) = 0
+s119:s31,s31,s80,s115,s116,s118:decmul1 |- ( ; 2 0 x. 2 ) = ; 4 0
+s120:s119:eqcomi |- ; 4 0 = ( ; 2 0 x. 2 )
+s121:s87:eqcomi |- ; 2 0 = ( ; 2 0 x. 1 )
+s122:s31,s110,s81,s120,s121:decmul10add |- ( ; 2 0 x. ; 2 1 ) = ( ; ; 4 0 0 + ; 2 0 )
+s123::4nn0 |- 4 e. NN0
+s124:s123,s80:deccl |- ; 4 0 e. NN0
+s125::eqid |- ; ; 4 0 0 = ; ; 4 0 0
+s126::eqid |- ; 4 0 = ; 4 0
+s127:s117:addlidi |- ( 0 + 2 ) = 2
+s128:s123,s80,s31,s126,s127:decaddi |- ( ; 4 0 + 2 ) = ; 4 2
+s129::0cn |- 0 e. CC
+s130:s129:addlidi |- ( 0 + 0 ) = 0
+s131:s124,s80,s31,s80,s125,s115,s128,s130:decadd |- ( ; ; 4 0 0 + ; 2 0 ) = ; ; 4 2 0
+s132:s122,s131:eqtri |- ( ; 2 0 x. ; 2 1 ) = ; ; 4 2 0
+s133:s132:oveq1i |- ( ( ; 2 0 x. ; 2 1 ) / ; 2 0 ) = ( ; ; 4 2 0 / ; 2 0 )
+s134:s123,s31:deccl |- ; 4 2 e. NN0
+s135:s134,s80:deccl |- ; ; 4 2 0 e. NN0
+s136:s135:nn0cni |- ; ; 4 2 0 e. CC
+s137:s136,s82,s112,s84:divmuli |- ( ( ; ; 4 2 0 / ; 2 0 ) = ; 2 1 <-> ( ; 2 0 x. ; 2 1 ) = ; ; 4 2 0 )
+s138:s132,s137:mpbir |- ( ; ; 4 2 0 / ; 2 0 ) = ; 2 1
+s139:s133,s138:eqtri |- ( ( ; 2 0 x. ; 2 1 ) / ; 2 0 ) = ; 2 1
+s140:s114,s139:eqtri |- ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) = ; 2 1
+s141:s140:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) = ; 2 1 )
+s142:s82,s83:mulneg1i |- ( -u ; 2 0 x. 1 ) = -u ( ; 2 0 x. 1 )
+s143:s87:negeqi |- -u ( ; 2 0 x. 1 ) = -u ; 2 0
+s144:s142,s143:eqtri |- ( -u ; 2 0 x. 1 ) = -u ; 2 0
+s145:s144:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( -u ; 2 0 x. 1 ) = -u ; 2 0 )
+s146:s141,s145:oveq12d |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) + ( -u ; 2 0 x. 1 ) ) = ( ; 2 1 + -u ; 2 0 ) )
+s147:s112,s82:negsubi |- ( ; 2 1 + -u ; 2 0 ) = ( ; 2 1 - ; 2 0 )
+s148:s83:addlidi |- ( 0 + 1 ) = 1
+s149:s31,s80,s110,s115,s148:decaddi |- ( ; 2 0 + 1 ) = ; 2 1
+s150:s112,s82,s83,s149:subaddrii |- ( ; 2 1 - ; 2 0 ) = 1
+s151:s147,s150:eqtri |- ( ; 2 1 + -u ; 2 0 ) = 1
+s152:s151:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 1 + -u ; 2 0 ) = 1 )
+s153:s102,s106:eqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( ( ; 2 1 / ; 2 0 ) - 1 ) ) = ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) + -u ( ; 2 0 x. 1 ) ) )
+s154:s153,s109:eqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( ( ; 2 1 / ; 2 0 ) - 1 ) ) = ( ( ; 2 0 x. ( ; 2 1 / ; 2 0 ) ) + ( -u ; 2 0 x. 1 ) ) )
+s155:s154,s146:eqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( ( ; 2 1 / ; 2 0 ) - 1 ) ) = ( ; 2 1 + -u ; 2 0 ) )
+s156:s155,s152:eqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( ( ; 2 1 / ; 2 0 ) - 1 ) ) = 1 )
+s157:s93,s156:eqtr4d |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 0 x. ( 1 / ; 2 0 ) ) = ( ; 2 0 x. ( ( ; 2 1 / ; 2 0 ) - 1 ) ) )
+i158::rpcn
+i159::rpdivcl
+i160::nnrp
+s161:s77,i158:ax-mp |- ( 1 / ; 2 0 ) e. CC
+s162:s161:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( 1 / ; 2 0 ) e. CC )
+s163:s100,s101:subcld |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ; 2 1 / ; 2 0 ) - 1 ) e. CC )
+s164:s84:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ; 2 0 =/= 0 )
+s165:s162,s163,s94,s164,s157:mulcanad |- ( S e. ( ~P Prime i^i Fin ) -> ( 1 / ; 2 0 ) = ( ( ; 2 1 / ; 2 0 ) - 1 ) )
+s166:s79,s165:breqtrd |- ( S e. ( ~P Prime i^i Fin ) -> 0 < ( ( ; 2 1 / ; 2 0 ) - 1 ) )
+s167::1re |- 1 e. RR
+s168:s167:a1i |- ( S e. ( ~P Prime i^i Fin ) -> 1 e. RR )
+i169::rpre
+i170::rpdivcl
+i171::nnrp
+i172::nnrp
+s173:s51:a1i |- ( S e. ( ~P Prime i^i Fin ) -> ( ; 2 1 / ; 2 0 ) e. RR )
+s174::0red |- ( S e. ( ~P Prime i^i Fin ) -> 0 e. RR )
+s175:s173,s168:resubcld |- ( S e. ( ~P Prime i^i Fin ) -> ( ( ; 2 1 / ; 2 0 ) - 1 ) e. RR )
+s176:s174,s175,s166:ltled |- ( S e. ( ~P Prime i^i Fin ) -> 0 <_ ( ( ; 2 1 / ; 2 0 ) - 1 ) )
+s177:s173,s168:subge0d |- ( S e. ( ~P Prime i^i Fin ) -> ( 0 <_ ( ( ; 2 1 / ; 2 0 ) - 1 ) <-> 1 <_ ( ; 2 1 / ; 2 0 ) ) )
+s178:s176,s177:mpbid |- ( S e. ( ~P Prime i^i Fin ) -> 1 <_ ( ; 2 1 / ; 2 0 ) )
+s179:s21,s22,s72,s52,s178:cxplead |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c 1 ) <_ ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) )
+s180:s21:recnd |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) e. CC )
+s181:s180:cxp1d |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c 1 ) = ( Lmod ` S ) )
+s182:s181:eqcomd |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) = ( ( Lmod ` S ) ^c 1 ) )
+s183:s182,s179:eqbrtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) <_ ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) )
+s184:s183,s71:breqtrd |- ( S e. ( ~P Prime i^i Fin ) -> ( Lmod ` S ) <_ ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s185:s71:eqcomd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) = ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) )
+s186:s21,s27,s52:recxpcld |- ( S e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` S ) ^c ( ; 2 1 / ; 2 0 ) ) e. RR )
+s187:s185,s186:eqeltrd |- ( S e. ( ~P Prime i^i Fin ) -> ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) e. RR )
+s188::id |- ( m = d -> m = d )
+c1:s188:breq1d |- ( m = d -> ( m || ( Lmod ` S ) <-> d || ( Lmod ` S ) ) )
+s189:c1:elrab |- ( d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } <-> ( d e. ( 1 ... ( Lmod ` S ) ) /\ d || ( Lmod ` S ) ) )
+s190::simpr |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } )
+s191:s189:a1i |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> ( d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } <-> ( d e. ( 1 ... ( Lmod ` S ) ) /\ d || ( Lmod ` S ) ) ) )
+s192:s190,s191:mpbid |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> ( d e. ( 1 ... ( Lmod ` S ) ) /\ d || ( Lmod ` S ) ) )
+s193:s192:simpld |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> d e. ( 1 ... ( Lmod ` S ) ) )
+i194::elfzle2
+s195:s193,i194:syl |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> d <_ ( Lmod ` S ) )
+i196::elfznn
+s197:s193,i196:syl |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> d e. NN )
+s198:s197:nnred |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> d e. RR )
+s199:s21:adantr |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> ( Lmod ` S ) e. RR )
+s200:s187:adantr |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) e. RR )
+s201:s184:adantr |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> ( Lmod ` S ) <_ ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s202:s198,s199,s200,s195,s201:letrd |- ( ( S e. ( ~P Prime i^i Fin ) /\ d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } ) -> d <_ ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+s203:s202:ralrimiva |- ( S e. ( ~P Prime i^i Fin ) -> A. d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } d <_ ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) )
+i204::rabid2im
+s205:s203,i204:syl |- ( S e. ( ~P Prime i^i Fin ) -> { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } = { d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } | d <_ ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) } )
+qed:s205:eqcomd |- ( S e. ( ~P Prime i^i Fin ) -> { d e. { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } | d <_ ( ( xceil ` S ) ^c ( ; 2 1 / ; ; 1 0 0 ) ) } = { m e. ( 1 ... ( Lmod ` S ) ) | m || ( Lmod ` S ) } )
+$)

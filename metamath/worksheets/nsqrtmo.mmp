@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=nsqrtmo  LOC_AFTER=?
+
+* The integer square root is monotone (Lean: Nat.sqrt_le_sqrt).
+
+s1::simpll |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> A e. NN0 )
+s2::simplr |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> C e. NN0 )
+s3::simpr |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> A <_ C )
+i4::nsqrtcl
+s5:s1,i4:syl |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( Nfloor ` ( sqrt ` A ) ) e. NN0 )
+i6::nsqrtle
+s7:s5,s1,i6:syl2anc |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( ( Nfloor ` ( sqrt ` A ) ) <_ ( Nfloor ` ( sqrt ` A ) ) <-> ( ( Nfloor ` ( sqrt ` A ) ) x. ( Nfloor ` ( sqrt ` A ) ) ) <_ A ) )
+s8::leidd |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( Nfloor ` ( sqrt ` A ) ) <_ ( Nfloor ` ( sqrt ` A ) ) )
+s9:s7,s8:mpbid |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( ( Nfloor ` ( sqrt ` A ) ) x. ( Nfloor ` ( sqrt ` A ) ) ) <_ A )
+s10:s5,s5:nn0mulcld |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( ( Nfloor ` ( sqrt ` A ) ) x. ( Nfloor ` ( sqrt ` A ) ) ) e. NN0 )
+s11:s10:nn0red |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( ( Nfloor ` ( sqrt ` A ) ) x. ( Nfloor ` ( sqrt ` A ) ) ) e. RR )
+s12:s1:nn0red |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> A e. RR )
+s13:s2:nn0red |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> C e. RR )
+s14:s11,s12,s13,s9,s3:letrd |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( ( Nfloor ` ( sqrt ` A ) ) x. ( Nfloor ` ( sqrt ` A ) ) ) <_ C )
+i15::nsqrtle
+s16:s5,s2,i15:syl2anc |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( ( Nfloor ` ( sqrt ` A ) ) <_ ( Nfloor ` ( sqrt ` C ) ) <-> ( ( Nfloor ` ( sqrt ` A ) ) x. ( Nfloor ` ( sqrt ` A ) ) ) <_ C ) )
+qed:s16,s14:mpbird |- ( ( ( A e. NN0 /\ C e. NN0 ) /\ A <_ C ) -> ( Nfloor ` ( sqrt ` A ) ) <_ ( Nfloor ` ( sqrt ` C ) ) )
+$)

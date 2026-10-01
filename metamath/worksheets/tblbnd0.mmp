@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=tblbnd0  LOC_AFTER=?
+
+* The empty table is length-bounded (Lean: tblBounded_empty).
+
+s1::simpr |- ( ( K e. NN0 /\ d e. NN0 ) -> d e. NN0 )
+i2::emptytblval
+s3:s1,i2:syl |- ( ( K e. NN0 /\ d e. NN0 ) -> ( EmptyTbl ` d ) = ( inr ` (/) ) )
+s4::nne |- ( -. ( EmptyTbl ` d ) =/= ( inr ` (/) ) <-> ( EmptyTbl ` d ) = ( inr ` (/) ) )
+s5:s4:biimpri |- ( ( EmptyTbl ` d ) = ( inr ` (/) ) -> -. ( EmptyTbl ` d ) =/= ( inr ` (/) ) )
+s6:s5:a1i |- ( ( K e. NN0 /\ d e. NN0 ) -> ( ( EmptyTbl ` d ) = ( inr ` (/) ) -> -. ( EmptyTbl ` d ) =/= ( inr ` (/) ) ) )
+s7:s3,s6:mpd |- ( ( K e. NN0 /\ d e. NN0 ) -> -. ( EmptyTbl ` d ) =/= ( inr ` (/) ) )
+s8:s7:pm2.21d |- ( ( K e. NN0 /\ d e. NN0 ) -> ( ( EmptyTbl ` d ) =/= ( inr ` (/) ) -> ( # ` ( 2nd ` ( EmptyTbl ` d ) ) ) <_ K ) )
+qed:s8:ralrimiva |- ( K e. NN0 -> A. d e. NN0 ( ( EmptyTbl ` d ) =/= ( inr ` (/) ) -> ( # ` ( 2nd ` ( EmptyTbl ` d ) ) ) <_ K ) )
+$)

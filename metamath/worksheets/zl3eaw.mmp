@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3eaw  LOC_AFTER=?
+
+* ` e ^ ( A y ) ` is an entire function of ` y `.
+
+s1::cnelprrecn |- CC e. { RR , CC }
+s2:s1:a1i |- ( A e. CC -> CC e. { RR , CC } )
+s3::simpr |- ( ( A e. CC /\ y e. CC ) -> y e. CC )
+s4:s2:dvmptid |- ( A e. CC -> ( CC _D ( y e. CC |-> y ) ) = ( y e. CC |-> 1 ) )
+s5::1cnd |- ( ( A e. CC /\ y e. CC ) -> 1 e. CC )
+s6::id |- ( A e. CC -> A e. CC )
+s7:s2,s3,s5,s4,s6:dvmptcmul |- ( A e. CC -> ( CC _D ( y e. CC |-> ( A x. y ) ) ) = ( y e. CC |-> ( A x. 1 ) ) )
+s8::simpl |- ( ( A e. CC /\ y e. CC ) -> A e. CC )
+s9:s8,s3:mulcld |- ( ( A e. CC /\ y e. CC ) -> ( A x. y ) e. CC )
+s10:s8,s5:mulcld |- ( ( A e. CC /\ y e. CC ) -> ( A x. 1 ) e. CC )
+s11::simpr |- ( ( A e. CC /\ x e. CC ) -> x e. CC )
+i12::efcl
+s13:s11,i12:syl |- ( ( A e. CC /\ x e. CC ) -> ( exp ` x ) e. CC )
+s14::eff |- exp : CC --> CC
+s15:s14:a1i |- ( A e. CC -> exp : CC --> CC )
+s16:s15:feqmptd |- ( A e. CC -> exp = ( x e. CC |-> ( exp ` x ) ) )
+s17::dvef |- ( CC _D exp ) = exp
+s18:s17:a1i |- ( A e. CC -> ( CC _D exp ) = exp )
+s19:s16:oveq2d |- ( A e. CC -> ( CC _D exp ) = ( CC _D ( x e. CC |-> ( exp ` x ) ) ) )
+s20:s19:eqcomd |- ( A e. CC -> ( CC _D ( x e. CC |-> ( exp ` x ) ) ) = ( CC _D exp ) )
+s21:s20,s18:eqtrd |- ( A e. CC -> ( CC _D ( x e. CC |-> ( exp ` x ) ) ) = exp )
+s22:s21,s16:eqtrd |- ( A e. CC -> ( CC _D ( x e. CC |-> ( exp ` x ) ) ) = ( x e. CC |-> ( exp ` x ) ) )
+s23::fveq2 |- ( x = ( A x. y ) -> ( exp ` x ) = ( exp ` ( A x. y ) ) )
+s24:s2,s2,s9,s10,s13,s13,s7,s22,s23,s23:dvmptco |- ( A e. CC -> ( CC _D ( y e. CC |-> ( exp ` ( A x. y ) ) ) ) = ( y e. CC |-> ( ( exp ` ( A x. y ) ) x. ( A x. 1 ) ) ) )
+i25::efcl
+s26:s9,i25:syl |- ( ( A e. CC /\ y e. CC ) -> ( exp ` ( A x. y ) ) e. CC )
+s27:s26,s10:mulcld |- ( ( A e. CC /\ y e. CC ) -> ( ( exp ` ( A x. y ) ) x. ( A x. 1 ) ) e. CC )
+s28::eqid |- ( y e. CC |-> ( ( exp ` ( A x. y ) ) x. ( A x. 1 ) ) ) = ( y e. CC |-> ( ( exp ` ( A x. y ) ) x. ( A x. 1 ) ) )
+s29:s28,s27:dmmptd |- ( A e. CC -> dom ( y e. CC |-> ( ( exp ` ( A x. y ) ) x. ( A x. 1 ) ) ) = CC )
+s30:s24:dmeqd |- ( A e. CC -> dom ( CC _D ( y e. CC |-> ( exp ` ( A x. y ) ) ) ) = dom ( y e. CC |-> ( ( exp ` ( A x. y ) ) x. ( A x. 1 ) ) ) )
+s31:s30,s29:eqtrd |- ( A e. CC -> dom ( CC _D ( y e. CC |-> ( exp ` ( A x. y ) ) ) ) = CC )
+s32::eqid |- ( y e. CC |-> ( exp ` ( A x. y ) ) ) = ( y e. CC |-> ( exp ` ( A x. y ) ) )
+s33:s26,s32:fmptd |- ( A e. CC -> ( y e. CC |-> ( exp ` ( A x. y ) ) ) : CC --> CC )
+s34::ssid |- CC C_ CC
+s35:s34:a1i |- ( A e. CC -> CC C_ CC )
+s36:s35,s33,s35:3jca |- ( A e. CC -> ( CC C_ CC /\ ( y e. CC |-> ( exp ` ( A x. y ) ) ) : CC --> CC /\ CC C_ CC ) )
+i37::dvcn
+s38:s36,s31,i37:syl2anc |- ( A e. CC -> ( y e. CC |-> ( exp ` ( A x. y ) ) ) e. ( CC -cn-> CC ) )
+s39:s31:eqcomd |- ( A e. CC -> CC = dom ( CC _D ( y e. CC |-> ( exp ` ( A x. y ) ) ) ) )
+s40:s39:eqimssd |- ( A e. CC -> CC C_ dom ( CC _D ( y e. CC |-> ( exp ` ( A x. y ) ) ) ) )
+qed:s38,s40:jca |- ( A e. CC -> ( ( y e. CC |-> ( exp ` ( A x. y ) ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( y e. CC |-> ( exp ` ( A x. y ) ) ) ) ) )
+$)

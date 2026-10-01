@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=pkfcn  LOC_AFTER=?
+
+* The Perron integrand ` z |-> ( ( U ^c z ) / z ) ` is continuous off the origin.
+
+s1::simpl |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> U e. RR+ )
+s2::simpr |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> E C_ ( CC \ { 0 } ) )
+s3::difss |- ( CC \ { 0 } ) C_ CC
+s4:s3:a1i |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( CC \ { 0 } ) C_ CC )
+s5:s2,s4:sstrd |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> E C_ CC )
+s6:s1,s5:jca |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( U e. RR+ /\ E C_ CC ) )
+i7::cxfcn
+s8:s6,i7:syl |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( z e. E |-> ( U ^c z ) ) e. ( E -cn-> CC ) )
+s9::0cn |- 0 e. CC
+s10:s9:a1i |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> 0 e. CC )
+i11::rinvcnss
+s12:s10,s2,i11:syl2anc |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( z e. E |-> ( 1 / ( z - 0 ) ) ) e. ( E -cn-> CC ) )
+s13:s5:adantr |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> E C_ CC )
+s14::simpr |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> z e. E )
+s15:s13,s14:sseldd |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> z e. CC )
+s16:s15:subid1d |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> ( z - 0 ) = z )
+s17:s16:oveq2d |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> ( 1 / ( z - 0 ) ) = ( 1 / z ) )
+s18:s17:mpteq2dva |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( z e. E |-> ( 1 / ( z - 0 ) ) ) = ( z e. E |-> ( 1 / z ) ) )
+s19:s18,s12:eqeltrrd |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( z e. E |-> ( 1 / z ) ) e. ( E -cn-> CC ) )
+s20:s8,s19:mulcncf |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( z e. E |-> ( ( U ^c z ) x. ( 1 / z ) ) ) e. ( E -cn-> CC ) )
+s21:s2:adantr |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> E C_ ( CC \ { 0 } ) )
+s22::simpr |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> z e. E )
+s23:s21,s22:sseldd |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> z e. ( CC \ { 0 } ) )
+i24::eldifsn
+s25:s23,i24:sylib |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> ( z e. CC /\ z =/= 0 ) )
+i26::simpr
+s27:s25,i26:syl |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> z =/= 0 )
+s28:s1:adantr |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> U e. RR+ )
+s29:s28:rpcnd |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> U e. CC )
+s30:s29,s15:cxpcld |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> ( U ^c z ) e. CC )
+s31:s30,s15,s27:divrecd |- ( ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) /\ z e. E ) -> ( ( U ^c z ) / z ) = ( ( U ^c z ) x. ( 1 / z ) ) )
+s32:s31:mpteq2dva |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( z e. E |-> ( ( U ^c z ) / z ) ) = ( z e. E |-> ( ( U ^c z ) x. ( 1 / z ) ) ) )
+qed:s32,s20:eqeltrd |- ( ( U e. RR+ /\ E C_ ( CC \ { 0 } ) ) -> ( z e. E |-> ( ( U ^c z ) / z ) ) e. ( E -cn-> CC ) )
+$)

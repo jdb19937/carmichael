@@ -1,0 +1,64 @@
+$( <MM> <PROOF_ASST> THEOREM=psiapsubsqrt  LOC_AFTER=?
+
+* The gap in a residue class is at most 2 sqrt ( Y ) log ( Y ) (Lean: psiAP_sub_thetaAP_le_sqrt_mul_log; set.mm chpub gives constant 1).
+
+s1::simpll |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> Q e. NN )
+s2::simplr |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> A e. ZZ )
+s3::simprl |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> Y e. RR )
+s4::simprr |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 1 <_ Y )
+s5:s1,s2,s3:3jca |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( Q e. NN /\ A e. ZZ /\ Y e. RR ) )
+i6::psiapsubthetaap
+s7:s5,i6:syl |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( A ( psiAP ` Q ) Y ) - ( A ( thetaAP ` Q ) Y ) ) <_ ( ( psi ` Y ) - ( theta ` Y ) ) )
+i8::chpub
+s9:s3,s4,i8:syl2anc |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( psi ` Y ) <_ ( ( theta ` Y ) + ( ( sqrt ` Y ) x. ( log ` Y ) ) ) )
+i10::chpcl
+s11:s3,i10:syl |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( psi ` Y ) e. RR )
+i12::chtcl
+s13:s3,i12:syl |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( theta ` Y ) e. RR )
+s14::0re |- 0 e. RR
+s15:s14:a1i |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 e. RR )
+s16::1re |- 1 e. RR
+s17:s16:a1i |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 1 e. RR )
+s18::0le1 |- 0 <_ 1
+s19:s18:a1i |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 <_ 1 )
+s20:s15,s17,s3,s19,s4:letrd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 <_ Y )
+i21::resqrtcl
+s22:s3,s20,i21:syl2anc |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( sqrt ` Y ) e. RR )
+i23::sqrtge0
+s24:s3,s20,i23:syl2anc |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 <_ ( sqrt ` Y ) )
+i25::logge0
+s26:s3,s4,i25:syl2anc |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 <_ ( log ` Y ) )
+s27::0lt1 |- 0 < 1
+s28:s27:a1i |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 < 1 )
+s29:s15,s17,s3,s28,s4:ltletrd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 < Y )
+s30:s3,s29:elrpd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> Y e. RR+ )
+s31:s30:relogcld |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( log ` Y ) e. RR )
+s32:s22,s31:remulcld |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( sqrt ` Y ) x. ( log ` Y ) ) e. RR )
+s33:s22,s31,s24,s26:mulge0d |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 0 <_ ( ( sqrt ` Y ) x. ( log ` Y ) ) )
+i34::lesubadd2
+s35:s11,s13,s32,i34:syl3anc |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( ( psi ` Y ) - ( theta ` Y ) ) <_ ( ( sqrt ` Y ) x. ( log ` Y ) ) <-> ( psi ` Y ) <_ ( ( theta ` Y ) + ( ( sqrt ` Y ) x. ( log ` Y ) ) ) ) )
+s36:s9,s35:mpbird |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( psi ` Y ) - ( theta ` Y ) ) <_ ( ( sqrt ` Y ) x. ( log ` Y ) ) )
+i37::addge01
+s38:s32,s32,i37:syl2anc |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( 0 <_ ( ( sqrt ` Y ) x. ( log ` Y ) ) <-> ( ( sqrt ` Y ) x. ( log ` Y ) ) <_ ( ( ( sqrt ` Y ) x. ( log ` Y ) ) + ( ( sqrt ` Y ) x. ( log ` Y ) ) ) ) )
+s39:s33,s38:mpbid |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( sqrt ` Y ) x. ( log ` Y ) ) <_ ( ( ( sqrt ` Y ) x. ( log ` Y ) ) + ( ( sqrt ` Y ) x. ( log ` Y ) ) ) )
+s40:s32:recnd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( sqrt ` Y ) x. ( log ` Y ) ) e. CC )
+s41:s40:2timesd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( 2 x. ( ( sqrt ` Y ) x. ( log ` Y ) ) ) = ( ( ( sqrt ` Y ) x. ( log ` Y ) ) + ( ( sqrt ` Y ) x. ( log ` Y ) ) ) )
+s42::2cnd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 2 e. CC )
+s43:s22:recnd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( sqrt ` Y ) e. CC )
+s44:s31:recnd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( log ` Y ) e. CC )
+s45:s42,s43,s44:mulassd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( 2 x. ( sqrt ` Y ) ) x. ( log ` Y ) ) = ( 2 x. ( ( sqrt ` Y ) x. ( log ` Y ) ) ) )
+s46:s45,s41:eqtrd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( 2 x. ( sqrt ` Y ) ) x. ( log ` Y ) ) = ( ( ( sqrt ` Y ) x. ( log ` Y ) ) + ( ( sqrt ` Y ) x. ( log ` Y ) ) ) )
+s47:s39,s46:breqtrrd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( sqrt ` Y ) x. ( log ` Y ) ) <_ ( ( 2 x. ( sqrt ` Y ) ) x. ( log ` Y ) ) )
+i48::psiapcl
+s49:s5,i48:syl |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( A ( psiAP ` Q ) Y ) e. RR )
+i50::thetaapcl
+s51:s5,i50:syl |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( A ( thetaAP ` Q ) Y ) e. RR )
+s52:s49,s51:resubcld |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( A ( psiAP ` Q ) Y ) - ( A ( thetaAP ` Q ) Y ) ) e. RR )
+s53:s11,s13:resubcld |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( psi ` Y ) - ( theta ` Y ) ) e. RR )
+s54::2re |- 2 e. RR
+s55:s54:a1i |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> 2 e. RR )
+s56:s55,s22:remulcld |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( 2 x. ( sqrt ` Y ) ) e. RR )
+s57:s56,s31:remulcld |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( 2 x. ( sqrt ` Y ) ) x. ( log ` Y ) ) e. RR )
+s58:s52,s53,s32,s7,s36:letrd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( A ( psiAP ` Q ) Y ) - ( A ( thetaAP ` Q ) Y ) ) <_ ( ( sqrt ` Y ) x. ( log ` Y ) ) )
+qed:s52,s32,s57,s58,s47:letrd |- ( ( ( Q e. NN /\ A e. ZZ ) /\ ( Y e. RR /\ 1 <_ Y ) ) -> ( ( A ( psiAP ` Q ) Y ) - ( A ( thetaAP ` Q ) Y ) ) <_ ( ( 2 x. ( sqrt ` Y ) ) x. ( log ` Y ) ) )
+$)

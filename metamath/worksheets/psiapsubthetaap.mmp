@@ -1,0 +1,93 @@
+$( <MM> <PROOF_ASST> THEOREM=psiapsubthetaap  LOC_AFTER=?
+
+* The gap in a residue class is at most the full gap psi - theta (Lean: psiAP_sub_thetaAP_le_psi_sub_theta).
+
+s1::simp1 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> Q e. NN )
+s2::simp2 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> A e. ZZ )
+s3::simp3 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> Y e. RR )
+s4::fzfid |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( 1 ... ( |_ ` Y ) ) e. Fin )
+s5::inindif |- ( ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) i^i ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) = (/)
+s6:s5:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) i^i ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) = (/) )
+s7::inundif |- ( ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) u. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) = ( 1 ... ( |_ ` Y ) )
+s8:s7:eqcomi |- ( 1 ... ( |_ ` Y ) ) = ( ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) u. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) )
+s9:s8:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( 1 ... ( |_ ` Y ) ) = ( ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) u. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) )
+s10::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> p e. ( 1 ... ( |_ ` Y ) ) )
+i11::elfznn
+s12:s10,i11:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> p e. NN )
+i13::psiaplem1
+s14:s12,i13:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. ( 0 [,) +oo ) )
+i15::elrege0
+s16:s14,i15:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> ( if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR /\ 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) )
+s17:s16:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR )
+s18:s16:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s19:s17:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. CC )
+i20::vmacl
+s21:s12,i20:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> ( Lam ` p ) e. RR )
+s22:s21:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> ( Lam ` p ) e. CC )
+s23:s6,s9,s4,s19:fsumsplit |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( 1 ... ( |_ ` Y ) ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) = ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) )
+s24:s6,s9,s4,s22:fsumsplit |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( 1 ... ( |_ ` Y ) ) ( Lam ` p ) = ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) ) )
+s25::psiapval |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = sum_ p e. ( 1 ... ( |_ ` Y ) ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s26:s25,s23:eqtrd |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) )
+s27::thetaapval2 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( thetaAP ` Q ) Y ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+i28::chpval
+s29:s3,i28:syl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( psi ` Y ) = sum_ p e. ( 1 ... ( |_ ` Y ) ) ( Lam ` p ) )
+s30:s29,s24:eqtrd |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( psi ` Y ) = ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) ) )
+i31::thetaaplem2
+s32:s3,i31:syl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( theta ` Y ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( log ` p ) )
+s33::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) )
+i34::elin
+s35:s33,i34:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( p e. ( 1 ... ( |_ ` Y ) ) /\ p e. Prime ) )
+s36:s35:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. Prime )
+i37::vmaprm
+s38:s36,i37:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( Lam ` p ) = ( log ` p ) )
+s39:s38:sumeq2dv |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( log ` p ) )
+s40:s32,s39:eqtr4d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( theta ` Y ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) )
+s41::thetaaplem4 |- ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) e. Fin
+s42:s41:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) e. Fin )
+i43::diffi
+s44:s4,i43:syl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( 1 ... ( |_ ` Y ) ) \ Prime ) e. Fin )
+s45::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) )
+i46::eldifi
+s47:s45,i46:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> p e. ( 1 ... ( |_ ` Y ) ) )
+i48::elfznn
+s49:s47,i48:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> p e. NN )
+i50::psiaplem1
+s51:s49,i50:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. ( 0 [,) +oo ) )
+i52::elrege0
+s53:s51,i52:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> ( if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR /\ 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) )
+s54:s53:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR )
+s55:s53:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s56:s54:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. CC )
+i57::vmacl
+s58:s49,i57:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> ( Lam ` p ) e. RR )
+s59:s58:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> ( Lam ` p ) e. CC )
+s60:s35:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. ( 1 ... ( |_ ` Y ) ) )
+i61::elfznn
+s62:s60,i61:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. NN )
+i63::psiaplem1
+s64:s62,i63:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. ( 0 [,) +oo ) )
+i65::elrege0
+s66:s64,i65:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR /\ 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) )
+s67:s66:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR )
+s68:s66:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s69:s67:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. CC )
+i70::prmnn
+s71:s36,i70:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. NN )
+i72::vmacl
+s73:s71,i72:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( Lam ` p ) e. RR )
+s74:s73:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( Lam ` p ) e. CC )
+s75:s42,s69:fsumcl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. CC )
+s76:s44,s56:fsumcl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. CC )
+s77:s42,s74:fsumcl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) e. CC )
+s78:s44,s59:fsumcl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) e. CC )
+s79:s26,s27:oveq12d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( A ( psiAP ` Q ) Y ) - ( A ( thetaAP ` Q ) Y ) ) = ( ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) - sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) )
+s80:s75,s76:pncan2d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) - sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s81:s79,s80:eqtrd |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( A ( psiAP ` Q ) Y ) - ( A ( thetaAP ` Q ) Y ) ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s82:s30,s40:oveq12d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( psi ` Y ) - ( theta ` Y ) ) = ( ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) ) - sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) ) )
+s83:s77,s78:pncan2d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) + sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) ) - sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( Lam ` p ) ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) )
+s84:s82,s83:eqtrd |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( psi ` Y ) - ( theta ` Y ) ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) )
+i85::psiaplem2
+s86:s49,i85:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) <_ ( Lam ` p ) )
+s87:s44,s54,s58,s86:fsumle |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) <_ sum_ p e. ( ( 1 ... ( |_ ` Y ) ) \ Prime ) ( Lam ` p ) )
+qed:s87,s81,s84:3brtr4d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( A ( psiAP ` Q ) Y ) - ( A ( thetaAP ` Q ) Y ) ) <_ ( ( psi ` Y ) - ( theta ` Y ) ) )
+$)

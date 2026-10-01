@@ -1,0 +1,50 @@
+$( <MM> <PROOF_ASST> THEOREM=recipsumlem4  LOC_AFTER=?
+
+* Lemma for recipsum: closure of the two sums.
+
+1::simpl    |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> w e. ( ZZ>= ` 2 ) )
+2::simpr    |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> z e. ( ZZ>= ` w ) )
+3a::eluz2nn
+3:1,3a:syl  |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> w e. NN )
+4:3:nnred   |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> w e. RR )
+5a::eluz2gt1
+5:1,5a:syl  |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> 1 < w )
+6:4,5:rplogcld |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( log ` w ) e. RR+ )
+7:6:rpred   |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( log ` w ) e. RR )
+8:6:rpcnd   |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( log ` w ) e. CC )
+9:6:rpne0d  |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( log ` w ) =/= 0 )
+10::fzfid   |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( ( w + 1 ) ... z ) e. Fin )
+11::inss1   |- ( ( ( w + 1 ) ... z ) i^i Prime ) C_ ( ( w + 1 ) ... z )
+12:11:a1i   |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( ( ( w + 1 ) ... z ) i^i Prime ) C_ ( ( w + 1 ) ... z ) )
+13a::ssfi
+13:10,12,13a:syl2anc |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( ( ( w + 1 ) ... z ) i^i Prime ) e. Fin )
+14::elinel1 |- ( p e. ( ( ( w + 1 ) ... z ) i^i Prime ) -> p e. ( ( w + 1 ) ... z ) )
+15:14:adantl |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ) -> p e. ( ( w + 1 ) ... z ) )
+16::elinel2 |- ( p e. ( ( ( w + 1 ) ... z ) i^i Prime ) -> p e. Prime )
+17:16:adantl |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ) -> p e. Prime )
+18a::prmnn
+18:17,18a:syl |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ) -> p e. NN )
+19:18:nnrpd |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ) -> p e. RR+ )
+20::1re     |- 1 e. RR
+21:20:a1i   |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ) -> 1 e. RR )
+22:21,19:rerpdivcld |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ) -> ( 1 / p ) e. RR )
+23:13,22:fsumrecl |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) e. RR )
+24::elfznn  |- ( m e. ( 1 ... z ) -> m e. NN )
+25:24:adantl |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... z ) ) -> m e. NN )
+26a::vmacl
+26:25,26a:syl |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... z ) ) -> ( Lam ` m ) e. RR )
+27:25:nnrpd |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... z ) ) -> m e. RR+ )
+28:26,27:rerpdivcld |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... z ) ) -> ( ( Lam ` m ) / m ) e. RR )
+29::fzfid   |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( 1 ... z ) e. Fin )
+30:29,28:fsumrecl |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) e. RR )
+31::fzfid   |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( 1 ... w ) e. Fin )
+32::elfznn  |- ( m e. ( 1 ... w ) -> m e. NN )
+33:32:adantl |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... w ) ) -> m e. NN )
+34a::vmacl
+34:33,34a:syl |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... w ) ) -> ( Lam ` m ) e. RR )
+35:33:nnrpd |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... w ) ) -> m e. RR+ )
+36:34,35:rerpdivcld |- ( ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) /\ m e. ( 1 ... w ) ) -> ( ( Lam ` m ) / m ) e. RR )
+37:31,36:fsumrecl |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) e. RR )
+38:30,37:resubcld |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) e. RR )
+qed:23,38:jca |- ( ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) -> ( sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) e. RR /\ ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) e. RR ) )
+$)

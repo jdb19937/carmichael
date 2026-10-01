@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=z6ehx  LOC_AFTER=?
+
+* Helper of z6mrhol: s |-> A ^ -s is HOL on CC for A > 0 (it is ( 1 / A ) ^ s, cxfhol).
+
+s1::id |- ( A e. RR+ -> A e. RR+ )
+s2:s1:rpreccld |- ( A e. RR+ -> ( 1 / A ) e. RR+ )
+i3::cxfhol
+s4:s2,i3:syl |- ( A e. RR+ -> ( ( s e. CC |-> ( ( 1 / A ) ^c s ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> ( ( 1 / A ) ^c s ) ) ) ) )
+s5::simpl |- ( ( A e. RR+ /\ s e. CC ) -> A e. RR+ )
+s6::simpr |- ( ( A e. RR+ /\ s e. CC ) -> s e. CC )
+i7::cxprec
+s8:s5,s6,i7:syl2anc |- ( ( A e. RR+ /\ s e. CC ) -> ( ( 1 / A ) ^c s ) = ( 1 / ( A ^c s ) ) )
+s9:s5:rpcnd |- ( ( A e. RR+ /\ s e. CC ) -> A e. CC )
+s10:s5:rpne0d |- ( ( A e. RR+ /\ s e. CC ) -> A =/= 0 )
+i11::cxpneg
+s12:s9,s10,s6,i11:syl3anc |- ( ( A e. RR+ /\ s e. CC ) -> ( A ^c -u s ) = ( 1 / ( A ^c s ) ) )
+s13:s8,s12:eqtr4d |- ( ( A e. RR+ /\ s e. CC ) -> ( ( 1 / A ) ^c s ) = ( A ^c -u s ) )
+s14:s13:mpteq2dva |- ( A e. RR+ -> ( s e. CC |-> ( ( 1 / A ) ^c s ) ) = ( s e. CC |-> ( A ^c -u s ) ) )
+i15::z6ehtr
+s16:s14,i15:syl |- ( A e. RR+ -> ( ( ( s e. CC |-> ( ( 1 / A ) ^c s ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> ( ( 1 / A ) ^c s ) ) ) ) <-> ( ( s e. CC |-> ( A ^c -u s ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> ( A ^c -u s ) ) ) ) ) )
+qed:s4,s16:mpbid |- ( A e. RR+ -> ( ( s e. CC |-> ( A ^c -u s ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> ( A ^c -u s ) ) ) ) )
+$)

@@ -1,0 +1,106 @@
+$( <MM> <PROOF_ASST> THEOREM=vedgbnd  LOC_AFTER=?
+
+* The vertical-edge bound for the Perron integrand: on the segment at real part ` P ` the modulus is at most ` ( U ^c P ) / ( abs ` P ) `, so the segment integral is at most that times the length ( ~ lintabs ).  This is ` norm_vert_edge_le ` of Route Z's PerronKernel.lean.
+
+s1::simpl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> U e. RR+ )
+i4::simpr
+s5:s1,i4:syl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( P e. RR /\ P =/= 0 ) )
+i6::simpl
+s7:s5,i6:syl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P e. RR )
+i8::simpr
+s9:s5,i8:syl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P =/= 0 )
+s10::simprl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> S e. RR )
+s11::simprr |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> T e. RR )
+s12::ax-icn |- _i e. CC
+s13:s12:a1i |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> _i e. CC )
+s14:s7:recnd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P e. CC )
+s15:s10:recnd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> S e. CC )
+s16:s13,s15:mulcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( _i x. S ) e. CC )
+s17:s14,s16:addcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( P + ( _i x. S ) ) e. CC )
+s18:s7:recnd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P e. CC )
+s19:s11:recnd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> T e. CC )
+s20:s13,s19:mulcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( _i x. T ) e. CC )
+s21:s18,s20:addcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( P + ( _i x. T ) ) e. CC )
+i22::crre
+s23:s7,s10,i22:syl2anc |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( Re ` ( P + ( _i x. S ) ) ) = P )
+i24::crre
+s25:s7,s11,i24:syl2anc |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( Re ` ( P + ( _i x. T ) ) ) = P )
+s26:s25:eqcomd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P = ( Re ` ( P + ( _i x. T ) ) ) )
+s27:s23,s26:eqtrd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( Re ` ( P + ( _i x. S ) ) ) = ( Re ` ( P + ( _i x. T ) ) ) )
+s28:s10,s11:jca |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( S e. RR /\ T e. RR ) )
+s29:s5,s28:jca |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( P e. RR /\ P =/= 0 ) /\ ( S e. RR /\ T e. RR ) ) )
+i30::csegne0
+s31:s29,i30:syl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> A. u e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) u e. ( CC \ { 0 } ) )
+s32::dfss3 |- ( ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) <-> A. u e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) u e. ( CC \ { 0 } ) )
+s33:s32:a1i |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) <-> A. u e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) u e. ( CC \ { 0 } ) ) )
+s34:s31,s33:mpbird |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) )
+s35::ssid |- ( CC \ { 0 } ) C_ ( CC \ { 0 } )
+s36:s35:a1i |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( CC \ { 0 } ) C_ ( CC \ { 0 } ) )
+s37:s3,s36:jca |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( U e. RR+ /\ ( CC \ { 0 } ) C_ ( CC \ { 0 } ) ) )
+i38::pkfcn
+s39:s37,i38:syl |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) )
+i40::csegvre
+s41:s17,s21,s27,i40:syl3anc |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> A. u e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ( Re ` u ) = ( Re ` ( P + ( _i x. S ) ) ) )
+s42::simpr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) )
+s43:s34:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) )
+s44:s43,s42:sseldd |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> a e. ( CC \ { 0 } ) )
+i45::eldifsn
+s46:s44,i45:sylib |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( a e. CC /\ a =/= 0 ) )
+i47::simpl
+s48:s46,i47:syl |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> a e. CC )
+i49::simpr
+s50:s46,i49:syl |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> a =/= 0 )
+s51::fveq2 |- ( u = a -> ( Re ` u ) = ( Re ` a ) )
+s52:s51:eqeq1d |- ( u = a -> ( ( Re ` u ) = ( Re ` ( P + ( _i x. S ) ) ) <-> ( Re ` a ) = ( Re ` ( P + ( _i x. S ) ) ) ) )
+s53:s41:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> A. u e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ( Re ` u ) = ( Re ` ( P + ( _i x. S ) ) ) )
+s54:s52,s53,s42:rspcdva |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( Re ` a ) = ( Re ` ( P + ( _i x. S ) ) ) )
+s55:s23:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( Re ` ( P + ( _i x. S ) ) ) = P )
+s56:s54,s55:eqtrd |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( Re ` a ) = P )
+s57:s3:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> U e. RR+ )
+s58:s57,s44:jca |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( U e. RR+ /\ a e. ( CC \ { 0 } ) ) )
+i59::pkfval
+s60:s58,i59:syl |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` a ) ) = ( ( U ^c ( Re ` a ) ) / ( abs ` a ) ) )
+s61:s56:oveq2d |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( U ^c ( Re ` a ) ) = ( U ^c P ) )
+s62:s61:oveq1d |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( ( U ^c ( Re ` a ) ) / ( abs ` a ) ) = ( ( U ^c P ) / ( abs ` a ) ) )
+s63:s60,s62:eqtrd |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` a ) ) = ( ( U ^c P ) / ( abs ` a ) ) )
+s64:s7:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> P e. RR )
+s65:s64:recnd |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> P e. CC )
+s66:s9:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> P =/= 0 )
+s67:s65,s66:absrpcld |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` P ) e. RR+ )
+s68:s48,s50:absrpcld |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` a ) e. RR+ )
+i69::absrele
+s70:s48,i69:syl |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` ( Re ` a ) ) <_ ( abs ` a ) )
+s71:s56:fveq2d |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` ( Re ` a ) ) = ( abs ` P ) )
+s73:s56:fveq2d |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` ( Re ` a ) ) = ( abs ` P ) )
+s74:s73:eqcomd |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` P ) = ( abs ` ( Re ` a ) ) )
+i75::absrele
+s76:s48,i75:syl |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` ( Re ` a ) ) <_ ( abs ` a ) )
+s77:s74,s76:eqbrtrd |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` P ) <_ ( abs ` a ) )
+s78:s3:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> U e. RR+ )
+s79:s7:adantr |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> P e. RR )
+s80:s78,s79:rpcxpcld |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( U ^c P ) e. RR+ )
+s81:s80:rpred |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( U ^c P ) e. RR )
+s82:s80:rpge0d |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> 0 <_ ( U ^c P ) )
+s83:s67,s68,s81,s82,s77:lediv2ad |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( ( U ^c P ) / ( abs ` a ) ) <_ ( ( U ^c P ) / ( abs ` P ) ) )
+s84:s63,s83:eqbrtrd |- ( ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) /\ a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ) -> ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` a ) ) <_ ( ( U ^c P ) / ( abs ` P ) ) )
+s85:s84:ralrimiva |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> A. a e. ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` a ) ) <_ ( ( U ^c P ) / ( abs ` P ) ) )
+s86:s3,s7:rpcxpcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( U ^c P ) e. RR+ )
+s87:s7:recnd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P e. CC )
+s88:s87,s9:absrpcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( abs ` P ) e. RR+ )
+s89:s88:rpred |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( abs ` P ) e. RR )
+s90:s7:recnd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P e. CC )
+s91:s90,s9:absrpcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( abs ` P ) e. RR+ )
+s92:s91:rpne0d |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( abs ` P ) =/= 0 )
+s94:s7:recnd |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> P e. CC )
+s95:s94,s9:absrpcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( abs ` P ) e. RR+ )
+s96:s3,s7:rpcxpcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( U ^c P ) e. RR+ )
+s97:s96,s95:rpdivcld |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( U ^c P ) / ( abs ` P ) ) e. RR+ )
+s98:s17,s21:jca |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( P + ( _i x. S ) ) e. CC /\ ( P + ( _i x. T ) ) e. CC ) )
+s99:s39,s34:jca |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) ) )
+s100:s98,s99:jca |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( ( P + ( _i x. S ) ) e. CC /\ ( P + ( _i x. T ) ) e. CC ) /\ ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( ( P + ( _i x. S ) ) cseg ( P + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) ) ) )
+s101:s97:rpred |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( U ^c P ) / ( abs ` P ) ) e. RR )
+i102::lintabs
+qed:s100,s101,s85,i102:syl3anc |- ( ( ( U e. RR+ /\ ( P e. RR /\ P =/= 0 ) ) /\ ( S e. RR /\ T e. RR ) ) -> ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( P + ( _i x. S ) ) , ( P + ( _i x. T ) ) >. ) ) <_ ( ( ( U ^c P ) / ( abs ` P ) ) x. ( abs ` ( ( P + ( _i x. T ) ) - ( P + ( _i x. S ) ) ) ) ) )
+$)

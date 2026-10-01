@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=algprods1  LOC_AFTER=?
+
+* The product of a one-letter word (Lean: List.prod_singleton).
+
+i1::s1cl
+s3::s1cl |- ( P e. NN0 -> <" P "> e. Word NN0 )
+i4::ccatrid
+s5:s3,i4:syl |- ( P e. NN0 -> ( <" P "> ++ (/) ) = <" P "> )
+s6::id |- ( ( <" P "> ++ (/) ) = <" P "> -> ( <" P "> ++ (/) ) = <" P "> )
+s7:s6:fveq2d |- ( ( <" P "> ++ (/) ) = <" P "> -> ( # ` ( <" P "> ++ (/) ) ) = ( # ` <" P "> ) )
+s8:s7:oveq2d |- ( ( <" P "> ++ (/) ) = <" P "> -> ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) = ( 0 ..^ ( # ` <" P "> ) ) )
+s9:s6:fveq1d |- ( ( <" P "> ++ (/) ) = <" P "> -> ( ( <" P "> ++ (/) ) ` i ) = ( <" P "> ` i ) )
+s10:s9:adantr |- ( ( ( <" P "> ++ (/) ) = <" P "> /\ i e. ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) ) -> ( ( <" P "> ++ (/) ) ` i ) = ( <" P "> ` i ) )
+s11:s8,s10:prodeq12dv |- ( ( <" P "> ++ (/) ) = <" P "> -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) ( ( <" P "> ++ (/) ) ` i ) = prod_ i e. ( 0 ..^ ( # ` <" P "> ) ) ( <" P "> ` i ) )
+s12:s5,s11:syl |- ( P e. NN0 -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) ( ( <" P "> ++ (/) ) ` i ) = prod_ i e. ( 0 ..^ ( # ` <" P "> ) ) ( <" P "> ` i ) )
+s13::id |- ( P e. NN0 -> P e. NN0 )
+s14::wrd0 |- (/) e. Word NN0
+s15:s14:a1i |- ( P e. NN0 -> (/) e. Word NN0 )
+i16::algprodcs
+s17:s13,s15,i16:syl2anc |- ( P e. NN0 -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) ( ( <" P "> ++ (/) ) ` i ) = ( P x. prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) ) )
+s18::algprod0 |- prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) = 1
+s19:s18:a1i |- ( P e. NN0 -> prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) = 1 )
+s20:s19:oveq2d |- ( P e. NN0 -> ( P x. prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) ) = ( P x. 1 ) )
+s21:s17,s20:eqtrd |- ( P e. NN0 -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) ( ( <" P "> ++ (/) ) ` i ) = ( P x. 1 ) )
+s22::id |- ( P e. NN0 -> P e. NN0 )
+s23:s22:nn0cnd |- ( P e. NN0 -> P e. CC )
+s24:s23:mulridd |- ( P e. NN0 -> ( P x. 1 ) = P )
+s25:s21,s24:eqtrd |- ( P e. NN0 -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) ( ( <" P "> ++ (/) ) ` i ) = P )
+s26:s12:eqcomd |- ( P e. NN0 -> prod_ i e. ( 0 ..^ ( # ` <" P "> ) ) ( <" P "> ` i ) = prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ (/) ) ) ) ( ( <" P "> ++ (/) ) ` i ) )
+qed:s26,s25:eqtrd |- ( P e. NN0 -> prod_ i e. ( 0 ..^ ( # ` <" P "> ) ) ( <" P "> ` i ) = P )
+$)

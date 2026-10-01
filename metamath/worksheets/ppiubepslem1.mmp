@@ -1,0 +1,85 @@
+$( <MM> <PROOF_ASST> THEOREM=ppiubepslem1  LOC_AFTER=?
+
+* Lemma for ppiubeps: if the PNT ratio is within eps of 1 at A >= 2, then pi ( A ) <_ ( log 4 + eps ) A / log A.
+
+s1::simpl1 |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> A e. RR )
+s2::simpl2 |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 2 <_ A )
+s3::simpl3 |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> E e. RR+ )
+s4::simpr |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E )
+s5:s3:rpred |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> E e. RR )
+s6::1re |- 1 e. RR
+s7:s6:a1i |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 1 e. RR )
+s8::2re |- 2 e. RR
+s9:s8:a1i |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 2 e. RR )
+s10::1lt2 |- 1 < 2
+s11:s10:a1i |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 1 < 2 )
+s12:s7,s9,s1,s11,s2:ltletrd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 1 < A )
+s13:s1,s12:rplogcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( log ` A ) e. RR+ )
+s14:s13:rpred |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( log ` A ) e. RR )
+s15:s13:rpgt0d |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 0 < ( log ` A ) )
+s16::0re |- 0 e. RR
+s17:s16:a1i |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 0 e. RR )
+s18::0lt1 |- 0 < 1
+s19:s18:a1i |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 0 < 1 )
+s20:s17,s7,s1,s19,s12:lttrd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 0 < A )
+s21:s1,s20:elrpd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> A e. RR+ )
+s22:s21,s13:rpdivcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( A / ( log ` A ) ) e. RR+ )
+s23:s22:rpred |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( A / ( log ` A ) ) e. RR )
+s24:s22:rpgt0d |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 0 < ( A / ( log ` A ) ) )
+i25::ppicl
+s26:s1,i25:syl |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ppi ` A ) e. NN0 )
+s27:s26:nn0red |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ppi ` A ) e. RR )
+s28:s27,s22:rerpdivcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ppi ` A ) / ( A / ( log ` A ) ) ) e. RR )
+s29:s28,s7:resubcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) e. RR )
+i30::abslt
+s31:s29,s5,i30:syl2anc |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E <-> ( -u E < ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) /\ ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) < E ) ) )
+s32:s4,s31:mpbid |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( -u E < ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) /\ ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) < E ) )
+s33:s32:simprd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) < E )
+i34::ltsubadd
+s35:s28,s7,s5,i34:syl3anc |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) < E <-> ( ( ppi ` A ) / ( A / ( log ` A ) ) ) < ( E + 1 ) ) )
+s36:s33,s35:mpbid |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ppi ` A ) / ( A / ( log ` A ) ) ) < ( E + 1 ) )
+s37:s5:recnd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> E e. CC )
+s38::1cnd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 1 e. CC )
+s39:s37,s38:addcomd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( E + 1 ) = ( 1 + E ) )
+s40:s36,s39:breqtrd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ppi ` A ) / ( A / ( log ` A ) ) ) < ( 1 + E ) )
+s41:s7,s5:readdcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( 1 + E ) e. RR )
+s42:s23,s24:jca |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( A / ( log ` A ) ) e. RR /\ 0 < ( A / ( log ` A ) ) ) )
+i43::ltdivmul
+s44:s27,s41,s42,i43:syl3anc |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) < ( 1 + E ) <-> ( ppi ` A ) < ( ( A / ( log ` A ) ) x. ( 1 + E ) ) ) )
+s45:s40,s44:mpbid |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ppi ` A ) < ( ( A / ( log ` A ) ) x. ( 1 + E ) ) )
+s46:s23:recnd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( A / ( log ` A ) ) e. CC )
+s47:s41:recnd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( 1 + E ) e. CC )
+s48:s46,s47:mulcomd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( A / ( log ` A ) ) x. ( 1 + E ) ) = ( ( 1 + E ) x. ( A / ( log ` A ) ) ) )
+s49:s1:recnd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> A e. CC )
+s50:s13:rpcnd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( log ` A ) e. CC )
+s51:s13:rpne0d |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( log ` A ) =/= 0 )
+s52:s47,s49,s50,s51:divassd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( 1 + E ) x. A ) / ( log ` A ) ) = ( ( 1 + E ) x. ( A / ( log ` A ) ) ) )
+s53:s48,s52:eqtr4d |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( A / ( log ` A ) ) x. ( 1 + E ) ) = ( ( ( 1 + E ) x. A ) / ( log ` A ) ) )
+s54:s45,s53:breqtrd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ppi ` A ) < ( ( ( 1 + E ) x. A ) / ( log ` A ) ) )
+s55:s41,s1:remulcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( 1 + E ) x. A ) e. RR )
+s56:s55,s13:rerpdivcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( 1 + E ) x. A ) / ( log ` A ) ) e. RR )
+s57:s27,s56,s54:ltled |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ppi ` A ) <_ ( ( ( 1 + E ) x. A ) / ( log ` A ) ) )
+s58::ppiubepslem0 |- 1 < ( log ` 4 )
+s59::4rp |- 4 e. RR+
+i60::relogcl
+s61:s59,i60:ax-mp |- ( log ` 4 ) e. RR
+s62:s61:a1i |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( log ` 4 ) e. RR )
+s63:s58:a1i |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 1 < ( log ` 4 ) )
+s64:s7,s62,s63:ltled |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 1 <_ ( log ` 4 ) )
+i65::leadd1
+s66:s7,s62,s5,i65:syl3anc |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( 1 <_ ( log ` 4 ) <-> ( 1 + E ) <_ ( ( log ` 4 ) + E ) ) )
+s67:s64,s66:mpbid |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( 1 + E ) <_ ( ( log ` 4 ) + E ) )
+s68:s62,s5:readdcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( log ` 4 ) + E ) e. RR )
+s69:s17,s1,s20:ltled |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> 0 <_ A )
+s70:s1,s69:jca |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( A e. RR /\ 0 <_ A ) )
+s71:s41,s68,s70:3jca |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( 1 + E ) e. RR /\ ( ( log ` 4 ) + E ) e. RR /\ ( A e. RR /\ 0 <_ A ) ) )
+i72::lemul1a
+s73:s71,s67,i72:syl2anc |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( 1 + E ) x. A ) <_ ( ( ( log ` 4 ) + E ) x. A ) )
+s74:s68,s1:remulcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( log ` 4 ) + E ) x. A ) e. RR )
+s75:s14,s15:jca |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( log ` A ) e. RR /\ 0 < ( log ` A ) ) )
+i76::lediv1
+s77:s55,s74,s75,i76:syl3anc |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( 1 + E ) x. A ) <_ ( ( ( log ` 4 ) + E ) x. A ) <-> ( ( ( 1 + E ) x. A ) / ( log ` A ) ) <_ ( ( ( ( log ` 4 ) + E ) x. A ) / ( log ` A ) ) ) )
+s78:s73,s77:mpbid |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( 1 + E ) x. A ) / ( log ` A ) ) <_ ( ( ( ( log ` 4 ) + E ) x. A ) / ( log ` A ) ) )
+s79:s74,s13:rerpdivcld |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ( ( ( log ` 4 ) + E ) x. A ) / ( log ` A ) ) e. RR )
+qed:s27,s56,s79,s57,s78:letrd |- ( ( ( A e. RR /\ 2 <_ A /\ E e. RR+ ) /\ ( abs ` ( ( ( ppi ` A ) / ( A / ( log ` A ) ) ) - 1 ) ) < E ) -> ( ppi ` A ) <_ ( ( ( ( log ` 4 ) + E ) x. A ) / ( log ` A ) ) )
+$)

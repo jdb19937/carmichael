@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=dlogser  LOC_AFTER=?
+
+* A logarithmically weighted Dirichlet series is the shifted series of the shifted coefficients.
+
+s1::simp1 |- ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) -> A : NN --> CC )
+s2::simp2 |- ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) -> E e. CC )
+s3::simp3 |- ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) -> Z e. CC )
+s4::simpr |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> k e. NN )
+i5::dshcval
+s6:s4,i5:syl |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` k ) = ( ( ( A ` k ) x. ( log ` k ) ) x. ( k ^c -u E ) ) )
+s7:s1:adantr |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> A : NN --> CC )
+s8:s7,s4:ffvelcdmd |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( A ` k ) e. CC )
+s9:s4:nnrpd |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> k e. RR+ )
+i10::relogcl
+s11:s9,i10:syl |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( log ` k ) e. RR )
+s12:s11:recnd |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( log ` k ) e. CC )
+s13:s8,s12:mulcld |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( ( A ` k ) x. ( log ` k ) ) e. CC )
+s14:s2:adantr |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> E e. CC )
+s15:s3:adantr |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> Z e. CC )
+s16:s4,s14,s15:3jca |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( k e. NN /\ E e. CC /\ Z e. CC ) )
+s17:s16,s13:jca |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( ( k e. NN /\ E e. CC /\ Z e. CC ) /\ ( ( A ` k ) x. ( log ` k ) ) e. CC ) )
+i18::dlogtrm
+s19:s17,i18:syl |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( ( ( ( A ` k ) x. ( log ` k ) ) x. ( k ^c -u E ) ) x. ( k ^c -u ( Z - E ) ) ) = ( ( ( A ` k ) x. ( log ` k ) ) x. ( k ^c -u Z ) ) )
+s20:s6:oveq1d |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` k ) x. ( k ^c -u ( Z - E ) ) ) = ( ( ( ( A ` k ) x. ( log ` k ) ) x. ( k ^c -u E ) ) x. ( k ^c -u ( Z - E ) ) ) )
+s21:s20,s19:eqtrd |- ( ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) /\ k e. NN ) -> ( ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` k ) x. ( k ^c -u ( Z - E ) ) ) = ( ( ( A ` k ) x. ( log ` k ) ) x. ( k ^c -u Z ) ) )
+qed:s21:sumeq2dv |- ( ( A : NN --> CC /\ E e. CC /\ Z e. CC ) -> sum_ k e. NN ( ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` k ) x. ( k ^c -u ( Z - E ) ) ) = sum_ k e. NN ( ( ( A ` k ) x. ( log ` k ) ) x. ( k ^c -u Z ) ) )
+$)

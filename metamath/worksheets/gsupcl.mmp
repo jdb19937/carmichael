@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=gsupcl  LOC_AFTER=?
+
+* The supremum of a bounded nonempty set of reals is a real number.
+
+s1::simpll |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> T C_ RR )
+s2::simplr |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> X e. T )
+s3::simprl |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> Y e. RR )
+s4::simprr |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> A. y e. T y <_ Y )
+i5::ne0i
+s6:s2,i5:syl |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> T =/= (/) )
+s7::breq2 |- ( x = Y -> ( y <_ x <-> y <_ Y ) )
+s8:s7:ralbidv |- ( x = Y -> ( A. y e. T y <_ x <-> A. y e. T y <_ Y ) )
+s9:s8:rspcev |- ( ( Y e. RR /\ A. y e. T y <_ Y ) -> E. x e. RR A. y e. T y <_ x )
+s10:s3,s4,s9:syl2anc |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> E. x e. RR A. y e. T y <_ x )
+s11:s1,s6,s10:3jca |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> ( T C_ RR /\ T =/= (/) /\ E. x e. RR A. y e. T y <_ x ) )
+i12::suprcl
+qed:s11,i12:syl |- ( ( ( T C_ RR /\ X e. T ) /\ ( Y e. RR /\ A. y e. T y <_ Y ) ) -> sup ( T , RR , < ) e. RR )
+$)

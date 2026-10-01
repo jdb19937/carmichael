@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=gtest9  LOC_AFTER=?
+
+* sign test: ( ( exp ` X ) x. ( N + 1 ) ) is positive for X e. RR and N e. NN0.
+
+s1::simpl |- ( ( X e. RR /\ N e. NN0 ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ N e. NN0 ) -> N e. NN0 )
+s3:s1:reefcld |- ( ( X e. RR /\ N e. NN0 ) -> ( exp ` X ) e. RR )
+s4:s2:nn0zd |- ( ( X e. RR /\ N e. NN0 ) -> N e. ZZ )
+s5:s4:zred |- ( ( X e. RR /\ N e. NN0 ) -> N e. RR )
+s6::1re |- 1 e. RR
+s7:s6:a1i |- ( ( X e. RR /\ N e. NN0 ) -> 1 e. RR )
+s8:s5,s7:readdcld |- ( ( X e. RR /\ N e. NN0 ) -> ( N + 1 ) e. RR )
+i9::efgt0
+s10:s1,i9:syl |- ( ( X e. RR /\ N e. NN0 ) -> 0 < ( exp ` X ) )
+s11:s2:nn0ge0d |- ( ( X e. RR /\ N e. NN0 ) -> 0 <_ N )
+s12::0lt1 |- 0 < 1
+s13:s12:a1i |- ( ( X e. RR /\ N e. NN0 ) -> 0 < 1 )
+s14:s5,s7,s11,s13:addgegt0d |- ( ( X e. RR /\ N e. NN0 ) -> 0 < ( N + 1 ) )
+s15:s3,s8,s10,s14:mulgt0d |- ( ( X e. RR /\ N e. NN0 ) -> 0 < ( ( exp ` X ) x. ( N + 1 ) ) )
+qed:s15:idi |- ( ( X e. RR /\ N e. NN0 ) -> 0 < ( ( exp ` X ) x. ( N + 1 ) ) )
+$)

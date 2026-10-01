@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=nstarcl  LOC_AFTER=?
+
+* Closure of Nstar: a positive integer when Q is a finite set of primes.
+
+s1::id |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P Prime i^i Fin ) )
+i2::elfpw
+s3:s1,i2:sylib |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s4:s3:simpld |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ Prime )
+s5:s3:simprd |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. Fin )
+s6::prmssnn |- Prime C_ NN
+s7::nnssnn0 |- NN C_ NN0
+s8:s6,s7:sstri |- Prime C_ NN0
+s9:s8:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ NN0 )
+s10:s4,s9:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ NN0 )
+s11:s10,s5:jca |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i12::elfpw
+s13:s11,i12:sylibr |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P NN0 i^i Fin ) )
+i14::nstarval
+s15:s13,i14:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( Nstar ` Q ) = ( ( Nceil ` ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) ) + 1 ) )
+s16::lambdalcl |- ( Q e. ( ~P Prime i^i Fin ) -> ( lambdaL ` Q ) e. NN )
+s17:s16:nnred |- ( Q e. ( ~P Prime i^i Fin ) -> ( lambdaL ` Q ) e. RR )
+s18::lmodqcl |- ( Q e. ( ~P Prime i^i Fin ) -> ( Lmod ` Q ) e. NN )
+s19:s18:nnrpd |- ( Q e. ( ~P Prime i^i Fin ) -> ( Lmod ` Q ) e. RR+ )
+s20:s19:relogcld |- ( Q e. ( ~P Prime i^i Fin ) -> ( log ` ( Lmod ` Q ) ) e. RR )
+s21::1red |- ( Q e. ( ~P Prime i^i Fin ) -> 1 e. RR )
+s22:s21,s20:readdcld |- ( Q e. ( ~P Prime i^i Fin ) -> ( 1 + ( log ` ( Lmod ` Q ) ) ) e. RR )
+s23:s17,s22:remulcld |- ( Q e. ( ~P Prime i^i Fin ) -> ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) e. RR )
+i24::nceilcl
+s25:s23,i24:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( Nceil ` ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) ) e. NN0 )
+i26::nn0p1nn
+s27:s25,i26:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( ( Nceil ` ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) ) + 1 ) e. NN )
+qed:s15,s27:eqeltrd |- ( Q e. ( ~P Prime i^i Fin ) -> ( Nstar ` Q ) e. NN )
+$)

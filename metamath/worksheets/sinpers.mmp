@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=sinpers  LOC_AFTER=?
+
+* A conditional table update leaves a nonempty entry alone (Lean: setIfNone_persist).
+
+s1::simpl |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) )
+s2::simprl |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> C e. NN0 )
+s3::simprr |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> ( T ` C ) =/= ( inr ` (/) ) )
+s4:s1,s2:jca |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ C e. NN0 ) )
+s5::sinapply |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ C e. NN0 ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) )
+s6:s4,s5:syl |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) )
+s7::simprl |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( T ` R ) = ( inr ` (/) ) )
+s8::simprr |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> C = R )
+s9:s8:fveq2d |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( T ` C ) = ( T ` R ) )
+s10:s9,s7:eqtrd |- ( ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) /\ ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) ) -> ( T ` C ) = ( inr ` (/) ) )
+s11:s10:ex |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) -> ( T ` C ) = ( inr ` (/) ) ) )
+i12::neneqd
+s13:s3,i12:syl |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> -. ( T ` C ) = ( inr ` (/) ) )
+s14:s11,s13:mtod |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> -. ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) )
+s15:s14:iffalsed |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> if ( ( ( T ` R ) = ( inr ` (/) ) /\ C = R ) , ( inl ` S ) , ( T ` C ) ) = ( T ` C ) )
+qed:s6,s15:eqtrd |- ( ( ( T e. Tbl /\ R e. NN0 /\ S e. Word NN0 ) /\ ( C e. NN0 /\ ( T ` C ) =/= ( inr ` (/) ) ) ) -> ( ( ( T SetIfNone R ) ` S ) ` C ) = ( T ` C ) )
+$)

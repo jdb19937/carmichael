@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=g2t13  LOC_AFTER=?
+
+* The ` fsumcom ` wrapper of tools/fsum.py: the body closure comes from the two-variable child closure of tools/cl.py.
+
+s1::simpl |- ( ( M e. NN /\ N e. NN ) -> M e. NN )
+s2::simpr |- ( ( M e. NN /\ N e. NN ) -> N e. NN )
+s3::fzfid |- ( ( M e. NN /\ N e. NN ) -> ( 1 ... M ) e. Fin )
+s4::fzfid |- ( ( M e. NN /\ N e. NN ) -> ( 1 ... N ) e. Fin )
+s5::simprl |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> j e. ( 1 ... M ) )
+i6::elfznn
+s7:s5,i6:syl |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> j e. NN )
+s8::simprr |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> k e. ( 1 ... N ) )
+i9::elfznn
+s10:s8,i9:syl |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> k e. NN )
+s11:s7:nnrpd |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> j e. RR+ )
+s12:s11:rpred |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> j e. RR )
+s13:s12:recnd |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> j e. CC )
+s14:s10:nnrpd |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> k e. RR+ )
+s15:s14:rpred |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> k e. RR )
+s16:s15:recnd |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> k e. CC )
+s17:s13,s16:mulcld |- ( ( ( M e. NN /\ N e. NN ) /\ ( j e. ( 1 ... M ) /\ k e. ( 1 ... N ) ) ) -> ( j x. k ) e. CC )
+qed:s3,s4,s17:fsumcom |- ( ( M e. NN /\ N e. NN ) -> sum_ j e. ( 1 ... M ) sum_ k e. ( 1 ... N ) ( j x. k ) = sum_ k e. ( 1 ... N ) sum_ j e. ( 1 ... M ) ( j x. k ) )
+$)

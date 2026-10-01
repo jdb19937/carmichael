@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=mulallcosts  LOC_AFTER=?
+
+* Step of the induction for mulallcost.
+
+s1::simpl1 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> V e. Word NN0 )
+s2::simpl2 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> P e. NN0 )
+s3::simpr |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> Q e. NN0 )
+i4::mulallcl
+s5:s3,s1,i4:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( Q MulAll V ) e. ( Word NN0 X. NN0 ) )
+i6::xp1st
+s7:s5,i6:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll V ) ) e. Word NN0 )
+i8::xp2nd
+s9:s5,i8:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 2nd ` ( Q MulAll V ) ) e. NN0 )
+s10:s3,s2:jca |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( Q e. NN0 /\ P e. NN0 ) )
+i11::mulallcs
+s12:s10,s1,i11:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( Q MulAll ( <" P "> ++ V ) ) = <. ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) , ( ( 2nd ` ( Q MulAll V ) ) + 1 ) >. )
+s13:s2,s3:nn0mulcld |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( P x. Q ) e. NN0 )
+i14::s1cl
+s15:s13,i14:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> <" ( P x. Q ) "> e. Word NN0 )
+i16::ccatcl
+s17:s15,s7,i16:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) e. Word NN0 )
+i18::peano2nn0
+s19:s9,i18:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( ( 2nd ` ( Q MulAll V ) ) + 1 ) e. NN0 )
+i20::alglencs
+s21:s2,s1,i20:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( # ` ( <" P "> ++ V ) ) = ( ( # ` V ) + 1 ) )
+s22::simpl3 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) )
+s23:s22,s3:mpd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) )
+s24:s12:fveq2d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 2nd ` ( Q MulAll ( <" P "> ++ V ) ) ) = ( 2nd ` <. ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) , ( ( 2nd ` ( Q MulAll V ) ) + 1 ) >. ) )
+i25::op2ndg
+s26:s17,s19,i25:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 2nd ` <. ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) , ( ( 2nd ` ( Q MulAll V ) ) + 1 ) >. ) = ( ( 2nd ` ( Q MulAll V ) ) + 1 ) )
+s27:s24,s26:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 2nd ` ( Q MulAll ( <" P "> ++ V ) ) ) = ( ( 2nd ` ( Q MulAll V ) ) + 1 ) )
+s28:s23:oveq1d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( ( 2nd ` ( Q MulAll V ) ) + 1 ) = ( ( # ` V ) + 1 ) )
+s29:s27,s28:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 2nd ` ( Q MulAll ( <" P "> ++ V ) ) ) = ( ( # ` V ) + 1 ) )
+s30:s29,s21:eqtr4d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) /\ Q e. NN0 ) -> ( 2nd ` ( Q MulAll ( <" P "> ++ V ) ) ) = ( # ` ( <" P "> ++ V ) ) )
+qed:s30:ex |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 2nd ` ( Q MulAll V ) ) = ( # ` V ) ) ) -> ( Q e. NN0 -> ( 2nd ` ( Q MulAll ( <" P "> ++ V ) ) ) = ( # ` ( <" P "> ++ V ) ) ) )
+$)

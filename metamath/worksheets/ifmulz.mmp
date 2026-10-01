@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=ifmulz  LOC_AFTER=?
+
+* A product of an indicator term with a constant on the left.
+
+s1::simpr |- ( ( C e. CC /\ ph ) -> ph )
+s2:s1:iftrued |- ( ( C e. CC /\ ph ) -> if ( ph , A , 0 ) = A )
+s3:s1:iftrued |- ( ( C e. CC /\ ph ) -> if ( ph , ( A x. C ) , 0 ) = ( A x. C ) )
+s4:s2:oveq1d |- ( ( C e. CC /\ ph ) -> ( if ( ph , A , 0 ) x. C ) = ( A x. C ) )
+s5:s3:eqcomd |- ( ( C e. CC /\ ph ) -> ( A x. C ) = if ( ph , ( A x. C ) , 0 ) )
+s6:s4,s5:eqtrd |- ( ( C e. CC /\ ph ) -> ( if ( ph , A , 0 ) x. C ) = if ( ph , ( A x. C ) , 0 ) )
+s7::simpr |- ( ( C e. CC /\ -. ph ) -> -. ph )
+s8:s7:iffalsed |- ( ( C e. CC /\ -. ph ) -> if ( ph , A , 0 ) = 0 )
+s9:s7:iffalsed |- ( ( C e. CC /\ -. ph ) -> if ( ph , ( A x. C ) , 0 ) = 0 )
+s10:s8:oveq1d |- ( ( C e. CC /\ -. ph ) -> ( if ( ph , A , 0 ) x. C ) = ( 0 x. C ) )
+s11::simpl |- ( ( C e. CC /\ -. ph ) -> C e. CC )
+s12:s11:mul02d |- ( ( C e. CC /\ -. ph ) -> ( 0 x. C ) = 0 )
+s13:s10,s12:eqtrd |- ( ( C e. CC /\ -. ph ) -> ( if ( ph , A , 0 ) x. C ) = 0 )
+s14:s9:eqcomd |- ( ( C e. CC /\ -. ph ) -> 0 = if ( ph , ( A x. C ) , 0 ) )
+s15:s13,s14:eqtrd |- ( ( C e. CC /\ -. ph ) -> ( if ( ph , A , 0 ) x. C ) = if ( ph , ( A x. C ) , 0 ) )
+qed:s6,s15:pm2.61dan |- ( C e. CC -> ( if ( ph , A , 0 ) x. C ) = if ( ph , ( A x. C ) , 0 ) )
+$)

@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=pfmul  LOC_AFTER=?
+
+* The prime divisors of a product of coprime positive integers are the union of the prime divisors of the factors.
+
+s1::simp1 |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> A e. NN )
+s2:s1:nnzd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> A e. ZZ )
+s3::simp2 |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> B e. NN )
+s4:s3:nnzd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> B e. ZZ )
+s5::simpr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> q e. Prime )
+s6:s2:adantr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> A e. ZZ )
+s7:s4:adantr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> B e. ZZ )
+i8::euclemma
+s9:s5,s6,s7,i8:syl3anc |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> ( q || ( A x. B ) <-> ( q || A \/ q || B ) ) )
+s10:s9:rabbidva |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> { q e. Prime | q || ( A x. B ) } = { q e. Prime | ( q || A \/ q || B ) } )
+s11::unrab |- ( { q e. Prime | q || A } u. { q e. Prime | q || B } ) = { q e. Prime | ( q || A \/ q || B ) }
+s12:s11:a1i |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( { q e. Prime | q || A } u. { q e. Prime | q || B } ) = { q e. Prime | ( q || A \/ q || B ) } )
+qed:s10,s12:eqtr4d |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> { q e. Prime | q || ( A x. B ) } = ( { q e. Prime | q || A } u. { q e. Prime | q || B } ) )
+$)

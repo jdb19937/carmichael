@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=thetaapletheta  LOC_AFTER=?
+
+* theta in a residue class is at most theta (Lean: thetaAP_le_theta).
+
+s1::thetaapval |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( thetaAP ` Q ) Y ) = sum_ p e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ( log ` p ) )
+s2::simp1 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> Q e. NN )
+s3::simp2 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> A e. ZZ )
+s4::simp3 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> Y e. RR )
+i5::thetaaplem2
+s6:s4,i5:syl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( theta ` Y ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( log ` p ) )
+s7::thetaaplem4 |- ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) e. Fin
+s8:s7:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) e. Fin )
+s9::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) )
+i10::elin
+s11:s9,i10:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( p e. ( 1 ... ( |_ ` Y ) ) /\ p e. Prime ) )
+s12:s11:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. ( 1 ... ( |_ ` Y ) ) )
+i13::elfznn
+s14:s12,i13:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> p e. NN )
+i15::thetaaplem1
+s16:s14,i15:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( log ` p ) e. ( 0 [,) +oo ) )
+i17::elrege0
+s18:s16,i17:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( ( log ` p ) e. RR /\ 0 <_ ( log ` p ) ) )
+s19:s18:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> ( log ` p ) e. RR )
+s20:s18:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ) -> 0 <_ ( log ` p ) )
+s21::thetaaplem3 |- { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } C_ ( ( 1 ... ( |_ ` Y ) ) i^i Prime )
+s22:s21:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } C_ ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) )
+s23:s8,s19,s20,s22:fsumless |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. { n e. ( 1 ... ( |_ ` Y ) ) | ( n e. Prime /\ ( n mod Q ) = ( A mod Q ) ) } ( log ` p ) <_ sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) ( log ` p ) )
+qed:s23,s1,s6:3brtr4d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( thetaAP ` Q ) Y ) <_ ( theta ` Y ) )
+$)

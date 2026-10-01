@@ -1,0 +1,54 @@
+$( <MM> <PROOF_ASST> THEOREM=bvmchkqrat  LOC_AFTER=?
+
+* The totient ratio of P Q splits: ( P Q ) / phi ( P Q ) = ( P / ( P - 1 ) ) ( Q / phi ( Q ) ) (phimul, phiprm).
+
+s1::id |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) )
+s2:s1:simp1d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P e. Prime )
+s3:s1:simp2d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> Q e. NN )
+s4:s1:simp3d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P gcd Q ) = 1 )
+i5::prmnn
+s6:s2,i5:syl |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P e. NN )
+s7:s6:nnzd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P e. ZZ )
+s8:s6:nnred |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P e. RR )
+s9:s6:nncnd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P e. CC )
+s10:s6:nnrpd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P e. RR+ )
+i11::prmgt1
+s12:s2,i11:syl |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> 1 < P )
+i13::prmuz2
+s14:s2,i13:syl |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P e. ( ZZ>= ` 2 ) )
+s15:s3:nnzd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> Q e. ZZ )
+s16:s3:nnred |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> Q e. RR )
+s17:s3:nncnd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> Q e. CC )
+s18:s3:nnrpd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> Q e. RR+ )
+s19:s10:rpne0d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> P =/= 0 )
+s20:s10:rpge0d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> 0 <_ P )
+i21::eluzle
+s22:s14,i21:syl |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> 2 <_ P )
+s23:s6,s3:nnmulcld |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P x. Q ) e. NN )
+s24:s23:nnzd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P x. Q ) e. ZZ )
+s25:s23:nncnd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P x. Q ) e. CC )
+s26:s23:nnred |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P x. Q ) e. RR )
+s27:s18:rpne0d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> Q =/= 0 )
+s28::1red |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> 1 e. RR )
+s29:s8,s28:resubcld |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P - 1 ) e. RR )
+s30::1red |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> 1 e. RR )
+s31:s30,s8:posdifd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( 1 < P <-> 0 < ( P - 1 ) ) )
+s32:s12,s31:mpbid |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> 0 < ( P - 1 ) )
+s33:s29,s32:elrpd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P - 1 ) e. RR+ )
+s34:s29:recnd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P - 1 ) e. CC )
+s35:s33:rpne0d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( P - 1 ) =/= 0 )
+i36::phimul
+s37:s6,s3,s4,i36:syl3anc |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( phi ` ( P x. Q ) ) = ( ( phi ` P ) x. ( phi ` Q ) ) )
+i38::phiprm
+s39:s2,i38:syl |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( phi ` P ) = ( P - 1 ) )
+s40:s39:oveq1d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( ( phi ` P ) x. ( phi ` Q ) ) = ( ( P - 1 ) x. ( phi ` Q ) ) )
+s41:s37,s40:eqtrd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( phi ` ( P x. Q ) ) = ( ( P - 1 ) x. ( phi ` Q ) ) )
+i42::phicl
+s43:s3,i42:syl |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( phi ` Q ) e. NN )
+s44:s43:nncnd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( phi ` Q ) e. CC )
+s45:s43:nnrpd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( phi ` Q ) e. RR+ )
+s46:s45:rpne0d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( phi ` Q ) =/= 0 )
+s47:s9,s34,s17,s44,s35,s46:divmuldivd |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( ( P / ( P - 1 ) ) x. ( Q / ( phi ` Q ) ) ) = ( ( P x. Q ) / ( ( P - 1 ) x. ( phi ` Q ) ) ) )
+s48:s41:oveq2d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( ( P x. Q ) / ( phi ` ( P x. Q ) ) ) = ( ( P x. Q ) / ( ( P - 1 ) x. ( phi ` Q ) ) ) )
+qed:s48,s47:eqtr4d |- ( ( P e. Prime /\ Q e. NN /\ ( P gcd Q ) = 1 ) -> ( ( P x. Q ) / ( phi ` ( P x. Q ) ) ) = ( ( P / ( P - 1 ) ) x. ( Q / ( phi ` Q ) ) ) )
+$)

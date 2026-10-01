@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=bwmaxle  LOC_AFTER=?
+
+* Both arguments are at most the larger one, written as an if.
+
+s1::simpl |- ( ( M e. RR /\ N e. RR ) -> M e. RR )
+s2::simpr |- ( ( M e. RR /\ N e. RR ) -> N e. RR )
+s3::simpr |- ( ( ( M e. RR /\ N e. RR ) /\ M <_ N ) -> M <_ N )
+s4:s3:iftrued |- ( ( ( M e. RR /\ N e. RR ) /\ M <_ N ) -> if ( M <_ N , N , M ) = N )
+s5:s2:adantr |- ( ( ( M e. RR /\ N e. RR ) /\ M <_ N ) -> N e. RR )
+s6:s5:leidd |- ( ( ( M e. RR /\ N e. RR ) /\ M <_ N ) -> N <_ N )
+s7:s3,s4:breqtrrd |- ( ( ( M e. RR /\ N e. RR ) /\ M <_ N ) -> M <_ if ( M <_ N , N , M ) )
+s8:s6,s4:breqtrrd |- ( ( ( M e. RR /\ N e. RR ) /\ M <_ N ) -> N <_ if ( M <_ N , N , M ) )
+s9:s7,s8:jca |- ( ( ( M e. RR /\ N e. RR ) /\ M <_ N ) -> ( M <_ if ( M <_ N , N , M ) /\ N <_ if ( M <_ N , N , M ) ) )
+s10::simpr |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> -. M <_ N )
+s11:s10:iffalsed |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> if ( M <_ N , N , M ) = M )
+s12:s1:adantr |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> M e. RR )
+s13:s2:adantr |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> N e. RR )
+i14::ltnle
+s15:s13,s12,i14:syl2anc |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> ( N < M <-> -. M <_ N ) )
+s16:s10,s15:mpbird |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> N < M )
+s17:s13,s12,s16:ltled |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> N <_ M )
+s18:s12:leidd |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> M <_ M )
+s19:s18,s11:breqtrrd |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> M <_ if ( M <_ N , N , M ) )
+s20:s17,s11:breqtrrd |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> N <_ if ( M <_ N , N , M ) )
+s21:s19,s20:jca |- ( ( ( M e. RR /\ N e. RR ) /\ -. M <_ N ) -> ( M <_ if ( M <_ N , N , M ) /\ N <_ if ( M <_ N , N , M ) ) )
+qed:s9,s21:pm2.61dan |- ( ( M e. RR /\ N e. RR ) -> ( M <_ if ( M <_ N , N , M ) /\ N <_ if ( M <_ N , N , M ) ) )
+$)

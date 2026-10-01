@@ -1,0 +1,60 @@
+$( <MM> <PROOF_ASST> THEOREM=recipsum  LOC_AFTER=?
+
+* Mertens-type bound for the reciprocal sum of primes in ( w , z ]: there is a constant c such that for all 2 <= w <= z, sum_{w<p<=z} 1/p <= ( log z - log w + c ) / log w. Parallel to primeRecipSum_sub_le in RecipSum.lean, with an existential constant in place of 2 ( log 4 + 4 ).
+
+1::vmadivsumb |- E. c e. RR+ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ c
+2::breq2    |- ( c = d -> ( ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ c <-> ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) )
+3:2:ralbidv |- ( c = d -> ( A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ c <-> A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) )
+4:3:cbvrexvw |- ( E. c e. RR+ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ c <-> E. d e. RR+ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d )
+5:1,4:mpbi  |- E. d e. RR+ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d
+6::simpll   |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) )
+7::simplr   |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> w e. ( ZZ>= ` 2 ) )
+8::simpr    |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> z e. ( ZZ>= ` w ) )
+9:7,8:jca   |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( w e. ( ZZ>= ` 2 ) /\ z e. ( ZZ>= ` w ) ) )
+10a::recipsumlem2
+10:7,8,10a:syl2anc |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) / ( log ` w ) ) )
+11a::recipsumlem3
+11:6,9,11a:syl2anc |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) <_ ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) )
+12a::recipsumlem4
+12:7,8,12a:syl2anc |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) e. RR /\ ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) e. RR ) )
+13:12:simpld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) e. RR )
+14:12:simprd |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) e. RR )
+15a::eluz2nn
+15:7,15a:syl |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> w e. NN )
+16:15:nnred |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> w e. RR )
+17a::eluz2gt1
+17:7,17a:syl |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> 1 < w )
+18:16,17:rplogcld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( log ` w ) e. RR+ )
+19a::eluznn
+19:15,8,19a:syl2anc |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> z e. NN )
+20:19:nnrpd |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> z e. RR+ )
+21:20:relogcld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( log ` z ) e. RR )
+22:18:rpred |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( log ` w ) e. RR )
+23:21,22:resubcld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( ( log ` z ) - ( log ` w ) ) e. RR )
+24::simpl   |- ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) -> d e. RR+ )
+25:6,24:syl |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> d e. RR+ )
+26::2rp     |- 2 e. RR+
+27:26:a1i   |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> 2 e. RR+ )
+28:27,25:rpmulcld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( 2 x. d ) e. RR+ )
+29:28:rpred |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( 2 x. d ) e. RR )
+30:23,29:readdcld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) e. RR )
+31:14,30,18,11:lediv1dd |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) / ( log ` w ) ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) )
+32:14,18:rerpdivcld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( ( sum_ m e. ( 1 ... z ) ( ( Lam ` m ) / m ) - sum_ m e. ( 1 ... w ) ( ( Lam ` m ) / m ) ) / ( log ` w ) ) e. RR )
+33:30,18:rerpdivcld |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) e. RR )
+34:13,32,33,10,31:letrd |- ( ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) /\ z e. ( ZZ>= ` w ) ) -> sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) )
+35:34:ralrimiva |- ( ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) /\ w e. ( ZZ>= ` 2 ) ) -> A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) )
+36:35:ralrimiva |- ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) -> A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) )
+37::2re     |- 2 e. RR
+38:24:rpred |- ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) -> d e. RR )
+39:37:a1i   |- ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) -> 2 e. RR )
+40:39,38:remulcld |- ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) -> ( 2 x. d ) e. RR )
+41::oveq2   |- ( c = ( 2 x. d ) -> ( ( ( log ` z ) - ( log ` w ) ) + c ) = ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) )
+42:41:oveq1d |- ( c = ( 2 x. d ) -> ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) ) = ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) )
+43:42:breq2d |- ( c = ( 2 x. d ) -> ( sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) ) <-> sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) ) )
+44:43:ralbidv |- ( c = ( 2 x. d ) -> ( A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) ) <-> A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) ) )
+45:44:ralbidv |- ( c = ( 2 x. d ) -> ( A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) ) <-> A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) ) )
+46:45:rspcev |- ( ( ( 2 x. d ) e. RR /\ A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + ( 2 x. d ) ) / ( log ` w ) ) ) -> E. c e. RR A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) ) )
+47:40,36,46:syl2anc |- ( ( d e. RR+ /\ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d ) -> E. c e. RR A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) ) )
+48:47:rexlimiva |- ( E. d e. RR+ A. x e. ( 1 [,) +oo ) ( abs ` ( sum_ n e. ( 1 ... ( |_ ` x ) ) ( ( Lam ` n ) / n ) - ( log ` x ) ) ) <_ d -> E. c e. RR A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) ) )
+qed:5,48:ax-mp |- E. c e. RR A. w e. ( ZZ>= ` 2 ) A. z e. ( ZZ>= ` w ) sum_ p e. ( ( ( w + 1 ) ... z ) i^i Prime ) ( 1 / p ) <_ ( ( ( ( log ` z ) - ( log ` w ) ) + c ) / ( log ` w ) )
+$)

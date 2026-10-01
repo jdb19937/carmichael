@@ -1,0 +1,65 @@
+$( <MM> <PROOF_ASST> THEOREM=step3we  LOC_AFTER=?
+
+* The scale facts Step 3 needs hold eventually (Lean: the filter_upwards list of step3_haltsW).
+
+s1::simp1 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( C e. RR /\ 0 < C ) )
+s2:s1:simpld |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> C e. RR )
+s3:s1:simprd |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> 0 < C )
+s4::simp2 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( X e. NN0 /\ R e. RR ) )
+s5:s4:simpld |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> X e. NN0 )
+s6::simp2 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( X e. NN0 /\ R e. RR ) )
+s7:s6:simprd |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> R e. RR )
+s8::simp3 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( K e. RR /\ 0 <_ K ) )
+s9:s8:simpld |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> K e. RR )
+s10::simp3 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( K e. RR /\ 0 <_ K ) )
+s11:s10:simprd |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> 0 <_ K )
+s12::evge3 |- E. m e. NN0 A. n e. ( ZZ>= ` m ) n e. ( ZZ>= ` 3 )
+s13:s12:a1i |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) n e. ( ZZ>= ` 3 ) )
+s14::5nn0 |- 5 e. NN0
+s15::0nn0 |- 0 e. NN0
+s16:s14,s15:deccl |- ; 5 0 e. NN0
+s17:s16:nn0rei |- ; 5 0 e. RR
+s18:s17:a1i |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ; 5 0 e. RR )
+i19::ell2ge
+s20:s18,i19:syl |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ; 5 0 <_ ( ell2 ` n ) )
+s21:s5:nn0red |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> X e. RR )
+i22::ell2ge
+s23:s21,i22:syl |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) X <_ ( ell2 ` n ) )
+s24::4rp |- 4 e. RR+
+s25:s24:a1i |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> 4 e. RR+ )
+s26:s2,s3:elrpd |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> C e. RR+ )
+s27:s25,s26:rpmulcld |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( 4 x. C ) e. RR+ )
+i28::relogcl
+s29:s27,i28:syl |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( log ` ( 4 x. C ) ) e. RR )
+i30::ell3ge
+s31:s29,i30:syl |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( log ` ( 4 x. C ) ) <_ ( ell3 ` n ) )
+s32:s7:recnd |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> R e. CC )
+s33:s32:abscld |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( abs ` R ) e. RR )
+s34::2nn0 |- 2 e. NN0
+s35:s34,s15:deccl |- ; 2 0 e. NN0
+s36:s35,s15:deccl |- ; ; 2 0 0 e. NN0
+s37:s36:nn0rei |- ; ; 2 0 0 e. RR
+s38:s37:a1i |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ; ; 2 0 0 e. RR )
+s39::2re |- 2 e. RR
+s40:s39:a1i |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> 2 e. RR )
+s41:s33,s40:readdcld |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( ( abs ` R ) + 2 ) e. RR )
+s42:s38,s41:remulcld |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( ; ; 2 0 0 x. ( ( abs ` R ) + 2 ) ) e. RR )
+i43::ell3ge
+s44:s42,i43:syl |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( ; ; 2 0 0 x. ( ( abs ` R ) + 2 ) ) <_ ( ell3 ` n ) )
+i45::rpdivcl
+s46::3rp |- 3 e. RR+
+i47::nnrp
+s48::1nn |- 1 e. NN
+s49:s48:decnncl2 |- ; 1 0 e. NN
+s50:s49,i47:ax-mp |- ; 1 0 e. RR+
+s51:s46,s50,i45:mp2an |- ( 3 / ; 1 0 ) e. RR+
+s52:s51:a1i |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( 3 / ; 1 0 ) e. RR+ )
+s53:s9,s11,s52:3jca |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> ( K e. RR /\ 0 <_ K /\ ( 3 / ; 1 0 ) e. RR+ ) )
+i54::quadexpe
+s55:s53,i54:syl |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( ( 3 / ; 1 0 ) x. ( ell2 ` n ) ) ) )
+s56:s13,s20:evan2 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( n e. ( ZZ>= ` 3 ) /\ ; 5 0 <_ ( ell2 ` n ) ) )
+s57:s56,s23:evan2 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( ( n e. ( ZZ>= ` 3 ) /\ ; 5 0 <_ ( ell2 ` n ) ) /\ X <_ ( ell2 ` n ) ) )
+s58:s57,s31:evan2 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( ( ( n e. ( ZZ>= ` 3 ) /\ ; 5 0 <_ ( ell2 ` n ) ) /\ X <_ ( ell2 ` n ) ) /\ ( log ` ( 4 x. C ) ) <_ ( ell3 ` n ) ) )
+s59:s58,s44:evan2 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( ( ( ( n e. ( ZZ>= ` 3 ) /\ ; 5 0 <_ ( ell2 ` n ) ) /\ X <_ ( ell2 ` n ) ) /\ ( log ` ( 4 x. C ) ) <_ ( ell3 ` n ) ) /\ ( ; ; 2 0 0 x. ( ( abs ` R ) + 2 ) ) <_ ( ell3 ` n ) ) )
+qed:s59,s55:evan2 |- ( ( ( C e. RR /\ 0 < C ) /\ ( X e. NN0 /\ R e. RR ) /\ ( K e. RR /\ 0 <_ K ) ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( ( ( ( ( n e. ( ZZ>= ` 3 ) /\ ; 5 0 <_ ( ell2 ` n ) ) /\ X <_ ( ell2 ` n ) ) /\ ( log ` ( 4 x. C ) ) <_ ( ell3 ` n ) ) /\ ( ; ; 2 0 0 x. ( ( abs ` R ) + 2 ) ) <_ ( ell3 ` n ) ) /\ ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( ( 3 / ; 1 0 ) x. ( ell2 ` n ) ) ) ) )
+$)

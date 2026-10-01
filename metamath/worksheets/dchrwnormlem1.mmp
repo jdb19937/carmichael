@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrwnormlem1  LOC_AFTER=?
+
+* Lemma for dchrwnorm: the inverse of the induced inverse character is the induced character, whose value at a unit is the value of the primitive character (Lean hchinv, heval).
+
+s1::simp1 |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) )
+s2::simp2 |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> U e. ZZ )
+s3::simp3 |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( U gcd Q ) = 1 )
+s4:s1:simp1d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( Q e. NN /\ F e. NN /\ F || Q ) )
+s5:s1:simp3d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) )
+s6:s4:simp1d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> Q e. NN )
+s7:s4:simp2d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> F e. NN )
+s8:s4:simp3d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> F || Q )
+s9:s5:simpld |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> Y e. ( Base ` ( DChr ` F ) ) )
+s10:s7,s6,s8:3jca |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( F e. NN /\ Q e. NN /\ F || Q ) )
+s11::eqid |- ( DChr ` F ) = ( DChr ` F )
+s12:s11:dchrabl |- ( F e. NN -> ( DChr ` F ) e. Abel )
+s13:s7,s12:syl |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( DChr ` F ) e. Abel )
+i14::ablgrp
+s15:s13,i14:syl |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( DChr ` F ) e. Grp )
+s16::eqid |- ( Base ` ( DChr ` F ) ) = ( Base ` ( DChr ` F ) )
+s17::eqid |- ( invg ` ( DChr ` F ) ) = ( invg ` ( DChr ` F ) )
+s18:s16,s17:grpinvcl |- ( ( ( DChr ` F ) e. Grp /\ Y e. ( Base ` ( DChr ` F ) ) ) -> ( ( invg ` ( DChr ` F ) ) ` Y ) e. ( Base ` ( DChr ` F ) ) )
+s19:s15,s9,s18:syl2anc |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( invg ` ( DChr ` F ) ) ` Y ) e. ( Base ` ( DChr ` F ) ) )
+s20:s10,s19:jca |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( F e. NN /\ Q e. NN /\ F || Q ) /\ ( ( invg ` ( DChr ` F ) ) ` Y ) e. ( Base ` ( DChr ` F ) ) ) )
+i21::dchrindinv
+s22:s20,i21:syl |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( F DChrInd Q ) ` ( ( invg ` ( DChr ` F ) ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) ) = ( ( invg ` ( DChr ` Q ) ) ` ( ( F DChrInd Q ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) ) )
+s23::eqid |- ( DChr ` F ) = ( DChr ` F )
+s24:s23:dchrabl |- ( F e. NN -> ( DChr ` F ) e. Abel )
+s25:s7,s24:syl |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( DChr ` F ) e. Abel )
+i26::ablgrp
+s27:s25,i26:syl |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( DChr ` F ) e. Grp )
+s28::eqid |- ( Base ` ( DChr ` F ) ) = ( Base ` ( DChr ` F ) )
+s29::eqid |- ( invg ` ( DChr ` F ) ) = ( invg ` ( DChr ` F ) )
+s30:s28,s29:grpinvinv |- ( ( ( DChr ` F ) e. Grp /\ Y e. ( Base ` ( DChr ` F ) ) ) -> ( ( invg ` ( DChr ` F ) ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) = Y )
+s31:s27,s9,s30:syl2anc |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( invg ` ( DChr ` F ) ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) = Y )
+s32:s31:fveq2d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( F DChrInd Q ) ` ( ( invg ` ( DChr ` F ) ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) ) = ( ( F DChrInd Q ) ` Y ) )
+s33:s32,s22:eqtr3d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( F DChrInd Q ) ` Y ) = ( ( invg ` ( DChr ` Q ) ) ` ( ( F DChrInd Q ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) ) )
+s34:s10,s9:jca |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( F e. NN /\ Q e. NN /\ F || Q ) /\ Y e. ( Base ` ( DChr ` F ) ) ) )
+i35::dchrindval1
+s36:s34,s2,s3,i35:syl3anc |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( ( F DChrInd Q ) ` Y ) ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` U ) ) = ( Y ` ( ( ZRHom ` ( Z/nZ ` F ) ) ` U ) ) )
+s37:s33:eqcomd |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( invg ` ( DChr ` Q ) ) ` ( ( F DChrInd Q ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) ) = ( ( F DChrInd Q ) ` Y ) )
+s38:s37:fveq1d |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( ( invg ` ( DChr ` Q ) ) ` ( ( F DChrInd Q ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) ) ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` U ) ) = ( ( ( F DChrInd Q ) ` Y ) ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` U ) ) )
+qed:s38,s36:eqtrd |- ( ( ( ( Q e. NN /\ F e. NN /\ F || Q ) /\ ( ( mmu ` ( Q / F ) ) =/= 0 /\ ( ( Q / F ) gcd F ) = 1 ) /\ ( Y e. ( Base ` ( DChr ` F ) ) /\ ( F DChrCond Y ) = F ) ) /\ U e. ZZ /\ ( U gcd Q ) = 1 ) -> ( ( ( invg ` ( DChr ` Q ) ) ` ( ( F DChrInd Q ) ` ( ( invg ` ( DChr ` F ) ) ` Y ) ) ) ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` U ) ) = ( Y ` ( ( ZRHom ` ( Z/nZ ` F ) ) ` U ) ) )
+$)

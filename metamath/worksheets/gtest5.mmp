@@ -1,0 +1,98 @@
+$( <MM> <PROOF_ASST> THEOREM=gtest5  LOC_AFTER=?
+
+* linarith test: a numeric constant fact (2 <_ A gives 1 < A).
+
+s1::simpl |- ( ( A e. RR /\ 2 <_ A ) -> A e. RR )
+s2::simpr |- ( ( A e. RR /\ 2 <_ A ) -> 2 <_ A )
+s3::2re |- 2 e. RR
+s4:s3:a1i |- ( ( A e. RR /\ 2 <_ A ) -> 2 e. RR )
+s5:s1,s4:subge0d |- ( ( A e. RR /\ 2 <_ A ) -> ( 0 <_ ( A - 2 ) <-> 2 <_ A ) )
+s6:s2,s5:mpbird |- ( ( A e. RR /\ 2 <_ A ) -> 0 <_ ( A - 2 ) )
+s7::0lt1 |- 0 < 1
+s8:s7:a1i |- ( ( A e. RR /\ 2 <_ A ) -> 0 < 1 )
+s9:s1,s4:resubcld |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 2 ) e. RR )
+s10::1re |- 1 e. RR
+s11:s10:a1i |- ( ( A e. RR /\ 2 <_ A ) -> 1 e. RR )
+s12:s9,s11,s6,s8:addgegt0d |- ( ( A e. RR /\ 2 <_ A ) -> 0 < ( ( A - 2 ) + 1 ) )
+s13:s1:recnd |- ( ( A e. RR /\ 2 <_ A ) -> A e. CC )
+s14::2cn |- 2 e. CC
+s15:s14:a1i |- ( ( A e. RR /\ 2 <_ A ) -> 2 e. CC )
+s16:s13,s15:negsubd |- ( ( A e. RR /\ 2 <_ A ) -> ( A + -u 2 ) = ( A - 2 ) )
+s17:s16:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 2 ) = ( A + -u 2 ) )
+s18:s15:mulm1d |- ( ( A e. RR /\ 2 <_ A ) -> ( -u 1 x. 2 ) = -u 2 )
+s19:s18:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> -u 2 = ( -u 1 x. 2 ) )
+s20:s19:oveq2d |- ( ( A e. RR /\ 2 <_ A ) -> ( A + -u 2 ) = ( A + ( -u 1 x. 2 ) ) )
+s21::ax-1cn |- 1 e. CC
+s22:s21:a1i |- ( ( A e. RR /\ 2 <_ A ) -> 1 e. CC )
+s23:s22,s13:mulcld |- ( ( A e. RR /\ 2 <_ A ) -> ( 1 x. A ) e. CC )
+s24:s23:addlidd |- ( ( A e. RR /\ 2 <_ A ) -> ( 0 + ( 1 x. A ) ) = ( 1 x. A ) )
+s25:s24:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> ( 1 x. A ) = ( 0 + ( 1 x. A ) ) )
+s26:s13:mullidd |- ( ( A e. RR /\ 2 <_ A ) -> ( 1 x. A ) = A )
+s27:s26:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> A = ( 1 x. A ) )
+s28:s27,s25:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> A = ( 0 + ( 1 x. A ) ) )
+s29:s14:mullidi |- ( 1 x. 2 ) = 2
+s30:s21,s14:mulneg1i |- ( -u 1 x. 2 ) = -u ( 1 x. 2 )
+s31:s29:negeqi |- -u ( 1 x. 2 ) = -u 2
+s32:s30,s31:eqtri |- ( -u 1 x. 2 ) = -u 2
+s33:s32:a1i |- ( ( A e. RR /\ 2 <_ A ) -> ( -u 1 x. 2 ) = -u 2 )
+s34:s28,s33:oveq12d |- ( ( A e. RR /\ 2 <_ A ) -> ( A + ( -u 1 x. 2 ) ) = ( ( 0 + ( 1 x. A ) ) + -u 2 ) )
+s35::0cn |- 0 e. CC
+s36:s35:a1i |- ( ( A e. RR /\ 2 <_ A ) -> 0 e. CC )
+s37:s14:negcli |- -u 2 e. CC
+s38:s37:a1i |- ( ( A e. RR /\ 2 <_ A ) -> -u 2 e. CC )
+s39:s36,s23,s38:add32d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( 0 + ( 1 x. A ) ) + -u 2 ) = ( ( 0 + -u 2 ) + ( 1 x. A ) ) )
+s40:s37:addlidi |- ( 0 + -u 2 ) = -u 2
+s41:s40:a1i |- ( ( A e. RR /\ 2 <_ A ) -> ( 0 + -u 2 ) = -u 2 )
+s42:s41:oveq1d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( 0 + -u 2 ) + ( 1 x. A ) ) = ( -u 2 + ( 1 x. A ) ) )
+s43:s39,s42:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( ( 0 + ( 1 x. A ) ) + -u 2 ) = ( -u 2 + ( 1 x. A ) ) )
+s44:s17,s20:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 2 ) = ( A + ( -u 1 x. 2 ) ) )
+s45:s44,s34:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 2 ) = ( ( 0 + ( 1 x. A ) ) + -u 2 ) )
+s46:s45,s43:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 2 ) = ( -u 2 + ( 1 x. A ) ) )
+s47::eqidd |- ( ( A e. RR /\ 2 <_ A ) -> 1 = 1 )
+s48:s46,s47:oveq12d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( A - 2 ) + 1 ) = ( ( -u 2 + ( 1 x. A ) ) + 1 ) )
+s49:s38,s23,s22:add32d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( -u 2 + ( 1 x. A ) ) + 1 ) = ( ( -u 2 + 1 ) + ( 1 x. A ) ) )
+s50:s37,s21:addcomi |- ( -u 2 + 1 ) = ( 1 + -u 2 )
+s51:s21,s14:negsubi |- ( 1 + -u 2 ) = ( 1 - 2 )
+s52:s14,s21:negsubdi2i |- -u ( 2 - 1 ) = ( 1 - 2 )
+s53:s52:eqcomi |- ( 1 - 2 ) = -u ( 2 - 1 )
+s54::1p1e2 |- ( 1 + 1 ) = 2
+s55:s14,s21,s21,s54:subaddrii |- ( 2 - 1 ) = 1
+s56:s55:negeqi |- -u ( 2 - 1 ) = -u 1
+s57:s53,s56:eqtri |- ( 1 - 2 ) = -u 1
+s58:s51,s57:eqtri |- ( 1 + -u 2 ) = -u 1
+s59:s50,s58:eqtri |- ( -u 2 + 1 ) = -u 1
+s60:s59:a1i |- ( ( A e. RR /\ 2 <_ A ) -> ( -u 2 + 1 ) = -u 1 )
+s61:s60:oveq1d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( -u 2 + 1 ) + ( 1 x. A ) ) = ( -u 1 + ( 1 x. A ) ) )
+s62:s49,s61:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( ( -u 2 + ( 1 x. A ) ) + 1 ) = ( -u 1 + ( 1 x. A ) ) )
+s63:s48,s62:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( ( A - 2 ) + 1 ) = ( -u 1 + ( 1 x. A ) ) )
+s64:s13,s22:negsubd |- ( ( A e. RR /\ 2 <_ A ) -> ( A + -u 1 ) = ( A - 1 ) )
+s65:s64:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 1 ) = ( A + -u 1 ) )
+s66:s22:mulm1d |- ( ( A e. RR /\ 2 <_ A ) -> ( -u 1 x. 1 ) = -u 1 )
+s67:s66:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> -u 1 = ( -u 1 x. 1 ) )
+s68:s67:oveq2d |- ( ( A e. RR /\ 2 <_ A ) -> ( A + -u 1 ) = ( A + ( -u 1 x. 1 ) ) )
+s69:s23:addlidd |- ( ( A e. RR /\ 2 <_ A ) -> ( 0 + ( 1 x. A ) ) = ( 1 x. A ) )
+s70:s69:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> ( 1 x. A ) = ( 0 + ( 1 x. A ) ) )
+s71:s13:mullidd |- ( ( A e. RR /\ 2 <_ A ) -> ( 1 x. A ) = A )
+s72:s71:eqcomd |- ( ( A e. RR /\ 2 <_ A ) -> A = ( 1 x. A ) )
+s73:s72,s70:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> A = ( 0 + ( 1 x. A ) ) )
+s74:s21:mullidi |- ( 1 x. 1 ) = 1
+s75:s21,s21:mulneg1i |- ( -u 1 x. 1 ) = -u ( 1 x. 1 )
+s76:s74:negeqi |- -u ( 1 x. 1 ) = -u 1
+s77:s75,s76:eqtri |- ( -u 1 x. 1 ) = -u 1
+s78:s77:a1i |- ( ( A e. RR /\ 2 <_ A ) -> ( -u 1 x. 1 ) = -u 1 )
+s79:s73,s78:oveq12d |- ( ( A e. RR /\ 2 <_ A ) -> ( A + ( -u 1 x. 1 ) ) = ( ( 0 + ( 1 x. A ) ) + -u 1 ) )
+s80:s21:negcli |- -u 1 e. CC
+s81:s80:a1i |- ( ( A e. RR /\ 2 <_ A ) -> -u 1 e. CC )
+s82:s36,s23,s81:add32d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( 0 + ( 1 x. A ) ) + -u 1 ) = ( ( 0 + -u 1 ) + ( 1 x. A ) ) )
+s83:s80:addlidi |- ( 0 + -u 1 ) = -u 1
+s84:s83:a1i |- ( ( A e. RR /\ 2 <_ A ) -> ( 0 + -u 1 ) = -u 1 )
+s85:s84:oveq1d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( 0 + -u 1 ) + ( 1 x. A ) ) = ( -u 1 + ( 1 x. A ) ) )
+s86:s82,s85:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( ( 0 + ( 1 x. A ) ) + -u 1 ) = ( -u 1 + ( 1 x. A ) ) )
+s87:s65,s68:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 1 ) = ( A + ( -u 1 x. 1 ) ) )
+s88:s87,s79:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 1 ) = ( ( 0 + ( 1 x. A ) ) + -u 1 ) )
+s89:s88,s86:eqtrd |- ( ( A e. RR /\ 2 <_ A ) -> ( A - 1 ) = ( -u 1 + ( 1 x. A ) ) )
+s90:s63,s89:eqtr4d |- ( ( A e. RR /\ 2 <_ A ) -> ( ( A - 2 ) + 1 ) = ( A - 1 ) )
+s91:s12,s90:breqtrd |- ( ( A e. RR /\ 2 <_ A ) -> 0 < ( A - 1 ) )
+s92:s11,s1:posdifd |- ( ( A e. RR /\ 2 <_ A ) -> ( 1 < A <-> 0 < ( A - 1 ) ) )
+qed:s91,s92:mpbird |- ( ( A e. RR /\ 2 <_ A ) -> 1 < A )
+$)

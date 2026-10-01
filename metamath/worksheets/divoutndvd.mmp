@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutndvd  LOC_AFTER=?
+
+* The divide-out loop leaves no factor of the divisor (Lean: divOut_not_dvd).
+
+s1::simpl1 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> D e. NN )
+s2::simpl2 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> R e. NN0 )
+s3::simpl3 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> F e. NN0 )
+s4::simpr1 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> 2 <_ D )
+s5::simpr2 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> 1 <_ R )
+s6::simpr3 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> R <_ F )
+i7::divoutndvdl
+s8:s3,i7:syl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> ( ( D e. NN /\ 2 <_ D ) -> A. r e. NN0 ( ( 1 <_ r /\ r <_ F ) -> -. D || ( 1st ` ( ( D DivOut r ) ` F ) ) ) ) )
+s9:s1,s4:jca |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> ( D e. NN /\ 2 <_ D ) )
+s10:s8,s9:mpd |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> A. r e. NN0 ( ( 1 <_ r /\ r <_ F ) -> -. D || ( 1st ` ( ( D DivOut r ) ` F ) ) ) )
+s11::id |- ( r = R -> r = R )
+c1:s11:breq2d |- ( r = R -> ( 1 <_ r <-> 1 <_ R ) )
+c2:s11:breq1d |- ( r = R -> ( r <_ F <-> R <_ F ) )
+c3:c1,c2:anbi12d |- ( r = R -> ( ( 1 <_ r /\ r <_ F ) <-> ( 1 <_ R /\ R <_ F ) ) )
+c4:s11:oveq2d |- ( r = R -> ( D DivOut r ) = ( D DivOut R ) )
+c5:c4:fveq1d |- ( r = R -> ( ( D DivOut r ) ` F ) = ( ( D DivOut R ) ` F ) )
+c6:c5:fveq2d |- ( r = R -> ( 1st ` ( ( D DivOut r ) ` F ) ) = ( 1st ` ( ( D DivOut R ) ` F ) ) )
+c7:c6:breq2d |- ( r = R -> ( D || ( 1st ` ( ( D DivOut r ) ` F ) ) <-> D || ( 1st ` ( ( D DivOut R ) ` F ) ) ) )
+c8:c7:notbid |- ( r = R -> ( -. D || ( 1st ` ( ( D DivOut r ) ` F ) ) <-> -. D || ( 1st ` ( ( D DivOut R ) ` F ) ) ) )
+c9:c3,c8:imbi12d |- ( r = R -> ( ( ( 1 <_ r /\ r <_ F ) -> -. D || ( 1st ` ( ( D DivOut r ) ` F ) ) ) <-> ( ( 1 <_ R /\ R <_ F ) -> -. D || ( 1st ` ( ( D DivOut R ) ` F ) ) ) ) )
+s12:c9,s10,s2:rspcdva |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> ( ( 1 <_ R /\ R <_ F ) -> -. D || ( 1st ` ( ( D DivOut R ) ` F ) ) ) )
+s13:s5,s6:jca |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> ( 1 <_ R /\ R <_ F ) )
+qed:s12,s13:mpd |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R /\ R <_ F ) ) -> -. D || ( 1st ` ( ( D DivOut R ) ` F ) ) )
+$)

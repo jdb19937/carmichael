@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=nsqrtle  LOC_AFTER=?
+
+* Characterisation of the integer square root (Lean: Nat.le_sqrt).
+
+s1::simpl |- ( ( E e. NN0 /\ A e. NN0 ) -> E e. NN0 )
+s2::simpr |- ( ( E e. NN0 /\ A e. NN0 ) -> A e. NN0 )
+s3:s1:nn0red |- ( ( E e. NN0 /\ A e. NN0 ) -> E e. RR )
+s4:s1:nn0cnd |- ( ( E e. NN0 /\ A e. NN0 ) -> E e. CC )
+s5:s1:nn0zd |- ( ( E e. NN0 /\ A e. NN0 ) -> E e. ZZ )
+s6:s1:nn0ge0d |- ( ( E e. NN0 /\ A e. NN0 ) -> 0 <_ E )
+s7:s2:nn0red |- ( ( E e. NN0 /\ A e. NN0 ) -> A e. RR )
+s8:s2:nn0ge0d |- ( ( E e. NN0 /\ A e. NN0 ) -> 0 <_ A )
+i9::sqval
+s10:s4,i9:syl |- ( ( E e. NN0 /\ A e. NN0 ) -> ( E ^ 2 ) = ( E x. E ) )
+i11::sqrtsq
+s12:s3,s6,i11:syl2anc |- ( ( E e. NN0 /\ A e. NN0 ) -> ( sqrt ` ( E ^ 2 ) ) = E )
+s13:s10:fveq2d |- ( ( E e. NN0 /\ A e. NN0 ) -> ( sqrt ` ( E ^ 2 ) ) = ( sqrt ` ( E x. E ) ) )
+s14:s13,s12:eqtr3d |- ( ( E e. NN0 /\ A e. NN0 ) -> ( sqrt ` ( E x. E ) ) = E )
+s15:s1,s1:nn0mulcld |- ( ( E e. NN0 /\ A e. NN0 ) -> ( E x. E ) e. NN0 )
+s16:s15:nn0red |- ( ( E e. NN0 /\ A e. NN0 ) -> ( E x. E ) e. RR )
+s17:s15:nn0ge0d |- ( ( E e. NN0 /\ A e. NN0 ) -> 0 <_ ( E x. E ) )
+s18:s16,s17:jca |- ( ( E e. NN0 /\ A e. NN0 ) -> ( ( E x. E ) e. RR /\ 0 <_ ( E x. E ) ) )
+s19:s7,s8:jca |- ( ( E e. NN0 /\ A e. NN0 ) -> ( A e. RR /\ 0 <_ A ) )
+i20::sqrtle
+s21:s18,s19,i20:syl2anc |- ( ( E e. NN0 /\ A e. NN0 ) -> ( ( E x. E ) <_ A <-> ( sqrt ` ( E x. E ) ) <_ ( sqrt ` A ) ) )
+s22:s14:breq1d |- ( ( E e. NN0 /\ A e. NN0 ) -> ( ( sqrt ` ( E x. E ) ) <_ ( sqrt ` A ) <-> E <_ ( sqrt ` A ) ) )
+s23:s21,s22:bitrd |- ( ( E e. NN0 /\ A e. NN0 ) -> ( ( E x. E ) <_ A <-> E <_ ( sqrt ` A ) ) )
+i24::resqrtcl
+s25:s7,s8,i24:syl2anc |- ( ( E e. NN0 /\ A e. NN0 ) -> ( sqrt ` A ) e. RR )
+i26::flge
+s27:s25,s5,i26:syl2anc |- ( ( E e. NN0 /\ A e. NN0 ) -> ( E <_ ( sqrt ` A ) <-> E <_ ( |_ ` ( sqrt ` A ) ) ) )
+s28:s23,s27:bitrd |- ( ( E e. NN0 /\ A e. NN0 ) -> ( ( E x. E ) <_ A <-> E <_ ( |_ ` ( sqrt ` A ) ) ) )
+i29::nsqrtfl
+s30:s2,i29:syl |- ( ( E e. NN0 /\ A e. NN0 ) -> ( Nfloor ` ( sqrt ` A ) ) = ( |_ ` ( sqrt ` A ) ) )
+s31:s30:breq2d |- ( ( E e. NN0 /\ A e. NN0 ) -> ( E <_ ( Nfloor ` ( sqrt ` A ) ) <-> E <_ ( |_ ` ( sqrt ` A ) ) ) )
+qed:s31,s28:bitr4d |- ( ( E e. NN0 /\ A e. NN0 ) -> ( E <_ ( Nfloor ` ( sqrt ` A ) ) <-> ( E x. E ) <_ A ) )
+$)

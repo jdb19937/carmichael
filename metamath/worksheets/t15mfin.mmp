@@ -1,0 +1,111 @@
+$( <MM> <PROOF_ASST> THEOREM=t15mfin  LOC_AFTER=?
+
+* The concrete machine is a finite TM2 machine (Lean: FinTM2).
+
+s1::df-tmgam |- TMGam = ( ( 0 ..^ 8 ) X. { Gamma' } )
+s2::ovex |- ( 0 ..^ 8 ) e. _V
+s3::snex |- { Gamma' } e. _V
+s4:s2,s3:xpex |- ( ( 0 ..^ 8 ) X. { Gamma' } ) e. _V
+s5:s1,s4:eqeltri |- TMGam e. _V
+s6::df-tmlab |- TMLab = ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) )
+s7::nn0ex |- NN0 e. _V
+i8::wrdexg
+s9:s7,i8:ax-mp |- Word NN0 e. _V
+s10:s9:mptex |- ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) ) e. _V
+s11:s6,s10:eqeltri |- TMLab e. _V
+s12::df-tmlbl |- ( TMLbl C K ) = ( TMLab " { w e. Word ( 0 ... ( ( C + K ) + ; ; 1 0 1 ) ) | ( # ` w ) <_ ; 3 0 } )
+s13:s11:imaex |- ( TMLab " { w e. Word ( 0 ... ( ( C + K ) + ; ; 1 0 1 ) ) | ( # ` w ) <_ ; 3 0 } ) e. _V
+s14:s12,s13:eqeltri |- ( TMLbl C K ) e. _V
+s15::tmstfi |- TMSt e. Fin
+s16:s15:elexi |- TMSt e. _V
+s17::opex |- <. TMGam , ( TMLbl C K ) >. e. _V
+s18::df-tmmach |- ( TMMach C K ) = <. <. ( TMTy C K ) , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >.
+s19::df-tmty |- ( TMTy C K ) = <. <. TMGam , ( TMLbl C K ) >. , TMSt >.
+s20:s19:opeq1i |- <. ( TMTy C K ) , <. 0 , 1 >. >. = <. <. <. TMGam , ( TMLbl C K ) >. , TMSt >. , <. 0 , 1 >. >.
+s21:s20:opeq1i |- <. <. ( TMTy C K ) , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. = <. <. <. <. TMGam , ( TMLbl C K ) >. , TMSt >. , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >.
+s22:s18,s21:eqtri |- ( TMMach C K ) = <. <. <. <. TMGam , ( TMLbl C K ) >. , TMSt >. , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >.
+s23::df-tmprog |- ( TMProg C K ) = ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) )
+s24:s14:mptex |- ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) ) e. _V
+s25:s23,s24:eqeltri |- ( TMProg C K ) e. _V
+s26:s5,s14,s16:3pm3.2i |- ( TMGam e. _V /\ ( TMLbl C K ) e. _V /\ TMSt e. _V )
+s27::c0ex |- 0 e. _V
+s28::1ex |- 1 e. _V
+s29:s27,s28:pm3.2i |- ( 0 e. _V /\ 1 e. _V )
+s30::fvex |- ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) e. _V
+s31::opex |- <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. _V
+s32:s30,s31,s25:3pm3.2i |- ( ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) e. _V /\ <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. _V /\ ( TMProg C K ) e. _V )
+i33::elfintm2
+s34:s26,s29,s32,i33:mp3an |- ( <. <. <. <. TMGam , ( TMLbl C K ) >. , TMSt >. , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. e. FinTM2 <-> ( ( Fun TMGam /\ dom TMGam e. Fin /\ ( 0 e. dom TMGam /\ 1 e. dom TMGam /\ ( TMGam ` 0 ) e. Fin ) ) /\ ( ( TMLbl C K ) e. Fin /\ ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) e. ( TMLbl C K ) ) /\ ( TMSt e. Fin /\ <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt /\ ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) ) ) )
+s35::tmgamfn |- TMGam Fn ( 0 ..^ 8 )
+i36::fnfun
+s37:s35,i36:ax-mp |- Fun TMGam
+i38::fndm
+s39:s35,i38:ax-mp |- dom TMGam = ( 0 ..^ 8 )
+s40::tmgamdm |- dom TMGam e. Fin
+s41::0nn0 |- 0 e. NN0
+s42::8nn |- 8 e. NN
+s43::8pos |- 0 < 8
+s44::elfzo0 |- ( 0 e. ( 0 ..^ 8 ) <-> ( 0 e. NN0 /\ 8 e. NN /\ 0 < 8 ) )
+s45:s41,s42,s43,s44:mpbir3an |- 0 e. ( 0 ..^ 8 )
+s46:s45,s39:eleqtrri |- 0 e. dom TMGam
+s47::1nn0 |- 1 e. NN0
+s48::8nn |- 8 e. NN
+i49::ltaddpos
+s50::7re |- 7 e. RR
+s51::1re |- 1 e. RR
+s52:s50,s51,i49:mp2an |- ( 0 < 7 <-> 1 < ( 1 + 7 ) )
+s53::7pos |- 0 < 7
+s54:s53,s52:mpbi |- 1 < ( 1 + 7 )
+s55::ax-1cn |- 1 e. CC
+s56::7cn |- 7 e. CC
+s57:s55,s56:addcomi |- ( 1 + 7 ) = ( 7 + 1 )
+s58::7p1e8 |- ( 7 + 1 ) = 8
+s59:s57,s58:eqtri |- ( 1 + 7 ) = 8
+s60:s54,s59:breqtri |- 1 < 8
+s61::elfzo0 |- ( 1 e. ( 0 ..^ 8 ) <-> ( 1 e. NN0 /\ 8 e. NN /\ 1 < 8 ) )
+s62:s47,s48,s60,s61:mpbir3an |- 1 e. ( 0 ..^ 8 )
+s63:s62,s39:eleqtrri |- 1 e. dom TMGam
+i64::tmgamfv
+s65:s45,i64:ax-mp |- ( TMGam ` 0 ) = Gamma'
+s66::gammafi |- Gamma' e. Fin
+s67:s65,s66:eqeltri |- ( TMGam ` 0 ) e. Fin
+s68:s46,s63,s67:3pm3.2i |- ( 0 e. dom TMGam /\ 1 e. dom TMGam /\ ( TMGam ` 0 ) e. Fin )
+s69:s37,s40,s68:3pm3.2i |- ( Fun TMGam /\ dom TMGam e. Fin /\ ( 0 e. dom TMGam /\ 1 e. dom TMGam /\ ( TMGam ` 0 ) e. Fin ) )
+s70::t15lblfi |- ( ( C e. NN0 /\ K e. NN ) -> ( ( TMLbl C K ) e. Fin /\ ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) e. ( TMLbl C K ) ) )
+s71::0el2o |- (/) e. 2o
+s72::bw0el3o |- (/) e. 3o
+i73::opelxpi
+s74:s72,s71,i73:mp2an |- <. (/) , (/) >. e. ( 3o X. 2o )
+i75::opelxpi
+s76:s71,s74,i75:mp2an |- <. (/) , <. (/) , (/) >. >. e. ( 2o X. ( 3o X. 2o ) )
+i77::opelxpi
+s78:s71,s76,i77:mp2an |- <. (/) , <. (/) , <. (/) , (/) >. >. >. e. ( 2o X. ( 2o X. ( 3o X. 2o ) ) )
+s79::0lt1o |- (/) e. 1o
+i80::djurcl
+s81:s79,i80:ax-mp |- ( inr ` (/) ) e. ( 2o |_| 1o )
+i82::opelxpi
+s83:s81,s78,i82:mp2an |- <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. e. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) )
+i84::djurcl
+i85::opelxpi
+s86:s81,s83,i85:mp2an |- <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) )
+i87::opelxpi
+s88:s71,s86,i87:mp2an |- <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s89::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s90:s88,s89:eleqtrri |- <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt
+s91::t15prog |- ( ( C e. NN0 /\ K e. NN ) -> ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) )
+s92::t15typ |- ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K ) /\ ( 2nd ` ( TMTy C K ) ) = TMSt )
+s93:s92:simp2i |- ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K )
+s94:s19:fveq2i |- ( TM2Stmt ` ( TMTy C K ) ) = ( TM2Stmt ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. )
+s95:s93,s94:feq23i |- ( ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) <-> ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) )
+s96:s91,s95:sylib |- ( ( C e. NN0 /\ K e. NN ) -> ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) )
+s97::tmstfi |- TMSt e. Fin
+s98:s97:a1i |- ( ( C e. NN0 /\ K e. NN ) -> TMSt e. Fin )
+s99:s90:a1i |- ( ( C e. NN0 /\ K e. NN ) -> <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt )
+s100:s98,s99,s96:3jca |- ( ( C e. NN0 /\ K e. NN ) -> ( TMSt e. Fin /\ <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt /\ ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) ) )
+s101:s69:a1i |- ( ( C e. NN0 /\ K e. NN ) -> ( Fun TMGam /\ dom TMGam e. Fin /\ ( 0 e. dom TMGam /\ 1 e. dom TMGam /\ ( TMGam ` 0 ) e. Fin ) ) )
+s102:s101,s70,s100:3jca |- ( ( C e. NN0 /\ K e. NN ) -> ( ( Fun TMGam /\ dom TMGam e. Fin /\ ( 0 e. dom TMGam /\ 1 e. dom TMGam /\ ( TMGam ` 0 ) e. Fin ) ) /\ ( ( TMLbl C K ) e. Fin /\ ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) e. ( TMLbl C K ) ) /\ ( TMSt e. Fin /\ <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt /\ ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) ) ) )
+s103:s34:a1i |- ( ( C e. NN0 /\ K e. NN ) -> ( <. <. <. <. TMGam , ( TMLbl C K ) >. , TMSt >. , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. e. FinTM2 <-> ( ( Fun TMGam /\ dom TMGam e. Fin /\ ( 0 e. dom TMGam /\ 1 e. dom TMGam /\ ( TMGam ` 0 ) e. Fin ) ) /\ ( ( TMLbl C K ) e. Fin /\ ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) e. ( TMLbl C K ) ) /\ ( TMSt e. Fin /\ <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt /\ ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` <. <. TMGam , ( TMLbl C K ) >. , TMSt >. ) ) ) ) )
+s104:s102,s103:mpbird |- ( ( C e. NN0 /\ K e. NN ) -> <. <. <. <. TMGam , ( TMLbl C K ) >. , TMSt >. , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. e. FinTM2 )
+s105:s22:a1i |- ( ( C e. NN0 /\ K e. NN ) -> ( TMMach C K ) = <. <. <. <. TMGam , ( TMLbl C K ) >. , TMSt >. , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. )
+qed:s105,s104:eqeltrd |- ( ( C e. NN0 /\ K e. NN ) -> ( TMMach C K ) e. FinTM2 )
+$)

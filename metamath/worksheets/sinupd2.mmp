@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=sinupd2  LOC_AFTER=?
+
+* The updated table away from the updated residue (Lean: Function.update_noteq).
+
+s1::simp1 |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> T e. Tbl )
+s2::simp2 |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> R e. NN0 )
+s3::simp3 |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> V e. W )
+i4::tblf
+s5:s1,i4:syl |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> T : NN0 --> ( Word NN0 |_| 1o ) )
+i6::ffn
+s7:s5,i6:syl |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> T Fn NN0 )
+s8::difss |- ( NN0 \ { R } ) C_ NN0
+s9:s8:a1i |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> ( NN0 \ { R } ) C_ NN0 )
+i10::fnssres
+s11:s7,s9,i10:syl2anc |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> ( T |` ( NN0 \ { R } ) ) Fn ( NN0 \ { R } ) )
+s12:s2:elexd |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> R e. _V )
+s13:s3:elexd |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> V e. _V )
+i14::fnsng
+s15:s12,s13,i14:syl2anc |- ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) -> { <. R , V >. } Fn { R } )
+s16:s11:adantr |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( T |` ( NN0 \ { R } ) ) Fn ( NN0 \ { R } ) )
+s17:s15:adantr |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> { <. R , V >. } Fn { R } )
+s18::disjdif |- ( { R } i^i ( NN0 \ { R } ) ) = (/)
+s19:s18:a1i |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( { R } i^i ( NN0 \ { R } ) ) = (/) )
+s20::incom |- ( ( NN0 \ { R } ) i^i { R } ) = ( { R } i^i ( NN0 \ { R } ) )
+s21:s20:a1i |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( ( NN0 \ { R } ) i^i { R } ) = ( { R } i^i ( NN0 \ { R } ) ) )
+s22:s19,s21:eqtrd |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( ( NN0 \ { R } ) i^i { R } ) = (/) )
+s23::simprl |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> C e. NN0 )
+s24::simprr |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> C =/= R )
+s25:s23,s24:jca |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( C e. NN0 /\ C =/= R ) )
+s26::eldifsn |- ( C e. ( NN0 \ { R } ) <-> ( C e. NN0 /\ C =/= R ) )
+s27:s26:a1i |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( C e. ( NN0 \ { R } ) <-> ( C e. NN0 /\ C =/= R ) ) )
+s28:s25,s27:mpbird |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> C e. ( NN0 \ { R } ) )
+s29:s22,s28:jca |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( ( ( NN0 \ { R } ) i^i { R } ) = (/) /\ C e. ( NN0 \ { R } ) ) )
+i30::fvun1
+s31:s16,s17,s29,i30:syl3anc |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( ( ( T |` ( NN0 \ { R } ) ) u. { <. R , V >. } ) ` C ) = ( ( T |` ( NN0 \ { R } ) ) ` C ) )
+i32::fvres
+s33:s28,i32:syl |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( ( T |` ( NN0 \ { R } ) ) ` C ) = ( T ` C ) )
+qed:s31,s33:eqtrd |- ( ( ( T e. Tbl /\ R e. NN0 /\ V e. W ) /\ ( C e. NN0 /\ C =/= R ) ) -> ( ( ( T |` ( NN0 \ { R } ) ) u. { <. R , V >. } ) ` C ) = ( T ` C ) )
+$)

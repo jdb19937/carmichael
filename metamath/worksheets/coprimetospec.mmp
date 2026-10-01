@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=coprimetospec  LOC_AFTER=?
+
+* coprimeTo reports true exactly when K is coprime to the product of the list (Lean: coprimeTo_spec).
+
+s1::simpll |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> S e. Word NN0 )
+s2::simplr |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> K e. NN )
+s3::simpr |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> A. q e. ran S q e. Prime )
+s4::id |- ( q = r -> q = r )
+s5:s4:eleq1d |- ( q = r -> ( q e. Prime <-> r e. Prime ) )
+s6:s3:adantr |- ( ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) /\ r e. ran S ) -> A. q e. ran S q e. Prime )
+s7::simpr |- ( ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) /\ r e. ran S ) -> r e. ran S )
+s8:s5,s6,s7:rspcdva |- ( ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) /\ r e. ran S ) -> r e. Prime )
+i9::prmnn
+s10:s8,i9:syl |- ( ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) /\ r e. ran S ) -> r e. NN )
+s11:s10:ralrimiva |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> A. r e. ran S r e. NN )
+s12::id |- ( q = r -> q = r )
+s13:s12:eleq1d |- ( q = r -> ( q e. NN <-> r e. NN ) )
+s14:s13:cbvralvw |- ( A. q e. ran S q e. NN <-> A. r e. ran S r e. NN )
+s15:s14:a1i |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> ( A. q e. ran S q e. NN <-> A. r e. ran S r e. NN ) )
+s16:s15,s11:mpbird |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> A. q e. ran S q e. NN )
+s17:s2:nnnn0d |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> K e. NN0 )
+s18:s1,s17:jca |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> ( S e. Word NN0 /\ K e. NN0 ) )
+i19::coprimetofst
+s20:s18,s16,i19:syl2anc |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> ( ( 1st ` ( S CoprimeTo K ) ) = 1o <-> A. q e. ran S -. q || K ) )
+s21:s1,s2:jca |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> ( S e. Word NN0 /\ K e. NN ) )
+i22::coprimetodvd
+s23:s21,s3,i22:syl2anc |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> ( A. q e. ran S -. q || K <-> ( K gcd prod_ i e. ( 0 ..^ ( # ` S ) ) ( S ` i ) ) = 1 ) )
+qed:s20,s23:bitrd |- ( ( ( S e. Word NN0 /\ K e. NN ) /\ A. q e. ran S q e. Prime ) -> ( ( 1st ` ( S CoprimeTo K ) ) = 1o <-> ( K gcd prod_ i e. ( 0 ..^ ( # ` S ) ) ( S ` i ) ) = 1 ) )
+$)

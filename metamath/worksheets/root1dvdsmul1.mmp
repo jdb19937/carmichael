@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=root1dvdsmul1  LOC_AFTER=?
+
+* Powers of the root of unity at products of congruent exponents agree.
+
+s1::simp1 |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> N e. NN )
+s2::simp2 |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) )
+s3::simp3 |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> N || ( A - B ) )
+s4:s2:simp1d |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> A e. ZZ )
+s5:s2:simp2d |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> B e. ZZ )
+s6:s2:simp3d |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> C e. ZZ )
+s7:s4,s5:zsubcld |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( A - B ) e. ZZ )
+s8:s1:nnzd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> N e. ZZ )
+i9::dvdsmultr1
+s10:s8,s7,s6,i9:syl3anc |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( N || ( A - B ) -> N || ( ( A - B ) x. C ) ) )
+s12:s1:nnzd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> N e. ZZ )
+i13::dvdsmultr1
+s14:s12,s7,s6,i13:syl3anc |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( N || ( A - B ) -> N || ( ( A - B ) x. C ) ) )
+s15:s3,s14:mpd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> N || ( ( A - B ) x. C ) )
+s16:s4:zcnd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> A e. CC )
+s17:s5:zcnd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> B e. CC )
+s18:s6:zcnd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> C e. CC )
+s19:s16,s17,s18:subdird |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( ( A - B ) x. C ) = ( ( A x. C ) - ( B x. C ) ) )
+s20:s15,s19:breqtrd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> N || ( ( A x. C ) - ( B x. C ) ) )
+s21:s4,s6:zmulcld |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( A x. C ) e. ZZ )
+s22:s5,s6:zmulcld |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( B x. C ) e. ZZ )
+i23::root1dvds
+s24:s1,s21,s22,i23:syl3anc |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( N || ( ( A x. C ) - ( B x. C ) ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ ( A x. C ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ ( B x. C ) ) ) )
+qed:s20,s24:mpd |- ( ( N e. NN /\ ( A e. ZZ /\ B e. ZZ /\ C e. ZZ ) /\ N || ( A - B ) ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ ( A x. C ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ ( B x. C ) ) )
+$)

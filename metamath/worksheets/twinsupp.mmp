@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=twinsupp  LOC_AFTER=?
+
+* The support of the twin sieve is a finite set of positive integers.
+
+s1::simpl |- ( ( M e. NN /\ T e. NN0 ) -> M e. NN )
+s2::simpr |- ( ( ( M e. NN /\ T e. NN0 ) /\ i e. ( 1 ... T ) ) -> i e. ( 1 ... T ) )
+i3::elfznn
+s4:s2,i3:syl |- ( ( ( M e. NN /\ T e. NN0 ) /\ i e. ( 1 ... T ) ) -> i e. NN )
+s5:s1:adantr |- ( ( ( M e. NN /\ T e. NN0 ) /\ i e. ( 1 ... T ) ) -> M e. NN )
+s6:s5,s4:nnmulcld |- ( ( ( M e. NN /\ T e. NN0 ) /\ i e. ( 1 ... T ) ) -> ( M x. i ) e. NN )
+s7::1nn |- 1 e. NN
+s8:s7:a1i |- ( ( ( M e. NN /\ T e. NN0 ) /\ i e. ( 1 ... T ) ) -> 1 e. NN )
+s9:s6,s8:nnaddcld |- ( ( ( M e. NN /\ T e. NN0 ) /\ i e. ( 1 ... T ) ) -> ( ( M x. i ) + 1 ) e. NN )
+s10:s4,s9:nnmulcld |- ( ( ( M e. NN /\ T e. NN0 ) /\ i e. ( 1 ... T ) ) -> ( i x. ( ( M x. i ) + 1 ) ) e. NN )
+s11::eqid |- ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) ) = ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) )
+s12:s10,s11:fmptd |- ( ( M e. NN /\ T e. NN0 ) -> ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) ) : ( 1 ... T ) --> NN )
+s13:s12:frnd |- ( ( M e. NN /\ T e. NN0 ) -> ran ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) ) C_ NN )
+s14::fzfid |- ( ( M e. NN /\ T e. NN0 ) -> ( 1 ... T ) e. Fin )
+i15::mptfi
+s16:s14,i15:syl |- ( ( M e. NN /\ T e. NN0 ) -> ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) ) e. Fin )
+i17::rnfi
+s18:s16,i17:syl |- ( ( M e. NN /\ T e. NN0 ) -> ran ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) ) e. Fin )
+qed:s18,s13:jca |- ( ( M e. NN /\ T e. NN0 ) -> ( ran ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) ) e. Fin /\ ran ( i e. ( 1 ... T ) |-> ( i x. ( ( M x. i ) + 1 ) ) ) C_ NN ) )
+$)

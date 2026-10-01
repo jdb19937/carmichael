@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=cmpstepfs  LOC_AFTER=?
+
+* cmpStep is a step function of bwFold.
+
+s1::simpll |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 3o ) -> a e. 2o )
+s2::simplr |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 3o ) -> b e. 2o )
+s3::simpr |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 3o ) -> c e. 3o )
+s4::bw2oel3o |- 2o e. 3o
+s5:s4:a1i |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 3o ) -> 2o e. 3o )
+s6::bw0el3o |- (/) e. 3o
+s7:s6:a1i |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 3o ) -> (/) e. 3o )
+s8:s5,s7:ifcld |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 3o ) -> if ( a = 1o , 2o , (/) ) e. 3o )
+s9:s3,s8:ifcld |- ( ( ( a e. 2o /\ b e. 2o ) /\ c e. 3o ) -> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) e. 3o )
+s10::eqid |- ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) = ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) )
+s11:s9,s10:fmptd |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) : 3o --> 3o )
+i12::fssxp
+s13:s11,i12:syl |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) C_ ( 3o X. 3o ) )
+s14::bw2oss3o |- 2o C_ 3o
+s15::ssid |- 3o C_ 3o
+i16::xpss12
+s17:s15,s15,i16:mp2an |- ( 3o X. 3o ) C_ ( 3o X. 3o )
+s18:s17:a1i |- ( ( a e. 2o /\ b e. 2o ) -> ( 3o X. 3o ) C_ ( 3o X. 3o ) )
+s19:s13,s18:sstrd |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) C_ ( 3o X. 3o ) )
+s20::bw3oex |- 3o e. _V
+i21::xpexg
+s22:s20,s20,i21:mp2an |- ( 3o X. 3o ) e. _V
+i23::elpw2g
+s24:s22,i23:ax-mp |- ( ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) e. ~P ( 3o X. 3o ) <-> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) C_ ( 3o X. 3o ) )
+s25:s19,s24:sylibr |- ( ( a e. 2o /\ b e. 2o ) -> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) e. ~P ( 3o X. 3o ) )
+s26:s25:rgen2 |- A. a e. 2o A. b e. 2o ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) e. ~P ( 3o X. 3o )
+s27::df-cmpstep |- cmpStep = ( a e. 2o , b e. 2o |-> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) )
+s28:s27:fmpo |- ( A. a e. 2o A. b e. 2o ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) e. ~P ( 3o X. 3o ) <-> cmpStep : ( 2o X. 2o ) --> ~P ( 3o X. 3o ) )
+s29:s26,s28:mpbi |- cmpStep : ( 2o X. 2o ) --> ~P ( 3o X. 3o )
+i30::fssxp
+s31:s29,i30:ax-mp |- cmpStep C_ ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) )
+s32::2oex |- 2o e. _V
+i33::xpexg
+s34:s32,s32,i33:mp2an |- ( 2o X. 2o ) e. _V
+s35:s22:pwex |- ~P ( 3o X. 3o ) e. _V
+i36::xpexg
+s37:s34,s35,i36:mp2an |- ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) e. _V
+i38::elpw2g
+s39:s37,i38:ax-mp |- ( cmpStep e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) <-> cmpStep C_ ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) )
+qed:s31,s39:mpbir |- cmpStep e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) )
+$)

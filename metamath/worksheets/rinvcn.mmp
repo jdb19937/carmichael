@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=rinvcn  LOC_AFTER=?
+
+* The function 1 / ( z - P ) is continuous on the complex plane with P removed.
+
+s1::id |- ( P e. CC -> P e. CC )
+s2::difss |- ( CC \ { P } ) C_ CC
+s3:s2:a1i |- ( P e. CC -> ( CC \ { P } ) C_ CC )
+s4::ssid |- CC C_ CC
+s5:s4:a1i |- ( P e. CC -> CC C_ CC )
+i6::cncfmptid
+s7:s3,s5,i6:syl2anc |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> z ) e. ( ( CC \ { P } ) -cn-> CC ) )
+i8::cncfmptc
+s9:s1,s3,s5,i8:syl3anc |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> P ) e. ( ( CC \ { P } ) -cn-> CC ) )
+s10::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s11:s10:subcn |- - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s12:s11:a1i |- ( P e. CC -> - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s13:s10,s12,s7,s9:cncfmpt2f |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> ( z - P ) ) e. ( ( CC \ { P } ) -cn-> CC ) )
+s14::simpr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> z e. ( CC \ { P } ) )
+i15::eldifi
+s16:s14,i15:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> z e. CC )
+i17::eldifsn
+s18:s14,i17:sylib |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z e. CC /\ z =/= P ) )
+i19::simpr
+s20:s18,i19:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> z =/= P )
+s21:s1:adantr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> P e. CC )
+s22:s16,s21,s20:subne0d |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z - P ) =/= 0 )
+s23:s16,s21:subcld |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z - P ) e. CC )
+s24:s23,s22:jca |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( ( z - P ) e. CC /\ ( z - P ) =/= 0 ) )
+i25::eldifsn
+s26:s24,i25:sylibr |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( z - P ) e. ( CC \ { 0 } ) )
+s27::eqid |- ( z e. ( CC \ { P } ) |-> ( z - P ) ) = ( z e. ( CC \ { P } ) |-> ( z - P ) )
+s28:s26,s27:fmptd |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> ( z - P ) ) : ( CC \ { P } ) --> ( CC \ { 0 } ) )
+s29::difss |- ( CC \ { 0 } ) C_ CC
+s30:s29:a1i |- ( P e. CC -> ( CC \ { 0 } ) C_ CC )
+i31::cncfcdm
+s32:s30,s13,i31:syl2anc |- ( P e. CC -> ( ( z e. ( CC \ { P } ) |-> ( z - P ) ) e. ( ( CC \ { P } ) -cn-> ( CC \ { 0 } ) ) <-> ( z e. ( CC \ { P } ) |-> ( z - P ) ) : ( CC \ { P } ) --> ( CC \ { 0 } ) ) )
+s33:s28,s32:mpbird |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> ( z - P ) ) e. ( ( CC \ { P } ) -cn-> ( CC \ { 0 } ) ) )
+s34::eqid |- ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) = ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) )
+s35:s34:cdivcncf |- ( 1 e. CC -> ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) )
+s36::ax-1cn |- 1 e. CC
+s37:s36,s35:ax-mp |- ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) e. ( ( CC \ { 0 } ) -cn-> CC )
+s38:s37:a1i |- ( P e. CC -> ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) )
+s39::ssid |- ( CC \ { 0 } ) C_ ( CC \ { 0 } )
+s40:s39:a1i |- ( P e. CC -> ( CC \ { 0 } ) C_ ( CC \ { 0 } ) )
+s41::nfv |- F/ z P e. CC
+s42::oveq2 |- ( x = ( z - P ) -> ( 1 / x ) = ( 1 / ( z - P ) ) )
+qed:s41,s33,s38,s40,s42:cncfcompt2 |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) e. ( ( CC \ { P } ) -cn-> CC ) )
+$)

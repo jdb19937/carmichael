@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=phimuinv  LOC_AFTER=?
+
+* Moebius inversion of the totient divisor sum.
+
+s1::phif |- phi : NN --> CC
+s2:s1:a1i |- ( M e. NN -> phi : NN --> CC )
+s3::phisum |- ( n e. NN -> sum_ d e. { x e. NN | x || n } ( phi ` d ) = n )
+s4::cbvsumv |- sum_ d e. { x e. NN | x || n } ( phi ` d ) = sum_ k e. { x e. NN | x || n } ( phi ` k )
+s5:s4:eqeq1i |- ( sum_ d e. { x e. NN | x || n } ( phi ` d ) = n <-> sum_ k e. { x e. NN | x || n } ( phi ` k ) = n )
+s6:s3,s5:sylib |- ( n e. NN -> sum_ k e. { x e. NN | x || n } ( phi ` k ) = n )
+s7:s6:eqcomd |- ( n e. NN -> n = sum_ k e. { x e. NN | x || n } ( phi ` k ) )
+s8:s7:mpteq2ia |- ( n e. NN |-> n ) = ( n e. NN |-> sum_ k e. { x e. NN | x || n } ( phi ` k ) )
+s9:s8:a1i |- ( M e. NN -> ( n e. NN |-> n ) = ( n e. NN |-> sum_ k e. { x e. NN | x || n } ( phi ` k ) ) )
+s10:s2,s9:muinv |- ( M e. NN -> phi = ( m e. NN |-> sum_ j e. { x e. NN | x || m } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) ) )
+s11::breq2 |- ( m = M -> ( x || m <-> x || M ) )
+s12:s11:rabbidv |- ( m = M -> { x e. NN | x || m } = { x e. NN | x || M } )
+s13::oveq1 |- ( m = M -> ( m / j ) = ( M / j ) )
+s14:s13:fveq2d |- ( m = M -> ( ( n e. NN |-> n ) ` ( m / j ) ) = ( ( n e. NN |-> n ) ` ( M / j ) ) )
+s15:s14:oveq2d |- ( m = M -> ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) = ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) )
+s16:s15:adantr |- ( ( m = M /\ j e. { x e. NN | x || m } ) -> ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) = ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) )
+s17:s12,s16:sumeq12dv |- ( m = M -> sum_ j e. { x e. NN | x || m } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) = sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) )
+s18::id |- ( M e. NN -> M e. NN )
+s19::sumex |- sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) e. _V
+s20:s19:a1i |- ( M e. NN -> sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) e. _V )
+s21::eqid |- ( m e. NN |-> sum_ j e. { x e. NN | x || m } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) ) = ( m e. NN |-> sum_ j e. { x e. NN | x || m } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) )
+s22:s17,s21:fvmptg |- ( ( M e. NN /\ sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) e. _V ) -> ( ( m e. NN |-> sum_ j e. { x e. NN | x || m } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) ) ` M ) = sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) )
+s23:s18,s20,s22:syl2anc |- ( M e. NN -> ( ( m e. NN |-> sum_ j e. { x e. NN | x || m } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) ) ` M ) = sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) )
+s24:s10:fveq1d |- ( M e. NN -> ( phi ` M ) = ( ( m e. NN |-> sum_ j e. { x e. NN | x || m } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( m / j ) ) ) ) ` M ) )
+s25:s24,s23:eqtrd |- ( M e. NN -> ( phi ` M ) = sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) )
+s26::simpr |- ( ( M e. NN /\ j e. { x e. NN | x || M } ) -> j e. { x e. NN | x || M } )
+s27:s18:adantr |- ( ( M e. NN /\ j e. { x e. NN | x || M } ) -> M e. NN )
+i28::dvdsdivcl
+s29:s27,s26,i28:syl2anc |- ( ( M e. NN /\ j e. { x e. NN | x || M } ) -> ( M / j ) e. { x e. NN | x || M } )
+i30::elrabi
+s31:s29,i30:syl |- ( ( M e. NN /\ j e. { x e. NN | x || M } ) -> ( M / j ) e. NN )
+i32::elex
+s33:s31,i32:syl |- ( ( M e. NN /\ j e. { x e. NN | x || M } ) -> ( M / j ) e. _V )
+s34::id |- ( n = ( M / j ) -> n = ( M / j ) )
+s35::eqid |- ( n e. NN |-> n ) = ( n e. NN |-> n )
+s36:s34,s35:fvmptg |- ( ( ( M / j ) e. NN /\ ( M / j ) e. _V ) -> ( ( n e. NN |-> n ) ` ( M / j ) ) = ( M / j ) )
+s37:s31,s33,s36:syl2anc |- ( ( M e. NN /\ j e. { x e. NN | x || M } ) -> ( ( n e. NN |-> n ) ` ( M / j ) ) = ( M / j ) )
+s38:s37:oveq2d |- ( ( M e. NN /\ j e. { x e. NN | x || M } ) -> ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) = ( ( mmu ` j ) x. ( M / j ) ) )
+s39:s38:sumeq2dv |- ( M e. NN -> sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( ( n e. NN |-> n ) ` ( M / j ) ) ) = sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( M / j ) ) )
+qed:s25,s39:eqtrd |- ( M e. NN -> ( phi ` M ) = sum_ j e. { x e. NN | x || M } ( ( mmu ` j ) x. ( M / j ) ) )
+$)

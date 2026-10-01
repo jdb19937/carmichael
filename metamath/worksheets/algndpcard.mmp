@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=algndpcard  LOC_AFTER=?
+
+* A word has no repeats exactly when its entries are as many as its letters (Lean: List.toFinset_card_of_nodup, both directions).
+
+s1::id |- ( W e. Word S -> W e. Word S )
+i2::wrdfn
+s3:s1,i2:syl |- ( W e. Word S -> W Fn ( 0 ..^ ( # ` W ) ) )
+i4::dffn4
+s5:s3,i4:sylib |- ( W e. Word S -> W : ( 0 ..^ ( # ` W ) ) -onto-> ran W )
+s6::fzofi |- ( 0 ..^ ( # ` W ) ) e. Fin
+s7:s6:a1i |- ( W e. Word S -> ( 0 ..^ ( # ` W ) ) e. Fin )
+i8::algwrdfi
+s9:s1,i8:syl |- ( W e. Word S -> ran W e. Fin )
+i10::lencl
+s11:s1,i10:syl |- ( W e. Word S -> ( # ` W ) e. NN0 )
+i12::hashfzo0
+s13:s11,i12:syl |- ( W e. Word S -> ( # ` ( 0 ..^ ( # ` W ) ) ) = ( # ` W ) )
+s14::wrdfin |- ( W e. Word S -> W e. Fin )
+s15:s14:syl |- ( W e. Word S -> W e. Fin )
+s16:s1:adantr |- ( ( W e. Word S /\ Fun `' W ) -> W e. Word S )
+s17::simpr |- ( ( W e. Word S /\ Fun `' W ) -> Fun `' W )
+i18::wrdf
+s19:s16,i18:syl |- ( ( W e. Word S /\ Fun `' W ) -> W : ( 0 ..^ ( # ` W ) ) --> S )
+s20:s19,s17:jca |- ( ( W e. Word S /\ Fun `' W ) -> ( W : ( 0 ..^ ( # ` W ) ) --> S /\ Fun `' W ) )
+i21::df-f1
+s22:s20,i21:sylibr |- ( ( W e. Word S /\ Fun `' W ) -> W : ( 0 ..^ ( # ` W ) ) -1-1-> S )
+s23:s15:adantr |- ( ( W e. Word S /\ Fun `' W ) -> W e. Fin )
+i24::hashf1dmrn
+s25:s23,s22,i24:syl2anc |- ( ( W e. Word S /\ Fun `' W ) -> ( # ` ( 0 ..^ ( # ` W ) ) ) = ( # ` ran W ) )
+s26:s13:adantr |- ( ( W e. Word S /\ Fun `' W ) -> ( # ` ( 0 ..^ ( # ` W ) ) ) = ( # ` W ) )
+s27:s25,s26:eqtr3d |- ( ( W e. Word S /\ Fun `' W ) -> ( # ` ran W ) = ( # ` W ) )
+s28:s27:ex |- ( W e. Word S -> ( Fun `' W -> ( # ` ran W ) = ( # ` W ) ) )
+s29::simpr |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ( # ` ran W ) = ( # ` W ) )
+s30:s13:adantr |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ( # ` ( 0 ..^ ( # ` W ) ) ) = ( # ` W ) )
+s31:s30,s29:eqtr4d |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ( # ` ( 0 ..^ ( # ` W ) ) ) = ( # ` ran W ) )
+s32:s7:adantr |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ( 0 ..^ ( # ` W ) ) e. Fin )
+s33:s9:adantr |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ran W e. Fin )
+i34::hashen
+s35:s32,s33,i34:syl2anc |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ( ( # ` ( 0 ..^ ( # ` W ) ) ) = ( # ` ran W ) <-> ( 0 ..^ ( # ` W ) ) ~~ ran W ) )
+s36:s35,s31:mpbid |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ( 0 ..^ ( # ` W ) ) ~~ ran W )
+s37:s5:adantr |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> W : ( 0 ..^ ( # ` W ) ) -onto-> ran W )
+i38::fofinf1o
+s39:s37,s36,s33,i38:syl3anc |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> W : ( 0 ..^ ( # ` W ) ) -1-1-onto-> ran W )
+i40::f1of1
+s41:s39,i40:syl |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> W : ( 0 ..^ ( # ` W ) ) -1-1-> ran W )
+i42::df-f1
+s43:s41,i42:sylib |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> ( W : ( 0 ..^ ( # ` W ) ) --> ran W /\ Fun `' W ) )
+s44:s43:simprd |- ( ( W e. Word S /\ ( # ` ran W ) = ( # ` W ) ) -> Fun `' W )
+s45:s44:ex |- ( W e. Word S -> ( ( # ` ran W ) = ( # ` W ) -> Fun `' W ) )
+qed:s28,s45:impbid |- ( W e. Word S -> ( Fun `' W <-> ( # ` ran W ) = ( # ` W ) ) )
+$)

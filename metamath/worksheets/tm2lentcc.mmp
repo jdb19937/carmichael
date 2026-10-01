@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lentcc  LOC_AFTER=?
+
+* The entries of a concatenation of lists.  Lean: ` entries_append ` .
+
+s1::simpl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> L e. Word Word ( { 1 } X. 2o ) )
+s2::simpr |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> U e. Word Word ( { 1 } X. 2o ) )
+i3::ccatcl
+s4:s1,s2,i3:syl2anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( L ++ U ) e. Word Word ( { 1 } X. 2o ) )
+i5::tm2lentval
+s6:s4,i5:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` ( L ++ U ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( L ++ U ) ) ) )
+s7::tm2lentpf |- ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) : Word ( { 1 } X. 2o ) --> Word Gamma'
+s8:s7:a1i |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) : Word ( { 1 } X. 2o ) --> Word Gamma' )
+i9::ccatco
+s10:s1,s2,s8,i9:syl3anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( L ++ U ) ) = ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) ++ ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) ) )
+s11:s10:oveq2d |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( L ++ U ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) ++ ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) ) ) )
+i12::wrdco
+s13:s1,s8,i12:syl2anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) e. Word Word Gamma' )
+i14::wrdco
+s15:s2,s8,i14:syl2anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) e. Word Word Gamma' )
+i16::gsumgamccat
+s17:s13,s15,i16:syl2anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) ++ ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) ) ) )
+s18:s11,s17:eqtrd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( L ++ U ) ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) ) ) )
+i19::tm2lentval
+s20:s1,i19:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` L ) = ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) ) )
+i21::tm2lentval
+s22:s2,i21:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` U ) = ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) ) )
+s23:s20,s22:oveq12d |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( entries ` L ) ++ ( entries ` U ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. L ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. U ) ) ) )
+s24:s18,s23:eqtr4d |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( L ++ U ) ) ) = ( ( entries ` L ) ++ ( entries ` U ) ) )
+qed:s6,s24:eqtrd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ U e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` ( L ++ U ) ) = ( ( entries ` L ) ++ ( entries ` U ) ) )
+$)

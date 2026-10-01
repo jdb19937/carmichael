@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=tmienc1  LOC_AFTER=?
+
+* The stack word of ` pushNum x 1 ` (Lean ` encodeNatGamma 1 ++ comma :: _ ` ): the one bit of ` 1 ` , then the terminator.
+
+s1::0nn0 |- 0 e. NN0
+s2:s1:a1i |- ( X e. Word Gamma' -> 0 e. NN0 )
+i3::encnatsuc
+s4:s2,i3:syl |- ( X e. Word Gamma' -> ( encodeNat ` ( 0 + 1 ) ) = ( incBits ` ( encodeNat ` 0 ) ) )
+s5::0p1e1 |- ( 0 + 1 ) = 1
+s6:s5:a1i |- ( X e. Word Gamma' -> ( 0 + 1 ) = 1 )
+s7:s6:fveq2d |- ( X e. Word Gamma' -> ( encodeNat ` ( 0 + 1 ) ) = ( encodeNat ` 1 ) )
+s8::encnat0 |- ( encodeNat ` 0 ) = (/)
+s9:s8:a1i |- ( X e. Word Gamma' -> ( encodeNat ` 0 ) = (/) )
+s10:s9:fveq2d |- ( X e. Word Gamma' -> ( incBits ` ( encodeNat ` 0 ) ) = ( incBits ` (/) ) )
+s11:s7,s4:eqtr3d |- ( X e. Word Gamma' -> ( encodeNat ` 1 ) = ( incBits ` ( encodeNat ` 0 ) ) )
+s12:s11,s10:eqtrd |- ( X e. Word Gamma' -> ( encodeNat ` 1 ) = ( incBits ` (/) ) )
+s13::incbitsnil |- ( incBits ` (/) ) = <" 1o ">
+s14:s13:a1i |- ( X e. Word Gamma' -> ( incBits ` (/) ) = <" 1o "> )
+s15:s12,s14:eqtrd |- ( X e. Word Gamma' -> ( encodeNat ` 1 ) = <" 1o "> )
+s16::1nn0 |- 1 e. NN0
+s17:s16:a1i |- ( X e. Word Gamma' -> 1 e. NN0 )
+i18::encnatgamval
+s19:s17,i18:syl |- ( X e. Word Gamma' -> ( encNatGam ` 1 ) = ( inclBool o. ( encodeNat ` 1 ) ) )
+s20:s15:coeq2d |- ( X e. Word Gamma' -> ( inclBool o. ( encodeNat ` 1 ) ) = ( inclBool o. <" 1o "> ) )
+s21:s19,s20:eqtrd |- ( X e. Word Gamma' -> ( encNatGam ` 1 ) = ( inclBool o. <" 1o "> ) )
+s22::1oel2o |- 1o e. 2o
+s23:s22:a1i |- ( X e. Word Gamma' -> 1o e. 2o )
+s24::inclboolf |- inclBool : 2o --> Gamma'
+s25:s24:a1i |- ( X e. Word Gamma' -> inclBool : 2o --> Gamma' )
+i26::s1co
+s27:s23,s25,i26:syl2anc |- ( X e. Word Gamma' -> ( inclBool o. <" 1o "> ) = <" ( inclBool ` 1o ) "> )
+i28::inclboolfv
+s29:s23,i28:syl |- ( X e. Word Gamma' -> ( inclBool ` 1o ) = <. 1 , 1o >. )
+s30:s29:s1eqd |- ( X e. Word Gamma' -> <" ( inclBool ` 1o ) "> = <" <. 1 , 1o >. "> )
+s31:s27,s30:eqtrd |- ( X e. Word Gamma' -> ( inclBool o. <" 1o "> ) = <" <. 1 , 1o >. "> )
+s32:s21,s31:eqtrd |- ( X e. Word Gamma' -> ( encNatGam ` 1 ) = <" <. 1 , 1o >. "> )
+qed:s32:oveq1d |- ( X e. Word Gamma' -> ( ( encNatGam ` 1 ) ++ ( <" 4 "> ++ X ) ) = ( <" <. 1 , 1o >. "> ++ ( <" 4 "> ++ X ) ) )
+$)

@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lenceq  LOC_AFTER=?
+
+* A list of numbers on a stack is the list of their binary encodings.  Lean: ` encList_eq ` .
+
+s1::tm2lencval |- ( L e. Word NN0 -> ( encList ` L ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L ) ) ++ <" 2 "> ) )
+s2::tm2lencgam |- ( L e. Word NN0 -> ( encNatGam o. L ) e. Word Word ( { 1 } X. 2o ) )
+i3::tm2lencbval
+s4:s2,i3:syl |- ( L e. Word NN0 -> ( encListB ` ( encNatGam o. L ) ) = ( ( entries ` ( encNatGam o. L ) ) ++ <" 2 "> ) )
+i5::tm2lentval
+s6:s2,i5:syl |- ( L e. Word NN0 -> ( entries ` ( encNatGam o. L ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. L ) ) ) )
+s7::coass |- ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) o. L ) = ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. L ) )
+s8::tm2lencpf |- ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) = ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) )
+s9:s8:coeq1i |- ( ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) o. L ) = ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L )
+s10:s7,s9:eqtr3i |- ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. L ) ) = ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L )
+s11:s10:oveq2i |- ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. L ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L ) )
+s12:s11:a1i |- ( L e. Word NN0 -> ( ( freeMnd ` Gamma' ) gsum ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. ( encNatGam o. L ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L ) ) )
+s13:s6,s12:eqtrd |- ( L e. Word NN0 -> ( entries ` ( encNatGam o. L ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L ) ) )
+s14:s13:oveq1d |- ( L e. Word NN0 -> ( ( entries ` ( encNatGam o. L ) ) ++ <" 2 "> ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L ) ) ++ <" 2 "> ) )
+s15:s4,s14:eqtrd |- ( L e. Word NN0 -> ( encListB ` ( encNatGam o. L ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. L ) ) ++ <" 2 "> ) )
+qed:s1,s15:eqtr4d |- ( L e. Word NN0 -> ( encList ` L ) = ( encListB ` ( encNatGam o. L ) ) )
+$)

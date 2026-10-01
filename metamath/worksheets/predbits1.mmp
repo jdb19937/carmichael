@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=predbits1  LOC_AFTER=?
+
+* Lean clause 3 of predBits: the predecessor of the one-letter word true is the empty word.
+
+s1::1oel2o |- 1o e. 2o
+i2::s1cl
+s3:s1,i2:ax-mp |- <" 1o "> e. Word 2o
+s4::predbitsval |- ( <" 1o "> e. Word 2o -> ( predBits ` <" 1o "> ) = ( ( ( toNat ` <" 1o "> ) - 1 ) bwrd if ( ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 ^ ( # ` <" 1o "> ) ) , ( ( # ` <" 1o "> ) - 1 ) , ( # ` <" 1o "> ) ) ) )
+s5:s3,s4:ax-mp |- ( predBits ` <" 1o "> ) = ( ( ( toNat ` <" 1o "> ) - 1 ) bwrd if ( ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 ^ ( # ` <" 1o "> ) ) , ( ( # ` <" 1o "> ) - 1 ) , ( # ` <" 1o "> ) ) )
+s6:s5:a1i |- ( T. -> ( predBits ` <" 1o "> ) = ( ( ( toNat ` <" 1o "> ) - 1 ) bwrd if ( ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 ^ ( # ` <" 1o "> ) ) , ( ( # ` <" 1o "> ) - 1 ) , ( # ` <" 1o "> ) ) ) )
+i7::tonats1
+s8:s1,i7:ax-mp |- ( toNat ` <" 1o "> ) = ( bToNat ` 1o )
+s9::bwbn1 |- ( bToNat ` 1o ) = 1
+s10:s8,s9:eqtri |- ( toNat ` <" 1o "> ) = 1
+s11:s10:a1i |- ( T. -> ( toNat ` <" 1o "> ) = 1 )
+s12::s1len |- ( # ` <" 1o "> ) = 1
+s13:s12:a1i |- ( T. -> ( # ` <" 1o "> ) = 1 )
+s14::2t1e2 |- ( 2 x. 1 ) = 2
+s15:s14:a1i |- ( T. -> ( 2 x. 1 ) = 2 )
+s16::2cn |- 2 e. CC
+i17::exp1
+s18:s16,i17:ax-mp |- ( 2 ^ 1 ) = 2
+s19:s18:a1i |- ( T. -> ( 2 ^ 1 ) = 2 )
+c1:s11:oveq1d |- ( T. -> ( ( toNat ` <" 1o "> ) - 1 ) = ( 1 - 1 ) )
+c2:s11:oveq2d |- ( T. -> ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 x. 1 ) )
+c3:s13:oveq2d |- ( T. -> ( 2 ^ ( # ` <" 1o "> ) ) = ( 2 ^ 1 ) )
+c4:c2,c3:eqeq12d |- ( T. -> ( ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 ^ ( # ` <" 1o "> ) ) <-> ( 2 x. 1 ) = ( 2 ^ 1 ) ) )
+c5:s13:oveq1d |- ( T. -> ( ( # ` <" 1o "> ) - 1 ) = ( 1 - 1 ) )
+c6:c4,c5,s13:ifbieq12d |- ( T. -> if ( ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 ^ ( # ` <" 1o "> ) ) , ( ( # ` <" 1o "> ) - 1 ) , ( # ` <" 1o "> ) ) = if ( ( 2 x. 1 ) = ( 2 ^ 1 ) , ( 1 - 1 ) , 1 ) )
+c7:c1,c6:oveq12d |- ( T. -> ( ( ( toNat ` <" 1o "> ) - 1 ) bwrd if ( ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 ^ ( # ` <" 1o "> ) ) , ( ( # ` <" 1o "> ) - 1 ) , ( # ` <" 1o "> ) ) ) = ( ( 1 - 1 ) bwrd if ( ( 2 x. 1 ) = ( 2 ^ 1 ) , ( 1 - 1 ) , 1 ) ) )
+c8:s15,s19:eqeq12d |- ( T. -> ( ( 2 x. 1 ) = ( 2 ^ 1 ) <-> 2 = 2 ) )
+c9:c8:ifbid |- ( T. -> if ( ( 2 x. 1 ) = ( 2 ^ 1 ) , ( 1 - 1 ) , 1 ) = if ( 2 = 2 , ( 1 - 1 ) , 1 ) )
+c10:c9:oveq2d |- ( T. -> ( ( 1 - 1 ) bwrd if ( ( 2 x. 1 ) = ( 2 ^ 1 ) , ( 1 - 1 ) , 1 ) ) = ( ( 1 - 1 ) bwrd if ( 2 = 2 , ( 1 - 1 ) , 1 ) ) )
+s20:c7,c10:eqtrd |- ( T. -> ( ( ( toNat ` <" 1o "> ) - 1 ) bwrd if ( ( 2 x. ( toNat ` <" 1o "> ) ) = ( 2 ^ ( # ` <" 1o "> ) ) , ( ( # ` <" 1o "> ) - 1 ) , ( # ` <" 1o "> ) ) ) = ( ( 1 - 1 ) bwrd if ( 2 = 2 , ( 1 - 1 ) , 1 ) ) )
+s21::eqid |- 2 = 2
+s22:s21:iftruei |- if ( 2 = 2 , ( 1 - 1 ) , 1 ) = ( 1 - 1 )
+s23:s22:a1i |- ( T. -> if ( 2 = 2 , ( 1 - 1 ) , 1 ) = ( 1 - 1 ) )
+c11:s23:oveq2d |- ( T. -> ( ( 1 - 1 ) bwrd if ( 2 = 2 , ( 1 - 1 ) , 1 ) ) = ( ( 1 - 1 ) bwrd ( 1 - 1 ) ) )
+s24::1m1e0 |- ( 1 - 1 ) = 0
+s25:s24:a1i |- ( T. -> ( 1 - 1 ) = 0 )
+c12:s25,s25:oveq12d |- ( T. -> ( ( 1 - 1 ) bwrd ( 1 - 1 ) ) = ( 0 bwrd 0 ) )
+s26::0z |- 0 e. ZZ
+i27::bwrd0
+s28:s26,i27:ax-mp |- ( 0 bwrd 0 ) = (/)
+s29:s28:a1i |- ( T. -> ( 0 bwrd 0 ) = (/) )
+s30:s6,s20,c11:3eqtrd |- ( T. -> ( predBits ` <" 1o "> ) = ( ( 1 - 1 ) bwrd ( 1 - 1 ) ) )
+s31:s30,c12,s29:3eqtrd |- ( T. -> ( predBits ` <" 1o "> ) = (/) )
+qed:s31:mptru |- ( predBits ` <" 1o "> ) = (/)
+$)

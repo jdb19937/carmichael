@@ -1,0 +1,70 @@
+$( <MM> <PROOF_ASST> THEOREM=lgamcns  LOC_AFTER=?
+
+* The log-Gamma function is continuous on a subset of the open right half-plane inside lgamgulm's disc ( ~ lgamcnu minus the continuous logarithm).
+
+h1::lgamcns.r |- ( ph -> R e. NN )
+h2::lgamcns.u |- U = { b e. CC | ( ( abs ` b ) <_ R /\ A. l e. NN0 ( 1 / R ) <_ ( abs ` ( b + l ) ) ) }
+h3::lgamcns.s |- ( ph -> S C_ U )
+h4::lgamcns.h |- ( ph -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s1::ref |- Re : CC --> RR
+i2::fdm
+s3:s1,i2:ax-mp |- dom Re = CC
+s4::cnvimass |- ( `' Re " ( 0 (,) +oo ) ) C_ dom Re
+s5:s4,s3:sseqtri |- ( `' Re " ( 0 (,) +oo ) ) C_ CC
+s6:s5:a1i |- ( ph -> ( `' Re " ( 0 (,) +oo ) ) C_ CC )
+s7:4,s6:sstrd |- ( ph -> S C_ CC )
+s8::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s9::ssid |- CC C_ CC
+s10:s9:a1i |- ( ph -> CC C_ CC )
+i11::cncfmptid
+s12:s7,s10,i11:syl2anc |- ( ph -> ( z e. S |-> z ) e. ( S -cn-> CC ) )
+s13:4:adantr |- ( ( ph /\ z e. S ) -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s14::simpr |- ( ( ph /\ z e. S ) -> z e. S )
+s15:s13,s14:sseldd |- ( ( ph /\ z e. S ) -> z e. ( `' Re " ( 0 (,) +oo ) ) )
+s16::0re |- 0 e. RR
+i17::elhp2
+s18:s16,i17:ax-mp |- ( z e. ( `' Re " ( 0 (,) +oo ) ) <-> ( z e. CC /\ 0 < ( Re ` z ) ) )
+s19:s18:a1i |- ( ( ph /\ z e. S ) -> ( z e. ( `' Re " ( 0 (,) +oo ) ) <-> ( z e. CC /\ 0 < ( Re ` z ) ) ) )
+s20:s15,s19:mpbid |- ( ( ph /\ z e. S ) -> ( z e. CC /\ 0 < ( Re ` z ) ) )
+i21::simpl
+s22:s20,i21:syl |- ( ( ph /\ z e. S ) -> z e. CC )
+i23::simpr
+s24:s20,i23:syl |- ( ( ph /\ z e. S ) -> 0 < ( Re ` z ) )
+i25::zrenn
+s26:s20,i25:syl |- ( ( ph /\ z e. S ) -> z e. ( CC \ ( ZZ \ NN ) ) )
+i27::hp0logdm
+s28:s15,i27:syl |- ( ( ph /\ z e. S ) -> z e. ( CC \ ( -oo (,] 0 ) ) )
+s29::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s30:s29:logdmn0 |- ( z e. ( CC \ ( -oo (,] 0 ) ) -> z =/= 0 )
+s31:s28,s30:syl |- ( ( ph /\ z e. S ) -> z =/= 0 )
+s32::difss |- ( CC \ ( -oo (,] 0 ) ) C_ CC
+s33:s32:a1i |- ( ph -> ( CC \ ( -oo (,] 0 ) ) C_ CC )
+s34::eqid |- ( z e. S |-> z ) = ( z e. S |-> z )
+s35:s28,s34:fmptd |- ( ph -> ( z e. S |-> z ) : S --> ( CC \ ( -oo (,] 0 ) ) )
+i36::cncfcdm
+s37:s33,s12,i36:syl2anc |- ( ph -> ( ( z e. S |-> z ) e. ( S -cn-> ( CC \ ( -oo (,] 0 ) ) ) <-> ( z e. S |-> z ) : S --> ( CC \ ( -oo (,] 0 ) ) ) )
+s38:s35,s37:mpbird |- ( ph -> ( z e. S |-> z ) e. ( S -cn-> ( CC \ ( -oo (,] 0 ) ) ) )
+s39::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s40:s39:logcn |- ( log |` ( CC \ ( -oo (,] 0 ) ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC )
+s41:s40:a1i |- ( ph -> ( log |` ( CC \ ( -oo (,] 0 ) ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC ) )
+s42:s38,s41:cncfco |- ( ph -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) o. ( z e. S |-> z ) ) e. ( S -cn-> CC ) )
+i43::cncff
+s44:s41,i43:syl |- ( ph -> ( log |` ( CC \ ( -oo (,] 0 ) ) ) : ( CC \ ( -oo (,] 0 ) ) --> CC )
+s45:s44,s28:cofmpt |- ( ph -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) o. ( z e. S |-> z ) ) = ( z e. S |-> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` z ) ) )
+i46::fvres
+s47:s28,i46:syl |- ( ( ph /\ z e. S ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` z ) = ( log ` z ) )
+s48:s47:mpteq2dva |- ( ph -> ( z e. S |-> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` z ) ) = ( z e. S |-> ( log ` z ) ) )
+s49:s45,s48:eqtrd |- ( ph -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) o. ( z e. S |-> z ) ) = ( z e. S |-> ( log ` z ) ) )
+s50:s49,s42:eqeltrrd |- ( ph -> ( z e. S |-> ( log ` z ) ) e. ( S -cn-> CC ) )
+s51:1,2,3,4:lgamcnu |- ( ph -> ( z e. S |-> ( ( log_G ` z ) + ( log ` z ) ) ) e. ( S -cn-> CC ) )
+s52:s8:subcn |- - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s53:s52:a1i |- ( ph -> - e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s54:s8,s53,s51,s50:cncfmpt2f |- ( ph -> ( z e. S |-> ( ( ( log_G ` z ) + ( log ` z ) ) - ( log ` z ) ) ) e. ( S -cn-> CC ) )
+i55::lgamcl
+s56:s26,i55:syl |- ( ( ph /\ z e. S ) -> ( log_G ` z ) e. CC )
+i57::logcl
+s58:s22,s31,i57:syl2anc |- ( ( ph /\ z e. S ) -> ( log ` z ) e. CC )
+s59:s56,s58:pncand |- ( ( ph /\ z e. S ) -> ( ( ( log_G ` z ) + ( log ` z ) ) - ( log ` z ) ) = ( log_G ` z ) )
+s60:s59:mpteq2dva |- ( ph -> ( z e. S |-> ( ( ( log_G ` z ) + ( log ` z ) ) - ( log ` z ) ) ) = ( z e. S |-> ( log_G ` z ) ) )
+qed:s60,s54:eqeltrrd |- ( ph -> ( z e. S |-> ( log_G ` z ) ) e. ( S -cn-> CC ) )
+$)

@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatbits  LOC_AFTER=?
+
+* The I-th letter of encodeNat N is true if and only if I is a binary digit of N (set.mm's bits).
+
+s1::simpl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> N e. NN0 )
+s2::simpr |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) )
+s3::encnatfv |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( encodeNat ` N ) ` I ) = if ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 , 1o , (/) ) )
+s4:s3:eqeq1d |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( ( encodeNat ` N ) ` I ) = 1o <-> if ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 , 1o , (/) ) = 1o ) )
+s5::1n0 |- 1o =/= (/)
+i6::iftrueb
+s7:s5,i6:ax-mp |- ( if ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 , 1o , (/) ) = 1o <-> ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 )
+s8:s7:a1i |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( if ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 , 1o , (/) ) = 1o <-> ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 ) )
+s9:s4,s8:bitrd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( ( encodeNat ` N ) ` I ) = 1o <-> ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 ) )
+i10::elfzonn0
+s11:s2,i10:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> I e. NN0 )
+s12:s1:nn0red |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> N e. RR )
+s13::2rp |- 2 e. RR+
+s14:s13:a1i |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> 2 e. RR+ )
+s15:s11:nn0zd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> I e. ZZ )
+i16::rpexpcl
+s17:s14,s15,i16:syl2anc |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( 2 ^ I ) e. RR+ )
+i18::rerpdivcl
+s19:s12,s17,i18:syl2anc |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( N / ( 2 ^ I ) ) e. RR )
+s20:s19:flcld |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( |_ ` ( N / ( 2 ^ I ) ) ) e. ZZ )
+i21::mod2eq1n2dvds
+s22:s20,i21:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 <-> -. 2 || ( |_ ` ( N / ( 2 ^ I ) ) ) ) )
+s23:s9,s22:bitrd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( ( encodeNat ` N ) ` I ) = 1o <-> -. 2 || ( |_ ` ( N / ( 2 ^ I ) ) ) ) )
+s24:s1:nn0zd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> N e. ZZ )
+i25::bitsval2
+s26:s24,s11,i25:syl2anc |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( I e. ( bits ` N ) <-> -. 2 || ( |_ ` ( N / ( 2 ^ I ) ) ) ) )
+qed:s23,s26:bitr4d |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( ( encodeNat ` N ) ` I ) = 1o <-> I e. ( bits ` N ) ) )
+$)

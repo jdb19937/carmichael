@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=eatabs  LOC_AFTER=?
+
+* The exponential e ( nu beta ) has modulus 1 for real nu, beta (LargeSieve norm_eAt).
+
+s1::simpl |- ( ( V e. RR /\ B e. RR ) -> V e. RR )
+s2::simpr |- ( ( V e. RR /\ B e. RR ) -> B e. RR )
+s3:s1:recnd |- ( ( V e. RR /\ B e. RR ) -> V e. CC )
+s4:s2:recnd |- ( ( V e. RR /\ B e. RR ) -> B e. CC )
+s5::2cn |- 2 e. CC
+s6:s5:a1i |- ( ( V e. RR /\ B e. RR ) -> 2 e. CC )
+s7::ax-icn |- _i e. CC
+s8:s7:a1i |- ( ( V e. RR /\ B e. RR ) -> _i e. CC )
+s9::picn |- _pi e. CC
+s10:s9:a1i |- ( ( V e. RR /\ B e. RR ) -> _pi e. CC )
+s11:s3,s4:mulcld |- ( ( V e. RR /\ B e. RR ) -> ( V x. B ) e. CC )
+s12:s1,s2:remulcld |- ( ( V e. RR /\ B e. RR ) -> ( V x. B ) e. RR )
+s13:s6,s8,s10:mul12d |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. ( _i x. _pi ) ) = ( _i x. ( 2 x. _pi ) ) )
+s14:s13:oveq1d |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) = ( ( _i x. ( 2 x. _pi ) ) x. ( V x. B ) ) )
+s15:s6,s10:mulcld |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. _pi ) e. CC )
+s16:s8,s15,s11:mulassd |- ( ( V e. RR /\ B e. RR ) -> ( ( _i x. ( 2 x. _pi ) ) x. ( V x. B ) ) = ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s17:s14,s16:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) = ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s18:s17:fveq2d |- ( ( V e. RR /\ B e. RR ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) = ( exp ` ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) )
+s19:s18:fveq2d |- ( ( V e. RR /\ B e. RR ) -> ( abs ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) ) = ( abs ` ( exp ` ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) ) )
+s20::2re |- 2 e. RR
+s21::pire |- _pi e. RR
+s22:s20,s21:remulcli |- ( 2 x. _pi ) e. RR
+s23:s22:a1i |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. _pi ) e. RR )
+s24:s23,s12:remulcld |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. _pi ) x. ( V x. B ) ) e. RR )
+i25::absefi
+s26:s24,i25:syl |- ( ( V e. RR /\ B e. RR ) -> ( abs ` ( exp ` ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) ) = 1 )
+qed:s19,s26:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( abs ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) ) = 1 )
+$)

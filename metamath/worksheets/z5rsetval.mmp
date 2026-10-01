@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=z5rsetval  LOC_AFTER=?
+
+* Value of the pseudocharacter index set: ( N RSet R ) is the set of squarefree k in ( 1 ... ( |_ ` R ) ) coprime to N (Lean Rset, Detector.lean 357).
+
+s1::id |- ( m = N -> m = N )
+c1:s1:oveq2d |- ( m = N -> ( k gcd m ) = ( k gcd N ) )
+c2:c1:eqeq1d |- ( m = N -> ( ( k gcd m ) = 1 <-> ( k gcd N ) = 1 ) )
+c3:c2:anbi2d |- ( m = N -> ( ( ( mmu ` k ) =/= 0 /\ ( k gcd m ) = 1 ) <-> ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) ) )
+c4:c3:rabbidv |- ( m = N -> { k e. ( 1 ... ( |_ ` y ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd m ) = 1 ) } = { k e. ( 1 ... ( |_ ` y ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } )
+s2::id |- ( y = R -> y = R )
+c5:s2:fveq2d |- ( y = R -> ( |_ ` y ) = ( |_ ` R ) )
+c6:c5:oveq2d |- ( y = R -> ( 1 ... ( |_ ` y ) ) = ( 1 ... ( |_ ` R ) ) )
+c7:c6:rabeqdv |- ( y = R -> { k e. ( 1 ... ( |_ ` y ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } = { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } )
+s3::df-rset |- RSet = ( m e. _V , y e. _V |-> { k e. ( 1 ... ( |_ ` y ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd m ) = 1 ) } )
+s4::ovex |- ( 1 ... ( |_ ` R ) ) e. _V
+s5:s4:rabex |- { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } e. _V
+s6:c4,c7,s3,s5:ovmpo |- ( ( N e. _V /\ R e. _V ) -> ( N RSet R ) = { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } )
+s7::elex |- ( N e. V -> N e. _V )
+s8::elex |- ( R e. W -> R e. _V )
+s9:s7,s8:anim12i |- ( ( N e. V /\ R e. W ) -> ( N e. _V /\ R e. _V ) )
+qed:s9,s6:syl |- ( ( N e. V /\ R e. W ) -> ( N RSet R ) = { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } )
+$)

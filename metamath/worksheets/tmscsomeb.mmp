@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=tmscsomeb  LOC_AFTER=?
+
+* Base of the fuel induction for ~ tmscsome .
+
+s1::simpl |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) )
+s2:s1:simpld |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> W e. Word NN0 )
+s3:s1:simprd |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) )
+i4::simp1
+s5:s3,i4:syl |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> F e. NN0 )
+i6::simp2
+s7:s3,i6:syl |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> Z e. NN0 )
+i8::simp3
+s9:s3,i8:syl |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> O e. NN0 )
+s10::simpr |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> k e. NN0 )
+s11:s2,s5:jca |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( W e. Word NN0 /\ F e. NN0 ) )
+s12:s11,s7:jca |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( ( W e. Word NN0 /\ F e. NN0 ) /\ Z e. NN0 ) )
+s13:s12,s9:jca |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( ( ( W e. Word NN0 /\ F e. NN0 ) /\ Z e. NN0 ) /\ O e. NN0 ) )
+s14:s13,s10:jca |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( ( ( ( W e. Word NN0 /\ F e. NN0 ) /\ Z e. NN0 ) /\ O e. NN0 ) /\ k e. NN0 ) )
+i15::scan0
+s16:s14,i15:syl |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) = <. ( inr ` (/) ) , 0 >. )
+s17::fvex |- ( inr ` (/) ) e. _V
+s18:s17:a1i |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( inr ` (/) ) e. _V )
+s19::c0ex |- 0 e. _V
+s20:s19:a1i |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> 0 e. _V )
+s21:s16:fveq2d |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) = ( 1st ` <. ( inr ` (/) ) , 0 >. ) )
+i22::op1stg
+s23:s18,s20,i22:syl2anc |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( 1st ` <. ( inr ` (/) ) , 0 >. ) = ( inr ` (/) ) )
+s24:s21,s23:eqtrd |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) = ( inr ` (/) ) )
+s25:s24:neeq1d |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) =/= ( inr ` (/) ) <-> ( inr ` (/) ) =/= ( inr ` (/) ) ) )
+s26::eqid |- ( inr ` (/) ) = ( inr ` (/) )
+i27::nne
+s28:s26,i27:mpbir |- -. ( inr ` (/) ) =/= ( inr ` (/) )
+s29:s28:a1i |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> -. ( inr ` (/) ) =/= ( inr ` (/) ) )
+s30:s25,s29:mtbird |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> -. ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) =/= ( inr ` (/) ) )
+s31:s30:pm2.21d |- ( ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) /\ k e. NN0 ) -> ( ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) =/= ( inr ` (/) ) -> ( ( k <_ ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) /\ ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) < ( k + 0 ) ) /\ ( ( ( 1st ` ( W CoprimeTo ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) ) ) = 1o /\ O <_ ( # ` ( 1st ` ( ( ( W PoolAlg F ) ` Z ) ` ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) ) ) ) ) /\ ( 2nd ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) = ( 1st ` ( ( ( W PoolAlg F ) ` Z ) ` ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) ) ) ) ) ) )
+qed:s31:ralrimiva |- ( ( W e. Word NN0 /\ ( F e. NN0 /\ Z e. NN0 /\ O e. NN0 ) ) -> A. k e. NN0 ( ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) =/= ( inr ` (/) ) -> ( ( k <_ ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) /\ ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) < ( k + 0 ) ) /\ ( ( ( 1st ` ( W CoprimeTo ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) ) ) = 1o /\ O <_ ( # ` ( 1st ` ( ( ( W PoolAlg F ) ` Z ) ` ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) ) ) ) ) /\ ( 2nd ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) = ( 1st ` ( ( ( W PoolAlg F ) ` Z ) ` ( 1st ` ( 2nd ` ( 1st ` ( ( ( ( ( W Scan F ) ` Z ) ` O ) ` k ) ` 0 ) ) ) ) ) ) ) ) ) )
+$)

@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=bwmapcons  LOC_AFTER=?
+
+* The letter map of a word with a letter prepended (Lean: bits_cons).
+
+s1::simpl |- ( ( B e. 2o /\ L e. Word 2o ) -> B e. 2o )
+s2::simpr |- ( ( B e. 2o /\ L e. Word 2o ) -> L e. Word 2o )
+s3::inclboolf |- inclBool : 2o --> Gamma'
+s4:s3:a1i |- ( ( B e. 2o /\ L e. Word 2o ) -> inclBool : 2o --> Gamma' )
+i5::s1cl
+s6:s1,i5:syl |- ( ( B e. 2o /\ L e. Word 2o ) -> <" B "> e. Word 2o )
+i7::ccatco
+s8:s6,s2,s4,i7:syl3anc |- ( ( B e. 2o /\ L e. Word 2o ) -> ( inclBool o. ( <" B "> ++ L ) ) = ( ( inclBool o. <" B "> ) ++ ( inclBool o. L ) ) )
+i9::s1co
+s10:s1,s4,i9:syl2anc |- ( ( B e. 2o /\ L e. Word 2o ) -> ( inclBool o. <" B "> ) = <" ( inclBool ` B ) "> )
+i11::inclboolfv
+s12:s1,i11:syl |- ( ( B e. 2o /\ L e. Word 2o ) -> ( inclBool ` B ) = <. 1 , B >. )
+s13:s12:s1eqd |- ( ( B e. 2o /\ L e. Word 2o ) -> <" ( inclBool ` B ) "> = <" <. 1 , B >. "> )
+s14:s10,s13:eqtrd |- ( ( B e. 2o /\ L e. Word 2o ) -> ( inclBool o. <" B "> ) = <" <. 1 , B >. "> )
+s15:s14:oveq1d |- ( ( B e. 2o /\ L e. Word 2o ) -> ( ( inclBool o. <" B "> ) ++ ( inclBool o. L ) ) = ( <" <. 1 , B >. "> ++ ( inclBool o. L ) ) )
+qed:s8,s15:eqtrd |- ( ( B e. 2o /\ L e. Word 2o ) -> ( inclBool o. ( <" B "> ++ L ) ) = ( <" <. 1 , B >. "> ++ ( inclBool o. L ) ) )
+$)

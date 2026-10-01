@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=prodlsps  LOC_AFTER=?
+
+* Step of the induction for the value of prodL (Lean: prodL_spec, cons case).
+
+s1::simp1 |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> V e. Word NN0 )
+s2::simp2 |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> P e. NN0 )
+s3::simp3 |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) )
+i4::prodlcl
+s5:s1,i4:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( ProdL ` V ) e. ( NN0 X. NN0 ) )
+i6::xp1st
+s7:s5,i6:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 1st ` ( ProdL ` V ) ) e. NN0 )
+i8::xp2nd
+s9:s5,i8:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 2nd ` ( ProdL ` V ) ) e. NN0 )
+i10::prodlcs
+s11:s2,s1,i10:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( ProdL ` ( <" P "> ++ V ) ) = <. ( P x. ( 1st ` ( ProdL ` V ) ) ) , ( ( 2nd ` ( ProdL ` V ) ) + 1 ) >. )
+s12:s2,s7:nn0mulcld |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( P x. ( 1st ` ( ProdL ` V ) ) ) e. NN0 )
+i13::peano2nn0
+s14:s9,i13:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( ( 2nd ` ( ProdL ` V ) ) + 1 ) e. NN0 )
+s15:s11:fveq2d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 1st ` ( ProdL ` ( <" P "> ++ V ) ) ) = ( 1st ` <. ( P x. ( 1st ` ( ProdL ` V ) ) ) , ( ( 2nd ` ( ProdL ` V ) ) + 1 ) >. ) )
+i16::op1stg
+s17:s12,s14,i16:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 1st ` <. ( P x. ( 1st ` ( ProdL ` V ) ) ) , ( ( 2nd ` ( ProdL ` V ) ) + 1 ) >. ) = ( P x. ( 1st ` ( ProdL ` V ) ) ) )
+s18:s15,s17:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 1st ` ( ProdL ` ( <" P "> ++ V ) ) ) = ( P x. ( 1st ` ( ProdL ` V ) ) ) )
+s19:s3:oveq2d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( P x. ( 1st ` ( ProdL ` V ) ) ) = ( P x. prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) )
+i20::algprodcs
+s21:s2,s1,i20:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ V ) ) ) ( ( <" P "> ++ V ) ` i ) = ( P x. prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) )
+s22:s18,s19:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 1st ` ( ProdL ` ( <" P "> ++ V ) ) ) = ( P x. prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) )
+qed:s22,s21:eqtr4d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( 1st ` ( ProdL ` V ) ) = prod_ i e. ( 0 ..^ ( # ` V ) ) ( V ` i ) ) -> ( 1st ` ( ProdL ` ( <" P "> ++ V ) ) ) = prod_ i e. ( 0 ..^ ( # ` ( <" P "> ++ V ) ) ) ( ( <" P "> ++ V ) ` i ) )
+$)

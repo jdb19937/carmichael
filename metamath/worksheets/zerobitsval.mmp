@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=zerobitsval  LOC_AFTER=?
+
+* Value of zeroBits: the flag stays set exactly when every scanned bit is false (Lean: zeroBits_eq with toNat_eq_zero_iff).
+
+s1::simpl |- ( ( L e. Word 2o /\ F e. 2o ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ F e. 2o ) -> F e. 2o )
+s3::simpl |- ( ( l = L /\ f = F ) -> l = L )
+s4::simpr |- ( ( l = L /\ f = F ) -> f = F )
+c1:s4:eqeq1d |- ( ( l = L /\ f = F ) -> ( f = 1o <-> F = 1o ) )
+c2:s3:fveq2d |- ( ( l = L /\ f = F ) -> ( toNat ` l ) = ( toNat ` L ) )
+c3:c2:eqeq1d |- ( ( l = L /\ f = F ) -> ( ( toNat ` l ) = 0 <-> ( toNat ` L ) = 0 ) )
+c4:c1,c3:anbi12d |- ( ( l = L /\ f = F ) -> ( ( f = 1o /\ ( toNat ` l ) = 0 ) <-> ( F = 1o /\ ( toNat ` L ) = 0 ) ) )
+c5:c4:ifbid |- ( ( l = L /\ f = F ) -> if ( ( f = 1o /\ ( toNat ` l ) = 0 ) , 1o , (/) ) = if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) )
+s5::df-zerobits |- zeroBits = ( l e. Word 2o , f e. 2o |-> if ( ( f = 1o /\ ( toNat ` l ) = 0 ) , 1o , (/) ) )
+s6::1oel2o |- 1o e. 2o
+s7:s6:a1i |- ( ( L e. Word 2o /\ F e. 2o ) -> 1o e. 2o )
+s8::0el2o |- (/) e. 2o
+s9:s8:a1i |- ( ( L e. Word 2o /\ F e. 2o ) -> (/) e. 2o )
+s10:s7,s9:ifcld |- ( ( L e. Word 2o /\ F e. 2o ) -> if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) e. 2o )
+s11:s10:elexd |- ( ( L e. Word 2o /\ F e. 2o ) -> if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) e. _V )
+s12:c5,s5:ovmpoga |- ( ( L e. Word 2o /\ F e. 2o /\ if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) e. _V ) -> ( L zeroBits F ) = if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) )
+qed:s1,s2,s11,s12:syl3anc |- ( ( L e. Word 2o /\ F e. 2o ) -> ( L zeroBits F ) = if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) )
+$)

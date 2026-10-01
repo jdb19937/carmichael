@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgsorth  LOC_AFTER=?
+
+* Orthogonality of the additive character in the exponential form (Lean AddChar.sum_mulShift for ZMod.stdAddChar; LConvexity, LargeSieve): sum over a of exp ( 2 _pi _i a W / N ).
+
+s1::simpl |- ( ( N e. NN /\ W e. ZZ ) -> N e. NN )
+s2:s1:adantr |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> N e. NN )
+s3::simpr |- ( ( N e. NN /\ W e. ZZ ) -> W e. ZZ )
+s4:s3:adantr |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> W e. ZZ )
+s5::simpr |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> a e. ( 0 ..^ N ) )
+i6::elfzoelz
+s7:s5,i6:syl |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> a e. ZZ )
+s8:s7,s4:zmulcld |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( a x. W ) e. ZZ )
+i9::dchrgsef
+s10:s2,s8,i9:syl2anc |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( a x. W ) / N ) ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) )
+s11:s10:sumeq2dv |- ( ( N e. NN /\ W e. ZZ ) -> sum_ a e. ( 0 ..^ N ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( a x. W ) / N ) ) ) = sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) )
+s12::root1sum |- ( ( N e. NN /\ W e. ZZ ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = if ( N || W , N , 0 ) )
+qed:s11,s12:eqtrd |- ( ( N e. NN /\ W e. ZZ ) -> sum_ a e. ( 0 ..^ N ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( a x. W ) / N ) ) ) = if ( N || W , N , 0 ) )
+$)

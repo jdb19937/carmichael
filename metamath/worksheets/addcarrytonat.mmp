@@ -1,0 +1,55 @@
+$( <MM> <PROOF_ASST> THEOREM=addcarrytonat  LOC_AFTER=?
+
+* The value of addCarry C is the value of C.
+
+s1::id |- ( C e. 2o -> C e. 2o )
+i2::bwel2o
+s3:s1,i2:syl |- ( C e. 2o -> ( C = (/) \/ C = 1o ) )
+s4::simpr |- ( ( C e. 2o /\ C = (/) ) -> C = (/) )
+s5:s4:fveq2d |- ( ( C e. 2o /\ C = (/) ) -> ( addCarry ` C ) = ( addCarry ` (/) ) )
+s6::addcarry0 |- ( addCarry ` (/) ) = (/)
+s7:s5,s6:eqtrdi |- ( ( C e. 2o /\ C = (/) ) -> ( addCarry ` C ) = (/) )
+s8:s7:fveq2d |- ( ( C e. 2o /\ C = (/) ) -> ( toNat ` ( addCarry ` C ) ) = ( toNat ` (/) ) )
+s9::tonat0 |- ( toNat ` (/) ) = 0
+s10:s8,s9:eqtrdi |- ( ( C e. 2o /\ C = (/) ) -> ( toNat ` ( addCarry ` C ) ) = 0 )
+s11:s4:fveq2d |- ( ( C e. 2o /\ C = (/) ) -> ( bToNat ` C ) = ( bToNat ` (/) ) )
+s12::bwbn0 |- ( bToNat ` (/) ) = 0
+s13:s11,s12:eqtrdi |- ( ( C e. 2o /\ C = (/) ) -> ( bToNat ` C ) = 0 )
+s14:s10,s13:eqtr4d |- ( ( C e. 2o /\ C = (/) ) -> ( toNat ` ( addCarry ` C ) ) = ( bToNat ` C ) )
+s15::simpr |- ( ( C e. 2o /\ C = 1o ) -> C = 1o )
+s16:s15:fveq2d |- ( ( C e. 2o /\ C = 1o ) -> ( addCarry ` C ) = ( addCarry ` 1o ) )
+s17::addcarry1 |- ( addCarry ` 1o ) = <" 1o ">
+s18:s16,s17:eqtrdi |- ( ( C e. 2o /\ C = 1o ) -> ( addCarry ` C ) = <" 1o "> )
+s19:s18:fveq2d |- ( ( C e. 2o /\ C = 1o ) -> ( toNat ` ( addCarry ` C ) ) = ( toNat ` <" 1o "> ) )
+s20::wrd0 |- (/) e. Word 2o
+s21::1oel2o |- 1o e. 2o
+i22::tonatsnoc
+s23:s20,s21,i22:mp2an |- ( toNat ` ( (/) ++ <" 1o "> ) ) = ( ( toNat ` (/) ) + ( ( bToNat ` 1o ) x. ( 2 ^ ( # ` (/) ) ) ) )
+s24::1oel2o |- 1o e. 2o
+i25::s1cl
+s26:s24,i25:ax-mp |- <" 1o "> e. Word 2o
+i27::ccatlid
+s28:s26,i27:ax-mp |- ( (/) ++ <" 1o "> ) = <" 1o ">
+s29:s28:fveq2i |- ( toNat ` ( (/) ++ <" 1o "> ) ) = ( toNat ` <" 1o "> )
+s30::tonat0 |- ( toNat ` (/) ) = 0
+s31::bwbn1 |- ( bToNat ` 1o ) = 1
+s32::hash0 |- ( # ` (/) ) = 0
+s33:s32:oveq2i |- ( 2 ^ ( # ` (/) ) ) = ( 2 ^ 0 )
+s34::2cn |- 2 e. CC
+i35::exp0
+s36:s34,i35:ax-mp |- ( 2 ^ 0 ) = 1
+s37:s33,s36:eqtri |- ( 2 ^ ( # ` (/) ) ) = 1
+s38:s31,s37:oveq12i |- ( ( bToNat ` 1o ) x. ( 2 ^ ( # ` (/) ) ) ) = ( 1 x. 1 )
+s39::1t1e1 |- ( 1 x. 1 ) = 1
+s40:s38,s39:eqtri |- ( ( bToNat ` 1o ) x. ( 2 ^ ( # ` (/) ) ) ) = 1
+s41:s30,s40:oveq12i |- ( ( toNat ` (/) ) + ( ( bToNat ` 1o ) x. ( 2 ^ ( # ` (/) ) ) ) ) = ( 0 + 1 )
+s42::0p1e1 |- ( 0 + 1 ) = 1
+s43:s41,s42:eqtri |- ( ( toNat ` (/) ) + ( ( bToNat ` 1o ) x. ( 2 ^ ( # ` (/) ) ) ) ) = 1
+s44:s29,s23,s43:3eqtr3i |- ( toNat ` <" 1o "> ) = 1
+s45:s19,s44:eqtrdi |- ( ( C e. 2o /\ C = 1o ) -> ( toNat ` ( addCarry ` C ) ) = 1 )
+s46:s15:fveq2d |- ( ( C e. 2o /\ C = 1o ) -> ( bToNat ` C ) = ( bToNat ` 1o ) )
+s47::bwbn1 |- ( bToNat ` 1o ) = 1
+s48:s46,s47:eqtrdi |- ( ( C e. 2o /\ C = 1o ) -> ( bToNat ` C ) = 1 )
+s49:s45,s48:eqtr4d |- ( ( C e. 2o /\ C = 1o ) -> ( toNat ` ( addCarry ` C ) ) = ( bToNat ` C ) )
+qed:s14,s49,s3:mpjaodan |- ( C e. 2o -> ( toNat ` ( addCarry ` C ) ) = ( bToNat ` C ) )
+$)

@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=tcsmod  LOC_AFTER=?
+
+* The residue of the product of a subset of the entries of a word.
+
+s1::simpl |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> ( L e. NN /\ E e. Word NN0 ) )
+s2:s1:simpld |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> L e. NN )
+s3::simpl |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> ( L e. NN /\ E e. Word NN0 ) )
+s4:s3:simprd |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> E e. Word NN0 )
+s5::simpr |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> S e. ~P ran E )
+s6:s4,s5:jca |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> ( E e. Word NN0 /\ S e. ~P ran E ) )
+i7::tcsprod
+s8:s6,i7:syl |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> prod_ q e. S q e. NN0 )
+s9:s8:nn0zd |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> prod_ q e. S q e. ZZ )
+i10::zmodcl
+s11:s9,s2,i10:syl2anc |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> ( prod_ q e. S q mod L ) e. NN0 )
+s12:s8:nn0red |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> prod_ q e. S q e. RR )
+i13::nnrp
+s14:s2,i13:syl |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> L e. RR+ )
+i15::modlt
+s16:s12,s14,i15:syl2anc |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> ( prod_ q e. S q mod L ) < L )
+qed:s11,s16:jca |- ( ( ( L e. NN /\ E e. Word NN0 ) /\ S e. ~P ran E ) -> ( ( prod_ q e. S q mod L ) e. NN0 /\ ( prod_ q e. S q mod L ) < L ) )
+$)

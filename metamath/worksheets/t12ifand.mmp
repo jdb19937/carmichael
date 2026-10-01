@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=t12ifand  LOC_AFTER=?
+
+* A conditional accumulator nests as a conjunction (the machine's ` accAnd ` in the accumulator).
+
+s1::iftrue |- ( ph -> if ( ph , if ( ps , 1 , 0 ) , 0 ) = if ( ps , 1 , 0 ) )
+s2::ibar |- ( ph -> ( ps <-> ( ph /\ ps ) ) )
+s3:s2:ifbid |- ( ph -> if ( ps , 1 , 0 ) = if ( ( ph /\ ps ) , 1 , 0 ) )
+s4:s1,s3:eqtrd |- ( ph -> if ( ph , if ( ps , 1 , 0 ) , 0 ) = if ( ( ph /\ ps ) , 1 , 0 ) )
+s5::iffalse |- ( -. ph -> if ( ph , if ( ps , 1 , 0 ) , 0 ) = 0 )
+s6::simpl |- ( ( ph /\ ps ) -> ph )
+s7:s6:con3i |- ( -. ph -> -. ( ph /\ ps ) )
+s8:s7:iffalsed |- ( -. ph -> if ( ( ph /\ ps ) , 1 , 0 ) = 0 )
+s9:s5,s8:eqtr4d |- ( -. ph -> if ( ph , if ( ps , 1 , 0 ) , 0 ) = if ( ( ph /\ ps ) , 1 , 0 ) )
+qed:s4,s9:pm2.61i |- if ( ph , if ( ps , 1 , 0 ) , 0 ) = if ( ( ph /\ ps ) , 1 , 0 )
+$)

@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=g3t11  LOC_AFTER=?
+
+* The triangle inequality for a finite sum and division of one by a constant, through tools/fsum.py.
+
+s1::simpl |- ( ( N e. NN /\ C e. RR+ ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ C e. RR+ ) -> C e. RR+ )
+s3::fzfid |- ( ( N e. NN /\ C e. RR+ ) -> ( 1 ... N ) e. Fin )
+s4::simpr |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i5::elfznn
+s6:s4,i5:syl |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s7::ax-1cn |- 1 e. CC
+s8:s7:a1i |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> 1 e. CC )
+s9:s6:nnrpd |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. RR+ )
+s10:s9:rpred |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. RR )
+s11:s10:recnd |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. CC )
+s12:s9:rpne0d |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k =/= 0 )
+s13:s8,s11,s12:divcld |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 / k ) e. CC )
+s14:s3,s13:fsumabs |- ( ( N e. NN /\ C e. RR+ ) -> ( abs ` sum_ k e. ( 1 ... N ) ( 1 / k ) ) <_ sum_ k e. ( 1 ... N ) ( abs ` ( 1 / k ) ) )
+s15:s2:rpred |- ( ( N e. NN /\ C e. RR+ ) -> C e. RR )
+s16:s15:recnd |- ( ( N e. NN /\ C e. RR+ ) -> C e. CC )
+s17:s2:rpne0d |- ( ( N e. NN /\ C e. RR+ ) -> C =/= 0 )
+s18:s3,s16,s13,s17:fsumdivc |- ( ( N e. NN /\ C e. RR+ ) -> ( sum_ k e. ( 1 ... N ) ( 1 / k ) / C ) = sum_ k e. ( 1 ... N ) ( ( 1 / k ) / C ) )
+qed:s14,s18:jca |- ( ( N e. NN /\ C e. RR+ ) -> ( ( abs ` sum_ k e. ( 1 ... N ) ( 1 / k ) ) <_ sum_ k e. ( 1 ... N ) ( abs ` ( 1 / k ) ) /\ ( sum_ k e. ( 1 ... N ) ( 1 / k ) / C ) = sum_ k e. ( 1 ... N ) ( ( 1 / k ) / C ) ) )
+$)

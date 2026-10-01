@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=cbege1  LOC_AFTER=?
+
+* A power of the exponential at a nonnegative exponent is at least 1 (Lean AlgBudget.lean, the local ` oneE ` of costPieces_bound).
+
+h1::cbege1.1 |- ( ph -> M e. RR )
+h2::cbege1.2 |- ( ph -> 0 <_ M )
+h3::cbege1.3 |- ( ph -> P e. RR )
+h4::cbege1.4 |- ( ph -> 0 <_ P )
+s1:3,1:remulcld |- ( ph -> ( P x. M ) e. RR )
+s2:3,1,4,2:mulge0d |- ( ph -> 0 <_ ( P x. M ) )
+s3::0red |- ( ph -> 0 e. RR )
+i4::efle
+s5:s3,s1,i4:syl2anc |- ( ph -> ( 0 <_ ( P x. M ) <-> ( exp ` 0 ) <_ ( exp ` ( P x. M ) ) ) )
+s6:s2,s5:mpbid |- ( ph -> ( exp ` 0 ) <_ ( exp ` ( P x. M ) ) )
+s7::ef0 |- ( exp ` 0 ) = 1
+s8:s7:a1i |- ( ph -> ( exp ` 0 ) = 1 )
+s9:s8:eqcomd |- ( ph -> 1 = ( exp ` 0 ) )
+qed:s9,s6:eqbrtrd |- ( ph -> 1 <_ ( exp ` ( P x. M ) ) )
+$)

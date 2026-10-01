@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=g5t6  LOC_AFTER=?
+
+* Fast path: an equation hypothesis used in the reverse orientation, then addge01d.
+
+s1::simp1 |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> A e. RR )
+s2::simp2 |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> B e. RR )
+s3::simp3 |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> A = ( 2 x. B ) )
+s4:s3:eqcomd |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 2 x. B ) = A )
+s5::2re |- 2 e. RR
+s6:s5:a1i |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> 2 e. RR )
+s7:s6,s2:remulcld |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 2 x. B ) e. RR )
+s8:s7,s4:eqled |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 2 x. B ) <_ A )
+s9::0le1 |- 0 <_ 1
+s10:s9:a1i |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> 0 <_ 1 )
+s11::1re |- 1 e. RR
+s12:s11:a1i |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> 1 e. RR )
+s13:s1,s12:addge01d |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 0 <_ 1 <-> A <_ ( A + 1 ) ) )
+s14:s10,s13:mpbid |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> A <_ ( A + 1 ) )
+s15:s1,s12:readdcld |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( A + 1 ) e. RR )
+qed:s7,s1,s15,s8,s14:letrd |- ( ( A e. RR /\ B e. RR /\ A = ( 2 x. B ) ) -> ( 2 x. B ) <_ ( A + 1 ) )
+$)

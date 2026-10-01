@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=prodefub  LOC_AFTER=?
+
+* The product of 1 + C / ( n x. ( n - 1 ) ) over ( 2 ... M ) is at most exp C.
+
+s1::simpll |- ( ( ( M e. NN /\ C e. RR+ ) /\ 2 <_ M ) -> M e. NN )
+s2::simplr |- ( ( ( M e. NN /\ C e. RR+ ) /\ 2 <_ M ) -> C e. RR+ )
+s3::simpr |- ( ( ( M e. NN /\ C e. RR+ ) /\ 2 <_ M ) -> 2 <_ M )
+s4:s1:nnzd |- ( ( ( M e. NN /\ C e. RR+ ) /\ 2 <_ M ) -> M e. ZZ )
+s5::2z |- 2 e. ZZ
+s6:s5:a1i |- ( ( ( M e. NN /\ C e. RR+ ) /\ 2 <_ M ) -> 2 e. ZZ )
+s7:s6,s4,s3:syl3anbrc |- ( ( ( M e. NN /\ C e. RR+ ) /\ 2 <_ M ) -> M e. ( ZZ>= ` 2 ) )
+i8::prodefublem
+s9:s7,s2,i8:syl2anc |- ( ( ( M e. NN /\ C e. RR+ ) /\ 2 <_ M ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) )
+s10::simpll |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> M e. NN )
+s11::simplr |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> C e. RR+ )
+s12::simpr |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> -. 2 <_ M )
+s13:s10:nnred |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> M e. RR )
+s14::2re |- 2 e. RR
+s15:s14:a1i |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> 2 e. RR )
+s16:s13,s15:ltnled |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> ( M < 2 <-> -. 2 <_ M ) )
+s17:s12,s16:mpbird |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> M < 2 )
+s18:s10:nnzd |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> M e. ZZ )
+s19::2z |- 2 e. ZZ
+s20:s19:a1i |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> 2 e. ZZ )
+i21::fzn
+s22:s20,s18,i21:syl2anc |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> ( M < 2 <-> ( 2 ... M ) = (/) ) )
+s23:s22,s17:mpbid |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> ( 2 ... M ) = (/) )
+s24:s23:prodeq1d |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) = prod_ n e. (/) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) )
+s25::prod0 |- prod_ n e. (/) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) = 1
+s26:s25:a1i |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> prod_ n e. (/) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) = 1 )
+s27:s24,s26:eqtrd |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) = 1 )
+i28::efgt1
+s29:s11,i28:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> 1 < ( exp ` C ) )
+s30::1red |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> 1 e. RR )
+s31:s11:rpred |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> C e. RR )
+s32:s31:reefcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> ( exp ` C ) e. RR )
+s33:s30,s32,s29:ltled |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> 1 <_ ( exp ` C ) )
+s34:s27,s33:eqbrtrd |- ( ( ( M e. NN /\ C e. RR+ ) /\ -. 2 <_ M ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) )
+qed:s9,s34:pm2.61dan |- ( ( M e. NN /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) )
+$)

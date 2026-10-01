@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatbwrd2  LOC_AFTER=?
+
+* The value of the digits word of N below 2 ^ M at length M is N itself.
+
+s1::simp1 |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> N e. NN0 )
+s2::simp2 |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> M e. NN0 )
+s3::simp3 |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> N < ( 2 ^ M ) )
+s4:s1:nn0zd |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> N e. ZZ )
+i5::tonatbwrd
+s6:s4,s2,i5:syl2anc |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> ( toNat ` ( N bwrd M ) ) = ( N mod ( 2 ^ M ) ) )
+s7::2nn |- 2 e. NN
+s8:s7:a1i |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> 2 e. NN )
+i9::nnexpcl
+s10:s8,s2,i9:syl2anc |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> ( 2 ^ M ) e. NN )
+i11::zmodidfzo
+s12:s4,s10,i11:syl2anc |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> ( ( N mod ( 2 ^ M ) ) = N <-> N e. ( 0 ..^ ( 2 ^ M ) ) ) )
+s13::2z |- 2 e. ZZ
+s14:s13:a1i |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> 2 e. ZZ )
+s15:s14,s2:zexpcld |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> ( 2 ^ M ) e. ZZ )
+i16::elfzo0z
+s17:s1,s15,s3,i16:syl3anbrc |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> N e. ( 0 ..^ ( 2 ^ M ) ) )
+s18:s17,s12:mpbird |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> ( N mod ( 2 ^ M ) ) = N )
+qed:s6,s18:eqtrd |- ( ( N e. NN0 /\ M e. NN0 /\ N < ( 2 ^ M ) ) -> ( toNat ` ( N bwrd M ) ) = N )
+$)

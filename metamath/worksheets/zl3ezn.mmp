@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3ezn  LOC_AFTER=?
+
+* The only zero of ` e ^ ( 2 pi w ) - 1 ` in the strip ` N - 1 < Im w < N + 1 ` is ` i N `.
+
+s1::simp1 |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> N e. ZZ )
+s2::simp2 |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) )
+s3::simp3 |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 )
+i4::simpl
+s5:s2,i4:syl |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> A e. CC )
+i6::simprl
+s7:s2,i6:syl |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( N - 1 ) < ( Im ` A ) )
+i8::simprr
+s9:s2,i8:syl |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( Im ` A ) < ( N + 1 ) )
+i10::zl3ez
+s11:s5,s3,i10:syl2anc |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( Re ` A ) = 0 /\ ( Im ` A ) e. ZZ ) )
+i12::simpl
+s13:s11,i12:syl |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( Re ` A ) = 0 )
+i14::simpr
+s15:s11,i14:syl |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( Im ` A ) e. ZZ )
+i16::peano2zm
+s17:s1,i16:syl |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( N - 1 ) e. ZZ )
+i18::zltp1le
+s19:s17,s15,i18:syl2anc |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( N - 1 ) < ( Im ` A ) <-> ( ( N - 1 ) + 1 ) <_ ( Im ` A ) ) )
+s20:s7,s19:mpbid |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( N - 1 ) + 1 ) <_ ( Im ` A ) )
+s21:s1:zcnd |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> N e. CC )
+s22::ax-1cn |- 1 e. CC
+s23:s22:a1i |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> 1 e. CC )
+i24::npcan
+s25:s21,s23,i24:syl2anc |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( N - 1 ) + 1 ) = N )
+s26:s25,s20:eqbrtrrd |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> N <_ ( Im ` A ) )
+i27::zleltp1
+s28:s15,s1,i27:syl2anc |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( Im ` A ) <_ N <-> ( Im ` A ) < ( N + 1 ) ) )
+s29:s9,s28:mpbird |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( Im ` A ) <_ N )
+s30:s15:zred |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( Im ` A ) e. RR )
+s31:s1:zred |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> N e. RR )
+s32:s30,s31:letri3d |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( Im ` A ) = N <-> ( ( Im ` A ) <_ N /\ N <_ ( Im ` A ) ) ) )
+s33:s29,s26,s32:mpbir2and |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( Im ` A ) = N )
+s34:s5:replimd |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> A = ( ( Re ` A ) + ( _i x. ( Im ` A ) ) ) )
+s35:s33:oveq2d |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( _i x. ( Im ` A ) ) = ( _i x. N ) )
+s36:s13,s35:oveq12d |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( ( Re ` A ) + ( _i x. ( Im ` A ) ) ) = ( 0 + ( _i x. N ) ) )
+s37::ax-icn |- _i e. CC
+s38:s37:a1i |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> _i e. CC )
+s39:s38,s21:mulcld |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( _i x. N ) e. CC )
+s40:s39:addlidd |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> ( 0 + ( _i x. N ) ) = ( _i x. N ) )
+s41:s34,s36:eqtrd |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> A = ( 0 + ( _i x. N ) ) )
+qed:s41,s40:eqtrd |- ( ( N e. ZZ /\ ( A e. CC /\ ( ( N - 1 ) < ( Im ` A ) /\ ( Im ` A ) < ( N + 1 ) ) ) /\ ( exp ` ( ( 2 x. _pi ) x. A ) ) = 1 ) -> A = ( _i x. N ) )
+$)

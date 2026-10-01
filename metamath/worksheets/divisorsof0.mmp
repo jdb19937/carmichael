@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=divisorsof0  LOC_AFTER=?
+
+* The base of the recursion of ~ df-divisorsof , Lean's first equation lemma.  Lean: divisorsOf, the subset products of a list.
+
+s1::id |- ( l = (/) -> l = (/) )
+c1:s1:fveq2d |- ( l = (/) -> ( # ` l ) = ( # ` (/) ) )
+c2:c1:fveq2d |- ( l = (/) -> ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` l ) ) = ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) )
+c3:c2,s1:fveq12d |- ( l = (/) -> ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` l ) ) ` l ) = ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) ` (/) ) )
+s2::df-divisorsof |- DivisorsOf = ( l e. Word NN0 |-> ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` l ) ) ` l ) )
+s3::wrd0 |- (/) e. Word NN0
+s4:s3:a1i |- ( T. -> (/) e. Word NN0 )
+s5::fvex |- ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) ` (/) ) e. _V
+s6:s5:a1i |- ( T. -> ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) ` (/) ) e. _V )
+s7:c3,s2:fvmptg |- ( ( (/) e. Word NN0 /\ ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) ` (/) ) e. _V ) -> ( DivisorsOf ` (/) ) = ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) ` (/) ) )
+s8:s4,s6,s7:syl2anc |- ( T. -> ( DivisorsOf ` (/) ) = ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) ` (/) ) )
+s9::hash0 |- ( # ` (/) ) = 0
+s10:s9:a1i |- ( T. -> ( # ` (/) ) = 0 )
+c4:s10:fveq2d |- ( T. -> ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) = ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` 0 ) )
+c5:c4:fveq1d |- ( T. -> ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` ( # ` (/) ) ) ` (/) ) = ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` 0 ) ` (/) ) )
+s11:s8,c5:eqtrd |- ( T. -> ( DivisorsOf ` (/) ) = ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` 0 ) ` (/) ) )
+s12::wrdexi |- Word NN0 e. _V
+s13:s12:a1i |- ( T. -> Word NN0 e. _V )
+i14::mptexg
+s15:s13,i14:syl |- ( T. -> ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) e. _V )
+s16::divisorsofsf |- DivisorsOfS : ( ( ( Word NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( Word NN0 X. NN0 ) ^m Word NN0 )
+s17:s16:a1i |- ( T. -> DivisorsOfS : ( ( ( Word NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( Word NN0 X. NN0 ) ^m Word NN0 ) )
+s18::ovex |- ( ( Word NN0 X. NN0 ) ^m Word NN0 ) e. _V
+s19:s18:a1i |- ( T. -> ( ( Word NN0 X. NN0 ) ^m Word NN0 ) e. _V )
+s20::nn0ex |- NN0 e. _V
+s21:s20:a1i |- ( T. -> NN0 e. _V )
+i22::xpexg
+s23:s19,s21,i22:syl2anc |- ( T. -> ( ( ( Word NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) e. _V )
+i24::fex
+s25:s17,s23,i24:syl2anc |- ( T. -> DivisorsOfS e. _V )
+i26::algrec0
+s27:s15,s25,i26:syl2anc |- ( T. -> ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` 0 ) = ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) )
+s28:s27:fveq1d |- ( T. -> ( ( ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) AlgRec DivisorsOfS ) ` 0 ) ` (/) ) = ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) ` (/) ) )
+s29::id |- ( g = (/) -> g = (/) )
+s30::eqidd |- ( g = (/) -> <. <" 1 "> , 0 >. = <. <" 1 "> , 0 >. )
+s31::eqid |- ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) = ( g e. Word NN0 |-> <. <" 1 "> , 0 >. )
+s32::opex |- <. <" 1 "> , 0 >. e. _V
+s33:s32:a1i |- ( T. -> <. <" 1 "> , 0 >. e. _V )
+s34:s30,s31:fvmptg |- ( ( (/) e. Word NN0 /\ <. <" 1 "> , 0 >. e. _V ) -> ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) ` (/) ) = <. <" 1 "> , 0 >. )
+s35:s4,s33,s34:syl2anc |- ( T. -> ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) ` (/) ) = <. <" 1 "> , 0 >. )
+s36:s11,s28:eqtrd |- ( T. -> ( DivisorsOf ` (/) ) = ( ( g e. Word NN0 |-> <. <" 1 "> , 0 >. ) ` (/) ) )
+s37:s36,s35:eqtrd |- ( T. -> ( DivisorsOf ` (/) ) = <. <" 1 "> , 0 >. )
+qed:s37:mptru |- ( DivisorsOf ` (/) ) = <. <" 1 "> , 0 >.
+$)

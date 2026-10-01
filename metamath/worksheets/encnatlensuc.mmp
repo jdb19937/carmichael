@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatlensuc  LOC_AFTER=?
+
+* Input length at least M + 1 forces N >= M (Lean: le_of_encodeNat_length_succ).
+
+s1::simp1 |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> N e. NN0 )
+s2::simp2 |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> M e. NN0 )
+s3::simp3 |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) )
+i4::nn0p1nn
+s5:s2,i4:syl |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> ( M + 1 ) e. NN )
+i6::encnatlenle
+s7:s1,s5,s3,i6:syl3anc |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> ( 2 ^ ( ( M + 1 ) - 1 ) ) <_ N )
+s8:s2:nn0cnd |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> M e. CC )
+s9::1cnd |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> 1 e. CC )
+i10::pncan
+s11:s8,s9,i10:syl2anc |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> ( ( M + 1 ) - 1 ) = M )
+s12:s11:oveq2d |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> ( 2 ^ ( ( M + 1 ) - 1 ) ) = ( 2 ^ M ) )
+s13:s12,s7:eqbrtrrd |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> ( 2 ^ M ) <_ N )
+s14::2z |- 2 e. ZZ
+i15::uzid
+s16:s14,i15:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s17:s16:a1i |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> 2 e. ( ZZ>= ` 2 ) )
+i18::bernneq3
+s19:s17,s2,i18:syl2anc |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> M < ( 2 ^ M ) )
+s20:s2:nn0red |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> M e. RR )
+s21::2re |- 2 e. RR
+s22:s21:a1i |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> 2 e. RR )
+s23:s22,s2:reexpcld |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> ( 2 ^ M ) e. RR )
+s24:s1:nn0red |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> N e. RR )
+s25:s20,s23,s24,s19,s13:ltletrd |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> M < N )
+qed:s20,s24,s25:ltled |- ( ( N e. NN0 /\ M e. NN0 /\ ( M + 1 ) <_ ( # ` ( encodeNat ` N ) ) ) -> M <_ N )
+$)

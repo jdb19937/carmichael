@@ -1,0 +1,80 @@
+$( <MM> <PROOF_ASST> THEOREM=bvida  LOC_AFTER=?
+
+* Identity (A): the Moebius function against the integer parts N / n sums to 1 (Lean sum_moebius_mul_div_eq_one), by the hyperbola swap and musum.
+
+s1::id |- ( N e. NN -> N e. NN )
+s2:s1:nnred |- ( N e. NN -> N e. RR )
+s3:s1:nnzd |- ( N e. NN -> N e. ZZ )
+i4::flid
+s5:s3,i4:syl |- ( N e. NN -> ( |_ ` N ) = N )
+s6::simprr |- ( ( N e. NN /\ ( n e. ( 1 ... ( |_ ` N ) ) /\ d e. { x e. NN | x || n } ) ) -> d e. { x e. NN | x || n } )
+i7::elrabi
+s8:s6,i7:syl |- ( ( N e. NN /\ ( n e. ( 1 ... ( |_ ` N ) ) /\ d e. { x e. NN | x || n } ) ) -> d e. NN )
+i9::mucl
+s10:s8,i9:syl |- ( ( N e. NN /\ ( n e. ( 1 ... ( |_ ` N ) ) /\ d e. { x e. NN | x || n } ) ) -> ( mmu ` d ) e. ZZ )
+s11:s10:zred |- ( ( N e. NN /\ ( n e. ( 1 ... ( |_ ` N ) ) /\ d e. { x e. NN | x || n } ) ) -> ( mmu ` d ) e. RR )
+s12:s11:recnd |- ( ( N e. NN /\ ( n e. ( 1 ... ( |_ ` N ) ) /\ d e. { x e. NN | x || n } ) ) -> ( mmu ` d ) e. CC )
+s13::eqid |- ( mmu ` d ) = ( mmu ` d )
+s14:s13:a1i |- ( n = ( d x. m ) -> ( mmu ` d ) = ( mmu ` d ) )
+s15:s14,s2,s12:dvdsflsumcom |- ( N e. NN -> sum_ n e. ( 1 ... ( |_ ` N ) ) sum_ d e. { x e. NN | x || n } ( mmu ` d ) = sum_ d e. ( 1 ... ( |_ ` N ) ) sum_ m e. ( 1 ... ( |_ ` ( N / d ) ) ) ( mmu ` d ) )
+s16::simpr |- ( ( N e. NN /\ n e. ( 1 ... ( |_ ` N ) ) ) -> n e. ( 1 ... ( |_ ` N ) ) )
+i17::elfznn
+s18:s16,i17:syl |- ( ( N e. NN /\ n e. ( 1 ... ( |_ ` N ) ) ) -> n e. NN )
+i19::bvmusum
+s20:s18,i19:syl |- ( ( N e. NN /\ n e. ( 1 ... ( |_ ` N ) ) ) -> sum_ d e. { x e. NN | x || n } ( mmu ` d ) = if ( n = 1 , 1 , 0 ) )
+s21:s20:sumeq2dv |- ( N e. NN -> sum_ n e. ( 1 ... ( |_ ` N ) ) sum_ d e. { x e. NN | x || n } ( mmu ` d ) = sum_ n e. ( 1 ... ( |_ ` N ) ) if ( n = 1 , 1 , 0 ) )
+s22::nnuz |- NN = ( ZZ>= ` 1 )
+s23:s22:a1i |- ( N e. NN -> NN = ( ZZ>= ` 1 ) )
+s24:s1,s23:eleqtrd |- ( N e. NN -> N e. ( ZZ>= ` 1 ) )
+i25::eluzfz1
+s26:s24,i25:syl |- ( N e. NN -> 1 e. ( 1 ... N ) )
+s27:s5:oveq2d |- ( N e. NN -> ( 1 ... ( |_ ` N ) ) = ( 1 ... N ) )
+s28:s26,s27:eleqtrrd |- ( N e. NN -> 1 e. ( 1 ... ( |_ ` N ) ) )
+s29::eqidd |- ( n = 1 -> 1 = 1 )
+s30::fzfid |- ( N e. NN -> ( 1 ... ( |_ ` N ) ) e. Fin )
+s31::1cnd |- ( N e. NN -> 1 e. CC )
+s32:s29,s30,s28,s31:sumite |- ( N e. NN -> sum_ n e. ( 1 ... ( |_ ` N ) ) if ( n = 1 , 1 , 0 ) = 1 )
+s33:s21,s32:eqtrd |- ( N e. NN -> sum_ n e. ( 1 ... ( |_ ` N ) ) sum_ d e. { x e. NN | x || n } ( mmu ` d ) = 1 )
+s34::simpr |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> d e. ( 1 ... ( |_ ` N ) ) )
+i35::elfznn
+s36:s34,i35:syl |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> d e. NN )
+i37::mucl
+s38:s36,i37:syl |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( mmu ` d ) e. ZZ )
+s39:s38:zred |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( mmu ` d ) e. RR )
+s40:s39:recnd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( mmu ` d ) e. CC )
+s41:s2:adantr |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> N e. RR )
+s42:s36:nnrpd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> d e. RR+ )
+s43:s41,s42:rerpdivcld |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( N / d ) e. RR )
+s44:s2:adantr |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> N e. RR )
+s45:s36:nnrpd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> d e. RR+ )
+s46:s1:adantr |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> N e. NN )
+s47:s46:nnrpd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> N e. RR+ )
+s48:s47:rpge0d |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> 0 <_ N )
+s49:s44,s45,s48:divge0d |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> 0 <_ ( N / d ) )
+i50::flge0nn0
+s51:s43,s49,i50:syl2anc |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( |_ ` ( N / d ) ) e. NN0 )
+s52::fzfid |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( 1 ... ( |_ ` ( N / d ) ) ) e. Fin )
+i53::fsumconst
+s54:s52,s40,i53:syl2anc |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> sum_ m e. ( 1 ... ( |_ ` ( N / d ) ) ) ( mmu ` d ) = ( ( # ` ( 1 ... ( |_ ` ( N / d ) ) ) ) x. ( mmu ` d ) ) )
+i55::hashfz1
+s56:s51,i55:syl |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( # ` ( 1 ... ( |_ ` ( N / d ) ) ) ) = ( |_ ` ( N / d ) ) )
+s57:s56:oveq1d |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( ( # ` ( 1 ... ( |_ ` ( N / d ) ) ) ) x. ( mmu ` d ) ) = ( ( |_ ` ( N / d ) ) x. ( mmu ` d ) ) )
+s58:s51:nn0cnd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( |_ ` ( N / d ) ) e. CC )
+s59:s58,s40:mulcomd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( ( |_ ` ( N / d ) ) x. ( mmu ` d ) ) = ( ( mmu ` d ) x. ( |_ ` ( N / d ) ) ) )
+s60:s57,s59:eqtrd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> ( ( # ` ( 1 ... ( |_ ` ( N / d ) ) ) ) x. ( mmu ` d ) ) = ( ( mmu ` d ) x. ( |_ ` ( N / d ) ) ) )
+s61:s54,s60:eqtrd |- ( ( N e. NN /\ d e. ( 1 ... ( |_ ` N ) ) ) -> sum_ m e. ( 1 ... ( |_ ` ( N / d ) ) ) ( mmu ` d ) = ( ( mmu ` d ) x. ( |_ ` ( N / d ) ) ) )
+s62:s61:sumeq2dv |- ( N e. NN -> sum_ d e. ( 1 ... ( |_ ` N ) ) sum_ m e. ( 1 ... ( |_ ` ( N / d ) ) ) ( mmu ` d ) = sum_ d e. ( 1 ... ( |_ ` N ) ) ( ( mmu ` d ) x. ( |_ ` ( N / d ) ) ) )
+s63::id |- ( d = n -> d = n )
+c1:s63:fveq2d |- ( d = n -> ( mmu ` d ) = ( mmu ` n ) )
+c2:s63:oveq2d |- ( d = n -> ( N / d ) = ( N / n ) )
+c3:c2:fveq2d |- ( d = n -> ( |_ ` ( N / d ) ) = ( |_ ` ( N / n ) ) )
+c4:c1,c3:oveq12d |- ( d = n -> ( ( mmu ` d ) x. ( |_ ` ( N / d ) ) ) = ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) )
+s64:c4:cbvsumv |- sum_ d e. ( 1 ... ( |_ ` N ) ) ( ( mmu ` d ) x. ( |_ ` ( N / d ) ) ) = sum_ n e. ( 1 ... ( |_ ` N ) ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) )
+s65:s5:oveq2d |- ( N e. NN -> ( 1 ... ( |_ ` N ) ) = ( 1 ... N ) )
+s66:s65:sumeq1d |- ( N e. NN -> sum_ n e. ( 1 ... ( |_ ` N ) ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) = sum_ n e. ( 1 ... N ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) )
+s67:s64:a1i |- ( N e. NN -> sum_ d e. ( 1 ... ( |_ ` N ) ) ( ( mmu ` d ) x. ( |_ ` ( N / d ) ) ) = sum_ n e. ( 1 ... ( |_ ` N ) ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) )
+s68:s62,s67:eqtrd |- ( N e. NN -> sum_ d e. ( 1 ... ( |_ ` N ) ) sum_ m e. ( 1 ... ( |_ ` ( N / d ) ) ) ( mmu ` d ) = sum_ n e. ( 1 ... ( |_ ` N ) ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) )
+s69:s68,s66:eqtrd |- ( N e. NN -> sum_ d e. ( 1 ... ( |_ ` N ) ) sum_ m e. ( 1 ... ( |_ ` ( N / d ) ) ) ( mmu ` d ) = sum_ n e. ( 1 ... N ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) )
+s70:s15,s69:eqtrd |- ( N e. NN -> sum_ n e. ( 1 ... ( |_ ` N ) ) sum_ d e. { x e. NN | x || n } ( mmu ` d ) = sum_ n e. ( 1 ... N ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) )
+qed:s70,s33:eqtr3d |- ( N e. NN -> sum_ n e. ( 1 ... N ) ( ( mmu ` n ) x. ( |_ ` ( N / n ) ) ) = 1 )
+$)

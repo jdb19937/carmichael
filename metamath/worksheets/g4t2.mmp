@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=g4t2  LOC_AFTER=?
+
+* The value of a mapping whose body is a finite sum: tools/congr.py descends into the sum with ` sumeq12dv ` and the value follows from ` fvmptg ` .
+
+s1::id |- ( N e. NN -> N e. NN )
+s2::sumex |- sum_ t e. ( 1 ... N ) ( ( F ` t ) x. N ) e. _V
+s3:s2:a1i |- ( N e. NN -> sum_ t e. ( 1 ... N ) ( ( F ` t ) x. N ) e. _V )
+s4::id |- ( q = N -> q = N )
+m1:s4:oveq2d |- ( q = N -> ( 1 ... q ) = ( 1 ... N ) )
+m2:s4:oveq2d |- ( q = N -> ( ( F ` t ) x. q ) = ( ( F ` t ) x. N ) )
+m3:m2:adantr |- ( ( q = N /\ t e. ( 1 ... q ) ) -> ( ( F ` t ) x. q ) = ( ( F ` t ) x. N ) )
+m4:m1,m3:sumeq12dv |- ( q = N -> sum_ t e. ( 1 ... q ) ( ( F ` t ) x. q ) = sum_ t e. ( 1 ... N ) ( ( F ` t ) x. N ) )
+s5::eqid |- ( q e. NN |-> sum_ t e. ( 1 ... q ) ( ( F ` t ) x. q ) ) = ( q e. NN |-> sum_ t e. ( 1 ... q ) ( ( F ` t ) x. q ) )
+s6:m4,s5:fvmptg |- ( ( N e. NN /\ sum_ t e. ( 1 ... N ) ( ( F ` t ) x. N ) e. _V ) -> ( ( q e. NN |-> sum_ t e. ( 1 ... q ) ( ( F ` t ) x. q ) ) ` N ) = sum_ t e. ( 1 ... N ) ( ( F ` t ) x. N ) )
+qed:s1,s3,s6:syl2anc |- ( N e. NN -> ( ( q e. NN |-> sum_ t e. ( 1 ... q ) ( ( F ` t ) x. q ) ) ` N ) = sum_ t e. ( 1 ... N ) ( ( F ` t ) x. N ) )
+$)

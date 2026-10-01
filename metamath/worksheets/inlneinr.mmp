@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=inlneinr  LOC_AFTER=?
+
+* The two injections into a disjoint union have disjoint ranges: some x is never none.
+
+1::inlval   |- ( A e. V -> ( inl ` A ) = <. (/) , A >. )
+2::inrval   |- ( B e. W -> ( inr ` B ) = <. 1o , B >. )
+3:1:adantr  |- ( ( A e. V /\ B e. W ) -> ( inl ` A ) = <. (/) , A >. )
+4:2:adantl  |- ( ( A e. V /\ B e. W ) -> ( inr ` B ) = <. 1o , B >. )
+5::0ex      |- (/) e. _V
+6:5:a1i     |- ( ( A e. V /\ B e. W ) -> (/) e. _V )
+7::simpl    |- ( ( A e. V /\ B e. W ) -> A e. V )
+8a::opthg
+8:6,7,8a:syl2anc |- ( ( A e. V /\ B e. W ) -> ( <. (/) , A >. = <. 1o , B >. <-> ( (/) = 1o /\ A = B ) ) )
+9::1n0      |- 1o =/= (/)
+10:9:necomi |- (/) =/= 1o
+11a::df-ne  |- ( (/) =/= 1o <-> -. (/) = 1o )
+11:10,11a:mpbi |- -. (/) = 1o
+12:11:intnanr |- -. ( (/) = 1o /\ A = B )
+13:12:a1i   |- ( ( A e. V /\ B e. W ) -> -. ( (/) = 1o /\ A = B ) )
+14:13,8:mtbird |- ( ( A e. V /\ B e. W ) -> -. <. (/) , A >. = <. 1o , B >. )
+15:3,4:eqeq12d |- ( ( A e. V /\ B e. W ) -> ( ( inl ` A ) = ( inr ` B ) <-> <. (/) , A >. = <. 1o , B >. ) )
+16:14,15:mtbird |- ( ( A e. V /\ B e. W ) -> -. ( inl ` A ) = ( inr ` B ) )
+qed:16:neqned |- ( ( A e. V /\ B e. W ) -> ( inl ` A ) =/= ( inr ` B ) )
+$)

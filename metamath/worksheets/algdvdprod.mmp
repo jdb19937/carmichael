@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=algdvdprod  LOC_AFTER=?
+
+* Every entry of a word divides its product (Lean: List.dvd_prod).
+
+s1::simpl |- ( ( W e. Word NN0 /\ Q e. ran W ) -> W e. Word NN0 )
+s2::simpr |- ( ( W e. Word NN0 /\ Q e. ran W ) -> Q e. ran W )
+i3::wrdfn
+s4:s1,i3:syl |- ( ( W e. Word NN0 /\ Q e. ran W ) -> W Fn ( 0 ..^ ( # ` W ) ) )
+i5::fvelrnb
+s6:s4,i5:syl |- ( ( W e. Word NN0 /\ Q e. ran W ) -> ( Q e. ran W <-> E. j e. ( 0 ..^ ( # ` W ) ) ( W ` j ) = Q ) )
+s7:s6,s2:mpbid |- ( ( W e. Word NN0 /\ Q e. ran W ) -> E. j e. ( 0 ..^ ( # ` W ) ) ( W ` j ) = Q )
+s8:s1:adantr |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> W e. Word NN0 )
+s9::simprl |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> j e. ( 0 ..^ ( # ` W ) ) )
+s10::simprr |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> ( W ` j ) = Q )
+s11::fzofi |- ( 0 ..^ ( # ` W ) ) e. Fin
+s12:s11:a1i |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> ( 0 ..^ ( # ` W ) ) e. Fin )
+s13:s8:adantr |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> W e. Word NN0 )
+s14::simpr |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> i e. ( 0 ..^ ( # ` W ) ) )
+i15::wrdsymbcl
+s16:s13,s14,i15:syl2anc |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. NN0 )
+s17:s16:nn0cnd |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. CC )
+s18::simpr |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i = j ) -> i = j )
+s19:s18:fveq2d |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i = j ) -> ( W ` i ) = ( W ` j ) )
+s20:s12,s17,s9,s19:fprodsplit1 |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) = ( ( W ` j ) x. prod_ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ( W ` i ) ) )
+s21:s10:oveq1d |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> ( ( W ` j ) x. prod_ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ( W ` i ) ) = ( Q x. prod_ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ( W ` i ) ) )
+s22:s20,s21:eqtrd |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) = ( Q x. prod_ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ( W ` i ) ) )
+s23::fzofi |- ( 0 ..^ ( # ` W ) ) e. Fin
+i24::diffi
+s25:s23,i24:ax-mp |- ( ( 0 ..^ ( # ` W ) ) \ { j } ) e. Fin
+s26:s25:a1i |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> ( ( 0 ..^ ( # ` W ) ) \ { j } ) e. Fin )
+s27::simpr |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ) -> i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) )
+i28::eldifi
+s29:s27,i28:syl |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ) -> i e. ( 0 ..^ ( # ` W ) ) )
+s30:s8:adantr |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ) -> W e. Word NN0 )
+i31::wrdsymbcl
+s32:s30,s29,i31:syl2anc |- ( ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) /\ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ) -> ( W ` i ) e. NN0 )
+s33:s26,s32:fprodnn0cl |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> prod_ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ( W ` i ) e. NN0 )
+s34:s33:nn0zd |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> prod_ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ( W ` i ) e. ZZ )
+s35:s2:adantr |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> Q e. ran W )
+s36:s8,s35:jca |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> ( W e. Word NN0 /\ Q e. ran W ) )
+i37::algwrdrn
+s38:s36,i37:syl |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> Q e. NN0 )
+s39:s38:nn0zd |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> Q e. ZZ )
+i40::dvdsmul1
+s41:s39,s34,i40:syl2anc |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> Q || ( Q x. prod_ i e. ( ( 0 ..^ ( # ` W ) ) \ { j } ) ( W ` i ) ) )
+s42:s22,s41:breqtrrd |- ( ( ( W e. Word NN0 /\ Q e. ran W ) /\ ( j e. ( 0 ..^ ( # ` W ) ) /\ ( W ` j ) = Q ) ) -> Q || prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) )
+s43:s42:rexlimdvaa |- ( ( W e. Word NN0 /\ Q e. ran W ) -> ( E. j e. ( 0 ..^ ( # ` W ) ) ( W ` j ) = Q -> Q || prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) ) )
+qed:s43,s7:mpd |- ( ( W e. Word NN0 /\ Q e. ran W ) -> Q || prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) )
+$)

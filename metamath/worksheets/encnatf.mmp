@@ -1,0 +1,10 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatf  LOC_AFTER=?
+
+* encodeNat is a function from the natural numbers to the words over the Booleans.
+
+s1::df-encnat |- encodeNat = ( n e. NN0 |-> ( i e. ( 0 ..^ if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) )
+s2::encnatlem1 |- ( n e. NN0 -> ( i e. ( 0 ..^ if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) : ( 0 ..^ if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) ) --> 2o )
+i3::iswrdi
+s4:s2,i3:syl |- ( n e. NN0 -> ( i e. ( 0 ..^ if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) e. Word 2o )
+qed:s1,s4:fmpti |- encodeNat : NN0 --> Word 2o
+$)

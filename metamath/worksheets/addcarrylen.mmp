@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=addcarrylen  LOC_AFTER=?
+
+* The length of addCarry C is the value of C.
+
+s1::id |- ( C e. 2o -> C e. 2o )
+i2::bwel2o
+s3:s1,i2:syl |- ( C e. 2o -> ( C = (/) \/ C = 1o ) )
+s4::simpr |- ( ( C e. 2o /\ C = (/) ) -> C = (/) )
+s5:s4:fveq2d |- ( ( C e. 2o /\ C = (/) ) -> ( addCarry ` C ) = ( addCarry ` (/) ) )
+s6::addcarry0 |- ( addCarry ` (/) ) = (/)
+s7:s5,s6:eqtrdi |- ( ( C e. 2o /\ C = (/) ) -> ( addCarry ` C ) = (/) )
+s8:s7:fveq2d |- ( ( C e. 2o /\ C = (/) ) -> ( # ` ( addCarry ` C ) ) = ( # ` (/) ) )
+s9::hash0 |- ( # ` (/) ) = 0
+s10:s8,s9:eqtrdi |- ( ( C e. 2o /\ C = (/) ) -> ( # ` ( addCarry ` C ) ) = 0 )
+s11:s4:fveq2d |- ( ( C e. 2o /\ C = (/) ) -> ( bToNat ` C ) = ( bToNat ` (/) ) )
+s12::bwbn0 |- ( bToNat ` (/) ) = 0
+s13:s11,s12:eqtrdi |- ( ( C e. 2o /\ C = (/) ) -> ( bToNat ` C ) = 0 )
+s14:s10,s13:eqtr4d |- ( ( C e. 2o /\ C = (/) ) -> ( # ` ( addCarry ` C ) ) = ( bToNat ` C ) )
+s15::simpr |- ( ( C e. 2o /\ C = 1o ) -> C = 1o )
+s16:s15:fveq2d |- ( ( C e. 2o /\ C = 1o ) -> ( addCarry ` C ) = ( addCarry ` 1o ) )
+s17::addcarry1 |- ( addCarry ` 1o ) = <" 1o ">
+s18:s16,s17:eqtrdi |- ( ( C e. 2o /\ C = 1o ) -> ( addCarry ` C ) = <" 1o "> )
+s19:s18:fveq2d |- ( ( C e. 2o /\ C = 1o ) -> ( # ` ( addCarry ` C ) ) = ( # ` <" 1o "> ) )
+s20::s1len |- ( # ` <" 1o "> ) = 1
+s21:s19,s20:eqtrdi |- ( ( C e. 2o /\ C = 1o ) -> ( # ` ( addCarry ` C ) ) = 1 )
+s22:s15:fveq2d |- ( ( C e. 2o /\ C = 1o ) -> ( bToNat ` C ) = ( bToNat ` 1o ) )
+s23::bwbn1 |- ( bToNat ` 1o ) = 1
+s24:s22,s23:eqtrdi |- ( ( C e. 2o /\ C = 1o ) -> ( bToNat ` C ) = 1 )
+s25:s21,s24:eqtr4d |- ( ( C e. 2o /\ C = 1o ) -> ( # ` ( addCarry ` C ) ) = ( bToNat ` C ) )
+qed:s14,s25,s3:mpjaodan |- ( C e. 2o -> ( # ` ( addCarry ` C ) ) = ( bToNat ` C ) )
+$)

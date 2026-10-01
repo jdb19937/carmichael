@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=ef2tmc  LOC_AFTER=?
+
+* The term ` M y ^ z / ( z ( z - Q ) ) ` is continuous on every set avoiding ` 0 ` and ` Q ` .
+
+s1::simp1 |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> Y e. RR+ )
+s2::simp2 |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( M e. CC /\ Q e. CC ) )
+s3::simp3 |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> E C_ ( ( CC \ { 0 } ) \ { Q } ) )
+i4::simpl
+s5:s2,i4:syl |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> M e. CC )
+i6::simpr
+s7:s2,i6:syl |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> Q e. CC )
+i8::ef2kph
+s9:s1,s7,i8:syl2anc |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( ( z e. ( ( CC \ { 0 } ) \ { Q } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) e. ( ( ( CC \ { 0 } ) \ { Q } ) -cn-> CC ) /\ ( ( CC \ { 0 } ) \ { Q } ) C_ dom ( CC _D ( z e. ( ( CC \ { 0 } ) \ { Q } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) ) ) )
+i10::simpl
+s11:s9,i10:syl |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( z e. ( ( CC \ { 0 } ) \ { Q } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) e. ( ( ( CC \ { 0 } ) \ { Q } ) -cn-> CC ) )
+i12::rescncf
+s13:s3,s11,i12:sylc |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( ( z e. ( ( CC \ { 0 } ) \ { Q } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) |` E ) e. ( E -cn-> CC ) )
+i14::resmpt
+s15:s3,i14:syl |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( ( z e. ( ( CC \ { 0 } ) \ { Q } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) |` E ) = ( z e. E |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) )
+s16::id |- ( z = d -> z = d )
+c1:s16:fveq2d |- ( z = d -> ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) = ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` d ) )
+c2:s16:oveq1d |- ( z = d -> ( z - Q ) = ( d - Q ) )
+c3:c1,c2:oveq12d |- ( z = d -> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) = ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` d ) / ( d - Q ) ) )
+s17:c3:cbvmptv |- ( z e. E |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) = ( d e. E |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` d ) / ( d - Q ) ) )
+s18:s17:a1i |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( z e. E |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) = ( d e. E |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` d ) / ( d - Q ) ) ) )
+s19:s15,s18:eqtrd |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( ( z e. ( ( CC \ { 0 } ) \ { Q } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - Q ) ) ) |` E ) = ( d e. E |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` d ) / ( d - Q ) ) ) )
+s20:s19,s13:eqeltrrd |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( d e. E |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` d ) / ( d - Q ) ) ) e. ( E -cn-> CC ) )
+s21::difss |- ( ( CC \ { 0 } ) \ { Q } ) C_ ( CC \ { 0 } )
+s22:s21:a1i |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( ( CC \ { 0 } ) \ { Q } ) C_ ( CC \ { 0 } ) )
+s23::difss |- ( CC \ { 0 } ) C_ CC
+s24:s23:a1i |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( CC \ { 0 } ) C_ CC )
+s25:s22,s24:sstrd |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( ( CC \ { 0 } ) \ { Q } ) C_ CC )
+s26:s3,s25:sstrd |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> E C_ CC )
+s27::ssid |- CC C_ CC
+s28:s27:a1i |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> CC C_ CC )
+i29::cncfmptc
+s30:s5,s26,s28,i29:syl3anc |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( d e. E |-> M ) e. ( E -cn-> CC ) )
+qed:s30,s20:mulcncf |- ( ( Y e. RR+ /\ ( M e. CC /\ Q e. CC ) /\ E C_ ( ( CC \ { 0 } ) \ { Q } ) ) -> ( d e. E |-> ( M x. ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` d ) / ( d - Q ) ) ) ) e. ( E -cn-> CC ) )
+$)

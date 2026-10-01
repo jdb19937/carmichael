@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=ifsq  LOC_AFTER=?
+
+* The square of an indicator term.
+
+s1::simpr |- ( ( A e. CC /\ ph ) -> ph )
+s2:s1:iftrued |- ( ( A e. CC /\ ph ) -> if ( ph , A , 0 ) = A )
+s3:s2:oveq1d |- ( ( A e. CC /\ ph ) -> ( if ( ph , A , 0 ) ^ 2 ) = ( A ^ 2 ) )
+s4:s1:iftrued |- ( ( A e. CC /\ ph ) -> if ( ph , ( A ^ 2 ) , 0 ) = ( A ^ 2 ) )
+s5:s4:eqcomd |- ( ( A e. CC /\ ph ) -> ( A ^ 2 ) = if ( ph , ( A ^ 2 ) , 0 ) )
+s6:s3,s5:eqtrd |- ( ( A e. CC /\ ph ) -> ( if ( ph , A , 0 ) ^ 2 ) = if ( ph , ( A ^ 2 ) , 0 ) )
+s7::simpr |- ( ( A e. CC /\ -. ph ) -> -. ph )
+s8::sq0 |- ( 0 ^ 2 ) = 0
+s9:s8:a1i |- ( ( A e. CC /\ -. ph ) -> ( 0 ^ 2 ) = 0 )
+s10:s7:iffalsed |- ( ( A e. CC /\ -. ph ) -> if ( ph , A , 0 ) = 0 )
+s11:s10:oveq1d |- ( ( A e. CC /\ -. ph ) -> ( if ( ph , A , 0 ) ^ 2 ) = ( 0 ^ 2 ) )
+s12:s11,s9:eqtrd |- ( ( A e. CC /\ -. ph ) -> ( if ( ph , A , 0 ) ^ 2 ) = 0 )
+s13:s7:iffalsed |- ( ( A e. CC /\ -. ph ) -> if ( ph , ( A ^ 2 ) , 0 ) = 0 )
+s14:s13:eqcomd |- ( ( A e. CC /\ -. ph ) -> 0 = if ( ph , ( A ^ 2 ) , 0 ) )
+s15:s12,s14:eqtrd |- ( ( A e. CC /\ -. ph ) -> ( if ( ph , A , 0 ) ^ 2 ) = if ( ph , ( A ^ 2 ) , 0 ) )
+qed:s6,s15:pm2.61dan |- ( A e. CC -> ( if ( ph , A , 0 ) ^ 2 ) = if ( ph , ( A ^ 2 ) , 0 ) )
+$)

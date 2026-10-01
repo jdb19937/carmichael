@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatltk  LOC_AFTER=?
+
+* A positive integer is below 2 to the power of one more than the integer part of its binary logarithm.
+
+s1::2z |- 2 e. ZZ
+i2::uzid
+s3:s1,i2:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s4:s3:a1i |- ( N e. NN -> 2 e. ( ZZ>= ` 2 ) )
+s5::nnrp |- ( N e. NN -> N e. RR+ )
+i6::relogbzcl
+s7:s4,s5,i6:syl2anc |- ( N e. NN -> ( 2 logb N ) e. RR )
+s8::encnatlem3 |- ( N e. NN -> ( |_ ` ( 2 logb N ) ) e. NN0 )
+i9::peano2nn0
+s10:s8,i9:syl |- ( N e. NN -> ( ( |_ ` ( 2 logb N ) ) + 1 ) e. NN0 )
+s11:s10:nn0zd |- ( N e. NN -> ( ( |_ ` ( 2 logb N ) ) + 1 ) e. ZZ )
+i12::flltp1
+s13:s7,i12:syl |- ( N e. NN -> ( 2 logb N ) < ( ( |_ ` ( 2 logb N ) ) + 1 ) )
+i14::nnlogbexp
+s15:s4,s11,i14:syl2anc |- ( N e. NN -> ( 2 logb ( 2 ^ ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) = ( ( |_ ` ( 2 logb N ) ) + 1 ) )
+s16:s15:eqcomd |- ( N e. NN -> ( ( |_ ` ( 2 logb N ) ) + 1 ) = ( 2 logb ( 2 ^ ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) )
+s17:s13,s16:breqtrd |- ( N e. NN -> ( 2 logb N ) < ( 2 logb ( 2 ^ ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) )
+s18::2rp |- 2 e. RR+
+s19:s18:a1i |- ( N e. NN -> 2 e. RR+ )
+i20::rpexpcl
+s21:s19,s11,i20:syl2anc |- ( N e. NN -> ( 2 ^ ( ( |_ ` ( 2 logb N ) ) + 1 ) ) e. RR+ )
+i22::logblt
+s23:s4,s5,s21,i22:syl3anc |- ( N e. NN -> ( N < ( 2 ^ ( ( |_ ` ( 2 logb N ) ) + 1 ) ) <-> ( 2 logb N ) < ( 2 logb ( 2 ^ ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) ) )
+qed:s17,s23:mpbird |- ( N e. NN -> N < ( 2 ^ ( ( |_ ` ( 2 logb N ) ) + 1 ) ) )
+$)

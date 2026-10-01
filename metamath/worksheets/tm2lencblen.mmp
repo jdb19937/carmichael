@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lencblen  LOC_AFTER=?
+
+* The length of an encoded list.  Lean: ` encListB_length_le ` .
+
+s1::simp1 |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> L e. Word Word ( { 1 } X. 2o ) )
+s2::simp2 |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> M e. NN0 )
+s3::tm2lentlen |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( entries ` L ) ) <_ ( ( # ` L ) x. ( M + 1 ) ) )
+i4::tm2lencbval
+s5:s1,i4:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( encListB ` L ) = ( ( entries ` L ) ++ <" 2 "> ) )
+s6:s5:fveq2d |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( encListB ` L ) ) = ( # ` ( ( entries ` L ) ++ <" 2 "> ) ) )
+i7::tm2lentcl
+s8:s1,i7:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( entries ` L ) e. Word Gamma' )
+s9::gamma2 |- 2 e. Gamma'
+s10:s9:a1i |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> 2 e. Gamma' )
+s11:s10:s1cld |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> <" 2 "> e. Word Gamma' )
+i12::ccatlen
+s13:s8,s11,i12:syl2anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( ( entries ` L ) ++ <" 2 "> ) ) = ( ( # ` ( entries ` L ) ) + ( # ` <" 2 "> ) ) )
+s14::s1len |- ( # ` <" 2 "> ) = 1
+s15:s14:oveq2i |- ( ( # ` ( entries ` L ) ) + ( # ` <" 2 "> ) ) = ( ( # ` ( entries ` L ) ) + 1 )
+s16:s15:a1i |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( ( # ` ( entries ` L ) ) + ( # ` <" 2 "> ) ) = ( ( # ` ( entries ` L ) ) + 1 ) )
+s17:s6,s13:eqtrd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( encListB ` L ) ) = ( ( # ` ( entries ` L ) ) + ( # ` <" 2 "> ) ) )
+s18:s17,s16:eqtrd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( encListB ` L ) ) = ( ( # ` ( entries ` L ) ) + 1 ) )
+i19::lencl
+s20:s1,i19:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` L ) e. NN0 )
+i21::lencl
+s22:s8,i21:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( entries ` L ) ) e. NN0 )
+i23::leid
+s24::1re |- 1 e. RR
+s25:s24,i23:ax-mp |- 1 <_ 1
+s26:s25:a1i |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> 1 <_ 1 )
+s27:s22:nn0zd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( entries ` L ) ) e. ZZ )
+s28:s27:zred |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( entries ` L ) ) e. RR )
+s29:s24:a1i |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> 1 e. RR )
+s30:s20:nn0zd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` L ) e. ZZ )
+s31:s30:zred |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` L ) e. RR )
+s32:s2:nn0zd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> M e. ZZ )
+s33:s32:zred |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> M e. RR )
+s34:s33,s29:readdcld |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( M + 1 ) e. RR )
+s35:s31,s34:remulcld |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( ( # ` L ) x. ( M + 1 ) ) e. RR )
+s36:s28,s29,s35,s29,s3,s26:le2addd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( ( # ` ( entries ` L ) ) + 1 ) <_ ( ( ( # ` L ) x. ( M + 1 ) ) + 1 ) )
+qed:s18,s36:eqbrtrd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ M e. NN0 /\ A. w e. ran L ( # ` w ) <_ M ) -> ( # ` ( encListB ` L ) ) <_ ( ( ( # ` L ) x. ( M + 1 ) ) + 1 ) )
+$)

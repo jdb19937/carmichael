@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=korselt1lem2  LOC_AFTER=?
+
+* Lemma for korselt1: the case P divides A; both sides are 0.
+
+1::simpl1   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> P e. Prime )
+2::simpl2   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> A e. ZZ )
+3::simpl3   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> K e. NN0 )
+4::simpr    |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> P || A )
+5a::prmnn
+5:1,5a:syl  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> P e. NN )
+6a::nnm1nn0
+6:5,6a:syl  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( P - 1 ) e. NN0 )
+7a::nn0mulcl
+7:6,3,7a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( ( P - 1 ) x. K ) e. NN0 )
+8a::nn0p1nn
+8:7,8a:syl  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( ( ( P - 1 ) x. K ) + 1 ) e. NN )
+9a::prmdvdsexp
+9:1,2,8,9a:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( P || ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) <-> P || A ) )
+10:4,9:mpbird |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> P || ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) )
+11:8:nnnn0d |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( ( ( P - 1 ) x. K ) + 1 ) e. NN0 )
+12a::zexpcl
+12:2,11,12a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) e. ZZ )
+13a::dvdsval3
+13:5,12,13a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( P || ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) <-> ( ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) mod P ) = 0 ) )
+14:10,13:mpbid |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) mod P ) = 0 )
+15a::dvdsval3
+15:5,2,15a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( P || A <-> ( A mod P ) = 0 ) )
+16:4,15:mpbid |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( A mod P ) = 0 )
+qed:14,16:eqtr4d |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ P || A ) -> ( ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) mod P ) = ( A mod P ) )
+$)

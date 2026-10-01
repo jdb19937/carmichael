@@ -1,0 +1,59 @@
+$( <MM> <PROOF_ASST> THEOREM=lintlog2  LOC_AFTER=?
+
+* The integral of 1 / ( z - P ) along a segment with P - z in the slit plane.
+
+s1::simpl |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( P e. CC /\ S e. CC /\ T e. CC ) )
+s2::simpr |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) )
+i3::simp1
+s4:s1,i3:syl |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> P e. CC )
+i5::simp2
+s6:s1,i5:syl |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> S e. CC )
+i7::simp3
+s8:s1,i7:syl |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> T e. CC )
+s9::oveq2 |- ( u = v -> ( P - u ) = ( P - v ) )
+s10:s9:eleq1d |- ( u = v -> ( ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) <-> ( P - v ) e. ( CC \ ( -oo (,] 0 ) ) ) )
+s11:s10:cbvralvw |- ( A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) <-> A. v e. ( S cseg T ) ( P - v ) e. ( CC \ ( -oo (,] 0 ) ) )
+s12:s2:adantr |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) )
+s13:s11:a1i |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> ( A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) <-> A. v e. ( S cseg T ) ( P - v ) e. ( CC \ ( -oo (,] 0 ) ) ) )
+s14:s12,s13:mpbid |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> A. v e. ( S cseg T ) ( P - v ) e. ( CC \ ( -oo (,] 0 ) ) )
+s15::simpr |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> v e. ( S cseg T ) )
+i16::rspa
+s17:s14,s15,i16:syl2anc |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> ( P - v ) e. ( CC \ ( -oo (,] 0 ) ) )
+s18:s4:adantr |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> P e. CC )
+s19:s6:adantr |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> S e. CC )
+s20:s8:adantr |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> T e. CC )
+i21::csegcl
+s22:s19,s20,i21:syl2anc |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> ( S cseg T ) C_ CC )
+s23:s22,s15:sseldd |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> v e. CC )
+s24:s23,s18:subcld |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> ( v - P ) e. CC )
+i25::mulm1
+s26:s24,i25:syl |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> ( -u 1 x. ( v - P ) ) = -u ( v - P ) )
+i27::negsubdi2
+s28:s23,s18,i27:syl2anc |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> -u ( v - P ) = ( P - v ) )
+s29:s26,s28:eqtrd |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> ( -u 1 x. ( v - P ) ) = ( P - v ) )
+s30:s29,s17:eqeltrd |- ( ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) /\ v e. ( S cseg T ) ) -> ( -u 1 x. ( v - P ) ) e. ( CC \ ( -oo (,] 0 ) ) )
+s31:s30:ralrimiva |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> A. v e. ( S cseg T ) ( -u 1 x. ( v - P ) ) e. ( CC \ ( -oo (,] 0 ) ) )
+s32::neg1cn |- -u 1 e. CC
+s33:s32:a1i |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> -u 1 e. CC )
+s34::neg1ne0 |- -u 1 =/= 0
+s35:s34:a1i |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> -u 1 =/= 0 )
+s36:s33,s35:jca |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( -u 1 e. CC /\ -u 1 =/= 0 ) )
+i37::lintlog
+s38:s36,s1,s31,i37:syl3anc |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) lint <. S , T >. ) = ( ( log ` ( -u 1 x. ( T - P ) ) ) - ( log ` ( -u 1 x. ( S - P ) ) ) ) )
+s39:s8,s4:subcld |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( T - P ) e. CC )
+i40::mulm1
+s41:s39,i40:syl |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( -u 1 x. ( T - P ) ) = -u ( T - P ) )
+i42::negsubdi2
+s43:s8,s4,i42:syl2anc |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> -u ( T - P ) = ( P - T ) )
+s44:s41,s43:eqtrd |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( -u 1 x. ( T - P ) ) = ( P - T ) )
+s45:s6,s4:subcld |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( S - P ) e. CC )
+i46::mulm1
+s47:s45,i46:syl |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( -u 1 x. ( S - P ) ) = -u ( S - P ) )
+i48::negsubdi2
+s49:s6,s4,i48:syl2anc |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> -u ( S - P ) = ( P - S ) )
+s50:s47,s49:eqtrd |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( -u 1 x. ( S - P ) ) = ( P - S ) )
+s51:s44:fveq2d |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( log ` ( -u 1 x. ( T - P ) ) ) = ( log ` ( P - T ) ) )
+s52:s50:fveq2d |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( log ` ( -u 1 x. ( S - P ) ) ) = ( log ` ( P - S ) ) )
+s53:s51,s52:oveq12d |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( ( log ` ( -u 1 x. ( T - P ) ) ) - ( log ` ( -u 1 x. ( S - P ) ) ) ) = ( ( log ` ( P - T ) ) - ( log ` ( P - S ) ) ) )
+qed:s38,s53:eqtrd |- ( ( ( P e. CC /\ S e. CC /\ T e. CC ) /\ A. u e. ( S cseg T ) ( P - u ) e. ( CC \ ( -oo (,] 0 ) ) ) -> ( ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) lint <. S , T >. ) = ( ( log ` ( P - T ) ) - ( log ` ( P - S ) ) ) )
+$)

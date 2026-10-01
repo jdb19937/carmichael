@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=noduptdcl  LOC_AFTER=?
+
+* The value of ~ df-noduptd is a pair of a result and an operation count.  Lean: nodupTD, the distinctness test of step 5.
+
+s1::id |- ( S e. Word NN0 -> S e. Word NN0 )
+s2::id |- ( l = S -> l = S )
+c1:s2:fveq2d |- ( l = S -> ( # ` l ) = ( # ` S ) )
+c2:c1:fveq2d |- ( l = S -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` l ) ) = ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) )
+c3:c2,s2:fveq12d |- ( l = S -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` l ) ) ` l ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) )
+s3::df-noduptd |- NodupTD = ( l e. Word NN0 |-> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` l ) ) ` l ) )
+s4::fvex |- ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) e. _V
+s5:s4:a1i |- ( S e. Word NN0 -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) e. _V )
+s6:c3,s3:fvmptg |- ( ( S e. Word NN0 /\ ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) e. _V ) -> ( NodupTD ` S ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) )
+s7:s1,s5,s6:syl2anc |- ( S e. Word NN0 -> ( NodupTD ` S ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) )
+s8::lencl |- ( S e. Word NN0 -> ( # ` S ) e. NN0 )
+s9:s1,s8:syl |- ( S e. Word NN0 -> ( # ` S ) e. NN0 )
+s10::ovex |- ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V
+s11:s10:a1i |- ( S e. Word NN0 -> ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V )
+s12::simpr |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> g e. Word NN0 )
+s13::1oel2o |- 1o e. 2o
+s14:s13:a1i |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> 1o e. 2o )
+s15::0nn0 |- 0 e. NN0
+s16:s15:a1i |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> 0 e. NN0 )
+s17::opelxpi |- ( ( 1o e. 2o /\ 0 e. NN0 ) -> <. 1o , 0 >. e. ( 2o X. NN0 ) )
+s18:s14,s16,s17:syl2anc |- ( ( S e. Word NN0 /\ g e. Word NN0 ) -> <. 1o , 0 >. e. ( 2o X. NN0 ) )
+s19::eqid |- ( g e. Word NN0 |-> <. 1o , 0 >. ) = ( g e. Word NN0 |-> <. 1o , 0 >. )
+s20:s18,s19:fmptd |- ( S e. Word NN0 -> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) )
+s21::2oex |- 2o e. _V
+s22:s21:a1i |- ( S e. Word NN0 -> 2o e. _V )
+s23::nn0ex |- NN0 e. _V
+s24:s23:a1i |- ( S e. Word NN0 -> NN0 e. _V )
+s25::xpexg |- ( ( 2o e. _V /\ NN0 e. _V ) -> ( 2o X. NN0 ) e. _V )
+s26:s22,s24,s25:syl2anc |- ( S e. Word NN0 -> ( 2o X. NN0 ) e. _V )
+s27::wrdexi |- Word NN0 e. _V
+s28:s27:a1i |- ( S e. Word NN0 -> Word NN0 e. _V )
+s29::elmapg |- ( ( ( 2o X. NN0 ) e. _V /\ Word NN0 e. _V ) -> ( ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) <-> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) ) )
+s30:s26,s28,s29:syl2anc |- ( S e. Word NN0 -> ( ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) <-> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) ) )
+s31:s20,s30:mpbird |- ( S e. Word NN0 -> ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s32::noduptdsf |- NodupS : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 )
+s33:s32:a1i |- ( S e. Word NN0 -> NodupS : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s34:s11,s31,s33:3jca |- ( S e. Word NN0 -> ( ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V /\ ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) /\ NodupS : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) ) )
+s35::algrecmap |- ( ( ( ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V /\ ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) /\ NodupS : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) ) /\ ( # ` S ) e. NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s36:s34,s9,s35:syl2anc |- ( S e. Word NN0 -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s37::elmapi |- ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) : Word NN0 --> ( 2o X. NN0 ) )
+s38:s36,s37:syl |- ( S e. Word NN0 -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) : Word NN0 --> ( 2o X. NN0 ) )
+s39::ffvelcdm |- ( ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) : Word NN0 --> ( 2o X. NN0 ) /\ S e. Word NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) e. ( 2o X. NN0 ) )
+s40:s38,s1,s39:syl2anc |- ( S e. Word NN0 -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec NodupS ) ` ( # ` S ) ) ` S ) e. ( 2o X. NN0 ) )
+qed:s7,s40:eqeltrd |- ( S e. Word NN0 -> ( NodupTD ` S ) e. ( 2o X. NN0 ) )
+$)

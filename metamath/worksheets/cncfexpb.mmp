@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=cncfexpb  LOC_AFTER=?
+
+* A nonnegative integer power of a continuous complex mapping is continuous.
+
+s1::simpl |- ( ( ( y e. E |-> S ) e. ( E -cn-> CC ) /\ M e. NN0 ) -> ( y e. E |-> S ) e. ( E -cn-> CC ) )
+s2::simpr |- ( ( ( y e. E |-> S ) e. ( E -cn-> CC ) /\ M e. NN0 ) -> M e. NN0 )
+s3::nfmpt1 |- F/_ y ( y e. E |-> S )
+s4::nfcv |- F/_ y ( E -cn-> CC )
+s5:s3,s4:nfel |- F/ y ( y e. E |-> S ) e. ( E -cn-> CC )
+s6::nfv |- F/ y M e. NN0
+s7:s5,s6:nfan |- F/ y ( ( y e. E |-> S ) e. ( E -cn-> CC ) /\ M e. NN0 )
+i8::expcncf
+s9:s2,i8:syl |- ( ( ( y e. E |-> S ) e. ( E -cn-> CC ) /\ M e. NN0 ) -> ( v e. CC |-> ( v ^ M ) ) e. ( CC -cn-> CC ) )
+s10::ssid |- CC C_ CC
+s11:s10:a1i |- ( ( ( y e. E |-> S ) e. ( E -cn-> CC ) /\ M e. NN0 ) -> CC C_ CC )
+s12::oveq1 |- ( v = S -> ( v ^ M ) = ( S ^ M ) )
+qed:s7,s1,s9,s11,s12:cncfcompt2 |- ( ( ( y e. E |-> S ) e. ( E -cn-> CC ) /\ M e. NN0 ) -> ( y e. E |-> ( S ^ M ) ) e. ( E -cn-> CC ) )
+$)

@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=lintcnlem  LOC_AFTER=?
+
+* The integrand of a segment integral is continuous on a subset of the unit interval.
+
+s1::simp1l |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> A e. CC )
+s2::simp1r |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> B e. CC )
+s3::simp3 |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> X C_ ( 0 [,] 1 ) )
+s4::cseglincnf |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( t e. X |-> ( F ` ( A + ( t x. ( B - A ) ) ) ) ) e. ( X -cn-> CC ) )
+s5::unitsscn |- ( 0 [,] 1 ) C_ CC
+s6:s5:a1i |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( 0 [,] 1 ) C_ CC )
+s7:s3,s6:sstrd |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> X C_ CC )
+s8::ssidd |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> CC C_ CC )
+s9:s2,s1:subcld |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( B - A ) e. CC )
+i10::cncfmptc
+s11:s9,s7,s8,i10:syl3anc |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( t e. X |-> ( B - A ) ) e. ( X -cn-> CC ) )
+s12::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s13:s12:mulcn |- x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s14:s13:a1i |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+qed:s12,s14,s4,s11:cncfmpt2f |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( t e. X |-> ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) e. ( X -cn-> CC ) )
+$)

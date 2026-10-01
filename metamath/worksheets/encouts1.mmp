@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=encouts1  LOC_AFTER=?
+
+* encodeOutput of a list extended by one number: the previous encoding followed by the number and a comma.
+
+s1::simp1 |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> M e. NN0 )
+s2::simp2 |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> S e. Word NN0 )
+s3::simp3 |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> P e. NN0 )
+i4::ccatws1cl
+s5:s2,s3,i4:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( S ++ <" P "> ) e. Word NN0 )
+i6::encoutval
+s7:s1,s5,i6:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( M encodeOutput ( S ++ <" P "> ) ) = ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) ) ) )
+s8:s3:s1cld |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> <" P "> e. Word NN0 )
+i9::encoutflatccat
+s10:s2,s8,i9:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. <" P "> ) ) ) )
+i11::encoutflats1
+s12:s3,i11:syl |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. <" P "> ) ) = ( ( encNatGam ` P ) ++ <" 4 "> ) )
+s13:s12:oveq2d |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. <" P "> ) ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) )
+s14:s10,s13:eqtrd |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) )
+s15:s14:oveq2d |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) ) = ( <" 4 "> ++ ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) ) )
+s16::gamma4 |- 4 e. Gamma'
+i17::s1cl
+s18:s16,i17:ax-mp |- <" 4 "> e. Word Gamma'
+s19:s18:a1i |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> <" 4 "> e. Word Gamma' )
+i20::encoutflatcl
+s21:s2,i20:syl |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) e. Word Gamma' )
+i22::encnatgamcl
+s23:s3,i22:syl |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( encNatGam ` P ) e. Word Gamma' )
+s24:s16:a1i |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> 4 e. Gamma' )
+i25::ccatws1cl
+s26:s23,s24,i25:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( encNatGam ` P ) ++ <" 4 "> ) e. Word Gamma' )
+i27::ccatass
+s28:s19,s21,s26,i27:syl3anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) = ( <" 4 "> ++ ( ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) ) )
+s29:s15,s28:eqtr4d |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) ) = ( ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) )
+s30:s29:oveq2d |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) ) ) = ( ( encNatGam ` M ) ++ ( ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) ) )
+i31::encnatgamcl
+s32:s1,i31:syl |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( encNatGam ` M ) e. Word Gamma' )
+i33::ccatcl
+s34:s19,s21,i33:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) e. Word Gamma' )
+i35::ccatass
+s36:s32,s34,s26,i35:syl3anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) = ( ( encNatGam ` M ) ++ ( ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) ) )
+s37:s30,s36:eqtr4d |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) ) ) = ( ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) )
+i38::encoutval
+s39:s1,s2,i38:syl2anc |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( M encodeOutput S ) = ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) )
+s40:s39:oveq1d |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( M encodeOutput S ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) = ( ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. S ) ) ) ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) )
+s41:s37,s40:eqtr4d |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( ( encNatGam ` M ) ++ ( <" 4 "> ++ ( ( freeMnd ` Gamma' ) gsum ( ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) o. ( S ++ <" P "> ) ) ) ) ) = ( ( M encodeOutput S ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) )
+qed:s7,s41:eqtrd |- ( ( M e. NN0 /\ S e. Word NN0 /\ P e. NN0 ) -> ( M encodeOutput ( S ++ <" P "> ) ) = ( ( M encodeOutput S ) ++ ( ( encNatGam ` P ) ++ <" 4 "> ) ) )
+$)

@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=tblcmp0  LOC_AFTER=?
+
+* The empty table is complete for the empty list (Lean: tblComplete_empty).
+
+s1::simpr |- ( ( L e. NN /\ s e. ~P ran (/) ) -> s e. ~P ran (/) )
+s2::rn0 |- ran (/) = (/)
+s3:s2:pweqi |- ~P ran (/) = ~P (/)
+s4::pw0 |- ~P (/) = { (/) }
+s5:s3,s4:eqtri |- ~P ran (/) = { (/) }
+s6:s5:a1i |- ( ( L e. NN /\ s e. ~P ran (/) ) -> ~P ran (/) = { (/) } )
+s7:s1,s6:eleqtrd |- ( ( L e. NN /\ s e. ~P ran (/) ) -> s e. { (/) } )
+i8::elsni
+s9:s7,i8:syl |- ( ( L e. NN /\ s e. ~P ran (/) ) -> s = (/) )
+s10::nne |- ( -. s =/= (/) <-> s = (/) )
+s11:s10:biimpri |- ( s = (/) -> -. s =/= (/) )
+s12:s11:a1i |- ( ( L e. NN /\ s e. ~P ran (/) ) -> ( s = (/) -> -. s =/= (/) ) )
+s13:s9,s12:mpd |- ( ( L e. NN /\ s e. ~P ran (/) ) -> -. s =/= (/) )
+s14:s13:pm2.21d |- ( ( L e. NN /\ s e. ~P ran (/) ) -> ( s =/= (/) -> ( EmptyTbl ` ( prod_ q e. s q mod L ) ) =/= ( inr ` (/) ) ) )
+qed:s14:ralrimiva |- ( L e. NN -> A. s e. ~P ran (/) ( s =/= (/) -> ( EmptyTbl ` ( prod_ q e. s q mod L ) ) =/= ( inr ` (/) ) ) )
+$)

@@ -1,0 +1,85 @@
+$( <MM> <PROOF_ASST> THEOREM=lsftc  LOC_AFTER=?
+
+* The fundamental theorem of calculus for a function differentiable on all of RR with a continuous derivative.
+
+s1::simpl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( A e. RR /\ B e. RR /\ A <_ B ) )
+s2:s1:simp1d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> A e. RR )
+s3:s1:simp2d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> B e. RR )
+s4:s1:simp3d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> A <_ B )
+s5::simpr |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) )
+s6:s5:simp1d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> F : RR --> CC )
+s7:s5:simp2d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR _D F ) = G )
+s8:s5:simp3d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> G e. ( RR -cn-> CC ) )
+s9::ax-resscn |- RR C_ CC
+s10:s9:a1i |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> RR C_ CC )
+s11::ssid |- RR C_ RR
+s12:s11:a1i |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> RR C_ RR )
+s13:s2,s3:iccssred |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( A [,] B ) C_ RR )
+s14::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s15::eqid |- ( ( TopOpen ` CCfld ) |`t RR ) = ( ( TopOpen ` CCfld ) |`t RR )
+s16:s10,s6:jca |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR C_ CC /\ F : RR --> CC ) )
+s17:s12,s13:jca |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR C_ RR /\ ( A [,] B ) C_ RR ) )
+s18:s16,s17:jca |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( RR C_ CC /\ F : RR --> CC ) /\ ( RR C_ RR /\ ( A [,] B ) C_ RR ) ) )
+s19:s14,s15:dvres |- ( ( ( RR C_ CC /\ F : RR --> CC ) /\ ( RR C_ RR /\ ( A [,] B ) C_ RR ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) ) )
+s20:s18,s19:syl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) ) )
+i21::iccntr
+s22:s2,s3,i21:syl2anc |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( int ` ( topGen ` ran (,) ) ) ` ( A [,] B ) ) = ( A (,) B ) )
+s23::tgioo4 |- ( topGen ` ran (,) ) = ( ( TopOpen ` CCfld ) |`t RR )
+s24:s23:a1i |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( topGen ` ran (,) ) = ( ( TopOpen ` CCfld ) |`t RR ) )
+s25:s24:fveq2d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( int ` ( topGen ` ran (,) ) ) = ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) )
+s26:s25:fveq1d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( int ` ( topGen ` ran (,) ) ) ` ( A [,] B ) ) = ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) )
+s27:s26:eqcomd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) = ( ( int ` ( topGen ` ran (,) ) ) ` ( A [,] B ) ) )
+s28:s27,s22:eqtrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) = ( A (,) B ) )
+s29:s7,s28:reseq12d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( RR _D F ) |` ( ( int ` ( ( TopOpen ` CCfld ) |`t RR ) ) ` ( A [,] B ) ) ) = ( G |` ( A (,) B ) ) )
+s30:s20,s29:eqtrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( G |` ( A (,) B ) ) )
+s31::ioossre |- ( A (,) B ) C_ RR
+s32:s31:a1i |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( A (,) B ) C_ RR )
+i33::rescncf
+s34:s32,s8,i33:sylc |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( G |` ( A (,) B ) ) e. ( ( A (,) B ) -cn-> CC ) )
+s35:s30,s34:eqeltrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) e. ( ( A (,) B ) -cn-> CC ) )
+i36::cncff
+s37:s8,i36:syl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> G : RR --> CC )
+s38:s37:feqmptd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> G = ( t e. RR |-> ( G ` t ) ) )
+s39:s38,s8:eqeltrrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( t e. RR |-> ( G ` t ) ) e. ( RR -cn-> CC ) )
+s40:s2,s3,s39:lsibl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( t e. ( A (,) B ) |-> ( G ` t ) ) e. L^1 )
+s41:s38:reseq1d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( G |` ( A (,) B ) ) = ( ( t e. RR |-> ( G ` t ) ) |` ( A (,) B ) ) )
+i42::resmpt
+s43:s32,i42:syl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( t e. RR |-> ( G ` t ) ) |` ( A (,) B ) ) = ( t e. ( A (,) B ) |-> ( G ` t ) ) )
+s44:s41,s43:eqtrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( G |` ( A (,) B ) ) = ( t e. ( A (,) B ) |-> ( G ` t ) ) )
+s45:s30,s44:eqtrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( t e. ( A (,) B ) |-> ( G ` t ) ) )
+s46:s45,s40:eqeltrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) e. L^1 )
+s47:s7:dmeqd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> dom ( RR _D F ) = dom G )
+i48::fdm
+s49:s37,i48:syl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> dom G = RR )
+s50:s47,s49:eqtrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> dom ( RR _D F ) = RR )
+s51:s10,s6,s12:3jca |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( RR C_ CC /\ F : RR --> CC /\ RR C_ RR ) )
+s52:s51,s50:jca |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( RR C_ CC /\ F : RR --> CC /\ RR C_ RR ) /\ dom ( RR _D F ) = RR ) )
+i53::dvcn
+s54:s52,i53:syl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> F e. ( RR -cn-> CC ) )
+i55::rescncf
+s56:s13,s54,i55:sylc |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( F |` ( A [,] B ) ) e. ( ( A [,] B ) -cn-> CC ) )
+s57:s2,s3,s4,s35,s46,s56:ftc2 |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> S. ( A (,) B ) ( ( RR _D ( F |` ( A [,] B ) ) ) ` t ) _d t = ( ( ( F |` ( A [,] B ) ) ` B ) - ( ( F |` ( A [,] B ) ) ` A ) ) )
+s58::simpr |- ( ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) /\ t e. ( A (,) B ) ) -> t e. ( A (,) B ) )
+s59:s30:adantr |- ( ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) /\ t e. ( A (,) B ) ) -> ( RR _D ( F |` ( A [,] B ) ) ) = ( G |` ( A (,) B ) ) )
+s60:s59:fveq1d |- ( ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) /\ t e. ( A (,) B ) ) -> ( ( RR _D ( F |` ( A [,] B ) ) ) ` t ) = ( ( G |` ( A (,) B ) ) ` t ) )
+i61::fvres
+s62:s58,i61:syl |- ( ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) /\ t e. ( A (,) B ) ) -> ( ( G |` ( A (,) B ) ) ` t ) = ( G ` t ) )
+s63:s60,s62:eqtrd |- ( ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) /\ t e. ( A (,) B ) ) -> ( ( RR _D ( F |` ( A [,] B ) ) ) ` t ) = ( G ` t ) )
+s64:s63:itgeq2dv |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> S. ( A (,) B ) ( ( RR _D ( F |` ( A [,] B ) ) ) ` t ) _d t = S. ( A (,) B ) ( G ` t ) _d t )
+s65:s2:rexrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> A e. RR* )
+s66:s3:rexrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> B e. RR* )
+i67::ubicc2
+s68:s65,s66,s4,i67:syl3anc |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> B e. ( A [,] B ) )
+s69:s2:rexrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> A e. RR* )
+s70:s3:rexrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> B e. RR* )
+i71::lbicc2
+s72:s69,s70,s4,i71:syl3anc |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> A e. ( A [,] B ) )
+i73::fvres
+s74:s68,i73:syl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( F |` ( A [,] B ) ) ` B ) = ( F ` B ) )
+i75::fvres
+s76:s72,i75:syl |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( F |` ( A [,] B ) ) ` A ) = ( F ` A ) )
+s77:s74,s76:oveq12d |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> ( ( ( F |` ( A [,] B ) ) ` B ) - ( ( F |` ( A [,] B ) ) ` A ) ) = ( ( F ` B ) - ( F ` A ) ) )
+s78:s64:eqcomd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> S. ( A (,) B ) ( G ` t ) _d t = S. ( A (,) B ) ( ( RR _D ( F |` ( A [,] B ) ) ) ` t ) _d t )
+s79:s78,s57:eqtrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> S. ( A (,) B ) ( G ` t ) _d t = ( ( ( F |` ( A [,] B ) ) ` B ) - ( ( F |` ( A [,] B ) ) ` A ) ) )
+qed:s79,s77:eqtrd |- ( ( ( A e. RR /\ B e. RR /\ A <_ B ) /\ ( F : RR --> CC /\ ( RR _D F ) = G /\ G e. ( RR -cn-> CC ) ) ) -> S. ( A (,) B ) ( G ` t ) _d t = ( ( F ` B ) - ( F ` A ) ) )
+$)

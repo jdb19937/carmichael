@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=bwoddne  LOC_AFTER=?
+
+* An odd integer is not an even one.
+
+s1::simpl |- ( ( A e. ZZ /\ B e. ZZ ) -> A e. ZZ )
+s2::simpr |- ( ( A e. ZZ /\ B e. ZZ ) -> B e. ZZ )
+s3::eqidd |- ( ( A e. ZZ /\ B e. ZZ ) -> ( ( 2 x. A ) + 1 ) = ( ( 2 x. A ) + 1 ) )
+i4::2tp1odd
+s5:s1,s3,i4:syl2anc |- ( ( A e. ZZ /\ B e. ZZ ) -> -. 2 || ( ( 2 x. A ) + 1 ) )
+s6::2z |- 2 e. ZZ
+s7:s6:a1i |- ( ( A e. ZZ /\ B e. ZZ ) -> 2 e. ZZ )
+i8::dvdsmul1
+s9:s7,s2,i8:syl2anc |- ( ( A e. ZZ /\ B e. ZZ ) -> 2 || ( 2 x. B ) )
+s10::breq2 |- ( ( ( 2 x. A ) + 1 ) = ( 2 x. B ) -> ( 2 || ( ( 2 x. A ) + 1 ) <-> 2 || ( 2 x. B ) ) )
+s11:s9,s10:syl5ibrcom |- ( ( A e. ZZ /\ B e. ZZ ) -> ( ( ( 2 x. A ) + 1 ) = ( 2 x. B ) -> 2 || ( ( 2 x. A ) + 1 ) ) )
+qed:s5,s11:mtod |- ( ( A e. ZZ /\ B e. ZZ ) -> -. ( ( 2 x. A ) + 1 ) = ( 2 x. B ) )
+$)

@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=tmdvlen  LOC_AFTER=?
+
+* The accumulator of ` divisorsOfF ` after ` j ` elements has ` 2 ^ j ` entries (Lean ` divisorsOf_rev_take_length ` ).
+
+s1::simpl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> W e. Word NN0 )
+s2::simpr |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> J e. ( 0 ... ( # ` W ) ) )
+i3::revcl
+s4:s1,i3:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( reverse ` W ) e. Word NN0 )
+i5::pfxcl
+s6:s4,i5:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( ( reverse ` W ) prefix J ) e. Word NN0 )
+i7::revcl
+s8:s6,i7:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( reverse ` ( ( reverse ` W ) prefix J ) ) e. Word NN0 )
+i9::divisorsofcl
+s10:s8,i9:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) e. ( Word NN0 X. NN0 ) )
+i11::xp1st
+s12:s10,i11:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) e. Word NN0 )
+i13::revlen
+s14:s1,i13:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( reverse ` W ) ) = ( # ` W ) )
+s15:s14:eqcomd |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` W ) = ( # ` ( reverse ` W ) ) )
+s16:s15:oveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( 0 ... ( # ` W ) ) = ( 0 ... ( # ` ( reverse ` W ) ) ) )
+s17:s2,s16:eleqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> J e. ( 0 ... ( # ` ( reverse ` W ) ) ) )
+i18::revlen
+s19:s12,i18:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) = ( # ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) )
+i20::divisorsoflen
+s21:s8,i20:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) = ( 2 ^ ( # ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) )
+i22::revlen
+s23:s6,i22:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) = ( # ` ( ( reverse ` W ) prefix J ) ) )
+i24::pfxlen
+s25:s4,s17,i24:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( ( reverse ` W ) prefix J ) ) = J )
+s26:s23,s25:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) = J )
+s27:s19,s21:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) = ( 2 ^ ( # ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) )
+s28:s26:oveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( 2 ^ ( # ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) = ( 2 ^ J ) )
+qed:s27,s28:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ... ( # ` W ) ) ) -> ( # ` ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) = ( 2 ^ J ) )
+$)

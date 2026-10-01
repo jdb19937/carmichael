@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=coprmliftlem  LOC_AFTER=?
+
+* Lemma for coprmlift: an infinite set of positive integers has an element above any given bound.
+
+s1::simp1 |- ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) -> S C_ NN )
+s2::simp2 |- ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) -> -. S e. Fin )
+s3::simp3 |- ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) -> M e. NN )
+s4::simpr |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> q e. S )
+s5:s1:ad2antrr |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> S C_ NN )
+s6:s5,s4:sseldd |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> q e. NN )
+s7:s3:ad2antrr |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> M e. NN )
+s8::breq2 |- ( p = q -> ( M < p <-> M < q ) )
+s9:s8:notbid |- ( p = q -> ( -. M < p <-> -. M < q ) )
+s10::simplr |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> A. p e. S -. M < p )
+s11:s9:rspccva |- ( ( A. p e. S -. M < p /\ q e. S ) -> -. M < q )
+s12:s10,s4,s11:syl2anc |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> -. M < q )
+s13:s6:nnred |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> q e. RR )
+s14:s7:nnred |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> M e. RR )
+i15::lenlt
+s16:s13,s14,i15:syl2anc |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> ( q <_ M <-> -. M < q ) )
+s17:s12,s16:mpbird |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> q <_ M )
+s18:s6,s7,s17:3jca |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> ( q e. NN /\ M e. NN /\ q <_ M ) )
+i19::elfz1b
+s20:s18,i19:sylibr |- ( ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) /\ q e. S ) -> q e. ( 1 ... M ) )
+s21:s20:ex |- ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) -> ( q e. S -> q e. ( 1 ... M ) ) )
+s22:s21:ssrdv |- ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) -> S C_ ( 1 ... M ) )
+s23::fzfi |- ( 1 ... M ) e. Fin
+s24:s23:a1i |- ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) -> ( 1 ... M ) e. Fin )
+i25::ssfi
+s26:s24,s22,i25:syl2anc |- ( ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) /\ A. p e. S -. M < p ) -> S e. Fin )
+s27:s26:ex |- ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) -> ( A. p e. S -. M < p -> S e. Fin ) )
+s28:s2,s27:mtod |- ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) -> -. A. p e. S -. M < p )
+s29::dfrex2 |- ( E. p e. S M < p <-> -. A. p e. S -. M < p )
+qed:s28,s29:sylibr |- ( ( S C_ NN /\ -. S e. Fin /\ M e. NN ) -> E. p e. S M < p )
+$)

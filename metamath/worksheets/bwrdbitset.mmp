@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=bwrdbitset  LOC_AFTER=?
+
+* The positions of the digits word holding true are the binary digits of the number below the length.
+
+s1::simpl |- ( ( N e. ZZ /\ M e. NN0 ) -> N e. ZZ )
+s2::simpr |- ( ( N e. ZZ /\ M e. NN0 ) -> M e. NN0 )
+i3::bwrdlen
+s4:s1,s2,i3:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( # ` ( N bwrd M ) ) = M )
+s5:s4:oveq2d |- ( ( N e. ZZ /\ M e. NN0 ) -> ( 0 ..^ ( # ` ( N bwrd M ) ) ) = ( 0 ..^ M ) )
+s6:s5:rabeqdv |- ( ( N e. ZZ /\ M e. NN0 ) -> { i e. ( 0 ..^ ( # ` ( N bwrd M ) ) ) | ( ( N bwrd M ) ` i ) = 1o } = { i e. ( 0 ..^ M ) | ( ( N bwrd M ) ` i ) = 1o } )
+s7::simpr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> i e. ( 0 ..^ M ) )
+s8:s1:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> N e. ZZ )
+s9:s2:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> M e. NN0 )
+i10::bwrdfv
+s11:s8,s9,s7,i10:syl3anc |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> ( ( N bwrd M ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s12:s11:eqeq1d |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> ( ( ( N bwrd M ) ` i ) = 1o <-> if ( i e. ( bits ` N ) , 1o , (/) ) = 1o ) )
+s13::1n0 |- 1o =/= (/)
+i14::iftrueb
+s15:s13,i14:ax-mp |- ( if ( i e. ( bits ` N ) , 1o , (/) ) = 1o <-> i e. ( bits ` N ) )
+s16:s15:a1i |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> ( if ( i e. ( bits ` N ) , 1o , (/) ) = 1o <-> i e. ( bits ` N ) ) )
+s17:s12,s16:bitrd |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ M ) ) -> ( ( ( N bwrd M ) ` i ) = 1o <-> i e. ( bits ` N ) ) )
+s18:s17:rabbidva |- ( ( N e. ZZ /\ M e. NN0 ) -> { i e. ( 0 ..^ M ) | ( ( N bwrd M ) ` i ) = 1o } = { i e. ( 0 ..^ M ) | i e. ( bits ` N ) } )
+s19::dfin5 |- ( ( 0 ..^ M ) i^i ( bits ` N ) ) = { i e. ( 0 ..^ M ) | i e. ( bits ` N ) }
+s20::incom |- ( ( 0 ..^ M ) i^i ( bits ` N ) ) = ( ( bits ` N ) i^i ( 0 ..^ M ) )
+s21:s19,s20:eqtr3i |- { i e. ( 0 ..^ M ) | i e. ( bits ` N ) } = ( ( bits ` N ) i^i ( 0 ..^ M ) )
+s22:s6,s18:eqtrd |- ( ( N e. ZZ /\ M e. NN0 ) -> { i e. ( 0 ..^ ( # ` ( N bwrd M ) ) ) | ( ( N bwrd M ) ` i ) = 1o } = { i e. ( 0 ..^ M ) | i e. ( bits ` N ) } )
+qed:s22,s21:eqtrdi |- ( ( N e. ZZ /\ M e. NN0 ) -> { i e. ( 0 ..^ ( # ` ( N bwrd M ) ) ) | ( ( N bwrd M ) ` i ) = 1o } = ( ( bits ` N ) i^i ( 0 ..^ M ) ) )
+$)

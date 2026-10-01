@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2layload  LOC_AFTER=?
+
+* load f q belongs to the constructor layer over X when q e. X.
+
+s2::tm2layval |- ( ( T e. V /\ X e. W ) -> ( T TM2lay X ) = ( X u. ( ( ( { <. 6 , (/) >. } u. U_ f e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) { <. 5 , f >. } ) u. ( U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } u. U_ f e. ( 2o ^m ( 2nd ` T ) ) U_ p e. X U_ q e. X { <. 4 , <. f , <. p , q >. >. >. } ) ) u. U_ k e. dom ( 1st ` ( 1st ` T ) ) ( U_ f e. ( ( ( 1st ` ( 1st ` T ) ) ` k ) ^m ( 2nd ` T ) ) U_ q e. X { <. 0 , <. k , <. f , q >. >. >. } u. U_ f e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` k ) |_| 1o ) ) ) U_ q e. X ( { <. 1 , <. k , <. f , q >. >. >. } u. { <. 2 , <. k , <. f , q >. >. >. } ) ) ) ) )
+s3:s2:adantr |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> ( T TM2lay X ) = ( X u. ( ( ( { <. 6 , (/) >. } u. U_ f e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) { <. 5 , f >. } ) u. ( U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } u. U_ f e. ( 2o ^m ( 2nd ` T ) ) U_ p e. X U_ q e. X { <. 4 , <. f , <. p , q >. >. >. } ) ) u. U_ k e. dom ( 1st ` ( 1st ` T ) ) ( U_ f e. ( ( ( 1st ` ( 1st ` T ) ) ` k ) ^m ( 2nd ` T ) ) U_ q e. X { <. 0 , <. k , <. f , q >. >. >. } u. U_ f e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` k ) |_| 1o ) ) ) U_ q e. X ( { <. 1 , <. k , <. f , q >. >. >. } u. { <. 2 , <. k , <. f , q >. >. >. } ) ) ) ) )
+s4::simprl |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) )
+s5::simprr |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> Q e. X )
+s6::opex |- <. 3 , <. F , Q >. >. e. _V
+i7::snidg
+s8:s6,i7:ax-mp |- <. 3 , <. F , Q >. >. e. { <. 3 , <. F , Q >. >. }
+s9:s8:a1i |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. { <. 3 , <. F , Q >. >. } )
+s10::id |- ( q = Q -> q = Q )
+c1:s10:opeq2d |- ( q = Q -> <. F , q >. = <. F , Q >. )
+c2:c1:opeq2d |- ( q = Q -> <. 3 , <. F , q >. >. = <. 3 , <. F , Q >. >. )
+c3:c2:sneqd |- ( q = Q -> { <. 3 , <. F , q >. >. } = { <. 3 , <. F , Q >. >. } )
+c4:c3:eleq2d |- ( q = Q -> ( <. 3 , <. F , Q >. >. e. { <. 3 , <. F , q >. >. } <-> <. 3 , <. F , Q >. >. e. { <. 3 , <. F , Q >. >. } ) )
+s11:c4:rspcev |- ( ( Q e. X /\ <. 3 , <. F , Q >. >. e. { <. 3 , <. F , Q >. >. } ) -> E. q e. X <. 3 , <. F , Q >. >. e. { <. 3 , <. F , q >. >. } )
+s12:s5,s9,s11:syl2anc |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> E. q e. X <. 3 , <. F , Q >. >. e. { <. 3 , <. F , q >. >. } )
+s13::eliun |- ( <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. F , q >. >. } <-> E. q e. X <. 3 , <. F , Q >. >. e. { <. 3 , <. F , q >. >. } )
+s14:s12,s13:sylibr |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. F , q >. >. } )
+s15::id |- ( f = F -> f = F )
+c5:s15:opeq1d |- ( f = F -> <. f , q >. = <. F , q >. )
+c6:c5:opeq2d |- ( f = F -> <. 3 , <. f , q >. >. = <. 3 , <. F , q >. >. )
+c7:c6:sneqd |- ( f = F -> { <. 3 , <. f , q >. >. } = { <. 3 , <. F , q >. >. } )
+c8:c7:iuneq2d |- ( f = F -> U_ q e. X { <. 3 , <. f , q >. >. } = U_ q e. X { <. 3 , <. F , q >. >. } )
+c9:c8:eleq2d |- ( f = F -> ( <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. f , q >. >. } <-> <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. F , q >. >. } ) )
+s16:c9:rspcev |- ( ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. F , q >. >. } ) -> E. f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. f , q >. >. } )
+s17:s4,s14,s16:syl2anc |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> E. f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. f , q >. >. } )
+s18::eliun |- ( <. 3 , <. F , Q >. >. e. U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } <-> E. f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) <. 3 , <. F , Q >. >. e. U_ q e. X { <. 3 , <. f , q >. >. } )
+s19:s17,s18:sylibr |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } )
+i20::elun1
+s21:s19,i20:syl |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. ( U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } u. U_ f e. ( 2o ^m ( 2nd ` T ) ) U_ p e. X U_ q e. X { <. 4 , <. f , <. p , q >. >. >. } ) )
+i22::elun2
+s23:s21,i22:syl |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. ( ( { <. 6 , (/) >. } u. U_ f e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) { <. 5 , f >. } ) u. ( U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } u. U_ f e. ( 2o ^m ( 2nd ` T ) ) U_ p e. X U_ q e. X { <. 4 , <. f , <. p , q >. >. >. } ) ) )
+i24::elun1
+s25:s23,i24:syl |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. ( ( ( { <. 6 , (/) >. } u. U_ f e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) { <. 5 , f >. } ) u. ( U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } u. U_ f e. ( 2o ^m ( 2nd ` T ) ) U_ p e. X U_ q e. X { <. 4 , <. f , <. p , q >. >. >. } ) ) u. U_ k e. dom ( 1st ` ( 1st ` T ) ) ( U_ f e. ( ( ( 1st ` ( 1st ` T ) ) ` k ) ^m ( 2nd ` T ) ) U_ q e. X { <. 0 , <. k , <. f , q >. >. >. } u. U_ f e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` k ) |_| 1o ) ) ) U_ q e. X ( { <. 1 , <. k , <. f , q >. >. >. } u. { <. 2 , <. k , <. f , q >. >. >. } ) ) ) )
+i26::elun2
+s27:s25,i26:syl |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. ( X u. ( ( ( { <. 6 , (/) >. } u. U_ f e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) { <. 5 , f >. } ) u. ( U_ f e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) U_ q e. X { <. 3 , <. f , q >. >. } u. U_ f e. ( 2o ^m ( 2nd ` T ) ) U_ p e. X U_ q e. X { <. 4 , <. f , <. p , q >. >. >. } ) ) u. U_ k e. dom ( 1st ` ( 1st ` T ) ) ( U_ f e. ( ( ( 1st ` ( 1st ` T ) ) ` k ) ^m ( 2nd ` T ) ) U_ q e. X { <. 0 , <. k , <. f , q >. >. >. } u. U_ f e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` k ) |_| 1o ) ) ) U_ q e. X ( { <. 1 , <. k , <. f , q >. >. >. } u. { <. 2 , <. k , <. f , q >. >. >. } ) ) ) ) )
+qed:s27,s3:eleqtrrd |- ( ( ( T e. V /\ X e. W ) /\ ( F e. ( ( 2nd ` T ) ^m ( 2nd ` T ) ) /\ Q e. X ) ) -> <. 3 , <. F , Q >. >. e. ( T TM2lay X ) )
+$)

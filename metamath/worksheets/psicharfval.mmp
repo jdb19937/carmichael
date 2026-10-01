@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=psicharfval  LOC_AFTER=?
+
+* Value of the function psiChar at a modulus: the operation sending a Dirichlet character and a real to the twisted psi sum.
+
+s1::fveq2 |- ( q = Q -> ( DChr ` q ) = ( DChr ` Q ) )
+s2:s1:fveq2d |- ( q = Q -> ( Base ` ( DChr ` q ) ) = ( Base ` ( DChr ` Q ) ) )
+s3::eqidd |- ( q = Q -> RR = RR )
+s4::fveq2 |- ( q = Q -> ( Z/nZ ` q ) = ( Z/nZ ` Q ) )
+s5:s4:fveq2d |- ( q = Q -> ( ZRHom ` ( Z/nZ ` q ) ) = ( ZRHom ` ( Z/nZ ` Q ) ) )
+s6:s5:fveq1d |- ( q = Q -> ( ( ZRHom ` ( Z/nZ ` q ) ) ` n ) = ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) )
+s7:s6:fveq2d |- ( q = Q -> ( x ` ( ( ZRHom ` ( Z/nZ ` q ) ) ` n ) ) = ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) ) )
+s8:s7:oveq1d |- ( q = Q -> ( ( x ` ( ( ZRHom ` ( Z/nZ ` q ) ) ` n ) ) x. ( Lam ` n ) ) = ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) ) x. ( Lam ` n ) ) )
+s9:s8:sumeq2sdv |- ( q = Q -> sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` q ) ) ` n ) ) x. ( Lam ` n ) ) = sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) ) x. ( Lam ` n ) ) )
+s10:s2,s3,s9:mpoeq123dv |- ( q = Q -> ( x e. ( Base ` ( DChr ` q ) ) , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` q ) ) ` n ) ) x. ( Lam ` n ) ) ) = ( x e. ( Base ` ( DChr ` Q ) ) , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) ) x. ( Lam ` n ) ) ) )
+s11::df-psichar |- psiChar = ( q e. NN |-> ( x e. ( Base ` ( DChr ` q ) ) , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` q ) ) ` n ) ) x. ( Lam ` n ) ) ) )
+s12::fvex |- ( Base ` ( DChr ` Q ) ) e. _V
+s13::reex |- RR e. _V
+s14::mpoexga |- ( ( ( Base ` ( DChr ` Q ) ) e. _V /\ RR e. _V ) -> ( x e. ( Base ` ( DChr ` Q ) ) , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) ) x. ( Lam ` n ) ) ) e. _V )
+s15:s12,s13,s14:mp2an |- ( x e. ( Base ` ( DChr ` Q ) ) , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) ) x. ( Lam ` n ) ) ) e. _V
+qed:s10,s11,s15:fvmpt |- ( Q e. NN -> ( psiChar ` Q ) = ( x e. ( Base ` ( DChr ` Q ) ) , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` n ) ) x. ( Lam ` n ) ) ) )
+$)

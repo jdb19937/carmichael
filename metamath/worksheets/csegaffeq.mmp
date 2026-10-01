@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=csegaffeq  LOC_AFTER=?
+
+* The affine image of a point of a segment, as a point of the image segment.
+
+s1::simp1 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( C e. CC /\ P e. CC ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> C e. CC )
+s4::simp1 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( C e. CC /\ P e. CC ) )
+i5::simpr
+s6:s4,i5:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> P e. CC )
+s7::simp2 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( S e. CC /\ T e. CC ) )
+i8::simpl
+s9:s7,i8:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> S e. CC )
+s10::simp2 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( S e. CC /\ T e. CC ) )
+i11::simpr
+s12:s10,i11:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> T e. CC )
+s13::simp3 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> U e. CC )
+s14:s9,s6:subcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( S - P ) e. CC )
+s15:s12,s6:subcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( T - P ) e. CC )
+s16:s12,s9:subcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( T - S ) e. CC )
+s17:s13,s16:mulcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( U x. ( T - S ) ) e. CC )
+s18:s3,s15,s14:subdid |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( C x. ( ( T - P ) - ( S - P ) ) ) = ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) )
+s19:s18:eqcomd |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) = ( C x. ( ( T - P ) - ( S - P ) ) ) )
+i20::nnncan2
+s21:s12,s9,s6,i20:syl3anc |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( T - P ) - ( S - P ) ) = ( T - S ) )
+s22:s21:oveq2d |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( C x. ( ( T - P ) - ( S - P ) ) ) = ( C x. ( T - S ) ) )
+s23:s19,s22:eqtrd |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) = ( C x. ( T - S ) ) )
+s24:s23:oveq2d |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( U x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) = ( U x. ( C x. ( T - S ) ) ) )
+s25:s13,s3,s16:mul12d |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( U x. ( C x. ( T - S ) ) ) = ( C x. ( U x. ( T - S ) ) ) )
+s26:s24,s25:eqtrd |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( U x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) = ( C x. ( U x. ( T - S ) ) ) )
+s27:s26:oveq2d |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( C x. ( S - P ) ) + ( U x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) = ( ( C x. ( S - P ) ) + ( C x. ( U x. ( T - S ) ) ) ) )
+s28:s3,s14,s17:adddid |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( C x. ( ( S - P ) + ( U x. ( T - S ) ) ) ) = ( ( C x. ( S - P ) ) + ( C x. ( U x. ( T - S ) ) ) ) )
+s29:s28:eqcomd |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( C x. ( S - P ) ) + ( C x. ( U x. ( T - S ) ) ) ) = ( C x. ( ( S - P ) + ( U x. ( T - S ) ) ) ) )
+i30::addsub
+s31:s9,s17,s6,i30:syl3anc |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( S + ( U x. ( T - S ) ) ) - P ) = ( ( S - P ) + ( U x. ( T - S ) ) ) )
+s32:s31:oveq2d |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( C x. ( ( S + ( U x. ( T - S ) ) ) - P ) ) = ( C x. ( ( S - P ) + ( U x. ( T - S ) ) ) ) )
+s33:s27,s29:eqtrd |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( C x. ( S - P ) ) + ( U x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) = ( C x. ( ( S - P ) + ( U x. ( T - S ) ) ) ) )
+qed:s33,s32:eqtr4d |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ U e. CC ) -> ( ( C x. ( S - P ) ) + ( U x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) = ( C x. ( ( S + ( U x. ( T - S ) ) ) - P ) ) )
+$)

@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lencbcc  LOC_AFTER=?
+
+* A list on a stack followed by the rest of the stack: the entries, then ` bra ` , then the rest.  Lean: ` encListB_eq_entries_append ` .
+
+s1::simpl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> L e. Word Word ( { 1 } X. 2o ) )
+s2::simpr |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> R e. Word Gamma' )
+i3::tm2lencbval
+s4:s1,i3:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> ( encListB ` L ) = ( ( entries ` L ) ++ <" 2 "> ) )
+s5:s4:oveq1d |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> ( ( encListB ` L ) ++ R ) = ( ( ( entries ` L ) ++ <" 2 "> ) ++ R ) )
+i6::tm2lentcl
+s7:s1,i6:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> ( entries ` L ) e. Word Gamma' )
+s8::gamma2 |- 2 e. Gamma'
+s9:s8:a1i |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> 2 e. Gamma' )
+s10:s9:s1cld |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> <" 2 "> e. Word Gamma' )
+i11::ccatass
+s12:s7,s10,s2,i11:syl3anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> ( ( ( entries ` L ) ++ <" 2 "> ) ++ R ) = ( ( entries ` L ) ++ ( <" 2 "> ++ R ) ) )
+qed:s5,s12:eqtrd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ R e. Word Gamma' ) -> ( ( encListB ` L ) ++ R ) = ( ( entries ` L ) ++ ( <" 2 "> ++ R ) ) )
+$)

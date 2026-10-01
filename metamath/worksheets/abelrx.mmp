@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=abelrx  LOC_AFTER=?
+
+* Reindexing the shifted Dirichlet-series sum: the terms at ` j + 1 ` over ` ( 1 ..^ N ) ` are the terms at ` k ` over ` ( 2 ... N ) `.
+
+s1::simp1 |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> A : NN --> CC )
+s2::simp2 |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> Z e. CC )
+s3::simp3 |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> N e. NN )
+i4::nnz
+s5:s3,i4:syl |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> N e. ZZ )
+s6::1z |- 1 e. ZZ
+s7:s6:a1i |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> 1 e. ZZ )
+s8:s5,s7:zsubcld |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> ( N - 1 ) e. ZZ )
+i9::fzoval
+s10:s5,i9:syl |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> ( 1 ..^ N ) = ( 1 ... ( N - 1 ) ) )
+s11:s10:sumeq1d |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> sum_ j e. ( 1 ..^ N ) ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) = sum_ j e. ( 1 ... ( N - 1 ) ) ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) )
+s12::simpr |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> j e. ( 1 ... ( N - 1 ) ) )
+i13::elfznn
+s14:s12,i13:syl |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> j e. NN )
+i15::peano2nn
+s16:s14,i15:syl |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> ( j + 1 ) e. NN )
+s17:s1:adantr |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> A : NN --> CC )
+s18:s17,s16:ffvelcdmd |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> ( A ` ( j + 1 ) ) e. CC )
+s19:s16:nnrpd |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> ( j + 1 ) e. RR+ )
+s20:s19:rpcnd |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> ( j + 1 ) e. CC )
+s21:s2:adantr |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> Z e. CC )
+s22:s21:negcld |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> -u Z e. CC )
+s23:s20,s22:cxpcld |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> ( ( j + 1 ) ^c -u Z ) e. CC )
+s24:s18,s23:mulcld |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ j e. ( 1 ... ( N - 1 ) ) ) -> ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) e. CC )
+s25::oveq1 |- ( j = ( k - 1 ) -> ( j + 1 ) = ( ( k - 1 ) + 1 ) )
+s26:s25:fveq2d |- ( j = ( k - 1 ) -> ( A ` ( j + 1 ) ) = ( A ` ( ( k - 1 ) + 1 ) ) )
+s27::oveq1 |- ( j = ( k - 1 ) -> ( j + 1 ) = ( ( k - 1 ) + 1 ) )
+s28:s27:oveq1d |- ( j = ( k - 1 ) -> ( ( j + 1 ) ^c -u Z ) = ( ( ( k - 1 ) + 1 ) ^c -u Z ) )
+s29:s26,s28:oveq12d |- ( j = ( k - 1 ) -> ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) = ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) )
+s30:s7,s7,s8,s24,s29:fsumshft |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> sum_ j e. ( 1 ... ( N - 1 ) ) ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) = sum_ k e. ( ( 1 + 1 ) ... ( ( N - 1 ) + 1 ) ) ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) )
+s31::1p1e2 |- ( 1 + 1 ) = 2
+s32:s31:a1i |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> ( 1 + 1 ) = 2 )
+s33:s5:zcnd |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> N e. CC )
+s34::ax-1cn |- 1 e. CC
+s35:s34:a1i |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> 1 e. CC )
+s36:s33,s35:npcand |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> ( ( N - 1 ) + 1 ) = N )
+s37:s32,s36:oveq12d |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> ( ( 1 + 1 ) ... ( ( N - 1 ) + 1 ) ) = ( 2 ... N ) )
+s38:s37:sumeq1d |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> sum_ k e. ( ( 1 + 1 ) ... ( ( N - 1 ) + 1 ) ) ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) = sum_ k e. ( 2 ... N ) ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) )
+s39::simpr |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> k e. ( 2 ... N ) )
+i40::elfzelz
+s41:s39,i40:syl |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> k e. ZZ )
+s42:s41:zred |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> k e. RR )
+s43:s42:recnd |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> k e. CC )
+s44::ax-1cn |- 1 e. CC
+s45:s44:a1i |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> 1 e. CC )
+s46:s43,s45:npcand |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> ( ( k - 1 ) + 1 ) = k )
+s47:s46:fveq2d |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> ( A ` ( ( k - 1 ) + 1 ) ) = ( A ` k ) )
+s48:s46:oveq1d |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> ( ( ( k - 1 ) + 1 ) ^c -u Z ) = ( k ^c -u Z ) )
+s49:s47,s48:oveq12d |- ( ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) /\ k e. ( 2 ... N ) ) -> ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) = ( ( A ` k ) x. ( k ^c -u Z ) ) )
+s50:s49:sumeq2dv |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> sum_ k e. ( 2 ... N ) ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) = sum_ k e. ( 2 ... N ) ( ( A ` k ) x. ( k ^c -u Z ) ) )
+s51:s11,s30:eqtrd |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> sum_ j e. ( 1 ..^ N ) ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) = sum_ k e. ( ( 1 + 1 ) ... ( ( N - 1 ) + 1 ) ) ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) )
+s52:s51,s38:eqtrd |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> sum_ j e. ( 1 ..^ N ) ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) = sum_ k e. ( 2 ... N ) ( ( A ` ( ( k - 1 ) + 1 ) ) x. ( ( ( k - 1 ) + 1 ) ^c -u Z ) ) )
+qed:s52,s50:eqtrd |- ( ( A : NN --> CC /\ Z e. CC /\ N e. NN ) -> sum_ j e. ( 1 ..^ N ) ( ( A ` ( j + 1 ) ) x. ( ( j + 1 ) ^c -u Z ) ) = sum_ k e. ( 2 ... N ) ( ( A ` k ) x. ( k ^c -u Z ) ) )
+$)

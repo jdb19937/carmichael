@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=bvmchkqratlem  LOC_AFTER=?
+
+* The field identity 1 + ( 1 / P ) ( P / ( P - 1 ) ) = P / ( P - 1 ) of the recursion assembly.
+
+s1::simpl |- ( ( P e. RR /\ 1 < P ) -> P e. RR )
+s2::simpr |- ( ( P e. RR /\ 1 < P ) -> 1 < P )
+s3:s1:recnd |- ( ( P e. RR /\ 1 < P ) -> P e. CC )
+s4::0le1 |- 0 <_ 1
+s5:s4:a1i |- ( ( P e. RR /\ 1 < P ) -> 0 <_ 1 )
+s6::0re |- 0 e. RR
+s7:s6:a1i |- ( ( P e. RR /\ 1 < P ) -> 0 e. RR )
+s8::1re |- 1 e. RR
+s9:s8:a1i |- ( ( P e. RR /\ 1 < P ) -> 1 e. RR )
+s10:s7,s9,s1,s5,s2:lelttrd |- ( ( P e. RR /\ 1 < P ) -> 0 < P )
+s11:s10:gt0ne0d |- ( ( P e. RR /\ 1 < P ) -> P =/= 0 )
+s12::1red |- ( ( P e. RR /\ 1 < P ) -> 1 e. RR )
+s13::1cnd |- ( ( P e. RR /\ 1 < P ) -> 1 e. CC )
+s14:s1,s12:resubcld |- ( ( P e. RR /\ 1 < P ) -> ( P - 1 ) e. RR )
+s15:s12,s1:posdifd |- ( ( P e. RR /\ 1 < P ) -> ( 1 < P <-> 0 < ( P - 1 ) ) )
+s16:s2,s15:mpbid |- ( ( P e. RR /\ 1 < P ) -> 0 < ( P - 1 ) )
+s17:s14:recnd |- ( ( P e. RR /\ 1 < P ) -> ( P - 1 ) e. CC )
+s18:s16:gt0ne0d |- ( ( P e. RR /\ 1 < P ) -> ( P - 1 ) =/= 0 )
+s19:s3,s11:reccld |- ( ( P e. RR /\ 1 < P ) -> ( 1 / P ) e. CC )
+s20:s19,s3,s17,s18:divassd |- ( ( P e. RR /\ 1 < P ) -> ( ( ( 1 / P ) x. P ) / ( P - 1 ) ) = ( ( 1 / P ) x. ( P / ( P - 1 ) ) ) )
+s21:s20:eqcomd |- ( ( P e. RR /\ 1 < P ) -> ( ( 1 / P ) x. ( P / ( P - 1 ) ) ) = ( ( ( 1 / P ) x. P ) / ( P - 1 ) ) )
+s22:s3,s11:recid2d |- ( ( P e. RR /\ 1 < P ) -> ( ( 1 / P ) x. P ) = 1 )
+s23:s22:oveq1d |- ( ( P e. RR /\ 1 < P ) -> ( ( ( 1 / P ) x. P ) / ( P - 1 ) ) = ( 1 / ( P - 1 ) ) )
+s24:s21,s23:eqtrd |- ( ( P e. RR /\ 1 < P ) -> ( ( 1 / P ) x. ( P / ( P - 1 ) ) ) = ( 1 / ( P - 1 ) ) )
+s25:s17,s13,s17,s18:divdird |- ( ( P e. RR /\ 1 < P ) -> ( ( ( P - 1 ) + 1 ) / ( P - 1 ) ) = ( ( ( P - 1 ) / ( P - 1 ) ) + ( 1 / ( P - 1 ) ) ) )
+s26:s17,s18:dividd |- ( ( P e. RR /\ 1 < P ) -> ( ( P - 1 ) / ( P - 1 ) ) = 1 )
+s27:s26:oveq1d |- ( ( P e. RR /\ 1 < P ) -> ( ( ( P - 1 ) / ( P - 1 ) ) + ( 1 / ( P - 1 ) ) ) = ( 1 + ( 1 / ( P - 1 ) ) ) )
+s28:s25,s27:eqtr2d |- ( ( P e. RR /\ 1 < P ) -> ( 1 + ( 1 / ( P - 1 ) ) ) = ( ( ( P - 1 ) + 1 ) / ( P - 1 ) ) )
+s29:s3,s13:npcand |- ( ( P e. RR /\ 1 < P ) -> ( ( P - 1 ) + 1 ) = P )
+s30:s29:oveq1d |- ( ( P e. RR /\ 1 < P ) -> ( ( ( P - 1 ) + 1 ) / ( P - 1 ) ) = ( P / ( P - 1 ) ) )
+s31:s24:oveq2d |- ( ( P e. RR /\ 1 < P ) -> ( 1 + ( ( 1 / P ) x. ( P / ( P - 1 ) ) ) ) = ( 1 + ( 1 / ( P - 1 ) ) ) )
+s32:s31,s28:eqtrd |- ( ( P e. RR /\ 1 < P ) -> ( 1 + ( ( 1 / P ) x. ( P / ( P - 1 ) ) ) ) = ( ( ( P - 1 ) + 1 ) / ( P - 1 ) ) )
+qed:s32,s30:eqtrd |- ( ( P e. RR /\ 1 < P ) -> ( 1 + ( ( 1 / P ) x. ( P / ( P - 1 ) ) ) ) = ( P / ( P - 1 ) ) )
+$)

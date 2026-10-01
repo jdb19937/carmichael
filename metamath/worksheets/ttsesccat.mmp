@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=ttsesccat  LOC_AFTER=?
+
+* The word of a concatenation of slot lists (Lean ` encSlots_append ` ).
+
+s1::simpl |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> L e. Word ( Word NN0 |_| 1o ) )
+s2::simpr |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> U e. Word ( Word NN0 |_| 1o ) )
+i3::ccatcl
+s4:s1,s2,i3:syl2anc |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( L ++ U ) e. Word ( Word NN0 |_| 1o ) )
+i5::ttsesv
+s6:s4,i5:syl |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlots ` ( L ++ U ) ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( L ++ U ) ) ) )
+s7::ttabslotf |- encSlot : ( Word NN0 |_| 1o ) --> Word Gamma'
+s8:s7:a1i |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> encSlot : ( Word NN0 |_| 1o ) --> Word Gamma' )
+i9::ccatco
+s10:s1,s2,s8,i9:syl3anc |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlot o. ( L ++ U ) ) = ( ( encSlot o. L ) ++ ( encSlot o. U ) ) )
+s11:s10:oveq2d |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( L ++ U ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( encSlot o. L ) ++ ( encSlot o. U ) ) ) )
+s12::ttabslotf |- encSlot : ( Word NN0 |_| 1o ) --> Word Gamma'
+s13:s12:a1i |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> encSlot : ( Word NN0 |_| 1o ) --> Word Gamma' )
+i14::wrdco
+s15:s1,s13,i14:syl2anc |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlot o. L ) e. Word Word Gamma' )
+s16::ttabslotf |- encSlot : ( Word NN0 |_| 1o ) --> Word Gamma'
+s17:s16:a1i |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> encSlot : ( Word NN0 |_| 1o ) --> Word Gamma' )
+i18::wrdco
+s19:s2,s17,i18:syl2anc |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlot o. U ) e. Word Word Gamma' )
+i20::gsumgamccat
+s21:s15,s19,i20:syl2anc |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( encSlot o. L ) ++ ( encSlot o. U ) ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( encSlot o. L ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( encSlot o. U ) ) ) )
+i22::ttsesv
+s23:s1,i22:syl |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlots ` L ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. L ) ) )
+i24::ttsesv
+s25:s2,i24:syl |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlots ` U ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. U ) ) )
+s26:s23,s25:oveq12d |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( ( encSlots ` L ) ++ ( encSlots ` U ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( encSlot o. L ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( encSlot o. U ) ) ) )
+s27:s6,s11:eqtrd |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlots ` ( L ++ U ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( encSlot o. L ) ++ ( encSlot o. U ) ) ) )
+s28:s27,s21:eqtrd |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlots ` ( L ++ U ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( encSlot o. L ) ) ++ ( ( freeMnd ` Gamma' ) gsum ( encSlot o. U ) ) ) )
+qed:s28,s26:eqtr4d |- ( ( L e. Word ( Word NN0 |_| 1o ) /\ U e. Word ( Word NN0 |_| 1o ) ) -> ( encSlots ` ( L ++ U ) ) = ( ( encSlots ` L ) ++ ( encSlots ` U ) ) )
+$)

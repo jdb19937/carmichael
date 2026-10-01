@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatrep0a  LOC_AFTER=?
+
+* Zero letters prepended multiply the value of a bit word by 2 to their number (Lean: toNat_replicate_false_append).
+
+s1::simpl |- ( ( L e. Word 2o /\ N e. NN0 ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ N e. NN0 ) -> N e. NN0 )
+s3::0el2o |- (/) e. 2o
+s4:s3:a1i |- ( ( L e. Word 2o /\ N e. NN0 ) -> (/) e. 2o )
+i5::repsw
+s6:s4,s2,i5:syl2anc |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( (/) repeatS N ) e. Word 2o )
+i7::tonatccat
+s8:s6,s1,i7:syl2anc |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` ( ( (/) repeatS N ) ++ L ) ) = ( ( toNat ` ( (/) repeatS N ) ) + ( ( 2 ^ ( # ` ( (/) repeatS N ) ) ) x. ( toNat ` L ) ) ) )
+i9::tonatrep0
+s10:s2,i9:syl |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` ( (/) repeatS N ) ) = 0 )
+s11::0ex |- (/) e. _V
+s12:s11:a1i |- ( ( L e. Word 2o /\ N e. NN0 ) -> (/) e. _V )
+i13::repswlen
+s14:s12,s2,i13:syl2anc |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( # ` ( (/) repeatS N ) ) = N )
+s15:s14:oveq2d |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( 2 ^ ( # ` ( (/) repeatS N ) ) ) = ( 2 ^ N ) )
+s16:s15:oveq1d |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( 2 ^ ( # ` ( (/) repeatS N ) ) ) x. ( toNat ` L ) ) = ( ( 2 ^ N ) x. ( toNat ` L ) ) )
+s17:s10,s16:oveq12d |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( toNat ` ( (/) repeatS N ) ) + ( ( 2 ^ ( # ` ( (/) repeatS N ) ) ) x. ( toNat ` L ) ) ) = ( 0 + ( ( 2 ^ N ) x. ( toNat ` L ) ) ) )
+s18::2cn |- 2 e. CC
+s19:s18:a1i |- ( ( L e. Word 2o /\ N e. NN0 ) -> 2 e. CC )
+s20:s19,s2:expcld |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( 2 ^ N ) e. CC )
+i21::tonatcl
+s22:s1,i21:syl |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. NN0 )
+s23:s22:nn0zd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. ZZ )
+s24:s23:zred |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. RR )
+s25:s24:recnd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. CC )
+s26:s20,s25:mulcld |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( 2 ^ N ) x. ( toNat ` L ) ) e. CC )
+s27:s26:addlidd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( 0 + ( ( 2 ^ N ) x. ( toNat ` L ) ) ) = ( ( 2 ^ N ) x. ( toNat ` L ) ) )
+qed:s8,s17,s27:3eqtrd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` ( ( (/) repeatS N ) ++ L ) ) = ( ( 2 ^ N ) x. ( toNat ` L ) ) )
+$)

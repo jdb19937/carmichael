@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=tpfrm  LOC_AFTER=?
+
+* The frame of the rectangle with corners ` P + i S ` , ` Q + i T ` , in coordinates.
+
+s1::simpll |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> P e. RR )
+s2::simplr |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> Q e. RR )
+s3::simprl |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> S e. RR )
+s4::simprr |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> T e. RR )
+i5::crre
+s6:s2,s4,i5:syl2anc |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( Re ` ( Q + ( _i x. T ) ) ) = Q )
+i7::crim
+s8:s1,s3,i7:syl2anc |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( Im ` ( P + ( _i x. S ) ) ) = S )
+i9::crre
+s10:s1,s3,i9:syl2anc |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( Re ` ( P + ( _i x. S ) ) ) = P )
+i11::crim
+s12:s2,s4,i11:syl2anc |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( Im ` ( Q + ( _i x. T ) ) ) = T )
+c1:s8:oveq2d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) = ( _i x. S ) )
+c2:s6,c1:oveq12d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) = ( Q + ( _i x. S ) ) )
+c3:c2:oveq2d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( P + ( _i x. S ) ) cseg ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) ) = ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) )
+c4:s8:oveq2d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) = ( _i x. S ) )
+c5:s6,c4:oveq12d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) = ( Q + ( _i x. S ) ) )
+c6:c5:oveq1d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) cseg ( Q + ( _i x. T ) ) ) = ( ( Q + ( _i x. S ) ) cseg ( Q + ( _i x. T ) ) ) )
+c7:c3,c6:uneq12d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( ( P + ( _i x. S ) ) cseg ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) ) u. ( ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) cseg ( Q + ( _i x. T ) ) ) ) = ( ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) u. ( ( Q + ( _i x. S ) ) cseg ( Q + ( _i x. T ) ) ) ) )
+c8:s12:oveq2d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) = ( _i x. T ) )
+c9:s10,c8:oveq12d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) = ( P + ( _i x. T ) ) )
+c10:c9:oveq2d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( Q + ( _i x. T ) ) cseg ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) ) = ( ( Q + ( _i x. T ) ) cseg ( P + ( _i x. T ) ) ) )
+c11:s12:oveq2d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) = ( _i x. T ) )
+c12:s10,c11:oveq12d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) = ( P + ( _i x. T ) ) )
+c13:c12:oveq1d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) cseg ( P + ( _i x. S ) ) ) = ( ( P + ( _i x. T ) ) cseg ( P + ( _i x. S ) ) ) )
+c14:c10,c13:uneq12d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( ( Q + ( _i x. T ) ) cseg ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) ) u. ( ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) cseg ( P + ( _i x. S ) ) ) ) = ( ( ( Q + ( _i x. T ) ) cseg ( P + ( _i x. T ) ) ) u. ( ( P + ( _i x. T ) ) cseg ( P + ( _i x. S ) ) ) ) )
+qed:c7,c14:uneq12d |- ( ( ( P e. RR /\ Q e. RR ) /\ ( S e. RR /\ T e. RR ) ) -> ( ( ( ( P + ( _i x. S ) ) cseg ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) ) u. ( ( ( Re ` ( Q + ( _i x. T ) ) ) + ( _i x. ( Im ` ( P + ( _i x. S ) ) ) ) ) cseg ( Q + ( _i x. T ) ) ) ) u. ( ( ( Q + ( _i x. T ) ) cseg ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) ) u. ( ( ( Re ` ( P + ( _i x. S ) ) ) + ( _i x. ( Im ` ( Q + ( _i x. T ) ) ) ) ) cseg ( P + ( _i x. S ) ) ) ) ) = ( ( ( ( P + ( _i x. S ) ) cseg ( Q + ( _i x. S ) ) ) u. ( ( Q + ( _i x. S ) ) cseg ( Q + ( _i x. T ) ) ) ) u. ( ( ( Q + ( _i x. T ) ) cseg ( P + ( _i x. T ) ) ) u. ( ( P + ( _i x. T ) ) cseg ( P + ( _i x. S ) ) ) ) ) )
+$)

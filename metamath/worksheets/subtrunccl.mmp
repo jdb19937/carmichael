@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=subtrunccl  LOC_AFTER=?
+
+* Closure of subtrunc.
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> C e. 2o )
+s4::subtruncval |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subTrunc Y ) ` C ) = if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) )
+s5::wrd0 |- (/) e. Word 2o
+s6:s5:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> (/) e. Word 2o )
+s7:s1,s2,s3:3jca |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) )
+i8::subbitscl
+s9:s7,i8:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBits Y ) ` C ) e. Word 2o )
+s10:s6,s9:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) e. Word 2o )
+qed:s4,s10:eqeltrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subTrunc Y ) ` C ) e. Word 2o )
+$)

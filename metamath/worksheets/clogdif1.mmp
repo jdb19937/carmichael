@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=clogdif1  LOC_AFTER=?
+
+* Above the real axis the principal logarithm exceeds the logarithm of the negative by _i x. _pi.
+
+s1::simpl |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> V e. CC )
+s2::simpr |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> 0 < ( Im ` V ) )
+i3::imcl
+s4:s1,i3:syl |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( Im ` V ) e. RR )
+s5:s1:negcld |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> -u V e. CC )
+s6:s4:lt0neg2d |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( 0 < ( Im ` V ) <-> -u ( Im ` V ) < 0 ) )
+s7:s2,s6:mpbid |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> -u ( Im ` V ) < 0 )
+i8::imneg
+s9:s1,i8:syl |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( Im ` -u V ) = -u ( Im ` V ) )
+s10:s9,s7:eqbrtrd |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( Im ` -u V ) < 0 )
+i11::clogneg
+s12:s5,s10,i11:syl2anc |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( log ` -u -u V ) = ( ( log ` -u V ) + ( _i x. _pi ) ) )
+i13::negneg
+s14:s1,i13:syl |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> -u -u V = V )
+s15:s14:fveq2d |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( log ` -u -u V ) = ( log ` V ) )
+s16:s15,s12:eqtr3d |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( log ` V ) = ( ( log ` -u V ) + ( _i x. _pi ) ) )
+i17::imcl
+s18:s5,i17:syl |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( Im ` -u V ) e. RR )
+s19:s10,s18:jca |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( ( Im ` -u V ) < 0 /\ ( Im ` -u V ) e. RR ) )
+s20:s5,s19:jca |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( -u V e. CC /\ ( ( Im ` -u V ) < 0 /\ ( Im ` -u V ) e. RR ) ) )
+i21::imcl
+s22:s5,i21:syl |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( Im ` -u V ) e. RR )
+s23:s22,s10:ltned |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( Im ` -u V ) =/= 0 )
+s24::im0 |- ( Im ` 0 ) = 0
+s25::fveq2 |- ( -u V = 0 -> ( Im ` -u V ) = ( Im ` 0 ) )
+s26:s25,s24:eqtrdi |- ( -u V = 0 -> ( Im ` -u V ) = 0 )
+s27:s26:a1i |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( -u V = 0 -> ( Im ` -u V ) = 0 ) )
+s28:s23:neneqd |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> -. ( Im ` -u V ) = 0 )
+s29:s28,s27:mtod |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> -. -u V = 0 )
+s30:s29:neqned |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> -u V =/= 0 )
+s31:s5,s30:logcld |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( log ` -u V ) e. CC )
+s32::ax-icn |- _i e. CC
+s33:s32:a1i |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> _i e. CC )
+s34::picn |- _pi e. CC
+s35:s34:a1i |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> _pi e. CC )
+s36:s33,s35:mulcld |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( _i x. _pi ) e. CC )
+s37:s16:oveq1d |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( ( log ` V ) - ( log ` -u V ) ) = ( ( ( log ` -u V ) + ( _i x. _pi ) ) - ( log ` -u V ) ) )
+i38::pncan2
+s39:s31,s36,i38:syl2anc |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( ( ( log ` -u V ) + ( _i x. _pi ) ) - ( log ` -u V ) ) = ( _i x. _pi ) )
+qed:s37,s39:eqtrd |- ( ( V e. CC /\ 0 < ( Im ` V ) ) -> ( ( log ` V ) - ( log ` -u V ) ) = ( _i x. _pi ) )
+$)

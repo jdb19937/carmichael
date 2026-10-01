@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=zl2muabs  LOC_AFTER=?
+
+* The modulus of the Moebius function is the squarefree indicator ( ~ muval2 , ~ absexp ).
+
+s1::simpr |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( mmu ` D ) =/= 0 )
+s2::simpl |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> D e. NN )
+s3::muval2 |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( mmu ` D ) = ( -u 1 ^ ( # ` { p e. Prime | p || D } ) ) )
+i4::prmdvdsfi
+s5:s2,i4:syl |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> { p e. Prime | p || D } e. Fin )
+i6::hashcl
+s7:s5,i6:syl |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( # ` { p e. Prime | p || D } ) e. NN0 )
+s8::neg1cn |- -u 1 e. CC
+s9:s8:a1i |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> -u 1 e. CC )
+i10::absexp
+s11:s9,s7,i10:syl2anc |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( abs ` ( -u 1 ^ ( # ` { p e. Prime | p || D } ) ) ) = ( ( abs ` -u 1 ) ^ ( # ` { p e. Prime | p || D } ) ) )
+s12::ax-1cn |- 1 e. CC
+s13::absneg |- ( 1 e. CC -> ( abs ` -u 1 ) = ( abs ` 1 ) )
+s14:s12,s13:ax-mp |- ( abs ` -u 1 ) = ( abs ` 1 )
+s15::abs1 |- ( abs ` 1 ) = 1
+s16:s14,s15:eqtri |- ( abs ` -u 1 ) = 1
+s17:s16:a1i |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( abs ` -u 1 ) = 1 )
+s18:s17:oveq1d |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( ( abs ` -u 1 ) ^ ( # ` { p e. Prime | p || D } ) ) = ( 1 ^ ( # ` { p e. Prime | p || D } ) ) )
+s19:s7:nn0zd |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( # ` { p e. Prime | p || D } ) e. ZZ )
+i20::1exp
+s21:s19,i20:syl |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( 1 ^ ( # ` { p e. Prime | p || D } ) ) = 1 )
+s22:s3:fveq2d |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = ( abs ` ( -u 1 ^ ( # ` { p e. Prime | p || D } ) ) ) )
+s23:s22,s11:eqtrd |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = ( ( abs ` -u 1 ) ^ ( # ` { p e. Prime | p || D } ) ) )
+s24:s23,s18:eqtrd |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = ( 1 ^ ( # ` { p e. Prime | p || D } ) ) )
+s25:s24,s21:eqtrd |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = 1 )
+s26:s1:iftrued |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> if ( ( mmu ` D ) =/= 0 , 1 , 0 ) = 1 )
+s27:s25,s26:eqtr4d |- ( ( D e. NN /\ ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = if ( ( mmu ` D ) =/= 0 , 1 , 0 ) )
+s28::simpr |- ( ( D e. NN /\ -. ( mmu ` D ) =/= 0 ) -> -. ( mmu ` D ) =/= 0 )
+s29::nne |- ( -. ( mmu ` D ) =/= 0 <-> ( mmu ` D ) = 0 )
+s30:s28,s29:sylib |- ( ( D e. NN /\ -. ( mmu ` D ) =/= 0 ) -> ( mmu ` D ) = 0 )
+s31:s30:fveq2d |- ( ( D e. NN /\ -. ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = ( abs ` 0 ) )
+s32::abs0 |- ( abs ` 0 ) = 0
+s33:s32:a1i |- ( ( D e. NN /\ -. ( mmu ` D ) =/= 0 ) -> ( abs ` 0 ) = 0 )
+s34:s31,s33:eqtrd |- ( ( D e. NN /\ -. ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = 0 )
+s35:s28:iffalsed |- ( ( D e. NN /\ -. ( mmu ` D ) =/= 0 ) -> if ( ( mmu ` D ) =/= 0 , 1 , 0 ) = 0 )
+s36:s34,s35:eqtr4d |- ( ( D e. NN /\ -. ( mmu ` D ) =/= 0 ) -> ( abs ` ( mmu ` D ) ) = if ( ( mmu ` D ) =/= 0 , 1 , 0 ) )
+qed:s27,s36:pm2.61dan |- ( D e. NN -> ( abs ` ( mmu ` D ) ) = if ( ( mmu ` D ) =/= 0 , 1 , 0 ) )
+$)

@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=t12fldivle  LOC_AFTER=?
+
+* The floor of ` a / k ` is at most ` x ` when ` a <_ k x ` (Lean's ` Nat.div_le_of_le_mul ` ; ~ fldivle , ~ ledivmul ).
+
+s1::simpl |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( A e. NN0 /\ K e. NN ) )
+s2:s1:simpld |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> A e. NN0 )
+s3:s1:simprd |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> K e. NN )
+s4::simpr |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( X e. RR /\ A <_ ( K x. X ) ) )
+s5:s4:simpld |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> X e. RR )
+s6:s4:simprd |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> A <_ ( K x. X ) )
+s7:s2:nn0red |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> A e. RR )
+s8:s3:nnred |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> K e. RR )
+s9:s3:nngt0d |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> 0 < K )
+i10::nnrp
+s11:s3,i10:syl |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> K e. RR+ )
+i12::fldivle
+s13:s7,s11,i12:syl2anc |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( |_ ` ( A / K ) ) <_ ( A / K ) )
+s14:s8,s9:jca |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( K e. RR /\ 0 < K ) )
+i15::ledivmul
+s16:s7,s5,s14,i15:syl3anc |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( ( A / K ) <_ X <-> A <_ ( K x. X ) ) )
+s17:s6,s16:mpbird |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( A / K ) <_ X )
+s18:s3:nnne0d |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> K =/= 0 )
+s19:s7,s8,s18:redivcld |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( A / K ) e. RR )
+s20:s19:flcld |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( |_ ` ( A / K ) ) e. ZZ )
+s21:s20:zred |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( |_ ` ( A / K ) ) e. RR )
+s22:s3:nnne0d |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> K =/= 0 )
+s23:s7,s8,s22:redivcld |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( A / K ) e. RR )
+qed:s21,s23,s5,s13,s17:letrd |- ( ( ( A e. NN0 /\ K e. NN ) /\ ( X e. RR /\ A <_ ( K x. X ) ) ) -> ( |_ ` ( A / K ) ) <_ X )
+$)

@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=t15enl  LOC_AFTER=?
+
+* The encoding of N has at most N letters.
+
+s1::2z |- 2 e. ZZ
+i2::uzid
+s3:s1,i2:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s4:s3:a1i |- ( N e. NN0 -> 2 e. ( ZZ>= ` 2 ) )
+s5::id |- ( N e. NN0 -> N e. NN0 )
+i6::bernneq3
+s7:s4,s5,i6:syl2anc |- ( N e. NN0 -> N < ( 2 ^ N ) )
+i8::encnatlenpow
+s9:s5,s5,s7,i8:syl3anc |- ( N e. NN0 -> ( # ` ( encodeNat ` N ) ) <_ N )
+i10::encnatgamlen
+s11:s5,i10:syl |- ( N e. NN0 -> ( # ` ( encNatGam ` N ) ) = ( # ` ( encodeNat ` N ) ) )
+s12:s11,s9:eqbrtrd |- ( N e. NN0 -> ( # ` ( encNatGam ` N ) ) <_ N )
+i13::encnatgamcl
+s14:s5,i13:syl |- ( N e. NN0 -> ( encNatGam ` N ) e. Word Gamma' )
+i15::lencl
+s16:s14,i15:syl |- ( N e. NN0 -> ( # ` ( encNatGam ` N ) ) e. NN0 )
+s17:s16:nn0red |- ( N e. NN0 -> ( # ` ( encNatGam ` N ) ) e. RR )
+s18:s5:nn0red |- ( N e. NN0 -> N e. RR )
+s19::1re |- 1 e. RR
+s20:s19:a1i |- ( N e. NN0 -> 1 e. RR )
+qed:s17,s18,s20,s12:leadd1dd |- ( N e. NN0 -> ( ( # ` ( encNatGam ` N ) ) + 1 ) <_ ( N + 1 ) )
+$)

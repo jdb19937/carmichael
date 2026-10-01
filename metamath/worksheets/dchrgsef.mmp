@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgsef  LOC_AFTER=?
+
+* The additive character exp ( 2 _pi _i A / N ) (Mathlib ZMod.stdAddChar at the class of A) is the A-th power of the primitive N-th root of unity ( -u 1 ^c ( 2 / N ) ).
+
+s1::simpl |- ( ( N e. NN /\ A e. ZZ ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ A e. ZZ ) -> A e. ZZ )
+s3:s1:nncnd |- ( ( N e. NN /\ A e. ZZ ) -> N e. CC )
+s4:s1:nnne0d |- ( ( N e. NN /\ A e. ZZ ) -> N =/= 0 )
+s5:s2:zcnd |- ( ( N e. NN /\ A e. ZZ ) -> A e. CC )
+s6::2cnd |- ( ( N e. NN /\ A e. ZZ ) -> 2 e. CC )
+s7::ax-icn |- _i e. CC
+s8::picn |- _pi e. CC
+s9:s7,s8:mulcli |- ( _i x. _pi ) e. CC
+s10:s9:a1i |- ( ( N e. NN /\ A e. ZZ ) -> ( _i x. _pi ) e. CC )
+s11:s6,s3,s4:divcld |- ( ( N e. NN /\ A e. ZZ ) -> ( 2 / N ) e. CC )
+s12:s11,s10:mulcld |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 / N ) x. ( _i x. _pi ) ) e. CC )
+s13::neg1cn |- -u 1 e. CC
+s14:s13:a1i |- ( ( N e. NN /\ A e. ZZ ) -> -u 1 e. CC )
+s15::neg1ne0 |- -u 1 =/= 0
+s16:s15:a1i |- ( ( N e. NN /\ A e. ZZ ) -> -u 1 =/= 0 )
+i17::cxpef
+s18:s14,s16,s11,i17:syl3anc |- ( ( N e. NN /\ A e. ZZ ) -> ( -u 1 ^c ( 2 / N ) ) = ( exp ` ( ( 2 / N ) x. ( log ` -u 1 ) ) ) )
+s19::logm1 |- ( log ` -u 1 ) = ( _i x. _pi )
+s20:s19:a1i |- ( ( N e. NN /\ A e. ZZ ) -> ( log ` -u 1 ) = ( _i x. _pi ) )
+s21:s20:oveq2d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 / N ) x. ( log ` -u 1 ) ) = ( ( 2 / N ) x. ( _i x. _pi ) ) )
+s22:s21:fveq2d |- ( ( N e. NN /\ A e. ZZ ) -> ( exp ` ( ( 2 / N ) x. ( log ` -u 1 ) ) ) = ( exp ` ( ( 2 / N ) x. ( _i x. _pi ) ) ) )
+s23:s18,s22:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> ( -u 1 ^c ( 2 / N ) ) = ( exp ` ( ( 2 / N ) x. ( _i x. _pi ) ) ) )
+s24:s23:oveq1d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ A ) = ( ( exp ` ( ( 2 / N ) x. ( _i x. _pi ) ) ) ^ A ) )
+i25::efexp
+s26:s12,s2,i25:syl2anc |- ( ( N e. NN /\ A e. ZZ ) -> ( exp ` ( A x. ( ( 2 / N ) x. ( _i x. _pi ) ) ) ) = ( ( exp ` ( ( 2 / N ) x. ( _i x. _pi ) ) ) ^ A ) )
+s27:s6,s10:mulcld |- ( ( N e. NN /\ A e. ZZ ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s28:s27,s5,s3,s4:divassd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( 2 x. ( _i x. _pi ) ) x. A ) / N ) = ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) )
+s29:s28:eqcomd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) = ( ( ( 2 x. ( _i x. _pi ) ) x. A ) / N ) )
+s30:s6,s10,s5:mul32d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. ( _i x. _pi ) ) x. A ) = ( ( 2 x. A ) x. ( _i x. _pi ) ) )
+s31:s30:oveq1d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( 2 x. ( _i x. _pi ) ) x. A ) / N ) = ( ( ( 2 x. A ) x. ( _i x. _pi ) ) / N ) )
+s32:s6,s5:mulcld |- ( ( N e. NN /\ A e. ZZ ) -> ( 2 x. A ) e. CC )
+s33:s32,s10,s3,s4:div23d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( 2 x. A ) x. ( _i x. _pi ) ) / N ) = ( ( ( 2 x. A ) / N ) x. ( _i x. _pi ) ) )
+s34:s6,s5:mulcomd |- ( ( N e. NN /\ A e. ZZ ) -> ( 2 x. A ) = ( A x. 2 ) )
+s35:s34:oveq1d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. A ) / N ) = ( ( A x. 2 ) / N ) )
+s36:s5,s6,s3,s4:divassd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( A x. 2 ) / N ) = ( A x. ( 2 / N ) ) )
+s37:s35,s36:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. A ) / N ) = ( A x. ( 2 / N ) ) )
+s38:s37:oveq1d |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( 2 x. A ) / N ) x. ( _i x. _pi ) ) = ( ( A x. ( 2 / N ) ) x. ( _i x. _pi ) ) )
+s39:s5,s11,s10:mulassd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( A x. ( 2 / N ) ) x. ( _i x. _pi ) ) = ( A x. ( ( 2 / N ) x. ( _i x. _pi ) ) ) )
+s40:s29,s31:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) = ( ( ( 2 x. A ) x. ( _i x. _pi ) ) / N ) )
+s41:s40,s33:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) = ( ( ( 2 x. A ) / N ) x. ( _i x. _pi ) ) )
+s42:s41,s38:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) = ( ( A x. ( 2 / N ) ) x. ( _i x. _pi ) ) )
+s43:s42,s39:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) = ( A x. ( ( 2 / N ) x. ( _i x. _pi ) ) ) )
+s44:s43:fveq2d |- ( ( N e. NN /\ A e. ZZ ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) ) = ( exp ` ( A x. ( ( 2 / N ) x. ( _i x. _pi ) ) ) ) )
+s45:s44,s26:eqtrd |- ( ( N e. NN /\ A e. ZZ ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) ) = ( ( exp ` ( ( 2 / N ) x. ( _i x. _pi ) ) ) ^ A ) )
+qed:s45,s24:eqtr4d |- ( ( N e. NN /\ A e. ZZ ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( A / N ) ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ A ) )
+$)

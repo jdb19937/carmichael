@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hrbr2  LOC_AFTER=?
+
+* The Hoare triple of the machine layer under its typing: the form a fragment lemma introduces and eliminates.
+
+s1::simpl |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( T e. V /\ M e. W ) )
+s2::simpr1 |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> C C_ ( TM2Cfg ` T ) )
+s3::simpr2 |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> D C_ ( TM2Cfg ` T ) )
+s4::simpr3 |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> N e. NN0 )
+s5::fvex |- ( TM2Cfg ` T ) e. _V
+s6:s5:a1i |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( TM2Cfg ` T ) e. _V )
+s7:s2,s6:ssexd |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> C e. _V )
+s8:s3,s6:ssexd |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> D e. _V )
+s9:s4:elexd |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> N e. _V )
+s10:s7,s8,s9:3jca |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( C e. _V /\ D e. _V /\ N e. _V ) )
+s11:s1,s10:jca |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( ( T e. V /\ M e. W ) /\ ( C e. _V /\ D e. _V /\ N e. _V ) ) )
+i12::tm2hrbr
+s13:s11,i12:syl |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( C ( T TM2Hoare M ) <. D , N >. <-> ( ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) /\ A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) ) )
+s14:s2,s3,s4:3jca |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) )
+s15:s14:biantrurd |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) <-> ( ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) /\ A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) ) )
+qed:s13,s15:bitr4d |- ( ( ( T e. V /\ M e. W ) /\ ( C C_ ( TM2Cfg ` T ) /\ D C_ ( TM2Cfg ` T ) /\ N e. NN0 ) ) -> ( C ( T TM2Hoare M ) <. D , N >. <-> A. u e. C E. i e. ( 0 ... N ) E. w e. D ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+$)

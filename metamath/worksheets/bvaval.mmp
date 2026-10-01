@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=bvaval  LOC_AFTER=?
+
+* Value of the Barban-Vehov divisor sum: ( ( A bvA B ) ` N ) is the sum of ( ( A bvLam B ) ` d ) over the divisors d of N (Lean bvA, Detector.lean).
+
+s1::id |- ( a = A -> a = A )
+c1:s1:oveq1d |- ( a = A -> ( a bvLam b ) = ( A bvLam b ) )
+c2:c1:fveq1d |- ( a = A -> ( ( a bvLam b ) ` d ) = ( ( A bvLam b ) ` d ) )
+c3:c2:sumeq2sdv |- ( a = A -> sum_ d e. { x e. NN | x || n } ( ( a bvLam b ) ` d ) = sum_ d e. { x e. NN | x || n } ( ( A bvLam b ) ` d ) )
+c4:c3:mpteq2dv |- ( a = A -> ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( a bvLam b ) ` d ) ) = ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam b ) ` d ) ) )
+s2::id |- ( b = B -> b = B )
+c5:s2:oveq2d |- ( b = B -> ( A bvLam b ) = ( A bvLam B ) )
+c6:c5:fveq1d |- ( b = B -> ( ( A bvLam b ) ` d ) = ( ( A bvLam B ) ` d ) )
+c7:c6:sumeq2sdv |- ( b = B -> sum_ d e. { x e. NN | x || n } ( ( A bvLam b ) ` d ) = sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) )
+c8:c7:mpteq2dv |- ( b = B -> ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam b ) ` d ) ) = ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) )
+s3::df-bva |- bvA = ( a e. _V , b e. _V |-> ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( a bvLam b ) ` d ) ) )
+s4::nnex |- NN e. _V
+s5:s4:mptex |- ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) e. _V
+s6:c4,c8,s3,s5:ovmpo |- ( ( A e. _V /\ B e. _V ) -> ( A bvA B ) = ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) )
+s7::elex |- ( A e. V -> A e. _V )
+s8::elex |- ( B e. W -> B e. _V )
+s9:s7,s8:anim12i |- ( ( A e. V /\ B e. W ) -> ( A e. _V /\ B e. _V ) )
+s10:s9,s6:syl |- ( ( A e. V /\ B e. W ) -> ( A bvA B ) = ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) )
+s11:s10:adantr |- ( ( ( A e. V /\ B e. W ) /\ N e. NN ) -> ( A bvA B ) = ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) )
+s12:s11:fveq1d |- ( ( ( A e. V /\ B e. W ) /\ N e. NN ) -> ( ( A bvA B ) ` N ) = ( ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) ` N ) )
+s13::id |- ( n = N -> n = N )
+c9:s13:breq2d |- ( n = N -> ( x || n <-> x || N ) )
+c10:c9:rabbidv |- ( n = N -> { x e. NN | x || n } = { x e. NN | x || N } )
+c11:c10:sumeq1d |- ( n = N -> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) = sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) )
+s14::eqid |- ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) = ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) )
+s15::sumex |- sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) e. _V
+s16:c11,s14,s15:fvmpt |- ( N e. NN -> ( ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) ` N ) = sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) )
+s17:s16:adantl |- ( ( ( A e. V /\ B e. W ) /\ N e. NN ) -> ( ( n e. NN |-> sum_ d e. { x e. NN | x || n } ( ( A bvLam B ) ` d ) ) ` N ) = sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) )
+qed:s12,s17:eqtrd |- ( ( ( A e. V /\ B e. W ) /\ N e. NN ) -> ( ( A bvA B ) ` N ) = sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) )
+$)

@@ -1,0 +1,63 @@
+$( <MM> <PROOF_ASST> THEOREM=logp1bnd  LOC_AFTER=?
+
+* The logarithm of ` K + 1 ` is bounded by a constant multiple of ` K ^c E ` for every positive ` E ` ( ~ logcxpbnd at ` 2 K ` ).
+
+s1::simpl |- ( ( K e. NN /\ E e. RR+ ) -> K e. NN )
+s2::simpr |- ( ( K e. NN /\ E e. RR+ ) -> E e. RR+ )
+s3:s1:nnred |- ( ( K e. NN /\ E e. RR+ ) -> K e. RR )
+s4:s3:recnd |- ( ( K e. NN /\ E e. RR+ ) -> K e. CC )
+i5::peano2nn
+s6:s1,i5:syl |- ( ( K e. NN /\ E e. RR+ ) -> ( K + 1 ) e. NN )
+s7::2nn |- 2 e. NN
+s8:s7:a1i |- ( ( K e. NN /\ E e. RR+ ) -> 2 e. NN )
+i9::nnmulcl
+s10:s8,s1,i9:syl2anc |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 x. K ) e. NN )
+s11::1re |- 1 e. RR
+s12:s11:a1i |- ( ( K e. NN /\ E e. RR+ ) -> 1 e. RR )
+s13:s1:nnge1d |- ( ( K e. NN /\ E e. RR+ ) -> 1 <_ K )
+s14:s12,s3,s3,s13:leadd2dd |- ( ( K e. NN /\ E e. RR+ ) -> ( K + 1 ) <_ ( K + K ) )
+s15:s4:2timesd |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 x. K ) = ( K + K ) )
+s16:s15:eqcomd |- ( ( K e. NN /\ E e. RR+ ) -> ( K + K ) = ( 2 x. K ) )
+s17:s14,s16:breqtrd |- ( ( K e. NN /\ E e. RR+ ) -> ( K + 1 ) <_ ( 2 x. K ) )
+s18:s6:nnrpd |- ( ( K e. NN /\ E e. RR+ ) -> ( K + 1 ) e. RR+ )
+s19:s10:nnrpd |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 x. K ) e. RR+ )
+i20::logleb
+s21:s18,s19,i20:syl2anc |- ( ( K e. NN /\ E e. RR+ ) -> ( ( K + 1 ) <_ ( 2 x. K ) <-> ( log ` ( K + 1 ) ) <_ ( log ` ( 2 x. K ) ) ) )
+s22:s17,s21:mpbid |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( K + 1 ) ) <_ ( log ` ( 2 x. K ) ) )
+i23::logcxpbnd
+s24:s10,s2,i23:syl2anc |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( 2 x. K ) ) <_ ( ( ( 2 x. K ) ^c E ) / E ) )
+s25:s2:rpred |- ( ( K e. NN /\ E e. RR+ ) -> E e. RR )
+s26:s25:recnd |- ( ( K e. NN /\ E e. RR+ ) -> E e. CC )
+s27:s1:nnnn0d |- ( ( K e. NN /\ E e. RR+ ) -> K e. NN0 )
+s28:s27:nn0ge0d |- ( ( K e. NN /\ E e. RR+ ) -> 0 <_ K )
+s29::2re |- 2 e. RR
+s30:s29:a1i |- ( ( K e. NN /\ E e. RR+ ) -> 2 e. RR )
+s31::0le2 |- 0 <_ 2
+s32:s31:a1i |- ( ( K e. NN /\ E e. RR+ ) -> 0 <_ 2 )
+s33:s30,s32:jca |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 e. RR /\ 0 <_ 2 ) )
+s34:s3,s28:jca |- ( ( K e. NN /\ E e. RR+ ) -> ( K e. RR /\ 0 <_ K ) )
+i35::mulcxp
+s36:s33,s34,s26,i35:syl3anc |- ( ( K e. NN /\ E e. RR+ ) -> ( ( 2 x. K ) ^c E ) = ( ( 2 ^c E ) x. ( K ^c E ) ) )
+s37::2rp |- 2 e. RR+
+s38:s37:a1i |- ( ( K e. NN /\ E e. RR+ ) -> 2 e. RR+ )
+s39:s38,s25:rpcxpcld |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 ^c E ) e. RR+ )
+s40:s39:rpcnd |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 ^c E ) e. CC )
+s41:s40:idi |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 ^c E ) e. CC )
+s42:s1:nnrpd |- ( ( K e. NN /\ E e. RR+ ) -> K e. RR+ )
+s43:s42,s25:rpcxpcld |- ( ( K e. NN /\ E e. RR+ ) -> ( K ^c E ) e. RR+ )
+s44:s43:rpcnd |- ( ( K e. NN /\ E e. RR+ ) -> ( K ^c E ) e. CC )
+s45:s2:rpne0d |- ( ( K e. NN /\ E e. RR+ ) -> E =/= 0 )
+s46:s41,s44,s26,s45:div23d |- ( ( K e. NN /\ E e. RR+ ) -> ( ( ( 2 ^c E ) x. ( K ^c E ) ) / E ) = ( ( ( 2 ^c E ) / E ) x. ( K ^c E ) ) )
+s47:s36:oveq1d |- ( ( K e. NN /\ E e. RR+ ) -> ( ( ( 2 x. K ) ^c E ) / E ) = ( ( ( 2 ^c E ) x. ( K ^c E ) ) / E ) )
+s48:s47,s46:eqtrd |- ( ( K e. NN /\ E e. RR+ ) -> ( ( ( 2 x. K ) ^c E ) / E ) = ( ( ( 2 ^c E ) / E ) x. ( K ^c E ) ) )
+s49:s6:nnrpd |- ( ( K e. NN /\ E e. RR+ ) -> ( K + 1 ) e. RR+ )
+s50:s49:relogcld |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( K + 1 ) ) e. RR )
+s51:s10:nnrpd |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 x. K ) e. RR+ )
+s52:s51:relogcld |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( 2 x. K ) ) e. RR )
+s53:s10:nnrpd |- ( ( K e. NN /\ E e. RR+ ) -> ( 2 x. K ) e. RR+ )
+s54:s53,s25:rpcxpcld |- ( ( K e. NN /\ E e. RR+ ) -> ( ( 2 x. K ) ^c E ) e. RR+ )
+s55:s54,s2:rpdivcld |- ( ( K e. NN /\ E e. RR+ ) -> ( ( ( 2 x. K ) ^c E ) / E ) e. RR+ )
+s56:s55:rpred |- ( ( K e. NN /\ E e. RR+ ) -> ( ( ( 2 x. K ) ^c E ) / E ) e. RR )
+s57:s50,s52,s56,s22,s24:letrd |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( K + 1 ) ) <_ ( ( ( 2 x. K ) ^c E ) / E ) )
+qed:s57,s48:breqtrd |- ( ( K e. NN /\ E e. RR+ ) -> ( log ` ( K + 1 ) ) <_ ( ( ( 2 ^c E ) / E ) x. ( K ^c E ) ) )
+$)

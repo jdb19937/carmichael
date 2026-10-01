@@ -1,0 +1,86 @@
+$( <MM> <PROOF_ASST> THEOREM=t15mproj  LOC_AFTER=?
+
+* The components of the concrete machine tuple.
+
+s1::df-tmgam |- TMGam = ( ( 0 ..^ 8 ) X. { Gamma' } )
+s2::ovex |- ( 0 ..^ 8 ) e. _V
+s3::snex |- { Gamma' } e. _V
+s4:s2,s3:xpex |- ( ( 0 ..^ 8 ) X. { Gamma' } ) e. _V
+s5:s1,s4:eqeltri |- TMGam e. _V
+s6::df-tmlab |- TMLab = ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) )
+s7::nn0ex |- NN0 e. _V
+i8::wrdexg
+s9:s7,i8:ax-mp |- Word NN0 e. _V
+s10:s9:mptex |- ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) ) e. _V
+s11:s6,s10:eqeltri |- TMLab e. _V
+s12::df-tmlbl |- ( TMLbl C K ) = ( TMLab " { w e. Word ( 0 ... ( ( C + K ) + ; ; 1 0 1 ) ) | ( # ` w ) <_ ; 3 0 } )
+s13:s11:imaex |- ( TMLab " { w e. Word ( 0 ... ( ( C + K ) + ; ; 1 0 1 ) ) | ( # ` w ) <_ ; 3 0 } ) e. _V
+s14:s12,s13:eqeltri |- ( TMLbl C K ) e. _V
+s15::tmstfi |- TMSt e. Fin
+s16:s15:elexi |- TMSt e. _V
+s17::opex |- <. TMGam , ( TMLbl C K ) >. e. _V
+s18::df-tmprog |- ( TMProg C K ) = ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) )
+s19:s14:mptex |- ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) ) e. _V
+s20:s18,s19:eqeltri |- ( TMProg C K ) e. _V
+s21::df-tmty |- ( TMTy C K ) = <. <. TMGam , ( TMLbl C K ) >. , TMSt >.
+s22::opex |- <. <. TMGam , ( TMLbl C K ) >. , TMSt >. e. _V
+s23:s21,s22:eqeltri |- ( TMTy C K ) e. _V
+s24::df-tmmach |- ( TMMach C K ) = <. <. ( TMTy C K ) , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >.
+s25::opex |- <. ( TMTy C K ) , <. 0 , 1 >. >. e. _V
+s26::opex |- <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. e. _V
+s27::c0ex |- 0 e. _V
+s28::1ex |- 1 e. _V
+s29::fvex |- ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) e. _V
+s30::opex |- <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. _V
+s31::opex |- <. 0 , 1 >. e. _V
+s32::opex |- <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. e. _V
+s33:s24:fveq2i |- ( 1st ` ( TMMach C K ) ) = ( 1st ` <. <. ( TMTy C K ) , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. )
+i34::op1stg
+s35:s25,s26,i34:mp2an |- ( 1st ` <. <. ( TMTy C K ) , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. ) = <. ( TMTy C K ) , <. 0 , 1 >. >.
+s36:s33,s35:eqtri |- ( 1st ` ( TMMach C K ) ) = <. ( TMTy C K ) , <. 0 , 1 >. >.
+s37:s24:fveq2i |- ( 2nd ` ( TMMach C K ) ) = ( 2nd ` <. <. ( TMTy C K ) , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. )
+i38::op2ndg
+s39:s25,s26,i38:mp2an |- ( 2nd ` <. <. ( TMTy C K ) , <. 0 , 1 >. >. , <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. >. ) = <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >.
+s40:s37,s39:eqtri |- ( 2nd ` ( TMMach C K ) ) = <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >.
+s41:s36:fveq2i |- ( 1st ` ( 1st ` ( TMMach C K ) ) ) = ( 1st ` <. ( TMTy C K ) , <. 0 , 1 >. >. )
+i42::op1stg
+s43:s23,s31,i42:mp2an |- ( 1st ` <. ( TMTy C K ) , <. 0 , 1 >. >. ) = ( TMTy C K )
+s44:s41,s43:eqtri |- ( 1st ` ( 1st ` ( TMMach C K ) ) ) = ( TMTy C K )
+s45:s40:fveq2i |- ( 2nd ` ( 2nd ` ( TMMach C K ) ) ) = ( 2nd ` <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. )
+i46::op2ndg
+s47:s32,s20,i46:mp2an |- ( 2nd ` <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. ) = ( TMProg C K )
+s48:s45,s47:eqtri |- ( 2nd ` ( 2nd ` ( TMMach C K ) ) ) = ( TMProg C K )
+s49:s40:fveq2i |- ( 1st ` ( 2nd ` ( TMMach C K ) ) ) = ( 1st ` <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. )
+i50::op1stg
+s51:s32,s20,i50:mp2an |- ( 1st ` <. <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. , ( TMProg C K ) >. ) = <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >.
+s52:s49,s51:eqtri |- ( 1st ` ( 2nd ` ( TMMach C K ) ) ) = <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >.
+s53:s52:fveq2i |- ( 1st ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = ( 1st ` <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. )
+i54::op1stg
+s55:s29,s30,i54:mp2an |- ( 1st ` <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. ) = ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) )
+s56:s53,s55:eqtri |- ( 1st ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) )
+s57:s52:fveq2i |- ( 2nd ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = ( 2nd ` <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. )
+i58::op2ndg
+s59:s29,s30,i58:mp2an |- ( 2nd ` <. ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) , <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. >. ) = <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >.
+s60:s57,s59:eqtri |- ( 2nd ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >.
+s61:s36:fveq2i |- ( 2nd ` ( 1st ` ( TMMach C K ) ) ) = ( 2nd ` <. ( TMTy C K ) , <. 0 , 1 >. >. )
+i62::op2ndg
+s63:s23,s31,i62:mp2an |- ( 2nd ` <. ( TMTy C K ) , <. 0 , 1 >. >. ) = <. 0 , 1 >.
+s64:s61,s63:eqtri |- ( 2nd ` ( 1st ` ( TMMach C K ) ) ) = <. 0 , 1 >.
+s65:s64:fveq2i |- ( 1st ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = ( 1st ` <. 0 , 1 >. )
+i66::op1stg
+s67:s27,s28,i66:mp2an |- ( 1st ` <. 0 , 1 >. ) = 0
+s68:s65,s67:eqtri |- ( 1st ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = 0
+s69:s64:fveq2i |- ( 2nd ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = ( 2nd ` <. 0 , 1 >. )
+i70::op2ndg
+s71:s27,s28,i70:mp2an |- ( 2nd ` <. 0 , 1 >. ) = 1
+s72:s69,s71:eqtri |- ( 2nd ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = 1
+s73::t15typ |- ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K ) /\ ( 2nd ` ( TMTy C K ) ) = TMSt )
+s74:s73:simp1i |- ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam
+s75:s44:fveq2i |- ( 1st ` ( 1st ` ( 1st ` ( TMMach C K ) ) ) ) = ( 1st ` ( TMTy C K ) )
+s76:s75:fveq2i |- ( 1st ` ( 1st ` ( 1st ` ( 1st ` ( TMMach C K ) ) ) ) ) = ( 1st ` ( 1st ` ( TMTy C K ) ) )
+s77:s76,s74:eqtri |- ( 1st ` ( 1st ` ( 1st ` ( 1st ` ( TMMach C K ) ) ) ) ) = TMGam
+s78:s44,s48:pm3.2i |- ( ( 1st ` ( 1st ` ( TMMach C K ) ) ) = ( TMTy C K ) /\ ( 2nd ` ( 2nd ` ( TMMach C K ) ) ) = ( TMProg C K ) )
+s79:s56,s60:pm3.2i |- ( ( 1st ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) /\ ( 2nd ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. )
+s80:s77,s68,s72:3pm3.2i |- ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` ( TMMach C K ) ) ) ) ) = TMGam /\ ( 1st ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = 0 /\ ( 2nd ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = 1 )
+qed:s78,s79,s80:3pm3.2i |- ( ( ( 1st ` ( 1st ` ( TMMach C K ) ) ) = ( TMTy C K ) /\ ( 2nd ` ( 2nd ` ( TMMach C K ) ) ) = ( TMProg C K ) ) /\ ( ( 1st ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = ( TMLab ` ( ( (/) ++ <" 0 "> ) ++ <" 0 "> ) ) /\ ( 2nd ` ( 1st ` ( 2nd ` ( TMMach C K ) ) ) ) = <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. ) /\ ( ( 1st ` ( 1st ` ( 1st ` ( 1st ` ( TMMach C K ) ) ) ) ) = TMGam /\ ( 1st ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = 0 /\ ( 2nd ` ( 2nd ` ( 1st ` ( TMMach C K ) ) ) ) = 1 ) )
+$)

@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=v3ftest  LOC_AFTER=?
+
+* fsum.py retry: fsumle and fsummulc2 with plain-step body closures.
+
+s1::simpl |- ( ( N e. NN /\ C e. RR+ ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ C e. RR+ ) -> C e. RR+ )
+s3::simpr |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i4::elfznn
+s5:s3,i4:syl |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s6:s5:nnrpd |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. RR+ )
+s7:s6:rpred |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. RR )
+s8:s6:rpreccld |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 / k ) e. RR+ )
+s9:s8:rpred |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 / k ) e. RR )
+s10:s9:recnd |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 / k ) e. CC )
+i11::nnge1
+s12:s5,i11:syl |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> 1 <_ k )
+s13::1red |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> 1 e. RR )
+s14::0lt1 |- 0 < 1
+s15:s14:a1i |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> 0 < 1 )
+s16:s13,s15:jca |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 e. RR /\ 0 < 1 ) )
+s17:s6:rpgt0d |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> 0 < k )
+s18:s7,s17:jca |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( k e. RR /\ 0 < k ) )
+s19:s16,s18:jca |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( ( 1 e. RR /\ 0 < 1 ) /\ ( k e. RR /\ 0 < k ) ) )
+i20::lerec
+s21:s19,i20:syl |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 <_ k <-> ( 1 / k ) <_ ( 1 / 1 ) ) )
+s22:s21,s12:mpbid |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 / k ) <_ ( 1 / 1 ) )
+s23::1div1e1 |- ( 1 / 1 ) = 1
+s24:s23:a1i |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 / 1 ) = 1 )
+s25:s22,s24:breqtrd |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> ( 1 / k ) <_ 1 )
+s26::1red |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> 1 e. RR )
+s27::fzfid |- ( ( N e. NN /\ C e. RR+ ) -> ( 1 ... N ) e. Fin )
+s28::simpr |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i29::elfznn
+s30:s28,i29:syl |- ( ( ( N e. NN /\ C e. RR+ ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s31:s27,s9,s26,s25:fsumle |- ( ( N e. NN /\ C e. RR+ ) -> sum_ k e. ( 1 ... N ) ( 1 / k ) <_ sum_ k e. ( 1 ... N ) 1 )
+s32:s2:rpred |- ( ( N e. NN /\ C e. RR+ ) -> C e. RR )
+s33:s32:recnd |- ( ( N e. NN /\ C e. RR+ ) -> C e. CC )
+s34:s27,s33,s10:fsummulc2 |- ( ( N e. NN /\ C e. RR+ ) -> ( C x. sum_ k e. ( 1 ... N ) ( 1 / k ) ) = sum_ k e. ( 1 ... N ) ( C x. ( 1 / k ) ) )
+qed:s31,s31:jca |- ( ( N e. NN /\ C e. RR+ ) -> ( sum_ k e. ( 1 ... N ) ( 1 / k ) <_ sum_ k e. ( 1 ... N ) 1 /\ sum_ k e. ( 1 ... N ) ( 1 / k ) <_ sum_ k e. ( 1 ... N ) 1 ) )
+$)

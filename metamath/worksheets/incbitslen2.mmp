@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=incbitslen2  LOC_AFTER=?
+
+* The length of incBits L, as an if.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+s6::incbitsval |- ( L e. Word 2o -> ( incBits ` L ) = ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) )
+s7:s6:fveq2d |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) = ( # ` ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) ) )
+s8:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+s9::1z |- 1 e. ZZ
+s10:s9:a1i |- ( L e. Word 2o -> 1 e. ZZ )
+s11:s8,s10:zaddcld |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. ZZ )
+i12::lencl
+s13:s1,i12:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s14::1nn0 |- 1 e. NN0
+s15:s14:a1i |- ( L e. Word 2o -> 1 e. NN0 )
+s16:s13,s15:nn0addcld |- ( L e. Word 2o -> ( ( # ` L ) + 1 ) e. NN0 )
+s17:s16,s13:ifcld |- ( L e. Word 2o -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) e. NN0 )
+i18::bwrdlen
+s19:s11,s17,i18:syl2anc |- ( L e. Word 2o -> ( # ` ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+qed:s7,s19:eqtrd |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+$)

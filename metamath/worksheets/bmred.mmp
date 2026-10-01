@@ -1,0 +1,167 @@
+$( <MM> <PROOF_ASST> THEOREM=bmred  LOC_AFTER=?
+
+* AGP (4.1), Lean ` exists_reduced_modulus ` : a squarefree ` L ` has a divisor ` w ` that no member of the finite exceptional set ` G ` (of moduli ` >_ 2 ` , at most ` J ` of them) divides, and whose divisor counts up to any ` y ` are within a factor ` 2 ^ J ` of those of ` L ` ; by induction on ` G ` (~ findcard2s , ~ bmred0 , ~ bmredlem ).
+
+s1::id |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) )
+s2:s1:simp1d |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( L e. NN /\ ( mmu ` L ) =/= 0 ) )
+s3:s2:simpld |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> L e. NN )
+s4:s2:simprd |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( mmu ` L ) =/= 0 )
+s5:s1:simp2d |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( G e. Fin /\ A. i e. G 2 <_ i ) )
+s6:s5:simpld |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> G e. Fin )
+s7:s5:simprd |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> A. i e. G 2 <_ i )
+s8:s1:simp3d |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( J e. NN0 /\ ( # ` G ) <_ J ) )
+s9:s8:simpld |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> J e. NN0 )
+s10:s8:simprd |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( # ` G ) <_ J )
+s11::id |- ( s = (/) -> s = (/) )
+c1:s11:raleqdv |- ( s = (/) -> ( A. i e. s 2 <_ i <-> A. i e. (/) 2 <_ i ) )
+c2:c1:anbi2d |- ( s = (/) -> ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) <-> ( ( mmu ` n ) =/= 0 /\ A. i e. (/) 2 <_ i ) ) )
+c3:s11:raleqdv |- ( s = (/) -> ( A. i e. s -. i || w <-> A. i e. (/) -. i || w ) )
+c4:s11:fveq2d |- ( s = (/) -> ( # ` s ) = ( # ` (/) ) )
+c5:c4:oveq2d |- ( s = (/) -> ( 2 ^ ( # ` s ) ) = ( 2 ^ ( # ` (/) ) ) )
+c6:c5:oveq1d |- ( s = (/) -> ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) = ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+c7:c6:breq2d |- ( s = (/) -> ( ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c8:c7:ralbidv |- ( s = (/) -> ( A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c9::biidd |- ( s = (/) -> ( w || n <-> w || n ) )
+c10:c9,c3,c8:3anbi123d |- ( s = (/) -> ( ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> ( w || n /\ A. i e. (/) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c11:c10:rexbidv |- ( s = (/) -> ( E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> E. w e. NN ( w || n /\ A. i e. (/) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c12:c2,c11:imbi12d |- ( s = (/) -> ( ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> ( ( ( mmu ` n ) =/= 0 /\ A. i e. (/) 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. (/) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+c13:c12:ralbidv |- ( s = (/) -> ( A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. (/) 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. (/) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+s12::id |- ( s = t -> s = t )
+c14:s12:raleqdv |- ( s = t -> ( A. i e. s 2 <_ i <-> A. i e. t 2 <_ i ) )
+c15:c14:anbi2d |- ( s = t -> ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) <-> ( ( mmu ` n ) =/= 0 /\ A. i e. t 2 <_ i ) ) )
+c16:s12:raleqdv |- ( s = t -> ( A. i e. s -. i || w <-> A. i e. t -. i || w ) )
+c17:s12:fveq2d |- ( s = t -> ( # ` s ) = ( # ` t ) )
+c18:c17:oveq2d |- ( s = t -> ( 2 ^ ( # ` s ) ) = ( 2 ^ ( # ` t ) ) )
+c19:c18:oveq1d |- ( s = t -> ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) = ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+c20:c19:breq2d |- ( s = t -> ( ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c21:c20:ralbidv |- ( s = t -> ( A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c22::biidd |- ( s = t -> ( w || n <-> w || n ) )
+c23:c22,c16,c21:3anbi123d |- ( s = t -> ( ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> ( w || n /\ A. i e. t -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c24:c23:rexbidv |- ( s = t -> ( E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> E. w e. NN ( w || n /\ A. i e. t -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c25:c15,c24:imbi12d |- ( s = t -> ( ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> ( ( ( mmu ` n ) =/= 0 /\ A. i e. t 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. t -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+c26:c25:ralbidv |- ( s = t -> ( A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. t 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. t -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+s13::id |- ( s = ( t u. { u } ) -> s = ( t u. { u } ) )
+c27:s13:raleqdv |- ( s = ( t u. { u } ) -> ( A. i e. s 2 <_ i <-> A. i e. ( t u. { u } ) 2 <_ i ) )
+c28:c27:anbi2d |- ( s = ( t u. { u } ) -> ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) <-> ( ( mmu ` n ) =/= 0 /\ A. i e. ( t u. { u } ) 2 <_ i ) ) )
+c29:s13:raleqdv |- ( s = ( t u. { u } ) -> ( A. i e. s -. i || w <-> A. i e. ( t u. { u } ) -. i || w ) )
+c30:s13:fveq2d |- ( s = ( t u. { u } ) -> ( # ` s ) = ( # ` ( t u. { u } ) ) )
+c31:c30:oveq2d |- ( s = ( t u. { u } ) -> ( 2 ^ ( # ` s ) ) = ( 2 ^ ( # ` ( t u. { u } ) ) ) )
+c32:c31:oveq1d |- ( s = ( t u. { u } ) -> ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) = ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+c33:c32:breq2d |- ( s = ( t u. { u } ) -> ( ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c34:c33:ralbidv |- ( s = ( t u. { u } ) -> ( A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c35::biidd |- ( s = ( t u. { u } ) -> ( w || n <-> w || n ) )
+c36:c35,c29,c34:3anbi123d |- ( s = ( t u. { u } ) -> ( ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> ( w || n /\ A. i e. ( t u. { u } ) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c37:c36:rexbidv |- ( s = ( t u. { u } ) -> ( E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> E. w e. NN ( w || n /\ A. i e. ( t u. { u } ) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c38:c28,c37:imbi12d |- ( s = ( t u. { u } ) -> ( ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> ( ( ( mmu ` n ) =/= 0 /\ A. i e. ( t u. { u } ) 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. ( t u. { u } ) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+c39:c38:ralbidv |- ( s = ( t u. { u } ) -> ( A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. ( t u. { u } ) 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. ( t u. { u } ) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+s14::id |- ( s = G -> s = G )
+c40:s14:raleqdv |- ( s = G -> ( A. i e. s 2 <_ i <-> A. i e. G 2 <_ i ) )
+c41:c40:anbi2d |- ( s = G -> ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) <-> ( ( mmu ` n ) =/= 0 /\ A. i e. G 2 <_ i ) ) )
+c42:s14:raleqdv |- ( s = G -> ( A. i e. s -. i || w <-> A. i e. G -. i || w ) )
+c43:s14:fveq2d |- ( s = G -> ( # ` s ) = ( # ` G ) )
+c44:c43:oveq2d |- ( s = G -> ( 2 ^ ( # ` s ) ) = ( 2 ^ ( # ` G ) ) )
+c45:c44:oveq1d |- ( s = G -> ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) = ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+c46:c45:breq2d |- ( s = G -> ( ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c47:c46:ralbidv |- ( s = G -> ( A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c48::biidd |- ( s = G -> ( w || n <-> w || n ) )
+c49:c48,c42,c47:3anbi123d |- ( s = G -> ( ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c50:c49:rexbidv |- ( s = G -> ( E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> E. w e. NN ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c51:c41,c50:imbi12d |- ( s = G -> ( ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> ( ( ( mmu ` n ) =/= 0 /\ A. i e. G 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+c52:c51:ralbidv |- ( s = G -> ( A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. s 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. s -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` s ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. G 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+s15::bmred0 |- A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. (/) 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. (/) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` (/) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+s16::bmredlem |- ( ( t e. Fin /\ -. u e. t ) -> ( A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. t 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. t -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` t ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) -> A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. ( t u. { u } ) 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. ( t u. { u } ) -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` ( t u. { u } ) ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+s17:c13,c26,c39,c52,s15,s16:findcard2s |- ( G e. Fin -> A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. G 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+s18:s6,s17:syl |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> A. n e. NN ( ( ( mmu ` n ) =/= 0 /\ A. i e. G 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+s19::id |- ( n = L -> n = L )
+c53:s19:fveq2d |- ( n = L -> ( mmu ` n ) = ( mmu ` L ) )
+c54:c53:neeq1d |- ( n = L -> ( ( mmu ` n ) =/= 0 <-> ( mmu ` L ) =/= 0 ) )
+c55:c54:anbi1d |- ( n = L -> ( ( ( mmu ` n ) =/= 0 /\ A. i e. G 2 <_ i ) <-> ( ( mmu ` L ) =/= 0 /\ A. i e. G 2 <_ i ) ) )
+c56:s19:breq2d |- ( n = L -> ( w || n <-> w || L ) )
+c57:s19:oveq2d |- ( n = L -> ( 1 ... n ) = ( 1 ... L ) )
+c58:s19:breq2d |- ( n = L -> ( m || n <-> m || L ) )
+c59:c57,c58:rabeqbidv |- ( n = L -> { m e. ( 1 ... n ) | m || n } = { m e. ( 1 ... L ) | m || L } )
+c60:c59:rabeqdv |- ( n = L -> { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } = { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } )
+c61:c60:fveq2d |- ( n = L -> ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) = ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) )
+c62:c61:breq1d |- ( n = L -> ( ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c63:c62:ralbidv |- ( n = L -> ( A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <-> A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+c64::biidd |- ( n = L -> ( A. i e. G -. i || w <-> A. i e. G -. i || w ) )
+c65:c56,c64,c63:3anbi123d |- ( n = L -> ( ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c66:c65:rexbidv |- ( n = L -> ( E. w e. NN ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) <-> E. w e. NN ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+c67:c55,c66:imbi12d |- ( n = L -> ( ( ( ( mmu ` n ) =/= 0 /\ A. i e. G 2 <_ i ) -> E. w e. NN ( w || n /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... n ) | m || n } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) <-> ( ( ( mmu ` L ) =/= 0 /\ A. i e. G 2 <_ i ) -> E. w e. NN ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) ) )
+s20:c67,s18,s3:rspcdva |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( ( ( mmu ` L ) =/= 0 /\ A. i e. G 2 <_ i ) -> E. w e. NN ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+s21:s4,s7:jca |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( ( mmu ` L ) =/= 0 /\ A. i e. G 2 <_ i ) )
+s22:s21,s20:mpd |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> E. w e. NN ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+s23::fzfi |- ( 1 ... w ) e. Fin
+i24::rabfi
+s25:s23,i24:ax-mp |- { m e. ( 1 ... w ) | m || w } e. Fin
+i26::rabfi
+s27:s25,i26:ax-mp |- { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } e. Fin
+i28::hashcl
+s29:s27,i28:ax-mp |- ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) e. NN0
+i30::nn0re
+s31:s29,i30:ax-mp |- ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) e. RR
+s32:s31:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) e. RR )
+i33::nn0ge0
+s34:s29,i33:ax-mp |- 0 <_ ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } )
+s35:s34:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> 0 <_ ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) )
+s36::fzfi |- ( 1 ... L ) e. Fin
+i37::rabfi
+s38:s36,i37:ax-mp |- { m e. ( 1 ... L ) | m || L } e. Fin
+i39::rabfi
+s40:s38,i39:ax-mp |- { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } e. Fin
+i41::hashcl
+s42:s40,i41:ax-mp |- ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) e. NN0
+i43::nn0re
+s44:s42,i43:ax-mp |- ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) e. RR
+s45:s44:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) e. RR )
+i46::nn0ge0
+s47:s42,i46:ax-mp |- 0 <_ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } )
+s48:s47:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> 0 <_ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) )
+s49:s6:adantr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> G e. Fin )
+s50:s49:adantr |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> G e. Fin )
+i51::hashcl
+s52:s50,i51:syl |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( # ` G ) e. NN0 )
+s53:s52:nn0zd |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( # ` G ) e. ZZ )
+s54:s9:adantr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> J e. NN0 )
+s55:s54:adantr |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> J e. NN0 )
+s56:s55:nn0zd |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> J e. ZZ )
+s57:s10:adantr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> ( # ` G ) <_ J )
+s58:s57:adantr |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( # ` G ) <_ J )
+s59:s53,s56,s58:3jca |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( ( # ` G ) e. ZZ /\ J e. ZZ /\ ( # ` G ) <_ J ) )
+s60::eluz2 |- ( J e. ( ZZ>= ` ( # ` G ) ) <-> ( ( # ` G ) e. ZZ /\ J e. ZZ /\ ( # ` G ) <_ J ) )
+s61:s59,s60:sylibr |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> J e. ( ZZ>= ` ( # ` G ) ) )
+s62::2re |- 2 e. RR
+s63:s62:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> 2 e. RR )
+s64::1le2 |- 1 <_ 2
+s65:s64:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> 1 <_ 2 )
+i66::leexp2a
+s67:s63,s65,s61,i66:syl3anc |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( 2 ^ ( # ` G ) ) <_ ( 2 ^ J ) )
+s68::2nn |- 2 e. NN
+s69:s68:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> 2 e. NN )
+i70::nnexpcl
+s71:s69,s52,i70:syl2anc |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( 2 ^ ( # ` G ) ) e. NN )
+s72:s71:nnred |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( 2 ^ ( # ` G ) ) e. RR )
+s73::2nn |- 2 e. NN
+s74:s73:a1i |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> 2 e. NN )
+s75:s9:adantr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> J e. NN0 )
+s76:s75:adantr |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> J e. NN0 )
+i77::nnexpcl
+s78:s74,s76,i77:syl2anc |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( 2 ^ J ) e. NN )
+s79:s78:nnred |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( 2 ^ J ) e. RR )
+s80:s72,s79,s32,s35,s67:lemul1ad |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+s81::simpr |- ( ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) /\ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+s82:s45:adantr |- ( ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) /\ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) e. RR )
+s83:s72,s32:remulcld |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) e. RR )
+s84:s83:adantr |- ( ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) /\ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) e. RR )
+s85:s79,s32:remulcld |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) e. RR )
+s86:s85:adantr |- ( ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) /\ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) e. RR )
+s87:s80:adantr |- ( ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) /\ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+s88:s82,s84,s86,s81,s87:letrd |- ( ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) /\ ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) )
+s89:s88:ex |- ( ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) /\ y e. RR ) -> ( ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) -> ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+s90:s89:ralimdva |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> ( A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) -> A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+s91::idd |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> ( w || L -> w || L ) )
+s92::idd |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> ( A. i e. G -. i || w -> A. i e. G -. i || w ) )
+s93:s91,s92,s90:3anim123d |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) /\ w e. NN ) -> ( ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+s94:s93:reximdva |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> ( E. w e. NN ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ ( # ` G ) ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) -> E. w e. NN ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) ) )
+qed:s22,s94:mpd |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ ( G e. Fin /\ A. i e. G 2 <_ i ) /\ ( J e. NN0 /\ ( # ` G ) <_ J ) ) -> E. w e. NN ( w || L /\ A. i e. G -. i || w /\ A. y e. RR ( # ` { d e. { m e. ( 1 ... L ) | m || L } | d <_ y } ) <_ ( ( 2 ^ J ) x. ( # ` { d e. { m e. ( 1 ... w ) | m || w } | d <_ y } ) ) ) )
+$)

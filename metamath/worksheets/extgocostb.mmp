@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=extgocostb  LOC_AFTER=?
+
+* Base of the induction for extgocost.
+
+s1::simpr |- ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) -> m e. NN0 )
+s2:s1:adantr |- ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) -> m e. NN0 )
+s3:s2:adantr |- ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) -> m e. NN0 )
+s4:s3:adantr |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> m e. NN0 )
+s5::simpr |- ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) -> u e. Word NN0 )
+s6:s5:adantr |- ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) -> u e. Word NN0 )
+s7:s6:adantr |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> u e. Word NN0 )
+s8::simpr |- ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) -> t e. Tbl )
+s9:s8:adantr |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> t e. Tbl )
+s10::simpr |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> k e. NN0 )
+s11::id |- ( ( L e. NN /\ N e. NN0 ) -> ( L e. NN /\ N e. NN0 ) )
+s12:s11:adantr |- ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) -> ( L e. NN /\ N e. NN0 ) )
+s13:s12:adantr |- ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) -> ( L e. NN /\ N e. NN0 ) )
+s14:s13:adantr |- ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) -> ( L e. NN /\ N e. NN0 ) )
+s15:s14:adantr |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( L e. NN /\ N e. NN0 ) )
+s16:s15:simpld |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> L e. NN )
+s17:s16:nnred |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> L e. RR )
+s18:s10:nn0red |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> k e. RR )
+s19:s10:nn0ge0d |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> 0 <_ k )
+s20:s15,s4:jca |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) )
+s21:s20,s7:jca |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) )
+s22:s21,s9:jca |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) )
+i23::extractgo0
+s24:s22,i23:syl |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) = <. ( inr ` (/) ) , 0 >. )
+s25::c0ex |- 0 e. _V
+s26:s25:a1i |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> 0 e. _V )
+s27::fvex |- ( inr ` (/) ) e. _V
+s28:s27:a1i |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( inr ` (/) ) e. _V )
+s29:s24:fveq2d |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) = ( 2nd ` <. ( inr ` (/) ) , 0 >. ) )
+i30::op2ndg
+s31:s28,s26,i30:syl2anc |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( 2nd ` <. ( inr ` (/) ) , 0 >. ) = 0 )
+s32:s29,s31:eqtrd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) = 0 )
+s33::hash0 |- ( # ` (/) ) = 0
+s34:s33:a1i |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( # ` (/) ) = 0 )
+s35:s34:oveq1d |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( # ` (/) ) x. ( L + 3 ) ) = ( 0 x. ( L + 3 ) ) )
+s36::3re |- 3 e. RR
+s37:s36:a1i |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> 3 e. RR )
+s38:s17,s37:readdcld |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( L + 3 ) e. RR )
+s39:s38:recnd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( L + 3 ) e. CC )
+s40:s39:mul02d |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( 0 x. ( L + 3 ) ) = 0 )
+s41:s35,s40:eqtrd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( # ` (/) ) x. ( L + 3 ) ) = 0 )
+s42:s41:oveq1d |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) = ( 0 + k ) )
+s43:s10:nn0cnd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> k e. CC )
+s44:s43:addlidd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( 0 + k ) = k )
+s45:s42,s44:eqtrd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) = k )
+s46:s32,s19:eqbrtrd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) <_ k )
+s47:s45:eqcomd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> k = ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) )
+s48:s46,s47:breqtrd |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) <_ ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) )
+s49:s48:a1d |- ( ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) /\ k e. NN0 ) -> ( A. d e. NN0 ( ( t ` d ) =/= ( inr ` (/) ) -> ( # ` ( 2nd ` ( t ` d ) ) ) <_ k ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) <_ ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) ) )
+s50:s49:ralrimiva |- ( ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) /\ t e. Tbl ) -> A. k e. NN0 ( A. d e. NN0 ( ( t ` d ) =/= ( inr ` (/) ) -> ( # ` ( 2nd ` ( t ` d ) ) ) <_ k ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) <_ ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) ) )
+s51:s50:ralrimiva |- ( ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) /\ u e. Word NN0 ) -> A. t e. Tbl A. k e. NN0 ( A. d e. NN0 ( ( t ` d ) =/= ( inr ` (/) ) -> ( # ` ( 2nd ` ( t ` d ) ) ) <_ k ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) <_ ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) ) )
+s52:s51:ralrimiva |- ( ( ( L e. NN /\ N e. NN0 ) /\ m e. NN0 ) -> A. u e. Word NN0 A. t e. Tbl A. k e. NN0 ( A. d e. NN0 ( ( t ` d ) =/= ( inr ` (/) ) -> ( # ` ( 2nd ` ( t ` d ) ) ) <_ k ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) <_ ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) ) )
+qed:s52:ralrimiva |- ( ( L e. NN /\ N e. NN0 ) -> A. m e. NN0 A. u e. Word NN0 A. t e. Tbl A. k e. NN0 ( A. d e. NN0 ( ( t ` d ) =/= ( inr ` (/) ) -> ( # ` ( 2nd ` ( t ` d ) ) ) <_ k ) -> ( 2nd ` ( ( ( ( ( L ExtractGo N ) ` (/) ) ` m ) ` u ) ` t ) ) <_ ( ( ( # ` (/) ) x. ( L + 3 ) ) + k ) ) )
+$)

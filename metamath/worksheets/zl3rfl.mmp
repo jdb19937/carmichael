@@ -1,0 +1,82 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3rfl  LOC_AFTER=?
+
+* The rising factorial splits off its first factor: ` A ( A + 1 ) ... ( A + K ) = A ( ( A + 1 ) ... ( A + K ) ) ` ( induction with ~ risefacp1 ).
+
+s1::id |- ( n = 0 -> n = 0 )
+c1:s1:oveq1d |- ( n = 0 -> ( n + 1 ) = ( 0 + 1 ) )
+c2:c1:oveq2d |- ( n = 0 -> ( A RiseFac ( n + 1 ) ) = ( A RiseFac ( 0 + 1 ) ) )
+c3:s1:oveq2d |- ( n = 0 -> ( ( A + 1 ) RiseFac n ) = ( ( A + 1 ) RiseFac 0 ) )
+c4:c3:oveq2d |- ( n = 0 -> ( A x. ( ( A + 1 ) RiseFac n ) ) = ( A x. ( ( A + 1 ) RiseFac 0 ) ) )
+c5:c2,c4:eqeq12d |- ( n = 0 -> ( ( A RiseFac ( n + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac n ) ) <-> ( A RiseFac ( 0 + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac 0 ) ) ) )
+s2::id |- ( n = y -> n = y )
+c6:s2:oveq1d |- ( n = y -> ( n + 1 ) = ( y + 1 ) )
+c7:c6:oveq2d |- ( n = y -> ( A RiseFac ( n + 1 ) ) = ( A RiseFac ( y + 1 ) ) )
+c8:s2:oveq2d |- ( n = y -> ( ( A + 1 ) RiseFac n ) = ( ( A + 1 ) RiseFac y ) )
+c9:c8:oveq2d |- ( n = y -> ( A x. ( ( A + 1 ) RiseFac n ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) )
+c10:c7,c9:eqeq12d |- ( n = y -> ( ( A RiseFac ( n + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac n ) ) <-> ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) )
+s3::id |- ( n = ( y + 1 ) -> n = ( y + 1 ) )
+c11:s3:oveq1d |- ( n = ( y + 1 ) -> ( n + 1 ) = ( ( y + 1 ) + 1 ) )
+c12:c11:oveq2d |- ( n = ( y + 1 ) -> ( A RiseFac ( n + 1 ) ) = ( A RiseFac ( ( y + 1 ) + 1 ) ) )
+c13:s3:oveq2d |- ( n = ( y + 1 ) -> ( ( A + 1 ) RiseFac n ) = ( ( A + 1 ) RiseFac ( y + 1 ) ) )
+c14:c13:oveq2d |- ( n = ( y + 1 ) -> ( A x. ( ( A + 1 ) RiseFac n ) ) = ( A x. ( ( A + 1 ) RiseFac ( y + 1 ) ) ) )
+c15:c12,c14:eqeq12d |- ( n = ( y + 1 ) -> ( ( A RiseFac ( n + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac n ) ) <-> ( A RiseFac ( ( y + 1 ) + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac ( y + 1 ) ) ) ) )
+s4::id |- ( n = K -> n = K )
+c16:s4:oveq1d |- ( n = K -> ( n + 1 ) = ( K + 1 ) )
+c17:c16:oveq2d |- ( n = K -> ( A RiseFac ( n + 1 ) ) = ( A RiseFac ( K + 1 ) ) )
+c18:s4:oveq2d |- ( n = K -> ( ( A + 1 ) RiseFac n ) = ( ( A + 1 ) RiseFac K ) )
+c19:c18:oveq2d |- ( n = K -> ( A x. ( ( A + 1 ) RiseFac n ) ) = ( A x. ( ( A + 1 ) RiseFac K ) ) )
+c20:c17,c19:eqeq12d |- ( n = K -> ( ( A RiseFac ( n + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac n ) ) <-> ( A RiseFac ( K + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac K ) ) ) )
+s5::id |- ( A e. CC -> A e. CC )
+s6::ax-1cn |- 1 e. CC
+s7:s6:a1i |- ( A e. CC -> 1 e. CC )
+s8:s5,s7:addcld |- ( A e. CC -> ( A + 1 ) e. CC )
+s9::0p1e1 |- ( 0 + 1 ) = 1
+s10:s9:a1i |- ( A e. CC -> ( 0 + 1 ) = 1 )
+s11:s10:oveq2d |- ( A e. CC -> ( A RiseFac ( 0 + 1 ) ) = ( A RiseFac 1 ) )
+i12::risefac1
+s13:s5,i12:syl |- ( A e. CC -> ( A RiseFac 1 ) = A )
+s14:s11,s13:eqtrd |- ( A e. CC -> ( A RiseFac ( 0 + 1 ) ) = A )
+i15::risefac0
+s16:s8,i15:syl |- ( A e. CC -> ( ( A + 1 ) RiseFac 0 ) = 1 )
+s17:s16:oveq2d |- ( A e. CC -> ( A x. ( ( A + 1 ) RiseFac 0 ) ) = ( A x. 1 ) )
+s18:s5:mulridd |- ( A e. CC -> ( A x. 1 ) = A )
+s19:s17,s18:eqtrd |- ( A e. CC -> ( A x. ( ( A + 1 ) RiseFac 0 ) ) = A )
+s20:s14,s19:eqtr4d |- ( A e. CC -> ( A RiseFac ( 0 + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac 0 ) ) )
+s21::simpr |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) )
+s22::simpll |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> A e. CC )
+s23::simplr |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> y e. NN0 )
+s24:s23:nn0cnd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> y e. CC )
+i25::peano2nn0
+s26:s23,i25:syl |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( y + 1 ) e. NN0 )
+s27::ax-1cn |- 1 e. CC
+s28:s27:a1i |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> 1 e. CC )
+s29:s22,s28:addcld |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A + 1 ) e. CC )
+i30::risefaccl
+s31:s29,s23,i30:syl2anc |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( A + 1 ) RiseFac y ) e. CC )
+i32::risefacp1
+s33:s22,s26,i32:syl2anc |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A RiseFac ( ( y + 1 ) + 1 ) ) = ( ( A RiseFac ( y + 1 ) ) x. ( A + ( y + 1 ) ) ) )
+s34:s21:oveq1d |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( A RiseFac ( y + 1 ) ) x. ( A + ( y + 1 ) ) ) = ( ( A x. ( ( A + 1 ) RiseFac y ) ) x. ( A + ( y + 1 ) ) ) )
+s35::ax-1cn |- 1 e. CC
+s36:s35:a1i |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> 1 e. CC )
+s37:s24,s36:addcld |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( y + 1 ) e. CC )
+s38:s22,s37:addcld |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A + ( y + 1 ) ) e. CC )
+s39:s22,s31,s38:mulassd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( A x. ( ( A + 1 ) RiseFac y ) ) x. ( A + ( y + 1 ) ) ) = ( A x. ( ( ( A + 1 ) RiseFac y ) x. ( A + ( y + 1 ) ) ) ) )
+s40::ax-1cn |- 1 e. CC
+s41:s40:a1i |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> 1 e. CC )
+s42:s22,s24,s41:addassd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( A + y ) + 1 ) = ( A + ( y + 1 ) ) )
+s43:s22,s41,s24:add32d |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( A + 1 ) + y ) = ( ( A + y ) + 1 ) )
+s44:s42:eqcomd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A + ( y + 1 ) ) = ( ( A + y ) + 1 ) )
+s45:s43:eqcomd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( A + y ) + 1 ) = ( ( A + 1 ) + y ) )
+s46:s44,s45:eqtrd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A + ( y + 1 ) ) = ( ( A + 1 ) + y ) )
+s47:s46:oveq2d |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( ( A + 1 ) RiseFac y ) x. ( A + ( y + 1 ) ) ) = ( ( ( A + 1 ) RiseFac y ) x. ( ( A + 1 ) + y ) ) )
+s48:s47:oveq2d |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A x. ( ( ( A + 1 ) RiseFac y ) x. ( A + ( y + 1 ) ) ) ) = ( A x. ( ( ( A + 1 ) RiseFac y ) x. ( ( A + 1 ) + y ) ) ) )
+i49::risefacp1
+s50:s29,s23,i49:syl2anc |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( A + 1 ) RiseFac ( y + 1 ) ) = ( ( ( A + 1 ) RiseFac y ) x. ( ( A + 1 ) + y ) ) )
+s51:s50:eqcomd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( ( ( A + 1 ) RiseFac y ) x. ( ( A + 1 ) + y ) ) = ( ( A + 1 ) RiseFac ( y + 1 ) ) )
+s52:s51:oveq2d |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A x. ( ( ( A + 1 ) RiseFac y ) x. ( ( A + 1 ) + y ) ) ) = ( A x. ( ( A + 1 ) RiseFac ( y + 1 ) ) ) )
+s53:s33,s34:eqtrd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A RiseFac ( ( y + 1 ) + 1 ) ) = ( ( A x. ( ( A + 1 ) RiseFac y ) ) x. ( A + ( y + 1 ) ) ) )
+s54:s53,s39:eqtrd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A RiseFac ( ( y + 1 ) + 1 ) ) = ( A x. ( ( ( A + 1 ) RiseFac y ) x. ( A + ( y + 1 ) ) ) ) )
+s55:s54,s48:eqtrd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A RiseFac ( ( y + 1 ) + 1 ) ) = ( A x. ( ( ( A + 1 ) RiseFac y ) x. ( ( A + 1 ) + y ) ) ) )
+s56:s55,s52:eqtrd |- ( ( ( A e. CC /\ y e. NN0 ) /\ ( A RiseFac ( y + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac y ) ) ) -> ( A RiseFac ( ( y + 1 ) + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac ( y + 1 ) ) ) )
+qed:c5,c10,c15,c20,s20,s56:nn0indd |- ( ( A e. CC /\ K e. NN0 ) -> ( A RiseFac ( K + 1 ) ) = ( A x. ( ( A + 1 ) RiseFac K ) ) )
+$)

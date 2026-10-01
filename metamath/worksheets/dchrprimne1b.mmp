@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrprimne1b  LOC_AFTER=?
+
+* The primitive character is trivial iff X is trivial (LConvexityCorollaries: the primitive character of a nontrivial character is nontrivial).
+
+s1::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3::id |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+i4::dchrcondnn
+s5:s3,i4:syl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond X ) e. NN )
+i6::dchrconddvdn
+s7:s3,i6:syl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond X ) || N )
+s8::dchrprimind |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) = X )
+s9::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) )
+s10:s9:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) = ( ( ( N DChrCond X ) DChrInd N ) ` ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) )
+s11:s5:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> ( N DChrCond X ) e. NN )
+s12:s1:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> N e. NN )
+s13:s7:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> ( N DChrCond X ) || N )
+i14::dchrind1
+s15:s11,s12,s13,i14:syl3anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> ( ( ( N DChrCond X ) DChrInd N ) ` ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) = ( 0g ` ( DChr ` N ) ) )
+s16:s10,s15:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) = ( 0g ` ( DChr ` N ) ) )
+s17:s8:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) = X )
+s18:s17,s16:eqtr3d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) -> X = ( 0g ` ( DChr ` N ) ) )
+s19:s18:ex |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) -> X = ( 0g ` ( DChr ` N ) ) ) )
+s20::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> X = ( 0g ` ( DChr ` N ) ) )
+s21::dchrcondeq1 |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( X = ( 0g ` ( DChr ` N ) ) <-> ( N DChrCond X ) = 1 ) )
+s22:s21:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( X = ( 0g ` ( DChr ` N ) ) <-> ( N DChrCond X ) = 1 ) )
+s23:s20,s22:mpbid |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( N DChrCond X ) = 1 )
+s24:s23:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( DChr ` ( N DChrCond X ) ) = ( DChr ` 1 ) )
+s25:s24:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( Base ` ( DChr ` ( N DChrCond X ) ) ) = ( Base ` ( DChr ` 1 ) ) )
+s26::dchrprimcl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) )
+s27:s26:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) )
+s28:s27,s25:eleqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( N DChrPrim X ) e. ( Base ` ( DChr ` 1 ) ) )
+i29::dchr1lev
+s30:s28,i29:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( N DChrPrim X ) = ( 0g ` ( DChr ` 1 ) ) )
+s31:s23:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( DChr ` ( N DChrCond X ) ) = ( DChr ` 1 ) )
+s32:s31:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( 0g ` ( DChr ` ( N DChrCond X ) ) ) = ( 0g ` ( DChr ` 1 ) ) )
+s33:s30,s32:eqtr4d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ X = ( 0g ` ( DChr ` N ) ) ) -> ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) )
+s34:s33:ex |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( X = ( 0g ` ( DChr ` N ) ) -> ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) ) )
+qed:s19,s34:impbid |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrPrim X ) = ( 0g ` ( DChr ` ( N DChrCond X ) ) ) <-> X = ( 0g ` ( DChr ` N ) ) ) )
+$)

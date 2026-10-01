@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=g4t4  LOC_AFTER=?
+
+* A finite sum re-indexed by a bijection, through tools/fsum.py and ` fsumf1o ` : the substituted body and the four hypothesis steps are written by the module.
+
+s1::simpll |- ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) -> A e. Fin )
+s2::simplr |- ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) -> C e. Fin )
+s3::simprl |- ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) -> F : C -1-1-onto-> A )
+s4::simprr |- ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) -> H : A --> CC )
+s5:s4:adantr |- ( ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) /\ k e. A ) -> H : A --> CC )
+s6::simpr |- ( ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) /\ k e. A ) -> k e. A )
+s7:s5,s6:ffvelcdmd |- ( ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) /\ k e. A ) -> ( H ` k ) e. CC )
+s8::eqidd |- ( ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) /\ n e. C ) -> ( F ` n ) = ( F ` n ) )
+s9::id |- ( k = ( F ` n ) -> k = ( F ` n ) )
+g1:s9:fveq2d |- ( k = ( F ` n ) -> ( H ` k ) = ( H ` ( F ` n ) ) )
+s10::simpr |- ( ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) /\ k e. A ) -> k e. A )
+qed:g1,s2,s3,s8,s7:fsumf1o |- ( ( ( A e. Fin /\ C e. Fin ) /\ ( F : C -1-1-onto-> A /\ H : A --> CC ) ) -> sum_ k e. A ( H ` k ) = sum_ n e. C ( H ` ( F ` n ) ) )
+$)

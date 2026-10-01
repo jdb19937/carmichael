@@ -1,0 +1,59 @@
+$( <MM> <PROOF_ASST> THEOREM=tmiblw2  LOC_AFTER=?
+
+* The word ` bitlen ` rebuilds on ` x ` : the ` I + 1 ` low bits of ` floor ( F / 2 ^ M ) ` are the bit ` M ` of ` F ` followed by the ` I ` low bits of ` floor ( F / 2 ^ ( M + 1 ) ) ` .
+
+s1::simp1 |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> F e. NN0 )
+s2::simp2 |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> M e. NN0 )
+s3::simp3 |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> I e. NN0 )
+s4::2nn |- 2 e. NN
+s5:s4:a1i |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> 2 e. NN )
+i6::nnexpcl
+s7:s5,s2,i6:syl2anc |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( 2 ^ M ) e. NN )
+i8::fldivnn0
+s9:s1,s7,i8:syl2anc |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. NN0 )
+s10:s1:nn0red |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> F e. RR )
+s11::2nn |- 2 e. NN
+s12:s11:a1i |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> 2 e. NN )
+i13::fldiv2
+s14:s10,s7,s12,i13:syl3anc |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) = ( |_ ` ( F / ( ( 2 ^ M ) x. 2 ) ) ) )
+s15::2cn |- 2 e. CC
+s16:s15:a1i |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> 2 e. CC )
+i17::expp1
+s18:s16,s2,i17:syl2anc |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( 2 ^ ( M + 1 ) ) = ( ( 2 ^ M ) x. 2 ) )
+s19:s18:eqcomd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( ( 2 ^ M ) x. 2 ) = ( 2 ^ ( M + 1 ) ) )
+s20:s19:oveq2d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( F / ( ( 2 ^ M ) x. 2 ) ) = ( F / ( 2 ^ ( M + 1 ) ) ) )
+s21:s20:fveq2d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( F / ( ( 2 ^ M ) x. 2 ) ) ) = ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) )
+s22:s14,s21:eqtrd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) = ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) )
+s23:s1:nn0zd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> F e. ZZ )
+i24::bitsval2
+s25:s23,s2,i24:syl2anc |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( M e. ( bits ` F ) <-> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s26:s9:nn0zd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. ZZ )
+i27::bwrdcons
+s28:s26,s3,i27:syl2anc |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) bwrd ( I + 1 ) ) = ( <" if ( 0 e. ( bits ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) , 1o , (/) ) "> ++ ( ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) bwrd I ) ) )
+s29::0nn0 |- 0 e. NN0
+s30:s29:a1i |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> 0 e. NN0 )
+i31::bitsval2
+s32:s26,s30,i31:syl2anc |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( 0 e. ( bits ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) <-> -. 2 || ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / ( 2 ^ 0 ) ) ) ) )
+s33::2cn |- 2 e. CC
+s34:s33:a1i |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> 2 e. CC )
+i35::exp0
+s36:s34,i35:syl |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( 2 ^ 0 ) = 1 )
+s37:s9:nn0cnd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. CC )
+s38:s36:oveq2d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) / ( 2 ^ 0 ) ) = ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 1 ) )
+i39::div1
+s40:s37,i39:syl |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 1 ) = ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s41:s38,s40:eqtrd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) / ( 2 ^ 0 ) ) = ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s42:s41:fveq2d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / ( 2 ^ 0 ) ) ) = ( |_ ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+i43::flid
+s44:s26,i43:syl |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) = ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s45:s42,s44:eqtrd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / ( 2 ^ 0 ) ) ) = ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s46:s45:breq2d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( 2 || ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / ( 2 ^ 0 ) ) ) <-> 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s47:s46:notbid |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( -. 2 || ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / ( 2 ^ 0 ) ) ) <-> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s48:s32,s47:bitrd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( 0 e. ( bits ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) <-> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s49:s48,s25:bitr4d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( 0 e. ( bits ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) <-> M e. ( bits ` F ) ) )
+s50:s49:ifbid |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> if ( 0 e. ( bits ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) , 1o , (/) ) = if ( M e. ( bits ` F ) , 1o , (/) ) )
+s51:s50:s1eqd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> <" if ( 0 e. ( bits ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) , 1o , (/) ) "> = <" if ( M e. ( bits ` F ) , 1o , (/) ) "> )
+s52:s22:oveq1d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) bwrd I ) = ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) bwrd I ) )
+s53:s51,s52:oveq12d |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( <" if ( 0 e. ( bits ` ( |_ ` ( F / ( 2 ^ M ) ) ) ) , 1o , (/) ) "> ++ ( ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) bwrd I ) ) = ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) bwrd I ) ) )
+qed:s28,s53:eqtrd |- ( ( F e. NN0 /\ M e. NN0 /\ I e. NN0 ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) bwrd ( I + 1 ) ) = ( <" if ( M e. ( bits ` F ) , 1o , (/) ) "> ++ ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) bwrd I ) ) )
+$)

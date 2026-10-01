@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutcostb  LOC_AFTER=?
+
+* Base of the induction for divoutcost.
+
+s1::simpll |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> D e. NN )
+s2::simpr |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> r e. NN0 )
+i3::divout0
+s4:s1,s2,i3:syl2anc |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( ( D DivOut r ) ` 0 ) = <. r , 0 >. )
+s5:s2:elexd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> r e. _V )
+s6::c0ex |- 0 e. _V
+s7:s6:a1i |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> 0 e. _V )
+s8:s4:fveq2d |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = ( 1st ` <. r , 0 >. ) )
+i9::op1stg
+s10:s5,s7,i9:syl2anc |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 1st ` <. r , 0 >. ) = r )
+s11:s8,s10:eqtrd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = r )
+s12:s2:elexd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> r e. _V )
+s13::c0ex |- 0 e. _V
+s14:s13:a1i |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> 0 e. _V )
+s15:s4:fveq2d |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 2nd ` ( ( D DivOut r ) ` 0 ) ) = ( 2nd ` <. r , 0 >. ) )
+i16::op2ndg
+s17:s12,s14,i16:syl2anc |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 2nd ` <. r , 0 >. ) = 0 )
+s18:s15,s17:eqtrd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 2nd ` ( ( D DivOut r ) ` 0 ) ) = 0 )
+s19::2nn0 |- 2 e. NN0
+s20:s19:a1i |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> 2 e. NN0 )
+i21::nlogcl
+s22:s20,s2,i21:syl2anc |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 2 Nlog r ) e. NN0 )
+s23:s22:nn0cnd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 2 Nlog r ) e. CC )
+s24::id |- ( ( 1st ` ( ( D DivOut r ) ` 0 ) ) = r -> ( 1st ` ( ( D DivOut r ) ` 0 ) ) = r )
+c1:s24:oveq2d |- ( ( 1st ` ( ( D DivOut r ) ` 0 ) ) = r -> ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` 0 ) ) ) = ( 2 Nlog r ) )
+s25:s11,c1:syl |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` 0 ) ) ) = ( 2 Nlog r ) )
+s26:s18,s25:oveq12d |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( ( 2nd ` ( ( D DivOut r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` 0 ) ) ) ) = ( 0 + ( 2 Nlog r ) ) )
+s27:s23:addlidd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 0 + ( 2 Nlog r ) ) = ( 2 Nlog r ) )
+s28:s26,s27:eqtrd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( ( 2nd ` ( ( D DivOut r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` 0 ) ) ) ) = ( 2 Nlog r ) )
+s29::leidd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 2 Nlog r ) <_ ( 2 Nlog r ) )
+s30:s28,s29:eqbrtrd |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( ( 2nd ` ( ( D DivOut r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` 0 ) ) ) ) <_ ( 2 Nlog r ) )
+s31:s30:a1d |- ( ( ( D e. NN /\ 2 <_ D ) /\ r e. NN0 ) -> ( 1 <_ r -> ( ( 2nd ` ( ( D DivOut r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` 0 ) ) ) ) <_ ( 2 Nlog r ) ) )
+qed:s31:ralrimiva |- ( ( D e. NN /\ 2 <_ D ) -> A. r e. NN0 ( 1 <_ r -> ( ( 2nd ` ( ( D DivOut r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` 0 ) ) ) ) <_ ( 2 Nlog r ) ) )
+$)

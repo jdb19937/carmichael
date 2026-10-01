@@ -1,0 +1,70 @@
+$( <MM> <PROOF_ASST> THEOREM=borrowsle  LOC_AFTER=?
+
+* The borrows of a decrement are at most the length (Lean: borrows_le_length).
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::borrowsval |- ( L e. Word 2o -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s3::simpr |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( toNat ` L ) = 0 )
+s4:s3:iftrued |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) = ( # ` L ) )
+s5:s2:adantr |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s6:s5,s4:eqtrd |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( borrows ` L ) = ( # ` L ) )
+i7::lencl
+s8:s1,i7:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s9:s8:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s10:s9:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+s11:s10:adantr |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( # ` L ) e. RR )
+s12:s11:leidd |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( # ` L ) <_ ( # ` L ) )
+s13:s6,s12:eqbrtrd |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( borrows ` L ) <_ ( # ` L ) )
+s14::simpr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> -. ( toNat ` L ) = 0 )
+s15:s14:iffalsed |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) = ( 2 pCnt ( toNat ` L ) ) )
+s16:s2:adantr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s17:s16,s15:eqtrd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( borrows ` L ) = ( 2 pCnt ( toNat ` L ) ) )
+s18:s14:neqned |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) =/= 0 )
+i19::tonatcl
+s20:s1,i19:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+s21:s20:adantr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) e. NN0 )
+i22::elnnne0
+s23:s21,s18,i22:sylanbrc |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) e. NN )
+s24::2prm |- 2 e. Prime
+s25:s24:a1i |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> 2 e. Prime )
+i26::pcdvds
+s27:s25,s23,i26:syl2anc |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) || ( toNat ` L ) )
+s28::2z |- 2 e. ZZ
+s29:s28:a1i |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> 2 e. ZZ )
+s30:s24:a1i |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> 2 e. Prime )
+i31::pccl
+s32:s30,s23,i31:syl2anc |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 pCnt ( toNat ` L ) ) e. NN0 )
+s33:s29,s32:zexpcld |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) e. ZZ )
+i34::dvdsle
+s35:s33,s23,i34:syl2anc |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) || ( toNat ` L ) -> ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) <_ ( toNat ` L ) ) )
+s36:s27,s35:mpd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) <_ ( toNat ` L ) )
+s37:s1:adantr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> L e. Word 2o )
+i38::tonatlt
+s39:s37,i38:syl |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) < ( 2 ^ ( # ` L ) ) )
+s40::2re |- 2 e. RR
+s41:s40:a1i |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> 2 e. RR )
+s42:s41,s32:reexpcld |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) e. RR )
+s43:s23:nnrpd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) e. RR+ )
+s44:s43:rpred |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) e. RR )
+s45:s1:adantr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> L e. Word 2o )
+i46::lencl
+s47:s45,i46:syl |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( # ` L ) e. NN0 )
+s48:s41,s47:reexpcld |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 ^ ( # ` L ) ) e. RR )
+s49:s42,s44,s48,s36,s39:lelttrd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) < ( 2 ^ ( # ` L ) ) )
+s50:s40:a1i |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> 2 e. RR )
+s51:s32:nn0zd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 pCnt ( toNat ` L ) ) e. ZZ )
+s52:s47:nn0zd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( # ` L ) e. ZZ )
+s53:s50,s51,s52:3jca |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 e. RR /\ ( 2 pCnt ( toNat ` L ) ) e. ZZ /\ ( # ` L ) e. ZZ ) )
+s54::1lt2 |- 1 < 2
+s55:s54:a1i |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> 1 < 2 )
+i56::ltexp2
+s57:s53,s55,i56:syl2anc |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( ( 2 pCnt ( toNat ` L ) ) < ( # ` L ) <-> ( 2 ^ ( 2 pCnt ( toNat ` L ) ) ) < ( 2 ^ ( # ` L ) ) ) )
+s58:s49,s57:mpbird |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 pCnt ( toNat ` L ) ) < ( # ` L ) )
+s59:s24:a1i |- ( L e. Word 2o -> 2 e. Prime )
+s60:s24:a1i |- ( L e. Word 2o -> 2 e. Prime )
+s61:s51:zred |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 pCnt ( toNat ` L ) ) e. RR )
+s62:s52:zred |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( # ` L ) e. RR )
+s63:s61,s62,s58:ltled |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 pCnt ( toNat ` L ) ) <_ ( # ` L ) )
+s64:s17,s63:eqbrtrd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( borrows ` L ) <_ ( # ` L ) )
+qed:s13,s64:pm2.61dan |- ( L e. Word 2o -> ( borrows ` L ) <_ ( # ` L ) )
+$)

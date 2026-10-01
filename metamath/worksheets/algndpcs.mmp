@@ -1,0 +1,77 @@
+$( <MM> <PROOF_ASST> THEOREM=algndpcs  LOC_AFTER=?
+
+* A cons has no repeats exactly when the head is new and the tail has none (Lean: List.nodup_cons).
+
+s1::simpl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> P e. NN0 )
+s2::simpr |- ( ( P e. NN0 /\ W e. Word NN0 ) -> W e. Word NN0 )
+i3::s1cl
+s4:s1,i3:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> <" P "> e. Word NN0 )
+i5::ccatcl
+s6:s4,s2,i5:syl2anc |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( <" P "> ++ W ) e. Word NN0 )
+i7::algndpcard
+s8:s6,i7:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( Fun `' ( <" P "> ++ W ) <-> ( # ` ran ( <" P "> ++ W ) ) = ( # ` ( <" P "> ++ W ) ) ) )
+s9::algrncs |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ran ( <" P "> ++ W ) = ( { P } u. ran W ) )
+s10::alglencs |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` ( <" P "> ++ W ) ) = ( ( # ` W ) + 1 ) )
+s11:s9:fveq2d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` ran ( <" P "> ++ W ) ) = ( # ` ( { P } u. ran W ) ) )
+s12:s11,s10:eqeq12d |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( ( # ` ran ( <" P "> ++ W ) ) = ( # ` ( <" P "> ++ W ) ) <-> ( # ` ( { P } u. ran W ) ) = ( ( # ` W ) + 1 ) ) )
+s13:s8,s12:bitrd |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( Fun `' ( <" P "> ++ W ) <-> ( # ` ( { P } u. ran W ) ) = ( ( # ` W ) + 1 ) ) )
+i14::lencl
+s15:s2,i14:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` W ) e. NN0 )
+i16::algwrdfi
+s17:s2,i16:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ran W e. Fin )
+i18::hashcl
+s19:s17,i18:syl |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( # ` ran W ) e. NN0 )
+s20:s13:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( Fun `' ( <" P "> ++ W ) <-> ( # ` ( { P } u. ran W ) ) = ( ( # ` W ) + 1 ) ) )
+s21::uncom |- ( { P } u. ran W ) = ( ran W u. { P } )
+s22:s21:a1i |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( { P } u. ran W ) = ( ran W u. { P } ) )
+s23:s1:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> P e. NN0 )
+i24::hashunsng
+s25:s23,i24:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( ( ran W e. Fin /\ -. P e. ran W ) -> ( # ` ( ran W u. { P } ) ) = ( ( # ` ran W ) + 1 ) ) )
+s26:s17:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ran W e. Fin )
+s27::simpr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> -. P e. ran W )
+s28:s26,s27:jca |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( ran W e. Fin /\ -. P e. ran W ) )
+s29:s25,s28:mpd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( # ` ( ran W u. { P } ) ) = ( ( # ` ran W ) + 1 ) )
+s30:s22:fveq2d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( # ` ( { P } u. ran W ) ) = ( # ` ( ran W u. { P } ) ) )
+s31:s30,s29:eqtrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( # ` ( { P } u. ran W ) ) = ( ( # ` ran W ) + 1 ) )
+s32:s31:eqeq1d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( ( # ` ( { P } u. ran W ) ) = ( ( # ` W ) + 1 ) <-> ( ( # ` ran W ) + 1 ) = ( ( # ` W ) + 1 ) ) )
+s33:s19:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( # ` ran W ) e. NN0 )
+s34:s33:nn0cnd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( # ` ran W ) e. CC )
+s35:s15:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( # ` W ) e. NN0 )
+s36:s35:nn0cnd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( # ` W ) e. CC )
+s37::1cnd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> 1 e. CC )
+s38:s34,s36,s37:addcan2d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( ( ( # ` ran W ) + 1 ) = ( ( # ` W ) + 1 ) <-> ( # ` ran W ) = ( # ` W ) ) )
+s39:s2:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> W e. Word NN0 )
+i40::algndpcard
+s41:s39,i40:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( Fun `' W <-> ( # ` ran W ) = ( # ` W ) ) )
+s42:s20,s32,s38:3bitrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( Fun `' ( <" P "> ++ W ) <-> ( # ` ran W ) = ( # ` W ) ) )
+s43:s42,s41:bitr4d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( Fun `' ( <" P "> ++ W ) <-> Fun `' W ) )
+s44::simpr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> -. P e. ran W )
+s45:s44:biantrurd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( Fun `' W <-> ( -. P e. ran W /\ Fun `' W ) ) )
+s46:s43,s45:bitrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ -. P e. ran W ) -> ( Fun `' ( <" P "> ++ W ) <-> ( -. P e. ran W /\ Fun `' W ) ) )
+s47:s13:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( Fun `' ( <" P "> ++ W ) <-> ( # ` ( { P } u. ran W ) ) = ( ( # ` W ) + 1 ) ) )
+s48::simpr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> P e. ran W )
+s49:s48:snssd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> { P } C_ ran W )
+i50::ssequn1
+s51:s49,i50:sylib |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( { P } u. ran W ) = ran W )
+s52:s51:fveq2d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` ( { P } u. ran W ) ) = ( # ` ran W ) )
+s53:s2:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> W e. Word NN0 )
+i54::algrnle
+s55:s53,i54:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` ran W ) <_ ( # ` W ) )
+s56:s19:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` ran W ) e. NN0 )
+s57:s56:nn0red |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` ran W ) e. RR )
+s58:s15:adantr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` W ) e. NN0 )
+s59:s58:nn0red |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` W ) e. RR )
+s60:s59:ltp1d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` W ) < ( ( # ` W ) + 1 ) )
+s61::1red |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> 1 e. RR )
+s62:s59,s61:readdcld |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( ( # ` W ) + 1 ) e. RR )
+s63:s57,s59,s62,s55,s60:lelttrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` ran W ) < ( ( # ` W ) + 1 ) )
+s64:s63:ltned |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` ran W ) =/= ( ( # ` W ) + 1 ) )
+s65:s52,s64:eqnetrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( # ` ( { P } u. ran W ) ) =/= ( ( # ` W ) + 1 ) )
+s66:s65:neneqd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> -. ( # ` ( { P } u. ran W ) ) = ( ( # ` W ) + 1 ) )
+s67:s47,s66:mtbird |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> -. Fun `' ( <" P "> ++ W ) )
+s68::simpr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> P e. ran W )
+s69:s68:notnotd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> -. -. P e. ran W )
+s70:s69:intnanrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> -. ( -. P e. ran W /\ Fun `' W ) )
+s71:s67,s70:2falsed |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ P e. ran W ) -> ( Fun `' ( <" P "> ++ W ) <-> ( -. P e. ran W /\ Fun `' W ) ) )
+qed:s71,s46:pm2.61dan |- ( ( P e. NN0 /\ W e. Word NN0 ) -> ( Fun `' ( <" P "> ++ W ) <-> ( -. P e. ran W /\ Fun `' W ) ) )
+$)

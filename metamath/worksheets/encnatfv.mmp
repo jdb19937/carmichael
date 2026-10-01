@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatfv  LOC_AFTER=?
+
+* The I-th letter of encodeNat N: the I-th binary digit of N as a Boolean.
+
+s1::simpl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> N e. NN0 )
+s2::simpr |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) )
+i3::encnatval
+s4:s1,i3:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( encodeNat ` N ) = ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) )
+i5::encnatlen
+s6:s1,i5:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( # ` ( encodeNat ` N ) ) = if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) )
+s7:s6:oveq2d |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) = ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) )
+s8:s2,s7:eleqtrd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> I e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) )
+s9::simpr |- ( ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) /\ i = I ) -> i = I )
+c1:s9:oveq2d |- ( ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) /\ i = I ) -> ( 2 ^ i ) = ( 2 ^ I ) )
+c2:c1:oveq2d |- ( ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) /\ i = I ) -> ( N / ( 2 ^ i ) ) = ( N / ( 2 ^ I ) ) )
+c3:c2:fveq2d |- ( ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) /\ i = I ) -> ( |_ ` ( N / ( 2 ^ i ) ) ) = ( |_ ` ( N / ( 2 ^ I ) ) ) )
+c4:c3:oveq1d |- ( ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) /\ i = I ) -> ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) )
+c5:c4:eqeq1d |- ( ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) /\ i = I ) -> ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 <-> ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 ) )
+c6:c5:ifbid |- ( ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) /\ i = I ) -> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) = if ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 , 1o , (/) ) )
+s10::1oex |- 1o e. _V
+s11:s10:a1i |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> 1o e. _V )
+s12::0ex |- (/) e. _V
+s13:s12:a1i |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> (/) e. _V )
+i14::ifexg
+s15:s11,s13,i14:syl2anc |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> if ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 , 1o , (/) ) e. _V )
+qed:s4,c6,s8,s15:fvmptd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( encodeNat ` N ) ` I ) = if ( ( ( |_ ` ( N / ( 2 ^ I ) ) ) mod 2 ) = 1 , 1o , (/) ) )
+$)

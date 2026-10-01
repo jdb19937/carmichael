@@ -1,0 +1,64 @@
+$( <MM> <PROOF_ASST> THEOREM=extrwfrm  LOC_AFTER=?
+
+* Fermat for an exponent divisible by P - 1: P || ( ( A ^ M ) - 1 ) (inside Lean exponent_dvd_lambdaW).
+
+s1::simpl1 |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> P e. Prime )
+s2::simpl2 |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> A e. ZZ )
+s3::simpl3 |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> -. P || A )
+s4::simprl |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> M e. NN )
+s5::simprr |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( P - 1 ) || M )
+i6::prmuz2
+s7:s1,i6:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> P e. ( ZZ>= ` 2 ) )
+i8::prmnn
+s9:s1,i8:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> P e. NN )
+s10:s9:nnrpd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> P e. RR+ )
+i11::uz2m1nn
+s12:s7,i11:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( P - 1 ) e. NN )
+i13::nndivdvds
+s14:s4,s12,i13:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( P - 1 ) || M <-> ( M / ( P - 1 ) ) e. NN ) )
+s15:s14,s5:mpbid |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( M / ( P - 1 ) ) e. NN )
+s16:s15:nnnn0d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( M / ( P - 1 ) ) e. NN0 )
+s17:s4:nncnd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> M e. CC )
+s18:s12:nncnd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( P - 1 ) e. CC )
+s19:s12:nnne0d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( P - 1 ) =/= 0 )
+s20:s17,s18,s19:divcan2d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( P - 1 ) x. ( M / ( P - 1 ) ) ) = M )
+i21::vfermltl
+s22:s1,s2,s3,i21:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( A ^ ( P - 1 ) ) mod P ) = 1 )
+s23:s9:nnred |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> P e. RR )
+i24::eluz2gt1
+s25:s7,i24:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> 1 < P )
+i26::1mod
+s27:s23,s25,i26:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( 1 mod P ) = 1 )
+s28:s27:eqcomd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> 1 = ( 1 mod P ) )
+s29:s22,s28:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( A ^ ( P - 1 ) ) mod P ) = ( 1 mod P ) )
+s30:s12:nnnn0d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( P - 1 ) e. NN0 )
+s31:s2,s30:zexpcld |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( A ^ ( P - 1 ) ) e. ZZ )
+s32::1z |- 1 e. ZZ
+s33:s32:a1i |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> 1 e. ZZ )
+s34:s31,s33:jca |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( A ^ ( P - 1 ) ) e. ZZ /\ 1 e. ZZ ) )
+s35:s16,s10:jca |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( M / ( P - 1 ) ) e. NN0 /\ P e. RR+ ) )
+s36:s34,s35,s29:3jca |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( ( A ^ ( P - 1 ) ) e. ZZ /\ 1 e. ZZ ) /\ ( ( M / ( P - 1 ) ) e. NN0 /\ P e. RR+ ) /\ ( ( A ^ ( P - 1 ) ) mod P ) = ( 1 mod P ) ) )
+i37::modexp
+s38:s36,i37:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( ( A ^ ( P - 1 ) ) ^ ( M / ( P - 1 ) ) ) mod P ) = ( ( 1 ^ ( M / ( P - 1 ) ) ) mod P ) )
+s39:s16:nn0zd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( M / ( P - 1 ) ) e. ZZ )
+i40::1exp
+s41:s39,i40:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( 1 ^ ( M / ( P - 1 ) ) ) = 1 )
+s42:s41:oveq1d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( 1 ^ ( M / ( P - 1 ) ) ) mod P ) = ( 1 mod P ) )
+s43:s38,s42:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( ( A ^ ( P - 1 ) ) ^ ( M / ( P - 1 ) ) ) mod P ) = ( 1 mod P ) )
+s44:s2:zcnd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> A e. CC )
+s45:s12:nnnn0d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( P - 1 ) e. NN0 )
+i46::expmul
+s47:s44,s45,s16,i46:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( A ^ ( ( P - 1 ) x. ( M / ( P - 1 ) ) ) ) = ( ( A ^ ( P - 1 ) ) ^ ( M / ( P - 1 ) ) ) )
+s48:s20:oveq2d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( A ^ ( ( P - 1 ) x. ( M / ( P - 1 ) ) ) ) = ( A ^ M ) )
+s49:s48:eqcomd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( A ^ M ) = ( A ^ ( ( P - 1 ) x. ( M / ( P - 1 ) ) ) ) )
+s50:s49,s47:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( A ^ M ) = ( ( A ^ ( P - 1 ) ) ^ ( M / ( P - 1 ) ) ) )
+s51:s50:oveq1d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( A ^ M ) mod P ) = ( ( ( A ^ ( P - 1 ) ) ^ ( M / ( P - 1 ) ) ) mod P ) )
+s52:s51,s43:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( A ^ M ) mod P ) = ( 1 mod P ) )
+s53:s4:nnnn0d |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> M e. NN0 )
+s54:s2,s53:zexpcld |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( A ^ M ) e. ZZ )
+s55::1z |- 1 e. ZZ
+s56:s55:a1i |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> 1 e. ZZ )
+i57::moddvds
+s58:s9,s54,s56,i57:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> ( ( ( A ^ M ) mod P ) = ( 1 mod P ) <-> P || ( ( A ^ M ) - 1 ) ) )
+qed:s58,s52:mpbid |- ( ( ( P e. Prime /\ A e. ZZ /\ -. P || A ) /\ ( M e. NN /\ ( P - 1 ) || M ) ) -> P || ( ( A ^ M ) - 1 ) )
+$)

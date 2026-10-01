@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=nfloorle  LOC_AFTER=?
+
+* The natural floor of a nonnegative real number is at most the number (Lean: Nat.floor_le).
+
+s1::simpl |- ( ( X e. RR /\ 0 <_ X ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ 0 <_ X ) -> 0 <_ X )
+s3::0red |- ( ( X e. RR /\ 0 <_ X ) -> 0 e. RR )
+i4::lenlt
+s5:s3,s1,i4:syl2anc |- ( ( X e. RR /\ 0 <_ X ) -> ( 0 <_ X <-> -. X < 0 ) )
+s6:s2,s5:mpbid |- ( ( X e. RR /\ 0 <_ X ) -> -. X < 0 )
+i7::nfloorval
+s8:s1,i7:syl |- ( ( X e. RR /\ 0 <_ X ) -> ( Nfloor ` X ) = if ( X < 0 , 0 , ( |_ ` X ) ) )
+s9:s6:iffalsed |- ( ( X e. RR /\ 0 <_ X ) -> if ( X < 0 , 0 , ( |_ ` X ) ) = ( |_ ` X ) )
+s10:s8,s9:eqtrd |- ( ( X e. RR /\ 0 <_ X ) -> ( Nfloor ` X ) = ( |_ ` X ) )
+i11::flle
+s12:s1,i11:syl |- ( ( X e. RR /\ 0 <_ X ) -> ( |_ ` X ) <_ X )
+qed:s10,s12:eqbrtrd |- ( ( X e. RR /\ 0 <_ X ) -> ( Nfloor ` X ) <_ X )
+$)

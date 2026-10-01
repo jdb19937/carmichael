@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=ioolin  LOC_AFTER=?
+
+* A point of the open parametrisation of a real interval lies in the open interval.
+
+s1::simpl1 |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> P e. RR )
+s2::simpl2 |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> Q e. RR )
+s3::simpl3 |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> P < Q )
+s4::simpr |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> T e. ( 0 (,) 1 ) )
+i5::elioore
+s6:s4,i5:syl |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> T e. RR )
+i7::eliooord
+s8:s4,i7:syl |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( 0 < T /\ T < 1 ) )
+s9:s8:simpld |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> 0 < T )
+s10:s8:simprd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> T < 1 )
+s11:s2,s1:resubcld |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( Q - P ) e. RR )
+i12::posdif
+s13:s1,s2,i12:syl2anc |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( P < Q <-> 0 < ( Q - P ) ) )
+s14:s3,s13:mpbid |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> 0 < ( Q - P ) )
+s15:s6,s11:remulcld |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( T x. ( Q - P ) ) e. RR )
+i16::mulgt0
+s17:s6,s9,s11,s14,i16:syl22anc |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> 0 < ( T x. ( Q - P ) ) )
+i18::ltaddpos
+s19:s15,s1,i18:syl2anc |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( 0 < ( T x. ( Q - P ) ) <-> P < ( P + ( T x. ( Q - P ) ) ) ) )
+s20:s17,s19:mpbid |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> P < ( P + ( T x. ( Q - P ) ) ) )
+s21::1red |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> 1 e. RR )
+s22:s11,s14:jca |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( ( Q - P ) e. RR /\ 0 < ( Q - P ) ) )
+i23::ltmul1a
+s24:s6,s21,s22,s10,i23:syl31anc |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( T x. ( Q - P ) ) < ( 1 x. ( Q - P ) ) )
+s25:s11:recnd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( Q - P ) e. CC )
+s26:s25:mullidd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( 1 x. ( Q - P ) ) = ( Q - P ) )
+s27:s24,s26:breqtrd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( T x. ( Q - P ) ) < ( Q - P ) )
+i28::ltadd2
+s29:s15,s11,s1,i28:syl3anc |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( ( T x. ( Q - P ) ) < ( Q - P ) <-> ( P + ( T x. ( Q - P ) ) ) < ( P + ( Q - P ) ) ) )
+s30:s27,s29:mpbid |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( P + ( T x. ( Q - P ) ) ) < ( P + ( Q - P ) ) )
+s31:s1:recnd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> P e. CC )
+s32:s2:recnd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> Q e. CC )
+s33:s31,s32:pncan3d |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( P + ( Q - P ) ) = Q )
+s34:s30,s33:breqtrd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( P + ( T x. ( Q - P ) ) ) < Q )
+s35:s1,s15:readdcld |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( P + ( T x. ( Q - P ) ) ) e. RR )
+s36:s1:rexrd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> P e. RR* )
+s37:s2:rexrd |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> Q e. RR* )
+i38::elioo2
+s39:s36,s37,i38:syl2anc |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( ( P + ( T x. ( Q - P ) ) ) e. ( P (,) Q ) <-> ( ( P + ( T x. ( Q - P ) ) ) e. RR /\ P < ( P + ( T x. ( Q - P ) ) ) /\ ( P + ( T x. ( Q - P ) ) ) < Q ) ) )
+qed:s35,s20,s34,s39:mpbir3and |- ( ( ( P e. RR /\ Q e. RR /\ P < Q ) /\ T e. ( 0 (,) 1 ) ) -> ( P + ( T x. ( Q - P ) ) ) e. ( P (,) Q ) )
+$)

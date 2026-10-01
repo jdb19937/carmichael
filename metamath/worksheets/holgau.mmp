@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=holgau  LOC_AFTER=?
+
+* The Gaussian normaliser is holomorphic on any open set of complex numbers.
+
+s1::simp1 |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> D e. ( TopOpen ` CCfld ) )
+s2::simp2 |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> D C_ CC )
+s3::simp3 |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> ( E e. CC /\ Q e. CC ) )
+i4::simpl
+s5:s3,i4:syl |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> E e. CC )
+i6::simpr
+s7:s3,i6:syl |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> Q e. CC )
+i8::gaucn
+s9:s5,s7,s2,i8:syl3anc |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) e. ( D -cn-> CC ) )
+s10::cnelprrecn |- CC e. { RR , CC }
+s11:s10:a1i |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> CC e. { RR , CC } )
+s12::simpr |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> z e. CC )
+s13:s5:adantr |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> E e. CC )
+s14:s7:adantr |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> Q e. CC )
+s15:s12:sqcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> ( z ^ 2 ) e. CC )
+s16:s15,s14:subcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> ( ( z ^ 2 ) - Q ) e. CC )
+s17:s13,s16:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> ( E x. ( ( z ^ 2 ) - Q ) ) e. CC )
+i18::efcl
+s19:s17,i18:syl |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) e. CC )
+s20::2cnd |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> 2 e. CC )
+s21:s20,s12:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> ( 2 x. z ) e. CC )
+s22:s13,s21:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> ( E x. ( 2 x. z ) ) e. CC )
+s23:s19,s22:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. CC ) -> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) e. CC )
+i24::dvgau
+s25:s5,s7,i24:syl2anc |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> ( CC _D ( z e. CC |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) = ( z e. CC |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) ) )
+s26::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s27::cnrestid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s28:s27:eqcomi |- ( TopOpen ` CCfld ) = ( ( TopOpen ` CCfld ) |`t CC )
+s29:s11,s19,s23,s25,s2,s28,s26,s1:dvmptres |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> ( CC _D ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) = ( z e. D |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) ) )
+s30::simpr |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> z e. D )
+s31:s2:adantr |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> D C_ CC )
+s32:s31,s30:sseldd |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> z e. CC )
+s33:s5:adantr |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> E e. CC )
+s34:s7:adantr |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> Q e. CC )
+s35:s32:sqcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> ( z ^ 2 ) e. CC )
+s36:s35,s34:subcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> ( ( z ^ 2 ) - Q ) e. CC )
+s37:s33,s36:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> ( E x. ( ( z ^ 2 ) - Q ) ) e. CC )
+i38::efcl
+s39:s37,i38:syl |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) e. CC )
+s40::2cnd |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> 2 e. CC )
+s41:s40,s32:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> ( 2 x. z ) e. CC )
+s42:s33,s41:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> ( E x. ( 2 x. z ) ) e. CC )
+s43:s39,s42:mulcld |- ( ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) /\ z e. D ) -> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) e. CC )
+s44::eqid |- ( z e. D |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) ) = ( z e. D |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) )
+s45:s43,s44:fmptd |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> ( z e. D |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) ) : D --> CC )
+i46::fdm
+s47:s45,i46:syl |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> dom ( z e. D |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) ) = D )
+s48:s29:dmeqd |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> dom ( CC _D ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) = dom ( z e. D |-> ( ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) x. ( E x. ( 2 x. z ) ) ) ) )
+s49:s48,s47:eqtrd |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> dom ( CC _D ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) = D )
+s50:s49:eqcomd |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> D = dom ( CC _D ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) )
+s51:s50:eqimssd |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> D C_ dom ( CC _D ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) )
+qed:s9,s51:jca |- ( ( D e. ( TopOpen ` CCfld ) /\ D C_ CC /\ ( E e. CC /\ Q e. CC ) ) -> ( ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) e. ( D -cn-> CC ) /\ D C_ dom ( CC _D ( z e. D |-> ( exp ` ( E x. ( ( z ^ 2 ) - Q ) ) ) ) ) ) )
+$)

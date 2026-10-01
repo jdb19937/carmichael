@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=eatper  LOC_AFTER=?
+
+* The function t |-> e ( V t ) has period 1 for an integer frequency V.
+
+s1::simpl |- ( ( V e. ZZ /\ B e. CC ) -> V e. ZZ )
+s2::simpr |- ( ( V e. ZZ /\ B e. CC ) -> B e. CC )
+s3:s1:zcnd |- ( ( V e. ZZ /\ B e. CC ) -> V e. CC )
+s4::1cnd |- ( ( V e. ZZ /\ B e. CC ) -> 1 e. CC )
+s5:s3,s2,s4:adddid |- ( ( V e. ZZ /\ B e. CC ) -> ( V x. ( B + 1 ) ) = ( ( V x. B ) + ( V x. 1 ) ) )
+s6:s3:mulridd |- ( ( V e. ZZ /\ B e. CC ) -> ( V x. 1 ) = V )
+s7:s6:oveq2d |- ( ( V e. ZZ /\ B e. CC ) -> ( ( V x. B ) + ( V x. 1 ) ) = ( ( V x. B ) + V ) )
+s8:s5,s7:eqtrd |- ( ( V e. ZZ /\ B e. CC ) -> ( V x. ( B + 1 ) ) = ( ( V x. B ) + V ) )
+s9:s8:oveq2d |- ( ( V e. ZZ /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( B + 1 ) ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( ( V x. B ) + V ) ) )
+s10::ax-icn |- _i e. CC
+s11::picn |- _pi e. CC
+s12:s10,s11:mulcli |- ( _i x. _pi ) e. CC
+s13::2cn |- 2 e. CC
+s14:s13,s12:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s15:s14:a1i |- ( ( V e. ZZ /\ B e. CC ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s16:s3,s2:mulcld |- ( ( V e. ZZ /\ B e. CC ) -> ( V x. B ) e. CC )
+s17:s15,s16,s3:adddid |- ( ( V e. ZZ /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( ( V x. B ) + V ) ) = ( ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) + ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s18::2cnd |- ( ( V e. ZZ /\ B e. CC ) -> 2 e. CC )
+s19::ax-icn |- _i e. CC
+s20:s19:a1i |- ( ( V e. ZZ /\ B e. CC ) -> _i e. CC )
+s21::picn |- _pi e. CC
+s22:s21:a1i |- ( ( V e. ZZ /\ B e. CC ) -> _pi e. CC )
+s23:s18,s20,s22:mul12d |- ( ( V e. ZZ /\ B e. CC ) -> ( 2 x. ( _i x. _pi ) ) = ( _i x. ( 2 x. _pi ) ) )
+s24:s23:oveq1d |- ( ( V e. ZZ /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) = ( ( _i x. ( 2 x. _pi ) ) x. V ) )
+s25:s24:oveq2d |- ( ( V e. ZZ /\ B e. CC ) -> ( ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) + ( ( 2 x. ( _i x. _pi ) ) x. V ) ) = ( ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) + ( ( _i x. ( 2 x. _pi ) ) x. V ) ) )
+s26:s9,s17:eqtrd |- ( ( V e. ZZ /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( B + 1 ) ) ) = ( ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) + ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s27:s26,s25:eqtrd |- ( ( V e. ZZ /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( B + 1 ) ) ) = ( ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) + ( ( _i x. ( 2 x. _pi ) ) x. V ) ) )
+s28:s27:fveq2d |- ( ( V e. ZZ /\ B e. CC ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( B + 1 ) ) ) ) = ( exp ` ( ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) + ( ( _i x. ( 2 x. _pi ) ) x. V ) ) ) )
+s29:s15,s16:mulcld |- ( ( V e. ZZ /\ B e. CC ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) e. CC )
+i30::efper
+s31:s29,s1,i30:syl2anc |- ( ( V e. ZZ /\ B e. CC ) -> ( exp ` ( ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) + ( ( _i x. ( 2 x. _pi ) ) x. V ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) )
+qed:s28,s31:eqtrd |- ( ( V e. ZZ /\ B e. CC ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( B + 1 ) ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) )
+$)

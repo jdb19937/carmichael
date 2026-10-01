@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=blchar  LOC_AFTER=?
+
+* The bit length is characterised by the sandwich 2 ^ ( M - 1 ) <_ A < 2 ^ M.
+
+s1::simpll |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> A e. NN )
+s2::simplr |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> M e. NN )
+s3::simprl |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( 2 ^ ( M - 1 ) ) <_ A )
+s4::simprr |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> A < ( 2 ^ M ) )
+s5:s1:nnnn0d |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> A e. NN0 )
+s6:s2:nnnn0d |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> M e. NN0 )
+i7::blcl
+s8:s5,i7:syl |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( bl ` A ) e. NN0 )
+i9::blle
+s10:s5,s6,s4,i9:syl3anc |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( bl ` A ) <_ M )
+i11::blpow2
+s12:s5,i11:syl |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> A < ( 2 ^ ( bl ` A ) ) )
+s13::2re |- 2 e. RR
+s14:s13:a1i |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> 2 e. RR )
+s15::2rp |- 2 e. RR+
+s16:s15:a1i |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> 2 e. RR+ )
+s17:s6:nn0zd |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> M e. ZZ )
+s18::1z |- 1 e. ZZ
+s19:s18:a1i |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> 1 e. ZZ )
+s20:s17,s19:zsubcld |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( M - 1 ) e. ZZ )
+s21:s16,s20:rpexpcld |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( 2 ^ ( M - 1 ) ) e. RR+ )
+s22:s21:rpred |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( 2 ^ ( M - 1 ) ) e. RR )
+s23:s1:nnrpd |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> A e. RR+ )
+s24:s23:rpred |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> A e. RR )
+s25:s14,s8:reexpcld |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( 2 ^ ( bl ` A ) ) e. RR )
+s26:s22,s24,s25,s3,s12:lelttrd |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( 2 ^ ( M - 1 ) ) < ( 2 ^ ( bl ` A ) ) )
+s27:s13:a1i |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> 2 e. RR )
+s28:s8:nn0zd |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( bl ` A ) e. ZZ )
+s29:s27,s20,s28:3jca |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( 2 e. RR /\ ( M - 1 ) e. ZZ /\ ( bl ` A ) e. ZZ ) )
+s30::1lt2 |- 1 < 2
+s31:s30:a1i |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> 1 < 2 )
+i32::ltexp2
+s33:s29,s31,i32:syl2anc |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( ( M - 1 ) < ( bl ` A ) <-> ( 2 ^ ( M - 1 ) ) < ( 2 ^ ( bl ` A ) ) ) )
+s34:s26,s33:mpbird |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( M - 1 ) < ( bl ` A ) )
+s35:s2:nnrpd |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> M e. RR+ )
+s36:s35:rpred |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> M e. RR )
+s37::1red |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> 1 e. RR )
+s38:s28:zred |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( bl ` A ) e. RR )
+i39::ltsubadd
+s40:s36,s37,s38,i39:syl3anc |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( ( M - 1 ) < ( bl ` A ) <-> M < ( ( bl ` A ) + 1 ) ) )
+s41:s34,s40:mpbid |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> M < ( ( bl ` A ) + 1 ) )
+i42::zleltp1
+s43:s17,s28,i42:syl2anc |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( M <_ ( bl ` A ) <-> M < ( ( bl ` A ) + 1 ) ) )
+s44:s41,s43:mpbird |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> M <_ ( bl ` A ) )
+i45::letri3
+s46:s38,s36,i45:syl2anc |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( ( bl ` A ) = M <-> ( ( bl ` A ) <_ M /\ M <_ ( bl ` A ) ) ) )
+s47:s10,s44:jca |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( ( bl ` A ) <_ M /\ M <_ ( bl ` A ) ) )
+qed:s47,s46:mpbird |- ( ( ( A e. NN /\ M e. NN ) /\ ( ( 2 ^ ( M - 1 ) ) <_ A /\ A < ( 2 ^ M ) ) ) -> ( bl ` A ) = M )
+$)

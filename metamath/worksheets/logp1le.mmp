@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=logp1le  LOC_AFTER=?
+
+* log ( B + 1 ) is at most B for positive real B.
+
+s1::rpred |- ( B e. RR+ -> B e. RR )
+s2:s1:recnd |- ( B e. RR+ -> B e. CC )
+s3::1red |- ( B e. RR+ -> 1 e. RR )
+s4:s3:recnd |- ( B e. RR+ -> 1 e. CC )
+s5::efgt1p |- ( B e. RR+ -> ( 1 + B ) < ( exp ` B ) )
+s6::1rp |- 1 e. RR+
+s7:s6:a1i |- ( B e. RR+ -> 1 e. RR+ )
+s8:s7:rpaddcld |- ( B e. RR+ -> ( 1 + B ) e. RR+ )
+i9::rpefcl
+s10:s1,i9:syl |- ( B e. RR+ -> ( exp ` B ) e. RR+ )
+i11::logltb
+s12:s8,s10,i11:syl2anc |- ( B e. RR+ -> ( ( 1 + B ) < ( exp ` B ) <-> ( log ` ( 1 + B ) ) < ( log ` ( exp ` B ) ) ) )
+s13:s12,s5:mpbid |- ( B e. RR+ -> ( log ` ( 1 + B ) ) < ( log ` ( exp ` B ) ) )
+i14::relogef
+s15:s1,i14:syl |- ( B e. RR+ -> ( log ` ( exp ` B ) ) = B )
+s16:s13,s15:breqtrd |- ( B e. RR+ -> ( log ` ( 1 + B ) ) < B )
+s17:s4,s2:addcomd |- ( B e. RR+ -> ( 1 + B ) = ( B + 1 ) )
+s18:s17:fveq2d |- ( B e. RR+ -> ( log ` ( 1 + B ) ) = ( log ` ( B + 1 ) ) )
+s19:s18,s16:eqbrtrrd |- ( B e. RR+ -> ( log ` ( B + 1 ) ) < B )
+s20:s8:relogcld |- ( B e. RR+ -> ( log ` ( 1 + B ) ) e. RR )
+s21:s18,s20:eqeltrrd |- ( B e. RR+ -> ( log ` ( B + 1 ) ) e. RR )
+qed:s21,s1,s19:ltled |- ( B e. RR+ -> ( log ` ( B + 1 ) ) <_ B )
+$)

@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=pkcl  LOC_AFTER=?
+
+* The truncated Perron kernel line integral is a complex number: the segment from ` C - _i T ` to ` C + _i T ` misses the origin ( ~ csegne0 ) and the integrand is continuous there ( ~ pkfcn ).
+
+s1::simp1 |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> U e. RR+ )
+s2::simp2 |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> C e. RR+ )
+s3::simp3 |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> T e. RR+ )
+s4:s2:rpred |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> C e. RR )
+s5:s2:rpne0d |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> C =/= 0 )
+s6:s3:rpred |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> T e. RR )
+s7:s6:renegcld |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> -u T e. RR )
+s8:s4:recnd |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> C e. CC )
+s9:s6:recnd |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> T e. CC )
+s10:s7:recnd |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> -u T e. CC )
+s11::ax-icn |- _i e. CC
+s12:s11:a1i |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> _i e. CC )
+s13:s12,s10:mulcld |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( _i x. -u T ) e. CC )
+s14:s8,s13:addcld |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( C + ( _i x. -u T ) ) e. CC )
+s15:s12,s9:mulcld |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( _i x. T ) e. CC )
+s16:s8,s15:addcld |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( C + ( _i x. T ) ) e. CC )
+s17:s4,s5:jca |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( C e. RR /\ C =/= 0 ) )
+s18:s7,s6:jca |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( -u T e. RR /\ T e. RR ) )
+s19:s17,s18:jca |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( ( C e. RR /\ C =/= 0 ) /\ ( -u T e. RR /\ T e. RR ) ) )
+i20::csegne0
+s21:s19,i20:syl |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> A. u e. ( ( C + ( _i x. -u T ) ) cseg ( C + ( _i x. T ) ) ) u e. ( CC \ { 0 } ) )
+s22::dfss3 |- ( ( ( C + ( _i x. -u T ) ) cseg ( C + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) <-> A. u e. ( ( C + ( _i x. -u T ) ) cseg ( C + ( _i x. T ) ) ) u e. ( CC \ { 0 } ) )
+s23:s22:a1i |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( ( ( C + ( _i x. -u T ) ) cseg ( C + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) <-> A. u e. ( ( C + ( _i x. -u T ) ) cseg ( C + ( _i x. T ) ) ) u e. ( CC \ { 0 } ) ) )
+s24:s21,s23:mpbird |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( ( C + ( _i x. -u T ) ) cseg ( C + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) )
+s25::ssid |- ( CC \ { 0 } ) C_ ( CC \ { 0 } )
+s26:s25:a1i |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( CC \ { 0 } ) C_ ( CC \ { 0 } ) )
+s27:s1,s26:jca |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( U e. RR+ /\ ( CC \ { 0 } ) C_ ( CC \ { 0 } ) ) )
+i28::pkfcn
+s29:s27,i28:syl |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) )
+s30:s14,s16:jca |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( ( C + ( _i x. -u T ) ) e. CC /\ ( C + ( _i x. T ) ) e. CC ) )
+s31:s29,s24:jca |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( ( C + ( _i x. -u T ) ) cseg ( C + ( _i x. T ) ) ) C_ ( CC \ { 0 } ) ) )
+i32::lintcl
+qed:s30,s31,i32:syl2anc |- ( ( U e. RR+ /\ C e. RR+ /\ T e. RR+ ) -> ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) e. CC )
+$)

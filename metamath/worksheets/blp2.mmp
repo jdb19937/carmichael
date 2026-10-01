@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=blp2  LOC_AFTER=?
+
+* The bit length of 2 ^ E is E + 1.
+
+s1::id |- ( E e. NN0 -> E e. NN0 )
+s2::2nn |- 2 e. NN
+s3:s2:a1i |- ( E e. NN0 -> 2 e. NN )
+i4::nnexpcl
+s5:s3,s1,i4:syl2anc |- ( E e. NN0 -> ( 2 ^ E ) e. NN )
+s6::1nn |- 1 e. NN
+s7:s6:a1i |- ( E e. NN0 -> 1 e. NN )
+i8::nn0nnaddcl
+s9:s1,s7,i8:syl2anc |- ( E e. NN0 -> ( E + 1 ) e. NN )
+s10:s1:nn0zd |- ( E e. NN0 -> E e. ZZ )
+s11:s10:zred |- ( E e. NN0 -> E e. RR )
+s12:s11:recnd |- ( E e. NN0 -> E e. CC )
+s13::1cnd |- ( E e. NN0 -> 1 e. CC )
+s14:s12,s13:pncand |- ( E e. NN0 -> ( ( E + 1 ) - 1 ) = E )
+s15:s14:oveq2d |- ( E e. NN0 -> ( 2 ^ ( ( E + 1 ) - 1 ) ) = ( 2 ^ E ) )
+s16::2re |- 2 e. RR
+s17:s16:a1i |- ( E e. NN0 -> 2 e. RR )
+s18:s17,s1:reexpcld |- ( E e. NN0 -> ( 2 ^ E ) e. RR )
+s19:s18:leidd |- ( E e. NN0 -> ( 2 ^ E ) <_ ( 2 ^ E ) )
+s20:s15,s19:eqbrtrd |- ( E e. NN0 -> ( 2 ^ ( ( E + 1 ) - 1 ) ) <_ ( 2 ^ E ) )
+s21:s11:ltp1d |- ( E e. NN0 -> E < ( E + 1 ) )
+s22:s16:a1i |- ( E e. NN0 -> 2 e. RR )
+s23::1z |- 1 e. ZZ
+s24:s23:a1i |- ( E e. NN0 -> 1 e. ZZ )
+s25:s10,s24:zaddcld |- ( E e. NN0 -> ( E + 1 ) e. ZZ )
+s26:s22,s10,s25:3jca |- ( E e. NN0 -> ( 2 e. RR /\ E e. ZZ /\ ( E + 1 ) e. ZZ ) )
+s27::1lt2 |- 1 < 2
+s28:s27:a1i |- ( E e. NN0 -> 1 < 2 )
+i29::ltexp2
+s30:s26,s28,i29:syl2anc |- ( E e. NN0 -> ( E < ( E + 1 ) <-> ( 2 ^ E ) < ( 2 ^ ( E + 1 ) ) ) )
+s31:s21,s30:mpbid |- ( E e. NN0 -> ( 2 ^ E ) < ( 2 ^ ( E + 1 ) ) )
+s32:s5,s9:jca |- ( E e. NN0 -> ( ( 2 ^ E ) e. NN /\ ( E + 1 ) e. NN ) )
+s33:s20,s31:jca |- ( E e. NN0 -> ( ( 2 ^ ( ( E + 1 ) - 1 ) ) <_ ( 2 ^ E ) /\ ( 2 ^ E ) < ( 2 ^ ( E + 1 ) ) ) )
+i34::blchar
+qed:s32,s33,i34:syl2anc |- ( E e. NN0 -> ( bl ` ( 2 ^ E ) ) = ( E + 1 ) )
+$)

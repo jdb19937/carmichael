@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=optstepsome  LOC_AFTER=?
+
+* The option-lifted step function sends some A to ( F ` A ) (Lean: some a >>= f = f a).
+
+1::simpl    |- ( ( F e. V /\ A e. dom F ) -> F e. V )
+2::simpr    |- ( ( F e. V /\ A e. dom F ) -> A e. dom F )
+3a::djulcl
+3:2,3a:syl  |- ( ( F e. V /\ A e. dom F ) -> ( inl ` A ) e. ( dom F |_| 1o ) )
+4a::optstepval
+4:1,3,4a:syl2anc |- ( ( F e. V /\ A e. dom F ) -> ( ( OptStep ` F ) ` ( inl ` A ) ) = if ( ( inl ` A ) = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` ( inl ` A ) ) ) ) )
+5::0ex      |- (/) e. _V
+6:5:a1i     |- ( ( F e. V /\ A e. dom F ) -> (/) e. _V )
+7a::inlneinr
+7:2,6,7a:syl2anc |- ( ( F e. V /\ A e. dom F ) -> ( inl ` A ) =/= ( inr ` (/) ) )
+8:7:neneqd  |- ( ( F e. V /\ A e. dom F ) -> -. ( inl ` A ) = ( inr ` (/) ) )
+9:8:iffalsed |- ( ( F e. V /\ A e. dom F ) -> if ( ( inl ` A ) = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` ( inl ` A ) ) ) ) = ( F ` ( 2nd ` ( inl ` A ) ) ) )
+10a::inlval
+10:2,10a:syl |- ( ( F e. V /\ A e. dom F ) -> ( inl ` A ) = <. (/) , A >. )
+11:10:fveq2d |- ( ( F e. V /\ A e. dom F ) -> ( 2nd ` ( inl ` A ) ) = ( 2nd ` <. (/) , A >. ) )
+12a::op2ndg
+12:6,2,12a:syl2anc |- ( ( F e. V /\ A e. dom F ) -> ( 2nd ` <. (/) , A >. ) = A )
+13:11,12:eqtrd |- ( ( F e. V /\ A e. dom F ) -> ( 2nd ` ( inl ` A ) ) = A )
+14:13:fveq2d |- ( ( F e. V /\ A e. dom F ) -> ( F ` ( 2nd ` ( inl ` A ) ) ) = ( F ` A ) )
+qed:4,9,14:3eqtrd |- ( ( F e. V /\ A e. dom F ) -> ( ( OptStep ` F ) ` ( inl ` A ) ) = ( F ` A ) )
+$)

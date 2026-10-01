@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=midhalf  LOC_AFTER=?
+
+* The midpoint of two complex numbers as a convex combination.
+
+s1::simpl |- ( ( M e. CC /\ N e. CC ) -> M e. CC )
+s2::simpr |- ( ( M e. CC /\ N e. CC ) -> N e. CC )
+s3::2cn |- 2 e. CC
+s4:s3:a1i |- ( ( M e. CC /\ N e. CC ) -> 2 e. CC )
+s5::2ne0 |- 2 =/= 0
+s6:s5:a1i |- ( ( M e. CC /\ N e. CC ) -> 2 =/= 0 )
+s7:s2,s1:subcld |- ( ( M e. CC /\ N e. CC ) -> ( N - M ) e. CC )
+i8::divrec2
+s9:s7,s4,s6,i8:syl3anc |- ( ( M e. CC /\ N e. CC ) -> ( ( N - M ) / 2 ) = ( ( 1 / 2 ) x. ( N - M ) ) )
+s10:s9:eqcomd |- ( ( M e. CC /\ N e. CC ) -> ( ( 1 / 2 ) x. ( N - M ) ) = ( ( N - M ) / 2 ) )
+s11:s10:oveq2d |- ( ( M e. CC /\ N e. CC ) -> ( M + ( ( 1 / 2 ) x. ( N - M ) ) ) = ( M + ( ( N - M ) / 2 ) ) )
+s12:s7,s4,s6:divcld |- ( ( M e. CC /\ N e. CC ) -> ( ( N - M ) / 2 ) e. CC )
+s13:s1,s12:addcld |- ( ( M e. CC /\ N e. CC ) -> ( M + ( ( N - M ) / 2 ) ) e. CC )
+s14:s4,s1,s12:adddid |- ( ( M e. CC /\ N e. CC ) -> ( 2 x. ( M + ( ( N - M ) / 2 ) ) ) = ( ( 2 x. M ) + ( 2 x. ( ( N - M ) / 2 ) ) ) )
+s15:s7,s4,s6:divcan2d |- ( ( M e. CC /\ N e. CC ) -> ( 2 x. ( ( N - M ) / 2 ) ) = ( N - M ) )
+s16:s1:2timesd |- ( ( M e. CC /\ N e. CC ) -> ( 2 x. M ) = ( M + M ) )
+s17:s16,s15:oveq12d |- ( ( M e. CC /\ N e. CC ) -> ( ( 2 x. M ) + ( 2 x. ( ( N - M ) / 2 ) ) ) = ( ( M + M ) + ( N - M ) ) )
+s18:s1,s1,s7:addassd |- ( ( M e. CC /\ N e. CC ) -> ( ( M + M ) + ( N - M ) ) = ( M + ( M + ( N - M ) ) ) )
+i19::pncan3
+s20:s1,s2,i19:syl2anc |- ( ( M e. CC /\ N e. CC ) -> ( M + ( N - M ) ) = N )
+s21:s20:oveq2d |- ( ( M e. CC /\ N e. CC ) -> ( M + ( M + ( N - M ) ) ) = ( M + N ) )
+s22:s14,s17:eqtrd |- ( ( M e. CC /\ N e. CC ) -> ( 2 x. ( M + ( ( N - M ) / 2 ) ) ) = ( ( M + M ) + ( N - M ) ) )
+s23:s22,s18:eqtrd |- ( ( M e. CC /\ N e. CC ) -> ( 2 x. ( M + ( ( N - M ) / 2 ) ) ) = ( M + ( M + ( N - M ) ) ) )
+s24:s23,s21:eqtrd |- ( ( M e. CC /\ N e. CC ) -> ( 2 x. ( M + ( ( N - M ) / 2 ) ) ) = ( M + N ) )
+s25:s1,s2:addcld |- ( ( M e. CC /\ N e. CC ) -> ( M + N ) e. CC )
+s26:s4,s6:jca |- ( ( M e. CC /\ N e. CC ) -> ( 2 e. CC /\ 2 =/= 0 ) )
+i27::divmul
+s28:s25,s13,s26,i27:syl3anc |- ( ( M e. CC /\ N e. CC ) -> ( ( ( M + N ) / 2 ) = ( M + ( ( N - M ) / 2 ) ) <-> ( 2 x. ( M + ( ( N - M ) / 2 ) ) ) = ( M + N ) ) )
+s29:s28,s24:mpbird |- ( ( M e. CC /\ N e. CC ) -> ( ( M + N ) / 2 ) = ( M + ( ( N - M ) / 2 ) ) )
+qed:s11,s29:eqtr4d |- ( ( M e. CC /\ N e. CC ) -> ( M + ( ( 1 / 2 ) x. ( N - M ) ) ) = ( ( M + N ) / 2 ) )
+$)

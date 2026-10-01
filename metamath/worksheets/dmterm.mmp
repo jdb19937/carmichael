@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=dmterm  LOC_AFTER=?
+
+* The divisor expansion of the ( K + 1 ) -st power weight at N.
+
+s1::simpll |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> K e. NN0 )
+s2::simplr |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> N e. NN )
+s3::simpr |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> ( mmu ` N ) =/= 0 )
+s4:s1:nn0cnd |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> K e. CC )
+s5:s3:iftrued |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> if ( ( mmu ` N ) =/= 0 , ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) , 0 ) = ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) )
+s6:s3:adantr |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> ( mmu ` N ) =/= 0 )
+s7:s6:iftrued |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) = ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) )
+s8:s7:sumeq2dv |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) = sum_ d e. { x e. NN | x || N } ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) )
+i9::dvdsfi
+s10:s2,i9:syl |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> { x e. NN | x || N } e. Fin )
+s11:s2:nncnd |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> N e. CC )
+s12:s2:nnne0d |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> N =/= 0 )
+s13::simpr |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> d e. { x e. NN | x || N } )
+i14::elrabi
+s15:s13,i14:syl |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> d e. NN )
+i16::prmdvdsfi
+s17:s15,i16:syl |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> { p e. Prime | p || d } e. Fin )
+s18::cbvrabv |- { p e. Prime | p || d } = { q e. Prime | q || d }
+s19:s18:a1i |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> { p e. Prime | p || d } = { q e. Prime | q || d } )
+s20:s17,s19:eqeltrrd |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> { q e. Prime | q || d } e. Fin )
+i21::hashcl
+s22:s20,i21:syl |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> ( # ` { q e. Prime | q || d } ) e. NN0 )
+s23:s4:adantr |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> K e. CC )
+s24:s23,s22:expcld |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> ( K ^ ( # ` { q e. Prime | q || d } ) ) e. CC )
+s25:s10,s11,s24,s12:fsumdivc |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> ( sum_ d e. { x e. NN | x || N } ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) = sum_ d e. { x e. NN | x || N } ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) )
+s26:s2,s3:jca |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> ( N e. NN /\ ( mmu ` N ) =/= 0 ) )
+i27::dmkey
+s28:s26,s4,i27:syl2anc |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> sum_ d e. { x e. NN | x || N } ( K ^ ( # ` { q e. Prime | q || d } ) ) = ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) )
+s29:s28:oveq1d |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> ( sum_ d e. { x e. NN | x || N } ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) = ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) )
+s30:s8,s25:eqtr4d |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) = ( sum_ d e. { x e. NN | x || N } ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) )
+s31:s30,s29:eqtrd |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) = ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) )
+s32:s5,s31:eqtr4d |- ( ( ( K e. NN0 /\ N e. NN ) /\ ( mmu ` N ) =/= 0 ) -> if ( ( mmu ` N ) =/= 0 , ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) , 0 ) = sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) )
+s33::simpr |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> -. ( mmu ` N ) =/= 0 )
+s34::simplr |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> N e. NN )
+s35:s33:iffalsed |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> if ( ( mmu ` N ) =/= 0 , ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) , 0 ) = 0 )
+s36:s33:adantr |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> -. ( mmu ` N ) =/= 0 )
+s37:s36:iffalsed |- ( ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) /\ d e. { x e. NN | x || N } ) -> if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) = 0 )
+s38:s37:sumeq2dv |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) = sum_ d e. { x e. NN | x || N } 0 )
+i39::dvdsfi
+s40:s34,i39:syl |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> { x e. NN | x || N } e. Fin )
+s41:s40:olcd |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> ( { x e. NN | x || N } C_ ( ZZ>= ` 1 ) \/ { x e. NN | x || N } e. Fin ) )
+i42::sumz
+s43:s41,i42:syl |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> sum_ d e. { x e. NN | x || N } 0 = 0 )
+s44:s38,s43:eqtrd |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) = 0 )
+s45:s35,s44:eqtr4d |- ( ( ( K e. NN0 /\ N e. NN ) /\ -. ( mmu ` N ) =/= 0 ) -> if ( ( mmu ` N ) =/= 0 , ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) , 0 ) = sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) )
+qed:s32,s45:pm2.61dan |- ( ( K e. NN0 /\ N e. NN ) -> if ( ( mmu ` N ) =/= 0 , ( ( ( K + 1 ) ^ ( # ` { q e. Prime | q || N } ) ) / N ) , 0 ) = sum_ d e. { x e. NN | x || N } if ( ( mmu ` N ) =/= 0 , ( ( K ^ ( # ` { q e. Prime | q || d } ) ) / N ) , 0 ) )
+$)

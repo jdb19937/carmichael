@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=z5wibl  LOC_AFTER=?
+
+* The window integrand is integrable on ( A (,) B ) and its integral is real (the integrability behind Lean's intervalIntegral.integral_mono_on in exp_sub_exp_le_Wwin).
+
+s1::simpll |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> A e. RR )
+s2::simplr |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> B e. RR )
+s3::simpr |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> K e. RR )
+s4::id |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( ( A e. RR /\ B e. RR ) /\ K e. RR ) )
+i5::z5wcn
+s6:s4,i5:syl |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> ( exp ` ( -u K / ( exp ` t ) ) ) ) e. ( ( A [,] B ) -cn-> CC ) )
+i7::cniccibl
+s8:s1,s2,s6,i7:syl3anc |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> ( exp ` ( -u K / ( exp ` t ) ) ) ) e. L^1 )
+s9::fvexd |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A [,] B ) ) -> ( exp ` ( -u K / ( exp ` t ) ) ) e. _V )
+s10::ioossicc |- ( A (,) B ) C_ ( A [,] B )
+s11:s10:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( A (,) B ) C_ ( A [,] B ) )
+s12::ioombl |- ( A (,) B ) e. dom vol
+s13:s12:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( A (,) B ) e. dom vol )
+s14:s11,s13,s9,s8:iblss |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A (,) B ) |-> ( exp ` ( -u K / ( exp ` t ) ) ) ) e. L^1 )
+s15::simpr |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A (,) B ) ) -> t e. ( A (,) B ) )
+i16::elioore
+s17:s15,i16:syl |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A (,) B ) ) -> t e. RR )
+s18:s3:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A (,) B ) ) -> K e. RR )
+s19:s18:renegcld |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A (,) B ) ) -> -u K e. RR )
+s20:s17:rpefcld |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A (,) B ) ) -> ( exp ` t ) e. RR+ )
+s21:s19,s20:rerpdivcld |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A (,) B ) ) -> ( -u K / ( exp ` t ) ) e. RR )
+s22:s21:reefcld |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A (,) B ) ) -> ( exp ` ( -u K / ( exp ` t ) ) ) e. RR )
+s23:s22,s14:itgrecl |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> S. ( A (,) B ) ( exp ` ( -u K / ( exp ` t ) ) ) _d t e. RR )
+qed:s14,s23:jca |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( ( t e. ( A (,) B ) |-> ( exp ` ( -u K / ( exp ` t ) ) ) ) e. L^1 /\ S. ( A (,) B ) ( exp ` ( -u K / ( exp ` t ) ) ) _d t e. RR ) )
+$)

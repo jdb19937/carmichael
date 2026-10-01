@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=drpfz  LOC_AFTER=?
+
+* The starting position of the T-element tail of a word lies in the index range.
+
+s1::simpl |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> V e. Word S )
+s2::simpr |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> T e. ( 0 ... ( # ` V ) ) )
+i3::lencl
+s4:s1,i3:syl |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. NN0 )
+i5::elfz2nn0
+s6:s2,i5:sylib |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( T e. NN0 /\ ( # ` V ) e. NN0 /\ T <_ ( # ` V ) ) )
+s7:s6:simp1d |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> T e. NN0 )
+s8:s6:simp3d |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> T <_ ( # ` V ) )
+i9::nn0sub
+s10:s7,s4,i9:syl2anc |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( T <_ ( # ` V ) <-> ( ( # ` V ) - T ) e. NN0 ) )
+s11:s8,s10:mpbid |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( # ` V ) - T ) e. NN0 )
+s12:s4:nn0red |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. RR )
+s13:s7:nn0red |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> T e. RR )
+s14:s7:nn0ge0d |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> 0 <_ T )
+i15::subge02
+s16:s12,s13,i15:syl2anc |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( 0 <_ T <-> ( ( # ` V ) - T ) <_ ( # ` V ) ) )
+s17:s14,s16:mpbid |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( # ` V ) - T ) <_ ( # ` V ) )
+s18:s11,s4,s17:3jca |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( ( # ` V ) - T ) e. NN0 /\ ( # ` V ) e. NN0 /\ ( ( # ` V ) - T ) <_ ( # ` V ) ) )
+i19::elfz2nn0
+qed:s18,i19:sylibr |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( # ` V ) - T ) e. ( 0 ... ( # ` V ) ) )
+$)

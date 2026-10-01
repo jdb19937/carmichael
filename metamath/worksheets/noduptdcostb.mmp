@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=noduptdcostb  LOC_AFTER=?
+
+* Base of the induction for noduptdcost.
+
+s1::noduptd0 |- ( NodupTD ` (/) ) = <. 1o , 0 >.
+s2:s1:fveq2i |- ( 2nd ` ( NodupTD ` (/) ) ) = ( 2nd ` <. 1o , 0 >. )
+s3::1oex |- 1o e. _V
+s4::c0ex |- 0 e. _V
+s5:s3,s4:op2nd |- ( 2nd ` <. 1o , 0 >. ) = 0
+s6:s2,s5:eqtri |- ( 2nd ` ( NodupTD ` (/) ) ) = 0
+s7::wrd0 |- (/) e. Word NN0
+i8::lencl
+s9:s7,i8:ax-mp |- ( # ` (/) ) e. NN0
+i10::peano2nn0
+s11:s9,i10:ax-mp |- ( ( # ` (/) ) + 1 ) e. NN0
+s12:s9,s11:nn0mulcli |- ( ( # ` (/) ) x. ( ( # ` (/) ) + 1 ) ) e. NN0
+i13::nn0ge0
+s14:s12,i13:ax-mp |- 0 <_ ( ( # ` (/) ) x. ( ( # ` (/) ) + 1 ) )
+qed:s6,s14:eqbrtri |- ( 2nd ` ( NodupTD ` (/) ) ) <_ ( ( # ` (/) ) x. ( ( # ` (/) ) + 1 ) )
+$)

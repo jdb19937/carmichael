@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lenccons  LOC_AFTER=?
+
+* A list of numbers with a new head on a stack.  Lean: ` encList_cons ` .
+
+s1::simpl |- ( ( A e. NN0 /\ L e. Word NN0 ) -> A e. NN0 )
+s2::simpr |- ( ( A e. NN0 /\ L e. Word NN0 ) -> L e. Word NN0 )
+s3:s1:s1cld |- ( ( A e. NN0 /\ L e. Word NN0 ) -> <" A "> e. Word NN0 )
+i4::ccatcl
+s5:s3,s2,i4:syl2anc |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( <" A "> ++ L ) e. Word NN0 )
+i6::tm2lenceq
+s7:s5,i6:syl |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encList ` ( <" A "> ++ L ) ) = ( encListB ` ( encNatGam o. ( <" A "> ++ L ) ) ) )
+s8::tm2lbitf |- encNatGam : NN0 --> Word ( { 1 } X. 2o )
+s9:s8:a1i |- ( ( A e. NN0 /\ L e. Word NN0 ) -> encNatGam : NN0 --> Word ( { 1 } X. 2o ) )
+i10::ccatco
+s11:s3,s2,s9,i10:syl3anc |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encNatGam o. ( <" A "> ++ L ) ) = ( ( encNatGam o. <" A "> ) ++ ( encNatGam o. L ) ) )
+i12::s1co
+s13:s1,s9,i12:syl2anc |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encNatGam o. <" A "> ) = <" ( encNatGam ` A ) "> )
+s14:s13:oveq1d |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( ( encNatGam o. <" A "> ) ++ ( encNatGam o. L ) ) = ( <" ( encNatGam ` A ) "> ++ ( encNatGam o. L ) ) )
+s15:s11,s14:eqtrd |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encNatGam o. ( <" A "> ++ L ) ) = ( <" ( encNatGam ` A ) "> ++ ( encNatGam o. L ) ) )
+s16:s15:fveq2d |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encListB ` ( encNatGam o. ( <" A "> ++ L ) ) ) = ( encListB ` ( <" ( encNatGam ` A ) "> ++ ( encNatGam o. L ) ) ) )
+i17::ffvelcdm
+s18:s9,s1,i17:syl2anc |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encNatGam ` A ) e. Word ( { 1 } X. 2o ) )
+i19::tm2lencgam
+s20:s2,i19:syl |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encNatGam o. L ) e. Word Word ( { 1 } X. 2o ) )
+i21::tm2lencbcons
+s22:s18,s20,i21:syl2anc |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encListB ` ( <" ( encNatGam ` A ) "> ++ ( encNatGam o. L ) ) ) = ( ( encNatGam ` A ) ++ ( <" 4 "> ++ ( encListB ` ( encNatGam o. L ) ) ) ) )
+i23::tm2lenceq
+s24:s2,i23:syl |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encList ` L ) = ( encListB ` ( encNatGam o. L ) ) )
+s25:s24:oveq2d |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( <" 4 "> ++ ( encList ` L ) ) = ( <" 4 "> ++ ( encListB ` ( encNatGam o. L ) ) ) )
+s26:s25:oveq2d |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( ( encNatGam ` A ) ++ ( <" 4 "> ++ ( encList ` L ) ) ) = ( ( encNatGam ` A ) ++ ( <" 4 "> ++ ( encListB ` ( encNatGam o. L ) ) ) ) )
+s27:s22,s26:eqtr4d |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encListB ` ( <" ( encNatGam ` A ) "> ++ ( encNatGam o. L ) ) ) = ( ( encNatGam ` A ) ++ ( <" 4 "> ++ ( encList ` L ) ) ) )
+s28:s16,s27:eqtrd |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encListB ` ( encNatGam o. ( <" A "> ++ L ) ) ) = ( ( encNatGam ` A ) ++ ( <" 4 "> ++ ( encList ` L ) ) ) )
+qed:s7,s28:eqtrd |- ( ( A e. NN0 /\ L e. Word NN0 ) -> ( encList ` ( <" A "> ++ L ) ) = ( ( encNatGam ` A ) ++ ( <" 4 "> ++ ( encList ` L ) ) ) )
+$)

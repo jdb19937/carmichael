@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=progvsqf  LOC_AFTER=?
+
+* The density of the progression sieve at a squarefree positive integer is the reciprocal of that integer.
+
+s1::simpl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> L e. NN )
+i2::progvval
+s3:s1,i2:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` L ) = prod_ f e. { g e. Prime | g || L } ( 1 / f ) )
+i4::pffinq
+s5:s1,i4:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { q e. Prime | q || L } e. Fin )
+s6::breq1 |- ( q = g -> ( q || L <-> g || L ) )
+s7:s6:cbvrabv |- { q e. Prime | q || L } = { g e. Prime | g || L }
+s8:s7:a1i |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { q e. Prime | q || L } = { g e. Prime | g || L } )
+s9:s8,s5:eqeltrrd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { g e. Prime | g || L } e. Fin )
+s10::simpr |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. { g e. Prime | g || L } )
+i11::elrabi
+s12:s10,i11:syl |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. Prime )
+i13::prmnn
+s14:s12,i13:syl |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. NN )
+i15::nnrp
+s16:s14,i15:syl |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. RR+ )
+s17:s16:rpreccld |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> ( 1 / f ) e. RR+ )
+s18::simpr |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. { g e. Prime | g || L } )
+i19::elrabi
+s20:s18,i19:syl |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. Prime )
+i21::prmnn
+s22:s20,i21:syl |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. NN )
+s23:s22:nncnd |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f e. CC )
+s24:s22:nnne0d |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> f =/= 0 )
+s25::1cnd |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ f e. { g e. Prime | g || L } ) -> 1 e. CC )
+s26:s9,s25,s23,s24:fproddiv |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ f e. { g e. Prime | g || L } ( 1 / f ) = ( prod_ f e. { g e. Prime | g || L } 1 / prod_ f e. { g e. Prime | g || L } f ) )
+s27:s9:olcd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( { g e. Prime | g || L } C_ ( ZZ>= ` 1 ) \/ { g e. Prime | g || L } e. Fin ) )
+i28::prod1
+s29:s27,i28:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ f e. { g e. Prime | g || L } 1 = 1 )
+s30::id |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( L e. NN /\ ( mmu ` L ) =/= 0 ) )
+i31::sqfprodid
+s32:s30,i31:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ p e. { q e. Prime | q || L } p = L )
+s33::id |- ( p = f -> p = f )
+s34:s33:cbvprodv |- prod_ p e. { q e. Prime | q || L } p = prod_ f e. { q e. Prime | q || L } f
+s35:s34:a1i |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ p e. { q e. Prime | q || L } p = prod_ f e. { q e. Prime | q || L } f )
+s36::breq1 |- ( q = g -> ( q || L <-> g || L ) )
+s37:s36:cbvrabv |- { q e. Prime | q || L } = { g e. Prime | g || L }
+s38:s37:a1i |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { q e. Prime | q || L } = { g e. Prime | g || L } )
+s39:s38:prodeq1d |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ f e. { q e. Prime | q || L } f = prod_ f e. { g e. Prime | g || L } f )
+s40:s35,s39:eqtrd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ p e. { q e. Prime | q || L } p = prod_ f e. { g e. Prime | g || L } f )
+s41:s40,s32:eqtr3d |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ f e. { g e. Prime | g || L } f = L )
+s42:s29,s41:oveq12d |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( prod_ f e. { g e. Prime | g || L } 1 / prod_ f e. { g e. Prime | g || L } f ) = ( 1 / L ) )
+s43:s26,s42:eqtrd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> prod_ f e. { g e. Prime | g || L } ( 1 / f ) = ( 1 / L ) )
+qed:s3,s43:eqtrd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 1 / f ) ) ` L ) = ( 1 / L ) )
+$)

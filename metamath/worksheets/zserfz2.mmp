@@ -1,0 +1,60 @@
+$( <MM> <PROOF_ASST> THEOREM=zserfz2  LOC_AFTER=?
+
+* The integral comparison for the zeta series, indexed by the summation variable itself.
+
+s1::simpl |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> ( T e. RR /\ 1 < T ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> T e. RR )
+s4::simprl |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> M e. NN )
+s5::simprr |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> N e. ( ZZ>= ` M ) )
+i6::eluzelz
+s7:s5,i6:syl |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> N e. ZZ )
+s8:s4:nnzd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> M e. ZZ )
+s9::1z |- 1 e. ZZ
+s10:s9:a1i |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> 1 e. ZZ )
+s11:s7,s10:zsubcld |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> ( N - 1 ) e. ZZ )
+s12::zserfz |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( M ..^ N ) ( ( k + 1 ) ^c -u T ) <_ ( ( M ^c ( 1 - T ) ) / ( T - 1 ) ) )
+i13::fzoval
+s14:s7,i13:syl |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> ( M ..^ N ) = ( M ... ( N - 1 ) ) )
+s15:s14:sumeq1d |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( M ..^ N ) ( ( k + 1 ) ^c -u T ) = sum_ k e. ( M ... ( N - 1 ) ) ( ( k + 1 ) ^c -u T ) )
+s16::oveq1 |- ( k = j -> ( k + 1 ) = ( j + 1 ) )
+s17:s16:oveq1d |- ( k = j -> ( ( k + 1 ) ^c -u T ) = ( ( j + 1 ) ^c -u T ) )
+s18:s17:cbvsumv |- sum_ k e. ( M ... ( N - 1 ) ) ( ( k + 1 ) ^c -u T ) = sum_ j e. ( M ... ( N - 1 ) ) ( ( j + 1 ) ^c -u T )
+s19:s18:a1i |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( M ... ( N - 1 ) ) ( ( k + 1 ) ^c -u T ) = sum_ j e. ( M ... ( N - 1 ) ) ( ( j + 1 ) ^c -u T ) )
+s20::simpr |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ j e. ( M ... ( N - 1 ) ) ) -> j e. ( M ... ( N - 1 ) ) )
+i21::elfzelz
+s22:s20,i21:syl |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ j e. ( M ... ( N - 1 ) ) ) -> j e. ZZ )
+s23:s22:zcnd |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ j e. ( M ... ( N - 1 ) ) ) -> j e. CC )
+s24::ax-1cn |- 1 e. CC
+s25:s24:a1i |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ j e. ( M ... ( N - 1 ) ) ) -> 1 e. CC )
+s26:s23,s25:addcld |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ j e. ( M ... ( N - 1 ) ) ) -> ( j + 1 ) e. CC )
+s27:s3:recnd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> T e. CC )
+s28:s27:negcld |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> -u T e. CC )
+s29:s28:adantr |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ j e. ( M ... ( N - 1 ) ) ) -> -u T e. CC )
+i30::cxpcl
+s31:s26,s29,i30:syl2anc |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ j e. ( M ... ( N - 1 ) ) ) -> ( ( j + 1 ) ^c -u T ) e. CC )
+s32::oveq1 |- ( j = ( k - 1 ) -> ( j + 1 ) = ( ( k - 1 ) + 1 ) )
+s33:s32:oveq1d |- ( j = ( k - 1 ) -> ( ( j + 1 ) ^c -u T ) = ( ( ( k - 1 ) + 1 ) ^c -u T ) )
+s34:s10,s8,s11,s31,s33:fsumshft |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ j e. ( M ... ( N - 1 ) ) ( ( j + 1 ) ^c -u T ) = sum_ k e. ( ( M + 1 ) ... ( ( N - 1 ) + 1 ) ) ( ( ( k - 1 ) + 1 ) ^c -u T ) )
+s35:s7:zcnd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> N e. CC )
+s36::ax-1cn |- 1 e. CC
+s37:s36:a1i |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> 1 e. CC )
+s38:s35,s37:npcand |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> ( ( N - 1 ) + 1 ) = N )
+s39:s38:oveq2d |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> ( ( M + 1 ) ... ( ( N - 1 ) + 1 ) ) = ( ( M + 1 ) ... N ) )
+s40:s39:sumeq1d |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( ( M + 1 ) ... ( ( N - 1 ) + 1 ) ) ( ( ( k - 1 ) + 1 ) ^c -u T ) = sum_ k e. ( ( M + 1 ) ... N ) ( ( ( k - 1 ) + 1 ) ^c -u T ) )
+s41::simpr |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> k e. ( ( M + 1 ) ... N ) )
+i42::elfzelz
+s43:s41,i42:syl |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> k e. ZZ )
+s44:s43:zcnd |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> k e. CC )
+s45::ax-1cn |- 1 e. CC
+s46:s45:a1i |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> 1 e. CC )
+s47:s44,s46:npcand |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( ( k - 1 ) + 1 ) = k )
+s48:s47:oveq1d |- ( ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( ( ( k - 1 ) + 1 ) ^c -u T ) = ( k ^c -u T ) )
+s49:s48:sumeq2dv |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( ( M + 1 ) ... N ) ( ( ( k - 1 ) + 1 ) ^c -u T ) = sum_ k e. ( ( M + 1 ) ... N ) ( k ^c -u T ) )
+s50:s15,s19:eqtrd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( M ..^ N ) ( ( k + 1 ) ^c -u T ) = sum_ j e. ( M ... ( N - 1 ) ) ( ( j + 1 ) ^c -u T ) )
+s51:s50,s34:eqtrd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( M ..^ N ) ( ( k + 1 ) ^c -u T ) = sum_ k e. ( ( M + 1 ) ... ( ( N - 1 ) + 1 ) ) ( ( ( k - 1 ) + 1 ) ^c -u T ) )
+s52:s40,s49:eqtrd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( ( M + 1 ) ... ( ( N - 1 ) + 1 ) ) ( ( ( k - 1 ) + 1 ) ^c -u T ) = sum_ k e. ( ( M + 1 ) ... N ) ( k ^c -u T ) )
+s53:s51,s52:eqtrd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( M ..^ N ) ( ( k + 1 ) ^c -u T ) = sum_ k e. ( ( M + 1 ) ... N ) ( k ^c -u T ) )
+s54:s53:eqcomd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( ( M + 1 ) ... N ) ( k ^c -u T ) = sum_ k e. ( M ..^ N ) ( ( k + 1 ) ^c -u T ) )
+qed:s54,s12:eqbrtrd |- ( ( ( T e. RR /\ 1 < T ) /\ ( M e. NN /\ N e. ( ZZ>= ` M ) ) ) -> sum_ k e. ( ( M + 1 ) ... N ) ( k ^c -u T ) <_ ( ( M ^c ( 1 - T ) ) / ( T - 1 ) ) )
+$)

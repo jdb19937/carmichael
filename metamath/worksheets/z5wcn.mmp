@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=z5wcn  LOC_AFTER=?
+
+* Lean continuous_windowIntegrand, on a compact interval: t |-> e ^ ( - K / e ^ t ) is continuous on ( A [,] B ).
+
+s1::simpll |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> A e. RR )
+s2::simplr |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> B e. RR )
+s3::simpr |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> K e. RR )
+i4::iccssre
+s5:s1,s2,i4:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( A [,] B ) C_ RR )
+s6::ax-resscn |- RR C_ CC
+s7:s6:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> RR C_ CC )
+s8:s5,s7:sstrd |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( A [,] B ) C_ CC )
+s9::ssidd |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> CC C_ CC )
+i10::cncfmptid
+s11:s8,s9,i10:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> t ) e. ( ( A [,] B ) -cn-> CC ) )
+s12::efcn |- exp e. ( CC -cn-> CC )
+s13:s12:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> exp e. ( CC -cn-> CC ) )
+s14:s13,s11:cncfmpt1f |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> ( exp ` t ) ) e. ( ( A [,] B ) -cn-> CC ) )
+s15:s5:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A [,] B ) ) -> ( A [,] B ) C_ RR )
+s16::simpr |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A [,] B ) ) -> t e. ( A [,] B ) )
+s17:s15,s16:sseldd |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A [,] B ) ) -> t e. RR )
+s18:s17:rpefcld |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A [,] B ) ) -> ( exp ` t ) e. RR+ )
+i19::rpcndif0
+s20:s18,i19:syl |- ( ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) /\ t e. ( A [,] B ) ) -> ( exp ` t ) e. ( CC \ { 0 } ) )
+s21::eqid |- ( t e. ( A [,] B ) |-> ( exp ` t ) ) = ( t e. ( A [,] B ) |-> ( exp ` t ) )
+s22:s20,s21:fmptd |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> ( exp ` t ) ) : ( A [,] B ) --> ( CC \ { 0 } ) )
+s23::difssd |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( CC \ { 0 } ) C_ CC )
+i24::cncfcdm
+s25:s23,s14,i24:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( ( t e. ( A [,] B ) |-> ( exp ` t ) ) e. ( ( A [,] B ) -cn-> ( CC \ { 0 } ) ) <-> ( t e. ( A [,] B ) |-> ( exp ` t ) ) : ( A [,] B ) --> ( CC \ { 0 } ) ) )
+s26:s22,s25:mpbird |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> ( exp ` t ) ) e. ( ( A [,] B ) -cn-> ( CC \ { 0 } ) ) )
+s27:s3:renegcld |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> -u K e. RR )
+s28:s27:recnd |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> -u K e. CC )
+i29::cncfmptc
+s30:s28,s8,s9,i29:syl3anc |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> -u K ) e. ( ( A [,] B ) -cn-> CC ) )
+s31:s30,s26:divcncf |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> ( -u K / ( exp ` t ) ) ) e. ( ( A [,] B ) -cn-> CC ) )
+s32::efcn |- exp e. ( CC -cn-> CC )
+s33:s32:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> exp e. ( CC -cn-> CC ) )
+qed:s33,s31:cncfmpt1f |- ( ( ( A e. RR /\ B e. RR ) /\ K e. RR ) -> ( t e. ( A [,] B ) |-> ( exp ` ( -u K / ( exp ` t ) ) ) ) e. ( ( A [,] B ) -cn-> CC ) )
+$)

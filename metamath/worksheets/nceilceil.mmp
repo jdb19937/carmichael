@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=nceilceil  LOC_AFTER=?
+
+* For a nonnegative real number the natural ceiling is the integer ceiling (Lean: Nat.cast_ceil_eq_int_ceil).
+
+s1::simpl |- ( ( X e. RR /\ 0 <_ X ) -> X e. RR )
+i2::nceilval
+s3:s1,i2:syl |- ( ( X e. RR /\ 0 <_ X ) -> ( Nceil ` X ) = if ( X <_ 0 , 0 , ( |^ ` X ) ) )
+s4::simpr |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> X <_ 0 )
+s5:s4:iftrued |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> if ( X <_ 0 , 0 , ( |^ ` X ) ) = 0 )
+s6::simpll |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> X e. RR )
+s7::simplr |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> 0 <_ X )
+s8::0red |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> 0 e. RR )
+s9:s4,s7:jca |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> ( X <_ 0 /\ 0 <_ X ) )
+i10::letri3
+s11:s6,s8,i10:syl2anc |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> ( X = 0 <-> ( X <_ 0 /\ 0 <_ X ) ) )
+s12:s9,s11:mpbird |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> X = 0 )
+s13:s12:fveq2d |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> ( |^ ` X ) = ( |^ ` 0 ) )
+s14::0z |- 0 e. ZZ
+i15::ceilid
+s16:s14,i15:ax-mp |- ( |^ ` 0 ) = 0
+s17:s16:a1i |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> ( |^ ` 0 ) = 0 )
+s18:s13,s17:eqtrd |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> ( |^ ` X ) = 0 )
+s19:s5,s18:eqtr4d |- ( ( ( X e. RR /\ 0 <_ X ) /\ X <_ 0 ) -> if ( X <_ 0 , 0 , ( |^ ` X ) ) = ( |^ ` X ) )
+s20::simpr |- ( ( ( X e. RR /\ 0 <_ X ) /\ -. X <_ 0 ) -> -. X <_ 0 )
+s21:s20:iffalsed |- ( ( ( X e. RR /\ 0 <_ X ) /\ -. X <_ 0 ) -> if ( X <_ 0 , 0 , ( |^ ` X ) ) = ( |^ ` X ) )
+s22:s19,s21:pm2.61dan |- ( ( X e. RR /\ 0 <_ X ) -> if ( X <_ 0 , 0 , ( |^ ` X ) ) = ( |^ ` X ) )
+qed:s3,s22:eqtrd |- ( ( X e. RR /\ 0 <_ X ) -> ( Nceil ` X ) = ( |^ ` X ) )
+$)

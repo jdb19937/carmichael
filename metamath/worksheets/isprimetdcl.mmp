@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=isprimetdcl  LOC_AFTER=?
+
+* The primality test returns a boolean and an operation count.
+
+s1::id |- ( M e. NN0 -> M e. NN0 )
+s2::id |- ( m = M -> m = M )
+c1:s2:breq1d |- ( m = M -> ( m < 2 <-> M < 2 ) )
+c2:s2:oveq1d |- ( m = M -> ( m PrimeGo 2 ) = ( M PrimeGo 2 ) )
+c3:c2,s2:fveq12d |- ( m = M -> ( ( m PrimeGo 2 ) ` m ) = ( ( M PrimeGo 2 ) ` M ) )
+c4:c3:fveq2d |- ( m = M -> ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) = ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) )
+c5:s2:oveq1d |- ( m = M -> ( m PrimeGo 2 ) = ( M PrimeGo 2 ) )
+c6:c5,s2:fveq12d |- ( m = M -> ( ( m PrimeGo 2 ) ` m ) = ( ( M PrimeGo 2 ) ` M ) )
+c7:c6:fveq2d |- ( m = M -> ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) = ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) )
+c8:c7:oveq1d |- ( m = M -> ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) = ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) )
+c9:c4,c8:opeq12d |- ( m = M -> <. ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) , ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) >. = <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. )
+c10:c1,c9:ifbieq2d |- ( m = M -> if ( m < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) , ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) >. ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s3::df-isprimetd |- IsPrimeTD = ( m e. NN0 |-> if ( m < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( m PrimeGo 2 ) ` m ) ) , ( ( 2nd ` ( ( m PrimeGo 2 ) ` m ) ) + 1 ) >. ) )
+s4::opex |- <. (/) , 1 >. e. _V
+s5:s4:a1i |- ( M e. NN0 -> <. (/) , 1 >. e. _V )
+s6::opex |- <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. e. _V
+s7:s6:a1i |- ( M e. NN0 -> <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. e. _V )
+s8:s5,s7:ifcld |- ( M e. NN0 -> if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) e. _V )
+s9:c10,s3:fvmptg |- ( ( M e. NN0 /\ if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) e. _V ) -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s10:s1,s8,s9:syl2anc |- ( M e. NN0 -> ( IsPrimeTD ` M ) = if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) )
+s11::0el2o |- (/) e. 2o
+s12:s11:a1i |- ( M e. NN0 -> (/) e. 2o )
+s13::1nn0 |- 1 e. NN0
+s14:s13:a1i |- ( M e. NN0 -> 1 e. NN0 )
+s15::opelxpi |- ( ( (/) e. 2o /\ 1 e. NN0 ) -> <. (/) , 1 >. e. ( 2o X. NN0 ) )
+s16:s12,s14,s15:syl2anc |- ( M e. NN0 -> <. (/) , 1 >. e. ( 2o X. NN0 ) )
+s17::2nn0 |- 2 e. NN0
+s18:s17:a1i |- ( M e. NN0 -> 2 e. NN0 )
+s19::primegocl |- ( ( ( M e. NN0 /\ 2 e. NN0 ) /\ M e. NN0 ) -> ( ( M PrimeGo 2 ) ` M ) e. ( 2o X. NN0 ) )
+s20:s1,s18:jca |- ( M e. NN0 -> ( M e. NN0 /\ 2 e. NN0 ) )
+s21:s20,s1:jca |- ( M e. NN0 -> ( ( M e. NN0 /\ 2 e. NN0 ) /\ M e. NN0 ) )
+s22:s21,s19:syl |- ( M e. NN0 -> ( ( M PrimeGo 2 ) ` M ) e. ( 2o X. NN0 ) )
+s23::xp1st |- ( ( ( M PrimeGo 2 ) ` M ) e. ( 2o X. NN0 ) -> ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) e. 2o )
+s24:s22,s23:syl |- ( M e. NN0 -> ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) e. 2o )
+s25::xp2nd |- ( ( ( M PrimeGo 2 ) ` M ) e. ( 2o X. NN0 ) -> ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) e. NN0 )
+s26:s22,s25:syl |- ( M e. NN0 -> ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) e. NN0 )
+s27:s26,s14:nn0addcld |- ( M e. NN0 -> ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) e. NN0 )
+s28::opelxpi |- ( ( ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) e. 2o /\ ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) e. NN0 ) -> <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. e. ( 2o X. NN0 ) )
+s29:s24,s27,s28:syl2anc |- ( M e. NN0 -> <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. e. ( 2o X. NN0 ) )
+s30:s16,s29:ifcld |- ( M e. NN0 -> if ( M < 2 , <. (/) , 1 >. , <. ( 1st ` ( ( M PrimeGo 2 ) ` M ) ) , ( ( 2nd ` ( ( M PrimeGo 2 ) ` M ) ) + 1 ) >. ) e. ( 2o X. NN0 ) )
+qed:s10,s30:eqeltrd |- ( M e. NN0 -> ( IsPrimeTD ` M ) e. ( 2o X. NN0 ) )
+$)

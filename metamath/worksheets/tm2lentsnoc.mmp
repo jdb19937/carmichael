@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lentsnoc  LOC_AFTER=?
+
+* The entries of a list with a new last entry.
+
+s1::simpl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ W e. Word ( { 1 } X. 2o ) ) -> L e. Word Word ( { 1 } X. 2o ) )
+s2::simpr |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ W e. Word ( { 1 } X. 2o ) ) -> W e. Word ( { 1 } X. 2o ) )
+s3:s2:s1cld |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ W e. Word ( { 1 } X. 2o ) ) -> <" W "> e. Word Word ( { 1 } X. 2o ) )
+i4::tm2lentcc
+s5:s1,s3,i4:syl2anc |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ W e. Word ( { 1 } X. 2o ) ) -> ( entries ` ( L ++ <" W "> ) ) = ( ( entries ` L ) ++ ( entries ` <" W "> ) ) )
+i6::tm2lents1
+s7:s2,i6:syl |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ W e. Word ( { 1 } X. 2o ) ) -> ( entries ` <" W "> ) = ( W ++ <" 4 "> ) )
+s8:s7:oveq2d |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ W e. Word ( { 1 } X. 2o ) ) -> ( ( entries ` L ) ++ ( entries ` <" W "> ) ) = ( ( entries ` L ) ++ ( W ++ <" 4 "> ) ) )
+qed:s5,s8:eqtrd |- ( ( L e. Word Word ( { 1 } X. 2o ) /\ W e. Word ( { 1 } X. 2o ) ) -> ( entries ` ( L ++ <" W "> ) ) = ( ( entries ` L ) ++ ( W ++ <" 4 "> ) ) )
+$)

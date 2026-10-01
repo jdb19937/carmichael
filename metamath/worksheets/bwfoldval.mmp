@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=bwfoldval  LOC_AFTER=?
+
+* Value of bwFold: the fold of the step function F over the digit positions of A and B from C, as a recursion on the position (df-algrec).
+
+s1::simpll |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> A e. ZZ )
+s2::simplr |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> B e. ZZ )
+s3::simprl |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) )
+s4::simprr |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> C e. 3o )
+s5::simpl |- ( ( a = A /\ b = B ) -> a = A )
+s6::simpr |- ( ( a = A /\ b = B ) -> b = B )
+c1:s5:fveq2d |- ( ( a = A /\ b = B ) -> ( bits ` a ) = ( bits ` A ) )
+c2:c1:eleq2d |- ( ( a = A /\ b = B ) -> ( k e. ( bits ` a ) <-> k e. ( bits ` A ) ) )
+c3:c2:ifbid |- ( ( a = A /\ b = B ) -> if ( k e. ( bits ` a ) , 1o , (/) ) = if ( k e. ( bits ` A ) , 1o , (/) ) )
+c4:s6:fveq2d |- ( ( a = A /\ b = B ) -> ( bits ` b ) = ( bits ` B ) )
+c5:c4:eleq2d |- ( ( a = A /\ b = B ) -> ( k e. ( bits ` b ) <-> k e. ( bits ` B ) ) )
+c6:c5:ifbid |- ( ( a = A /\ b = B ) -> if ( k e. ( bits ` b ) , 1o , (/) ) = if ( k e. ( bits ` B ) , 1o , (/) ) )
+c7:c3,c6:oveq12d |- ( ( a = A /\ b = B ) -> ( if ( k e. ( bits ` a ) , 1o , (/) ) f if ( k e. ( bits ` b ) , 1o , (/) ) ) = ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) )
+c8:c7:fveq1d |- ( ( a = A /\ b = B ) -> ( ( if ( k e. ( bits ` a ) , 1o , (/) ) f if ( k e. ( bits ` b ) , 1o , (/) ) ) ` u ) = ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) )
+c9:c8:mpoeq3dv |- ( ( a = A /\ b = B ) -> ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` a ) , 1o , (/) ) f if ( k e. ( bits ` b ) , 1o , (/) ) ) ` u ) ) = ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) )
+c10:c9:oveq2d |- ( ( a = A /\ b = B ) -> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` a ) , 1o , (/) ) f if ( k e. ( bits ` b ) , 1o , (/) ) ) ` u ) ) ) = ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) )
+c11:c10:mpoeq3dv |- ( ( a = A /\ b = B ) -> ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` a ) , 1o , (/) ) f if ( k e. ( bits ` b ) , 1o , (/) ) ) ` u ) ) ) ) = ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) )
+s7::df-bwfold |- bwFold = ( a e. ZZ , b e. ZZ |-> ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` a ) , 1o , (/) ) f if ( k e. ( bits ` b ) , 1o , (/) ) ) ` u ) ) ) ) )
+s8::bwfsex |- ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) e. _V
+s9:s8:a1i |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) e. _V )
+s10::bw3oex |- 3o e. _V
+s11:s10:a1i |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> 3o e. _V )
+i12::mpoexga
+s13:s9,s11,i12:syl2anc |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) e. _V )
+s14:c11,s7:ovmpoga |- ( ( A e. ZZ /\ B e. ZZ /\ ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) e. _V ) -> ( A bwFold B ) = ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) )
+s15:s1,s2,s13,s14:syl3anc |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( A bwFold B ) = ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) )
+s16:s15:oveqd |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( F ( A bwFold B ) C ) = ( F ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) C ) )
+s17::simpl |- ( ( f = F /\ c = C ) -> f = F )
+s18::simpr |- ( ( f = F /\ c = C ) -> c = C )
+c12:s17:oveqd |- ( ( f = F /\ c = C ) -> ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) = ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) )
+c13:c12:fveq1d |- ( ( f = F /\ c = C ) -> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) = ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) )
+c14:c13:mpoeq3dv |- ( ( f = F /\ c = C ) -> ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) = ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) )
+c15:s18,c14:oveq12d |- ( ( f = F /\ c = C ) -> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) = ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) )
+s19::eqid |- ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) = ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) )
+s20::ovex |- ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) e. _V
+s21:s20:a1i |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) e. _V )
+s22:c15,s19:ovmpoga |- ( ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o /\ ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) e. _V ) -> ( F ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) C ) = ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) )
+s23:s3,s4,s21,s22:syl3anc |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( F ( f e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) , c e. 3o |-> ( c AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) f if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ) C ) = ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) )
+qed:s16,s23:eqtrd |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( F ( A bwFold B ) C ) = ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) )
+$)

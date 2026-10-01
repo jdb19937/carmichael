@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=sqrtlogle  LOC_AFTER=?
+
+* The product of the square root and the logarithm is at most the argument, for arguments at least one.
+
+s1::simpl |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ 1 <_ X ) -> 1 <_ X )
+s3::0red |- ( ( X e. RR /\ 1 <_ X ) -> 0 e. RR )
+s4::1red |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. RR )
+s5::0lt1 |- 0 < 1
+s6:s5:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 0 < 1 )
+s7:s3,s4,s1,s6,s2:ltletrd |- ( ( X e. RR /\ 1 <_ X ) -> 0 < X )
+s8:s1,s7:elrpd |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR+ )
+s9:s3,s1,s7:ltled |- ( ( X e. RR /\ 1 <_ X ) -> 0 <_ X )
+s10::1red |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. RR )
+s11:s1,s10:resubcld |- ( ( X e. RR /\ 1 <_ X ) -> ( X - 1 ) e. RR )
+i12::subge0
+s13:s1,s10,i12:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( 0 <_ ( X - 1 ) <-> 1 <_ X ) )
+s14:s2,s13:mpbird |- ( ( X e. RR /\ 1 <_ X ) -> 0 <_ ( X - 1 ) )
+i15::loglesqrt
+s16:s11,s14,i15:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` ( ( X - 1 ) + 1 ) ) <_ ( sqrt ` ( X - 1 ) ) )
+s17:s1:recnd |- ( ( X e. RR /\ 1 <_ X ) -> X e. CC )
+s18::1cnd |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. CC )
+s19:s17,s18:npcand |- ( ( X e. RR /\ 1 <_ X ) -> ( ( X - 1 ) + 1 ) = X )
+s20:s19:fveq2d |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` ( ( X - 1 ) + 1 ) ) = ( log ` X ) )
+s21:s20,s16:eqbrtrrd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) <_ ( sqrt ` ( X - 1 ) ) )
+s22:s11,s14:jca |- ( ( X e. RR /\ 1 <_ X ) -> ( ( X - 1 ) e. RR /\ 0 <_ ( X - 1 ) ) )
+s23:s1,s9:jca |- ( ( X e. RR /\ 1 <_ X ) -> ( X e. RR /\ 0 <_ X ) )
+i24::sqrtle
+s25:s22,s23,i24:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( X - 1 ) <_ X <-> ( sqrt ` ( X - 1 ) ) <_ ( sqrt ` X ) ) )
+s26:s1:ltm1d |- ( ( X e. RR /\ 1 <_ X ) -> ( X - 1 ) < X )
+s27:s11,s1,s26:ltled |- ( ( X e. RR /\ 1 <_ X ) -> ( X - 1 ) <_ X )
+s28:s27,s25:mpbid |- ( ( X e. RR /\ 1 <_ X ) -> ( sqrt ` ( X - 1 ) ) <_ ( sqrt ` X ) )
+i29::rpsqrtcl
+s30:s8,i29:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( sqrt ` X ) e. RR+ )
+s31:s30:rpred |- ( ( X e. RR /\ 1 <_ X ) -> ( sqrt ` X ) e. RR )
+s32:s30:rpge0d |- ( ( X e. RR /\ 1 <_ X ) -> 0 <_ ( sqrt ` X ) )
+i33::relogcl
+s34:s8,i33:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) e. RR )
+i35::resqrtcl
+s36:s11,s14,i35:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( sqrt ` ( X - 1 ) ) e. RR )
+s37:s34,s36,s31,s21,s28:letrd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) <_ ( sqrt ` X ) )
+s38:s31,s32:jca |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) e. RR /\ 0 <_ ( sqrt ` X ) ) )
+s39:s34,s31,s38:3jca |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` X ) e. RR /\ ( sqrt ` X ) e. RR /\ ( ( sqrt ` X ) e. RR /\ 0 <_ ( sqrt ` X ) ) ) )
+i40::lemul2a
+s41:s39,s37,i40:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) x. ( log ` X ) ) <_ ( ( sqrt ` X ) x. ( sqrt ` X ) ) )
+s42:s31:recnd |- ( ( X e. RR /\ 1 <_ X ) -> ( sqrt ` X ) e. CC )
+i43::sqval
+s44:s42,i43:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) ^ 2 ) = ( ( sqrt ` X ) x. ( sqrt ` X ) )  )
+i45::resqrtth
+s46:s1,s9,i45:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) ^ 2 ) = X )
+s47:s44,s46:eqtr3d |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) x. ( sqrt ` X ) ) = X )
+qed:s41,s47:breqtrd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sqrt ` X ) x. ( log ` X ) ) <_ X )
+$)

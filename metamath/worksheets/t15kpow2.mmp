@@ -1,0 +1,962 @@
+$( <MM> <PROOF_ASST> THEOREM=t15kpow2  LOC_AFTER=?
+
+* The installation predicate ~ df-tmipow2 holds at the concrete program (generated).
+
+h1::t15kpow2.1 |- ( ph -> ( ( T e. _V /\ R e. _V ) /\ ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) )
+h2::t15kpow2.2 |- ( ph -> ( ( 0 ... ; 3 0 ) C_ A /\ A C_ NN0 ) )
+h3::t15kpow2.3 |- ( ph -> A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) )
+h4::t15kpow2.4 |- ( ph -> A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) )
+s1:h1:simp1d |- ( ph -> ( T e. _V /\ R e. _V ) )
+s2:s1:simpld |- ( ph -> T e. _V )
+s3:s1:simprd |- ( ph -> R e. _V )
+s4:h1:simp2d |- ( ph -> ( 1st ` ( 1st ` T ) ) = TMGam )
+s5:h1:simp3d |- ( ph -> ( 2nd ` T ) = TMSt )
+s6:h2:simpld |- ( ph -> ( 0 ... ; 3 0 ) C_ A )
+s7:h2:simprd |- ( ph -> A C_ NN0 )
+h5::t15kpow2.5 |- ( ph -> W e. Word A )
+h6::t15kpow2.6 |- ( ph -> ( ( # ` W ) + 2 ) <_ ; 3 0 )
+h7::t15kpow2.7 |- ( ph -> P = ( TMLab ` W ) )
+h8::t15kpow2.8 |- ( ph -> E e. ( 2nd ` ( 1st ` T ) ) )
+h9::t15kpow2.9 |- ( ph -> ( R TMWalk W ) = ( TMnpow2 K J I I' T P E ) )
+h10::t15kpow2.10 |- ( ph -> K e. ( 0 ..^ 8 ) )
+h11::t15kpow2.11 |- ( ph -> J e. ( 0 ..^ 8 ) )
+h12::t15kpow2.12 |- ( ph -> I e. ( 0 ..^ 8 ) )
+h13::t15kpow2.13 |- ( ph -> I' e. ( 0 ..^ 8 ) )
+s8:h7:fveq1d |- ( ph -> ( P ` 0 ) = ( ( TMLab ` W ) ` 0 ) )
+s9:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s10::1p1e2 |- ( 1 + 1 ) = 2
+s11:s10:a1i |- ( ph -> ( 1 + 1 ) = 2 )
+s12::1nn0 |- 1 e. NN0
+s13:s12:a1i |- ( ph -> 1 e. NN0 )
+s14:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+s15::0nn0 |- 0 e. NN0
+s16::3nn0 |- 3 e. NN0
+s17:s16,s15:deccl |- ; 3 0 e. NN0
+s18:s17:nn0ge0i |- 0 <_ ; 3 0
+s19::elfz2nn0 |- ( 0 e. ( 0 ... ; 3 0 ) <-> ( 0 e. NN0 /\ ; 3 0 e. NN0 /\ 0 <_ ; 3 0 ) )
+s20:s15,s17,s18,s19:mpbir3an |- 0 e. ( 0 ... ; 3 0 )
+s21:s20:a1i |- ( ph -> 0 e. ( 0 ... ; 3 0 ) )
+s22:s6,s21:sseldd |- ( ph -> 0 e. A )
+s23:s22,s7:jca |- ( ph -> ( 0 e. A /\ A C_ NN0 ) )
+s24:s14,s23:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 0 e. A /\ A C_ NN0 ) ) )
+s25:s9,s24:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 0 e. A /\ A C_ NN0 ) ) ) )
+i26::t15ap
+s27:s25,i26:syl |- ( ph -> ( ( ( TMLab ` W ) ` 0 ) = ( TMLab ` ( W ++ <" 0 "> ) ) /\ ( W ++ <" 0 "> ) e. Word A /\ ( ( # ` ( W ++ <" 0 "> ) ) + 1 ) <_ ; 3 0 ) )
+s28:s27:simp1d |- ( ph -> ( ( TMLab ` W ) ` 0 ) = ( TMLab ` ( W ++ <" 0 "> ) ) )
+s29:s27:simp2d |- ( ph -> ( W ++ <" 0 "> ) e. Word A )
+s30:s27:simp3d |- ( ph -> ( ( # ` ( W ++ <" 0 "> ) ) + 1 ) <_ ; 3 0 )
+s31:s8,s28:eqtrd |- ( ph -> ( P ` 0 ) = ( TMLab ` ( W ++ <" 0 "> ) ) )
+i32::tmwalks1
+s33:s3,h5,s22,i32:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 0 "> ) ) = ( ( R TMWalk W ) ` 0 ) )
+s34:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 0 ) = ( ( TMnpow2 K J I I' T P E ) ` 0 ) )
+s35::df-tmnpow2 |- ( TMnpow2 K J I I' T P E ) = ( j e. NN0 |-> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) )
+s36:s35:a1i |- ( ph -> ( TMnpow2 K J I I' T P E ) = ( j e. NN0 |-> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) ) )
+s37::simpr |- ( ( ph /\ j = 0 ) -> j = 0 )
+s38:s37:iftrued |- ( ( ph /\ j = 0 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. )
+s39:s15:a1i |- ( ph -> 0 e. NN0 )
+s40::opex |- <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. e. _V
+s41:s40:a1i |- ( ph -> <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. e. _V )
+s42:s36,s38,s39,s41:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 0 ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. )
+s43:s33,s34,s42:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 0 "> ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. )
+s44:s4,h11:jca |- ( ph -> ( ( 1st ` ( 1st ` T ) ) = TMGam /\ J e. ( 0 ..^ 8 ) ) )
+i45::t15kdom
+s46:s44,i45:syl |- ( ph -> ( J e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 1st ` ( 1st ` T ) ) ` J ) = Gamma' ) )
+s47:s46:simpld |- ( ph -> J e. dom ( 1st ` ( 1st ` T ) ) )
+s48:s46:simprd |- ( ph -> ( ( 1st ` ( 1st ` T ) ) ` J ) = Gamma' )
+s49::gammaex |- Gamma' e. _V
+s50:s49:a1i |- ( ph -> Gamma' e. _V )
+s51::gamma4 |- 4 e. Gamma'
+s52:s51:a1i |- ( ph -> 4 e. Gamma' )
+s53:s50,s52:jca |- ( ph -> ( Gamma' e. _V /\ 4 e. Gamma' ) )
+i54::t15cst
+s55:s53,i54:syl |- ( ph -> ( ( 2nd ` T ) X. { 4 } ) e. ( Gamma' ^m ( 2nd ` T ) ) )
+s56:s48:oveq1d |- ( ph -> ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) = ( Gamma' ^m ( 2nd ` T ) ) )
+s57:s55,s56:eleqtrrd |- ( ph -> ( ( 2nd ` T ) X. { 4 } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) )
+s58:h7:fveq1d |- ( ph -> ( P ` 1 ) = ( ( TMLab ` W ) ` 1 ) )
+s59:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s60:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+i61::addge01
+s62::1re |- 1 e. RR
+s63::2nn0 |- 2 e. NN0
+s64::9nn0 |- 9 e. NN0
+s65:s63,s64:deccl |- ; 2 9 e. NN0
+s66:s65:nn0rei |- ; 2 9 e. RR
+s67:s62,s66,i61:mp2an |- ( 0 <_ ; 2 9 <-> 1 <_ ( 1 + ; 2 9 ) )
+s68:s65:nn0ge0i |- 0 <_ ; 2 9
+s69:s68,s67:mpbi |- 1 <_ ( 1 + ; 2 9 )
+s70::ax-1cn |- 1 e. CC
+s71:s65:nn0cni |- ; 2 9 e. CC
+s72:s70,s71:addcomi |- ( 1 + ; 2 9 ) = ( ; 2 9 + 1 )
+s73::eqid |- ; 2 9 = ; 2 9
+s74::2p1e3 |- ( 2 + 1 ) = 3
+s75::9p1e10 |- ( 9 + 1 ) = ; 1 0
+s76:s63,s64,s12,s73,s74,s15,s75:decaddci |- ( ; 2 9 + 1 ) = ; 3 0
+s77:s72,s76:eqtri |- ( 1 + ; 2 9 ) = ; 3 0
+s78:s69,s77:breqtri |- 1 <_ ; 3 0
+s79::elfz2nn0 |- ( 1 e. ( 0 ... ; 3 0 ) <-> ( 1 e. NN0 /\ ; 3 0 e. NN0 /\ 1 <_ ; 3 0 ) )
+s80:s12,s17,s78,s79:mpbir3an |- 1 e. ( 0 ... ; 3 0 )
+s81:s80:a1i |- ( ph -> 1 e. ( 0 ... ; 3 0 ) )
+s82:s6,s81:sseldd |- ( ph -> 1 e. A )
+s83:s82,s7:jca |- ( ph -> ( 1 e. A /\ A C_ NN0 ) )
+s84:s60,s83:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 1 e. A /\ A C_ NN0 ) ) )
+s85:s59,s84:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 1 e. A /\ A C_ NN0 ) ) ) )
+i86::t15ap
+s87:s85,i86:syl |- ( ph -> ( ( ( TMLab ` W ) ` 1 ) = ( TMLab ` ( W ++ <" 1 "> ) ) /\ ( W ++ <" 1 "> ) e. Word A /\ ( ( # ` ( W ++ <" 1 "> ) ) + 1 ) <_ ; 3 0 ) )
+s88:s87:simp1d |- ( ph -> ( ( TMLab ` W ) ` 1 ) = ( TMLab ` ( W ++ <" 1 "> ) ) )
+s89:s87:simp2d |- ( ph -> ( W ++ <" 1 "> ) e. Word A )
+s90:s87:simp3d |- ( ph -> ( ( # ` ( W ++ <" 1 "> ) ) + 1 ) <_ ; 3 0 )
+s91:s58,s88:eqtrd |- ( ph -> ( P ` 1 ) = ( TMLab ` ( W ++ <" 1 "> ) ) )
+s92:s89,s90,s13:3jca |- ( ph -> ( ( W ++ <" 1 "> ) e. Word A /\ ( ( # ` ( W ++ <" 1 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s93:h3,s92:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( W ++ <" 1 "> ) e. Word A /\ ( ( # ` ( W ++ <" 1 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) ) )
+i94::t15lab
+s95:s93,i94:syl |- ( ph -> ( TMLab ` ( W ++ <" 1 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s96:s91,s95:eqeltrd |- ( ph -> ( P ` 1 ) e. ( 2nd ` ( 1st ` T ) ) )
+s97::fvex |- ( 2nd ` ( 1st ` T ) ) e. _V
+s98:s97:a1i |- ( ph -> ( 2nd ` ( 1st ` T ) ) e. _V )
+s99:s98,s96:jca |- ( ph -> ( ( 2nd ` ( 1st ` T ) ) e. _V /\ ( P ` 1 ) e. ( 2nd ` ( 1st ` T ) ) ) )
+i100::t15cst
+s101:s99,i100:syl |- ( ph -> ( ( 2nd ` T ) X. { ( P ` 1 ) } ) e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) )
+i102::tm2goto
+s103:s2,s101,i102:syl2anc |- ( ph -> <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. e. ( TM2Stmt ` T ) )
+s104:s47,s57:jca |- ( ph -> ( J e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 2nd ` T ) X. { 4 } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) ) )
+i105::tm2push
+s106:s2,s104,s103,i105:syl3anc |- ( ph -> <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) )
+s107:h3,h4:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) ) )
+s108:s29,s30,s13:3jca |- ( ph -> ( ( W ++ <" 0 "> ) e. Word A /\ ( ( # ` ( W ++ <" 0 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s109:s43,s106:jca |- ( ph -> ( ( R TMWalk ( W ++ <" 0 "> ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. /\ <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) ) )
+i110::t15own
+s111:s107,s108,s109,i110:syl3anc |- ( ph -> ( ( M ` ( TMLab ` ( W ++ <" 0 "> ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. /\ ( TMLab ` ( W ++ <" 0 "> ) ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s112:s111:simpld |- ( ph -> ( M ` ( TMLab ` ( W ++ <" 0 "> ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. )
+s113:s31:fveq2d |- ( ph -> ( M ` ( P ` 0 ) ) = ( M ` ( TMLab ` ( W ++ <" 0 "> ) ) ) )
+s114:s113,s112:eqtrd |- ( ph -> ( M ` ( P ` 0 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. )
+i115::tmwalks1
+s116:s3,h5,s82,i115:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 1 "> ) ) = ( ( R TMWalk W ) ` 1 ) )
+s117:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 1 ) = ( ( TMnpow2 K J I I' T P E ) ` 1 ) )
+s118::simpr |- ( ( ph /\ j = 1 ) -> j = 1 )
+i119::eqeq1
+s120:s118,i119:syl |- ( ( ph /\ j = 1 ) -> ( j = 0 <-> 1 = 0 ) )
+s121::0lt1 |- 0 < 1
+s122::0re |- 0 e. RR
+s123:s122,s121:ltneii |- 0 =/= 1
+s124:s123:necomi |- 1 =/= 0
+s125:s124:neii |- -. 1 = 0
+s126:s125:a1i |- ( ( ph /\ j = 1 ) -> -. 1 = 0 )
+s127:s126,s120:mtbird |- ( ( ph /\ j = 1 ) -> -. j = 0 )
+s128:s127:iffalsed |- ( ( ph /\ j = 1 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) )
+s129:s118:iftrued |- ( ( ph /\ j = 1 ) -> if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. )
+s130:s128,s129:eqtrd |- ( ( ph /\ j = 1 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. )
+s131::opex |- <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. e. _V
+s132:s131:a1i |- ( ph -> <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. e. _V )
+s133:s36,s130,s13,s132:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 1 ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. )
+s134:s116,s117,s133:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 1 "> ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. )
+s135::1oel2o |- 1o e. 2o
+i136::bitgamma
+s137:s135,i136:ax-mp |- <. 1 , 1o >. e. Gamma'
+s138:s137:a1i |- ( ph -> <. 1 , 1o >. e. Gamma' )
+s139:s50,s138:jca |- ( ph -> ( Gamma' e. _V /\ <. 1 , 1o >. e. Gamma' ) )
+i140::t15cst
+s141:s139,i140:syl |- ( ph -> ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) e. ( Gamma' ^m ( 2nd ` T ) ) )
+s142:s48:oveq1d |- ( ph -> ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) = ( Gamma' ^m ( 2nd ` T ) ) )
+s143:s141,s142:eleqtrrd |- ( ph -> ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) )
+s144:h7:fveq1d |- ( ph -> ( P ` 4 ) = ( ( TMLab ` W ) ` 4 ) )
+s145:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s146:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+s147::4nn0 |- 4 e. NN0
+i148::addge01
+s149::4re |- 4 e. RR
+s150::6nn0 |- 6 e. NN0
+s151:s63,s150:deccl |- ; 2 6 e. NN0
+s152:s151:nn0rei |- ; 2 6 e. RR
+s153:s149,s152,i148:mp2an |- ( 0 <_ ; 2 6 <-> 4 <_ ( 4 + ; 2 6 ) )
+s154:s151:nn0ge0i |- 0 <_ ; 2 6
+s155:s154,s153:mpbi |- 4 <_ ( 4 + ; 2 6 )
+s156::4cn |- 4 e. CC
+s157:s151:nn0cni |- ; 2 6 e. CC
+s158:s156,s157:addcomi |- ( 4 + ; 2 6 ) = ( ; 2 6 + 4 )
+s159::eqid |- ; 2 6 = ; 2 6
+s160::6p4e10 |- ( 6 + 4 ) = ; 1 0
+s161:s63,s150,s147,s159,s74,s15,s160:decaddci |- ( ; 2 6 + 4 ) = ; 3 0
+s162:s158,s161:eqtri |- ( 4 + ; 2 6 ) = ; 3 0
+s163:s155,s162:breqtri |- 4 <_ ; 3 0
+s164::elfz2nn0 |- ( 4 e. ( 0 ... ; 3 0 ) <-> ( 4 e. NN0 /\ ; 3 0 e. NN0 /\ 4 <_ ; 3 0 ) )
+s165:s147,s17,s163,s164:mpbir3an |- 4 e. ( 0 ... ; 3 0 )
+s166:s165:a1i |- ( ph -> 4 e. ( 0 ... ; 3 0 ) )
+s167:s6,s166:sseldd |- ( ph -> 4 e. A )
+s168:s167,s7:jca |- ( ph -> ( 4 e. A /\ A C_ NN0 ) )
+s169:s146,s168:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 4 e. A /\ A C_ NN0 ) ) )
+s170:s145,s169:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 4 e. A /\ A C_ NN0 ) ) ) )
+i171::t15ap
+s172:s170,i171:syl |- ( ph -> ( ( ( TMLab ` W ) ` 4 ) = ( TMLab ` ( W ++ <" 4 "> ) ) /\ ( W ++ <" 4 "> ) e. Word A /\ ( ( # ` ( W ++ <" 4 "> ) ) + 1 ) <_ ; 3 0 ) )
+s173:s172:simp1d |- ( ph -> ( ( TMLab ` W ) ` 4 ) = ( TMLab ` ( W ++ <" 4 "> ) ) )
+s174:s172:simp2d |- ( ph -> ( W ++ <" 4 "> ) e. Word A )
+s175:s172:simp3d |- ( ph -> ( ( # ` ( W ++ <" 4 "> ) ) + 1 ) <_ ; 3 0 )
+s176:s144,s173:eqtrd |- ( ph -> ( P ` 4 ) = ( TMLab ` ( W ++ <" 4 "> ) ) )
+s177:s176:fveq1d |- ( ph -> ( ( P ` 4 ) ` 0 ) = ( ( TMLab ` ( W ++ <" 4 "> ) ) ` 0 ) )
+s178:s174,s175:jca |- ( ph -> ( ( W ++ <" 4 "> ) e. Word A /\ ( ( # ` ( W ++ <" 4 "> ) ) + 1 ) <_ ; 3 0 ) )
+s179:s70:addlidi |- ( 0 + 1 ) = 1
+s180:s179:a1i |- ( ph -> ( 0 + 1 ) = 1 )
+s181:s39,s180:jca |- ( ph -> ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) )
+s182:s22,s7:jca |- ( ph -> ( 0 e. A /\ A C_ NN0 ) )
+s183:s181,s182:jca |- ( ph -> ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) )
+s184:s178,s183:jca |- ( ph -> ( ( ( W ++ <" 4 "> ) e. Word A /\ ( ( # ` ( W ++ <" 4 "> ) ) + 1 ) <_ ; 3 0 ) /\ ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) ) )
+i185::t15ap
+s186:s184,i185:syl |- ( ph -> ( ( ( TMLab ` ( W ++ <" 4 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) /\ ( ( W ++ <" 4 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 ) )
+s187:s186:simp1d |- ( ph -> ( ( TMLab ` ( W ++ <" 4 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) )
+s188:s186:simp2d |- ( ph -> ( ( W ++ <" 4 "> ) ++ <" 0 "> ) e. Word A )
+s189:s186:simp3d |- ( ph -> ( ( # ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 )
+s190:s177,s187:eqtrd |- ( ph -> ( ( P ` 4 ) ` 0 ) = ( TMLab ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) )
+s191:s188,s189,s39:3jca |- ( ph -> ( ( ( W ++ <" 4 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) )
+s192:h3,s191:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( ( W ++ <" 4 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) ) )
+i193::t15lab
+s194:s192,i193:syl |- ( ph -> ( TMLab ` ( ( W ++ <" 4 "> ) ++ <" 0 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s195:s190,s194:eqeltrd |- ( ph -> ( ( P ` 4 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) )
+s196:s98,s195:jca |- ( ph -> ( ( 2nd ` ( 1st ` T ) ) e. _V /\ ( ( P ` 4 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) ) )
+i197::t15cst
+s198:s196,i197:syl |- ( ph -> ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) )
+i199::tm2goto
+s200:s2,s198,i199:syl2anc |- ( ph -> <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. e. ( TM2Stmt ` T ) )
+s201:s47,s143:jca |- ( ph -> ( J e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) ) )
+i202::tm2push
+s203:s2,s201,s200,i202:syl3anc |- ( ph -> <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) )
+s204:h3,h4:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) ) )
+s205:s89,s90,s13:3jca |- ( ph -> ( ( W ++ <" 1 "> ) e. Word A /\ ( ( # ` ( W ++ <" 1 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s206:s134,s203:jca |- ( ph -> ( ( R TMWalk ( W ++ <" 1 "> ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. /\ <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) ) )
+i207::t15own
+s208:s204,s205,s206,i207:syl3anc |- ( ph -> ( ( M ` ( TMLab ` ( W ++ <" 1 "> ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. /\ ( TMLab ` ( W ++ <" 1 "> ) ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s209:s208:simpld |- ( ph -> ( M ` ( TMLab ` ( W ++ <" 1 "> ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. )
+s210:s91:fveq2d |- ( ph -> ( M ` ( P ` 1 ) ) = ( M ` ( TMLab ` ( W ++ <" 1 "> ) ) ) )
+s211:s210,s209:eqtrd |- ( ph -> ( M ` ( P ` 1 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. )
+s212:s114,s211:jca |- ( ph -> ( ( M ` ( P ` 0 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. /\ ( M ` ( P ` 1 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. ) )
+s213:h7:fveq1d |- ( ph -> ( P ` 2 ) = ( ( TMLab ` W ) ` 2 ) )
+s214:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s215:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+i216::addge01
+s217::2re |- 2 e. RR
+s218::8nn0 |- 8 e. NN0
+s219:s63,s218:deccl |- ; 2 8 e. NN0
+s220:s219:nn0rei |- ; 2 8 e. RR
+s221:s217,s220,i216:mp2an |- ( 0 <_ ; 2 8 <-> 2 <_ ( 2 + ; 2 8 ) )
+s222:s219:nn0ge0i |- 0 <_ ; 2 8
+s223:s222,s221:mpbi |- 2 <_ ( 2 + ; 2 8 )
+s224::2cn |- 2 e. CC
+s225:s219:nn0cni |- ; 2 8 e. CC
+s226:s224,s225:addcomi |- ( 2 + ; 2 8 ) = ( ; 2 8 + 2 )
+s227::eqid |- ; 2 8 = ; 2 8
+s228::8p2e10 |- ( 8 + 2 ) = ; 1 0
+s229:s63,s218,s63,s227,s74,s15,s228:decaddci |- ( ; 2 8 + 2 ) = ; 3 0
+s230:s226,s229:eqtri |- ( 2 + ; 2 8 ) = ; 3 0
+s231:s223,s230:breqtri |- 2 <_ ; 3 0
+s232::elfz2nn0 |- ( 2 e. ( 0 ... ; 3 0 ) <-> ( 2 e. NN0 /\ ; 3 0 e. NN0 /\ 2 <_ ; 3 0 ) )
+s233:s63,s17,s231,s232:mpbir3an |- 2 e. ( 0 ... ; 3 0 )
+s234:s233:a1i |- ( ph -> 2 e. ( 0 ... ; 3 0 ) )
+s235:s6,s234:sseldd |- ( ph -> 2 e. A )
+s236:s235,s7:jca |- ( ph -> ( 2 e. A /\ A C_ NN0 ) )
+s237:s215,s236:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 2 e. A /\ A C_ NN0 ) ) )
+s238:s214,s237:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 2 e. A /\ A C_ NN0 ) ) ) )
+i239::t15ap
+s240:s238,i239:syl |- ( ph -> ( ( ( TMLab ` W ) ` 2 ) = ( TMLab ` ( W ++ <" 2 "> ) ) /\ ( W ++ <" 2 "> ) e. Word A /\ ( ( # ` ( W ++ <" 2 "> ) ) + 1 ) <_ ; 3 0 ) )
+s241:s240:simp1d |- ( ph -> ( ( TMLab ` W ) ` 2 ) = ( TMLab ` ( W ++ <" 2 "> ) ) )
+s242:s240:simp2d |- ( ph -> ( W ++ <" 2 "> ) e. Word A )
+s243:s240:simp3d |- ( ph -> ( ( # ` ( W ++ <" 2 "> ) ) + 1 ) <_ ; 3 0 )
+s244:s213,s241:eqtrd |- ( ph -> ( P ` 2 ) = ( TMLab ` ( W ++ <" 2 "> ) ) )
+i245::tmwalks1
+s246:s3,h5,s235,i245:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 2 "> ) ) = ( ( R TMWalk W ) ` 2 ) )
+s247:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 2 ) = ( ( TMnpow2 K J I I' T P E ) ` 2 ) )
+s248::simpr |- ( ( ph /\ j = 2 ) -> j = 2 )
+i249::eqeq1
+s250:s248,i249:syl |- ( ( ph /\ j = 2 ) -> ( j = 0 <-> 2 = 0 ) )
+s251::2pos |- 0 < 2
+s252:s122,s251:ltneii |- 0 =/= 2
+s253:s252:necomi |- 2 =/= 0
+s254:s253:neii |- -. 2 = 0
+s255:s254:a1i |- ( ( ph /\ j = 2 ) -> -. 2 = 0 )
+s256:s255,s250:mtbird |- ( ( ph /\ j = 2 ) -> -. j = 0 )
+s257:s256:iffalsed |- ( ( ph /\ j = 2 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) )
+i258::eqeq1
+s259:s248,i258:syl |- ( ( ph /\ j = 2 ) -> ( j = 1 <-> 2 = 1 ) )
+i260::ltaddpos
+s261:s62,s62,i260:mp2an |- ( 0 < 1 <-> 1 < ( 1 + 1 ) )
+s262:s121,s261:mpbi |- 1 < ( 1 + 1 )
+s263:s262,s10:breqtri |- 1 < 2
+s264:s62,s263:ltneii |- 1 =/= 2
+s265:s264:necomi |- 2 =/= 1
+s266:s265:neii |- -. 2 = 1
+s267:s266:a1i |- ( ( ph /\ j = 2 ) -> -. 2 = 1 )
+s268:s267,s259:mtbird |- ( ( ph /\ j = 2 ) -> -. j = 1 )
+s269:s268:iffalsed |- ( ( ph /\ j = 2 ) -> if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+s270:s248:iftrued |- ( ( ph /\ j = 2 ) -> if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. )
+s271:s257,s269:eqtrd |- ( ( ph /\ j = 2 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+s272:s271,s270:eqtrd |- ( ( ph /\ j = 2 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. )
+s273:s63:a1i |- ( ph -> 2 e. NN0 )
+s274::opex |- <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. e. _V
+s275:s274:a1i |- ( ph -> <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. e. _V )
+s276:s36,s272,s273,s275:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 2 ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. )
+s277:s246,s247,s276:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 2 "> ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. )
+s278::2oex |- 2o e. _V
+s279:s278:a1i |- ( ph -> 2o e. _V )
+s280::simpr |- ( ( ph /\ u e. TMSt ) -> u e. TMSt )
+s281::0el2o |- (/) e. 2o
+s282:s281:a1i |- ( ( ph /\ u e. TMSt ) -> (/) e. 2o )
+s283:s135:a1i |- ( ( ph /\ u e. TMSt ) -> 1o e. 2o )
+s284:s282,s283:ifcld |- ( ( ph /\ u e. TMSt ) -> if ( ( TMfl ` u ) = 1o , (/) , 1o ) e. 2o )
+s285:s284:ralrimiva |- ( ph -> A. u e. TMSt if ( ( TMfl ` u ) = 1o , (/) , 1o ) e. 2o )
+i286::tmcmapty
+s287:s5,s279,s285,i286:syl3anc |- ( ph -> ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) e. ( 2o ^m ( 2nd ` T ) ) )
+s288:h7:fveq1d |- ( ph -> ( P ` 5 ) = ( ( TMLab ` W ) ` 5 ) )
+s289:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s290:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+s291::5nn0 |- 5 e. NN0
+i292::addge01
+s293::5re |- 5 e. RR
+s294:s63,s291:deccl |- ; 2 5 e. NN0
+s295:s294:nn0rei |- ; 2 5 e. RR
+s296:s293,s295,i292:mp2an |- ( 0 <_ ; 2 5 <-> 5 <_ ( 5 + ; 2 5 ) )
+s297:s294:nn0ge0i |- 0 <_ ; 2 5
+s298:s297,s296:mpbi |- 5 <_ ( 5 + ; 2 5 )
+s299::5cn |- 5 e. CC
+s300:s294:nn0cni |- ; 2 5 e. CC
+s301:s299,s300:addcomi |- ( 5 + ; 2 5 ) = ( ; 2 5 + 5 )
+s302::eqid |- ; 2 5 = ; 2 5
+s303::5p5e10 |- ( 5 + 5 ) = ; 1 0
+s304:s63,s291,s291,s302,s74,s15,s303:decaddci |- ( ; 2 5 + 5 ) = ; 3 0
+s305:s301,s304:eqtri |- ( 5 + ; 2 5 ) = ; 3 0
+s306:s298,s305:breqtri |- 5 <_ ; 3 0
+s307::elfz2nn0 |- ( 5 e. ( 0 ... ; 3 0 ) <-> ( 5 e. NN0 /\ ; 3 0 e. NN0 /\ 5 <_ ; 3 0 ) )
+s308:s291,s17,s306,s307:mpbir3an |- 5 e. ( 0 ... ; 3 0 )
+s309:s308:a1i |- ( ph -> 5 e. ( 0 ... ; 3 0 ) )
+s310:s6,s309:sseldd |- ( ph -> 5 e. A )
+s311:s310,s7:jca |- ( ph -> ( 5 e. A /\ A C_ NN0 ) )
+s312:s290,s311:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 5 e. A /\ A C_ NN0 ) ) )
+s313:s289,s312:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 5 e. A /\ A C_ NN0 ) ) ) )
+i314::t15ap
+s315:s313,i314:syl |- ( ph -> ( ( ( TMLab ` W ) ` 5 ) = ( TMLab ` ( W ++ <" 5 "> ) ) /\ ( W ++ <" 5 "> ) e. Word A /\ ( ( # ` ( W ++ <" 5 "> ) ) + 1 ) <_ ; 3 0 ) )
+s316:s315:simp1d |- ( ph -> ( ( TMLab ` W ) ` 5 ) = ( TMLab ` ( W ++ <" 5 "> ) ) )
+s317:s315:simp2d |- ( ph -> ( W ++ <" 5 "> ) e. Word A )
+s318:s315:simp3d |- ( ph -> ( ( # ` ( W ++ <" 5 "> ) ) + 1 ) <_ ; 3 0 )
+s319:s288,s316:eqtrd |- ( ph -> ( P ` 5 ) = ( TMLab ` ( W ++ <" 5 "> ) ) )
+s320:s319:fveq1d |- ( ph -> ( ( P ` 5 ) ` 0 ) = ( ( TMLab ` ( W ++ <" 5 "> ) ) ` 0 ) )
+s321:s317,s318:jca |- ( ph -> ( ( W ++ <" 5 "> ) e. Word A /\ ( ( # ` ( W ++ <" 5 "> ) ) + 1 ) <_ ; 3 0 ) )
+s322:s39,s180:jca |- ( ph -> ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) )
+s323:s22,s7:jca |- ( ph -> ( 0 e. A /\ A C_ NN0 ) )
+s324:s322,s323:jca |- ( ph -> ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) )
+s325:s321,s324:jca |- ( ph -> ( ( ( W ++ <" 5 "> ) e. Word A /\ ( ( # ` ( W ++ <" 5 "> ) ) + 1 ) <_ ; 3 0 ) /\ ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) ) )
+i326::t15ap
+s327:s325,i326:syl |- ( ph -> ( ( ( TMLab ` ( W ++ <" 5 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) /\ ( ( W ++ <" 5 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 ) )
+s328:s327:simp1d |- ( ph -> ( ( TMLab ` ( W ++ <" 5 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) )
+s329:s327:simp2d |- ( ph -> ( ( W ++ <" 5 "> ) ++ <" 0 "> ) e. Word A )
+s330:s327:simp3d |- ( ph -> ( ( # ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 )
+s331:s320,s328:eqtrd |- ( ph -> ( ( P ` 5 ) ` 0 ) = ( TMLab ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) )
+s332:s329,s330,s39:3jca |- ( ph -> ( ( ( W ++ <" 5 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) )
+s333:h3,s332:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( ( W ++ <" 5 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) ) )
+i334::t15lab
+s335:s333,i334:syl |- ( ph -> ( TMLab ` ( ( W ++ <" 5 "> ) ++ <" 0 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s336:s331,s335:eqeltrd |- ( ph -> ( ( P ` 5 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) )
+s337:s98,s336:jca |- ( ph -> ( ( 2nd ` ( 1st ` T ) ) e. _V /\ ( ( P ` 5 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) ) )
+i338::t15cst
+s339:s337,i338:syl |- ( ph -> ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) )
+i340::tm2goto
+s341:s2,s339,i340:syl2anc |- ( ph -> <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. e. ( TM2Stmt ` T ) )
+s342:h7:fveq1d |- ( ph -> ( P ` 7 ) = ( ( TMLab ` W ) ` 7 ) )
+s343:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s344:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+s345::7nn0 |- 7 e. NN0
+i346::addge01
+s347::7re |- 7 e. RR
+s348:s63,s16:deccl |- ; 2 3 e. NN0
+s349:s348:nn0rei |- ; 2 3 e. RR
+s350:s347,s349,i346:mp2an |- ( 0 <_ ; 2 3 <-> 7 <_ ( 7 + ; 2 3 ) )
+s351:s348:nn0ge0i |- 0 <_ ; 2 3
+s352:s351,s350:mpbi |- 7 <_ ( 7 + ; 2 3 )
+s353::7cn |- 7 e. CC
+s354:s348:nn0cni |- ; 2 3 e. CC
+s355:s353,s354:addcomi |- ( 7 + ; 2 3 ) = ( ; 2 3 + 7 )
+s356::eqid |- ; 2 3 = ; 2 3
+s357::3cn |- 3 e. CC
+s358:s357,s353:addcomi |- ( 3 + 7 ) = ( 7 + 3 )
+s359::7p3e10 |- ( 7 + 3 ) = ; 1 0
+s360:s358,s359:eqtri |- ( 3 + 7 ) = ; 1 0
+s361:s63,s16,s345,s356,s74,s15,s360:decaddci |- ( ; 2 3 + 7 ) = ; 3 0
+s362:s355,s361:eqtri |- ( 7 + ; 2 3 ) = ; 3 0
+s363:s352,s362:breqtri |- 7 <_ ; 3 0
+s364::elfz2nn0 |- ( 7 e. ( 0 ... ; 3 0 ) <-> ( 7 e. NN0 /\ ; 3 0 e. NN0 /\ 7 <_ ; 3 0 ) )
+s365:s345,s17,s363,s364:mpbir3an |- 7 e. ( 0 ... ; 3 0 )
+s366:s365:a1i |- ( ph -> 7 e. ( 0 ... ; 3 0 ) )
+s367:s6,s366:sseldd |- ( ph -> 7 e. A )
+s368:s367,s7:jca |- ( ph -> ( 7 e. A /\ A C_ NN0 ) )
+s369:s344,s368:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 7 e. A /\ A C_ NN0 ) ) )
+s370:s343,s369:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 7 e. A /\ A C_ NN0 ) ) ) )
+i371::t15ap
+s372:s370,i371:syl |- ( ph -> ( ( ( TMLab ` W ) ` 7 ) = ( TMLab ` ( W ++ <" 7 "> ) ) /\ ( W ++ <" 7 "> ) e. Word A /\ ( ( # ` ( W ++ <" 7 "> ) ) + 1 ) <_ ; 3 0 ) )
+s373:s372:simp1d |- ( ph -> ( ( TMLab ` W ) ` 7 ) = ( TMLab ` ( W ++ <" 7 "> ) ) )
+s374:s372:simp2d |- ( ph -> ( W ++ <" 7 "> ) e. Word A )
+s375:s372:simp3d |- ( ph -> ( ( # ` ( W ++ <" 7 "> ) ) + 1 ) <_ ; 3 0 )
+s376:s342,s373:eqtrd |- ( ph -> ( P ` 7 ) = ( TMLab ` ( W ++ <" 7 "> ) ) )
+s377:s376:fveq1d |- ( ph -> ( ( P ` 7 ) ` 0 ) = ( ( TMLab ` ( W ++ <" 7 "> ) ) ` 0 ) )
+s378:s374,s375:jca |- ( ph -> ( ( W ++ <" 7 "> ) e. Word A /\ ( ( # ` ( W ++ <" 7 "> ) ) + 1 ) <_ ; 3 0 ) )
+s379:s39,s180:jca |- ( ph -> ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) )
+s380:s22,s7:jca |- ( ph -> ( 0 e. A /\ A C_ NN0 ) )
+s381:s379,s380:jca |- ( ph -> ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) )
+s382:s378,s381:jca |- ( ph -> ( ( ( W ++ <" 7 "> ) e. Word A /\ ( ( # ` ( W ++ <" 7 "> ) ) + 1 ) <_ ; 3 0 ) /\ ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) ) )
+i383::t15ap
+s384:s382,i383:syl |- ( ph -> ( ( ( TMLab ` ( W ++ <" 7 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) /\ ( ( W ++ <" 7 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 ) )
+s385:s384:simp1d |- ( ph -> ( ( TMLab ` ( W ++ <" 7 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) )
+s386:s384:simp2d |- ( ph -> ( ( W ++ <" 7 "> ) ++ <" 0 "> ) e. Word A )
+s387:s384:simp3d |- ( ph -> ( ( # ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 )
+s388:s377,s385:eqtrd |- ( ph -> ( ( P ` 7 ) ` 0 ) = ( TMLab ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) )
+s389:s386,s387,s39:3jca |- ( ph -> ( ( ( W ++ <" 7 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) )
+s390:h3,s389:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( ( W ++ <" 7 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) ) )
+i391::t15lab
+s392:s390,i391:syl |- ( ph -> ( TMLab ` ( ( W ++ <" 7 "> ) ++ <" 0 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s393:s388,s392:eqeltrd |- ( ph -> ( ( P ` 7 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) )
+s394:s98,s393:jca |- ( ph -> ( ( 2nd ` ( 1st ` T ) ) e. _V /\ ( ( P ` 7 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) ) )
+i395::t15cst
+s396:s394,i395:syl |- ( ph -> ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) )
+i397::tm2goto
+s398:s2,s396,i397:syl2anc |- ( ph -> <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. e. ( TM2Stmt ` T ) )
+s399:s341,s398:jca |- ( ph -> ( <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. e. ( TM2Stmt ` T ) /\ <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. e. ( TM2Stmt ` T ) ) )
+i400::tm2br
+s401:s2,s287,s399,i400:syl3anc |- ( ph -> <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) )
+s402:h3,h4:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) ) )
+s403:s242,s243,s13:3jca |- ( ph -> ( ( W ++ <" 2 "> ) e. Word A /\ ( ( # ` ( W ++ <" 2 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s404:s277,s401:jca |- ( ph -> ( ( R TMWalk ( W ++ <" 2 "> ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. /\ <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) ) )
+i405::t15own
+s406:s402,s403,s404,i405:syl3anc |- ( ph -> ( ( M ` ( TMLab ` ( W ++ <" 2 "> ) ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. /\ ( TMLab ` ( W ++ <" 2 "> ) ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s407:s406:simpld |- ( ph -> ( M ` ( TMLab ` ( W ++ <" 2 "> ) ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. )
+s408:s244:fveq2d |- ( ph -> ( M ` ( P ` 2 ) ) = ( M ` ( TMLab ` ( W ++ <" 2 "> ) ) ) )
+s409:s408,s407:eqtrd |- ( ph -> ( M ` ( P ` 2 ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. )
+s410:h7:fveq1d |- ( ph -> ( P ` 3 ) = ( ( TMLab ` W ) ` 3 ) )
+s411:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s412:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+i413::addge01
+s414::3re |- 3 e. RR
+s415:s63,s345:deccl |- ; 2 7 e. NN0
+s416:s415:nn0rei |- ; 2 7 e. RR
+s417:s414,s416,i413:mp2an |- ( 0 <_ ; 2 7 <-> 3 <_ ( 3 + ; 2 7 ) )
+s418:s415:nn0ge0i |- 0 <_ ; 2 7
+s419:s418,s417:mpbi |- 3 <_ ( 3 + ; 2 7 )
+s420:s415:nn0cni |- ; 2 7 e. CC
+s421:s357,s420:addcomi |- ( 3 + ; 2 7 ) = ( ; 2 7 + 3 )
+s422::eqid |- ; 2 7 = ; 2 7
+s423:s63,s345,s16,s422,s74,s15,s359:decaddci |- ( ; 2 7 + 3 ) = ; 3 0
+s424:s421,s423:eqtri |- ( 3 + ; 2 7 ) = ; 3 0
+s425:s419,s424:breqtri |- 3 <_ ; 3 0
+s426::elfz2nn0 |- ( 3 e. ( 0 ... ; 3 0 ) <-> ( 3 e. NN0 /\ ; 3 0 e. NN0 /\ 3 <_ ; 3 0 ) )
+s427:s16,s17,s425,s426:mpbir3an |- 3 e. ( 0 ... ; 3 0 )
+s428:s427:a1i |- ( ph -> 3 e. ( 0 ... ; 3 0 ) )
+s429:s6,s428:sseldd |- ( ph -> 3 e. A )
+s430:s429,s7:jca |- ( ph -> ( 3 e. A /\ A C_ NN0 ) )
+s431:s412,s430:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 3 e. A /\ A C_ NN0 ) ) )
+s432:s411,s431:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 3 e. A /\ A C_ NN0 ) ) ) )
+i433::t15ap
+s434:s432,i433:syl |- ( ph -> ( ( ( TMLab ` W ) ` 3 ) = ( TMLab ` ( W ++ <" 3 "> ) ) /\ ( W ++ <" 3 "> ) e. Word A /\ ( ( # ` ( W ++ <" 3 "> ) ) + 1 ) <_ ; 3 0 ) )
+s435:s434:simp1d |- ( ph -> ( ( TMLab ` W ) ` 3 ) = ( TMLab ` ( W ++ <" 3 "> ) ) )
+s436:s434:simp2d |- ( ph -> ( W ++ <" 3 "> ) e. Word A )
+s437:s434:simp3d |- ( ph -> ( ( # ` ( W ++ <" 3 "> ) ) + 1 ) <_ ; 3 0 )
+s438:s410,s435:eqtrd |- ( ph -> ( P ` 3 ) = ( TMLab ` ( W ++ <" 3 "> ) ) )
+i439::tmwalks1
+s440:s3,h5,s429,i439:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 3 "> ) ) = ( ( R TMWalk W ) ` 3 ) )
+s441:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 3 ) = ( ( TMnpow2 K J I I' T P E ) ` 3 ) )
+s442::simpr |- ( ( ph /\ j = 3 ) -> j = 3 )
+i443::eqeq1
+s444:s442,i443:syl |- ( ( ph /\ j = 3 ) -> ( j = 0 <-> 3 = 0 ) )
+s445::3pos |- 0 < 3
+s446:s122,s445:ltneii |- 0 =/= 3
+s447:s446:necomi |- 3 =/= 0
+s448:s447:neii |- -. 3 = 0
+s449:s448:a1i |- ( ( ph /\ j = 3 ) -> -. 3 = 0 )
+s450:s449,s444:mtbird |- ( ( ph /\ j = 3 ) -> -. j = 0 )
+s451:s450:iffalsed |- ( ( ph /\ j = 3 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) )
+i452::eqeq1
+s453:s442,i452:syl |- ( ( ph /\ j = 3 ) -> ( j = 1 <-> 3 = 1 ) )
+i454::ltaddpos
+s455:s217,s62,i454:mp2an |- ( 0 < 2 <-> 1 < ( 1 + 2 ) )
+s456:s251,s455:mpbi |- 1 < ( 1 + 2 )
+s457::1p2e3 |- ( 1 + 2 ) = 3
+s458:s456,s457:breqtri |- 1 < 3
+s459:s62,s458:ltneii |- 1 =/= 3
+s460:s459:necomi |- 3 =/= 1
+s461:s460:neii |- -. 3 = 1
+s462:s461:a1i |- ( ( ph /\ j = 3 ) -> -. 3 = 1 )
+s463:s462,s453:mtbird |- ( ( ph /\ j = 3 ) -> -. j = 1 )
+s464:s463:iffalsed |- ( ( ph /\ j = 3 ) -> if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+i465::eqeq1
+s466:s442,i465:syl |- ( ( ph /\ j = 3 ) -> ( j = 2 <-> 3 = 2 ) )
+i467::ltaddpos
+s468:s62,s217,i467:mp2an |- ( 0 < 1 <-> 2 < ( 2 + 1 ) )
+s469:s121,s468:mpbi |- 2 < ( 2 + 1 )
+s470:s469,s74:breqtri |- 2 < 3
+s471:s217,s470:ltneii |- 2 =/= 3
+s472:s471:necomi |- 3 =/= 2
+s473:s472:neii |- -. 3 = 2
+s474:s473:a1i |- ( ( ph /\ j = 3 ) -> -. 3 = 2 )
+s475:s474,s466:mtbird |- ( ( ph /\ j = 3 ) -> -. j = 2 )
+s476:s475:iffalsed |- ( ( ph /\ j = 3 ) -> if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+s477:s442:iftrued |- ( ( ph /\ j = 3 ) -> if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. )
+s478:s451,s464:eqtrd |- ( ( ph /\ j = 3 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+s479:s478,s476:eqtrd |- ( ( ph /\ j = 3 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+s480:s479,s477:eqtrd |- ( ( ph /\ j = 3 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. )
+s481:s16:a1i |- ( ph -> 3 e. NN0 )
+s482::opex |- <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. e. _V
+s483:s482:a1i |- ( ph -> <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. e. _V )
+s484:s36,s480,s481,s483:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 3 ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. )
+s485:s440,s441,s484:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 3 "> ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. )
+i486::bitgamma
+s487:s281,i486:ax-mp |- <. 1 , (/) >. e. Gamma'
+s488:s487:a1i |- ( ph -> <. 1 , (/) >. e. Gamma' )
+s489:s50,s488:jca |- ( ph -> ( Gamma' e. _V /\ <. 1 , (/) >. e. Gamma' ) )
+i490::t15cst
+s491:s489,i490:syl |- ( ph -> ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) e. ( Gamma' ^m ( 2nd ` T ) ) )
+s492:s48:oveq1d |- ( ph -> ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) = ( Gamma' ^m ( 2nd ` T ) ) )
+s493:s491,s492:eleqtrrd |- ( ph -> ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) )
+s494:h7:fveq1d |- ( ph -> ( P ` 6 ) = ( ( TMLab ` W ) ` 6 ) )
+s495:h5,h6:jca |- ( ph -> ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) )
+s496:s13,s11:jca |- ( ph -> ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) )
+i497::addge01
+s498::6re |- 6 e. RR
+s499:s63,s147:deccl |- ; 2 4 e. NN0
+s500:s499:nn0rei |- ; 2 4 e. RR
+s501:s498,s500,i497:mp2an |- ( 0 <_ ; 2 4 <-> 6 <_ ( 6 + ; 2 4 ) )
+s502:s499:nn0ge0i |- 0 <_ ; 2 4
+s503:s502,s501:mpbi |- 6 <_ ( 6 + ; 2 4 )
+s504::6cn |- 6 e. CC
+s505:s499:nn0cni |- ; 2 4 e. CC
+s506:s504,s505:addcomi |- ( 6 + ; 2 4 ) = ( ; 2 4 + 6 )
+s507::eqid |- ; 2 4 = ; 2 4
+s508:s156,s504:addcomi |- ( 4 + 6 ) = ( 6 + 4 )
+s509:s508,s160:eqtri |- ( 4 + 6 ) = ; 1 0
+s510:s63,s147,s150,s507,s74,s15,s509:decaddci |- ( ; 2 4 + 6 ) = ; 3 0
+s511:s506,s510:eqtri |- ( 6 + ; 2 4 ) = ; 3 0
+s512:s503,s511:breqtri |- 6 <_ ; 3 0
+s513::elfz2nn0 |- ( 6 e. ( 0 ... ; 3 0 ) <-> ( 6 e. NN0 /\ ; 3 0 e. NN0 /\ 6 <_ ; 3 0 ) )
+s514:s150,s17,s512,s513:mpbir3an |- 6 e. ( 0 ... ; 3 0 )
+s515:s514:a1i |- ( ph -> 6 e. ( 0 ... ; 3 0 ) )
+s516:s6,s515:sseldd |- ( ph -> 6 e. A )
+s517:s516,s7:jca |- ( ph -> ( 6 e. A /\ A C_ NN0 ) )
+s518:s496,s517:jca |- ( ph -> ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 6 e. A /\ A C_ NN0 ) ) )
+s519:s495,s518:jca |- ( ph -> ( ( W e. Word A /\ ( ( # ` W ) + 2 ) <_ ; 3 0 ) /\ ( ( 1 e. NN0 /\ ( 1 + 1 ) = 2 ) /\ ( 6 e. A /\ A C_ NN0 ) ) ) )
+i520::t15ap
+s521:s519,i520:syl |- ( ph -> ( ( ( TMLab ` W ) ` 6 ) = ( TMLab ` ( W ++ <" 6 "> ) ) /\ ( W ++ <" 6 "> ) e. Word A /\ ( ( # ` ( W ++ <" 6 "> ) ) + 1 ) <_ ; 3 0 ) )
+s522:s521:simp1d |- ( ph -> ( ( TMLab ` W ) ` 6 ) = ( TMLab ` ( W ++ <" 6 "> ) ) )
+s523:s521:simp2d |- ( ph -> ( W ++ <" 6 "> ) e. Word A )
+s524:s521:simp3d |- ( ph -> ( ( # ` ( W ++ <" 6 "> ) ) + 1 ) <_ ; 3 0 )
+s525:s494,s522:eqtrd |- ( ph -> ( P ` 6 ) = ( TMLab ` ( W ++ <" 6 "> ) ) )
+s526:s525:fveq1d |- ( ph -> ( ( P ` 6 ) ` 0 ) = ( ( TMLab ` ( W ++ <" 6 "> ) ) ` 0 ) )
+s527:s523,s524:jca |- ( ph -> ( ( W ++ <" 6 "> ) e. Word A /\ ( ( # ` ( W ++ <" 6 "> ) ) + 1 ) <_ ; 3 0 ) )
+s528:s39,s180:jca |- ( ph -> ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) )
+s529:s22,s7:jca |- ( ph -> ( 0 e. A /\ A C_ NN0 ) )
+s530:s528,s529:jca |- ( ph -> ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) )
+s531:s527,s530:jca |- ( ph -> ( ( ( W ++ <" 6 "> ) e. Word A /\ ( ( # ` ( W ++ <" 6 "> ) ) + 1 ) <_ ; 3 0 ) /\ ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( 0 e. A /\ A C_ NN0 ) ) ) )
+i532::t15ap
+s533:s531,i532:syl |- ( ph -> ( ( ( TMLab ` ( W ++ <" 6 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) /\ ( ( W ++ <" 6 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 ) )
+s534:s533:simp1d |- ( ph -> ( ( TMLab ` ( W ++ <" 6 "> ) ) ` 0 ) = ( TMLab ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) )
+s535:s533:simp2d |- ( ph -> ( ( W ++ <" 6 "> ) ++ <" 0 "> ) e. Word A )
+s536:s533:simp3d |- ( ph -> ( ( # ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 )
+s537:s526,s534:eqtrd |- ( ph -> ( ( P ` 6 ) ` 0 ) = ( TMLab ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) )
+s538:s535,s536,s39:3jca |- ( ph -> ( ( ( W ++ <" 6 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) )
+s539:h3,s538:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( ( W ++ <" 6 "> ) ++ <" 0 "> ) e. Word A /\ ( ( # ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) ) )
+i540::t15lab
+s541:s539,i540:syl |- ( ph -> ( TMLab ` ( ( W ++ <" 6 "> ) ++ <" 0 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s542:s537,s541:eqeltrd |- ( ph -> ( ( P ` 6 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) )
+s543:s98,s542:jca |- ( ph -> ( ( 2nd ` ( 1st ` T ) ) e. _V /\ ( ( P ` 6 ) ` 0 ) e. ( 2nd ` ( 1st ` T ) ) ) )
+i544::t15cst
+s545:s543,i544:syl |- ( ph -> ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) )
+i546::tm2goto
+s547:s2,s545,i546:syl2anc |- ( ph -> <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. e. ( TM2Stmt ` T ) )
+s548:s47,s493:jca |- ( ph -> ( J e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` J ) ^m ( 2nd ` T ) ) ) )
+i549::tm2push
+s550:s2,s548,s547,i549:syl3anc |- ( ph -> <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) )
+s551:h3,h4:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) ) )
+s552:s436,s437,s13:3jca |- ( ph -> ( ( W ++ <" 3 "> ) e. Word A /\ ( ( # ` ( W ++ <" 3 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s553:s485,s550:jca |- ( ph -> ( ( R TMWalk ( W ++ <" 3 "> ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. /\ <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. e. ( TM2Stmt ` T ) ) )
+i554::t15own
+s555:s551,s552,s553,i554:syl3anc |- ( ph -> ( ( M ` ( TMLab ` ( W ++ <" 3 "> ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. /\ ( TMLab ` ( W ++ <" 3 "> ) ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s556:s555:simpld |- ( ph -> ( M ` ( TMLab ` ( W ++ <" 3 "> ) ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. )
+s557:s438:fveq2d |- ( ph -> ( M ` ( P ` 3 ) ) = ( M ` ( TMLab ` ( W ++ <" 3 "> ) ) ) )
+s558:s557,s556:eqtrd |- ( ph -> ( M ` ( P ` 3 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. )
+s559:s409,s558:jca |- ( ph -> ( ( M ` ( P ` 2 ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. /\ ( M ` ( P ` 3 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. ) )
+s560:s212,s559:jca |- ( ph -> ( ( ( M ` ( P ` 0 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. /\ ( M ` ( P ` 1 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. ) /\ ( ( M ` ( P ` 2 ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. /\ ( M ` ( P ` 3 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. ) ) )
+s561:h7:fveq1d |- ( ph -> ( P ` 4 ) = ( ( TMLab ` W ) ` 4 ) )
+s562:s561,s173:eqtrd |- ( ph -> ( P ` 4 ) = ( TMLab ` ( W ++ <" 4 "> ) ) )
+s563:s242,s243,s13:3jca |- ( ph -> ( ( W ++ <" 2 "> ) e. Word A /\ ( ( # ` ( W ++ <" 2 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s564:h3,s563:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( W ++ <" 2 "> ) e. Word A /\ ( ( # ` ( W ++ <" 2 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) ) )
+i565::t15lab
+s566:s564,i565:syl |- ( ph -> ( TMLab ` ( W ++ <" 2 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s567:s244,s566:eqeltrd |- ( ph -> ( P ` 2 ) e. ( 2nd ` ( 1st ` T ) ) )
+i568::tmwalks1
+s569:s3,h5,s167,i568:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 4 "> ) ) = ( ( R TMWalk W ) ` 4 ) )
+s570:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 4 ) = ( ( TMnpow2 K J I I' T P E ) ` 4 ) )
+s571::simpr |- ( ( ph /\ j = 4 ) -> j = 4 )
+i572::eqeq1
+s573:s571,i572:syl |- ( ( ph /\ j = 4 ) -> ( j = 0 <-> 4 = 0 ) )
+s574::4pos |- 0 < 4
+s575:s122,s574:ltneii |- 0 =/= 4
+s576:s575:necomi |- 4 =/= 0
+s577:s576:neii |- -. 4 = 0
+s578:s577:a1i |- ( ( ph /\ j = 4 ) -> -. 4 = 0 )
+s579:s578,s573:mtbird |- ( ( ph /\ j = 4 ) -> -. j = 0 )
+s580:s579:iffalsed |- ( ( ph /\ j = 4 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) )
+i581::eqeq1
+s582:s571,i581:syl |- ( ( ph /\ j = 4 ) -> ( j = 1 <-> 4 = 1 ) )
+i583::ltaddpos
+s584:s414,s62,i583:mp2an |- ( 0 < 3 <-> 1 < ( 1 + 3 ) )
+s585:s445,s584:mpbi |- 1 < ( 1 + 3 )
+s586:s70,s357:addcomi |- ( 1 + 3 ) = ( 3 + 1 )
+s587::3p1e4 |- ( 3 + 1 ) = 4
+s588:s586,s587:eqtri |- ( 1 + 3 ) = 4
+s589:s585,s588:breqtri |- 1 < 4
+s590:s62,s589:ltneii |- 1 =/= 4
+s591:s590:necomi |- 4 =/= 1
+s592:s591:neii |- -. 4 = 1
+s593:s592:a1i |- ( ( ph /\ j = 4 ) -> -. 4 = 1 )
+s594:s593,s582:mtbird |- ( ( ph /\ j = 4 ) -> -. j = 1 )
+s595:s594:iffalsed |- ( ( ph /\ j = 4 ) -> if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+i596::eqeq1
+s597:s571,i596:syl |- ( ( ph /\ j = 4 ) -> ( j = 2 <-> 4 = 2 ) )
+i598::ltaddpos
+s599:s217,s217,i598:mp2an |- ( 0 < 2 <-> 2 < ( 2 + 2 ) )
+s600:s251,s599:mpbi |- 2 < ( 2 + 2 )
+s601::2p2e4 |- ( 2 + 2 ) = 4
+s602:s600,s601:breqtri |- 2 < 4
+s603:s217,s602:ltneii |- 2 =/= 4
+s604:s603:necomi |- 4 =/= 2
+s605:s604:neii |- -. 4 = 2
+s606:s605:a1i |- ( ( ph /\ j = 4 ) -> -. 4 = 2 )
+s607:s606,s597:mtbird |- ( ( ph /\ j = 4 ) -> -. j = 2 )
+s608:s607:iffalsed |- ( ( ph /\ j = 4 ) -> if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+i609::eqeq1
+s610:s571,i609:syl |- ( ( ph /\ j = 4 ) -> ( j = 3 <-> 4 = 3 ) )
+i611::ltaddpos
+s612:s62,s414,i611:mp2an |- ( 0 < 1 <-> 3 < ( 3 + 1 ) )
+s613:s121,s612:mpbi |- 3 < ( 3 + 1 )
+s614:s613,s587:breqtri |- 3 < 4
+s615:s414,s614:ltneii |- 3 =/= 4
+s616:s615:necomi |- 4 =/= 3
+s617:s616:neii |- -. 4 = 3
+s618:s617:a1i |- ( ( ph /\ j = 4 ) -> -. 4 = 3 )
+s619:s618,s610:mtbird |- ( ( ph /\ j = 4 ) -> -. j = 3 )
+s620:s619:iffalsed |- ( ( ph /\ j = 4 ) -> if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+s621:s571:iftrued |- ( ( ph /\ j = 4 ) -> if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) = ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) )
+s622:s580,s595:eqtrd |- ( ( ph /\ j = 4 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+s623:s622,s608:eqtrd |- ( ( ph /\ j = 4 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+s624:s623,s620:eqtrd |- ( ( ph /\ j = 4 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+s625:s624,s621:eqtrd |- ( ( ph /\ j = 4 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) )
+s626:s147:a1i |- ( ph -> 4 e. NN0 )
+s627::df-tmniz |- ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) = ( j e. NN0 |-> if ( j = 0 , <. 0 , <. I , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. I , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 1 ) } ) >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 2 ) } ) >. >. >. >. >. >. >. , if ( j = 2 , <. 0 , <. K , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 3 ) } ) >. >. >. >. , if ( j = 3 , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , 1o >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 4 ) } ) >. >. >. , <. 2 , <. I , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. K , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , if ( ( ( TMfl ` u ) = 1o /\ -. ( bitOf ` ( TMra ` u ) ) = 1o ) , 1o , (/) ) >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 4 ) } ) >. >. >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( P ` 2 ) } ) >. >. >. >. >. >. >. ) ) ) ) )
+s628::nn0ex |- NN0 e. _V
+s629:s628:mptex |- ( j e. NN0 |-> if ( j = 0 , <. 0 , <. I , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. I , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 1 ) } ) >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 2 ) } ) >. >. >. >. >. >. >. , if ( j = 2 , <. 0 , <. K , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 3 ) } ) >. >. >. >. , if ( j = 3 , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , 1o >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 4 ) } ) >. >. >. , <. 2 , <. I , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. K , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , if ( ( ( TMfl ` u ) = 1o /\ -. ( bitOf ` ( TMra ` u ) ) = 1o ) , 1o , (/) ) >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 4 ) } ) >. >. >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( P ` 2 ) } ) >. >. >. >. >. >. >. ) ) ) ) ) e. _V
+s630:s627,s629:eqeltri |- ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) e. _V
+s631:s630:a1i |- ( ph -> ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) e. _V )
+s632:s36,s625,s626,s631:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 4 ) = ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) )
+s633:s569,s570,s632:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 4 "> ) ) = ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) )
+s634:h1,h2,h3,h4,s174,s175,s562,s567,s633,h10,h12:t15kiz |- ( ph -> TMIiz K I T M ( P ` 4 ) ( P ` 2 ) )
+s635:h7:fveq1d |- ( ph -> ( P ` 5 ) = ( ( TMLab ` W ) ` 5 ) )
+s636:s635,s316:eqtrd |- ( ph -> ( P ` 5 ) = ( TMLab ` ( W ++ <" 5 "> ) ) )
+s637:s436,s437,s13:3jca |- ( ph -> ( ( W ++ <" 3 "> ) e. Word A /\ ( ( # ` ( W ++ <" 3 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s638:h3,s637:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( W ++ <" 3 "> ) e. Word A /\ ( ( # ` ( W ++ <" 3 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) ) )
+i639::t15lab
+s640:s638,i639:syl |- ( ph -> ( TMLab ` ( W ++ <" 3 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s641:s438,s640:eqeltrd |- ( ph -> ( P ` 3 ) e. ( 2nd ` ( 1st ` T ) ) )
+i642::tmwalks1
+s643:s3,h5,s310,i642:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 5 "> ) ) = ( ( R TMWalk W ) ` 5 ) )
+s644:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 5 ) = ( ( TMnpow2 K J I I' T P E ) ` 5 ) )
+s645::simpr |- ( ( ph /\ j = 5 ) -> j = 5 )
+i646::eqeq1
+s647:s645,i646:syl |- ( ( ph /\ j = 5 ) -> ( j = 0 <-> 5 = 0 ) )
+s648::5pos |- 0 < 5
+s649:s122,s648:ltneii |- 0 =/= 5
+s650:s649:necomi |- 5 =/= 0
+s651:s650:neii |- -. 5 = 0
+s652:s651:a1i |- ( ( ph /\ j = 5 ) -> -. 5 = 0 )
+s653:s652,s647:mtbird |- ( ( ph /\ j = 5 ) -> -. j = 0 )
+s654:s653:iffalsed |- ( ( ph /\ j = 5 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) )
+i655::eqeq1
+s656:s645,i655:syl |- ( ( ph /\ j = 5 ) -> ( j = 1 <-> 5 = 1 ) )
+i657::ltaddpos
+s658:s149,s62,i657:mp2an |- ( 0 < 4 <-> 1 < ( 1 + 4 ) )
+s659:s574,s658:mpbi |- 1 < ( 1 + 4 )
+s660:s70,s156:addcomi |- ( 1 + 4 ) = ( 4 + 1 )
+s661::4p1e5 |- ( 4 + 1 ) = 5
+s662:s660,s661:eqtri |- ( 1 + 4 ) = 5
+s663:s659,s662:breqtri |- 1 < 5
+s664:s62,s663:ltneii |- 1 =/= 5
+s665:s664:necomi |- 5 =/= 1
+s666:s665:neii |- -. 5 = 1
+s667:s666:a1i |- ( ( ph /\ j = 5 ) -> -. 5 = 1 )
+s668:s667,s656:mtbird |- ( ( ph /\ j = 5 ) -> -. j = 1 )
+s669:s668:iffalsed |- ( ( ph /\ j = 5 ) -> if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+i670::eqeq1
+s671:s645,i670:syl |- ( ( ph /\ j = 5 ) -> ( j = 2 <-> 5 = 2 ) )
+i672::ltaddpos
+s673:s414,s217,i672:mp2an |- ( 0 < 3 <-> 2 < ( 2 + 3 ) )
+s674:s445,s673:mpbi |- 2 < ( 2 + 3 )
+s675:s224,s357:addcomi |- ( 2 + 3 ) = ( 3 + 2 )
+s676::3p2e5 |- ( 3 + 2 ) = 5
+s677:s675,s676:eqtri |- ( 2 + 3 ) = 5
+s678:s674,s677:breqtri |- 2 < 5
+s679:s217,s678:ltneii |- 2 =/= 5
+s680:s679:necomi |- 5 =/= 2
+s681:s680:neii |- -. 5 = 2
+s682:s681:a1i |- ( ( ph /\ j = 5 ) -> -. 5 = 2 )
+s683:s682,s671:mtbird |- ( ( ph /\ j = 5 ) -> -. j = 2 )
+s684:s683:iffalsed |- ( ( ph /\ j = 5 ) -> if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+i685::eqeq1
+s686:s645,i685:syl |- ( ( ph /\ j = 5 ) -> ( j = 3 <-> 5 = 3 ) )
+i687::ltaddpos
+s688:s217,s414,i687:mp2an |- ( 0 < 2 <-> 3 < ( 3 + 2 ) )
+s689:s251,s688:mpbi |- 3 < ( 3 + 2 )
+s690:s689,s676:breqtri |- 3 < 5
+s691:s414,s690:ltneii |- 3 =/= 5
+s692:s691:necomi |- 5 =/= 3
+s693:s692:neii |- -. 5 = 3
+s694:s693:a1i |- ( ( ph /\ j = 5 ) -> -. 5 = 3 )
+s695:s694,s686:mtbird |- ( ( ph /\ j = 5 ) -> -. j = 3 )
+s696:s695:iffalsed |- ( ( ph /\ j = 5 ) -> if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+i697::eqeq1
+s698:s645,i697:syl |- ( ( ph /\ j = 5 ) -> ( j = 4 <-> 5 = 4 ) )
+i699::ltaddpos
+s700:s62,s149,i699:mp2an |- ( 0 < 1 <-> 4 < ( 4 + 1 ) )
+s701:s121,s700:mpbi |- 4 < ( 4 + 1 )
+s702:s701,s661:breqtri |- 4 < 5
+s703:s149,s702:ltneii |- 4 =/= 5
+s704:s703:necomi |- 5 =/= 4
+s705:s704:neii |- -. 5 = 4
+s706:s705:a1i |- ( ( ph /\ j = 5 ) -> -. 5 = 4 )
+s707:s706,s698:mtbird |- ( ( ph /\ j = 5 ) -> -. j = 4 )
+s708:s707:iffalsed |- ( ( ph /\ j = 5 ) -> if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) = if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) )
+s709:s645:iftrued |- ( ( ph /\ j = 5 ) -> if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) = ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) )
+s710:s654,s669:eqtrd |- ( ( ph /\ j = 5 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+s711:s710,s684:eqtrd |- ( ( ph /\ j = 5 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+s712:s711,s696:eqtrd |- ( ( ph /\ j = 5 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+s713:s712,s708:eqtrd |- ( ( ph /\ j = 5 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) )
+s714:s713,s709:eqtrd |- ( ( ph /\ j = 5 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) )
+s715:s291:a1i |- ( ph -> 5 e. NN0 )
+s716::df-tmnprd |- ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) = ( j e. NN0 |-> if ( j = 0 , <. 0 , <. I' , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inl ` (/) ) , 1o , (/) ) ) , <. <. 0 , <. I' , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 1 ) } ) >. >. >. >. , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inl ` 1o ) , 1o , (/) ) ) , <. <. 1 , <. K , <. TMrdEnd , <. 4 , <. TMdb , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. , <. 0 , <. K , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. >. >. >. >. >. >. >. >. >. , <. 0 , <. K , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. >. >. >. >. >. >. >. >. >. >. >. >. , <. 2 , <. I' , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. K , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( P ` 3 ) } ) >. >. >. >. >. >. >. ) ) )
+s717:s628:mptex |- ( j e. NN0 |-> if ( j = 0 , <. 0 , <. I' , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inl ` (/) ) , 1o , (/) ) ) , <. <. 0 , <. I' , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 1 ) } ) >. >. >. >. , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inl ` 1o ) , 1o , (/) ) ) , <. <. 1 , <. K , <. TMrdEnd , <. 4 , <. TMdb , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. , <. 0 , <. K , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. >. >. >. >. >. >. >. >. >. , <. 0 , <. K , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. >. >. >. >. >. >. >. >. >. >. >. >. , <. 2 , <. I' , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. K , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 2 ) } ) >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( P ` 3 ) } ) >. >. >. >. >. >. >. ) ) ) e. _V
+s718:s716,s717:eqeltri |- ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) e. _V
+s719:s718:a1i |- ( ph -> ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) e. _V )
+s720:s36,s714,s715,s719:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 5 ) = ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) )
+s721:s643,s644,s720:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 5 "> ) ) = ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) )
+s722:h1,h2,h3,h4,s317,s318,s636,s641,s721,h10,h13:t15kprd |- ( ph -> TMIprd K I' T M ( P ` 5 ) ( P ` 3 ) )
+s723:s634,s722:jca |- ( ph -> ( TMIiz K I T M ( P ` 4 ) ( P ` 2 ) /\ TMIprd K I' T M ( P ` 5 ) ( P ` 3 ) ) )
+s724:h7:fveq1d |- ( ph -> ( P ` 6 ) = ( ( TMLab ` W ) ` 6 ) )
+s725:s724,s522:eqtrd |- ( ph -> ( P ` 6 ) = ( TMLab ` ( W ++ <" 6 "> ) ) )
+i726::tmwalks1
+s727:s3,h5,s516,i726:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 6 "> ) ) = ( ( R TMWalk W ) ` 6 ) )
+s728:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 6 ) = ( ( TMnpow2 K J I I' T P E ) ` 6 ) )
+s729::simpr |- ( ( ph /\ j = 6 ) -> j = 6 )
+i730::eqeq1
+s731:s729,i730:syl |- ( ( ph /\ j = 6 ) -> ( j = 0 <-> 6 = 0 ) )
+s732::6pos |- 0 < 6
+s733:s122,s732:ltneii |- 0 =/= 6
+s734:s733:necomi |- 6 =/= 0
+s735:s734:neii |- -. 6 = 0
+s736:s735:a1i |- ( ( ph /\ j = 6 ) -> -. 6 = 0 )
+s737:s736,s731:mtbird |- ( ( ph /\ j = 6 ) -> -. j = 0 )
+s738:s737:iffalsed |- ( ( ph /\ j = 6 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) )
+i739::eqeq1
+s740:s729,i739:syl |- ( ( ph /\ j = 6 ) -> ( j = 1 <-> 6 = 1 ) )
+i741::ltaddpos
+s742:s293,s62,i741:mp2an |- ( 0 < 5 <-> 1 < ( 1 + 5 ) )
+s743:s648,s742:mpbi |- 1 < ( 1 + 5 )
+s744:s70,s299:addcomi |- ( 1 + 5 ) = ( 5 + 1 )
+s745::5p1e6 |- ( 5 + 1 ) = 6
+s746:s744,s745:eqtri |- ( 1 + 5 ) = 6
+s747:s743,s746:breqtri |- 1 < 6
+s748:s62,s747:ltneii |- 1 =/= 6
+s749:s748:necomi |- 6 =/= 1
+s750:s749:neii |- -. 6 = 1
+s751:s750:a1i |- ( ( ph /\ j = 6 ) -> -. 6 = 1 )
+s752:s751,s740:mtbird |- ( ( ph /\ j = 6 ) -> -. j = 1 )
+s753:s752:iffalsed |- ( ( ph /\ j = 6 ) -> if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+i754::eqeq1
+s755:s729,i754:syl |- ( ( ph /\ j = 6 ) -> ( j = 2 <-> 6 = 2 ) )
+i756::ltaddpos
+s757:s149,s217,i756:mp2an |- ( 0 < 4 <-> 2 < ( 2 + 4 ) )
+s758:s574,s757:mpbi |- 2 < ( 2 + 4 )
+s759:s224,s156:addcomi |- ( 2 + 4 ) = ( 4 + 2 )
+s760::4p2e6 |- ( 4 + 2 ) = 6
+s761:s759,s760:eqtri |- ( 2 + 4 ) = 6
+s762:s758,s761:breqtri |- 2 < 6
+s763:s217,s762:ltneii |- 2 =/= 6
+s764:s763:necomi |- 6 =/= 2
+s765:s764:neii |- -. 6 = 2
+s766:s765:a1i |- ( ( ph /\ j = 6 ) -> -. 6 = 2 )
+s767:s766,s755:mtbird |- ( ( ph /\ j = 6 ) -> -. j = 2 )
+s768:s767:iffalsed |- ( ( ph /\ j = 6 ) -> if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+i769::eqeq1
+s770:s729,i769:syl |- ( ( ph /\ j = 6 ) -> ( j = 3 <-> 6 = 3 ) )
+i771::ltaddpos
+s772:s414,s414,i771:mp2an |- ( 0 < 3 <-> 3 < ( 3 + 3 ) )
+s773:s445,s772:mpbi |- 3 < ( 3 + 3 )
+s774::3p3e6 |- ( 3 + 3 ) = 6
+s775:s773,s774:breqtri |- 3 < 6
+s776:s414,s775:ltneii |- 3 =/= 6
+s777:s776:necomi |- 6 =/= 3
+s778:s777:neii |- -. 6 = 3
+s779:s778:a1i |- ( ( ph /\ j = 6 ) -> -. 6 = 3 )
+s780:s779,s770:mtbird |- ( ( ph /\ j = 6 ) -> -. j = 3 )
+s781:s780:iffalsed |- ( ( ph /\ j = 6 ) -> if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+i782::eqeq1
+s783:s729,i782:syl |- ( ( ph /\ j = 6 ) -> ( j = 4 <-> 6 = 4 ) )
+i784::ltaddpos
+s785:s217,s149,i784:mp2an |- ( 0 < 2 <-> 4 < ( 4 + 2 ) )
+s786:s251,s785:mpbi |- 4 < ( 4 + 2 )
+s787:s786,s760:breqtri |- 4 < 6
+s788:s149,s787:ltneii |- 4 =/= 6
+s789:s788:necomi |- 6 =/= 4
+s790:s789:neii |- -. 6 = 4
+s791:s790:a1i |- ( ( ph /\ j = 6 ) -> -. 6 = 4 )
+s792:s791,s783:mtbird |- ( ( ph /\ j = 6 ) -> -. j = 4 )
+s793:s792:iffalsed |- ( ( ph /\ j = 6 ) -> if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) = if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) )
+i794::eqeq1
+s795:s729,i794:syl |- ( ( ph /\ j = 6 ) -> ( j = 5 <-> 6 = 5 ) )
+i796::ltaddpos
+s797:s62,s293,i796:mp2an |- ( 0 < 1 <-> 5 < ( 5 + 1 ) )
+s798:s121,s797:mpbi |- 5 < ( 5 + 1 )
+s799:s798,s745:breqtri |- 5 < 6
+s800:s293,s799:ltneii |- 5 =/= 6
+s801:s800:necomi |- 6 =/= 5
+s802:s801:neii |- -. 6 = 5
+s803:s802:a1i |- ( ( ph /\ j = 6 ) -> -. 6 = 5 )
+s804:s803,s795:mtbird |- ( ( ph /\ j = 6 ) -> -. j = 5 )
+s805:s804:iffalsed |- ( ( ph /\ j = 6 ) -> if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) = if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) )
+s806:s729:iftrued |- ( ( ph /\ j = 6 ) -> if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) = ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) )
+s807:s738,s753:eqtrd |- ( ( ph /\ j = 6 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+s808:s807,s768:eqtrd |- ( ( ph /\ j = 6 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+s809:s808,s781:eqtrd |- ( ( ph /\ j = 6 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+s810:s809,s793:eqtrd |- ( ( ph /\ j = 6 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) )
+s811:s810,s805:eqtrd |- ( ( ph /\ j = 6 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) )
+s812:s811,s806:eqtrd |- ( ( ph /\ j = 6 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) )
+s813:s150:a1i |- ( ph -> 6 e. NN0 )
+s814::df-tmniz |- ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) = ( j e. NN0 |-> if ( j = 0 , <. 0 , <. I , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. I , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 1 ) } ) >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 2 ) } ) >. >. >. >. >. >. >. , if ( j = 2 , <. 0 , <. K , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 3 ) } ) >. >. >. >. , if ( j = 3 , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , 1o >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 4 ) } ) >. >. >. , <. 2 , <. I , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. K , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , if ( ( ( TMfl ` u ) = 1o /\ -. ( bitOf ` ( TMra ` u ) ) = 1o ) , 1o , (/) ) >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 4 ) } ) >. >. >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( P ` 2 ) } ) >. >. >. >. >. >. >. ) ) ) ) )
+s815:s628:mptex |- ( j e. NN0 |-> if ( j = 0 , <. 0 , <. I , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. I , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 1 ) } ) >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 2 ) } ) >. >. >. >. >. >. >. , if ( j = 2 , <. 0 , <. K , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 3 ) } ) >. >. >. >. , if ( j = 3 , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , 1o >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 4 ) } ) >. >. >. , <. 2 , <. I , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 0 , <. K , <. ( u e. TMSt |-> <. 1 , ( bitOf ` ( TMra ` u ) ) >. ) , <. 3 , <. ( u e. TMSt |-> <. ( TMcar ` u ) , <. ( TMra ` u ) , <. ( TMrb ` u ) , <. ( TMda ` u ) , <. ( TMdb ` u ) , <. ( TMcmp ` u ) , if ( ( ( TMfl ` u ) = 1o /\ -. ( bitOf ` ( TMra ` u ) ) = 1o ) , 1o , (/) ) >. >. >. >. >. >. ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 4 ) } ) >. >. >. >. >. >. , <. 5 , ( ( 2nd ` T ) X. { ( P ` 2 ) } ) >. >. >. >. >. >. >. ) ) ) ) ) e. _V
+s816:s814,s815:eqeltri |- ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) e. _V
+s817:s816:a1i |- ( ph -> ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) e. _V )
+s818:s36,s812,s813,s817:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 6 ) = ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) )
+s819:s727,s728,s818:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 6 "> ) ) = ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) )
+s820:h1,h2,h3,h4,s523,s524,s725,s567,s819,h10,h12:t15kiz |- ( ph -> TMIiz K I T M ( P ` 6 ) ( P ` 2 ) )
+s821:h7:fveq1d |- ( ph -> ( P ` 7 ) = ( ( TMLab ` W ) ` 7 ) )
+s822:s821,s373:eqtrd |- ( ph -> ( P ` 7 ) = ( TMLab ` ( W ++ <" 7 "> ) ) )
+i823::tmwalks1
+s824:s3,h5,s367,i823:syl3anc |- ( ph -> ( R TMWalk ( W ++ <" 7 "> ) ) = ( ( R TMWalk W ) ` 7 ) )
+s825:h9:fveq1d |- ( ph -> ( ( R TMWalk W ) ` 7 ) = ( ( TMnpow2 K J I I' T P E ) ` 7 ) )
+s826::simpr |- ( ( ph /\ j = 7 ) -> j = 7 )
+i827::eqeq1
+s828:s826,i827:syl |- ( ( ph /\ j = 7 ) -> ( j = 0 <-> 7 = 0 ) )
+s829::7pos |- 0 < 7
+s830:s122,s829:ltneii |- 0 =/= 7
+s831:s830:necomi |- 7 =/= 0
+s832:s831:neii |- -. 7 = 0
+s833:s832:a1i |- ( ( ph /\ j = 7 ) -> -. 7 = 0 )
+s834:s833,s828:mtbird |- ( ( ph /\ j = 7 ) -> -. j = 0 )
+s835:s834:iffalsed |- ( ( ph /\ j = 7 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) )
+i836::eqeq1
+s837:s826,i836:syl |- ( ( ph /\ j = 7 ) -> ( j = 1 <-> 7 = 1 ) )
+i838::ltaddpos
+s839:s498,s62,i838:mp2an |- ( 0 < 6 <-> 1 < ( 1 + 6 ) )
+s840:s732,s839:mpbi |- 1 < ( 1 + 6 )
+s841:s70,s504:addcomi |- ( 1 + 6 ) = ( 6 + 1 )
+s842::6p1e7 |- ( 6 + 1 ) = 7
+s843:s841,s842:eqtri |- ( 1 + 6 ) = 7
+s844:s840,s843:breqtri |- 1 < 7
+s845:s62,s844:ltneii |- 1 =/= 7
+s846:s845:necomi |- 7 =/= 1
+s847:s846:neii |- -. 7 = 1
+s848:s847:a1i |- ( ( ph /\ j = 7 ) -> -. 7 = 1 )
+s849:s848,s837:mtbird |- ( ( ph /\ j = 7 ) -> -. j = 1 )
+s850:s849:iffalsed |- ( ( ph /\ j = 7 ) -> if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+i851::eqeq1
+s852:s826,i851:syl |- ( ( ph /\ j = 7 ) -> ( j = 2 <-> 7 = 2 ) )
+i853::ltaddpos
+s854:s293,s217,i853:mp2an |- ( 0 < 5 <-> 2 < ( 2 + 5 ) )
+s855:s648,s854:mpbi |- 2 < ( 2 + 5 )
+s856:s224,s299:addcomi |- ( 2 + 5 ) = ( 5 + 2 )
+s857::5p2e7 |- ( 5 + 2 ) = 7
+s858:s856,s857:eqtri |- ( 2 + 5 ) = 7
+s859:s855,s858:breqtri |- 2 < 7
+s860:s217,s859:ltneii |- 2 =/= 7
+s861:s860:necomi |- 7 =/= 2
+s862:s861:neii |- -. 7 = 2
+s863:s862:a1i |- ( ( ph /\ j = 7 ) -> -. 7 = 2 )
+s864:s863,s852:mtbird |- ( ( ph /\ j = 7 ) -> -. j = 2 )
+s865:s864:iffalsed |- ( ( ph /\ j = 7 ) -> if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+i866::eqeq1
+s867:s826,i866:syl |- ( ( ph /\ j = 7 ) -> ( j = 3 <-> 7 = 3 ) )
+i868::ltaddpos
+s869:s149,s414,i868:mp2an |- ( 0 < 4 <-> 3 < ( 3 + 4 ) )
+s870:s574,s869:mpbi |- 3 < ( 3 + 4 )
+s871:s357,s156:addcomi |- ( 3 + 4 ) = ( 4 + 3 )
+s872::4p3e7 |- ( 4 + 3 ) = 7
+s873:s871,s872:eqtri |- ( 3 + 4 ) = 7
+s874:s870,s873:breqtri |- 3 < 7
+s875:s414,s874:ltneii |- 3 =/= 7
+s876:s875:necomi |- 7 =/= 3
+s877:s876:neii |- -. 7 = 3
+s878:s877:a1i |- ( ( ph /\ j = 7 ) -> -. 7 = 3 )
+s879:s878,s867:mtbird |- ( ( ph /\ j = 7 ) -> -. j = 3 )
+s880:s879:iffalsed |- ( ( ph /\ j = 7 ) -> if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+i881::eqeq1
+s882:s826,i881:syl |- ( ( ph /\ j = 7 ) -> ( j = 4 <-> 7 = 4 ) )
+i883::ltaddpos
+s884:s414,s149,i883:mp2an |- ( 0 < 3 <-> 4 < ( 4 + 3 ) )
+s885:s445,s884:mpbi |- 4 < ( 4 + 3 )
+s886:s885,s872:breqtri |- 4 < 7
+s887:s149,s886:ltneii |- 4 =/= 7
+s888:s887:necomi |- 7 =/= 4
+s889:s888:neii |- -. 7 = 4
+s890:s889:a1i |- ( ( ph /\ j = 7 ) -> -. 7 = 4 )
+s891:s890,s882:mtbird |- ( ( ph /\ j = 7 ) -> -. j = 4 )
+s892:s891:iffalsed |- ( ( ph /\ j = 7 ) -> if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) = if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) )
+i893::eqeq1
+s894:s826,i893:syl |- ( ( ph /\ j = 7 ) -> ( j = 5 <-> 7 = 5 ) )
+i895::ltaddpos
+s896:s217,s293,i895:mp2an |- ( 0 < 2 <-> 5 < ( 5 + 2 ) )
+s897:s251,s896:mpbi |- 5 < ( 5 + 2 )
+s898:s897,s857:breqtri |- 5 < 7
+s899:s293,s898:ltneii |- 5 =/= 7
+s900:s899:necomi |- 7 =/= 5
+s901:s900:neii |- -. 7 = 5
+s902:s901:a1i |- ( ( ph /\ j = 7 ) -> -. 7 = 5 )
+s903:s902,s894:mtbird |- ( ( ph /\ j = 7 ) -> -. j = 5 )
+s904:s903:iffalsed |- ( ( ph /\ j = 7 ) -> if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) = if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) )
+i905::eqeq1
+s906:s826,i905:syl |- ( ( ph /\ j = 7 ) -> ( j = 6 <-> 7 = 6 ) )
+i907::ltaddpos
+s908:s62,s498,i907:mp2an |- ( 0 < 1 <-> 6 < ( 6 + 1 ) )
+s909:s121,s908:mpbi |- 6 < ( 6 + 1 )
+s910:s909,s842:breqtri |- 6 < 7
+s911:s498,s910:ltneii |- 6 =/= 7
+s912:s911:necomi |- 7 =/= 6
+s913:s912:neii |- -. 7 = 6
+s914:s913:a1i |- ( ( ph /\ j = 7 ) -> -. 7 = 6 )
+s915:s914,s906:mtbird |- ( ( ph /\ j = 7 ) -> -. j = 6 )
+s916:s915:iffalsed |- ( ( ph /\ j = 7 ) -> if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) = ( TMndrop K T ( P ` 7 ) E ) )
+s917:s835,s850:eqtrd |- ( ( ph /\ j = 7 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) )
+s918:s917,s865:eqtrd |- ( ( ph /\ j = 7 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) )
+s919:s918,s880:eqtrd |- ( ( ph /\ j = 7 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) )
+s920:s919,s892:eqtrd |- ( ( ph /\ j = 7 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) )
+s921:s920,s904:eqtrd |- ( ( ph /\ j = 7 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) )
+s922:s921,s916:eqtrd |- ( ( ph /\ j = 7 ) -> if ( j = 0 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. , if ( j = 1 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. , if ( j = 2 , <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. , if ( j = 3 , <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. , if ( j = 4 , ( TMniz K I T ( P ` 4 ) ( P ` 2 ) ) , if ( j = 5 , ( TMnprd K I' T ( P ` 5 ) ( P ` 3 ) ) , if ( j = 6 , ( TMniz K I T ( P ` 6 ) ( P ` 2 ) ) , ( TMndrop K T ( P ` 7 ) E ) ) ) ) ) ) ) ) = ( TMndrop K T ( P ` 7 ) E ) )
+s923:s345:a1i |- ( ph -> 7 e. NN0 )
+s924::df-tmndrop |- ( TMndrop K T ( P ` 7 ) E ) = ( j e. NN0 |-> <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { E } ) >. >. >. >. >. >. >. )
+s925:s628:mptex |- ( j e. NN0 |-> <. 2 , <. K , <. TMrdA , <. 4 , <. ( u e. TMSt |-> if ( ( TMra ` u ) = ( inr ` (/) ) , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { E } ) >. >. >. >. >. >. >. ) e. _V
+s926:s924,s925:eqeltri |- ( TMndrop K T ( P ` 7 ) E ) e. _V
+s927:s926:a1i |- ( ph -> ( TMndrop K T ( P ` 7 ) E ) e. _V )
+s928:s36,s922,s923,s927:fvmptd |- ( ph -> ( ( TMnpow2 K J I I' T P E ) ` 7 ) = ( TMndrop K T ( P ` 7 ) E ) )
+s929:s824,s825,s928:3eqtrd |- ( ph -> ( R TMWalk ( W ++ <" 7 "> ) ) = ( TMndrop K T ( P ` 7 ) E ) )
+s930:h1,h2,h3,h4,s374,s375,s822,h8,s929,h10:t15kdrop |- ( ph -> TMIdrop K T M ( P ` 7 ) E )
+s931:s820,s930:jca |- ( ph -> ( TMIiz K I T M ( P ` 6 ) ( P ` 2 ) /\ TMIdrop K T M ( P ` 7 ) E ) )
+s932:s723,s931:jca |- ( ph -> ( ( TMIiz K I T M ( P ` 4 ) ( P ` 2 ) /\ TMIprd K I' T M ( P ` 5 ) ( P ` 3 ) ) /\ ( TMIiz K I T M ( P ` 6 ) ( P ` 2 ) /\ TMIdrop K T M ( P ` 7 ) E ) ) )
+s933:s560,s932:jca |- ( ph -> ( ( ( ( M ` ( P ` 0 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. /\ ( M ` ( P ` 1 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. ) /\ ( ( M ` ( P ` 2 ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. /\ ( M ` ( P ` 3 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. ) ) /\ ( ( TMIiz K I T M ( P ` 4 ) ( P ` 2 ) /\ TMIprd K I' T M ( P ` 5 ) ( P ` 3 ) ) /\ ( TMIiz K I T M ( P ` 6 ) ( P ` 2 ) /\ TMIdrop K T M ( P ` 7 ) E ) ) ) )
+s934:s29,s30,s13:3jca |- ( ph -> ( ( W ++ <" 0 "> ) e. Word A /\ ( ( # ` ( W ++ <" 0 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) )
+s935:h3,s934:jca |- ( ph -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( W ++ <" 0 "> ) e. Word A /\ ( ( # ` ( W ++ <" 0 "> ) ) + 1 ) <_ ; 3 0 /\ 1 e. NN0 ) ) )
+i936::t15lab
+s937:s935,i936:syl |- ( ph -> ( TMLab ` ( W ++ <" 0 "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s938:s31,s937:eqeltrd |- ( ph -> ( P ` 0 ) e. ( 2nd ` ( 1st ` T ) ) )
+s939:s938,s96:jca |- ( ph -> ( ( P ` 0 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 1 ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s940:s567,s641:jca |- ( ph -> ( ( P ` 2 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 3 ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s941:s939,s940:jca |- ( ph -> ( ( ( P ` 0 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 1 ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( P ` 2 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 3 ) e. ( 2nd ` ( 1st ` T ) ) ) ) )
+s942:s933,s941:jca |- ( ph -> ( ( ( ( ( M ` ( P ` 0 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. /\ ( M ` ( P ` 1 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. ) /\ ( ( M ` ( P ` 2 ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. /\ ( M ` ( P ` 3 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. ) ) /\ ( ( TMIiz K I T M ( P ` 4 ) ( P ` 2 ) /\ TMIprd K I' T M ( P ` 5 ) ( P ` 3 ) ) /\ ( TMIiz K I T M ( P ` 6 ) ( P ` 2 ) /\ TMIdrop K T M ( P ` 7 ) E ) ) ) /\ ( ( ( P ` 0 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 1 ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( P ` 2 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 3 ) e. ( 2nd ` ( 1st ` T ) ) ) ) ) )
+s943::df-tmipow2 |- ( TMIpow2 K J I I' T M P E <-> ( ( ( ( ( M ` ( P ` 0 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { 4 } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` 1 ) } ) >. >. >. >. /\ ( M ` ( P ` 1 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , 1o >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 4 ) ` 0 ) } ) >. >. >. >. ) /\ ( ( M ` ( P ` 2 ) ) = <. 4 , <. ( u e. TMSt |-> if ( ( TMfl ` u ) = 1o , (/) , 1o ) ) , <. <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 5 ) ` 0 ) } ) >. , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 7 ) ` 0 ) } ) >. >. >. >. /\ ( M ` ( P ` 3 ) ) = <. 0 , <. J , <. ( ( 2nd ` T ) X. { <. 1 , (/) >. } ) , <. 5 , ( ( 2nd ` T ) X. { ( ( P ` 6 ) ` 0 ) } ) >. >. >. >. ) ) /\ ( ( TMIiz K I T M ( P ` 4 ) ( P ` 2 ) /\ TMIprd K I' T M ( P ` 5 ) ( P ` 3 ) ) /\ ( TMIiz K I T M ( P ` 6 ) ( P ` 2 ) /\ TMIdrop K T M ( P ` 7 ) E ) ) ) /\ ( ( ( P ` 0 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 1 ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( P ` 2 ) e. ( 2nd ` ( 1st ` T ) ) /\ ( P ` 3 ) e. ( 2nd ` ( 1st ` T ) ) ) ) ) )
+qed:s942,s943:sylibr |- ( ph -> TMIpow2 K J I I' T M P E )
+$)

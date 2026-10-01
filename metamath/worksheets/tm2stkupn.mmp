@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stkupn  LOC_AFTER=?
+
+* The value of an updated stack assignment at an index other than the updated one.  Lean: ` Function.update_of_ne ` .
+
+s1::simp1 |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> ( T e. V /\ D e. ( TM2Stk ` T ) ) )
+s2::simp2 |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) )
+s3::simp3 |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) )
+s4:s3:simpld |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> J e. dom ( 1st ` ( 1st ` T ) ) )
+s5:s3:simprd |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> J =/= K )
+i6::tm2stkupv
+s7:s1,s2,s4,i6:syl3anc |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> ( ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , Y >. } ) ` J ) = if ( J = K , Y , ( D ` J ) ) )
+s8:s5:neneqd |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> -. J = K )
+s9:s8:iffalsed |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> if ( J = K , Y , ( D ` J ) ) = ( D ` J ) )
+qed:s7,s9:eqtrd |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) ) /\ ( K e. dom ( 1st ` ( 1st ` T ) ) /\ Y e. W ) /\ ( J e. dom ( 1st ` ( 1st ` T ) ) /\ J =/= K ) ) -> ( ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , Y >. } ) ` J ) = ( D ` J ) )
+$)

@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=crectaff  LOC_AFTER=?
+
+* The point ` A + T ( Z - A ) ` , ` 0 <_ T <_ 1 ` , of the segment from the lower left corner to a point of the rectangle lies in the rectangle.
+
+s1::simpl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( A e. CC /\ B e. CC ) )
+s4::simpr |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) )
+i5::simpl
+s6:s4,i5:syl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> Z e. ( A crect B ) )
+i7::simpr
+s8:s4,i7:syl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> T e. ( 0 [,] 1 ) )
+i9::crectcnr1
+s10:s1,i9:syl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> A e. ( A crect B ) )
+i11::simpl
+s12:s3,i11:syl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> A e. CC )
+i13::crectss
+s14:s3,i13:syl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( A crect B ) C_ CC )
+s15:s14,s6:sseldd |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> Z e. CC )
+s16:s10,s6:jca |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( A e. ( A crect B ) /\ Z e. ( A crect B ) ) )
+i17::crectcvx
+s18:s3,s16,i17:syl2anc |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( A cseg Z ) C_ ( A crect B ) )
+i19::csegel
+s20:s12,s15,i19:syl2anc |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( ( A + ( T x. ( Z - A ) ) ) e. ( A cseg Z ) <-> E. t e. ( 0 [,] 1 ) ( A + ( T x. ( Z - A ) ) ) = ( A + ( t x. ( Z - A ) ) ) ) )
+s21::oveq1 |- ( t = T -> ( t x. ( Z - A ) ) = ( T x. ( Z - A ) ) )
+s22:s21:oveq2d |- ( t = T -> ( A + ( t x. ( Z - A ) ) ) = ( A + ( T x. ( Z - A ) ) ) )
+s23:s22:eqeq2d |- ( t = T -> ( ( A + ( T x. ( Z - A ) ) ) = ( A + ( t x. ( Z - A ) ) ) <-> ( A + ( T x. ( Z - A ) ) ) = ( A + ( T x. ( Z - A ) ) ) ) )
+s24::eqidd |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( A + ( T x. ( Z - A ) ) ) = ( A + ( T x. ( Z - A ) ) ) )
+s25:s23:rspcev |- ( ( T e. ( 0 [,] 1 ) /\ ( A + ( T x. ( Z - A ) ) ) = ( A + ( T x. ( Z - A ) ) ) ) -> E. t e. ( 0 [,] 1 ) ( A + ( T x. ( Z - A ) ) ) = ( A + ( t x. ( Z - A ) ) ) )
+s26:s8,s24,s25:syl2anc |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> E. t e. ( 0 [,] 1 ) ( A + ( T x. ( Z - A ) ) ) = ( A + ( t x. ( Z - A ) ) ) )
+s27:s26,s20:mpbird |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( A + ( T x. ( Z - A ) ) ) e. ( A cseg Z ) )
+qed:s18,s27:sseldd |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( ( Re ` A ) <_ ( Re ` B ) /\ ( Im ` A ) <_ ( Im ` B ) ) ) /\ ( Z e. ( A crect B ) /\ T e. ( 0 [,] 1 ) ) ) -> ( A + ( T x. ( Z - A ) ) ) e. ( A crect B ) )
+$)

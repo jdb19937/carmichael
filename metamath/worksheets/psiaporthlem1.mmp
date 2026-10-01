@@ -1,0 +1,102 @@
+$( <MM> <PROOF_ASST> THEOREM=psiaporthlem1  LOC_AFTER=?
+
+* Lemma for psiaporth: if B is an inverse of A mod Q, the divisibility Q || ( ( B x. N ) - 1 ) says exactly that N lies in the residue class of A.
+
+s1::simp11 |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> Q e. NN )
+s2::simp12 |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> A e. ZZ )
+s3::simp13 |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> B e. ZZ )
+s4::simp2 |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> Q || ( ( A x. B ) - 1 ) )
+s5::simp3 |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> N e. ZZ )
+s6:s1:nnzd |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> Q e. ZZ )
+i7::moddvds
+s8:s1,s5,s2,i7:syl3anc |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> ( ( N mod Q ) = ( A mod Q ) <-> Q || ( N - A ) ) )
+s9:s2:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> A e. ZZ )
+s10:s3:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> B e. ZZ )
+s11:s5:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> N e. ZZ )
+s12:s6:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> Q e. ZZ )
+s13:s4:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> Q || ( ( A x. B ) - 1 ) )
+s14::simpr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> Q || ( ( B x. N ) - 1 ) )
+s15:s8:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( N mod Q ) = ( A mod Q ) <-> Q || ( N - A ) ) )
+s16::1zzd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> 1 e. ZZ )
+i17::zmulcl
+s18:s10,s11,i17:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( B x. N ) e. ZZ )
+i19::zmulcl
+s20:s9,s10,i19:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( A x. B ) e. ZZ )
+i21::zsubcl
+s22:s18,s16,i21:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( B x. N ) - 1 ) e. ZZ )
+i23::zsubcl
+s24:s20,s16,i23:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( A x. B ) - 1 ) e. ZZ )
+i25::dvdsmultr2
+s26:s12,s9,s22,i25:syl3anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( Q || ( ( B x. N ) - 1 ) -> Q || ( A x. ( ( B x. N ) - 1 ) ) ) )
+s27:s14,s26:mpd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> Q || ( A x. ( ( B x. N ) - 1 ) ) )
+i28::dvdsmultr2
+s29:s12,s11,s24,i28:syl3anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( Q || ( ( A x. B ) - 1 ) -> Q || ( N x. ( ( A x. B ) - 1 ) ) ) )
+s30:s13,s29:mpd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> Q || ( N x. ( ( A x. B ) - 1 ) ) )
+i31::zmulcl
+s32:s9,s22,i31:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( A x. ( ( B x. N ) - 1 ) ) e. ZZ )
+i33::zmulcl
+s34:s11,s24,i33:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N x. ( ( A x. B ) - 1 ) ) e. ZZ )
+s35:s12,s32,s34,s27,s30:dvds2subd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> Q || ( ( A x. ( ( B x. N ) - 1 ) ) - ( N x. ( ( A x. B ) - 1 ) ) ) )
+s36:s9:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> A e. CC )
+s37:s10:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> B e. CC )
+s38:s11:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> N e. CC )
+s39::1cnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> 1 e. CC )
+s40:s18:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( B x. N ) e. CC )
+s41:s20:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( A x. B ) e. CC )
+s42:s36,s40,s39:subdid |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( A x. ( ( B x. N ) - 1 ) ) = ( ( A x. ( B x. N ) ) - ( A x. 1 ) ) )
+s43:s36:mulridd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( A x. 1 ) = A )
+s44:s43:oveq2d |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( A x. ( B x. N ) ) - ( A x. 1 ) ) = ( ( A x. ( B x. N ) ) - A ) )
+s45:s42,s44:eqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( A x. ( ( B x. N ) - 1 ) ) = ( ( A x. ( B x. N ) ) - A ) )
+s46:s38,s41,s39:subdid |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N x. ( ( A x. B ) - 1 ) ) = ( ( N x. ( A x. B ) ) - ( N x. 1 ) ) )
+s47:s38:mulridd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N x. 1 ) = N )
+s48:s47:oveq2d |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( N x. ( A x. B ) ) - ( N x. 1 ) ) = ( ( N x. ( A x. B ) ) - N ) )
+s49:s46,s48:eqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N x. ( ( A x. B ) - 1 ) ) = ( ( N x. ( A x. B ) ) - N ) )
+s50:s38,s41:mulcomd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N x. ( A x. B ) ) = ( ( A x. B ) x. N ) )
+s51:s36,s37,s38:mulassd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( A x. B ) x. N ) = ( A x. ( B x. N ) ) )
+s52:s50,s51:eqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N x. ( A x. B ) ) = ( A x. ( B x. N ) ) )
+s53:s52:oveq1d |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( N x. ( A x. B ) ) - N ) = ( ( A x. ( B x. N ) ) - N ) )
+s54:s49,s53:eqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N x. ( ( A x. B ) - 1 ) ) = ( ( A x. ( B x. N ) ) - N ) )
+s55:s36,s40:mulcld |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( A x. ( B x. N ) ) e. CC )
+s56:s45,s54:oveq12d |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( A x. ( ( B x. N ) - 1 ) ) - ( N x. ( ( A x. B ) - 1 ) ) ) = ( ( ( A x. ( B x. N ) ) - A ) - ( ( A x. ( B x. N ) ) - N ) ) )
+i57::nnncan1
+s58:s55,s36,s38,i57:syl3anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( ( A x. ( B x. N ) ) - A ) - ( ( A x. ( B x. N ) ) - N ) ) = ( N - A ) )
+s59:s56,s58:eqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( ( A x. ( ( B x. N ) - 1 ) ) - ( N x. ( ( A x. B ) - 1 ) ) ) = ( N - A ) )
+s60:s35,s59:breqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> Q || ( N - A ) )
+s61:s60,s15:mpbird |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ Q || ( ( B x. N ) - 1 ) ) -> ( N mod Q ) = ( A mod Q ) )
+s62:s2:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> A e. ZZ )
+s63:s3:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> B e. ZZ )
+s64:s5:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> N e. ZZ )
+s65:s6:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> Q e. ZZ )
+s66:s4:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> Q || ( ( A x. B ) - 1 ) )
+s67:s8:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( ( N mod Q ) = ( A mod Q ) <-> Q || ( N - A ) ) )
+s68::simpr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( N mod Q ) = ( A mod Q ) )
+s69:s68,s67:mpbid |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> Q || ( N - A ) )
+s70::1zzd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> 1 e. ZZ )
+i71::zsubcl
+s72:s64,s62,i71:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( N - A ) e. ZZ )
+i73::zmulcl
+s74:s62,s63,i73:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( A x. B ) e. ZZ )
+i75::zsubcl
+s76:s74,s70,i75:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( ( A x. B ) - 1 ) e. ZZ )
+i77::dvdsmultr2
+s78:s65,s63,s72,i77:syl3anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( Q || ( N - A ) -> Q || ( B x. ( N - A ) ) ) )
+s79:s69,s78:mpd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> Q || ( B x. ( N - A ) ) )
+i80::zmulcl
+s81:s63,s72,i80:syl2anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( B x. ( N - A ) ) e. ZZ )
+s82:s65,s81,s76,s79,s66:dvds2addd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> Q || ( ( B x. ( N - A ) ) + ( ( A x. B ) - 1 ) ) )
+s83:s62:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> A e. CC )
+s84:s63:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> B e. CC )
+s85:s64:zcnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> N e. CC )
+s86::1cnd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> 1 e. CC )
+s87:s84,s85,s83:subdid |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( B x. ( N - A ) ) = ( ( B x. N ) - ( B x. A ) ) )
+s88:s83,s84:mulcomd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( A x. B ) = ( B x. A ) )
+s89:s88:oveq1d |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( ( A x. B ) - 1 ) = ( ( B x. A ) - 1 ) )
+s90:s87,s89:oveq12d |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( ( B x. ( N - A ) ) + ( ( A x. B ) - 1 ) ) = ( ( ( B x. N ) - ( B x. A ) ) + ( ( B x. A ) - 1 ) ) )
+s91:s84,s85:mulcld |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( B x. N ) e. CC )
+s92:s84,s83:mulcld |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( B x. A ) e. CC )
+i93::npncan
+s94:s91,s92,s86,i93:syl3anc |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( ( ( B x. N ) - ( B x. A ) ) + ( ( B x. A ) - 1 ) ) = ( ( B x. N ) - 1 ) )
+s95:s90,s94:eqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> ( ( B x. ( N - A ) ) + ( ( A x. B ) - 1 ) ) = ( ( B x. N ) - 1 ) )
+s96:s82,s95:breqtrd |- ( ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) /\ ( N mod Q ) = ( A mod Q ) ) -> Q || ( ( B x. N ) - 1 ) )
+qed:s61,s96:impbida |- ( ( ( Q e. NN /\ A e. ZZ /\ B e. ZZ ) /\ Q || ( ( A x. B ) - 1 ) /\ N e. ZZ ) -> ( Q || ( ( B x. N ) - 1 ) <-> ( N mod Q ) = ( A mod Q ) ) )
+$)

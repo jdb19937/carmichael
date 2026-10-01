@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=predrestval  LOC_AFTER=?
+
+* Value of predRest: the digits of predBits L above the borrow chain.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::id |- ( l = L -> l = L )
+c1:s2:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c2:c1:oveq1d |- ( l = L -> ( ( toNat ` l ) - 1 ) = ( ( toNat ` L ) - 1 ) )
+c3:s2:fveq2d |- ( l = L -> ( borrows ` l ) = ( borrows ` L ) )
+c4:c3:oveq2d |- ( l = L -> ( 2 ^ ( borrows ` l ) ) = ( 2 ^ ( borrows ` L ) ) )
+c5:c2,c4:oveq12d |- ( l = L -> ( ( ( toNat ` l ) - 1 ) / ( 2 ^ ( borrows ` l ) ) ) = ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) )
+c6:c5:fveq2d |- ( l = L -> ( |_ ` ( ( ( toNat ` l ) - 1 ) / ( 2 ^ ( borrows ` l ) ) ) ) = ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) )
+c7:s2:fveq2d |- ( l = L -> ( predBits ` l ) = ( predBits ` L ) )
+c8:c7:fveq2d |- ( l = L -> ( # ` ( predBits ` l ) ) = ( # ` ( predBits ` L ) ) )
+c9:s2:fveq2d |- ( l = L -> ( borrows ` l ) = ( borrows ` L ) )
+c10:c8,c9:oveq12d |- ( l = L -> ( ( # ` ( predBits ` l ) ) - ( borrows ` l ) ) = ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) )
+c11:c6,c10:oveq12d |- ( l = L -> ( ( |_ ` ( ( ( toNat ` l ) - 1 ) / ( 2 ^ ( borrows ` l ) ) ) ) bwrd ( ( # ` ( predBits ` l ) ) - ( borrows ` l ) ) ) = ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) )
+s3::df-predrest |- predRest = ( l e. Word 2o |-> ( ( |_ ` ( ( ( toNat ` l ) - 1 ) / ( 2 ^ ( borrows ` l ) ) ) ) bwrd ( ( # ` ( predBits ` l ) ) - ( borrows ` l ) ) ) )
+s4::ovex |- ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) e. _V
+s5:s4:a1i |- ( L e. Word 2o -> ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) e. _V )
+s6:c11,s3:fvmptg |- ( ( L e. Word 2o /\ ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) e. _V ) -> ( predRest ` L ) = ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) )
+qed:s1,s5,s6:syl2anc |- ( L e. Word 2o -> ( predRest ` L ) = ( ( |_ ` ( ( ( toNat ` L ) - 1 ) / ( 2 ^ ( borrows ` L ) ) ) ) bwrd ( ( # ` ( predBits ` L ) ) - ( borrows ` L ) ) ) )
+$)

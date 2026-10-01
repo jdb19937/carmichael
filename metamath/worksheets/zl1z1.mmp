@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=zl1z1  LOC_AFTER=?
+
+* The zeta continuation terms vanish at ` 1 ` : ` sum_ k HT ( k , 1 ) = 0 ` , so ` ( s - 1 ) zeta ( s ) ` continued is ` 1 ` at ` s = 1 ` (Lean ` LFunctionTrivChar_1 ` at ` 1 ` , the residue of ` zeta ` ).
+
+s1::id |- ( k e. NN -> k e. NN )
+i2::peano2nn
+s3:s1,i2:syl |- ( k e. NN -> ( k + 1 ) e. NN )
+s4:s1:nnrpd |- ( k e. NN -> k e. RR+ )
+s5:s4:rpred |- ( k e. NN -> k e. RR )
+s6:s5:recnd |- ( k e. NN -> k e. CC )
+s7::ax-1cn |- 1 e. CC
+s8:s7:a1i |- ( k e. NN -> 1 e. CC )
+s9:s6,s8:addcld |- ( k e. NN -> ( k + 1 ) e. CC )
+s10:s3:nnne0d |- ( k e. NN -> ( k + 1 ) =/= 0 )
+s11::ax-1cn |- 1 e. CC
+s12:s11:a1i |- ( k e. NN -> 1 e. CC )
+i13::cxpneg
+s14:s9,s10,s12,i13:syl3anc |- ( k e. NN -> ( ( k + 1 ) ^c -u 1 ) = ( 1 / ( ( k + 1 ) ^c 1 ) ) )
+i15::cxp1
+s16:s9,i15:syl |- ( k e. NN -> ( ( k + 1 ) ^c 1 ) = ( k + 1 ) )
+s17:s16:oveq2d |- ( k e. NN -> ( 1 / ( ( k + 1 ) ^c 1 ) ) = ( 1 / ( k + 1 ) ) )
+s18:s14,s17:eqtrd |- ( k e. NN -> ( ( k + 1 ) ^c -u 1 ) = ( 1 / ( k + 1 ) ) )
+s19:s18:oveq2d |- ( k e. NN -> ( ( k + 1 ) x. ( ( k + 1 ) ^c -u 1 ) ) = ( ( k + 1 ) x. ( 1 / ( k + 1 ) ) ) )
+s20:s9,s10:recidd |- ( k e. NN -> ( ( k + 1 ) x. ( 1 / ( k + 1 ) ) ) = 1 )
+s21:s19,s20:eqtrd |- ( k e. NN -> ( ( k + 1 ) x. ( ( k + 1 ) ^c -u 1 ) ) = 1 )
+s22:s1:nnne0d |- ( k e. NN -> k =/= 0 )
+s23::ax-1cn |- 1 e. CC
+s24:s23:a1i |- ( k e. NN -> 1 e. CC )
+i25::cxpneg
+s26:s6,s22,s24,i25:syl3anc |- ( k e. NN -> ( k ^c -u 1 ) = ( 1 / ( k ^c 1 ) ) )
+i27::cxp1
+s28:s6,i27:syl |- ( k e. NN -> ( k ^c 1 ) = k )
+s29:s28:oveq2d |- ( k e. NN -> ( 1 / ( k ^c 1 ) ) = ( 1 / k ) )
+s30:s26,s29:eqtrd |- ( k e. NN -> ( k ^c -u 1 ) = ( 1 / k ) )
+s31:s30:oveq2d |- ( k e. NN -> ( k x. ( k ^c -u 1 ) ) = ( k x. ( 1 / k ) ) )
+s32:s6,s22:recidd |- ( k e. NN -> ( k x. ( 1 / k ) ) = 1 )
+s33:s31,s32:eqtrd |- ( k e. NN -> ( k x. ( k ^c -u 1 ) ) = 1 )
+s34:s21,s33:oveq12d |- ( k e. NN -> ( ( ( k + 1 ) x. ( ( k + 1 ) ^c -u 1 ) ) - ( k x. ( k ^c -u 1 ) ) ) = ( 1 - 1 ) )
+s35:s8:subidd |- ( k e. NN -> ( 1 - 1 ) = 0 )
+s36:s34,s35:eqtrd |- ( k e. NN -> ( ( ( k + 1 ) x. ( ( k + 1 ) ^c -u 1 ) ) - ( k x. ( k ^c -u 1 ) ) ) = 0 )
+s37:s36:sumeq2i |- sum_ k e. NN ( ( ( k + 1 ) x. ( ( k + 1 ) ^c -u 1 ) ) - ( k x. ( k ^c -u 1 ) ) ) = sum_ k e. NN 0
+s38::nnuz |- NN = ( ZZ>= ` 1 )
+s39:s38:eqimssi |- NN C_ ( ZZ>= ` 1 )
+s40:s39:orci |- ( NN C_ ( ZZ>= ` 1 ) \/ NN e. Fin )
+i41::sumz
+s42:s40,i41:ax-mp |- sum_ k e. NN 0 = 0
+qed:s37,s42:eqtri |- sum_ k e. NN ( ( ( k + 1 ) x. ( ( k + 1 ) ^c -u 1 ) ) - ( k x. ( k ^c -u 1 ) ) ) = 0
+$)

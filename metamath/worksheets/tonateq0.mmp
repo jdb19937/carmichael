@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=tonateq0  LOC_AFTER=?
+
+* The value of a bit word is 0 exactly when every letter is false (Lean: toNat_eq_zero_iff).
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+s4:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+s5::0z |- 0 e. ZZ
+s6:s5:a1i |- ( L e. Word 2o -> 0 e. ZZ )
+i7::bwbitsinj
+s8:s4,s6,i7:syl2anc |- ( L e. Word 2o -> ( ( bits ` ( toNat ` L ) ) = ( bits ` 0 ) <-> ( toNat ` L ) = 0 ) )
+s9::0bits |- ( bits ` 0 ) = (/)
+s10::bwbits |- ( L e. Word 2o -> ( bits ` ( toNat ` L ) ) = { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } )
+s11:s9:a1i |- ( L e. Word 2o -> ( bits ` 0 ) = (/) )
+s12:s10,s11:eqeq12d |- ( L e. Word 2o -> ( ( bits ` ( toNat ` L ) ) = ( bits ` 0 ) <-> { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } = (/) ) )
+s13::rabeq0 |- ( { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } = (/) <-> A. i e. ( 0 ..^ ( # ` L ) ) -. ( L ` i ) = 1o )
+s14:s13:a1i |- ( L e. Word 2o -> ( { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } = (/) <-> A. i e. ( 0 ..^ ( # ` L ) ) -. ( L ` i ) = 1o ) )
+s15::wrdsymbcl |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) e. 2o )
+i16::bwel2on
+s17:s15,i16:syl |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( -. ( L ` i ) = 1o <-> ( L ` i ) = (/) ) )
+s18:s17:ralbidva |- ( L e. Word 2o -> ( A. i e. ( 0 ..^ ( # ` L ) ) -. ( L ` i ) = 1o <-> A. i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) = (/) ) )
+s19:s12,s14:bitrd |- ( L e. Word 2o -> ( ( bits ` ( toNat ` L ) ) = ( bits ` 0 ) <-> A. i e. ( 0 ..^ ( # ` L ) ) -. ( L ` i ) = 1o ) )
+s20:s19,s18:bitrd |- ( L e. Word 2o -> ( ( bits ` ( toNat ` L ) ) = ( bits ` 0 ) <-> A. i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) = (/) ) )
+qed:s8,s20:bitr3d |- ( L e. Word 2o -> ( ( toNat ` L ) = 0 <-> A. i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) = (/) ) )
+$)

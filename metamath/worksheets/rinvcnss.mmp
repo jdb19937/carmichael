@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=rinvcnss  LOC_AFTER=?
+
+* The function 1 / ( z - P ) is continuous on any set of complex numbers omitting P.
+
+s1::simpl |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> P e. CC )
+s2::simpr |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> E C_ ( CC \ { P } ) )
+i3::rinvcn
+s4:s1,i3:syl |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) e. ( ( CC \ { P } ) -cn-> CC ) )
+i5::rescncf
+s6:s2,i5:syl |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) e. ( ( CC \ { P } ) -cn-> CC ) -> ( ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) |` E ) e. ( E -cn-> CC ) ) )
+s7:s6,s4:mpd |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) |` E ) e. ( E -cn-> CC ) )
+i8::resmpt
+s9:s2,i8:syl |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) |` E ) = ( z e. E |-> ( 1 / ( z - P ) ) ) )
+qed:s9,s7:eqeltrrd |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( z e. E |-> ( 1 / ( z - P ) ) ) e. ( E -cn-> CC ) )
+$)

@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=cen2sq  LOC_AFTER=?
+
+* The trivial regime: the census up to ` K ` is at most ` K ^ 2 ` (Lean Census ` censusCount_le_sq ` ).
+
+s1::simpr |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> m e. ( 1 ... K ) )
+i2::elfznn
+s3:s1,i2:syl |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> m e. NN )
+i4::cen2bcf
+s5:s3,i4:syl |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> ( { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } e. Fin /\ ( # ` { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } ) <_ m ) )
+s6:s5:simpld |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } e. Fin )
+i7::hashcl
+s8:s6,i7:syl |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> ( # ` { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } ) e. NN0 )
+s9:s8:nn0red |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> ( # ` { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } ) e. RR )
+s10::id |- ( K e. NN0 -> K e. NN0 )
+s11:s10:nn0red |- ( K e. NN0 -> K e. RR )
+s12:s11:adantr |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> K e. RR )
+s13::simpr |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> m e. ( 1 ... K ) )
+i14::elfzle2
+s15:s13,i14:syl |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> m <_ K )
+s16:s3:nnred |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> m e. RR )
+s17:s5:simprd |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> ( # ` { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } ) <_ m )
+s18:s9,s16,s12,s17,s15:letrd |- ( ( K e. NN0 /\ m e. ( 1 ... K ) ) -> ( # ` { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } ) <_ K )
+s19::fzfid |- ( K e. NN0 -> ( 1 ... K ) e. Fin )
+s20:s19,s9,s12,s18:fsumle |- ( K e. NN0 -> sum_ m e. ( 1 ... K ) ( # ` { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } ) <_ sum_ m e. ( 1 ... K ) K )
+s21:s11:recnd |- ( K e. NN0 -> K e. CC )
+i22::fsumconst
+s23:s19,s21,i22:syl2anc |- ( K e. NN0 -> sum_ m e. ( 1 ... K ) K = ( ( # ` ( 1 ... K ) ) x. K ) )
+s24::hashfz1 |- ( K e. NN0 -> ( # ` ( 1 ... K ) ) = K )
+s25:s24:oveq1d |- ( K e. NN0 -> ( ( # ` ( 1 ... K ) ) x. K ) = ( K x. K ) )
+s26:s23,s25:eqtrd |- ( K e. NN0 -> sum_ m e. ( 1 ... K ) K = ( K x. K ) )
+qed:s20,s26:breqtrd |- ( K e. NN0 -> sum_ m e. ( 1 ... K ) ( # ` { y e. ( Base ` ( DChr ` m ) ) | ( ( m DChrCond y ) = m /\ { o e. ( ( S + ( _i x. -u V ) ) crect ( 1 + ( _i x. V ) ) ) | ( o =/= 1 /\ ( ( m DChrLF y ) ` o ) = 0 ) } =/= (/) ) } ) <_ ( K x. K ) )
+$)

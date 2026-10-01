@@ -1,0 +1,56 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrparulem3  LOC_AFTER=?
+
+* Lemma for dchrparu: the delta sum over v collapses to phi ( N ) G ( u ) conj G ( u ) (Lean Finset.sum_eq_single).
+
+s1::simpl |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) )
+s2:s1:simpld |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> N e. NN )
+s3::simpl |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) )
+s4:s3:simprd |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC )
+s5::simpr |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+s6::simpr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+s7:s5:adantr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+i8::elrabi
+s9:s7,i8:syl |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. ( 0 ..^ N ) )
+i10::elrabi
+s11:s6,i10:syl |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> v e. ( 0 ..^ N ) )
+s12:s2:adantr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> N e. NN )
+i13::fzocongeq0
+s14:s12,s9,s11,i13:syl3anc |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( N || ( u - v ) <-> u = v ) )
+s15::eqcom |- ( u = v <-> v = u )
+s16:s15:a1i |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( u = v <-> v = u ) )
+s17:s14,s16:bitrd |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( N || ( u - v ) <-> v = u ) )
+s18:s17:ifbid |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> if ( N || ( u - v ) , ( phi ` N ) , 0 ) = if ( v = u , ( phi ` N ) , 0 ) )
+s19:s18:oveq2d |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( v = u , ( phi ` N ) , 0 ) ) )
+s20::ovif2 |- ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( v = u , ( phi ` N ) , 0 ) ) = if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. 0 ) )
+s21:s20:a1i |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( v = u , ( phi ` N ) , 0 ) ) = if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. 0 ) ) )
+s22:s4:adantr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC )
+s23:s5:adantr |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+s24:s22,s23:ffvelcdmd |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( G ` u ) e. CC )
+s25:s22,s6:ffvelcdmd |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( G ` v ) e. CC )
+s26:s25:cjcld |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( * ` ( G ` v ) ) e. CC )
+s27:s24,s26:mulcld |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( G ` u ) x. ( * ` ( G ` v ) ) ) e. CC )
+s28:s27:mul01d |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. 0 ) = 0 )
+s29:s28:ifeq2d |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. 0 ) ) = if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , 0 ) )
+s30:s19,s21:eqtrd |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. 0 ) ) )
+s31:s30,s29:eqtrd |- ( ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) /\ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , 0 ) )
+s32:s31:sumeq2dv |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , 0 ) )
+s33::fveq2 |- ( v = u -> ( G ` v ) = ( G ` u ) )
+s34:s33:fveq2d |- ( v = u -> ( * ` ( G ` v ) ) = ( * ` ( G ` u ) ) )
+s35:s34:oveq2d |- ( v = u -> ( ( G ` u ) x. ( * ` ( G ` v ) ) ) = ( ( G ` u ) x. ( * ` ( G ` u ) ) ) )
+s36:s35:oveq1d |- ( v = u -> ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) = ( ( ( G ` u ) x. ( * ` ( G ` u ) ) ) x. ( phi ` N ) ) )
+s37:s4,s5:ffvelcdmd |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( G ` u ) e. CC )
+s38:s37:cjcld |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( * ` ( G ` u ) ) e. CC )
+s39:s37,s38:mulcld |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( G ` u ) x. ( * ` ( G ` u ) ) ) e. CC )
+i40::phicl
+s41:s2,i40:syl |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( phi ` N ) e. NN )
+s42:s41:nncnd |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( phi ` N ) e. CC )
+s43:s39,s42:mulcld |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( ( G ` u ) x. ( * ` ( G ` u ) ) ) x. ( phi ` N ) ) e. CC )
+s44::fzofi |- ( 0 ..^ N ) e. Fin
+i45::rabfi
+s46:s44,i45:ax-mp |- { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } e. Fin
+s47:s46:a1i |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } e. Fin )
+s48:s36,s47,s5,s43:sumite |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } if ( v = u , ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. ( phi ` N ) ) , 0 ) = ( ( ( G ` u ) x. ( * ` ( G ` u ) ) ) x. ( phi ` N ) ) )
+s49:s32,s48:eqtrd |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = ( ( ( G ` u ) x. ( * ` ( G ` u ) ) ) x. ( phi ` N ) ) )
+s50:s39,s42:mulcomd |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( ( G ` u ) x. ( * ` ( G ` u ) ) ) x. ( phi ` N ) ) = ( ( phi ` N ) x. ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+qed:s49,s50:eqtrd |- ( ( ( N e. NN /\ G : { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } --> CC ) /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> sum_ v e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( ( G ` u ) x. ( * ` ( G ` v ) ) ) x. if ( N || ( u - v ) , ( phi ` N ) , 0 ) ) = ( ( phi ` N ) x. ( ( G ` u ) x. ( * ` ( G ` u ) ) ) ) )
+$)

@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=ppifle  LOC_AFTER=?
+
+* The primality indicator factor is at most the factor itself.
+
+s1::simplr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> C e. RR+ )
+s2::simpr |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> p e. ( 2 ... M ) )
+i3::fz2m1rp
+s4:s2,i3:syl |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( p x. ( p - 1 ) ) e. RR+ )
+s5:s1,s4:rpdivcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( C / ( p x. ( p - 1 ) ) ) e. RR+ )
+s6:s5:rpred |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( C / ( p x. ( p - 1 ) ) ) e. RR )
+s7:s5:rpge0d |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> 0 <_ ( C / ( p x. ( p - 1 ) ) ) )
+s8::1red |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> 1 e. RR )
+s9:s8,s6:readdcld |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) e. RR )
+s10::simpr |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ p e. Prime ) -> p e. Prime )
+s11:s10:iftrued |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ p e. Prime ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) = ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s12:s9:adantr |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ p e. Prime ) -> ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) e. RR )
+s13:s12:leidd |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ p e. Prime ) -> ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s14:s11,s13:eqbrtrd |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ p e. Prime ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s15::simpr |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> -. p e. Prime )
+s16:s15:iffalsed |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) = 1 )
+s17::1red |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> 1 e. RR )
+s18:s6:adantr |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> ( C / ( p x. ( p - 1 ) ) ) e. RR )
+s19:s7:adantr |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> 0 <_ ( C / ( p x. ( p - 1 ) ) ) )
+i20::addge01
+s21:s17,s18,i20:syl2anc |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> ( 0 <_ ( C / ( p x. ( p - 1 ) ) ) <-> 1 <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) ) )
+s22:s21,s19:mpbid |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> 1 <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+s23:s16,s22:eqbrtrd |- ( ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) /\ -. p e. Prime ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+qed:s14,s23:pm2.61dan |- ( ( ( M e. NN /\ C e. RR+ ) /\ p e. ( 2 ... M ) ) -> if ( p e. Prime , ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) , 1 ) <_ ( 1 + ( C / ( p x. ( p - 1 ) ) ) ) )
+$)

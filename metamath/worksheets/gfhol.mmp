@@ -1,0 +1,60 @@
+$( <MM> <PROOF_ASST> THEOREM=gfhol  LOC_AFTER=?
+
+* Lean's ` gFun ` , ` s |-> 1 - 2 ^ ( 1 - s ) ` , is holomorphic (entire; here on the right half-plane): ~ dvcxp2 , ~ dvmptco , ~ zl2hent .
+
+s1::cnelprrecn |- CC e. { RR , CC }
+s2:s1:a1i |- ( T. -> CC e. { RR , CC } )
+s3::1cnd |- ( T. -> 1 e. CC )
+s4:s2,s3:dvmptc |- ( T. -> ( CC _D ( z e. CC |-> 1 ) ) = ( z e. CC |-> 0 ) )
+s5:s2:dvmptid |- ( T. -> ( CC _D ( z e. CC |-> z ) ) = ( z e. CC |-> 1 ) )
+s6::simpr |- ( ( T. /\ z e. CC ) -> z e. CC )
+s7::1cnd |- ( ( T. /\ z e. CC ) -> 1 e. CC )
+s8::0cnd |- ( ( T. /\ z e. CC ) -> 0 e. CC )
+s9:s2,s7,s8,s4,s6,s7,s5:dvmptsub |- ( T. -> ( CC _D ( z e. CC |-> ( 1 - z ) ) ) = ( z e. CC |-> ( 0 - 1 ) ) )
+s10::2rp |- 2 e. RR+
+s11:s10:a1i |- ( T. -> 2 e. RR+ )
+i12::dvcxp2
+s13:s11,i12:syl |- ( T. -> ( CC _D ( y e. CC |-> ( 2 ^c y ) ) ) = ( y e. CC |-> ( ( log ` 2 ) x. ( 2 ^c y ) ) ) )
+s14:s7,s6:subcld |- ( ( T. /\ z e. CC ) -> ( 1 - z ) e. CC )
+s15:s8,s7:subcld |- ( ( T. /\ z e. CC ) -> ( 0 - 1 ) e. CC )
+s16::simpr |- ( ( T. /\ y e. CC ) -> y e. CC )
+s17::2cnd |- ( ( T. /\ y e. CC ) -> 2 e. CC )
+s18:s17,s16:cxpcld |- ( ( T. /\ y e. CC ) -> ( 2 ^c y ) e. CC )
+s19:s11:adantr |- ( ( T. /\ y e. CC ) -> 2 e. RR+ )
+s20:s19:relogcld |- ( ( T. /\ y e. CC ) -> ( log ` 2 ) e. RR )
+s21:s20:recnd |- ( ( T. /\ y e. CC ) -> ( log ` 2 ) e. CC )
+s22:s21,s18:mulcld |- ( ( T. /\ y e. CC ) -> ( ( log ` 2 ) x. ( 2 ^c y ) ) e. CC )
+s23::oveq2 |- ( y = ( 1 - z ) -> ( 2 ^c y ) = ( 2 ^c ( 1 - z ) ) )
+s24:s23:oveq2d |- ( y = ( 1 - z ) -> ( ( log ` 2 ) x. ( 2 ^c y ) ) = ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) )
+s25:s2,s2,s14,s15,s18,s22,s9,s13,s23,s24:dvmptco |- ( T. -> ( CC _D ( z e. CC |-> ( 2 ^c ( 1 - z ) ) ) ) = ( z e. CC |-> ( ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) x. ( 0 - 1 ) ) ) )
+s26::2cnd |- ( ( T. /\ z e. CC ) -> 2 e. CC )
+s27:s26,s14:cxpcld |- ( ( T. /\ z e. CC ) -> ( 2 ^c ( 1 - z ) ) e. CC )
+s28:s11:relogcld |- ( T. -> ( log ` 2 ) e. RR )
+s29:s28:adantr |- ( ( T. /\ z e. CC ) -> ( log ` 2 ) e. RR )
+s30:s29:recnd |- ( ( T. /\ z e. CC ) -> ( log ` 2 ) e. CC )
+s31:s30,s27:mulcld |- ( ( T. /\ z e. CC ) -> ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) e. CC )
+s32:s31,s15:mulcld |- ( ( T. /\ z e. CC ) -> ( ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) x. ( 0 - 1 ) ) e. CC )
+s33:s2,s7,s8,s4,s27,s32,s25:dvmptsub |- ( T. -> ( CC _D ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) = ( z e. CC |-> ( 0 - ( ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) x. ( 0 - 1 ) ) ) ) )
+s34:s8,s32:subcld |- ( ( T. /\ z e. CC ) -> ( 0 - ( ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) x. ( 0 - 1 ) ) ) e. CC )
+s35:s34:ralrimiva |- ( T. -> A. z e. CC ( 0 - ( ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) x. ( 0 - 1 ) ) ) e. CC )
+i36::dmmptg
+s37:s35,i36:syl |- ( T. -> dom ( z e. CC |-> ( 0 - ( ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) x. ( 0 - 1 ) ) ) ) = CC )
+s38:s33:dmeqd |- ( T. -> dom ( CC _D ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) = dom ( z e. CC |-> ( 0 - ( ( ( log ` 2 ) x. ( 2 ^c ( 1 - z ) ) ) x. ( 0 - 1 ) ) ) ) )
+s39:s38,s37:eqtrd |- ( T. -> dom ( CC _D ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) = CC )
+s40:s7,s27:subcld |- ( ( T. /\ z e. CC ) -> ( 1 - ( 2 ^c ( 1 - z ) ) ) e. CC )
+s41:s40:fmptd |- ( T. -> ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) : CC --> CC )
+s42::ssid |- CC C_ CC
+s43:s42:a1i |- ( T. -> CC C_ CC )
+s44:s43,s41,s43:3jca |- ( T. -> ( CC C_ CC /\ ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) : CC --> CC /\ CC C_ CC ) )
+i45::dvcn
+s46:s44,s39,i45:syl2anc |- ( T. -> ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) e. ( CC -cn-> CC ) )
+s47:s39:eqcomd |- ( T. -> CC = dom ( CC _D ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) )
+s48:s47:eqimssd |- ( T. -> CC C_ dom ( CC _D ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) )
+s49:s46,s48:jca |- ( T. -> ( ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) ) )
+s50::hpopn |- ( `' Re " ( 0 (,) +oo ) ) e. ( TopOpen ` CCfld )
+s51:s50:a1i |- ( T. -> ( `' Re " ( 0 (,) +oo ) ) e. ( TopOpen ` CCfld ) )
+s52:s49,s51:jca |- ( T. -> ( ( ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( z e. CC |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) ) /\ ( `' Re " ( 0 (,) +oo ) ) e. ( TopOpen ` CCfld ) ) )
+i53::zl2hent
+s54:s52,i53:syl |- ( T. -> ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) ) )
+qed:s54:mptru |- ( ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) e. ( ( `' Re " ( 0 (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( 0 (,) +oo ) ) C_ dom ( CC _D ( z e. ( `' Re " ( 0 (,) +oo ) ) |-> ( 1 - ( 2 ^c ( 1 - z ) ) ) ) ) )
+$)

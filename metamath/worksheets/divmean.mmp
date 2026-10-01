@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=divmean  LOC_AFTER=?
+
+* The unweighted divisor mean-value estimate: the sum of K to the number of prime factors over the squarefree d up to Y is at most Y x. ( 1 + log Y ) to the K - 1.
+
+s1::simpl |- ( ( K e. NN /\ Y e. NN ) -> K e. NN )
+s2::simpr |- ( ( K e. NN /\ Y e. NN ) -> Y e. NN )
+i3::nnm1nn0
+s4:s1,i3:syl |- ( ( K e. NN /\ Y e. NN ) -> ( K - 1 ) e. NN0 )
+i5::divmean1
+s6:s4,s2,i5:syl2anc |- ( ( K e. NN /\ Y e. NN ) -> sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( ( ( K - 1 ) + 1 ) ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) <_ ( Y x. ( ( 1 + ( log ` Y ) ) ^ ( K - 1 ) ) ) )
+s7:s1:nncnd |- ( ( K e. NN /\ Y e. NN ) -> K e. CC )
+s8::1cnd |- ( ( K e. NN /\ Y e. NN ) -> 1 e. CC )
+i9::npcan
+s10:s7,s8,i9:syl2anc |- ( ( K e. NN /\ Y e. NN ) -> ( ( K - 1 ) + 1 ) = K )
+s11:s10:oveq1d |- ( ( K e. NN /\ Y e. NN ) -> ( ( ( K - 1 ) + 1 ) ^ ( # ` { q e. Prime | q || n } ) ) = ( K ^ ( # ` { q e. Prime | q || n } ) ) )
+s12:s11:ifeq1d |- ( ( K e. NN /\ Y e. NN ) -> if ( ( mmu ` n ) =/= 0 , ( ( ( K - 1 ) + 1 ) ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) = if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) )
+s13:s12:sumeq2sdv |- ( ( K e. NN /\ Y e. NN ) -> sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( ( ( K - 1 ) + 1 ) ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) = sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) )
+s14:s13:eqcomd |- ( ( K e. NN /\ Y e. NN ) -> sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) = sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( ( ( K - 1 ) + 1 ) ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) )
+s15:s14,s6:eqbrtrd |- ( ( K e. NN /\ Y e. NN ) -> sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) <_ ( Y x. ( ( 1 + ( log ` Y ) ) ^ ( K - 1 ) ) ) )
+s16::fveq2 |- ( n = d -> ( mmu ` n ) = ( mmu ` d ) )
+s17:s16:neeq1d |- ( n = d -> ( ( mmu ` n ) =/= 0 <-> ( mmu ` d ) =/= 0 ) )
+s18::breq2 |- ( n = d -> ( q || n <-> q || d ) )
+s19:s18:rabbidv |- ( n = d -> { q e. Prime | q || n } = { q e. Prime | q || d } )
+s20:s19:fveq2d |- ( n = d -> ( # ` { q e. Prime | q || n } ) = ( # ` { q e. Prime | q || d } ) )
+s21:s20:oveq2d |- ( n = d -> ( K ^ ( # ` { q e. Prime | q || n } ) ) = ( K ^ ( # ` { q e. Prime | q || d } ) ) )
+s22:s17,s21:ifbieq1d |- ( n = d -> if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) = if ( ( mmu ` d ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || d } ) ) , 0 ) )
+s23:s22:cbvsumv |- sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) = sum_ d e. ( 1 ... Y ) if ( ( mmu ` d ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || d } ) ) , 0 )
+s24:s23:a1i |- ( ( K e. NN /\ Y e. NN ) -> sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) = sum_ d e. ( 1 ... Y ) if ( ( mmu ` d ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || d } ) ) , 0 ) )
+s25:s24:eqcomd |- ( ( K e. NN /\ Y e. NN ) -> sum_ d e. ( 1 ... Y ) if ( ( mmu ` d ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || d } ) ) , 0 ) = sum_ n e. ( 1 ... Y ) if ( ( mmu ` n ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || n } ) ) , 0 ) )
+qed:s25,s15:eqbrtrd |- ( ( K e. NN /\ Y e. NN ) -> sum_ d e. ( 1 ... Y ) if ( ( mmu ` d ) =/= 0 , ( K ^ ( # ` { q e. Prime | q || d } ) ) , 0 ) <_ ( Y x. ( ( 1 + ( log ` Y ) ) ^ ( K - 1 ) ) ) )
+$)

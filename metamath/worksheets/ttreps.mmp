@@ -1,0 +1,68 @@
+$( <MM> <PROOF_ASST> THEOREM=ttreps  LOC_AFTER=?
+
+* The free-monoid sum of ` L ` copies of the one-letter word ` <" Z "> ` is ` Z ` repeated ` L ` times.
+
+s1::id |- ( n = 0 -> n = 0 )
+c1:s1:oveq2d |- ( n = 0 -> ( <" Z "> repeatS n ) = ( <" Z "> repeatS 0 ) )
+c2:c1:oveq2d |- ( n = 0 -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS 0 ) ) )
+c3:s1:oveq2d |- ( n = 0 -> ( Z repeatS n ) = ( Z repeatS 0 ) )
+c4:c2,c3:eqeq12d |- ( n = 0 -> ( ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( Z repeatS n ) <-> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS 0 ) ) = ( Z repeatS 0 ) ) )
+s2::id |- ( n = k -> n = k )
+c5:s2:oveq2d |- ( n = k -> ( <" Z "> repeatS n ) = ( <" Z "> repeatS k ) )
+c6:c5:oveq2d |- ( n = k -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) )
+c7:s2:oveq2d |- ( n = k -> ( Z repeatS n ) = ( Z repeatS k ) )
+c8:c6,c7:eqeq12d |- ( n = k -> ( ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( Z repeatS n ) <-> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) )
+s3::id |- ( n = ( k + 1 ) -> n = ( k + 1 ) )
+c9:s3:oveq2d |- ( n = ( k + 1 ) -> ( <" Z "> repeatS n ) = ( <" Z "> repeatS ( k + 1 ) ) )
+c10:c9:oveq2d |- ( n = ( k + 1 ) -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS ( k + 1 ) ) ) )
+c11:s3:oveq2d |- ( n = ( k + 1 ) -> ( Z repeatS n ) = ( Z repeatS ( k + 1 ) ) )
+c12:c10,c11:eqeq12d |- ( n = ( k + 1 ) -> ( ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( Z repeatS n ) <-> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS ( k + 1 ) ) ) = ( Z repeatS ( k + 1 ) ) ) )
+s4::id |- ( n = L -> n = L )
+c13:s4:oveq2d |- ( n = L -> ( <" Z "> repeatS n ) = ( <" Z "> repeatS L ) )
+c14:c13:oveq2d |- ( n = L -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS L ) ) )
+c15:s4:oveq2d |- ( n = L -> ( Z repeatS n ) = ( Z repeatS L ) )
+c16:c14,c15:eqeq12d |- ( n = L -> ( ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS n ) ) = ( Z repeatS n ) <-> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS L ) ) = ( Z repeatS L ) ) )
+s5::id |- ( Z e. Gamma' -> Z e. Gamma' )
+s6:s5:s1cld |- ( Z e. Gamma' -> <" Z "> e. Word Gamma' )
+i7::repsw0
+s8:s6,i7:syl |- ( Z e. Gamma' -> ( <" Z "> repeatS 0 ) = (/) )
+s9:s8:oveq2d |- ( Z e. Gamma' -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS 0 ) ) = ( ( freeMnd ` Gamma' ) gsum (/) ) )
+s10::gsumgam0 |- ( ( freeMnd ` Gamma' ) gsum (/) ) = (/)
+s11:s10:a1i |- ( Z e. Gamma' -> ( ( freeMnd ` Gamma' ) gsum (/) ) = (/) )
+s12:s9,s11:eqtrd |- ( Z e. Gamma' -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS 0 ) ) = (/) )
+i13::repsw0
+s14:s5,i13:syl |- ( Z e. Gamma' -> ( Z repeatS 0 ) = (/) )
+s15:s12,s14:eqtr4d |- ( Z e. Gamma' -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS 0 ) ) = ( Z repeatS 0 ) )
+s16::simpll |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> Z e. Gamma' )
+s17::simplr |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> k e. NN0 )
+s18::simpr |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) )
+s19:s16:s1cld |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> <" Z "> e. Word Gamma' )
+s20::1nn0 |- 1 e. NN0
+s21:s20:a1i |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> 1 e. NN0 )
+i22::repswccat
+s23:s19,s17,s21,i22:syl3anc |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( <" Z "> repeatS k ) ++ ( <" Z "> repeatS 1 ) ) = ( <" Z "> repeatS ( k + 1 ) ) )
+i24::repsw1
+s25:s19,i24:syl |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( <" Z "> repeatS 1 ) = <" <" Z "> "> )
+s26:s25:oveq2d |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( <" Z "> repeatS k ) ++ ( <" Z "> repeatS 1 ) ) = ( ( <" Z "> repeatS k ) ++ <" <" Z "> "> ) )
+s27:s26,s23:eqtr3d |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( <" Z "> repeatS k ) ++ <" <" Z "> "> ) = ( <" Z "> repeatS ( k + 1 ) ) )
+s28:s27:oveq2d |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( <" Z "> repeatS k ) ++ <" <" Z "> "> ) ) = ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS ( k + 1 ) ) ) )
+i29::repsw
+s30:s19,s17,i29:syl2anc |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( <" Z "> repeatS k ) e. Word Word Gamma' )
+s31:s19:s1cld |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> <" <" Z "> "> e. Word Word Gamma' )
+i32::gsumgamccat
+s33:s30,s31,i32:syl2anc |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum ( ( <" Z "> repeatS k ) ++ <" <" Z "> "> ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) ++ ( ( freeMnd ` Gamma' ) gsum <" <" Z "> "> ) ) )
+i34::gsumgams1
+s35:s19,i34:syl |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum <" <" Z "> "> ) = <" Z "> )
+s36:s18,s35:oveq12d |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) ++ ( ( freeMnd ` Gamma' ) gsum <" <" Z "> "> ) ) = ( ( Z repeatS k ) ++ <" Z "> ) )
+i37::repsw1
+s38:s16,i37:syl |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( Z repeatS 1 ) = <" Z "> )
+i39::repswccat
+s40:s16,s17,s21,i39:syl3anc |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( Z repeatS k ) ++ ( Z repeatS 1 ) ) = ( Z repeatS ( k + 1 ) ) )
+s41:s38:oveq2d |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( Z repeatS k ) ++ ( Z repeatS 1 ) ) = ( ( Z repeatS k ) ++ <" Z "> ) )
+s42:s41,s40:eqtr3d |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( Z repeatS k ) ++ <" Z "> ) = ( Z repeatS ( k + 1 ) ) )
+s43:s28:eqcomd |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS ( k + 1 ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( ( <" Z "> repeatS k ) ++ <" <" Z "> "> ) ) )
+s44:s43,s33:eqtrd |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS ( k + 1 ) ) ) = ( ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) ++ ( ( freeMnd ` Gamma' ) gsum <" <" Z "> "> ) ) )
+s45:s44,s36:eqtrd |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS ( k + 1 ) ) ) = ( ( Z repeatS k ) ++ <" Z "> ) )
+s46:s45,s42:eqtrd |- ( ( ( Z e. Gamma' /\ k e. NN0 ) /\ ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS k ) ) = ( Z repeatS k ) ) -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS ( k + 1 ) ) ) = ( Z repeatS ( k + 1 ) ) )
+qed:c4,c8,c12,c16,s15,s46:nn0indd |- ( ( Z e. Gamma' /\ L e. NN0 ) -> ( ( freeMnd ` Gamma' ) gsum ( <" Z "> repeatS L ) ) = ( Z repeatS L ) )
+$)

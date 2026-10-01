@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=ef2pole  LOC_AFTER=?
+
+* Lean ` rectInt_ys_pole ` : for ` p ` strictly inside a rectangle in the right half-plane, the boundary integral of ` y ^ s / ( s ( s - p ) ) ` is ` 2 pi i y ^ p / p ` ( C0c ~ rectintcau at C4 ~ pkfhol ).
+
+s1::simp1 |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> Y e. RR+ )
+s2::simp2 |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) )
+s3::simp3 |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) )
+i4::simpl
+s5:s2,i4:syl |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( A e. CC /\ B e. CC ) )
+i6::ef2rhp
+s7:s2,i6:syl |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( A crect B ) C_ ( `' Re " ( 0 (,) +oo ) ) /\ ( A crect B ) C_ ( CC \ { 0 } ) ) )
+i8::simpr
+s9:s7,i8:syl |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( A crect B ) C_ ( CC \ { 0 } ) )
+s10::pkfhol |- ( Y e. RR+ -> ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ) ) )
+s11:s1,s10:syl |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ) ) )
+s12:s11,s9:jca |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ) ) /\ ( A crect B ) C_ ( CC \ { 0 } ) ) )
+i13::holcrect
+s14:s12,i13:syl |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( A crect B ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ) ) )
+s15:s5,s3,s14:3jca |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( A e. CC /\ B e. CC ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) /\ ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( A crect B ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ) ) ) )
+i16::rectintcau
+s17:s15,i16:syl |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( z e. ( ( A crect B ) \ { P } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - P ) ) ) rectint <. A , B >. ) = ( ( 2 x. ( _i x. _pi ) ) x. ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` P ) ) )
+i18::crectinp
+s19:s5,s3,i18:syl2anc |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> P e. ( A crect B ) )
+s20:s9,s19:sseldd |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> P e. ( CC \ { 0 } ) )
+s21::ovexd |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( Y ^c P ) / P ) e. _V )
+s22::id |- ( o = P -> o = P )
+c1:s22:oveq2d |- ( o = P -> ( Y ^c o ) = ( Y ^c P ) )
+c2:c1,s22:oveq12d |- ( o = P -> ( ( Y ^c o ) / o ) = ( ( Y ^c P ) / P ) )
+s23:c2:adantl |- ( ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) /\ o = P ) -> ( ( Y ^c o ) / o ) = ( ( Y ^c P ) / P ) )
+s24::eqidd |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) = ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) )
+s25:s24,s23,s20,s21:fvmptd |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` P ) = ( ( Y ^c P ) / P ) )
+s26:s25:oveq2d |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` P ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( ( Y ^c P ) / P ) ) )
+qed:s17,s26:eqtrd |- ( ( Y e. RR+ /\ ( ( A e. CC /\ B e. CC ) /\ 0 < ( Re ` A ) ) /\ ( P e. CC /\ ( ( ( Re ` A ) < ( Re ` P ) /\ ( Re ` P ) < ( Re ` B ) ) /\ ( ( Im ` A ) < ( Im ` P ) /\ ( Im ` P ) < ( Im ` B ) ) ) ) ) -> ( ( z e. ( ( A crect B ) \ { P } ) |-> ( ( ( o e. ( CC \ { 0 } ) |-> ( ( Y ^c o ) / o ) ) ` z ) / ( z - P ) ) ) rectint <. A , B >. ) = ( ( 2 x. ( _i x. _pi ) ) x. ( ( Y ^c P ) / P ) ) )
+$)

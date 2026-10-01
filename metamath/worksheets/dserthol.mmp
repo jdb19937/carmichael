@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=dserthol  LOC_AFTER=?
+
+* A term function of a Dirichlet series is holomorphic on the half-plane.
+
+s1::simpl |- ( ( A : NN --> CC /\ K e. NN ) -> A : NN --> CC )
+s2::simpr |- ( ( A : NN --> CC /\ K e. NN ) -> K e. NN )
+s3:s1:adantr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> A : NN --> CC )
+s4:s2:adantr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> K e. NN )
+s5::simpr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> z e. ( `' Re " ( T (,) +oo ) ) )
+s6:s3,s4:ffvelcdmd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( A ` K ) e. CC )
+s7::hpss |- ( `' Re " ( T (,) +oo ) ) C_ CC
+s8:s7:a1i |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( `' Re " ( T (,) +oo ) ) C_ CC )
+s9:s8,s5:sseldd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> z e. CC )
+s10:s4:nncnd |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> K e. CC )
+s11:s9:negcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> -u z e. CC )
+i12::cxpcl
+s13:s10,s11,i12:syl2anc |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( K ^c -u z ) e. CC )
+s14:s6,s13:mulcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( A ` K ) x. ( K ^c -u z ) ) e. CC )
+s15:s2:nnrpd |- ( ( A : NN --> CC /\ K e. NN ) -> K e. RR+ )
+s16:s15:relogcld |- ( ( A : NN --> CC /\ K e. NN ) -> ( log ` K ) e. RR )
+s17:s16:recnd |- ( ( A : NN --> CC /\ K e. NN ) -> ( log ` K ) e. CC )
+s18:s17:adantr |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( log ` K ) e. CC )
+s19:s6,s18:mulcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( A ` K ) x. ( log ` K ) ) e. CC )
+s20:s19,s13:mulcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) e. CC )
+s21:s20:negcld |- ( ( ( A : NN --> CC /\ K e. NN ) /\ z e. ( `' Re " ( T (,) +oo ) ) ) -> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) e. CC )
+s22::dsertdv |- ( ( A : NN --> CC /\ K e. NN ) -> ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) )
+s23::eqid |- ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) )
+s24:s21,s23:fmptd |- ( ( A : NN --> CC /\ K e. NN ) -> ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) : ( `' Re " ( T (,) +oo ) ) --> CC )
+i25::fdm
+s26:s24,i25:syl |- ( ( A : NN --> CC /\ K e. NN ) -> dom ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) = ( `' Re " ( T (,) +oo ) ) )
+s27:s22:dmeqd |- ( ( A : NN --> CC /\ K e. NN ) -> dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = dom ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) )
+s28:s27,s26:eqtrd |- ( ( A : NN --> CC /\ K e. NN ) -> dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = ( `' Re " ( T (,) +oo ) ) )
+s29:s28:eqcomd |- ( ( A : NN --> CC /\ K e. NN ) -> ( `' Re " ( T (,) +oo ) ) = dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) )
+s30:s29:eqimssd |- ( ( A : NN --> CC /\ K e. NN ) -> ( `' Re " ( T (,) +oo ) ) C_ dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) )
+s31::eqid |- ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) )
+s32:s21,s31:fmptd |- ( ( A : NN --> CC /\ K e. NN ) -> ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) : ( `' Re " ( T (,) +oo ) ) --> CC )
+s33:s22:dmeqd |- ( ( A : NN --> CC /\ K e. NN ) -> dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = dom ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) )
+i34::fdm
+s35:s32,i34:syl |- ( ( A : NN --> CC /\ K e. NN ) -> dom ( z e. ( `' Re " ( T (,) +oo ) ) |-> -u ( ( ( A ` K ) x. ( log ` K ) ) x. ( K ^c -u z ) ) ) = ( `' Re " ( T (,) +oo ) ) )
+s36:s33,s35:eqtrd |- ( ( A : NN --> CC /\ K e. NN ) -> dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = ( `' Re " ( T (,) +oo ) ) )
+s37::eqid |- ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) = ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) )
+s38:s14,s37:fmptd |- ( ( A : NN --> CC /\ K e. NN ) -> ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) : ( `' Re " ( T (,) +oo ) ) --> CC )
+s39::ssid |- CC C_ CC
+s40:s39:a1i |- ( ( A : NN --> CC /\ K e. NN ) -> CC C_ CC )
+s41::hpss |- ( `' Re " ( T (,) +oo ) ) C_ CC
+s42:s41:a1i |- ( ( A : NN --> CC /\ K e. NN ) -> ( `' Re " ( T (,) +oo ) ) C_ CC )
+s43:s40,s38,s42:3jca |- ( ( A : NN --> CC /\ K e. NN ) -> ( CC C_ CC /\ ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) : ( `' Re " ( T (,) +oo ) ) --> CC /\ ( `' Re " ( T (,) +oo ) ) C_ CC ) )
+s44:s43,s36:jca |- ( ( A : NN --> CC /\ K e. NN ) -> ( ( CC C_ CC /\ ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) : ( `' Re " ( T (,) +oo ) ) --> CC /\ ( `' Re " ( T (,) +oo ) ) C_ CC ) /\ dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) = ( `' Re " ( T (,) +oo ) ) ) )
+i45::dvcn
+s46:s44,i45:syl |- ( ( A : NN --> CC /\ K e. NN ) -> ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) e. ( ( `' Re " ( T (,) +oo ) ) -cn-> CC ) )
+qed:s46,s30:jca |- ( ( A : NN --> CC /\ K e. NN ) -> ( ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) e. ( ( `' Re " ( T (,) +oo ) ) -cn-> CC ) /\ ( `' Re " ( T (,) +oo ) ) C_ dom ( CC _D ( z e. ( `' Re " ( T (,) +oo ) ) |-> ( ( A ` K ) x. ( K ^c -u z ) ) ) ) ) )
+$)

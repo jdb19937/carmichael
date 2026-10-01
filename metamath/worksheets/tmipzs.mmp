@@ -1,0 +1,121 @@
+$( <MM> <PROOF_ASST> THEOREM=tmipzs  LOC_AFTER=?
+
+* The charges of the entries of Lean's ` poolGo ` sum to its cost: ` sum_ j pgc x z k l[j] = ( poolGo x z k l ).2 ` (Steps23.lean ` poolGo_append ` at every prefix, telescoped by ~ telfsumo2 ).
+
+s1::simpl |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) )
+s2::simpr |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> L e. Word NN0 )
+s3::simpr |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> j e. ( 0 ..^ ( # ` L ) ) )
+s4::simpl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) )
+s5:s4:simpld |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) )
+s6:s4:simprd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> L e. Word NN0 )
+i7::wrdsymbcl
+s8:s6,s3,i7:syl2anc |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` j ) e. NN0 )
+i9::s1cl
+s10:s8,i9:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> <" ( L ` j ) "> e. Word NN0 )
+i11::pfxcl
+s12:s6,i11:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( L prefix j ) e. Word NN0 )
+i13::tm2lpfxs1
+s14:s6,s3,i13:syl2anc |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( L prefix ( j + 1 ) ) = ( ( L prefix j ) ++ <" ( L ` j ) "> ) )
+s15:s5,s10:jca |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ <" ( L ` j ) "> e. Word NN0 ) )
+s16:s15,s12:jca |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ <" ( L ` j ) "> e. Word NN0 ) /\ ( L prefix j ) e. Word NN0 ) )
+i17::tmpgapp
+s18:s16,i17:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F PoolGo Z ) ` G ) ` ( ( L prefix j ) ++ <" ( L ` j ) "> ) ) = <. ( ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ++ ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) , ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) >. )
+s19:s14:fveq2d |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) = ( ( ( F PoolGo Z ) ` G ) ` ( ( L prefix j ) ++ <" ( L ` j ) "> ) ) )
+s20:s19,s18:eqtrd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) = <. ( ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ++ ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) , ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) >. )
+s21:s5,s12:jca |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ ( L prefix j ) e. Word NN0 ) )
+i22::poolgocl
+s23:s21,i22:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) e. ( Word NN0 X. NN0 ) )
+s24:s5,s10:jca |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ <" ( L ` j ) "> e. Word NN0 ) )
+i25::poolgocl
+s26:s24,i25:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) e. ( Word NN0 X. NN0 ) )
+i27::xp1st
+s28:s23,i27:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) e. Word NN0 )
+i29::xp2nd
+s30:s23,i29:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) e. NN0 )
+i31::xp1st
+s32:s26,i31:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) e. Word NN0 )
+i33::xp2nd
+s34:s26,i33:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) e. NN0 )
+i35::ccatcl
+s36:s28,s32,i35:syl2anc |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ++ ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) e. Word NN0 )
+s37:s36:elexd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ++ ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) e. _V )
+s38:s30,s34:nn0addcld |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) e. NN0 )
+s39:s38:elexd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) e. _V )
+s40:s20:fveq2d |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) = ( 2nd ` <. ( ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ++ ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) , ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) >. ) )
+i41::op2ndg
+s42:s37,s39,i41:syl2anc |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` <. ( ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ++ ( 1st ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) , ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) >. ) = ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) )
+s43:s40,s42:eqtrd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) = ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) )
+s44:s43:oveq1d |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ) = ( ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ) )
+s45:s30:nn0cnd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) e. CC )
+s46:s34:nn0cnd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) e. CC )
+i47::pncan2
+s48:s45,s46,i47:syl2anc |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) + ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) )
+s49:s44,s48:eqtrd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) )
+s50:s49:eqcomd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ j e. ( 0 ..^ ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) = ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ) )
+s51:s50:sumeq2dv |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> sum_ j e. ( 0 ..^ ( # ` L ) ) ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) = sum_ j e. ( 0 ..^ ( # ` L ) ) ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ) )
+i52::lencl
+s53:s2,i52:syl |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( # ` L ) e. NN0 )
+s54::nn0uz |- NN0 = ( ZZ>= ` 0 )
+s55:s54:a1i |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> NN0 = ( ZZ>= ` 0 ) )
+s56:s53,s55:eleqtrd |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( # ` L ) e. ( ZZ>= ` 0 ) )
+s57::simpl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) )
+s58:s57:simpld |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) )
+s59::simpl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) )
+s60:s59:simprd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> L e. Word NN0 )
+i61::pfxcl
+s62:s60,i61:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( L prefix k ) e. Word NN0 )
+s63:s58,s62:jca |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ ( L prefix k ) e. Word NN0 ) )
+i64::poolgocl
+s65:s63,i64:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) e. ( Word NN0 X. NN0 ) )
+i66::xp2nd
+s67:s65,i66:syl |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) ) e. NN0 )
+s68:s67:nn0cnd |- ( ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) /\ k e. ( 0 ... ( # ` L ) ) ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) ) e. CC )
+s69::id |- ( k = j -> k = j )
+c1:s69:oveq2d |- ( k = j -> ( L prefix k ) = ( L prefix j ) )
+c2:c1:fveq2d |- ( k = j -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) = ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) )
+c3:c2:fveq2d |- ( k = j -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) )
+s70::id |- ( k = ( j + 1 ) -> k = ( j + 1 ) )
+c4:s70:oveq2d |- ( k = ( j + 1 ) -> ( L prefix k ) = ( L prefix ( j + 1 ) ) )
+c5:c4:fveq2d |- ( k = ( j + 1 ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) = ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) )
+c6:c5:fveq2d |- ( k = ( j + 1 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) )
+s71::id |- ( k = 0 -> k = 0 )
+c7:s71:oveq2d |- ( k = 0 -> ( L prefix k ) = ( L prefix 0 ) )
+c8:c7:fveq2d |- ( k = 0 -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) = ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) )
+c9:c8:fveq2d |- ( k = 0 -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) ) )
+s72::id |- ( k = ( # ` L ) -> k = ( # ` L ) )
+c10:s72:oveq2d |- ( k = ( # ` L ) -> ( L prefix k ) = ( L prefix ( # ` L ) ) )
+c11:c10:fveq2d |- ( k = ( # ` L ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) = ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) )
+c12:c11:fveq2d |- ( k = ( # ` L ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix k ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) ) )
+s73:c3,c6,c9,c12,s56,s68:telfsumo2 |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> sum_ j e. ( 0 ..^ ( # ` L ) ) ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( j + 1 ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix j ) ) ) ) = ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) ) ) )
+i74::pfxid
+s75:s2,i74:syl |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( L prefix ( # ` L ) ) = L )
+s76:s75:fveq2d |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) = ( ( ( F PoolGo Z ) ` G ) ` L ) )
+s77:s76:fveq2d |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) )
+s78::pfx00 |- ( L prefix 0 ) = (/)
+s79:s78:a1i |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( L prefix 0 ) = (/) )
+i80::poolgo0
+s81:s1,i80:syl |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( ( F PoolGo Z ) ` G ) ` (/) ) = <. (/) , 0 >. )
+s82::0ex |- (/) e. _V
+s83:s82:a1i |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> (/) e. _V )
+s84::c0ex |- 0 e. _V
+s85:s84:a1i |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> 0 e. _V )
+s86:s81:fveq2d |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` (/) ) ) = ( 2nd ` <. (/) , 0 >. ) )
+i87::op2ndg
+s88:s83,s85,i87:syl2anc |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` <. (/) , 0 >. ) = 0 )
+s89:s86,s88:eqtrd |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` (/) ) ) = 0 )
+s90:s79:fveq2d |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) = ( ( ( F PoolGo Z ) ` G ) ` (/) ) )
+s91:s90:fveq2d |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` (/) ) ) )
+s92:s91,s89:eqtrd |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) ) = 0 )
+s93:s1,s2:jca |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) )
+i94::poolgocl
+s95:s93,i94:syl |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( ( F PoolGo Z ) ` G ) ` L ) e. ( Word NN0 X. NN0 ) )
+i96::xp2nd
+s97:s95,i96:syl |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) e. NN0 )
+s98:s97:nn0cnd |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) e. CC )
+s99:s77,s92:oveq12d |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) ) ) = ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) - 0 ) )
+i100::subid1
+s101:s98,i100:syl |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) - 0 ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) )
+s102:s99,s101:eqtrd |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) )
+s103:s51,s73:eqtrd |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> sum_ j e. ( 0 ..^ ( # ` L ) ) ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) = ( ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix ( # ` L ) ) ) ) - ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` ( L prefix 0 ) ) ) ) )
+qed:s103,s102:eqtrd |- ( ( ( ( F e. NN0 /\ Z e. NN0 ) /\ G e. NN0 ) /\ L e. Word NN0 ) -> sum_ j e. ( 0 ..^ ( # ` L ) ) ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` <" ( L ` j ) "> ) ) = ( 2nd ` ( ( ( F PoolGo Z ) ` G ) ` L ) ) )
+$)

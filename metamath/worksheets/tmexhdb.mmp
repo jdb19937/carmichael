@@ -1,0 +1,77 @@
+$( <MM> <PROOF_ASST> THEOREM=tmexhdb  LOC_AFTER=?
+
+* The top of a list of numbers on a stack is ` bra ` exactly when the list is empty (Lean ` decide_head?_encList_bra ` ).
+
+s1::simpl |- ( ( V e. Word NN0 /\ X e. Word Gamma' ) -> V e. Word NN0 )
+s2::simpr |- ( ( V e. Word NN0 /\ X e. Word Gamma' ) -> X e. Word Gamma' )
+s3::simpr |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> V = (/) )
+s4:s3:fveq2d |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( encList ` V ) = ( encList ` (/) ) )
+s5::tm2lenc0 |- ( encList ` (/) ) = <" 2 ">
+s6:s5:a1i |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( encList ` (/) ) = <" 2 "> )
+s7:s4,s6:eqtrd |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( encList ` V ) = <" 2 "> )
+s8:s7:oveq1d |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( ( encList ` V ) ++ X ) = ( <" 2 "> ++ X ) )
+s9:s8:fveq1d |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( ( ( encList ` V ) ++ X ) ` 0 ) = ( ( <" 2 "> ++ X ) ` 0 ) )
+s10::gamma2 |- 2 e. Gamma'
+s11:s10:a1i |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> 2 e. Gamma' )
+s12:s11:s1cld |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> <" 2 "> e. Word Gamma' )
+s13::s1len |- ( # ` <" 2 "> ) = 1
+s14:s13:a1i |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( # ` <" 2 "> ) = 1 )
+s15::0lt1 |- 0 < 1
+s16:s15:a1i |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> 0 < 1 )
+s17:s14,s16:breqtrrd |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> 0 < ( # ` <" 2 "> ) )
+s18:s2:adantr |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> X e. Word Gamma' )
+i19::ccatfv0
+s20:s12,s18,s17,i19:syl3anc |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( ( <" 2 "> ++ X ) ` 0 ) = ( <" 2 "> ` 0 ) )
+i21::s1fv
+s22:s11,i21:syl |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( <" 2 "> ` 0 ) = 2 )
+s23:s9,s20:eqtrd |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( ( ( encList ` V ) ++ X ) ` 0 ) = ( <" 2 "> ` 0 ) )
+s24:s23,s22:eqtrd |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V = (/) ) -> ( ( ( encList ` V ) ++ X ) ` 0 ) = 2 )
+s25:s24:ex |- ( ( V e. Word NN0 /\ X e. Word Gamma' ) -> ( V = (/) -> ( ( ( encList ` V ) ++ X ) ` 0 ) = 2 ) )
+s26::simpr |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> V =/= (/) )
+s27:s1:adantr |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> V e. Word NN0 )
+i28::tm2lencgam
+s29:s27,i28:syl |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( encNatGam o. V ) e. Word Word ( { 1 } X. 2o ) )
+s30::tm2lbitf |- encNatGam : NN0 --> Word ( { 1 } X. 2o )
+s31:s30:a1i |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> encNatGam : NN0 --> Word ( { 1 } X. 2o ) )
+i32::lenco
+s33:s27,s31,i32:syl2anc |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( # ` ( encNatGam o. V ) ) = ( # ` V ) )
+i34::hasheq0
+s35:s27,i34:syl |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( # ` V ) = 0 <-> V = (/) ) )
+s36:s26:neneqd |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> -. V = (/) )
+s37:s36,s35:mtbird |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> -. ( # ` V ) = 0 )
+i38::hasheq0
+s39:s29,i38:syl |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( # ` ( encNatGam o. V ) ) = 0 <-> ( encNatGam o. V ) = (/) ) )
+s40:s33:eqeq1d |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( # ` ( encNatGam o. V ) ) = 0 <-> ( # ` V ) = 0 ) )
+s41:s40,s37:mtbird |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> -. ( # ` ( encNatGam o. V ) ) = 0 )
+s42:s41,s39:mtbid |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> -. ( encNatGam o. V ) = (/) )
+s43:s42:neqned |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( encNatGam o. V ) =/= (/) )
+i44::tm2lenceq
+s45:s27,i44:syl |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( encList ` V ) = ( encListB ` ( encNatGam o. V ) ) )
+s46:s45:oveq1d |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( encList ` V ) ++ X ) = ( ( encListB ` ( encNatGam o. V ) ) ++ X ) )
+s47:s46:fveq1d |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( ( encList ` V ) ++ X ) ` 0 ) = ( ( ( encListB ` ( encNatGam o. V ) ) ++ X ) ` 0 ) )
+s48:s2:adantr |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> X e. Word Gamma' )
+i49::tm2lencbhd1
+s50:s29,s48,s43,i49:syl3anc |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( ( encListB ` ( encNatGam o. V ) ) ++ X ) ` 0 ) e. ( ( { 1 } X. 2o ) u. { 4 } ) )
+s51:s47,s50:eqeltrd |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( ( encList ` V ) ++ X ) ` 0 ) e. ( ( { 1 } X. 2o ) u. { 4 } ) )
+s52::2re |- 2 e. RR
+i53::tmcnbits
+s54:s52,i53:ax-mp |- -. 2 e. ( { 1 } X. 2o )
+s55::2re |- 2 e. RR
+s56::2lt4 |- 2 < 4
+s57:s55,s56:ltneii |- 2 =/= 4
+s58:s57:neii |- -. 2 = 4
+s59::2ex |- 2 e. _V
+s60:s59:elsn |- ( 2 e. { 4 } <-> 2 = 4 )
+s61:s58,s60:mtbir |- -. 2 e. { 4 }
+s62:s54,s61:pm3.2i |- ( -. 2 e. ( { 1 } X. 2o ) /\ -. 2 e. { 4 } )
+s63::ioran |- ( -. ( 2 e. ( { 1 } X. 2o ) \/ 2 e. { 4 } ) <-> ( -. 2 e. ( { 1 } X. 2o ) /\ -. 2 e. { 4 } ) )
+s64:s62,s63:mpbir |- -. ( 2 e. ( { 1 } X. 2o ) \/ 2 e. { 4 } )
+s65::elun |- ( 2 e. ( ( { 1 } X. 2o ) u. { 4 } ) <-> ( 2 e. ( { 1 } X. 2o ) \/ 2 e. { 4 } ) )
+s66:s64,s65:mtbir |- -. 2 e. ( ( { 1 } X. 2o ) u. { 4 } )
+s67:s66:a1i |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> -. 2 e. ( ( { 1 } X. 2o ) u. { 4 } ) )
+i68::nelne2
+s69:s51,s67,i68:syl2anc |- ( ( ( V e. Word NN0 /\ X e. Word Gamma' ) /\ V =/= (/) ) -> ( ( ( encList ` V ) ++ X ) ` 0 ) =/= 2 )
+s70:s69:ex |- ( ( V e. Word NN0 /\ X e. Word Gamma' ) -> ( V =/= (/) -> ( ( ( encList ` V ) ++ X ) ` 0 ) =/= 2 ) )
+s71:s70:necon4d |- ( ( V e. Word NN0 /\ X e. Word Gamma' ) -> ( ( ( ( encList ` V ) ++ X ) ` 0 ) = 2 -> V = (/) ) )
+qed:s71,s25:impbid |- ( ( V e. Word NN0 /\ X e. Word Gamma' ) -> ( ( ( ( encList ` V ) ++ X ) ` 0 ) = 2 <-> V = (/) ) )
+$)

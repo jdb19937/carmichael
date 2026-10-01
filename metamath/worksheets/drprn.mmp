@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=drprn  LOC_AFTER=?
+
+* Every element of the tail of a word is an element of the word (Lean: List.mem_of_mem_drop).
+
+s1::simpl |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> V e. Word S )
+s2::drpfz |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( # ` V ) - T ) e. ( 0 ... ( # ` V ) ) )
+i3::lencl
+s4:s1,i3:syl |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. NN0 )
+i5::nn0fz0
+s6:s4,i5:sylib |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. ( 0 ... ( # ` V ) ) )
+i7::swrdrn3
+s8:s1,s2,s6,i7:syl3anc |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ran ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) = ( V " ( ( ( # ` V ) - T ) ..^ ( # ` V ) ) ) )
+s9::imassrn |- ( V " ( ( ( # ` V ) - T ) ..^ ( # ` V ) ) ) C_ ran V
+s10:s9:a1i |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ( V " ( ( ( # ` V ) - T ) ..^ ( # ` V ) ) ) C_ ran V )
+qed:s8,s10:eqsstrd |- ( ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) -> ran ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) C_ ran V )
+$)

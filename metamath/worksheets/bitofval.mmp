@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=bitofval  LOC_AFTER=?
+
+* Value of bitOf: the payload of a register, false when empty (Lean: bitOf o = o.getD false).
+
+s1::id |- ( O e. ( 2o |_| 1o ) -> O e. ( 2o |_| 1o ) )
+s2::0ex |- (/) e. _V
+s3::fvex |- ( 2nd ` O ) e. _V
+i4::ifexg
+s5:s2,s3,i4:mp2an |- if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) e. _V
+s6:s5:a1i |- ( O e. ( 2o |_| 1o ) -> if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) e. _V )
+s7::id |- ( o = O -> o = O )
+c1:s7:eqeq1d |- ( o = O -> ( o = ( inr ` (/) ) <-> O = ( inr ` (/) ) ) )
+c2:s7:fveq2d |- ( o = O -> ( 2nd ` o ) = ( 2nd ` O ) )
+c3:c1,c2:ifbieq2d |- ( o = O -> if ( o = ( inr ` (/) ) , (/) , ( 2nd ` o ) ) = if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) )
+s8::df-bitof |- bitOf = ( o e. ( 2o |_| 1o ) |-> if ( o = ( inr ` (/) ) , (/) , ( 2nd ` o ) ) )
+s9:c3,s8:fvmptg |- ( ( O e. ( 2o |_| 1o ) /\ if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) e. _V ) -> ( bitOf ` O ) = if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) )
+qed:s1,s6,s9:syl2anc |- ( O e. ( 2o |_| 1o ) -> ( bitOf ` O ) = if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) )
+$)

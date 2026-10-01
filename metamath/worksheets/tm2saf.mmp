@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2saf  LOC_AFTER=?
+
+* TM2sa is a function from statements and (state, stacks) pairs to configurations.
+
+s1::tm2safn2 |- ( T e. V -> ( TM2sa ` T ) Fn ( ( TM2Stmt ` T ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+s2::simpll |- ( ( ( T e. V /\ a e. ( TM2Stmt ` T ) ) /\ b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> T e. V )
+s3::simplr |- ( ( ( T e. V /\ a e. ( TM2Stmt ` T ) ) /\ b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> a e. ( TM2Stmt ` T ) )
+s4::simpr |- ( ( ( T e. V /\ a e. ( TM2Stmt ` T ) ) /\ b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i5::tm2sacl
+s6:s2,s3,s4,i5:syl3anc |- ( ( ( T e. V /\ a e. ( TM2Stmt ` T ) ) /\ b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( a ( TM2sa ` T ) b ) e. ( TM2Cfg ` T ) )
+s7:s6:anasss |- ( ( T e. V /\ ( a e. ( TM2Stmt ` T ) /\ b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) ) -> ( a ( TM2sa ` T ) b ) e. ( TM2Cfg ` T ) )
+s8:s7:ralrimivva |- ( T e. V -> A. a e. ( TM2Stmt ` T ) A. b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( a ( TM2sa ` T ) b ) e. ( TM2Cfg ` T ) )
+s9::ffnov |- ( ( TM2sa ` T ) : ( ( TM2Stmt ` T ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) --> ( TM2Cfg ` T ) <-> ( ( TM2sa ` T ) Fn ( ( TM2Stmt ` T ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ A. a e. ( TM2Stmt ` T ) A. b e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( a ( TM2sa ` T ) b ) e. ( TM2Cfg ` T ) ) )
+qed:s1,s8,s9:sylanbrc |- ( T e. V -> ( TM2sa ` T ) : ( ( TM2Stmt ` T ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) --> ( TM2Cfg ` T ) )
+$)

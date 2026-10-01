@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=algwrdss  LOC_AFTER=?
+
+* A duplicate-free word whose entries lie in another word is no longer (Lean: List.Subperm.length_le of List.subperm_of_subset).
+
+s1::simpll |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> V e. Word S )
+s2::simplr |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> W e. Word S )
+s3::simprl |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> Fun `' V )
+s4::simprr |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ran V C_ ran W )
+i5::algwrdcard
+s6:s1,s3,i5:syl2anc |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` ran V ) = ( # ` V ) )
+i7::algwrdfi
+s8:s2,i7:syl |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ran W e. Fin )
+i9::hashss
+s10:s8,s4,i9:syl2anc |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` ran V ) <_ ( # ` ran W ) )
+i11::algrnle
+s12:s2,i11:syl |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` ran W ) <_ ( # ` W ) )
+i13::lencl
+s14:s1,i13:syl |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` V ) e. NN0 )
+s15:s14:nn0red |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` V ) e. RR )
+i16::algwrdfi
+s17:s2,i16:syl |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ran W e. Fin )
+i18::hashcl
+s19:s17,i18:syl |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` ran W ) e. NN0 )
+s20:s19:nn0red |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` ran W ) e. RR )
+i21::lencl
+s22:s2,i21:syl |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` W ) e. NN0 )
+s23:s22:nn0red |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` W ) e. RR )
+s24:s6,s10:eqbrtrrd |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` V ) <_ ( # ` ran W ) )
+qed:s15,s20,s23,s24,s12:letrd |- ( ( ( V e. Word S /\ W e. Word S ) /\ ( Fun `' V /\ ran V C_ ran W ) ) -> ( # ` V ) <_ ( # ` W ) )
+$)

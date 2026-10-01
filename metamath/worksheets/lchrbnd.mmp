@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=lchrbnd  LOC_AFTER=?
+
+* The Dirichlet L-series of a character is bounded on the half-plane to the right of the line one.
+
+s1::simpl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s2::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( Z e. CC /\ 1 < ( Re ` Z ) ) )
+i3::lchrcfb
+s4:s1,i3:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) ` m ) ) <_ 1 ) )
+s5:s4,s2:jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) ` m ) ) <_ 1 ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) )
+i6::dserbnd
+s7:s5,i6:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( abs ` sum_ k e. NN ( ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) ` k ) x. ( k ^c -u Z ) ) ) <_ ( 1 x. ( 1 + ( 1 / ( ( Re ` Z ) - 1 ) ) ) ) )
+s8::simpr |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) /\ k e. NN ) -> k e. NN )
+s9:s1:adantr |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) /\ k e. NN ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s10:s9,s8:jca |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) /\ k e. NN ) -> ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ k e. NN ) )
+i11::lchrval
+s12:s10,i11:syl |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) /\ k e. NN ) -> ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) ` k ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` k ) ) )
+s13:s12:oveq1d |- ( ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) /\ k e. NN ) -> ( ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) ` k ) x. ( k ^c -u Z ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` k ) ) x. ( k ^c -u Z ) ) )
+s14:s13:sumeq2dv |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> sum_ k e. NN ( ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) ` k ) x. ( k ^c -u Z ) ) = sum_ k e. NN ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` k ) ) x. ( k ^c -u Z ) ) )
+s15:s14:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( abs ` sum_ k e. NN ( ( ( q e. NN |-> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` q ) ) ) ` k ) x. ( k ^c -u Z ) ) ) = ( abs ` sum_ k e. NN ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` k ) ) x. ( k ^c -u Z ) ) ) )
+s16:s15,s7:eqbrtrrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( abs ` sum_ k e. NN ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` k ) ) x. ( k ^c -u Z ) ) ) <_ ( 1 x. ( 1 + ( 1 / ( ( Re ` Z ) - 1 ) ) ) ) )
+i17::simpl
+s18:s2,i17:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> Z e. CC )
+i19::simpr
+s20:s2,i19:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> 1 < ( Re ` Z ) )
+i21::recl
+s22:s18,i21:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( Re ` Z ) e. RR )
+s23::1re |- 1 e. RR
+s24:s23:a1i |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> 1 e. RR )
+s25:s22,s24:resubcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( ( Re ` Z ) - 1 ) e. RR )
+s26:s24,s22:posdifd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( 1 < ( Re ` Z ) <-> 0 < ( ( Re ` Z ) - 1 ) ) )
+s27:s20,s26:mpbid |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> 0 < ( ( Re ` Z ) - 1 ) )
+s28:s25,s27:elrpd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( ( Re ` Z ) - 1 ) e. RR+ )
+s29:s28:rpreccld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( 1 / ( ( Re ` Z ) - 1 ) ) e. RR+ )
+s30:s29:rpred |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( 1 / ( ( Re ` Z ) - 1 ) ) e. RR )
+s31:s24,s30:readdcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( 1 + ( 1 / ( ( Re ` Z ) - 1 ) ) ) e. RR )
+s32:s31:recnd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( 1 + ( 1 / ( ( Re ` Z ) - 1 ) ) ) e. CC )
+i33::mullid
+s34:s32,i33:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( 1 x. ( 1 + ( 1 / ( ( Re ` Z ) - 1 ) ) ) ) = ( 1 + ( 1 / ( ( Re ` Z ) - 1 ) ) ) )
+qed:s16,s34:breqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) -> ( abs ` sum_ k e. NN ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` k ) ) x. ( k ^c -u Z ) ) ) <_ ( 1 + ( 1 / ( ( Re ` Z ) - 1 ) ) ) )
+$)

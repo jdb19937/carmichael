@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcracl  LOC_AFTER=?
+
+* Closure of the ` ra ` field of a machine state (Lean: the type of ` St.ra ` ).
+
+s1::id |- ( V e. TMSt -> V e. TMSt )
+s2::df-tmra |- TMra = ( v e. TMSt |-> ( 1st ` ( 2nd ` v ) ) )
+s3:s2:a1i |- ( V e. TMSt -> TMra = ( v e. TMSt |-> ( 1st ` ( 2nd ` v ) ) ) )
+s4::fveq2 |- ( v = V -> ( 2nd ` v ) = ( 2nd ` V ) )
+s5:s4:fveq2d |- ( v = V -> ( 1st ` ( 2nd ` v ) ) = ( 1st ` ( 2nd ` V ) ) )
+s6:s5:adantl |- ( ( V e. TMSt /\ v = V ) -> ( 1st ` ( 2nd ` v ) ) = ( 1st ` ( 2nd ` V ) ) )
+s7::fvexd |- ( V e. TMSt -> ( 1st ` ( 2nd ` V ) ) e. _V )
+s8:s3,s6,s1,s7:fvmptd |- ( V e. TMSt -> ( TMra ` V ) = ( 1st ` ( 2nd ` V ) ) )
+s9::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s10:s1,s9:eleqtrdi |- ( V e. TMSt -> V e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) ) )
+i11::xp2nd
+s12:s10,i11:syl |- ( V e. TMSt -> ( 2nd ` V ) e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+i13::xp1st
+s14:s12,i13:syl |- ( V e. TMSt -> ( 1st ` ( 2nd ` V ) ) e. ( 2o |_| 1o ) )
+qed:s8,s14:eqeltrd |- ( V e. TMSt -> ( TMra ` V ) e. ( 2o |_| 1o ) )
+$)

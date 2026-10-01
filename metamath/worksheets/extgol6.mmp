@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=extgol6  LOC_AFTER=?
+
+* A product of two numbers congruent to one is congruent to one.
+
+s1::simpl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( L e. NN /\ M e. NN0 /\ S e. NN0 ) )
+s2:s1:simp1d |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> L e. NN )
+s3::simpl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( L e. NN /\ M e. NN0 /\ S e. NN0 ) )
+s4:s3:simp2d |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> M e. NN0 )
+s5::simpl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( L e. NN /\ M e. NN0 /\ S e. NN0 ) )
+s6:s5:simp3d |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> S e. NN0 )
+s7::simprl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> L || ( M - 1 ) )
+s8::simprr |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> L || ( S - 1 ) )
+s9:s2:nnzd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> L e. ZZ )
+s10:s4:nn0zd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> M e. ZZ )
+s11:s6:nn0zd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> S e. ZZ )
+i12::peano2zm
+s13:s10,i12:syl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( M - 1 ) e. ZZ )
+i14::peano2zm
+s15:s11,i14:syl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( S - 1 ) e. ZZ )
+s16:s9,s13,s11:3jca |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( L e. ZZ /\ ( M - 1 ) e. ZZ /\ S e. ZZ ) )
+i17::dvdsmultr1
+s18:s16,i17:syl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( L || ( M - 1 ) -> L || ( ( M - 1 ) x. S ) ) )
+s19:s18,s7:mpd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> L || ( ( M - 1 ) x. S ) )
+s20:s13,s11:zmulcld |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( M - 1 ) x. S ) e. ZZ )
+s21:s9,s20,s15:3jca |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( L e. ZZ /\ ( ( M - 1 ) x. S ) e. ZZ /\ ( S - 1 ) e. ZZ ) )
+i22::dvds2add
+s23:s21,i22:syl |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( L || ( ( M - 1 ) x. S ) /\ L || ( S - 1 ) ) -> L || ( ( ( M - 1 ) x. S ) + ( S - 1 ) ) ) )
+s24:s19,s8:jca |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( L || ( ( M - 1 ) x. S ) /\ L || ( S - 1 ) ) )
+s25:s23,s24:mpd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> L || ( ( ( M - 1 ) x. S ) + ( S - 1 ) ) )
+s26:s4:nn0cnd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> M e. CC )
+s27:s6:nn0cnd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> S e. CC )
+s28::ax-1cn |- 1 e. CC
+s29:s28:a1i |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> 1 e. CC )
+s30:s26,s29,s27:subdird |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( M - 1 ) x. S ) = ( ( M x. S ) - ( 1 x. S ) ) )
+s31:s27:mullidd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( 1 x. S ) = S )
+s32:s31:oveq2d |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( M x. S ) - ( 1 x. S ) ) = ( ( M x. S ) - S ) )
+s33:s30,s32:eqtrd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( M - 1 ) x. S ) = ( ( M x. S ) - S ) )
+s34:s4,s6:nn0mulcld |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( M x. S ) e. NN0 )
+s35:s34:nn0red |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( M x. S ) e. RR )
+s36:s6:nn0red |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> S e. RR )
+s37:s33:oveq1d |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( ( M - 1 ) x. S ) + ( S - 1 ) ) = ( ( ( M x. S ) - S ) + ( S - 1 ) ) )
+s38:s35:recnd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( M x. S ) e. CC )
+s39::ax-1cn |- 1 e. CC
+s40:s39:a1i |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> 1 e. CC )
+s41:s38,s27,s40:npncand |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( ( M x. S ) - S ) + ( S - 1 ) ) = ( ( M x. S ) - 1 ) )
+s42:s37,s41:eqtrd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> ( ( ( M - 1 ) x. S ) + ( S - 1 ) ) = ( ( M x. S ) - 1 ) )
+qed:s25,s42:breqtrd |- ( ( ( L e. NN /\ M e. NN0 /\ S e. NN0 ) /\ ( L || ( M - 1 ) /\ L || ( S - 1 ) ) ) -> L || ( ( M x. S ) - 1 ) )
+$)

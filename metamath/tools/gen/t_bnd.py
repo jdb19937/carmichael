@@ -1,0 +1,277 @@
+"""Sortie S, batch 5: encodeNat length bounds (Overhead.lean), the top bit, and the worked example encodeNat 5."""
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..')); from tm import *
+only = sys.argv[1:]
+def run(w):
+    if only and w.label not in only: return True
+    return w.run()
+
+ENC = lambda N: '( encodeNat ` %s )' % N
+LEN = lambda N: '( # ` ( encodeNat ` %s ) )' % N
+K = '( |_ ` ( 2 logb N ) )'
+K1 = '( ( |_ ` ( 2 logb N ) ) + 1 )'
+
+def uzge2(w, A):
+    z2 = w.s([], '2z', '2 e. ZZ'); u = w.inst('uzid'); u2 = w.s([z2, u], 'ax-mp', '2 e. ( ZZ>= ` 2 )')
+    return w.s([u2], 'a1i', '( %s -> 2 e. ( ZZ>= ` 2 ) )' % A)
+
+# ---- encnatltk: N < 2 ^ ( K + 1 )
+w = W('encnatltk', 'A positive integer is below 2 to the power of one more than the integer part of its binary logarithm.')
+A = 'N e. NN'
+u2 = uzge2(w, A); rp = w.s([], 'nnrp', '( %s -> N e. RR+ )' % A)
+l = w.s([u2, rp, w.inst('relogbzcl')], 'syl2anc', '( %s -> ( 2 logb N ) e. RR )' % A)
+k = w.s([], 'encnatlem3', '( %s -> %s e. NN0 )' % (A, K)); k1 = w.s([k, w.inst('peano2nn0')], 'syl', '( %s -> %s e. NN0 )' % (A, K1)); k1z = w.s([k1], 'nn0zd', '( %s -> %s e. ZZ )' % (A, K1))
+lt = w.s([l, w.inst('flltp1')], 'syl', '( %s -> ( 2 logb N ) < %s )' % (A, K1))
+le = w.s([u2, k1z, w.inst('nnlogbexp')], 'syl2anc', '( %s -> ( 2 logb ( 2 ^ %s ) ) = %s )' % (A, K1, K1))
+le2 = w.s([le], 'eqcomd', '( %s -> %s = ( 2 logb ( 2 ^ %s ) ) )' % (A, K1, K1))
+lt2 = w.s([lt, le2], 'breqtrd', '( %s -> ( 2 logb N ) < ( 2 logb ( 2 ^ %s ) ) )' % (A, K1))
+r2 = w.s([], '2rp', '2 e. RR+'); r2d = w.s([r2], 'a1i', '( %s -> 2 e. RR+ )' % A)
+p2 = w.s([r2d, k1z, w.inst('rpexpcl')], 'syl2anc', '( %s -> ( 2 ^ %s ) e. RR+ )' % (A, K1))
+bi = w.s([u2, rp, p2, w.inst('logblt')], 'syl3anc', '( %s -> ( N < ( 2 ^ %s ) <-> ( 2 logb N ) < ( 2 logb ( 2 ^ %s ) ) ) )' % (A, K1, K1))
+w.qed([lt2, bi], 'mpbird', '( %s -> N < ( 2 ^ %s ) )' % (A, K1)); run(w)
+
+# ---- encnatgek: 2 ^ K <_ N
+w = W('encnatgek', 'A positive integer is at least 2 to the power of the integer part of its binary logarithm.')
+A = 'N e. NN'
+u2 = uzge2(w, A); rp = w.s([], 'nnrp', '( %s -> N e. RR+ )' % A)
+l = w.s([u2, rp, w.inst('relogbzcl')], 'syl2anc', '( %s -> ( 2 logb N ) e. RR )' % A)
+k = w.s([], 'encnatlem3', '( %s -> %s e. NN0 )' % (A, K)); kz = w.s([k], 'nn0zd', '( %s -> %s e. ZZ )' % (A, K))
+le = w.s([l, w.inst('flle')], 'syl', '( %s -> %s <_ ( 2 logb N ) )' % (A, K))
+eq = w.s([u2, kz, w.inst('nnlogbexp')], 'syl2anc', '( %s -> ( 2 logb ( 2 ^ %s ) ) = %s )' % (A, K, K))
+le2 = w.s([eq, le], 'eqbrtrd', '( %s -> ( 2 logb ( 2 ^ %s ) ) <_ ( 2 logb N ) )' % (A, K))
+r2 = w.s([], '2rp', '2 e. RR+'); r2d = w.s([r2], 'a1i', '( %s -> 2 e. RR+ )' % A)
+p2 = w.s([r2d, kz, w.inst('rpexpcl')], 'syl2anc', '( %s -> ( 2 ^ %s ) e. RR+ )' % (A, K))
+bi = w.s([u2, p2, rp, w.inst('logbleb')], 'syl3anc', '( %s -> ( ( 2 ^ %s ) <_ N <-> ( 2 logb ( 2 ^ %s ) ) <_ ( 2 logb N ) ) )' % (A, K, K))
+w.qed([le2, bi], 'mpbird', '( %s -> ( 2 ^ %s ) <_ N )' % (A, K)); run(w)
+
+# ---- encnatlenm1: ( LEN - 1 ) = K
+w = W('encnatlenm1', 'The length of encodeNat N minus one is the integer part of the binary logarithm of N.')
+A = 'N e. NN'
+l = w.s([], 'encnatlenn', '( %s -> %s = %s )' % (A, LEN('N'), K1)); l2 = w.s([l], 'oveq1d', '( %s -> ( %s - 1 ) = ( %s - 1 ) )' % (A, LEN('N'), K1))
+k = w.s([], 'encnatlem3', '( %s -> %s e. NN0 )' % (A, K)); kc = w.s([k], 'nn0cnd', '( %s -> %s e. CC )' % (A, K)); c1 = w.s([], '1cnd', '( %s -> 1 e. CC )' % A)
+p = w.s([kc, c1, w.inst('pncan')], 'syl2anc', '( %s -> ( %s - 1 ) = %s )' % (A, K1, K))
+w.qed([l2, p], 'eqtrd', '( %s -> ( %s - 1 ) = %s )' % (A, LEN('N'), K)); run(w)
+
+# ---- encnatge, encnatlt
+w = W('encnatge', 'A positive integer is at least 2 to the power of its input length minus one.')
+A = 'N e. NN'
+m = w.s([], 'encnatlenm1', '( %s -> ( %s - 1 ) = %s )' % (A, LEN('N'), K)); m2 = w.s([m], 'oveq2d', '( %s -> ( 2 ^ ( %s - 1 ) ) = ( 2 ^ %s ) )' % (A, LEN('N'), K))
+g = w.s([], 'encnatgek', '( %s -> ( 2 ^ %s ) <_ N )' % (A, K))
+w.qed([m2, g], 'eqbrtrd', '( %s -> ( 2 ^ ( %s - 1 ) ) <_ N )' % (A, LEN('N'))); run(w)
+
+w = W('encnatlt', 'Every natural number is below 2 to the power of its input length (Lean: lt_two_pow_encodeNat_length).')
+A = 'N e. NN0'; A1 = '( N e. NN0 /\\ N = 0 )'; A2 = '( N e. NN0 /\\ N =/= 0 )'
+e1 = w.s([], 'simpr', '( %s -> N = 0 )' % A1)
+f1 = w.s([e1], 'fveq2d', '( %s -> %s = %s )' % (A1, ENC('N'), ENC('0'))); f2 = w.s([f1], 'fveq2d', '( %s -> %s = %s )' % (A1, LEN('N'), LEN('0')))
+l0 = w.s([], 'encnatlen0', '%s = 0' % LEN('0')); l0d = w.s([l0], 'a1i', '( %s -> %s = 0 )' % (A1, LEN('0'))); f3 = w.s([f2, l0d], 'eqtrd', '( %s -> %s = 0 )' % (A1, LEN('N')))
+f4 = w.s([f3], 'oveq2d', '( %s -> ( 2 ^ %s ) = ( 2 ^ 0 ) )' % (A1, LEN('N')))
+c2 = w.s([], '2cn', '2 e. CC'); x0 = w.s([c2, w.inst('exp0')], 'ax-mp', '( 2 ^ 0 ) = 1'); x0d = w.s([x0], 'a1i', '( %s -> ( 2 ^ 0 ) = 1 )' % A1)
+f5 = w.s([f4, x0d], 'eqtrd', '( %s -> ( 2 ^ %s ) = 1 )' % (A1, LEN('N')))
+z1 = w.s([], '0lt1', '0 < 1'); z1d = w.s([z1], 'a1i', '( %s -> 0 < 1 )' % A1)
+b1 = w.s([e1, z1d], 'eqbrtrd', '( %s -> N < 1 )' % A1)
+c1 = w.s([b1, f5], 'breqtrrd', '( %s -> N < ( 2 ^ %s ) )' % (A1, LEN('N')))
+en = w.s([], 'elnnne0', '( N e. NN <-> ( N e. NN0 /\\ N =/= 0 ) )'); n2 = w.s([en], 'biimpri', '( %s -> N e. NN )' % A2)
+lt = w.s([n2, w.inst('encnatltk')], 'syl', '( %s -> N < ( 2 ^ %s ) )' % (A2, K1))
+ln = w.s([n2, w.inst('encnatlenn')], 'syl', '( %s -> %s = %s )' % (A2, LEN('N'), K1)); ln2 = w.s([ln], 'oveq2d', '( %s -> ( 2 ^ %s ) = ( 2 ^ %s ) )' % (A2, LEN('N'), K1))
+c22 = w.s([lt, ln2], 'breqtrrd', '( %s -> N < ( 2 ^ %s ) )' % (A2, LEN('N')))
+w.qed([c1, c22], 'pm2.61dane', '( %s -> N < ( 2 ^ %s ) )' % (A, LEN('N'))); run(w)
+
+# ---- encnatlenle (Lean: le_of_encodeNat_length)
+w = W('encnatlenle', 'Input length at least M >= 1 forces N >= 2 ^ ( M - 1 ) (Lean: le_of_encodeNat_length).')
+A = '( N e. NN0 /\\ M e. NN /\\ M <_ %s )' % LEN('N'); A1 = '( %s /\\ N = 0 )' % A; A2 = '( %s /\\ N =/= 0 )' % A
+n = w.s([], 'simp1', '( %s -> N e. NN0 )' % A); m = w.s([], 'simp2', '( %s -> M e. NN )' % A); h = w.s([], 'simp3', '( %s -> M <_ %s )' % (A, LEN('N')))
+# case N = 0: contradiction
+e1 = w.s([], 'simpr', '( %s -> N = 0 )' % A1)
+f1 = w.s([e1], 'fveq2d', '( %s -> %s = %s )' % (A1, ENC('N'), ENC('0'))); f2 = w.s([f1], 'fveq2d', '( %s -> %s = %s )' % (A1, LEN('N'), LEN('0')))
+l0 = w.s([], 'encnatlen0', '%s = 0' % LEN('0')); l0d = w.s([l0], 'a1i', '( %s -> %s = 0 )' % (A1, LEN('0'))); f3 = w.s([f2, l0d], 'eqtrd', '( %s -> %s = 0 )' % (A1, LEN('N')))
+h1 = w.s([h], 'adantr', '( %s -> M <_ %s )' % (A1, LEN('N'))); h2 = w.s([h1, f3], 'breqtrd', '( %s -> M <_ 0 )' % A1)
+m1 = w.s([m], 'adantr', '( %s -> M e. NN )' % A1); g0 = w.s([m1, w.inst('nngt0')], 'syl', '( %s -> 0 < M )' % A1)
+r0 = w.s([], '0re', '0 e. RR'); r0d = w.s([r0], 'a1i', '( %s -> 0 e. RR )' % A1); mr = w.s([m1], 'nnred', '( %s -> M e. RR )' % A1)
+nl = w.s([r0d, mr, w.inst('ltnle')], 'syl2anc', '( %s -> ( 0 < M <-> -. M <_ 0 ) )' % A1); nle = w.s([g0, nl], 'mpbid', '( %s -> -. M <_ 0 )' % A1)
+c1 = w.s([h2, nle], 'pm2.21dd', '( %s -> ( 2 ^ ( M - 1 ) ) <_ N )' % A1)
+# case N =/= 0
+n0 = w.s([n], 'adantr', '( %s -> N e. NN0 )' % A2); ne = w.s([], 'simpr', '( %s -> N =/= 0 )' % A2)
+en = w.s([], 'elnnne0', '( N e. NN <-> ( N e. NN0 /\\ N =/= 0 ) )'); nn = w.s([n0, ne, en], 'sylanbrc', '( %s -> N e. NN )' % A2)
+m2 = w.s([m], 'adantr', '( %s -> M e. NN )' % A2); h3 = w.s([h], 'adantr', '( %s -> M <_ %s )' % (A2, LEN('N')))
+mr2 = w.s([m2], 'nnred', '( %s -> M e. RR )' % A2)
+ec = w.s([n0, w.inst('encnatcl')], 'syl', '( %s -> %s e. Word 2o )' % (A2, ENC('N'))); lc = w.s([ec, w.inst('lencl')], 'syl', '( %s -> %s e. NN0 )' % (A2, LEN('N'))); lr = w.s([lc], 'nn0red', '( %s -> %s e. RR )' % (A2, LEN('N')))
+r1 = w.s([], '1re', '1 e. RR'); r1d = w.s([r1], 'a1i', '( %s -> 1 e. RR )' % A2)
+ls = w.s([mr2, lr, r1d, w.inst('lesub1')], 'syl3anc', '( %s -> ( M <_ %s <-> ( M - 1 ) <_ ( %s - 1 ) ) )' % (A2, LEN('N'), LEN('N')))
+h4 = w.s([h3, ls], 'mpbid', '( %s -> ( M - 1 ) <_ ( %s - 1 ) )' % (A2, LEN('N')))
+mz = w.s([m2], 'nnzd', '( %s -> M e. ZZ )' % A2); mz1 = w.s([mz, w.inst('peano2zm')], 'syl', '( %s -> ( M - 1 ) e. ZZ )' % A2)
+lz = w.s([lc], 'nn0zd', '( %s -> %s e. ZZ )' % (A2, LEN('N'))); lz1 = w.s([lz, w.inst('peano2zm')], 'syl', '( %s -> ( %s - 1 ) e. ZZ )' % (A2, LEN('N')))
+uz = w.s([mz1, lz1, w.inst('eluz')], 'syl2anc', '( %s -> ( ( %s - 1 ) e. ( ZZ>= ` ( M - 1 ) ) <-> ( M - 1 ) <_ ( %s - 1 ) ) )' % (A2, LEN('N'), LEN('N')))
+uz2 = w.s([h4, uz], 'mpbird', '( %s -> ( %s - 1 ) e. ( ZZ>= ` ( M - 1 ) ) )' % (A2, LEN('N')))
+r2 = w.s([], '2re', '2 e. RR'); r2d = w.s([r2], 'a1i', '( %s -> 2 e. RR )' % A2); l12 = w.s([], '1le2', '1 <_ 2'); l12d = w.s([l12], 'a1i', '( %s -> 1 <_ 2 )' % A2)
+le = w.s([r2d, l12d, uz2, w.inst('leexp2a')], 'syl3anc', '( %s -> ( 2 ^ ( M - 1 ) ) <_ ( 2 ^ ( %s - 1 ) ) )' % (A2, LEN('N')))
+ge = w.s([nn, w.inst('encnatge')], 'syl', '( %s -> ( 2 ^ ( %s - 1 ) ) <_ N )' % (A2, LEN('N')))
+mm = w.s([m2, w.inst('nnm1nn0')], 'syl', '( %s -> ( M - 1 ) e. NN0 )' % A2); x1 = w.s([r2d, mm], 'reexpcld', '( %s -> ( 2 ^ ( M - 1 ) ) e. RR )' % A2)
+km = w.s([nn, w.inst('encnatlenm1')], 'syl', '( %s -> ( %s - 1 ) = %s )' % (A2, LEN('N'), K)); kk = w.s([nn, w.inst('encnatlem3')], 'syl', '( %s -> %s e. NN0 )' % (A2, K))
+lm = w.s([km, kk], 'eqeltrd', '( %s -> ( %s - 1 ) e. NN0 )' % (A2, LEN('N'))); x2 = w.s([r2d, lm], 'reexpcld', '( %s -> ( 2 ^ ( %s - 1 ) ) e. RR )' % (A2, LEN('N')))
+nr = w.s([n0], 'nn0red', '( %s -> N e. RR )' % A2)
+c2 = w.s([x1, x2, nr, le, ge], 'letrd', '( %s -> ( 2 ^ ( M - 1 ) ) <_ N )' % A2)
+w.qed([c1, c2], 'pm2.61dane', '( %s -> ( 2 ^ ( M - 1 ) ) <_ N )' % A); run(w)
+
+# ---- encnatlensuc (Lean: le_of_encodeNat_length_succ)
+w = W('encnatlensuc', 'Input length at least M + 1 forces N >= M (Lean: le_of_encodeNat_length_succ).')
+A = '( N e. NN0 /\\ M e. NN0 /\\ ( M + 1 ) <_ %s )' % LEN('N')
+n = w.s([], 'simp1', '( %s -> N e. NN0 )' % A); m = w.s([], 'simp2', '( %s -> M e. NN0 )' % A); h = w.s([], 'simp3', '( %s -> ( M + 1 ) <_ %s )' % (A, LEN('N')))
+m1 = w.s([m, w.inst('nn0p1nn')], 'syl', '( %s -> ( M + 1 ) e. NN )' % A)
+le = w.s([n, m1, h, w.inst('encnatlenle')], 'syl3anc', '( %s -> ( 2 ^ ( ( M + 1 ) - 1 ) ) <_ N )' % A)
+mc = w.s([m], 'nn0cnd', '( %s -> M e. CC )' % A); c1 = w.s([], '1cnd', '( %s -> 1 e. CC )' % A)
+p = w.s([mc, c1, w.inst('pncan')], 'syl2anc', '( %s -> ( ( M + 1 ) - 1 ) = M )' % A); p2 = w.s([p], 'oveq2d', '( %s -> ( 2 ^ ( ( M + 1 ) - 1 ) ) = ( 2 ^ M ) )' % A)
+le2 = w.s([p2, le], 'eqbrtrrd', '( %s -> ( 2 ^ M ) <_ N )' % A)
+u2 = uzge2(w, A); b = w.s([u2, m, w.inst('bernneq3')], 'syl2anc', '( %s -> M < ( 2 ^ M ) )' % A)
+mr = w.s([m], 'nn0red', '( %s -> M e. RR )' % A); r2 = w.s([], '2re', '2 e. RR'); r2d = w.s([r2], 'a1i', '( %s -> 2 e. RR )' % A); x = w.s([r2d, m], 'reexpcld', '( %s -> ( 2 ^ M ) e. RR )' % A); nr = w.s([n], 'nn0red', '( %s -> N e. RR )' % A)
+lt = w.s([mr, x, nr, b, le2], 'ltletrd', '( %s -> M < N )' % A)
+w.qed([mr, nr, lt], 'ltled', '( %s -> M <_ N )' % A); run(w)
+
+# ---- encnatlsb: the top bit is 1 (no trailing zero)
+w = W('encnatlsb', 'The last letter of encodeNat N for N >= 1 is true: the encoding has no trailing zero (Mathlib: encodePosNum ends with true).')
+A = 'N e. NN'
+Q = '( N / ( 2 ^ %s ) )' % K; FQ = '( |_ ` %s )' % Q; P2K = '( 2 ^ %s )' % K
+n0 = w.s([], 'nnnn0', '( %s -> N e. NN0 )' % A); nz = w.s([], 'nnzd', '( %s -> N e. ZZ )' % A) if False else None
+nz = w.s([n0], 'nn0zd', '( %s -> N e. ZZ )' % A); nr = w.s([n0], 'nn0red', '( %s -> N e. RR )' % A)
+ec = w.s([n0, w.inst('encnatcl')], 'syl', '( %s -> %s e. Word 2o )' % (A, ENC('N')))
+ls = w.s([ec, w.inst('lsw')], 'syl', '( %s -> ( lastS ` %s ) = ( %s ` ( %s - 1 ) ) )' % (A, ENC('N'), ENC('N'), LEN('N')))
+m1 = w.s([], 'encnatlenm1', '( %s -> ( %s - 1 ) = %s )' % (A, LEN('N'), K)); m2 = w.s([m1], 'fveq2d', '( %s -> ( %s ` ( %s - 1 ) ) = ( %s ` %s ) )' % (A, ENC('N'), LEN('N'), ENC('N'), K))
+ls2 = w.s([ls, m2], 'eqtrd', '( %s -> ( lastS ` %s ) = ( %s ` %s ) )' % (A, ENC('N'), ENC('N'), K))
+k = w.s([], 'encnatlem3', '( %s -> %s e. NN0 )' % (A, K)); kr = w.s([k], 'nn0red', '( %s -> %s e. RR )' % (A, K))
+ln = w.s([], 'encnatlenn', '( %s -> %s = %s )' % (A, LEN('N'), K1))
+k1n = w.s([k, w.inst('nn0p1nn')], 'syl', '( %s -> %s e. NN )' % (A, K1)); lnn = w.s([ln, k1n], 'eqeltrd', '( %s -> %s e. NN )' % (A, LEN('N')))
+klt = w.s([kr, w.inst('ltp1')], 'syl', '( %s -> %s < %s )' % (A, K, K1)); klt2 = w.s([klt, ln], 'breqtrrd', '( %s -> %s < %s )' % (A, K, LEN('N')))
+kin = w.s([k, lnn, klt2, w.inst('elfzo0')], 'syl3anbrc', '( %s -> %s e. ( 0 ..^ %s ) )' % (A, K, LEN('N')))
+bt = w.s([n0, kin, w.inst('encnatbits')], 'syl2anc', '( %s -> ( ( %s ` %s ) = 1o <-> %s e. ( bits ` N ) ) )' % (A, ENC('N'), K, K))
+bv = w.s([nz, k, w.inst('bitsval2')], 'syl2anc', '( %s -> ( %s e. ( bits ` N ) <-> -. 2 || %s ) )' % (A, K, FQ))
+# ( |_ ` Q ) = 1
+r2 = w.s([], '2re', '2 e. RR'); r2d = w.s([r2], 'a1i', '( %s -> 2 e. RR )' % A); p2r = w.s([r2d, k], 'reexpcld', '( %s -> %s e. RR )' % (A, P2K))
+r2p = w.s([], '2rp', '2 e. RR+'); r2pd = w.s([r2p], 'a1i', '( %s -> 2 e. RR+ )' % A); kz = w.s([k], 'nn0zd', '( %s -> %s e. ZZ )' % (A, K))
+p2p = w.s([r2pd, kz, w.inst('rpexpcl')], 'syl2anc', '( %s -> %s e. RR+ )' % (A, P2K)); p2gt = w.s([p2p], 'rpgt0d', '( %s -> 0 < %s )' % (A, P2K))
+p2c = w.s([p2r, p2gt], 'jca', '( %s -> ( %s e. RR /\\ 0 < %s ) )' % (A, P2K, P2K))
+qr = w.s([nr, p2p, w.inst('rerpdivcl')], 'syl2anc', '( %s -> %s e. RR )' % (A, Q))
+r1 = w.s([], '1re', '1 e. RR'); r1d = w.s([r1], 'a1i', '( %s -> 1 e. RR )' % A); z1 = w.s([], '1zzd', '( %s -> 1 e. ZZ )' % A)
+fb = w.s([qr, z1, w.inst('flbi')], 'syl2anc', '( %s -> ( %s = 1 <-> ( 1 <_ %s /\\ %s < ( 1 + 1 ) ) ) )' % (A, FQ, Q, Q))
+lm = w.s([r1d, nr, p2c, w.inst('lemuldiv')], 'syl3anc', '( %s -> ( ( 1 x. %s ) <_ N <-> 1 <_ %s ) )' % (A, P2K, Q))
+p2cn = w.s([p2r], 'recnd', '( %s -> %s e. CC )' % (A, P2K)); ml = w.s([p2cn, w.inst('mullid')], 'syl', '( %s -> ( 1 x. %s ) = %s )' % (A, P2K, P2K))
+ge = w.s([], 'encnatgek', '( %s -> %s <_ N )' % (A, P2K)); ge2 = w.s([ml, ge], 'eqbrtrd', '( %s -> ( 1 x. %s ) <_ N )' % (A, P2K))
+ge3 = w.s([ge2, lm], 'mpbid', '( %s -> 1 <_ %s )' % (A, Q))
+r11 = w.s([r1d, r1d], 'readdcld', '( %s -> ( 1 + 1 ) e. RR )' % A)
+ld = w.s([nr, r11, p2c, w.inst('ltdivmul')], 'syl3anc', '( %s -> ( %s < ( 1 + 1 ) <-> N < ( %s x. ( 1 + 1 ) ) ) )' % (A, Q, P2K))
+lt = w.s([], 'encnatltk', '( %s -> N < ( 2 ^ %s ) )' % (A, K1))
+c2 = w.s([], '2cn', '2 e. CC'); c2d = w.s([c2], 'a1i', '( %s -> 2 e. CC )' % A)
+ep = w.s([c2d, k, w.inst('expp1')], 'syl2anc', '( %s -> ( 2 ^ %s ) = ( %s x. 2 ) )' % (A, K1, P2K))
+e11 = w.s([], '1p1e2', '( 1 + 1 ) = 2'); e11d = w.s([e11], 'a1i', '( %s -> ( 1 + 1 ) = 2 )' % A); e12 = w.s([e11d], 'oveq2d', '( %s -> ( %s x. ( 1 + 1 ) ) = ( %s x. 2 ) )' % (A, P2K, P2K))
+ep2 = w.s([ep, e12], 'eqtr4d', '( %s -> ( 2 ^ %s ) = ( %s x. ( 1 + 1 ) ) )' % (A, K1, P2K))
+lt2 = w.s([lt, ep2], 'breqtrd', '( %s -> N < ( %s x. ( 1 + 1 ) ) )' % (A, P2K))
+lt3 = w.s([lt2, ld], 'mpbird', '( %s -> %s < ( 1 + 1 ) )' % (A, Q))
+fl1 = w.s([ge3, lt3], 'jca', '( %s -> ( 1 <_ %s /\\ %s < ( 1 + 1 ) ) )' % (A, Q, Q)); fl2 = w.s([fl1, fb], 'mpbird', '( %s -> %s = 1 )' % (A, FQ))
+dv = w.s([fl2], 'breq2d', '( %s -> ( 2 || %s <-> 2 || 1 ) )' % (A, FQ)); dv2 = w.s([dv], 'notbid', '( %s -> ( -. 2 || %s <-> -. 2 || 1 ) )' % (A, FQ))
+n21 = w.s([], 'n2dvds1', '-. 2 || 1'); dv3 = w.s([n21, dv2], 'mpbiri', '( %s -> -. 2 || %s )' % (A, FQ))
+kb = w.s([dv3, bv], 'mpbird', '( %s -> %s e. ( bits ` N ) )' % (A, K)); k1o = w.s([kb, bt], 'mpbird', '( %s -> ( %s ` %s ) = 1o )' % (A, ENC('N'), K))
+w.qed([ls2, k1o], 'eqtrd', '( %s -> ( lastS ` %s ) = 1o )' % (A, ENC('N'))); run(w)
+
+# ---- the worked example: encodeNat 5 = <" 1o (/) 1o ">
+E5 = ENC('5'); L5 = LEN('5'); K5 = '( |_ ` ( 2 logb 5 ) )'; S3 = '<" 1o (/) 1o ">'
+X5 = lambda i: 'if ( ( ( |_ ` ( 5 / ( 2 ^ %s ) ) ) mod 2 ) = 1 , 1o , (/) )' % i
+w = W('encnat5lem1', 'Lemma for the example: the integer part of the binary logarithm of 5 is 2.')
+n2 = w.s([], '2nn0', '2 e. NN0')
+s = w.s([], 'sq2', '( 2 ^ 2 ) = 4'); p = w.s([], '2p1e3', '( 2 + 1 ) = 3'); p2 = w.s([p], 'oveq2i', '( 2 ^ ( 2 + 1 ) ) = ( 2 ^ 3 )'); c = w.s([], 'cu2', '( 2 ^ 3 ) = 8'); p3 = w.s([p2, c], 'eqtri', '( 2 ^ ( 2 + 1 ) ) = 8')
+o = w.s([s, p3], 'oveq12i', '( ( 2 ^ 2 ) ..^ ( 2 ^ ( 2 + 1 ) ) ) = ( 4 ..^ 8 )')
+z5 = w.s([], '5nn0', '5 e. NN0'); z5z = w.s([z5], 'nn0zi', '5 e. ZZ'); z4 = w.s([], '4z', '4 e. ZZ'); z8 = w.s([], '8nn0', '8 e. NN0'); z8z = w.s([z8], 'nn0zi', '8 e. ZZ')
+ef = w.s([z5z, z4, z8z, w.inst('elfzo')], 'mp3an', '( 5 e. ( 4 ..^ 8 ) <-> ( 4 <_ 5 /\\ 5 < 8 ) )')
+r4 = w.s([], '4re', '4 e. RR'); r5 = w.s([], '5re', '5 e. RR'); l45 = w.s([], '4lt5', '4 < 5'); li45 = w.s([r4, r5], 'ltlei', '( 4 < 5 -> 4 <_ 5 )'); le45 = w.s([l45, li45], 'ax-mp', '4 <_ 5'); l58 = w.s([], '5lt8', '5 < 8')
+m = w.s([le45, l58, ef], 'mpbir2an', '5 e. ( 4 ..^ 8 )'); m2 = w.s([m, o], 'eleqtrri', '5 e. ( ( 2 ^ 2 ) ..^ ( 2 ^ ( 2 + 1 ) ) )')
+w.qed([n2, m2, w.inst('fllog2')], 'mp2an', '%s = 2' % K5); run(w)
+
+w = W('encnat5len', 'Lemma for the example: the length of encodeNat 5 is 3.')
+n5 = w.s([], '5nn', '5 e. NN'); l = w.s([n5, w.inst('encnatlenn')], 'ax-mp', '%s = ( %s + 1 )' % (L5, K5))
+k = w.s([], 'encnat5lem1', '%s = 2' % K5); k2 = w.s([k], 'oveq1i', '( %s + 1 ) = ( 2 + 1 )' % K5); p = w.s([], '2p1e3', '( 2 + 1 ) = 3')
+k3 = w.s([k2, p], 'eqtri', '( %s + 1 ) = 3' % K5); w.qed([l, k3], 'eqtri', '%s = 3' % L5); run(w)
+
+def digit(label, i, val, body):
+    """body(w) proves X5(i) = val; returns step"""
+    w = W(label, 'Lemma for the example: letter %s of encodeNat 5.' % i)
+    n5 = w.s([], '5nn0', '5 e. NN0')
+    l3 = w.s([], 'encnat5len', '%s = 3' % L5); o = w.s([l3], 'oveq2i', '( 0 ..^ %s ) = ( 0 ..^ 3 )' % L5); t = w.s([], 'fzo0to3tp', '( 0 ..^ 3 ) = { 0 , 1 , 2 }'); o2 = w.s([o, t], 'eqtri', '( 0 ..^ %s ) = { 0 , 1 , 2 }' % L5)
+    if i == '0':
+        ex = w.s([], 'c0ex', '0 e. _V'); mem = w.s([ex], 'tpid1', '0 e. { 0 , 1 , 2 }')
+    elif i == '1':
+        ex = w.s([], '1ex', '1 e. _V'); mem = w.s([ex], 'tpid2', '1 e. { 0 , 1 , 2 }')
+    else:
+        ex = w.s([], '2ex', '2 e. _V'); mem = w.s([ex], 'tpid3', '2 e. { 0 , 1 , 2 }')
+    mem2 = w.s([mem, o2], 'eleqtrri', '%s e. ( 0 ..^ %s )' % (i, L5))
+    fv = w.s([n5, mem2, w.inst('encnatfv')], 'mp2an', '( %s ` %s ) = %s' % (E5, i, X5(i)))
+    v = body(w)
+    w.qed([fv, v], 'eqtri', '( %s ` %s ) = %s' % (E5, i, val)); run(w)
+
+def body0(w):
+    c2 = w.s([], '2cn', '2 e. CC'); e0 = w.s([c2, w.inst('exp0')], 'ax-mp', '( 2 ^ 0 ) = 1'); d = w.s([e0], 'oveq2i', '( 5 / ( 2 ^ 0 ) ) = ( 5 / 1 )')
+    c5 = w.s([], '5cn', '5 e. CC'); d1 = w.s([c5, w.inst('div1')], 'ax-mp', '( 5 / 1 ) = 5'); d2 = w.s([d, d1], 'eqtri', '( 5 / ( 2 ^ 0 ) ) = 5')
+    f = w.s([d2], 'fveq2i', '( |_ ` ( 5 / ( 2 ^ 0 ) ) ) = ( |_ ` 5 )'); z5 = w.s([], '5nn0', '5 e. NN0'); z5z = w.s([z5], 'nn0zi', '5 e. ZZ'); fi = w.s([z5z, w.inst('flid')], 'ax-mp', '( |_ ` 5 ) = 5')
+    f2 = w.s([f, fi], 'eqtri', '( |_ ` ( 5 / ( 2 ^ 0 ) ) ) = 5'); m = w.s([f2], 'oveq1i', '( ( |_ ` ( 5 / ( 2 ^ 0 ) ) ) mod 2 ) = ( 5 mod 2 )')
+    z2 = w.s([], '2z', '2 e. ZZ'); u = w.inst('uzid'); u2 = w.s([z2, u], 'ax-mp', '2 e. ( ZZ>= ` 2 )')
+    mp = w.s([z2, u2, w.inst('mulp1mod1')], 'mp2an', '( ( ( 2 x. 2 ) + 1 ) mod 2 ) = 1')
+    t = w.s([], '2t2e4', '( 2 x. 2 ) = 4'); t1 = w.s([t], 'oveq1i', '( ( 2 x. 2 ) + 1 ) = ( 4 + 1 )'); t2 = w.s([], '4p1e5', '( 4 + 1 ) = 5'); t3 = w.s([t1, t2], 'eqtri', '( ( 2 x. 2 ) + 1 ) = 5')
+    t4 = w.s([t3], 'oveq1i', '( ( ( 2 x. 2 ) + 1 ) mod 2 ) = ( 5 mod 2 )'); m5 = w.s([t4, mp], 'eqtr3i', '( 5 mod 2 ) = 1')
+    m2 = w.s([m, m5], 'eqtri', '( ( |_ ` ( 5 / ( 2 ^ 0 ) ) ) mod 2 ) = 1')
+    return w.s([m2], 'iftruei', '%s = 1o' % X5('0'))
+digit('encnat5lem2', '0', '1o', body0)
+
+def body1(w):
+    c2 = w.s([], '2cn', '2 e. CC'); e1 = w.s([c2, w.inst('exp1')], 'ax-mp', '( 2 ^ 1 ) = 2'); d = w.s([e1], 'oveq2i', '( 5 / ( 2 ^ 1 ) ) = ( 5 / 2 )')
+    f = w.s([d], 'fveq2i', '( |_ ` ( 5 / ( 2 ^ 1 ) ) ) = ( |_ ` ( 5 / 2 ) )')
+    r5 = w.s([], '5re', '5 e. RR'); r2 = w.s([], '2re', '2 e. RR'); n2 = w.s([], '2ne0', '2 =/= 0'); q = w.s([r5, r2, n2], 'redivcli', '( 5 / 2 ) e. RR')
+    z2 = w.s([], '2z', '2 e. ZZ'); fb = w.s([q, z2, w.inst('flbi')], 'mp2an', '( ( |_ ` ( 5 / 2 ) ) = 2 <-> ( 2 <_ ( 5 / 2 ) /\\ ( 5 / 2 ) < ( 2 + 1 ) ) )')
+    g0 = w.s([], '2pos', '0 < 2'); pc = w.s([r2, g0], 'pm3.2i', '( 2 e. RR /\\ 0 < 2 )')
+    lm = w.s([r2, r5, pc, w.inst('lemuldiv')], 'mp3an', '( ( 2 x. 2 ) <_ 5 <-> 2 <_ ( 5 / 2 ) )')
+    t = w.s([], '2t2e4', '( 2 x. 2 ) = 4'); r4 = w.s([], '4re', '4 e. RR'); l45 = w.s([], '4lt5', '4 < 5'); li45 = w.s([r4, r5], 'ltlei', '( 4 < 5 -> 4 <_ 5 )'); le45 = w.s([l45, li45], 'ax-mp', '4 <_ 5'); le = w.s([t, le45], 'eqbrtri', '( 2 x. 2 ) <_ 5')
+    a = w.s([le, lm], 'mpbi', '2 <_ ( 5 / 2 )')
+    r3 = w.s([], '3re', '3 e. RR'); p = w.s([], '2p1e3', '( 2 + 1 ) = 3'); r21 = w.s([p, r3], 'eqeltri', '( 2 + 1 ) e. RR')
+    ld = w.s([r5, r21, pc, w.inst('ltdivmul')], 'mp3an', '( ( 5 / 2 ) < ( 2 + 1 ) <-> 5 < ( 2 x. ( 2 + 1 ) ) )')
+    p2 = w.s([p], 'oveq2i', '( 2 x. ( 2 + 1 ) ) = ( 2 x. 3 )'); c3 = w.s([], '3cn', '3 e. CC'); mc = w.s([c2, c3], 'mulcomi', '( 2 x. 3 ) = ( 3 x. 2 )'); t6 = w.s([], '3t2e6', '( 3 x. 2 ) = 6')
+    p3 = w.s([p2, mc], 'eqtri', '( 2 x. ( 2 + 1 ) ) = ( 3 x. 2 )'); p4 = w.s([p3, t6], 'eqtri', '( 2 x. ( 2 + 1 ) ) = 6')
+    l56 = w.s([], '5lt6', '5 < 6'); l = w.s([l56, p4], 'breqtrri', '5 < ( 2 x. ( 2 + 1 ) )'); b = w.s([l, ld], 'mpbir', '( 5 / 2 ) < ( 2 + 1 )')
+    fl = w.s([a, b, fb], 'mpbir2an', '( |_ ` ( 5 / 2 ) ) = 2'); f2 = w.s([f, fl], 'eqtri', '( |_ ` ( 5 / ( 2 ^ 1 ) ) ) = 2')
+    m = w.s([f2], 'oveq1i', '( ( |_ ` ( 5 / ( 2 ^ 1 ) ) ) mod 2 ) = ( 2 mod 2 )'); rp2 = w.s([], '2rp', '2 e. RR+'); m0 = w.s([rp2, w.inst('modid0')], 'ax-mp', '( 2 mod 2 ) = 0')
+    m2 = w.s([m, m0], 'eqtri', '( ( |_ ` ( 5 / ( 2 ^ 1 ) ) ) mod 2 ) = 0')
+    ne = w.s([], '0ne1', '0 =/= 1'); nn = w.s([ne], 'neii', '-. 0 = 1'); ne2 = w.s([m2], 'eqeq1i', '( ( ( |_ ` ( 5 / ( 2 ^ 1 ) ) ) mod 2 ) = 1 <-> 0 = 1 )'); nn2 = w.s([nn, ne2], 'mtbir', '-. ( ( |_ ` ( 5 / ( 2 ^ 1 ) ) ) mod 2 ) = 1')
+    return w.s([nn2], 'iffalsei', '%s = (/)' % X5('1'))
+digit('encnat5lem3', '1', '(/)', body1)
+
+def body2(w):
+    s = w.s([], 'sq2', '( 2 ^ 2 ) = 4'); d = w.s([s], 'oveq2i', '( 5 / ( 2 ^ 2 ) ) = ( 5 / 4 )'); f = w.s([d], 'fveq2i', '( |_ ` ( 5 / ( 2 ^ 2 ) ) ) = ( |_ ` ( 5 / 4 ) )')
+    r5 = w.s([], '5re', '5 e. RR'); r4 = w.s([], '4re', '4 e. RR'); n4 = w.s([], '4ne0', '4 =/= 0'); q = w.s([r5, r4, n4], 'redivcli', '( 5 / 4 ) e. RR')
+    z1 = w.s([], '1z', '1 e. ZZ'); fb = w.s([q, z1, w.inst('flbi')], 'mp2an', '( ( |_ ` ( 5 / 4 ) ) = 1 <-> ( 1 <_ ( 5 / 4 ) /\\ ( 5 / 4 ) < ( 1 + 1 ) ) )')
+    g0 = w.s([], '4pos', '0 < 4'); pc = w.s([r4, g0], 'pm3.2i', '( 4 e. RR /\\ 0 < 4 )'); r1 = w.s([], '1re', '1 e. RR')
+    lm = w.s([r1, r5, pc, w.inst('lemuldiv')], 'mp3an', '( ( 1 x. 4 ) <_ 5 <-> 1 <_ ( 5 / 4 ) )')
+    c4 = w.s([], '4cn', '4 e. CC'); ml = w.s([c4, w.inst('mullid')], 'ax-mp', '( 1 x. 4 ) = 4'); l45 = w.s([], '4lt5', '4 < 5'); li45 = w.s([r4, r5], 'ltlei', '( 4 < 5 -> 4 <_ 5 )'); le45 = w.s([l45, li45], 'ax-mp', '4 <_ 5'); le = w.s([ml, le45], 'eqbrtri', '( 1 x. 4 ) <_ 5')
+    a = w.s([le, lm], 'mpbi', '1 <_ ( 5 / 4 )')
+    r2 = w.s([], '2re', '2 e. RR'); p = w.s([], '1p1e2', '( 1 + 1 ) = 2'); r11 = w.s([p, r2], 'eqeltri', '( 1 + 1 ) e. RR')
+    ld = w.s([r5, r11, pc, w.inst('ltdivmul')], 'mp3an', '( ( 5 / 4 ) < ( 1 + 1 ) <-> 5 < ( 4 x. ( 1 + 1 ) ) )')
+    p2 = w.s([p], 'oveq2i', '( 4 x. ( 1 + 1 ) ) = ( 4 x. 2 )'); t8 = w.s([], '4t2e8', '( 4 x. 2 ) = 8'); p3 = w.s([p2, t8], 'eqtri', '( 4 x. ( 1 + 1 ) ) = 8')
+    l58 = w.s([], '5lt8', '5 < 8'); l = w.s([l58, p3], 'breqtrri', '5 < ( 4 x. ( 1 + 1 ) )'); b = w.s([l, ld], 'mpbir', '( 5 / 4 ) < ( 1 + 1 )')
+    fl = w.s([a, b, fb], 'mpbir2an', '( |_ ` ( 5 / 4 ) ) = 1'); f2 = w.s([f, fl], 'eqtri', '( |_ ` ( 5 / ( 2 ^ 2 ) ) ) = 1')
+    m = w.s([f2], 'oveq1i', '( ( |_ ` ( 5 / ( 2 ^ 2 ) ) ) mod 2 ) = ( 1 mod 2 )'); l12 = w.s([], '1lt2', '1 < 2'); m1 = w.s([r2, l12, w.inst('1mod')], 'mp2an', '( 1 mod 2 ) = 1')
+    m2 = w.s([m, m1], 'eqtri', '( ( |_ ` ( 5 / ( 2 ^ 2 ) ) ) mod 2 ) = 1')
+    return w.s([m2], 'iftruei', '%s = 1o' % X5('2'))
+digit('encnat5lem4', '2', '1o', body2)
+
+w = W('encnat5', 'The worked example: encodeNat 5 is the word true, false, true (binary 101, least significant bit first).')
+n5 = w.s([], '5nn0', '5 e. NN0'); e = w.s([n5, w.inst('encnatcl')], 'ax-mp', '%s e. Word 2o' % E5)
+o1 = w.s([], '1oel2o', '1o e. 2o'); o0 = w.s([], '0el2o', '(/) e. 2o'); s3 = w.s([o1, o0, o1, w.inst('s3cl')], 'mp3an', '%s e. Word 2o' % S3)
+ew = w.s([e, s3, w.inst('eqwrd')], 'mp2an', '( %s = %s <-> ( ( # ` %s ) = ( # ` %s ) /\\ A. i e. ( 0 ..^ %s ) ( %s ` i ) = ( %s ` i ) ) )' % (E5, S3, E5, S3, L5, E5, S3))
+l5 = w.s([], 'encnat5len', '%s = 3' % L5); sl = w.s([], 's3len', '( # ` %s ) = 3' % S3); lq = w.s([l5, sl], 'eqtr4i', '%s = ( # ` %s )' % (L5, S3))
+o = w.s([l5], 'oveq2i', '( 0 ..^ %s ) = ( 0 ..^ 3 )' % L5); t = w.s([], 'fzo0to3tp', '( 0 ..^ 3 ) = { 0 , 1 , 2 }'); o2 = w.s([o, t], 'eqtri', '( 0 ..^ %s ) = { 0 , 1 , 2 }' % L5)
+rb = w.s([o2], 'raleqi', '( A. i e. ( 0 ..^ %s ) ( %s ` i ) = ( %s ` i ) <-> A. i e. { 0 , 1 , 2 } ( %s ` i ) = ( %s ` i ) )' % (L5, E5, S3, E5, S3))
+def subst(k):
+    a = w.s([], 'fveq2', '( i = %s -> ( %s ` i ) = ( %s ` %s ) )' % (k, E5, E5, k)); b = w.s([], 'fveq2', '( i = %s -> ( %s ` i ) = ( %s ` %s ) )' % (k, S3, S3, k))
+    return w.s([a, b], 'eqeq12d', '( i = %s -> ( ( %s ` i ) = ( %s ` i ) <-> ( %s ` %s ) = ( %s ` %s ) ) )' % (k, E5, S3, E5, k, S3, k))
+s0 = subst('0'); s1 = subst('1'); s2 = subst('2')
+ex0 = w.s([], 'c0ex', '0 e. _V'); ex1 = w.s([], '1ex', '1 e. _V'); ex2 = w.s([], '2ex', '2 e. _V')
+rt = w.s([s0, s1, s2], 'raltpg', '( ( 0 e. _V /\\ 1 e. _V /\\ 2 e. _V ) -> ( A. i e. { 0 , 1 , 2 } ( %s ` i ) = ( %s ` i ) <-> ( ( %s ` 0 ) = ( %s ` 0 ) /\\ ( %s ` 1 ) = ( %s ` 1 ) /\\ ( %s ` 2 ) = ( %s ` 2 ) ) ) )' % (E5, S3, E5, S3, E5, S3, E5, S3))
+rt2 = w.s([ex0, ex1, ex2, rt], 'mp3an', '( A. i e. { 0 , 1 , 2 } ( %s ` i ) = ( %s ` i ) <-> ( ( %s ` 0 ) = ( %s ` 0 ) /\\ ( %s ` 1 ) = ( %s ` 1 ) /\\ ( %s ` 2 ) = ( %s ` 2 ) ) )' % (E5, S3, E5, S3, E5, S3, E5, S3))
+d0 = w.s([], 'encnat5lem2', '( %s ` 0 ) = 1o' % E5); v0 = w.s([o1, w.inst('s3fv0')], 'ax-mp', '( %s ` 0 ) = 1o' % S3); q0 = w.s([d0, v0], 'eqtr4i', '( %s ` 0 ) = ( %s ` 0 )' % (E5, S3))
+d1 = w.s([], 'encnat5lem3', '( %s ` 1 ) = (/)' % E5); v1 = w.s([o0, w.inst('s3fv1')], 'ax-mp', '( %s ` 1 ) = (/)' % S3); q1 = w.s([d1, v1], 'eqtr4i', '( %s ` 1 ) = ( %s ` 1 )' % (E5, S3))
+d2 = w.s([], 'encnat5lem4', '( %s ` 2 ) = 1o' % E5); v2 = w.s([o1, w.inst('s3fv2')], 'ax-mp', '( %s ` 2 ) = 1o' % S3); q2 = w.s([d2, v2], 'eqtr4i', '( %s ` 2 ) = ( %s ` 2 )' % (E5, S3))
+q3 = w.s([q0, q1, q2], '3pm3.2i', '( ( %s ` 0 ) = ( %s ` 0 ) /\\ ( %s ` 1 ) = ( %s ` 1 ) /\\ ( %s ` 2 ) = ( %s ` 2 ) )' % (E5, S3, E5, S3, E5, S3))
+ral = w.s([q3, rt2], 'mpbir', 'A. i e. { 0 , 1 , 2 } ( %s ` i ) = ( %s ` i )' % (E5, S3)); ral2 = w.s([ral, rb], 'mpbir', 'A. i e. ( 0 ..^ %s ) ( %s ` i ) = ( %s ` i )' % (L5, E5, S3))
+w.qed([lq, ral2, ew], 'mpbir2an', '%s = %s' % (E5, S3)); run(w)

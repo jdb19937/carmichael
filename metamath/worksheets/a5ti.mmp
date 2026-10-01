@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=a5ti  LOC_AFTER=?
+
+* The reservoir has at least T elements (Lean: hlen of SearchAlg.lean).
+
+h1::a5ti.1 |- ( ph -> ( Z e. NN /\ W e. NN0 /\ Y e. NN ) )
+h2::a5ti.2 |- ( ph -> R = ( ( Z Reservoir W ) ` Y ) )
+h3::a5ti.3 |- ( ph -> I = ( # ` ( 1st ` R ) ) )
+h4::a5ti.4 |- ( ph -> T <_ ( # ` ( ( Z goodPrimesW W ) ` Y ) ) )
+s1:1:simp1d |- ( ph -> Z e. NN )
+s2:1:simp2d |- ( ph -> W e. NN0 )
+s3:1:simp3d |- ( ph -> Y e. NN )
+s4:s1,s2:jca |- ( ph -> ( Z e. NN /\ W e. NN0 ) )
+i5::reservoircl
+s6:s4,s3,i5:syl2anc |- ( ph -> ( ( Z Reservoir W ) ` Y ) e. ( Word NN0 X. NN0 ) )
+s7:2,s6:eqeltrd |- ( ph -> R e. ( Word NN0 X. NN0 ) )
+i8::xp1st
+s9:s7,i8:syl |- ( ph -> ( 1st ` R ) e. Word NN0 )
+i10::resspecw
+s11:1,i10:syl |- ( ph -> ( Fun `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) /\ ran ( 1st ` ( ( Z Reservoir W ) ` Y ) ) = ( ( Z goodPrimesW W ) ` Y ) ) )
+s12:2:fveq2d |- ( ph -> ( 1st ` R ) = ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s13:s11:simpld |- ( ph -> Fun `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s14:s12:cnveqd |- ( ph -> `' ( 1st ` R ) = `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s15:s14:funeqd |- ( ph -> ( Fun `' ( 1st ` R ) <-> Fun `' ( 1st ` ( ( Z Reservoir W ) ` Y ) ) ) )
+s16:s13,s15:mpbird |- ( ph -> Fun `' ( 1st ` R ) )
+s17:s12:rneqd |- ( ph -> ran ( 1st ` R ) = ran ( 1st ` ( ( Z Reservoir W ) ` Y ) ) )
+s18:s11:simprd |- ( ph -> ran ( 1st ` ( ( Z Reservoir W ) ` Y ) ) = ( ( Z goodPrimesW W ) ` Y ) )
+s19:s17,s18:eqtrd |- ( ph -> ran ( 1st ` R ) = ( ( Z goodPrimesW W ) ` Y ) )
+s20:s9,s16:jca |- ( ph -> ( ( 1st ` R ) e. Word NN0 /\ Fun `' ( 1st ` R ) ) )
+i21::algwrdcard
+s22:s20,i21:syl |- ( ph -> ( # ` ran ( 1st ` R ) ) = ( # ` ( 1st ` R ) ) )
+s23:s19:fveq2d |- ( ph -> ( # ` ran ( 1st ` R ) ) = ( # ` ( ( Z goodPrimesW W ) ` Y ) ) )
+s24:s23,s22:eqtr3d |- ( ph -> ( # ` ( ( Z goodPrimesW W ) ` Y ) ) = ( # ` ( 1st ` R ) ) )
+s25:4,s24:breqtrd |- ( ph -> T <_ ( # ` ( 1st ` R ) ) )
+s26:3:eqcomd |- ( ph -> ( # ` ( 1st ` R ) ) = I )
+qed:s25,s26:breqtrd |- ( ph -> T <_ I )
+$)

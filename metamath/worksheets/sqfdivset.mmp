@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=sqfdivset  LOC_AFTER=?
+
+* Every divisor of a squarefree L is squarefree.
+
+s1::simpr |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) -> m e. NN )
+s2::simpll |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) -> L e. NN )
+s3::simplr |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) -> ( mmu ` L ) =/= 0 )
+s4:s2:adantr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> L e. NN )
+s5:s1:adantr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> m e. NN )
+s6::simpr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> m || L )
+i7::dvdssqf
+s8:s4,s5,s6,i7:syl3anc |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> ( ( mmu ` L ) =/= 0 -> ( mmu ` m ) =/= 0 ) )
+s9:s3:adantr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> ( mmu ` L ) =/= 0 )
+s10:s9,s8:mpd |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> ( mmu ` m ) =/= 0 )
+s11::simpr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> m || L )
+s12:s10,s11:jca |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ m || L ) -> ( ( mmu ` m ) =/= 0 /\ m || L ) )
+s13::simprr |- ( ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) /\ ( ( mmu ` m ) =/= 0 /\ m || L ) ) -> m || L )
+s14:s13,s12:impbida |- ( ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) /\ m e. NN ) -> ( ( ( mmu ` m ) =/= 0 /\ m || L ) <-> m || L ) )
+qed:s14:rabbidva |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } = { m e. NN | m || L } )
+$)

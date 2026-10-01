@@ -1,0 +1,59 @@
+$( <MM> <PROOF_ASST> THEOREM=optstepf  LOC_AFTER=?
+
+* The option-lifted step function of F : A --> Option A is a function Option A --> Option A.
+
+1::simpll   |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) -> A e. V )
+2::simplr   |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) -> F : A --> ( A |_| 1o ) )
+3::simpr    |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) -> x e. ( A |_| 1o ) )
+4::0lt1o    |- (/) e. 1o
+5a::djurcl
+5:4,5a:ax-mp |- ( inr ` (/) ) e. ( A |_| 1o )
+6:5:a1i     |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ x = ( inr ` (/) ) ) -> ( inr ` (/) ) e. ( A |_| 1o ) )
+7a::djur
+7:3,7a:syl  |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) -> ( E. y e. A x = ( inl ` y ) \/ E. y e. 1o x = ( inr ` y ) ) )
+8::simpr    |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ y e. 1o ) -> y e. 1o )
+9::el1o     |- ( y e. 1o <-> y = (/) )
+10:8,9:sylib |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ y e. 1o ) -> y = (/) )
+11:10:fveq2d |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ y e. 1o ) -> ( inr ` y ) = ( inr ` (/) ) )
+12:11:eqeq2d |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ y e. 1o ) -> ( x = ( inr ` y ) <-> x = ( inr ` (/) ) ) )
+13::simplr  |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ y e. 1o ) -> -. x = ( inr ` (/) ) )
+14:13,12:mtbird |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ y e. 1o ) -> -. x = ( inr ` y ) )
+15:14:nrexdv |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> -. E. y e. 1o x = ( inr ` y ) )
+16:7:adantr |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> ( E. y e. A x = ( inl ` y ) \/ E. y e. 1o x = ( inr ` y ) ) )
+17:16,15:olcnd |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> E. y e. A x = ( inl ` y ) )
+18::simpr   |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> ( y e. A /\ x = ( inl ` y ) ) )
+19:18:simpld |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> y e. A )
+20:18:simprd |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> x = ( inl ` y ) )
+21a::inlval
+21:19,21a:syl |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> ( inl ` y ) = <. (/) , y >. )
+22:20,21:eqtrd |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> x = <. (/) , y >. )
+23:22:fveq2d |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> ( 2nd ` x ) = ( 2nd ` <. (/) , y >. ) )
+24::0ex     |- (/) e. _V
+25:24:a1i   |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> (/) e. _V )
+26a::op2ndg
+26:25,19,26a:syl2anc |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> ( 2nd ` <. (/) , y >. ) = y )
+27:23,26:eqtrd |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> ( 2nd ` x ) = y )
+28:27,19:eqeltrd |- ( ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) /\ ( y e. A /\ x = ( inl ` y ) ) ) -> ( 2nd ` x ) e. A )
+29:28:ex    |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> ( ( y e. A /\ x = ( inl ` y ) ) -> ( 2nd ` x ) e. A ) )
+30:29:expd  |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> ( y e. A -> ( x = ( inl ` y ) -> ( 2nd ` x ) e. A ) ) )
+31:30:rexlimdv |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> ( E. y e. A x = ( inl ` y ) -> ( 2nd ` x ) e. A ) )
+32:17,31:mpd |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> ( 2nd ` x ) e. A )
+33:2:adantr |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> F : A --> ( A |_| 1o ) )
+34:33,32:ffvelcdmd |- ( ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) /\ -. x = ( inr ` (/) ) ) -> ( F ` ( 2nd ` x ) ) e. ( A |_| 1o ) )
+35:6,34:ifclda |- ( ( ( A e. V /\ F : A --> ( A |_| 1o ) ) /\ x e. ( A |_| 1o ) ) -> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) e. ( A |_| 1o ) )
+36:35:fmpttd |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> ( x e. ( A |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) : ( A |_| 1o ) --> ( A |_| 1o ) )
+37::simpl   |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> A e. V )
+38::simpr   |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> F : A --> ( A |_| 1o ) )
+39a::fex
+39:38,37,39a:syl2anc |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> F e. _V )
+40a::optstepfval
+40:39,40a:syl |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> ( OptStep ` F ) = ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+41a::fdm
+41:38,41a:syl |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> dom F = A )
+42a::djueq1
+42:41,42a:syl |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> ( dom F |_| 1o ) = ( A |_| 1o ) )
+43:42:mpteq1d |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) = ( x e. ( A |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+44:40,43:eqtrd |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> ( OptStep ` F ) = ( x e. ( A |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+45:44:feq1d |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> ( ( OptStep ` F ) : ( A |_| 1o ) --> ( A |_| 1o ) <-> ( x e. ( A |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) : ( A |_| 1o ) --> ( A |_| 1o ) ) )
+qed:36,45:mpbird |- ( ( A e. V /\ F : A --> ( A |_| 1o ) ) -> ( OptStep ` F ) : ( A |_| 1o ) --> ( A |_| 1o ) )
+$)

@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stmtmin2  LOC_AFTER=?
+
+* Every statement first appears at some depth.
+
+s1::simpl |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) -> T e. V )
+s2::simpr |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) -> Q e. ( TM2Stmt ` T ) )
+i3::tm2stmtel
+s4:s1,i3:syl |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) -> ( Q e. ( TM2Stmt ` T ) <-> E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s5::id |- ( n = m -> n = m )
+c1:s5:fveq2d |- ( n = m -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+c2:c1:eleq2d |- ( n = m -> ( Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) )
+s6:c2:cbvrexvw |- ( E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> E. m e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+s7:s4,s6:bitrdi |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) -> ( Q e. ( TM2Stmt ` T ) <-> E. m e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) )
+s8:s2,s7:mpbid |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) -> E. m e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+s9::simprl |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) -> m e. _om )
+s10::simprr |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) -> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+i11::tm2stmtmin
+s12:s9,i11:syl |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) -> ( Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) -> E. n e. _om ( Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc n ) /\ -. Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) )
+s13:s10,s12:mpd |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) -> E. n e. _om ( Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc n ) /\ -. Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+qed:s8,s13:rexlimddv |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) ) -> E. n e. _om ( Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc n ) /\ -. Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+$)

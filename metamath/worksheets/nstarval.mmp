@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=nstarval  LOC_AFTER=?
+
+* Value of Nstar: the natural ceiling of lambdaL Q * ( 1 + log ( Lmod Q ) ) plus one (Lean: Nstar).
+
+s1::id |- ( s = Q -> s = Q )
+c1:s1:fveq2d |- ( s = Q -> ( lambdaL ` s ) = ( lambdaL ` Q ) )
+c2:s1:fveq2d |- ( s = Q -> ( Lmod ` s ) = ( Lmod ` Q ) )
+c3:c2:fveq2d |- ( s = Q -> ( log ` ( Lmod ` s ) ) = ( log ` ( Lmod ` Q ) ) )
+c4:c3:oveq2d |- ( s = Q -> ( 1 + ( log ` ( Lmod ` s ) ) ) = ( 1 + ( log ` ( Lmod ` Q ) ) ) )
+c5:c1,c4:oveq12d |- ( s = Q -> ( ( lambdaL ` s ) x. ( 1 + ( log ` ( Lmod ` s ) ) ) ) = ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) )
+c6:c5:fveq2d |- ( s = Q -> ( Nceil ` ( ( lambdaL ` s ) x. ( 1 + ( log ` ( Lmod ` s ) ) ) ) ) = ( Nceil ` ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) ) )
+c7:c6:oveq1d |- ( s = Q -> ( ( Nceil ` ( ( lambdaL ` s ) x. ( 1 + ( log ` ( Lmod ` s ) ) ) ) ) + 1 ) = ( ( Nceil ` ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) ) + 1 ) )
+s2::df-nstar |- Nstar = ( s e. ( ~P NN0 i^i Fin ) |-> ( ( Nceil ` ( ( lambdaL ` s ) x. ( 1 + ( log ` ( Lmod ` s ) ) ) ) ) + 1 ) )
+s3::ovex |- ( ( Nceil ` ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) ) + 1 ) e. _V
+qed:c7,s2,s3:fvmpt |- ( Q e. ( ~P NN0 i^i Fin ) -> ( Nstar ` Q ) = ( ( Nceil ` ( ( lambdaL ` Q ) x. ( 1 + ( log ` ( Lmod ` Q ) ) ) ) ) + 1 ) )
+$)

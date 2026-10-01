@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=mvdvsin  LOC_AFTER=?
+
+* The derivative of t |-> sin ( B t ) on RR (chain rule, dvmptco with dvsin).
+
+s1::id |- ( B e. RR -> B e. RR )
+s2:s1:recnd |- ( B e. RR -> B e. CC )
+s3::simpr |- ( ( B e. RR /\ t e. RR ) -> t e. RR )
+s4:s1:adantr |- ( ( B e. RR /\ t e. RR ) -> B e. RR )
+s5::simpr |- ( ( B e. RR /\ y e. CC ) -> y e. CC )
+s6::reelprrecn |- RR e. { RR , CC }
+s7:s6:a1i |- ( B e. RR -> RR e. { RR , CC } )
+s8::cnelprrecn |- CC e. { RR , CC }
+s9:s8:a1i |- ( B e. RR -> CC e. { RR , CC } )
+s10:s7:dvmptid |- ( B e. RR -> ( RR _D ( t e. RR |-> t ) ) = ( t e. RR |-> 1 ) )
+s11::1cnd |- ( ( B e. RR /\ t e. RR ) -> 1 e. CC )
+s12:s3:recnd |- ( ( B e. RR /\ t e. RR ) -> t e. CC )
+s13:s7,s12,s11,s10,s2:dvmptcmul |- ( B e. RR -> ( RR _D ( t e. RR |-> ( B x. t ) ) ) = ( t e. RR |-> ( B x. 1 ) ) )
+s14:s4:recnd |- ( ( B e. RR /\ t e. RR ) -> B e. CC )
+s15:s14:mulridd |- ( ( B e. RR /\ t e. RR ) -> ( B x. 1 ) = B )
+s16:s15:mpteq2dva |- ( B e. RR -> ( t e. RR |-> ( B x. 1 ) ) = ( t e. RR |-> B ) )
+s17:s13,s16:eqtrd |- ( B e. RR -> ( RR _D ( t e. RR |-> ( B x. t ) ) ) = ( t e. RR |-> B ) )
+s18::sinf |- sin : CC --> CC
+s19:s18:a1i |- ( B e. RR -> sin : CC --> CC )
+s20::cosf |- cos : CC --> CC
+s21:s20:a1i |- ( B e. RR -> cos : CC --> CC )
+s22:s19:feqmptd |- ( B e. RR -> sin = ( y e. CC |-> ( sin ` y ) ) )
+s23:s21:feqmptd |- ( B e. RR -> cos = ( y e. CC |-> ( cos ` y ) ) )
+s24::dvsin |- ( CC _D sin ) = cos
+s25:s24:a1i |- ( B e. RR -> ( CC _D sin ) = cos )
+s26:s22:oveq2d |- ( B e. RR -> ( CC _D sin ) = ( CC _D ( y e. CC |-> ( sin ` y ) ) ) )
+s27:s26:eqcomd |- ( B e. RR -> ( CC _D ( y e. CC |-> ( sin ` y ) ) ) = ( CC _D sin ) )
+s28:s27,s25:eqtrd |- ( B e. RR -> ( CC _D ( y e. CC |-> ( sin ` y ) ) ) = cos )
+s29:s28,s23:eqtrd |- ( B e. RR -> ( CC _D ( y e. CC |-> ( sin ` y ) ) ) = ( y e. CC |-> ( cos ` y ) ) )
+s30::fveq2 |- ( y = ( B x. t ) -> ( sin ` y ) = ( sin ` ( B x. t ) ) )
+s31::fveq2 |- ( y = ( B x. t ) -> ( cos ` y ) = ( cos ` ( B x. t ) ) )
+s32:s14,s12:mulcld |- ( ( B e. RR /\ t e. RR ) -> ( B x. t ) e. CC )
+s33:s5:sincld |- ( ( B e. RR /\ y e. CC ) -> ( sin ` y ) e. CC )
+s34:s5:coscld |- ( ( B e. RR /\ y e. CC ) -> ( cos ` y ) e. CC )
+s35:s7,s9,s32,s14,s33,s34,s17,s29,s30,s31:dvmptco |- ( B e. RR -> ( RR _D ( t e. RR |-> ( sin ` ( B x. t ) ) ) ) = ( t e. RR |-> ( ( cos ` ( B x. t ) ) x. B ) ) )
+s36:s32:coscld |- ( ( B e. RR /\ t e. RR ) -> ( cos ` ( B x. t ) ) e. CC )
+s37:s36,s14:mulcomd |- ( ( B e. RR /\ t e. RR ) -> ( ( cos ` ( B x. t ) ) x. B ) = ( B x. ( cos ` ( B x. t ) ) ) )
+s38:s37:mpteq2dva |- ( B e. RR -> ( t e. RR |-> ( ( cos ` ( B x. t ) ) x. B ) ) = ( t e. RR |-> ( B x. ( cos ` ( B x. t ) ) ) ) )
+qed:s35,s38:eqtrd |- ( B e. RR -> ( RR _D ( t e. RR |-> ( sin ` ( B x. t ) ) ) ) = ( t e. RR |-> ( B x. ( cos ` ( B x. t ) ) ) ) )
+$)

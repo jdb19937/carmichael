@@ -1,0 +1,66 @@
+$( <MM> <PROOF_ASST> THEOREM=tmlabap  LOC_AFTER=?
+
+* Applying the address label of W to an index gives the label of the extended address.
+
+s1::simp1 |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> W e. Word NN0 )
+s2::simp2 |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( # ` W ) < ; 3 0 )
+s3::simp3 |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> I e. NN0 )
+i4::lencl
+s5:s1,i4:syl |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( # ` W ) e. NN0 )
+s6::3nn0 |- 3 e. NN0
+s7::0nn0 |- 0 e. NN0
+s8:s6,s7:deccl |- ; 3 0 e. NN0
+s9:s8:a1i |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ; 3 0 e. NN0 )
+i10::nn0ltp1le
+s11:s5,s9,i10:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( # ` W ) < ; 3 0 <-> ( ( # ` W ) + 1 ) <_ ; 3 0 ) )
+s12:s2,s11:mpbid |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( # ` W ) + 1 ) <_ ; 3 0 )
+i13::peano2nn0
+s14:s5,i13:syl |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( # ` W ) + 1 ) e. NN0 )
+i15::nn0sub
+s16:s14,s9,i15:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( ( # ` W ) + 1 ) <_ ; 3 0 <-> ( ; 3 0 - ( ( # ` W ) + 1 ) ) e. NN0 ) )
+s17:s12,s16:mpbid |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ; 3 0 - ( ( # ` W ) + 1 ) ) e. NN0 )
+s18:s9:nn0cnd |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ; 3 0 e. CC )
+s19:s5:nn0cnd |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( # ` W ) e. CC )
+s20::ax-1cn |- 1 e. CC
+s21:s20:a1i |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> 1 e. CC )
+s22:s18,s19,s21:subsub4d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( ; 3 0 - ( # ` W ) ) - 1 ) = ( ; 3 0 - ( ( # ` W ) + 1 ) ) )
+s23:s22:oveq1d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( ( ; 3 0 - ( # ` W ) ) - 1 ) + 1 ) = ( ( ; 3 0 - ( ( # ` W ) + 1 ) ) + 1 ) )
+s24:s18,s19:subcld |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ; 3 0 - ( # ` W ) ) e. CC )
+i25::npcan1
+s26:s24,i25:syl |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( ( ; 3 0 - ( # ` W ) ) - 1 ) + 1 ) = ( ; 3 0 - ( # ` W ) ) )
+s27:s23,s26:eqtr3d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( ; 3 0 - ( ( # ` W ) + 1 ) ) + 1 ) = ( ; 3 0 - ( # ` W ) ) )
+s28::fvexd |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) e. _V )
+s29::id |- ( w = W -> w = W )
+c29_1:s29:fveq2d |- ( w = W -> ( # ` w ) = ( # ` W ) )
+c29_2:c29_1:oveq2d |- ( w = W -> ( ; 3 0 - ( # ` w ) ) = ( ; 3 0 - ( # ` W ) ) )
+c29_3:c29_2:fveq2d |- ( w = W -> ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) = ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) )
+c29_4:c29_3,s29:fveq12d |- ( w = W -> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) = ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) )
+s30::df-tmlab |- TMLab = ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) )
+s31:c29_4,s30:fvmptg |- ( ( W e. Word NN0 /\ ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) e. _V ) -> ( TMLab ` W ) = ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) )
+s32:s1,s28,s31:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( TMLab ` W ) = ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) )
+s33:s32:fveq1d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( TMLab ` W ) ` I ) = ( ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) ` I ) )
+s34:s27:fveq2d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( TMFam ` ( ( ; 3 0 - ( ( # ` W ) + 1 ) ) + 1 ) ) = ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) )
+s35:s34:fveq1d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( TMFam ` ( ( ; 3 0 - ( ( # ` W ) + 1 ) ) + 1 ) ) ` W ) = ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) )
+s36:s35:fveq1d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( ( TMFam ` ( ( ; 3 0 - ( ( # ` W ) + 1 ) ) + 1 ) ) ` W ) ` I ) = ( ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) ` I ) )
+i37::tmfamap
+s38:s17,s1,s3,i37:syl3anc |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( ( TMFam ` ( ( ; 3 0 - ( ( # ` W ) + 1 ) ) + 1 ) ) ` W ) ` I ) = ( ( TMFam ` ( ; 3 0 - ( ( # ` W ) + 1 ) ) ) ` ( W ++ <" I "> ) ) )
+s39:s33,s36,s38:3eqtr2d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( TMLab ` W ) ` I ) = ( ( TMFam ` ( ; 3 0 - ( ( # ` W ) + 1 ) ) ) ` ( W ++ <" I "> ) ) )
+i40::ccatws1cl
+s41:s1,s3,i40:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( W ++ <" I "> ) e. Word NN0 )
+s42::fvexd |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) ` ( W ++ <" I "> ) ) e. _V )
+s43::id |- ( w = ( W ++ <" I "> ) -> w = ( W ++ <" I "> ) )
+c47_1:s43:fveq2d |- ( w = ( W ++ <" I "> ) -> ( # ` w ) = ( # ` ( W ++ <" I "> ) ) )
+c47_2:c47_1:oveq2d |- ( w = ( W ++ <" I "> ) -> ( ; 3 0 - ( # ` w ) ) = ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) )
+c47_3:c47_2:fveq2d |- ( w = ( W ++ <" I "> ) -> ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) = ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) )
+c47_4:c47_3,s43:fveq12d |- ( w = ( W ++ <" I "> ) -> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) = ( ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) ` ( W ++ <" I "> ) ) )
+s44::df-tmlab |- TMLab = ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) )
+s45:c47_4,s44:fvmptg |- ( ( ( W ++ <" I "> ) e. Word NN0 /\ ( ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) ` ( W ++ <" I "> ) ) e. _V ) -> ( TMLab ` ( W ++ <" I "> ) ) = ( ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) ` ( W ++ <" I "> ) ) )
+s46:s41,s42,s45:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( TMLab ` ( W ++ <" I "> ) ) = ( ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) ` ( W ++ <" I "> ) ) )
+i47::ccatws1len
+s48:s1,i47:syl |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( # ` ( W ++ <" I "> ) ) = ( ( # ` W ) + 1 ) )
+s49:s48:oveq2d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) = ( ; 3 0 - ( ( # ` W ) + 1 ) ) )
+s50:s49:fveq2d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) = ( TMFam ` ( ; 3 0 - ( ( # ` W ) + 1 ) ) ) )
+s51:s50:fveq1d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( TMFam ` ( ; 3 0 - ( # ` ( W ++ <" I "> ) ) ) ) ` ( W ++ <" I "> ) ) = ( ( TMFam ` ( ; 3 0 - ( ( # ` W ) + 1 ) ) ) ` ( W ++ <" I "> ) ) )
+s52:s46,s51:eqtrd |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( TMLab ` ( W ++ <" I "> ) ) = ( ( TMFam ` ( ; 3 0 - ( ( # ` W ) + 1 ) ) ) ` ( W ++ <" I "> ) ) )
+qed:s39,s52:eqtr4d |- ( ( W e. Word NN0 /\ ( # ` W ) < ; 3 0 /\ I e. NN0 ) -> ( ( TMLab ` W ) ` I ) = ( TMLab ` ( W ++ <" I "> ) ) )
+$)

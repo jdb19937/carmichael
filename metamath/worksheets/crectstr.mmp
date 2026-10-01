@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=crectstr  LOC_AFTER=?
+
+* A rectangle whose vertical sides are the strip boundaries lies in the strip.
+
+s1::simp1 |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> X e. RR )
+s2::simp2 |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> Y e. RR )
+s3::simp3 |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> T e. RR )
+s4:s3:renegcld |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> -u T e. RR )
+s5::ax-icn |- _i e. CC
+s6:s5:a1i |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> _i e. CC )
+s7:s1:recnd |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> X e. CC )
+s8:s4:recnd |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> -u T e. CC )
+s9:s6,s8:mulcld |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( _i x. -u T ) e. CC )
+s10:s7,s9:addcld |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( X + ( _i x. -u T ) ) e. CC )
+s11:s2:recnd |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> Y e. CC )
+s12:s3:recnd |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> T e. CC )
+s13:s6,s12:mulcld |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( _i x. T ) e. CC )
+s14:s11,s13:addcld |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( Y + ( _i x. T ) ) e. CC )
+i15::crre
+s16:s1,s4,i15:syl2anc |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( Re ` ( X + ( _i x. -u T ) ) ) = X )
+i17::crre
+s18:s2,s3,i17:syl2anc |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( Re ` ( Y + ( _i x. T ) ) ) = Y )
+i19::crim
+s20:s1,s4,i19:syl2anc |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( Im ` ( X + ( _i x. -u T ) ) ) = -u T )
+i21::crim
+s22:s2,s3,i21:syl2anc |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( Im ` ( Y + ( _i x. T ) ) ) = T )
+s23::simpr |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) )
+s24:s10:adantr |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( X + ( _i x. -u T ) ) e. CC )
+s25:s14:adantr |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( Y + ( _i x. T ) ) e. CC )
+i26::elcrect
+s27:s24,s25,i26:syl2anc |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) <-> ( v e. CC /\ ( Re ` v ) e. ( ( Re ` ( X + ( _i x. -u T ) ) ) [,] ( Re ` ( Y + ( _i x. T ) ) ) ) /\ ( Im ` v ) e. ( ( Im ` ( X + ( _i x. -u T ) ) ) [,] ( Im ` ( Y + ( _i x. T ) ) ) ) ) ) )
+s28:s23,s27:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( v e. CC /\ ( Re ` v ) e. ( ( Re ` ( X + ( _i x. -u T ) ) ) [,] ( Re ` ( Y + ( _i x. T ) ) ) ) /\ ( Im ` v ) e. ( ( Im ` ( X + ( _i x. -u T ) ) ) [,] ( Im ` ( Y + ( _i x. T ) ) ) ) ) )
+i29::simp1
+s30:s28,i29:syl |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> v e. CC )
+i31::simp2
+s32:s28,i31:syl |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( Re ` v ) e. ( ( Re ` ( X + ( _i x. -u T ) ) ) [,] ( Re ` ( Y + ( _i x. T ) ) ) ) )
+s33:s16:adantr |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( Re ` ( X + ( _i x. -u T ) ) ) = X )
+s34:s18:adantr |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( Re ` ( Y + ( _i x. T ) ) ) = Y )
+s35:s33,s34:oveq12d |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( ( Re ` ( X + ( _i x. -u T ) ) ) [,] ( Re ` ( Y + ( _i x. T ) ) ) ) = ( X [,] Y ) )
+s36:s32,s35:eleqtrd |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( Re ` v ) e. ( X [,] Y ) )
+s37:s30,s36:jca |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( v e. CC /\ ( Re ` v ) e. ( X [,] Y ) ) )
+s38::elstr |- ( v e. ( `' Re " ( X [,] Y ) ) <-> ( v e. CC /\ ( Re ` v ) e. ( X [,] Y ) ) )
+s39:s38:a1i |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> ( v e. ( `' Re " ( X [,] Y ) ) <-> ( v e. CC /\ ( Re ` v ) e. ( X [,] Y ) ) ) )
+s40:s37,s39:mpbird |- ( ( ( X e. RR /\ Y e. RR /\ T e. RR ) /\ v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) ) -> v e. ( `' Re " ( X [,] Y ) ) )
+s41:s40:ex |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( v e. ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) -> v e. ( `' Re " ( X [,] Y ) ) ) )
+qed:s41:ssrdv |- ( ( X e. RR /\ Y e. RR /\ T e. RR ) -> ( ( X + ( _i x. -u T ) ) crect ( Y + ( _i x. T ) ) ) C_ ( `' Re " ( X [,] Y ) ) )
+$)

@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgs1shift  LOC_AFTER=?
+
+* The Gauss sum of the trivial character shifted by a unit U is the Gauss sum itself (Lean hshiftA in norm_gaussSum_one_squarefree: gaussSum_mulShift_eq with inv_one and MulChar.one_apply_coe).
+
+s1::simp1 |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> N e. NN )
+s2::simp2 |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> U e. ZZ )
+s3::simp3 |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( U gcd N ) = 1 )
+s4::eqid |- ( DChr ` N ) = ( DChr ` N )
+s5::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s6::eqid |- ( invg ` ( DChr ` N ) ) = ( invg ` ( DChr ` N ) )
+s7::eqid |- ( 0g ` ( DChr ` N ) ) = ( 0g ` ( DChr ` N ) )
+s8::eqid |- ( Z/nZ ` N ) = ( Z/nZ ` N )
+s9::eqid |- ( Unit ` ( Z/nZ ` N ) ) = ( Unit ` ( Z/nZ ` N ) )
+s10::eqid |- ( ZRHom ` ( Z/nZ ` N ) ) = ( ZRHom ` ( Z/nZ ` N ) )
+s11:s4:dchrabl |- ( N e. NN -> ( DChr ` N ) e. Abel )
+s12:s1,s11:syl |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( DChr ` N ) e. Abel )
+s13:s12:ablgrpd |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( DChr ` N ) e. Grp )
+s14:s5,s7:grpidcl |- ( ( DChr ` N ) e. Grp -> ( 0g ` ( DChr ` N ) ) e. ( Base ` ( DChr ` N ) ) )
+s15:s13,s14:syl |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( 0g ` ( DChr ` N ) ) e. ( Base ` ( DChr ` N ) ) )
+s16:s1,s15:jca |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( N e. NN /\ ( 0g ` ( DChr ` N ) ) e. ( Base ` ( DChr ` N ) ) ) )
+i17::dchrgsshiftr
+s18:s16,s2,s3,i17:syl3anc |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> sum_ a e. ( 0 ..^ N ) ( ( ( 0g ` ( DChr ` N ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ ( U x. a ) ) ) = ( ( ( ( invg ` ( DChr ` N ) ) ` ( 0g ` ( DChr ` N ) ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) x. ( N DChrGS ( 0g ` ( DChr ` N ) ) ) ) )
+s19:s7,s6:grpinvid |- ( ( DChr ` N ) e. Grp -> ( ( invg ` ( DChr ` N ) ) ` ( 0g ` ( DChr ` N ) ) ) = ( 0g ` ( DChr ` N ) ) )
+s20:s13,s19:syl |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( invg ` ( DChr ` N ) ) ` ( 0g ` ( DChr ` N ) ) ) = ( 0g ` ( DChr ` N ) ) )
+s21:s20:fveq1d |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( ( invg ` ( DChr ` N ) ) ` ( 0g ` ( DChr ` N ) ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) = ( ( 0g ` ( DChr ` N ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) )
+s22:s1:nnnn0d |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> N e. NN0 )
+s23:s8,s9,s10:znunit |- ( ( N e. NN0 /\ U e. ZZ ) -> ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) e. ( Unit ` ( Z/nZ ` N ) ) <-> ( U gcd N ) = 1 ) )
+s24:s22,s2,s23:syl2anc |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) e. ( Unit ` ( Z/nZ ` N ) ) <-> ( U gcd N ) = 1 ) )
+s25:s3,s24:mpbird |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) e. ( Unit ` ( Z/nZ ` N ) ) )
+s26:s4,s8,s7,s9,s1,s25:dchr1 |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( 0g ` ( DChr ` N ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) = 1 )
+i27::dchrgscl
+s28:s16,i27:syl |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( N DChrGS ( 0g ` ( DChr ` N ) ) ) e. CC )
+s29:s21,s26:eqtrd |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( ( invg ` ( DChr ` N ) ) ` ( 0g ` ( DChr ` N ) ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) = 1 )
+s30:s29:oveq1d |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( ( ( invg ` ( DChr ` N ) ) ` ( 0g ` ( DChr ` N ) ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) x. ( N DChrGS ( 0g ` ( DChr ` N ) ) ) ) = ( 1 x. ( N DChrGS ( 0g ` ( DChr ` N ) ) ) ) )
+s31:s28:mullidd |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( 1 x. ( N DChrGS ( 0g ` ( DChr ` N ) ) ) ) = ( N DChrGS ( 0g ` ( DChr ` N ) ) ) )
+s32:s30,s31:eqtrd |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> ( ( ( ( invg ` ( DChr ` N ) ) ` ( 0g ` ( DChr ` N ) ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` U ) ) x. ( N DChrGS ( 0g ` ( DChr ` N ) ) ) ) = ( N DChrGS ( 0g ` ( DChr ` N ) ) ) )
+qed:s18,s32:eqtrd |- ( ( N e. NN /\ U e. ZZ /\ ( U gcd N ) = 1 ) -> sum_ a e. ( 0 ..^ N ) ( ( ( 0g ` ( DChr ` N ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ ( U x. a ) ) ) = ( N DChrGS ( 0g ` ( DChr ` N ) ) ) )
+$)

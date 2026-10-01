@@ -1,0 +1,109 @@
+$( <MM> <PROOF_ASST> THEOREM=gamvbl  LOC_AFTER=?
+
+* The vertical bound of ~ gamvbc below height eight, where the constant alone suffices.
+
+s1::simpl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( Z e. CC /\ 0 < ( Re ` Z ) ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> Z e. CC )
+i4::simpr
+s5:s1,i4:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 0 < ( Re ` Z ) )
+s6::simpr |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( abs ` ( Im ` Z ) ) <_ 8 )
+s7:s3:imcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( Im ` Z ) e. RR )
+s8:s7:recnd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( Im ` Z ) e. CC )
+s9:s8:abscld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( abs ` ( Im ` Z ) ) e. RR )
+s10::2re |- 2 e. RR
+s11:s10:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 2 e. RR )
+s12::2ne0 |- 2 =/= 0
+s13:s12:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 2 =/= 0 )
+s14:s9,s11,s13:redivcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( ( abs ` ( Im ` Z ) ) / 2 ) e. RR )
+s15::2rp |- 2 e. RR+
+s16:s15:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 2 e. RR+ )
+s17:s14:renegcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> -u ( ( abs ` ( Im ` Z ) ) / 2 ) e. RR )
+s18:s16,s17:rpcxpcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) e. RR+ )
+s19::fz10 |- ( 1 ... 0 ) = (/)
+s20::ral0 |- A. j e. (/) ( 2 x. ( ( Re ` Z ) + j ) ) <_ ( abs ` ( Im ` Z ) )
+s21:s19:eqcomi |- (/) = ( 1 ... 0 )
+i22::raleq
+s23:s21,i22:ax-mp |- ( A. j e. (/) ( 2 x. ( ( Re ` Z ) + j ) ) <_ ( abs ` ( Im ` Z ) ) <-> A. j e. ( 1 ... 0 ) ( 2 x. ( ( Re ` Z ) + j ) ) <_ ( abs ` ( Im ` Z ) ) )
+s24:s20,s23:mpbi |- A. j e. ( 1 ... 0 ) ( 2 x. ( ( Re ` Z ) + j ) ) <_ ( abs ` ( Im ` Z ) )
+s25:s24:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> A. j e. ( 1 ... 0 ) ( 2 x. ( ( Re ` Z ) + j ) ) <_ ( abs ` ( Im ` Z ) ) )
+s26::2cn |- 2 e. CC
+i27::exp0
+s28:s26,i27:ax-mp |- ( 2 ^ 0 ) = 1
+s29:s28:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 ^ 0 ) = 1 )
+s30::1div1e1 |- ( 1 / 1 ) = 1
+s31:s30:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 1 / 1 ) = 1 )
+s33:s29:oveq2d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 1 / ( 2 ^ 0 ) ) = ( 1 / 1 ) )
+s34::1div1e1 |- ( 1 / 1 ) = 1
+s35:s34:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 1 / 1 ) = 1 )
+s36:s33,s35:eqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 1 / ( 2 ^ 0 ) ) = 1 )
+s37::4cn |- 4 e. CC
+i38::cxpneg
+s39:s26,s12,s37,i38:mp3an |- ( 2 ^c -u 4 ) = ( 1 / ( 2 ^c 4 ) )
+s40::4nn0 |- 4 e. NN0
+i41::cxpexp
+s42:s26,s40,i41:mp2an |- ( 2 ^c 4 ) = ( 2 ^ 4 )
+s43::2exp4 |- ( 2 ^ 4 ) = ; 1 6
+s44:s42,s43:eqtri |- ( 2 ^c 4 ) = ; 1 6
+s45:s44:oveq2i |- ( 1 / ( 2 ^c 4 ) ) = ( 1 / ; 1 6 )
+s46:s39,s45:eqtri |- ( 2 ^c -u 4 ) = ( 1 / ; 1 6 )
+s47::4re |- 4 e. RR
+s48:s47:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 4 e. RR )
+s49:s10:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 2 e. RR )
+s50::2pos |- 0 < 2
+s51:s50:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 0 < 2 )
+s52:s49,s51:jca |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 e. RR /\ 0 < 2 ) )
+i53::ledivmul
+s54:s9,s48,s52,i53:syl3anc |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( ( ( abs ` ( Im ` Z ) ) / 2 ) <_ 4 <-> ( abs ` ( Im ` Z ) ) <_ ( 2 x. 4 ) ) )
+s55::2t4e8 |- ( 2 x. 4 ) = 8
+s56:s55:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 x. 4 ) = 8 )
+s57:s56:eqcomd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 8 = ( 2 x. 4 ) )
+s58:s6,s57:breqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( abs ` ( Im ` Z ) ) <_ ( 2 x. 4 ) )
+s59:s58,s54:mpbird |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( ( abs ` ( Im ` Z ) ) / 2 ) <_ 4 )
+s60:s47:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 4 e. RR )
+s61:s14,s60:lenegd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( ( ( abs ` ( Im ` Z ) ) / 2 ) <_ 4 <-> -u 4 <_ -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) )
+s62:s59,s61:mpbid |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> -u 4 <_ -u ( ( abs ` ( Im ` Z ) ) / 2 ) )
+s63:s10:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 2 e. RR )
+s64::1le2 |- 1 <_ 2
+s65:s47:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 4 e. RR )
+s66:s65:renegcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> -u 4 e. RR )
+s67:s14:renegcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> -u ( ( abs ` ( Im ` Z ) ) / 2 ) e. RR )
+s69:s64:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 1 <_ 2 )
+s70:s10:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 2 e. RR )
+s71:s70,s69:jca |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 e. RR /\ 1 <_ 2 ) )
+s72:s47:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 4 e. RR )
+s73:s72:renegcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> -u 4 e. RR )
+s74:s14:renegcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> -u ( ( abs ` ( Im ` Z ) ) / 2 ) e. RR )
+s75:s73,s74:jca |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( -u 4 e. RR /\ -u ( ( abs ` ( Im ` Z ) ) / 2 ) e. RR ) )
+i76::cxplea
+s77:s71,s75,s62,i76:syl3anc |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 ^c -u 4 ) <_ ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) )
+s78:s46:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 ^c -u 4 ) = ( 1 / ; 1 6 ) )
+s79:s78,s77:eqbrtrrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 1 / ; 1 6 ) <_ ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) )
+s80::1nn0 |- 1 e. NN0
+s81::6nn0 |- 6 e. NN0
+s82:s80,s81:deccl |- ; 1 6 e. NN0
+s83:s82:nn0rei |- ; 1 6 e. RR
+s84:s83:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ; 1 6 e. RR )
+s85::1re |- 1 e. RR
+s86:s85:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 1 e. RR )
+s87::6nn |- 6 e. NN
+s88:s80,s87:decnncl |- ; 1 6 e. NN
+s89:s88:nnne0i |- ; 1 6 =/= 0
+s90:s89:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ; 1 6 =/= 0 )
+s91:s86,s84,s90:redivcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 1 / ; 1 6 ) e. RR )
+s92:s18:rpred |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) e. RR )
+s93:s82:nn0ge0i |- 0 <_ ; 1 6
+s94:s93:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 0 <_ ; 1 6 )
+s95:s91,s92,s84,s94,s79:lemul2ad |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( ; 1 6 x. ( 1 / ; 1 6 ) ) <_ ( ; 1 6 x. ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) ) )
+s96:s82:nn0cni |- ; 1 6 e. CC
+i97::recid
+s98:s96,s89,i97:mp2an |- ( ; 1 6 x. ( 1 / ; 1 6 ) ) = 1
+s99:s98:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( ; 1 6 x. ( 1 / ; 1 6 ) ) = 1 )
+s100:s99,s95:eqbrtrrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 1 <_ ( ; 1 6 x. ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) ) )
+s101:s36,s100:eqbrtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 1 / ( 2 ^ 0 ) ) <_ ( ; 1 6 x. ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) ) )
+s102::0nn0 |- 0 e. NN0
+s103:s102:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> 0 e. NN0 )
+s104:s103,s25:jca |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( 0 e. NN0 /\ A. j e. ( 1 ... 0 ) ( 2 x. ( ( Re ` Z ) + j ) ) <_ ( abs ` ( Im ` Z ) ) ) )
+i105::gamvbc
+qed:s1,s104,s101,i105:syl3anc |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( abs ` ( Im ` Z ) ) <_ 8 ) -> ( abs ` ( _G ` Z ) ) <_ ( ( ; 1 6 x. ( _G ` ( Re ` Z ) ) ) x. ( 2 ^c -u ( ( abs ` ( Im ` Z ) ) / 2 ) ) ) )
+$)

@@ -1,0 +1,54 @@
+$( <MM> <PROOF_ASST> THEOREM=lintval  LOC_AFTER=?
+
+* Value of the integral of a function along a segment.
+
+s1::simp1 |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> F e. V )
+s2::simp2 |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> A e. CC )
+s3::simp3 |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> B e. CC )
+s4::df-lint |- lint = ( f e. _V , p e. ( CC X. CC ) |-> S. ( 0 (,) 1 ) ( ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) _d t )
+s5:s4:a1i |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> lint = ( f e. _V , p e. ( CC X. CC ) |-> S. ( 0 (,) 1 ) ( ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) _d t ) )
+s6::simpl |- ( ( f = F /\ p = <. A , B >. ) -> f = F )
+s7::simpr |- ( ( f = F /\ p = <. A , B >. ) -> p = <. A , B >. )
+c1:s7:fveq2d |- ( ( f = F /\ p = <. A , B >. ) -> ( 1st ` p ) = ( 1st ` <. A , B >. ) )
+c2:s7:fveq2d |- ( ( f = F /\ p = <. A , B >. ) -> ( 2nd ` p ) = ( 2nd ` <. A , B >. ) )
+c3:s7:fveq2d |- ( ( f = F /\ p = <. A , B >. ) -> ( 1st ` p ) = ( 1st ` <. A , B >. ) )
+c4:c2,c3:oveq12d |- ( ( f = F /\ p = <. A , B >. ) -> ( ( 2nd ` p ) - ( 1st ` p ) ) = ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) )
+c5:c4:oveq2d |- ( ( f = F /\ p = <. A , B >. ) -> ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) = ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) )
+c6:c1,c5:oveq12d |- ( ( f = F /\ p = <. A , B >. ) -> ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) = ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) )
+c7:s6,c6:fveq12d |- ( ( f = F /\ p = <. A , B >. ) -> ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) = ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) )
+c8:s7:fveq2d |- ( ( f = F /\ p = <. A , B >. ) -> ( 2nd ` p ) = ( 2nd ` <. A , B >. ) )
+c9:s7:fveq2d |- ( ( f = F /\ p = <. A , B >. ) -> ( 1st ` p ) = ( 1st ` <. A , B >. ) )
+c10:c8,c9:oveq12d |- ( ( f = F /\ p = <. A , B >. ) -> ( ( 2nd ` p ) - ( 1st ` p ) ) = ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) )
+c11:c7,c10:oveq12d |- ( ( f = F /\ p = <. A , B >. ) -> ( ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) = ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) )
+s8:c11:adantr |- ( ( ( f = F /\ p = <. A , B >. ) /\ t e. ( 0 (,) 1 ) ) -> ( ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) = ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) )
+s9:s8:itgeq2dv |- ( ( f = F /\ p = <. A , B >. ) -> S. ( 0 (,) 1 ) ( ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) _d t = S. ( 0 (,) 1 ) ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) _d t )
+s10:s9:adantl |- ( ( ( F e. V /\ A e. CC /\ B e. CC ) /\ ( f = F /\ p = <. A , B >. ) ) -> S. ( 0 (,) 1 ) ( ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) _d t = S. ( 0 (,) 1 ) ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) _d t )
+s11:s2:elexd |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> A e. _V )
+s12:s3:elexd |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> B e. _V )
+i13::op1stg
+s14:s11,s12,i13:syl2anc |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( 1st ` <. A , B >. ) = A )
+i15::op2ndg
+s16:s11,s12,i15:syl2anc |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( 2nd ` <. A , B >. ) = B )
+i17::op1stg
+s18:s11,s12,i17:syl2anc |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( 1st ` <. A , B >. ) = A )
+i19::op2ndg
+s20:s11,s12,i19:syl2anc |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( 2nd ` <. A , B >. ) = B )
+i21::op1stg
+s22:s11,s12,i21:syl2anc |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( 1st ` <. A , B >. ) = A )
+c12:s20,s22:oveq12d |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) = ( B - A ) )
+c13:c12:oveq2d |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) = ( t x. ( B - A ) ) )
+c14:s22,c13:oveq12d |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) = ( A + ( t x. ( B - A ) ) ) )
+c15:c14:fveq2d |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) = ( F ` ( A + ( t x. ( B - A ) ) ) ) )
+c16:s20,s22:oveq12d |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) = ( B - A ) )
+c17:c15,c16:oveq12d |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) = ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) )
+s23:c17:adantr |- ( ( ( F e. V /\ A e. CC /\ B e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) = ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) )
+s24:s23:itgeq2dv |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> S. ( 0 (,) 1 ) ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) _d t = S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+s25:s24:adantr |- ( ( ( F e. V /\ A e. CC /\ B e. CC ) /\ ( f = F /\ p = <. A , B >. ) ) -> S. ( 0 (,) 1 ) ( ( F ` ( ( 1st ` <. A , B >. ) + ( t x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) ) ) x. ( ( 2nd ` <. A , B >. ) - ( 1st ` <. A , B >. ) ) ) _d t = S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+s26:s10,s25:eqtrd |- ( ( ( F e. V /\ A e. CC /\ B e. CC ) /\ ( f = F /\ p = <. A , B >. ) ) -> S. ( 0 (,) 1 ) ( ( f ` ( ( 1st ` p ) + ( t x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) ) ) x. ( ( 2nd ` p ) - ( 1st ` p ) ) ) _d t = S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+s27:s1:elexd |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> F e. _V )
+i28::opelxpi
+s29:s2,s3,i28:syl2anc |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> <. A , B >. e. ( CC X. CC ) )
+s30::itgex |- S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t e. _V
+s31:s30:a1i |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t e. _V )
+qed:s5,s26,s27,s29,s31:ovmpod |- ( ( F e. V /\ A e. CC /\ B e. CC ) -> ( F lint <. A , B >. ) = S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+$)

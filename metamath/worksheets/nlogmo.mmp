@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=nlogmo  LOC_AFTER=?
+
+* Nlog is monotone in its argument (Lean: Nat.log_mono_right).
+
+s1::simpll |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) -> B e. ( ZZ>= ` 2 ) )
+s2::simplrl |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) -> A e. NN0 )
+s3::simplrr |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) -> C e. NN0 )
+s4::simpr |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) -> A <_ C )
+i5::eluz2nn
+s6:s1,i5:syl |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) -> B e. NN )
+s7:s6:nnnn0d |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) -> B e. NN0 )
+s8:s1:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> B e. ( ZZ>= ` 2 ) )
+s9:s2:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> A e. NN0 )
+s10:s3:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> C e. NN0 )
+s11:s4:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> A <_ C )
+s12:s7:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> B e. NN0 )
+s13::simpr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> 1 <_ A )
+i14::elnnnn0c
+s15:s9,s13,i14:sylanbrc |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> A e. NN )
+s16:s9:nn0red |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> A e. RR )
+s17:s10:nn0red |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> C e. RR )
+s18::1red |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> 1 e. RR )
+s19:s18,s16,s17,s13,s11:letrd |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> 1 <_ C )
+i20::elnnnn0c
+s21:s10,s19,i20:sylanbrc |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> C e. NN )
+i22::nlogcl
+s23:s12,s9,i22:syl2anc |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( B Nlog A ) e. NN0 )
+i24::nlogle
+s25:s8,s15,i24:syl2anc |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( B ^ ( B Nlog A ) ) <_ A )
+i26::eluz2nn
+s27:s8,i26:syl |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> B e. NN )
+s28:s27:nnnn0d |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> B e. NN0 )
+s29:s28,s23:nn0expcld |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( B ^ ( B Nlog A ) ) e. NN0 )
+s30:s29:nn0red |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( B ^ ( B Nlog A ) ) e. RR )
+s31:s30,s16,s17,s25,s11:letrd |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( B ^ ( B Nlog A ) ) <_ C )
+s32:s8,s21:jca |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( B e. ( ZZ>= ` 2 ) /\ C e. NN ) )
+s33:s23,s31:jca |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( ( B Nlog A ) e. NN0 /\ ( B ^ ( B Nlog A ) ) <_ C ) )
+i34::nlogub
+s35:s32,s33,i34:syl2anc |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ 1 <_ A ) -> ( B Nlog A ) <_ ( B Nlog C ) )
+s36:s7:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> B e. NN0 )
+s37:s2:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> A e. NN0 )
+s38:s3:adantr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> C e. NN0 )
+s39::simpr |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> -. 1 <_ A )
+s40:s39:intnand |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> -. ( 2 <_ B /\ 1 <_ A ) )
+s41:s36,s37:jca |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> ( B e. NN0 /\ A e. NN0 ) )
+i42::nlogz
+s43:s41,s40,i42:syl2anc |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> ( B Nlog A ) = 0 )
+i44::nlogcl
+s45:s36,s38,i44:syl2anc |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> ( B Nlog C ) e. NN0 )
+s46:s45:nn0ge0d |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> 0 <_ ( B Nlog C ) )
+s47:s43,s46:eqbrtrd |- ( ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) /\ -. 1 <_ A ) -> ( B Nlog A ) <_ ( B Nlog C ) )
+qed:s35,s47:pm2.61dan |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( A e. NN0 /\ C e. NN0 ) ) /\ A <_ C ) -> ( B Nlog A ) <_ ( B Nlog C ) )
+$)

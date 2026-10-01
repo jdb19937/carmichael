@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2goto  LOC_AFTER=?
+
+* goto f is a statement for f : L --> S ... (f a function from states to labels).
+
+s1::simpl |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> T e. V )
+s2::simpr |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) )
+s3::fvex |- ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) e. _V
+s4:s3:a1i |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) e. _V )
+s5:s1,s4:jca |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> ( T e. V /\ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) e. _V ) )
+i6::tm2laygoto
+s7:s5,s2,i6:syl2anc |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> <. 5 , F >. e. ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) ) )
+s8::peano1 |- (/) e. _om
+s9:s8:a1i |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> (/) e. _om )
+i10::tm2laysuc
+s11:s9,i10:syl |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc (/) ) = ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) ) )
+s12:s7,s11:eleqtrrd |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> <. 5 , F >. e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc (/) ) )
+i13::peano2
+s14:s9,i13:syl |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> suc (/) e. _om )
+i15::tm2layssstmt
+s16:s1,s14,i15:syl2anc |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc (/) ) C_ ( TM2Stmt ` T ) )
+qed:s16,s12:sseldd |- ( ( T e. V /\ F e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) ) -> <. 5 , F >. e. ( TM2Stmt ` T ) )
+$)

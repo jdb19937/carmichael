@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=subborroweq0  LOC_AFTER=?
+
+* No borrow runs off the end exactly when the subtraction is exact (Lean: subBorrow_eq_false_iff).
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> C e. 2o )
+s4::subborrowval |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBorrow Y ) ` C ) = if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) )
+s5:s4:eqeq1d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( ( X subBorrow Y ) ` C ) = (/) <-> if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) = (/) ) )
+s6::1n0 |- 1o =/= (/)
+s7:s6:necomi |- (/) =/= 1o
+s8::simpr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) )
+s9:s8:iftrued |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) = 1o )
+s10:s6:a1i |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> 1o =/= (/) )
+s11:s9,s10:eqnetrd |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) =/= (/) )
+s12:s11:neneqd |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> -. if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) = (/) )
+s13:s8:notnotd |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> -. -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) )
+s14:s12,s13:2falsed |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> ( if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) = (/) <-> -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) )
+s15::simpr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) )
+s16:s15:iffalsed |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) = (/) )
+s17:s16,s15:2thd |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) /\ -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) -> ( if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) = (/) <-> -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) )
+s18:s14,s17:pm2.61dan |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) = (/) <-> -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) )
+i19::tonatcl
+s20:s2,i19:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` Y ) e. NN0 )
+s21:s20:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` Y ) e. ZZ )
+s22:s21:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` Y ) e. RR )
+i23::bwbncl
+s24:s3,i23:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` C ) e. NN0 )
+s25:s24:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` C ) e. ZZ )
+s26:s25:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( bToNat ` C ) e. RR )
+s27:s22,s26:readdcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( toNat ` Y ) + ( bToNat ` C ) ) e. RR )
+i28::tonatcl
+s29:s1,i28:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` X ) e. NN0 )
+s30:s29:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` X ) e. ZZ )
+s31:s30:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` X ) e. RR )
+i32::lenlt
+s33:s27,s31,i32:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( ( toNat ` Y ) + ( bToNat ` C ) ) <_ ( toNat ` X ) <-> -. ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) )
+qed:s5,s18,s33:3bitr4d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( ( X subBorrow Y ) ` C ) = (/) <-> ( ( toNat ` Y ) + ( bToNat ` C ) ) <_ ( toNat ` X ) ) )
+$)

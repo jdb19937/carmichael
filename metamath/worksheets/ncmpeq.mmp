@@ -1,0 +1,68 @@
+$( <MM> <PROOF_ASST> THEOREM=ncmpeq  LOC_AFTER=?
+
+* Ncmp says eq exactly for equal numbers.
+
+s1::simpl |- ( ( A e. NN0 /\ B e. NN0 ) -> A e. NN0 )
+s2::simpr |- ( ( A e. NN0 /\ B e. NN0 ) -> B e. NN0 )
+s3:s1:nn0zd |- ( ( A e. NN0 /\ B e. NN0 ) -> A e. ZZ )
+s4:s3:zred |- ( ( A e. NN0 /\ B e. NN0 ) -> A e. RR )
+s5:s2:nn0zd |- ( ( A e. NN0 /\ B e. NN0 ) -> B e. ZZ )
+s6:s5:zred |- ( ( A e. NN0 /\ B e. NN0 ) -> B e. RR )
+i7::lttri4
+s8:s4,s6,i7:syl2anc |- ( ( A e. NN0 /\ B e. NN0 ) -> ( A < B \/ A = B \/ B < A ) )
+s9::ncmpval |- ( ( A e. NN0 /\ B e. NN0 ) -> ( A Ncmp B ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+s10::simpr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> A < B )
+s11:s9:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> ( A Ncmp B ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+s12:s4:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> A e. RR )
+s13:s6:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> B e. RR )
+s14:s12,s10:ltned |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> A =/= B )
+s15:s14:neneqd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> -. A = B )
+s16:s15:iffalsed |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> if ( A = B , 1o , if ( A < B , (/) , 2o ) ) = if ( A < B , (/) , 2o ) )
+s17:s10:iftrued |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> if ( A < B , (/) , 2o ) = (/) )
+s18:s16,s17:eqtrd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> if ( A = B , 1o , if ( A < B , (/) , 2o ) ) = (/) )
+s19:s11,s18:eqtrd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> ( A Ncmp B ) = (/) )
+s20:s19:eqeq1d |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> ( ( A Ncmp B ) = 1o <-> (/) = 1o ) )
+s21::1n0 |- 1o =/= (/)
+s22:s21:nesymi |- -. (/) = 1o
+s23:s22:a1i |- ( T. -> -. (/) = 1o )
+s24::tru |- T.
+s25:s24,s23:ax-mp |- -. (/) = 1o
+s26:s25:a1i |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> -. (/) = 1o )
+s27:s26,s20:mtbird |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> -. ( A Ncmp B ) = 1o )
+s28:s27,s15:2falsed |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A < B ) -> ( ( A Ncmp B ) = 1o <-> A = B ) )
+s29::simpr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> A = B )
+s30:s9:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> ( A Ncmp B ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+s31:s4:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> A e. RR )
+s32:s6:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> B e. RR )
+s33:s29:iftrued |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> if ( A = B , 1o , if ( A < B , (/) , 2o ) ) = 1o )
+s34:s30,s33:eqtrd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> ( A Ncmp B ) = 1o )
+s35:s34:eqeq1d |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> ( ( A Ncmp B ) = 1o <-> 1o = 1o ) )
+s36::eqid |- 1o = 1o
+s37:s36:a1i |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> 1o = 1o )
+s38:s37,s35:mpbird |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> ( A Ncmp B ) = 1o )
+s39:s38,s29:2thd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ A = B ) -> ( ( A Ncmp B ) = 1o <-> A = B ) )
+s40::simpr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> B < A )
+s41:s9:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> ( A Ncmp B ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+s42:s4:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> A e. RR )
+s43:s6:adantr |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> B e. RR )
+s44:s43,s40:ltned |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> B =/= A )
+s45:s44:necomd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> A =/= B )
+i46::ltnsym
+s47:s43,s42,i46:syl2anc |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> ( B < A -> -. A < B ) )
+s48:s40,s47:mpd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> -. A < B )
+s49:s45:neneqd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> -. A = B )
+s50:s49:iffalsed |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> if ( A = B , 1o , if ( A < B , (/) , 2o ) ) = if ( A < B , (/) , 2o ) )
+s51:s48:iffalsed |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> if ( A < B , (/) , 2o ) = 2o )
+s52:s50,s51:eqtrd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> if ( A = B , 1o , if ( A < B , (/) , 2o ) ) = 2o )
+s53:s41,s52:eqtrd |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> ( A Ncmp B ) = 2o )
+s54:s53:eqeq1d |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> ( ( A Ncmp B ) = 1o <-> 2o = 1o ) )
+s55::bw1o2o |- 1o =/= 2o
+s56:s55:nesymi |- -. 2o = 1o
+s57:s56:a1i |- ( T. -> -. 2o = 1o )
+s58::tru |- T.
+s59:s58,s57:ax-mp |- -. 2o = 1o
+s60:s59:a1i |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> -. 2o = 1o )
+s61:s60,s54:mtbird |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> -. ( A Ncmp B ) = 1o )
+s62:s61,s49:2falsed |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ B < A ) -> ( ( A Ncmp B ) = 1o <-> A = B ) )
+qed:s28,s39,s62,s8:mpjao3dan |- ( ( A e. NN0 /\ B e. NN0 ) -> ( ( A Ncmp B ) = 1o <-> A = B ) )
+$)

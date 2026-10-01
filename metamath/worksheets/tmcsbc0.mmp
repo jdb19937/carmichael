@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcsbc0  LOC_AFTER=?
+
+* The borrow into bit 0 of a subtraction without borrow-in is 0.
+
+s1::simpl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> L' e. Word 2o )
+i3::tonatcl
+s4:s1,i3:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. NN0 )
+i5::tonatcl
+s6:s2,i5:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. NN0 )
+i7::lencl
+s8:s1,i7:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( # ` L ) e. NN0 )
+i9::lencl
+s10:s2,i9:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( # ` L' ) e. NN0 )
+s11::0nn0 |- 0 e. NN0
+s12:s11:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> 0 e. NN0 )
+s13:s4:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. ZZ )
+s14:s6:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. ZZ )
+s15::0el2o |- (/) e. 2o
+s16:s15:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> (/) e. 2o )
+s17:s13,s14,s16:3jca |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) )
+s18:s17,s12:jca |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) /\ 0 e. NN0 ) )
+i19::bwborrow
+s20:s18,i19:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( borrow ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` 0 ) = if ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) < ( ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) )
+s21::2cn |- 2 e. CC
+s22:s21:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> 2 e. CC )
+i23::exp0
+s24:s22,i23:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( 2 ^ 0 ) = 1 )
+s25:s24:oveq2d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L ) mod 1 ) )
+s26:s4:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L ) e. ZZ )
+i27::zmod10
+s28:s26,i27:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod 1 ) = 0 )
+s29:s25,s28:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L ) mod ( 2 ^ 0 ) ) = 0 )
+s30:s24:oveq2d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) = ( ( toNat ` L' ) mod 1 ) )
+s31:s6:nn0zd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( toNat ` L' ) e. ZZ )
+i32::zmod10
+s33:s31,i32:syl |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod 1 ) = 0 )
+s34:s30,s33:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) = 0 )
+s35::bwbn0 |- ( bToNat ` (/) ) = 0
+s36:s35:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( bToNat ` (/) ) = 0 )
+s37:s34,s36:oveq12d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) + ( bToNat ` (/) ) ) = ( 0 + 0 ) )
+s38::00id |- ( 0 + 0 ) = 0
+s39:s38:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( 0 + 0 ) = 0 )
+s40:s37,s39:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) + ( bToNat ` (/) ) ) = 0 )
+s41:s29,s40:breq12d |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) < ( ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) + ( bToNat ` (/) ) ) <-> 0 < 0 ) )
+s42::0re |- 0 e. RR
+s43:s42:ltnri |- -. 0 < 0
+s44:s43:a1i |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> -. 0 < 0 )
+s45:s41,s44:mtbird |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> -. ( ( toNat ` L ) mod ( 2 ^ 0 ) ) < ( ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) + ( bToNat ` (/) ) ) )
+s46:s45:iffalsed |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> if ( ( ( toNat ` L ) mod ( 2 ^ 0 ) ) < ( ( ( toNat ` L' ) mod ( 2 ^ 0 ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) = (/) )
+qed:s20,s46:eqtrd |- ( ( L e. Word 2o /\ L' e. Word 2o ) -> ( ( borrow ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` 0 ) = (/) )
+$)

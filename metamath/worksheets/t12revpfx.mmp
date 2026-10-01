@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=t12revpfx  LOC_AFTER=?
+
+* The list of the reversed prefix one entry on: the entry ` L[j] ` pushed on the list of the reversed prefix (~ tm2lpfxs1 , ~ revccat , ~ tm2lenccons ; Lists.lean ` memList_runs ` , the moved entries).
+
+s1::simpl |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> L e. Word NN0 )
+s2::simpr |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) )
+s3:s2:simpld |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> J e. ( 0 ..^ ( # ` L ) ) )
+s4:s2:simprd |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> Z e. Word Gamma' )
+i5::wrdsymbcl
+s6:s1,s3,i5:syl2anc |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( L ` J ) e. NN0 )
+i7::tm2lpfxs1
+s8:s1,s3,i7:syl2anc |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( L prefix ( J + 1 ) ) = ( ( L prefix J ) ++ <" ( L ` J ) "> ) )
+i9::pfxcl
+s10:s1,i9:syl |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( L prefix J ) e. Word NN0 )
+i11::s1cl
+s12:s6,i11:syl |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> <" ( L ` J ) "> e. Word NN0 )
+i13::revccat
+s14:s10,s12,i13:syl2anc |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( reverse ` ( ( L prefix J ) ++ <" ( L ` J ) "> ) ) = ( ( reverse ` <" ( L ` J ) "> ) ++ ( reverse ` ( L prefix J ) ) ) )
+s15::revs1 |- ( reverse ` <" ( L ` J ) "> ) = <" ( L ` J ) ">
+s16:s15:a1i |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( reverse ` <" ( L ` J ) "> ) = <" ( L ` J ) "> )
+s17:s8:fveq2d |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( reverse ` ( L prefix ( J + 1 ) ) ) = ( reverse ` ( ( L prefix J ) ++ <" ( L ` J ) "> ) ) )
+s18:s16:oveq1d |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( ( reverse ` <" ( L ` J ) "> ) ++ ( reverse ` ( L prefix J ) ) ) = ( <" ( L ` J ) "> ++ ( reverse ` ( L prefix J ) ) ) )
+s19:s14,s18:eqtrd |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( reverse ` ( ( L prefix J ) ++ <" ( L ` J ) "> ) ) = ( <" ( L ` J ) "> ++ ( reverse ` ( L prefix J ) ) ) )
+s20:s17,s19:eqtrd |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( reverse ` ( L prefix ( J + 1 ) ) ) = ( <" ( L ` J ) "> ++ ( reverse ` ( L prefix J ) ) ) )
+i21::revcl
+s22:s10,i21:syl |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( reverse ` ( L prefix J ) ) e. Word NN0 )
+i23::tm2lenccons
+s24:s6,s22,i23:syl2anc |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( encList ` ( <" ( L ` J ) "> ++ ( reverse ` ( L prefix J ) ) ) ) = ( ( encNatGam ` ( L ` J ) ) ++ ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ) )
+s25:s20:fveq2d |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( encList ` ( reverse ` ( L prefix ( J + 1 ) ) ) ) = ( encList ` ( <" ( L ` J ) "> ++ ( reverse ` ( L prefix J ) ) ) ) )
+s26:s25,s24:eqtrd |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( encList ` ( reverse ` ( L prefix ( J + 1 ) ) ) ) = ( ( encNatGam ` ( L ` J ) ) ++ ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ) )
+i27::encnatgamcl
+s28:s6,i27:syl |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( encNatGam ` ( L ` J ) ) e. Word Gamma' )
+i29::tm2lenccl
+s30:s22,i29:syl |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( encList ` ( reverse ` ( L prefix J ) ) ) e. Word Gamma' )
+s31::gamma4 |- 4 e. Gamma'
+s32:s31:a1i |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> 4 e. Gamma' )
+s33:s32:s1cld |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> <" 4 "> e. Word Gamma' )
+i34::ccatcl
+s35:s33,s30,i34:syl2anc |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) e. Word Gamma' )
+i36::ccatass
+s37:s28,s35,s4,i36:syl3anc |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( ( ( encNatGam ` ( L ` J ) ) ++ ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ) ++ Z ) = ( ( encNatGam ` ( L ` J ) ) ++ ( ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ++ Z ) ) )
+i38::ccatass
+s39:s33,s30,s4,i38:syl3anc |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ++ Z ) = ( <" 4 "> ++ ( ( encList ` ( reverse ` ( L prefix J ) ) ) ++ Z ) ) )
+s40:s26:oveq1d |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( ( encList ` ( reverse ` ( L prefix ( J + 1 ) ) ) ) ++ Z ) = ( ( ( encNatGam ` ( L ` J ) ) ++ ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ) ++ Z ) )
+s41:s40,s37:eqtrd |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( ( encList ` ( reverse ` ( L prefix ( J + 1 ) ) ) ) ++ Z ) = ( ( encNatGam ` ( L ` J ) ) ++ ( ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ++ Z ) ) )
+s42:s39:oveq2d |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( ( encNatGam ` ( L ` J ) ) ++ ( ( <" 4 "> ++ ( encList ` ( reverse ` ( L prefix J ) ) ) ) ++ Z ) ) = ( ( encNatGam ` ( L ` J ) ) ++ ( <" 4 "> ++ ( ( encList ` ( reverse ` ( L prefix J ) ) ) ++ Z ) ) ) )
+qed:s41,s42:eqtrd |- ( ( L e. Word NN0 /\ ( J e. ( 0 ..^ ( # ` L ) ) /\ Z e. Word Gamma' ) ) -> ( ( encList ` ( reverse ` ( L prefix ( J + 1 ) ) ) ) ++ Z ) = ( ( encNatGam ` ( L ` J ) ) ++ ( <" 4 "> ++ ( ( encList ` ( reverse ` ( L prefix J ) ) ) ++ Z ) ) ) )
+$)

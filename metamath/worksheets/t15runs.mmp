@@ -1,0 +1,135 @@
+$( <MM> <PROOF_ASST> THEOREM=t15runs  LOC_AFTER=?
+
+* The run of the concrete machine on an input n < 16: prefix, failAll, halt.
+
+s1::simpl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( C e. NN0 /\ K e. NN ) )
+s2::simprl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> N e. NN0 )
+s3::simprr |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> N < ; 1 6 )
+s4::t15typ |- ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K ) /\ ( 2nd ` ( TMTy C K ) ) = TMSt )
+s5::df-tmty |- ( TMTy C K ) = <. <. TMGam , ( TMLbl C K ) >. , TMSt >.
+s6::opex |- <. <. TMGam , ( TMLbl C K ) >. , TMSt >. e. _V
+s7:s5,s6:eqeltri |- ( TMTy C K ) e. _V
+s8:s7:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( TMTy C K ) e. _V )
+i9::t15prog
+s10:s1,i9:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) )
+s11:s4:simp1i |- ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam
+s12:s11:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam )
+s13:s4:simp3i |- ( 2nd ` ( TMTy C K ) ) = TMSt
+s14:s13:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( 2nd ` ( TMTy C K ) ) = TMSt )
+s15:s8,s10:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) )
+s16:s12,s14:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( TMTy C K ) ) = TMSt ) )
+s17:s15,s16:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) /\ ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( TMTy C K ) ) = TMSt ) ) )
+s18:s17:simpld |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) )
+s19:s18:simpld |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( TMTy C K ) e. _V )
+s20:s17:simprd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( TMTy C K ) ) = TMSt ) )
+s21:s20:simpld |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam )
+s22:s20:simprd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( 2nd ` ( TMTy C K ) ) = TMSt )
+i23::t15inst
+s24:s1,i23:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> TMIroot C K ( TMTy C K ) ( TMProg C K ) ( TMFroot (/) C K ) ( TMLab ` (/) ) )
+s25:s17,s24:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) /\ ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( TMTy C K ) ) = TMSt ) ) /\ TMIroot C K ( TMTy C K ) ( TMProg C K ) ( TMFroot (/) C K ) ( TMLab ` (/) ) ) )
+s26:s25,s2:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) /\ ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( TMTy C K ) ) = TMSt ) ) /\ TMIroot C K ( TMTy C K ) ( TMProg C K ) ( TMFroot (/) C K ) ( TMLab ` (/) ) ) /\ N e. NN0 ) )
+s27:s26,s3:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) /\ ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( TMTy C K ) ) = TMSt ) ) /\ TMIroot C K ( TMTy C K ) ( TMProg C K ) ( TMFroot (/) C K ) ( TMLab ` (/) ) ) /\ N e. NN0 ) /\ N < ; 1 6 ) )
+i28::t15pres
+s29:s27,i28:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( { ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) } X. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) } ) ) ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. ( { ( inl ` ( ( TMFroot (/) C K ) ` 9 ) ) } X. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) , ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) >. )
+s30::gamma4 |- 4 e. Gamma'
+i31::s1cl
+s32:s30,i31:ax-mp |- <" 4 "> e. Word Gamma'
+s33:s32:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> <" 4 "> e. Word Gamma' )
+s34::1nn0 |- 1 e. NN0
+s35::8nn |- 8 e. NN
+i36::ltaddpos
+s37::7re |- 7 e. RR
+s38::1re |- 1 e. RR
+s39:s37,s38,i36:mp2an |- ( 0 < 7 <-> 1 < ( 1 + 7 ) )
+s40::7pos |- 0 < 7
+s41:s40,s39:mpbi |- 1 < ( 1 + 7 )
+s42::ax-1cn |- 1 e. CC
+s43::7cn |- 7 e. CC
+s44:s42,s43:addcomi |- ( 1 + 7 ) = ( 7 + 1 )
+s45::7p1e8 |- ( 7 + 1 ) = 8
+s46:s44,s45:eqtri |- ( 1 + 7 ) = 8
+s47:s41,s46:breqtri |- 1 < 8
+s48::elfzo0 |- ( 1 e. ( 0 ..^ 8 ) <-> ( 1 e. NN0 /\ 8 e. NN /\ 1 < 8 ) )
+s49:s34,s35,s47,s48:mpbir3an |- 1 e. ( 0 ..^ 8 )
+s50:s49:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> 1 e. ( 0 ..^ 8 ) )
+s51:s21,s50:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ 1 e. ( 0 ..^ 8 ) ) )
+i52::t15kdom
+s53:s51,i52:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( 1 e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) /\ ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) ` 1 ) = Gamma' ) )
+s54:s53:simpld |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> 1 e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) )
+s55:s53:simprd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) ` 1 ) = Gamma' )
+i56::wrdeq
+s57:s55,i56:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> Word ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) ` 1 ) = Word Gamma' )
+s58:s33,s57:eleqtrrd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> <" 4 "> e. Word ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) ` 1 ) )
+i59::tm2initstk
+s60:s19,s54,s58,i59:syl3anc |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( j e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( j = 1 , <" 4 "> , (/) ) ) e. ( TM2Stk ` ( TMTy C K ) ) )
+s61::eqeq1 |- ( k = j -> ( k = 1 <-> j = 1 ) )
+s62:s61:ifbid |- ( k = j -> if ( k = 1 , <" 4 "> , (/) ) = if ( j = 1 , <" 4 "> , (/) ) )
+s63:s62:cbvmptv |- ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) = ( j e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( j = 1 , <" 4 "> , (/) ) )
+s64:s63:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) = ( j e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( j = 1 , <" 4 "> , (/) ) ) )
+s65:s64,s60:eqeltrd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) e. ( TM2Stk ` ( TMTy C K ) ) )
+s66:s25,s65:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) /\ ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( TMTy C K ) ) = TMSt ) ) /\ TMIroot C K ( TMTy C K ) ( TMProg C K ) ( TMFroot (/) C K ) ( TMLab ` (/) ) ) /\ ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) e. ( TM2Stk ` ( TMTy C K ) ) ) )
+i67::t15halt
+s68:s66,i67:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( { ( inl ` ( ( TMFroot (/) C K ) ` 9 ) ) } X. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) , 1 >. )
+i69::tm2hseq
+s70:s18,s29,s68,i69:syl3anc |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( { ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) } X. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) } ) ) ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) , ( ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) + 1 ) >. )
+s71::fvexd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) e. _V )
+i72::snidg
+s73:s71,i72:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) e. { ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) } )
+s74::t15typ |- ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K ) /\ ( 2nd ` ( TMTy C K ) ) = TMSt )
+s75::0el2o |- (/) e. 2o
+s76::bw0el3o |- (/) e. 3o
+i77::opelxpi
+s78:s76,s75,i77:mp2an |- <. (/) , (/) >. e. ( 3o X. 2o )
+i79::opelxpi
+s80:s75,s78,i79:mp2an |- <. (/) , <. (/) , (/) >. >. e. ( 2o X. ( 3o X. 2o ) )
+i81::opelxpi
+s82:s75,s80,i81:mp2an |- <. (/) , <. (/) , <. (/) , (/) >. >. >. e. ( 2o X. ( 2o X. ( 3o X. 2o ) ) )
+s83::0lt1o |- (/) e. 1o
+i84::djurcl
+s85:s83,i84:ax-mp |- ( inr ` (/) ) e. ( 2o |_| 1o )
+i86::opelxpi
+s87:s85,s82,i86:mp2an |- <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. e. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) )
+i88::djurcl
+i89::opelxpi
+s90:s85,s87,i89:mp2an |- <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) )
+i91::opelxpi
+s92:s75,s90,i91:mp2an |- <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s93::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s94:s92,s93:eleqtrri |- <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt
+s95:s94:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. TMSt )
+s96:s95,s22:eleqtrrd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. e. ( 2nd ` ( TMTy C K ) ) )
+s97::fvex |- ( 1st ` ( 1st ` ( TMTy C K ) ) ) e. _V
+s98:s97:dmex |- dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) e. _V
+s99:s98:mptex |- ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) e. _V
+s100:s99:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) e. _V )
+i101::snidg
+s102:s100,i101:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) e. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) } )
+i103::opelxpi
+s104:s96,s102,i103:syl2anc |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. e. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) } ) )
+i105::opelxpi
+s106:s73,s104,i105:syl2anc |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> <. ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. >. e. ( { ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) } X. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) } ) ) )
+s107:s106:snssd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> { <. ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. >. } C_ ( { ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) } X. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) } ) ) )
+s108:s18,s70:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) /\ ( { ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) } X. ( ( 2nd ` ( TMTy C K ) ) X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) } ) ) ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) , ( ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) + 1 ) >. ) )
+i109::tm2hssc
+s110:s108,s107,i109:syl2anc |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> { <. ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. >. } ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) , ( ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) + 1 ) >. )
+s111::xpsn |- ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) = { <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. }
+s112:s111:xpeq2i |- ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) = ( { ( inr ` (/) ) } X. { <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. } )
+s113::xpsn |- ( { ( inr ` (/) ) } X. { <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. } ) = { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. }
+s114:s112,s113:eqtri |- ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) = { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. }
+s115:s114:a1i |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) = { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. } )
+s116:s115:eqimssd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) C_ { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. } )
+s117:s18:simprd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) )
+s118::fvexd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( 2nd ` ( 1st ` ( TMTy C K ) ) ) e. _V )
+i119::fex
+s120:s117,s118,i119:syl2anc |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( TMProg C K ) e. _V )
+s121:s19,s120:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( TMTy C K ) e. _V /\ ( TMProg C K ) e. _V ) )
+s122:s121,s110:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) e. _V ) /\ { <. ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. >. } ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) , ( ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) + 1 ) >. ) )
+i123::tm2hrtyp
+s124:s122,i123:syl |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( { <. ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. >. } C_ ( TM2Cfg ` ( TMTy C K ) ) /\ ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) C_ ( TM2Cfg ` ( TMTy C K ) ) /\ ( ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) + 1 ) e. NN0 ) )
+s125:s124:simp2d |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) C_ ( TM2Cfg ` ( TMTy C K ) ) )
+s126:s115,s125:eqsstrrd |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. } C_ ( TM2Cfg ` ( TMTy C K ) ) )
+s127:s18,s110:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( ( TMTy C K ) e. _V /\ ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) ) /\ { <. ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. >. } ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) , ( ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) + 1 ) >. ) )
+s128:s116,s126:jca |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> ( ( { ( inr ` (/) ) } X. ( { <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. } X. { ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) } ) ) C_ { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. } /\ { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. } C_ ( TM2Cfg ` ( TMTy C K ) ) ) )
+i129::tm2hssd
+qed:s127,s128,i129:syl2anc |- ( ( ( C e. NN0 /\ K e. NN ) /\ ( N e. NN0 /\ N < ; 1 6 ) ) -> { <. ( inl ` ( ( ( TMFroot (/) C K ) ` 0 ) ` 0 ) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 0 , ( encNatGam ` N ) , (/) ) ) >. >. } ( ( TMTy C K ) TM2Hoare ( TMProg C K ) ) <. { <. ( inr ` (/) ) , <. <. (/) , <. ( inr ` (/) ) , <. ( inr ` (/) ) , <. (/) , <. (/) , <. (/) , (/) >. >. >. >. >. >. , ( k e. dom ( 1st ` ( 1st ` ( TMTy C K ) ) ) |-> if ( k = 1 , <" 4 "> , (/) ) ) >. >. } , ( ( ( 7 x. ( # ` ( encodeNat ` N ) ) ) + ; 7 0 ) + 1 ) >. )
+$)

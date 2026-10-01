@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=t12bllt  LOC_AFTER=?
+
+* The bit length of a number below ` 2 ^ B ` is below ` 2 ^ B ` (~ blle , ~ bernneq3 ).
+
+s1::blle |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( bl ` A ) <_ B )
+s2::simp2 |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. NN0 )
+s3::2z |- 2 e. ZZ
+i4::uzid
+s5:s3,i4:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s6:s5:a1i |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> 2 e. ( ZZ>= ` 2 ) )
+i7::bernneq3
+s8:s6,s2,i7:syl2anc |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B < ( 2 ^ B ) )
+s9::simp1 |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> A e. NN0 )
+i10::blcl
+s11:s9,i10:syl |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( bl ` A ) e. NN0 )
+s12:s11:nn0red |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( bl ` A ) e. RR )
+s13:s2:nn0red |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. RR )
+s14::2re |- 2 e. RR
+s15:s14:a1i |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> 2 e. RR )
+s16:s15,s2:reexpcld |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 2 ^ B ) e. RR )
+qed:s12,s13,s16,s1,s8:lelttrd |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( bl ` A ) < ( 2 ^ B ) )
+$)

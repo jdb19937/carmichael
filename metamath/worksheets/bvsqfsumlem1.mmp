@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=bvsqfsumlem1  LOC_AFTER=?
+
+* A squarefree D <= M is a squarefree divisor of the radical prod_ p e. PR(M) p (sqfdvdprod).
+
+s1::simpl |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> M e. NN )
+s2::simprl |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> D e. ( 1 ... M ) )
+s3::simprr |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> ( mmu ` D ) =/= 0 )
+s4:s1,s2:jca |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> ( M e. NN /\ D e. ( 1 ... M ) ) )
+i5::sqfdvdprod
+s6:s4,s3,i5:syl2anc |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> D || prod_ p e. ( ( 1 ... M ) i^i Prime ) p )
+s7::id |- ( p = r -> p = r )
+s8:s7:cbvprodv |- prod_ p e. ( ( 1 ... M ) i^i Prime ) p = prod_ r e. ( ( 1 ... M ) i^i Prime ) r
+s9:s8:a1i |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> prod_ p e. ( ( 1 ... M ) i^i Prime ) p = prod_ r e. ( ( 1 ... M ) i^i Prime ) r )
+s10:s6,s9:breqtrd |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> D || prod_ r e. ( ( 1 ... M ) i^i Prime ) r )
+i11::elfznn
+s12:s2,i11:syl |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> D e. NN )
+s13::id |- ( x = D -> x = D )
+c1:s13:fveq2d |- ( x = D -> ( mmu ` x ) = ( mmu ` D ) )
+c2:c1:neeq1d |- ( x = D -> ( ( mmu ` x ) =/= 0 <-> ( mmu ` D ) =/= 0 ) )
+c3:s13:breq1d |- ( x = D -> ( x || prod_ r e. ( ( 1 ... M ) i^i Prime ) r <-> D || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) )
+c4:c2,c3:anbi12d |- ( x = D -> ( ( ( mmu ` x ) =/= 0 /\ x || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) <-> ( ( mmu ` D ) =/= 0 /\ D || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) ) )
+s14:c4:elrab |- ( D e. { x e. NN | ( ( mmu ` x ) =/= 0 /\ x || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) } <-> ( D e. NN /\ ( ( mmu ` D ) =/= 0 /\ D || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) ) )
+s15:s3,s10:jca |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> ( ( mmu ` D ) =/= 0 /\ D || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) )
+s16:s12,s15:jca |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> ( D e. NN /\ ( ( mmu ` D ) =/= 0 /\ D || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) ) )
+s17:s14:a1i |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> ( D e. { x e. NN | ( ( mmu ` x ) =/= 0 /\ x || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) } <-> ( D e. NN /\ ( ( mmu ` D ) =/= 0 /\ D || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) ) ) )
+qed:s16,s17:mpbird |- ( ( M e. NN /\ ( D e. ( 1 ... M ) /\ ( mmu ` D ) =/= 0 ) ) -> D e. { x e. NN | ( ( mmu ` x ) =/= 0 /\ x || prod_ r e. ( ( 1 ... M ) i^i Prime ) r ) } )
+$)

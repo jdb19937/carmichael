@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrindghm  LOC_AFTER=?
+
+* The inducing map is a group homomorphism of the character groups (Mathlib changeLevel : DirichletCharacter R n ->* DirichletCharacter R m).
+
+s1::simp1 |- ( ( N e. NN /\ M e. NN /\ N || M ) -> N e. NN )
+s2::simp2 |- ( ( N e. NN /\ M e. NN /\ N || M ) -> M e. NN )
+s3::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s4::eqid |- ( Base ` ( DChr ` M ) ) = ( Base ` ( DChr ` M ) )
+s5::eqid |- ( +g ` ( DChr ` N ) ) = ( +g ` ( DChr ` N ) )
+s6::eqid |- ( +g ` ( DChr ` M ) ) = ( +g ` ( DChr ` M ) )
+s7::eqid |- ( DChr ` N ) = ( DChr ` N )
+s8:s7:dchrabl |- ( N e. NN -> ( DChr ` N ) e. Abel )
+s9:s1,s8:syl |- ( ( N e. NN /\ M e. NN /\ N || M ) -> ( DChr ` N ) e. Abel )
+s10::eqid |- ( DChr ` M ) = ( DChr ` M )
+s11:s10:dchrabl |- ( M e. NN -> ( DChr ` M ) e. Abel )
+s12:s2,s11:syl |- ( ( N e. NN /\ M e. NN /\ N || M ) -> ( DChr ` M ) e. Abel )
+s13:s9:ablgrpd |- ( ( N e. NN /\ M e. NN /\ N || M ) -> ( DChr ` N ) e. Grp )
+s14:s12:ablgrpd |- ( ( N e. NN /\ M e. NN /\ N || M ) -> ( DChr ` M ) e. Grp )
+s15::dchrindf |- ( ( N e. NN /\ M e. NN /\ N || M ) -> ( N DChrInd M ) : ( Base ` ( DChr ` N ) ) --> ( Base ` ( DChr ` M ) ) )
+s16::simpl |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ ( x e. ( Base ` ( DChr ` N ) ) /\ y e. ( Base ` ( DChr ` N ) ) ) ) -> ( N e. NN /\ M e. NN /\ N || M ) )
+s17::simprl |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ ( x e. ( Base ` ( DChr ` N ) ) /\ y e. ( Base ` ( DChr ` N ) ) ) ) -> x e. ( Base ` ( DChr ` N ) ) )
+s18::simprr |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ ( x e. ( Base ` ( DChr ` N ) ) /\ y e. ( Base ` ( DChr ` N ) ) ) ) -> y e. ( Base ` ( DChr ` N ) ) )
+i19::dchrindmul
+s20:s16,s17,s18,i19:syl3anc |- ( ( ( N e. NN /\ M e. NN /\ N || M ) /\ ( x e. ( Base ` ( DChr ` N ) ) /\ y e. ( Base ` ( DChr ` N ) ) ) ) -> ( ( N DChrInd M ) ` ( x ( +g ` ( DChr ` N ) ) y ) ) = ( ( ( N DChrInd M ) ` x ) ( +g ` ( DChr ` M ) ) ( ( N DChrInd M ) ` y ) ) )
+qed:s3,s4,s5,s6,s13,s14,s15,s20:isghmd |- ( ( N e. NN /\ M e. NN /\ N || M ) -> ( N DChrInd M ) e. ( ( DChr ` N ) GrpHom ( DChr ` M ) ) )
+$)

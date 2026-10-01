@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=tmccmcp  LOC_AFTER=?
+
+* The comparison recursion of the comparator (Lean ` cmpStep ` ), ~ bwcmpfp1 at the operands' values.
+
+s1::simpll |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> L e. Word 2o )
+s2::simplr |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> L' e. Word 2o )
+s3::simpr |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> N e. NN0 )
+i4::tonatcl
+s5:s1,i4:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L ) e. NN0 )
+i6::tonatcl
+s7:s2,i6:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L' ) e. NN0 )
+i8::lencl
+s9:s1,i8:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( # ` L ) e. NN0 )
+i10::lencl
+s11:s2,i10:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( # ` L' ) e. NN0 )
+s12::bw1oel3o |- 1o e. 3o
+s13:s12:a1i |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> 1o e. 3o )
+s14:s5,s7,s13:3jca |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( toNat ` L ) e. NN0 /\ ( toNat ` L' ) e. NN0 /\ 1o e. 3o ) )
+s15:s14,s3:jca |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( ( toNat ` L ) e. NN0 /\ ( toNat ` L' ) e. NN0 /\ 1o e. 3o ) /\ N e. NN0 ) )
+i16::bwcmpfp1
+qed:s15,i16:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( cmpStep ( ( toNat ` L ) bwFold ( toNat ` L' ) ) 1o ) ` ( N + 1 ) ) = ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) cmpStep if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( cmpStep ( ( toNat ` L ) bwFold ( toNat ` L' ) ) 1o ) ` N ) ) )
+$)

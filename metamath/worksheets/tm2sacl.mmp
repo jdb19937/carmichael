@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2sacl  LOC_AFTER=?
+
+* Closure of TM2sa: the result of a statement at a (state, stacks) pair is a configuration.
+
+s1::simp1 |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> T e. V )
+s2::simp2 |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> Q e. ( TM2Stmt ` T ) )
+s3::simp3 |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i4::tm2stmtel
+s5:s1,i4:syl |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( Q e. ( TM2Stmt ` T ) <-> E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s6:s2,s5:mpbid |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) )
+s7:s1:adantr |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> T e. V )
+s8:s3:adantr |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+s9::simprl |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> n e. _om )
+s10::simprr |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) )
+i11::tm2sacllem
+s12:s9,i11:syl |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> ( T e. V -> A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) ) )
+s13:s7,s12:mpd |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> A. q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) )
+s14::id |- ( q = Q -> q = Q )
+c1:s14:oveq1d |- ( q = Q -> ( q ( TM2sa ` T ) p ) = ( Q ( TM2sa ` T ) p ) )
+c2:c1:eleq1d |- ( q = Q -> ( ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) <-> ( Q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) ) )
+c3:c2:ralbidv |- ( q = Q -> ( A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) <-> A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( Q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) ) )
+s15:c3,s13,s10:rspcdva |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> A. p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ( Q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) )
+s16::id |- ( p = P -> p = P )
+c4:s16:oveq2d |- ( p = P -> ( Q ( TM2sa ` T ) p ) = ( Q ( TM2sa ` T ) P ) )
+c5:c4:eleq1d |- ( p = P -> ( ( Q ( TM2sa ` T ) p ) e. ( TM2Cfg ` T ) <-> ( Q ( TM2sa ` T ) P ) e. ( TM2Cfg ` T ) ) )
+s17:c5,s15,s8:rspcdva |- ( ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) /\ ( n e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) ) -> ( Q ( TM2sa ` T ) P ) e. ( TM2Cfg ` T ) )
+qed:s6,s17:rexlimddv |- ( ( T e. V /\ Q e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( Q ( TM2sa ` T ) P ) e. ( TM2Cfg ` T ) )
+$)

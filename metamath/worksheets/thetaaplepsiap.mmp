@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=thetaaplepsiap  LOC_AFTER=?
+
+* theta in a residue class is at most psi in the class (Lean: thetaAP_le_psiAP).
+
+s1::thetaapval2 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( thetaAP ` Q ) Y ) = sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s2::psiapval |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = sum_ p e. ( 1 ... ( |_ ` Y ) ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s3::fzfid |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( 1 ... ( |_ ` Y ) ) e. Fin )
+s4::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> p e. ( 1 ... ( |_ ` Y ) ) )
+i5::elfznn
+s6:s4,i5:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> p e. NN )
+i7::psiaplem1
+s8:s6,i7:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. ( 0 [,) +oo ) )
+i9::elrege0
+s10:s8,i9:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> ( if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR /\ 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) ) )
+s11:s10:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. RR )
+s12:s10:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> 0 <_ if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+s13:s11:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ p e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) e. CC )
+s14::inss1 |- ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) C_ ( 1 ... ( |_ ` Y ) )
+s15:s14:a1i |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) C_ ( 1 ... ( |_ ` Y ) ) )
+s16:s3,s11,s12,s15:fsumless |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ p e. ( ( 1 ... ( |_ ` Y ) ) i^i Prime ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) <_ sum_ p e. ( 1 ... ( |_ ` Y ) ) if ( ( p mod Q ) = ( A mod Q ) , ( Lam ` p ) , 0 ) )
+qed:s16,s1,s2:3brtr4d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( thetaAP ` Q ) Y ) <_ ( A ( psiAP ` Q ) Y ) )
+$)

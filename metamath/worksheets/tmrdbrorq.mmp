@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=tmrdbrorq  LOC_AFTER=?
+
+* The peek handler ` readBraOr ` keeps ` cmp ` (it writes only the flag).
+
+s1::simpl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> V e. TMSt )
+s2::tmrdbrorv |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMrdBraOr ` <. V , O >. ) = <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. )
+i3::tmccarcl
+s4:s1,i3:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMcar ` V ) e. 2o )
+i5::tmcracl
+s6:s1,i5:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMra ` V ) e. ( 2o |_| 1o ) )
+i7::tmcrbcl
+s8:s1,i7:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMrb ` V ) e. ( 2o |_| 1o ) )
+i9::tmcdacl
+s10:s1,i9:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMda ` V ) e. 2o )
+i11::tmcdbcl
+s12:s1,i11:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMdb ` V ) e. 2o )
+i13::tmccmpcl
+s14:s1,i13:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMcmp ` V ) e. 3o )
+i15::tmcflcl
+s16:s1,i15:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMfl ` V ) e. 2o )
+s17::1oel2o |- 1o e. 2o
+s18::0el2o |- (/) e. 2o
+s19:s17,s18:ifcli |- if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) e. 2o
+s20:s19:a1i |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) e. 2o )
+s21:s4,s6,s8:3jca |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( ( TMcar ` V ) e. 2o /\ ( TMra ` V ) e. ( 2o |_| 1o ) /\ ( TMrb ` V ) e. ( 2o |_| 1o ) ) )
+s22:s10,s12:jca |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( ( TMda ` V ) e. 2o /\ ( TMdb ` V ) e. 2o ) )
+s23:s14,s20:jca |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( ( TMcmp ` V ) e. 3o /\ if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) e. 2o ) )
+s24:s21,s22,s23:3jca |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( ( ( TMcar ` V ) e. 2o /\ ( TMra ` V ) e. ( 2o |_| 1o ) /\ ( TMrb ` V ) e. ( 2o |_| 1o ) ) /\ ( ( TMda ` V ) e. 2o /\ ( TMdb ` V ) e. 2o ) /\ ( ( TMcmp ` V ) e. 3o /\ if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) e. 2o ) ) )
+i25::tmcstmk
+s26:s24,i25:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. e. TMSt )
+i27::tmccarmk
+s28:s24,i27:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMcar ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) = ( TMcar ` V ) )
+i29::tmcramk
+s30:s24,i29:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMra ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) = ( TMra ` V ) )
+i31::tmcrbmk
+s32:s24,i31:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMrb ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) = ( TMrb ` V ) )
+i33::tmcdamk
+s34:s24,i33:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMda ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) = ( TMda ` V ) )
+i35::tmcdbmk
+s36:s24,i35:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMdb ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) = ( TMdb ` V ) )
+i37::tmccmpmk
+s38:s24,i37:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMcmp ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) = ( TMcmp ` V ) )
+i39::tmcflmk
+s40:s24,i39:syl |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMfl ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) = if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) )
+s41:s2:fveq2d |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMcmp ` ( TMrdBraOr ` <. V , O >. ) ) = ( TMcmp ` <. ( TMcar ` V ) , <. ( TMra ` V ) , <. ( TMrb ` V ) , <. ( TMda ` V ) , <. ( TMdb ` V ) , <. ( TMcmp ` V ) , if ( ( ( TMfl ` V ) = 1o \/ O = ( inl ` 2 ) ) , 1o , (/) ) >. >. >. >. >. >. ) )
+qed:s41,s38:eqtrd |- ( ( V e. TMSt /\ O e. ( Gamma' |_| 1o ) ) -> ( TMcmp ` ( TMrdBraOr ` <. V , O >. ) ) = ( TMcmp ` V ) )
+$)

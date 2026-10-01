@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=rc1  LOC_AFTER=?
+
+* The quadratic X ( M X + 1 ) has one root modulo 1.
+
+s1::simpr |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> v e. ( 0 ..^ 1 ) )
+i2::elfzoelz
+s3:s1,i2:syl |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> v e. ZZ )
+s4::simpl |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> M e. ZZ )
+s5:s4,s3:zmulcld |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> ( M x. v ) e. ZZ )
+s6::1zzd |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> 1 e. ZZ )
+s7:s5,s6:zaddcld |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> ( ( M x. v ) + 1 ) e. ZZ )
+s8:s3,s7:zmulcld |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> ( v x. ( ( M x. v ) + 1 ) ) e. ZZ )
+i9::1dvds
+s10:s8,i9:syl |- ( ( M e. ZZ /\ v e. ( 0 ..^ 1 ) ) -> 1 || ( v x. ( ( M x. v ) + 1 ) ) )
+s11:s10:ralrimiva |- ( M e. ZZ -> A. v e. ( 0 ..^ 1 ) 1 || ( v x. ( ( M x. v ) + 1 ) ) )
+s12::rabid2 |- ( ( 0 ..^ 1 ) = { v e. ( 0 ..^ 1 ) | 1 || ( v x. ( ( M x. v ) + 1 ) ) } <-> A. v e. ( 0 ..^ 1 ) 1 || ( v x. ( ( M x. v ) + 1 ) ) )
+s13:s12:a1i |- ( M e. ZZ -> ( ( 0 ..^ 1 ) = { v e. ( 0 ..^ 1 ) | 1 || ( v x. ( ( M x. v ) + 1 ) ) } <-> A. v e. ( 0 ..^ 1 ) 1 || ( v x. ( ( M x. v ) + 1 ) ) ) )
+s14:s11,s13:mpbird |- ( M e. ZZ -> ( 0 ..^ 1 ) = { v e. ( 0 ..^ 1 ) | 1 || ( v x. ( ( M x. v ) + 1 ) ) } )
+s15::fzo01 |- ( 0 ..^ 1 ) = { 0 }
+s16:s15:a1i |- ( M e. ZZ -> ( 0 ..^ 1 ) = { 0 } )
+s17:s14:eqcomd |- ( M e. ZZ -> { v e. ( 0 ..^ 1 ) | 1 || ( v x. ( ( M x. v ) + 1 ) ) } = ( 0 ..^ 1 ) )
+s18:s17,s16:eqtrd |- ( M e. ZZ -> { v e. ( 0 ..^ 1 ) | 1 || ( v x. ( ( M x. v ) + 1 ) ) } = { 0 } )
+s19::c0ex |- 0 e. _V
+s20:s19:a1i |- ( M e. ZZ -> 0 e. _V )
+i21::hashsng
+s22:s20,i21:syl |- ( M e. ZZ -> ( # ` { 0 } ) = 1 )
+s23:s18:fveq2d |- ( M e. ZZ -> ( # ` { v e. ( 0 ..^ 1 ) | 1 || ( v x. ( ( M x. v ) + 1 ) ) } ) = ( # ` { 0 } ) )
+qed:s23,s22:eqtrd |- ( M e. ZZ -> ( # ` { v e. ( 0 ..^ 1 ) | 1 || ( v x. ( ( M x. v ) + 1 ) ) } ) = 1 )
+$)

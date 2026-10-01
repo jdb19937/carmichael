@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=t21om  LOC_AFTER=?
+
+* The number of prime factors of ` N ` is at most ` N ` (Lean ` omega_le_self ` ; ~ hashss , ~ hashfz1 ).
+
+s1::simpr |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> x e. { p e. Prime | p || N } )
+s2::breq1 |- ( p = x -> ( p || N <-> x || N ) )
+s3:s2:elrab |- ( x e. { p e. Prime | p || N } <-> ( x e. Prime /\ x || N ) )
+s4:s1,s3:sylib |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> ( x e. Prime /\ x || N ) )
+s5:s4:simpld |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> x e. Prime )
+i6::prmnn
+s7:s5,i6:syl |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> x e. NN )
+s8:s4:simprd |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> x || N )
+s9:s7:nnzd |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> x e. ZZ )
+s10::simpl |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> N e. NN )
+s11:s9,s10:jca |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> ( x e. ZZ /\ N e. NN ) )
+i12::dvdsle
+s13:s11,i12:syl |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> ( x || N -> x <_ N ) )
+s14:s8,s13:mpd |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> x <_ N )
+s15::simpl |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> N e. NN )
+s16:s7,s15,s14:3jca |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> ( x e. NN /\ N e. NN /\ x <_ N ) )
+s17::elfz1b |- ( x e. ( 1 ... N ) <-> ( x e. NN /\ N e. NN /\ x <_ N ) )
+s18:s16,s17:sylibr |- ( ( N e. NN /\ x e. { p e. Prime | p || N } ) -> x e. ( 1 ... N ) )
+s19:s18:ex |- ( N e. NN -> ( x e. { p e. Prime | p || N } -> x e. ( 1 ... N ) ) )
+s20:s19:ssrdv |- ( N e. NN -> { p e. Prime | p || N } C_ ( 1 ... N ) )
+s21::fzfid |- ( N e. NN -> ( 1 ... N ) e. Fin )
+s22:s21,s20:jca |- ( N e. NN -> ( ( 1 ... N ) e. Fin /\ { p e. Prime | p || N } C_ ( 1 ... N ) ) )
+i23::hashss
+s24:s22,i23:syl |- ( N e. NN -> ( # ` { p e. Prime | p || N } ) <_ ( # ` ( 1 ... N ) ) )
+s25::nnnn0 |- ( N e. NN -> N e. NN0 )
+i26::hashfz1
+s27:s25,i26:syl |- ( N e. NN -> ( # ` ( 1 ... N ) ) = N )
+qed:s24,s27:breqtrd |- ( N e. NN -> ( # ` { p e. Prime | p || N } ) <_ N )
+$)

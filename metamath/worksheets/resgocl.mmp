@@ -1,0 +1,77 @@
+$( <MM> <PROOF_ASST> THEOREM=resgocl  LOC_AFTER=?
+
+* The value of ~ df-resgo is a pair of a result and an operation count.  Lean: resGo, the reservoir loop of step 2.
+
+s1::simpr |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> F e. NN0 )
+s2::simpl |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) )
+s3:s2:simpld |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( Z e. NN0 /\ Y e. NN ) )
+s4:s2:simprd |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> Q e. NN )
+s5:s3:simpld |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> Z e. NN0 )
+s6:s3:simprd |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> Y e. NN )
+s7::simpl |- ( ( z = Z /\ y = Y ) -> z = Z )
+s8::simpr |- ( ( z = Z /\ y = Y ) -> y = Y )
+c1:s7,s8:oveq12d |- ( ( z = Z /\ y = Y ) -> ( z ResGoS y ) = ( Z ResGoS Y ) )
+c2:c1:oveq2d |- ( ( z = Z /\ y = Y ) -> ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) = ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) )
+c3:c2:fveq1d |- ( ( z = Z /\ y = Y ) -> ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) = ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) )
+c4:c3:fveq1d |- ( ( z = Z /\ y = Y ) -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) )
+c5:c4:mpteq2dv |- ( ( z = Z /\ y = Y ) -> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) )
+c6:c5:mpteq2dv |- ( ( z = Z /\ y = Y ) -> ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) ) ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) )
+s9::df-resgo |- ResGo = ( z e. NN0 , y e. NN |-> ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( z ResGoS y ) ) ` f ) ` q ) ) ) )
+s10::nnex |- NN e. _V
+s11:s10:a1i |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> NN e. _V )
+i12::mptexg
+s13:s11,i12:syl |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) e. _V )
+s14:c6,s9:ovmpoga |- ( ( Z e. NN0 /\ Y e. NN /\ ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) e. _V ) -> ( Z ResGo Y ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) )
+s15:s5,s6,s13,s14:syl3anc |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( Z ResGo Y ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) )
+s16:s15:fveq1d |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( Z ResGo Y ) ` Q ) = ( ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) ` Q ) )
+s17::id |- ( q = Q -> q = Q )
+c7:s17:fveq2d |- ( q = Q -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) )
+c8:c7:mpteq2dv |- ( q = Q -> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s18::eqid |- ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) = ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) )
+s19::nn0ex |- NN0 e. _V
+s20:s19:a1i |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> NN0 e. _V )
+i21::mptexg
+s22:s20,i21:syl |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) e. _V )
+s23:c8,s18:fvmptg |- ( ( Q e. NN /\ ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) e. _V ) -> ( ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) ` Q ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s24:s4,s22,s23:syl2anc |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( q e. NN |-> ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` q ) ) ) ` Q ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s25:s16,s24:eqtrd |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( Z ResGo Y ) ` Q ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) )
+s26:s25:fveq1d |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( Z ResGo Y ) ` Q ) ` F ) = ( ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) ` F ) )
+s27::id |- ( f = F -> f = F )
+c9:s27:fveq2d |- ( f = F -> ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) = ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) )
+c10:c9:fveq1d |- ( f = F -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) )
+s28::eqid |- ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) = ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) )
+s29::fvex |- ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) e. _V
+s30:s29:a1i |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) e. _V )
+s31:c10,s28:fvmptg |- ( ( F e. NN0 /\ ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) e. _V ) -> ( ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) ` F ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) )
+s32:s1,s30,s31:syl2anc |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( f e. NN0 |-> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` f ) ` Q ) ) ` F ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) )
+s33:s26,s32:eqtrd |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( Z ResGo Y ) ` Q ) ` F ) = ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) )
+s34::ovex |- ( ( Word NN0 X. NN0 ) ^m NN ) e. _V
+s35:s34:a1i |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( Word NN0 X. NN0 ) ^m NN ) e. _V )
+s36::simpr |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) /\ g e. NN ) -> g e. NN )
+s37::wrd0 |- (/) e. Word NN0
+s38:s37:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) /\ g e. NN ) -> (/) e. Word NN0 )
+s39::0nn0 |- 0 e. NN0
+s40:s39:a1i |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) /\ g e. NN ) -> 0 e. NN0 )
+i41::opelxpi
+s42:s38,s40,i41:syl2anc |- ( ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) /\ g e. NN ) -> <. (/) , 0 >. e. ( Word NN0 X. NN0 ) )
+s43::eqid |- ( g e. NN |-> <. (/) , 0 >. ) = ( g e. NN |-> <. (/) , 0 >. )
+s44:s42,s43:fmptd |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( g e. NN |-> <. (/) , 0 >. ) : NN --> ( Word NN0 X. NN0 ) )
+s45::wrdexi |- Word NN0 e. _V
+s46:s45:a1i |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> Word NN0 e. _V )
+i47::xpexg
+s48:s46,s20,i47:syl2anc |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( Word NN0 X. NN0 ) e. _V )
+i49::elmapg
+s50:s48,s11,i49:syl2anc |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( g e. NN |-> <. (/) , 0 >. ) e. ( ( Word NN0 X. NN0 ) ^m NN ) <-> ( g e. NN |-> <. (/) , 0 >. ) : NN --> ( Word NN0 X. NN0 ) ) )
+s51:s44,s50:mpbird |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( g e. NN |-> <. (/) , 0 >. ) e. ( ( Word NN0 X. NN0 ) ^m NN ) )
+i52::resgosf
+s53:s5,s6:jca |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( Z e. NN0 /\ Y e. NN ) )
+s54:s53,i52:syl |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( Z ResGoS Y ) : ( ( ( Word NN0 X. NN0 ) ^m NN ) X. NN0 ) --> ( ( Word NN0 X. NN0 ) ^m NN ) )
+s55:s35,s51,s54:3jca |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( Word NN0 X. NN0 ) ^m NN ) e. _V /\ ( g e. NN |-> <. (/) , 0 >. ) e. ( ( Word NN0 X. NN0 ) ^m NN ) /\ ( Z ResGoS Y ) : ( ( ( Word NN0 X. NN0 ) ^m NN ) X. NN0 ) --> ( ( Word NN0 X. NN0 ) ^m NN ) ) )
+i56::algrecmap
+s57:s55,s1,i56:syl2anc |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) e. ( ( Word NN0 X. NN0 ) ^m NN ) )
+i58::elmapi
+s59:s57,i58:syl |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) : NN --> ( Word NN0 X. NN0 ) )
+i60::ffvelcdm
+s61:s59,s4,i60:syl2anc |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( ( g e. NN |-> <. (/) , 0 >. ) AlgRec ( Z ResGoS Y ) ) ` F ) ` Q ) e. ( Word NN0 X. NN0 ) )
+qed:s33,s61:eqeltrd |- ( ( ( ( Z e. NN0 /\ Y e. NN ) /\ Q e. NN ) /\ F e. NN0 ) -> ( ( ( Z ResGo Y ) ` Q ) ` F ) e. ( Word NN0 X. NN0 ) )
+$)

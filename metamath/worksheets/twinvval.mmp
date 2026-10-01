@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=twinvval  LOC_AFTER=?
+
+* The value of the twin-sieve density at a positive integer is the product of 2 over its prime divisors.
+
+s1::breq2 |- ( t = N -> ( g || t <-> g || N ) )
+s2:s1:rabbidv |- ( t = N -> { g e. Prime | g || t } = { g e. Prime | g || N } )
+s3:s2:prodeq1d |- ( t = N -> prod_ f e. { g e. Prime | g || t } ( 2 / f ) = prod_ f e. { g e. Prime | g || N } ( 2 / f ) )
+s4::prodex |- prod_ f e. { g e. Prime | g || N } ( 2 / f ) e. _V
+s5::eqid |- ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 2 / f ) ) = ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 2 / f ) )
+s6:s3,s5:fvmptg |- ( ( N e. NN /\ prod_ f e. { g e. Prime | g || N } ( 2 / f ) e. _V ) -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 2 / f ) ) ` N ) = prod_ f e. { g e. Prime | g || N } ( 2 / f ) )
+s7::id |- ( N e. NN -> N e. NN )
+s8:s4:a1i |- ( N e. NN -> prod_ f e. { g e. Prime | g || N } ( 2 / f ) e. _V )
+s9:s7,s8:jca |- ( N e. NN -> ( N e. NN /\ prod_ f e. { g e. Prime | g || N } ( 2 / f ) e. _V ) )
+s10:s6:a1i |- ( N e. NN -> ( ( N e. NN /\ prod_ f e. { g e. Prime | g || N } ( 2 / f ) e. _V ) -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 2 / f ) ) ` N ) = prod_ f e. { g e. Prime | g || N } ( 2 / f ) ) )
+qed:s9,s10:mpd |- ( N e. NN -> ( ( t e. NN |-> prod_ f e. { g e. Prime | g || t } ( 2 / f ) ) ` N ) = prod_ f e. { g e. Prime | g || N } ( 2 / f ) )
+$)

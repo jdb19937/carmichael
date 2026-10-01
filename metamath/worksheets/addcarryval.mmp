@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=addcarryval  LOC_AFTER=?
+
+* Value of addCarry: the final carry as a bit word (Lean: addCarry c = if c then [true] else []).
+
+s1::id |- ( C e. 2o -> C e. 2o )
+s2::id |- ( c = C -> c = C )
+c1:s2:eqeq1d |- ( c = C -> ( c = 1o <-> C = 1o ) )
+c2:c1:ifbid |- ( c = C -> if ( c = 1o , <" 1o "> , (/) ) = if ( C = 1o , <" 1o "> , (/) ) )
+s3::df-addcarry |- addCarry = ( c e. 2o |-> if ( c = 1o , <" 1o "> , (/) ) )
+s4::1oel2o |- 1o e. 2o
+s5:s4:a1i |- ( C e. 2o -> 1o e. 2o )
+i6::s1cl
+s7:s5,i6:syl |- ( C e. 2o -> <" 1o "> e. Word 2o )
+s8::wrd0 |- (/) e. Word 2o
+s9:s8:a1i |- ( C e. 2o -> (/) e. Word 2o )
+s10:s7,s9:ifcld |- ( C e. 2o -> if ( C = 1o , <" 1o "> , (/) ) e. Word 2o )
+s11:s10:elexd |- ( C e. 2o -> if ( C = 1o , <" 1o "> , (/) ) e. _V )
+s12:c2,s3:fvmptg |- ( ( C e. 2o /\ if ( C = 1o , <" 1o "> , (/) ) e. _V ) -> ( addCarry ` C ) = if ( C = 1o , <" 1o "> , (/) ) )
+qed:s1,s11,s12:syl2anc |- ( C e. 2o -> ( addCarry ` C ) = if ( C = 1o , <" 1o "> , (/) ) )
+$)

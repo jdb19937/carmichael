@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=extgol4  LOC_AFTER=?
+
+* The product of a hit is at most the ceiling to the batch size.
+
+s1::simpl |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) )
+s2:s1:simp1d |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> X e. NN0 )
+s3::simpl |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) )
+s4:s3:simp2d |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> 1 <_ X )
+s5::simpl |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) )
+s6:s5:simp3d |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> B e. NN0 )
+s7::simpr |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) )
+s8:s7:simp1d |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> S e. Word NN0 )
+s9::simpr |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) )
+s10:s9:simp2d |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> A. q e. ran S q <_ X )
+s11::simpr |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) )
+s12:s11:simp3d |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( # ` S ) <_ B )
+s13:s8,s2:jca |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( S e. Word NN0 /\ X e. NN0 ) )
+s14:s13,s10:jca |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( ( S e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran S q <_ X ) )
+i15::algprodle
+s16:s14,i15:syl |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> prod_ i e. ( 0 ..^ ( # ` S ) ) ( S ` i ) <_ ( X ^ ( # ` S ) ) )
+i17::lencl
+s18:s8,i17:syl |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( # ` S ) e. NN0 )
+s19:s18:nn0zd |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( # ` S ) e. ZZ )
+s20:s6:nn0zd |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> B e. ZZ )
+s21:s19,s20,s12:3jca |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( ( # ` S ) e. ZZ /\ B e. ZZ /\ ( # ` S ) <_ B ) )
+i22::eluz2
+s23:s21,i22:sylibr |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> B e. ( ZZ>= ` ( # ` S ) ) )
+s24:s2:nn0red |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> X e. RR )
+s25:s24,s4,s23:3jca |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X e. RR /\ 1 <_ X /\ B e. ( ZZ>= ` ( # ` S ) ) ) )
+i26::leexp2a
+s27:s25,i26:syl |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X ^ ( # ` S ) ) <_ ( X ^ B ) )
+i28::algprodcl
+s29:s8,i28:syl |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> prod_ i e. ( 0 ..^ ( # ` S ) ) ( S ` i ) e. NN0 )
+s30:s29:nn0red |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> prod_ i e. ( 0 ..^ ( # ` S ) ) ( S ` i ) e. RR )
+s31:s2,s18:nn0expcld |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X ^ ( # ` S ) ) e. NN0 )
+s32:s31:nn0red |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X ^ ( # ` S ) ) e. RR )
+s33:s2,s6:nn0expcld |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X ^ B ) e. NN0 )
+s34:s33:nn0red |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> ( X ^ B ) e. RR )
+qed:s30,s32,s34,s16,s27:letrd |- ( ( ( X e. NN0 /\ 1 <_ X /\ B e. NN0 ) /\ ( S e. Word NN0 /\ A. q e. ran S q <_ X /\ ( # ` S ) <_ B ) ) -> prod_ i e. ( 0 ..^ ( # ` S ) ) ( S ` i ) <_ ( X ^ B ) )
+$)

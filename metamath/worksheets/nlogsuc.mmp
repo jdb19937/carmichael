@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=nlogsuc  LOC_AFTER=?
+
+* One more power of the base fits below R (Lean: Nat.log_mul_base with Nat.log_mono_right).
+
+s1::simpll |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> B e. ( ZZ>= ` 2 ) )
+s2::simplrl |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> S e. NN )
+s3::simplrr |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> R e. NN )
+s4::simpr |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( S x. B ) <_ R )
+i5::eluz2nn
+s6:s1,i5:syl |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> B e. NN )
+s7:s6:nnnn0d |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> B e. NN0 )
+s8:s2:nnnn0d |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> S e. NN0 )
+i9::nlogcl
+s10:s7,s8,i9:syl2anc |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( B Nlog S ) e. NN0 )
+i11::nlogle
+s12:s1,s2,i11:syl2anc |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( B ^ ( B Nlog S ) ) <_ S )
+s13:s7:nn0cnd |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> B e. CC )
+i14::expp1
+s15:s13,s10,i14:syl2anc |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( B ^ ( ( B Nlog S ) + 1 ) ) = ( ( B ^ ( B Nlog S ) ) x. B ) )
+s16:s7,s10:nn0expcld |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( B ^ ( B Nlog S ) ) e. NN0 )
+s17:s16:nn0red |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( B ^ ( B Nlog S ) ) e. RR )
+s18:s8:nn0red |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> S e. RR )
+s19:s7:nn0red |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> B e. RR )
+s20:s7:nn0ge0d |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> 0 <_ B )
+s21:s17,s18,s19,s20,s12:lemul1ad |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( ( B ^ ( B Nlog S ) ) x. B ) <_ ( S x. B ) )
+s22:s17,s19:remulcld |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( ( B ^ ( B Nlog S ) ) x. B ) e. RR )
+s23:s18,s19:remulcld |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( S x. B ) e. RR )
+s24:s3:nnred |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> R e. RR )
+s25:s22,s23,s24,s21,s4:letrd |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( ( B ^ ( B Nlog S ) ) x. B ) <_ R )
+s26:s15,s25:eqbrtrd |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( B ^ ( ( B Nlog S ) + 1 ) ) <_ R )
+i27::peano2nn0
+s28:s10,i27:syl |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( ( B Nlog S ) + 1 ) e. NN0 )
+s29:s1,s3:jca |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( B e. ( ZZ>= ` 2 ) /\ R e. NN ) )
+s30:s28,s26:jca |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( ( ( B Nlog S ) + 1 ) e. NN0 /\ ( B ^ ( ( B Nlog S ) + 1 ) ) <_ R ) )
+i31::nlogub
+qed:s29,s30,i31:syl2anc |- ( ( ( B e. ( ZZ>= ` 2 ) /\ ( S e. NN /\ R e. NN ) ) /\ ( S x. B ) <_ R ) -> ( ( B Nlog S ) + 1 ) <_ ( B Nlog R ) )
+$)

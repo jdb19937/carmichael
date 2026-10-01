@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=gf1edv  LOC_AFTER=?
+
+* The derivative of ` t |-> exp ( W t ) ` on the real line is ` exp ( W t ) W ` ( ~ dvmptco , ~ dvef ).
+
+s1::id |- ( W e. CC -> W e. CC )
+s2::reelprrecn |- RR e. { RR , CC }
+s3:s2:a1i |- ( W e. CC -> RR e. { RR , CC } )
+s4::cnelprrecn |- CC e. { RR , CC }
+s5:s4:a1i |- ( W e. CC -> CC e. { RR , CC } )
+s6:s3:dvmptid |- ( W e. CC -> ( RR _D ( t e. RR |-> t ) ) = ( t e. RR |-> 1 ) )
+s7::simpr |- ( ( W e. CC /\ t e. RR ) -> t e. RR )
+s8:s7:recnd |- ( ( W e. CC /\ t e. RR ) -> t e. CC )
+s9::1cnd |- ( ( W e. CC /\ t e. RR ) -> 1 e. CC )
+s10:s3,s8,s9,s6,s1:dvmptcmul |- ( W e. CC -> ( RR _D ( t e. RR |-> ( W x. t ) ) ) = ( t e. RR |-> ( W x. 1 ) ) )
+s11:s1:adantr |- ( ( W e. CC /\ t e. RR ) -> W e. CC )
+s12:s11,s8:mulcld |- ( ( W e. CC /\ t e. RR ) -> ( W x. t ) e. CC )
+s13:s11,s9:mulcld |- ( ( W e. CC /\ t e. RR ) -> ( W x. 1 ) e. CC )
+s14::simpr |- ( ( W e. CC /\ y e. CC ) -> y e. CC )
+s15:s14:efcld |- ( ( W e. CC /\ y e. CC ) -> ( exp ` y ) e. CC )
+s16::eff |- exp : CC --> CC
+s17:s16:a1i |- ( W e. CC -> exp : CC --> CC )
+s18:s17:feqmptd |- ( W e. CC -> exp = ( y e. CC |-> ( exp ` y ) ) )
+s19::dvef |- ( CC _D exp ) = exp
+s20:s19:a1i |- ( W e. CC -> ( CC _D exp ) = exp )
+s21:s18:eqcomd |- ( W e. CC -> ( y e. CC |-> ( exp ` y ) ) = exp )
+s22:s21:oveq2d |- ( W e. CC -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = ( CC _D exp ) )
+s23:s22,s20:eqtrd |- ( W e. CC -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = exp )
+s24:s23,s18:eqtrd |- ( W e. CC -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = ( y e. CC |-> ( exp ` y ) ) )
+s25::fveq2 |- ( y = ( W x. t ) -> ( exp ` y ) = ( exp ` ( W x. t ) ) )
+s26:s3,s5,s12,s13,s15,s15,s10,s24,s25,s25:dvmptco |- ( W e. CC -> ( RR _D ( t e. RR |-> ( exp ` ( W x. t ) ) ) ) = ( t e. RR |-> ( ( exp ` ( W x. t ) ) x. ( W x. 1 ) ) ) )
+s27:s11:mulridd |- ( ( W e. CC /\ t e. RR ) -> ( W x. 1 ) = W )
+s28:s27:oveq2d |- ( ( W e. CC /\ t e. RR ) -> ( ( exp ` ( W x. t ) ) x. ( W x. 1 ) ) = ( ( exp ` ( W x. t ) ) x. W ) )
+s29:s28:mpteq2dva |- ( W e. CC -> ( t e. RR |-> ( ( exp ` ( W x. t ) ) x. ( W x. 1 ) ) ) = ( t e. RR |-> ( ( exp ` ( W x. t ) ) x. W ) ) )
+s30:s26,s29:eqtrd |- ( W e. CC -> ( RR _D ( t e. RR |-> ( exp ` ( W x. t ) ) ) ) = ( t e. RR |-> ( ( exp ` ( W x. t ) ) x. W ) ) )
+qed:s30:idi |- ( W e. CC -> ( RR _D ( t e. RR |-> ( exp ` ( W x. t ) ) ) ) = ( t e. RR |-> ( ( exp ` ( W x. t ) ) x. W ) ) )
+$)

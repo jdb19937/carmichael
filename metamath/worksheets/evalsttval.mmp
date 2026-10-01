@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=evalsttval  LOC_AFTER=?
+
+* Value of the EvalsToInTime relation of a set F with time bound M.
+
+1::df-evalstt |- EvalsToInTime = ( f e. _V , m e. NN0 |-> { <. a , b >. | ( ( a e. dom f /\ b e. ( dom f |_| 1o ) ) /\ E. n e. ( 0 ... m ) ( ( ( OptStep ` f ) ^r n ) ` ( inl ` a ) ) = b ) } )
+2:1:a1i     |- ( ( F e. V /\ M e. NN0 ) -> EvalsToInTime = ( f e. _V , m e. NN0 |-> { <. a , b >. | ( ( a e. dom f /\ b e. ( dom f |_| 1o ) ) /\ E. n e. ( 0 ... m ) ( ( ( OptStep ` f ) ^r n ) ` ( inl ` a ) ) = b ) } ) )
+3::simprl   |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> f = F )
+4::simprr   |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> m = M )
+5:3:dmeqd   |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> dom f = dom F )
+6:5:eleq2d  |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( a e. dom f <-> a e. dom F ) )
+7a::djueq1
+7:5,7a:syl  |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( dom f |_| 1o ) = ( dom F |_| 1o ) )
+8:7:eleq2d  |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( b e. ( dom f |_| 1o ) <-> b e. ( dom F |_| 1o ) ) )
+9:6,8:anbi12d |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( ( a e. dom f /\ b e. ( dom f |_| 1o ) ) <-> ( a e. dom F /\ b e. ( dom F |_| 1o ) ) ) )
+10:4:oveq2d |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( 0 ... m ) = ( 0 ... M ) )
+11:3:fveq2d |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( OptStep ` f ) = ( OptStep ` F ) )
+12:11:oveq1d |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( ( OptStep ` f ) ^r n ) = ( ( OptStep ` F ) ^r n ) )
+13:12:fveq1d |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( ( ( OptStep ` f ) ^r n ) ` ( inl ` a ) ) = ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) )
+14:13:eqeq1d |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( ( ( ( OptStep ` f ) ^r n ) ` ( inl ` a ) ) = b <-> ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) )
+15:10,14:rexeqbidv |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( E. n e. ( 0 ... m ) ( ( ( OptStep ` f ) ^r n ) ` ( inl ` a ) ) = b <-> E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) )
+16:9,15:anbi12d |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> ( ( ( a e. dom f /\ b e. ( dom f |_| 1o ) ) /\ E. n e. ( 0 ... m ) ( ( ( OptStep ` f ) ^r n ) ` ( inl ` a ) ) = b ) <-> ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) ) )
+17:16:opabbidv |- ( ( ( F e. V /\ M e. NN0 ) /\ ( f = F /\ m = M ) ) -> { <. a , b >. | ( ( a e. dom f /\ b e. ( dom f |_| 1o ) ) /\ E. n e. ( 0 ... m ) ( ( ( OptStep ` f ) ^r n ) ` ( inl ` a ) ) = b ) } = { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } )
+18::simpl   |- ( ( F e. V /\ M e. NN0 ) -> F e. V )
+19:18:elexd |- ( ( F e. V /\ M e. NN0 ) -> F e. _V )
+20::simpr   |- ( ( F e. V /\ M e. NN0 ) -> M e. NN0 )
+21::opabssxp |- { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } C_ ( dom F X. ( dom F |_| 1o ) )
+22:21:a1i   |- ( ( F e. V /\ M e. NN0 ) -> { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } C_ ( dom F X. ( dom F |_| 1o ) ) )
+23a::dmexg
+23:18,23a:syl |- ( ( F e. V /\ M e. NN0 ) -> dom F e. _V )
+24::1oex    |- 1o e. _V
+25:24:a1i   |- ( ( F e. V /\ M e. NN0 ) -> 1o e. _V )
+26a::djuex
+26:23,25,26a:syl2anc |- ( ( F e. V /\ M e. NN0 ) -> ( dom F |_| 1o ) e. _V )
+27a::xpexg
+27:23,26,27a:syl2anc |- ( ( F e. V /\ M e. NN0 ) -> ( dom F X. ( dom F |_| 1o ) ) e. _V )
+28:27,22:ssexd |- ( ( F e. V /\ M e. NN0 ) -> { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } e. _V )
+qed:2,17,19,20,28:ovmpod |- ( ( F e. V /\ M e. NN0 ) -> ( F EvalsToInTime M ) = { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } )
+$)

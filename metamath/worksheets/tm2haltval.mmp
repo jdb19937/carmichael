@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2haltval  LOC_AFTER=?
+
+* Value of TM2halt: the halting configuration with output word X (Lean's haltList).
+
+s1::simpl |- ( ( m = M /\ l = X ) -> m = M )
+s2::simpr |- ( ( m = M /\ l = X ) -> l = X )
+c1:s1:fveq2d |- ( ( m = M /\ l = X ) -> ( 2nd ` m ) = ( 2nd ` M ) )
+c2:c1:fveq2d |- ( ( m = M /\ l = X ) -> ( 1st ` ( 2nd ` m ) ) = ( 1st ` ( 2nd ` M ) ) )
+c3:c2:fveq2d |- ( ( m = M /\ l = X ) -> ( 2nd ` ( 1st ` ( 2nd ` m ) ) ) = ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) )
+c4:s1:fveq2d |- ( ( m = M /\ l = X ) -> ( 1st ` m ) = ( 1st ` M ) )
+c5:c4:fveq2d |- ( ( m = M /\ l = X ) -> ( 1st ` ( 1st ` m ) ) = ( 1st ` ( 1st ` M ) ) )
+c6:c5:fveq2d |- ( ( m = M /\ l = X ) -> ( 1st ` ( 1st ` ( 1st ` m ) ) ) = ( 1st ` ( 1st ` ( 1st ` M ) ) ) )
+c7:c6:fveq2d |- ( ( m = M /\ l = X ) -> ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) = ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) )
+c8:c7:dmeqd |- ( ( m = M /\ l = X ) -> dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) = dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) )
+c9:s1:fveq2d |- ( ( m = M /\ l = X ) -> ( 1st ` m ) = ( 1st ` M ) )
+c10:c9:fveq2d |- ( ( m = M /\ l = X ) -> ( 2nd ` ( 1st ` m ) ) = ( 2nd ` ( 1st ` M ) ) )
+c11:c10:fveq2d |- ( ( m = M /\ l = X ) -> ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) )
+c12:c11:eqeq2d |- ( ( m = M /\ l = X ) -> ( k = ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) <-> k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) ) )
+c13:c12,s2:ifbieq1d |- ( ( m = M /\ l = X ) -> if ( k = ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) , l , (/) ) = if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) )
+c14:c8,c13:mpteq12dv |- ( ( m = M /\ l = X ) -> ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) , l , (/) ) ) = ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) )
+c15:c3,c14:opeq12d |- ( ( m = M /\ l = X ) -> <. ( 2nd ` ( 1st ` ( 2nd ` m ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) , l , (/) ) ) >. = <. ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) >. )
+c16:c15:opeq2d |- ( ( m = M /\ l = X ) -> <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` m ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) , l , (/) ) ) >. >. = <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) >. >. )
+s3::df-tm2halt |- TM2halt = ( m e. _V , l e. _V |-> <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` m ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` m ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` m ) ) ) , l , (/) ) ) >. >. )
+s4:c16,s3:ovmpoga |- ( ( M e. _V /\ X e. _V /\ <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) >. >. e. _V ) -> ( M TM2halt X ) = <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) >. >. )
+s5::opex |- <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) >. >. e. _V
+s6::elex |- ( M e. V -> M e. _V )
+s7::elex |- ( X e. W -> X e. _V )
+s8:s6:adantr |- ( ( M e. V /\ X e. W ) -> M e. _V )
+s9:s7:adantl |- ( ( M e. V /\ X e. W ) -> X e. _V )
+s10:s5:a1i |- ( ( M e. V /\ X e. W ) -> <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) >. >. e. _V )
+qed:s8,s9,s10,s4:syl3anc |- ( ( M e. V /\ X e. W ) -> ( M TM2halt X ) = <. ( inr ` (/) ) , <. ( 2nd ` ( 1st ` ( 2nd ` M ) ) ) , ( k e. dom ( 1st ` ( 1st ` ( 1st ` ( 1st ` M ) ) ) ) |-> if ( k = ( 2nd ` ( 2nd ` ( 1st ` M ) ) ) , X , (/) ) ) >. >. )
+$)

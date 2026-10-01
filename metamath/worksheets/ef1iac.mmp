@@ -1,0 +1,66 @@
+$( <MM> <PROOF_ASST> THEOREM=ef1iac  LOC_AFTER=?
+
+* ` 1 / ( 1 + | t | ) ` is integrable on every bounded interval ( Lean ` continuous_one_div_one_add_abs ` with ` Continuous.intervalIntegrable ` ; ~ cniccibl ).
+
+s1::simpl |- ( ( U e. RR /\ V e. RR ) -> U e. RR )
+s2::simpr |- ( ( U e. RR /\ V e. RR ) -> V e. RR )
+i3::iccssre
+s4:s1,s2,i3:syl2anc |- ( ( U e. RR /\ V e. RR ) -> ( U [,] V ) C_ RR )
+s5::ax-resscn |- RR C_ CC
+s6:s5:a1i |- ( ( U e. RR /\ V e. RR ) -> RR C_ CC )
+s7:s4,s6:sstrd |- ( ( U e. RR /\ V e. RR ) -> ( U [,] V ) C_ CC )
+s8::ssid |- CC C_ CC
+s9:s8:a1i |- ( ( U e. RR /\ V e. RR ) -> CC C_ CC )
+i10::cncfmptid
+s11:s7,s9,i10:syl2anc |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> t ) e. ( ( U [,] V ) -cn-> CC ) )
+s12::ax-resscn |- RR C_ CC
+s13::ssid |- CC C_ CC
+i14::cncfss
+s15:s12,s13,i14:mp2an |- ( CC -cn-> RR ) C_ ( CC -cn-> CC )
+s16::abscncf |- abs e. ( CC -cn-> RR )
+s17:s15,s16:sselii |- abs e. ( CC -cn-> CC )
+s18:s17:a1i |- ( ( U e. RR /\ V e. RR ) -> abs e. ( CC -cn-> CC ) )
+s19:s18,s11:cncfmpt1f |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> ( abs ` t ) ) e. ( ( U [,] V ) -cn-> CC ) )
+s20::ax-1cn |- 1 e. CC
+s21:s20:a1i |- ( ( U e. RR /\ V e. RR ) -> 1 e. CC )
+i22::cncfmptc
+s23:s21,s7,s9,i22:syl3anc |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> 1 ) e. ( ( U [,] V ) -cn-> CC ) )
+s24:s23,s19:addcncf |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> ( 1 + ( abs ` t ) ) ) e. ( ( U [,] V ) -cn-> CC ) )
+s25:s4:adantr |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( U [,] V ) C_ RR )
+s26::simpr |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> t e. ( U [,] V ) )
+s27:s25,s26:sseldd |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> t e. RR )
+s28:s27:recnd |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> t e. CC )
+s29:s28:abscld |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( abs ` t ) e. RR )
+s30:s28:absge0d |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> 0 <_ ( abs ` t ) )
+s31::0lt1 |- 0 < 1
+s32:s31:a1i |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> 0 < 1 )
+s33::0re |- 0 e. RR
+s34:s33:a1i |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> 0 e. RR )
+s35::1re |- 1 e. RR
+s36:s35:a1i |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> 1 e. RR )
+s37:s34,s34,s36,s29,s32,s30:ltleaddd |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( 0 + 0 ) < ( 1 + ( abs ` t ) ) )
+s38::0cn |- 0 e. CC
+s39:s38:addlidi |- ( 0 + 0 ) = 0
+s40:s39:a1i |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( 0 + 0 ) = 0 )
+s41:s40,s37:eqbrtrrd |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> 0 < ( 1 + ( abs ` t ) ) )
+s42:s36,s29:readdcld |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( 1 + ( abs ` t ) ) e. RR )
+s43:s42,s41:elrpd |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( 1 + ( abs ` t ) ) e. RR+ )
+i44::rpcndif0
+s45:s43,i44:syl |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( 1 + ( abs ` t ) ) e. ( CC \ { 0 } ) )
+s46::eqid |- ( t e. ( U [,] V ) |-> ( 1 + ( abs ` t ) ) ) = ( t e. ( U [,] V ) |-> ( 1 + ( abs ` t ) ) )
+s47:s45,s46:fmptd |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> ( 1 + ( abs ` t ) ) ) : ( U [,] V ) --> ( CC \ { 0 } ) )
+s48::difss |- ( CC \ { 0 } ) C_ CC
+s49:s48:a1i |- ( ( U e. RR /\ V e. RR ) -> ( CC \ { 0 } ) C_ CC )
+i50::cncfcdm
+s51:s49,s24,i50:syl2anc |- ( ( U e. RR /\ V e. RR ) -> ( ( t e. ( U [,] V ) |-> ( 1 + ( abs ` t ) ) ) e. ( ( U [,] V ) -cn-> ( CC \ { 0 } ) ) <-> ( t e. ( U [,] V ) |-> ( 1 + ( abs ` t ) ) ) : ( U [,] V ) --> ( CC \ { 0 } ) ) )
+s52:s47,s51:mpbird |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> ( 1 + ( abs ` t ) ) ) e. ( ( U [,] V ) -cn-> ( CC \ { 0 } ) ) )
+s53:s23,s52:divcncf |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> ( 1 / ( 1 + ( abs ` t ) ) ) ) e. ( ( U [,] V ) -cn-> CC ) )
+i54::cniccibl
+s55:s1,s2,s53,i54:syl3anc |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U [,] V ) |-> ( 1 / ( 1 + ( abs ` t ) ) ) ) e. L^1 )
+s56:s43:rpreccld |- ( ( ( U e. RR /\ V e. RR ) /\ t e. ( U [,] V ) ) -> ( 1 / ( 1 + ( abs ` t ) ) ) e. RR+ )
+s57::ioossicc |- ( U (,) V ) C_ ( U [,] V )
+s58:s57:a1i |- ( ( U e. RR /\ V e. RR ) -> ( U (,) V ) C_ ( U [,] V ) )
+s59::ioombl |- ( U (,) V ) e. dom vol
+s60:s59:a1i |- ( ( U e. RR /\ V e. RR ) -> ( U (,) V ) e. dom vol )
+qed:s58,s60,s56,s55:iblss |- ( ( U e. RR /\ V e. RR ) -> ( t e. ( U (,) V ) |-> ( 1 / ( 1 + ( abs ` t ) ) ) ) e. L^1 )
+$)

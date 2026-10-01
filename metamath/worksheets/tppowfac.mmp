@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=tppowfac  LOC_AFTER=?
+
+* Lean ` KDerivDetect.pow_le_factorial_mul_exp ` : ` x ^ k <_ k ! e ^ x ` for ` 0 <_ x ` (one term of the exponential series).
+
+s1::simp1 |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> X e. RR )
+s2::simp2 |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> 0 <_ X )
+s3::simp3 |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> K e. NN0 )
+s4:s1:recnd |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> X e. CC )
+s5::eqid |- ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) = ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) )
+s6:s5:efcvg |- ( X e. CC -> seq 0 ( + , ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) ) ~~> ( exp ` X ) )
+s7:s4,s6:syl |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> seq 0 ( + , ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) ) ~~> ( exp ` X ) )
+s8::climrel |- Rel ~~>
+s9:s8:releldmi |- ( seq 0 ( + , ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) ) ~~> ( exp ` X ) -> seq 0 ( + , ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) ) e. dom ~~> )
+s10:s7,s9:syl |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> seq 0 ( + , ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) ) e. dom ~~> )
+s11:s1:adantr |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> X e. RR )
+s12::simpr |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> k e. NN0 )
+s13:s2:adantr |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> 0 <_ X )
+s14:s5:eftval |- ( k e. NN0 -> ( ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) ` k ) = ( ( X ^ k ) / ( ! ` k ) ) )
+s15:s14:adantl |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> ( ( n e. NN0 |-> ( ( X ^ n ) / ( ! ` n ) ) ) ` k ) = ( ( X ^ k ) / ( ! ` k ) ) )
+i16::faccl
+s17:s12,i16:syl |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> ( ! ` k ) e. NN )
+s18:s11,s12:reexpcld |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> ( X ^ k ) e. RR )
+s19:s17:nnrpd |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> ( ! ` k ) e. RR+ )
+s20:s18,s19:rerpdivcld |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> ( ( X ^ k ) / ( ! ` k ) ) e. RR )
+s21:s11,s12,s13:expge0d |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> 0 <_ ( X ^ k ) )
+s22:s18,s19,s21:divge0d |- ( ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) /\ k e. NN0 ) -> 0 <_ ( ( X ^ k ) / ( ! ` k ) ) )
+s23::nn0uz |- NN0 = ( ZZ>= ` 0 )
+s24::0z |- 0 e. ZZ
+s25:s24:a1i |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> 0 e. ZZ )
+s26::snfi |- { K } e. Fin
+s27:s26:a1i |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> { K } e. Fin )
+s28:s3:snssd |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> { K } C_ NN0 )
+s29:s23,s25,s27,s28,s15,s20,s22,s10:isumless |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> sum_ k e. { K } ( ( X ^ k ) / ( ! ` k ) ) <_ sum_ k e. NN0 ( ( X ^ k ) / ( ! ` k ) ) )
+s30::oveq2 |- ( k = K -> ( X ^ k ) = ( X ^ K ) )
+s31::fveq2 |- ( k = K -> ( ! ` k ) = ( ! ` K ) )
+s32:s30,s31:oveq12d |- ( k = K -> ( ( X ^ k ) / ( ! ` k ) ) = ( ( X ^ K ) / ( ! ` K ) ) )
+i33::faccl
+s34:s3,i33:syl |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ! ` K ) e. NN )
+s35:s4,s3:expcld |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( X ^ K ) e. CC )
+s36:s34:nnrpd |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ! ` K ) e. RR+ )
+s37:s36:rpred |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ! ` K ) e. RR )
+s38:s37:recnd |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ! ` K ) e. CC )
+s39:s36:rpne0d |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ! ` K ) =/= 0 )
+s40:s35,s38,s39:divcld |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ( X ^ K ) / ( ! ` K ) ) e. CC )
+s41:s32:sumsn |- ( ( K e. NN0 /\ ( ( X ^ K ) / ( ! ` K ) ) e. CC ) -> sum_ k e. { K } ( ( X ^ k ) / ( ! ` k ) ) = ( ( X ^ K ) / ( ! ` K ) ) )
+s42:s3,s40,s41:syl2anc |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> sum_ k e. { K } ( ( X ^ k ) / ( ! ` k ) ) = ( ( X ^ K ) / ( ! ` K ) ) )
+i43::efval
+s44:s4,i43:syl |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( exp ` X ) = sum_ k e. NN0 ( ( X ^ k ) / ( ! ` k ) ) )
+s45:s42,s29:eqbrtrrd |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ( X ^ K ) / ( ! ` K ) ) <_ sum_ k e. NN0 ( ( X ^ k ) / ( ! ` k ) ) )
+s46:s45,s44:breqtrrd |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ( X ^ K ) / ( ! ` K ) ) <_ ( exp ` X ) )
+s47:s36:rpgt0d |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> 0 < ( ! ` K ) )
+s48:s1,s3:reexpcld |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( X ^ K ) e. RR )
+s49:s1:reefcld |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( exp ` X ) e. RR )
+i50::ledivmul
+s51:s48,s49,s37,s47,i50:syl112anc |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( ( ( X ^ K ) / ( ! ` K ) ) <_ ( exp ` X ) <-> ( X ^ K ) <_ ( ( ! ` K ) x. ( exp ` X ) ) ) )
+qed:s46,s51:mpbid |- ( ( X e. RR /\ 0 <_ X /\ K e. NN0 ) -> ( X ^ K ) <_ ( ( ! ` K ) x. ( exp ` X ) ) )
+$)

@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=smoothtdcl  LOC_AFTER=?
+
+* The smoothness test returns a boolean and an operation count.
+
+s1::simpr |- ( ( Y e. NN /\ K e. NN0 ) -> K e. NN0 )
+s2::simpl |- ( ( Y e. NN /\ K e. NN0 ) -> Y e. NN )
+i3::nnm1nn0
+s4:s2,i3:syl |- ( ( Y e. NN /\ K e. NN0 ) -> ( Y - 1 ) e. NN0 )
+s5::simpl |- ( ( y = Y /\ k = K ) -> y = Y )
+s6::simpr |- ( ( y = Y /\ k = K ) -> k = K )
+c1:s6:oveq2d |- ( ( y = Y /\ k = K ) -> ( 2 SmoothGo k ) = ( 2 SmoothGo K ) )
+c2:s5:oveq1d |- ( ( y = Y /\ k = K ) -> ( y - 1 ) = ( Y - 1 ) )
+c3:c1,c2:fveq12d |- ( ( y = Y /\ k = K ) -> ( ( 2 SmoothGo k ) ` ( y - 1 ) ) = ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) )
+c4:c3:fveq2d |- ( ( y = Y /\ k = K ) -> ( 1st ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) = ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) )
+c5:c4:eqeq1d |- ( ( y = Y /\ k = K ) -> ( ( 1st ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) = 1 <-> ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 ) )
+c6:c5:ifbid |- ( ( y = Y /\ k = K ) -> if ( ( 1st ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) = 1 , 1o , (/) ) = if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) )
+c7:s6:oveq2d |- ( ( y = Y /\ k = K ) -> ( 2 SmoothGo k ) = ( 2 SmoothGo K ) )
+c8:s5:oveq1d |- ( ( y = Y /\ k = K ) -> ( y - 1 ) = ( Y - 1 ) )
+c9:c7,c8:fveq12d |- ( ( y = Y /\ k = K ) -> ( ( 2 SmoothGo k ) ` ( y - 1 ) ) = ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) )
+c10:c9:fveq2d |- ( ( y = Y /\ k = K ) -> ( 2nd ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) = ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) )
+c11:c10:oveq1d |- ( ( y = Y /\ k = K ) -> ( ( 2nd ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) + 1 ) = ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) )
+c12:c6,c11:opeq12d |- ( ( y = Y /\ k = K ) -> <. if ( ( 1st ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) + 1 ) >. = <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. )
+s7::df-smoothtd |- SmoothTD = ( y e. NN , k e. NN0 |-> <. if ( ( 1st ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo k ) ` ( y - 1 ) ) ) + 1 ) >. )
+s8::opex |- <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. e. _V
+s9:s8:a1i |- ( ( Y e. NN /\ K e. NN0 ) -> <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. e. _V )
+s10:c12,s7:ovmpoga |- ( ( Y e. NN /\ K e. NN0 /\ <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. e. _V ) -> ( Y SmoothTD K ) = <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. )
+s11:s2,s1,s9,s10:syl3anc |- ( ( Y e. NN /\ K e. NN0 ) -> ( Y SmoothTD K ) = <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. )
+s12::1oel2o |- 1o e. 2o
+s13:s12:a1i |- ( ( Y e. NN /\ K e. NN0 ) -> 1o e. 2o )
+s14::0el2o |- (/) e. 2o
+s15:s14:a1i |- ( ( Y e. NN /\ K e. NN0 ) -> (/) e. 2o )
+s16:s13,s15:ifcld |- ( ( Y e. NN /\ K e. NN0 ) -> if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) e. 2o )
+s17::2nn |- 2 e. NN
+s18:s17:a1i |- ( ( Y e. NN /\ K e. NN0 ) -> 2 e. NN )
+s19::smoothgocl |- ( ( ( 2 e. NN /\ K e. NN0 ) /\ ( Y - 1 ) e. NN0 ) -> ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) e. ( NN0 X. NN0 ) )
+s20:s18,s1:jca |- ( ( Y e. NN /\ K e. NN0 ) -> ( 2 e. NN /\ K e. NN0 ) )
+s21:s20,s4:jca |- ( ( Y e. NN /\ K e. NN0 ) -> ( ( 2 e. NN /\ K e. NN0 ) /\ ( Y - 1 ) e. NN0 ) )
+s22:s21,s19:syl |- ( ( Y e. NN /\ K e. NN0 ) -> ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) e. ( NN0 X. NN0 ) )
+s23::xp2nd |- ( ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) e. ( NN0 X. NN0 ) -> ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) e. NN0 )
+s24:s22,s23:syl |- ( ( Y e. NN /\ K e. NN0 ) -> ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) e. NN0 )
+s25::1nn0 |- 1 e. NN0
+s26:s25:a1i |- ( ( Y e. NN /\ K e. NN0 ) -> 1 e. NN0 )
+s27:s24,s26:nn0addcld |- ( ( Y e. NN /\ K e. NN0 ) -> ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) e. NN0 )
+s28::opelxpi |- ( ( if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) e. 2o /\ ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) e. NN0 ) -> <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. e. ( 2o X. NN0 ) )
+s29:s16,s27,s28:syl2anc |- ( ( Y e. NN /\ K e. NN0 ) -> <. if ( ( 1st ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) = 1 , 1o , (/) ) , ( ( 2nd ` ( ( 2 SmoothGo K ) ` ( Y - 1 ) ) ) + 1 ) >. e. ( 2o X. NN0 ) )
+qed:s11,s29:eqeltrd |- ( ( Y e. NN /\ K e. NN0 ) -> ( Y SmoothTD K ) e. ( 2o X. NN0 ) )
+$)

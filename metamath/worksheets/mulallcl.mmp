@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=mulallcl  LOC_AFTER=?
+
+* The value of ~ df-mulall is a pair of a result and an operation count.  Lean: mulAll, the scaling map of the divisor enumeration.
+
+s1::simpr |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> S e. Word NN0 )
+s2::simpl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> Q e. NN0 )
+s3::simpl |- ( ( q = Q /\ l = S ) -> q = Q )
+s4::simpr |- ( ( q = Q /\ l = S ) -> l = S )
+c1:s3:fveq2d |- ( ( q = Q /\ l = S ) -> ( MulAllS ` q ) = ( MulAllS ` Q ) )
+c2:c1:oveq2d |- ( ( q = Q /\ l = S ) -> ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` q ) ) = ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) )
+c3:s4:fveq2d |- ( ( q = Q /\ l = S ) -> ( # ` l ) = ( # ` S ) )
+c4:c2,c3:fveq12d |- ( ( q = Q /\ l = S ) -> ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` q ) ) ` ( # ` l ) ) = ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) )
+c5:c4,s4:fveq12d |- ( ( q = Q /\ l = S ) -> ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` q ) ) ` ( # ` l ) ) ` l ) = ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) ` S ) )
+s5::df-mulall |- MulAll = ( q e. NN0 , l e. Word NN0 |-> ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` q ) ) ` ( # ` l ) ) ` l ) )
+s6::fvex |- ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) ` S ) e. _V
+s7:s6:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) ` S ) e. _V )
+s8:c5,s5:ovmpoga |- ( ( Q e. NN0 /\ S e. Word NN0 /\ ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) ` S ) e. _V ) -> ( Q MulAll S ) = ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) ` S ) )
+s9:s2,s1,s7,s8:syl3anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( Q MulAll S ) = ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) ` S ) )
+i10::lencl
+s11:s1,i10:syl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( # ` S ) e. NN0 )
+s12::ovex |- ( ( Word NN0 X. NN0 ) ^m Word NN0 ) e. _V
+s13:s12:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( Word NN0 X. NN0 ) ^m Word NN0 ) e. _V )
+s14::simpr |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> g e. Word NN0 )
+s15::wrd0 |- (/) e. Word NN0
+s16:s15:a1i |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> (/) e. Word NN0 )
+s17::0nn0 |- 0 e. NN0
+s18:s17:a1i |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> 0 e. NN0 )
+i19::opelxpi
+s20:s16,s18,i19:syl2anc |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> <. (/) , 0 >. e. ( Word NN0 X. NN0 ) )
+s21::eqid |- ( g e. Word NN0 |-> <. (/) , 0 >. ) = ( g e. Word NN0 |-> <. (/) , 0 >. )
+s22:s20,s21:fmptd |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( g e. Word NN0 |-> <. (/) , 0 >. ) : Word NN0 --> ( Word NN0 X. NN0 ) )
+s23::wrdexi |- Word NN0 e. _V
+s24:s23:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> Word NN0 e. _V )
+s25::nn0ex |- NN0 e. _V
+s26:s25:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> NN0 e. _V )
+i27::xpexg
+s28:s24,s26,i27:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( Word NN0 X. NN0 ) e. _V )
+i29::elmapg
+s30:s28,s24,i29:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( g e. Word NN0 |-> <. (/) , 0 >. ) e. ( ( Word NN0 X. NN0 ) ^m Word NN0 ) <-> ( g e. Word NN0 |-> <. (/) , 0 >. ) : Word NN0 --> ( Word NN0 X. NN0 ) ) )
+s31:s22,s30:mpbird |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( g e. Word NN0 |-> <. (/) , 0 >. ) e. ( ( Word NN0 X. NN0 ) ^m Word NN0 ) )
+i32::mulallsf
+s33:s2,i32:syl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( MulAllS ` Q ) : ( ( ( Word NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( Word NN0 X. NN0 ) ^m Word NN0 ) )
+s34:s13,s31,s33:3jca |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( Word NN0 X. NN0 ) ^m Word NN0 ) e. _V /\ ( g e. Word NN0 |-> <. (/) , 0 >. ) e. ( ( Word NN0 X. NN0 ) ^m Word NN0 ) /\ ( MulAllS ` Q ) : ( ( ( Word NN0 X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( Word NN0 X. NN0 ) ^m Word NN0 ) ) )
+i35::algrecmap
+s36:s34,s11,i35:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) e. ( ( Word NN0 X. NN0 ) ^m Word NN0 ) )
+i37::elmapi
+s38:s36,i37:syl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) : Word NN0 --> ( Word NN0 X. NN0 ) )
+i39::ffvelcdm
+s40:s38,s1,i39:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. (/) , 0 >. ) AlgRec ( MulAllS ` Q ) ) ` ( # ` S ) ) ` S ) e. ( Word NN0 X. NN0 ) )
+qed:s9,s40:eqeltrd |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( Q MulAll S ) e. ( Word NN0 X. NN0 ) )
+$)

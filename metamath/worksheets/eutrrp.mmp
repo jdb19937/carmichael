@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=eutrrp  LOC_AFTER=?
+
+* Euler's term ( ~ eutval ) at a positive real argument is a positive real.
+
+s1::simpll |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> X e. RR )
+s2::simplr |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> 0 < X )
+s3::simpr |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> M e. NN )
+s4:s1,s2:elrpd |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> X e. RR+ )
+s5:s3:nnrpd |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> M e. RR+ )
+s6::1rp |- 1 e. RR+
+s7:s6:a1i |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> 1 e. RR+ )
+s8:s5,s7:rpaddcld |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( M + 1 ) e. RR+ )
+s9:s8,s5:rpdivcld |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( ( M + 1 ) / M ) e. RR+ )
+s10:s9,s1:rpcxpcld |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( ( ( M + 1 ) / M ) ^c X ) e. RR+ )
+s11:s4,s5:rpdivcld |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( X / M ) e. RR+ )
+s12:s11,s7:rpaddcld |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( ( X / M ) + 1 ) e. RR+ )
+i13::eutval
+s14:s3,i13:syl |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) ) ` M ) = ( ( ( ( M + 1 ) / M ) ^c X ) / ( ( X / M ) + 1 ) ) )
+s15:s10,s12:rpdivcld |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( ( ( ( M + 1 ) / M ) ^c X ) / ( ( X / M ) + 1 ) ) e. RR+ )
+qed:s14,s15:eqeltrd |- ( ( ( X e. RR /\ 0 < X ) /\ M e. NN ) -> ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) ) ` M ) e. RR+ )
+$)

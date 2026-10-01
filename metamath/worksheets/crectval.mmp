@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=crectval  LOC_AFTER=?
+
+* Value of the closed rectangle with given corners.
+
+s1::simpl |- ( ( a = A /\ b = B ) -> a = A )
+s2::simpr |- ( ( a = A /\ b = B ) -> b = B )
+Rea:s1:fveq2d |- ( ( a = A /\ b = B ) -> ( Re ` a ) = ( Re ` A ) )
+Reb:s2:fveq2d |- ( ( a = A /\ b = B ) -> ( Re ` b ) = ( Re ` B ) )
+Ima:s1:fveq2d |- ( ( a = A /\ b = B ) -> ( Im ` a ) = ( Im ` A ) )
+Imb:s2:fveq2d |- ( ( a = A /\ b = B ) -> ( Im ` b ) = ( Im ` B ) )
+s3:Rea,Reb:oveq12d |- ( ( a = A /\ b = B ) -> ( ( Re ` a ) [,] ( Re ` b ) ) = ( ( Re ` A ) [,] ( Re ` B ) ) )
+s4:Ima,Imb:oveq12d |- ( ( a = A /\ b = B ) -> ( ( Im ` a ) [,] ( Im ` b ) ) = ( ( Im ` A ) [,] ( Im ` B ) ) )
+s5:s3:eleq2d |- ( ( a = A /\ b = B ) -> ( ( Re ` z ) e. ( ( Re ` a ) [,] ( Re ` b ) ) <-> ( Re ` z ) e. ( ( Re ` A ) [,] ( Re ` B ) ) ) )
+s6:s4:eleq2d |- ( ( a = A /\ b = B ) -> ( ( Im ` z ) e. ( ( Im ` a ) [,] ( Im ` b ) ) <-> ( Im ` z ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) )
+s7:s5,s6:anbi12d |- ( ( a = A /\ b = B ) -> ( ( ( Re ` z ) e. ( ( Re ` a ) [,] ( Re ` b ) ) /\ ( Im ` z ) e. ( ( Im ` a ) [,] ( Im ` b ) ) ) <-> ( ( Re ` z ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` z ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) ) )
+s8:s7:rabbidv |- ( ( a = A /\ b = B ) -> { z e. CC | ( ( Re ` z ) e. ( ( Re ` a ) [,] ( Re ` b ) ) /\ ( Im ` z ) e. ( ( Im ` a ) [,] ( Im ` b ) ) ) } = { z e. CC | ( ( Re ` z ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` z ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) } )
+s9::df-crect |- crect = ( a e. CC , b e. CC |-> { z e. CC | ( ( Re ` z ) e. ( ( Re ` a ) [,] ( Re ` b ) ) /\ ( Im ` z ) e. ( ( Im ` a ) [,] ( Im ` b ) ) ) } )
+s10::cnex |- CC e. _V
+i11::rabexg
+s12:s10,i11:ax-mp |- { z e. CC | ( ( Re ` z ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` z ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) } e. _V
+s13:s8,s9:ovmpoga |- ( ( A e. CC /\ B e. CC /\ { z e. CC | ( ( Re ` z ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` z ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) } e. _V ) -> ( A crect B ) = { z e. CC | ( ( Re ` z ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` z ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) } )
+qed:s12,s13:mp3an3 |- ( ( A e. CC /\ B e. CC ) -> ( A crect B ) = { z e. CC | ( ( Re ` z ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` z ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) } )
+$)

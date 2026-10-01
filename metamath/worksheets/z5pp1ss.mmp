@@ -1,0 +1,75 @@
+$( <MM> <PROOF_ASST> THEOREM=z5pp1ss  LOC_AFTER=?
+
+* Lean hone of norm_Mr_le: for Q C_ { p | R }, prod_ p e. Q ( p + 1 ) <_ prod_ ( p | R ) ( p + 1 ) (the factors over the complement are at least 1).
+
+s1::simpl |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> R e. NN )
+s2::simpr |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> Q C_ { q e. Prime | q || R } )
+i3::pffinq
+s4:s1,i3:syl |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> { q e. Prime | q || R } e. Fin )
+s5:s4,s2:ssfid |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> Q e. Fin )
+i6::diffi
+s7:s4,i6:syl |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> ( { q e. Prime | q || R } \ Q ) e. Fin )
+s8::undif |- ( Q C_ { q e. Prime | q || R } <-> ( Q u. ( { q e. Prime | q || R } \ Q ) ) = { q e. Prime | q || R } )
+s9:s2,s8:sylib |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> ( Q u. ( { q e. Prime | q || R } \ Q ) ) = { q e. Prime | q || R } )
+s10::disjdif |- ( Q i^i ( { q e. Prime | q || R } \ Q ) ) = (/)
+s11:s10:a1i |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> ( Q i^i ( { q e. Prime | q || R } \ Q ) ) = (/) )
+s12::simpr |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. { q e. Prime | q || R } ) -> p e. { q e. Prime | q || R } )
+i13::elrabi
+s14:s12,i13:syl |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. { q e. Prime | q || R } ) -> p e. Prime )
+i15::prmnn
+s16:s14,i15:syl |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. { q e. Prime | q || R } ) -> p e. NN )
+s17:s16:nnred |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. { q e. Prime | q || R } ) -> p e. RR )
+s18::1red |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. { q e. Prime | q || R } ) -> 1 e. RR )
+s19:s17,s18:readdcld |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. { q e. Prime | q || R } ) -> ( p + 1 ) e. RR )
+s20:s19:recnd |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. { q e. Prime | q || R } ) -> ( p + 1 ) e. CC )
+s21:s9:eqcomd |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> { q e. Prime | q || R } = ( Q u. ( { q e. Prime | q || R } \ Q ) ) )
+s22:s11,s21,s4,s20:fprodsplit |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> prod_ p e. { q e. Prime | q || R } ( p + 1 ) = ( prod_ p e. Q ( p + 1 ) x. prod_ p e. ( { q e. Prime | q || R } \ Q ) ( p + 1 ) ) )
+s23::simpr |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> p e. ( { q e. Prime | q || R } \ Q ) )
+s24:s23:eldifad |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> p e. { q e. Prime | q || R } )
+i25::elrabi
+s26:s24,i25:syl |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> p e. Prime )
+i27::prmnn
+s28:s26,i27:syl |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> p e. NN )
+s29:s28:nnred |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> p e. RR )
+s30::1red |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> 1 e. RR )
+s31:s29,s30:readdcld |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> ( p + 1 ) e. RR )
+s32:s28:nnge1d |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> 1 <_ p )
+s33::0le1 |- 0 <_ 1
+s34:s33:a1i |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> 0 <_ 1 )
+s35::1re |- 1 e. RR
+s36:s35:a1i |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> 1 e. RR )
+s37:s29,s36:addge01d |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> ( 0 <_ 1 <-> p <_ ( p + 1 ) ) )
+s38:s34,s37:mpbid |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> p <_ ( p + 1 ) )
+s39:s29,s36:readdcld |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> ( p + 1 ) e. RR )
+s40:s36,s29,s39,s32,s38:letrd |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. ( { q e. Prime | q || R } \ Q ) ) -> 1 <_ ( p + 1 ) )
+s41::nfv |- F/ p ( R e. NN /\ Q C_ { q e. Prime | q || R } )
+s42:s41,s7,s31,s40:fprodge1 |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> 1 <_ prod_ p e. ( { q e. Prime | q || R } \ Q ) ( p + 1 ) )
+s43:s2:adantr |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> Q C_ { q e. Prime | q || R } )
+s44::simpr |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> p e. Q )
+s45:s43,s44:sseldd |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> p e. { q e. Prime | q || R } )
+i46::elrabi
+s47:s45,i46:syl |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> p e. Prime )
+i48::prmnn
+s49:s47,i48:syl |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> p e. NN )
+s50:s49:nnred |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> p e. RR )
+s51::1red |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 1 e. RR )
+s52:s50,s51:readdcld |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> ( p + 1 ) e. RR )
+s53:s49:nnge1d |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 1 <_ p )
+s54:s33:a1i |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 0 <_ 1 )
+s55::0re |- 0 e. RR
+s56:s55:a1i |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 0 e. RR )
+s57:s35:a1i |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 1 e. RR )
+s58:s56,s57,s50,s54,s53:letrd |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 0 <_ p )
+s59:s33:a1i |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 0 <_ 1 )
+s60:s56,s56,s50,s57,s58,s59:le2addd |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> ( 0 + 0 ) <_ ( p + 1 ) )
+s61::0cn |- 0 e. CC
+s62:s61:addlidi |- ( 0 + 0 ) = 0
+s63:s62:a1i |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> ( 0 + 0 ) = 0 )
+s64:s63,s60:eqbrtrrd |- ( ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) /\ p e. Q ) -> 0 <_ ( p + 1 ) )
+s65::nfv |- F/ p ( R e. NN /\ Q C_ { q e. Prime | q || R } )
+s66:s65,s5,s52,s64:fprodge0 |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> 0 <_ prod_ p e. Q ( p + 1 ) )
+s67:s5,s52:fprodrecl |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> prod_ p e. Q ( p + 1 ) e. RR )
+s68:s7,s31:fprodrecl |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> prod_ p e. ( { q e. Prime | q || R } \ Q ) ( p + 1 ) e. RR )
+s69:s67,s68,s66,s42:lemulge11d |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> prod_ p e. Q ( p + 1 ) <_ ( prod_ p e. Q ( p + 1 ) x. prod_ p e. ( { q e. Prime | q || R } \ Q ) ( p + 1 ) ) )
+qed:s69,s22:breqtrrd |- ( ( R e. NN /\ Q C_ { q e. Prime | q || R } ) -> prod_ p e. Q ( p + 1 ) <_ prod_ p e. { q e. Prime | q || R } ( p + 1 ) )
+$)

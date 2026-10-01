@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=bvmchkq1  LOC_AFTER=?
+
+* The check sum at Q = 1 is the unrestricted sigma sum of bvmchks (Lean mCheckQ_one).
+
+s1::simpl |- ( ( S e. RR /\ X e. RR ) -> S e. RR )
+s2::simpr |- ( ( S e. RR /\ X e. RR ) -> X e. RR )
+s3::1nn |- 1 e. NN
+s4:s3:a1i |- ( ( S e. RR /\ X e. RR ) -> 1 e. NN )
+i5::bvmchkqval
+s6:s1,s4,s2,i5:syl3anc |- ( ( S e. RR /\ X e. RR ) -> ( 1 ( mChkQ ` S ) X ) = sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd 1 ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+s7::simpr |- ( ( ( S e. RR /\ X e. RR ) /\ n e. ( 1 ... ( |_ ` X ) ) ) -> n e. ( 1 ... ( |_ ` X ) ) )
+i8::elfzelz
+s9:s7,i8:syl |- ( ( ( S e. RR /\ X e. RR ) /\ n e. ( 1 ... ( |_ ` X ) ) ) -> n e. ZZ )
+i10::gcd1
+s11:s9,i10:syl |- ( ( ( S e. RR /\ X e. RR ) /\ n e. ( 1 ... ( |_ ` X ) ) ) -> ( n gcd 1 ) = 1 )
+s12:s11:iftrued |- ( ( ( S e. RR /\ X e. RR ) /\ n e. ( 1 ... ( |_ ` X ) ) ) -> if ( ( n gcd 1 ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) = ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) )
+s13:s12:sumeq2dv |- ( ( S e. RR /\ X e. RR ) -> sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd 1 ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) = sum_ n e. ( 1 ... ( |_ ` X ) ) ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) )
+qed:s6,s13:eqtrd |- ( ( S e. RR /\ X e. RR ) -> ( 1 ( mChkQ ` S ) X ) = sum_ n e. ( 1 ... ( |_ ` X ) ) ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) )
+$)

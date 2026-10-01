@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatbwrd  LOC_AFTER=?
+
+* The value of the digits word of N of length M is N modulo 2 ^ M.
+
+s1::simpl |- ( ( N e. ZZ /\ M e. NN0 ) -> N e. ZZ )
+s2::simpr |- ( ( N e. ZZ /\ M e. NN0 ) -> M e. NN0 )
+i3::bwrdcl
+s4:s1,s2,i3:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N bwrd M ) e. Word 2o )
+i5::bwbits
+s6:s4,i5:syl |- ( ( N e. ZZ /\ M e. NN0 ) -> ( bits ` ( toNat ` ( N bwrd M ) ) ) = { i e. ( 0 ..^ ( # ` ( N bwrd M ) ) ) | ( ( N bwrd M ) ` i ) = 1o } )
+s7::bwrdbitset |- ( ( N e. ZZ /\ M e. NN0 ) -> { i e. ( 0 ..^ ( # ` ( N bwrd M ) ) ) | ( ( N bwrd M ) ` i ) = 1o } = ( ( bits ` N ) i^i ( 0 ..^ M ) ) )
+i8::bitsmod
+s9:s1,s2,i8:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( bits ` ( N mod ( 2 ^ M ) ) ) = ( ( bits ` N ) i^i ( 0 ..^ M ) ) )
+s10:s6,s7,s9:3eqtr4d |- ( ( N e. ZZ /\ M e. NN0 ) -> ( bits ` ( toNat ` ( N bwrd M ) ) ) = ( bits ` ( N mod ( 2 ^ M ) ) ) )
+i11::tonatcl
+s12:s4,i11:syl |- ( ( N e. ZZ /\ M e. NN0 ) -> ( toNat ` ( N bwrd M ) ) e. NN0 )
+s13:s12:nn0zd |- ( ( N e. ZZ /\ M e. NN0 ) -> ( toNat ` ( N bwrd M ) ) e. ZZ )
+s14::2nn |- 2 e. NN
+s15:s14:a1i |- ( ( N e. ZZ /\ M e. NN0 ) -> 2 e. NN )
+i16::nnexpcl
+s17:s15,s2,i16:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( 2 ^ M ) e. NN )
+i18::zmodcl
+s19:s1,s17,i18:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N mod ( 2 ^ M ) ) e. NN0 )
+s20:s19:nn0zd |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N mod ( 2 ^ M ) ) e. ZZ )
+i21::bwbitsinj
+s22:s13,s20,i21:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( ( bits ` ( toNat ` ( N bwrd M ) ) ) = ( bits ` ( N mod ( 2 ^ M ) ) ) <-> ( toNat ` ( N bwrd M ) ) = ( N mod ( 2 ^ M ) ) ) )
+qed:s10,s22:mpbid |- ( ( N e. ZZ /\ M e. NN0 ) -> ( toNat ` ( N bwrd M ) ) = ( N mod ( 2 ^ M ) ) )
+$)

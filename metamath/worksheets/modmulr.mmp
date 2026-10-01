@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=modmulr  LOC_AFTER=?
+
+* A factor may be reduced modulo the modulus before multiplying.
+
+s1::simp1 |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> A e. NN0 )
+s2::simp2 |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> B e. NN0 )
+s3::simp3 |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> L e. NN )
+s4:s1:nn0red |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> A e. RR )
+s5:s2:nn0zd |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> B e. ZZ )
+i6::nnrp
+s7:s3,i6:syl |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> L e. RR+ )
+s8:s1:nn0zd |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> A e. ZZ )
+i9::zmodcl
+s10:s8,s3,i9:syl2anc |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> ( A mod L ) e. NN0 )
+s11:s10:nn0red |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> ( A mod L ) e. RR )
+i12::modabs2
+s13:s4,s7,i12:syl2anc |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> ( ( A mod L ) mod L ) = ( A mod L ) )
+s14:s11,s4:jca |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> ( ( A mod L ) e. RR /\ A e. RR ) )
+s15:s5,s7:jca |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> ( B e. ZZ /\ L e. RR+ ) )
+i16::modmul1
+qed:s14,s15,s13,i16:syl3anc |- ( ( A e. NN0 /\ B e. NN0 /\ L e. NN ) -> ( ( ( A mod L ) x. B ) mod L ) = ( ( A x. B ) mod L ) )
+$)

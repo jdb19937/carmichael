@@ -1,0 +1,11 @@
+$( <MM> <PROOF_ASST> THEOREM=g2t10  LOC_AFTER=?
+
+* The antecedent-lifting helper of tools/cl.py: a step proved under the innermost conjunct is lifted through a binary, a ternary and a binary conjunction in one call.
+
+s1::simpl |- ( ( A e. RR /\ B e. RR ) -> A e. RR )
+s2::simpr |- ( ( A e. RR /\ B e. RR ) -> B e. RR )
+s3:s1,s2:readdcld |- ( ( A e. RR /\ B e. RR ) -> ( A + B ) e. RR )
+s4:s3:adantr |- ( ( ( A e. RR /\ B e. RR ) /\ D e. RR ) -> ( A + B ) e. RR )
+s5:s4:3adant2 |- ( ( ( A e. RR /\ B e. RR ) /\ C e. RR /\ D e. RR ) -> ( A + B ) e. RR )
+qed:s5:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ C e. RR /\ D e. RR ) /\ E e. RR ) -> ( A + B ) e. RR )
+$)

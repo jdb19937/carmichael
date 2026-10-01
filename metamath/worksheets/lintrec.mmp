@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=lintrec  LOC_AFTER=?
+
+* The integral of the reciprocal along a segment of the slit plane is the difference of the principal logarithms of the endpoints.
+
+s1::simpll |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> V e. CC )
+s2::simplr |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> W e. CC )
+s3::simpr |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) )
+s4::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s5:s4:logcn |- ( log |` ( CC \ ( -oo (,] 0 ) ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC )
+i6::cncff
+s7:s5,i6:ax-mp |- ( log |` ( CC \ ( -oo (,] 0 ) ) ) : ( CC \ ( -oo (,] 0 ) ) --> CC
+s8:s7:a1i |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( log |` ( CC \ ( -oo (,] 0 ) ) ) : ( CC \ ( -oo (,] 0 ) ) --> CC )
+s9::eqid |- ( CC \ ( -oo (,] 0 ) ) = ( CC \ ( -oo (,] 0 ) )
+s10:s9:dvlog |- ( CC _D ( log |` ( CC \ ( -oo (,] 0 ) ) ) ) = ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) )
+s11:s10:a1i |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( CC _D ( log |` ( CC \ ( -oo (,] 0 ) ) ) ) = ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) ) )
+s12::slitinvcn |- ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC )
+s13:s12:a1i |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC ) )
+s14:s1,s2:jca |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( V e. CC /\ W e. CC ) )
+s15:s8,s11:jca |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) : ( CC \ ( -oo (,] 0 ) ) --> CC /\ ( CC _D ( log |` ( CC \ ( -oo (,] 0 ) ) ) ) = ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) ) ) )
+s16:s13,s3:jca |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) ) e. ( ( CC \ ( -oo (,] 0 ) ) -cn-> CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) )
+i17::lintftc
+s18:s14,s15,s16,i17:syl3anc |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) ) lint <. V , W >. ) = ( ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` W ) - ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` V ) ) )
+i19::csegid1
+s20:s1,s2,i19:syl2anc |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> V e. ( V cseg W ) )
+s21:s3,s20:sseldd |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> V e. ( CC \ ( -oo (,] 0 ) ) )
+i22::csegid2
+s23:s1,s2,i22:syl2anc |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> W e. ( V cseg W ) )
+s24:s3,s23:sseldd |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> W e. ( CC \ ( -oo (,] 0 ) ) )
+i25::fvres
+s26:s21,i25:syl |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` V ) = ( log ` V ) )
+i27::fvres
+s28:s24,i27:syl |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` W ) = ( log ` W ) )
+s29:s28,s26:oveq12d |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` W ) - ( ( log |` ( CC \ ( -oo (,] 0 ) ) ) ` V ) ) = ( ( log ` W ) - ( log ` V ) ) )
+qed:s18,s29:eqtrd |- ( ( ( V e. CC /\ W e. CC ) /\ ( V cseg W ) C_ ( CC \ ( -oo (,] 0 ) ) ) -> ( ( x e. ( CC \ ( -oo (,] 0 ) ) |-> ( 1 / x ) ) lint <. V , W >. ) = ( ( log ` W ) - ( log ` V ) ) )
+$)

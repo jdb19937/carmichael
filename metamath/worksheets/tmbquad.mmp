@@ -1,0 +1,139 @@
+$( <MM> <PROOF_ASST> THEOREM=tmbquad  LOC_AFTER=?
+
+* A bound quadratic in the operand bit length with a coefficient at most 64 is within the per-tick budget of the machine layer.  Lean: ` quad_le_B ` .
+
+s1::simp1 |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> B e. NN0 )
+s2::simp2 |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> C e. NN0 )
+s3::simp3 |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> C <_ ; 6 4 )
+i4::tmbval
+s5:s1,i4:syl |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( TMB ` B ) = ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) )
+s6:s1:nn0red |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> B e. RR )
+s7:s2:nn0red |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> C e. RR )
+s8::2re |- 2 e. RR
+s9:s8:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 2 e. RR )
+s10:s6,s9:readdcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( B + 2 ) e. RR )
+s11:s10:recnd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( B + 2 ) e. CC )
+s12::2nn0 |- 2 e. NN0
+s13:s12:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 2 e. NN0 )
+s14::3nn0 |- 3 e. NN0
+s15:s14:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 3 e. NN0 )
+s16:s10,s13:reexpcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) e. RR )
+s17:s16:recnd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) e. CC )
+s18::2nn |- 2 e. NN
+s19:s18:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 2 e. NN )
+i20::nn0nnaddcl
+s21:s1,s19,i20:syl2anc |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( B + 2 ) e. NN )
+s22:s21:nnge1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 1 <_ ( B + 2 ) )
+s23:s10,s13,s22:expge1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 1 <_ ( ( B + 2 ) ^ 2 ) )
+s24:s1:nn0ge0d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 <_ B )
+s25::1re |- 1 e. RR
+s26:s25:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 1 e. RR )
+s27:s16,s26:subge0d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 0 <_ ( ( ( B + 2 ) ^ 2 ) - 1 ) <-> 1 <_ ( ( B + 2 ) ^ 2 ) ) )
+s28:s23,s27:mpbird |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 <_ ( ( ( B + 2 ) ^ 2 ) - 1 ) )
+s29::0lt1 |- 0 < 1
+s30:s29:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 < 1 )
+s31:s16,s26:resubcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 1 ) e. RR )
+s32:s31,s26,s28,s30:addgegt0d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 < ( ( ( ( B + 2 ) ^ 2 ) - 1 ) + 1 ) )
+s33:s16:recnd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) e. CC )
+s34::ax-1cn |- 1 e. CC
+s35:s34:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 1 e. CC )
+s36:s33,s35:negsubd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) + -u 1 ) = ( ( ( B + 2 ) ^ 2 ) - 1 ) )
+s37:s36:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 1 ) = ( ( ( B + 2 ) ^ 2 ) + -u 1 ) )
+s38:s35:mulm1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( -u 1 x. 1 ) = -u 1 )
+s39:s38:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> -u 1 = ( -u 1 x. 1 ) )
+s40:s39:oveq2d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) + -u 1 ) = ( ( ( B + 2 ) ^ 2 ) + ( -u 1 x. 1 ) ) )
+s41:s35,s33:mulcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 1 x. ( ( B + 2 ) ^ 2 ) ) e. CC )
+s42:s41:addlidd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) = ( 1 x. ( ( B + 2 ) ^ 2 ) ) )
+s43:s42:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 1 x. ( ( B + 2 ) ^ 2 ) ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s44:s33:mullidd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 1 x. ( ( B + 2 ) ^ 2 ) ) = ( ( B + 2 ) ^ 2 ) )
+s45:s44:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) = ( 1 x. ( ( B + 2 ) ^ 2 ) ) )
+s46:s45,s43:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s47:s34:mullidi |- ( 1 x. 1 ) = 1
+s48:s34,s34:mulneg1i |- ( -u 1 x. 1 ) = -u ( 1 x. 1 )
+s49:s47:negeqi |- -u ( 1 x. 1 ) = -u 1
+s50:s48,s49:eqtri |- ( -u 1 x. 1 ) = -u 1
+s51:s50:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( -u 1 x. 1 ) = -u 1 )
+s52:s46,s51:oveq12d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) + ( -u 1 x. 1 ) ) = ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + -u 1 ) )
+s53::0cn |- 0 e. CC
+s54:s53:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 e. CC )
+s55:s34:negcli |- -u 1 e. CC
+s56:s55:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> -u 1 e. CC )
+s57:s54,s41,s56:add32d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + -u 1 ) = ( ( 0 + -u 1 ) + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s58:s55:addlidi |- ( 0 + -u 1 ) = -u 1
+s59:s58:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 0 + -u 1 ) = -u 1 )
+s60:s59:oveq1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( 0 + -u 1 ) + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) = ( -u 1 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s61:s57,s60:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + -u 1 ) = ( -u 1 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s62:s37,s40:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 1 ) = ( ( ( B + 2 ) ^ 2 ) + ( -u 1 x. 1 ) ) )
+s63:s62,s52:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 1 ) = ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + -u 1 ) )
+s64:s63,s61:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 1 ) = ( -u 1 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s65::eqidd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 1 = 1 )
+s66:s64,s65:oveq12d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( ( B + 2 ) ^ 2 ) - 1 ) + 1 ) = ( ( -u 1 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + 1 ) )
+s67:s56,s41,s35:add32d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( -u 1 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + 1 ) = ( ( -u 1 + 1 ) + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s68:s55,s34:addcomi |- ( -u 1 + 1 ) = ( 1 + -u 1 )
+s69:s34:negidi |- ( 1 + -u 1 ) = 0
+s70:s68,s69:eqtri |- ( -u 1 + 1 ) = 0
+s71:s70:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( -u 1 + 1 ) = 0 )
+s72:s71:oveq1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( -u 1 + 1 ) + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s73:s67,s72:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( -u 1 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + 1 ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s74:s66,s73:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( ( B + 2 ) ^ 2 ) - 1 ) + 1 ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s75:s33,s54:negsubd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) + -u 0 ) = ( ( ( B + 2 ) ^ 2 ) - 0 ) )
+s76:s75:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 0 ) = ( ( ( B + 2 ) ^ 2 ) + -u 0 ) )
+s77:s54:mulm1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( -u 1 x. 0 ) = -u 0 )
+s78:s77:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> -u 0 = ( -u 1 x. 0 ) )
+s79:s78:oveq2d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) + -u 0 ) = ( ( ( B + 2 ) ^ 2 ) + ( -u 1 x. 0 ) ) )
+s80:s41:addlidd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) = ( 1 x. ( ( B + 2 ) ^ 2 ) ) )
+s81:s80:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 1 x. ( ( B + 2 ) ^ 2 ) ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s82:s33:mullidd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 1 x. ( ( B + 2 ) ^ 2 ) ) = ( ( B + 2 ) ^ 2 ) )
+s83:s82:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) = ( 1 x. ( ( B + 2 ) ^ 2 ) ) )
+s84:s83,s81:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s85:s55:mul01i |- ( -u 1 x. 0 ) = 0
+s86:s85:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( -u 1 x. 0 ) = 0 )
+s87:s84,s86:oveq12d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) + ( -u 1 x. 0 ) ) = ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + 0 ) )
+s88:s54,s41,s54:add32d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + 0 ) = ( ( 0 + 0 ) + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s89:s53:addlidi |- ( 0 + 0 ) = 0
+s90:s89:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 0 + 0 ) = 0 )
+s91:s90:oveq1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( 0 + 0 ) + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s92:s88,s91:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + 0 ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s93:s76,s79:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 0 ) = ( ( ( B + 2 ) ^ 2 ) + ( -u 1 x. 0 ) ) )
+s94:s93,s87:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 0 ) = ( ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) + 0 ) )
+s95:s94,s92:eqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 0 ) = ( 0 + ( 1 x. ( ( B + 2 ) ^ 2 ) ) ) )
+s96:s74,s95:eqtr4d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( ( B + 2 ) ^ 2 ) - 1 ) + 1 ) = ( ( ( B + 2 ) ^ 2 ) - 0 ) )
+s97:s32,s96:breqtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 < ( ( ( B + 2 ) ^ 2 ) - 0 ) )
+s98::0re |- 0 e. RR
+s99:s98:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 e. RR )
+s100::0red |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 e. RR )
+s101:s16,s99:resubcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) - 0 ) e. RR )
+s102:s100,s101,s97:ltled |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 <_ ( ( ( B + 2 ) ^ 2 ) - 0 ) )
+s103:s16,s99:subge0d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 0 <_ ( ( ( B + 2 ) ^ 2 ) - 0 ) <-> 0 <_ ( ( B + 2 ) ^ 2 ) ) )
+s104:s102,s103:mpbid |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 <_ ( ( B + 2 ) ^ 2 ) )
+s105:s11,s13:expp1d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ ( 2 + 1 ) ) = ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) )
+s106::2p1e3 |- ( 2 + 1 ) = 3
+s107:s106:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( 2 + 1 ) = 3 )
+s108:s107:oveq2d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ ( 2 + 1 ) ) = ( ( B + 2 ) ^ 3 ) )
+s109:s108,s105:eqtr3d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 3 ) = ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) )
+s110::6nn0 |- 6 e. NN0
+s111::4nn |- 4 e. NN
+s112:s110,s111:decnncl |- ; 6 4 e. NN
+s113:s112:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ; 6 4 e. NN )
+s114:s113:nnred |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ; 6 4 e. RR )
+s115:s113:nnnn0d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ; 6 4 e. NN0 )
+s116:s115:nn0ge0d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 0 <_ ; 6 4 )
+s117:s7,s114,s16,s104,s3:lemul1ad |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( C x. ( ( B + 2 ) ^ 2 ) ) <_ ( ; 6 4 x. ( ( B + 2 ) ^ 2 ) ) )
+s118::1re |- 1 e. RR
+s119:s118:a1i |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> 1 e. RR )
+s120:s119,s10,s16,s104,s22:lemul2ad |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) x. 1 ) <_ ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) )
+s121:s16:recnd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) e. CC )
+i122::mulrid
+s123:s121,i122:syl |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) x. 1 ) = ( ( B + 2 ) ^ 2 ) )
+s124:s123:eqcomd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) = ( ( ( B + 2 ) ^ 2 ) x. 1 ) )
+s125:s124,s120:eqbrtrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( B + 2 ) ^ 2 ) <_ ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) )
+s126:s16,s10:remulcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) e. RR )
+s127:s16,s126,s114,s116,s125:lemul2ad |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ; 6 4 x. ( ( B + 2 ) ^ 2 ) ) <_ ( ; 6 4 x. ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) ) )
+s128:s7,s16:remulcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( C x. ( ( B + 2 ) ^ 2 ) ) e. RR )
+s129:s114,s16:remulcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ; 6 4 x. ( ( B + 2 ) ^ 2 ) ) e. RR )
+s130:s114,s126:remulcld |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ; 6 4 x. ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) ) e. RR )
+s131:s128,s129,s130,s117,s127:letrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( C x. ( ( B + 2 ) ^ 2 ) ) <_ ( ; 6 4 x. ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) ) )
+s132:s109:oveq2d |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) = ( ; 6 4 x. ( ( ( B + 2 ) ^ 2 ) x. ( B + 2 ) ) ) )
+s133:s131,s132:breqtrrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( C x. ( ( B + 2 ) ^ 2 ) ) <_ ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) )
+qed:s133,s5:breqtrrd |- ( ( B e. NN0 /\ C e. NN0 /\ C <_ ; 6 4 ) -> ( C x. ( ( B + 2 ) ^ 2 ) ) <_ ( TMB ` B ) )
+$)

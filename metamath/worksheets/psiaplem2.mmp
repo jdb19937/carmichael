@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=psiaplem2  LOC_AFTER=?
+
+* The summand of psiAP is at most the von Mangoldt value.
+
+s1::simpr |- ( ( n e. NN /\ ( n mod Q ) = ( A mod Q ) ) -> ( n mod Q ) = ( A mod Q ) )
+s2:s1:iftrued |- ( ( n e. NN /\ ( n mod Q ) = ( A mod Q ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) = ( Lam ` n ) )
+s3::simpl |- ( ( n e. NN /\ ( n mod Q ) = ( A mod Q ) ) -> n e. NN )
+i4::vmacl
+s5:s3,i4:syl |- ( ( n e. NN /\ ( n mod Q ) = ( A mod Q ) ) -> ( Lam ` n ) e. RR )
+s6:s5:leidd |- ( ( n e. NN /\ ( n mod Q ) = ( A mod Q ) ) -> ( Lam ` n ) <_ ( Lam ` n ) )
+s7:s2,s6:eqbrtrd |- ( ( n e. NN /\ ( n mod Q ) = ( A mod Q ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) <_ ( Lam ` n ) )
+s8::simpr |- ( ( n e. NN /\ -. ( n mod Q ) = ( A mod Q ) ) -> -. ( n mod Q ) = ( A mod Q ) )
+s9:s8:iffalsed |- ( ( n e. NN /\ -. ( n mod Q ) = ( A mod Q ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) = 0 )
+s10::simpl |- ( ( n e. NN /\ -. ( n mod Q ) = ( A mod Q ) ) -> n e. NN )
+i11::vmage0
+s12:s10,i11:syl |- ( ( n e. NN /\ -. ( n mod Q ) = ( A mod Q ) ) -> 0 <_ ( Lam ` n ) )
+s13:s9,s12:eqbrtrd |- ( ( n e. NN /\ -. ( n mod Q ) = ( A mod Q ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) <_ ( Lam ` n ) )
+qed:s7,s13:pm2.61dan |- ( n e. NN -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) <_ ( Lam ` n ) )
+$)

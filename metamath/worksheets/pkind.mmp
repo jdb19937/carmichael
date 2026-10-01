@@ -1,0 +1,72 @@
+$( <MM> <PROOF_ASST> THEOREM=pkind  LOC_AFTER=?
+
+* The far-regime bound on the truncated Perron kernel with the indicator of ` 1 < U `: ` norm_perronKernel_sub_indicator_le ` of Route Z's PerronKernel.lean, times ` 2 _pi ` ( ~ pkgt1 , ~ pklt1 ).
+
+s1::simpll |- ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) -> U e. RR+ )
+s2::simplr |- ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) -> U =/= 1 )
+s3::simpr |- ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) -> ( C e. RR+ /\ T e. RR+ ) )
+s4:s1:rpred |- ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) -> U e. RR )
+s5::simpr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> 1 < U )
+s6:s4:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> U e. RR )
+s7:s6,s5:jca |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( U e. RR /\ 1 < U ) )
+s8:s3:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( C e. RR+ /\ T e. RR+ ) )
+s9:s7,s8:jca |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( ( U e. RR /\ 1 < U ) /\ ( C e. RR+ /\ T e. RR+ ) ) )
+i10::pkgt1
+s11:s9,i10:syl |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - ( 2 x. ( _i x. _pi ) ) ) ) <_ ( ( 6 x. ( U ^c C ) ) / ( T x. ( log ` U ) ) ) )
+s12:s5:iftrued |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) = ( 2 x. ( _i x. _pi ) ) )
+s13:s4:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> U e. RR )
+s14::1re |- 1 e. RR
+s15:s14:a1i |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> 1 e. RR )
+s16:s4:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> U e. RR )
+s17:s15,s16,s5:ltled |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> 1 <_ U )
+i18::logge0
+s19:s13,s17,i18:syl2anc |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> 0 <_ ( log ` U ) )
+s20:s1:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> U e. RR+ )
+i21::relogcl
+s22:s20,i21:syl |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( log ` U ) e. RR )
+s23:s22,s19:absidd |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( abs ` ( log ` U ) ) = ( log ` U ) )
+s24:s12:oveq2d |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) = ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - ( 2 x. ( _i x. _pi ) ) ) )
+s25:s24:fveq2d |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) ) = ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - ( 2 x. ( _i x. _pi ) ) ) ) )
+s26:s23:eqcomd |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( log ` U ) = ( abs ` ( log ` U ) ) )
+s27:s26:oveq2d |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( T x. ( log ` U ) ) = ( T x. ( abs ` ( log ` U ) ) ) )
+s28:s27:oveq2d |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( ( 6 x. ( U ^c C ) ) / ( T x. ( log ` U ) ) ) = ( ( 6 x. ( U ^c C ) ) / ( T x. ( abs ` ( log ` U ) ) ) ) )
+s29:s11,s28:breqtrd |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - ( 2 x. ( _i x. _pi ) ) ) ) <_ ( ( 6 x. ( U ^c C ) ) / ( T x. ( abs ` ( log ` U ) ) ) ) )
+s30:s25,s29:eqbrtrd |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ 1 < U ) -> ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) ) <_ ( ( 6 x. ( U ^c C ) ) / ( T x. ( abs ` ( log ` U ) ) ) ) )
+s31::simpr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> -. 1 < U )
+s32:s4:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> U e. RR )
+s33::1re |- 1 e. RR
+s34:s33:a1i |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> 1 e. RR )
+i35::lenlt
+s36:s32,s34,i35:syl2anc |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( U <_ 1 <-> -. 1 < U ) )
+s37:s31,s36:mpbird |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> U <_ 1 )
+s38:s2:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> U =/= 1 )
+s39:s38:necomd |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> 1 =/= U )
+s40:s37,s39:jca |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( U <_ 1 /\ 1 =/= U ) )
+s41::1re |- 1 e. RR
+s42:s41:a1i |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> 1 e. RR )
+i43::ltlen
+s44:s32,s42,i43:syl2anc |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( U < 1 <-> ( U <_ 1 /\ 1 =/= U ) ) )
+s45:s40,s44:mpbird |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> U < 1 )
+s46:s1:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> U e. RR+ )
+s47:s46,s45:jca |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( U e. RR+ /\ U < 1 ) )
+s48:s3:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( C e. RR+ /\ T e. RR+ ) )
+s49:s47,s48:jca |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( ( U e. RR+ /\ U < 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) )
+i50::pklt1
+s51:s49,i50:syl |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) ) <_ ( ( 6 x. ( U ^c C ) ) / ( T x. ( abs ` ( log ` U ) ) ) ) )
+s52:s31:iffalsed |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) = 0 )
+s53:s1:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> U e. RR+ )
+s54:s3:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( C e. RR+ /\ T e. RR+ ) )
+i55::simpl
+s56:s54,i55:syl |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> C e. RR+ )
+s57:s3:adantr |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( C e. RR+ /\ T e. RR+ ) )
+i58::simpr
+s59:s57,i58:syl |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> T e. RR+ )
+i60::pkcl
+s61:s53,s56,s59,i60:syl3anc |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) e. CC )
+s62:s52:oveq2d |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) = ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - 0 ) )
+s63:s61:subid1d |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - 0 ) = ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) )
+s64:s62,s63:eqtrd |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) = ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) )
+s65:s64:fveq2d |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) ) = ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) ) )
+s66:s65,s51:eqbrtrd |- ( ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) /\ -. 1 < U ) -> ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) ) <_ ( ( 6 x. ( U ^c C ) ) / ( T x. ( abs ` ( log ` U ) ) ) ) )
+qed:s30,s66:pm2.61dan |- ( ( ( U e. RR+ /\ U =/= 1 ) /\ ( C e. RR+ /\ T e. RR+ ) ) -> ( abs ` ( ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) lint <. ( C + ( _i x. -u T ) ) , ( C + ( _i x. T ) ) >. ) - if ( 1 < U , ( 2 x. ( _i x. _pi ) ) , 0 ) ) ) <_ ( ( 6 x. ( U ^c C ) ) / ( T x. ( abs ` ( log ` U ) ) ) ) )
+$)

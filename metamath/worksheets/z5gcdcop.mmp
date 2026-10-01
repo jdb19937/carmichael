@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=z5gcdcop  LOC_AFTER=?
+
+* Lean coprime_gcd_gcd_tOf: the two factors ( R , D ) and ( t ( D ; R ) , M ) of the gcd splitting are coprime.
+
+s1::simpl |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> R e. NN )
+s2::simprl |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> D e. NN )
+s3::simprr |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> M e. NN )
+i4::z5tofcop
+s5:s1,s2,i4:syl2anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( D gcd prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w ) = 1 )
+i6::z5tofsq
+s7:s1,i6:syl |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w e. NN /\ ( mmu ` prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w ) =/= 0 ) /\ { q e. Prime | q || prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w } = { q e. Prime | ( q || R /\ -. q || D ) } ) )
+s8:s7:simplld |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w e. NN )
+s9:s1:nnzd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> R e. ZZ )
+s10:s2:nnzd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> D e. ZZ )
+s11:s3:nnzd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> M e. ZZ )
+s12:s8:nnzd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w e. ZZ )
+i13::gcdnncl
+s14:s1,s2,i13:syl2anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( R gcd D ) e. NN )
+s15:s14:nnzd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( R gcd D ) e. ZZ )
+i16::gcdnncl
+s17:s8,s3,i16:syl2anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) e. NN )
+s18:s17:nnzd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) e. ZZ )
+i19::gcddvds
+s20:s9,s10,i19:syl2anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( R gcd D ) || R /\ ( R gcd D ) || D ) )
+s21:s20:simprd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( R gcd D ) || D )
+i22::gcddvds
+s23:s12,s11,i22:syl2anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) || prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w /\ ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) || M ) )
+s24:s23:simpld |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) || prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w )
+i25::rpdvds
+s26:s10,s18,s12,s5,s24,i25:syl32anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( D gcd ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) ) = 1 )
+i27::gcdcom
+s28:s18,s10,i27:syl2anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) gcd D ) = ( D gcd ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) ) )
+s29:s28,s26:eqtrd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) gcd D ) = 1 )
+i30::rpdvds
+s31:s18,s15,s10,s29,s21,i30:syl32anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) gcd ( R gcd D ) ) = 1 )
+i32::gcdcom
+s33:s15,s18,i32:syl2anc |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( R gcd D ) gcd ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) ) = ( ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) gcd ( R gcd D ) ) )
+qed:s33,s31:eqtrd |- ( ( R e. NN /\ ( D e. NN /\ M e. NN ) ) -> ( ( R gcd D ) gcd ( prod_ w e. { u e. Prime | ( u || R /\ -. u || D ) } w gcd M ) ) = 1 )
+$)

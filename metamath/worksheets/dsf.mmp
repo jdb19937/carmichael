@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=dsf  LOC_AFTER=?
+
+* The extended difference quotient maps the domain into the complex numbers.
+
+s1::simp1 |- ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) -> F e. ( D -cn-> CC ) )
+s2::simp2 |- ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) -> P e. D )
+s3::simp3 |- ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) -> C e. CC )
+i4::cncfrss
+s5:s1,i4:syl |- ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) -> D C_ CC )
+i6::cncff
+s7:s1,i6:syl |- ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) -> F : D --> CC )
+s8::simpr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z = P ) -> z = P )
+i9::iftrue
+s10:s8,i9:syl |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z = P ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) = C )
+s11:s3:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) -> C e. CC )
+s12:s11:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z = P ) -> C e. CC )
+s13:s10,s12:eqeltrd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z = P ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) e. CC )
+s14::simplr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> z e. D )
+s15::simpr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> z =/= P )
+s16:s5:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) -> D C_ CC )
+s17:s16:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> D C_ CC )
+s18:s7:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) -> F : D --> CC )
+s19:s18:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> F : D --> CC )
+s20:s2:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) -> P e. D )
+s21:s20:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> P e. D )
+s22:s17,s14:sseldd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> z e. CC )
+s23:s17,s21:sseldd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> P e. CC )
+s24:s19,s14:ffvelcdmd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> ( F ` z ) e. CC )
+s25:s19,s21:ffvelcdmd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> ( F ` P ) e. CC )
+s26:s24,s25:subcld |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> ( ( F ` z ) - ( F ` P ) ) e. CC )
+s27:s22,s23:subcld |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> ( z - P ) e. CC )
+s28:s22,s23,s15:subne0d |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> ( z - P ) =/= 0 )
+s29:s26,s27,s28:divcld |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) e. CC )
+s30:s15:neneqd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> -. z = P )
+i31::iffalse
+s32:s30,i31:syl |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) = ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) )
+s33:s32,s29:eqeltrd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) /\ z =/= P ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) e. CC )
+s34:s13,s33:pm2.61dane |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) /\ z e. D ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) e. CC )
+s35::eqid |- ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) = ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) )
+qed:s34,s35:fmptd |- ( ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) -> ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) : D --> CC )
+$)

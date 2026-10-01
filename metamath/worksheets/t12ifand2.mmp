@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=t12ifand2  LOC_AFTER=?
+
+* A nested conditional on ` (/) ` as a conjunction (A1b's ` verify ` value).
+
+s1::iftrue |- ( ph -> if ( ph , if ( ps , A , (/) ) , (/) ) = if ( ps , A , (/) ) )
+s2::ibar |- ( ph -> ( ps <-> ( ph /\ ps ) ) )
+s3:s2:ifbid |- ( ph -> if ( ps , A , (/) ) = if ( ( ph /\ ps ) , A , (/) ) )
+s4:s1,s3:eqtrd |- ( ph -> if ( ph , if ( ps , A , (/) ) , (/) ) = if ( ( ph /\ ps ) , A , (/) ) )
+s5::iffalse |- ( -. ph -> if ( ph , if ( ps , A , (/) ) , (/) ) = (/) )
+s6::simpl |- ( ( ph /\ ps ) -> ph )
+s7:s6:con3i |- ( -. ph -> -. ( ph /\ ps ) )
+s8:s7:iffalsed |- ( -. ph -> if ( ( ph /\ ps ) , A , (/) ) = (/) )
+s9:s5,s8:eqtr4d |- ( -. ph -> if ( ph , if ( ps , A , (/) ) , (/) ) = if ( ( ph /\ ps ) , A , (/) ) )
+qed:s4,s9:pm2.61i |- if ( ph , if ( ps , A , (/) ) , (/) ) = if ( ( ph /\ ps ) , A , (/) )
+$)

@@ -1,0 +1,221 @@
+$( <MM> <PROOF_ASST> THEOREM=s3logx  LOC_AFTER=?
+
+* log x <_ 75 ell2 n ell3 n for x = ( Lmod Q ) ^ 5 (Lean: Step3W.lean hlogx_ub).
+
+h1::s3logx.1 |- ( ph -> N e. ( ZZ>= ` 3 ) )
+h2::s3logx.2 |- ( ph -> 0 <_ ( ell2 ` N ) )
+h3::s3logx.3 |- ( ph -> 0 <_ ( ell3 ` N ) )
+h4::s3logx.4 |- ( ph -> Z e. NN0 )
+h5::s3logx.5 |- ( ph -> W e. NN0 )
+h6::s3logx.6 |- ( ph -> Y e. NN0 )
+h7::s3logx.7 |- ( ph -> 0 < Z )
+h8::s3logx.8 |- ( ph -> S C_ ( ( Z goodPrimesW W ) ` Y ) )
+h9::s3logx.9 |- ( ph -> ( # ` S ) = T )
+h10::s3logx.10 |- ( ph -> T <_ ( 5 x. ( ell2 ` N ) ) )
+h11::s3logx.11 |- ( ph -> ( log ` Z ) <_ ( 3 x. ( ell3 ` N ) ) )
+h12::s3logx.12 |- ( ph -> 0 <_ ( log ` Z ) )
+i1::uzuzle23
+s2:1,i1:syl |- ( ph -> N e. ( ZZ>= ` 2 ) )
+i3::ell2cl
+s4:s2,i3:syl |- ( ph -> ( ell2 ` N ) e. RR )
+i5::ell3cl
+s6:1,i5:syl |- ( ph -> ( ell3 ` N ) e. RR )
+s7:4,5,6:3jca |- ( ph -> ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) )
+s8:s7,8:jca |- ( ph -> ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) )
+i9::s3sfp
+s10:s8,i9:syl |- ( ph -> S e. ( ~P Prime i^i Fin ) )
+i11::elfpw
+s12:s10,i11:sylib |- ( ph -> ( S C_ Prime /\ S e. Fin ) )
+s13:s12:simpld |- ( ph -> S C_ Prime )
+s14:s12:simprd |- ( ph -> S e. Fin )
+s15::prmssnn |- Prime C_ NN
+s16::nnssnn0 |- NN C_ NN0
+s17:s15,s16:sstri |- Prime C_ NN0
+s18:s17:a1i |- ( ph -> Prime C_ NN0 )
+s19:s13,s18:sstrd |- ( ph -> S C_ NN0 )
+s20:s19,s14:jca |- ( ph -> ( S C_ NN0 /\ S e. Fin ) )
+i21::elfpw
+s22:s20,i21:sylibr |- ( ph -> S e. ( ~P NN0 i^i Fin ) )
+i23::lmodqcl
+s24:s10,i23:syl |- ( ph -> ( Lmod ` S ) e. NN )
+s25:s24:nnrpd |- ( ph -> ( Lmod ` S ) e. RR+ )
+i26::hashcl
+s27:s14,i26:syl |- ( ph -> ( # ` S ) e. NN0 )
+s28:9,s27:eqeltrrd |- ( ph -> T e. NN0 )
+s29:s7,8:jca |- ( ph -> ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) /\ S C_ ( ( Z goodPrimesW W ) ` Y ) ) )
+i30::s3sallz
+s31:s29,i30:syl |- ( ph -> A. p e. S p <_ Z )
+s32:s10,4,s31:3jca |- ( ph -> ( S e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ A. p e. S p <_ Z ) )
+i33::prmprodub
+s34:s32,i33:syl |- ( ph -> ( Lmod ` S ) <_ ( Z ^ ( # ` S ) ) )
+s35:9:oveq2d |- ( ph -> ( Z ^ ( # ` S ) ) = ( Z ^ T ) )
+s36:s34,s35:breqtrd |- ( ph -> ( Lmod ` S ) <_ ( Z ^ T ) )
+s37:4:nn0red |- ( ph -> Z e. RR )
+s38:s37,7:elrpd |- ( ph -> Z e. RR+ )
+s39:s28:nn0zd |- ( ph -> T e. ZZ )
+s40:s38,s39:rpexpcld |- ( ph -> ( Z ^ T ) e. RR+ )
+i41::logleb
+s42:s25,s40,i41:syl2anc |- ( ph -> ( ( Lmod ` S ) <_ ( Z ^ T ) <-> ( log ` ( Lmod ` S ) ) <_ ( log ` ( Z ^ T ) ) ) )
+s43:s36,s42:mpbid |- ( ph -> ( log ` ( Lmod ` S ) ) <_ ( log ` ( Z ^ T ) ) )
+s44:s28:nn0zd |- ( ph -> T e. ZZ )
+i45::relogexp
+s46:s38,s44,i45:syl2anc |- ( ph -> ( log ` ( Z ^ T ) ) = ( T x. ( log ` Z ) ) )
+s47:s43,s46:breqtrd |- ( ph -> ( log ` ( Lmod ` S ) ) <_ ( T x. ( log ` Z ) ) )
+s48:s28:nn0red |- ( ph -> T e. RR )
+s49:s28:nn0ge0d |- ( ph -> 0 <_ T )
+i50::relogcl
+s51:s38,i50:syl |- ( ph -> ( log ` Z ) e. RR )
+s52::5re |- 5 e. RR
+s53:s52:a1i |- ( ph -> 5 e. RR )
+s54::3re |- 3 e. RR
+s55:s54:a1i |- ( ph -> 3 e. RR )
+s56:s53,s4:remulcld |- ( ph -> ( 5 x. ( ell2 ` N ) ) e. RR )
+s57:s55,s6:remulcld |- ( ph -> ( 3 x. ( ell3 ` N ) ) e. RR )
+s58:s48,s56,s51,s57,s49,12,10,11:lemul12ad |- ( ph -> ( T x. ( log ` Z ) ) <_ ( ( 5 x. ( ell2 ` N ) ) x. ( 3 x. ( ell3 ` N ) ) ) )
+s59::5cn |- 5 e. CC
+s60:s59:a1i |- ( ph -> 5 e. CC )
+s61::3cn |- 3 e. CC
+s62:s61:a1i |- ( ph -> 3 e. CC )
+s63:s4:recnd |- ( ph -> ( ell2 ` N ) e. CC )
+s64:s6:recnd |- ( ph -> ( ell3 ` N ) e. CC )
+s65:s60,s63:jca |- ( ph -> ( 5 e. CC /\ ( ell2 ` N ) e. CC ) )
+s66:s62,s64:jca |- ( ph -> ( 3 e. CC /\ ( ell3 ` N ) e. CC ) )
+i67::mul4
+s68:s65,s66,i67:syl2anc |- ( ph -> ( ( 5 x. ( ell2 ` N ) ) x. ( 3 x. ( ell3 ` N ) ) ) = ( ( 5 x. 3 ) x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s69::5t3e15 |- ( 5 x. 3 ) = ; 1 5
+s70:s69:a1i |- ( ph -> ( 5 x. 3 ) = ; 1 5 )
+s71:s70:oveq1d |- ( ph -> ( ( 5 x. 3 ) x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) = ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s72:s68,s71:eqtrd |- ( ph -> ( ( 5 x. ( ell2 ` N ) ) x. ( 3 x. ( ell3 ` N ) ) ) = ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s73:s58,s72:breqtrd |- ( ph -> ( T x. ( log ` Z ) ) <_ ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+i74::relogcl
+s75:s25,i74:syl |- ( ph -> ( log ` ( Lmod ` S ) ) e. RR )
+s76:s48,s51:remulcld |- ( ph -> ( T x. ( log ` Z ) ) e. RR )
+s77:s4,s6:remulcld |- ( ph -> ( ( ell2 ` N ) x. ( ell3 ` N ) ) e. RR )
+s78::1nn0 |- 1 e. NN0
+s79::5nn0 |- 5 e. NN0
+s80:s78,s79:deccl |- ; 1 5 e. NN0
+s81:s80:nn0rei |- ; 1 5 e. RR
+s82:s81:a1i |- ( ph -> ; 1 5 e. RR )
+s83:s82,s77:remulcld |- ( ph -> ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) e. RR )
+s84:s75,s76,s83,s47,s73:letrd |- ( ph -> ( log ` ( Lmod ` S ) ) <_ ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+i85::xceilval
+s86:s22,i85:syl |- ( ph -> ( xceil ` S ) = ( ( Lmod ` S ) ^ 5 ) )
+s87:s79:nn0zi |- 5 e. ZZ
+s88:s87:a1i |- ( ph -> 5 e. ZZ )
+i89::relogexp
+s90:s25,s88,i89:syl2anc |- ( ph -> ( log ` ( ( Lmod ` S ) ^ 5 ) ) = ( 5 x. ( log ` ( Lmod ` S ) ) ) )
+s91:s86:fveq2d |- ( ph -> ( log ` ( xceil ` S ) ) = ( log ` ( ( Lmod ` S ) ^ 5 ) ) )
+s92:s91,s90:eqtrd |- ( ph -> ( log ` ( xceil ` S ) ) = ( 5 x. ( log ` ( Lmod ` S ) ) ) )
+s93:s81:a1i |- ( ph -> ; 1 5 e. RR )
+s94:s93,s77:remulcld |- ( ph -> ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) e. RR )
+s95:s94,s75:subge0d |- ( ph -> ( 0 <_ ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) <-> ( log ` ( Lmod ` S ) ) <_ ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s96:s84,s95:mpbird |- ( ph -> 0 <_ ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) )
+s97:s94,s75:resubcld |- ( ph -> ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) e. RR )
+s98::5re |- 5 e. RR
+s99:s98:a1i |- ( ph -> 5 e. RR )
+s100:s79:nn0ge0i |- 0 <_ 5
+s101:s100:a1i |- ( ph -> 0 <_ 5 )
+s102:s99,s97,s101,s96:mulge0d |- ( ph -> 0 <_ ( 5 x. ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) ) )
+s103::5cn |- 5 e. CC
+s104:s103:a1i |- ( ph -> 5 e. CC )
+s105:s80:nn0cni |- ; 1 5 e. CC
+s106:s105:a1i |- ( ph -> ; 1 5 e. CC )
+s107:s77:recnd |- ( ph -> ( ( ell2 ` N ) x. ( ell3 ` N ) ) e. CC )
+s108:s106,s107:mulcld |- ( ph -> ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) e. CC )
+s109:s75:recnd |- ( ph -> ( log ` ( Lmod ` S ) ) e. CC )
+s110:s104,s108,s109:subdid |- ( ph -> ( 5 x. ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) ) = ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s111:s104,s108:mulcld |- ( ph -> ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) e. CC )
+s112:s104,s109:mulcld |- ( ph -> ( 5 x. ( log ` ( Lmod ` S ) ) ) e. CC )
+s113:s111,s112:negsubd |- ( ph -> ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + -u ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s114:s113:eqcomd |- ( ph -> ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + -u ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s115:s104,s109:mulneg1d |- ( ph -> ( -u 5 x. ( log ` ( Lmod ` S ) ) ) = -u ( 5 x. ( log ` ( Lmod ` S ) ) ) )
+s116:s115:eqcomd |- ( ph -> -u ( 5 x. ( log ` ( Lmod ` S ) ) ) = ( -u 5 x. ( log ` ( Lmod ` S ) ) ) )
+s117:s116:oveq2d |- ( ph -> ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + -u ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s118:s104,s106,s107:mulassd |- ( ph -> ( ( 5 x. ; 1 5 ) x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) = ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s119:s118:eqcomd |- ( ph -> ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) = ( ( 5 x. ; 1 5 ) x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s120:s103,s105:mulcomi |- ( 5 x. ; 1 5 ) = ( ; 1 5 x. 5 )
+s121:s103:mullidi |- ( 1 x. 5 ) = 5
+s122:s121:oveq1i |- ( ( 1 x. 5 ) + 2 ) = ( 5 + 2 )
+s123::5p2e7 |- ( 5 + 2 ) = 7
+s124:s122,s123:eqtri |- ( ( 1 x. 5 ) + 2 ) = 7
+s125::eqid |- ; 1 5 = ; 1 5
+s126::2nn0 |- 2 e. NN0
+s127::5t5e25 |- ( 5 x. 5 ) = ; 2 5
+s128:s79,s78,s79,s125,s79,s126,s124,s127:decmul1c |- ( ; 1 5 x. 5 ) = ; 7 5
+s129:s120,s128:eqtri |- ( 5 x. ; 1 5 ) = ; 7 5
+s130:s129:a1i |- ( ph -> ( 5 x. ; 1 5 ) = ; 7 5 )
+s131:s130:oveq1d |- ( ph -> ( ( 5 x. ; 1 5 ) x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) = ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s132::7nn0 |- 7 e. NN0
+s133:s132,s79:deccl |- ; 7 5 e. NN0
+s134:s133:nn0cni |- ; 7 5 e. CC
+s135:s134:a1i |- ( ph -> ; 7 5 e. CC )
+s136:s135,s107:mulcld |- ( ph -> ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) e. CC )
+s137:s136:addlidd |- ( ph -> ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) = ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s138:s137:eqcomd |- ( ph -> ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) = ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s139:s119,s131:eqtrd |- ( ph -> ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) = ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s140:s139,s138:eqtrd |- ( ph -> ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) = ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s141:s103:negcli |- -u 5 e. CC
+s142:s141:a1i |- ( ph -> -u 5 e. CC )
+s143:s142,s109:mulcld |- ( ph -> ( -u 5 x. ( log ` ( Lmod ` S ) ) ) e. CC )
+s144:s143:addlidd |- ( ph -> ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( -u 5 x. ( log ` ( Lmod ` S ) ) ) )
+s145:s144:eqcomd |- ( ph -> ( -u 5 x. ( log ` ( Lmod ` S ) ) ) = ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s146:s140,s145:oveq12d |- ( ph -> ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s147::0cn |- 0 e. CC
+s148:s147:a1i |- ( ph -> 0 e. CC )
+s149:s148,s136:addcld |- ( ph -> ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) e. CC )
+s150:s149,s148,s143:addassd |- ( ph -> ( ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s151:s150:eqcomd |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) = ( ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s152:s148,s136,s148:add32d |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) = ( ( 0 + 0 ) + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s153:s147:addlidi |- ( 0 + 0 ) = 0
+s154:s153:a1i |- ( ph -> ( 0 + 0 ) = 0 )
+s155:s154:oveq1d |- ( ph -> ( ( 0 + 0 ) + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) = ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s156:s152,s155:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) = ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s157:s156:oveq1d |- ( ph -> ( ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s158:s151,s157:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s159:s110,s114:eqtrd |- ( ph -> ( 5 x. ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) ) = ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + -u ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s160:s159,s117:eqtrd |- ( ph -> ( 5 x. ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) ) = ( ( 5 x. ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s161:s160,s146:eqtrd |- ( ph -> ( 5 x. ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s162:s161,s158:eqtrd |- ( ph -> ( 5 x. ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s163:s136,s112:negsubd |- ( ph -> ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) + -u ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s164:s163:eqcomd |- ( ph -> ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) + -u ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s165:s112:mulm1d |- ( ph -> ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = -u ( 5 x. ( log ` ( Lmod ` S ) ) ) )
+s166:s165:eqcomd |- ( ph -> -u ( 5 x. ( log ` ( Lmod ` S ) ) ) = ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s167:s166:oveq2d |- ( ph -> ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) + -u ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) + ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s168:s136:addlidd |- ( ph -> ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) = ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+s169:s168:eqcomd |- ( ph -> ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) = ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s170::ax-1cn |- 1 e. CC
+s171:s170:negcli |- -u 1 e. CC
+s172:s171:a1i |- ( ph -> -u 1 e. CC )
+s173:s172,s104,s109:mulassd |- ( ph -> ( ( -u 1 x. 5 ) x. ( log ` ( Lmod ` S ) ) ) = ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s174:s173:eqcomd |- ( ph -> ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( -u 1 x. 5 ) x. ( log ` ( Lmod ` S ) ) ) )
+s175:s170,s103:mulneg1i |- ( -u 1 x. 5 ) = -u ( 1 x. 5 )
+s176:s121:negeqi |- -u ( 1 x. 5 ) = -u 5
+s177:s175,s176:eqtri |- ( -u 1 x. 5 ) = -u 5
+s178:s177:a1i |- ( ph -> ( -u 1 x. 5 ) = -u 5 )
+s179:s178:oveq1d |- ( ph -> ( ( -u 1 x. 5 ) x. ( log ` ( Lmod ` S ) ) ) = ( -u 5 x. ( log ` ( Lmod ` S ) ) ) )
+s180:s143:addlidd |- ( ph -> ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( -u 5 x. ( log ` ( Lmod ` S ) ) ) )
+s181:s180:eqcomd |- ( ph -> ( -u 5 x. ( log ` ( Lmod ` S ) ) ) = ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s182:s174,s179:eqtrd |- ( ph -> ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( -u 5 x. ( log ` ( Lmod ` S ) ) ) )
+s183:s182,s181:eqtrd |- ( ph -> ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s184:s169,s183:oveq12d |- ( ph -> ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) + ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s185:s149,s148,s143:addassd |- ( ph -> ( ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s186:s185:eqcomd |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) = ( ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s187:s148,s136,s148:add32d |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) = ( ( 0 + 0 ) + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s188:s153:a1i |- ( ph -> ( 0 + 0 ) = 0 )
+s189:s188:oveq1d |- ( ph -> ( ( 0 + 0 ) + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) = ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s190:s187,s189:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) = ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s191:s190:oveq1d |- ( ph -> ( ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + 0 ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s192:s186,s191:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s193:s164,s167:eqtrd |- ( ph -> ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) + ( -u 1 x. ( 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s194:s193,s184:eqtrd |- ( ph -> ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( 0 + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) ) )
+s195:s194,s192:eqtrd |- ( ph -> ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) = ( ( 0 + ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) + ( -u 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s196:s162,s195:eqtr4d |- ( ph -> ( 5 x. ( ( ; 1 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( log ` ( Lmod ` S ) ) ) ) = ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s197:s102,s196:breqtrd |- ( ph -> 0 <_ ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) )
+s198:s99,s75:remulcld |- ( ph -> ( 5 x. ( log ` ( Lmod ` S ) ) ) e. RR )
+s199:s133:nn0rei |- ; 7 5 e. RR
+s200:s199:a1i |- ( ph -> ; 7 5 e. RR )
+s201:s200,s77:remulcld |- ( ph -> ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) e. RR )
+s202:s201,s198:subge0d |- ( ph -> ( 0 <_ ( ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) - ( 5 x. ( log ` ( Lmod ` S ) ) ) ) <-> ( 5 x. ( log ` ( Lmod ` S ) ) ) <_ ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) ) )
+s203:s197,s202:mpbid |- ( ph -> ( 5 x. ( log ` ( Lmod ` S ) ) ) <_ ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+qed:s92,s203:eqbrtrd |- ( ph -> ( log ` ( xceil ` S ) ) <_ ( ; 7 5 x. ( ( ell2 ` N ) x. ( ell3 ` N ) ) ) )
+$)

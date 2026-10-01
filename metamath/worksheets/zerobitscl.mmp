@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=zerobitscl  LOC_AFTER=?
+
+* Closure of zeroBits: a Boolean.
+
+s1::simpl |- ( ( L e. Word 2o /\ F e. 2o ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ F e. 2o ) -> F e. 2o )
+s3::zerobitsval |- ( ( L e. Word 2o /\ F e. 2o ) -> ( L zeroBits F ) = if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) )
+s4::1oel2o |- 1o e. 2o
+s5:s4:a1i |- ( ( L e. Word 2o /\ F e. 2o ) -> 1o e. 2o )
+s6::0el2o |- (/) e. 2o
+s7:s6:a1i |- ( ( L e. Word 2o /\ F e. 2o ) -> (/) e. 2o )
+s8:s5,s7:ifcld |- ( ( L e. Word 2o /\ F e. 2o ) -> if ( ( F = 1o /\ ( toNat ` L ) = 0 ) , 1o , (/) ) e. 2o )
+qed:s3,s8:eqeltrd |- ( ( L e. Word 2o /\ F e. 2o ) -> ( L zeroBits F ) e. 2o )
+$)

@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=pkfval  LOC_AFTER=?
+
+* The value and the modulus of the Perron integrand ` ( U ^c z ) / z ` at a nonzero point.
+
+s1::simpl |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> U e. RR+ )
+s2::simpr |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> V e. ( CC \ { 0 } ) )
+i3::eldifsn
+s4:s2,i3:sylib |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( V e. CC /\ V =/= 0 ) )
+i5::simpl
+s6:s4,i5:syl |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> V e. CC )
+i7::simpr
+s8:s4,i7:syl |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> V =/= 0 )
+s9::oveq2 |- ( z = V -> ( U ^c z ) = ( U ^c V ) )
+s10::id |- ( z = V -> z = V )
+s11:s9,s10:oveq12d |- ( z = V -> ( ( U ^c z ) / z ) = ( ( U ^c V ) / V ) )
+s12::ovex |- ( ( U ^c V ) / V ) e. _V
+s13:s12:a1i |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( ( U ^c V ) / V ) e. _V )
+s14::eqid |- ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) = ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) )
+s15:s11,s14:fvmptg |- ( ( V e. ( CC \ { 0 } ) /\ ( ( U ^c V ) / V ) e. _V ) -> ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` V ) = ( ( U ^c V ) / V ) )
+s16:s2,s13,s15:syl2anc |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` V ) = ( ( U ^c V ) / V ) )
+s17:s1:rpcnd |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> U e. CC )
+s18:s17,s6:cxpcld |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( U ^c V ) e. CC )
+s19:s18,s6,s8:absdivd |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( abs ` ( ( U ^c V ) / V ) ) = ( ( abs ` ( U ^c V ) ) / ( abs ` V ) ) )
+i20::abscxp
+s21:s1,s6,i20:syl2anc |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( abs ` ( U ^c V ) ) = ( U ^c ( Re ` V ) ) )
+s22:s16:fveq2d |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` V ) ) = ( abs ` ( ( U ^c V ) / V ) ) )
+s23:s21:oveq1d |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( ( abs ` ( U ^c V ) ) / ( abs ` V ) ) = ( ( U ^c ( Re ` V ) ) / ( abs ` V ) ) )
+s24:s19,s23:eqtrd |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( abs ` ( ( U ^c V ) / V ) ) = ( ( U ^c ( Re ` V ) ) / ( abs ` V ) ) )
+qed:s22,s24:eqtrd |- ( ( U e. RR+ /\ V e. ( CC \ { 0 } ) ) -> ( abs ` ( ( z e. ( CC \ { 0 } ) |-> ( ( U ^c z ) / z ) ) ` V ) ) = ( ( U ^c ( Re ` V ) ) / ( abs ` V ) ) )
+$)

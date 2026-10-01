@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=efcxp  LOC_AFTER=?
+
+* A real power of an exponential.
+
+s1::simpl |- ( ( X e. RR /\ Y e. RR ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ Y e. RR ) -> Y e. RR )
+s3:s1:rpefcld |- ( ( X e. RR /\ Y e. RR ) -> ( exp ` X ) e. RR+ )
+s4:s3:rpcnd |- ( ( X e. RR /\ Y e. RR ) -> ( exp ` X ) e. CC )
+s5:s3:rpne0d |- ( ( X e. RR /\ Y e. RR ) -> ( exp ` X ) =/= 0 )
+s6:s2:recnd |- ( ( X e. RR /\ Y e. RR ) -> Y e. CC )
+i7::cxpef
+s8:s4,s5,s6,i7:syl3anc |- ( ( X e. RR /\ Y e. RR ) -> ( ( exp ` X ) ^c Y ) = ( exp ` ( Y x. ( log ` ( exp ` X ) ) ) ) )
+i9::relogef
+s10:s1,i9:syl |- ( ( X e. RR /\ Y e. RR ) -> ( log ` ( exp ` X ) ) = X )
+s11:s10:oveq2d |- ( ( X e. RR /\ Y e. RR ) -> ( Y x. ( log ` ( exp ` X ) ) ) = ( Y x. X ) )
+s12:s11:fveq2d |- ( ( X e. RR /\ Y e. RR ) -> ( exp ` ( Y x. ( log ` ( exp ` X ) ) ) ) = ( exp ` ( Y x. X ) ) )
+qed:s8,s12:eqtrd |- ( ( X e. RR /\ Y e. RR ) -> ( ( exp ` X ) ^c Y ) = ( exp ` ( Y x. X ) ) )
+$)

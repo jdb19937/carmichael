@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=zscalelt  LOC_AFTER=?
+
+* The scale z is less than C * ell2 N * ell3 N + 1 when that product is nonnegative (Lean: Nat.ceil_lt_add_one; DefsW.lean hz_hi).
+
+s1::simp1 |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> C e. RR )
+s2::simp2 |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> N e. ( ZZ>= ` 3 ) )
+s3::simp3 |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) )
+i4::uzuzle23
+s5:s2,i4:syl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> N e. ( ZZ>= ` 2 ) )
+i6::eluz2nn
+s7:s5,i6:syl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> N e. NN )
+s8:s7:nnnn0d |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> N e. NN0 )
+i9::ell2cl
+s10:s5,i9:syl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> ( ell2 ` N ) e. RR )
+i11::ell3cl
+s12:s2,i11:syl |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> ( ell3 ` N ) e. RR )
+s13:s1,s10:remulcld |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> ( C x. ( ell2 ` N ) ) e. RR )
+s14:s13,s12:remulcld |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) e. RR )
+i15::zscaleval
+s16:s1,s8,i15:syl2anc |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> ( C zscale N ) = ( Nceil ` ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) )
+i17::nceillt
+s18:s14,s3,i17:syl2anc |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> ( Nceil ` ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) < ( ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) + 1 ) )
+qed:s16,s18:eqbrtrd |- ( ( C e. RR /\ N e. ( ZZ>= ` 3 ) /\ 0 <_ ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) ) -> ( C zscale N ) < ( ( ( C x. ( ell2 ` N ) ) x. ( ell3 ` N ) ) + 1 ) )
+$)

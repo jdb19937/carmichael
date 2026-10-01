@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=prmprodsqf  LOC_AFTER=?
+
+* L = Lmod Q is squarefree (Lean: prod_primes_squarefree of Step3W.lean).
+
+s1::id |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P Prime i^i Fin ) )
+i2::elfpw
+s3:s1,i2:sylib |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s4:s3:simpld |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ Prime )
+s5:s3:simprd |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. Fin )
+s6::prmssnn |- Prime C_ NN
+s7::nnssnn0 |- NN C_ NN0
+s8:s6,s7:sstri |- Prime C_ NN0
+s9:s8:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ NN0 )
+s10:s4,s9:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ NN0 )
+s11:s10,s5:jca |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i12::elfpw
+s13:s11,i12:sylibr |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P NN0 i^i Fin ) )
+s14::nnssz |- NN C_ ZZ
+s15:s6,s14:sstri |- Prime C_ ZZ
+s16:s15:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ ZZ )
+s17:s4,s16:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ ZZ )
+i18::prmprodsqfv
+s19:s5,i18:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ Prime -> ( mmu ` prod_ q e. Q q ) =/= 0 ) )
+s20:s4,s19:mpd |- ( Q e. ( ~P Prime i^i Fin ) -> ( mmu ` prod_ q e. Q q ) =/= 0 )
+i21::lmodqval
+s22:s13,i21:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( Lmod ` Q ) = prod_ q e. Q q )
+s23:s22:fveq2d |- ( Q e. ( ~P Prime i^i Fin ) -> ( mmu ` ( Lmod ` Q ) ) = ( mmu ` prod_ q e. Q q ) )
+qed:s23,s20:eqnetrd |- ( Q e. ( ~P Prime i^i Fin ) -> ( mmu ` ( Lmod ` Q ) ) =/= 0 )
+$)

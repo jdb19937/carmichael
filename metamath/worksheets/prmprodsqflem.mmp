@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=prmprodsqflem  LOC_AFTER=?
+
+* Induction step: adjoining a new prime keeps the product squarefree.
+
+s1::simp1 |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( y e. Fin /\ -. z e. y ) )
+s2:s1:simpld |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> y e. Fin )
+s3:s1:simprd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> -. z e. y )
+s4::simp2 |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) )
+s5::simp3 |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( y u. { z } ) C_ Prime )
+s6:s5:unssad |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> y C_ Prime )
+s7:s5:unssbd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> { z } C_ Prime )
+s8::vex |- z e. _V
+s9:s8:a1i |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> z e. _V )
+i10::snssg
+s11:s9,i10:syl |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( z e. Prime <-> { z } C_ Prime ) )
+s12:s7,s11:mpbird |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> z e. Prime )
+s13:s6,s4:mpd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( mmu ` prod_ q e. y q ) =/= 0 )
+s14:s6,s2:jca |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( y C_ Prime /\ y e. Fin ) )
+i15::elfpw
+s16:s14,i15:sylibr |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> y e. ( ~P Prime i^i Fin ) )
+s17:s16,s12,s3:3jca |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( y e. ( ~P Prime i^i Fin ) /\ z e. Prime /\ -. z e. y ) )
+i18::prmprodsplit
+s19:s17,i18:syl |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> prod_ q e. ( y u. { z } ) q = ( prod_ q e. y q x. z ) )
+i20::prmprodnn
+s21:s16,i20:syl |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> prod_ q e. y q e. NN )
+s22:s21:nnzd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> prod_ q e. y q e. ZZ )
+i23::prmnn
+s24:s12,i23:syl |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> z e. NN )
+s25:s24:nnzd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> z e. ZZ )
+i26::prmprodndvds
+s27:s17,i26:syl |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> -. z || prod_ q e. y q )
+i28::coprm
+s29:s12,s22,i28:syl2anc |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( -. z || prod_ q e. y q <-> ( z gcd prod_ q e. y q ) = 1 ) )
+s30:s27,s29:mpbid |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( z gcd prod_ q e. y q ) = 1 )
+i31::gcdcom
+s32:s25,s22,i31:syl2anc |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( z gcd prod_ q e. y q ) = ( prod_ q e. y q gcd z ) )
+s33:s32:eqcomd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( prod_ q e. y q gcd z ) = ( z gcd prod_ q e. y q ) )
+s34:s33,s30:eqtrd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( prod_ q e. y q gcd z ) = 1 )
+i35::sqfprm
+s36:s12,i35:syl |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( mmu ` z ) =/= 0 )
+s37:s21,s24,s34:3jca |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( prod_ q e. y q e. NN /\ z e. NN /\ ( prod_ q e. y q gcd z ) = 1 ) )
+s38:s13,s36:jca |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( ( mmu ` prod_ q e. y q ) =/= 0 /\ ( mmu ` z ) =/= 0 ) )
+i39::mumullem2
+s40:s37,s38,i39:syl2anc |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( mmu ` ( prod_ q e. y q x. z ) ) =/= 0 )
+s41:s19:fveq2d |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( mmu ` prod_ q e. ( y u. { z } ) q ) = ( mmu ` ( prod_ q e. y q x. z ) ) )
+qed:s41,s40:eqnetrd |- ( ( ( y e. Fin /\ -. z e. y ) /\ ( y C_ Prime -> ( mmu ` prod_ q e. y q ) =/= 0 ) /\ ( y u. { z } ) C_ Prime ) -> ( mmu ` prod_ q e. ( y u. { z } ) q ) =/= 0 )
+$)

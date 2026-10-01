@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=abscrle  LOC_AFTER=?
+
+* The absolute value of a complex number is at most the sum of the absolute values of its parts.
+
+s1::id |- ( X e. CC -> X e. CC )
+s2::ax-icn |- _i e. CC
+s3:s2:a1i |- ( X e. CC -> _i e. CC )
+i4::recl
+s5:s1,i4:syl |- ( X e. CC -> ( Re ` X ) e. RR )
+i6::imcl
+s7:s1,i6:syl |- ( X e. CC -> ( Im ` X ) e. RR )
+s8:s5:recnd |- ( X e. CC -> ( Re ` X ) e. CC )
+s9:s7:recnd |- ( X e. CC -> ( Im ` X ) e. CC )
+s10:s3,s9:mulcld |- ( X e. CC -> ( _i x. ( Im ` X ) ) e. CC )
+s11:s1:replimd |- ( X e. CC -> X = ( ( Re ` X ) + ( _i x. ( Im ` X ) ) ) )
+s12:s8,s10:abstrid |- ( X e. CC -> ( abs ` ( ( Re ` X ) + ( _i x. ( Im ` X ) ) ) ) <_ ( ( abs ` ( Re ` X ) ) + ( abs ` ( _i x. ( Im ` X ) ) ) ) )
+s13::absi |- ( abs ` _i ) = 1
+s14:s13:a1i |- ( X e. CC -> ( abs ` _i ) = 1 )
+s15:s3,s9:absmuld |- ( X e. CC -> ( abs ` ( _i x. ( Im ` X ) ) ) = ( ( abs ` _i ) x. ( abs ` ( Im ` X ) ) ) )
+s16:s14:oveq1d |- ( X e. CC -> ( ( abs ` _i ) x. ( abs ` ( Im ` X ) ) ) = ( 1 x. ( abs ` ( Im ` X ) ) ) )
+s17:s9:abscld |- ( X e. CC -> ( abs ` ( Im ` X ) ) e. RR )
+s18:s17:recnd |- ( X e. CC -> ( abs ` ( Im ` X ) ) e. CC )
+s21:s14:oveq1d |- ( X e. CC -> ( ( abs ` _i ) x. ( abs ` ( Im ` X ) ) ) = ( 1 x. ( abs ` ( Im ` X ) ) ) )
+s22:s9:abscld |- ( X e. CC -> ( abs ` ( Im ` X ) ) e. RR )
+s23:s22:recnd |- ( X e. CC -> ( abs ` ( Im ` X ) ) e. CC )
+s24:s23:mullidd |- ( X e. CC -> ( 1 x. ( abs ` ( Im ` X ) ) ) = ( abs ` ( Im ` X ) ) )
+s25:s21,s24:eqtrd |- ( X e. CC -> ( ( abs ` _i ) x. ( abs ` ( Im ` X ) ) ) = ( abs ` ( Im ` X ) ) )
+s26:s3,s9:absmuld |- ( X e. CC -> ( abs ` ( _i x. ( Im ` X ) ) ) = ( ( abs ` _i ) x. ( abs ` ( Im ` X ) ) ) )
+s27:s26,s25:eqtrd |- ( X e. CC -> ( abs ` ( _i x. ( Im ` X ) ) ) = ( abs ` ( Im ` X ) ) )
+s28:s11:fveq2d |- ( X e. CC -> ( abs ` X ) = ( abs ` ( ( Re ` X ) + ( _i x. ( Im ` X ) ) ) ) )
+s29:s28:eqcomd |- ( X e. CC -> ( abs ` ( ( Re ` X ) + ( _i x. ( Im ` X ) ) ) ) = ( abs ` X ) )
+s30:s27:oveq2d |- ( X e. CC -> ( ( abs ` ( Re ` X ) ) + ( abs ` ( _i x. ( Im ` X ) ) ) ) = ( ( abs ` ( Re ` X ) ) + ( abs ` ( Im ` X ) ) ) )
+qed:s12,s29,s30:3brtr3d |- ( X e. CC -> ( abs ` X ) <_ ( ( abs ` ( Re ` X ) ) + ( abs ` ( Im ` X ) ) ) )
+$)

@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=lswinmem  LOC_AFTER=?
+
+* An element of the Farey family U_ q ( { q } X. CR(q) ) is the pair of its denominator q <_ |_ Q and a numerator coprime to q.
+
+s1::simpl |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> p = <. q , u >. )
+s2::vex |- q e. _V
+s3::vex |- u e. _V
+s4:s2,s3:op1std |- ( p = <. q , u >. -> ( 1st ` p ) = q )
+s5:s1,s4:syl |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 1st ` p ) = q )
+s6:s2,s3:op2ndd |- ( p = <. q , u >. -> ( 2nd ` p ) = u )
+s7:s1,s6:syl |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 2nd ` p ) = u )
+s8:s5,s7:opeq12d |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> <. ( 1st ` p ) , ( 2nd ` p ) >. = <. q , u >. )
+s9:s1,s8:eqtr4d |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> p = <. ( 1st ` p ) , ( 2nd ` p ) >. )
+s10::simprl |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> q e. ( 1 ... ( |_ ` Q ) ) )
+s11::simprr |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } )
+s12:s5,s10:eqeltrd |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 1st ` p ) e. ( 1 ... ( |_ ` Q ) ) )
+s13:s5:eqcomd |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> q = ( 1st ` p ) )
+c1::id |- ( q = ( 1st ` p ) -> q = ( 1st ` p ) )
+c2:c1:oveq2d |- ( q = ( 1st ` p ) -> ( 0 ..^ q ) = ( 0 ..^ ( 1st ` p ) ) )
+c3:c1:oveq2d |- ( q = ( 1st ` p ) -> ( k gcd q ) = ( k gcd ( 1st ` p ) ) )
+c4:c3:eqeq1d |- ( q = ( 1st ` p ) -> ( ( k gcd q ) = 1 <-> ( k gcd ( 1st ` p ) ) = 1 ) )
+c5:c2,c4:rabeqbidv |- ( q = ( 1st ` p ) -> { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } = { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } )
+c6:s13,c5:syl |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } = { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } )
+s14:s11,c6:eleqtrd |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> u e. { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } )
+s15:s7,s14:eqeltrd |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 2nd ` p ) e. { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } )
+s16:s9,s12,s15:3jca |- ( ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( p = <. ( 1st ` p ) , ( 2nd ` p ) >. /\ ( 1st ` p ) e. ( 1 ... ( |_ ` Q ) ) /\ ( 2nd ` p ) e. { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } ) )
+s17:s16:exlimivv |- ( E. q E. u ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( p = <. ( 1st ` p ) , ( 2nd ` p ) >. /\ ( 1st ` p ) e. ( 1 ... ( |_ ` Q ) ) /\ ( 2nd ` p ) e. { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } ) )
+s18::eliunxp |- ( p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) <-> E. q E. u ( p = <. q , u >. /\ ( q e. ( 1 ... ( |_ ` Q ) ) /\ u e. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) )
+qed:s18,s17:sylbi |- ( p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) -> ( p = <. ( 1st ` p ) , ( 2nd ` p ) >. /\ ( 1st ` p ) e. ( 1 ... ( |_ ` Q ) ) /\ ( 2nd ` p ) e. { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } ) )
+$)

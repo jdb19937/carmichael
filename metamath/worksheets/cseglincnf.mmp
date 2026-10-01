@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=cseglincnf  LOC_AFTER=?
+
+* A continuous function composed with the parametrisation of a segment in its domain is continuous.
+
+s1::simp1l |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> A e. CC )
+s2::simp1r |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> B e. CC )
+s3::simp2l |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> F e. ( D -cn-> CC ) )
+s4::simp2r |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( A cseg B ) C_ D )
+s5::simp3 |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> X C_ ( 0 [,] 1 ) )
+i6::cncfrss
+s7:s3,i6:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> D C_ CC )
+s8:s1,s2:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( A e. CC /\ B e. CC ) )
+s9:s7,s4:jca |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( D C_ CC /\ ( A cseg B ) C_ D ) )
+i10::cseglincnd
+s11:s8,s9,s5,i10:syl3anc |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( t e. X |-> ( A + ( t x. ( B - A ) ) ) ) e. ( X -cn-> D ) )
+i12::cncff
+s13:s3,i12:syl |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> F : D --> CC )
+s14:s13:feqmptd |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> F = ( y e. D |-> ( F ` y ) ) )
+s15:s3,s14:eqeltrrd |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( y e. D |-> ( F ` y ) ) e. ( D -cn-> CC ) )
+s16::nfv |- F/ t ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) )
+s17::ssidd |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> D C_ D )
+s18::fveq2 |- ( y = ( A + ( t x. ( B - A ) ) ) -> ( F ` y ) = ( F ` ( A + ( t x. ( B - A ) ) ) ) )
+qed:s16,s11,s15,s17,s18:cncfcompt2 |- ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) /\ X C_ ( 0 [,] 1 ) ) -> ( t e. X |-> ( F ` ( A + ( t x. ( B - A ) ) ) ) ) e. ( X -cn-> CC ) )
+$)

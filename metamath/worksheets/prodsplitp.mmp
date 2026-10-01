@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=prodsplitp  LOC_AFTER=?
+
+* Splitting one element out of a finite product (Lean: Finset.mul_prod_erase).
+
+s1::simp1 |- ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) -> S e. Fin )
+s2::simp2 |- ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) -> S C_ NN0 )
+s3::simp3 |- ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) -> P e. S )
+s4:s2:adantr |- ( ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) /\ q e. S ) -> S C_ NN0 )
+s5::simpr |- ( ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) /\ q e. S ) -> q e. S )
+s6:s4,s5:sseldd |- ( ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) /\ q e. S ) -> q e. NN0 )
+s7:s6:nn0cnd |- ( ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) /\ q e. S ) -> q e. CC )
+s8::simpr |- ( ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) /\ q = P ) -> q = P )
+qed:s1,s7,s3,s8:fprodsplit1 |- ( ( S e. Fin /\ S C_ NN0 /\ P e. S ) -> prod_ q e. S q = ( P x. prod_ q e. ( S \ { P } ) q ) )
+$)

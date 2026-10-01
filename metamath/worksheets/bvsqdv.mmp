@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=bvsqdv  LOC_AFTER=?
+
+* The squarefree divisors of a squarefree number are all its divisors (dvdssqf).
+
+s1::simpl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( mmu ` N ) =/= 0 )
+s3:s1:adantr |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) -> N e. NN )
+s4:s3:adantr |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) /\ x || N ) -> N e. NN )
+s5::simpr |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) -> x e. NN )
+s6:s5:adantr |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) /\ x || N ) -> x e. NN )
+s7::simpr |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) /\ x || N ) -> x || N )
+s8:s4,s6,s7:3jca |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) /\ x || N ) -> ( N e. NN /\ x e. NN /\ x || N ) )
+i9::dvdssqf
+s10:s8,i9:syl |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) /\ x || N ) -> ( ( mmu ` N ) =/= 0 -> ( mmu ` x ) =/= 0 ) )
+s11:s2:adantr |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) -> ( mmu ` N ) =/= 0 )
+s12:s11:adantr |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) /\ x || N ) -> ( mmu ` N ) =/= 0 )
+s13:s12,s10:mpd |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) /\ x || N ) -> ( mmu ` x ) =/= 0 )
+s14:s13:ex |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) -> ( x || N -> ( mmu ` x ) =/= 0 ) )
+s15:s14:pm4.71rd |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) -> ( x || N <-> ( ( mmu ` x ) =/= 0 /\ x || N ) ) )
+s16:s15:bicomd |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) /\ x e. NN ) -> ( ( ( mmu ` x ) =/= 0 /\ x || N ) <-> x || N ) )
+qed:s16:rabbidva |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> { x e. NN | ( ( mmu ` x ) =/= 0 /\ x || N ) } = { x e. NN | x || N } )
+$)

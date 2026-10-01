@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lpfxs1  LOC_AFTER=?
+
+* The prefix of length ` J + 1 ` : the prefix of length ` J ` followed by the ` J ` -th letter.  Lean: ` take_succ_of_drop_eq_cons ` .
+
+s1::simpl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> L e. Word V )
+s2::simpr |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ..^ ( # ` L ) ) )
+i3::elfzonn0
+s4:s2,i3:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. NN0 )
+i5::nn0fz0
+s6:s4,i5:sylib |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ... J ) )
+i7::fzelp1
+s8:s6,i7:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ... ( J + 1 ) ) )
+i9::fzofzp1
+s10:s2,i9:syl |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( J + 1 ) e. ( 0 ... ( # ` L ) ) )
+i11::ccatpfx
+s12:s1,s8,s10,i11:syl3anc |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L prefix J ) ++ ( L substr <. J , ( J + 1 ) >. ) ) = ( L prefix ( J + 1 ) ) )
+i13::swrds1
+s14:s1,s2,i13:syl2anc |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L substr <. J , ( J + 1 ) >. ) = <" ( L ` J ) "> )
+s15:s14:oveq2d |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L prefix J ) ++ ( L substr <. J , ( J + 1 ) >. ) ) = ( ( L prefix J ) ++ <" ( L ` J ) "> ) )
+qed:s12,s15:eqtr3d |- ( ( L e. Word V /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L prefix ( J + 1 ) ) = ( ( L prefix J ) ++ <" ( L ` J ) "> ) )
+$)

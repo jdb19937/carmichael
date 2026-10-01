@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatrep0c  LOC_AFTER=?
+
+* Zero letters appended do not change the value of a bit word (Lean: toNat_append_replicate_false).
+
+s1::simpl |- ( ( L e. Word 2o /\ N e. NN0 ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ N e. NN0 ) -> N e. NN0 )
+s3::0el2o |- (/) e. 2o
+s4:s3:a1i |- ( ( L e. Word 2o /\ N e. NN0 ) -> (/) e. 2o )
+i5::repsw
+s6:s4,s2,i5:syl2anc |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( (/) repeatS N ) e. Word 2o )
+i7::tonatccat
+s8:s1,s6,i7:syl2anc |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` ( L ++ ( (/) repeatS N ) ) ) = ( ( toNat ` L ) + ( ( 2 ^ ( # ` L ) ) x. ( toNat ` ( (/) repeatS N ) ) ) ) )
+i9::tonatrep0
+s10:s2,i9:syl |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` ( (/) repeatS N ) ) = 0 )
+s11:s10:oveq2d |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( 2 ^ ( # ` L ) ) x. ( toNat ` ( (/) repeatS N ) ) ) = ( ( 2 ^ ( # ` L ) ) x. 0 ) )
+s12::2cn |- 2 e. CC
+s13:s12:a1i |- ( ( L e. Word 2o /\ N e. NN0 ) -> 2 e. CC )
+i14::lencl
+s15:s1,i14:syl |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( # ` L ) e. NN0 )
+s16:s13,s15:expcld |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( 2 ^ ( # ` L ) ) e. CC )
+s17:s16:mul01d |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( 2 ^ ( # ` L ) ) x. 0 ) = 0 )
+s18:s11,s17:eqtrd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( 2 ^ ( # ` L ) ) x. ( toNat ` ( (/) repeatS N ) ) ) = 0 )
+s19:s18:oveq2d |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( toNat ` L ) + ( ( 2 ^ ( # ` L ) ) x. ( toNat ` ( (/) repeatS N ) ) ) ) = ( ( toNat ` L ) + 0 ) )
+i20::tonatcl
+s21:s1,i20:syl |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. NN0 )
+s22:s21:nn0zd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. ZZ )
+s23:s22:zred |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. RR )
+s24:s23:recnd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` L ) e. CC )
+s25:s24:addridd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( ( toNat ` L ) + 0 ) = ( toNat ` L ) )
+qed:s8,s19,s25:3eqtrd |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( toNat ` ( L ++ ( (/) repeatS N ) ) ) = ( toNat ` L ) )
+$)

@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=sumbitval  LOC_AFTER=?
+
+* Value of sumBit: the exclusive or of three Booleans (Lean: sumBit a b c = xor (xor a b) c).
+
+s1::simpl |- ( ( a = A /\ b = B ) -> a = A )
+s2::simpr |- ( ( a = A /\ b = B ) -> b = B )
+s3:s1:eqeq1d |- ( ( a = A /\ b = B ) -> ( a = 1o <-> A = 1o ) )
+s4:s2:eqeq1d |- ( ( a = A /\ b = B ) -> ( b = 1o <-> B = 1o ) )
+s5:s3,s4:xorbi12d |- ( ( a = A /\ b = B ) -> ( ( a = 1o \/_ b = 1o ) <-> ( A = 1o \/_ B = 1o ) ) )
+s6::biidd |- ( ( a = A /\ b = B ) -> ( c = 1o <-> c = 1o ) )
+s7:s5,s6:xorbi12d |- ( ( a = A /\ b = B ) -> ( ( ( a = 1o \/_ b = 1o ) \/_ c = 1o ) <-> ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) ) )
+s8:s7:ifbid |- ( ( a = A /\ b = B ) -> if ( ( ( a = 1o \/_ b = 1o ) \/_ c = 1o ) , 1o , (/) ) = if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) )
+s9:s8:mpteq2dv |- ( ( a = A /\ b = B ) -> ( c e. 2o |-> if ( ( ( a = 1o \/_ b = 1o ) \/_ c = 1o ) , 1o , (/) ) ) = ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) )
+s10::df-sumbit |- sumBit = ( a e. 2o , b e. 2o |-> ( c e. 2o |-> if ( ( ( a = 1o \/_ b = 1o ) \/_ c = 1o ) , 1o , (/) ) ) )
+s11:s9,s10:ovmpoga |- ( ( A e. 2o /\ B e. 2o /\ ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) e. _V ) -> ( A sumBit B ) = ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) )
+s12::2oex |- 2o e. _V
+i13::mptexg
+s14:s12,i13:ax-mp |- ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) e. _V
+s15::simp1 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> A e. 2o )
+s16::simp2 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> B e. 2o )
+s17::simp3 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> C e. 2o )
+s18:s14:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) e. _V )
+s19:s15,s16,s18,s11:syl3anc |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( A sumBit B ) = ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) )
+s20:s19:fveq1d |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( ( A sumBit B ) ` C ) = ( ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) ` C ) )
+s21::id |- ( c = C -> c = C )
+s22:s21:eqeq1d |- ( c = C -> ( c = 1o <-> C = 1o ) )
+s23::biidd |- ( c = C -> ( ( A = 1o \/_ B = 1o ) <-> ( A = 1o \/_ B = 1o ) ) )
+s24:s23,s22:xorbi12d |- ( c = C -> ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) <-> ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) ) )
+s25:s24:ifbid |- ( c = C -> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) = if ( ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) , 1o , (/) ) )
+s26::eqid |- ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) = ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) )
+s27:s25,s26:fvmptg |- ( ( C e. 2o /\ if ( ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) , 1o , (/) ) e. _V ) -> ( ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) ` C ) = if ( ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) , 1o , (/) ) )
+s28::1oex |- 1o e. _V
+s29::0ex |- (/) e. _V
+i30::ifexg
+s31:s28,s29,i30:mp2an |- if ( ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) , 1o , (/) ) e. _V
+s32:s31:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> if ( ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) , 1o , (/) ) e. _V )
+s33:s17,s32,s27:syl2anc |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( ( c e. 2o |-> if ( ( ( A = 1o \/_ B = 1o ) \/_ c = 1o ) , 1o , (/) ) ) ` C ) = if ( ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) , 1o , (/) ) )
+qed:s20,s33:eqtrd |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( ( A sumBit B ) ` C ) = if ( ( ( A = 1o \/_ B = 1o ) \/_ C = 1o ) , 1o , (/) ) )
+$)

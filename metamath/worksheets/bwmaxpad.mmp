@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=bwmaxpad  LOC_AFTER=?
+
+* Padding the shorter word does not change the larger length.
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` Y ) < ( # ` X ) )
+s4::0el2o |- (/) e. 2o
+s5:s4:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> (/) e. 2o )
+i6::s1cl
+s7:s5,i6:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> <" (/) "> e. Word 2o )
+i8::ccatlen
+s9:s2,s7,i8:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` ( Y ++ <" (/) "> ) ) = ( ( # ` Y ) + ( # ` <" (/) "> ) ) )
+s10::s1len |- ( # ` <" (/) "> ) = 1
+s11:s10:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` <" (/) "> ) = 1 )
+s12:s11:oveq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( ( # ` Y ) + ( # ` <" (/) "> ) ) = ( ( # ` Y ) + 1 ) )
+s13:s9,s12:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` ( Y ++ <" (/) "> ) ) = ( ( # ` Y ) + 1 ) )
+c1:s13:breq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( ( # ` X ) <_ ( # ` ( Y ++ <" (/) "> ) ) <-> ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) )
+c2:c1,s13:ifbieq1d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> if ( ( # ` X ) <_ ( # ` ( Y ++ <" (/) "> ) ) , ( # ` ( Y ++ <" (/) "> ) ) , ( # ` X ) ) = if ( ( # ` X ) <_ ( ( # ` Y ) + 1 ) , ( ( # ` Y ) + 1 ) , ( # ` X ) ) )
+i14::lencl
+s15:s2,i14:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` Y ) e. NN0 )
+s16:s15:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` Y ) e. ZZ )
+s17:s16:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` Y ) e. RR )
+i18::lencl
+s19:s1,i18:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` X ) e. NN0 )
+s20:s19:nn0zd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` X ) e. ZZ )
+s21:s20:zred |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( # ` X ) e. RR )
+s22:s17,s21:ltnled |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( ( # ` Y ) < ( # ` X ) <-> -. ( # ` X ) <_ ( # ` Y ) ) )
+s23:s3,s22:mpbid |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> -. ( # ` X ) <_ ( # ` Y ) )
+s24:s23:iffalsed |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) = ( # ` X ) )
+i25::zltp1le
+s26:s16,s20,i25:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( ( # ` Y ) < ( # ` X ) <-> ( ( # ` Y ) + 1 ) <_ ( # ` X ) ) )
+s27:s3,s26:mpbid |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( ( # ` Y ) + 1 ) <_ ( # ` X ) )
+s28::simpr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> ( # ` X ) <_ ( ( # ` Y ) + 1 ) )
+s29:s28:iftrued |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> if ( ( # ` X ) <_ ( ( # ` Y ) + 1 ) , ( ( # ` Y ) + 1 ) , ( # ` X ) ) = ( ( # ` Y ) + 1 ) )
+s30:s21:adantr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> ( # ` X ) e. RR )
+s31::1re |- 1 e. RR
+s32:s31:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> 1 e. RR )
+s33:s17,s32:readdcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> ( ( # ` Y ) + 1 ) e. RR )
+s34:s33:adantr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> ( ( # ` Y ) + 1 ) e. RR )
+i35::letri3
+s36:s30,s34,i35:syl2anc |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> ( ( # ` X ) = ( ( # ` Y ) + 1 ) <-> ( ( # ` X ) <_ ( ( # ` Y ) + 1 ) /\ ( ( # ` Y ) + 1 ) <_ ( # ` X ) ) ) )
+s37:s27:adantr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> ( ( # ` Y ) + 1 ) <_ ( # ` X ) )
+s38:s28,s37:jca |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> ( ( # ` X ) <_ ( ( # ` Y ) + 1 ) /\ ( ( # ` Y ) + 1 ) <_ ( # ` X ) ) )
+s39:s38,s36:mpbird |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> ( # ` X ) = ( ( # ` Y ) + 1 ) )
+s40:s29,s39:eqtr4d |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> if ( ( # ` X ) <_ ( ( # ` Y ) + 1 ) , ( ( # ` Y ) + 1 ) , ( # ` X ) ) = ( # ` X ) )
+s41::simpr |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ -. ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> -. ( # ` X ) <_ ( ( # ` Y ) + 1 ) )
+s42:s41:iffalsed |- ( ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) /\ -. ( # ` X ) <_ ( ( # ` Y ) + 1 ) ) -> if ( ( # ` X ) <_ ( ( # ` Y ) + 1 ) , ( ( # ` Y ) + 1 ) , ( # ` X ) ) = ( # ` X ) )
+s43:s40,s42:pm2.61dan |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> if ( ( # ` X ) <_ ( ( # ` Y ) + 1 ) , ( ( # ` Y ) + 1 ) , ( # ` X ) ) = ( # ` X ) )
+s44:c2,s43:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> if ( ( # ` X ) <_ ( # ` ( Y ++ <" (/) "> ) ) , ( # ` ( Y ++ <" (/) "> ) ) , ( # ` X ) ) = ( # ` X ) )
+qed:s44,s24:eqtr4d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( # ` Y ) < ( # ` X ) ) -> if ( ( # ` X ) <_ ( # ` ( Y ++ <" (/) "> ) ) , ( # ` ( Y ++ <" (/) "> ) ) , ( # ` X ) ) = if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) )
+$)

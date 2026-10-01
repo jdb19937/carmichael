@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=zl2hadd  LOC_AFTER=?
+
+* A pointwise sum of two functions holomorphic on a common domain is holomorphic there ( ~ holmul with ~ addcn , ~ dvmptadd ).
+
+s1::simpl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) )
+s2::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) )
+i3::simpl
+s4:s1,i3:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> F e. ( D -cn-> CC ) )
+i5::cncff
+s6:s4,i5:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> F : D --> CC )
+s7:s6:feqmptd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> F = ( z e. D |-> ( F ` z ) ) )
+i8::holdv
+s9:s1,i8:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( CC _D ( z e. D |-> ( F ` z ) ) ) = ( z e. D |-> ( ( CC _D F ) ` z ) ) )
+i10::holf
+s11:s1,i10:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( CC _D F ) : D --> CC )
+i12::simpl
+s13:s2,i12:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> G e. ( D -cn-> CC ) )
+i14::cncff
+s15:s13,i14:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> G : D --> CC )
+s16:s15:feqmptd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> G = ( z e. D |-> ( G ` z ) ) )
+i17::holdv
+s18:s2,i17:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( CC _D ( z e. D |-> ( G ` z ) ) ) = ( z e. D |-> ( ( CC _D G ) ` z ) ) )
+i19::holf
+s20:s2,i19:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( CC _D G ) : D --> CC )
+s21:s7,s4:eqeltrrd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( z e. D |-> ( F ` z ) ) e. ( D -cn-> CC ) )
+s22:s16,s13:eqeltrrd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( z e. D |-> ( G ` z ) ) e. ( D -cn-> CC ) )
+s23::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s24:s23:addcn |- + e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s25:s24:a1i |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> + e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s26:s23,s25,s21,s22:cncfmpt2f |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) e. ( D -cn-> CC ) )
+s27::cnelprrecn |- CC e. { RR , CC }
+s28:s27:a1i |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> CC e. { RR , CC } )
+s29::simpr |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> z e. D )
+s30:s6:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> F : D --> CC )
+s31:s30,s29:ffvelcdmd |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> ( F ` z ) e. CC )
+s32:s15:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> G : D --> CC )
+s33:s32,s29:ffvelcdmd |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> ( G ` z ) e. CC )
+s34:s11:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> ( CC _D F ) : D --> CC )
+s35:s34,s29:ffvelcdmd |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> ( ( CC _D F ) ` z ) e. CC )
+s36:s20:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> ( CC _D G ) : D --> CC )
+s37:s36,s29:ffvelcdmd |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> ( ( CC _D G ) ` z ) e. CC )
+s38:s28,s31,s35,s9,s33,s37,s18:dvmptadd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( CC _D ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) ) = ( z e. D |-> ( ( ( CC _D F ) ` z ) + ( ( CC _D G ) ` z ) ) ) )
+s39:s35,s37:addcld |- ( ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) /\ z e. D ) -> ( ( ( CC _D F ) ` z ) + ( ( CC _D G ) ` z ) ) e. CC )
+s40::eqid |- ( z e. D |-> ( ( ( CC _D F ) ` z ) + ( ( CC _D G ) ` z ) ) ) = ( z e. D |-> ( ( ( CC _D F ) ` z ) + ( ( CC _D G ) ` z ) ) )
+s41:s39,s40:fmptd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( z e. D |-> ( ( ( CC _D F ) ` z ) + ( ( CC _D G ) ` z ) ) ) : D --> CC )
+i42::fdm
+s43:s41,i42:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> dom ( z e. D |-> ( ( ( CC _D F ) ` z ) + ( ( CC _D G ) ` z ) ) ) = D )
+s44:s38:dmeqd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> dom ( CC _D ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) ) = dom ( z e. D |-> ( ( ( CC _D F ) ` z ) + ( ( CC _D G ) ` z ) ) ) )
+s45:s44,s43:eqtrd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> dom ( CC _D ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) ) = D )
+s46:s45:eqcomd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> D = dom ( CC _D ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) ) )
+s47:s46:eqimssd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> D C_ dom ( CC _D ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) ) )
+qed:s26,s47:jca |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ ( G e. ( D -cn-> CC ) /\ D C_ dom ( CC _D G ) ) ) -> ( ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) e. ( D -cn-> CC ) /\ D C_ dom ( CC _D ( z e. D |-> ( ( F ` z ) + ( G ` z ) ) ) ) ) )
+$)

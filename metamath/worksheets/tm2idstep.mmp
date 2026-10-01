@@ -1,0 +1,106 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2idstep  LOC_AFTER=?
+
+* One step of the halt machine from its initial configuration reaches the halting configuration.
+
+s1::simpl |- ( ( A e. Fin /\ W e. Word A ) -> A e. Fin )
+s2:s1:elexd |- ( ( A e. Fin /\ W e. Word A ) -> A e. _V )
+s3::simpr |- ( ( A e. Fin /\ W e. Word A ) -> W e. Word A )
+s4::opex |- <. <. { <. (/) , A >. } , 1o >. , 1o >. e. _V
+s5:s4:a1i |- ( ( A e. Fin /\ W e. Word A ) -> <. <. { <. (/) , A >. } , 1o >. , 1o >. e. _V )
+s6::snex |- { <. (/) , <. 6 , (/) >. >. } e. _V
+s7:s6:a1i |- ( ( A e. Fin /\ W e. Word A ) -> { <. (/) , <. 6 , (/) >. >. } e. _V )
+s8:s5,s7:jca |- ( ( A e. Fin /\ W e. Word A ) -> ( <. <. { <. (/) , A >. } , 1o >. , 1o >. e. _V /\ { <. (/) , <. 6 , (/) >. >. } e. _V ) )
+s9::0lt1o |- (/) e. 1o
+s10:s9:a1i |- ( ( A e. Fin /\ W e. Word A ) -> (/) e. 1o )
+s11::0ex |- (/) e. _V
+s12:s11:a1i |- ( ( A e. Fin /\ W e. Word A ) -> (/) e. _V )
+i13::fvsng
+s14:s12,s2,i13:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( { <. (/) , A >. } ` (/) ) = A )
+i15::dmsnopg
+s16:s2,i15:syl |- ( ( A e. Fin /\ W e. Word A ) -> dom { <. (/) , A >. } = { (/) } )
+s17::0ex |- (/) e. _V
+s18:s17:a1i |- ( ( A e. Fin /\ W e. Word A ) -> (/) e. _V )
+i19::snidg
+s20:s17,i19:ax-mp |- (/) e. { (/) }
+s21:s20:a1i |- ( ( A e. Fin /\ W e. Word A ) -> (/) e. { (/) } )
+s22::opex |- <. { <. (/) , A >. } , 1o >. e. _V
+s23:s22:a1i |- ( ( A e. Fin /\ W e. Word A ) -> <. { <. (/) , A >. } , 1o >. e. _V )
+s24::1oex |- 1o e. _V
+s25:s24:a1i |- ( ( A e. Fin /\ W e. Word A ) -> 1o e. _V )
+i26::op1stg
+s27:s23,s25,i26:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) = <. { <. (/) , A >. } , 1o >. )
+c1:s27:fveq2d |- ( ( A e. Fin /\ W e. Word A ) -> ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) = ( 1st ` <. { <. (/) , A >. } , 1o >. ) )
+c2:c1:dmeqd |- ( ( A e. Fin /\ W e. Word A ) -> dom ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) = dom ( 1st ` <. { <. (/) , A >. } , 1o >. ) )
+s28::snex |- { <. (/) , A >. } e. _V
+s29:s28:a1i |- ( ( A e. Fin /\ W e. Word A ) -> { <. (/) , A >. } e. _V )
+i30::op1stg
+s31:s29,s25,i30:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( 1st ` <. { <. (/) , A >. } , 1o >. ) = { <. (/) , A >. } )
+c3:s31:dmeqd |- ( ( A e. Fin /\ W e. Word A ) -> dom ( 1st ` <. { <. (/) , A >. } , 1o >. ) = dom { <. (/) , A >. } )
+s32:c2,c3:eqtrd |- ( ( A e. Fin /\ W e. Word A ) -> dom ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) = dom { <. (/) , A >. } )
+s33:s32,s16:eqtrd |- ( ( A e. Fin /\ W e. Word A ) -> dom ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) = { (/) } )
+s34:s21,s33:eleqtrrd |- ( ( A e. Fin /\ W e. Word A ) -> (/) e. dom ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) )
+s35::opex |- <. { <. (/) , A >. } , 1o >. e. _V
+s36:s35:a1i |- ( ( A e. Fin /\ W e. Word A ) -> <. { <. (/) , A >. } , 1o >. e. _V )
+s37::1oex |- 1o e. _V
+s38:s37:a1i |- ( ( A e. Fin /\ W e. Word A ) -> 1o e. _V )
+i39::op1stg
+s40:s36,s38,i39:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) = <. { <. (/) , A >. } , 1o >. )
+c4:s40:fveq2d |- ( ( A e. Fin /\ W e. Word A ) -> ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) = ( 1st ` <. { <. (/) , A >. } , 1o >. ) )
+c5:c4:fveq1d |- ( ( A e. Fin /\ W e. Word A ) -> ( ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ` (/) ) = ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) )
+c6::wrdeq |- ( ( ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ` (/) ) = ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) -> Word ( ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ` (/) ) = Word ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) )
+c7:c5,c6:syl |- ( ( A e. Fin /\ W e. Word A ) -> Word ( ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ` (/) ) = Word ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) )
+s41::snex |- { <. (/) , A >. } e. _V
+s42:s41:a1i |- ( ( A e. Fin /\ W e. Word A ) -> { <. (/) , A >. } e. _V )
+i43::op1stg
+s44:s42,s38,i43:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( 1st ` <. { <. (/) , A >. } , 1o >. ) = { <. (/) , A >. } )
+c8:s44:fveq1d |- ( ( A e. Fin /\ W e. Word A ) -> ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) = ( { <. (/) , A >. } ` (/) ) )
+c9::wrdeq |- ( ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) = ( { <. (/) , A >. } ` (/) ) -> Word ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) = Word ( { <. (/) , A >. } ` (/) ) )
+c10:c8,c9:syl |- ( ( A e. Fin /\ W e. Word A ) -> Word ( ( 1st ` <. { <. (/) , A >. } , 1o >. ) ` (/) ) = Word ( { <. (/) , A >. } ` (/) ) )
+c11::wrdeq |- ( ( { <. (/) , A >. } ` (/) ) = A -> Word ( { <. (/) , A >. } ` (/) ) = Word A )
+c12:s14,c11:syl |- ( ( A e. Fin /\ W e. Word A ) -> Word ( { <. (/) , A >. } ` (/) ) = Word A )
+s45:c7,c10:eqtrd |- ( ( A e. Fin /\ W e. Word A ) -> Word ( ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ` (/) ) = Word ( { <. (/) , A >. } ` (/) ) )
+s46:s45,c12:eqtrd |- ( ( A e. Fin /\ W e. Word A ) -> Word ( ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ` (/) ) = Word A )
+s47:s3,s46:eleqtrrd |- ( ( A e. Fin /\ W e. Word A ) -> W e. Word ( ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ` (/) ) )
+i48::tm2initstk
+s49:s5,s34,s47,i48:syl3anc |- ( ( A e. Fin /\ W e. Word A ) -> ( j e. dom ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) |-> if ( j = (/) , W , (/) ) ) e. ( TM2Stk ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) )
+s50:s33:mpteq1d |- ( ( A e. Fin /\ W e. Word A ) -> ( j e. dom ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) |-> if ( j = (/) , W , (/) ) ) = ( j e. { (/) } |-> if ( j = (/) , W , (/) ) ) )
+s51::eqeq1 |- ( j = k -> ( j = (/) <-> k = (/) ) )
+s52:s51:ifbid |- ( j = k -> if ( j = (/) , W , (/) ) = if ( k = (/) , W , (/) ) )
+s53:s52:cbvmptv |- ( j e. { (/) } |-> if ( j = (/) , W , (/) ) ) = ( k e. { (/) } |-> if ( k = (/) , W , (/) ) )
+s54:s50,s53:eqtrdi |- ( ( A e. Fin /\ W e. Word A ) -> ( j e. dom ( 1st ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) |-> if ( j = (/) , W , (/) ) ) = ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) )
+s55:s54,s49:eqeltrrd |- ( ( A e. Fin /\ W e. Word A ) -> ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) e. ( TM2Stk ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) )
+s56::opex |- <. { <. (/) , A >. } , 1o >. e. _V
+s57:s56:a1i |- ( ( A e. Fin /\ W e. Word A ) -> <. { <. (/) , A >. } , 1o >. e. _V )
+s58::1oex |- 1o e. _V
+s59:s58:a1i |- ( ( A e. Fin /\ W e. Word A ) -> 1o e. _V )
+i60::op1stg
+s61:s57,s59,i60:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) = <. { <. (/) , A >. } , 1o >. )
+c13:s61:fveq2d |- ( ( A e. Fin /\ W e. Word A ) -> ( 2nd ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) = ( 2nd ` <. { <. (/) , A >. } , 1o >. ) )
+s62::snex |- { <. (/) , A >. } e. _V
+s63:s62:a1i |- ( ( A e. Fin /\ W e. Word A ) -> { <. (/) , A >. } e. _V )
+i64::op2ndg
+s65:s63,s59,i64:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( 2nd ` <. { <. (/) , A >. } , 1o >. ) = 1o )
+s66:c13,s65:eqtrd |- ( ( A e. Fin /\ W e. Word A ) -> ( 2nd ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) = 1o )
+s67::opex |- <. { <. (/) , A >. } , 1o >. e. _V
+s68:s67:a1i |- ( ( A e. Fin /\ W e. Word A ) -> <. { <. (/) , A >. } , 1o >. e. _V )
+s69::1oex |- 1o e. _V
+s70:s69:a1i |- ( ( A e. Fin /\ W e. Word A ) -> 1o e. _V )
+i71::op2ndg
+s72:s68,s70,i71:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( 2nd ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) = 1o )
+s73:s10,s66:eleqtrrd |- ( ( A e. Fin /\ W e. Word A ) -> (/) e. ( 2nd ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) )
+s74:s10,s72:eleqtrrd |- ( ( A e. Fin /\ W e. Word A ) -> (/) e. ( 2nd ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) )
+s75:s74,s55:jca |- ( ( A e. Fin /\ W e. Word A ) -> ( (/) e. ( 2nd ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) /\ ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) e. ( TM2Stk ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) )
+s76:s73,s75:jca |- ( ( A e. Fin /\ W e. Word A ) -> ( (/) e. ( 2nd ` ( 1st ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) /\ ( (/) e. ( 2nd ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) /\ ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) e. ( TM2Stk ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) ) ) )
+i77::tm2stepsome
+s78:s8,s76,i77:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( ( <. <. { <. (/) , A >. } , 1o >. , 1o >. TM2step { <. (/) , <. 6 , (/) >. >. } ) ` <. ( inl ` (/) ) , <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. >. ) = ( inl ` ( ( { <. (/) , <. 6 , (/) >. >. } ` (/) ) ( TM2sa ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. ) ) )
+s79::opex |- <. 6 , (/) >. e. _V
+i80::fvsng
+s81:s17,s79,i80:mp2an |- ( { <. (/) , <. 6 , (/) >. >. } ` (/) ) = <. 6 , (/) >.
+s82:s81:a1i |- ( ( A e. Fin /\ W e. Word A ) -> ( { <. (/) , <. 6 , (/) >. >. } ` (/) ) = <. 6 , (/) >. )
+s83:s82:oveq1d |- ( ( A e. Fin /\ W e. Word A ) -> ( ( { <. (/) , <. 6 , (/) >. >. } ` (/) ) ( TM2sa ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. ) = ( <. 6 , (/) >. ( TM2sa ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. ) )
+i84::tm2sahalt
+s85:s5,s75,i84:syl2anc |- ( ( A e. Fin /\ W e. Word A ) -> ( <. 6 , (/) >. ( TM2sa ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. ) = <. ( inr ` (/) ) , <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. >. )
+s86:s83,s85:eqtrd |- ( ( A e. Fin /\ W e. Word A ) -> ( ( { <. (/) , <. 6 , (/) >. >. } ` (/) ) ( TM2sa ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. ) = <. ( inr ` (/) ) , <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. >. )
+s87:s86:fveq2d |- ( ( A e. Fin /\ W e. Word A ) -> ( inl ` ( ( { <. (/) , <. 6 , (/) >. >. } ` (/) ) ( TM2sa ` <. <. { <. (/) , A >. } , 1o >. , 1o >. ) <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. ) ) = ( inl ` <. ( inr ` (/) ) , <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. >. ) )
+qed:s78,s87:eqtrd |- ( ( A e. Fin /\ W e. Word A ) -> ( ( <. <. { <. (/) , A >. } , 1o >. , 1o >. TM2step { <. (/) , <. 6 , (/) >. >. } ) ` <. ( inl ` (/) ) , <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. >. ) = ( inl ` <. ( inr ` (/) ) , <. (/) , ( k e. { (/) } |-> if ( k = (/) , W , (/) ) ) >. >. ) )
+$)

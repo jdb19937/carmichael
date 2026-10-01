@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=bvmchkqle1  LOC_AFTER=?
+
+* Q / phi ( Q ) is at least 1 (phibnd for Q >= 2, phi1).
+
+s1::id |- ( Q e. NN -> Q e. NN )
+s2:s1:nnred |- ( Q e. NN -> Q e. RR )
+i3::phicl
+s4:s1,i3:syl |- ( Q e. NN -> ( phi ` Q ) e. NN )
+s5:s4:nnrpd |- ( Q e. NN -> ( phi ` Q ) e. RR+ )
+s6:s5:rpred |- ( Q e. NN -> ( phi ` Q ) e. RR )
+s7:s6:recnd |- ( Q e. NN -> ( phi ` Q ) e. CC )
+s8:s5:rpne0d |- ( Q e. NN -> ( phi ` Q ) =/= 0 )
+s9::simpr |- ( ( Q e. NN /\ Q = 1 ) -> Q = 1 )
+s10:s9:fveq2d |- ( ( Q e. NN /\ Q = 1 ) -> ( phi ` Q ) = ( phi ` 1 ) )
+s11:s9,s10:oveq12d |- ( ( Q e. NN /\ Q = 1 ) -> ( Q / ( phi ` Q ) ) = ( 1 / ( phi ` 1 ) ) )
+s12::phi1 |- ( phi ` 1 ) = 1
+s13:s12:a1i |- ( ( Q e. NN /\ Q = 1 ) -> ( phi ` 1 ) = 1 )
+s14:s13:oveq2d |- ( ( Q e. NN /\ Q = 1 ) -> ( 1 / ( phi ` 1 ) ) = ( 1 / 1 ) )
+s15::1div1e1 |- ( 1 / 1 ) = 1
+s16:s15:a1i |- ( ( Q e. NN /\ Q = 1 ) -> ( 1 / 1 ) = 1 )
+s17:s11,s14:eqtrd |- ( ( Q e. NN /\ Q = 1 ) -> ( Q / ( phi ` Q ) ) = ( 1 / 1 ) )
+s18:s17,s16:eqtrd |- ( ( Q e. NN /\ Q = 1 ) -> ( Q / ( phi ` Q ) ) = 1 )
+s19::1le1 |- 1 <_ 1
+s20:s19:a1i |- ( ( Q e. NN /\ Q = 1 ) -> 1 <_ 1 )
+s21:s20,s18:breqtrrd |- ( ( Q e. NN /\ Q = 1 ) -> 1 <_ ( Q / ( phi ` Q ) ) )
+s22::simpr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> Q e. ( ZZ>= ` 2 ) )
+i23::phibnd
+s24:s22,i23:syl |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( phi ` Q ) <_ ( Q - 1 ) )
+s25:s6:adantr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( phi ` Q ) e. RR )
+s26:s2:adantr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> Q e. RR )
+s27::0le1 |- 0 <_ 1
+s28:s27:a1i |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> 0 <_ 1 )
+s29::1re |- 1 e. RR
+s30:s29:a1i |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> 1 e. RR )
+s31:s26,s30:subge02d |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( 0 <_ 1 <-> ( Q - 1 ) <_ Q ) )
+s32:s28,s31:mpbid |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( Q - 1 ) <_ Q )
+s33:s26,s30:resubcld |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( Q - 1 ) e. RR )
+s34:s25,s33,s26,s24,s32:letrd |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( phi ` Q ) <_ Q )
+s35:s6:adantr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( phi ` Q ) e. RR )
+s36:s2:adantr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> Q e. RR )
+s37:s5:adantr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( phi ` Q ) e. RR+ )
+s38:s35,s36,s37,s34:lediv1dd |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( ( phi ` Q ) / ( phi ` Q ) ) <_ ( Q / ( phi ` Q ) ) )
+s39:s7:adantr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( phi ` Q ) e. CC )
+s40:s8:adantr |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( phi ` Q ) =/= 0 )
+s41:s39,s40:dividd |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> ( ( phi ` Q ) / ( phi ` Q ) ) = 1 )
+s42:s41,s38:eqbrtrrd |- ( ( Q e. NN /\ Q e. ( ZZ>= ` 2 ) ) -> 1 <_ ( Q / ( phi ` Q ) ) )
+s43::elnn1uz2 |- ( Q e. NN <-> ( Q = 1 \/ Q e. ( ZZ>= ` 2 ) ) )
+s44:s43:a1i |- ( Q e. NN -> ( Q e. NN <-> ( Q = 1 \/ Q e. ( ZZ>= ` 2 ) ) ) )
+s45:s1,s44:mpbid |- ( Q e. NN -> ( Q = 1 \/ Q e. ( ZZ>= ` 2 ) ) )
+qed:s21,s42,s45:mpjaodan |- ( Q e. NN -> 1 <_ ( Q / ( phi ` Q ) ) )
+$)

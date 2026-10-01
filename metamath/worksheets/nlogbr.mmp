@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=nlogbr  LOC_AFTER=?
+
+* The bridge between Nlog and log: ( 2 Nlog X ) log 2 <_ log X < ( ( 2 Nlog X ) + 1 ) log 2 (Lean: natLog_bridge).
+
+s1::id |- ( X e. NN -> X e. NN )
+s2::2z |- 2 e. ZZ
+i3::uzid
+s4:s2,i3:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s5:s4:a1i |- ( X e. NN -> 2 e. ( ZZ>= ` 2 ) )
+i6::nlogle
+s7:s5,s1,i6:syl2anc |- ( X e. NN -> ( 2 ^ ( 2 Nlog X ) ) <_ X )
+i8::nloglt
+s9:s5,s1,i8:syl2anc |- ( X e. NN -> X < ( 2 ^ ( ( 2 Nlog X ) + 1 ) ) )
+s10::2nn0 |- 2 e. NN0
+s11:s10:a1i |- ( X e. NN -> 2 e. NN0 )
+s12:s1:nnnn0d |- ( X e. NN -> X e. NN0 )
+i13::nlogcl
+s14:s11,s12,i13:syl2anc |- ( X e. NN -> ( 2 Nlog X ) e. NN0 )
+s15::2rp |- 2 e. RR+
+s16:s15:a1i |- ( X e. NN -> 2 e. RR+ )
+s17:s14:nn0zd |- ( X e. NN -> ( 2 Nlog X ) e. ZZ )
+i18::relogexp
+s19:s16,s17,i18:syl2anc |- ( X e. NN -> ( log ` ( 2 ^ ( 2 Nlog X ) ) ) = ( ( 2 Nlog X ) x. ( log ` 2 ) ) )
+s20::1z |- 1 e. ZZ
+s21:s20:a1i |- ( X e. NN -> 1 e. ZZ )
+s22:s17,s21:zaddcld |- ( X e. NN -> ( ( 2 Nlog X ) + 1 ) e. ZZ )
+i23::relogexp
+s24:s16,s22,i23:syl2anc |- ( X e. NN -> ( log ` ( 2 ^ ( ( 2 Nlog X ) + 1 ) ) ) = ( ( ( 2 Nlog X ) + 1 ) x. ( log ` 2 ) ) )
+s25::2rp |- 2 e. RR+
+s26:s25:a1i |- ( X e. NN -> 2 e. RR+ )
+s27:s26,s17:rpexpcld |- ( X e. NN -> ( 2 ^ ( 2 Nlog X ) ) e. RR+ )
+s28:s1:nnrpd |- ( X e. NN -> X e. RR+ )
+i29::logleb
+s30:s27,s28,i29:syl2anc |- ( X e. NN -> ( ( 2 ^ ( 2 Nlog X ) ) <_ X <-> ( log ` ( 2 ^ ( 2 Nlog X ) ) ) <_ ( log ` X ) ) )
+s31:s26,s22:rpexpcld |- ( X e. NN -> ( 2 ^ ( ( 2 Nlog X ) + 1 ) ) e. RR+ )
+i32::logltb
+s33:s28,s31,i32:syl2anc |- ( X e. NN -> ( X < ( 2 ^ ( ( 2 Nlog X ) + 1 ) ) <-> ( log ` X ) < ( log ` ( 2 ^ ( ( 2 Nlog X ) + 1 ) ) ) ) )
+s34:s7,s30:mpbid |- ( X e. NN -> ( log ` ( 2 ^ ( 2 Nlog X ) ) ) <_ ( log ` X ) )
+s35:s9,s33:mpbid |- ( X e. NN -> ( log ` X ) < ( log ` ( 2 ^ ( ( 2 Nlog X ) + 1 ) ) ) )
+s36:s19,s34:eqbrtrrd |- ( X e. NN -> ( ( 2 Nlog X ) x. ( log ` 2 ) ) <_ ( log ` X ) )
+s37:s35,s24:breqtrd |- ( X e. NN -> ( log ` X ) < ( ( ( 2 Nlog X ) + 1 ) x. ( log ` 2 ) ) )
+qed:s36,s37:jca |- ( X e. NN -> ( ( ( 2 Nlog X ) x. ( log ` 2 ) ) <_ ( log ` X ) /\ ( log ` X ) < ( ( ( 2 Nlog X ) + 1 ) x. ( log ` 2 ) ) ) )
+$)

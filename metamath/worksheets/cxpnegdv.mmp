@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=cxpnegdv  LOC_AFTER=?
+
+* The derivative of ` ( K ^c -u z ) ` on an open set ( ~ dvcxp2 , ~ dvmptco ).
+
+s1::simpl |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> K e. RR+ )
+s2::simpr |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> U e. ( TopOpen ` CCfld ) )
+s3:s1:rpcnd |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> K e. CC )
+s4:s1:relogcld |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( log ` K ) e. RR )
+s5:s4:recnd |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( log ` K ) e. CC )
+s6::cnelprrecn |- CC e. { RR , CC }
+s7:s6:a1i |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> CC e. { RR , CC } )
+s8::simpr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> z e. CC )
+s9:s8:negcld |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> -u z e. CC )
+s10::neg1cn |- -u 1 e. CC
+s11:s10:a1i |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> -u 1 e. CC )
+s12::ax-1cn |- 1 e. CC
+s13:s12:a1i |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> 1 e. CC )
+s14::simpr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ y e. CC ) -> y e. CC )
+s15:s3:adantr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ y e. CC ) -> K e. CC )
+i16::cxpcl
+s17:s15,s14,i16:syl2anc |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ y e. CC ) -> ( K ^c y ) e. CC )
+s18:s5:adantr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ y e. CC ) -> ( log ` K ) e. CC )
+s19:s18,s17:mulcld |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ y e. CC ) -> ( ( log ` K ) x. ( K ^c y ) ) e. CC )
+s20:s7:dvmptid |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( CC _D ( z e. CC |-> z ) ) = ( z e. CC |-> 1 ) )
+s21:s7,s8,s13,s20:dvmptneg |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( CC _D ( z e. CC |-> -u z ) ) = ( z e. CC |-> -u 1 ) )
+i22::dvcxp2
+s23:s1,i22:syl |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( CC _D ( y e. CC |-> ( K ^c y ) ) ) = ( y e. CC |-> ( ( log ` K ) x. ( K ^c y ) ) ) )
+s24::oveq2 |- ( y = -u z -> ( K ^c y ) = ( K ^c -u z ) )
+s25:s24:oveq2d |- ( y = -u z -> ( ( log ` K ) x. ( K ^c y ) ) = ( ( log ` K ) x. ( K ^c -u z ) ) )
+s26:s7,s7,s9,s11,s17,s19,s21,s23,s24,s25:dvmptco |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( CC _D ( z e. CC |-> ( K ^c -u z ) ) ) = ( z e. CC |-> ( ( ( log ` K ) x. ( K ^c -u z ) ) x. -u 1 ) ) )
+s27:s3:adantr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> K e. CC )
+i28::cxpcl
+s29:s27,s9,i28:syl2anc |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> ( K ^c -u z ) e. CC )
+s30:s5:adantr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> ( log ` K ) e. CC )
+s31:s30,s29:mulcld |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> ( ( log ` K ) x. ( K ^c -u z ) ) e. CC )
+s32:s31,s11:mulcld |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. CC ) -> ( ( ( log ` K ) x. ( K ^c -u z ) ) x. -u 1 ) e. CC )
+s33::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s34:s33:cnfldtopon |- ( TopOpen ` CCfld ) e. ( TopOn ` CC )
+s35:s34:a1i |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( TopOpen ` CCfld ) e. ( TopOn ` CC ) )
+i36::toponss
+s37:s35,s2,i36:syl2anc |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> U C_ CC )
+s38::cnrestid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s39:s38:eqcomi |- ( TopOpen ` CCfld ) = ( ( TopOpen ` CCfld ) |`t CC )
+s40::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s41:s7,s29,s32,s26,s37,s39,s40,s2:dvmptres |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( CC _D ( z e. U |-> ( K ^c -u z ) ) ) = ( z e. U |-> ( ( ( log ` K ) x. ( K ^c -u z ) ) x. -u 1 ) ) )
+s42:s37:adantr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> U C_ CC )
+s43::simpr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> z e. U )
+s44:s42,s43:sseldd |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> z e. CC )
+s45:s3:adantr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> K e. CC )
+s46:s44:negcld |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> -u z e. CC )
+i47::cxpcl
+s48:s45,s46,i47:syl2anc |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> ( K ^c -u z ) e. CC )
+s49:s5:adantr |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> ( log ` K ) e. CC )
+s50:s49,s48:mulcld |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> ( ( log ` K ) x. ( K ^c -u z ) ) e. CC )
+s51::neg1cn |- -u 1 e. CC
+s52:s51:a1i |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> -u 1 e. CC )
+s53:s50,s52:mulcomd |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> ( ( ( log ` K ) x. ( K ^c -u z ) ) x. -u 1 ) = ( -u 1 x. ( ( log ` K ) x. ( K ^c -u z ) ) ) )
+s54:s50:mulm1d |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> ( -u 1 x. ( ( log ` K ) x. ( K ^c -u z ) ) ) = -u ( ( log ` K ) x. ( K ^c -u z ) ) )
+s55:s53,s54:eqtrd |- ( ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) /\ z e. U ) -> ( ( ( log ` K ) x. ( K ^c -u z ) ) x. -u 1 ) = -u ( ( log ` K ) x. ( K ^c -u z ) ) )
+s56:s55:mpteq2dva |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( z e. U |-> ( ( ( log ` K ) x. ( K ^c -u z ) ) x. -u 1 ) ) = ( z e. U |-> -u ( ( log ` K ) x. ( K ^c -u z ) ) ) )
+qed:s41,s56:eqtrd |- ( ( K e. RR+ /\ U e. ( TopOpen ` CCfld ) ) -> ( CC _D ( z e. U |-> ( K ^c -u z ) ) ) = ( z e. U |-> -u ( ( log ` K ) x. ( K ^c -u z ) ) ) )
+$)

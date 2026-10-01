@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrindid  LOC_AFTER=?
+
+* Inducing a character to its own level changes nothing (Mathlib changeLevel_self).
+
+s1::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3:s1:nnzd |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. ZZ )
+i4::iddvds
+s5:s3,i4:syl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N || N )
+s6:s1,s1,s5:3jca |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N e. NN /\ N e. NN /\ N || N ) )
+s7:s6,s2:jca |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N e. NN /\ N e. NN /\ N || N ) /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s8::eqidd |- ( ( a gcd N ) = 1 -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+s9:s8:rgenw |- A. a e. ZZ ( ( a gcd N ) = 1 -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+s10:s9:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> A. a e. ZZ ( ( a gcd N ) = 1 -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) )
+i11::dchrindeq
+s12:s7,s2,s10,i11:syl3anc |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X = ( ( N DChrInd N ) ` X ) )
+qed:s12:eqcomd |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrInd N ) ` X ) = X )
+$)

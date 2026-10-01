@@ -1,0 +1,82 @@
+$( <MM> <PROOF_ASST> THEOREM=bwsubdig  LOC_AFTER=?
+
+* The I-th digit of A - B - C is the sum bit of the two digits at I and the borrow into I.
+
+s1::simpl1 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> A e. ZZ )
+s2::simpl2 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> B e. ZZ )
+s3::simpl3 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> C e. 2o )
+s4::simpr |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> I e. NN0 )
+i5::bwbncl
+s6:s3,i5:syl |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` C ) e. NN0 )
+s7:s6:nn0zd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` C ) e. ZZ )
+s8:s2,s7:zaddcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( B + ( bToNat ` C ) ) e. ZZ )
+s9:s1,s8:zsubcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( A - ( B + ( bToNat ` C ) ) ) e. ZZ )
+i10::bwmodp1
+s11:s9,s4,i10:syl2anc |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( A - ( B + ( bToNat ` C ) ) ) mod ( 2 ^ ( I + 1 ) ) ) = ( ( ( A - ( B + ( bToNat ` C ) ) ) mod ( 2 ^ I ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) ) )
+s12::bwsublem2 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( A - ( B + ( bToNat ` C ) ) ) mod ( 2 ^ I ) ) = ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) )
+s13:s12:oveq1d |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( ( A - ( B + ( bToNat ` C ) ) ) mod ( 2 ^ I ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) ) = ( ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) ) )
+s14::bwsublem5 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( A - ( B + ( bToNat ` C ) ) ) mod ( 2 ^ ( I + 1 ) ) ) = ( ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) ) )
+s15:s11,s13:eqtrd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( A - ( B + ( bToNat ` C ) ) ) mod ( 2 ^ ( I + 1 ) ) ) = ( ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) ) )
+s16:s15,s14:eqtr3d |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) ) = ( ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) ) )
+s17:s1:zred |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> A e. RR )
+s18::2rp |- 2 e. RR+
+s19:s18:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> 2 e. RR+ )
+s20:s4:nn0zd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> I e. ZZ )
+s21:s19,s20:rpexpcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( 2 ^ I ) e. RR+ )
+s22:s17,s21:modcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( A mod ( 2 ^ I ) ) e. RR )
+s23:s22:recnd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( A mod ( 2 ^ I ) ) e. CC )
+s24:s2:zred |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> B e. RR )
+s25:s24,s21:modcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( B mod ( 2 ^ I ) ) e. RR )
+s26:s25:recnd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( B mod ( 2 ^ I ) ) e. CC )
+s27:s7:zred |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` C ) e. RR )
+s28:s27:recnd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` C ) e. CC )
+s29:s26,s28:addcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) e. CC )
+s30:s23,s29:subcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) e. CC )
+s31::2cn |- 2 e. CC
+s32:s31:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> 2 e. CC )
+s33:s32,s4:expcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( 2 ^ I ) e. CC )
+s34::1oel2o |- 1o e. 2o
+s35:s34:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> 1o e. 2o )
+s36::0el2o |- (/) e. 2o
+s37:s36:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> (/) e. 2o )
+s38:s35,s37:ifcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) e. 2o )
+i39::bwbncl
+s40:s38,i39:syl |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. NN0 )
+s41:s40:nn0zd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. ZZ )
+s42:s41:zred |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. RR )
+s43:s42:recnd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. CC )
+s44:s33,s43:mulcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) e. CC )
+s45:s30,s44:addcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) e. CC )
+s46:s35,s37:ifcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) e. 2o )
+i47::bwbncl
+s48:s46,i47:syl |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) e. NN0 )
+s49:s48:nn0zd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) e. ZZ )
+s50:s49:zred |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) e. RR )
+s51:s50:recnd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) e. CC )
+s52:s33,s51:mulcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) e. CC )
+s53:s35,s37:ifcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> if ( I e. ( bits ` A ) , 1o , (/) ) e. 2o )
+s54:s35,s37:ifcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> if ( I e. ( bits ` B ) , 1o , (/) ) e. 2o )
+s55:s53,s54,s38:3jca |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( if ( I e. ( bits ` A ) , 1o , (/) ) e. 2o /\ if ( I e. ( bits ` B ) , 1o , (/) ) e. 2o /\ if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) e. 2o ) )
+i56::sumbitcl
+s57:s55,i56:syl |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) e. 2o )
+i58::bwbncl
+s59:s57,i58:syl |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) e. NN0 )
+s60:s59:nn0zd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) e. ZZ )
+s61:s60:zred |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) e. RR )
+s62:s61:recnd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) e. CC )
+s63:s33,s62:mulcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( 2 ^ I ) x. ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) e. CC )
+s64:s45,s52,s63:addcand |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) ) = ( ( ( ( A mod ( 2 ^ I ) ) - ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) + ( ( 2 ^ I ) x. ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) ) <-> ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) = ( ( 2 ^ I ) x. ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) ) )
+s65:s16,s64:mpbid |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) = ( ( 2 ^ I ) x. ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) )
+s66:s21:rpne0d |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( 2 ^ I ) =/= 0 )
+s67:s51,s62,s33,s66:mulcand |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( ( 2 ^ I ) x. ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) ) = ( ( 2 ^ I ) x. ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) <-> ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) = ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) ) )
+s68:s65,s67:mpbid |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) = ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) )
+i69::bwbn11
+s70:s46,s57,i69:syl2anc |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( bToNat ` if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) ) = ( bToNat ` ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) <-> if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) )
+s71:s68,s70:mpbid |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) )
+s72:s71:eqeq1d |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) = 1o <-> ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) = 1o ) )
+s73::1n0 |- 1o =/= (/)
+i74::iftrueb
+s75:s73,i74:ax-mp |- ( if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) = 1o <-> I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) )
+s76:s75:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( if ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) , 1o , (/) ) = 1o <-> I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) ) )
+qed:s76,s72:bitr3d |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( I e. ( bits ` ( A - ( B + ( bToNat ` C ) ) ) ) <-> ( ( if ( I e. ( bits ` A ) , 1o , (/) ) sumBit if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) = 1o ) )
+$)

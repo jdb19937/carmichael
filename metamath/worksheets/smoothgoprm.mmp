@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=smoothgoprm  LOC_AFTER=?
+
+* Every prime factor of the input either survives the smoothness loop or is below the range reached (Lean: smoothGo_prime).
+
+s1::simpl1 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> D e. NN )
+s2::simpl2 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> R e. NN0 )
+s3::simpl3 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> F e. NN0 )
+s4::simpr |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> ( P e. Prime /\ P || R ) )
+i5::smoothgoprml
+s6:s3,i5:syl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> A. d e. NN A. r e. NN0 ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( d SmoothGo r ) ` F ) ) \/ P < ( d + F ) ) ) )
+s7::id |- ( d = D -> d = D )
+c1:s7:oveq1d |- ( d = D -> ( d SmoothGo r ) = ( D SmoothGo r ) )
+c2:c1:fveq1d |- ( d = D -> ( ( d SmoothGo r ) ` F ) = ( ( D SmoothGo r ) ` F ) )
+c3:c2:fveq2d |- ( d = D -> ( 1st ` ( ( d SmoothGo r ) ` F ) ) = ( 1st ` ( ( D SmoothGo r ) ` F ) ) )
+c4:c3:breq2d |- ( d = D -> ( P || ( 1st ` ( ( d SmoothGo r ) ` F ) ) <-> P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) ) )
+c5:s7:oveq1d |- ( d = D -> ( d + F ) = ( D + F ) )
+c6:c5:breq2d |- ( d = D -> ( P < ( d + F ) <-> P < ( D + F ) ) )
+c7:c4,c6:orbi12d |- ( d = D -> ( ( P || ( 1st ` ( ( d SmoothGo r ) ` F ) ) \/ P < ( d + F ) ) <-> ( P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) \/ P < ( D + F ) ) ) )
+c8:c7:imbi2d |- ( d = D -> ( ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( d SmoothGo r ) ` F ) ) \/ P < ( d + F ) ) ) <-> ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) \/ P < ( D + F ) ) ) ) )
+c9:c8:ralbidv |- ( d = D -> ( A. r e. NN0 ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( d SmoothGo r ) ` F ) ) \/ P < ( d + F ) ) ) <-> A. r e. NN0 ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) \/ P < ( D + F ) ) ) ) )
+s8:c9,s6,s1:rspcdva |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> A. r e. NN0 ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) \/ P < ( D + F ) ) ) )
+s9::id |- ( r = R -> r = R )
+c10:s9:breq2d |- ( r = R -> ( P || r <-> P || R ) )
+c11:c10:anbi2d |- ( r = R -> ( ( P e. Prime /\ P || r ) <-> ( P e. Prime /\ P || R ) ) )
+c12:s9:oveq2d |- ( r = R -> ( D SmoothGo r ) = ( D SmoothGo R ) )
+c13:c12:fveq1d |- ( r = R -> ( ( D SmoothGo r ) ` F ) = ( ( D SmoothGo R ) ` F ) )
+c14:c13:fveq2d |- ( r = R -> ( 1st ` ( ( D SmoothGo r ) ` F ) ) = ( 1st ` ( ( D SmoothGo R ) ` F ) ) )
+c15:c14:breq2d |- ( r = R -> ( P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) <-> P || ( 1st ` ( ( D SmoothGo R ) ` F ) ) ) )
+c16:c15:orbi1d |- ( r = R -> ( ( P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) \/ P < ( D + F ) ) <-> ( P || ( 1st ` ( ( D SmoothGo R ) ` F ) ) \/ P < ( D + F ) ) ) )
+c17:c11,c16:imbi12d |- ( r = R -> ( ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( D SmoothGo r ) ` F ) ) \/ P < ( D + F ) ) ) <-> ( ( P e. Prime /\ P || R ) -> ( P || ( 1st ` ( ( D SmoothGo R ) ` F ) ) \/ P < ( D + F ) ) ) ) )
+s10:c17,s8,s2:rspcdva |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> ( ( P e. Prime /\ P || R ) -> ( P || ( 1st ` ( ( D SmoothGo R ) ` F ) ) \/ P < ( D + F ) ) ) )
+qed:s10,s4:mpd |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> ( P || ( 1st ` ( ( D SmoothGo R ) ` F ) ) \/ P < ( D + F ) ) )
+$)

@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=dscn  LOC_AFTER=?
+
+* The extended difference quotient of a continuous function differentiable at the base point is continuous on the domain.
+
+s1::simp1 |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> F e. ( D -cn-> CC ) )
+s2::simp2 |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> P e. dom ( CC _D F ) )
+s3::simp3 |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> C = ( ( CC _D F ) ` P ) )
+i4::cncfrss
+s5:s1,i4:syl |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> D C_ CC )
+i6::cncff
+s7:s1,i6:syl |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> F : D --> CC )
+s8::ssid |- CC C_ CC
+s9:s8:a1i |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> CC C_ CC )
+s10:s9,s7,s5:dvbss |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> dom ( CC _D F ) C_ D )
+s11:s10,s2:sseldd |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> P e. D )
+s12::dvfcn |- ( CC _D F ) : dom ( CC _D F ) --> CC
+s13:s12:a1i |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> ( CC _D F ) : dom ( CC _D F ) --> CC )
+s14:s13,s2:ffvelcdmd |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> ( ( CC _D F ) ` P ) e. CC )
+s15:s3,s14:eqeltrd |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> C e. CC )
+s16:s1,s11,s15:3jca |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) )
+i17::dsf
+s18:s16,i17:syl |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) : D --> CC )
+s19::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> ( s e. D /\ e e. RR+ ) )
+i20::simpl
+s21:s19,i20:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> s e. D )
+s22::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> ( s e. D /\ e e. RR+ ) )
+i23::simpr
+s24:s22,i23:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> e e. RR+ )
+s25::simpr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s = P ) -> s = P )
+s26::oveq2 |- ( s = P -> ( v - s ) = ( v - P ) )
+s27:s26:fveq2d |- ( s = P -> ( abs ` ( v - s ) ) = ( abs ` ( v - P ) ) )
+s28:s27:breq1d |- ( s = P -> ( ( abs ` ( v - s ) ) < k <-> ( abs ` ( v - P ) ) < k ) )
+s29::fveq2 |- ( s = P -> ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) = ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) )
+s30:s29:oveq2d |- ( s = P -> ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) = ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) )
+s31:s30:fveq2d |- ( s = P -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) = ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) )
+s32:s31:breq1d |- ( s = P -> ( ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e <-> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) < e ) )
+s33:s28,s32:imbi12d |- ( s = P -> ( ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) <-> ( ( abs ` ( v - P ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) < e ) ) )
+s34:s33:ralbidv |- ( s = P -> ( A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) <-> A. v e. D ( ( abs ` ( v - P ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) < e ) ) )
+s35:s34:rexbidv |- ( s = P -> ( E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) <-> E. k e. RR+ A. v e. D ( ( abs ` ( v - P ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) < e ) ) )
+s36:s1,s2,s3:3jca |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) )
+s37:s36:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) )
+s38:s37,s24:jca |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ e e. RR+ ) )
+s39:s38:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s = P ) -> ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ e e. RR+ ) )
+i40::dscnq
+s41:s39,i40:syl |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s = P ) -> E. k e. RR+ A. v e. D ( ( abs ` ( v - P ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) < e ) )
+s42:s35:a1i |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s = P ) -> ( s = P -> ( E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) <-> E. k e. RR+ A. v e. D ( ( abs ` ( v - P ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) < e ) ) ) )
+s43:s25,s42:mpd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s = P ) -> ( E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) <-> E. k e. RR+ A. v e. D ( ( abs ` ( v - P ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) ) ) < e ) ) )
+s44:s41,s43:mpbird |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s = P ) -> E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) )
+s45:s16:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) )
+s46:s45:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s =/= P ) -> ( F e. ( D -cn-> CC ) /\ P e. D /\ C e. CC ) )
+s47:s21:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s =/= P ) -> s e. D )
+s48::simpr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s =/= P ) -> s =/= P )
+s49:s24:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s =/= P ) -> e e. RR+ )
+s50:s47,s48,s49:3jca |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s =/= P ) -> ( s e. D /\ s =/= P /\ e e. RR+ ) )
+i51::dscnp
+s52:s46,s50,i51:syl2anc |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) /\ s =/= P ) -> E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) )
+s53:s44,s52:pm2.61dane |- ( ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) /\ ( s e. D /\ e e. RR+ ) ) -> E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) )
+s54:s53:ralrimivva |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> A. s e. D A. e e. RR+ E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) )
+i55::elcncf2
+s56:s5,s9,i55:syl2anc |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) e. ( D -cn-> CC ) <-> ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) : D --> CC /\ A. s e. D A. e e. RR+ E. k e. RR+ A. v e. D ( ( abs ` ( v - s ) ) < k -> ( abs ` ( ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` v ) - ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` s ) ) ) < e ) ) ) )
+qed:s18,s54,s56:mpbir2and |- ( ( F e. ( D -cn-> CC ) /\ P e. dom ( CC _D F ) /\ C = ( ( CC _D F ) ` P ) ) -> ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) e. ( D -cn-> CC ) )
+$)

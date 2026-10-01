@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=cmitgif  LOC_AFTER=?
+
+* The integral of a guarded integrand whose guard is free of the integration variable: ` S. A if ( ps , B , 0 ) = if ( ps , S. A B , 0 ) ` , with integrability ( ~ ovif , ~ iblmulc2 , ~ itgmulc2 ).
+
+h1::cmitgif.1 |- ( ph -> ( x e. A |-> B ) e. L^1 )
+h2::cmitgif.2 |- ( ( ph /\ x e. A ) -> B e. CC )
+s1::ax-1cn |- 1 e. CC
+s2:s1:a1i |- ( ph -> 1 e. CC )
+s3::0cn |- 0 e. CC
+s4:s3:a1i |- ( ph -> 0 e. CC )
+s5:s2,s4:ifcld |- ( ph -> if ( ps , 1 , 0 ) e. CC )
+s6::ovif |- ( if ( ps , 1 , 0 ) x. B ) = if ( ps , ( 1 x. B ) , ( 0 x. B ) )
+s7:s6:a1i |- ( ( ph /\ x e. A ) -> ( if ( ps , 1 , 0 ) x. B ) = if ( ps , ( 1 x. B ) , ( 0 x. B ) ) )
+s8:h2:mullidd |- ( ( ph /\ x e. A ) -> ( 1 x. B ) = B )
+s9:h2:mul02d |- ( ( ph /\ x e. A ) -> ( 0 x. B ) = 0 )
+s10:s8,s9:ifeq12d |- ( ( ph /\ x e. A ) -> if ( ps , ( 1 x. B ) , ( 0 x. B ) ) = if ( ps , B , 0 ) )
+s11:s7,s10:eqtrd |- ( ( ph /\ x e. A ) -> ( if ( ps , 1 , 0 ) x. B ) = if ( ps , B , 0 ) )
+s12:s5,h2,h1:iblmulc2 |- ( ph -> ( x e. A |-> ( if ( ps , 1 , 0 ) x. B ) ) e. L^1 )
+s13:s11:mpteq2dva |- ( ph -> ( x e. A |-> ( if ( ps , 1 , 0 ) x. B ) ) = ( x e. A |-> if ( ps , B , 0 ) ) )
+s14:s13,s12:eqeltrrd |- ( ph -> ( x e. A |-> if ( ps , B , 0 ) ) e. L^1 )
+s15:s5,h2,h1:itgmulc2 |- ( ph -> ( if ( ps , 1 , 0 ) x. S. A B _d x ) = S. A ( if ( ps , 1 , 0 ) x. B ) _d x )
+s16:s11:itgeq2dv |- ( ph -> S. A ( if ( ps , 1 , 0 ) x. B ) _d x = S. A if ( ps , B , 0 ) _d x )
+s17:h2,h1:itgcl |- ( ph -> S. A B _d x e. CC )
+s18::ovif |- ( if ( ps , 1 , 0 ) x. S. A B _d x ) = if ( ps , ( 1 x. S. A B _d x ) , ( 0 x. S. A B _d x ) )
+s19:s18:a1i |- ( ph -> ( if ( ps , 1 , 0 ) x. S. A B _d x ) = if ( ps , ( 1 x. S. A B _d x ) , ( 0 x. S. A B _d x ) ) )
+s20:s17:mullidd |- ( ph -> ( 1 x. S. A B _d x ) = S. A B _d x )
+s21:s17:mul02d |- ( ph -> ( 0 x. S. A B _d x ) = 0 )
+s22:s20,s21:ifeq12d |- ( ph -> if ( ps , ( 1 x. S. A B _d x ) , ( 0 x. S. A B _d x ) ) = if ( ps , S. A B _d x , 0 ) )
+s23:s19,s22:eqtrd |- ( ph -> ( if ( ps , 1 , 0 ) x. S. A B _d x ) = if ( ps , S. A B _d x , 0 ) )
+s24:s16:eqcomd |- ( ph -> S. A if ( ps , B , 0 ) _d x = S. A ( if ( ps , 1 , 0 ) x. B ) _d x )
+s25:s15:eqcomd |- ( ph -> S. A ( if ( ps , 1 , 0 ) x. B ) _d x = ( if ( ps , 1 , 0 ) x. S. A B _d x ) )
+s26:s24,s25:eqtrd |- ( ph -> S. A if ( ps , B , 0 ) _d x = ( if ( ps , 1 , 0 ) x. S. A B _d x ) )
+s27:s26,s23:eqtrd |- ( ph -> S. A if ( ps , B , 0 ) _d x = if ( ps , S. A B _d x , 0 ) )
+s28:s14,s27:jca |- ( ph -> ( ( x e. A |-> if ( ps , B , 0 ) ) e. L^1 /\ S. A if ( ps , B , 0 ) _d x = if ( ps , S. A B _d x , 0 ) ) )
+qed:s28:idi |- ( ph -> ( ( x e. A |-> if ( ps , B , 0 ) ) e. L^1 /\ S. A if ( ps , B , 0 ) _d x = if ( ps , S. A B _d x , 0 ) ) )
+$)

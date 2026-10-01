@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=t12rnpfx  LOC_AFTER=?
+
+* Membership in the range of a prefix one entry on (~ tm2lpfxs1 , ~ ccatrn , ~ s1rn ).
+
+s1::simpll |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> L e. Word NN0 )
+s2::simplr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> J e. ( 0 ..^ ( # ` L ) ) )
+s3::simpr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> A e. NN0 )
+i4::wrdsymbcl
+s5:s1,s2,i4:syl2anc |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( L ` J ) e. NN0 )
+i6::tm2lpfxs1
+s7:s1,s2,i6:syl2anc |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( L prefix ( J + 1 ) ) = ( ( L prefix J ) ++ <" ( L ` J ) "> ) )
+i8::pfxcl
+s9:s1,i8:syl |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( L prefix J ) e. Word NN0 )
+i10::s1cl
+s11:s5,i10:syl |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> <" ( L ` J ) "> e. Word NN0 )
+i12::ccatrn
+s13:s9,s11,i12:syl2anc |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ran ( ( L prefix J ) ++ <" ( L ` J ) "> ) = ( ran ( L prefix J ) u. ran <" ( L ` J ) "> ) )
+i14::s1rn
+s15:s5,i14:syl |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ran <" ( L ` J ) "> = { ( L ` J ) } )
+s16:s7:rneqd |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ran ( L prefix ( J + 1 ) ) = ran ( ( L prefix J ) ++ <" ( L ` J ) "> ) )
+s17:s15:uneq2d |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( ran ( L prefix J ) u. ran <" ( L ` J ) "> ) = ( ran ( L prefix J ) u. { ( L ` J ) } ) )
+s18:s16,s13,s17:3eqtrd |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ran ( L prefix ( J + 1 ) ) = ( ran ( L prefix J ) u. { ( L ` J ) } ) )
+s19:s18:eleq2d |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( A e. ran ( L prefix ( J + 1 ) ) <-> A e. ( ran ( L prefix J ) u. { ( L ` J ) } ) ) )
+s20::elun |- ( A e. ( ran ( L prefix J ) u. { ( L ` J ) } ) <-> ( A e. ran ( L prefix J ) \/ A e. { ( L ` J ) } ) )
+i21::elsng
+s22:s3,i21:syl |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( A e. { ( L ` J ) } <-> A = ( L ` J ) ) )
+s23:s22:orbi2d |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( ( A e. ran ( L prefix J ) \/ A e. { ( L ` J ) } ) <-> ( A e. ran ( L prefix J ) \/ A = ( L ` J ) ) ) )
+s24:s20:a1i |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( A e. ( ran ( L prefix J ) u. { ( L ` J ) } ) <-> ( A e. ran ( L prefix J ) \/ A e. { ( L ` J ) } ) ) )
+s25:s24,s23:bitrd |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( A e. ( ran ( L prefix J ) u. { ( L ` J ) } ) <-> ( A e. ran ( L prefix J ) \/ A = ( L ` J ) ) ) )
+qed:s19,s25:bitrd |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ A e. NN0 ) -> ( A e. ran ( L prefix ( J + 1 ) ) <-> ( A e. ran ( L prefix J ) \/ A = ( L ` J ) ) ) )
+$)

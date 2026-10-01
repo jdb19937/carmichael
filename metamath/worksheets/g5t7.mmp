@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=g5t7  LOC_AFTER=?
+
+* Fast path: a sum against a literal, the literal split between the summands, and a literal factor against a literal.
+
+s1::simpl |- ( ( L e. RR /\ L <_ 5 ) -> L e. RR )
+s2::simpr |- ( ( L e. RR /\ L <_ 5 ) -> L <_ 5 )
+s3::5re |- 5 e. RR
+s4:s3:a1i |- ( ( L e. RR /\ L <_ 5 ) -> 5 e. RR )
+s5::2re |- 2 e. RR
+s6:s5:a1i |- ( ( L e. RR /\ L <_ 5 ) -> 2 e. RR )
+s7::0le2 |- 0 <_ 2
+s8:s7:a1i |- ( ( L e. RR /\ L <_ 5 ) -> 0 <_ 2 )
+s9:s1,s4,s6,s8,s2:lemul2ad |- ( ( L e. RR /\ L <_ 5 ) -> ( 2 x. L ) <_ ( 2 x. 5 ) )
+s10::2cn |- 2 e. CC
+s11::5cn |- 5 e. CC
+s12:s10,s11:mulcomi |- ( 2 x. 5 ) = ( 5 x. 2 )
+s13::5t2e10 |- ( 5 x. 2 ) = ; 1 0
+s14:s12,s13:eqtri |- ( 2 x. 5 ) = ; 1 0
+s15:s14:a1i |- ( ( L e. RR /\ L <_ 5 ) -> ( 2 x. 5 ) = ; 1 0 )
+s16:s9,s15:breqtrd |- ( ( L e. RR /\ L <_ 5 ) -> ( 2 x. L ) <_ ; 1 0 )
+i17::leid
+s18::3re |- 3 e. RR
+s19:s18,i17:ax-mp |- 3 <_ 3
+s20:s19:a1i |- ( ( L e. RR /\ L <_ 5 ) -> 3 <_ 3 )
+s21:s6,s1:remulcld |- ( ( L e. RR /\ L <_ 5 ) -> ( 2 x. L ) e. RR )
+s22:s18:a1i |- ( ( L e. RR /\ L <_ 5 ) -> 3 e. RR )
+s23::1nn0 |- 1 e. NN0
+s24::0nn0 |- 0 e. NN0
+s25:s23,s24:deccl |- ; 1 0 e. NN0
+s26:s25:nn0rei |- ; 1 0 e. RR
+s27:s26:a1i |- ( ( L e. RR /\ L <_ 5 ) -> ; 1 0 e. RR )
+s28:s21,s22,s27,s22,s16,s20:le2addd |- ( ( L e. RR /\ L <_ 5 ) -> ( ( 2 x. L ) + 3 ) <_ ( ; 1 0 + 3 ) )
+s29::3nn0 |- 3 e. NN0
+s30::eqid |- ; 1 0 = ; 1 0
+s31::3cn |- 3 e. CC
+s32:s31:addlidi |- ( 0 + 3 ) = 3
+s33:s23,s24,s29,s30,s32:decaddi |- ( ; 1 0 + 3 ) = ; 1 3
+s34:s33:a1i |- ( ( L e. RR /\ L <_ 5 ) -> ( ; 1 0 + 3 ) = ; 1 3 )
+qed:s28,s34:breqtrd |- ( ( L e. RR /\ L <_ 5 ) -> ( ( 2 x. L ) + 3 ) <_ ; 1 3 )
+$)

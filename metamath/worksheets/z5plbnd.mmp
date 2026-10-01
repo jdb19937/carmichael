@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=z5plbnd  LOC_AFTER=?
+
+* Lean Real.posLog (written if ( 1 <_ x , log x , 0 )) is nonnegative and at least log x for x > 0 (the two facts behind posLog_of_one_le, posLog_mul_le, Detector.lean).
+
+s1::simpl |- ( ( X e. RR+ /\ 1 <_ X ) -> X e. RR+ )
+s2:s1:rpred |- ( ( X e. RR+ /\ 1 <_ X ) -> X e. RR )
+s3::simpr |- ( ( X e. RR+ /\ 1 <_ X ) -> 1 <_ X )
+i4::iftrue
+s5:s3,i4:syl |- ( ( X e. RR+ /\ 1 <_ X ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = ( log ` X ) )
+s6::simpr |- ( ( X e. RR+ /\ 1 <_ X ) -> 1 <_ X )
+i7::logge0
+s8:s2,s6,i7:syl2anc |- ( ( X e. RR+ /\ 1 <_ X ) -> 0 <_ ( log ` X ) )
+s9:s8,s5:breqtrrd |- ( ( X e. RR+ /\ 1 <_ X ) -> 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s10::simpl |- ( ( X e. RR+ /\ 1 <_ X ) -> X e. RR+ )
+s11:s10:relogcld |- ( ( X e. RR+ /\ 1 <_ X ) -> ( log ` X ) e. RR )
+s12:s11:leidd |- ( ( X e. RR+ /\ 1 <_ X ) -> ( log ` X ) <_ ( log ` X ) )
+s13:s12,s5:breqtrrd |- ( ( X e. RR+ /\ 1 <_ X ) -> ( log ` X ) <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s14:s9,s13:jca |- ( ( X e. RR+ /\ 1 <_ X ) -> ( 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) /\ ( log ` X ) <_ if ( 1 <_ X , ( log ` X ) , 0 ) ) )
+s15::simpl |- ( ( X e. RR+ /\ -. 1 <_ X ) -> X e. RR+ )
+s16:s15:rpred |- ( ( X e. RR+ /\ -. 1 <_ X ) -> X e. RR )
+s17::simpr |- ( ( X e. RR+ /\ -. 1 <_ X ) -> -. 1 <_ X )
+i18::iffalse
+s19:s17,i18:syl |- ( ( X e. RR+ /\ -. 1 <_ X ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = 0 )
+s20::simpr |- ( ( X e. RR+ /\ -. 1 <_ X ) -> -. 1 <_ X )
+s21::1red |- ( ( X e. RR+ /\ -. 1 <_ X ) -> 1 e. RR )
+s22:s16,s21:ltnled |- ( ( X e. RR+ /\ -. 1 <_ X ) -> ( X < 1 <-> -. 1 <_ X ) )
+s23:s20,s22:mpbird |- ( ( X e. RR+ /\ -. 1 <_ X ) -> X < 1 )
+s24:s23:ltled |- ( ( X e. RR+ /\ -. 1 <_ X ) -> X <_ 1 )
+s25::1rp |- 1 e. RR+
+s26:s25:a1i |- ( ( X e. RR+ /\ -. 1 <_ X ) -> 1 e. RR+ )
+i27::logleb
+s28:s15,s26,i27:syl2anc |- ( ( X e. RR+ /\ -. 1 <_ X ) -> ( X <_ 1 <-> ( log ` X ) <_ ( log ` 1 ) ) )
+s29:s24,s28:mpbid |- ( ( X e. RR+ /\ -. 1 <_ X ) -> ( log ` X ) <_ ( log ` 1 ) )
+s30::log1 |- ( log ` 1 ) = 0
+s31:s30:a1i |- ( ( X e. RR+ /\ -. 1 <_ X ) -> ( log ` 1 ) = 0 )
+s32:s29,s31:breqtrd |- ( ( X e. RR+ /\ -. 1 <_ X ) -> ( log ` X ) <_ 0 )
+s33::0red |- ( ( X e. RR+ /\ -. 1 <_ X ) -> 0 e. RR )
+s34:s33:leidd |- ( ( X e. RR+ /\ -. 1 <_ X ) -> 0 <_ 0 )
+s35:s34,s19:breqtrrd |- ( ( X e. RR+ /\ -. 1 <_ X ) -> 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s36:s32,s19:breqtrrd |- ( ( X e. RR+ /\ -. 1 <_ X ) -> ( log ` X ) <_ if ( 1 <_ X , ( log ` X ) , 0 ) )
+s37:s35,s36:jca |- ( ( X e. RR+ /\ -. 1 <_ X ) -> ( 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) /\ ( log ` X ) <_ if ( 1 <_ X , ( log ` X ) , 0 ) ) )
+qed:s14,s37:pm2.61dan |- ( X e. RR+ -> ( 0 <_ if ( 1 <_ X , ( log ` X ) , 0 ) /\ ( log ` X ) <_ if ( 1 <_ X , ( log ` X ) , 0 ) ) )
+$)

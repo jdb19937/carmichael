@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=z5fmpprod  LOC_AFTER=?
+
+* Lean fmp_prod_primeFactors: for squarefree M, f ( M ) = prod_ p | M f ( p ) (mmu ( M ) = ( -1 ) ^ omega ( M ), phi ( M ) = prod ( p - 1 ), f ( p ) = - ( p - 1 )).
+
+s1::simpl |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> M e. NN )
+i2::pffinq
+s3:s1,i2:syl |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> { q e. Prime | q || M } e. Fin )
+s4::simpr |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> p e. { q e. Prime | q || M } )
+i5::elrabi
+s6:s4,i5:syl |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> p e. Prime )
+i7::z5fmpprm
+s8:s6,i7:syl |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> ( ( mmu ` p ) x. ( phi ` p ) ) = -u ( p - 1 ) )
+i9::prmnn
+s10:s6,i9:syl |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> p e. NN )
+s11:s10:nncnd |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> p e. CC )
+s12::1cnd |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> 1 e. CC )
+s13:s11,s12:subcld |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> ( p - 1 ) e. CC )
+s14:s13:mulm1d |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> ( -u 1 x. ( p - 1 ) ) = -u ( p - 1 ) )
+s15:s14:eqcomd |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> -u ( p - 1 ) = ( -u 1 x. ( p - 1 ) ) )
+s16:s8,s15:eqtrd |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> ( ( mmu ` p ) x. ( phi ` p ) ) = ( -u 1 x. ( p - 1 ) ) )
+s17:s16:prodeq2dv |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> prod_ p e. { q e. Prime | q || M } ( ( mmu ` p ) x. ( phi ` p ) ) = prod_ p e. { q e. Prime | q || M } ( -u 1 x. ( p - 1 ) ) )
+s18::neg1cn |- -u 1 e. CC
+s19:s18:a1i |- ( ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) /\ p e. { q e. Prime | q || M } ) -> -u 1 e. CC )
+s20:s3,s19,s13:fprodmul |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> prod_ p e. { q e. Prime | q || M } ( -u 1 x. ( p - 1 ) ) = ( prod_ p e. { q e. Prime | q || M } -u 1 x. prod_ p e. { q e. Prime | q || M } ( p - 1 ) ) )
+s21::neg1cn |- -u 1 e. CC
+s22:s21:a1i |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> -u 1 e. CC )
+i23::fprodconst
+s24:s3,s22,i23:syl2anc |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> prod_ p e. { q e. Prime | q || M } -u 1 = ( -u 1 ^ ( # ` { q e. Prime | q || M } ) ) )
+s25::id |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( M e. NN /\ ( mmu ` M ) =/= 0 ) )
+i26::muval2
+s27:s25,i26:syl |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( mmu ` M ) = ( -u 1 ^ ( # ` { p e. Prime | p || M } ) ) )
+s28::breq1 |- ( p = q -> ( p || M <-> q || M ) )
+s29:s28:cbvrabv |- { p e. Prime | p || M } = { q e. Prime | q || M }
+s30:s29:fveq2i |- ( # ` { p e. Prime | p || M } ) = ( # ` { q e. Prime | q || M } )
+s31:s30:oveq2i |- ( -u 1 ^ ( # ` { p e. Prime | p || M } ) ) = ( -u 1 ^ ( # ` { q e. Prime | q || M } ) )
+s32:s31:a1i |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( -u 1 ^ ( # ` { p e. Prime | p || M } ) ) = ( -u 1 ^ ( # ` { q e. Prime | q || M } ) ) )
+s33:s27,s32:eqtrd |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( mmu ` M ) = ( -u 1 ^ ( # ` { q e. Prime | q || M } ) ) )
+s34:s33:eqcomd |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( -u 1 ^ ( # ` { q e. Prime | q || M } ) ) = ( mmu ` M ) )
+s35:s24,s34:eqtrd |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> prod_ p e. { q e. Prime | q || M } -u 1 = ( mmu ` M ) )
+s36::id |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( M e. NN /\ ( mmu ` M ) =/= 0 ) )
+i37::phisqf
+s38:s36,i37:syl |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( phi ` M ) = prod_ p e. { q e. Prime | q || M } ( p - 1 ) )
+s39:s38:eqcomd |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> prod_ p e. { q e. Prime | q || M } ( p - 1 ) = ( phi ` M ) )
+s40:s35,s39:oveq12d |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( prod_ p e. { q e. Prime | q || M } -u 1 x. prod_ p e. { q e. Prime | q || M } ( p - 1 ) ) = ( ( mmu ` M ) x. ( phi ` M ) ) )
+s41:s17,s20:eqtrd |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> prod_ p e. { q e. Prime | q || M } ( ( mmu ` p ) x. ( phi ` p ) ) = ( prod_ p e. { q e. Prime | q || M } -u 1 x. prod_ p e. { q e. Prime | q || M } ( p - 1 ) ) )
+s42:s41,s40:eqtrd |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> prod_ p e. { q e. Prime | q || M } ( ( mmu ` p ) x. ( phi ` p ) ) = ( ( mmu ` M ) x. ( phi ` M ) ) )
+qed:s42:eqcomd |- ( ( M e. NN /\ ( mmu ` M ) =/= 0 ) -> ( ( mmu ` M ) x. ( phi ` M ) ) = prod_ p e. { q e. Prime | q || M } ( ( mmu ` p ) x. ( phi ` p ) ) )
+$)

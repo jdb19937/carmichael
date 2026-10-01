@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=clogdif2  LOC_AFTER=?
+
+* Below the real axis the principal logarithm of the negative exceeds the logarithm by _i x. _pi.
+
+s1::simpl |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> V e. CC )
+s2::simpr |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( Im ` V ) < 0 )
+i3::imcl
+s4:s1,i3:syl |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( Im ` V ) e. RR )
+s5:s4,s2:ltned |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( Im ` V ) =/= 0 )
+s6::im0 |- ( Im ` 0 ) = 0
+s7::fveq2 |- ( V = 0 -> ( Im ` V ) = ( Im ` 0 ) )
+s8:s7,s6:eqtrdi |- ( V = 0 -> ( Im ` V ) = 0 )
+s9:s8:a1i |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( V = 0 -> ( Im ` V ) = 0 ) )
+s10:s5:neneqd |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> -. ( Im ` V ) = 0 )
+s11:s10,s9:mtod |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> -. V = 0 )
+s12:s11:neqned |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> V =/= 0 )
+s13:s1,s12:logcld |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( log ` V ) e. CC )
+s14::ax-icn |- _i e. CC
+s15:s14:a1i |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> _i e. CC )
+s16::picn |- _pi e. CC
+s17:s16:a1i |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> _pi e. CC )
+s18:s15,s17:mulcld |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( _i x. _pi ) e. CC )
+i19::clogneg
+s20:s1,s2,i19:syl2anc |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( log ` -u V ) = ( ( log ` V ) + ( _i x. _pi ) ) )
+s21:s20:oveq1d |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( ( log ` -u V ) - ( log ` V ) ) = ( ( ( log ` V ) + ( _i x. _pi ) ) - ( log ` V ) ) )
+i22::pncan2
+s23:s13,s18,i22:syl2anc |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( ( ( log ` V ) + ( _i x. _pi ) ) - ( log ` V ) ) = ( _i x. _pi ) )
+qed:s21,s23:eqtrd |- ( ( V e. CC /\ ( Im ` V ) < 0 ) -> ( ( log ` -u V ) - ( log ` V ) ) = ( _i x. _pi ) )
+$)

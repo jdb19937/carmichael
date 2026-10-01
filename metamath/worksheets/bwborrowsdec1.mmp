@@ -1,0 +1,84 @@
+$( <MM> <PROOF_ASST> THEOREM=bwborrowsdec1  LOC_AFTER=?
+
+* The run decomposition of the borrow chain: L is its borrows false letters followed by the rest.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::borrowsle
+s3:s1,i2:syl |- ( L e. Word 2o -> ( borrows ` L ) <_ ( # ` L ) )
+i4::borrowscl
+s5:s1,i4:syl |- ( L e. Word 2o -> ( borrows ` L ) e. NN0 )
+i6::lencl
+s7:s1,i6:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+i8::elfz2nn0
+s9:s5,s7,s3,i8:syl3anbrc |- ( L e. Word 2o -> ( borrows ` L ) e. ( 0 ... ( # ` L ) ) )
+s10:s7:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s11:s10:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+s12:s11:leidd |- ( L e. Word 2o -> ( # ` L ) <_ ( # ` L ) )
+i13::elfz2nn0
+s14:s7,s7,s12,i13:syl3anbrc |- ( L e. Word 2o -> ( # ` L ) e. ( 0 ... ( # ` L ) ) )
+i15::ccatpfx
+s16:s1,s9,s14,i15:syl3anc |- ( L e. Word 2o -> ( ( L prefix ( borrows ` L ) ) ++ ( L substr <. ( borrows ` L ) , ( # ` L ) >. ) ) = ( L prefix ( # ` L ) ) )
+i17::pfxid
+s18:s1,i17:syl |- ( L e. Word 2o -> ( L prefix ( # ` L ) ) = L )
+s19:s16,s18:eqtrd |- ( L e. Word 2o -> ( ( L prefix ( borrows ` L ) ) ++ ( L substr <. ( borrows ` L ) , ( # ` L ) >. ) ) = L )
+i20::pfxcl
+s21:s1,i20:syl |- ( L e. Word 2o -> ( L prefix ( borrows ` L ) ) e. Word 2o )
+i22::pfxlen
+s23:s1,s9,i22:syl2anc |- ( L e. Word 2o -> ( # ` ( L prefix ( borrows ` L ) ) ) = ( borrows ` L ) )
+s24::borrowsdvds |- ( L e. Word 2o -> ( 2 ^ ( borrows ` L ) ) || ( toNat ` L ) )
+i25::tonatcl
+s26:s1,i25:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+s27:s26:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+i28::bitsuz
+s29:s27,s5,i28:syl2anc |- ( L e. Word 2o -> ( ( 2 ^ ( borrows ` L ) ) || ( toNat ` L ) <-> ( bits ` ( toNat ` L ) ) C_ ( ZZ>= ` ( borrows ` L ) ) ) )
+s30:s24,s29:mpbid |- ( L e. Word 2o -> ( bits ` ( toNat ` L ) ) C_ ( ZZ>= ` ( borrows ` L ) ) )
+s31::simpr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> i e. ( 0 ..^ ( borrows ` L ) ) )
+s32:s1:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> L e. Word 2o )
+s33:s9:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( borrows ` L ) e. ( 0 ... ( # ` L ) ) )
+i34::pfxfv
+s35:s32,s33,s31,i34:syl3anc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( ( L prefix ( borrows ` L ) ) ` i ) = ( L ` i ) )
+i36::elfzonn0
+s37:s31,i36:syl |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> i e. NN0 )
+i38::elfzolt2
+s39:s31,i38:syl |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> i < ( borrows ` L ) )
+s40:s37:nn0zd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> i e. ZZ )
+s41:s40:zred |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> i e. RR )
+s42:s5:nn0zd |- ( L e. Word 2o -> ( borrows ` L ) e. ZZ )
+s43:s42:zred |- ( L e. Word 2o -> ( borrows ` L ) e. RR )
+s44:s43:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( borrows ` L ) e. RR )
+s45:s11:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( # ` L ) e. RR )
+s46:s3:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( borrows ` L ) <_ ( # ` L ) )
+s47:s41,s44,s45,s39,s46:ltletrd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> i < ( # ` L ) )
+s48:s10:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( # ` L ) e. ZZ )
+i49::elfzo0z
+s50:s37,s48,s47,i49:syl3anbrc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> i e. ( 0 ..^ ( # ` L ) ) )
+s51:s1:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> L e. Word 2o )
+i52::bwfvb
+s53:s51,s50,i52:syl2anc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( ( L ` i ) = 1o <-> i e. ( bits ` ( toNat ` L ) ) ) )
+s54:s43:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( borrows ` L ) e. RR )
+s55:s41,s54:ltnled |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( i < ( borrows ` L ) <-> -. ( borrows ` L ) <_ i ) )
+s56:s39,s55:mpbid |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> -. ( borrows ` L ) <_ i )
+s57:s30:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( bits ` ( toNat ` L ) ) C_ ( ZZ>= ` ( borrows ` L ) ) )
+s58:s57:sseld |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( i e. ( bits ` ( toNat ` L ) ) -> i e. ( ZZ>= ` ( borrows ` L ) ) ) )
+i59::eluzle
+s60:s58,i59:syl6 |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( i e. ( bits ` ( toNat ` L ) ) -> ( borrows ` L ) <_ i ) )
+s61:s56,s60:mtod |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> -. i e. ( bits ` ( toNat ` L ) ) )
+s62:s61,s53:mtbird |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> -. ( L ` i ) = 1o )
+s63:s1:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> L e. Word 2o )
+i64::wrdsymbcl
+s65:s63,s50,i64:syl2anc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( L ` i ) e. 2o )
+i66::bwel2on
+s67:s65,i66:syl |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( -. ( L ` i ) = 1o <-> ( L ` i ) = (/) ) )
+s68:s62,s67:mpbid |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( L ` i ) = (/) )
+s69:s35,s68:eqtrd |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( borrows ` L ) ) ) -> ( ( L prefix ( borrows ` L ) ) ` i ) = (/) )
+s70:s69:ralrimiva |- ( L e. Word 2o -> A. i e. ( 0 ..^ ( borrows ` L ) ) ( ( L prefix ( borrows ` L ) ) ` i ) = (/) )
+s71:s21,s23,s70:3jca |- ( L e. Word 2o -> ( ( L prefix ( borrows ` L ) ) e. Word 2o /\ ( # ` ( L prefix ( borrows ` L ) ) ) = ( borrows ` L ) /\ A. i e. ( 0 ..^ ( borrows ` L ) ) ( ( L prefix ( borrows ` L ) ) ` i ) = (/) ) )
+s72::0el2o |- (/) e. 2o
+s73:s72:a1i |- ( L e. Word 2o -> (/) e. 2o )
+i74::repsdf2
+s75:s73,s5,i74:syl2anc |- ( L e. Word 2o -> ( ( L prefix ( borrows ` L ) ) = ( (/) repeatS ( borrows ` L ) ) <-> ( ( L prefix ( borrows ` L ) ) e. Word 2o /\ ( # ` ( L prefix ( borrows ` L ) ) ) = ( borrows ` L ) /\ A. i e. ( 0 ..^ ( borrows ` L ) ) ( ( L prefix ( borrows ` L ) ) ` i ) = (/) ) ) )
+s76:s71,s75:mpbird |- ( L e. Word 2o -> ( L prefix ( borrows ` L ) ) = ( (/) repeatS ( borrows ` L ) ) )
+s77:s76:oveq1d |- ( L e. Word 2o -> ( ( L prefix ( borrows ` L ) ) ++ ( L substr <. ( borrows ` L ) , ( # ` L ) >. ) ) = ( ( (/) repeatS ( borrows ` L ) ) ++ ( L substr <. ( borrows ` L ) , ( # ` L ) >. ) ) )
+s78:s77,s19:eqtr3d |- ( L e. Word 2o -> ( ( (/) repeatS ( borrows ` L ) ) ++ ( L substr <. ( borrows ` L ) , ( # ` L ) >. ) ) = L )
+qed:s78:eqcomd |- ( L e. Word 2o -> L = ( ( (/) repeatS ( borrows ` L ) ) ++ ( L substr <. ( borrows ` L ) , ( # ` L ) >. ) ) )
+$)

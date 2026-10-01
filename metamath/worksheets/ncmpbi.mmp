@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=ncmpbi  LOC_AFTER=?
+
+* Ncmp depends only on the order of its arguments.
+
+s1::simpll |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> ( A e. NN0 /\ B e. NN0 ) )
+s2::simplr |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> ( D e. NN0 /\ E e. NN0 ) )
+s3::simprl |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> ( A = B <-> D = E ) )
+s4::simprr |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> ( A < B <-> D < E ) )
+i5::ncmpval
+s6:s1,i5:syl |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> ( A Ncmp B ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+i7::ncmpval
+s8:s2,i7:syl |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> ( D Ncmp E ) = if ( D = E , 1o , if ( D < E , (/) , 2o ) ) )
+s9:s4:ifbid |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> if ( A < B , (/) , 2o ) = if ( D < E , (/) , 2o ) )
+s10:s3,s9:ifbieq2d |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> if ( A = B , 1o , if ( A < B , (/) , 2o ) ) = if ( D = E , 1o , if ( D < E , (/) , 2o ) ) )
+s11:s6,s10,s8:3eqtr4d |- ( ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) /\ ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) ) -> ( A Ncmp B ) = ( D Ncmp E ) )
+qed:s11:ex |- ( ( ( A e. NN0 /\ B e. NN0 ) /\ ( D e. NN0 /\ E e. NN0 ) ) -> ( ( ( A = B <-> D = E ) /\ ( A < B <-> D < E ) ) -> ( A Ncmp B ) = ( D Ncmp E ) ) )
+$)

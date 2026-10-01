@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=log2ge  LOC_AFTER=?
+
+* A crude lower bound on log 2 (replaces Lean s Real.log_two_gt_d9).
+
+s1::1rp |- 1 e. RR+
+i2::logdiflbnd
+s3:s1,i2:ax-mp |- ( 1 / ( 1 + 1 ) ) <_ ( ( log ` ( 1 + 1 ) ) - ( log ` 1 ) )
+s4::1p1e2 |- ( 1 + 1 ) = 2
+s5:s4:oveq2i |- ( 1 / ( 1 + 1 ) ) = ( 1 / 2 )
+s6:s4:fveq2i |- ( log ` ( 1 + 1 ) ) = ( log ` 2 )
+s7::log1 |- ( log ` 1 ) = 0
+s8:s6,s7:oveq12i |- ( ( log ` ( 1 + 1 ) ) - ( log ` 1 ) ) = ( ( log ` 2 ) - 0 )
+s9::relogcl |- ( 2 e. RR+ -> ( log ` 2 ) e. RR )
+s10::2rp |- 2 e. RR+
+s11:s10,s9:ax-mp |- ( log ` 2 ) e. RR
+s12:s11:recni |- ( log ` 2 ) e. CC
+s13:s12:subid1i |- ( ( log ` 2 ) - 0 ) = ( log ` 2 )
+s14:s8,s13:eqtri |- ( ( log ` ( 1 + 1 ) ) - ( log ` 1 ) ) = ( log ` 2 )
+s15:s5,s14:breq12i |- ( ( 1 / ( 1 + 1 ) ) <_ ( ( log ` ( 1 + 1 ) ) - ( log ` 1 ) ) <-> ( 1 / 2 ) <_ ( log ` 2 ) )
+qed:s3,s15:mpbi |- ( 1 / 2 ) <_ ( log ` 2 )
+$)

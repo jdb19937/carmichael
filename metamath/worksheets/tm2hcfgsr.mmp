@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hcfgsr  LOC_AFTER=?
+
+* The halted configurations with state-and-stacks in a given class are configurations.
+
+s1::simpl |- ( ( T e. V /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> T e. V )
+s2::simpr |- ( ( T e. V /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+s3::0lt1o |- (/) e. 1o
+i4::djurcl
+s5:s3,i4:ax-mp |- ( inr ` (/) ) e. ( ( 2nd ` ( 1st ` T ) ) |_| 1o )
+s6:s5:a1i |- ( ( T e. V /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( inr ` (/) ) e. ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+s7:s6:snssd |- ( ( T e. V /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> { ( inr ` (/) ) } C_ ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+i8::xpss12
+s9:s7,s2,i8:syl2anc |- ( ( T e. V /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( { ( inr ` (/) ) } X. P ) C_ ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+i10::tm2cfgval
+s11:s1,i10:syl |- ( ( T e. V /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( TM2Cfg ` T ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+qed:s9,s11:sseqtrrd |- ( ( T e. V /\ P C_ ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( { ( inr ` (/) ) } X. P ) C_ ( TM2Cfg ` T ) )
+$)

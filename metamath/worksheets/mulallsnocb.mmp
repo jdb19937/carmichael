@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=mulallsnocb  LOC_AFTER=?
+
+* Base of the induction for mulallsnoc.
+
+s1::simpl |- ( ( Q e. NN0 /\ R e. NN0 ) -> Q e. NN0 )
+s2::simpr |- ( ( Q e. NN0 /\ R e. NN0 ) -> R e. NN0 )
+i3::s1cl
+s4:s2,i3:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> <" R "> e. Word NN0 )
+i5::ccatlid
+s6:s4,i5:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( (/) ++ <" R "> ) = <" R "> )
+i7::s1cl
+s8:s2,i7:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> <" R "> e. Word NN0 )
+i9::ccatrid
+s10:s8,i9:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( <" R "> ++ (/) ) = <" R "> )
+s11:s10:eqcomd |- ( ( Q e. NN0 /\ R e. NN0 ) -> <" R "> = ( <" R "> ++ (/) ) )
+s12:s6,s11:eqtrd |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( (/) ++ <" R "> ) = ( <" R "> ++ (/) ) )
+s13:s12:oveq2d |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( Q MulAll ( (/) ++ <" R "> ) ) = ( Q MulAll ( <" R "> ++ (/) ) ) )
+s14::wrd0 |- (/) e. Word NN0
+s15:s14:a1i |- ( ( Q e. NN0 /\ R e. NN0 ) -> (/) e. Word NN0 )
+s16:s1,s2:jca |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( Q e. NN0 /\ R e. NN0 ) )
+i17::mulallcs
+s18:s16,s15,i17:syl2anc |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( Q MulAll ( <" R "> ++ (/) ) ) = <. ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) , ( ( 2nd ` ( Q MulAll (/) ) ) + 1 ) >. )
+i19::mulall0
+s20:s1,i19:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( Q MulAll (/) ) = <. (/) , 0 >. )
+s21::0ex |- (/) e. _V
+s22:s21:a1i |- ( ( Q e. NN0 /\ R e. NN0 ) -> (/) e. _V )
+s23::c0ex |- 0 e. _V
+s24:s23:a1i |- ( ( Q e. NN0 /\ R e. NN0 ) -> 0 e. _V )
+s25:s20:fveq2d |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll (/) ) ) = ( 1st ` <. (/) , 0 >. ) )
+i26::op1stg
+s27:s22,s24,i26:syl2anc |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` <. (/) , 0 >. ) = (/) )
+s28:s25,s27:eqtrd |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll (/) ) ) = (/) )
+i29::mulallcl
+s30:s1,s15,i29:syl2anc |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( Q MulAll (/) ) e. ( Word NN0 X. NN0 ) )
+i31::xp1st
+s32:s30,i31:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll (/) ) ) e. Word NN0 )
+i33::xp2nd
+s34:s30,i33:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 2nd ` ( Q MulAll (/) ) ) e. NN0 )
+s35:s2,s1:nn0mulcld |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( R x. Q ) e. NN0 )
+i36::s1cl
+s37:s35,i36:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> <" ( R x. Q ) "> e. Word NN0 )
+i38::ccatcl
+s39:s37,s32,i38:syl2anc |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) e. Word NN0 )
+i40::peano2nn0
+s41:s34,i40:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( ( 2nd ` ( Q MulAll (/) ) ) + 1 ) e. NN0 )
+s42:s18:fveq2d |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll ( <" R "> ++ (/) ) ) ) = ( 1st ` <. ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) , ( ( 2nd ` ( Q MulAll (/) ) ) + 1 ) >. ) )
+i43::op1stg
+s44:s39,s41,i43:syl2anc |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` <. ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) , ( ( 2nd ` ( Q MulAll (/) ) ) + 1 ) >. ) = ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) )
+s45:s42,s44:eqtrd |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll ( <" R "> ++ (/) ) ) ) = ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) )
+s46:s13:fveq2d |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll ( (/) ++ <" R "> ) ) ) = ( 1st ` ( Q MulAll ( <" R "> ++ (/) ) ) ) )
+s47:s46,s45:eqtrd |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll ( (/) ++ <" R "> ) ) ) = ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) )
+s48:s28:oveq2d |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( <" ( R x. Q ) "> ++ ( 1st ` ( Q MulAll (/) ) ) ) = ( <" ( R x. Q ) "> ++ (/) ) )
+i49::ccatrid
+s50:s37,i49:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( <" ( R x. Q ) "> ++ (/) ) = <" ( R x. Q ) "> )
+s51:s47,s48:eqtrd |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll ( (/) ++ <" R "> ) ) ) = ( <" ( R x. Q ) "> ++ (/) ) )
+s52:s51,s50:eqtrd |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll ( (/) ++ <" R "> ) ) ) = <" ( R x. Q ) "> )
+s53:s28:oveq1d |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( ( 1st ` ( Q MulAll (/) ) ) ++ <" ( R x. Q ) "> ) = ( (/) ++ <" ( R x. Q ) "> ) )
+i54::ccatlid
+s55:s37,i54:syl |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( (/) ++ <" ( R x. Q ) "> ) = <" ( R x. Q ) "> )
+s56:s53,s55:eqtrd |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( ( 1st ` ( Q MulAll (/) ) ) ++ <" ( R x. Q ) "> ) = <" ( R x. Q ) "> )
+qed:s52,s56:eqtr4d |- ( ( Q e. NN0 /\ R e. NN0 ) -> ( 1st ` ( Q MulAll ( (/) ++ <" R "> ) ) ) = ( ( 1st ` ( Q MulAll (/) ) ) ++ <" ( R x. Q ) "> ) )
+$)

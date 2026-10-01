@@ -1,0 +1,55 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stmtel2  LOC_AFTER=?
+
+* Two statements lie in a common depth layer.
+
+s1::simp1 |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> T e. V )
+s2::simp2 |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> P e. ( TM2Stmt ` T ) )
+s3::simp3 |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> Q e. ( TM2Stmt ` T ) )
+i4::tm2stmtel
+s5:s1,i4:syl |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> ( P e. ( TM2Stmt ` T ) <-> E. n e. _om P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s6::id |- ( n = m -> n = m )
+c1:s6:fveq2d |- ( n = m -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+c2:c1:eleq2d |- ( n = m -> ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) )
+s7:c2:cbvrexvw |- ( E. n e. _om P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> E. m e. _om P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+s8:s5,s7:bitrdi |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> ( P e. ( TM2Stmt ` T ) <-> E. m e. _om P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) )
+s9:s2,s8:mpbid |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> E. m e. _om P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+i10::tm2stmtel
+s11:s1,i10:syl |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> ( Q e. ( TM2Stmt ` T ) <-> E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s12::id |- ( n = l -> n = l )
+c3:s12:fveq2d |- ( n = l -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) )
+c4:c3:eleq2d |- ( n = l -> ( Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) )
+s13:c4:cbvrexvw |- ( E. n e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> E. l e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) )
+s14:s11,s13:bitrdi |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> ( Q e. ( TM2Stmt ` T ) <-> E. l e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) )
+s15:s3,s14:mpbid |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> E. l e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) )
+s16:s1:ad2antrr |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> T e. V )
+s17::simplrl |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> m e. _om )
+s18::simplrr |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) )
+s19::simprl |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> l e. _om )
+s20::simprr |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) )
+s21::ordom |- Ord _om
+s22:s21:a1i |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> Ord _om )
+i23::ordunel
+s24:s22,s17,s19,i23:syl3anc |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> ( m u. l ) e. _om )
+s25::ssun1 |- m C_ ( m u. l )
+s26::ssun2 |- l C_ ( m u. l )
+i27::tm2layss
+s28:s16,s17,s24,i27:syl3anc |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> ( m C_ ( m u. l ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) ) )
+s29:s25,s28:mpi |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) )
+i30::tm2layss
+s31:s16,s19,s24,i30:syl3anc |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> ( l C_ ( m u. l ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) ) )
+s32:s26,s31:mpi |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) C_ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) )
+s33:s29,s18:sseldd |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) )
+s34:s32,s20:sseldd |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) )
+s35:s33,s34:jca |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) ) )
+s36::id |- ( n = ( m u. l ) -> n = ( m u. l ) )
+c5:s36:fveq2d |- ( n = ( m u. l ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) )
+c6:c5:eleq2d |- ( n = ( m u. l ) -> ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) ) )
+c7:s36:fveq2d |- ( n = ( m u. l ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) )
+c8:c7:eleq2d |- ( n = ( m u. l ) -> ( Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) <-> Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) ) )
+c9:c6,c8:anbi12d |- ( n = ( m u. l ) -> ( ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) <-> ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) ) ) )
+s37:c9:rspcev |- ( ( ( m u. l ) e. _om /\ ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` ( m u. l ) ) ) ) -> E. n e. _om ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s38:s24,s35,s37:syl2anc |- ( ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) /\ ( l e. _om /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) ) ) -> E. n e. _om ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+s39:s15:adantr |- ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) -> E. l e. _om Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` l ) )
+s40:s39,s38:rexlimddv |- ( ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) /\ ( m e. _om /\ P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` m ) ) ) -> E. n e. _om ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+qed:s9,s40:rexlimddv |- ( ( T e. V /\ P e. ( TM2Stmt ` T ) /\ Q e. ( TM2Stmt ` T ) ) -> E. n e. _om ( P e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) /\ Q e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` n ) ) )
+$)

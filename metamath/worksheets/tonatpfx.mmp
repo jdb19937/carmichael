@@ -1,0 +1,67 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatpfx  LOC_AFTER=?
+
+* The value of a prefix of a bit word is the value modulo 2 to the prefix length.
+
+s1::simp1 |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> L e. Word 2o )
+s2::simp2 |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> M e. NN0 )
+s3::simp3 |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> M <_ ( # ` L ) )
+i4::lencl
+s5:s1,i4:syl |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( # ` L ) e. NN0 )
+i6::elfz2nn0
+s7:s2,s5,s3,i6:syl3anbrc |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> M e. ( 0 ... ( # ` L ) ) )
+s8:s5:nn0zd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( # ` L ) e. ZZ )
+s9:s8:zred |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( # ` L ) e. RR )
+s10:s9:leidd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( # ` L ) <_ ( # ` L ) )
+i11::elfz2nn0
+s12:s5,s5,s10,i11:syl3anbrc |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( # ` L ) e. ( 0 ... ( # ` L ) ) )
+i13::ccatpfx
+s14:s1,s7,s12,i13:syl3anc |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( L prefix M ) ++ ( L substr <. M , ( # ` L ) >. ) ) = ( L prefix ( # ` L ) ) )
+i15::pfxid
+s16:s1,i15:syl |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( L prefix ( # ` L ) ) = L )
+s17:s14,s16:eqtrd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( L prefix M ) ++ ( L substr <. M , ( # ` L ) >. ) ) = L )
+i18::pfxcl
+s19:s1,i18:syl |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( L prefix M ) e. Word 2o )
+i20::swrdcl
+s21:s1,i20:syl |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( L substr <. M , ( # ` L ) >. ) e. Word 2o )
+i22::tonatccat
+s23:s19,s21,i22:syl2anc |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( ( L prefix M ) ++ ( L substr <. M , ( # ` L ) >. ) ) ) = ( ( toNat ` ( L prefix M ) ) + ( ( 2 ^ ( # ` ( L prefix M ) ) ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) ) )
+i24::pfxlen
+s25:s1,s7,i24:syl2anc |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( # ` ( L prefix M ) ) = M )
+s26:s25:oveq2d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( 2 ^ ( # ` ( L prefix M ) ) ) = ( 2 ^ M ) )
+s27:s26:oveq1d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( 2 ^ ( # ` ( L prefix M ) ) ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) = ( ( 2 ^ M ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) )
+s28:s27:oveq2d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( toNat ` ( L prefix M ) ) + ( ( 2 ^ ( # ` ( L prefix M ) ) ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) ) = ( ( toNat ` ( L prefix M ) ) + ( ( 2 ^ M ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) ) )
+s29:s17:fveq2d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( ( L prefix M ) ++ ( L substr <. M , ( # ` L ) >. ) ) ) = ( toNat ` L ) )
+s30:s29,s23,s28:3eqtr3d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` L ) = ( ( toNat ` ( L prefix M ) ) + ( ( 2 ^ M ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) ) )
+i31::tonatlt
+s32:s19,i31:syl |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L prefix M ) ) < ( 2 ^ ( # ` ( L prefix M ) ) ) )
+s33:s32,s26:breqtrd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L prefix M ) ) < ( 2 ^ M ) )
+s34::2cn |- 2 e. CC
+s35:s34:a1i |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> 2 e. CC )
+s36:s35,s2:expcld |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( 2 ^ M ) e. CC )
+i37::tonatcl
+s38:s21,i37:syl |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) e. NN0 )
+s39:s38:nn0zd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) e. ZZ )
+s40:s39:zred |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) e. RR )
+s41:s40:recnd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) e. CC )
+s42:s36,s41:mulcomd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( 2 ^ M ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) = ( ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) x. ( 2 ^ M ) ) )
+s43:s42:oveq2d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( toNat ` ( L prefix M ) ) + ( ( 2 ^ M ) x. ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) ) ) = ( ( toNat ` ( L prefix M ) ) + ( ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) x. ( 2 ^ M ) ) ) )
+s44:s30,s43:eqtrd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` L ) = ( ( toNat ` ( L prefix M ) ) + ( ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) x. ( 2 ^ M ) ) ) )
+s45:s44:oveq1d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( toNat ` L ) mod ( 2 ^ M ) ) = ( ( ( toNat ` ( L prefix M ) ) + ( ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) x. ( 2 ^ M ) ) ) mod ( 2 ^ M ) ) )
+i46::tonatcl
+s47:s19,i46:syl |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L prefix M ) ) e. NN0 )
+s48:s47:nn0zd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L prefix M ) ) e. ZZ )
+s49:s48:zred |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L prefix M ) ) e. RR )
+s50::2rp |- 2 e. RR+
+s51:s50:a1i |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> 2 e. RR+ )
+s52:s2:nn0zd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> M e. ZZ )
+s53:s51,s52:rpexpcld |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( 2 ^ M ) e. RR+ )
+i54::modcyc
+s55:s49,s53,s39,i54:syl3anc |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( ( toNat ` ( L prefix M ) ) + ( ( toNat ` ( L substr <. M , ( # ` L ) >. ) ) x. ( 2 ^ M ) ) ) mod ( 2 ^ M ) ) = ( ( toNat ` ( L prefix M ) ) mod ( 2 ^ M ) ) )
+s56:s49,s53:jca |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( toNat ` ( L prefix M ) ) e. RR /\ ( 2 ^ M ) e. RR+ ) )
+s57:s47:nn0ge0d |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> 0 <_ ( toNat ` ( L prefix M ) ) )
+s58:s57,s33:jca |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( 0 <_ ( toNat ` ( L prefix M ) ) /\ ( toNat ` ( L prefix M ) ) < ( 2 ^ M ) ) )
+i59::modid
+s60:s56,s58,i59:syl2anc |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( toNat ` ( L prefix M ) ) mod ( 2 ^ M ) ) = ( toNat ` ( L prefix M ) ) )
+s61:s45,s55,s60:3eqtrd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( ( toNat ` L ) mod ( 2 ^ M ) ) = ( toNat ` ( L prefix M ) ) )
+qed:s61:eqcomd |- ( ( L e. Word 2o /\ M e. NN0 /\ M <_ ( # ` L ) ) -> ( toNat ` ( L prefix M ) ) = ( ( toNat ` L ) mod ( 2 ^ M ) ) )
+$)

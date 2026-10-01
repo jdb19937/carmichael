@@ -1,0 +1,50 @@
+$( <MM> <PROOF_ASST> THEOREM=kd2stir  LOC_AFTER=?
+
+* Lean ` KDerivDetect.factorial_ge_div_exp_pow ` and ` hstir ` : ` ( A / e )^K <_ K! ` for ` 0 <_ A <_ K ` ( TP ~ tppowfac at ` X = K ` ).
+
+s1::simpl |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( A e. RR /\ 0 <_ A ) )
+s2::simpr |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( K e. NN0 /\ A <_ K ) )
+s3:s1:simpld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> A e. RR )
+s4:s1:simprd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> 0 <_ A )
+s5:s2:simpld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> K e. NN0 )
+s6:s2:simprd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> A <_ K )
+s7:s5:nn0red |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> K e. RR )
+s8:s5:nn0ge0d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> 0 <_ K )
+s9::epr |- _e e. RR+
+s10::df-e |- _e = ( exp ` 1 )
+s11:s10,s9:eqeltrri |- ( exp ` 1 ) e. RR+
+s12:s11:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( exp ` 1 ) e. RR+ )
+s13:s12:rpred |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( exp ` 1 ) e. RR )
+s14:s3,s12:rerpdivcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( A / ( exp ` 1 ) ) e. RR )
+s15:s7,s12:rerpdivcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( K / ( exp ` 1 ) ) e. RR )
+s16:s3,s12,s4:divge0d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> 0 <_ ( A / ( exp ` 1 ) ) )
+s17:s3,s7,s12,s6:lediv1dd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( A / ( exp ` 1 ) ) <_ ( K / ( exp ` 1 ) ) )
+s18:s14,s15,s5,s16,s17:leexp1ad |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( A / ( exp ` 1 ) ) ^ K ) <_ ( ( K / ( exp ` 1 ) ) ^ K ) )
+s19:s7:recnd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> K e. CC )
+s20:s12:rpcnd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( exp ` 1 ) e. CC )
+s21:s12:rpne0d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( exp ` 1 ) =/= 0 )
+s22:s19,s20,s21,s5:expdivd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( K / ( exp ` 1 ) ) ^ K ) = ( ( K ^ K ) / ( ( exp ` 1 ) ^ K ) ) )
+i23::tppowfac
+s24:s7,s8,s5,i23:syl3anc |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( K ^ K ) <_ ( ( ! ` K ) x. ( exp ` K ) ) )
+s25:s5:nn0zd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> K e. ZZ )
+s26::ax-1cn |- 1 e. CC
+s27:s26:a1i |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> 1 e. CC )
+i28::efexp
+s29:s27,s25,i28:syl2anc |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( exp ` ( K x. 1 ) ) = ( ( exp ` 1 ) ^ K ) )
+s30:s19:mulridd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( K x. 1 ) = K )
+s31:s30:fveq2d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( exp ` ( K x. 1 ) ) = ( exp ` K ) )
+s32:s31,s29:eqtr3d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( exp ` K ) = ( ( exp ` 1 ) ^ K ) )
+s33:s32:oveq2d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( ! ` K ) x. ( exp ` K ) ) = ( ( ! ` K ) x. ( ( exp ` 1 ) ^ K ) ) )
+s34:s24,s33:breqtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( K ^ K ) <_ ( ( ! ` K ) x. ( ( exp ` 1 ) ^ K ) ) )
+s35:s12,s25:rpexpcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( exp ` 1 ) ^ K ) e. RR+ )
+s36:s5:faccld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ! ` K ) e. NN )
+s37:s36:nnred |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ! ` K ) e. RR )
+s38:s7,s5:reexpcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( K ^ K ) e. RR )
+s39:s38,s37,s35:ledivmul2d |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( ( K ^ K ) / ( ( exp ` 1 ) ^ K ) ) <_ ( ! ` K ) <-> ( K ^ K ) <_ ( ( ! ` K ) x. ( ( exp ` 1 ) ^ K ) ) ) )
+s40:s34,s39:mpbird |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( K ^ K ) / ( ( exp ` 1 ) ^ K ) ) <_ ( ! ` K ) )
+s41:s22,s40:eqbrtrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( K / ( exp ` 1 ) ) ^ K ) <_ ( ! ` K ) )
+s42:s14,s5:reexpcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( A / ( exp ` 1 ) ) ^ K ) e. RR )
+s43:s15,s5:reexpcld |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( K / ( exp ` 1 ) ) ^ K ) e. RR )
+s44:s42,s43,s37,s18,s41:letrd |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( A / ( exp ` 1 ) ) ^ K ) <_ ( ! ` K ) )
+qed:s44:idi |- ( ( ( A e. RR /\ 0 <_ A ) /\ ( K e. NN0 /\ A <_ K ) ) -> ( ( A / ( exp ` 1 ) ) ^ K ) <_ ( ! ` K ) )
+$)

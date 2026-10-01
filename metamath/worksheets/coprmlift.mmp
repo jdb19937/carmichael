@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=coprmlift  LOC_AFTER=?
+
+* Unit lifting (Mathlib ZMod.unitsMap_surjective): every integer A coprime to N is congruent mod N to an integer coprime to M. Proved from Dirichlet's theorem dirith: the primes congruent to A mod N are infinite, so one of them exceeds M and is therefore coprime to M.
+
+s1::simp1l |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> N e. NN )
+s2::simp1r |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> M e. NN )
+s3::simp2 |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> A e. ZZ )
+s4::simp3 |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( A gcd N ) = 1 )
+i5::dirith
+s6:s1,s3,s4,i5:syl3anc |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> { p e. Prime | N || ( p - A ) } ~~ NN )
+s7::oveq1 |- ( p = q -> ( p - A ) = ( q - A ) )
+s8:s7:breq2d |- ( p = q -> ( N || ( p - A ) <-> N || ( q - A ) ) )
+s9:s8:cbvrabv |- { p e. Prime | N || ( p - A ) } = { q e. Prime | N || ( q - A ) }
+s10:s9,s6:eqbrtrrid |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> { q e. Prime | N || ( q - A ) } ~~ NN )
+i11::enfi
+s12:s10,i11:syl |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( { q e. Prime | N || ( q - A ) } e. Fin <-> NN e. Fin ) )
+s13::nnnfi |- -. NN e. Fin
+s14:s13:a1i |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> -. NN e. Fin )
+s15:s14,s12:mtbird |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> -. { q e. Prime | N || ( q - A ) } e. Fin )
+s16::ssrab2 |- { q e. Prime | N || ( q - A ) } C_ Prime
+s17::prmssnn |- Prime C_ NN
+s18:s16,s17:sstri |- { q e. Prime | N || ( q - A ) } C_ NN
+s19:s18:a1i |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> { q e. Prime | N || ( q - A ) } C_ NN )
+i20::coprmliftlem
+s21:s19,s15,s2,i20:syl3anc |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> E. p e. { q e. Prime | N || ( q - A ) } M < p )
+s22::simprl |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. { q e. Prime | N || ( q - A ) } )
+s23::simprr |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M < p )
+s24::oveq1 |- ( q = p -> ( q - A ) = ( p - A ) )
+s25:s24:breq2d |- ( q = p -> ( N || ( q - A ) <-> N || ( p - A ) ) )
+s26:s25:elrab |- ( p e. { q e. Prime | N || ( q - A ) } <-> ( p e. Prime /\ N || ( p - A ) ) )
+s27:s22,s26:sylib |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( p e. Prime /\ N || ( p - A ) ) )
+s28:s27:simpld |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. Prime )
+s29:s27:simprd |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> N || ( p - A ) )
+s31::prmz |- ( p e. Prime -> p e. ZZ )
+s32:s28,s31:syl |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. ZZ )
+s33:s2:adantr |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M e. NN )
+i34::dvdsle
+s35:s32,s33,i34:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( p || M -> p <_ M ) )
+s36:s33:nnred |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M e. RR )
+s37::prmnn |- ( p e. Prime -> p e. NN )
+s38:s28,s37:syl |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. NN )
+s39:s38:nnred |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. RR )
+i40::ltnle
+s41:s36,s39,i40:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( M < p <-> -. p <_ M ) )
+s42:s23,s41:mpbid |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> -. p <_ M )
+s43:s42,s35:mtod |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> -. p || M )
+s44:s33:nnzd |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M e. ZZ )
+i45::coprm
+s48:s33:nnzd |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M e. ZZ )
+i49::coprm
+s50:s28,s48,i49:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( -. p || M <-> ( p gcd M ) = 1 ) )
+s51:s43,s50:mpbid |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( p gcd M ) = 1 )
+s52:s29,s51:jca |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( N || ( p - A ) /\ ( p gcd M ) = 1 ) )
+s53::oveq1 |- ( b = p -> ( b - A ) = ( p - A ) )
+s54:s53:breq2d |- ( b = p -> ( N || ( b - A ) <-> N || ( p - A ) ) )
+s55::oveq1 |- ( b = p -> ( b gcd M ) = ( p gcd M ) )
+s56:s55:eqeq1d |- ( b = p -> ( ( b gcd M ) = 1 <-> ( p gcd M ) = 1 ) )
+s57:s54,s56:anbi12d |- ( b = p -> ( ( N || ( b - A ) /\ ( b gcd M ) = 1 ) <-> ( N || ( p - A ) /\ ( p gcd M ) = 1 ) ) )
+s58:s57:rspcev |- ( ( p e. ZZ /\ ( N || ( p - A ) /\ ( p gcd M ) = 1 ) ) -> E. b e. ZZ ( N || ( b - A ) /\ ( b gcd M ) = 1 ) )
+s59:s32,s52,s58:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> E. b e. ZZ ( N || ( b - A ) /\ ( b gcd M ) = 1 ) )
+qed:s21,s59:rexlimddv |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> E. b e. ZZ ( N || ( b - A ) /\ ( b gcd M ) = 1 ) )
+$)

@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=exstopcl  LOC_AFTER=?
+
+* One step of the extraction state stays a state (~ df-exstop ).
+
+s1::simpl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( L e. NN /\ G e. NN0 ) )
+s2:s1:simpld |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> L e. NN )
+s3:s1:simprd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> G e. NN0 )
+s4::simpr |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) )
+s5:s4:simpld |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) )
+s6:s4:simprd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> F e. NN0 )
+i7::xp1st
+s8:s5,i7:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 1st ` Z ) e. NN0 )
+i9::xp2nd
+s10:s5,i9:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 2nd ` Z ) e. ( Word NN0 X. ( Tbl X. 2o ) ) )
+i11::xp1st
+s12:s10,i11:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 1st ` ( 2nd ` Z ) ) e. Word NN0 )
+i13::xp2nd
+s14:s10,i13:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 2nd ` ( 2nd ` Z ) ) e. ( Tbl X. 2o ) )
+i15::xp1st
+s16:s14,i15:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) e. Tbl )
+s17:s2,s6:jca |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( L e. NN /\ F e. NN0 ) )
+s18:s17,s16:jca |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( ( L e. NN /\ F e. NN0 ) /\ ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) e. Tbl ) )
+i19::dpstepcl
+s20:s18,i19:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) e. ( Tbl X. NN0 ) )
+i21::xp1st
+s22:s20,i21:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) e. Tbl )
+s23::0el2o |- (/) e. 2o
+s24:s23:a1i |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> (/) e. 2o )
+s25:s22,s24:opelxpd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> <. ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) , (/) >. e. ( Tbl X. 2o ) )
+s26:s12,s25:opelxpd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> <. ( 1st ` ( 2nd ` Z ) ) , <. ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) , (/) >. >. e. ( Word NN0 X. ( Tbl X. 2o ) ) )
+s27:s8,s26:opelxpd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> <. ( 1st ` Z ) , <. ( 1st ` ( 2nd ` Z ) ) , <. ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) , (/) >. >. >. e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) )
+s28::1z |- 1 e. ZZ
+s29:s28:a1i |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> 1 e. ZZ )
+i30::zmodcl
+s31:s29,s2,i30:syl2anc |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 1 mod L ) e. NN0 )
+i32::tblfv
+s33:s22,s31,i32:syl2anc |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) e. ( Word NN0 |_| 1o ) )
+i34::ttabopt
+s35:s33,i34:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) e. Word NN0 )
+i36::prodlcl
+s37:s35,i36:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) e. ( NN0 X. NN0 ) )
+i38::xp1st
+s39:s37,i38:syl |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) e. NN0 )
+s40:s8,s39:nn0mulcld |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) e. NN0 )
+i41::ccatcl
+s42:s35,s12,i41:syl2anc |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ++ ( 1st ` ( 2nd ` Z ) ) ) e. Word NN0 )
+s43::emptytblcl |- EmptyTbl e. Tbl
+s44:s43:a1i |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> EmptyTbl e. Tbl )
+s45::1oel2o |- 1o e. 2o
+s46:s45:a1i |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> 1o e. 2o )
+s47:s46,s24:ifcld |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> if ( G < ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , 1o , (/) ) e. 2o )
+s48:s44,s47:opelxpd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> <. EmptyTbl , if ( G < ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , 1o , (/) ) >. e. ( Tbl X. 2o ) )
+s49:s42,s48:opelxpd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> <. ( ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ++ ( 1st ` ( 2nd ` Z ) ) ) , <. EmptyTbl , if ( G < ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , 1o , (/) ) >. >. e. ( Word NN0 X. ( Tbl X. 2o ) ) )
+s50:s40,s49:opelxpd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> <. ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , <. ( ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ++ ( 1st ` ( 2nd ` Z ) ) ) , <. EmptyTbl , if ( G < ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , 1o , (/) ) >. >. >. e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) )
+s51:s27,s50:ifcld |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> if ( ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) = ( inr ` (/) ) , <. ( 1st ` Z ) , <. ( 1st ` ( 2nd ` Z ) ) , <. ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) , (/) >. >. >. , <. ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , <. ( ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ++ ( 1st ` ( 2nd ` Z ) ) ) , <. EmptyTbl , if ( G < ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , 1o , (/) ) >. >. >. ) e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) )
+s52::exstopv |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( Z ( L ExStOp G ) F ) = if ( ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) = ( inr ` (/) ) , <. ( 1st ` Z ) , <. ( 1st ` ( 2nd ` Z ) ) , <. ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) , (/) >. >. >. , <. ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , <. ( ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ++ ( 1st ` ( 2nd ` Z ) ) ) , <. EmptyTbl , if ( G < ( ( 1st ` Z ) x. ( 1st ` ( ProdL ` ( 2nd ` ( ( 1st ` ( ( L DpStep F ) ` ( 1st ` ( 2nd ` ( 2nd ` Z ) ) ) ) ) ` ( 1 mod L ) ) ) ) ) ) , 1o , (/) ) >. >. >. ) )
+qed:s52,s51:eqeltrd |- ( ( ( L e. NN /\ G e. NN0 ) /\ ( Z e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) /\ F e. NN0 ) ) -> ( Z ( L ExStOp G ) F ) e. ( NN0 X. ( Word NN0 X. ( Tbl X. 2o ) ) ) )
+$)

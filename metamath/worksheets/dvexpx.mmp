@@ -1,0 +1,64 @@
+$( <MM> <PROOF_ASST> THEOREM=dvexpx  LOC_AFTER=?
+
+* A positive integer power of a function is differentiable at every point where the function is ( pointwise chain rule, ~ dvcobr ).
+
+s1::simpll |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> F : D --> CC )
+s2::simplr |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> D C_ CC )
+s3::simprl |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> N e. NN )
+s4::simprr |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> X e. dom ( CC _D F ) )
+s5::ssid |- CC C_ CC
+s6:s5:a1i |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> CC C_ CC )
+s7::simpr |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> y e. CC )
+s8:s3:adantr |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> N e. NN )
+s9:s8:nnnn0d |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> N e. NN0 )
+s10:s7,s9:expcld |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> ( y ^ N ) e. CC )
+s11::eqid |- ( y e. CC |-> ( y ^ N ) ) = ( y e. CC |-> ( y ^ N ) )
+s12:s10,s11:fmptd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( y e. CC |-> ( y ^ N ) ) : CC --> CC )
+i13::dvexp
+s14:s3,i13:syl |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( CC _D ( y e. CC |-> ( y ^ N ) ) ) = ( y e. CC |-> ( N x. ( y ^ ( N - 1 ) ) ) ) )
+s15:s8:nncnd |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> N e. CC )
+i16::nnm1nn0
+s17:s8,i16:syl |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> ( N - 1 ) e. NN0 )
+s18:s7,s17:expcld |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> ( y ^ ( N - 1 ) ) e. CC )
+s19:s15,s18:mulcld |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ y e. CC ) -> ( N x. ( y ^ ( N - 1 ) ) ) e. CC )
+s20::eqid |- ( y e. CC |-> ( N x. ( y ^ ( N - 1 ) ) ) ) = ( y e. CC |-> ( N x. ( y ^ ( N - 1 ) ) ) )
+s21:s19,s20:fmptd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( y e. CC |-> ( N x. ( y ^ ( N - 1 ) ) ) ) : CC --> CC )
+i22::fdm
+s23:s21,i22:syl |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> dom ( y e. CC |-> ( N x. ( y ^ ( N - 1 ) ) ) ) = CC )
+s24:s14:dmeqd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) = dom ( y e. CC |-> ( N x. ( y ^ ( N - 1 ) ) ) ) )
+s25:s24,s23:eqtrd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) = CC )
+s26:s25:eqcomd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> CC = dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) )
+s27:s26:eqimssd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> CC C_ dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) )
+s28:s6,s1,s2:dvbss |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> dom ( CC _D F ) C_ D )
+s29:s28,s4:sseldd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> X e. D )
+s30:s1,s29:ffvelcdmd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( F ` X ) e. CC )
+s31:s27,s30:sseldd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( F ` X ) e. dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) )
+s32::dvfcn |- ( CC _D ( y e. CC |-> ( y ^ N ) ) ) : dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) --> CC
+s33:s32:a1i |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( CC _D ( y e. CC |-> ( y ^ N ) ) ) : dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) --> CC )
+s34:s33:ffund |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> Fun ( CC _D ( y e. CC |-> ( y ^ N ) ) ) )
+i35::funfvbrb
+s36:s34,i35:syl |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( ( F ` X ) e. dom ( CC _D ( y e. CC |-> ( y ^ N ) ) ) <-> ( F ` X ) ( CC _D ( y e. CC |-> ( y ^ N ) ) ) ( ( CC _D ( y e. CC |-> ( y ^ N ) ) ) ` ( F ` X ) ) ) )
+s37:s31,s36:mpbid |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( F ` X ) ( CC _D ( y e. CC |-> ( y ^ N ) ) ) ( ( CC _D ( y e. CC |-> ( y ^ N ) ) ) ` ( F ` X ) ) )
+s38::dvfcn |- ( CC _D F ) : dom ( CC _D F ) --> CC
+s39:s38:a1i |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( CC _D F ) : dom ( CC _D F ) --> CC )
+s40:s39:ffund |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> Fun ( CC _D F ) )
+i41::funfvbrb
+s42:s40,i41:syl |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( X e. dom ( CC _D F ) <-> X ( CC _D F ) ( ( CC _D F ) ` X ) ) )
+s43:s4,s42:mpbid |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> X ( CC _D F ) ( ( CC _D F ) ` X ) )
+s44::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s45:s12,s6,s1,s2,s6,s6,s37,s43,s44:dvcobr |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> X ( CC _D ( ( y e. CC |-> ( y ^ N ) ) o. F ) ) ( ( ( CC _D ( y e. CC |-> ( y ^ N ) ) ) ` ( F ` X ) ) x. ( ( CC _D F ) ` X ) ) )
+s46::reldv |- Rel ( CC _D ( ( y e. CC |-> ( y ^ N ) ) o. F ) )
+s47:s46:a1i |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> Rel ( CC _D ( ( y e. CC |-> ( y ^ N ) ) o. F ) ) )
+i48::releldm
+s49:s47,s45,i48:syl2anc |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> X e. dom ( CC _D ( ( y e. CC |-> ( y ^ N ) ) o. F ) ) )
+s50:s1:adantr |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ z e. D ) -> F : D --> CC )
+s51::simpr |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ z e. D ) -> z e. D )
+s52:s50,s51:ffvelcdmd |- ( ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) /\ z e. D ) -> ( F ` z ) e. CC )
+s53:s1:feqmptd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> F = ( z e. D |-> ( F ` z ) ) )
+s54::eqidd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( y e. CC |-> ( y ^ N ) ) = ( y e. CC |-> ( y ^ N ) ) )
+s55::oveq1 |- ( y = ( F ` z ) -> ( y ^ N ) = ( ( F ` z ) ^ N ) )
+s56:s52,s53,s54,s55:fmptco |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( ( y e. CC |-> ( y ^ N ) ) o. F ) = ( z e. D |-> ( ( F ` z ) ^ N ) ) )
+s57:s56:oveq2d |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> ( CC _D ( ( y e. CC |-> ( y ^ N ) ) o. F ) ) = ( CC _D ( z e. D |-> ( ( F ` z ) ^ N ) ) ) )
+s58:s57:dmeqd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> dom ( CC _D ( ( y e. CC |-> ( y ^ N ) ) o. F ) ) = dom ( CC _D ( z e. D |-> ( ( F ` z ) ^ N ) ) ) )
+qed:s49,s58:eleqtrd |- ( ( ( F : D --> CC /\ D C_ CC ) /\ ( N e. NN /\ X e. dom ( CC _D F ) ) ) -> X e. dom ( CC _D ( z e. D |-> ( ( F ` z ) ^ N ) ) ) )
+$)

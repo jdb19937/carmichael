@@ -1,0 +1,183 @@
+$( <MM> <PROOF_ASST> THEOREM=cbe8  LOC_AFTER=?
+
+* Eight is below exp ( M / 4 ) once M is at least twelve: the constant factors of the cost budget are all at most eight (Lean AlgBudget.lean, the local ` h8 ` of costPieces_bound).
+
+h1::cbe8.1 |- ( ph -> M e. RR )
+h2::cbe8.2 |- ( ph -> ; 1 2 <_ M )
+s1::egt2lt3 |- ( 2 < _e /\ _e < 3 )
+s2:s1:simpli |- 2 < _e
+s3:s2:a1i |- ( ph -> 2 < _e )
+s4::df-e |- _e = ( exp ` 1 )
+s5:s4:a1i |- ( ph -> _e = ( exp ` 1 ) )
+s6:s3,s5:breqtrd |- ( ph -> 2 < ( exp ` 1 ) )
+s7::1red |- ( ph -> 1 e. RR )
+s8:s7:reefcld |- ( ph -> ( exp ` 1 ) e. RR )
+s9::2re |- 2 e. RR
+s10:s9:a1i |- ( ph -> 2 e. RR )
+s11::0le2 |- 0 <_ 2
+s12:s11:a1i |- ( ph -> 0 <_ 2 )
+s13::3nn0 |- 3 e. NN0
+s14:s13:a1i |- ( ph -> 3 e. NN0 )
+s15:s10,s8,s14:3jca |- ( ph -> ( 2 e. RR /\ ( exp ` 1 ) e. RR /\ 3 e. NN0 ) )
+s16:s6:ltled |- ( ph -> 2 <_ ( exp ` 1 ) )
+s17:s12,s16:jca |- ( ph -> ( 0 <_ 2 /\ 2 <_ ( exp ` 1 ) ) )
+s18:s15,s17:jca |- ( ph -> ( ( 2 e. RR /\ ( exp ` 1 ) e. RR /\ 3 e. NN0 ) /\ ( 0 <_ 2 /\ 2 <_ ( exp ` 1 ) ) ) )
+i19::leexp1a
+s20:s18,i19:syl |- ( ph -> ( 2 ^ 3 ) <_ ( ( exp ` 1 ) ^ 3 ) )
+s21::cu2 |- ( 2 ^ 3 ) = 8
+s22:s21:a1i |- ( ph -> ( 2 ^ 3 ) = 8 )
+s23:s22:eqcomd |- ( ph -> 8 = ( 2 ^ 3 ) )
+s24:s23,s20:eqbrtrd |- ( ph -> 8 <_ ( ( exp ` 1 ) ^ 3 ) )
+s25::1cnd |- ( ph -> 1 e. CC )
+s26:s14:nn0zd |- ( ph -> 3 e. ZZ )
+s27:s25,s26:jca |- ( ph -> ( 1 e. CC /\ 3 e. ZZ ) )
+i28::efexp
+s29:s27,i28:syl |- ( ph -> ( exp ` ( 3 x. 1 ) ) = ( ( exp ` 1 ) ^ 3 ) )
+s30::3t1e3 |- ( 3 x. 1 ) = 3
+s31:s30:a1i |- ( ph -> ( 3 x. 1 ) = 3 )
+s32:s31:fveq2d |- ( ph -> ( exp ` ( 3 x. 1 ) ) = ( exp ` 3 ) )
+s33:s32:eqcomd |- ( ph -> ( exp ` 3 ) = ( exp ` ( 3 x. 1 ) ) )
+s34:s33,s29:eqtrd |- ( ph -> ( exp ` 3 ) = ( ( exp ` 1 ) ^ 3 ) )
+s35:s34:eqcomd |- ( ph -> ( ( exp ` 1 ) ^ 3 ) = ( exp ` 3 ) )
+s36:s24,s35:breqtrd |- ( ph -> 8 <_ ( exp ` 3 ) )
+i37::rpre
+i38::rpdivcl
+s39::1rp |- 1 e. RR+
+i40::nnrp
+s41::4nn |- 4 e. NN
+s42:s41,i40:ax-mp |- 4 e. RR+
+s43:s39,s42,i38:mp2an |- ( 1 / 4 ) e. RR+
+s44:s43,i37:ax-mp |- ( 1 / 4 ) e. RR
+s45:s44:a1i |- ( ph -> ( 1 / 4 ) e. RR )
+s46:s45,1:remulcld |- ( ph -> ( ( 1 / 4 ) x. M ) e. RR )
+s47::3re |- 3 e. RR
+s48:s47:a1i |- ( ph -> 3 e. RR )
+s49::1nn0 |- 1 e. NN0
+s50::2nn0 |- 2 e. NN0
+s51:s49,s50:deccl |- ; 1 2 e. NN0
+s52:s51:nn0rei |- ; 1 2 e. RR
+s53:s52:a1i |- ( ph -> ; 1 2 e. RR )
+s54:1,s53:subge0d |- ( ph -> ( 0 <_ ( M - ; 1 2 ) <-> ; 1 2 <_ M ) )
+s55:2,s54:mpbird |- ( ph -> 0 <_ ( M - ; 1 2 ) )
+s56:1,s53:resubcld |- ( ph -> ( M - ; 1 2 ) e. RR )
+i57::rpge0
+i58::rpdivcl
+i59::nnrp
+s60:s43,i57:ax-mp |- 0 <_ ( 1 / 4 )
+s61:s60:a1i |- ( ph -> 0 <_ ( 1 / 4 ) )
+s62:s45,s56,s61,s55:mulge0d |- ( ph -> 0 <_ ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) )
+s63::4cn |- 4 e. CC
+s64:s63:a1i |- ( ph -> 4 e. CC )
+i65::rpcn
+i66::rpdivcl
+i67::nnrp
+s68:s43,i65:ax-mp |- ( 1 / 4 ) e. CC
+s69:s68:a1i |- ( ph -> ( 1 / 4 ) e. CC )
+s70:1:recnd |- ( ph -> M e. CC )
+s71:s51:nn0cni |- ; 1 2 e. CC
+s72:s71:a1i |- ( ph -> ; 1 2 e. CC )
+s73:s70,s72:subcld |- ( ph -> ( M - ; 1 2 ) e. CC )
+s74:s64,s69,s73:mulassd |- ( ph -> ( ( 4 x. ( 1 / 4 ) ) x. ( M - ; 1 2 ) ) = ( 4 x. ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) ) )
+s75:s74:eqcomd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) ) = ( ( 4 x. ( 1 / 4 ) ) x. ( M - ; 1 2 ) ) )
+s76::ax-1cn |- 1 e. CC
+s77::4ne0 |- 4 =/= 0
+s78:s63,s76,s63,s77:divassi |- ( ( 4 x. 1 ) / 4 ) = ( 4 x. ( 1 / 4 ) )
+s79:s78:eqcomi |- ( 4 x. ( 1 / 4 ) ) = ( ( 4 x. 1 ) / 4 )
+s80:s63:mulridi |- ( 4 x. 1 ) = 4
+s81:s80:oveq1i |- ( ( 4 x. 1 ) / 4 ) = ( 4 / 4 )
+s82:s63,s63,s76,s77:divmuli |- ( ( 4 / 4 ) = 1 <-> ( 4 x. 1 ) = 4 )
+s83:s80,s82:mpbir |- ( 4 / 4 ) = 1
+s84:s81,s83:eqtri |- ( ( 4 x. 1 ) / 4 ) = 1
+s85:s79,s84:eqtri |- ( 4 x. ( 1 / 4 ) ) = 1
+s86:s85:a1i |- ( ph -> ( 4 x. ( 1 / 4 ) ) = 1 )
+s87:s86:oveq1d |- ( ph -> ( ( 4 x. ( 1 / 4 ) ) x. ( M - ; 1 2 ) ) = ( 1 x. ( M - ; 1 2 ) ) )
+s88:s73:mullidd |- ( ph -> ( 1 x. ( M - ; 1 2 ) ) = ( M - ; 1 2 ) )
+s89:s70,s72:negsubd |- ( ph -> ( M + -u ; 1 2 ) = ( M - ; 1 2 ) )
+s90:s89:eqcomd |- ( ph -> ( M - ; 1 2 ) = ( M + -u ; 1 2 ) )
+s91:s72:mulm1d |- ( ph -> ( -u 1 x. ; 1 2 ) = -u ; 1 2 )
+s92:s91:eqcomd |- ( ph -> -u ; 1 2 = ( -u 1 x. ; 1 2 ) )
+s93:s92:oveq2d |- ( ph -> ( M + -u ; 1 2 ) = ( M + ( -u 1 x. ; 1 2 ) ) )
+s94:s76:a1i |- ( ph -> 1 e. CC )
+s95:s94,s70:mulcld |- ( ph -> ( 1 x. M ) e. CC )
+s96:s95:addlidd |- ( ph -> ( 0 + ( 1 x. M ) ) = ( 1 x. M ) )
+s97:s96:eqcomd |- ( ph -> ( 1 x. M ) = ( 0 + ( 1 x. M ) ) )
+s98:s70:mullidd |- ( ph -> ( 1 x. M ) = M )
+s99:s98:eqcomd |- ( ph -> M = ( 1 x. M ) )
+s100:s99,s97:eqtrd |- ( ph -> M = ( 0 + ( 1 x. M ) ) )
+s101:s71:mullidi |- ( 1 x. ; 1 2 ) = ; 1 2
+s102:s76,s71:mulneg1i |- ( -u 1 x. ; 1 2 ) = -u ( 1 x. ; 1 2 )
+s103:s101:negeqi |- -u ( 1 x. ; 1 2 ) = -u ; 1 2
+s104:s102,s103:eqtri |- ( -u 1 x. ; 1 2 ) = -u ; 1 2
+s105:s104:a1i |- ( ph -> ( -u 1 x. ; 1 2 ) = -u ; 1 2 )
+s106:s100,s105:oveq12d |- ( ph -> ( M + ( -u 1 x. ; 1 2 ) ) = ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) )
+s107::0cn |- 0 e. CC
+s108:s107:a1i |- ( ph -> 0 e. CC )
+s109:s71:negcli |- -u ; 1 2 e. CC
+s110:s109:a1i |- ( ph -> -u ; 1 2 e. CC )
+s111:s108,s95,s110:add32d |- ( ph -> ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) = ( ( 0 + -u ; 1 2 ) + ( 1 x. M ) ) )
+s112:s109:addlidi |- ( 0 + -u ; 1 2 ) = -u ; 1 2
+s113:s112:a1i |- ( ph -> ( 0 + -u ; 1 2 ) = -u ; 1 2 )
+s114:s113:oveq1d |- ( ph -> ( ( 0 + -u ; 1 2 ) + ( 1 x. M ) ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s115:s111,s114:eqtrd |- ( ph -> ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s116:s90,s93:eqtrd |- ( ph -> ( M - ; 1 2 ) = ( M + ( -u 1 x. ; 1 2 ) ) )
+s117:s116,s106:eqtrd |- ( ph -> ( M - ; 1 2 ) = ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) )
+s118:s117,s115:eqtrd |- ( ph -> ( M - ; 1 2 ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s119:s75,s87:eqtrd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) ) = ( 1 x. ( M - ; 1 2 ) ) )
+s120:s119,s88:eqtrd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) ) = ( M - ; 1 2 ) )
+s121:s120,s118:eqtrd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s122:s69,s70:mulcld |- ( ph -> ( ( 1 / 4 ) x. M ) e. CC )
+s123::3cn |- 3 e. CC
+s124:s123:a1i |- ( ph -> 3 e. CC )
+s125:s64,s122,s124:subdid |- ( ph -> ( 4 x. ( ( ( 1 / 4 ) x. M ) - 3 ) ) = ( ( 4 x. ( ( 1 / 4 ) x. M ) ) - ( 4 x. 3 ) ) )
+s126:s64,s122:mulcld |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. M ) ) e. CC )
+s127:s64,s124:mulcld |- ( ph -> ( 4 x. 3 ) e. CC )
+s128:s126,s127:negsubd |- ( ph -> ( ( 4 x. ( ( 1 / 4 ) x. M ) ) + -u ( 4 x. 3 ) ) = ( ( 4 x. ( ( 1 / 4 ) x. M ) ) - ( 4 x. 3 ) ) )
+s129:s128:eqcomd |- ( ph -> ( ( 4 x. ( ( 1 / 4 ) x. M ) ) - ( 4 x. 3 ) ) = ( ( 4 x. ( ( 1 / 4 ) x. M ) ) + -u ( 4 x. 3 ) ) )
+s130:s64,s124:mulneg1d |- ( ph -> ( -u 4 x. 3 ) = -u ( 4 x. 3 ) )
+s131:s130:eqcomd |- ( ph -> -u ( 4 x. 3 ) = ( -u 4 x. 3 ) )
+s132:s131:oveq2d |- ( ph -> ( ( 4 x. ( ( 1 / 4 ) x. M ) ) + -u ( 4 x. 3 ) ) = ( ( 4 x. ( ( 1 / 4 ) x. M ) ) + ( -u 4 x. 3 ) ) )
+s133:s64,s69,s70:mulassd |- ( ph -> ( ( 4 x. ( 1 / 4 ) ) x. M ) = ( 4 x. ( ( 1 / 4 ) x. M ) ) )
+s134:s133:eqcomd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. M ) ) = ( ( 4 x. ( 1 / 4 ) ) x. M ) )
+s135:s85:a1i |- ( ph -> ( 4 x. ( 1 / 4 ) ) = 1 )
+s136:s135:oveq1d |- ( ph -> ( ( 4 x. ( 1 / 4 ) ) x. M ) = ( 1 x. M ) )
+s137:s70:mullidd |- ( ph -> ( 1 x. M ) = M )
+s138:s95:addlidd |- ( ph -> ( 0 + ( 1 x. M ) ) = ( 1 x. M ) )
+s139:s138:eqcomd |- ( ph -> ( 1 x. M ) = ( 0 + ( 1 x. M ) ) )
+s140:s70:mullidd |- ( ph -> ( 1 x. M ) = M )
+s141:s140:eqcomd |- ( ph -> M = ( 1 x. M ) )
+s142:s141,s139:eqtrd |- ( ph -> M = ( 0 + ( 1 x. M ) ) )
+s143:s134,s136:eqtrd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. M ) ) = ( 1 x. M ) )
+s144:s143,s137:eqtrd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. M ) ) = M )
+s145:s144,s142:eqtrd |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. M ) ) = ( 0 + ( 1 x. M ) ) )
+s146::4t3e12 |- ( 4 x. 3 ) = ; 1 2
+s147:s63,s123:mulneg1i |- ( -u 4 x. 3 ) = -u ( 4 x. 3 )
+s148:s146:negeqi |- -u ( 4 x. 3 ) = -u ; 1 2
+s149:s147,s148:eqtri |- ( -u 4 x. 3 ) = -u ; 1 2
+s150:s149:a1i |- ( ph -> ( -u 4 x. 3 ) = -u ; 1 2 )
+s151:s145,s150:oveq12d |- ( ph -> ( ( 4 x. ( ( 1 / 4 ) x. M ) ) + ( -u 4 x. 3 ) ) = ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) )
+s152:s108,s95,s110:add32d |- ( ph -> ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) = ( ( 0 + -u ; 1 2 ) + ( 1 x. M ) ) )
+s153:s112:a1i |- ( ph -> ( 0 + -u ; 1 2 ) = -u ; 1 2 )
+s154:s153:oveq1d |- ( ph -> ( ( 0 + -u ; 1 2 ) + ( 1 x. M ) ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s155:s152,s154:eqtrd |- ( ph -> ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s156:s125,s129:eqtrd |- ( ph -> ( 4 x. ( ( ( 1 / 4 ) x. M ) - 3 ) ) = ( ( 4 x. ( ( 1 / 4 ) x. M ) ) + -u ( 4 x. 3 ) ) )
+s157:s156,s132:eqtrd |- ( ph -> ( 4 x. ( ( ( 1 / 4 ) x. M ) - 3 ) ) = ( ( 4 x. ( ( 1 / 4 ) x. M ) ) + ( -u 4 x. 3 ) ) )
+s158:s157,s151:eqtrd |- ( ph -> ( 4 x. ( ( ( 1 / 4 ) x. M ) - 3 ) ) = ( ( 0 + ( 1 x. M ) ) + -u ; 1 2 ) )
+s159:s158,s155:eqtrd |- ( ph -> ( 4 x. ( ( ( 1 / 4 ) x. M ) - 3 ) ) = ( -u ; 1 2 + ( 1 x. M ) ) )
+s160:s121,s159:eqtr4d |- ( ph -> ( 4 x. ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) ) = ( 4 x. ( ( ( 1 / 4 ) x. M ) - 3 ) ) )
+s161:s69,s73:mulcld |- ( ph -> ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) e. CC )
+s162:s122,s124:subcld |- ( ph -> ( ( ( 1 / 4 ) x. M ) - 3 ) e. CC )
+s163:s77:a1i |- ( ph -> 4 =/= 0 )
+s164:s161,s162,s64,s163,s160:mulcanad |- ( ph -> ( ( 1 / 4 ) x. ( M - ; 1 2 ) ) = ( ( ( 1 / 4 ) x. M ) - 3 ) )
+s165:s62,s164:breqtrd |- ( ph -> 0 <_ ( ( ( 1 / 4 ) x. M ) - 3 ) )
+s166:s47:a1i |- ( ph -> 3 e. RR )
+s167:s46,s166:subge0d |- ( ph -> ( 0 <_ ( ( ( 1 / 4 ) x. M ) - 3 ) <-> 3 <_ ( ( 1 / 4 ) x. M ) ) )
+s168:s165,s167:mpbid |- ( ph -> 3 <_ ( ( 1 / 4 ) x. M ) )
+i169::efle
+s170:s48,s46,i169:syl2anc |- ( ph -> ( 3 <_ ( ( 1 / 4 ) x. M ) <-> ( exp ` 3 ) <_ ( exp ` ( ( 1 / 4 ) x. M ) ) ) )
+s171:s170,s168:mpbid |- ( ph -> ( exp ` 3 ) <_ ( exp ` ( ( 1 / 4 ) x. M ) ) )
+s172::8re |- 8 e. RR
+s173:s172:a1i |- ( ph -> 8 e. RR )
+s174:s166:reefcld |- ( ph -> ( exp ` 3 ) e. RR )
+s175:s46:reefcld |- ( ph -> ( exp ` ( ( 1 / 4 ) x. M ) ) e. RR )
+qed:s173,s174,s175,s36,s171:letrd |- ( ph -> 8 <_ ( exp ` ( ( 1 / 4 ) x. M ) ) )
+$)

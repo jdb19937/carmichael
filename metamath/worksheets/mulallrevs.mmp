@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=mulallrevs  LOC_AFTER=?
+
+* Step of the induction for mulallrev.
+
+s1::simpl1 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> V e. Word NN0 )
+s2::simpl2 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> P e. NN0 )
+s3::simpr |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> Q e. NN0 )
+s4::simpl3 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) )
+s5:s4,s3:mpd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) )
+i6::s1cl
+s7:s2,i6:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> <" P "> e. Word NN0 )
+i8::revcl
+s9:s1,i8:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` V ) e. Word NN0 )
+i10::revccat
+s11:s7,s1,i10:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` ( <" P "> ++ V ) ) = ( ( reverse ` V ) ++ ( reverse ` <" P "> ) ) )
+s12::revs1 |- ( reverse ` <" P "> ) = <" P ">
+s13:s12:a1i |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` <" P "> ) = <" P "> )
+s14:s13:oveq2d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( ( reverse ` V ) ++ ( reverse ` <" P "> ) ) = ( ( reverse ` V ) ++ <" P "> ) )
+s15:s11,s14:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` ( <" P "> ++ V ) ) = ( ( reverse ` V ) ++ <" P "> ) )
+s16:s3,s2:jca |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( Q e. NN0 /\ P e. NN0 ) )
+i17::mulallsnoc
+s18:s16,s9,i17:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( ( reverse ` V ) ++ <" P "> ) ) ) = ( ( 1st ` ( Q MulAll ( reverse ` V ) ) ) ++ <" ( P x. Q ) "> ) )
+s19:s15:oveq2d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( Q MulAll ( reverse ` ( <" P "> ++ V ) ) ) = ( Q MulAll ( ( reverse ` V ) ++ <" P "> ) ) )
+s20:s19:fveq2d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( reverse ` ( <" P "> ++ V ) ) ) ) = ( 1st ` ( Q MulAll ( ( reverse ` V ) ++ <" P "> ) ) ) )
+s21:s20,s18:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( reverse ` ( <" P "> ++ V ) ) ) ) = ( ( 1st ` ( Q MulAll ( reverse ` V ) ) ) ++ <" ( P x. Q ) "> ) )
+s22:s5:oveq1d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( ( 1st ` ( Q MulAll ( reverse ` V ) ) ) ++ <" ( P x. Q ) "> ) = ( ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ++ <" ( P x. Q ) "> ) )
+s23:s21,s22:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( reverse ` ( <" P "> ++ V ) ) ) ) = ( ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ++ <" ( P x. Q ) "> ) )
+s24:s3,s2:jca |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( Q e. NN0 /\ P e. NN0 ) )
+i25::mulallcs
+s26:s24,s1,i25:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( Q MulAll ( <" P "> ++ V ) ) = <. ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) , ( ( 2nd ` ( Q MulAll V ) ) + 1 ) >. )
+i27::mulallcl
+s28:s3,s1,i27:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( Q MulAll V ) e. ( Word NN0 X. NN0 ) )
+i29::xp1st
+s30:s28,i29:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll V ) ) e. Word NN0 )
+i31::xp2nd
+s32:s28,i31:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 2nd ` ( Q MulAll V ) ) e. NN0 )
+s33:s2,s3:nn0mulcld |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( P x. Q ) e. NN0 )
+i34::s1cl
+s35:s33,i34:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> <" ( P x. Q ) "> e. Word NN0 )
+i36::ccatcl
+s37:s35,s30,i36:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) e. Word NN0 )
+i38::peano2nn0
+s39:s32,i38:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( ( 2nd ` ( Q MulAll V ) ) + 1 ) e. NN0 )
+s40:s26:fveq2d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( <" P "> ++ V ) ) ) = ( 1st ` <. ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) , ( ( 2nd ` ( Q MulAll V ) ) + 1 ) >. ) )
+i41::op1stg
+s42:s37,s39,i41:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` <. ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) , ( ( 2nd ` ( Q MulAll V ) ) + 1 ) >. ) = ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) )
+s43:s40,s42:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( <" P "> ++ V ) ) ) = ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) )
+i44::revccat
+s45:s35,s30,i44:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) ) = ( ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ++ ( reverse ` <" ( P x. Q ) "> ) ) )
+s46::revs1 |- ( reverse ` <" ( P x. Q ) "> ) = <" ( P x. Q ) ">
+s47:s46:a1i |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` <" ( P x. Q ) "> ) = <" ( P x. Q ) "> )
+s48:s47:oveq2d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ++ ( reverse ` <" ( P x. Q ) "> ) ) = ( ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ++ <" ( P x. Q ) "> ) )
+s49:s45,s48:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) ) = ( ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ++ <" ( P x. Q ) "> ) )
+s50:s43:fveq2d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` ( 1st ` ( Q MulAll ( <" P "> ++ V ) ) ) ) = ( reverse ` ( <" ( P x. Q ) "> ++ ( 1st ` ( Q MulAll V ) ) ) ) )
+s51:s50,s49:eqtrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( reverse ` ( 1st ` ( Q MulAll ( <" P "> ++ V ) ) ) ) = ( ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ++ <" ( P x. Q ) "> ) )
+s52:s23,s51:eqtr4d |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) /\ Q e. NN0 ) -> ( 1st ` ( Q MulAll ( reverse ` ( <" P "> ++ V ) ) ) ) = ( reverse ` ( 1st ` ( Q MulAll ( <" P "> ++ V ) ) ) ) )
+qed:s52:ex |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` V ) ) ) = ( reverse ` ( 1st ` ( Q MulAll V ) ) ) ) ) -> ( Q e. NN0 -> ( 1st ` ( Q MulAll ( reverse ` ( <" P "> ++ V ) ) ) ) = ( reverse ` ( 1st ` ( Q MulAll ( <" P "> ++ V ) ) ) ) ) )
+$)

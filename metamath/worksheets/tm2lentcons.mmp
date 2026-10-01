@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lentcons  LOC_AFTER=?
+
+* The entries of a list with a new head entry.  Lean: ` entries_cons ` .
+
+s1::simpl |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> W e. Word ( { 1 } X. 2o ) )
+s2::simpr |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> L e. Word Word ( { 1 } X. 2o ) )
+s3:s1:s1cld |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> <" W "> e. Word Word ( { 1 } X. 2o ) )
+i4::tm2lentcc
+s5:s3,s2,i4:syl2anc |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` ( <" W "> ++ L ) ) = ( ( entries ` <" W "> ) ++ ( entries ` L ) ) )
+i6::tm2lents1
+s7:s1,i6:syl |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` <" W "> ) = ( W ++ <" 4 "> ) )
+s8:s7:oveq1d |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( entries ` <" W "> ) ++ ( entries ` L ) ) = ( ( W ++ <" 4 "> ) ++ ( entries ` L ) ) )
+s9::tm2lwbss |- Word ( { 1 } X. 2o ) C_ Word Gamma'
+s10:s9:a1i |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> Word ( { 1 } X. 2o ) C_ Word Gamma' )
+s11:s10,s1:sseldd |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> W e. Word Gamma' )
+s12::gamma4 |- 4 e. Gamma'
+s13:s12:a1i |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> 4 e. Gamma' )
+s14:s13:s1cld |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> <" 4 "> e. Word Gamma' )
+i15::tm2lentcl
+s16:s2,i15:syl |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` L ) e. Word Gamma' )
+i17::ccatass
+s18:s11,s14,s16,i17:syl3anc |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( W ++ <" 4 "> ) ++ ( entries ` L ) ) = ( W ++ ( <" 4 "> ++ ( entries ` L ) ) ) )
+s19:s8,s18:eqtrd |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( entries ` <" W "> ) ++ ( entries ` L ) ) = ( W ++ ( <" 4 "> ++ ( entries ` L ) ) ) )
+qed:s5,s19:eqtrd |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` ( <" W "> ++ L ) ) = ( W ++ ( <" 4 "> ++ ( entries ` L ) ) ) )
+$)

@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=zdprodle  LOC_AFTER=?
+
+* A product of factors in [ 0 , 1 ] over a finite set is at most the product over a subset (Lean prod_le_prod_subset_of_le_one').
+
+h1::zdprodle.1 |- ( ph -> B e. Fin )
+h2::zdprodle.2 |- ( ph -> A C_ B )
+h3::zdprodle.3 |- ( ( ph /\ k e. B ) -> C e. RR )
+h4::zdprodle.4 |- ( ( ph /\ k e. B ) -> 0 <_ C )
+h5::zdprodle.5 |- ( ( ph /\ k e. B ) -> C <_ 1 )
+s1::undif |- ( A C_ B <-> ( A u. ( B \ A ) ) = B )
+s2:2,s1:sylib |- ( ph -> ( A u. ( B \ A ) ) = B )
+s3:s2:eqcomd |- ( ph -> B = ( A u. ( B \ A ) ) )
+s4::disjdif |- ( A i^i ( B \ A ) ) = (/)
+s5:s4:a1i |- ( ph -> ( A i^i ( B \ A ) ) = (/) )
+s6:2:sseld |- ( ph -> ( k e. A -> k e. B ) )
+s7:s6:imp |- ( ( ph /\ k e. A ) -> k e. B )
+s8::simpr |- ( ( ph /\ k e. ( B \ A ) ) -> k e. ( B \ A ) )
+i9::eldifi
+s10:s8,i9:syl |- ( ( ph /\ k e. ( B \ A ) ) -> k e. B )
+s11::simpl |- ( ( ph /\ k e. A ) -> ph )
+s12:s11,s7,3:syl2anc |- ( ( ph /\ k e. A ) -> C e. RR )
+s13::simpl |- ( ( ph /\ k e. A ) -> ph )
+s14:s13,s7,4:syl2anc |- ( ( ph /\ k e. A ) -> 0 <_ C )
+s15::simpl |- ( ( ph /\ k e. ( B \ A ) ) -> ph )
+s16:s15,s10,3:syl2anc |- ( ( ph /\ k e. ( B \ A ) ) -> C e. RR )
+s17::simpl |- ( ( ph /\ k e. ( B \ A ) ) -> ph )
+s18:s17,s10,4:syl2anc |- ( ( ph /\ k e. ( B \ A ) ) -> 0 <_ C )
+s19::simpl |- ( ( ph /\ k e. ( B \ A ) ) -> ph )
+s20:s19,s10,5:syl2anc |- ( ( ph /\ k e. ( B \ A ) ) -> C <_ 1 )
+s21:1,2:ssfid |- ( ph -> A e. Fin )
+s22::difss |- ( B \ A ) C_ B
+s23:s22:a1i |- ( ph -> ( B \ A ) C_ B )
+s24:1,s23:ssfid |- ( ph -> ( B \ A ) e. Fin )
+s25:3:recnd |- ( ( ph /\ k e. B ) -> C e. CC )
+s26:s5,s3,1,s25:fprodsplit |- ( ph -> prod_ k e. B C = ( prod_ k e. A C x. prod_ k e. ( B \ A ) C ) )
+s27::nfv |- F/ k ph
+s28:s27,s21,s12,s14:fprodge0 |- ( ph -> 0 <_ prod_ k e. A C )
+s29:s21,s12:fprodrecl |- ( ph -> prod_ k e. A C e. RR )
+s30:s24,s16:fprodrecl |- ( ph -> prod_ k e. ( B \ A ) C e. RR )
+s31::1re |- 1 e. RR
+s32:s31:a1i |- ( ( ph /\ k e. ( B \ A ) ) -> 1 e. RR )
+s33:s27,s24,s16,s18,s32,s20:fprodle |- ( ph -> prod_ k e. ( B \ A ) C <_ prod_ k e. ( B \ A ) 1 )
+s34:s24:olcd |- ( ph -> ( ( B \ A ) C_ ( ZZ>= ` 0 ) \/ ( B \ A ) e. Fin ) )
+i35::prod1
+s36:s34,i35:syl |- ( ph -> prod_ k e. ( B \ A ) 1 = 1 )
+s37:s33,s36:breqtrd |- ( ph -> prod_ k e. ( B \ A ) C <_ 1 )
+s38::1red |- ( ph -> 1 e. RR )
+s39:s30,s38,s29,s28,s37:lemul2ad |- ( ph -> ( prod_ k e. A C x. prod_ k e. ( B \ A ) C ) <_ ( prod_ k e. A C x. 1 ) )
+s40:s29:recnd |- ( ph -> prod_ k e. A C e. CC )
+s41:s40:mulridd |- ( ph -> ( prod_ k e. A C x. 1 ) = prod_ k e. A C )
+s42:s39,s41:breqtrd |- ( ph -> ( prod_ k e. A C x. prod_ k e. ( B \ A ) C ) <_ prod_ k e. A C )
+qed:s26,s42:eqbrtrd |- ( ph -> prod_ k e. B C <_ prod_ k e. A C )
+$)

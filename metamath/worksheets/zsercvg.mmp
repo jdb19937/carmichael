@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=zsercvg  LOC_AFTER=?
+
+* The zeta series converges for a real abscissa above one.
+
+s1::simpl |- ( ( T e. RR /\ 1 < T ) -> T e. RR )
+s2::simpr |- ( ( T e. RR /\ 1 < T ) -> 1 < T )
+s3:s1:recnd |- ( ( T e. RR /\ 1 < T ) -> T e. CC )
+i4::rere
+s5:s1,i4:syl |- ( ( T e. RR /\ 1 < T ) -> ( Re ` T ) = T )
+s6:s5:eqcomd |- ( ( T e. RR /\ 1 < T ) -> T = ( Re ` T ) )
+s7:s2,s6:breqtrd |- ( ( T e. RR /\ 1 < T ) -> 1 < ( Re ` T ) )
+s8::simpr |- ( ( ( T e. RR /\ 1 < T ) /\ k e. NN ) -> k e. NN )
+s9::oveq1 |- ( n = k -> ( n ^c -u T ) = ( k ^c -u T ) )
+s10::eqid |- ( n e. NN |-> ( n ^c -u T ) ) = ( n e. NN |-> ( n ^c -u T ) )
+s11:s9,s10:fvmptg |- ( ( k e. NN /\ ( k ^c -u T ) e. _V ) -> ( ( n e. NN |-> ( n ^c -u T ) ) ` k ) = ( k ^c -u T ) )
+s12::ovex |- ( k ^c -u T ) e. _V
+s13:s12:a1i |- ( ( ( T e. RR /\ 1 < T ) /\ k e. NN ) -> ( k ^c -u T ) e. _V )
+s14:s8,s13,s11:syl2anc |- ( ( ( T e. RR /\ 1 < T ) /\ k e. NN ) -> ( ( n e. NN |-> ( n ^c -u T ) ) ` k ) = ( k ^c -u T ) )
+qed:s3,s7,s14:zetacvg |- ( ( T e. RR /\ 1 < T ) -> seq 1 ( + , ( n e. NN |-> ( n ^c -u T ) ) ) e. dom ~~> )
+$)

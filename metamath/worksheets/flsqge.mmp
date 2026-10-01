@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=flsqge  LOC_AFTER=?
+
+* A nonnegative integer whose square is at most a real is at most the integer square root of that real.
+
+s1::simp1 |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> A e. RR )
+s2::simp2 |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> B e. NN0 )
+s3::simp3 |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( B ^ 2 ) <_ A )
+s4:s2:nn0red |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> B e. RR )
+s5:s2:nn0ge0d |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> 0 <_ B )
+s6::2nn0 |- 2 e. NN0
+s7:s6:a1i |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> 2 e. NN0 )
+s8:s4,s7:reexpcld |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( B ^ 2 ) e. RR )
+s9::2nn0 |- 2 e. NN0
+s10:s9:a1i |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> 2 e. NN0 )
+s11:s4,s5,s10:expge0d |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> 0 <_ ( B ^ 2 ) )
+s12::0red |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> 0 e. RR )
+s13:s12,s8,s1,s11,s3:letrd |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> 0 <_ A )
+s14:s1,s13:jca |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( A e. RR /\ 0 <_ A ) )
+i15::resqrtcl
+s16:s14,i15:syl |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( sqrt ` A ) e. RR )
+i17::sqrtge0
+s18:s14,i17:syl |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> 0 <_ ( sqrt ` A ) )
+i19::resqrtth
+s20:s14,i19:syl |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( ( sqrt ` A ) ^ 2 ) = A )
+s21:s4,s5:jca |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( B e. RR /\ 0 <_ B ) )
+s22:s16,s18:jca |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( ( sqrt ` A ) e. RR /\ 0 <_ ( sqrt ` A ) ) )
+s23:s21,s22:jca |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( ( B e. RR /\ 0 <_ B ) /\ ( ( sqrt ` A ) e. RR /\ 0 <_ ( sqrt ` A ) ) ) )
+i24::le2sq
+s25:s23,i24:syl |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( B <_ ( sqrt ` A ) <-> ( B ^ 2 ) <_ ( ( sqrt ` A ) ^ 2 ) ) )
+s26:s20:eqcomd |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> A = ( ( sqrt ` A ) ^ 2 ) )
+s27:s3,s26:breqtrd |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( B ^ 2 ) <_ ( ( sqrt ` A ) ^ 2 ) )
+s28:s25,s27:mpbird |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> B <_ ( sqrt ` A ) )
+s29:s2:nn0zd |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> B e. ZZ )
+i30::flge
+s31:s16,s29,i30:syl2anc |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> ( B <_ ( sqrt ` A ) <-> B <_ ( |_ ` ( sqrt ` A ) ) ) )
+qed:s31,s28:mpbid |- ( ( A e. RR /\ B e. NN0 /\ ( B ^ 2 ) <_ A ) -> B <_ ( |_ ` ( sqrt ` A ) ) )
+$)

@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=z5bva0  LOC_AFTER=?
+
+* Lean bvA_eq_zero, the Barban-Vehov vanishing property: ( ( z1 bvA z2 ) ` N ) = 0 for 1 < N <_ z1.
+
+s1::simprl |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> N e. NN )
+s2::simprr |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> ( 1 < N /\ N <_ A ) )
+s3:s2:simpld |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> 1 < N )
+s4:s2:simprd |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> N <_ A )
+s5::simpl |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) )
+i6::z5bvamu
+s7:s5,s1,s4,i6:syl12anc |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> ( ( A bvA B ) ` N ) = if ( N = 1 , 1 , 0 ) )
+s8:s3:gtned |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> N =/= 1 )
+s9:s8:neneqd |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> -. N = 1 )
+s10:s9:iffalsed |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> if ( N = 1 , 1 , 0 ) = 0 )
+qed:s7,s10:eqtrd |- ( ( ( ( A e. RR /\ 1 <_ A ) /\ ( B e. RR /\ A < B ) ) /\ ( N e. NN /\ ( 1 < N /\ N <_ A ) ) ) -> ( ( A bvA B ) ` N ) = 0 )
+$)

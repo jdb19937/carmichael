@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=smoothgocostb  LOC_AFTER=?
+
+* Base of the induction for smoothgocost.
+
+s1::simpl |- ( ( d e. NN /\ r e. NN0 ) -> d e. NN )
+s2::simpr |- ( ( d e. NN /\ r e. NN0 ) -> r e. NN0 )
+i3::smoothgo0
+s4:s1,s2,i3:syl2anc |- ( ( d e. NN /\ r e. NN0 ) -> ( ( d SmoothGo r ) ` 0 ) = <. r , 0 >. )
+s5:s2:elexd |- ( ( d e. NN /\ r e. NN0 ) -> r e. _V )
+s6::c0ex |- 0 e. _V
+s7:s6:a1i |- ( ( d e. NN /\ r e. NN0 ) -> 0 e. _V )
+s8:s4:fveq2d |- ( ( d e. NN /\ r e. NN0 ) -> ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = ( 1st ` <. r , 0 >. ) )
+i9::op1stg
+s10:s5,s7,i9:syl2anc |- ( ( d e. NN /\ r e. NN0 ) -> ( 1st ` <. r , 0 >. ) = r )
+s11:s8,s10:eqtrd |- ( ( d e. NN /\ r e. NN0 ) -> ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = r )
+s12:s4:fveq2d |- ( ( d e. NN /\ r e. NN0 ) -> ( 2nd ` ( ( d SmoothGo r ) ` 0 ) ) = ( 2nd ` <. r , 0 >. ) )
+i13::op2ndg
+s14:s5,s7,i13:syl2anc |- ( ( d e. NN /\ r e. NN0 ) -> ( 2nd ` <. r , 0 >. ) = 0 )
+s15:s12,s14:eqtrd |- ( ( d e. NN /\ r e. NN0 ) -> ( 2nd ` ( ( d SmoothGo r ) ` 0 ) ) = 0 )
+s16::id |- ( ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = r -> ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = r )
+c1:s16:oveq2d |- ( ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = r -> ( 2 Nlog ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) ) = ( 2 Nlog r ) )
+s17:s11,c1:syl |- ( ( d e. NN /\ r e. NN0 ) -> ( 2 Nlog ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) ) = ( 2 Nlog r ) )
+s18:s15,s17:oveq12d |- ( ( d e. NN /\ r e. NN0 ) -> ( ( 2nd ` ( ( d SmoothGo r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) ) ) = ( 0 + ( 2 Nlog r ) ) )
+s19::2nn0 |- 2 e. NN0
+s20:s19:a1i |- ( ( d e. NN /\ r e. NN0 ) -> 2 e. NN0 )
+i21::nlogcl
+s22:s20,s2,i21:syl2anc |- ( ( d e. NN /\ r e. NN0 ) -> ( 2 Nlog r ) e. NN0 )
+s23:s22:nn0red |- ( ( d e. NN /\ r e. NN0 ) -> ( 2 Nlog r ) e. RR )
+s24::0re |- 0 e. RR
+s25:s24:a1i |- ( ( d e. NN /\ r e. NN0 ) -> 0 e. RR )
+s26:s25,s23:readdcld |- ( ( d e. NN /\ r e. NN0 ) -> ( 0 + ( 2 Nlog r ) ) e. RR )
+s27:s26:leidd |- ( ( d e. NN /\ r e. NN0 ) -> ( 0 + ( 2 Nlog r ) ) <_ ( 0 + ( 2 Nlog r ) ) )
+s28:s18,s27:eqbrtrd |- ( ( d e. NN /\ r e. NN0 ) -> ( ( 2nd ` ( ( d SmoothGo r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) ) ) <_ ( 0 + ( 2 Nlog r ) ) )
+s29:s28:a1d |- ( ( d e. NN /\ r e. NN0 ) -> ( 2 <_ d -> ( ( 2nd ` ( ( d SmoothGo r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) ) ) <_ ( 0 + ( 2 Nlog r ) ) ) )
+s30:s29:ralrimiva |- ( d e. NN -> A. r e. NN0 ( 2 <_ d -> ( ( 2nd ` ( ( d SmoothGo r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) ) ) <_ ( 0 + ( 2 Nlog r ) ) ) )
+qed:s30:rgen |- A. d e. NN A. r e. NN0 ( 2 <_ d -> ( ( 2nd ` ( ( d SmoothGo r ) ` 0 ) ) + ( 2 Nlog ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) ) ) <_ ( 0 + ( 2 Nlog r ) ) )
+$)

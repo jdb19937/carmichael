@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=bwblval  LOC_AFTER=?
+
+* Value of bl: the bit length, 0 for 0 and log2 + 1 otherwise (Lean: bl).
+
+s1::id |- ( A e. NN0 -> A e. NN0 )
+s2::id |- ( a = A -> a = A )
+c1:s2:eqeq1d |- ( a = A -> ( a = 0 <-> A = 0 ) )
+c2:s2:oveq2d |- ( a = A -> ( 2 Nlog a ) = ( 2 Nlog A ) )
+c3:c2:oveq1d |- ( a = A -> ( ( 2 Nlog a ) + 1 ) = ( ( 2 Nlog A ) + 1 ) )
+c4:c1,c3:ifbieq2d |- ( a = A -> if ( a = 0 , 0 , ( ( 2 Nlog a ) + 1 ) ) = if ( A = 0 , 0 , ( ( 2 Nlog A ) + 1 ) ) )
+s3::df-bwbl |- bl = ( a e. NN0 |-> if ( a = 0 , 0 , ( ( 2 Nlog a ) + 1 ) ) )
+s4::0nn0 |- 0 e. NN0
+s5:s4:a1i |- ( A e. NN0 -> 0 e. NN0 )
+s6::2nn0 |- 2 e. NN0
+s7:s6:a1i |- ( A e. NN0 -> 2 e. NN0 )
+i8::nlogcl
+s9:s7,s1,i8:syl2anc |- ( A e. NN0 -> ( 2 Nlog A ) e. NN0 )
+s10::1nn0 |- 1 e. NN0
+s11:s10:a1i |- ( A e. NN0 -> 1 e. NN0 )
+s12:s9,s11:nn0addcld |- ( A e. NN0 -> ( ( 2 Nlog A ) + 1 ) e. NN0 )
+s13:s5,s12:ifcld |- ( A e. NN0 -> if ( A = 0 , 0 , ( ( 2 Nlog A ) + 1 ) ) e. NN0 )
+s14:s13:elexd |- ( A e. NN0 -> if ( A = 0 , 0 , ( ( 2 Nlog A ) + 1 ) ) e. _V )
+s15:c4,s3:fvmptg |- ( ( A e. NN0 /\ if ( A = 0 , 0 , ( ( 2 Nlog A ) + 1 ) ) e. _V ) -> ( bl ` A ) = if ( A = 0 , 0 , ( ( 2 Nlog A ) + 1 ) ) )
+qed:s1,s14,s15:syl2anc |- ( A e. NN0 -> ( bl ` A ) = if ( A = 0 , 0 , ( ( 2 Nlog A ) + 1 ) ) )
+$)

@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=tcsfin  LOC_AFTER=?
+
+* A subset of the entries of a word is a finite set of residues.
+
+s1::simpl |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> E e. Word NN0 )
+s2::simpr |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> S e. ~P ran E )
+i3::elpwi
+s4:s2,i3:syl |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> S C_ ran E )
+i5::algwrdfi
+s6:s1,i5:syl |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> ran E e. Fin )
+i7::ssfi
+s8:s6,s4,i7:syl2anc |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> S e. Fin )
+i9::wrdf
+s10:s1,i9:syl |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> E : ( 0 ..^ ( # ` E ) ) --> NN0 )
+i11::frn
+s12:s10,i11:syl |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> ran E C_ NN0 )
+s13:s4,s12:sstrd |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> S C_ NN0 )
+qed:s8,s13:jca |- ( ( E e. Word NN0 /\ S e. ~P ran E ) -> ( S e. Fin /\ S C_ NN0 ) )
+$)

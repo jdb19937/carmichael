@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=tblfv  LOC_AFTER=?
+
+* An entry of a DP table is an optional word (Lean: t : Tbl is total).
+
+s1::simpl |- ( ( T e. Tbl /\ C e. NN0 ) -> T e. Tbl )
+s2::simpr |- ( ( T e. Tbl /\ C e. NN0 ) -> C e. NN0 )
+s3::df-tbl |- Tbl = ( ( Word NN0 |_| 1o ) ^m NN0 )
+s4:s3:eleq2i |- ( T e. Tbl <-> T e. ( ( Word NN0 |_| 1o ) ^m NN0 ) )
+s5:s4:a1i |- ( ( T e. Tbl /\ C e. NN0 ) -> ( T e. Tbl <-> T e. ( ( Word NN0 |_| 1o ) ^m NN0 ) ) )
+s6:s1,s5:mpbid |- ( ( T e. Tbl /\ C e. NN0 ) -> T e. ( ( Word NN0 |_| 1o ) ^m NN0 ) )
+i7::elmapi
+s8:s6,i7:syl |- ( ( T e. Tbl /\ C e. NN0 ) -> T : NN0 --> ( Word NN0 |_| 1o ) )
+i9::ffvelcdm
+qed:s8,s2,i9:syl2anc |- ( ( T e. Tbl /\ C e. NN0 ) -> ( T ` C ) e. ( Word NN0 |_| 1o ) )
+$)

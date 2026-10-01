@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=dvrinv2  LOC_AFTER=?
+
+* The derivative of the negated reciprocal of z - P is the reciprocal of its square.
+
+s1::cnelprrecn |- CC e. { RR , CC }
+s2:s1:a1i |- ( P e. CC -> CC e. { RR , CC } )
+s3::id |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( P e. CC /\ z e. ( CC \ { P } ) ) )
+i4::rinvcl
+s5:s3,i4:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( 1 / ( z - P ) ) e. CC )
+s6::id |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( P e. CC /\ z e. ( CC \ { P } ) ) )
+i7::rinv2cl
+s8:s6,i7:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( 1 / ( ( z - P ) ^ 2 ) ) e. CC )
+s9:s8:negcld |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> -u ( 1 / ( ( z - P ) ^ 2 ) ) e. CC )
+s10::dvrinv |- ( P e. CC -> ( CC _D ( z e. ( CC \ { P } ) |-> ( 1 / ( z - P ) ) ) ) = ( z e. ( CC \ { P } ) |-> -u ( 1 / ( ( z - P ) ^ 2 ) ) ) )
+s11:s2,s5,s9,s10:dvmptneg |- ( P e. CC -> ( CC _D ( z e. ( CC \ { P } ) |-> -u ( 1 / ( z - P ) ) ) ) = ( z e. ( CC \ { P } ) |-> -u -u ( 1 / ( ( z - P ) ^ 2 ) ) ) )
+s12::id |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( P e. CC /\ z e. ( CC \ { P } ) ) )
+i13::rinv2cl
+s14:s12,i13:syl |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> ( 1 / ( ( z - P ) ^ 2 ) ) e. CC )
+s15:s14:negnegd |- ( ( P e. CC /\ z e. ( CC \ { P } ) ) -> -u -u ( 1 / ( ( z - P ) ^ 2 ) ) = ( 1 / ( ( z - P ) ^ 2 ) ) )
+s16:s15:mpteq2dva |- ( P e. CC -> ( z e. ( CC \ { P } ) |-> -u -u ( 1 / ( ( z - P ) ^ 2 ) ) ) = ( z e. ( CC \ { P } ) |-> ( 1 / ( ( z - P ) ^ 2 ) ) ) )
+qed:s11,s16:eqtrd |- ( P e. CC -> ( CC _D ( z e. ( CC \ { P } ) |-> -u ( 1 / ( z - P ) ) ) ) = ( z e. ( CC \ { P } ) |-> ( 1 / ( ( z - P ) ^ 2 ) ) ) )
+$)

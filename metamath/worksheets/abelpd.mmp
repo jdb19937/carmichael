@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=abelpd  LOC_AFTER=?
+
+* A partial sum grows by the next coefficient ( ~ fsump1 ).
+
+s1::simpl |- ( ( A : NN --> CC /\ J e. NN ) -> A : NN --> CC )
+s2::simpr |- ( ( A : NN --> CC /\ J e. NN ) -> J e. NN )
+s3::nnuz |- NN = ( ZZ>= ` 1 )
+s4:s3:a1i |- ( ( A : NN --> CC /\ J e. NN ) -> NN = ( ZZ>= ` 1 ) )
+s5:s2,s4:eleqtrd |- ( ( A : NN --> CC /\ J e. NN ) -> J e. ( ZZ>= ` 1 ) )
+s6:s1:adantr |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... ( J + 1 ) ) ) -> A : NN --> CC )
+s7::simpr |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... ( J + 1 ) ) ) -> i e. ( 1 ... ( J + 1 ) ) )
+i8::elfznn
+s9:s7,i8:syl |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... ( J + 1 ) ) ) -> i e. NN )
+s10:s6,s9:ffvelcdmd |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... ( J + 1 ) ) ) -> ( A ` i ) e. CC )
+s11::fveq2 |- ( i = ( J + 1 ) -> ( A ` i ) = ( A ` ( J + 1 ) ) )
+s12:s5,s10,s11:fsump1 |- ( ( A : NN --> CC /\ J e. NN ) -> sum_ i e. ( 1 ... ( J + 1 ) ) ( A ` i ) = ( sum_ i e. ( 1 ... J ) ( A ` i ) + ( A ` ( J + 1 ) ) ) )
+s13:s1:adantr |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... J ) ) -> A : NN --> CC )
+s14::simpr |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... J ) ) -> i e. ( 1 ... J ) )
+i15::elfznn
+s16:s14,i15:syl |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... J ) ) -> i e. NN )
+s17:s13,s16:ffvelcdmd |- ( ( ( A : NN --> CC /\ J e. NN ) /\ i e. ( 1 ... J ) ) -> ( A ` i ) e. CC )
+s18::fzfid |- ( ( A : NN --> CC /\ J e. NN ) -> ( 1 ... J ) e. Fin )
+s19:s18,s17:fsumcl |- ( ( A : NN --> CC /\ J e. NN ) -> sum_ i e. ( 1 ... J ) ( A ` i ) e. CC )
+i20::peano2nn
+s21:s2,i20:syl |- ( ( A : NN --> CC /\ J e. NN ) -> ( J + 1 ) e. NN )
+s22:s1,s21:ffvelcdmd |- ( ( A : NN --> CC /\ J e. NN ) -> ( A ` ( J + 1 ) ) e. CC )
+s23:s12:oveq1d |- ( ( A : NN --> CC /\ J e. NN ) -> ( sum_ i e. ( 1 ... ( J + 1 ) ) ( A ` i ) - sum_ i e. ( 1 ... J ) ( A ` i ) ) = ( ( sum_ i e. ( 1 ... J ) ( A ` i ) + ( A ` ( J + 1 ) ) ) - sum_ i e. ( 1 ... J ) ( A ` i ) ) )
+s24:s22,s19:pncan2d |- ( ( A : NN --> CC /\ J e. NN ) -> ( ( sum_ i e. ( 1 ... J ) ( A ` i ) + ( A ` ( J + 1 ) ) ) - sum_ i e. ( 1 ... J ) ( A ` i ) ) = ( A ` ( J + 1 ) ) )
+qed:s23,s24:eqtrd |- ( ( A : NN --> CC /\ J e. NN ) -> ( sum_ i e. ( 1 ... ( J + 1 ) ) ( A ` i ) - sum_ i e. ( 1 ... J ) ( A ` i ) ) = ( A ` ( J + 1 ) ) )
+$)

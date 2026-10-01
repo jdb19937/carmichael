@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=algprodle  LOC_AFTER=?
+
+* The product over a word is at most the bound to the power of the length (Lean: List.prod_le_pow_card).
+
+s1::simpll |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> W e. Word NN0 )
+s2::simplr |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> X e. NN0 )
+s3::simpr |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> A. q e. ran W q <_ X )
+s4::nfv |- F/ i ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X )
+s5::fzofi |- ( 0 ..^ ( # ` W ) ) e. Fin
+s6:s5:a1i |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> ( 0 ..^ ( # ` W ) ) e. Fin )
+s7:s1:adantr |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> W e. Word NN0 )
+s8:s2:adantr |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> X e. NN0 )
+s9::simpr |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> i e. ( 0 ..^ ( # ` W ) ) )
+i10::wrdsymbcl
+s11:s7,s9,i10:syl2anc |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. NN0 )
+s12:s11:nn0red |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. RR )
+s13:s11:nn0ge0d |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> 0 <_ ( W ` i ) )
+s14:s8:nn0red |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> X e. RR )
+i15::algranfv
+s16:s7,s9,i15:syl2anc |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) e. ran W )
+s17:s3:adantr |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> A. q e. ran W q <_ X )
+s18:s17,s16:rspcdva |- ( ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) /\ i e. ( 0 ..^ ( # ` W ) ) ) -> ( W ` i ) <_ X )
+s19:s4,s6,s12,s13,s14,s18:fprodle |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) <_ prod_ i e. ( 0 ..^ ( # ` W ) ) X )
+s20::fzofi |- ( 0 ..^ ( # ` W ) ) e. Fin
+s21:s2:nn0cnd |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> X e. CC )
+i22::fprodconst
+s23:s20,s21,i22:sylancr |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) X = ( X ^ ( # ` ( 0 ..^ ( # ` W ) ) ) ) )
+i24::lencl
+s25:s1,i24:syl |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> ( # ` W ) e. NN0 )
+i26::hashfzo0
+s27:s25,i26:syl |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> ( # ` ( 0 ..^ ( # ` W ) ) ) = ( # ` W ) )
+s28:s27:oveq2d |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> ( X ^ ( # ` ( 0 ..^ ( # ` W ) ) ) ) = ( X ^ ( # ` W ) ) )
+s29:s23,s28:eqtrd |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) X = ( X ^ ( # ` W ) ) )
+qed:s19,s29:breqtrd |- ( ( ( W e. Word NN0 /\ X e. NN0 ) /\ A. q e. ran W q <_ X ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) <_ ( X ^ ( # ` W ) ) )
+$)

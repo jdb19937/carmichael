@@ -1,0 +1,75 @@
+$( <MM> <PROOF_ASST> THEOREM=phiinvpf  LOC_AFTER=?
+
+* For a positive integer L, ( 1 / L ) times the Euler product of 1 / ( 1 - 1 / q ) over the primes dividing L is 1 / phi ( L ).
+
+s1::id |- ( L e. NN -> L e. NN )
+s2::breq1 |- ( q = r -> ( q || L <-> r || L ) )
+s3:s2:cbvrabv |- { q e. Prime | q || L } = { r e. Prime | r || L }
+s4:s3:prodeq1i |- prod_ p e. { q e. Prime | q || L } ( 1 - ( 1 / p ) ) = prod_ p e. { r e. Prime | r || L } ( 1 - ( 1 / p ) )
+s5::oveq2 |- ( p = q -> ( 1 / p ) = ( 1 / q ) )
+s6:s5:oveq2d |- ( p = q -> ( 1 - ( 1 / p ) ) = ( 1 - ( 1 / q ) ) )
+s7:s6:cbvprodv |- prod_ p e. { r e. Prime | r || L } ( 1 - ( 1 / p ) ) = prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) )
+s8:s4,s7:eqtri |- prod_ p e. { q e. Prime | q || L } ( 1 - ( 1 / p ) ) = prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) )
+i9::phipfprod
+s10:s1,i9:syl |- ( L e. NN -> prod_ p e. { q e. Prime | q || L } ( 1 - ( 1 / p ) ) = ( ( phi ` L ) / L ) )
+s11:s8:a1i |- ( L e. NN -> prod_ p e. { q e. Prime | q || L } ( 1 - ( 1 / p ) ) = prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) ) )
+s12:s10,s11:eqtr3d |- ( L e. NN -> prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) ) = ( ( phi ` L ) / L ) )
+i13::pffinq
+s14:s1,i13:syl |- ( L e. NN -> { q e. Prime | q || L } e. Fin )
+s15:s3:a1i |- ( L e. NN -> { q e. Prime | q || L } = { r e. Prime | r || L } )
+s16:s14,s15:eqeltrrd |- ( L e. NN -> { r e. Prime | r || L } e. Fin )
+s17::ssrab2 |- { r e. Prime | r || L } C_ Prime
+s18:s17:a1i |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> { r e. Prime | r || L } C_ Prime )
+s19::simpr |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> q e. { r e. Prime | r || L } )
+s20:s18,s19:sseldd |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> q e. Prime )
+i21::prmnn
+s22:s20,i21:syl |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> q e. NN )
+s23:s22:nnrpd |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> q e. RR+ )
+s24:s23:rpred |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> q e. RR )
+s25:s23:rpreccld |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( 1 / q ) e. RR+ )
+s26:s25:rpred |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( 1 / q ) e. RR )
+i27::prmuz2
+s28:s20,i27:syl |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> q e. ( ZZ>= ` 2 ) )
+i29::eluzle
+s30:s28,i29:syl |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 2 <_ q )
+s31::1red |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 1 e. RR )
+s32::2re |- 2 e. RR
+s33:s32:a1i |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 2 e. RR )
+s34::1lt2 |- 1 < 2
+s35:s34:a1i |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 1 < 2 )
+s36:s31,s33,s24,s35,s30:ltletrd |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 1 < q )
+s37:s23:rpgt0d |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 0 < q )
+s38:s24,s37:jca |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( q e. RR /\ 0 < q ) )
+i39::recgt1
+s40:s38,i39:syl |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( 1 < q <-> ( 1 / q ) < 1 ) )
+s41:s40,s36:mpbid |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( 1 / q ) < 1 )
+s42::1red |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 1 e. RR )
+s43:s26,s42:posdifd |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( ( 1 / q ) < 1 <-> 0 < ( 1 - ( 1 / q ) ) ) )
+s44:s43,s41:mpbid |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 0 < ( 1 - ( 1 / q ) ) )
+s45::1red |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 1 e. RR )
+s46:s45,s26:resubcld |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( 1 - ( 1 / q ) ) e. RR )
+s47:s46:recnd |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( 1 - ( 1 / q ) ) e. CC )
+s48:s44:gt0ne0d |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> ( 1 - ( 1 / q ) ) =/= 0 )
+s49::1red |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 1 e. RR )
+s50:s49:recnd |- ( ( L e. NN /\ q e. { r e. Prime | r || L } ) -> 1 e. CC )
+s51:s16,s50,s47,s48:fproddiv |- ( L e. NN -> prod_ q e. { r e. Prime | r || L } ( 1 / ( 1 - ( 1 / q ) ) ) = ( prod_ q e. { r e. Prime | r || L } 1 / prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) ) ) )
+s52:s16:olcd |- ( L e. NN -> ( { r e. Prime | r || L } C_ ( ZZ>= ` 1 ) \/ { r e. Prime | r || L } e. Fin ) )
+i53::prod1
+s54:s52,i53:syl |- ( L e. NN -> prod_ q e. { r e. Prime | r || L } 1 = 1 )
+s55:s54:oveq1d |- ( L e. NN -> ( prod_ q e. { r e. Prime | r || L } 1 / prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) ) ) = ( 1 / prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) ) ) )
+s56:s12:oveq2d |- ( L e. NN -> ( 1 / prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) ) ) = ( 1 / ( ( phi ` L ) / L ) ) )
+s57:s55,s56:eqtrd |- ( L e. NN -> ( prod_ q e. { r e. Prime | r || L } 1 / prod_ q e. { r e. Prime | r || L } ( 1 - ( 1 / q ) ) ) = ( 1 / ( ( phi ` L ) / L ) ) )
+s58:s51,s57:eqtrd |- ( L e. NN -> prod_ q e. { r e. Prime | r || L } ( 1 / ( 1 - ( 1 / q ) ) ) = ( 1 / ( ( phi ` L ) / L ) ) )
+s59:s1:phicld |- ( L e. NN -> ( phi ` L ) e. NN )
+s60:s59:nncnd |- ( L e. NN -> ( phi ` L ) e. CC )
+s61:s59:nnne0d |- ( L e. NN -> ( phi ` L ) =/= 0 )
+s62:s1:nncnd |- ( L e. NN -> L e. CC )
+s63:s1:nnne0d |- ( L e. NN -> L =/= 0 )
+s64:s60,s62,s61,s63:recdivd |- ( L e. NN -> ( 1 / ( ( phi ` L ) / L ) ) = ( L / ( phi ` L ) ) )
+s65:s58,s64:eqtrd |- ( L e. NN -> prod_ q e. { r e. Prime | r || L } ( 1 / ( 1 - ( 1 / q ) ) ) = ( L / ( phi ` L ) ) )
+s66:s65:oveq2d |- ( L e. NN -> ( ( 1 / L ) x. prod_ q e. { r e. Prime | r || L } ( 1 / ( 1 - ( 1 / q ) ) ) ) = ( ( 1 / L ) x. ( L / ( phi ` L ) ) ) )
+s67::1red |- ( L e. NN -> 1 e. RR )
+s68:s67:recnd |- ( L e. NN -> 1 e. CC )
+s69:s68,s62,s60,s63,s61:dmdcan2d |- ( L e. NN -> ( ( 1 / L ) x. ( L / ( phi ` L ) ) ) = ( 1 / ( phi ` L ) ) )
+qed:s66,s69:eqtrd |- ( L e. NN -> ( ( 1 / L ) x. prod_ q e. { r e. Prime | r || L } ( 1 / ( 1 - ( 1 / q ) ) ) ) = ( 1 / ( phi ` L ) ) )
+$)

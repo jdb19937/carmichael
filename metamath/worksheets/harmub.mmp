@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=harmub  LOC_AFTER=?
+
+* The harmonic sum up to M / D is at most 1 + log M, for D in ( 1 ... M ).
+
+s1::simpl |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> M e. NN )
+s2::simpr |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> D e. ( 1 ... M ) )
+i3::elfznn
+s4:s2,i3:syl |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> D e. NN )
+i5::elfzle2
+s6:s2,i5:syl |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> D <_ M )
+i7::elfzle1
+s8:s2,i7:syl |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> 1 <_ D )
+s9:s1:nnred |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> M e. RR )
+s10:s4:nnred |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> D e. RR )
+s11:s4:nnrpd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> D e. RR+ )
+s12:s1:nnrpd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> M e. RR+ )
+s13:s12,s11:rpdivcld |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( M / D ) e. RR+ )
+s14:s13:rpred |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( M / D ) e. RR )
+i15::divge1
+s16:s11,s9,s6,i15:syl3anc |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> 1 <_ ( M / D ) )
+i17::harmonicubnd
+s18:s14,s16,i17:syl2anc |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> sum_ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ( 1 / m ) <_ ( ( log ` ( M / D ) ) + 1 ) )
+i19::relogdiv
+s20:s12,s11,i19:syl2anc |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( log ` ( M / D ) ) = ( ( log ` M ) - ( log ` D ) ) )
+i21::logge0
+s22:s10,s8,i21:syl2anc |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> 0 <_ ( log ` D ) )
+s23:s12:relogcld |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( log ` M ) e. RR )
+s24:s11:relogcld |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( log ` D ) e. RR )
+i25::subge02
+s26:s23,s24,i25:syl2anc |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( 0 <_ ( log ` D ) <-> ( ( log ` M ) - ( log ` D ) ) <_ ( log ` M ) ) )
+s27:s26,s22:mpbid |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( ( log ` M ) - ( log ` D ) ) <_ ( log ` M ) )
+s28:s20,s27:eqbrtrd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( log ` ( M / D ) ) <_ ( log ` M ) )
+s29:s13:relogcld |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( log ` ( M / D ) ) e. RR )
+s30::1red |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> 1 e. RR )
+s31:s29,s23,s30,s28:leadd1dd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( ( log ` ( M / D ) ) + 1 ) <_ ( ( log ` M ) + 1 ) )
+s32::fzfid |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( 1 ... ( |_ ` ( M / D ) ) ) e. Fin )
+s33::simpr |- ( ( ( M e. NN /\ D e. ( 1 ... M ) ) /\ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ) -> m e. ( 1 ... ( |_ ` ( M / D ) ) ) )
+i34::elfznn
+s35:s33,i34:syl |- ( ( ( M e. NN /\ D e. ( 1 ... M ) ) /\ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ) -> m e. NN )
+s36::1re |- 1 e. RR
+s37:s36:a1i |- ( ( ( M e. NN /\ D e. ( 1 ... M ) ) /\ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ) -> 1 e. RR )
+s38:s35:nnrpd |- ( ( ( M e. NN /\ D e. ( 1 ... M ) ) /\ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ) -> m e. RR+ )
+s39:s37,s38:rerpdivcld |- ( ( ( M e. NN /\ D e. ( 1 ... M ) ) /\ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ) -> ( 1 / m ) e. RR )
+s40:s32,s39:fsumrecl |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> sum_ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ( 1 / m ) e. RR )
+s41:s29,s30:readdcld |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( ( log ` ( M / D ) ) + 1 ) e. RR )
+s42:s23,s30:readdcld |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( ( log ` M ) + 1 ) e. RR )
+s43:s40,s41,s42,s18,s31:letrd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> sum_ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ( 1 / m ) <_ ( ( log ` M ) + 1 ) )
+s44:s23:recnd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( log ` M ) e. CC )
+s45:s30:recnd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> 1 e. CC )
+s46:s44,s45:addcomd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> ( ( log ` M ) + 1 ) = ( 1 + ( log ` M ) ) )
+qed:s43,s46:breqtrd |- ( ( M e. NN /\ D e. ( 1 ... M ) ) -> sum_ m e. ( 1 ... ( |_ ` ( M / D ) ) ) ( 1 / m ) <_ ( 1 + ( log ` M ) ) )
+$)

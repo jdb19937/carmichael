@@ -1,0 +1,65 @@
+$( <MM> <PROOF_ASST> THEOREM=bxabs  LOC_AFTER=?
+
+* A point of an open box with nonnegative left abscissa has modulus at most twice the height.
+
+s1::simpl1 |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> L e. RR )
+s2::simpl2 |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> 0 <_ L )
+s3::simpl3 |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> R e. RR )
+s4::simpr |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) )
+i5::elbxi
+s6:s4,i5:syl |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( Z e. CC /\ ( L < ( Re ` Z ) /\ ( Re ` Z ) < R ) /\ ( -u R < ( Im ` Z ) /\ ( Im ` Z ) < R ) ) )
+i7::simp1
+s8:s6,i7:syl |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> Z e. CC )
+i9::simp2
+s10:s6,i9:syl |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( L < ( Re ` Z ) /\ ( Re ` Z ) < R ) )
+i11::simp3
+s12:s6,i11:syl |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( -u R < ( Im ` Z ) /\ ( Im ` Z ) < R ) )
+s13:s8:recld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( Re ` Z ) e. RR )
+s14:s8:imcld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( Im ` Z ) e. RR )
+s15:s13:recnd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( Re ` Z ) e. CC )
+s16:s14:recnd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( Im ` Z ) e. CC )
+s17::ax-icn |- _i e. CC
+s18:s17:a1i |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> _i e. CC )
+s19:s18,s16:mulcld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( _i x. ( Im ` Z ) ) e. CC )
+s20:s8:replimd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> Z = ( ( Re ` Z ) + ( _i x. ( Im ` Z ) ) ) )
+i21::abstri
+s22:s15,s19,i21:syl2anc |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( ( Re ` Z ) + ( _i x. ( Im ` Z ) ) ) ) <_ ( ( abs ` ( Re ` Z ) ) + ( abs ` ( _i x. ( Im ` Z ) ) ) ) )
+s23:s16:abscld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( Im ` Z ) ) e. RR )
+s24:s18,s16:absmuld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( _i x. ( Im ` Z ) ) ) = ( ( abs ` _i ) x. ( abs ` ( Im ` Z ) ) ) )
+s25::absi |- ( abs ` _i ) = 1
+s26:s25:a1i |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` _i ) = 1 )
+s27:s26:oveq1d |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( ( abs ` _i ) x. ( abs ` ( Im ` Z ) ) ) = ( 1 x. ( abs ` ( Im ` Z ) ) ) )
+s28:s23:recnd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( Im ` Z ) ) e. CC )
+s29:s28:mullidd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( 1 x. ( abs ` ( Im ` Z ) ) ) = ( abs ` ( Im ` Z ) ) )
+s30:s27,s29:eqtrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( ( abs ` _i ) x. ( abs ` ( Im ` Z ) ) ) = ( abs ` ( Im ` Z ) ) )
+s31:s24,s30:eqtrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( _i x. ( Im ` Z ) ) ) = ( abs ` ( Im ` Z ) ) )
+s32:s20:fveq2d |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` Z ) = ( abs ` ( ( Re ` Z ) + ( _i x. ( Im ` Z ) ) ) ) )
+s33:s32,s22:eqbrtrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` Z ) <_ ( ( abs ` ( Re ` Z ) ) + ( abs ` ( _i x. ( Im ` Z ) ) ) ) )
+s34:s31:oveq2d |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( ( abs ` ( Re ` Z ) ) + ( abs ` ( _i x. ( Im ` Z ) ) ) ) = ( ( abs ` ( Re ` Z ) ) + ( abs ` ( Im ` Z ) ) ) )
+s35:s33,s34:breqtrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` Z ) <_ ( ( abs ` ( Re ` Z ) ) + ( abs ` ( Im ` Z ) ) ) )
+s36::0re |- 0 e. RR
+s37:s36:a1i |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> 0 e. RR )
+s38:s10:simpld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> L < ( Re ` Z ) )
+s39:s37,s1,s13,s2,s38:lelttrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> 0 < ( Re ` Z ) )
+s40::0re |- 0 e. RR
+s41:s40:a1i |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> 0 e. RR )
+s42:s41,s13,s39:ltled |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> 0 <_ ( Re ` Z ) )
+s43:s13,s42:absidd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( Re ` Z ) ) = ( Re ` Z ) )
+s44:s10:simprd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( Re ` Z ) < R )
+s45:s13,s3,s44:ltled |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( Re ` Z ) <_ R )
+s46:s43,s45:eqbrtrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( Re ` Z ) ) <_ R )
+i47::abslt
+s48:s14,s3,i47:syl2anc |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( ( abs ` ( Im ` Z ) ) < R <-> ( -u R < ( Im ` Z ) /\ ( Im ` Z ) < R ) ) )
+s49:s12,s48:mpbird |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( Im ` Z ) ) < R )
+s50:s23,s3,s49:ltled |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( Im ` Z ) ) <_ R )
+s51:s15:abscld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` ( Re ` Z ) ) e. RR )
+s52:s51,s23,s3,s3,s46,s50:le2addd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( ( abs ` ( Re ` Z ) ) + ( abs ` ( Im ` Z ) ) ) <_ ( R + R ) )
+s53:s3:recnd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> R e. CC )
+s54:s53:2timesd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( 2 x. R ) = ( R + R ) )
+s55:s54:eqcomd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( R + R ) = ( 2 x. R ) )
+s56:s8:abscld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` Z ) e. RR )
+s57:s51,s23:readdcld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( ( abs ` ( Re ` Z ) ) + ( abs ` ( Im ` Z ) ) ) e. RR )
+s58:s3,s3:readdcld |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( R + R ) e. RR )
+s59:s56,s57,s58,s35,s52:letrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` Z ) <_ ( R + R ) )
+qed:s59,s55:breqtrd |- ( ( ( L e. RR /\ 0 <_ L /\ R e. RR ) /\ Z e. ( ( `' Re " ( L (,) R ) ) i^i ( `' Im " ( -u R (,) R ) ) ) ) -> ( abs ` Z ) <_ ( 2 x. R ) )
+$)

@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgsparlem2  LOC_AFTER=?
+
+* Lemma for dchrgspar: the orthogonality sum over k of the root of unity at k ( b - c ) is N when b = c and 0 otherwise, for residues b, c.
+
+s1::simpl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s2:s1:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> N e. NN )
+s3::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) )
+s4:s3:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> b e. ( 0 ..^ N ) )
+s5::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) )
+s6:s5:simprd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> c e. ( 0 ..^ N ) )
+i7::elfzoelz
+s8:s4,i7:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> b e. ZZ )
+i9::elfzoelz
+s10:s6,i9:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> c e. ZZ )
+s11:s8,s10:zsubcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> ( b - c ) e. ZZ )
+i12::root1sum
+s13:s2,s11,i12:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> sum_ k e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( k x. ( b - c ) ) ) = if ( N || ( b - c ) , N , 0 ) )
+i14::fzocongeq0
+s15:s2,s4,s6,i14:syl3anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> ( N || ( b - c ) <-> b = c ) )
+s16:s15:ifbid |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> if ( N || ( b - c ) , N , 0 ) = if ( b = c , N , 0 ) )
+qed:s13,s16:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( b e. ( 0 ..^ N ) /\ c e. ( 0 ..^ N ) ) ) -> sum_ k e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( k x. ( b - c ) ) ) = if ( b = c , N , 0 ) )
+$)

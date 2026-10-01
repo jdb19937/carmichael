@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=z5hbvre  LOC_AFTER=?
+
+* The product kernel is real (Lean hBV : RR).
+
+s1::id |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> ( ( R e. V /\ S e. W ) /\ D e. NN ) )
+i2::z5hbvval
+s3:s1,i2:syl |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> ( ( R hBV S ) ` D ) = if ( ( mmu ` D ) =/= 0 , prod_ p e. { q e. Prime | q || D } ( ( if ( p || R , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) x. if ( p || S , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) ) - 1 ) , 0 ) )
+s4::simpr |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> D e. NN )
+i5::pffinq
+s6:s4,i5:syl |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> { q e. Prime | q || D } e. Fin )
+s7::simpr |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> p e. { q e. Prime | q || D } )
+i8::elrabi
+s9:s7,i8:syl |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> p e. Prime )
+i10::prmnn
+s11:s9,i10:syl |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> p e. NN )
+i12::mucl
+s13:s11,i12:syl |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> ( mmu ` p ) e. ZZ )
+s14:s13:zred |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> ( mmu ` p ) e. RR )
+i15::phicl
+s16:s11,i15:syl |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> ( phi ` p ) e. NN )
+s17:s16:nnred |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> ( phi ` p ) e. RR )
+s18:s14,s17:remulcld |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> ( ( mmu ` p ) x. ( phi ` p ) ) e. RR )
+s19::1red |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> 1 e. RR )
+s20:s18,s19:ifcld |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> if ( p || R , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) e. RR )
+s21:s18,s19:ifcld |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> if ( p || S , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) e. RR )
+s22:s20,s21:remulcld |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> ( if ( p || R , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) x. if ( p || S , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) ) e. RR )
+s23:s22,s19:resubcld |- ( ( ( ( R e. V /\ S e. W ) /\ D e. NN ) /\ p e. { q e. Prime | q || D } ) -> ( ( if ( p || R , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) x. if ( p || S , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) ) - 1 ) e. RR )
+s24:s6,s23:fprodrecl |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> prod_ p e. { q e. Prime | q || D } ( ( if ( p || R , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) x. if ( p || S , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) ) - 1 ) e. RR )
+s25::0red |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> 0 e. RR )
+s26:s24,s25:ifcld |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> if ( ( mmu ` D ) =/= 0 , prod_ p e. { q e. Prime | q || D } ( ( if ( p || R , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) x. if ( p || S , ( ( mmu ` p ) x. ( phi ` p ) ) , 1 ) ) - 1 ) , 0 ) e. RR )
+qed:s3,s26:eqeltrd |- ( ( ( R e. V /\ S e. W ) /\ D e. NN ) -> ( ( R hBV S ) ` D ) e. RR )
+$)

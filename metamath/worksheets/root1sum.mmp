@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=root1sum  LOC_AFTER=?
+
+* Orthogonality of the additive character (Mathlib AddChar.sum_mulShift with ZMod.isPrimitive_stdAddChar): the sum over the residues a of the ( a x. W )-th power of the root of unity is N when N divides W and 0 otherwise.
+
+s1::root1sumlem1 |- ( ( N e. NN /\ W e. ZZ ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = sum_ a e. ( 0 ..^ N ) ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) )
+s2::simpll |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> N e. NN )
+s3::simplr |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> W e. ZZ )
+s4::simpr |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> N || W )
+i5::root1eq1
+s6:s2,s3,i5:syl2anc |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) = 1 <-> N || W ) )
+s7:s4,s6:mpbird |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ W ) = 1 )
+s8::simpr |- ( ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) /\ a e. ( 0 ..^ N ) ) -> a e. ( 0 ..^ N ) )
+i9::elfzoelz
+s10:s8,i9:syl |- ( ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) /\ a e. ( 0 ..^ N ) ) -> a e. ZZ )
+s11:s7:adantr |- ( ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) /\ a e. ( 0 ..^ N ) ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ W ) = 1 )
+s12:s11:oveq1d |- ( ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) /\ a e. ( 0 ..^ N ) ) -> ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) = ( 1 ^ a ) )
+i13::1exp
+s14:s10,i13:syl |- ( ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) /\ a e. ( 0 ..^ N ) ) -> ( 1 ^ a ) = 1 )
+s15:s12,s14:eqtrd |- ( ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) /\ a e. ( 0 ..^ N ) ) -> ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) = 1 )
+s16:s15:sumeq2dv |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) = sum_ a e. ( 0 ..^ N ) 1 )
+s17::fzofi |- ( 0 ..^ N ) e. Fin
+s18:s17:a1i |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> ( 0 ..^ N ) e. Fin )
+s19::1cnd |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> 1 e. CC )
+i20::fsumconst
+s21:s18,s19,i20:syl2anc |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> sum_ a e. ( 0 ..^ N ) 1 = ( ( # ` ( 0 ..^ N ) ) x. 1 ) )
+s22:s2:nnnn0d |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> N e. NN0 )
+i23::hashfzo0
+s24:s22,i23:syl |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> ( # ` ( 0 ..^ N ) ) = N )
+s25:s24:oveq1d |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> ( ( # ` ( 0 ..^ N ) ) x. 1 ) = ( N x. 1 ) )
+s26:s2:nncnd |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> N e. CC )
+s27:s26:mulridd |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> ( N x. 1 ) = N )
+s28:s1:adantr |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = sum_ a e. ( 0 ..^ N ) ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) )
+s29:s28,s16:eqtrd |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = sum_ a e. ( 0 ..^ N ) 1 )
+s30:s29,s21:eqtrd |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = ( ( # ` ( 0 ..^ N ) ) x. 1 ) )
+s31:s25,s27:eqtrd |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> ( ( # ` ( 0 ..^ N ) ) x. 1 ) = N )
+s32:s30,s31:eqtrd |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = N )
+s33:s4:iftrued |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> if ( N || W , N , 0 ) = N )
+s34:s32,s33:eqtr4d |- ( ( ( N e. NN /\ W e. ZZ ) /\ N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = if ( N || W , N , 0 ) )
+s35:s1:adantr |- ( ( ( N e. NN /\ W e. ZZ ) /\ -. N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = sum_ a e. ( 0 ..^ N ) ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) )
+s36::root1sumlem2 |- ( ( ( N e. NN /\ W e. ZZ ) /\ -. N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) = 0 )
+s37:s35,s36:eqtrd |- ( ( ( N e. NN /\ W e. ZZ ) /\ -. N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = 0 )
+s38::simpr |- ( ( ( N e. NN /\ W e. ZZ ) /\ -. N || W ) -> -. N || W )
+s39:s38:iffalsed |- ( ( ( N e. NN /\ W e. ZZ ) /\ -. N || W ) -> if ( N || W , N , 0 ) = 0 )
+s40:s37,s39:eqtr4d |- ( ( ( N e. NN /\ W e. ZZ ) /\ -. N || W ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = if ( N || W , N , 0 ) )
+qed:s34,s40:pm2.61dan |- ( ( N e. NN /\ W e. ZZ ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = if ( N || W , N , 0 ) )
+$)

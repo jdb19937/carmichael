@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=orectss  LOC_AFTER=?
+
+* The open rectangle lies in the closed one.
+
+s1::simpr |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) )
+s2::elin |- ( x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) <-> ( x e. ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) /\ x e. ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) )
+s3:s1,s2:sylib |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( x e. ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) /\ x e. ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) )
+s4::ref |- Re : CC --> RR
+i5::ffn
+s6:s4,i5:ax-mp |- Re Fn CC
+s7::imf |- Im : CC --> RR
+i8::ffn
+s9:s7,i8:ax-mp |- Im Fn CC
+i10::elpreima
+s11:s6,i10:ax-mp |- ( x e. ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) <-> ( x e. CC /\ ( Re ` x ) e. ( ( Re ` A ) (,) ( Re ` B ) ) ) )
+i12::elpreima
+s13:s9,i12:ax-mp |- ( x e. ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) <-> ( x e. CC /\ ( Im ` x ) e. ( ( Im ` A ) (,) ( Im ` B ) ) ) )
+i14::simpl
+s15:s3,i14:syl |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> x e. ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) )
+s16:s15,s11:sylib |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( x e. CC /\ ( Re ` x ) e. ( ( Re ` A ) (,) ( Re ` B ) ) ) )
+i17::simpr
+s18:s3,i17:syl |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> x e. ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) )
+s19:s18,s13:sylib |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( x e. CC /\ ( Im ` x ) e. ( ( Im ` A ) (,) ( Im ` B ) ) ) )
+i20::simpl
+s21:s16,i20:syl |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> x e. CC )
+i22::simpr
+s23:s16,i22:syl |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( Re ` x ) e. ( ( Re ` A ) (,) ( Re ` B ) ) )
+i24::simpr
+s25:s19,i24:syl |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( Im ` x ) e. ( ( Im ` A ) (,) ( Im ` B ) ) )
+s26::ioossicc |- ( ( Re ` A ) (,) ( Re ` B ) ) C_ ( ( Re ` A ) [,] ( Re ` B ) )
+s27:s26,s23:sselid |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( Re ` x ) e. ( ( Re ` A ) [,] ( Re ` B ) ) )
+s28::ioossicc |- ( ( Im ` A ) (,) ( Im ` B ) ) C_ ( ( Im ` A ) [,] ( Im ` B ) )
+s29:s28,s25:sselid |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( Im ` x ) e. ( ( Im ` A ) [,] ( Im ` B ) ) )
+s30::simpl |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( A e. CC /\ B e. CC ) )
+i31::elcrect
+s32:s30,i31:syl |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( x e. ( A crect B ) <-> ( x e. CC /\ ( Re ` x ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` x ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) ) )
+s33:s21,s27,s29:3jca |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> ( x e. CC /\ ( Re ` x ) e. ( ( Re ` A ) [,] ( Re ` B ) ) /\ ( Im ` x ) e. ( ( Im ` A ) [,] ( Im ` B ) ) ) )
+s34:s33,s32:mpbird |- ( ( ( A e. CC /\ B e. CC ) /\ x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) ) -> x e. ( A crect B ) )
+s35:s34:ex |- ( ( A e. CC /\ B e. CC ) -> ( x e. ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) -> x e. ( A crect B ) ) )
+qed:s35:ssrdv |- ( ( A e. CC /\ B e. CC ) -> ( ( `' Re " ( ( Re ` A ) (,) ( Re ` B ) ) ) i^i ( `' Im " ( ( Im ` A ) (,) ( Im ` B ) ) ) ) C_ ( A crect B ) )
+$)

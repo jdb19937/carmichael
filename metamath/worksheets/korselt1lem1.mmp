@@ -1,0 +1,59 @@
+$( <MM> <PROOF_ASST> THEOREM=korselt1lem1  LOC_AFTER=?
+
+* Lemma for korselt1: the case P does not divide A. Fermat's little theorem
+  gives A ^ ( P - 1 ) == 1 mod P; raise to the K and multiply by A.
+
+1::simpl1   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> P e. Prime )
+2::simpl2   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> A e. ZZ )
+3::simpl3   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> K e. NN0 )
+4::simpr    |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> -. P || A )
+5a::vfermltl
+5:1,2,4,5a:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( P - 1 ) ) mod P ) = 1 )
+6a::prmnn
+6:1,6a:syl  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> P e. NN )
+7a::nnrp
+7:6,7a:syl  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> P e. RR+ )
+8:6:nnred   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> P e. RR )
+9a::prmgt1
+9:1,9a:syl  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> 1 < P )
+10a::1mod
+10:8,9,10a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( 1 mod P ) = 1 )
+11:5,10:eqtr4d |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( P - 1 ) ) mod P ) = ( 1 mod P ) )
+12a::nnm1nn0
+12:6,12a:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( P - 1 ) e. NN0 )
+13a::zexpcl
+13:2,12,13a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( A ^ ( P - 1 ) ) e. ZZ )
+14::1z      |- 1 e. ZZ
+15:13,14:jctir |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( P - 1 ) ) e. ZZ /\ 1 e. ZZ ) )
+16:3,7:jca  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( K e. NN0 /\ P e. RR+ ) )
+17a::modexp
+17:15,16,11,17a:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( ( A ^ ( P - 1 ) ) ^ K ) mod P ) = ( ( 1 ^ K ) mod P ) )
+18:3:nn0zd  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> K e. ZZ )
+19a::1exp
+19:18,19a:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( 1 ^ K ) = 1 )
+20:19:oveq1d |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( 1 ^ K ) mod P ) = ( 1 mod P ) )
+21:17,20:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( ( A ^ ( P - 1 ) ) ^ K ) mod P ) = ( 1 mod P ) )
+22:2:zcnd   |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> A e. CC )
+23a::expmul
+23:22,12,3,23a:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( A ^ ( ( P - 1 ) x. K ) ) = ( ( A ^ ( P - 1 ) ) ^ K ) )
+24:23:oveq1d |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( ( P - 1 ) x. K ) ) mod P ) = ( ( ( A ^ ( P - 1 ) ) ^ K ) mod P ) )
+25:24,21:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( ( P - 1 ) x. K ) ) mod P ) = ( 1 mod P ) )
+26a::nn0mulcl
+26:12,3,26a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( P - 1 ) x. K ) e. NN0 )
+27a::zexpcl
+27:2,26,27a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( A ^ ( ( P - 1 ) x. K ) ) e. ZZ )
+28:27:zred  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( A ^ ( ( P - 1 ) x. K ) ) e. RR )
+29::1re     |- 1 e. RR
+30:28,29:jctir |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( ( P - 1 ) x. K ) ) e. RR /\ 1 e. RR ) )
+31:2,7:jca  |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( A e. ZZ /\ P e. RR+ ) )
+32a::modmul1
+32:30,31,25,32a:syl3anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( ( A ^ ( ( P - 1 ) x. K ) ) x. A ) mod P ) = ( ( 1 x. A ) mod P ) )
+33a::mullid
+33:22,33a:syl |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( 1 x. A ) = A )
+34:33:oveq1d |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( 1 x. A ) mod P ) = ( A mod P ) )
+35:32,34:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( ( A ^ ( ( P - 1 ) x. K ) ) x. A ) mod P ) = ( A mod P ) )
+36a::expp1
+36:22,26,36a:syl2anc |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) = ( ( A ^ ( ( P - 1 ) x. K ) ) x. A ) )
+37:36:oveq1d |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) mod P ) = ( ( ( A ^ ( ( P - 1 ) x. K ) ) x. A ) mod P ) )
+qed:37,35:eqtrd |- ( ( ( P e. Prime /\ A e. ZZ /\ K e. NN0 ) /\ -. P || A ) -> ( ( A ^ ( ( ( P - 1 ) x. K ) + 1 ) ) mod P ) = ( A mod P ) )
+$)

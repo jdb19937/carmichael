@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=algupd  LOC_AFTER=?
+
+* Function update keeps a function total: Lean's Function.update t r v, written ` ( ( T |` ( A \ { R } ) ) u. { <. R , V >. } ) ` as in the machine model, maps ` A ` into ` B ` again.  This is what keeps ~ df-setifnone inside ~ df-tbl .
+
+s1::simp1 |- ( ( T : A --> B /\ R e. A /\ V e. B ) -> T : A --> B )
+s2::simp2 |- ( ( T : A --> B /\ R e. A /\ V e. B ) -> R e. A )
+s3::simp3 |- ( ( T : A --> B /\ R e. A /\ V e. B ) -> V e. B )
+s4::difss |- ( A \ { R } ) C_ A
+s5:s4:a1i |- ( ( T : A --> B /\ R e. A /\ V e. B ) -> ( A \ { R } ) C_ A )
+s6::fssres |- ( ( T : A --> B /\ ( A \ { R } ) C_ A ) -> ( T |` ( A \ { R } ) ) : ( A \ { R } ) --> B )
+s7:s1,s5,s6:syl2anc |- ( ( T : A --> B /\ R e. A /\ V e. B ) -> ( T |` ( A \ { R } ) ) : ( A \ { R } ) --> B )
+s8::fsnunf2 |- ( ( ( T |` ( A \ { R } ) ) : ( A \ { R } ) --> B /\ R e. A /\ V e. B ) -> ( ( T |` ( A \ { R } ) ) u. { <. R , V >. } ) : A --> B )
+qed:s7,s2,s3,s8:syl3anc |- ( ( T : A --> B /\ R e. A /\ V e. B ) -> ( ( T |` ( A \ { R } ) ) u. { <. R , V >. } ) : A --> B )
+$)

@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=goodprimeswfval  LOC_AFTER=?
+
+* The curried value of goodPrimesW: the mapping y |-> the windowed reservoir.
+
+s1::simpl |- ( ( z = Z /\ w = W ) -> z = Z )
+s2::simpr |- ( ( z = Z /\ w = W ) -> w = W )
+c1:s1:oveq2d |- ( ( z = Z /\ w = W ) -> ( 0 ... z ) = ( 0 ... Z ) )
+c2:s2:breq1d |- ( ( z = Z /\ w = W ) -> ( w < q <-> W < q ) )
+c3:c2:3anbi2d |- ( ( z = Z /\ w = W ) -> ( ( q e. Prime /\ w < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) <-> ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) ) )
+c4:c1,c3:rabeqbidv |- ( ( z = Z /\ w = W ) -> { q e. ( 0 ... z ) | ( q e. Prime /\ w < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } = { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } )
+c5:c4:mpteq2dv |- ( ( z = Z /\ w = W ) -> ( y e. NN0 |-> { q e. ( 0 ... z ) | ( q e. Prime /\ w < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } ) = ( y e. NN0 |-> { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } ) )
+s3::df-goodprimesw |- goodPrimesW = ( z e. NN0 , w e. NN0 |-> ( y e. NN0 |-> { q e. ( 0 ... z ) | ( q e. Prime /\ w < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } ) )
+s4::nn0ex |- NN0 e. _V
+s5:s4:mptex |- ( y e. NN0 |-> { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } ) e. _V
+qed:c5,s3,s5:ovmpoa |- ( ( Z e. NN0 /\ W e. NN0 ) -> ( Z goodPrimesW W ) = ( y e. NN0 |-> { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ y ) ) } ) )
+$)

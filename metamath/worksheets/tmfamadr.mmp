@@ -1,0 +1,87 @@
+$( <MM> <PROOF_ASST> THEOREM=tmfamadr  LOC_AFTER=?
+
+* An address object returns its address at -u 1.
+
+s1::simpr |- ( ( N e. NN0 /\ W e. Word NN0 ) -> W e. Word NN0 )
+s2:s1:elexd |- ( ( N e. NN0 /\ W e. Word NN0 ) -> W e. _V )
+s3::negex |- -u 1 e. _V
+s4::simpr |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> N = 0 )
+s5:s4:fveq2d |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( TMFam ` N ) = ( TMFam ` 0 ) )
+s6::tmfam0 |- ( TMFam ` 0 ) = ( w e. Word NN0 |-> { <. -u 1 , w >. } )
+s7:s6:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( TMFam ` 0 ) = ( w e. Word NN0 |-> { <. -u 1 , w >. } ) )
+s8:s5,s7:eqtrd |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( TMFam ` N ) = ( w e. Word NN0 |-> { <. -u 1 , w >. } ) )
+s9:s8:fveq1d |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( ( TMFam ` N ) ` W ) = ( ( w e. Word NN0 |-> { <. -u 1 , w >. } ) ` W ) )
+s10:s1:adantr |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> W e. Word NN0 )
+s11::snex |- { <. -u 1 , W >. } e. _V
+s12:s11:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> { <. -u 1 , W >. } e. _V )
+s13::id |- ( w = W -> w = W )
+c13_1:s13:opeq2d |- ( w = W -> <. -u 1 , w >. = <. -u 1 , W >. )
+c13_2:c13_1:sneqd |- ( w = W -> { <. -u 1 , w >. } = { <. -u 1 , W >. } )
+s14::eqid |- ( w e. Word NN0 |-> { <. -u 1 , w >. } ) = ( w e. Word NN0 |-> { <. -u 1 , w >. } )
+s15:c13_2,s14:fvmptg |- ( ( W e. Word NN0 /\ { <. -u 1 , W >. } e. _V ) -> ( ( w e. Word NN0 |-> { <. -u 1 , w >. } ) ` W ) = { <. -u 1 , W >. } )
+s16:s10,s12,s15:syl2anc |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( ( w e. Word NN0 |-> { <. -u 1 , w >. } ) ` W ) = { <. -u 1 , W >. } )
+s17:s9,s16:eqtrd |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( ( TMFam ` N ) ` W ) = { <. -u 1 , W >. } )
+s18:s17:fveq1d |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( ( ( TMFam ` N ) ` W ) ` -u 1 ) = ( { <. -u 1 , W >. } ` -u 1 ) )
+s19:s3:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> -u 1 e. _V )
+s20:s2:adantr |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> W e. _V )
+i21::fvsng
+s22:s19,s20,i21:syl2anc |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( { <. -u 1 , W >. } ` -u 1 ) = W )
+s23:s18,s22:eqtrd |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N = 0 ) -> ( ( ( TMFam ` N ) ` W ) ` -u 1 ) = W )
+s24::simpr |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> N e. NN )
+i25::nnm1nn0
+s26:s24,i25:syl |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( N - 1 ) e. NN0 )
+s27:s24:nncnd |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> N e. CC )
+i28::npcan1
+s29:s27,i28:syl |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( N - 1 ) + 1 ) = N )
+s30:s29:fveq2d |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( TMFam ` ( ( N - 1 ) + 1 ) ) = ( TMFam ` N ) )
+i31::tmfamsuc
+s32:s26,i31:syl |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( TMFam ` ( ( N - 1 ) + 1 ) ) = ( w e. Word NN0 |-> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) ) )
+s33:s30,s32:eqtr3d |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( TMFam ` N ) = ( w e. Word NN0 |-> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) ) )
+s34:s33:fveq1d |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( TMFam ` N ) ` W ) = ( ( w e. Word NN0 |-> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) ) ` W ) )
+s35:s1:adantr |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> W e. Word NN0 )
+s36::nn0ex |- NN0 e. _V
+s37:s36:mptex |- ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) e. _V
+s38::snex |- { <. -u 1 , W >. } e. _V
+s39:s37,s38:unex |- ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) e. _V
+s40:s39:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) e. _V )
+s41::id |- ( w = W -> w = W )
+c43_1:s41:oveq1d |- ( w = W -> ( w ++ <" i "> ) = ( W ++ <" i "> ) )
+c43_2:c43_1:fveq2d |- ( w = W -> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) = ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) )
+c43_3:c43_2:mpteq2dv |- ( w = W -> ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) = ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) )
+c43_4:s41:opeq2d |- ( w = W -> <. -u 1 , w >. = <. -u 1 , W >. )
+c43_5:c43_4:sneqd |- ( w = W -> { <. -u 1 , w >. } = { <. -u 1 , W >. } )
+c43_6:c43_3,c43_5:uneq12d |- ( w = W -> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) = ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) )
+s42::eqid |- ( w e. Word NN0 |-> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) ) = ( w e. Word NN0 |-> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) )
+s43:c43_6,s42:fvmptg |- ( ( W e. Word NN0 /\ ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) e. _V ) -> ( ( w e. Word NN0 |-> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) ) ` W ) = ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) )
+s44:s35,s40,s43:syl2anc |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( w e. Word NN0 |-> ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( w ++ <" i "> ) ) ) u. { <. -u 1 , w >. } ) ) ` W ) = ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) )
+s45:s34,s44:eqtrd |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( TMFam ` N ) ` W ) = ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) )
+s46:s45:fveq1d |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( ( TMFam ` N ) ` W ) ` -u 1 ) = ( ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) ` -u 1 ) )
+s47:s2:adantr |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> W e. _V )
+s48::fvex |- ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) e. _V
+s49::eqid |- ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) = ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) )
+s50:s48,s49:fnmpti |- ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) Fn NN0
+s51:s50:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) Fn NN0 )
+s52::negex |- -u 1 e. _V
+s53:s52:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> -u 1 e. _V )
+i54::fnsng
+s55:s53,s47,i54:syl2anc |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> { <. -u 1 , W >. } Fn { -u 1 } )
+s56::neg1lt0 |- -u 1 < 0
+s57::nn0nlt0 |- ( -u 1 e. NN0 -> -. -u 1 < 0 )
+s58:s56,s57:mt2 |- -. -u 1 e. NN0
+s59::disjsn |- ( ( NN0 i^i { -u 1 } ) = (/) <-> -. -u 1 e. NN0 )
+s60:s58,s59:mpbir |- ( NN0 i^i { -u 1 } ) = (/)
+s61:s60:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( NN0 i^i { -u 1 } ) = (/) )
+s62:s3:snid |- -u 1 e. { -u 1 }
+s63:s62:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> -u 1 e. { -u 1 } )
+s64:s61,s63:jca |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( NN0 i^i { -u 1 } ) = (/) /\ -u 1 e. { -u 1 } ) )
+i65::fvun2
+s66:s51,s55,s64,i65:syl3anc |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( ( i e. NN0 |-> ( ( TMFam ` ( N - 1 ) ) ` ( W ++ <" i "> ) ) ) u. { <. -u 1 , W >. } ) ` -u 1 ) = ( { <. -u 1 , W >. } ` -u 1 ) )
+s67:s3:a1i |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> -u 1 e. _V )
+i68::fvsng
+s69:s67,s47,i68:syl2anc |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( { <. -u 1 , W >. } ` -u 1 ) = W )
+s70:s46,s66,s69:3eqtrd |- ( ( ( N e. NN0 /\ W e. Word NN0 ) /\ N e. NN ) -> ( ( ( TMFam ` N ) ` W ) ` -u 1 ) = W )
+s71::simpl |- ( ( N e. NN0 /\ W e. Word NN0 ) -> N e. NN0 )
+s72::elnn0 |- ( N e. NN0 <-> ( N e. NN \/ N = 0 ) )
+s73:s71,s72:sylib |- ( ( N e. NN0 /\ W e. Word NN0 ) -> ( N e. NN \/ N = 0 ) )
+qed:s70,s23,s73:mpjaodan |- ( ( N e. NN0 /\ W e. Word NN0 ) -> ( ( ( TMFam ` N ) ` W ) ` -u 1 ) = W )
+$)

@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2cfgval  LOC_AFTER=?
+
+* Value of TM2Cfg: a configuration is an optional label, a state and the stacks.
+
+s1::id |- ( t = T -> t = T )
+c1:s1:fveq2d |- ( t = T -> ( 1st ` t ) = ( 1st ` T ) )
+c2:c1:fveq2d |- ( t = T -> ( 2nd ` ( 1st ` t ) ) = ( 2nd ` ( 1st ` T ) ) )
+c3::djueq1 |- ( ( 2nd ` ( 1st ` t ) ) = ( 2nd ` ( 1st ` T ) ) -> ( ( 2nd ` ( 1st ` t ) ) |_| 1o ) = ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+c4:c2,c3:syl |- ( t = T -> ( ( 2nd ` ( 1st ` t ) ) |_| 1o ) = ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) )
+c5:s1:fveq2d |- ( t = T -> ( 2nd ` t ) = ( 2nd ` T ) )
+c6:s1:fveq2d |- ( t = T -> ( TM2Stk ` t ) = ( TM2Stk ` T ) )
+c7:c5,c6:xpeq12d |- ( t = T -> ( ( 2nd ` t ) X. ( TM2Stk ` t ) ) = ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+c8:c4,c7:xpeq12d |- ( t = T -> ( ( ( 2nd ` ( 1st ` t ) ) |_| 1o ) X. ( ( 2nd ` t ) X. ( TM2Stk ` t ) ) ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+s2::df-tm2cfg |- TM2Cfg = ( t e. _V |-> ( ( ( 2nd ` ( 1st ` t ) ) |_| 1o ) X. ( ( 2nd ` t ) X. ( TM2Stk ` t ) ) ) )
+s3:c8,s2:fvmptg |- ( ( T e. _V /\ ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) e. _V ) -> ( TM2Cfg ` T ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+s4::fvex |- ( 2nd ` ( 1st ` T ) ) e. _V
+s5::1oex |- 1o e. _V
+i6::djuex
+s7:s4,s5,i6:mp2an |- ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) e. _V
+s8::fvex |- ( 2nd ` T ) e. _V
+s9::fvex |- ( TM2Stk ` T ) e. _V
+i10::xpexg
+s11:s8,s9,i10:mp2an |- ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) e. _V
+i12::xpexg
+s13:s7,s11,i12:mp2an |- ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) e. _V
+s14:s13,s3:mpan2 |- ( T e. _V -> ( TM2Cfg ` T ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+s15::elex |- ( T e. V -> T e. _V )
+qed:s15,s14:syl |- ( T e. V -> ( TM2Cfg ` T ) = ( ( ( 2nd ` ( 1st ` T ) ) |_| 1o ) X. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+$)

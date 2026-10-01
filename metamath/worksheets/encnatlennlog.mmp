@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatlennlog  LOC_AFTER=?
+
+* The length of encodeNat N is at most log2 N + 1 (Lean: encodeNat_length_le).
+
+s1::id |- ( N e. NN0 -> N e. NN0 )
+s2::encnatlenbl |- ( N e. NN0 -> ( # ` ( encodeNat ` N ) ) = ( bl ` N ) )
+s3::bwblval |- ( N e. NN0 -> ( bl ` N ) = if ( N = 0 , 0 , ( ( 2 Nlog N ) + 1 ) ) )
+s4::2nn0 |- 2 e. NN0
+s5:s4:a1i |- ( N e. NN0 -> 2 e. NN0 )
+i6::nlogcl
+s7:s5,s1,i6:syl2anc |- ( N e. NN0 -> ( 2 Nlog N ) e. NN0 )
+s8::1nn0 |- 1 e. NN0
+s9:s8:a1i |- ( N e. NN0 -> 1 e. NN0 )
+s10:s7,s9:nn0addcld |- ( N e. NN0 -> ( ( 2 Nlog N ) + 1 ) e. NN0 )
+s11:s10:nn0ge0d |- ( N e. NN0 -> 0 <_ ( ( 2 Nlog N ) + 1 ) )
+s12:s7:nn0zd |- ( N e. NN0 -> ( 2 Nlog N ) e. ZZ )
+s13:s12:zred |- ( N e. NN0 -> ( 2 Nlog N ) e. RR )
+s14::1re |- 1 e. RR
+s15:s14:a1i |- ( N e. NN0 -> 1 e. RR )
+s16:s13,s15:readdcld |- ( N e. NN0 -> ( ( 2 Nlog N ) + 1 ) e. RR )
+s17:s16:leidd |- ( N e. NN0 -> ( ( 2 Nlog N ) + 1 ) <_ ( ( 2 Nlog N ) + 1 ) )
+s18::simpr |- ( ( N e. NN0 /\ N = 0 ) -> N = 0 )
+s19:s18:iftrued |- ( ( N e. NN0 /\ N = 0 ) -> if ( N = 0 , 0 , ( ( 2 Nlog N ) + 1 ) ) = 0 )
+s20:s11:adantr |- ( ( N e. NN0 /\ N = 0 ) -> 0 <_ ( ( 2 Nlog N ) + 1 ) )
+s21:s19,s20:eqbrtrd |- ( ( N e. NN0 /\ N = 0 ) -> if ( N = 0 , 0 , ( ( 2 Nlog N ) + 1 ) ) <_ ( ( 2 Nlog N ) + 1 ) )
+s22::simpr |- ( ( N e. NN0 /\ -. N = 0 ) -> -. N = 0 )
+s23:s22:iffalsed |- ( ( N e. NN0 /\ -. N = 0 ) -> if ( N = 0 , 0 , ( ( 2 Nlog N ) + 1 ) ) = ( ( 2 Nlog N ) + 1 ) )
+s24:s17:adantr |- ( ( N e. NN0 /\ -. N = 0 ) -> ( ( 2 Nlog N ) + 1 ) <_ ( ( 2 Nlog N ) + 1 ) )
+s25:s23,s24:eqbrtrd |- ( ( N e. NN0 /\ -. N = 0 ) -> if ( N = 0 , 0 , ( ( 2 Nlog N ) + 1 ) ) <_ ( ( 2 Nlog N ) + 1 ) )
+s26:s21,s25:pm2.61dan |- ( N e. NN0 -> if ( N = 0 , 0 , ( ( 2 Nlog N ) + 1 ) ) <_ ( ( 2 Nlog N ) + 1 ) )
+s27:s2,s3:eqtrd |- ( N e. NN0 -> ( # ` ( encodeNat ` N ) ) = if ( N = 0 , 0 , ( ( 2 Nlog N ) + 1 ) ) )
+qed:s27,s26:eqbrtrd |- ( N e. NN0 -> ( # ` ( encodeNat ` N ) ) <_ ( ( 2 Nlog N ) + 1 ) )
+$)

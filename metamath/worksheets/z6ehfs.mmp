@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=z6ehfs  LOC_AFTER=?
+
+* Helper of z6mrhol: HOL on CC is closed under finite sums (dvmptfsum).
+
+h1::z6ehfs.1 |- ( ph -> I e. Fin )
+h2::z6ehfs.2 |- ( ( ph /\ i e. I ) -> ( ( s e. CC |-> A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> A ) ) ) )
+s1:2:simpld |- ( ( ph /\ i e. I ) -> ( s e. CC |-> A ) e. ( CC -cn-> CC ) )
+i2::cncff
+s3:s1,i2:syl |- ( ( ph /\ i e. I ) -> ( s e. CC |-> A ) : CC --> CC )
+s4::eqid |- ( s e. CC |-> A ) = ( s e. CC |-> A )
+s5:s4:fmpt |- ( A. s e. CC A e. CC <-> ( s e. CC |-> A ) : CC --> CC )
+s6:s3,s5:sylibr |- ( ( ph /\ i e. I ) -> A. s e. CC A e. CC )
+s7:s6:r19.21bi |- ( ( ( ph /\ i e. I ) /\ s e. CC ) -> A e. CC )
+i8::z6ehder
+s9:2,i8:syl |- ( ( ph /\ i e. I ) -> ( ( CC _D ( s e. CC |-> A ) ) : CC --> CC /\ ( CC _D ( s e. CC |-> A ) ) = ( s e. CC |-> ( ( CC _D ( s e. CC |-> A ) ) ` s ) ) ) )
+s10:s9:simpld |- ( ( ph /\ i e. I ) -> ( CC _D ( s e. CC |-> A ) ) : CC --> CC )
+s11:s9:simprd |- ( ( ph /\ i e. I ) -> ( CC _D ( s e. CC |-> A ) ) = ( s e. CC |-> ( ( CC _D ( s e. CC |-> A ) ) ` s ) ) )
+s12:s10:ffvelcdmda |- ( ( ( ph /\ i e. I ) /\ s e. CC ) -> ( ( CC _D ( s e. CC |-> A ) ) ` s ) e. CC )
+s13:s7:3impa |- ( ( ph /\ i e. I /\ s e. CC ) -> A e. CC )
+s14:s12:3impa |- ( ( ph /\ i e. I /\ s e. CC ) -> ( ( CC _D ( s e. CC |-> A ) ) ` s ) e. CC )
+s15::cnelprrecn |- CC e. { RR , CC }
+s16:s15:a1i |- ( ph -> CC e. { RR , CC } )
+s17::eqid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( ( TopOpen ` CCfld ) |`t CC )
+s18::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s19:s18:cnfldtop |- ( TopOpen ` CCfld ) e. Top
+s20::unicntop |- CC = U. ( TopOpen ` CCfld )
+s21:s20:restid |- ( ( TopOpen ` CCfld ) e. Top -> ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld ) )
+s22:s19,s21:ax-mp |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s23:s18:cnfldtopon |- ( TopOpen ` CCfld ) e. ( TopOn ` CC )
+i24::toponmax
+s25:s23,i24:ax-mp |- CC e. ( TopOpen ` CCfld )
+s26:s25,s22:eleqtrri |- CC e. ( ( TopOpen ` CCfld ) |`t CC )
+s27:s26:a1i |- ( ph -> CC e. ( ( TopOpen ` CCfld ) |`t CC ) )
+s28:s17,s18,s16,s27,1,s13,s14,s11:dvmptfsum |- ( ph -> ( CC _D ( s e. CC |-> sum_ i e. I A ) ) = ( s e. CC |-> sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) ) )
+s29:1:adantr |- ( ( ph /\ s e. CC ) -> I e. Fin )
+s30:s7:an32s |- ( ( ( ph /\ s e. CC ) /\ i e. I ) -> A e. CC )
+s31:s29,s30:fsumcl |- ( ( ph /\ s e. CC ) -> sum_ i e. I A e. CC )
+s32:s31:ralrimiva |- ( ph -> A. s e. CC sum_ i e. I A e. CC )
+s33::sumex |- sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) e. _V
+s34:s33:rgenw |- A. s e. CC sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) e. _V
+s35:s34:a1i |- ( ph -> A. s e. CC sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) e. _V )
+s36:s28,s35:jca |- ( ph -> ( ( CC _D ( s e. CC |-> sum_ i e. I A ) ) = ( s e. CC |-> sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) ) /\ A. s e. CC sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) e. _V ) )
+s37:s32,s36:jca |- ( ph -> ( A. s e. CC sum_ i e. I A e. CC /\ ( ( CC _D ( s e. CC |-> sum_ i e. I A ) ) = ( s e. CC |-> sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) ) /\ A. s e. CC sum_ i e. I ( ( CC _D ( s e. CC |-> A ) ) ` s ) e. _V ) ) )
+i38::z6ehdv
+qed:s37,i38:syl |- ( ph -> ( ( s e. CC |-> sum_ i e. I A ) e. ( CC -cn-> CC ) /\ CC C_ dom ( CC _D ( s e. CC |-> sum_ i e. I A ) ) ) )
+$)

@@ -1,0 +1,115 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcprdi  LOC_AFTER=?
+
+* Decrementing a run of zeros followed by a word turns the run into ones and decrements the word (Lean ` predBits ` on ` false :: l ` , iterated).
+
+s1::id |- ( x = 0 -> x = 0 )
+c1:s1:oveq2d |- ( x = 0 -> ( (/) repeatS x ) = ( (/) repeatS 0 ) )
+c2:c1:oveq1d |- ( x = 0 -> ( ( (/) repeatS x ) ++ M ) = ( ( (/) repeatS 0 ) ++ M ) )
+c3:c2:fveq2d |- ( x = 0 -> ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( predBits ` ( ( (/) repeatS 0 ) ++ M ) ) )
+c4:s1:oveq2d |- ( x = 0 -> ( 1o repeatS x ) = ( 1o repeatS 0 ) )
+c5:c4:oveq1d |- ( x = 0 -> ( ( 1o repeatS x ) ++ ( predBits ` M ) ) = ( ( 1o repeatS 0 ) ++ ( predBits ` M ) ) )
+c6:c3,c5:eqeq12d |- ( x = 0 -> ( ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( ( 1o repeatS x ) ++ ( predBits ` M ) ) <-> ( predBits ` ( ( (/) repeatS 0 ) ++ M ) ) = ( ( 1o repeatS 0 ) ++ ( predBits ` M ) ) ) )
+s2::id |- ( x = y -> x = y )
+c7:s2:oveq2d |- ( x = y -> ( (/) repeatS x ) = ( (/) repeatS y ) )
+c8:c7:oveq1d |- ( x = y -> ( ( (/) repeatS x ) ++ M ) = ( ( (/) repeatS y ) ++ M ) )
+c9:c8:fveq2d |- ( x = y -> ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( predBits ` ( ( (/) repeatS y ) ++ M ) ) )
+c10:s2:oveq2d |- ( x = y -> ( 1o repeatS x ) = ( 1o repeatS y ) )
+c11:c10:oveq1d |- ( x = y -> ( ( 1o repeatS x ) ++ ( predBits ` M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) )
+c12:c9,c11:eqeq12d |- ( x = y -> ( ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( ( 1o repeatS x ) ++ ( predBits ` M ) ) <-> ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) )
+s3::id |- ( x = ( y + 1 ) -> x = ( y + 1 ) )
+c13:s3:oveq2d |- ( x = ( y + 1 ) -> ( (/) repeatS x ) = ( (/) repeatS ( y + 1 ) ) )
+c14:c13:oveq1d |- ( x = ( y + 1 ) -> ( ( (/) repeatS x ) ++ M ) = ( ( (/) repeatS ( y + 1 ) ) ++ M ) )
+c15:c14:fveq2d |- ( x = ( y + 1 ) -> ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( predBits ` ( ( (/) repeatS ( y + 1 ) ) ++ M ) ) )
+c16:s3:oveq2d |- ( x = ( y + 1 ) -> ( 1o repeatS x ) = ( 1o repeatS ( y + 1 ) ) )
+c17:c16:oveq1d |- ( x = ( y + 1 ) -> ( ( 1o repeatS x ) ++ ( predBits ` M ) ) = ( ( 1o repeatS ( y + 1 ) ) ++ ( predBits ` M ) ) )
+c18:c15,c17:eqeq12d |- ( x = ( y + 1 ) -> ( ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( ( 1o repeatS x ) ++ ( predBits ` M ) ) <-> ( predBits ` ( ( (/) repeatS ( y + 1 ) ) ++ M ) ) = ( ( 1o repeatS ( y + 1 ) ) ++ ( predBits ` M ) ) ) )
+s4::id |- ( x = C -> x = C )
+c19:s4:oveq2d |- ( x = C -> ( (/) repeatS x ) = ( (/) repeatS C ) )
+c20:c19:oveq1d |- ( x = C -> ( ( (/) repeatS x ) ++ M ) = ( ( (/) repeatS C ) ++ M ) )
+c21:c20:fveq2d |- ( x = C -> ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( predBits ` ( ( (/) repeatS C ) ++ M ) ) )
+c22:s4:oveq2d |- ( x = C -> ( 1o repeatS x ) = ( 1o repeatS C ) )
+c23:c22:oveq1d |- ( x = C -> ( ( 1o repeatS x ) ++ ( predBits ` M ) ) = ( ( 1o repeatS C ) ++ ( predBits ` M ) ) )
+c24:c21,c23:eqeq12d |- ( x = C -> ( ( predBits ` ( ( (/) repeatS x ) ++ M ) ) = ( ( 1o repeatS x ) ++ ( predBits ` M ) ) <-> ( predBits ` ( ( (/) repeatS C ) ++ M ) ) = ( ( 1o repeatS C ) ++ ( predBits ` M ) ) ) )
+s5::0ex |- (/) e. _V
+s6::1oex |- 1o e. _V
+i7::repsw0
+s8:s6,i7:ax-mp |- ( 1o repeatS 0 ) = (/)
+i9::repsw0
+s10:s5,i9:ax-mp |- ( (/) repeatS 0 ) = (/)
+s11::id |- ( M e. Word 2o -> M e. Word 2o )
+s12:s10:oveq1i |- ( ( (/) repeatS 0 ) ++ M ) = ( (/) ++ M )
+i13::ccatlid
+s14:s11,i13:syl |- ( M e. Word 2o -> ( (/) ++ M ) = M )
+s15:s12,s14:eqtrid |- ( M e. Word 2o -> ( ( (/) repeatS 0 ) ++ M ) = M )
+s16:s15:fveq2d |- ( M e. Word 2o -> ( predBits ` ( ( (/) repeatS 0 ) ++ M ) ) = ( predBits ` M ) )
+i17::predbitscl
+s18:s11,i17:syl |- ( M e. Word 2o -> ( predBits ` M ) e. Word 2o )
+s19:s8:oveq1i |- ( ( 1o repeatS 0 ) ++ ( predBits ` M ) ) = ( (/) ++ ( predBits ` M ) )
+i20::ccatlid
+s21:s18,i20:syl |- ( M e. Word 2o -> ( (/) ++ ( predBits ` M ) ) = ( predBits ` M ) )
+s22:s19,s21:eqtrid |- ( M e. Word 2o -> ( ( 1o repeatS 0 ) ++ ( predBits ` M ) ) = ( predBits ` M ) )
+s23:s16,s22:eqtr4d |- ( M e. Word 2o -> ( predBits ` ( ( (/) repeatS 0 ) ++ M ) ) = ( ( 1o repeatS 0 ) ++ ( predBits ` M ) ) )
+s24::simpr |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) )
+s25::simplr |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> y e. NN0 )
+s26::simpll |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> M e. Word 2o )
+s27::1nn0 |- 1 e. NN0
+s28:s27:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> 1 e. NN0 )
+s29:s5:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> (/) e. _V )
+i30::repswccat
+s31:s29,s28,s25,i30:syl3anc |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( (/) repeatS 1 ) ++ ( (/) repeatS y ) ) = ( (/) repeatS ( 1 + y ) ) )
+i32::repsw1
+s33:s29,i32:syl |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( (/) repeatS 1 ) = <" (/) "> )
+s34:s33:oveq1d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( (/) repeatS 1 ) ++ ( (/) repeatS y ) ) = ( <" (/) "> ++ ( (/) repeatS y ) ) )
+s35:s25:nn0cnd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> y e. CC )
+s36::ax-1cn |- 1 e. CC
+s37:s36:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> 1 e. CC )
+s38:s35,s37:addcomd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( y + 1 ) = ( 1 + y ) )
+s39:s38:oveq2d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( (/) repeatS ( y + 1 ) ) = ( (/) repeatS ( 1 + y ) ) )
+s40:s31,s34:eqtr3d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( (/) repeatS ( 1 + y ) ) = ( <" (/) "> ++ ( (/) repeatS y ) ) )
+s41:s39,s40:eqtrd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( (/) repeatS ( y + 1 ) ) = ( <" (/) "> ++ ( (/) repeatS y ) ) )
+s42::1nn0 |- 1 e. NN0
+s43:s42:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> 1 e. NN0 )
+s44:s6:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> 1o e. _V )
+i45::repswccat
+s46:s44,s43,s25,i45:syl3anc |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( 1o repeatS 1 ) ++ ( 1o repeatS y ) ) = ( 1o repeatS ( 1 + y ) ) )
+i47::repsw1
+s48:s44,i47:syl |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( 1o repeatS 1 ) = <" 1o "> )
+s49:s48:oveq1d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( 1o repeatS 1 ) ++ ( 1o repeatS y ) ) = ( <" 1o "> ++ ( 1o repeatS y ) ) )
+s50:s25:nn0cnd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> y e. CC )
+s51::ax-1cn |- 1 e. CC
+s52:s51:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> 1 e. CC )
+s53:s50,s52:addcomd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( y + 1 ) = ( 1 + y ) )
+s54:s53:oveq2d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( 1o repeatS ( y + 1 ) ) = ( 1o repeatS ( 1 + y ) ) )
+s55:s46,s49:eqtr3d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( 1o repeatS ( 1 + y ) ) = ( <" 1o "> ++ ( 1o repeatS y ) ) )
+s56:s54,s55:eqtrd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( 1o repeatS ( y + 1 ) ) = ( <" 1o "> ++ ( 1o repeatS y ) ) )
+s57::1oel2o |- 1o e. 2o
+s58:s57:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> 1o e. 2o )
+s59::0el2o |- (/) e. 2o
+s60:s59:a1i |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> (/) e. 2o )
+i61::repsw
+s62:s60,s25,i61:syl2anc |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( (/) repeatS y ) e. Word 2o )
+i63::repsw
+s64:s58,s25,i63:syl2anc |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( 1o repeatS y ) e. Word 2o )
+s65:s60:s1cld |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> <" (/) "> e. Word 2o )
+s66:s58:s1cld |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> <" 1o "> e. Word 2o )
+s67:s41:oveq1d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( (/) repeatS ( y + 1 ) ) ++ M ) = ( ( <" (/) "> ++ ( (/) repeatS y ) ) ++ M ) )
+i68::ccatass
+s69:s65,s62,s26,i68:syl3anc |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( <" (/) "> ++ ( (/) repeatS y ) ) ++ M ) = ( <" (/) "> ++ ( ( (/) repeatS y ) ++ M ) ) )
+s70:s67,s69:eqtrd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( (/) repeatS ( y + 1 ) ) ++ M ) = ( <" (/) "> ++ ( ( (/) repeatS y ) ++ M ) ) )
+s71:s70:fveq2d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( predBits ` ( ( (/) repeatS ( y + 1 ) ) ++ M ) ) = ( predBits ` ( <" (/) "> ++ ( ( (/) repeatS y ) ++ M ) ) ) )
+i72::ccatcl
+s73:s62,s26,i72:syl2anc |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( (/) repeatS y ) ++ M ) e. Word 2o )
+i74::predbitscons0
+s75:s73,i74:syl |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( predBits ` ( <" (/) "> ++ ( ( (/) repeatS y ) ++ M ) ) ) = ( <" 1o "> ++ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) ) )
+s76:s24:oveq2d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( <" 1o "> ++ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) ) = ( <" 1o "> ++ ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) )
+i77::predbitscl
+s78:s26,i77:syl |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( predBits ` M ) e. Word 2o )
+i79::ccatass
+s80:s66,s64,s78,i79:syl3anc |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( <" 1o "> ++ ( 1o repeatS y ) ) ++ ( predBits ` M ) ) = ( <" 1o "> ++ ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) )
+s81:s56:oveq1d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( 1o repeatS ( y + 1 ) ) ++ ( predBits ` M ) ) = ( ( <" 1o "> ++ ( 1o repeatS y ) ) ++ ( predBits ` M ) ) )
+s82:s81,s80:eqtrd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( ( 1o repeatS ( y + 1 ) ) ++ ( predBits ` M ) ) = ( <" 1o "> ++ ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) )
+s83:s71,s75:eqtrd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( predBits ` ( ( (/) repeatS ( y + 1 ) ) ++ M ) ) = ( <" 1o "> ++ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) ) )
+s84:s83,s76:eqtrd |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( predBits ` ( ( (/) repeatS ( y + 1 ) ) ++ M ) ) = ( <" 1o "> ++ ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) )
+s85:s84,s82:eqtr4d |- ( ( ( M e. Word 2o /\ y e. NN0 ) /\ ( predBits ` ( ( (/) repeatS y ) ++ M ) ) = ( ( 1o repeatS y ) ++ ( predBits ` M ) ) ) -> ( predBits ` ( ( (/) repeatS ( y + 1 ) ) ++ M ) ) = ( ( 1o repeatS ( y + 1 ) ) ++ ( predBits ` M ) ) )
+qed:c6,c12,c18,c24,s23,s85:nn0indd |- ( ( M e. Word 2o /\ C e. NN0 ) -> ( predBits ` ( ( (/) repeatS C ) ++ M ) ) = ( ( 1o repeatS C ) ++ ( predBits ` M ) ) )
+$)

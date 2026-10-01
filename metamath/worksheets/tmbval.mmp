@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=tmbval  LOC_AFTER=?
+
+* The value of the per-tick step budget of the machine layer.  Lean (TM/Cost.lean): ` def B (b : Nat) : Nat := 64 * (b + 2) ^ 3 ` .
+
+s1::id |- ( B e. NN0 -> B e. NN0 )
+s2::oveq1 |- ( b = B -> ( b + 2 ) = ( B + 2 ) )
+s3:s2:oveq1d |- ( b = B -> ( ( b + 2 ) ^ 3 ) = ( ( B + 2 ) ^ 3 ) )
+s4:s3:oveq2d |- ( b = B -> ( ; 6 4 x. ( ( b + 2 ) ^ 3 ) ) = ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) )
+s5::df-tmb |- TMB = ( b e. NN0 |-> ( ; 6 4 x. ( ( b + 2 ) ^ 3 ) ) )
+s6::ovex |- ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) e. _V
+s7:s6:a1i |- ( B e. NN0 -> ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) e. _V )
+s8:s4,s5:fvmptg |- ( ( B e. NN0 /\ ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) e. _V ) -> ( TMB ` B ) = ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) )
+qed:s1,s7,s8:syl2anc |- ( B e. NN0 -> ( TMB ` B ) = ( ; 6 4 x. ( ( B + 2 ) ^ 3 ) ) )
+$)

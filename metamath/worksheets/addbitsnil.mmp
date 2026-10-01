@@ -1,0 +1,81 @@
+$( <MM> <PROOF_ASST> THEOREM=addbitsnil  LOC_AFTER=?
+
+* Lean clause 1 of addBits: the sum of two empty words is the carry word.
+
+s1::id |- ( C e. 2o -> C e. 2o )
+s2::wrd0 |- (/) e. Word 2o
+s3:s2:a1i |- ( C e. 2o -> (/) e. Word 2o )
+i4::addbitsval
+s5:s3,s3,s1,i4:syl3anc |- ( C e. 2o -> ( ( (/) addBits (/) ) ` C ) = ( ( ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) ++ ( addCarry ` if ( ( 2 ^ if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) <_ ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) )
+s6::tonat0 |- ( toNat ` (/) ) = 0
+s7:s6:a1i |- ( C e. 2o -> ( toNat ` (/) ) = 0 )
+s8::hash0 |- ( # ` (/) ) = 0
+s9:s8:a1i |- ( C e. 2o -> ( # ` (/) ) = 0 )
+s10::ifid |- if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = ( # ` (/) )
+s11:s10,s8:eqtri |- if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = 0
+s12:s11:a1i |- ( C e. 2o -> if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = 0 )
+s13:s7,s7:oveq12d |- ( C e. 2o -> ( ( toNat ` (/) ) + ( toNat ` (/) ) ) = ( 0 + 0 ) )
+s14::00id |- ( 0 + 0 ) = 0
+s15:s13,s14:eqtrdi |- ( C e. 2o -> ( ( toNat ` (/) ) + ( toNat ` (/) ) ) = 0 )
+s16:s15:oveq1d |- ( C e. 2o -> ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) = ( 0 + ( bToNat ` C ) ) )
+i17::bwbncl
+s18:s1,i17:syl |- ( C e. 2o -> ( bToNat ` C ) e. NN0 )
+s19:s18:nn0zd |- ( C e. 2o -> ( bToNat ` C ) e. ZZ )
+s20:s19:zred |- ( C e. 2o -> ( bToNat ` C ) e. RR )
+s21:s20:recnd |- ( C e. 2o -> ( bToNat ` C ) e. CC )
+s22:s21:addlidd |- ( C e. 2o -> ( 0 + ( bToNat ` C ) ) = ( bToNat ` C ) )
+s23:s16,s22:eqtrd |- ( C e. 2o -> ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) = ( bToNat ` C ) )
+c1:s23,s12:oveq12d |- ( C e. 2o -> ( ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) = ( ( bToNat ` C ) bwrd 0 ) )
+c2:s12:oveq2d |- ( C e. 2o -> ( 2 ^ if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) = ( 2 ^ 0 ) )
+c3:c2,s23:breq12d |- ( C e. 2o -> ( ( 2 ^ if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) <_ ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) <-> ( 2 ^ 0 ) <_ ( bToNat ` C ) ) )
+c4:c3:ifbid |- ( C e. 2o -> if ( ( 2 ^ if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) <_ ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) , 1o , (/) ) = if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) )
+c5:c4:fveq2d |- ( C e. 2o -> ( addCarry ` if ( ( 2 ^ if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) <_ ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) = ( addCarry ` if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) ) )
+c6:c1,c5:oveq12d |- ( C e. 2o -> ( ( ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) bwrd if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) ++ ( addCarry ` if ( ( 2 ^ if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) <_ ( ( ( toNat ` (/) ) + ( toNat ` (/) ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) ) = ( ( ( bToNat ` C ) bwrd 0 ) ++ ( addCarry ` if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) ) ) )
+i24::bwrd0
+s25:s19,i24:syl |- ( C e. 2o -> ( ( bToNat ` C ) bwrd 0 ) = (/) )
+s26::2cn |- 2 e. CC
+i27::exp0
+s28:s26,i27:ax-mp |- ( 2 ^ 0 ) = 1
+s29:s28:a1i |- ( C e. 2o -> ( 2 ^ 0 ) = 1 )
+s30:s29:breq1d |- ( C e. 2o -> ( ( 2 ^ 0 ) <_ ( bToNat ` C ) <-> 1 <_ ( bToNat ` C ) ) )
+i31::bwbnle1
+s32:s1,i31:syl |- ( C e. 2o -> ( bToNat ` C ) <_ 1 )
+s33::1red |- ( C e. 2o -> 1 e. RR )
+i34::letri3
+s35:s33,s20,i34:syl2anc |- ( C e. 2o -> ( 1 = ( bToNat ` C ) <-> ( 1 <_ ( bToNat ` C ) /\ ( bToNat ` C ) <_ 1 ) ) )
+s36:s32:biantrud |- ( C e. 2o -> ( 1 <_ ( bToNat ` C ) <-> ( 1 <_ ( bToNat ` C ) /\ ( bToNat ` C ) <_ 1 ) ) )
+s37:s36,s35:bitr4d |- ( C e. 2o -> ( 1 <_ ( bToNat ` C ) <-> 1 = ( bToNat ` C ) ) )
+s38::eqcom |- ( 1 = ( bToNat ` C ) <-> ( bToNat ` C ) = 1 )
+s39:s38:a1i |- ( C e. 2o -> ( 1 = ( bToNat ` C ) <-> ( bToNat ` C ) = 1 ) )
+i40::bwbneq1
+s41:s1,i40:syl |- ( C e. 2o -> ( ( bToNat ` C ) = 1 <-> C = 1o ) )
+s42:s30,s37:bitrd |- ( C e. 2o -> ( ( 2 ^ 0 ) <_ ( bToNat ` C ) <-> 1 = ( bToNat ` C ) ) )
+s43:s42,s39:bitrd |- ( C e. 2o -> ( ( 2 ^ 0 ) <_ ( bToNat ` C ) <-> ( bToNat ` C ) = 1 ) )
+s44:s43,s41:bitrd |- ( C e. 2o -> ( ( 2 ^ 0 ) <_ ( bToNat ` C ) <-> C = 1o ) )
+s45:s44:ifbid |- ( C e. 2o -> if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) = if ( C = 1o , 1o , (/) ) )
+s46::biidd |- ( C e. 2o -> ( C = 1o <-> C = 1o ) )
+s47::simpr |- ( ( C e. 2o /\ C = 1o ) -> C = 1o )
+s48:s46:adantr |- ( ( C e. 2o /\ C = 1o ) -> ( C = 1o <-> C = 1o ) )
+s49:s47,s48:mpbid |- ( ( C e. 2o /\ C = 1o ) -> C = 1o )
+s50:s49:iftrued |- ( ( C e. 2o /\ C = 1o ) -> if ( C = 1o , 1o , (/) ) = 1o )
+s51:s47,s50:eqtr4d |- ( ( C e. 2o /\ C = 1o ) -> C = if ( C = 1o , 1o , (/) ) )
+s52::simpr |- ( ( C e. 2o /\ -. C = 1o ) -> -. C = 1o )
+s53:s46:adantr |- ( ( C e. 2o /\ -. C = 1o ) -> ( C = 1o <-> C = 1o ) )
+s54:s52,s53:mtbid |- ( ( C e. 2o /\ -. C = 1o ) -> -. C = 1o )
+s55:s54:iffalsed |- ( ( C e. 2o /\ -. C = 1o ) -> if ( C = 1o , 1o , (/) ) = (/) )
+s56:s1:adantr |- ( ( C e. 2o /\ -. C = 1o ) -> C e. 2o )
+i57::bwel2on
+s58:s56,i57:syl |- ( ( C e. 2o /\ -. C = 1o ) -> ( -. C = 1o <-> C = (/) ) )
+s59:s52,s58:mpbid |- ( ( C e. 2o /\ -. C = 1o ) -> C = (/) )
+s60:s59,s55:eqtr4d |- ( ( C e. 2o /\ -. C = 1o ) -> C = if ( C = 1o , 1o , (/) ) )
+s61:s51,s60:pm2.61dan |- ( C e. 2o -> C = if ( C = 1o , 1o , (/) ) )
+s62:s45,s61:eqtr4d |- ( C e. 2o -> if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) = C )
+s63:s62:fveq2d |- ( C e. 2o -> ( addCarry ` if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) ) = ( addCarry ` C ) )
+s64:s25,s63:oveq12d |- ( C e. 2o -> ( ( ( bToNat ` C ) bwrd 0 ) ++ ( addCarry ` if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) ) ) = ( (/) ++ ( addCarry ` C ) ) )
+i65::addcarrycl
+s66:s1,i65:syl |- ( C e. 2o -> ( addCarry ` C ) e. Word 2o )
+i67::ccatlid
+s68:s66,i67:syl |- ( C e. 2o -> ( (/) ++ ( addCarry ` C ) ) = ( addCarry ` C ) )
+s69:s5,c6:eqtrd |- ( C e. 2o -> ( ( (/) addBits (/) ) ` C ) = ( ( ( bToNat ` C ) bwrd 0 ) ++ ( addCarry ` if ( ( 2 ^ 0 ) <_ ( bToNat ` C ) , 1o , (/) ) ) ) )
+qed:s69,s64,s68:3eqtrd |- ( C e. 2o -> ( ( (/) addBits (/) ) ` C ) = ( addCarry ` C ) )
+$)

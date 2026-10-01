@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=tplpowsuc  LOC_AFTER=?
+
+* ` a < 2 ^ b -> a < 2 ^ ( b + 1 ) ` (` lt_pow_succ ` of TM/PrimTD.lean, read by Steps23, Overhead and Step5).
+
+s1::simp1 |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> A e. RR )
+s2::simp2 |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. NN0 )
+s3::simp3 |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> A < ( 2 ^ B ) )
+s4::2re |- 2 e. RR
+s5:s4:a1i |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> 2 e. RR )
+s6:s2:nn0zd |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. ZZ )
+s7:s6:peano2zd |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( B + 1 ) e. ZZ )
+s8::1lt2 |- 1 < 2
+s9:s8:a1i |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> 1 < 2 )
+s10:s2:nn0red |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. RR )
+s11:s10:ltp1d |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B < ( B + 1 ) )
+s12:s5,s6,s7:3jca |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 2 e. RR /\ B e. ZZ /\ ( B + 1 ) e. ZZ ) )
+s13:s9,s11:jca |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 1 < 2 /\ B < ( B + 1 ) ) )
+i14::ltexp2a
+s15:s12,s13,i14:syl2anc |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 2 ^ B ) < ( 2 ^ ( B + 1 ) ) )
+s16:s5,s2:reexpcld |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 2 ^ B ) e. RR )
+i17::peano2nn0
+s18:s2,i17:syl |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( B + 1 ) e. NN0 )
+s19:s5,s18:reexpcld |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 2 ^ ( B + 1 ) ) e. RR )
+qed:s1,s16,s19,s3,s15:lttrd |- ( ( A e. RR /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> A < ( 2 ^ ( B + 1 ) ) )
+$)

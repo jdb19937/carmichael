@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=g5t5  LOC_AFTER=?
+
+* Fast path: a sum against a sum with a common minuend (le2addd, lesub2dd), the strict hypothesis weakened by ltled.
+
+s1::simp1 |- ( ( A e. RR /\ B e. RR /\ A < B ) -> A e. RR )
+s2::simp2 |- ( ( A e. RR /\ B e. RR /\ A < B ) -> B e. RR )
+s3::simp3 |- ( ( A e. RR /\ B e. RR /\ A < B ) -> A < B )
+s4:s1,s2,s3:ltled |- ( ( A e. RR /\ B e. RR /\ A < B ) -> A <_ B )
+s5::5re |- 5 e. RR
+s6:s5:a1i |- ( ( A e. RR /\ B e. RR /\ A < B ) -> 5 e. RR )
+s7:s1,s2,s6,s4:lesub2dd |- ( ( A e. RR /\ B e. RR /\ A < B ) -> ( 5 - B ) <_ ( 5 - A ) )
+i8::addge01
+s9::1re |- 1 e. RR
+s10:s9,s9,i8:mp2an |- ( 0 <_ 1 <-> 1 <_ ( 1 + 1 ) )
+s11::0le1 |- 0 <_ 1
+s12:s11,s10:mpbi |- 1 <_ ( 1 + 1 )
+s13::1p1e2 |- ( 1 + 1 ) = 2
+s14:s12,s13:breqtri |- 1 <_ 2
+s15:s14:a1i |- ( ( A e. RR /\ B e. RR /\ A < B ) -> 1 <_ 2 )
+s16:s6,s2:resubcld |- ( ( A e. RR /\ B e. RR /\ A < B ) -> ( 5 - B ) e. RR )
+s17:s9:a1i |- ( ( A e. RR /\ B e. RR /\ A < B ) -> 1 e. RR )
+s18:s6,s1:resubcld |- ( ( A e. RR /\ B e. RR /\ A < B ) -> ( 5 - A ) e. RR )
+s19::2re |- 2 e. RR
+s20:s19:a1i |- ( ( A e. RR /\ B e. RR /\ A < B ) -> 2 e. RR )
+qed:s16,s17,s18,s20,s7,s15:le2addd |- ( ( A e. RR /\ B e. RR /\ A < B ) -> ( ( 5 - B ) + 1 ) <_ ( ( 5 - A ) + 2 ) )
+$)

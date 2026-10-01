@@ -1,0 +1,68 @@
+$( <MM> <PROOF_ASST> THEOREM=tmdvacc  LOC_AFTER=?
+
+* The accumulator of ` divisorsOfF ` one element on (Lean ` divisorsOf_rev_take_succ ` ): the reversed subset products of the reversed first ` j + 1 ` elements of ` Q.reverse ` are the products by ` q = Q.reverse[j] ` of the old accumulator, followed by the old accumulator (~ divisorsofcs , ~ mulallrev ).
+
+s1::simpl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> W e. Word NN0 )
+s2::simpr |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> J e. ( 0 ..^ ( # ` W ) ) )
+i3::revcl
+s4:s1,i3:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` W ) e. Word NN0 )
+i5::pfxcl
+s6:s4,i5:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( reverse ` W ) prefix J ) e. Word NN0 )
+i7::revcl
+s8:s6,i7:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( ( reverse ` W ) prefix J ) ) e. Word NN0 )
+i9::divisorsofcl
+s10:s8,i9:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) e. ( Word NN0 X. NN0 ) )
+i11::xp1st
+s12:s10,i11:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) e. Word NN0 )
+i13::revlen
+s14:s1,i13:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( # ` ( reverse ` W ) ) = ( # ` W ) )
+s15:s14:eqcomd |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( # ` W ) = ( # ` ( reverse ` W ) ) )
+s16:s15:oveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 0 ..^ ( # ` W ) ) = ( 0 ..^ ( # ` ( reverse ` W ) ) ) )
+s17:s2,s16:eleqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> J e. ( 0 ..^ ( # ` ( reverse ` W ) ) ) )
+i18::wrdsymbcl
+s19:s4,s17,i18:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( reverse ` W ) ` J ) e. NN0 )
+i20::tm2lpfxs1
+s21:s4,s17,i20:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( reverse ` W ) prefix ( J + 1 ) ) = ( ( ( reverse ` W ) prefix J ) ++ <" ( ( reverse ` W ) ` J ) "> ) )
+i22::s1cl
+s23:s19,i22:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> <" ( ( reverse ` W ) ` J ) "> e. Word NN0 )
+i24::revccat
+s25:s6,s23,i24:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( ( ( reverse ` W ) prefix J ) ++ <" ( ( reverse ` W ) ` J ) "> ) ) = ( ( reverse ` <" ( ( reverse ` W ) ` J ) "> ) ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) )
+s26:s21:fveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) = ( reverse ` ( ( ( reverse ` W ) prefix J ) ++ <" ( ( reverse ` W ) ` J ) "> ) ) )
+s27::revs1 |- ( reverse ` <" ( ( reverse ` W ) ` J ) "> ) = <" ( ( reverse ` W ) ` J ) ">
+s28:s27:a1i |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` <" ( ( reverse ` W ) ` J ) "> ) = <" ( ( reverse ` W ) ` J ) "> )
+s29:s28:oveq1d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( reverse ` <" ( ( reverse ` W ) ` J ) "> ) ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) = ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) )
+s30:s25,s29:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( ( ( reverse ` W ) prefix J ) ++ <" ( ( reverse ` W ) ` J ) "> ) ) = ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) )
+s31:s26,s30:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) = ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) )
+i32::divisorsofcs
+s33:s19,s8,i32:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( DivisorsOf ` ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) = <. ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) , ( ( 2nd ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) + ( 2nd ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) >. )
+i34::divisorsofcl
+s35:s8,i34:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) e. ( Word NN0 X. NN0 ) )
+i36::xp1st
+s37:s35,i36:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) e. Word NN0 )
+i38::xp2nd
+s39:s35,i38:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 2nd ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) e. NN0 )
+i40::mulallcl
+s41:s19,s37,i40:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) e. ( Word NN0 X. NN0 ) )
+i42::xp1st
+s43:s41,i42:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) e. Word NN0 )
+i44::xp2nd
+s45:s41,i44:syl |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 2nd ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) e. NN0 )
+i46::ccatcl
+s47:s37,s43,i46:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) e. Word NN0 )
+s48:s39,s45:nn0addcld |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( 2nd ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) + ( 2nd ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) e. NN0 )
+s49:s33:fveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( DivisorsOf ` ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) = ( 1st ` <. ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) , ( ( 2nd ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) + ( 2nd ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) >. ) )
+i50::op1stg
+s51:s47,s48,i50:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` <. ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) , ( ( 2nd ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) + ( 2nd ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) >. ) = ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) )
+s52:s49,s51:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( DivisorsOf ` ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) = ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) )
+s53:s31:fveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) ) = ( DivisorsOf ` ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) )
+s54:s53:fveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) ) ) = ( 1st ` ( DivisorsOf ` ( <" ( ( reverse ` W ) ` J ) "> ++ ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) )
+s55:s54,s52:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) ) ) = ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) )
+i56::revccat
+s57:s37,s43,i56:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) ) = ( ( reverse ` ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) ++ ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) )
+i58::mulallrev
+s59:s19,s37,i58:syl2anc |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) = ( reverse ` ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) )
+s60:s55:fveq2d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) ) ) ) = ( reverse ` ( ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ++ ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) ) )
+s61:s60,s57:eqtrd |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) ) ) ) = ( ( reverse ` ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) ++ ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) )
+s62:s59:oveq1d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) ++ ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) = ( ( reverse ` ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) ++ ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) )
+qed:s61,s62:eqtr4d |- ( ( W e. Word NN0 /\ J e. ( 0 ..^ ( # ` W ) ) ) -> ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix ( J + 1 ) ) ) ) ) ) = ( ( 1st ` ( ( ( reverse ` W ) ` J ) MulAll ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) ) ++ ( reverse ` ( 1st ` ( DivisorsOf ` ( reverse ` ( ( reverse ` W ) prefix J ) ) ) ) ) ) )
+$)

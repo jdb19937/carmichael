@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=recipsumlem1  LOC_AFTER=?
+
+* Lemma for recipsum: for a prime p >= w >= 2, 1 / p <= ( Lam(p) / p ) / log w.
+
+1::simp1    |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> w e. ( ZZ>= ` 2 ) )
+2::simp2    |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> p e. Prime )
+3::simp3    |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> w <_ p )
+4a::eluz2nn
+4:1,4a:syl  |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> w e. NN )
+5:4:nnrpd   |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> w e. RR+ )
+6a::prmnn
+6:2,6a:syl  |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> p e. NN )
+7:6:nnrpd   |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> p e. RR+ )
+8a::vmaprm
+8:2,8a:syl  |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( Lam ` p ) = ( log ` p ) )
+9a::eluz2gt1
+9:1,9a:syl  |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> 1 < w )
+10:4:nnred  |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> w e. RR )
+11:10,9:rplogcld |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( log ` w ) e. RR+ )
+12:5,7:logled |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( w <_ p <-> ( log ` w ) <_ ( log ` p ) ) )
+13:3,12:mpbid |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( log ` w ) <_ ( log ` p ) )
+14:7:relogcld |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( log ` p ) e. RR )
+15:11:rpred |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( log ` w ) e. RR )
+16:15,14,7,13:lediv1dd |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( log ` w ) / p ) <_ ( ( log ` p ) / p ) )
+17:15:recnd |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( log ` w ) e. CC )
+18:7:rpcnd  |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> p e. CC )
+19:7:rpne0d |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> p =/= 0 )
+20a::divrec2
+20:17,18,19,20a:syl3anc |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( log ` w ) / p ) = ( ( 1 / p ) x. ( log ` w ) ) )
+21:20,16:eqbrtrrd |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( 1 / p ) x. ( log ` w ) ) <_ ( ( log ` p ) / p ) )
+22::1re     |- 1 e. RR
+23:22:a1i   |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> 1 e. RR )
+24:23,7:rerpdivcld |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( 1 / p ) e. RR )
+25:14,7:rerpdivcld |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( log ` p ) / p ) e. RR )
+26:11:rpgt0d |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> 0 < ( log ` w ) )
+27:15,26:jca |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( log ` w ) e. RR /\ 0 < ( log ` w ) ) )
+28a::lemuldiv
+28:24,25,27,28a:syl3anc |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( ( 1 / p ) x. ( log ` w ) ) <_ ( ( log ` p ) / p ) <-> ( 1 / p ) <_ ( ( ( log ` p ) / p ) / ( log ` w ) ) ) )
+29:21,28:mpbid |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( 1 / p ) <_ ( ( ( log ` p ) / p ) / ( log ` w ) ) )
+30:8:oveq1d |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( Lam ` p ) / p ) = ( ( log ` p ) / p ) )
+31:30:oveq1d |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( ( ( Lam ` p ) / p ) / ( log ` w ) ) = ( ( ( log ` p ) / p ) / ( log ` w ) ) )
+qed:29,31:breqtrrd |- ( ( w e. ( ZZ>= ` 2 ) /\ p e. Prime /\ w <_ p ) -> ( 1 / p ) <_ ( ( ( Lam ` p ) / p ) / ( log ` w ) ) )
+$)

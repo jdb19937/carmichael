@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=cvxid  LOC_AFTER=?
+
+* The parametrisation of a segment as a convex combination.
+
+s1::simp1 |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> A e. CC )
+s2::simp2 |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> B e. CC )
+s3::simp3 |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> T e. CC )
+s4::1cnd |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> 1 e. CC )
+s5:s3,s1:mulcld |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( T x. A ) e. CC )
+s6:s3,s2:mulcld |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( T x. B ) e. CC )
+i7::subdir
+s8:s4,s3,s1,i7:syl3anc |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( ( 1 - T ) x. A ) = ( ( 1 x. A ) - ( T x. A ) ) )
+s9:s1:mullidd |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( 1 x. A ) = A )
+s10:s9:oveq1d |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( ( 1 x. A ) - ( T x. A ) ) = ( A - ( T x. A ) ) )
+s11:s8,s10:eqtrd |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( ( 1 - T ) x. A ) = ( A - ( T x. A ) ) )
+s12:s11:oveq1d |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( ( ( 1 - T ) x. A ) + ( T x. B ) ) = ( ( A - ( T x. A ) ) + ( T x. B ) ) )
+i13::subadd23
+s14:s1,s5,s6,i13:syl3anc |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( ( A - ( T x. A ) ) + ( T x. B ) ) = ( A + ( ( T x. B ) - ( T x. A ) ) ) )
+s15:s3,s2,s1:subdid |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( T x. ( B - A ) ) = ( ( T x. B ) - ( T x. A ) ) )
+s16:s15:oveq2d |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( A + ( T x. ( B - A ) ) ) = ( A + ( ( T x. B ) - ( T x. A ) ) ) )
+s17:s12,s14:eqtrd |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( ( ( 1 - T ) x. A ) + ( T x. B ) ) = ( A + ( ( T x. B ) - ( T x. A ) ) ) )
+qed:s16,s17:eqtr4d |- ( ( A e. CC /\ B e. CC /\ T e. CC ) -> ( A + ( T x. ( B - A ) ) ) = ( ( ( 1 - T ) x. A ) + ( T x. B ) ) )
+$)

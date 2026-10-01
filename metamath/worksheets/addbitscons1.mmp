@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=addbitscons1  LOC_AFTER=?
+
+* Lean clause 2 of addBits: the second operand is empty.
+
+s1::simpll |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> A e. 2o )
+s2::simplr |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> C e. 2o )
+s3::simpr |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> X e. Word 2o )
+i4::s1cl
+s5:s1,i4:syl |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> <" A "> e. Word 2o )
+i6::ccatcl
+s7:s5,s3,i6:syl2anc |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( <" A "> ++ X ) e. Word 2o )
+s8::wrd0 |- (/) e. Word 2o
+s9:s8:a1i |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> (/) e. Word 2o )
+i10::ccatlen
+s11:s5,s3,i10:syl2anc |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` ( <" A "> ++ X ) ) = ( ( # ` <" A "> ) + ( # ` X ) ) )
+s12::s1len |- ( # ` <" A "> ) = 1
+s13:s12:a1i |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` <" A "> ) = 1 )
+s14:s13:oveq1d |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( ( # ` <" A "> ) + ( # ` X ) ) = ( 1 + ( # ` X ) ) )
+s15::1cnd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> 1 e. CC )
+i16::lencl
+s17:s3,i16:syl |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` X ) e. NN0 )
+s18:s17:nn0zd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` X ) e. ZZ )
+s19:s18:zred |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` X ) e. RR )
+s20:s19:recnd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` X ) e. CC )
+s21:s15,s20:addcomd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( 1 + ( # ` X ) ) = ( ( # ` X ) + 1 ) )
+s22:s11,s14,s21:3eqtrd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` ( <" A "> ++ X ) ) = ( ( # ` X ) + 1 ) )
+s23::hash0 |- ( # ` (/) ) = 0
+s24:s23:a1i |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` (/) ) = 0 )
+i25::nn0p1gt0
+s26:s17,i25:syl |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> 0 < ( ( # ` X ) + 1 ) )
+s27:s26,s22:breqtrrd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> 0 < ( # ` ( <" A "> ++ X ) ) )
+s28:s24,s27:eqbrtrd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( # ` (/) ) < ( # ` ( <" A "> ++ X ) ) )
+s29:s7,s9,s2:3jca |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( ( <" A "> ++ X ) e. Word 2o /\ (/) e. Word 2o /\ C e. 2o ) )
+i30::addbitspad
+s31:s29,s28,i30:syl2anc |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( ( ( <" A "> ++ X ) addBits (/) ) ` C ) = ( ( ( <" A "> ++ X ) addBits ( (/) ++ <" (/) "> ) ) ` C ) )
+s32::0el2o |- (/) e. 2o
+s33:s32:a1i |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> (/) e. 2o )
+i34::s1cl
+s35:s33,i34:syl |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> <" (/) "> e. Word 2o )
+i36::ccatlid
+s37:s35,i36:syl |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( (/) ++ <" (/) "> ) = <" (/) "> )
+i38::ccatrid
+s39:s35,i38:syl |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( <" (/) "> ++ (/) ) = <" (/) "> )
+s40:s39:eqcomd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> <" (/) "> = ( <" (/) "> ++ (/) ) )
+s41:s37,s40:eqtrd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( (/) ++ <" (/) "> ) = ( <" (/) "> ++ (/) ) )
+s42:s41:oveq2d |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( ( <" A "> ++ X ) addBits ( (/) ++ <" (/) "> ) ) = ( ( <" A "> ++ X ) addBits ( <" (/) "> ++ (/) ) ) )
+s43:s42:fveq1d |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( ( ( <" A "> ++ X ) addBits ( (/) ++ <" (/) "> ) ) ` C ) = ( ( ( <" A "> ++ X ) addBits ( <" (/) "> ++ (/) ) ) ` C ) )
+s44:s1,s33,s2:3jca |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( A e. 2o /\ (/) e. 2o /\ C e. 2o ) )
+s45:s3,s9:jca |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( X e. Word 2o /\ (/) e. Word 2o ) )
+i46::addbitscons
+s47:s44,s45,i46:syl2anc |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( ( ( <" A "> ++ X ) addBits ( <" (/) "> ++ (/) ) ) ` C ) = ( <" ( ( A sumBit (/) ) ` C ) "> ++ ( ( X addBits (/) ) ` ( ( A majBit (/) ) ` C ) ) ) )
+qed:s31,s43,s47:3eqtrd |- ( ( ( A e. 2o /\ C e. 2o ) /\ X e. Word 2o ) -> ( ( ( <" A "> ++ X ) addBits (/) ) ` C ) = ( <" ( ( A sumBit (/) ) ` C ) "> ++ ( ( X addBits (/) ) ` ( ( A majBit (/) ) ` C ) ) ) )
+$)

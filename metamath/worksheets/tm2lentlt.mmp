@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lentlt  LOC_AFTER=?
+
+* A number below ` 2 ^ B ` has an encoding of at most ` B ` bits.  Lean: ` encodeNat_length_le_of_lt_pow ` .
+
+s1::simp1 |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> A e. NN0 )
+s2::simp2 |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. NN0 )
+s3::simp3 |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> A < ( 2 ^ B ) )
+i4::encnatgamlen
+s5:s1,i4:syl |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( # ` ( encNatGam ` A ) ) = ( # ` ( encodeNat ` A ) ) )
+i6::nn0p1nn
+s7:s2,i6:syl |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( B + 1 ) e. NN )
+s8:s1:adantr |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> A e. NN0 )
+s9:s7:adantr |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> ( B + 1 ) e. NN )
+s10::simpr |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) )
+i11::encnatlenle
+s12:s8,s9,s10,i11:syl3anc |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> ( 2 ^ ( ( B + 1 ) - 1 ) ) <_ A )
+s13:s2:nn0cnd |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. CC )
+i14::pncan1
+s15:s13,i14:syl |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( ( B + 1 ) - 1 ) = B )
+s16:s15:oveq2d |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 2 ^ ( ( B + 1 ) - 1 ) ) = ( 2 ^ B ) )
+s17:s16:adantr |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> ( 2 ^ ( ( B + 1 ) - 1 ) ) = ( 2 ^ B ) )
+s18:s17,s12:eqbrtrrd |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> ( 2 ^ B ) <_ A )
+s19:s1:nn0red |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> A e. RR )
+s20::2re |- 2 e. RR
+s21:s20:a1i |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> 2 e. RR )
+s22:s21,s2:reexpcld |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( 2 ^ B ) e. RR )
+s23:s19,s22:ltnled |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( A < ( 2 ^ B ) <-> -. ( 2 ^ B ) <_ A ) )
+s24:s23,s3:mpbid |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> -. ( 2 ^ B ) <_ A )
+s25:s24:adantr |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> -. ( 2 ^ B ) <_ A )
+s26:s18,s25:pm2.21dd |- ( ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) /\ ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) -> -. ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) )
+s27:s26:ex |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) -> -. ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) )
+s28:s27:pm2.01d |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> -. ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) )
+i29::encnatf
+s30:s1,i29:sylancr |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( encodeNat ` A ) e. Word 2o )
+s31::encnatf |- encodeNat : NN0 --> Word 2o
+s32:s31:a1i |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> encodeNat : NN0 --> Word 2o )
+i33::ffvelcdm
+s34:s32,s1,i33:syl2anc |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( encodeNat ` A ) e. Word 2o )
+i35::lencl
+s36:s34,i35:syl |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( # ` ( encodeNat ` A ) ) e. NN0 )
+s37:s36:nn0red |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( # ` ( encodeNat ` A ) ) e. RR )
+s38:s2:nn0red |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> B e. RR )
+i39::peano2re
+s40:s38,i39:syl |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( B + 1 ) e. RR )
+s41:s37,s40:ltnled |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( ( # ` ( encodeNat ` A ) ) < ( B + 1 ) <-> -. ( B + 1 ) <_ ( # ` ( encodeNat ` A ) ) ) )
+s42:s41,s28:mpbird |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( # ` ( encodeNat ` A ) ) < ( B + 1 ) )
+i43::nn0leltp1
+s44:s36,s2,i43:syl2anc |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( ( # ` ( encodeNat ` A ) ) <_ B <-> ( # ` ( encodeNat ` A ) ) < ( B + 1 ) ) )
+s45:s44,s42:mpbird |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( # ` ( encodeNat ` A ) ) <_ B )
+qed:s5,s45:eqbrtrd |- ( ( A e. NN0 /\ B e. NN0 /\ A < ( 2 ^ B ) ) -> ( # ` ( encNatGam ` A ) ) <_ B )
+$)

@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrsumcr  LOC_AFTER=?
+
+* A sum weighted by a Dirichlet character over the coprime residues equals the sum over all residues: the character vanishes off the units (LargeSieve sum_units_eq).
+
+h1::dchrsumcr.n |- ( ph -> N e. NN )
+h2::dchrsumcr.x |- ( ph -> X e. ( Base ` ( DChr ` N ) ) )
+h3::dchrsumcr.b |- ( ( ph /\ u e. ( 0 ..^ N ) ) -> B e. CC )
+s1::ssrab2 |- { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } C_ ( 0 ..^ N )
+s2:s1:a1i |- ( ph -> { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } C_ ( 0 ..^ N ) )
+i3::elrabi
+s4::simpr |- ( ( ph /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+s5:s4,i3:syl |- ( ( ph /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. ( 0 ..^ N ) )
+s6:i3,3:sylan2 |- ( ( ph /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> B e. CC )
+i7::elfzoelz
+s8:s5,i7:syl |- ( ( ph /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> u e. ZZ )
+s9::eqid |- ( DChr ` N ) = ( DChr ` N )
+s10::eqid |- ( Z/nZ ` N ) = ( Z/nZ ` N )
+s11::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s12::eqid |- ( ZRHom ` ( Z/nZ ` N ) ) = ( ZRHom ` ( Z/nZ ` N ) )
+s13:2:adantr |- ( ( ph /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> X e. ( Base ` ( DChr ` N ) ) )
+s14:s9,s10,s11,s12,s13,s8:dchrzrhcl |- ( ( ph /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) e. CC )
+s15:s14,s6:mulcld |- ( ( ph /\ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) -> ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. B ) e. CC )
+s16::simpr |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) )
+s17:s16:eldifad |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> u e. ( 0 ..^ N ) )
+s18:s16:eldifbd |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> -. u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } )
+s19::oveq1 |- ( k = u -> ( k gcd N ) = ( u gcd N ) )
+s20:s19:eqeq1d |- ( k = u -> ( ( k gcd N ) = 1 <-> ( u gcd N ) = 1 ) )
+s21:s20:elrab |- ( u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } <-> ( u e. ( 0 ..^ N ) /\ ( u gcd N ) = 1 ) )
+s22:s21:a1i |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> ( u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } <-> ( u e. ( 0 ..^ N ) /\ ( u gcd N ) = 1 ) ) )
+s23:s17,s22:mpbirand |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> ( u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } <-> ( u gcd N ) = 1 ) )
+s24:s18,s23:mtbid |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> -. ( u gcd N ) = 1 )
+i25::elfzoelz
+s26:s17,i25:syl |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> u e. ZZ )
+s27:1,2:jca |- ( ph -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s28:s27:adantr |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+i29::dchrzrh0
+s30:s28,s26,s24,i29:syl3anc |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) = 0 )
+s31:s30:oveq1d |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. B ) = ( 0 x. B ) )
+i32::eldifi
+s33:i32,3:sylan2 |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> B e. CC )
+s34:s33:mul02d |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> ( 0 x. B ) = 0 )
+s35:s31,s34:eqtrd |- ( ( ph /\ u e. ( ( 0 ..^ N ) \ { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ) ) -> ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. B ) = 0 )
+s36::fzofi |- ( 0 ..^ N ) e. Fin
+s37:s36:a1i |- ( ph -> ( 0 ..^ N ) e. Fin )
+qed:s2,s15,s35,s37:fsumss |- ( ph -> sum_ u e. { k e. ( 0 ..^ N ) | ( k gcd N ) = 1 } ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. B ) = sum_ u e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` u ) ) x. B ) )
+$)

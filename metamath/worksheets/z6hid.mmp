@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=z6hid  LOC_AFTER=?
+
+* The identity is holomorphic on every open set.
+
+s1::id |- ( D e. ( TopOpen ` CCfld ) -> D e. ( TopOpen ` CCfld ) )
+s2::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s3:s2:cnfldtopon |- ( TopOpen ` CCfld ) e. ( TopOn ` CC )
+s4:s3:a1i |- ( D e. ( TopOpen ` CCfld ) -> ( TopOpen ` CCfld ) e. ( TopOn ` CC ) )
+i5::toponss
+s6:s4,s1,i5:syl2anc |- ( D e. ( TopOpen ` CCfld ) -> D C_ CC )
+s7::cnelprrecn |- CC e. { RR , CC }
+s8:s7:a1i |- ( D e. ( TopOpen ` CCfld ) -> CC e. { RR , CC } )
+s9:s8:dvmptid |- ( D e. ( TopOpen ` CCfld ) -> ( CC _D ( z e. CC |-> z ) ) = ( z e. CC |-> 1 ) )
+s10::simpr |- ( ( D e. ( TopOpen ` CCfld ) /\ z e. CC ) -> z e. CC )
+s11::ax-1cn |- 1 e. CC
+s12:s11:a1i |- ( ( D e. ( TopOpen ` CCfld ) /\ z e. CC ) -> 1 e. CC )
+s13::cnelprrecn |- CC e. { RR , CC }
+s14:s13:a1i |- ( D e. ( TopOpen ` CCfld ) -> CC e. { RR , CC } )
+s15::cnrestid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s16:s15:eqcomi |- ( TopOpen ` CCfld ) = ( ( TopOpen ` CCfld ) |`t CC )
+s17::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s18:s14,s10,s12,s9,s6,s16,s17,s1:dvmptres |- ( D e. ( TopOpen ` CCfld ) -> ( CC _D ( z e. D |-> z ) ) = ( z e. D |-> 1 ) )
+s19:s6:adantr |- ( ( D e. ( TopOpen ` CCfld ) /\ z e. D ) -> D C_ CC )
+s20::simpr |- ( ( D e. ( TopOpen ` CCfld ) /\ z e. D ) -> z e. D )
+s21:s19,s20:sseldd |- ( ( D e. ( TopOpen ` CCfld ) /\ z e. D ) -> z e. CC )
+s22::ax-1cn |- 1 e. CC
+s23:s22:a1i |- ( ( D e. ( TopOpen ` CCfld ) /\ z e. D ) -> 1 e. CC )
+s24::eqid |- ( z e. D |-> 1 ) = ( z e. D |-> 1 )
+s25:s23,s24:fmptd |- ( D e. ( TopOpen ` CCfld ) -> ( z e. D |-> 1 ) : D --> CC )
+s26:s18:dmeqd |- ( D e. ( TopOpen ` CCfld ) -> dom ( CC _D ( z e. D |-> z ) ) = dom ( z e. D |-> 1 ) )
+i27::fdm
+s28:s25,i27:syl |- ( D e. ( TopOpen ` CCfld ) -> dom ( z e. D |-> 1 ) = D )
+s29:s26,s28:eqtrd |- ( D e. ( TopOpen ` CCfld ) -> dom ( CC _D ( z e. D |-> z ) ) = D )
+s30:s29:eqcomd |- ( D e. ( TopOpen ` CCfld ) -> D = dom ( CC _D ( z e. D |-> z ) ) )
+s31:s30:eqimssd |- ( D e. ( TopOpen ` CCfld ) -> D C_ dom ( CC _D ( z e. D |-> z ) ) )
+s32::eqid |- ( z e. D |-> z ) = ( z e. D |-> z )
+s33:s21,s32:fmptd |- ( D e. ( TopOpen ` CCfld ) -> ( z e. D |-> z ) : D --> CC )
+s34::ssid |- CC C_ CC
+s35:s34:a1i |- ( D e. ( TopOpen ` CCfld ) -> CC C_ CC )
+s36:s35,s33,s6:3jca |- ( D e. ( TopOpen ` CCfld ) -> ( CC C_ CC /\ ( z e. D |-> z ) : D --> CC /\ D C_ CC ) )
+s37:s36,s29:jca |- ( D e. ( TopOpen ` CCfld ) -> ( ( CC C_ CC /\ ( z e. D |-> z ) : D --> CC /\ D C_ CC ) /\ dom ( CC _D ( z e. D |-> z ) ) = D ) )
+i38::dvcn
+s39:s37,i38:syl |- ( D e. ( TopOpen ` CCfld ) -> ( z e. D |-> z ) e. ( D -cn-> CC ) )
+qed:s39,s31:jca |- ( D e. ( TopOpen ` CCfld ) -> ( ( z e. D |-> z ) e. ( D -cn-> CC ) /\ D C_ dom ( CC _D ( z e. D |-> z ) ) ) )
+$)

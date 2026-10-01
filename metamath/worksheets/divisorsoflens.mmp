@@ -1,0 +1,56 @@
+$( <MM> <PROOF_ASST> THEOREM=divisorsoflens  LOC_AFTER=?
+
+* Step of the induction for divisorsoflen.
+
+s1::simp1 |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> V e. Word NN0 )
+s2::simp2 |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> P e. NN0 )
+i3::divisorsofcl
+s4:s1,i3:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( DivisorsOf ` V ) e. ( Word NN0 X. NN0 ) )
+i5::xp1st
+s6:s4,i5:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 1st ` ( DivisorsOf ` V ) ) e. Word NN0 )
+i7::xp2nd
+s8:s4,i7:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2nd ` ( DivisorsOf ` V ) ) e. NN0 )
+i9::mulallcl
+s10:s2,s6,i9:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) e. ( Word NN0 X. NN0 ) )
+i11::xp1st
+s12:s10,i11:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) e. Word NN0 )
+i13::xp2nd
+s14:s10,i13:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2nd ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) e. NN0 )
+i15::divisorsofcs
+s16:s2,s1,i15:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( DivisorsOf ` ( <" P "> ++ V ) ) = <. ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) , ( ( 2nd ` ( DivisorsOf ` V ) ) + ( 2nd ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) >. )
+i17::ccatcl
+s18:s6,s12,i17:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) e. Word NN0 )
+s19:s8,s14:nn0addcld |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( ( 2nd ` ( DivisorsOf ` V ) ) + ( 2nd ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) e. NN0 )
+i20::alglencs
+s21:s2,s1,i20:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( <" P "> ++ V ) ) = ( ( # ` V ) + 1 ) )
+i22::lencl
+s23:s1,i22:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` V ) e. NN0 )
+i24::mulalllen
+s25:s2,s6,i24:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) = ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) )
+i26::mulallcost
+s27:s2,s6,i26:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2nd ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) = ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) )
+i28::ccatlen
+s29:s6,s12,i28:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) ) = ( ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) + ( # ` ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) ) )
+s30::2cnd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> 2 e. CC )
+i31::expp1
+s32:s30,s23,i31:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2 ^ ( ( # ` V ) + 1 ) ) = ( ( 2 ^ ( # ` V ) ) x. 2 ) )
+s33::simp3 |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) )
+s34:s16:fveq2d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 1st ` ( DivisorsOf ` ( <" P "> ++ V ) ) ) = ( 1st ` <. ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) , ( ( 2nd ` ( DivisorsOf ` V ) ) + ( 2nd ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) >. ) )
+i35::op1stg
+s36:s18,s19,i35:syl2anc |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 1st ` <. ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) , ( ( 2nd ` ( DivisorsOf ` V ) ) + ( 2nd ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) >. ) = ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) )
+s37:s34,s36:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 1st ` ( DivisorsOf ` ( <" P "> ++ V ) ) ) = ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) )
+s38:s37:fveq2d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( 1st ` ( DivisorsOf ` ( <" P "> ++ V ) ) ) ) = ( # ` ( ( 1st ` ( DivisorsOf ` V ) ) ++ ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) ) )
+s39:s38,s29:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( 1st ` ( DivisorsOf ` ( <" P "> ++ V ) ) ) ) = ( ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) + ( # ` ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) ) )
+s40:s25,s33:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) = ( 2 ^ ( # ` V ) ) )
+s41:s33,s40:oveq12d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) + ( # ` ( 1st ` ( P MulAll ( 1st ` ( DivisorsOf ` V ) ) ) ) ) ) = ( ( 2 ^ ( # ` V ) ) + ( 2 ^ ( # ` V ) ) ) )
+s42:s39,s41:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( 1st ` ( DivisorsOf ` ( <" P "> ++ V ) ) ) ) = ( ( 2 ^ ( # ` V ) ) + ( 2 ^ ( # ` V ) ) ) )
+s43::2cnd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> 2 e. CC )
+s44:s43,s23:expcld |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2 ^ ( # ` V ) ) e. CC )
+s45:s44:times2d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( ( 2 ^ ( # ` V ) ) x. 2 ) = ( ( 2 ^ ( # ` V ) ) + ( 2 ^ ( # ` V ) ) ) )
+s46::id |- ( ( # ` ( <" P "> ++ V ) ) = ( ( # ` V ) + 1 ) -> ( # ` ( <" P "> ++ V ) ) = ( ( # ` V ) + 1 ) )
+c1:s46:oveq2d |- ( ( # ` ( <" P "> ++ V ) ) = ( ( # ` V ) + 1 ) -> ( 2 ^ ( # ` ( <" P "> ++ V ) ) ) = ( 2 ^ ( ( # ` V ) + 1 ) ) )
+s47:s21,c1:syl |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2 ^ ( # ` ( <" P "> ++ V ) ) ) = ( 2 ^ ( ( # ` V ) + 1 ) ) )
+s48:s47,s32:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2 ^ ( # ` ( <" P "> ++ V ) ) ) = ( ( 2 ^ ( # ` V ) ) x. 2 ) )
+s49:s48,s45:eqtrd |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( 2 ^ ( # ` ( <" P "> ++ V ) ) ) = ( ( 2 ^ ( # ` V ) ) + ( 2 ^ ( # ` V ) ) ) )
+qed:s42,s49:eqtr4d |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( # ` ( 1st ` ( DivisorsOf ` V ) ) ) = ( 2 ^ ( # ` V ) ) ) -> ( # ` ( 1st ` ( DivisorsOf ` ( <" P "> ++ V ) ) ) ) = ( 2 ^ ( # ` ( <" P "> ++ V ) ) ) )
+$)

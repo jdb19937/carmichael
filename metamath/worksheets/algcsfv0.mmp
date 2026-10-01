@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=algcsfv0  LOC_AFTER=?
+
+* The head of a cons (Lean: List.head).
+
+s1::simpl |- ( ( P e. V /\ W e. Word V ) -> P e. V )
+s2::simpr |- ( ( P e. V /\ W e. Word V ) -> W e. Word V )
+i3::s1cl
+s4:s1,i3:syl |- ( ( P e. V /\ W e. Word V ) -> <" P "> e. Word V )
+s5::s1len |- ( # ` <" P "> ) = 1
+s6:s5:a1i |- ( ( P e. V /\ W e. Word V ) -> ( # ` <" P "> ) = 1 )
+s7::fzo01 |- ( 0 ..^ 1 ) = { 0 }
+s8:s7:a1i |- ( ( P e. V /\ W e. Word V ) -> ( 0 ..^ 1 ) = { 0 } )
+s9::0nn0 |- 0 e. NN0
+s10:s9:a1i |- ( ( P e. V /\ W e. Word V ) -> 0 e. NN0 )
+s11:s6:oveq2d |- ( ( P e. V /\ W e. Word V ) -> ( 0 ..^ ( # ` <" P "> ) ) = ( 0 ..^ 1 ) )
+s12:s11,s8:eqtrd |- ( ( P e. V /\ W e. Word V ) -> ( 0 ..^ ( # ` <" P "> ) ) = { 0 } )
+s13::c0ex |- 0 e. _V
+s14:s13:snid |- 0 e. { 0 }
+s15:s14:a1i |- ( ( P e. V /\ W e. Word V ) -> 0 e. { 0 } )
+s16:s15,s12:eleqtrrd |- ( ( P e. V /\ W e. Word V ) -> 0 e. ( 0 ..^ ( # ` <" P "> ) ) )
+i17::ccatval1
+s18:s4,s2,s16,i17:syl3anc |- ( ( P e. V /\ W e. Word V ) -> ( ( <" P "> ++ W ) ` 0 ) = ( <" P "> ` 0 ) )
+i19::s1fv
+s20:s1,i19:syl |- ( ( P e. V /\ W e. Word V ) -> ( <" P "> ` 0 ) = P )
+qed:s18,s20:eqtrd |- ( ( P e. V /\ W e. Word V ) -> ( ( <" P "> ++ W ) ` 0 ) = P )
+$)

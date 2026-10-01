@@ -1,0 +1,74 @@
+$( <MM> <PROOF_ASST> THEOREM=dsdv1  LOC_AFTER=?
+
+* A point at which a function is differentiable, other than the base point, is interior to the punctured domain.
+
+s1::simpl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( F e. ( D -cn-> CC ) /\ P e. D ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> F e. ( D -cn-> CC ) )
+s4::simpl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( F e. ( D -cn-> CC ) /\ P e. D ) )
+i5::simpr
+s6:s4,i5:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> P e. D )
+s7::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( X e. dom ( CC _D F ) /\ X =/= P ) )
+i8::simpl
+s9:s7,i8:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. dom ( CC _D F ) )
+s10::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( X e. dom ( CC _D F ) /\ X =/= P ) )
+i11::simpr
+s12:s10,i11:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X =/= P )
+i13::cncfrss
+s14:s3,i13:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> D C_ CC )
+i15::cncff
+s16:s3,i15:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> F : D --> CC )
+s17::ssid |- CC C_ CC
+s18:s17:a1i |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> CC C_ CC )
+s19::difss |- ( D \ { P } ) C_ D
+s20:s19:a1i |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( D \ { P } ) C_ D )
+s21:s20,s14:sstrd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( D \ { P } ) C_ CC )
+s22:s18,s16,s14:dvbss |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> dom ( CC _D F ) C_ D )
+s23:s22,s9:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. D )
+s24:s14,s23:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. CC )
+s25:s23,s12:jca |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( X e. D /\ X =/= P ) )
+i26::eldifsn
+s27:s25,i26:sylibr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. ( D \ { P } ) )
+s28:s14,s6:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> P e. CC )
+s29:s16,s6:ffvelcdmd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( F ` P ) e. CC )
+s30::cnfldtop |- ( TopOpen ` CCfld ) e. Top
+s31:s30:a1i |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( TopOpen ` CCfld ) e. Top )
+s32::unicntop |- CC = U. ( TopOpen ` CCfld )
+s33::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s34::cnrestid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s35:s34:eqcomi |- ( TopOpen ` CCfld ) = ( ( TopOpen ` CCfld ) |`t CC )
+s36:s18,s16,s14,s35,s33:dvbssntr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> dom ( CC _D F ) C_ ( ( int ` ( TopOpen ` CCfld ) ) ` D ) )
+s37:s36,s9:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. ( ( int ` ( TopOpen ` CCfld ) ) ` D ) )
+s38:s32:ntropn |- ( ( ( TopOpen ` CCfld ) e. Top /\ D C_ CC ) -> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) e. ( TopOpen ` CCfld ) )
+s39:s31,s14,s38:syl2anc |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) e. ( TopOpen ` CCfld ) )
+i40::cnopnsn
+s41:s28,i40:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( CC \ { P } ) e. ( TopOpen ` CCfld ) )
+i42::inopn
+s43:s31,s39,s41,i42:syl3anc |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) e. ( TopOpen ` CCfld ) )
+s44:s24,s12:jca |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( X e. CC /\ X =/= P ) )
+i45::eldifsn
+s46:s44,i45:sylibr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. ( CC \ { P } ) )
+s47:s37,s46:elind |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) )
+s48::simpr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) )
+s49:s48:elin1d |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> g e. ( ( int ` ( TopOpen ` CCfld ) ) ` D ) )
+s50:s48:elin2d |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> g e. ( CC \ { P } ) )
+s51:s31:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> ( TopOpen ` CCfld ) e. Top )
+s52:s14:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> D C_ CC )
+s53:s32:ntrss2 |- ( ( ( TopOpen ` CCfld ) e. Top /\ D C_ CC ) -> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) C_ D )
+s54:s51,s52,s53:syl2anc |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) C_ D )
+s55:s54,s49:sseldd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> g e. D )
+i56::eldifsn
+s57:s50,i56:sylib |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> ( g e. CC /\ g =/= P ) )
+i58::simpr
+s59:s57,i58:syl |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> g =/= P )
+s60:s55,s59:jca |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> ( g e. D /\ g =/= P ) )
+i61::eldifsn
+s62:s60,i61:sylibr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) /\ g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) ) -> g e. ( D \ { P } ) )
+s63:s62:ex |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( g e. ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) -> g e. ( D \ { P } ) ) )
+s64:s63:ssrdv |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) C_ ( D \ { P } ) )
+s65:s31,s21:jca |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( ( TopOpen ` CCfld ) e. Top /\ ( D \ { P } ) C_ CC ) )
+s66:s43,s64:jca |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) e. ( TopOpen ` CCfld ) /\ ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) C_ ( D \ { P } ) ) )
+s67:s32:ssntr |- ( ( ( ( TopOpen ` CCfld ) e. Top /\ ( D \ { P } ) C_ CC ) /\ ( ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) e. ( TopOpen ` CCfld ) /\ ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) C_ ( D \ { P } ) ) ) -> ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) C_ ( ( int ` ( TopOpen ` CCfld ) ) ` ( D \ { P } ) ) )
+s68:s65,s66,s67:syl2anc |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> ( ( ( int ` ( TopOpen ` CCfld ) ) ` D ) i^i ( CC \ { P } ) ) C_ ( ( int ` ( TopOpen ` CCfld ) ) ` ( D \ { P } ) ) )
+qed:s68,s47:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( X e. dom ( CC _D F ) /\ X =/= P ) ) -> X e. ( ( int ` ( TopOpen ` CCfld ) ) ` ( D \ { P } ) ) )
+$)

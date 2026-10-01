@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutcost  LOC_AFTER=?
+
+* The cost of the divide-out loop (Lean: divOut_cost).
+
+s1::simpl1 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> D e. NN )
+s2::simpl2 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> R e. NN0 )
+s3::simpl3 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> F e. NN0 )
+s4::simprl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> 2 <_ D )
+s5::simprr |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> 1 <_ R )
+i6::divoutcostl
+s7:s3,i6:syl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> ( ( D e. NN /\ 2 <_ D ) -> A. r e. NN0 ( 1 <_ r -> ( ( 2nd ` ( ( D DivOut r ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` F ) ) ) ) <_ ( 2 Nlog r ) ) ) )
+s8:s1,s4:jca |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> ( D e. NN /\ 2 <_ D ) )
+s9:s7,s8:mpd |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> A. r e. NN0 ( 1 <_ r -> ( ( 2nd ` ( ( D DivOut r ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` F ) ) ) ) <_ ( 2 Nlog r ) ) )
+s10::id |- ( r = R -> r = R )
+c1:s10:breq2d |- ( r = R -> ( 1 <_ r <-> 1 <_ R ) )
+c2:s10:oveq2d |- ( r = R -> ( D DivOut r ) = ( D DivOut R ) )
+c3:c2:fveq1d |- ( r = R -> ( ( D DivOut r ) ` F ) = ( ( D DivOut R ) ` F ) )
+c4:c3:fveq2d |- ( r = R -> ( 2nd ` ( ( D DivOut r ) ` F ) ) = ( 2nd ` ( ( D DivOut R ) ` F ) ) )
+c5:s10:oveq2d |- ( r = R -> ( D DivOut r ) = ( D DivOut R ) )
+c6:c5:fveq1d |- ( r = R -> ( ( D DivOut r ) ` F ) = ( ( D DivOut R ) ` F ) )
+c7:c6:fveq2d |- ( r = R -> ( 1st ` ( ( D DivOut r ) ` F ) ) = ( 1st ` ( ( D DivOut R ) ` F ) ) )
+c8:c7:oveq2d |- ( r = R -> ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` F ) ) ) = ( 2 Nlog ( 1st ` ( ( D DivOut R ) ` F ) ) ) )
+c9:c4,c8:oveq12d |- ( r = R -> ( ( 2nd ` ( ( D DivOut r ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` F ) ) ) ) = ( ( 2nd ` ( ( D DivOut R ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut R ) ` F ) ) ) ) )
+c10:s10:oveq2d |- ( r = R -> ( 2 Nlog r ) = ( 2 Nlog R ) )
+c11:c9,c10:breq12d |- ( r = R -> ( ( ( 2nd ` ( ( D DivOut r ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` F ) ) ) ) <_ ( 2 Nlog r ) <-> ( ( 2nd ` ( ( D DivOut R ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut R ) ` F ) ) ) ) <_ ( 2 Nlog R ) ) )
+c12:c1,c11:imbi12d |- ( r = R -> ( ( 1 <_ r -> ( ( 2nd ` ( ( D DivOut r ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut r ) ` F ) ) ) ) <_ ( 2 Nlog r ) ) <-> ( 1 <_ R -> ( ( 2nd ` ( ( D DivOut R ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut R ) ` F ) ) ) ) <_ ( 2 Nlog R ) ) ) )
+s11:c12,s9,s2:rspcdva |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> ( 1 <_ R -> ( ( 2nd ` ( ( D DivOut R ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut R ) ` F ) ) ) ) <_ ( 2 Nlog R ) ) )
+qed:s11,s5:mpd |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ 1 <_ R ) ) -> ( ( 2nd ` ( ( D DivOut R ) ` F ) ) + ( 2 Nlog ( 1st ` ( ( D DivOut R ) ` F ) ) ) ) <_ ( 2 Nlog R ) )
+$)

@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hid  LOC_AFTER=?
+
+* Reflexivity of the Hoare triple of the machine layer: every class of configurations reaches itself in no steps.  Lean: ` runsTo_zero ` .
+
+s1::simplr |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> C C_ ( TM2Cfg ` T ) )
+s2::simpr |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> u e. C )
+s3:s1,s2:sseldd |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> u e. ( TM2Cfg ` T ) )
+i4::djulcl
+s5:s3,i4:syl |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> ( inl ` u ) e. ( ( TM2Cfg ` T ) |_| 1o ) )
+s6::fvex |- ( TM2Cfg ` T ) e. _V
+s7::1oex |- 1o e. _V
+i8::djuex
+s9:s6,s7,i8:mp2an |- ( ( TM2Cfg ` T ) |_| 1o ) e. _V
+s10:s9:a1i |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> ( ( TM2Cfg ` T ) |_| 1o ) e. _V )
+s11::simpll |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) )
+i12::tm2hstf
+s13:s11,i12:syl |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> ( OptStep ` ( T TM2step M ) ) : ( ( TM2Cfg ` T ) |_| 1o ) --> ( ( TM2Cfg ` T ) |_| 1o ) )
+i14::relexp0fv
+s15:s10,s13,s5,i14:syl3anc |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> ( ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) ` ( inl ` u ) ) = ( inl ` u ) )
+s16::fveq2 |- ( w = u -> ( inl ` w ) = ( inl ` u ) )
+s17:s16:eqeq2d |- ( w = u -> ( ( ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) ` ( inl ` u ) ) = ( inl ` w ) <-> ( ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) ` ( inl ` u ) ) = ( inl ` u ) ) )
+i18::rspcev
+s19:s2,s15,i18:syl2anc |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> E. w e. C ( ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) ` ( inl ` u ) ) = ( inl ` w ) )
+s20::oveq2 |- ( i = 0 -> ( ( OptStep ` ( T TM2step M ) ) ^r i ) = ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) )
+s21:s20:fveq1d |- ( i = 0 -> ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) ` ( inl ` u ) ) )
+s22:s21:eqeq1d |- ( i = 0 -> ( ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) <-> ( ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+s23:s22:rexbidv |- ( i = 0 -> ( E. w e. C ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) <-> E. w e. C ( ( ( OptStep ` ( T TM2step M ) ) ^r 0 ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+s24::0nn0 |- 0 e. NN0
+s25::nn0fz0 |- ( 0 e. NN0 <-> 0 e. ( 0 ... 0 ) )
+s26:s24,s25:mpbi |- 0 e. ( 0 ... 0 )
+s27:s26:a1i |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> 0 e. ( 0 ... 0 ) )
+i28::rspcev
+s29:s27,s19,i28:syl2anc |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) /\ u e. C ) -> E. i e. ( 0 ... 0 ) E. w e. C ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) )
+s30:s29:ralrimiva |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> A. u e. C E. i e. ( 0 ... 0 ) E. w e. C ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) )
+s31::simpr |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> C C_ ( TM2Cfg ` T ) )
+s32:s24:a1i |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> 0 e. NN0 )
+s33:s31,s31,s32:3jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> ( C C_ ( TM2Cfg ` T ) /\ C C_ ( TM2Cfg ` T ) /\ 0 e. NN0 ) )
+s34::simpl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) )
+i35::simpl
+s36:s34,i35:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> T e. V )
+i37::tm2hmvv
+s38:s34,i37:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> M e. _V )
+s39:s36,s38:jca |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> ( T e. V /\ M e. _V ) )
+i40::tm2hrbr2
+s41:s39,s33,i40:syl2anc |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> ( C ( T TM2Hoare M ) <. C , 0 >. <-> A. u e. C E. i e. ( 0 ... 0 ) E. w e. C ( ( ( OptStep ` ( T TM2step M ) ) ^r i ) ` ( inl ` u ) ) = ( inl ` w ) ) )
+qed:s41,s30:mpbird |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C C_ ( TM2Cfg ` T ) ) -> C ( T TM2Hoare M ) <. C , 0 >. )
+$)

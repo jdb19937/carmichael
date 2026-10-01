@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=z6hexp  LOC_AFTER=?
+
+* The exponential of a holomorphic function is holomorphic ( ~ dvef , ~ dvmptco ).
+
+s1::simpl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> F e. ( D -cn-> CC ) )
+i2::cncff
+s3:s1,i2:syl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> F : D --> CC )
+i4::cncfrss
+s5:s1,i4:syl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> D C_ CC )
+s6::holf |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( CC _D F ) : D --> CC )
+s7::cnelprrecn |- CC e. { RR , CC }
+s8:s7:a1i |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> CC e. { RR , CC } )
+s9::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ z e. D ) -> z e. D )
+s10:s3:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ z e. D ) -> F : D --> CC )
+s11:s10,s9:ffvelcdmd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ z e. D ) -> ( F ` z ) e. CC )
+s12:s6:adantr |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ z e. D ) -> ( CC _D F ) : D --> CC )
+s13:s12,s9:ffvelcdmd |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ z e. D ) -> ( ( CC _D F ) ` z ) e. CC )
+s14::simpr |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ y e. CC ) -> y e. CC )
+i15::efcl
+s16:s14,i15:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ y e. CC ) -> ( exp ` y ) e. CC )
+s17::holdv |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( CC _D ( z e. D |-> ( F ` z ) ) ) = ( z e. D |-> ( ( CC _D F ) ` z ) ) )
+s18::eff |- exp : CC --> CC
+s19:s18:a1i |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> exp : CC --> CC )
+s20:s19:feqmptd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> exp = ( y e. CC |-> ( exp ` y ) ) )
+s21:s20:oveq2d |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( CC _D exp ) = ( CC _D ( y e. CC |-> ( exp ` y ) ) ) )
+s22::dvef |- ( CC _D exp ) = exp
+s23:s22:a1i |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( CC _D exp ) = exp )
+s24:s21,s23,s20:3eqtr3d |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = ( y e. CC |-> ( exp ` y ) ) )
+s25::fveq2 |- ( y = ( F ` z ) -> ( exp ` y ) = ( exp ` ( F ` z ) ) )
+s26:s8,s8,s11,s13,s16,s16,s17,s24,s25,s25:dvmptco |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( CC _D ( z e. D |-> ( exp ` ( F ` z ) ) ) ) = ( z e. D |-> ( ( exp ` ( F ` z ) ) x. ( ( CC _D F ) ` z ) ) ) )
+i27::efcl
+s28:s11,i27:syl |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ z e. D ) -> ( exp ` ( F ` z ) ) e. CC )
+s29:s28,s13:mulcld |- ( ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) /\ z e. D ) -> ( ( exp ` ( F ` z ) ) x. ( ( CC _D F ) ` z ) ) e. CC )
+s30::eqid |- ( z e. D |-> ( ( exp ` ( F ` z ) ) x. ( ( CC _D F ) ` z ) ) ) = ( z e. D |-> ( ( exp ` ( F ` z ) ) x. ( ( CC _D F ) ` z ) ) )
+s31:s29,s30:fmptd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( z e. D |-> ( ( exp ` ( F ` z ) ) x. ( ( CC _D F ) ` z ) ) ) : D --> CC )
+s32:s26:dmeqd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> dom ( CC _D ( z e. D |-> ( exp ` ( F ` z ) ) ) ) = dom ( z e. D |-> ( ( exp ` ( F ` z ) ) x. ( ( CC _D F ) ` z ) ) ) )
+i33::fdm
+s34:s31,i33:syl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> dom ( z e. D |-> ( ( exp ` ( F ` z ) ) x. ( ( CC _D F ) ` z ) ) ) = D )
+s35:s32,s34:eqtrd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> dom ( CC _D ( z e. D |-> ( exp ` ( F ` z ) ) ) ) = D )
+s36:s35:eqcomd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> D = dom ( CC _D ( z e. D |-> ( exp ` ( F ` z ) ) ) ) )
+s37:s36:eqimssd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> D C_ dom ( CC _D ( z e. D |-> ( exp ` ( F ` z ) ) ) ) )
+s38::eqid |- ( z e. D |-> ( exp ` ( F ` z ) ) ) = ( z e. D |-> ( exp ` ( F ` z ) ) )
+s39:s28,s38:fmptd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( z e. D |-> ( exp ` ( F ` z ) ) ) : D --> CC )
+s40::ssid |- CC C_ CC
+s41:s40:a1i |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> CC C_ CC )
+s42:s41,s39,s5:3jca |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( CC C_ CC /\ ( z e. D |-> ( exp ` ( F ` z ) ) ) : D --> CC /\ D C_ CC ) )
+s43:s42,s35:jca |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( ( CC C_ CC /\ ( z e. D |-> ( exp ` ( F ` z ) ) ) : D --> CC /\ D C_ CC ) /\ dom ( CC _D ( z e. D |-> ( exp ` ( F ` z ) ) ) ) = D ) )
+i44::dvcn
+s45:s43,i44:syl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( z e. D |-> ( exp ` ( F ` z ) ) ) e. ( D -cn-> CC ) )
+qed:s45,s37:jca |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( ( z e. D |-> ( exp ` ( F ` z ) ) ) e. ( D -cn-> CC ) /\ D C_ dom ( CC _D ( z e. D |-> ( exp ` ( F ` z ) ) ) ) ) )
+$)

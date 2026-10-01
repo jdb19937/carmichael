@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=uhps  LOC_AFTER=?
+
+* The partial-sum functions of a term-function sequence: the N-th partial sum function is the pointwise finite sum ( ~ seqof , ~ fsumser ).
+
+s1::simpl |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> F : NN --> ( CC ^m U ) )
+s2::simpr |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> N e. NN )
+s3::nnuz |- NN = ( ZZ>= ` 1 )
+s4::1z |- 1 e. ZZ
+s5:s4:a1i |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> 1 e. ZZ )
+s6::1nn |- 1 e. NN
+s7:s6:a1i |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> 1 e. NN )
+s8:s1,s7:ffvelcdmd |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> ( F ` 1 ) e. ( CC ^m U ) )
+i9::elmapex
+s10:s8,i9:syl |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> ( CC e. _V /\ U e. _V ) )
+i11::simpr
+s12:s10,i11:syl |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> U e. _V )
+s13:s2,s3:eleqtrdi |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> N e. ( ZZ>= ` 1 ) )
+s14::simpr |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> i e. ( 1 ... N ) )
+i15::elfznn
+s16:s14,i15:syl |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> i e. NN )
+s17:s1:adantr |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> F : NN --> ( CC ^m U ) )
+s18:s17,s16:ffvelcdmd |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( F ` i ) e. ( CC ^m U ) )
+i19::elmapi
+s20:s18,i19:syl |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( F ` i ) : U --> CC )
+s21:s20:feqmptd |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( F ` i ) = ( z e. U |-> ( ( F ` i ) ` z ) ) )
+s22::fveq2 |- ( h = i -> ( F ` h ) = ( F ` i ) )
+s23:s22:fveq1d |- ( h = i -> ( ( F ` h ) ` z ) = ( ( F ` i ) ` z ) )
+s24::fvex |- ( ( F ` i ) ` z ) e. _V
+s25:s24:a1i |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( ( F ` i ) ` z ) e. _V )
+s26::eqid |- ( h e. NN |-> ( ( F ` h ) ` z ) ) = ( h e. NN |-> ( ( F ` h ) ` z ) )
+s27:s23,s26:fvmptg |- ( ( i e. NN /\ ( ( F ` i ) ` z ) e. _V ) -> ( ( h e. NN |-> ( ( F ` h ) ` z ) ) ` i ) = ( ( F ` i ) ` z ) )
+s28:s16,s25,s27:syl2anc |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( ( h e. NN |-> ( ( F ` h ) ` z ) ) ` i ) = ( ( F ` i ) ` z ) )
+s29:s28:eqcomd |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( ( F ` i ) ` z ) = ( ( h e. NN |-> ( ( F ` h ) ` z ) ) ` i ) )
+s30:s29:mpteq2dv |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( z e. U |-> ( ( F ` i ) ` z ) ) = ( z e. U |-> ( ( h e. NN |-> ( ( F ` h ) ` z ) ) ` i ) ) )
+s31:s21,s30:eqtrd |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ i e. ( 1 ... N ) ) -> ( F ` i ) = ( z e. U |-> ( ( h e. NN |-> ( ( F ` h ) ` z ) ) ` i ) ) )
+s32:s12,s13,s31:seqof |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> ( seq 1 ( oF + , F ) ` N ) = ( z e. U |-> ( seq 1 ( + , ( h e. NN |-> ( ( F ` h ) ` z ) ) ) ` N ) ) )
+s33::simpr |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i34::elfznn
+s35:s33,i34:syl |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s36::fveq2 |- ( h = k -> ( F ` h ) = ( F ` k ) )
+s37:s36:fveq1d |- ( h = k -> ( ( F ` h ) ` z ) = ( ( F ` k ) ` z ) )
+s38::fvex |- ( ( F ` k ) ` z ) e. _V
+s39:s38:a1i |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> ( ( F ` k ) ` z ) e. _V )
+s40::eqid |- ( h e. NN |-> ( ( F ` h ) ` z ) ) = ( h e. NN |-> ( ( F ` h ) ` z ) )
+s41:s37,s40:fvmptg |- ( ( k e. NN /\ ( ( F ` k ) ` z ) e. _V ) -> ( ( h e. NN |-> ( ( F ` h ) ` z ) ) ` k ) = ( ( F ` k ) ` z ) )
+s42:s35,s39,s41:syl2anc |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> ( ( h e. NN |-> ( ( F ` h ) ` z ) ) ` k ) = ( ( F ` k ) ` z ) )
+s43:s1:ad2antrr |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> F : NN --> ( CC ^m U ) )
+s44:s43,s35:ffvelcdmd |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> ( F ` k ) e. ( CC ^m U ) )
+i45::elmapi
+s46:s44,i45:syl |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> ( F ` k ) : U --> CC )
+s47::simplr |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> z e. U )
+s48:s46,s47:ffvelcdmd |- ( ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) /\ k e. ( 1 ... N ) ) -> ( ( F ` k ) ` z ) e. CC )
+s49:s13:adantr |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) -> N e. ( ZZ>= ` 1 ) )
+s50:s42,s49,s48:fsumser |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) -> sum_ k e. ( 1 ... N ) ( ( F ` k ) ` z ) = ( seq 1 ( + , ( h e. NN |-> ( ( F ` h ) ` z ) ) ) ` N ) )
+s51:s50:eqcomd |- ( ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) /\ z e. U ) -> ( seq 1 ( + , ( h e. NN |-> ( ( F ` h ) ` z ) ) ) ` N ) = sum_ k e. ( 1 ... N ) ( ( F ` k ) ` z ) )
+s52:s51:mpteq2dva |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> ( z e. U |-> ( seq 1 ( + , ( h e. NN |-> ( ( F ` h ) ` z ) ) ) ` N ) ) = ( z e. U |-> sum_ k e. ( 1 ... N ) ( ( F ` k ) ` z ) ) )
+qed:s32,s52:eqtrd |- ( ( F : NN --> ( CC ^m U ) /\ N e. NN ) -> ( seq 1 ( oF + , F ) ` N ) = ( z e. U |-> sum_ k e. ( 1 ... N ) ( ( F ` k ) ` z ) ) )
+$)

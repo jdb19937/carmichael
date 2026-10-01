@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=smoothgoprmb  LOC_AFTER=?
+
+* Base of the induction for smoothgoprm.
+
+s1::simpl |- ( ( d e. NN /\ r e. NN0 ) -> d e. NN )
+s2::simpr |- ( ( d e. NN /\ r e. NN0 ) -> r e. NN0 )
+i3::smoothgo0
+s4:s1,s2,i3:syl2anc |- ( ( d e. NN /\ r e. NN0 ) -> ( ( d SmoothGo r ) ` 0 ) = <. r , 0 >. )
+s5:s2:elexd |- ( ( d e. NN /\ r e. NN0 ) -> r e. _V )
+s6::c0ex |- 0 e. _V
+s7:s6:a1i |- ( ( d e. NN /\ r e. NN0 ) -> 0 e. _V )
+s8:s4:fveq2d |- ( ( d e. NN /\ r e. NN0 ) -> ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = ( 1st ` <. r , 0 >. ) )
+i9::op1stg
+s10:s5,s7,i9:syl2anc |- ( ( d e. NN /\ r e. NN0 ) -> ( 1st ` <. r , 0 >. ) = r )
+s11:s8,s10:eqtrd |- ( ( d e. NN /\ r e. NN0 ) -> ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = r )
+s12::simprr |- ( ( ( d e. NN /\ r e. NN0 ) /\ ( P e. Prime /\ P || r ) ) -> P || r )
+s13:s11:adantr |- ( ( ( d e. NN /\ r e. NN0 ) /\ ( P e. Prime /\ P || r ) ) -> ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) = r )
+s14:s13,s12:breqtrrd |- ( ( ( d e. NN /\ r e. NN0 ) /\ ( P e. Prime /\ P || r ) ) -> P || ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) )
+s15:s14:orcd |- ( ( ( d e. NN /\ r e. NN0 ) /\ ( P e. Prime /\ P || r ) ) -> ( P || ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) \/ P < ( d + 0 ) ) )
+s16:s15:ex |- ( ( d e. NN /\ r e. NN0 ) -> ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) \/ P < ( d + 0 ) ) ) )
+s17:s16:ralrimiva |- ( d e. NN -> A. r e. NN0 ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) \/ P < ( d + 0 ) ) ) )
+qed:s17:rgen |- A. d e. NN A. r e. NN0 ( ( P e. Prime /\ P || r ) -> ( P || ( 1st ` ( ( d SmoothGo r ) ` 0 ) ) \/ P < ( d + 0 ) ) )
+$)

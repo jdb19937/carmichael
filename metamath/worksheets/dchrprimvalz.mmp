@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrprimvalz  LOC_AFTER=?
+
+* The primitive character agrees with X at every integer coprime to the level (Mathlib primitiveCharacter_apply_of_isCoprime; PsiTheta primitiveCharacter_natCast_eq_of_coprime).
+
+s1::simp1 |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s2:s1:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> N e. NN )
+s3::simp2 |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> A e. ZZ )
+s4::simp3 |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( A gcd N ) = 1 )
+i5::dchrcondnn
+s6:s1,i5:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( N DChrCond X ) e. NN )
+i7::dchrconddvdn
+s8:s1,i7:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( N DChrCond X ) || N )
+i9::dchrprimcl
+s10:s1,i9:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) )
+s11:s6,s2,s8:3jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( ( N DChrCond X ) e. NN /\ N e. NN /\ ( N DChrCond X ) || N ) )
+s12:s11,s10:jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( ( ( N DChrCond X ) e. NN /\ N e. NN /\ ( N DChrCond X ) || N ) /\ ( N DChrPrim X ) e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) ) )
+i13::dchrindval1
+s14:s12,s3,s4,i13:syl3anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) = ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` A ) ) )
+i15::dchrprimind
+s16:s1,i15:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) = X )
+s17:s16:fveq1d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( ( ( ( N DChrCond X ) DChrInd N ) ` ( N DChrPrim X ) ) ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) )
+qed:s14,s17:eqtr3d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( ( N DChrPrim X ) ` ( ( ZRHom ` ( Z/nZ ` ( N DChrCond X ) ) ) ` A ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` A ) ) )
+$)

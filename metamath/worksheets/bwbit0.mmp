@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=bwbit0  LOC_AFTER=?
+
+* The lowest binary digit of bToNat B + 2 M is B.
+
+s1::simpl |- ( ( B e. 2o /\ M e. ZZ ) -> B e. 2o )
+s2::simpr |- ( ( B e. 2o /\ M e. ZZ ) -> M e. ZZ )
+i3::bwel2o
+s4:s1,i3:syl |- ( ( B e. 2o /\ M e. ZZ ) -> ( B = (/) \/ B = 1o ) )
+s5::simpr |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> B = (/) )
+s6:s2:adantr |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> M e. ZZ )
+s7:s5:fveq2d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( bToNat ` B ) = ( bToNat ` (/) ) )
+s8::bwbn0 |- ( bToNat ` (/) ) = 0
+s9:s7,s8:eqtrdi |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( bToNat ` B ) = 0 )
+s10:s9:oveq1d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( ( bToNat ` B ) + ( 2 x. M ) ) = ( 0 + ( 2 x. M ) ) )
+s11::2cn |- 2 e. CC
+s12:s11:a1i |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> 2 e. CC )
+s13:s6:zred |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> M e. RR )
+s14:s13:recnd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> M e. CC )
+s15:s12,s14:mulcld |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( 2 x. M ) e. CC )
+s16:s15:addlidd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( 0 + ( 2 x. M ) ) = ( 2 x. M ) )
+s17:s10,s16:eqtrd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( ( bToNat ` B ) + ( 2 x. M ) ) = ( 2 x. M ) )
+s18:s17:fveq2d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) = ( bits ` ( 2 x. M ) ) )
+s19:s18:eleq2d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( 0 e. ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) <-> 0 e. ( bits ` ( 2 x. M ) ) ) )
+i20::bits0e
+s21:s6,i20:syl |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> -. 0 e. ( bits ` ( 2 x. M ) ) )
+s22:s21,s19:mtbird |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> -. 0 e. ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) )
+s23::1n0 |- 1o =/= (/)
+s24:s23:nesymi |- -. (/) = 1o
+s25:s24:a1i |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> -. (/) = 1o )
+s26:s5:eqeq1d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( B = 1o <-> (/) = 1o ) )
+s27:s25,s26:mtbird |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> -. B = 1o )
+s28:s22,s27:2falsed |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = (/) ) -> ( 0 e. ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) <-> B = 1o ) )
+s29::simpr |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> B = 1o )
+s30:s2:adantr |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> M e. ZZ )
+s31:s29:fveq2d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( bToNat ` B ) = ( bToNat ` 1o ) )
+s32::bwbn1 |- ( bToNat ` 1o ) = 1
+s33:s31,s32:eqtrdi |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( bToNat ` B ) = 1 )
+s34:s33:oveq1d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( ( bToNat ` B ) + ( 2 x. M ) ) = ( 1 + ( 2 x. M ) ) )
+s35:s11:a1i |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> 2 e. CC )
+s36:s30:zred |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> M e. RR )
+s37:s36:recnd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> M e. CC )
+s38:s35,s37:mulcld |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( 2 x. M ) e. CC )
+s39::1cnd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> 1 e. CC )
+s40:s39,s38:addcomd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( 1 + ( 2 x. M ) ) = ( ( 2 x. M ) + 1 ) )
+s41:s34,s40:eqtrd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( ( bToNat ` B ) + ( 2 x. M ) ) = ( ( 2 x. M ) + 1 ) )
+s42:s41:fveq2d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) = ( bits ` ( ( 2 x. M ) + 1 ) ) )
+s43:s42:eleq2d |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( 0 e. ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) <-> 0 e. ( bits ` ( ( 2 x. M ) + 1 ) ) ) )
+i44::bits0o
+s45:s30,i44:syl |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> 0 e. ( bits ` ( ( 2 x. M ) + 1 ) ) )
+s46:s45,s43:mpbird |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> 0 e. ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) )
+s47:s46,s29:2thd |- ( ( ( B e. 2o /\ M e. ZZ ) /\ B = 1o ) -> ( 0 e. ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) <-> B = 1o ) )
+qed:s28,s47,s4:mpjaodan |- ( ( B e. 2o /\ M e. ZZ ) -> ( 0 e. ( bits ` ( ( bToNat ` B ) + ( 2 x. M ) ) ) <-> B = 1o ) )
+$)

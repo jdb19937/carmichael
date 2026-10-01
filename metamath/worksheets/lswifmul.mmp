@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=lswifmul  LOC_AFTER=?
+
+* The product of an indicator value and the conjugate of another is the indicator of the conjunction (Lean tri_bilinear_eq hprod).
+
+s1::simplr |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ph )
+i2::iftrue
+s3:s1,i2:syl |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> if ( ph , B , 0 ) = B )
+s4::simpr |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ps )
+i5::iftrue
+s6:s4,i5:syl |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> if ( ps , C , 0 ) = C )
+s7:s6:fveq2d |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ( * ` if ( ps , C , 0 ) ) = ( * ` C ) )
+s8:s3,s7:oveq12d |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = ( B x. ( * ` C ) ) )
+s9::simplr |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ph )
+s10::simpr |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ps )
+s11:s9,s10:jca |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ( ph /\ ps ) )
+i12::iftrue
+s13:s11,i12:syl |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) = ( B x. ( * ` C ) ) )
+s14:s8,s13:eqtr4d |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ ps ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) )
+s15::simpr |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> -. ps )
+i16::iffalse
+s17:s15,i16:syl |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> if ( ps , C , 0 ) = 0 )
+s18:s17:fveq2d |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> ( * ` if ( ps , C , 0 ) ) = ( * ` 0 ) )
+s19::cj0 |- ( * ` 0 ) = 0
+s20:s19:a1i |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> ( * ` 0 ) = 0 )
+s21:s18,s20:eqtrd |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> ( * ` if ( ps , C , 0 ) ) = 0 )
+s22::simplll |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> B e. CC )
+s23::0cnd |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> 0 e. CC )
+s24:s22,s23:ifcld |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> if ( ph , B , 0 ) e. CC )
+s25:s21:oveq2d |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = ( if ( ph , B , 0 ) x. 0 ) )
+s26:s24:mul01d |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> ( if ( ph , B , 0 ) x. 0 ) = 0 )
+s27:s25,s26:eqtrd |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = 0 )
+s28:s15:intnand |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> -. ( ph /\ ps ) )
+i29::iffalse
+s30:s28,i29:syl |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) = 0 )
+s31:s27,s30:eqtr4d |- ( ( ( ( B e. CC /\ C e. CC ) /\ ph ) /\ -. ps ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) )
+s32:s14,s31:pm2.61dan |- ( ( ( B e. CC /\ C e. CC ) /\ ph ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) )
+s33::simpr |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> -. ph )
+i34::iffalse
+s35:s33,i34:syl |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> if ( ph , B , 0 ) = 0 )
+s36::simplr |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> C e. CC )
+s37::0cnd |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> 0 e. CC )
+s38:s36,s37:ifcld |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> if ( ps , C , 0 ) e. CC )
+s39:s38:cjcld |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> ( * ` if ( ps , C , 0 ) ) e. CC )
+s40:s35:oveq1d |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = ( 0 x. ( * ` if ( ps , C , 0 ) ) ) )
+s41:s39:mul02d |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> ( 0 x. ( * ` if ( ps , C , 0 ) ) ) = 0 )
+s42:s40,s41:eqtrd |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = 0 )
+s43:s33:intnanrd |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> -. ( ph /\ ps ) )
+i44::iffalse
+s45:s43,i44:syl |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) = 0 )
+s46:s42,s45:eqtr4d |- ( ( ( B e. CC /\ C e. CC ) /\ -. ph ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) )
+qed:s32,s46:pm2.61dan |- ( ( B e. CC /\ C e. CC ) -> ( if ( ph , B , 0 ) x. ( * ` if ( ps , C , 0 ) ) ) = if ( ( ph /\ ps ) , ( B x. ( * ` C ) ) , 0 ) )
+$)

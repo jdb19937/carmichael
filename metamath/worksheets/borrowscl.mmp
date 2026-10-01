@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=borrowscl  LOC_AFTER=?
+
+* Closure of borrows: a nonnegative integer.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::borrowsval |- ( L e. Word 2o -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s3::simpr |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( toNat ` L ) = 0 )
+s4:s3:iftrued |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) = ( # ` L ) )
+s5:s2:adantr |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s6:s5,s4:eqtrd |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( borrows ` L ) = ( # ` L ) )
+i7::lencl
+s8:s1,i7:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s9:s8:adantr |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( # ` L ) e. NN0 )
+s10:s6,s9:eqeltrd |- ( ( L e. Word 2o /\ ( toNat ` L ) = 0 ) -> ( borrows ` L ) e. NN0 )
+s11::simpr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> -. ( toNat ` L ) = 0 )
+s12:s11:iffalsed |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) = ( 2 pCnt ( toNat ` L ) ) )
+s13:s2:adantr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( borrows ` L ) = if ( ( toNat ` L ) = 0 , ( # ` L ) , ( 2 pCnt ( toNat ` L ) ) ) )
+s14:s13,s12:eqtrd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( borrows ` L ) = ( 2 pCnt ( toNat ` L ) ) )
+s15:s11:neqned |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) =/= 0 )
+i16::tonatcl
+s17:s1,i16:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+s18:s17:adantr |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) e. NN0 )
+i19::elnnne0
+s20:s18,s15,i19:sylanbrc |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( toNat ` L ) e. NN )
+s21::2prm |- 2 e. Prime
+s22:s21:a1i |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> 2 e. Prime )
+i23::pccl
+s24:s22,s20,i23:syl2anc |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( 2 pCnt ( toNat ` L ) ) e. NN0 )
+s25:s14,s24:eqeltrd |- ( ( L e. Word 2o /\ -. ( toNat ` L ) = 0 ) -> ( borrows ` L ) e. NN0 )
+qed:s10,s25:pm2.61dan |- ( L e. Word 2o -> ( borrows ` L ) e. NN0 )
+$)

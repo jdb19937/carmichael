@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutprm  LOC_AFTER=?
+
+* A prime factor of the input either survives the divide-out loop or is the divisor (Lean: divOut_prime).
+
+s1::simpl1 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> D e. NN )
+s2::simpl2 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> R e. NN0 )
+s3::simpl3 |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> F e. NN0 )
+s4::simprl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> P e. Prime )
+s5::simprr |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> P || R )
+i6::divoutprml
+s7:s3,i6:syl |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> ( ( D e. NN /\ P e. Prime ) -> A. r e. NN0 ( P || r -> ( P || ( 1st ` ( ( D DivOut r ) ` F ) ) \/ P || D ) ) ) )
+s8:s1,s4:jca |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> ( D e. NN /\ P e. Prime ) )
+s9:s7,s8:mpd |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> A. r e. NN0 ( P || r -> ( P || ( 1st ` ( ( D DivOut r ) ` F ) ) \/ P || D ) ) )
+s10::id |- ( r = R -> r = R )
+c1:s10:breq2d |- ( r = R -> ( P || r <-> P || R ) )
+c2:s10:oveq2d |- ( r = R -> ( D DivOut r ) = ( D DivOut R ) )
+c3:c2:fveq1d |- ( r = R -> ( ( D DivOut r ) ` F ) = ( ( D DivOut R ) ` F ) )
+c4:c3:fveq2d |- ( r = R -> ( 1st ` ( ( D DivOut r ) ` F ) ) = ( 1st ` ( ( D DivOut R ) ` F ) ) )
+c5:c4:breq2d |- ( r = R -> ( P || ( 1st ` ( ( D DivOut r ) ` F ) ) <-> P || ( 1st ` ( ( D DivOut R ) ` F ) ) ) )
+c6:c5:orbi1d |- ( r = R -> ( ( P || ( 1st ` ( ( D DivOut r ) ` F ) ) \/ P || D ) <-> ( P || ( 1st ` ( ( D DivOut R ) ` F ) ) \/ P || D ) ) )
+c7:c1,c6:imbi12d |- ( r = R -> ( ( P || r -> ( P || ( 1st ` ( ( D DivOut r ) ` F ) ) \/ P || D ) ) <-> ( P || R -> ( P || ( 1st ` ( ( D DivOut R ) ` F ) ) \/ P || D ) ) ) )
+s11:c7,s9,s2:rspcdva |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> ( P || R -> ( P || ( 1st ` ( ( D DivOut R ) ` F ) ) \/ P || D ) ) )
+qed:s11,s5:mpd |- ( ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) /\ ( P e. Prime /\ P || R ) ) -> ( P || ( 1st ` ( ( D DivOut R ) ` F ) ) \/ P || D ) )
+$)

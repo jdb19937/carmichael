@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=coprimetodvdb  LOC_AFTER=?
+
+* Base of the induction for coprimetodvd.
+
+s1::simpl |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> K e. NN )
+s2::rn0 |- ran (/) = (/)
+s3:s2:a1i |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> ran (/) = (/) )
+s4:s3:raleqdv |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> ( A. q e. ran (/) -. q || K <-> A. q e. (/) -. q || K ) )
+s5::ral0 |- A. q e. (/) -. q || K
+s6:s5:a1i |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> A. q e. (/) -. q || K )
+s7:s4,s6:mpbird |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> A. q e. ran (/) -. q || K )
+s8::algprod0 |- prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) = 1
+s9:s8:a1i |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) = 1 )
+s10:s1:nnzd |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> K e. ZZ )
+i11::gcd1
+s12:s10,i11:syl |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> ( K gcd 1 ) = 1 )
+s13:s9:oveq2d |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> ( K gcd prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) ) = ( K gcd 1 ) )
+s14:s13,s12:eqtrd |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> ( K gcd prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) ) = 1 )
+qed:s7,s14:2thd |- ( ( K e. NN /\ A. q e. ran (/) q e. Prime ) -> ( A. q e. ran (/) -. q || K <-> ( K gcd prod_ i e. ( 0 ..^ ( # ` (/) ) ) ( (/) ` i ) ) = 1 ) )
+$)

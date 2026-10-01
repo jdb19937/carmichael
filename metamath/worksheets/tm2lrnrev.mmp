@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lrnrev  LOC_AFTER=?
+
+* The range of the reversal of a word is within the range of the word (Lean: ` List.mem_reverse ` , used for the entry-size bound of a reversed list).
+
+s1::elex |- ( L e. Word A -> L e. _V )
+i2::revval
+s3:s1,i2:syl |- ( L e. Word A -> ( reverse ` L ) = ( x e. ( 0 ..^ ( # ` L ) ) |-> ( L ` ( ( ( # ` L ) - 1 ) - x ) ) ) )
+s4::simpl |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> L e. Word A )
+s5::simpr |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> x e. ( 0 ..^ ( # ` L ) ) )
+i6::wrdfn
+s7:s4,i6:syl |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> L Fn ( 0 ..^ ( # ` L ) ) )
+i8::ubmelm1fzo
+s9:s5,i8:syl |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( # ` L ) - x ) - 1 ) e. ( 0 ..^ ( # ` L ) ) )
+i10::lencl
+s11:s4,i10:syl |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` L ) e. NN0 )
+s12:s11:nn0cnd |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` L ) e. CC )
+s13::ax-1cn |- 1 e. CC
+s14:s13:a1i |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> 1 e. CC )
+i15::elfzonn0
+s16:s5,i15:syl |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> x e. NN0 )
+s17:s16:nn0cnd |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> x e. CC )
+i18::sub32
+s19:s12,s14,s17,i18:syl3anc |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( # ` L ) - 1 ) - x ) = ( ( ( # ` L ) - x ) - 1 ) )
+s20:s19,s9:eqeltrd |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( # ` L ) - 1 ) - x ) e. ( 0 ..^ ( # ` L ) ) )
+i21::fnfvelrn
+s22:s7,s20,i21:syl2anc |- ( ( L e. Word A /\ x e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` ( ( ( # ` L ) - 1 ) - x ) ) e. ran L )
+s23:s22:ralrimiva |- ( L e. Word A -> A. x e. ( 0 ..^ ( # ` L ) ) ( L ` ( ( ( # ` L ) - 1 ) - x ) ) e. ran L )
+s24::eqid |- ( x e. ( 0 ..^ ( # ` L ) ) |-> ( L ` ( ( ( # ` L ) - 1 ) - x ) ) ) = ( x e. ( 0 ..^ ( # ` L ) ) |-> ( L ` ( ( ( # ` L ) - 1 ) - x ) ) )
+s25:s24:rnmptss |- ( A. x e. ( 0 ..^ ( # ` L ) ) ( L ` ( ( ( # ` L ) - 1 ) - x ) ) e. ran L -> ran ( x e. ( 0 ..^ ( # ` L ) ) |-> ( L ` ( ( ( # ` L ) - 1 ) - x ) ) ) C_ ran L )
+s26:s23,s25:syl |- ( L e. Word A -> ran ( x e. ( 0 ..^ ( # ` L ) ) |-> ( L ` ( ( ( # ` L ) - 1 ) - x ) ) ) C_ ran L )
+s27:s3:rneqd |- ( L e. Word A -> ran ( reverse ` L ) = ran ( x e. ( 0 ..^ ( # ` L ) ) |-> ( L ` ( ( ( # ` L ) - 1 ) - x ) ) ) )
+qed:s27,s26:eqsstrd |- ( L e. Word A -> ran ( reverse ` L ) C_ ran L )
+$)

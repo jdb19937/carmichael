@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=ttreswv  LOC_AFTER=?
+
+* Value of ~ df-reswop .
+
+s1::id |- ( q = Q -> q = Q )
+c1:s1:fveq2d |- ( q = Q -> ( toNat ` q ) = ( toNat ` Q ) )
+c2:c1:breq1d |- ( q = Q -> ( ( toNat ` q ) <_ ( toNat ` x ) <-> ( toNat ` Q ) <_ ( toNat ` x ) ) )
+c3:s1:oveq2d |- ( q = Q -> ( x subTrunc q ) = ( x subTrunc Q ) )
+c4:c3:fveq1d |- ( q = Q -> ( ( x subTrunc q ) ` (/) ) = ( ( x subTrunc Q ) ` (/) ) )
+c5:s1:oveq1d |- ( q = Q -> ( q subTrunc x ) = ( Q subTrunc x ) )
+c6:c5:fveq1d |- ( q = Q -> ( ( q subTrunc x ) ` (/) ) = ( ( Q subTrunc x ) ` (/) ) )
+c7:c6:oveq2d |- ( q = Q -> ( e subTrunc ( ( q subTrunc x ) ` (/) ) ) = ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) )
+c8:c7:fveq1d |- ( q = Q -> ( ( e subTrunc ( ( q subTrunc x ) ` (/) ) ) ` (/) ) = ( ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) )
+c9:c2,c4,c8:ifbieq12d |- ( q = Q -> if ( ( toNat ` q ) <_ ( toNat ` x ) , ( ( x subTrunc q ) ` (/) ) , ( ( e subTrunc ( ( q subTrunc x ) ` (/) ) ) ` (/) ) ) = if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) )
+c10:c9:mpoeq3dv |- ( q = Q -> ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` q ) <_ ( toNat ` x ) , ( ( x subTrunc q ) ` (/) ) , ( ( e subTrunc ( ( q subTrunc x ) ` (/) ) ) ` (/) ) ) ) = ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) )
+s2::id |- ( e = E -> e = E )
+c11:s2:oveq1d |- ( e = E -> ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) = ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) )
+c12:c11:fveq1d |- ( e = E -> ( ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) = ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) )
+c13:c12:ifeq2d |- ( e = E -> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) = if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) )
+c14:c13:mpoeq3dv |- ( e = E -> ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( e subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) = ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) )
+s3::df-reswop |- ResWOp = ( q e. Word 2o , e e. Word 2o |-> ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` q ) <_ ( toNat ` x ) , ( ( x subTrunc q ) ` (/) ) , ( ( e subTrunc ( ( q subTrunc x ) ` (/) ) ) ` (/) ) ) ) )
+s4:c10,c14,s3:ovmpog |- ( ( Q e. Word 2o /\ E e. Word 2o /\ ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) e. _V ) -> ( Q ResWOp E ) = ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) )
+s5::simpl |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> ( Q e. Word 2o /\ E e. Word 2o ) )
+s6::simpr |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> ( X e. Word 2o /\ Y e. NN0 ) )
+s7::2oex |- 2o e. _V
+i8::wrdexg
+s9:s7,i8:ax-mp |- Word 2o e. _V
+s10::nn0ex |- NN0 e. _V
+s11:s9,s10:mpoex |- ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) e. _V
+s12:s11:a1i |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) e. _V )
+s13:s5:simpld |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> Q e. Word 2o )
+s14:s5:simprd |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> E e. Word 2o )
+s15:s13,s14,s12,s4:syl3anc |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> ( Q ResWOp E ) = ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) )
+s16:s15:oveqd |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> ( X ( Q ResWOp E ) Y ) = ( X ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) Y ) )
+s17::id |- ( x = X -> x = X )
+c15:s17:fveq2d |- ( x = X -> ( toNat ` x ) = ( toNat ` X ) )
+c16:c15:breq2d |- ( x = X -> ( ( toNat ` Q ) <_ ( toNat ` x ) <-> ( toNat ` Q ) <_ ( toNat ` X ) ) )
+c17:s17:oveq1d |- ( x = X -> ( x subTrunc Q ) = ( X subTrunc Q ) )
+c18:c17:fveq1d |- ( x = X -> ( ( x subTrunc Q ) ` (/) ) = ( ( X subTrunc Q ) ` (/) ) )
+c19:s17:oveq2d |- ( x = X -> ( Q subTrunc x ) = ( Q subTrunc X ) )
+c20:c19:fveq1d |- ( x = X -> ( ( Q subTrunc x ) ` (/) ) = ( ( Q subTrunc X ) ` (/) ) )
+c21:c20:oveq2d |- ( x = X -> ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) = ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) )
+c22:c21:fveq1d |- ( x = X -> ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) = ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) )
+c23:c16,c18,c22:ifbieq12d |- ( x = X -> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) = if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) )
+s18::id |- ( y = Y -> y = Y )
+s19::eqidd |- ( y = Y -> if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) = if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) )
+s20::eqid |- ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) = ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) )
+s21:c23,s19,s20:ovmpog |- ( ( X e. Word 2o /\ Y e. NN0 /\ if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) e. _V ) -> ( X ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) Y ) = if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) )
+s22::fvex |- ( ( X subTrunc Q ) ` (/) ) e. _V
+s23::fvex |- ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) e. _V
+s24:s22,s23:ifex |- if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) e. _V
+s25:s24:a1i |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) e. _V )
+s26:s6:simpld |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> X e. Word 2o )
+s27:s6:simprd |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> Y e. NN0 )
+s28:s26,s27,s25,s21:syl3anc |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> ( X ( x e. Word 2o , y e. NN0 |-> if ( ( toNat ` Q ) <_ ( toNat ` x ) , ( ( x subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc x ) ` (/) ) ) ` (/) ) ) ) Y ) = if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) )
+qed:s16,s28:eqtrd |- ( ( ( Q e. Word 2o /\ E e. Word 2o ) /\ ( X e. Word 2o /\ Y e. NN0 ) ) -> ( X ( Q ResWOp E ) Y ) = if ( ( toNat ` Q ) <_ ( toNat ` X ) , ( ( X subTrunc Q ) ` (/) ) , ( ( E subTrunc ( ( Q subTrunc X ) ` (/) ) ) ` (/) ) ) )
+$)

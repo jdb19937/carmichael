@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=dchr2sumz  LOC_AFTER=?
+
+* Orthogonality of Dirichlet characters (set.mm dchr2sum) summed over the integer representatives ( 0 ..^ N ).
+
+s1::simp1 |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simp2 |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3::simp3 |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> Y e. ( Base ` ( DChr ` N ) ) )
+s4::eqid |- ( DChr ` N ) = ( DChr ` N )
+s5::eqid |- ( Z/nZ ` N ) = ( Z/nZ ` N )
+s6::eqid |- ( Base ` ( DChr ` N ) ) = ( Base ` ( DChr ` N ) )
+s7::eqid |- ( ZRHom ` ( Z/nZ ` N ) ) = ( ZRHom ` ( Z/nZ ` N ) )
+s8::eqid |- ( Base ` ( Z/nZ ` N ) ) = ( Base ` ( Z/nZ ` N ) )
+s9:s4,s5,s6,s8,s2,s3:dchr2sum |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> sum_ b e. ( Base ` ( Z/nZ ` N ) ) ( ( X ` b ) x. ( * ` ( Y ` b ) ) ) = if ( X = Y , ( phi ` N ) , 0 ) )
+s10::fzofi |- ( 0 ..^ N ) e. Fin
+s11:s10:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> ( 0 ..^ N ) e. Fin )
+i12::dchrindlem0
+s13:s1,i12:syl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> ( ( ZRHom ` ( Z/nZ ` N ) ) |` ( 0 ..^ N ) ) : ( 0 ..^ N ) -1-1-onto-> ( Base ` ( Z/nZ ` N ) ) )
+s14::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> a e. ( 0 ..^ N ) )
+s15:s14:fvresd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ a e. ( 0 ..^ N ) ) -> ( ( ( ZRHom ` ( Z/nZ ` N ) ) |` ( 0 ..^ N ) ) ` a ) = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) )
+s16:s2:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s17:s4,s5,s6,s8,s16:dchrf |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> X : ( Base ` ( Z/nZ ` N ) ) --> CC )
+s18:s3:adantr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> Y e. ( Base ` ( DChr ` N ) ) )
+s19:s4,s5,s6,s8,s18:dchrf |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> Y : ( Base ` ( Z/nZ ` N ) ) --> CC )
+s20::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> b e. ( Base ` ( Z/nZ ` N ) ) )
+s21:s17,s20:ffvelcdmd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> ( X ` b ) e. CC )
+s22:s19,s20:ffvelcdmd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> ( Y ` b ) e. CC )
+s23:s22:cjcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> ( * ` ( Y ` b ) ) e. CC )
+s24:s21,s23:mulcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) /\ b e. ( Base ` ( Z/nZ ` N ) ) ) -> ( ( X ` b ) x. ( * ` ( Y ` b ) ) ) e. CC )
+s25::id |- ( b = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) -> b = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) )
+fa1:s25:fveq2d |- ( b = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) -> ( X ` b ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+fa2:s25:fveq2d |- ( b = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) -> ( Y ` b ) = ( Y ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+fa3:fa2:fveq2d |- ( b = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) -> ( * ` ( Y ` b ) ) = ( * ` ( Y ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) )
+fa4:fa1,fa3:oveq12d |- ( b = ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) -> ( ( X ` b ) x. ( * ` ( Y ` b ) ) ) = ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( * ` ( Y ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) ) )
+s26:fa4,s11,s13,s15,s24:fsumf1o |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> sum_ b e. ( Base ` ( Z/nZ ` N ) ) ( ( X ` b ) x. ( * ` ( Y ` b ) ) ) = sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( * ` ( Y ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) ) )
+qed:s26,s9:eqtr3d |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) /\ Y e. ( Base ` ( DChr ` N ) ) ) -> sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( * ` ( Y ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) ) = if ( X = Y , ( phi ` N ) , 0 ) )
+$)

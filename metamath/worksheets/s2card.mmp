@@ -1,0 +1,75 @@
+$( <MM> <PROOF_ASST> THEOREM=s2card  LOC_AFTER=?
+
+* The AGP count at z is at most the reservoir size plus the number of integers up to the floor w (Lean: Step2W.lean hcard, hkey).
+
+h1::s2card.1 |- ( ph -> Z e. NN0 )
+h2::s2card.2 |- ( ph -> W e. NN0 )
+h3::s2card.3 |- ( ph -> Y e. NN0 )
+h4::s2card.4 |- ( ph -> E e. RR )
+h5::s2card.5 |- ( ph -> G e. RR )
+h6::s2card.6 |- ( ph -> ( Z ^c ( 1 - E ) ) <_ Y )
+h7::s2card.7 |- ( ph -> X e. NN0 )
+h8::s2card.8 |- ( ph -> X <_ Z )
+h9::s2card.9 |- ( ph -> A. x e. ( ZZ>= ` X ) ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) )
+s1:7:nn0zd |- ( ph -> X e. ZZ )
+s2:1:nn0zd |- ( ph -> Z e. ZZ )
+s3:s1,s2,8:3jca |- ( ph -> ( X e. ZZ /\ Z e. ZZ /\ X <_ Z ) )
+i4::eluz2
+s5:s3,i4:sylibr |- ( ph -> Z e. ( ZZ>= ` X ) )
+s6::id |- ( x = Z -> x = Z )
+c1:s6:fveq2d |- ( x = Z -> ( ppi ` x ) = ( ppi ` Z ) )
+c2:c1:oveq2d |- ( x = Z -> ( G x. ( ppi ` x ) ) = ( G x. ( ppi ` Z ) ) )
+c3:s6:oveq2d |- ( x = Z -> ( 0 ... x ) = ( 0 ... Z ) )
+c4:s6:oveq1d |- ( x = Z -> ( x ^c ( 1 - E ) ) = ( Z ^c ( 1 - E ) ) )
+c5:c4:breq2d |- ( x = Z -> ( q <_ ( x ^c ( 1 - E ) ) <-> q <_ ( Z ^c ( 1 - E ) ) ) )
+c6:c5:imbi2d |- ( x = Z -> ( ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) <-> ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) )
+c7:c6:ralbidv |- ( x = Z -> ( A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) <-> A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) )
+c8:c7:anbi2d |- ( x = Z -> ( ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) <-> ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) ) )
+c9:c3,c8:rabeqbidv |- ( x = Z -> { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } = { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } )
+c10:c9:fveq2d |- ( x = Z -> ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) = ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) )
+c11:c2,c10:breq12d |- ( x = Z -> ( ( G x. ( ppi ` x ) ) <_ ( # ` { a e. ( 0 ... x ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( x ^c ( 1 - E ) ) ) ) } ) <-> ( G x. ( ppi ` Z ) ) <_ ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) ) )
+s7:c11,9,s5:rspcdva |- ( ph -> ( G x. ( ppi ` Z ) ) <_ ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) )
+s8:1,2,3,4,6:s2sub |- ( ph -> { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } C_ ( ( ( Z goodPrimesW W ) ` Y ) u. ( 0 ... W ) ) )
+s9:1,2,3:3jca |- ( ph -> ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) )
+i10::goodprimeswfi
+s11:s9,i10:syl |- ( ph -> ( ( Z goodPrimesW W ) ` Y ) e. ( ~P Prime i^i Fin ) )
+i12::elfpw
+s13:s11,i12:sylib |- ( ph -> ( ( ( Z goodPrimesW W ) ` Y ) C_ Prime /\ ( ( Z goodPrimesW W ) ` Y ) e. Fin ) )
+s14:s13:simprd |- ( ph -> ( ( Z goodPrimesW W ) ` Y ) e. Fin )
+s15::fzfi |- ( 0 ... W ) e. Fin
+s16:s15:a1i |- ( ph -> ( 0 ... W ) e. Fin )
+i17::unfi
+s18:s14,s16,i17:syl2anc |- ( ph -> ( ( ( Z goodPrimesW W ) ` Y ) u. ( 0 ... W ) ) e. Fin )
+i19::hashss
+s20:s18,s8,i19:syl2anc |- ( ph -> ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) <_ ( # ` ( ( ( Z goodPrimesW W ) ` Y ) u. ( 0 ... W ) ) ) )
+i21::hashun2
+s22:s14,s16,i21:syl2anc |- ( ph -> ( # ` ( ( ( Z goodPrimesW W ) ` Y ) u. ( 0 ... W ) ) ) <_ ( ( # ` ( ( Z goodPrimesW W ) ` Y ) ) + ( # ` ( 0 ... W ) ) ) )
+i23::hashfz0
+s24:2,i23:syl |- ( ph -> ( # ` ( 0 ... W ) ) = ( W + 1 ) )
+s25:s24:oveq2d |- ( ph -> ( ( # ` ( ( Z goodPrimesW W ) ` Y ) ) + ( # ` ( 0 ... W ) ) ) = ( ( # ` ( ( Z goodPrimesW W ) ` Y ) ) + ( W + 1 ) ) )
+s26:s22,s25:breqtrd |- ( ph -> ( # ` ( ( ( Z goodPrimesW W ) ` Y ) u. ( 0 ... W ) ) ) <_ ( ( # ` ( ( Z goodPrimesW W ) ` Y ) ) + ( W + 1 ) ) )
+s27::fzfi |- ( 0 ... Z ) e. Fin
+i28::rabfi
+s29:s27,i28:ax-mp |- { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } e. Fin
+i30::hashcl
+s31:s29,i30:ax-mp |- ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) e. NN0
+s32:s31:a1i |- ( ph -> ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) e. NN0 )
+s33:s32:nn0red |- ( ph -> ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) e. RR )
+i34::hashcl
+s35:s18,i34:syl |- ( ph -> ( # ` ( ( ( Z goodPrimesW W ) ` Y ) u. ( 0 ... W ) ) ) e. NN0 )
+s36:s35:nn0red |- ( ph -> ( # ` ( ( ( Z goodPrimesW W ) ` Y ) u. ( 0 ... W ) ) ) e. RR )
+i37::hashcl
+s38:s14,i37:syl |- ( ph -> ( # ` ( ( Z goodPrimesW W ) ` Y ) ) e. NN0 )
+s39:s38:nn0red |- ( ph -> ( # ` ( ( Z goodPrimesW W ) ` Y ) ) e. RR )
+s40:2:nn0red |- ( ph -> W e. RR )
+s41::1red |- ( ph -> 1 e. RR )
+s42:s40,s41:readdcld |- ( ph -> ( W + 1 ) e. RR )
+s43:s39,s42:readdcld |- ( ph -> ( ( # ` ( ( Z goodPrimesW W ) ` Y ) ) + ( W + 1 ) ) e. RR )
+s44:1:nn0red |- ( ph -> Z e. RR )
+i45::ppicl
+s46:s44,i45:syl |- ( ph -> ( ppi ` Z ) e. NN0 )
+s47:s46:nn0red |- ( ph -> ( ppi ` Z ) e. RR )
+s48:5,s47:remulcld |- ( ph -> ( G x. ( ppi ` Z ) ) e. RR )
+s49:s33,s36,s43,s20,s26:letrd |- ( ph -> ( # ` { a e. ( 0 ... Z ) | ( a e. Prime /\ A. q e. Prime ( q || ( a - 1 ) -> q <_ ( Z ^c ( 1 - E ) ) ) ) } ) <_ ( ( # ` ( ( Z goodPrimesW W ) ` Y ) ) + ( W + 1 ) ) )
+qed:s48,s33,s43,s7,s49:letrd |- ( ph -> ( G x. ( ppi ` Z ) ) <_ ( ( # ` ( ( Z goodPrimesW W ) ` Y ) ) + ( W + 1 ) ) )
+$)

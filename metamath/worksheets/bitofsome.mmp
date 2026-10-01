@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=bitofsome  LOC_AFTER=?
+
+* bitOf of a register holding a bit is that bit (Lean: bitOf_some).
+
+s1::id |- ( B e. 2o -> B e. 2o )
+i2::djulcl
+s3:s1,i2:syl |- ( B e. 2o -> ( inl ` B ) e. ( 2o |_| 1o ) )
+i4::bitofval
+s5:s3,i4:syl |- ( B e. 2o -> ( bitOf ` ( inl ` B ) ) = if ( ( inl ` B ) = ( inr ` (/) ) , (/) , ( 2nd ` ( inl ` B ) ) ) )
+i6::inlval
+s7:s1,i6:syl |- ( B e. 2o -> ( inl ` B ) = <. (/) , B >. )
+s8::0ex |- (/) e. _V
+i9::inrval
+s10:s8,i9:ax-mp |- ( inr ` (/) ) = <. 1o , (/) >.
+s11:s10:a1i |- ( B e. 2o -> ( inr ` (/) ) = <. 1o , (/) >. )
+s12:s7,s11:eqeq12d |- ( B e. 2o -> ( ( inl ` B ) = ( inr ` (/) ) <-> <. (/) , B >. = <. 1o , (/) >. ) )
+s13:s1:elexd |- ( B e. 2o -> B e. _V )
+s14:s8:a1i |- ( B e. 2o -> (/) e. _V )
+i15::opthg
+s16:s14,s13,i15:syl2anc |- ( B e. 2o -> ( <. (/) , B >. = <. 1o , (/) >. <-> ( (/) = 1o /\ B = (/) ) ) )
+s17::1n0 |- 1o =/= (/)
+s18:s17:nesymi |- -. (/) = 1o
+s19:s18:intnanr |- -. ( (/) = 1o /\ B = (/) )
+s20:s19:a1i |- ( B e. 2o -> -. ( (/) = 1o /\ B = (/) ) )
+s21:s20,s16:mtbird |- ( B e. 2o -> -. <. (/) , B >. = <. 1o , (/) >. )
+s22:s21,s12:mtbird |- ( B e. 2o -> -. ( inl ` B ) = ( inr ` (/) ) )
+s23:s22:iffalsed |- ( B e. 2o -> if ( ( inl ` B ) = ( inr ` (/) ) , (/) , ( 2nd ` ( inl ` B ) ) ) = ( 2nd ` ( inl ` B ) ) )
+i24::2ndinl
+s25:s1,i24:syl |- ( B e. 2o -> ( 2nd ` ( inl ` B ) ) = B )
+qed:s5,s23,s25:3eqtrd |- ( B e. 2o -> ( bitOf ` ( inl ` B ) ) = B )
+$)

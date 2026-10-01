@@ -1,0 +1,80 @@
+$( <MM> <PROOF_ASST> THEOREM=tmprlstep  LOC_AFTER=?
+
+* The product of the prefix of length ` J + 1 ` is the entry ` L ` J ` times the product of the prefix of length ` J ` (Lean ` take_succ ` , ` List.prod_append ` in ` prodBody_runs ` ).
+
+s1::simpl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> L e. Word NN0 )
+s2::simpr |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ..^ ( # ` L ) ) )
+i3::fzofzp1
+s4:s2,i3:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( J + 1 ) e. ( 0 ... ( # ` L ) ) )
+i5::elfzofz
+s6:s2,i5:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( 0 ... ( # ` L ) ) )
+i7::elfzonn0
+s8:s2,i7:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. NN0 )
+i9::pfxcl
+s10:s1,i9:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L prefix ( J + 1 ) ) e. Word NN0 )
+i11::prodlspec
+s12:s10,i11:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix ( J + 1 ) ) ) ) = prod_ i e. ( 0 ..^ ( # ` ( L prefix ( J + 1 ) ) ) ) ( ( L prefix ( J + 1 ) ) ` i ) )
+i13::pfxlen
+s14:s1,s4,i13:syl2anc |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` ( L prefix ( J + 1 ) ) ) = ( J + 1 ) )
+s15:s14:oveq2d |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 0 ..^ ( # ` ( L prefix ( J + 1 ) ) ) ) = ( 0 ..^ ( J + 1 ) ) )
+s16:s15:prodeq1d |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> prod_ i e. ( 0 ..^ ( # ` ( L prefix ( J + 1 ) ) ) ) ( ( L prefix ( J + 1 ) ) ` i ) = prod_ i e. ( 0 ..^ ( J + 1 ) ) ( ( L prefix ( J + 1 ) ) ` i ) )
+s17:s1:adantr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ ( J + 1 ) ) ) -> L e. Word NN0 )
+s18:s4:adantr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ ( J + 1 ) ) ) -> ( J + 1 ) e. ( 0 ... ( # ` L ) ) )
+s19::simpr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ ( J + 1 ) ) ) -> i e. ( 0 ..^ ( J + 1 ) ) )
+i20::pfxfv
+s21:s17,s18,s19,i20:syl3anc |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ ( J + 1 ) ) ) -> ( ( L prefix ( J + 1 ) ) ` i ) = ( L ` i ) )
+s22:s21:prodeq2dv |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> prod_ i e. ( 0 ..^ ( J + 1 ) ) ( ( L prefix ( J + 1 ) ) ` i ) = prod_ i e. ( 0 ..^ ( J + 1 ) ) ( L ` i ) )
+s23:s12,s16:eqtrd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix ( J + 1 ) ) ) ) = prod_ i e. ( 0 ..^ ( J + 1 ) ) ( ( L prefix ( J + 1 ) ) ` i ) )
+s24:s23,s22:eqtrd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix ( J + 1 ) ) ) ) = prod_ i e. ( 0 ..^ ( J + 1 ) ) ( L ` i ) )
+i25::pfxcl
+s26:s1,i25:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L prefix J ) e. Word NN0 )
+i27::prodlspec
+s28:s26,i27:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix J ) ) ) = prod_ i e. ( 0 ..^ ( # ` ( L prefix J ) ) ) ( ( L prefix J ) ` i ) )
+i29::pfxlen
+s30:s1,s6,i29:syl2anc |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` ( L prefix J ) ) = J )
+s31:s30:oveq2d |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 0 ..^ ( # ` ( L prefix J ) ) ) = ( 0 ..^ J ) )
+s32:s31:prodeq1d |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> prod_ i e. ( 0 ..^ ( # ` ( L prefix J ) ) ) ( ( L prefix J ) ` i ) = prod_ i e. ( 0 ..^ J ) ( ( L prefix J ) ` i ) )
+s33:s1:adantr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> L e. Word NN0 )
+s34:s6:adantr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> J e. ( 0 ... ( # ` L ) ) )
+s35::simpr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> i e. ( 0 ..^ J ) )
+i36::pfxfv
+s37:s33,s34,s35,i36:syl3anc |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> ( ( L prefix J ) ` i ) = ( L ` i ) )
+s38:s37:prodeq2dv |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> prod_ i e. ( 0 ..^ J ) ( ( L prefix J ) ` i ) = prod_ i e. ( 0 ..^ J ) ( L ` i ) )
+s39:s28,s32:eqtrd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix J ) ) ) = prod_ i e. ( 0 ..^ J ) ( ( L prefix J ) ` i ) )
+s40:s39,s38:eqtrd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix J ) ) ) = prod_ i e. ( 0 ..^ J ) ( L ` i ) )
+i41::elnn0uz
+s42:s8,i41:sylib |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. ( ZZ>= ` 0 ) )
+i43::fzosplitsn
+s44:s42,i43:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 0 ..^ ( J + 1 ) ) = ( ( 0 ..^ J ) u. { J } ) )
+s45:s44:prodeq1d |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> prod_ i e. ( 0 ..^ ( J + 1 ) ) ( L ` i ) = prod_ i e. ( ( 0 ..^ J ) u. { J } ) ( L ` i ) )
+s46::nfv |- F/ i ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) )
+s47::nfcv |- F/_ i ( L ` J )
+s48::fzofi |- ( 0 ..^ J ) e. Fin
+s49:s48:a1i |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 0 ..^ J ) e. Fin )
+s50:s8:elexd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> J e. _V )
+s51::fzonel |- -. J e. ( 0 ..^ J )
+s52:s51:a1i |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> -. J e. ( 0 ..^ J ) )
+i53::elfzuz3
+s54:s6,i53:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` L ) e. ( ZZ>= ` J ) )
+i55::fzoss2
+s56:s54,i55:syl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 0 ..^ J ) C_ ( 0 ..^ ( # ` L ) ) )
+s57:s56:adantr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> ( 0 ..^ J ) C_ ( 0 ..^ ( # ` L ) ) )
+s58::simpr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> i e. ( 0 ..^ J ) )
+s59:s57,s58:sseldd |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> i e. ( 0 ..^ ( # ` L ) ) )
+s60:s1:adantr |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> L e. Word NN0 )
+i61::wrdsymbcl
+s62:s60,s59,i61:syl2anc |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> ( L ` i ) e. NN0 )
+s63:s62:nn0cnd |- ( ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) /\ i e. ( 0 ..^ J ) ) -> ( L ` i ) e. CC )
+s64::fveq2 |- ( i = J -> ( L ` i ) = ( L ` J ) )
+i65::wrdsymbcl
+s66:s1,s2,i65:syl2anc |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` J ) e. NN0 )
+s67:s66:nn0cnd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` J ) e. CC )
+s68:s46,s47,s49,s50,s52,s63,s64,s67:fprodsplitsn |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> prod_ i e. ( ( 0 ..^ J ) u. { J } ) ( L ` i ) = ( prod_ i e. ( 0 ..^ J ) ( L ` i ) x. ( L ` J ) ) )
+s69:s49,s63:fprodcl |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> prod_ i e. ( 0 ..^ J ) ( L ` i ) e. CC )
+s70:s69,s67:mulcomd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( prod_ i e. ( 0 ..^ J ) ( L ` i ) x. ( L ` J ) ) = ( ( L ` J ) x. prod_ i e. ( 0 ..^ J ) ( L ` i ) ) )
+s71:s24,s45:eqtrd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix ( J + 1 ) ) ) ) = prod_ i e. ( ( 0 ..^ J ) u. { J } ) ( L ` i ) )
+s72:s71,s68:eqtrd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix ( J + 1 ) ) ) ) = ( prod_ i e. ( 0 ..^ J ) ( L ` i ) x. ( L ` J ) ) )
+s73:s72,s70:eqtrd |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix ( J + 1 ) ) ) ) = ( ( L ` J ) x. prod_ i e. ( 0 ..^ J ) ( L ` i ) ) )
+s74:s40:oveq2d |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L ` J ) x. ( 1st ` ( ProdL ` ( L prefix J ) ) ) ) = ( ( L ` J ) x. prod_ i e. ( 0 ..^ J ) ( L ` i ) ) )
+qed:s73,s74:eqtr4d |- ( ( L e. Word NN0 /\ J e. ( 0 ..^ ( # ` L ) ) ) -> ( 1st ` ( ProdL ` ( L prefix ( J + 1 ) ) ) ) = ( ( L ` J ) x. ( 1st ` ( ProdL ` ( L prefix J ) ) ) ) )
+$)

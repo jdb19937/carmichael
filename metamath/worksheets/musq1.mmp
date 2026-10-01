@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=musq1  LOC_AFTER=?
+
+* The square of the Moebius value at a squarefree argument is one.
+
+s1::simpl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( mmu ` N ) =/= 0 )
+i3::prmdvdsfi
+s4:s1,i3:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> { p e. Prime | p || N } e. Fin )
+i5::hashcl
+s6:s4,i5:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( # ` { p e. Prime | p || N } ) e. NN0 )
+s7:s6:nn0zd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( # ` { p e. Prime | p || N } ) e. ZZ )
+s8::id |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( N e. NN /\ ( mmu ` N ) =/= 0 ) )
+i9::muval2
+s10:s8,i9:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( mmu ` N ) = ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) )
+s11::neg1cn |- -u 1 e. CC
+s12:s11:a1i |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> -u 1 e. CC )
+s13::2nn0 |- 2 e. NN0
+s14:s13:a1i |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> 2 e. NN0 )
+i15::expmul
+s16:s12,s6,s14,i15:syl3anc |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( -u 1 ^ ( ( # ` { p e. Prime | p || N } ) x. 2 ) ) = ( ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ^ 2 ) )
+s17:s16:eqcomd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ^ 2 ) = ( -u 1 ^ ( ( # ` { p e. Prime | p || N } ) x. 2 ) ) )
+s18:s6:nn0cnd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( # ` { p e. Prime | p || N } ) e. CC )
+s19::2cn |- 2 e. CC
+s20:s19:a1i |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> 2 e. CC )
+s21:s18,s20:mulcomd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( # ` { p e. Prime | p || N } ) x. 2 ) = ( 2 x. ( # ` { p e. Prime | p || N } ) ) )
+s22:s21:oveq2d |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( -u 1 ^ ( ( # ` { p e. Prime | p || N } ) x. 2 ) ) = ( -u 1 ^ ( 2 x. ( # ` { p e. Prime | p || N } ) ) ) )
+i23::expmul
+s24:s12,s14,s6,i23:syl3anc |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( -u 1 ^ ( 2 x. ( # ` { p e. Prime | p || N } ) ) ) = ( ( -u 1 ^ 2 ) ^ ( # ` { p e. Prime | p || N } ) ) )
+s25::neg1sqe1 |- ( -u 1 ^ 2 ) = 1
+s26:s25:a1i |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( -u 1 ^ 2 ) = 1 )
+s27:s26:oveq1d |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( -u 1 ^ 2 ) ^ ( # ` { p e. Prime | p || N } ) ) = ( 1 ^ ( # ` { p e. Prime | p || N } ) ) )
+i28::1exp
+s29:s7,i28:syl |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( 1 ^ ( # ` { p e. Prime | p || N } ) ) = 1 )
+s30:s17,s22:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ^ 2 ) = ( -u 1 ^ ( 2 x. ( # ` { p e. Prime | p || N } ) ) ) )
+s31:s24,s27:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( -u 1 ^ ( 2 x. ( # ` { p e. Prime | p || N } ) ) ) = ( 1 ^ ( # ` { p e. Prime | p || N } ) ) )
+s32:s31,s29:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( -u 1 ^ ( 2 x. ( # ` { p e. Prime | p || N } ) ) ) = 1 )
+s33:s30,s32:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ^ 2 ) = 1 )
+s34:s10:oveq1d |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( mmu ` N ) ^ 2 ) = ( ( -u 1 ^ ( # ` { p e. Prime | p || N } ) ) ^ 2 ) )
+qed:s34,s33:eqtrd |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 ) -> ( ( mmu ` N ) ^ 2 ) = 1 )
+$)

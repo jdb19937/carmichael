@@ -1,0 +1,89 @@
+$( <MM> <PROOF_ASST> THEOREM=ldenrp  LOC_AFTER=?
+
+* Lean ` rpow_neg_sq_mul_sq ` : ` ( x ^ - s ) ^ 2 x ^ 2 = x ^ ( 2 - 2 s ) ` ( ~ cxpmuld , ~ cxpaddd ).
+
+s1::simpl |- ( ( X e. RR+ /\ S e. RR ) -> X e. RR+ )
+s2::simpr |- ( ( X e. RR+ /\ S e. RR ) -> S e. RR )
+s3:s1:rpred |- ( ( X e. RR+ /\ S e. RR ) -> X e. RR )
+s4:s3:recnd |- ( ( X e. RR+ /\ S e. RR ) -> X e. CC )
+s5:s2:recnd |- ( ( X e. RR+ /\ S e. RR ) -> S e. CC )
+s6:s5:negcld |- ( ( X e. RR+ /\ S e. RR ) -> -u S e. CC )
+s7:s4,s6:cxpcld |- ( ( X e. RR+ /\ S e. RR ) -> ( X ^c -u S ) e. CC )
+s8::2nn0 |- 2 e. NN0
+s9:s8:a1i |- ( ( X e. RR+ /\ S e. RR ) -> 2 e. NN0 )
+i10::cxpexp
+s11:s7,s9,i10:syl2anc |- ( ( X e. RR+ /\ S e. RR ) -> ( ( X ^c -u S ) ^c 2 ) = ( ( X ^c -u S ) ^ 2 ) )
+s12:s2:renegcld |- ( ( X e. RR+ /\ S e. RR ) -> -u S e. RR )
+s13::2cn |- 2 e. CC
+s14:s13:a1i |- ( ( X e. RR+ /\ S e. RR ) -> 2 e. CC )
+s15:s1,s12,s14:cxpmuld |- ( ( X e. RR+ /\ S e. RR ) -> ( X ^c ( -u S x. 2 ) ) = ( ( X ^c -u S ) ^c 2 ) )
+s16::2nn0 |- 2 e. NN0
+s17:s16:a1i |- ( ( X e. RR+ /\ S e. RR ) -> 2 e. NN0 )
+i18::cxpexp
+s19:s4,s17,i18:syl2anc |- ( ( X e. RR+ /\ S e. RR ) -> ( X ^c 2 ) = ( X ^ 2 ) )
+s20:s1:rpne0d |- ( ( X e. RR+ /\ S e. RR ) -> X =/= 0 )
+s21:s6,s14:mulcld |- ( ( X e. RR+ /\ S e. RR ) -> ( -u S x. 2 ) e. CC )
+s22:s4,s20,s21,s14:cxpaddd |- ( ( X e. RR+ /\ S e. RR ) -> ( X ^c ( ( -u S x. 2 ) + 2 ) ) = ( ( X ^c ( -u S x. 2 ) ) x. ( X ^c 2 ) ) )
+s23:s15,s11:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( X ^c ( -u S x. 2 ) ) = ( ( X ^c -u S ) ^ 2 ) )
+s24:s23,s19:oveq12d |- ( ( X e. RR+ /\ S e. RR ) -> ( ( X ^c ( -u S x. 2 ) ) x. ( X ^c 2 ) ) = ( ( ( X ^c -u S ) ^ 2 ) x. ( X ^ 2 ) ) )
+s25:s6,s14:mulcomd |- ( ( X e. RR+ /\ S e. RR ) -> ( -u S x. 2 ) = ( 2 x. -u S ) )
+s26:s14,s5:mulneg2d |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 x. -u S ) = -u ( 2 x. S ) )
+s27:s14,s5:mulneg1d |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 2 x. S ) = -u ( 2 x. S ) )
+s28:s27:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> -u ( 2 x. S ) = ( -u 2 x. S ) )
+s29:s13:negcli |- -u 2 e. CC
+s30:s29:a1i |- ( ( X e. RR+ /\ S e. RR ) -> -u 2 e. CC )
+s31:s30,s5:mulcld |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 2 x. S ) e. CC )
+s32:s31:addlidd |- ( ( X e. RR+ /\ S e. RR ) -> ( 0 + ( -u 2 x. S ) ) = ( -u 2 x. S ) )
+s33:s32:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 2 x. S ) = ( 0 + ( -u 2 x. S ) ) )
+s34:s26,s28:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 x. -u S ) = ( -u 2 x. S ) )
+s35:s34,s33:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 x. -u S ) = ( 0 + ( -u 2 x. S ) ) )
+s36:s25,s35:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( -u S x. 2 ) = ( 0 + ( -u 2 x. S ) ) )
+s37::eqidd |- ( ( X e. RR+ /\ S e. RR ) -> 2 = 2 )
+s38:s36,s37:oveq12d |- ( ( X e. RR+ /\ S e. RR ) -> ( ( -u S x. 2 ) + 2 ) = ( ( 0 + ( -u 2 x. S ) ) + 2 ) )
+s39::0cn |- 0 e. CC
+s40:s39:a1i |- ( ( X e. RR+ /\ S e. RR ) -> 0 e. CC )
+s41:s40,s31,s14:add32d |- ( ( X e. RR+ /\ S e. RR ) -> ( ( 0 + ( -u 2 x. S ) ) + 2 ) = ( ( 0 + 2 ) + ( -u 2 x. S ) ) )
+s42:s13:addlidi |- ( 0 + 2 ) = 2
+s43:s42:a1i |- ( ( X e. RR+ /\ S e. RR ) -> ( 0 + 2 ) = 2 )
+s44:s43:oveq1d |- ( ( X e. RR+ /\ S e. RR ) -> ( ( 0 + 2 ) + ( -u 2 x. S ) ) = ( 2 + ( -u 2 x. S ) ) )
+s45:s41,s44:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( ( 0 + ( -u 2 x. S ) ) + 2 ) = ( 2 + ( -u 2 x. S ) ) )
+s46:s38,s45:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( ( -u S x. 2 ) + 2 ) = ( 2 + ( -u 2 x. S ) ) )
+s47:s14,s5:mulcld |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 x. S ) e. CC )
+s48:s14,s47:negsubd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 + -u ( 2 x. S ) ) = ( 2 - ( 2 x. S ) ) )
+s49:s48:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 - ( 2 x. S ) ) = ( 2 + -u ( 2 x. S ) ) )
+s50:s47:mulm1d |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 1 x. ( 2 x. S ) ) = -u ( 2 x. S ) )
+s51:s50:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> -u ( 2 x. S ) = ( -u 1 x. ( 2 x. S ) ) )
+s52:s51:oveq2d |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 + -u ( 2 x. S ) ) = ( 2 + ( -u 1 x. ( 2 x. S ) ) ) )
+s53::eqidd |- ( ( X e. RR+ /\ S e. RR ) -> 2 = 2 )
+s54::ax-1cn |- 1 e. CC
+s55:s54:negcli |- -u 1 e. CC
+s56:s55:a1i |- ( ( X e. RR+ /\ S e. RR ) -> -u 1 e. CC )
+s57:s56,s14,s5:mulassd |- ( ( X e. RR+ /\ S e. RR ) -> ( ( -u 1 x. 2 ) x. S ) = ( -u 1 x. ( 2 x. S ) ) )
+s58:s57:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 1 x. ( 2 x. S ) ) = ( ( -u 1 x. 2 ) x. S ) )
+s59:s13:mullidi |- ( 1 x. 2 ) = 2
+s60:s54,s13:mulneg1i |- ( -u 1 x. 2 ) = -u ( 1 x. 2 )
+s61:s59:negeqi |- -u ( 1 x. 2 ) = -u 2
+s62:s60,s61:eqtri |- ( -u 1 x. 2 ) = -u 2
+s63:s62:a1i |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 1 x. 2 ) = -u 2 )
+s64:s63:oveq1d |- ( ( X e. RR+ /\ S e. RR ) -> ( ( -u 1 x. 2 ) x. S ) = ( -u 2 x. S ) )
+s65:s31:addlidd |- ( ( X e. RR+ /\ S e. RR ) -> ( 0 + ( -u 2 x. S ) ) = ( -u 2 x. S ) )
+s66:s65:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 2 x. S ) = ( 0 + ( -u 2 x. S ) ) )
+s67:s58,s64:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 1 x. ( 2 x. S ) ) = ( -u 2 x. S ) )
+s68:s67,s66:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( -u 1 x. ( 2 x. S ) ) = ( 0 + ( -u 2 x. S ) ) )
+s69:s53,s68:oveq12d |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 + ( -u 1 x. ( 2 x. S ) ) ) = ( 2 + ( 0 + ( -u 2 x. S ) ) ) )
+s70:s14,s40,s31:addassd |- ( ( X e. RR+ /\ S e. RR ) -> ( ( 2 + 0 ) + ( -u 2 x. S ) ) = ( 2 + ( 0 + ( -u 2 x. S ) ) ) )
+s71:s70:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 + ( 0 + ( -u 2 x. S ) ) ) = ( ( 2 + 0 ) + ( -u 2 x. S ) ) )
+s72:s13:addridi |- ( 2 + 0 ) = 2
+s73:s72:a1i |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 + 0 ) = 2 )
+s74:s73:oveq1d |- ( ( X e. RR+ /\ S e. RR ) -> ( ( 2 + 0 ) + ( -u 2 x. S ) ) = ( 2 + ( -u 2 x. S ) ) )
+s75:s71,s74:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 + ( 0 + ( -u 2 x. S ) ) ) = ( 2 + ( -u 2 x. S ) ) )
+s76:s49,s52:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 - ( 2 x. S ) ) = ( 2 + ( -u 1 x. ( 2 x. S ) ) ) )
+s77:s76,s69:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 - ( 2 x. S ) ) = ( 2 + ( 0 + ( -u 2 x. S ) ) ) )
+s78:s77,s75:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( 2 - ( 2 x. S ) ) = ( 2 + ( -u 2 x. S ) ) )
+s79:s46,s78:eqtr4d |- ( ( X e. RR+ /\ S e. RR ) -> ( ( -u S x. 2 ) + 2 ) = ( 2 - ( 2 x. S ) ) )
+s80:s79:oveq2d |- ( ( X e. RR+ /\ S e. RR ) -> ( X ^c ( ( -u S x. 2 ) + 2 ) ) = ( X ^c ( 2 - ( 2 x. S ) ) ) )
+s81:s22,s24:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( X ^c ( ( -u S x. 2 ) + 2 ) ) = ( ( ( X ^c -u S ) ^ 2 ) x. ( X ^ 2 ) ) )
+s82:s81:eqcomd |- ( ( X e. RR+ /\ S e. RR ) -> ( ( ( X ^c -u S ) ^ 2 ) x. ( X ^ 2 ) ) = ( X ^c ( ( -u S x. 2 ) + 2 ) ) )
+s83:s82,s80:eqtrd |- ( ( X e. RR+ /\ S e. RR ) -> ( ( ( X ^c -u S ) ^ 2 ) x. ( X ^ 2 ) ) = ( X ^c ( 2 - ( 2 x. S ) ) ) )
+qed:s83:idi |- ( ( X e. RR+ /\ S e. RR ) -> ( ( ( X ^c -u S ) ^ 2 ) x. ( X ^ 2 ) ) = ( X ^c ( 2 - ( 2 x. S ) ) ) )
+$)

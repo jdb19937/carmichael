@@ -1,0 +1,502 @@
+$( <MM> <PROOF_ASST> THEOREM=zl2grw  LOC_AFTER=?
+
+* A cubic bound is dominated by an exponential: ` P ( 4 + U ) ^ 3 <_ 64 P e ^ U ` ( the growth condition of ~ rectintpl from a polynomial bound; Lean ` isBigO_double_exp ` ).
+
+s1::simpll |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> P e. RR )
+s2::simplr |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ P )
+s3::simprl |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> U e. RR )
+s4::simprr |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ U )
+s5::4re |- 4 e. RR
+s6:s5:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 e. RR )
+s7::4ne0 |- 4 =/= 0
+s8:s7:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 =/= 0 )
+s9:s3,s6,s8:redivcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U / 4 ) e. RR )
+s10::4cn |- 4 e. CC
+s11:s10:mul02i |- ( 0 x. 4 ) = 0
+s12:s11:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 x. 4 ) = 0 )
+s13:s12,s4:eqbrtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 x. 4 ) <_ U )
+s14::0re |- 0 e. RR
+s15:s14:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 e. RR )
+i16::nnrp
+s17::4nn |- 4 e. NN
+s18:s17,i16:ax-mp |- 4 e. RR+
+s19:s18:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 e. RR+ )
+s20:s15,s3,s19:lemuldivd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 x. 4 ) <_ U <-> 0 <_ ( U / 4 ) ) )
+s21:s13,s20:mpbid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( U / 4 ) )
+i22::bvefge1p
+s23:s9,s21,i22:syl2anc |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 + ( U / 4 ) ) <_ ( exp ` ( U / 4 ) ) )
+s24:s9:reefcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` ( U / 4 ) ) e. RR )
+s25::1re |- 1 e. RR
+s26:s25:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 1 e. RR )
+s27:s3,s19:rerpdivcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U / 4 ) e. RR )
+s28:s26,s27:readdcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 + ( U / 4 ) ) e. RR )
+s29:s24,s28:subge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) <-> ( 1 + ( U / 4 ) ) <_ ( exp ` ( U / 4 ) ) ) )
+s30:s23,s29:mpbird |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) )
+s31:s24,s28:resubcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) e. RR )
+s32::4re |- 4 e. RR
+s33:s32:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 e. RR )
+s34::4nn0 |- 4 e. NN0
+s35:s34:nn0ge0i |- 0 <_ 4
+s36:s35:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ 4 )
+s37:s33,s31,s36,s30:mulge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( 4 x. ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) ) )
+s38:s10:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 e. CC )
+s39:s3:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> U e. CC )
+s40::4ne0 |- 4 =/= 0
+s41:s40:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 =/= 0 )
+s42:s39,s38,s41:divcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U / 4 ) e. CC )
+s43:s42:efcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` ( U / 4 ) ) e. CC )
+s44::ax-1cn |- 1 e. CC
+s45:s44:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 1 e. CC )
+s46:s45,s42:addcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 + ( U / 4 ) ) e. CC )
+s47:s38,s43,s46:subdid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 x. ( 1 + ( U / 4 ) ) ) ) )
+s48:s38,s43:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( exp ` ( U / 4 ) ) ) e. CC )
+s49:s38,s46:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( 1 + ( U / 4 ) ) ) e. CC )
+s50:s48,s49:negsubd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) + -u ( 4 x. ( 1 + ( U / 4 ) ) ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 x. ( 1 + ( U / 4 ) ) ) ) )
+s51:s50:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 x. ( 1 + ( U / 4 ) ) ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) + -u ( 4 x. ( 1 + ( U / 4 ) ) ) ) )
+s52:s38,s46:mulneg1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 1 + ( U / 4 ) ) ) = -u ( 4 x. ( 1 + ( U / 4 ) ) ) )
+s53:s52:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ( 4 x. ( 1 + ( U / 4 ) ) ) = ( -u 4 x. ( 1 + ( U / 4 ) ) ) )
+s54:s53:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) + -u ( 4 x. ( 1 + ( U / 4 ) ) ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) + ( -u 4 x. ( 1 + ( U / 4 ) ) ) ) )
+s55:s48:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) = ( 4 x. ( exp ` ( U / 4 ) ) ) )
+s56:s55:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( exp ` ( U / 4 ) ) ) = ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s57:s10:negcli |- -u 4 e. CC
+s58:s57:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u 4 e. CC )
+s59:s58,s45,s42:adddid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 1 + ( U / 4 ) ) ) = ( ( -u 4 x. 1 ) + ( -u 4 x. ( U / 4 ) ) ) )
+s60:s10:mulridi |- ( 4 x. 1 ) = 4
+s61:s10,s44:mulneg1i |- ( -u 4 x. 1 ) = -u ( 4 x. 1 )
+s62:s60:negeqi |- -u ( 4 x. 1 ) = -u 4
+s63:s61,s62:eqtri |- ( -u 4 x. 1 ) = -u 4
+s64:s63:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. 1 ) = -u 4 )
+i65::divrec2
+s66:s39,s38,s41,i65:syl3anc |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U / 4 ) = ( ( 1 / 4 ) x. U ) )
+s67:s66:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( U / 4 ) ) = ( -u 4 x. ( ( 1 / 4 ) x. U ) ) )
+i68::rpcn
+i69::rpdivcl
+s70::1rp |- 1 e. RR+
+i71::nnrp
+s72:s70,s18,i69:mp2an |- ( 1 / 4 ) e. RR+
+s73:s72,i68:ax-mp |- ( 1 / 4 ) e. CC
+s74:s73:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 / 4 ) e. CC )
+s75:s58,s74,s39:mulassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 x. ( 1 / 4 ) ) x. U ) = ( -u 4 x. ( ( 1 / 4 ) x. U ) ) )
+s76:s75:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( ( 1 / 4 ) x. U ) ) = ( ( -u 4 x. ( 1 / 4 ) ) x. U ) )
+s77:s10,s44,s10,s40:divassi |- ( ( 4 x. 1 ) / 4 ) = ( 4 x. ( 1 / 4 ) )
+s78:s77:eqcomi |- ( 4 x. ( 1 / 4 ) ) = ( ( 4 x. 1 ) / 4 )
+s79:s60:oveq1i |- ( ( 4 x. 1 ) / 4 ) = ( 4 / 4 )
+s80:s10,s10,s44,s40:divmuli |- ( ( 4 / 4 ) = 1 <-> ( 4 x. 1 ) = 4 )
+s81:s60,s80:mpbir |- ( 4 / 4 ) = 1
+s82:s79,s81:eqtri |- ( ( 4 x. 1 ) / 4 ) = 1
+s83:s78,s82:eqtri |- ( 4 x. ( 1 / 4 ) ) = 1
+i84::rpcn
+i85::rpdivcl
+i86::nnrp
+s87:s10,s73:mulneg1i |- ( -u 4 x. ( 1 / 4 ) ) = -u ( 4 x. ( 1 / 4 ) )
+s88:s83:negeqi |- -u ( 4 x. ( 1 / 4 ) ) = -u 1
+s89:s87,s88:eqtri |- ( -u 4 x. ( 1 / 4 ) ) = -u 1
+s90:s89:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 1 / 4 ) ) = -u 1 )
+s91:s90:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 x. ( 1 / 4 ) ) x. U ) = ( -u 1 x. U ) )
+s92:s44:negcli |- -u 1 e. CC
+s93:s92:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u 1 e. CC )
+s94:s93,s39:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. U ) e. CC )
+s95:s94:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u 1 x. U ) ) = ( -u 1 x. U ) )
+s96:s95:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. U ) = ( 0 + ( -u 1 x. U ) ) )
+s97:s76,s91:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( ( 1 / 4 ) x. U ) ) = ( -u 1 x. U ) )
+s98:s97,s96:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( ( 1 / 4 ) x. U ) ) = ( 0 + ( -u 1 x. U ) ) )
+s99:s67,s98:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( U / 4 ) ) = ( 0 + ( -u 1 x. U ) ) )
+s100:s64,s99:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 x. 1 ) + ( -u 4 x. ( U / 4 ) ) ) = ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) )
+s101::0cn |- 0 e. CC
+s102:s101:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 e. CC )
+s103:s58,s102,s94:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 + 0 ) + ( -u 1 x. U ) ) = ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) )
+s104:s103:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) = ( ( -u 4 + 0 ) + ( -u 1 x. U ) ) )
+s105:s57:addridi |- ( -u 4 + 0 ) = -u 4
+s106:s105:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 + 0 ) = -u 4 )
+s107:s106:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 + 0 ) + ( -u 1 x. U ) ) = ( -u 4 + ( -u 1 x. U ) ) )
+s108:s104,s107:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) = ( -u 4 + ( -u 1 x. U ) ) )
+s109:s59,s100:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 1 + ( U / 4 ) ) ) = ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) )
+s110:s109,s108:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 1 + ( U / 4 ) ) ) = ( -u 4 + ( -u 1 x. U ) ) )
+s111:s56,s110:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) + ( -u 4 x. ( 1 + ( U / 4 ) ) ) ) = ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) )
+s112:s102,s48:addcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) e. CC )
+s113:s112,s58,s94:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) + ( -u 1 x. U ) ) = ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) )
+s114:s113:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) = ( ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) + ( -u 1 x. U ) ) )
+s115:s102,s48,s58:add32d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) = ( ( 0 + -u 4 ) + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s116:s57:addlidi |- ( 0 + -u 4 ) = -u 4
+s117:s116:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + -u 4 ) = -u 4 )
+s118:s117:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + -u 4 ) + ( 4 x. ( exp ` ( U / 4 ) ) ) ) = ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s119:s115,s118:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) = ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s120:s119:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) + ( -u 1 x. U ) ) = ( ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 1 x. U ) ) )
+s121:s114,s120:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) = ( ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 1 x. U ) ) )
+s122:s47,s51:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) + -u ( 4 x. ( 1 + ( U / 4 ) ) ) ) )
+s123:s122,s54:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) + ( -u 4 x. ( 1 + ( U / 4 ) ) ) ) )
+s124:s123,s111:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) ) = ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) )
+s125:s124,s121:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) ) = ( ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 1 x. U ) ) )
+s126:s38,s39:addcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 + U ) e. CC )
+s127:s48,s126:negsubd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) + -u ( 4 + U ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) )
+s128:s127:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) + -u ( 4 + U ) ) )
+s129:s126:mulm1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( 4 + U ) ) = -u ( 4 + U ) )
+s130:s129:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ( 4 + U ) = ( -u 1 x. ( 4 + U ) ) )
+s131:s130:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) + -u ( 4 + U ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) + ( -u 1 x. ( 4 + U ) ) ) )
+s132:s48:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) = ( 4 x. ( exp ` ( U / 4 ) ) ) )
+s133:s132:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( exp ` ( U / 4 ) ) ) = ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s134:s93,s38,s39:adddid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( 4 + U ) ) = ( ( -u 1 x. 4 ) + ( -u 1 x. U ) ) )
+s135:s10:mullidi |- ( 1 x. 4 ) = 4
+s136:s44,s10:mulneg1i |- ( -u 1 x. 4 ) = -u ( 1 x. 4 )
+s137:s135:negeqi |- -u ( 1 x. 4 ) = -u 4
+s138:s136,s137:eqtri |- ( -u 1 x. 4 ) = -u 4
+s139:s138:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. 4 ) = -u 4 )
+s140:s94:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u 1 x. U ) ) = ( -u 1 x. U ) )
+s141:s140:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. U ) = ( 0 + ( -u 1 x. U ) ) )
+s142:s139,s141:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 1 x. 4 ) + ( -u 1 x. U ) ) = ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) )
+s143:s58,s102,s94:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 + 0 ) + ( -u 1 x. U ) ) = ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) )
+s144:s143:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) = ( ( -u 4 + 0 ) + ( -u 1 x. U ) ) )
+s145:s105:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 + 0 ) = -u 4 )
+s146:s145:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 + 0 ) + ( -u 1 x. U ) ) = ( -u 4 + ( -u 1 x. U ) ) )
+s147:s144,s146:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) = ( -u 4 + ( -u 1 x. U ) ) )
+s148:s134,s142:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( 4 + U ) ) = ( -u 4 + ( 0 + ( -u 1 x. U ) ) ) )
+s149:s148,s147:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( 4 + U ) ) = ( -u 4 + ( -u 1 x. U ) ) )
+s150:s133,s149:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) + ( -u 1 x. ( 4 + U ) ) ) = ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) )
+s151:s112,s58,s94:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) + ( -u 1 x. U ) ) = ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) )
+s152:s151:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) = ( ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) + ( -u 1 x. U ) ) )
+s153:s102,s48,s58:add32d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) = ( ( 0 + -u 4 ) + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s154:s116:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + -u 4 ) = -u 4 )
+s155:s154:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + -u 4 ) + ( 4 x. ( exp ` ( U / 4 ) ) ) ) = ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s156:s153,s155:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) = ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s157:s156:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + -u 4 ) + ( -u 1 x. U ) ) = ( ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 1 x. U ) ) )
+s158:s152,s157:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) = ( ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 1 x. U ) ) )
+s159:s128,s131:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) + ( -u 1 x. ( 4 + U ) ) ) )
+s160:s159,s150:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) = ( ( 0 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 4 + ( -u 1 x. U ) ) ) )
+s161:s160,s158:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) = ( ( -u 4 + ( 4 x. ( exp ` ( U / 4 ) ) ) ) + ( -u 1 x. U ) ) )
+s162:s125,s161:eqtr4d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( exp ` ( U / 4 ) ) - ( 1 + ( U / 4 ) ) ) ) = ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) )
+s163:s37,s162:breqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) )
+s164:s33,s3:readdcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 + U ) e. RR )
+s165:s33,s24:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( exp ` ( U / 4 ) ) ) e. RR )
+s166:s165,s164:subge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ ( ( 4 x. ( exp ` ( U / 4 ) ) ) - ( 4 + U ) ) <-> ( 4 + U ) <_ ( 4 x. ( exp ` ( U / 4 ) ) ) ) )
+s167:s163,s166:mpbid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 + U ) <_ ( 4 x. ( exp ` ( U / 4 ) ) ) )
+s168::4re |- 4 e. RR
+s169:s168:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 e. RR )
+s170:s169,s3:readdcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 + U ) e. RR )
+s171:s35:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ 4 )
+s172:s3,s33:addge02d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ 4 <-> U <_ ( 4 + U ) ) )
+s173:s171,s172:mpbid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> U <_ ( 4 + U ) )
+s174:s15,s3,s164,s4,s173:letrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( 4 + U ) )
+s175::4re |- 4 e. RR
+s176:s175:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 e. RR )
+s177:s176,s24:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( exp ` ( U / 4 ) ) ) e. RR )
+s178::3nn0 |- 3 e. NN0
+s179:s178:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 3 e. NN0 )
+s180:s170,s177,s179,s174,s167:leexp1ad |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 + U ) ^ 3 ) <_ ( ( 4 x. ( exp ` ( U / 4 ) ) ) ^ 3 ) )
+s181:s24:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` ( U / 4 ) ) e. CC )
+s182::4cn |- 4 e. CC
+s183:s182:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 4 e. CC )
+s184:s183,s181,s179:mulexpd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) ^ 3 ) = ( ( 4 ^ 3 ) x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s185::4cn |- 4 e. CC
+s186::2nn0 |- 2 e. NN0
+s187:s185,s186:pm3.2i |- ( 4 e. CC /\ 2 e. NN0 )
+s188::expp1 |- ( ( 4 e. CC /\ 2 e. NN0 ) -> ( 4 ^ ( 2 + 1 ) ) = ( ( 4 ^ 2 ) x. 4 ) )
+s189:s187,s188:ax-mp |- ( 4 ^ ( 2 + 1 ) ) = ( ( 4 ^ 2 ) x. 4 )
+s190::2p1e3 |- ( 2 + 1 ) = 3
+s191:s190:oveq2i |- ( 4 ^ ( 2 + 1 ) ) = ( 4 ^ 3 )
+s192:s191,s189:eqtr3i |- ( 4 ^ 3 ) = ( ( 4 ^ 2 ) x. 4 )
+s193::4cn |- 4 e. CC
+s194:s193:sqvali |- ( 4 ^ 2 ) = ( 4 x. 4 )
+s195::4t4e16 |- ( 4 x. 4 ) = ; 1 6
+s196:s194,s195:eqtri |- ( 4 ^ 2 ) = ; 1 6
+s197:s196:oveq1i |- ( ( 4 ^ 2 ) x. 4 ) = ( ; 1 6 x. 4 )
+s198:s135:oveq1i |- ( ( 1 x. 4 ) + 2 ) = ( 4 + 2 )
+s199::4p2e6 |- ( 4 + 2 ) = 6
+s200:s198,s199:eqtri |- ( ( 1 x. 4 ) + 2 ) = 6
+s201::1nn0 |- 1 e. NN0
+s202::6nn0 |- 6 e. NN0
+s203::eqid |- ; 1 6 = ; 1 6
+s204::2nn0 |- 2 e. NN0
+s205::6t4e24 |- ( 6 x. 4 ) = ; 2 4
+s206:s34,s201,s202,s203,s34,s204,s200,s205:decmul1c |- ( ; 1 6 x. 4 ) = ; 6 4
+s207:s192,s197:eqtri |- ( 4 ^ 3 ) = ( ; 1 6 x. 4 )
+s208:s207,s206:eqtri |- ( 4 ^ 3 ) = ; 6 4
+s209:s208:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 ^ 3 ) = ; 6 4 )
+s210:s9:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U / 4 ) e. CC )
+s211::3z |- 3 e. ZZ
+s212:s211:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 3 e. ZZ )
+i213::efexp
+s214:s210,s212,i213:syl2anc |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` ( 3 x. ( U / 4 ) ) ) = ( ( exp ` ( U / 4 ) ) ^ 3 ) )
+s215::3re |- 3 e. RR
+s216:s215:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 3 e. RR )
+s217:s216,s9:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 3 x. ( U / 4 ) ) e. RR )
+s218:s3,s15:subge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ ( U - 0 ) <-> 0 <_ U ) )
+s219:s4,s218:mpbird |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( U - 0 ) )
+s220:s3,s15:resubcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U - 0 ) e. RR )
+i221::rpre
+i222::rpdivcl
+i223::nnrp
+s224:s72,i221:ax-mp |- ( 1 / 4 ) e. RR
+s225:s224:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 / 4 ) e. RR )
+i226::rpge0
+i227::rpdivcl
+i228::nnrp
+s229:s72,i226:ax-mp |- 0 <_ ( 1 / 4 )
+s230:s229:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( 1 / 4 ) )
+s231:s225,s220,s230,s219:mulge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ( 1 / 4 ) x. ( U - 0 ) ) )
+s232:s39,s102:subcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U - 0 ) e. CC )
+s233:s38,s74,s232:mulassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( 1 / 4 ) ) x. ( U - 0 ) ) = ( 4 x. ( ( 1 / 4 ) x. ( U - 0 ) ) ) )
+s234:s233:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( 1 / 4 ) x. ( U - 0 ) ) ) = ( ( 4 x. ( 1 / 4 ) ) x. ( U - 0 ) ) )
+s235:s83:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( 1 / 4 ) ) = 1 )
+s236:s235:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( 1 / 4 ) ) x. ( U - 0 ) ) = ( 1 x. ( U - 0 ) ) )
+s237:s232:mullidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 x. ( U - 0 ) ) = ( U - 0 ) )
+s238:s39,s102:negsubd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U + -u 0 ) = ( U - 0 ) )
+s239:s238:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U - 0 ) = ( U + -u 0 ) )
+s240:s102:mulm1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. 0 ) = -u 0 )
+s241:s240:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u 0 = ( -u 1 x. 0 ) )
+s242:s241:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U + -u 0 ) = ( U + ( -u 1 x. 0 ) ) )
+s243:s45,s39:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 x. U ) e. CC )
+s244:s243:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 1 x. U ) ) = ( 1 x. U ) )
+s245:s244:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 x. U ) = ( 0 + ( 1 x. U ) ) )
+s246:s39:mullidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 1 x. U ) = U )
+s247:s246:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> U = ( 1 x. U ) )
+s248:s247,s245:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> U = ( 0 + ( 1 x. U ) ) )
+s249:s92:mul01i |- ( -u 1 x. 0 ) = 0
+s250:s249:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. 0 ) = 0 )
+s251:s248,s250:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U + ( -u 1 x. 0 ) ) = ( ( 0 + ( 1 x. U ) ) + 0 ) )
+s252:s102,s243,s102:add32d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 1 x. U ) ) + 0 ) = ( ( 0 + 0 ) + ( 1 x. U ) ) )
+s253:s101:addlidi |- ( 0 + 0 ) = 0
+s254:s253:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + 0 ) = 0 )
+s255:s254:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( 1 x. U ) ) = ( 0 + ( 1 x. U ) ) )
+s256:s252,s255:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 1 x. U ) ) + 0 ) = ( 0 + ( 1 x. U ) ) )
+s257:s239,s242:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U - 0 ) = ( U + ( -u 1 x. 0 ) ) )
+s258:s257,s251:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U - 0 ) = ( ( 0 + ( 1 x. U ) ) + 0 ) )
+s259:s258,s256:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U - 0 ) = ( 0 + ( 1 x. U ) ) )
+s260:s234,s236:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( 1 / 4 ) x. ( U - 0 ) ) ) = ( 1 x. ( U - 0 ) ) )
+s261:s260,s237:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( 1 / 4 ) x. ( U - 0 ) ) ) = ( U - 0 ) )
+s262:s261,s259:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( 1 / 4 ) x. ( U - 0 ) ) ) = ( 0 + ( 1 x. U ) ) )
+s263::3cn |- 3 e. CC
+s264:s263:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 3 e. CC )
+s265:s264,s42:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 3 x. ( U / 4 ) ) e. CC )
+s266:s38,s39,s265:subdid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( U - ( 3 x. ( U / 4 ) ) ) ) = ( ( 4 x. U ) - ( 4 x. ( 3 x. ( U / 4 ) ) ) ) )
+s267:s38,s39:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. U ) e. CC )
+s268:s38,s265:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( 3 x. ( U / 4 ) ) ) e. CC )
+s269:s267,s268:negsubd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. U ) + -u ( 4 x. ( 3 x. ( U / 4 ) ) ) ) = ( ( 4 x. U ) - ( 4 x. ( 3 x. ( U / 4 ) ) ) ) )
+s270:s269:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. U ) - ( 4 x. ( 3 x. ( U / 4 ) ) ) ) = ( ( 4 x. U ) + -u ( 4 x. ( 3 x. ( U / 4 ) ) ) ) )
+s271:s38,s265:mulneg1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 3 x. ( U / 4 ) ) ) = -u ( 4 x. ( 3 x. ( U / 4 ) ) ) )
+s272:s271:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ( 4 x. ( 3 x. ( U / 4 ) ) ) = ( -u 4 x. ( 3 x. ( U / 4 ) ) ) )
+s273:s272:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. U ) + -u ( 4 x. ( 3 x. ( U / 4 ) ) ) ) = ( ( 4 x. U ) + ( -u 4 x. ( 3 x. ( U / 4 ) ) ) ) )
+s274:s267:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 4 x. U ) ) = ( 4 x. U ) )
+s275:s274:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. U ) = ( 0 + ( 4 x. U ) ) )
+s276:s58,s264,s42:mulassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 x. 3 ) x. ( U / 4 ) ) = ( -u 4 x. ( 3 x. ( U / 4 ) ) ) )
+s277:s276:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 3 x. ( U / 4 ) ) ) = ( ( -u 4 x. 3 ) x. ( U / 4 ) ) )
+s278::4t3e12 |- ( 4 x. 3 ) = ; 1 2
+s279:s10,s263:mulneg1i |- ( -u 4 x. 3 ) = -u ( 4 x. 3 )
+s280:s278:negeqi |- -u ( 4 x. 3 ) = -u ; 1 2
+s281:s279,s280:eqtri |- ( -u 4 x. 3 ) = -u ; 1 2
+s282:s281:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. 3 ) = -u ; 1 2 )
+s283:s282:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u 4 x. 3 ) x. ( U / 4 ) ) = ( -u ; 1 2 x. ( U / 4 ) ) )
+i284::divrec2
+s285:s39,s38,s41,i284:syl3anc |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U / 4 ) = ( ( 1 / 4 ) x. U ) )
+s286:s285:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 1 2 x. ( U / 4 ) ) = ( -u ; 1 2 x. ( ( 1 / 4 ) x. U ) ) )
+s287:s201,s204:deccl |- ; 1 2 e. NN0
+s288:s287:nn0cni |- ; 1 2 e. CC
+s289:s288:negcli |- -u ; 1 2 e. CC
+s290:s289:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ; 1 2 e. CC )
+s291:s290,s74,s39:mulassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u ; 1 2 x. ( 1 / 4 ) ) x. U ) = ( -u ; 1 2 x. ( ( 1 / 4 ) x. U ) ) )
+s292:s291:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 1 2 x. ( ( 1 / 4 ) x. U ) ) = ( ( -u ; 1 2 x. ( 1 / 4 ) ) x. U ) )
+s293:s288,s44,s10,s40:divassi |- ( ( ; 1 2 x. 1 ) / 4 ) = ( ; 1 2 x. ( 1 / 4 ) )
+s294:s293:eqcomi |- ( ; 1 2 x. ( 1 / 4 ) ) = ( ( ; 1 2 x. 1 ) / 4 )
+s295:s288:mulridi |- ( ; 1 2 x. 1 ) = ; 1 2
+s296:s295:oveq1i |- ( ( ; 1 2 x. 1 ) / 4 ) = ( ; 1 2 / 4 )
+s297:s288,s10,s263,s40:divmuli |- ( ( ; 1 2 / 4 ) = 3 <-> ( 4 x. 3 ) = ; 1 2 )
+s298:s278,s297:mpbir |- ( ; 1 2 / 4 ) = 3
+s299:s296,s298:eqtri |- ( ( ; 1 2 x. 1 ) / 4 ) = 3
+s300:s294,s299:eqtri |- ( ; 1 2 x. ( 1 / 4 ) ) = 3
+i301::rpcn
+i302::rpdivcl
+i303::nnrp
+s304:s288,s73:mulneg1i |- ( -u ; 1 2 x. ( 1 / 4 ) ) = -u ( ; 1 2 x. ( 1 / 4 ) )
+s305:s300:negeqi |- -u ( ; 1 2 x. ( 1 / 4 ) ) = -u 3
+s306:s304,s305:eqtri |- ( -u ; 1 2 x. ( 1 / 4 ) ) = -u 3
+s307:s306:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 1 2 x. ( 1 / 4 ) ) = -u 3 )
+s308:s307:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( -u ; 1 2 x. ( 1 / 4 ) ) x. U ) = ( -u 3 x. U ) )
+s309:s263:negcli |- -u 3 e. CC
+s310:s309:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u 3 e. CC )
+s311:s310,s39:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 3 x. U ) e. CC )
+s312:s311:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u 3 x. U ) ) = ( -u 3 x. U ) )
+s313:s312:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 3 x. U ) = ( 0 + ( -u 3 x. U ) ) )
+s314:s292,s308:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 1 2 x. ( ( 1 / 4 ) x. U ) ) = ( -u 3 x. U ) )
+s315:s314,s313:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 1 2 x. ( ( 1 / 4 ) x. U ) ) = ( 0 + ( -u 3 x. U ) ) )
+s316:s286,s315:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 1 2 x. ( U / 4 ) ) = ( 0 + ( -u 3 x. U ) ) )
+s317:s277,s283:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 3 x. ( U / 4 ) ) ) = ( -u ; 1 2 x. ( U / 4 ) ) )
+s318:s317,s316:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 4 x. ( 3 x. ( U / 4 ) ) ) = ( 0 + ( -u 3 x. U ) ) )
+s319:s275,s318:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. U ) + ( -u 4 x. ( 3 x. ( U / 4 ) ) ) ) = ( ( 0 + ( 4 x. U ) ) + ( 0 + ( -u 3 x. U ) ) ) )
+s320:s102,s267,s102,s311:add4d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. U ) ) + ( 0 + ( -u 3 x. U ) ) ) = ( ( 0 + 0 ) + ( ( 4 x. U ) + ( -u 3 x. U ) ) ) )
+s321:s253:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + 0 ) = 0 )
+s322:s38,s310,s39:adddird |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 + -u 3 ) x. U ) = ( ( 4 x. U ) + ( -u 3 x. U ) ) )
+s323:s322:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. U ) + ( -u 3 x. U ) ) = ( ( 4 + -u 3 ) x. U ) )
+s324:s10,s263:negsubi |- ( 4 + -u 3 ) = ( 4 - 3 )
+s325::3p1e4 |- ( 3 + 1 ) = 4
+s326:s10,s263,s44,s325:subaddrii |- ( 4 - 3 ) = 1
+s327:s324,s326:eqtri |- ( 4 + -u 3 ) = 1
+s328:s327:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 + -u 3 ) = 1 )
+s329:s328:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 + -u 3 ) x. U ) = ( 1 x. U ) )
+s330:s323,s329:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. U ) + ( -u 3 x. U ) ) = ( 1 x. U ) )
+s331:s321,s330:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( ( 4 x. U ) + ( -u 3 x. U ) ) ) = ( 0 + ( 1 x. U ) ) )
+s332:s320,s331:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 4 x. U ) ) + ( 0 + ( -u 3 x. U ) ) ) = ( 0 + ( 1 x. U ) ) )
+s333:s266,s270:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( U - ( 3 x. ( U / 4 ) ) ) ) = ( ( 4 x. U ) + -u ( 4 x. ( 3 x. ( U / 4 ) ) ) ) )
+s334:s333,s273:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( U - ( 3 x. ( U / 4 ) ) ) ) = ( ( 4 x. U ) + ( -u 4 x. ( 3 x. ( U / 4 ) ) ) ) )
+s335:s334,s319:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( U - ( 3 x. ( U / 4 ) ) ) ) = ( ( 0 + ( 4 x. U ) ) + ( 0 + ( -u 3 x. U ) ) ) )
+s336:s335,s332:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( U - ( 3 x. ( U / 4 ) ) ) ) = ( 0 + ( 1 x. U ) ) )
+s337:s262,s336:eqtr4d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 4 x. ( ( 1 / 4 ) x. ( U - 0 ) ) ) = ( 4 x. ( U - ( 3 x. ( U / 4 ) ) ) ) )
+s338:s74,s232:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 1 / 4 ) x. ( U - 0 ) ) e. CC )
+s339:s39,s265:subcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( U - ( 3 x. ( U / 4 ) ) ) e. CC )
+s340:s338,s339,s38,s41,s337:mulcanad |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 1 / 4 ) x. ( U - 0 ) ) = ( U - ( 3 x. ( U / 4 ) ) ) )
+s341:s231,s340:breqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( U - ( 3 x. ( U / 4 ) ) ) )
+s342::3re |- 3 e. RR
+s343:s342:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 3 e. RR )
+s344:s343,s27:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 3 x. ( U / 4 ) ) e. RR )
+s345:s3,s344:subge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ ( U - ( 3 x. ( U / 4 ) ) ) <-> ( 3 x. ( U / 4 ) ) <_ U ) )
+s346:s341,s345:mpbid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 3 x. ( U / 4 ) ) <_ U )
+i347::efle
+s348:s217,s3,i347:syl2anc |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 3 x. ( U / 4 ) ) <_ U <-> ( exp ` ( 3 x. ( U / 4 ) ) ) <_ ( exp ` U ) ) )
+s349:s346,s348:mpbid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` ( 3 x. ( U / 4 ) ) ) <_ ( exp ` U ) )
+s350:s214,s349:eqbrtrrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( exp ` ( U / 4 ) ) ^ 3 ) <_ ( exp ` U ) )
+s351:s209:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 ^ 3 ) x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s352:s184,s351:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 x. ( exp ` ( U / 4 ) ) ) ^ 3 ) = ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s353:s180,s352:breqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 + U ) ^ 3 ) <_ ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s354:s24,s179:reexpcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( exp ` ( U / 4 ) ) ^ 3 ) e. RR )
+s355:s3:reefcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` U ) e. RR )
+s356:s170,s179:reexpcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 + U ) ^ 3 ) e. RR )
+s357:s202,s34:deccl |- ; 6 4 e. NN0
+s358:s357:nn0rei |- ; 6 4 e. RR
+s359:s358:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ; 6 4 e. RR )
+s360:s359,s354:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) e. RR )
+s361:s360,s356:subge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) <-> ( ( 4 + U ) ^ 3 ) <_ ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s362:s353,s361:mpbird |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) )
+s363:s355,s354:subge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) <-> ( ( exp ` ( U / 4 ) ) ^ 3 ) <_ ( exp ` U ) ) )
+s364:s350,s363:mpbird |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s365:s355,s354:resubcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) e. RR )
+s366:s357:nn0ge0i |- 0 <_ ; 6 4
+s367:s366:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ; 6 4 )
+s368:s359,s365,s367,s364:mulge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s369:s360,s356:resubcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) e. RR )
+s370:s359,s365:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) e. RR )
+s371:s369,s370,s362,s368:addge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) + ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) )
+s372:s357:nn0cni |- ; 6 4 e. CC
+s373:s372:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ; 6 4 e. CC )
+s374::3nn0 |- 3 e. NN0
+s375:s374:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 3 e. NN0 )
+s376:s43,s375:expcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( exp ` ( U / 4 ) ) ^ 3 ) e. CC )
+s377:s373,s376:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) e. CC )
+s378:s126,s375:expcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 + U ) ^ 3 ) e. CC )
+s379:s377,s378:negsubd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + -u ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) )
+s380:s379:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + -u ( ( 4 + U ) ^ 3 ) ) )
+s381:s378:mulm1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) = -u ( ( 4 + U ) ^ 3 ) )
+s382:s381:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ( ( 4 + U ) ^ 3 ) = ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) )
+s383:s382:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + -u ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s384:s377:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s385:s384:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = ( 0 + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s386:s93,s378:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) e. CC )
+s387:s386:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) )
+s388:s387:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s389:s385,s388:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( ( 0 + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) )
+s390:s102,s386:addcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) e. CC )
+s391:s102,s377,s390:add32d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s392:s102,s102,s386:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) )
+s393:s392:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s394:s253:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + 0 ) = 0 )
+s395:s394:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s396:s393,s395:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s397:s396:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s398:s391,s397:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s399:s380,s383:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s400:s399,s389:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( 0 + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) )
+s401:s400,s398:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s402:s39:efcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` U ) e. CC )
+s403:s373,s402,s376:subdid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( ; 6 4 x. ( exp ` U ) ) - ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s404:s373,s402:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( exp ` U ) ) e. CC )
+s405:s404,s377:negsubd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) + -u ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( ; 6 4 x. ( exp ` U ) ) - ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s406:s405:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) - ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( ; 6 4 x. ( exp ` U ) ) + -u ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s407:s373,s376:mulneg1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = -u ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s408:s407:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s409:s408:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) + -u ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( ; 6 4 x. ( exp ` U ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s410:s404:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) = ( ; 6 4 x. ( exp ` U ) ) )
+s411:s410:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( exp ` U ) ) = ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) )
+s412:s372:negcli |- -u ; 6 4 e. CC
+s413:s412:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ; 6 4 e. CC )
+s414:s413,s376:mulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) e. CC )
+s415:s414:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s416:s415:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s417:s411,s416:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) )
+s418:s102,s414:addcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) e. CC )
+s419:s102,s404,s418:add32d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( 0 + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s420:s102,s102,s414:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( 0 + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) )
+s421:s420:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( 0 + 0 ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s422:s253:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + 0 ) = 0 )
+s423:s422:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s424:s421,s423:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s425:s424:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) = ( ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s426:s419,s425:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s427:s403,s406:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( ; 6 4 x. ( exp ` U ) ) + -u ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s428:s427,s409:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( ; 6 4 x. ( exp ` U ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s429:s428,s417:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) )
+s430:s429,s426:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s431:s401,s430:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) + ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) ) )
+s432:s390,s377:addcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) e. CC )
+s433:s432,s418,s404:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) = ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) ) )
+s434:s433:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) ) = ( ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s435:s390,s377,s102,s414:add4d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + 0 ) + ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) )
+s436:s102,s386,s102:add32d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + 0 ) = ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s437:s253:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + 0 ) = 0 )
+s438:s437:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s439:s436,s438:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + 0 ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s440:s373,s413,s376:adddird |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 + -u ; 6 4 ) x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s441:s440:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( ; 6 4 + -u ; 6 4 ) x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s442:s372:negidi |- ( ; 6 4 + -u ; 6 4 ) = 0
+s443:s442:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 + -u ; 6 4 ) = 0 )
+s444:s443:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 + -u ; 6 4 ) x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = ( 0 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s445:s441,s444:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( 0 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) )
+s446:s439,s445:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + 0 ) + ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( 0 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s447:s435,s446:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( 0 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) )
+s448:s376:mul02d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) = 0 )
+s449:s448:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( 0 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + 0 ) )
+s450:s390:addridd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + 0 ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s451:s447,s449:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + 0 ) )
+s452:s451,s450:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s453:s452:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s454:s434,s453:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ( 0 + ( -u ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s455:s431,s454:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) + ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s456:s404,s378:negsubd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) + -u ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) )
+s457:s456:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( exp ` U ) ) + -u ( ( 4 + U ) ^ 3 ) ) )
+s458:s378:mulm1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) = -u ( ( 4 + U ) ^ 3 ) )
+s459:s458:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> -u ( ( 4 + U ) ^ 3 ) = ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) )
+s460:s459:oveq2d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) + -u ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( exp ` U ) ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s461:s404:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) = ( ; 6 4 x. ( exp ` U ) ) )
+s462:s461:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( exp ` U ) ) = ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) )
+s463:s386:addlidd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) )
+s464:s463:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s465:s462,s464:oveq12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) )
+s466:s102,s404,s390:add32d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s467:s102,s102,s386:addassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) )
+s468:s467:eqcomd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s469:s253:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + 0 ) = 0 )
+s470:s469:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + 0 ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s471:s468,s470:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s472:s471:oveq1d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s473:s466,s472:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s474:s457,s460:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( ; 6 4 x. ( exp ` U ) ) + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) )
+s475:s474,s465:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( 0 + ( ; 6 4 x. ( exp ` U ) ) ) + ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) ) )
+s476:s475,s473:eqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) = ( ( 0 + ( -u 1 x. ( ( 4 + U ) ^ 3 ) ) ) + ( ; 6 4 x. ( exp ` U ) ) ) )
+s477:s455,s476:eqtr4d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ( ; 6 4 x. ( ( exp ` ( U / 4 ) ) ^ 3 ) ) - ( ( 4 + U ) ^ 3 ) ) + ( ; 6 4 x. ( ( exp ` U ) - ( ( exp ` ( U / 4 ) ) ^ 3 ) ) ) ) = ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) )
+s478:s371,s477:breqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> 0 <_ ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) )
+s479:s359,s355:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( exp ` U ) ) e. RR )
+s480:s479,s356:subge0d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( 0 <_ ( ( ; 6 4 x. ( exp ` U ) ) - ( ( 4 + U ) ^ 3 ) ) <-> ( ( 4 + U ) ^ 3 ) <_ ( ; 6 4 x. ( exp ` U ) ) ) )
+s481:s478,s480:mpbid |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( 4 + U ) ^ 3 ) <_ ( ; 6 4 x. ( exp ` U ) ) )
+s482::6nn0 |- 6 e. NN0
+s483::4nn0 |- 4 e. NN0
+s484:s482,s483:deccl |- ; 6 4 e. NN0
+s485:s484:nn0rei |- ; 6 4 e. RR
+s486:s485:a1i |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ; 6 4 e. RR )
+s487:s486,s355:remulcld |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ; 6 4 x. ( exp ` U ) ) e. RR )
+s488:s356,s487,s1,s2,s481:lemul2ad |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( P x. ( ( 4 + U ) ^ 3 ) ) <_ ( P x. ( ; 6 4 x. ( exp ` U ) ) ) )
+s489:s1:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> P e. CC )
+s490:s486:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ; 6 4 e. CC )
+s491:s355:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` U ) e. CC )
+s492:s489,s490,s491:mul12d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( P x. ( ; 6 4 x. ( exp ` U ) ) ) = ( ; 6 4 x. ( P x. ( exp ` U ) ) ) )
+s493:s486:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ; 6 4 e. CC )
+s494:s355:recnd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( exp ` U ) e. CC )
+s495:s493,s489,s494:mulassd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( ( ; 6 4 x. P ) x. ( exp ` U ) ) = ( ; 6 4 x. ( P x. ( exp ` U ) ) ) )
+s496:s492,s495:eqtr4d |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( P x. ( ; 6 4 x. ( exp ` U ) ) ) = ( ( ; 6 4 x. P ) x. ( exp ` U ) ) )
+qed:s488,s496:breqtrd |- ( ( ( P e. RR /\ 0 <_ P ) /\ ( U e. RR /\ 0 <_ U ) ) -> ( P x. ( ( 4 + U ) ^ 3 ) ) <_ ( ( ; 6 4 x. P ) x. ( exp ` U ) ) )
+$)

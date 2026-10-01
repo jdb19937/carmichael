@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrcondval  LOC_AFTER=?
+
+* Value of the conductor (Mathlib conductor): the infimum of the positive divisors d of N through which X factors, i.e. such that X is induced from a character mod d.
+
+s1::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3::df-dchrcond |- DChrCond = ( n e. NN , x e. ( Base ` ( DChr ` n ) ) |-> inf ( { d e. NN | ( d || n /\ E. y e. ( Base ` ( DChr ` d ) ) x = ( ( d DChrInd n ) ` y ) ) } , RR , < ) )
+s4:s3:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> DChrCond = ( n e. NN , x e. ( Base ` ( DChr ` n ) ) |-> inf ( { d e. NN | ( d || n /\ E. y e. ( Base ` ( DChr ` d ) ) x = ( ( d DChrInd n ) ` y ) ) } , RR , < ) ) )
+s5::simprl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> n = N )
+s6::simprr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> x = X )
+c1:s5:breq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( d || n <-> d || N ) )
+c2:s5:oveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( d DChrInd n ) = ( d DChrInd N ) )
+c3:c2:fveq1d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ( d DChrInd n ) ` y ) = ( ( d DChrInd N ) ` y ) )
+c4:s6,c3:eqeq12d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( x = ( ( d DChrInd n ) ` y ) <-> X = ( ( d DChrInd N ) ` y ) ) )
+c5:c4:rexbidv |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( E. y e. ( Base ` ( DChr ` d ) ) x = ( ( d DChrInd n ) ` y ) <-> E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) )
+c6:c1,c5:anbi12d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ( d || n /\ E. y e. ( Base ` ( DChr ` d ) ) x = ( ( d DChrInd n ) ` y ) ) <-> ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) ) )
+s7:c6:rabbidv |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> { d e. NN | ( d || n /\ E. y e. ( Base ` ( DChr ` d ) ) x = ( ( d DChrInd n ) ` y ) ) } = { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } )
+s8:s7:infeq1d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> inf ( { d e. NN | ( d || n /\ E. y e. ( Base ` ( DChr ` d ) ) x = ( ( d DChrInd n ) ` y ) ) } , RR , < ) = inf ( { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } , RR , < ) )
+s9::ltso |- < Or RR
+s10:s9:infex |- inf ( { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } , RR , < ) e. _V
+s11:s10:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> inf ( { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } , RR , < ) e. _V )
+s12::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> n = N )
+s13:s12:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> ( DChr ` n ) = ( DChr ` N ) )
+s14:s13:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> ( Base ` ( DChr ` n ) ) = ( Base ` ( DChr ` N ) ) )
+qed:s4,s8,s14,s1,s2,s11:ovmpodx |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrCond X ) = inf ( { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } , RR , < ) )
+$)

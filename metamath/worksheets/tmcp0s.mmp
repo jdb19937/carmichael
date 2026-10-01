@@ -1,0 +1,64 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcp0s  LOC_AFTER=?
+
+* Step of the induction for tmcp0.
+
+s1::simpl1 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> V e. Word NN0 )
+s2::simpl2 |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> P e. NN0 )
+s3::simpr |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> G e. NN0 )
+s4:s3,s2:jca |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( G e. NN0 /\ P e. NN0 ) )
+i5::coprimetocs
+s6:s4,s1,i5:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( ( <" P "> ++ V ) CoprimeTo G ) = if ( ( G mod P ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. ) )
+s7:s6:adantr |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> ( ( <" P "> ++ V ) CoprimeTo G ) = if ( ( G mod P ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. ) )
+s8::simpr |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> ( G mod P ) = 0 )
+s9:s8:iftrued |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> if ( ( G mod P ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. ) = <. (/) , 1 >. )
+s10:s7,s9:eqtrd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> ( ( <" P "> ++ V ) CoprimeTo G ) = <. (/) , 1 >. )
+s11:s6:adantr |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( ( <" P "> ++ V ) CoprimeTo G ) = if ( ( G mod P ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. ) )
+s12::simpr |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> -. ( G mod P ) = 0 )
+s13:s12:iffalsed |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> if ( ( G mod P ) = 0 , <. (/) , 1 >. , <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. ) = <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. )
+s14:s11,s13:eqtrd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( ( <" P "> ++ V ) CoprimeTo G ) = <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. )
+s15::0ex |- (/) e. _V
+s16:s15:a1i |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> (/) e. _V )
+s17::1ex |- 1 e. _V
+s18:s17:a1i |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> 1 e. _V )
+s19:s10:fveq2d |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) = ( 2nd ` <. (/) , 1 >. ) )
+i20::op2ndg
+s21:s16,s18,i20:syl2anc |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> ( 2nd ` <. (/) , 1 >. ) = 1 )
+s22:s19,s21:eqtrd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) = 1 )
+s23::ax-1ne0 |- 1 =/= 0
+s24:s23:a1i |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> 1 =/= 0 )
+s25:s22,s24:eqnetrd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ ( G mod P ) = 0 ) -> ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) =/= 0 )
+i26::coprimetocl
+s27:s1,s3,i26:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( V CoprimeTo G ) e. ( 2o X. NN0 ) )
+i28::xp1st
+s29:s27,i28:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( 1st ` ( V CoprimeTo G ) ) e. 2o )
+i30::xp2nd
+s31:s27,i30:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( 2nd ` ( V CoprimeTo G ) ) e. NN0 )
+s32:s31:adantr |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( 2nd ` ( V CoprimeTo G ) ) e. NN0 )
+s33:s29:adantr |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( 1st ` ( V CoprimeTo G ) ) e. 2o )
+s34:s33:elexd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( 1st ` ( V CoprimeTo G ) ) e. _V )
+i35::peano2nn0
+s36:s32,i35:syl |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) e. NN0 )
+s37:s36:elexd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) e. _V )
+s38:s14:fveq2d |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) = ( 2nd ` <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. ) )
+i39::op2ndg
+s40:s34,s37,i39:syl2anc |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( 2nd ` <. ( 1st ` ( V CoprimeTo G ) ) , ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) >. ) = ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) )
+s41:s38,s40:eqtrd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) = ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) )
+i42::nn0p1nn
+s43:s32,i42:syl |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) e. NN )
+i44::nnne0
+s45:s43,i44:syl |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( ( 2nd ` ( V CoprimeTo G ) ) + 1 ) =/= 0 )
+s46:s41,s45:eqnetrd |- ( ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) /\ -. ( G mod P ) = 0 ) -> ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) =/= 0 )
+s47:s25,s46:pm2.61dan |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) =/= 0 )
+i48::s1cl
+s49:s2,i48:syl |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> <" P "> e. Word NN0 )
+s50::s1nz |- <" P "> =/= (/)
+i51::ccat0
+s52:s49,s1,i51:syl2anc |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( ( <" P "> ++ V ) = (/) <-> ( <" P "> = (/) /\ V = (/) ) ) )
+s53:s50:neii |- -. <" P "> = (/)
+s54:s53:a1i |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> -. <" P "> = (/) )
+s55:s54:intnanrd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> -. ( <" P "> = (/) /\ V = (/) ) )
+s56:s52,s55:mtbird |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> -. ( <" P "> ++ V ) = (/) )
+s57:s47:neneqd |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> -. ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) = 0 )
+s58:s57,s56:2falsed |- ( ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) /\ G e. NN0 ) -> ( ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) = 0 <-> ( <" P "> ++ V ) = (/) ) )
+qed:s58:ex |- ( ( V e. Word NN0 /\ P e. NN0 /\ ( G e. NN0 -> ( ( 2nd ` ( V CoprimeTo G ) ) = 0 <-> V = (/) ) ) ) -> ( G e. NN0 -> ( ( 2nd ` ( ( <" P "> ++ V ) CoprimeTo G ) ) = 0 <-> ( <" P "> ++ V ) = (/) ) ) )
+$)

@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=g4t6  LOC_AFTER=?
+
+* A finite sum with its index reversed, through tools/fsum.py and ` fsumrev ` .
+
+s1::simpl |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> F : ( 1 ... N ) --> CC )
+s3:s2:adantr |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ j e. ( 1 ... N ) ) -> F : ( 1 ... N ) --> CC )
+s4::simpr |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ j e. ( 1 ... N ) ) -> j e. ( 1 ... N ) )
+s5:s3,s4:ffvelcdmd |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ j e. ( 1 ... N ) ) -> ( F ` j ) e. CC )
+s6:s1:nnnn0d |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> N e. NN0 )
+s7:s6:nn0zd |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> N e. ZZ )
+s8::1z |- 1 e. ZZ
+s9:s8:a1i |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> 1 e. ZZ )
+s10:s7,s9:zaddcld |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> ( N + 1 ) e. ZZ )
+s11::simpr |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ j e. ( 1 ... N ) ) -> j e. ( 1 ... N ) )
+i12::elfznn
+s13:s11,i12:syl |- ( ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) /\ j e. ( 1 ... N ) ) -> j e. NN )
+s14::id |- ( j = ( ( N + 1 ) - k ) -> j = ( ( N + 1 ) - k ) )
+r1:s14:fveq2d |- ( j = ( ( N + 1 ) - k ) -> ( F ` j ) = ( F ` ( ( N + 1 ) - k ) ) )
+qed:s10,s9,s7,s5,r1:fsumrev |- ( ( N e. NN /\ F : ( 1 ... N ) --> CC ) -> sum_ j e. ( 1 ... N ) ( F ` j ) = sum_ k e. ( ( ( N + 1 ) - N ) ... ( ( N + 1 ) - 1 ) ) ( F ` ( ( N + 1 ) - k ) ) )
+$)

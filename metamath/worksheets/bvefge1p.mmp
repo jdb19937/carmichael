@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=bvefge1p  LOC_AFTER=?
+
+* The exponential dominates 1 + A for A >= 0 (from the A layer's extrwlogle).
+
+s1::simpl |- ( ( A e. RR /\ 0 <_ A ) -> A e. RR )
+s2::simpr |- ( ( A e. RR /\ 0 <_ A ) -> 0 <_ A )
+s3:s1:recnd |- ( ( A e. RR /\ 0 <_ A ) -> A e. CC )
+s4::1red |- ( ( A e. RR /\ 0 <_ A ) -> 1 e. RR )
+s5::1cnd |- ( ( A e. RR /\ 0 <_ A ) -> 1 e. CC )
+s6:s4,s1:readdcld |- ( ( A e. RR /\ 0 <_ A ) -> ( 1 + A ) e. RR )
+i7::leid
+s8::1re |- 1 e. RR
+s9:s8,i7:ax-mp |- 1 <_ 1
+s10:s9:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 1 <_ 1 )
+s11:s8:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 1 e. RR )
+s12::0re |- 0 e. RR
+s13:s12:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 0 e. RR )
+s14:s11,s13,s11,s1,s10,s2:le2addd |- ( ( A e. RR /\ 0 <_ A ) -> ( 1 + 0 ) <_ ( 1 + A ) )
+s15::ax-1cn |- 1 e. CC
+s16:s15:addridi |- ( 1 + 0 ) = 1
+s17:s16:a1i |- ( ( A e. RR /\ 0 <_ A ) -> ( 1 + 0 ) = 1 )
+s18:s17,s14:eqbrtrrd |- ( ( A e. RR /\ 0 <_ A ) -> 1 <_ ( 1 + A ) )
+i19::extrwlogle
+s20:s6,s18,i19:syl2anc |- ( ( A e. RR /\ 0 <_ A ) -> ( log ` ( 1 + A ) ) <_ ( ( 1 + A ) - 1 ) )
+s21:s5,s3:pncan2d |- ( ( A e. RR /\ 0 <_ A ) -> ( ( 1 + A ) - 1 ) = A )
+s22:s20,s21:breqtrd |- ( ( A e. RR /\ 0 <_ A ) -> ( log ` ( 1 + A ) ) <_ A )
+s23::0lt1 |- 0 < 1
+s24:s23:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 0 < 1 )
+s25:s12:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 0 e. RR )
+s26:s8:a1i |- ( ( A e. RR /\ 0 <_ A ) -> 1 e. RR )
+s27:s25,s25,s26,s1,s24,s2:ltleaddd |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 + 0 ) < ( 1 + A ) )
+s28::0cn |- 0 e. CC
+s29:s28:addlidi |- ( 0 + 0 ) = 0
+s30:s29:a1i |- ( ( A e. RR /\ 0 <_ A ) -> ( 0 + 0 ) = 0 )
+s31:s30,s27:eqbrtrrd |- ( ( A e. RR /\ 0 <_ A ) -> 0 < ( 1 + A ) )
+s32:s6,s31:elrpd |- ( ( A e. RR /\ 0 <_ A ) -> ( 1 + A ) e. RR+ )
+s33:s32:relogcld |- ( ( A e. RR /\ 0 <_ A ) -> ( log ` ( 1 + A ) ) e. RR )
+i34::efle
+s35:s33,s1,i34:syl2anc |- ( ( A e. RR /\ 0 <_ A ) -> ( ( log ` ( 1 + A ) ) <_ A <-> ( exp ` ( log ` ( 1 + A ) ) ) <_ ( exp ` A ) ) )
+s36:s22,s35:mpbid |- ( ( A e. RR /\ 0 <_ A ) -> ( exp ` ( log ` ( 1 + A ) ) ) <_ ( exp ` A ) )
+i37::reeflog
+s38:s32,i37:syl |- ( ( A e. RR /\ 0 <_ A ) -> ( exp ` ( log ` ( 1 + A ) ) ) = ( 1 + A ) )
+qed:s38,s36:eqbrtrrd |- ( ( A e. RR /\ 0 <_ A ) -> ( 1 + A ) <_ ( exp ` A ) )
+$)

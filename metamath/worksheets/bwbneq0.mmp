@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=bwbneq0  LOC_AFTER=?
+
+* The value of a Boolean is 0 exactly when it is false.
+
+s1::id |- ( C e. 2o -> C e. 2o )
+i2::bwel2o
+s3:s1,i2:syl |- ( C e. 2o -> ( C = (/) \/ C = 1o ) )
+s4::simpr |- ( ( C e. 2o /\ C = (/) ) -> C = (/) )
+s5:s4:fveq2d |- ( ( C e. 2o /\ C = (/) ) -> ( bToNat ` C ) = ( bToNat ` (/) ) )
+s6::bwbn0 |- ( bToNat ` (/) ) = 0
+s7:s5,s6:eqtrdi |- ( ( C e. 2o /\ C = (/) ) -> ( bToNat ` C ) = 0 )
+s8:s7:eqeq1d |- ( ( C e. 2o /\ C = (/) ) -> ( ( bToNat ` C ) = 0 <-> 0 = 0 ) )
+s9:s4:eqeq1d |- ( ( C e. 2o /\ C = (/) ) -> ( C = (/) <-> (/) = (/) ) )
+s10::eqid |- 0 = 0
+s11:s10:a1i |- ( ( C e. 2o /\ C = (/) ) -> 0 = 0 )
+s12::eqid |- (/) = (/)
+s13:s12:a1i |- ( ( C e. 2o /\ C = (/) ) -> (/) = (/) )
+s14:s11,s8:mpbird |- ( ( C e. 2o /\ C = (/) ) -> ( bToNat ` C ) = 0 )
+s15:s13,s9:mpbird |- ( ( C e. 2o /\ C = (/) ) -> C = (/) )
+s16:s14,s15:2thd |- ( ( C e. 2o /\ C = (/) ) -> ( ( bToNat ` C ) = 0 <-> C = (/) ) )
+s17::simpr |- ( ( C e. 2o /\ C = 1o ) -> C = 1o )
+s18:s17:fveq2d |- ( ( C e. 2o /\ C = 1o ) -> ( bToNat ` C ) = ( bToNat ` 1o ) )
+s19::bwbn1 |- ( bToNat ` 1o ) = 1
+s20:s18,s19:eqtrdi |- ( ( C e. 2o /\ C = 1o ) -> ( bToNat ` C ) = 1 )
+s21:s20:eqeq1d |- ( ( C e. 2o /\ C = 1o ) -> ( ( bToNat ` C ) = 0 <-> 1 = 0 ) )
+s22:s17:eqeq1d |- ( ( C e. 2o /\ C = 1o ) -> ( C = (/) <-> 1o = (/) ) )
+s23::0ne1 |- 0 =/= 1
+s24:s23:nesymi |- -. 1 = 0
+s25:s24:a1i |- ( ( C e. 2o /\ C = 1o ) -> -. 1 = 0 )
+s26:s25,s21:mtbird |- ( ( C e. 2o /\ C = 1o ) -> -. ( bToNat ` C ) = 0 )
+s27::1n0 |- 1o =/= (/)
+s28:s27:neii |- -. 1o = (/)
+s29:s28:a1i |- ( ( C e. 2o /\ C = 1o ) -> -. 1o = (/) )
+s30:s29,s22:mtbird |- ( ( C e. 2o /\ C = 1o ) -> -. C = (/) )
+s31:s26,s30:2falsed |- ( ( C e. 2o /\ C = 1o ) -> ( ( bToNat ` C ) = 0 <-> C = (/) ) )
+qed:s16,s31,s3:mpjaodan |- ( C e. 2o -> ( ( bToNat ` C ) = 0 <-> C = (/) ) )
+$)

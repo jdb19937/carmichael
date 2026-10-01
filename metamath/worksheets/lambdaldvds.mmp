@@ -1,0 +1,56 @@
+$( <MM> <PROOF_ASST> THEOREM=lambdaldvds  LOC_AFTER=?
+
+* Each q - 1 for q in Q divides lambdaL Q (Lean: Finset.dvd_lcm; Extraction.lean).
+
+s1::simpl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> Q e. ( ~P Prime i^i Fin ) )
+s2::simpr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> P e. Q )
+i3::elfpw
+s4:s1,i3:sylib |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s5:s4:simpld |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> Q C_ Prime )
+s6:s4:simprd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> Q e. Fin )
+s7::prmssnn |- Prime C_ NN
+s8::nnssnn0 |- NN C_ NN0
+s9:s7,s8:sstri |- Prime C_ NN0
+s10:s9:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> Prime C_ NN0 )
+s11:s5,s10:sstrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> Q C_ NN0 )
+s12:s11,s6:jca |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i13::elfpw
+s14:s12,i13:sylibr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> Q e. ( ~P NN0 i^i Fin ) )
+i15::lambdalval
+s16:s14,i15:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( lambdaL ` Q ) = ( _lcm ` ran ( q e. Q |-> ( q - 1 ) ) ) )
+s17:s5:adantr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q e. Q ) -> Q C_ Prime )
+s18::simpr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q e. Q ) -> q e. Q )
+s19:s17,s18:sseldd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q e. Q ) -> q e. Prime )
+i20::prmuz2
+s21:s19,i20:syl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q e. Q ) -> q e. ( ZZ>= ` 2 ) )
+i22::uz2m1nn
+s23:s21,i22:syl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q e. Q ) -> ( q - 1 ) e. NN )
+s24:s23:ralrimiva |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> A. q e. Q ( q - 1 ) e. NN )
+s25::eqid |- ( q e. Q |-> ( q - 1 ) ) = ( q e. Q |-> ( q - 1 ) )
+s26:s25:rnmptss |- ( A. q e. Q ( q - 1 ) e. NN -> ran ( q e. Q |-> ( q - 1 ) ) C_ NN )
+s27:s24,s26:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ran ( q e. Q |-> ( q - 1 ) ) C_ NN )
+i28::mptfi
+s29:s6,i28:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( q e. Q |-> ( q - 1 ) ) e. Fin )
+i30::rnfi
+s31:s29,i30:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ran ( q e. Q |-> ( q - 1 ) ) e. Fin )
+s32::nnssz |- NN C_ ZZ
+s33:s32:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> NN C_ ZZ )
+s34:s27,s33:sstrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ran ( q e. Q |-> ( q - 1 ) ) C_ ZZ )
+i35::dvdslcmf
+s36:s34,s31,i35:syl2anc |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> A. x e. ran ( q e. Q |-> ( q - 1 ) ) x || ( _lcm ` ran ( q e. Q |-> ( q - 1 ) ) ) )
+s37:s5,s2:sseldd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> P e. Prime )
+i38::prmuz2
+s39:s37,i38:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> P e. ( ZZ>= ` 2 ) )
+i40::uz2m1nn
+s41:s39,i40:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( P - 1 ) e. NN )
+s42:s41:elexd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( P - 1 ) e. _V )
+s43::eqid |- ( q e. Q |-> ( q - 1 ) ) = ( q e. Q |-> ( q - 1 ) )
+s44::simpr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q = P ) -> q = P )
+c1:s44:oveq1d |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q = P ) -> ( q - 1 ) = ( P - 1 ) )
+s45:c1:eqcomd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) /\ q = P ) -> ( P - 1 ) = ( q - 1 ) )
+s46:s43,s2,s42,s45:elrnmptdv |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( P - 1 ) e. ran ( q e. Q |-> ( q - 1 ) ) )
+s47::id |- ( x = ( P - 1 ) -> x = ( P - 1 ) )
+c2:s47:breq1d |- ( x = ( P - 1 ) -> ( x || ( _lcm ` ran ( q e. Q |-> ( q - 1 ) ) ) <-> ( P - 1 ) || ( _lcm ` ran ( q e. Q |-> ( q - 1 ) ) ) ) )
+s48:c2,s36,s46:rspcdva |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( P - 1 ) || ( _lcm ` ran ( q e. Q |-> ( q - 1 ) ) ) )
+qed:s48,s16:breqtrrd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ P e. Q ) -> ( P - 1 ) || ( lambdaL ` Q ) )
+$)

@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrconddvd  LOC_AFTER=?
+
+* The conductor divides every member of the conductor set (Mathlib conductor_dvd_of_mem_conductorSet).
+
+s1::simpl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s2::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } )
+i3::dchrcondcs
+s4:s1,i3:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N DChrCond X ) e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } )
+i5::dchrcondnn
+s6:s1,i5:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N DChrCond X ) e. NN )
+s7::dchrcondel |- ( D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } <-> ( D e. NN /\ ( D || N /\ E. y e. ( Base ` ( DChr ` D ) ) X = ( ( D DChrInd N ) ` y ) ) ) )
+s8:s2,s7:sylib |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( D e. NN /\ ( D || N /\ E. y e. ( Base ` ( DChr ` D ) ) X = ( ( D DChrInd N ) ` y ) ) ) )
+s9:s8:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> D e. NN )
+s10:s4,s2:jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) )
+i11::dchrcondgcd
+s12:s1,s10,i11:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) gcd D ) e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } )
+i13::dchrcondle
+s14:s1,s12,i13:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N DChrCond X ) <_ ( ( N DChrCond X ) gcd D ) )
+s15:s6:nnzd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N DChrCond X ) e. ZZ )
+s16:s9:nnzd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> D e. ZZ )
+i17::gcddvds
+s18:s15,s16,i17:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( ( N DChrCond X ) gcd D ) || ( N DChrCond X ) /\ ( ( N DChrCond X ) gcd D ) || D ) )
+i19::gcdnncl
+s20:s6,s9,i19:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) gcd D ) e. NN )
+s21:s20:nnzd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) gcd D ) e. ZZ )
+i22::dvdsle
+s23:s21,s6,i22:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( ( N DChrCond X ) gcd D ) || ( N DChrCond X ) -> ( ( N DChrCond X ) gcd D ) <_ ( N DChrCond X ) ) )
+s24:s18:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) gcd D ) || ( N DChrCond X ) )
+s25:s23,s24:mpd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) gcd D ) <_ ( N DChrCond X ) )
+s26:s14,s25:jca |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) <_ ( ( N DChrCond X ) gcd D ) /\ ( ( N DChrCond X ) gcd D ) <_ ( N DChrCond X ) ) )
+s27:s6:nnred |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N DChrCond X ) e. RR )
+s28:s20:nnred |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) gcd D ) e. RR )
+i29::letri3
+s30:s27,s28,i29:syl2anc |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) = ( ( N DChrCond X ) gcd D ) <-> ( ( N DChrCond X ) <_ ( ( N DChrCond X ) gcd D ) /\ ( ( N DChrCond X ) gcd D ) <_ ( N DChrCond X ) ) ) )
+s31:s26,s30:mpbird |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N DChrCond X ) = ( ( N DChrCond X ) gcd D ) )
+s32:s18:simprd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( ( N DChrCond X ) gcd D ) || D )
+qed:s31,s32:eqbrtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ D e. { d e. NN | ( d || N /\ E. y e. ( Base ` ( DChr ` d ) ) X = ( ( d DChrInd N ) ` y ) ) } ) -> ( N DChrCond X ) || D )
+$)

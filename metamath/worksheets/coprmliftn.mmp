@@ -1,0 +1,59 @@
+$( <MM> <PROOF_ASST> THEOREM=coprmliftn  LOC_AFTER=?
+
+* Unit lifting with a positive witness: every integer A coprime to N is congruent mod N to a positive integer coprime to M (the prime of coprmlift).
+
+s1::simp1l |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> N e. NN )
+s2::simp1r |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> M e. NN )
+s3::simp2 |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> A e. ZZ )
+s4::simp3 |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( A gcd N ) = 1 )
+i5::dirith
+s6:s1,s3,s4,i5:syl3anc |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> { p e. Prime | N || ( p - A ) } ~~ NN )
+s7::oveq1 |- ( p = q -> ( p - A ) = ( q - A ) )
+s8:s7:breq2d |- ( p = q -> ( N || ( p - A ) <-> N || ( q - A ) ) )
+s9:s8:cbvrabv |- { p e. Prime | N || ( p - A ) } = { q e. Prime | N || ( q - A ) }
+s10:s9,s6:eqbrtrrid |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> { q e. Prime | N || ( q - A ) } ~~ NN )
+i11::enfi
+s12:s10,i11:syl |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> ( { q e. Prime | N || ( q - A ) } e. Fin <-> NN e. Fin ) )
+s13::nnnfi |- -. NN e. Fin
+s14:s13:a1i |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> -. NN e. Fin )
+s15:s14,s12:mtbird |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> -. { q e. Prime | N || ( q - A ) } e. Fin )
+s16::ssrab2 |- { q e. Prime | N || ( q - A ) } C_ Prime
+s17::prmssnn |- Prime C_ NN
+s18:s16,s17:sstri |- { q e. Prime | N || ( q - A ) } C_ NN
+s19:s18:a1i |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> { q e. Prime | N || ( q - A ) } C_ NN )
+i20::coprmliftlem
+s21:s19,s15,s2,i20:syl3anc |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> E. p e. { q e. Prime | N || ( q - A ) } M < p )
+s22::simprl |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. { q e. Prime | N || ( q - A ) } )
+s23::simprr |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M < p )
+s24::oveq1 |- ( q = p -> ( q - A ) = ( p - A ) )
+s25:s24:breq2d |- ( q = p -> ( N || ( q - A ) <-> N || ( p - A ) ) )
+s26:s25:elrab |- ( p e. { q e. Prime | N || ( q - A ) } <-> ( p e. Prime /\ N || ( p - A ) ) )
+s27:s22,s26:sylib |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( p e. Prime /\ N || ( p - A ) ) )
+s28:s27:simpld |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. Prime )
+s29:s27:simprd |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> N || ( p - A ) )
+s30::prmnn |- ( p e. Prime -> p e. NN )
+s31:s28,s30:syl |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. NN )
+s32:s31:nnzd |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. ZZ )
+s33:s2:adantr |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M e. NN )
+i34::dvdsle
+s35:s32,s33,i34:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( p || M -> p <_ M ) )
+s36:s33:nnred |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M e. RR )
+s37:s31:nnred |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> p e. RR )
+i38::ltnle
+s39:s36,s37,i38:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( M < p <-> -. p <_ M ) )
+s40:s23,s39:mpbid |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> -. p <_ M )
+s41:s40,s35:mtod |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> -. p || M )
+s42:s33:nnzd |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> M e. ZZ )
+i43::coprm
+s44:s28,s42,i43:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( -. p || M <-> ( p gcd M ) = 1 ) )
+s45:s41,s44:mpbid |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( p gcd M ) = 1 )
+s46:s29,s45:jca |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> ( N || ( p - A ) /\ ( p gcd M ) = 1 ) )
+s47::oveq1 |- ( b = p -> ( b - A ) = ( p - A ) )
+s48:s47:breq2d |- ( b = p -> ( N || ( b - A ) <-> N || ( p - A ) ) )
+s49::oveq1 |- ( b = p -> ( b gcd M ) = ( p gcd M ) )
+s50:s49:eqeq1d |- ( b = p -> ( ( b gcd M ) = 1 <-> ( p gcd M ) = 1 ) )
+s51:s48,s50:anbi12d |- ( b = p -> ( ( N || ( b - A ) /\ ( b gcd M ) = 1 ) <-> ( N || ( p - A ) /\ ( p gcd M ) = 1 ) ) )
+s52:s51:rspcev |- ( ( p e. NN /\ ( N || ( p - A ) /\ ( p gcd M ) = 1 ) ) -> E. b e. NN ( N || ( b - A ) /\ ( b gcd M ) = 1 ) )
+s53:s31,s46,s52:syl2anc |- ( ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) /\ ( p e. { q e. Prime | N || ( q - A ) } /\ M < p ) ) -> E. b e. NN ( N || ( b - A ) /\ ( b gcd M ) = 1 ) )
+qed:s21,s53:rexlimddv |- ( ( ( N e. NN /\ M e. NN ) /\ A e. ZZ /\ ( A gcd N ) = 1 ) -> E. b e. NN ( N || ( b - A ) /\ ( b gcd M ) = 1 ) )
+$)

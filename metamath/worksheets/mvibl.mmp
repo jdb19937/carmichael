@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=mvibl  LOC_AFTER=?
+
+* A continuous function on an open bounded interval that is bounded there is integrable (bddibl with cnmbf).
+
+s1::simpl |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> ( A e. RR /\ B e. RR ) )
+s2:s1:simpld |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> A e. RR )
+s3:s1:simprd |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> B e. RR )
+s4::simpr |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) )
+s5:s4:simp1d |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> F e. ( ( A (,) B ) -cn-> CC ) )
+s6:s4:simp2d |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> Z e. RR )
+s7:s4:simp3d |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z )
+s8::ioombl |- ( A (,) B ) e. dom vol
+s9:s8:a1i |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> ( A (,) B ) e. dom vol )
+i10::cnmbf
+s11:s9,s5,i10:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> F e. MblFn )
+i12::cncff
+s13:s5,i12:syl |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> F : ( A (,) B ) --> CC )
+i14::fdm
+s15:s13,i14:syl |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> dom F = ( A (,) B ) )
+s16:s15:fveq2d |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> ( vol ` dom F ) = ( vol ` ( A (,) B ) ) )
+i17::ioovolcl
+s18:s2,s3,i17:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> ( vol ` ( A (,) B ) ) e. RR )
+s19:s16,s18:eqeltrd |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> ( vol ` dom F ) e. RR )
+s20:s15:raleqdv |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> ( A. y e. dom F ( abs ` ( F ` y ) ) <_ Z <-> A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) )
+s21:s7,s20:mpbird |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> A. y e. dom F ( abs ` ( F ` y ) ) <_ Z )
+s22::id |- ( x = Z -> x = Z )
+c1:s22:breq2d |- ( x = Z -> ( ( abs ` ( F ` y ) ) <_ x <-> ( abs ` ( F ` y ) ) <_ Z ) )
+c2:c1:ralbidv |- ( x = Z -> ( A. y e. dom F ( abs ` ( F ` y ) ) <_ x <-> A. y e. dom F ( abs ` ( F ` y ) ) <_ Z ) )
+s23:c2:rspcev |- ( ( Z e. RR /\ A. y e. dom F ( abs ` ( F ` y ) ) <_ Z ) -> E. x e. RR A. y e. dom F ( abs ` ( F ` y ) ) <_ x )
+s24:s6,s21,s23:syl2anc |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> E. x e. RR A. y e. dom F ( abs ` ( F ` y ) ) <_ x )
+i25::bddibl
+qed:s11,s19,s24,i25:syl3anc |- ( ( ( A e. RR /\ B e. RR ) /\ ( F e. ( ( A (,) B ) -cn-> CC ) /\ Z e. RR /\ A. y e. ( A (,) B ) ( abs ` ( F ` y ) ) <_ Z ) ) -> F e. L^1 )
+$)

@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=psiapge0  LOC_AFTER=?
+
+* psi in a residue class is nonnegative (Lean: psiAP_nonneg).
+
+s1::psiapval |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = sum_ n e. ( 1 ... ( |_ ` Y ) ) if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) )
+s2::fzfid |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( 1 ... ( |_ ` Y ) ) e. Fin )
+s3::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> n e. ( 1 ... ( |_ ` Y ) ) )
+i4::elfznn
+s5:s3,i4:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> n e. NN )
+i6::psiaplem1
+s7:s5,i6:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) e. ( 0 [,) +oo ) )
+i8::elrege0
+s9:s7,i8:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> ( if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) e. RR /\ 0 <_ if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) ) )
+s10:s9:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) e. RR )
+s11:s9:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> 0 <_ if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) )
+s12:s2,s10,s11:fsumge0 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> 0 <_ sum_ n e. ( 1 ... ( |_ ` Y ) ) if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) )
+qed:s12,s1:breqtrrd |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> 0 <_ ( A ( psiAP ` Q ) Y ) )
+$)

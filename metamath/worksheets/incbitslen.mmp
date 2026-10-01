@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=incbitslen  LOC_AFTER=?
+
+* incBits L is at most one letter longer than L (Lean: incBits_length).
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+s6::incbitslen2 |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+s7::simpr |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) )
+s8:s7:iftrued |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) = ( ( # ` L ) + 1 ) )
+i9::lencl
+s10:s1,i9:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s11:s10:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s12:s11:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+s13::1re |- 1 e. RR
+s14:s13:a1i |- ( L e. Word 2o -> 1 e. RR )
+s15:s12,s14:readdcld |- ( L e. Word 2o -> ( ( # ` L ) + 1 ) e. RR )
+s16:s15:adantr |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( # ` L ) + 1 ) e. RR )
+s17:s16:leidd |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( # ` L ) + 1 ) <_ ( ( # ` L ) + 1 ) )
+s18:s8,s17:eqbrtrd |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) <_ ( ( # ` L ) + 1 ) )
+s19::simpr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) )
+s20:s19:iffalsed |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) = ( # ` L ) )
+s21:s12:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. RR )
+s22:s21:lep1d |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) <_ ( ( # ` L ) + 1 ) )
+s23:s20,s22:eqbrtrd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) <_ ( ( # ` L ) + 1 ) )
+s24:s18,s23:pm2.61dan |- ( L e. Word 2o -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) <_ ( ( # ` L ) + 1 ) )
+qed:s6,s24:eqbrtrd |- ( L e. Word 2o -> ( # ` ( incBits ` L ) ) <_ ( ( # ` L ) + 1 ) )
+$)

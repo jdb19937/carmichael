@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatlen  LOC_AFTER=?
+
+* Length of encodeNat: |_ log2 N _| + 1 for N =/= 0 and 0 for N = 0.
+
+s1::encnatval |- ( N e. NN0 -> ( encodeNat ` N ) = ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) )
+s2:s1:fveq2d |- ( N e. NN0 -> ( # ` ( encodeNat ` N ) ) = ( # ` ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) ) )
+s3::encnatlem1 |- ( N e. NN0 -> ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) : ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) --> 2o )
+i4::ffn
+s5:s3,i4:syl |- ( N e. NN0 -> ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) Fn ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) )
+i6::hashfn
+s7:s5,i6:syl |- ( N e. NN0 -> ( # ` ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) ) = ( # ` ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) ) )
+s8::encnatlem2 |- ( N e. NN0 -> if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) e. NN0 )
+i9::hashfzo0
+s10:s8,i9:syl |- ( N e. NN0 -> ( # ` ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) ) = if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) )
+s11:s7,s10:eqtrd |- ( N e. NN0 -> ( # ` ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) ) = if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) )
+qed:s2,s11:eqtrd |- ( N e. NN0 -> ( # ` ( encodeNat ` N ) ) = if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) )
+$)

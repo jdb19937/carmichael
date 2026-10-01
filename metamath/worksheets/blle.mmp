@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=blle  LOC_AFTER=?
+
+* The bit length of a number below 2 ^ M is at most M.
+
+s1::simp1 |- ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) -> A e. NN0 )
+s2::simp2 |- ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) -> M e. NN0 )
+s3::simp3 |- ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) -> A < ( 2 ^ M ) )
+s4::simpr |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A = 0 ) -> A = 0 )
+s5:s4:fveq2d |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A = 0 ) -> ( bl ` A ) = ( bl ` 0 ) )
+s6::bl0 |- ( bl ` 0 ) = 0
+s7:s5,s6:eqtrdi |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A = 0 ) -> ( bl ` A ) = 0 )
+s8:s2:adantr |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A = 0 ) -> M e. NN0 )
+s9:s8:nn0ge0d |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A = 0 ) -> 0 <_ M )
+s10:s7,s9:eqbrtrd |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A = 0 ) -> ( bl ` A ) <_ M )
+s11::elnnne0 |- ( A e. NN <-> ( A e. NN0 /\ A =/= 0 ) )
+s12:s1:adantr |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> A e. NN0 )
+s13::simpr |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> A =/= 0 )
+s14:s12,s13:jca |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( A e. NN0 /\ A =/= 0 ) )
+s15:s14,s11:sylibr |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> A e. NN )
+s16:s2:adantr |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> M e. NN0 )
+i17::blcl
+s18:s12,i17:syl |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( bl ` A ) e. NN0 )
+i19::blle2
+s20:s15,i19:syl |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( 2 ^ ( ( bl ` A ) - 1 ) ) <_ A )
+s21:s3:adantr |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> A < ( 2 ^ M ) )
+s22::2re |- 2 e. RR
+s23:s22:a1i |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> 2 e. RR )
+s24::2rp |- 2 e. RR+
+s25:s24:a1i |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> 2 e. RR+ )
+s26:s18:nn0zd |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( bl ` A ) e. ZZ )
+s27::1z |- 1 e. ZZ
+s28:s27:a1i |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> 1 e. ZZ )
+s29:s26,s28:zsubcld |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( ( bl ` A ) - 1 ) e. ZZ )
+s30:s25,s29:rpexpcld |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( 2 ^ ( ( bl ` A ) - 1 ) ) e. RR+ )
+s31:s30:rpred |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( 2 ^ ( ( bl ` A ) - 1 ) ) e. RR )
+s32:s15:nnrpd |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> A e. RR+ )
+s33:s32:rpred |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> A e. RR )
+s34:s23,s16:reexpcld |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( 2 ^ M ) e. RR )
+s35:s31,s33,s34,s20,s21:lelttrd |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( 2 ^ ( ( bl ` A ) - 1 ) ) < ( 2 ^ M ) )
+s36:s22:a1i |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> 2 e. RR )
+s37:s16:nn0zd |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> M e. ZZ )
+s38:s36,s29,s37:3jca |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( 2 e. RR /\ ( ( bl ` A ) - 1 ) e. ZZ /\ M e. ZZ ) )
+s39::1lt2 |- 1 < 2
+s40:s39:a1i |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> 1 < 2 )
+i41::ltexp2
+s42:s38,s40,i41:syl2anc |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( ( ( bl ` A ) - 1 ) < M <-> ( 2 ^ ( ( bl ` A ) - 1 ) ) < ( 2 ^ M ) ) )
+s43:s35,s42:mpbird |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( ( bl ` A ) - 1 ) < M )
+s44:s26:zred |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( bl ` A ) e. RR )
+s45:s37:zred |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> M e. RR )
+s46::1red |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> 1 e. RR )
+i47::ltsubadd
+s48:s44,s46,s45,i47:syl3anc |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( ( ( bl ` A ) - 1 ) < M <-> ( bl ` A ) < ( M + 1 ) ) )
+s49:s43,s48:mpbid |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( bl ` A ) < ( M + 1 ) )
+i50::zleltp1
+s51:s26,s37,i50:syl2anc |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( ( bl ` A ) <_ M <-> ( bl ` A ) < ( M + 1 ) ) )
+s52:s49,s51:mpbird |- ( ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) /\ A =/= 0 ) -> ( bl ` A ) <_ M )
+qed:s10,s52:pm2.61dane |- ( ( A e. NN0 /\ M e. NN0 /\ A < ( 2 ^ M ) ) -> ( bl ` A ) <_ M )
+$)

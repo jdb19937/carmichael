@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=logb2ge0  LOC_AFTER=?
+
+* The base-two logarithm of a real number at least one is nonnegative, from ` relogbval ` and ` divge0 ` . This is the main-body route to the half of set.mm's mathbox theorem ` logbge0b ` that the proof automation of tools/cl.py needs.
+
+s1::simpl |- ( ( X e. RR+ /\ 1 <_ X ) -> X e. RR+ )
+s2::simpr |- ( ( X e. RR+ /\ 1 <_ X ) -> 1 <_ X )
+i3::rpre
+s4:s1,i3:syl |- ( ( X e. RR+ /\ 1 <_ X ) -> X e. RR )
+s5::2z |- 2 e. ZZ
+i6::uzid
+s7:s5,i6:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s8:s7:a1i |- ( ( X e. RR+ /\ 1 <_ X ) -> 2 e. ( ZZ>= ` 2 ) )
+i9::relogbval
+s10:s8,s1,i9:syl2anc |- ( ( X e. RR+ /\ 1 <_ X ) -> ( 2 logb X ) = ( ( log ` X ) / ( log ` 2 ) ) )
+i11::relogcl
+s12:s1,i11:syl |- ( ( X e. RR+ /\ 1 <_ X ) -> ( log ` X ) e. RR )
+i13::logge0
+s14:s4,s2,i13:syl2anc |- ( ( X e. RR+ /\ 1 <_ X ) -> 0 <_ ( log ` X ) )
+s15::2re |- 2 e. RR
+s16::1lt2 |- 1 < 2
+i17::rplogcl
+s18:s15,s16,i17:mp2an |- ( log ` 2 ) e. RR+
+s19:s18:a1i |- ( ( X e. RR+ /\ 1 <_ X ) -> ( log ` 2 ) e. RR+ )
+s20:s19:rpred |- ( ( X e. RR+ /\ 1 <_ X ) -> ( log ` 2 ) e. RR )
+s21:s19:rpgt0d |- ( ( X e. RR+ /\ 1 <_ X ) -> 0 < ( log ` 2 ) )
+s22:s12,s14:jca |- ( ( X e. RR+ /\ 1 <_ X ) -> ( ( log ` X ) e. RR /\ 0 <_ ( log ` X ) ) )
+s23:s20,s21:jca |- ( ( X e. RR+ /\ 1 <_ X ) -> ( ( log ` 2 ) e. RR /\ 0 < ( log ` 2 ) ) )
+i24::divge0
+s25:s22,s23,i24:syl2anc |- ( ( X e. RR+ /\ 1 <_ X ) -> 0 <_ ( ( log ` X ) / ( log ` 2 ) ) )
+qed:s25,s10:breqtrrd |- ( ( X e. RR+ /\ 1 <_ X ) -> 0 <_ ( 2 logb X ) )
+$)

@@ -1,0 +1,56 @@
+$( <MM> <PROOF_ASST> THEOREM=eatcenter  LOC_AFTER=?
+
+* Recentring the frequencies of a window sum by a real shift does not change its modulus (LargeSieve norm_eAt_center).
+
+s1::simp1 |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) )
+s2::simp2 |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> M e. RR )
+s3::simp3 |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> B e. RR )
+s4:s1:simp1d |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> W e. Fin )
+s5:s1:simp2d |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> W C_ ZZ )
+s6:s1:simp3d |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> A : W --> CC )
+s7:s2:recnd |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> M e. CC )
+s8:s3:recnd |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> B e. CC )
+s9::simpr |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> n e. W )
+s10:s5:adantr |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> W C_ ZZ )
+i11::ssel2
+s12:s10,s9,i11:syl2anc |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> n e. ZZ )
+s13:s12:zcnd |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> n e. CC )
+s14:s6:adantr |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> A : W --> CC )
+s15:s14,s9:ffvelcdmd |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( A ` n ) e. CC )
+s16:s7:adantr |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> M e. CC )
+s17:s8:adantr |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> B e. CC )
+s18:s16,s13:pncan3d |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( M + ( n - M ) ) = n )
+s19:s18:eqcomd |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> n = ( M + ( n - M ) ) )
+s20:s19:oveq1d |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( n x. B ) = ( ( M + ( n - M ) ) x. B ) )
+s21:s20:oveq2d |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( ( M + ( n - M ) ) x. B ) ) )
+s22:s21:fveq2d |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( M + ( n - M ) ) x. B ) ) ) )
+s23:s13,s16:subcld |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( n - M ) e. CC )
+i24::eatadd
+s25:s16,s23,s17,i24:syl3anc |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( M + ( n - M ) ) x. B ) ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) )
+s26:s22,s25:eqtrd |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) )
+s27:s26:oveq2d |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) = ( ( A ` n ) x. ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+i28::eatcl
+s29:s16,s17,i28:syl2anc |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) e. CC )
+i30::eatcl
+s31:s23,s17,i30:syl2anc |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) e. CC )
+s32:s15,s29,s31:mul12d |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( ( A ` n ) x. ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+s33:s27,s32:eqtrd |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+s34:s33:sumeq2dv |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) = sum_ n e. W ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+i35::eatcl
+s36:s7,s8,i35:syl2anc |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) e. CC )
+s37:s15,s31:mulcld |- ( ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) /\ n e. W ) -> ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) e. CC )
+s38:s4,s36,s37:fsummulc2 |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) = sum_ n e. W ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+s39:s34,s38:eqtr4d |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+s40:s39:fveq2d |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) ) = ( abs ` ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) )
+s41:s4,s37:fsumcl |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) e. CC )
+s42:s36,s41:absmuld |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) x. sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) = ( ( abs ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) ) x. ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) )
+i43::eatabs
+s44:s2,s3,i43:syl2anc |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) ) = 1 )
+s45:s44:oveq1d |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( ( abs ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) ) x. ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) = ( 1 x. ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) )
+s46:s41:abscld |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) e. RR )
+s47:s46:recnd |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) e. CC )
+s48:s47:mullidd |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( 1 x. ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) = ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+s49:s40,s42:eqtrd |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) ) = ( ( abs ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( M x. B ) ) ) ) x. ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) )
+s50:s49,s45:eqtrd |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) ) = ( 1 x. ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) ) )
+qed:s50,s48:eqtrd |- ( ( ( W e. Fin /\ W C_ ZZ /\ A : W --> CC ) /\ M e. RR /\ B e. RR ) -> ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( n x. B ) ) ) ) ) = ( abs ` sum_ n e. W ( ( A ` n ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( ( n - M ) x. B ) ) ) ) ) )
+$)

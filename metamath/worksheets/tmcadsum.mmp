@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcadsum  LOC_AFTER=?
+
+* The sum bit of the ` N ` -th iteration of the adder is bit ` N ` of the sum (Lean ` addBits ` unfolded, T4 ~ bwadddig with the carry of ~ bwcarry ).
+
+s1::simpll |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> L e. Word 2o )
+s2::simplr |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> L' e. Word 2o )
+s3::simpr |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> N e. NN0 )
+i4::tonatcl
+s5:s1,i4:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L ) e. NN0 )
+i6::tonatcl
+s7:s2,i6:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L' ) e. NN0 )
+i8::lencl
+s9:s1,i8:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( # ` L ) e. NN0 )
+i10::lencl
+s11:s2,i10:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( # ` L' ) e. NN0 )
+s12:s5:nn0zd |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L ) e. ZZ )
+s13:s7:nn0zd |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L' ) e. ZZ )
+s14::0el2o |- (/) e. 2o
+s15:s14:a1i |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> (/) e. 2o )
+s16:s12,s13,s15:3jca |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) )
+s17:s16,s3:jca |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) /\ N e. NN0 ) )
+i18::bwcarry
+s19:s17,i18:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) = if ( ( 2 ^ N ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ N ) ) + ( ( toNat ` L' ) mod ( 2 ^ N ) ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) )
+i20::bwadddig
+s21:s17,i20:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( N e. ( bits ` ( ( ( toNat ` L ) + ( toNat ` L' ) ) + ( bToNat ` (/) ) ) ) <-> ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` if ( ( 2 ^ N ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ N ) ) + ( ( toNat ` L' ) mod ( 2 ^ N ) ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) ) = 1o ) )
+s22:s19:fveq2d |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) = ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` if ( ( 2 ^ N ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ N ) ) + ( ( toNat ` L' ) mod ( 2 ^ N ) ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) ) )
+s23:s22:eqeq1d |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) = 1o <-> ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` if ( ( 2 ^ N ) <_ ( ( ( ( toNat ` L ) mod ( 2 ^ N ) ) + ( ( toNat ` L' ) mod ( 2 ^ N ) ) ) + ( bToNat ` (/) ) ) , 1o , (/) ) ) = 1o ) )
+s24:s23,s21:bitr4d |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) = 1o <-> N e. ( bits ` ( ( ( toNat ` L ) + ( toNat ` L' ) ) + ( bToNat ` (/) ) ) ) ) )
+s25::1oel2o |- 1o e. 2o
+s26::0el2o |- (/) e. 2o
+s27:s25,s26:ifcli |- if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) e. 2o
+s28::1oel2o |- 1o e. 2o
+s29::0el2o |- (/) e. 2o
+s30:s28,s29:ifcli |- if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) e. 2o
+i31::bwcarrycl
+s32:s17,i31:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) e. 2o )
+s33:s27:a1i |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) e. 2o )
+s34:s30:a1i |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) e. 2o )
+i35::sumbitcl
+s36:s33,s34,s32,i35:syl3anc |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) e. 2o )
+s37:s36,s24:jca |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) e. 2o /\ ( ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) = 1o <-> N e. ( bits ` ( ( ( toNat ` L ) + ( toNat ` L' ) ) + ( bToNat ` (/) ) ) ) ) ) )
+i38::tmc2oif
+qed:s37,i38:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) sumBit if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( majBit ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) = if ( N e. ( bits ` ( ( ( toNat ` L ) + ( toNat ` L' ) ) + ( bToNat ` (/) ) ) ) , 1o , (/) ) )
+$)

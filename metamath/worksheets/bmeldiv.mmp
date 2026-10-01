@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=bmeldiv  LOC_AFTER=?
+
+* Membership in the divisor set ` { m e. ( 1 ... N ) | m || N } ` of carmsw.3 (Lean ` Nat.mem_divisors ` ): a natural number dividing ` N ` (~ elrab , ~ elfz1b , ~ dvdsle ).
+
+s1::breq1 |- ( m = A -> ( m || N <-> A || N ) )
+s2:s1:elrab |- ( A e. { m e. ( 1 ... N ) | m || N } <-> ( A e. ( 1 ... N ) /\ A || N ) )
+s3::elfznn |- ( A e. ( 1 ... N ) -> A e. NN )
+s4:s3:anim1i |- ( ( A e. ( 1 ... N ) /\ A || N ) -> ( A e. NN /\ A || N ) )
+s5:s4:a1i |- ( N e. NN -> ( ( A e. ( 1 ... N ) /\ A || N ) -> ( A e. NN /\ A || N ) ) )
+s6::simpl |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> N e. NN )
+s7::simprl |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> A e. NN )
+s8::simprr |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> A || N )
+s9:s7:nnzd |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> A e. ZZ )
+i10::dvdsle
+s11:s9,s6,i10:syl2anc |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> ( A || N -> A <_ N ) )
+s12:s8,s11:mpd |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> A <_ N )
+s13:s7,s6,s12:3jca |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> ( A e. NN /\ N e. NN /\ A <_ N ) )
+s14::elfz1b |- ( A e. ( 1 ... N ) <-> ( A e. NN /\ N e. NN /\ A <_ N ) )
+s15:s13,s14:sylibr |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> A e. ( 1 ... N ) )
+s16:s15,s8:jca |- ( ( N e. NN /\ ( A e. NN /\ A || N ) ) -> ( A e. ( 1 ... N ) /\ A || N ) )
+s17:s16:ex |- ( N e. NN -> ( ( A e. NN /\ A || N ) -> ( A e. ( 1 ... N ) /\ A || N ) ) )
+s18:s5,s17:impbid |- ( N e. NN -> ( ( A e. ( 1 ... N ) /\ A || N ) <-> ( A e. NN /\ A || N ) ) )
+qed:s2,s18:bitrid |- ( N e. NN -> ( A e. { m e. ( 1 ... N ) | m || N } <-> ( A e. NN /\ A || N ) ) )
+$)

@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=evexpsq  LOC_AFTER=?
+
+* Eventually a nonnegative multiple of the square of ell2 is below the exponential of ell2 (A2 quadexpe at R = 1; the hexp2 step of Lean's eventually_uW).
+
+s1::simpl |- ( ( K e. RR /\ 0 <_ K ) -> K e. RR )
+s2::simpr |- ( ( K e. RR /\ 0 <_ K ) -> 0 <_ K )
+s3::1rp |- 1 e. RR+
+s4:s3:a1i |- ( ( K e. RR /\ 0 <_ K ) -> 1 e. RR+ )
+s5:s1,s2,s4:3jca |- ( ( K e. RR /\ 0 <_ K ) -> ( K e. RR /\ 0 <_ K /\ 1 e. RR+ ) )
+i6::quadexpe
+s7:s5,i6:syl |- ( ( K e. RR /\ 0 <_ K ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) )
+s8::evge3 |- E. m e. NN0 A. n e. ( ZZ>= ` m ) n e. ( ZZ>= ` 3 )
+s9:s8:a1i |- ( ( K e. RR /\ 0 <_ K ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) n e. ( ZZ>= ` 3 ) )
+s10:s7,s9:evan2 |- ( ( K e. RR /\ 0 <_ K ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) )
+s11::simprl |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) )
+s12::simprr |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> n e. ( ZZ>= ` 3 ) )
+i13::uzuzle23
+s14:s12,i13:syl |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> n e. ( ZZ>= ` 2 ) )
+i15::ell2cl
+s16:s14,i15:syl |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( ell2 ` n ) e. RR )
+s17:s16:recnd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( ell2 ` n ) e. CC )
+s18:s17:mullidd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( 1 x. ( ell2 ` n ) ) = ( ell2 ` n ) )
+s19:s18:fveq2d |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( exp ` ( 1 x. ( ell2 ` n ) ) ) = ( exp ` ( ell2 ` n ) ) )
+s20:s11,s19:breqtrd |- ( ( ( K e. RR /\ 0 <_ K ) /\ ( ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( 1 x. ( ell2 ` n ) ) ) /\ n e. ( ZZ>= ` 3 ) ) ) -> ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( ell2 ` n ) ) )
+qed:s10,s20:evimd |- ( ( K e. RR /\ 0 <_ K ) -> E. m e. NN0 A. n e. ( ZZ>= ` m ) ( K x. ( ( ell2 ` n ) ^ 2 ) ) <_ ( exp ` ( ell2 ` n ) ) )
+$)

@@ -1,0 +1,86 @@
+$( <MM> <PROOF_ASST> THEOREM=subborrowcons  LOC_AFTER=?
+
+* Lean clause 4 of subBorrow: the borrow-out of two words with a letter prepended is the borrow-out of the tails from the borrow of the two letters.
+
+s1::simpl1 |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> A e. 2o )
+s2::simpl2 |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> B e. 2o )
+s3::simpl3 |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> C e. 2o )
+s4::simprl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> X e. Word 2o )
+s5::simprr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> Y e. Word 2o )
+i6::tonatcons
+s7:s1,s4,i6:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( toNat ` ( <" A "> ++ X ) ) = ( ( bToNat ` A ) + ( 2 x. ( toNat ` X ) ) ) )
+i8::tonatcons
+s9:s2,s5,i8:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( toNat ` ( <" B "> ++ Y ) ) = ( ( bToNat ` B ) + ( 2 x. ( toNat ` Y ) ) ) )
+i10::s1cl
+s11:s1,i10:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> <" A "> e. Word 2o )
+i12::ccatlen
+s13:s11,s4,i12:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` ( <" A "> ++ X ) ) = ( ( # ` <" A "> ) + ( # ` X ) ) )
+s14::s1len |- ( # ` <" A "> ) = 1
+s15:s14:a1i |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` <" A "> ) = 1 )
+s16:s15:oveq1d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( # ` <" A "> ) + ( # ` X ) ) = ( 1 + ( # ` X ) ) )
+s17::1cnd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> 1 e. CC )
+i18::lencl
+s19:s4,i18:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` X ) e. NN0 )
+s20:s19:nn0zd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` X ) e. ZZ )
+s21:s20:zred |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` X ) e. RR )
+s22:s21:recnd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` X ) e. CC )
+s23:s17,s22:addcomd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( 1 + ( # ` X ) ) = ( ( # ` X ) + 1 ) )
+s24:s13,s16,s23:3eqtrd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` ( <" A "> ++ X ) ) = ( ( # ` X ) + 1 ) )
+i25::s1cl
+s26:s2,i25:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> <" B "> e. Word 2o )
+i27::ccatlen
+s28:s26,s5,i27:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` ( <" B "> ++ Y ) ) = ( ( # ` <" B "> ) + ( # ` Y ) ) )
+s29::s1len |- ( # ` <" B "> ) = 1
+s30:s29:a1i |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` <" B "> ) = 1 )
+s31:s30:oveq1d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( # ` <" B "> ) + ( # ` Y ) ) = ( 1 + ( # ` Y ) ) )
+s32::1cnd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> 1 e. CC )
+i33::lencl
+s34:s5,i33:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` Y ) e. NN0 )
+s35:s34:nn0zd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` Y ) e. ZZ )
+s36:s35:zred |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` Y ) e. RR )
+s37:s36:recnd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` Y ) e. CC )
+s38:s32,s37:addcomd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( 1 + ( # ` Y ) ) = ( ( # ` Y ) + 1 ) )
+s39:s28,s31,s38:3eqtrd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` ( <" B "> ++ Y ) ) = ( ( # ` Y ) + 1 ) )
+s40::1cnd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> 1 e. CC )
+s41:s40,s22:addcomd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( 1 + ( # ` X ) ) = ( ( # ` X ) + 1 ) )
+s42::1cnd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> 1 e. CC )
+s43:s42,s37:addcomd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( 1 + ( # ` Y ) ) = ( ( # ` Y ) + 1 ) )
+s44:s24,s41:eqtr4d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` ( <" A "> ++ X ) ) = ( 1 + ( # ` X ) ) )
+s45:s39,s43:eqtr4d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( # ` ( <" B "> ++ Y ) ) = ( 1 + ( # ` Y ) ) )
+c1:s44,s45:breq12d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( # ` ( <" A "> ++ X ) ) <_ ( # ` ( <" B "> ++ Y ) ) <-> ( 1 + ( # ` X ) ) <_ ( 1 + ( # ` Y ) ) ) )
+c2:c1,s45,s44:ifbieq12d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> if ( ( # ` ( <" A "> ++ X ) ) <_ ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" A "> ++ X ) ) ) = if ( ( 1 + ( # ` X ) ) <_ ( 1 + ( # ` Y ) ) , ( 1 + ( # ` Y ) ) , ( 1 + ( # ` X ) ) ) )
+i46::bwmaxp1
+s47:s19,s34,i46:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> if ( ( 1 + ( # ` X ) ) <_ ( 1 + ( # ` Y ) ) , ( 1 + ( # ` Y ) ) , ( 1 + ( # ` X ) ) ) = ( 1 + if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+s48::1cnd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> 1 e. CC )
+s49:s37,s22:ifcld |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) e. CC )
+s50:s48,s49:addcomd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( 1 + if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) = ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + 1 ) )
+s51:c2,s47,s50:3eqtrd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> if ( ( # ` ( <" A "> ++ X ) ) <_ ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" A "> ++ X ) ) ) = ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + 1 ) )
+s52:s1,s2,s3:3jca |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( A e. 2o /\ B e. 2o /\ C e. 2o ) )
+i53::borrowcl
+s54:s52,i53:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( A borrow B ) ` C ) e. 2o )
+i55::ccatcl
+s56:s11,s4,i55:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( <" A "> ++ X ) e. Word 2o )
+i57::ccatcl
+s58:s26,s5,i57:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( <" B "> ++ Y ) e. Word 2o )
+i59::subborrowfold
+s60:s56,s58,s3,i59:syl3anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( ( <" A "> ++ X ) subBorrow ( <" B "> ++ Y ) ) ` C ) = ( ( borrow ( ( toNat ` ( <" A "> ++ X ) ) bwFold ( toNat ` ( <" B "> ++ Y ) ) ) C ) ` if ( ( # ` ( <" A "> ++ X ) ) <_ ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" A "> ++ X ) ) ) ) )
+c3:s7,s9:oveq12d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( toNat ` ( <" A "> ++ X ) ) bwFold ( toNat ` ( <" B "> ++ Y ) ) ) = ( ( ( bToNat ` A ) + ( 2 x. ( toNat ` X ) ) ) bwFold ( ( bToNat ` B ) + ( 2 x. ( toNat ` Y ) ) ) ) )
+c4:c3:oveqd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( borrow ( ( toNat ` ( <" A "> ++ X ) ) bwFold ( toNat ` ( <" B "> ++ Y ) ) ) C ) = ( borrow ( ( ( bToNat ` A ) + ( 2 x. ( toNat ` X ) ) ) bwFold ( ( bToNat ` B ) + ( 2 x. ( toNat ` Y ) ) ) ) C ) )
+c5:c4,s51:fveq12d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( borrow ( ( toNat ` ( <" A "> ++ X ) ) bwFold ( toNat ` ( <" B "> ++ Y ) ) ) C ) ` if ( ( # ` ( <" A "> ++ X ) ) <_ ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" B "> ++ Y ) ) , ( # ` ( <" A "> ++ X ) ) ) ) = ( ( borrow ( ( ( bToNat ` A ) + ( 2 x. ( toNat ` X ) ) ) bwFold ( ( bToNat ` B ) + ( 2 x. ( toNat ` Y ) ) ) ) C ) ` ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + 1 ) ) )
+s61:s1,s2,s3:3jca |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( A e. 2o /\ B e. 2o /\ C e. 2o ) )
+i62::tonatcl
+s63:s4,i62:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( toNat ` X ) e. NN0 )
+s64:s63:nn0zd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( toNat ` X ) e. ZZ )
+i65::tonatcl
+s66:s5,i65:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( toNat ` Y ) e. NN0 )
+s67:s66:nn0zd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( toNat ` Y ) e. ZZ )
+s68:s64,s67:jca |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( toNat ` X ) e. ZZ /\ ( toNat ` Y ) e. ZZ ) )
+s69:s61,s68:jca |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( ( toNat ` X ) e. ZZ /\ ( toNat ` Y ) e. ZZ ) ) )
+s70:s34,s19:ifcld |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) e. NN0 )
+i71::bwborrowshift
+s72:s69,s70,i71:syl2anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( borrow ( ( ( bToNat ` A ) + ( 2 x. ( toNat ` X ) ) ) bwFold ( ( bToNat ` B ) + ( 2 x. ( toNat ` Y ) ) ) ) C ) ` ( if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) + 1 ) ) = ( ( borrow ( ( toNat ` X ) bwFold ( toNat ` Y ) ) ( ( A borrow B ) ` C ) ) ` if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+i73::subborrowfold
+s74:s4,s5,s54,i73:syl3anc |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( X subBorrow Y ) ` ( ( A borrow B ) ` C ) ) = ( ( borrow ( ( toNat ` X ) bwFold ( toNat ` Y ) ) ( ( A borrow B ) ` C ) ) ` if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+s75:s60,c5,s72:3eqtrd |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( ( <" A "> ++ X ) subBorrow ( <" B "> ++ Y ) ) ` C ) = ( ( borrow ( ( toNat ` X ) bwFold ( toNat ` Y ) ) ( ( A borrow B ) ` C ) ) ` if ( ( # ` X ) <_ ( # ` Y ) , ( # ` Y ) , ( # ` X ) ) ) )
+qed:s75,s74:eqtr4d |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ ( X e. Word 2o /\ Y e. Word 2o ) ) -> ( ( ( <" A "> ++ X ) subBorrow ( <" B "> ++ Y ) ) ` C ) = ( ( X subBorrow Y ) ` ( ( A borrow B ) ` C ) ) )
+$)

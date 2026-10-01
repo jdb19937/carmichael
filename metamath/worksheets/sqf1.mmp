@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=sqf1  LOC_AFTER=?
+
+* 1 is squarefree.
+
+s1::simpl |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p e. Prime )
+i2::prmnn
+s3:s1,i2:syl |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p e. NN )
+s4:s3:nnzd |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p e. ZZ )
+s5:s3:nncnd |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p e. CC )
+s6:s5:sqvald |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> ( p ^ 2 ) = ( p x. p ) )
+i7::dvdsmul2
+s8:s4,s4,i7:syl2anc |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p || ( p x. p ) )
+s9:s6:eqcomd |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> ( p x. p ) = ( p ^ 2 ) )
+s10:s8,s9:breqtrd |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p || ( p ^ 2 ) )
+s11::simpr |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> ( p ^ 2 ) || 1 )
+s12::2nn0 |- 2 e. NN0
+s13:s12:a1i |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> 2 e. NN0 )
+s14:s4,s13:zexpcld |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> ( p ^ 2 ) e. ZZ )
+s15::1z |- 1 e. ZZ
+s16:s15:a1i |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> 1 e. ZZ )
+i17::dvdstr
+s18:s4,s14,s16,i17:syl3anc |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> ( ( p || ( p ^ 2 ) /\ ( p ^ 2 ) || 1 ) -> p || 1 ) )
+s19:s10,s11:jca |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> ( p || ( p ^ 2 ) /\ ( p ^ 2 ) || 1 ) )
+s20:s18,s19:mpd |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p || 1 )
+s21::simpl |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> p e. Prime )
+i22::nprmdvds1
+s23:s21,i22:syl |- ( ( p e. Prime /\ ( p ^ 2 ) || 1 ) -> -. p || 1 )
+s24:s20,s23:pm2.65da |- ( p e. Prime -> -. ( p ^ 2 ) || 1 )
+s25:s24:rgen |- A. p e. Prime -. ( p ^ 2 ) || 1
+i26::ralnex
+s27:s25,i26:mpbi |- -. E. p e. Prime ( p ^ 2 ) || 1
+s28::1nn |- 1 e. NN
+i29::isnsqf
+s30:s28,i29:ax-mp |- ( ( mmu ` 1 ) = 0 <-> E. p e. Prime ( p ^ 2 ) || 1 )
+s31:s27,s30:mtbir |- -. ( mmu ` 1 ) = 0
+i32::df-ne
+qed:s31,i32:mpbir |- ( mmu ` 1 ) =/= 0
+$)

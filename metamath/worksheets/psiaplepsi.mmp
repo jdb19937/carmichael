@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=psiaplepsi  LOC_AFTER=?
+
+* psi in a residue class is at most psi (Lean: psiAP_le_psi).
+
+s1::psiapval |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) = sum_ n e. ( 1 ... ( |_ ` Y ) ) if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) )
+s2::simp1 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> Q e. NN )
+s3::simp2 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> A e. ZZ )
+s4::simp3 |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> Y e. RR )
+i5::chpval
+s6:s4,i5:syl |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( psi ` Y ) = sum_ n e. ( 1 ... ( |_ ` Y ) ) ( Lam ` n ) )
+s7::fzfid |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( 1 ... ( |_ ` Y ) ) e. Fin )
+s8::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> n e. ( 1 ... ( |_ ` Y ) ) )
+i9::elfznn
+s10:s8,i9:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> n e. NN )
+i11::psiaplem1
+s12:s10,i11:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) e. ( 0 [,) +oo ) )
+i13::elrege0
+s14:s12,i13:sylib |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> ( if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) e. RR /\ 0 <_ if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) ) )
+s15:s14:simpld |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) e. RR )
+s16:s14:simprd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> 0 <_ if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) )
+s17:s15:recnd |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) e. CC )
+i18::vmacl
+s19:s10,i18:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> ( Lam ` n ) e. RR )
+i20::psiaplem2
+s21:s10,i20:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) /\ n e. ( 1 ... ( |_ ` Y ) ) ) -> if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) <_ ( Lam ` n ) )
+s22:s7,s15,s19,s21:fsumle |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> sum_ n e. ( 1 ... ( |_ ` Y ) ) if ( ( n mod Q ) = ( A mod Q ) , ( Lam ` n ) , 0 ) <_ sum_ n e. ( 1 ... ( |_ ` Y ) ) ( Lam ` n ) )
+qed:s22,s1,s6:3brtr4d |- ( ( Q e. NN /\ A e. ZZ /\ Y e. RR ) -> ( A ( psiAP ` Q ) Y ) <_ ( psi ` Y ) )
+$)

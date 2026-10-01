@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=nfloorfl  LOC_AFTER=?
+
+* For a nonnegative real number the natural floor is the integer floor (Lean: Nat.cast_floor_eq_int_floor).
+
+s1::simpl |- ( ( X e. RR /\ 0 <_ X ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ 0 <_ X ) -> 0 <_ X )
+s3::0red |- ( ( X e. RR /\ 0 <_ X ) -> 0 e. RR )
+i4::lenlt
+s5:s3,s1,i4:syl2anc |- ( ( X e. RR /\ 0 <_ X ) -> ( 0 <_ X <-> -. X < 0 ) )
+s6:s2,s5:mpbid |- ( ( X e. RR /\ 0 <_ X ) -> -. X < 0 )
+i7::nfloorval
+s8:s1,i7:syl |- ( ( X e. RR /\ 0 <_ X ) -> ( Nfloor ` X ) = if ( X < 0 , 0 , ( |_ ` X ) ) )
+s9:s6:iffalsed |- ( ( X e. RR /\ 0 <_ X ) -> if ( X < 0 , 0 , ( |_ ` X ) ) = ( |_ ` X ) )
+qed:s8,s9:eqtrd |- ( ( X e. RR /\ 0 <_ X ) -> ( Nfloor ` X ) = ( |_ ` X ) )
+$)

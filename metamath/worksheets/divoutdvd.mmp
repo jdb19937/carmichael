@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutdvd  LOC_AFTER=?
+
+* The divide-out loop returns a divisor of its input (Lean: divOut_dvd).
+
+s1::simp1 |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> D e. NN )
+s2::simp2 |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> R e. NN0 )
+s3::simp3 |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> F e. NN0 )
+i4::divoutdvdl
+s5:s3,i4:syl |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> ( D e. NN -> A. r e. NN0 ( 1st ` ( ( D DivOut r ) ` F ) ) || r ) )
+s6:s5,s1:mpd |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> A. r e. NN0 ( 1st ` ( ( D DivOut r ) ` F ) ) || r )
+s7::id |- ( r = R -> r = R )
+c1:s7:oveq2d |- ( r = R -> ( D DivOut r ) = ( D DivOut R ) )
+c2:c1:fveq1d |- ( r = R -> ( ( D DivOut r ) ` F ) = ( ( D DivOut R ) ` F ) )
+c3:c2:fveq2d |- ( r = R -> ( 1st ` ( ( D DivOut r ) ` F ) ) = ( 1st ` ( ( D DivOut R ) ` F ) ) )
+c4:c3,s7:breq12d |- ( r = R -> ( ( 1st ` ( ( D DivOut r ) ` F ) ) || r <-> ( 1st ` ( ( D DivOut R ) ` F ) ) || R ) )
+qed:c4,s6,s2:rspcdva |- ( ( D e. NN /\ R e. NN0 /\ F e. NN0 ) -> ( 1st ` ( ( D DivOut R ) ` F ) ) || R )
+$)

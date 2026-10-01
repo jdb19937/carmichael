@@ -1,0 +1,63 @@
+$( <MM> <PROOF_ASST> THEOREM=extrwpcop  LOC_AFTER=?
+
+* A pool element is coprime to the modulus: it is a prime above z, while every prime of Q is at most z (Lean: pool_coprimeW).
+
+s1::simpl1 |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Q e. ( ~P Prime i^i Fin ) )
+s2::simpl2 |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Z e. NN0 )
+s3::simpl3 |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> K e. NN0 )
+s4::simprl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> A. q e. Q q <_ Z )
+s5::simprr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> P e. ( ( Q pool Z ) ` K ) )
+i6::elfpw
+s7:s1,i6:sylib |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s8:s7:simpld |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Q C_ Prime )
+s9:s7:simprd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Q e. Fin )
+s10::prmssnn |- Prime C_ NN
+s11::nnssnn0 |- NN C_ NN0
+s12:s10,s11:sstri |- Prime C_ NN0
+s13:s12:a1i |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Prime C_ NN0 )
+s14:s8,s13:sstrd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Q C_ NN0 )
+s15:s14,s9:jca |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i16::elfpw
+s17:s15,i16:sylibr |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Q e. ( ~P NN0 i^i Fin ) )
+i18::lmodqval
+s19:s17,i18:syl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Lmod ` Q ) = prod_ q e. Q q )
+s20::id |- ( q = j -> q = j )
+s21:s20:cbvprodv |- prod_ q e. Q q = prod_ j e. Q j
+s22:s21:a1i |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> prod_ q e. Q q = prod_ j e. Q j )
+s23:s19,s22:eqtrd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Lmod ` Q ) = prod_ j e. Q j )
+i24::lmodqcl
+s25:s1,i24:syl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Lmod ` Q ) e. NN )
+s26:s25:nnzd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Lmod ` Q ) e. ZZ )
+s27:s17,s2,s3:3jca |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Q e. ( ~P NN0 i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) )
+s28:s27,s5:jca |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( ( Q e. ( ~P NN0 i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ P e. ( ( Q pool Z ) ` K ) ) )
+i29::poolel
+s30:s28,i29:syl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( P e. Prime /\ Z < P /\ P <_ ( xceil ` Q ) ) )
+s31:s30:simp1d |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> P e. Prime )
+s32:s30:simp2d |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> Z < P )
+s33:s9,s8,s31:3jca |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( Q e. Fin /\ Q C_ Prime /\ P e. Prime ) )
+i34::extrwpdv
+s35:s33,i34:syl |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( P || prod_ j e. Q j -> P e. Q ) )
+s36:s23:breq2d |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( P || ( Lmod ` Q ) <-> P || prod_ j e. Q j ) )
+s37:s36:biimpd |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( P || ( Lmod ` Q ) -> P || prod_ j e. Q j ) )
+s38:s37,s35:syld |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( P || ( Lmod ` Q ) -> P e. Q ) )
+s39::id |- ( q = P -> q = P )
+s40:s39:breq1d |- ( q = P -> ( q <_ Z <-> P <_ Z ) )
+s41:s4:adantr |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> A. q e. Q q <_ Z )
+s42::simpr |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> P e. Q )
+s43:s40,s41,s42:rspcdva |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> P <_ Z )
+s44:s2:adantr |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> Z e. NN0 )
+s45:s44:nn0red |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> Z e. RR )
+s46:s31:adantr |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> P e. Prime )
+i47::prmnn
+s48:s46,i47:syl |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> P e. NN )
+s49:s48:nnred |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> P e. RR )
+s50:s32:adantr |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> Z < P )
+s51:s49,s45,s49,s43,s50:lelttrd |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> P < P )
+i52::ltnr
+s53:s49,i52:syl |- ( ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) /\ P e. Q ) -> -. P < P )
+s54:s51,s53:pm2.65da |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> -. P e. Q )
+s55:s54,s38:mtod |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> -. P || ( Lmod ` Q ) )
+i56::coprm
+s57:s31,s26,i56:syl2anc |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( -. P || ( Lmod ` Q ) <-> ( P gcd ( Lmod ` Q ) ) = 1 ) )
+qed:s57,s55:mpbid |- ( ( ( Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN0 ) /\ ( A. q e. Q q <_ Z /\ P e. ( ( Q pool Z ) ` K ) ) ) -> ( P gcd ( Lmod ` Q ) ) = 1 )
+$)

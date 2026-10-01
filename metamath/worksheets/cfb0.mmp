@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=cfb0  LOC_AFTER=?
+
+* A bound on the modulus of the coefficients of a Dirichlet series is nonnegative.
+
+s1::simp1 |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> A : NN --> CC )
+s2::simp2 |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> C e. RR )
+s3::simp3 |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> A. m e. NN ( abs ` ( A ` m ) ) <_ C )
+s4::1nn |- 1 e. NN
+s5:s4:a1i |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> 1 e. NN )
+s6::fveq2 |- ( m = 1 -> ( A ` m ) = ( A ` 1 ) )
+s7:s6:fveq2d |- ( m = 1 -> ( abs ` ( A ` m ) ) = ( abs ` ( A ` 1 ) ) )
+s8:s7:breq1d |- ( m = 1 -> ( ( abs ` ( A ` m ) ) <_ C <-> ( abs ` ( A ` 1 ) ) <_ C ) )
+s9:s8,s3,s5:rspcdva |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> ( abs ` ( A ` 1 ) ) <_ C )
+s10:s1,s5:ffvelcdmd |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> ( A ` 1 ) e. CC )
+s11::0re |- 0 e. RR
+s12:s11:a1i |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> 0 e. RR )
+s13:s10:abscld |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> ( abs ` ( A ` 1 ) ) e. RR )
+s14:s10:absge0d |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> 0 <_ ( abs ` ( A ` 1 ) ) )
+qed:s12,s13,s2,s14,s9:letrd |- ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) -> 0 <_ C )
+$)

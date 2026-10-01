@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=divsetnn  LOC_AFTER=?
+
+* The divisors of L in ( 1 ... L ) are all the positive divisors (Lean: Nat.divisors).
+
+s1::id |- ( m = d -> m = d )
+c1:s1:breq1d |- ( m = d -> ( m || L <-> d || L ) )
+s2:c1:elrab |- ( d e. { m e. ( 1 ... L ) | m || L } <-> ( d e. ( 1 ... L ) /\ d || L ) )
+s3:c1:elrab |- ( d e. { m e. NN | m || L } <-> ( d e. NN /\ d || L ) )
+s4::simprl |- ( ( L e. NN /\ ( d e. ( 1 ... L ) /\ d || L ) ) -> d e. ( 1 ... L ) )
+i5::elfznn
+s6:s4,i5:syl |- ( ( L e. NN /\ ( d e. ( 1 ... L ) /\ d || L ) ) -> d e. NN )
+s7::simprr |- ( ( L e. NN /\ ( d e. ( 1 ... L ) /\ d || L ) ) -> d || L )
+s8:s6,s7:jca |- ( ( L e. NN /\ ( d e. ( 1 ... L ) /\ d || L ) ) -> ( d e. NN /\ d || L ) )
+s9::simprl |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> d e. NN )
+s10::simprr |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> d || L )
+s11::simpl |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> L e. NN )
+s12:s9:nnzd |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> d e. ZZ )
+i13::dvdsle
+s14:s12,s11,i13:syl2anc |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> ( d || L -> d <_ L ) )
+s15:s10,s14:mpd |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> d <_ L )
+s16:s11:nnzd |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> L e. ZZ )
+i17::fznn
+s18:s16,i17:syl |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> ( d e. ( 1 ... L ) <-> ( d e. NN /\ d <_ L ) ) )
+s19:s9,s15:jca |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> ( d e. NN /\ d <_ L ) )
+s20:s19,s18:mpbird |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> d e. ( 1 ... L ) )
+s21:s20,s10:jca |- ( ( L e. NN /\ ( d e. NN /\ d || L ) ) -> ( d e. ( 1 ... L ) /\ d || L ) )
+s22:s8,s21:impbida |- ( L e. NN -> ( ( d e. ( 1 ... L ) /\ d || L ) <-> ( d e. NN /\ d || L ) ) )
+s23:s2:a1i |- ( L e. NN -> ( d e. { m e. ( 1 ... L ) | m || L } <-> ( d e. ( 1 ... L ) /\ d || L ) ) )
+s24:s23,s22:bitrd |- ( L e. NN -> ( d e. { m e. ( 1 ... L ) | m || L } <-> ( d e. NN /\ d || L ) ) )
+s25:s3:bicomi |- ( ( d e. NN /\ d || L ) <-> d e. { m e. NN | m || L } )
+s26:s25:a1i |- ( L e. NN -> ( ( d e. NN /\ d || L ) <-> d e. { m e. NN | m || L } ) )
+s27:s24,s26:bitrd |- ( L e. NN -> ( d e. { m e. ( 1 ... L ) | m || L } <-> d e. { m e. NN | m || L } ) )
+qed:s27:eqrdv |- ( L e. NN -> { m e. ( 1 ... L ) | m || L } = { m e. NN | m || L } )
+$)

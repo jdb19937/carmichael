@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=bwstriprevg  LOC_AFTER=?
+
+* The reversal of a bit list on the machine (` bits l ` , ~ bwmaprev ) is a run of zero letters followed by the reversal of the canonical form.  Lean: ` bits_stripHigh ` with ` dropZeros_eq ` ; ~ bwstriprev through ~ bwmapccat , ~ repsco and ~ inclboolfv .
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::encnatcl
+s5:s3,i4:syl |- ( L e. Word 2o -> ( encodeNat ` ( toNat ` L ) ) e. Word 2o )
+i6::lencl
+s7:s1,i6:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+i8::lencl
+s9:s5,i8:syl |- ( L e. Word 2o -> ( # ` ( encodeNat ` ( toNat ` L ) ) ) e. NN0 )
+i10::bwstriplen
+s11:s1,i10:syl |- ( L e. Word 2o -> ( # ` ( encodeNat ` ( toNat ` L ) ) ) <_ ( # ` L ) )
+i12::nn0sub
+s13:s9,s7,i12:syl2anc |- ( L e. Word 2o -> ( ( # ` ( encodeNat ` ( toNat ` L ) ) ) <_ ( # ` L ) <-> ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) e. NN0 ) )
+s14:s13,s11:mpbid |- ( L e. Word 2o -> ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) e. NN0 )
+i15::bwrep0
+s16:s14,i15:syl |- ( L e. Word 2o -> ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) = ( 0 bwrd ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s17::0z |- 0 e. ZZ
+s18:s17:a1i |- ( L e. Word 2o -> 0 e. ZZ )
+i19::bwrdcl
+s20:s18,s14,i19:syl2anc |- ( L e. Word 2o -> ( 0 bwrd ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) e. Word 2o )
+s21:s16,s20:eqeltrd |- ( L e. Word 2o -> ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) e. Word 2o )
+i22::bwstriprev
+s23:s1,i22:syl |- ( L e. Word 2o -> ( reverse ` L ) = ( ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) ) )
+s24:s23:coeq2d |- ( L e. Word 2o -> ( inclBool o. ( reverse ` L ) ) = ( inclBool o. ( ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+i25::bwmaprev
+s26:s1,i25:syl |- ( L e. Word 2o -> ( inclBool o. ( reverse ` L ) ) = ( reverse ` ( inclBool o. L ) ) )
+i27::revcl
+s28:s5,i27:syl |- ( L e. Word 2o -> ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) e. Word 2o )
+i29::bwmapccat
+s30:s21,s28,i29:syl2anc |- ( L e. Word 2o -> ( inclBool o. ( ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) ) ) = ( ( inclBool o. ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ++ ( inclBool o. ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s31::0el2o |- (/) e. 2o
+s32:s31:a1i |- ( L e. Word 2o -> (/) e. 2o )
+s33::inclboolf |- inclBool : 2o --> Gamma'
+s34:s33:a1i |- ( L e. Word 2o -> inclBool : 2o --> Gamma' )
+i35::repsco
+s36:s32,s14,s34,i35:syl3anc |- ( L e. Word 2o -> ( inclBool o. ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) = ( ( inclBool ` (/) ) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+i37::inclboolfv
+s38:s32,i37:syl |- ( L e. Word 2o -> ( inclBool ` (/) ) = <. 1 , (/) >. )
+s39:s38:oveq1d |- ( L e. Word 2o -> ( ( inclBool ` (/) ) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) = ( <. 1 , (/) >. repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s40:s36,s39:eqtrd |- ( L e. Word 2o -> ( inclBool o. ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) = ( <. 1 , (/) >. repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+i41::bwmaprev
+s42:s5,i41:syl |- ( L e. Word 2o -> ( inclBool o. ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) ) = ( reverse ` ( inclBool o. ( encodeNat ` ( toNat ` L ) ) ) ) )
+s43:s40,s42:oveq12d |- ( L e. Word 2o -> ( ( inclBool o. ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ) ++ ( inclBool o. ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) ) ) = ( ( <. 1 , (/) >. repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( inclBool o. ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s44:s30,s43:eqtrd |- ( L e. Word 2o -> ( inclBool o. ( ( (/) repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( encodeNat ` ( toNat ` L ) ) ) ) ) = ( ( <. 1 , (/) >. repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( inclBool o. ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s45:s24,s44:eqtrd |- ( L e. Word 2o -> ( inclBool o. ( reverse ` L ) ) = ( ( <. 1 , (/) >. repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( inclBool o. ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+s46:s26:eqcomd |- ( L e. Word 2o -> ( reverse ` ( inclBool o. L ) ) = ( inclBool o. ( reverse ` L ) ) )
+qed:s46,s45:eqtrd |- ( L e. Word 2o -> ( reverse ` ( inclBool o. L ) ) = ( ( <. 1 , (/) >. repeatS ( ( # ` L ) - ( # ` ( encodeNat ` ( toNat ` L ) ) ) ) ) ++ ( reverse ` ( inclBool o. ( encodeNat ` ( toNat ` L ) ) ) ) ) )
+$)

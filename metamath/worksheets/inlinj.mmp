@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=inlinj  LOC_AFTER=?
+
+* The left injection of a disjoint union is one-to-one.  Lean: ` Option.some_injective ` .
+
+s1::simpl |- ( ( A e. V /\ B e. W ) -> A e. V )
+s2::simpr |- ( ( A e. V /\ B e. W ) -> B e. W )
+i3::inlval
+s4:s1,i3:syl |- ( ( A e. V /\ B e. W ) -> ( inl ` A ) = <. (/) , A >. )
+i5::inlval
+s6:s2,i5:syl |- ( ( A e. V /\ B e. W ) -> ( inl ` B ) = <. (/) , B >. )
+s7:s4,s6:eqeq12d |- ( ( A e. V /\ B e. W ) -> ( ( inl ` A ) = ( inl ` B ) <-> <. (/) , A >. = <. (/) , B >. ) )
+s8::0ex |- (/) e. _V
+s9:s8:a1i |- ( ( A e. V /\ B e. W ) -> (/) e. _V )
+i10::opthg
+s11:s9,s1,i10:syl2anc |- ( ( A e. V /\ B e. W ) -> ( <. (/) , A >. = <. (/) , B >. <-> ( (/) = (/) /\ A = B ) ) )
+s12::eqid |- (/) = (/)
+s13:s12:a1i |- ( ( A e. V /\ B e. W ) -> (/) = (/) )
+s14:s13:biantrurd |- ( ( A e. V /\ B e. W ) -> ( A = B <-> ( (/) = (/) /\ A = B ) ) )
+s15:s11,s14:bitr4d |- ( ( A e. V /\ B e. W ) -> ( <. (/) , A >. = <. (/) , B >. <-> A = B ) )
+qed:s7,s15:bitrd |- ( ( A e. V /\ B e. W ) -> ( ( inl ` A ) = ( inl ` B ) <-> A = B ) )
+$)

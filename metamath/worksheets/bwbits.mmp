@@ -1,0 +1,15 @@
+$( <MM> <PROOF_ASST> THEOREM=bwbits  LOC_AFTER=?
+
+* The binary digits of the value of a bit word are its positions holding true.
+
+s1::tonatval |- ( L e. Word 2o -> ( toNat ` L ) = sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) )
+s2::oveq2 |- ( i = n -> ( 2 ^ i ) = ( 2 ^ n ) )
+s3:s2:cbvsumv |- sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) = sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n )
+s4:s3:a1i |- ( L e. Word 2o -> sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) = sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n ) )
+s5:s1,s4:eqtrd |- ( L e. Word 2o -> ( toNat ` L ) = sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n ) )
+s6:s5:fveq2d |- ( L e. Word 2o -> ( bits ` ( toNat ` L ) ) = ( bits ` sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n ) ) )
+s7::tonatlem1 |- { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } e. ( ~P NN0 i^i Fin )
+i8::bitsinv2
+s9:s7,i8:ax-mp |- ( bits ` sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n ) ) = { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o }
+qed:s6,s9:eqtrdi |- ( L e. Word 2o -> ( bits ` ( toNat ` L ) ) = { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } )
+$)

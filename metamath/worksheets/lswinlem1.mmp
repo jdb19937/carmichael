@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=lswinlem1  LOC_AFTER=?
+
+* The Farey family of denominators up to |_ Q is finite, its points v / q are real, and 1 / Q ^ 2 > 0 (LargeSieve window_sieve, step 4).
+
+s1::simpl |- ( ( Q e. RR /\ 2 <_ Q ) -> Q e. RR )
+s2::simpr |- ( ( Q e. RR /\ 2 <_ Q ) -> 2 <_ Q )
+s3::ax-icn |- _i e. CC
+s4::picn |- _pi e. CC
+s5:s3,s4:mulcli |- ( _i x. _pi ) e. CC
+s6::2cn |- 2 e. CC
+s7:s6,s5:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s8:s7:a1i |- ( ( Q e. RR /\ 2 <_ Q ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s9::ax-icn |- _i e. CC
+s10:s9:a1i |- ( ( Q e. RR /\ 2 <_ Q ) -> _i e. CC )
+s11::pirp |- _pi e. RR+
+s12:s11:a1i |- ( ( Q e. RR /\ 2 <_ Q ) -> _pi e. RR+ )
+s13::0red |- ( ( Q e. RR /\ 2 <_ Q ) -> 0 e. RR )
+s14::2re |- 2 e. RR
+s15:s14:a1i |- ( ( Q e. RR /\ 2 <_ Q ) -> 2 e. RR )
+s16::2pos |- 0 < 2
+s17:s16:a1i |- ( ( Q e. RR /\ 2 <_ Q ) -> 0 < 2 )
+s18:s13,s15,s1,s17,s2:ltletrd |- ( ( Q e. RR /\ 2 <_ Q ) -> 0 < Q )
+s19:s1,s18:elrpd |- ( ( Q e. RR /\ 2 <_ Q ) -> Q e. RR+ )
+s20::fzfid |- ( ( Q e. RR /\ 2 <_ Q ) -> ( 1 ... ( |_ ` Q ) ) e. Fin )
+s21::snfi |- { q } e. Fin
+s22:s21:a1i |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ q e. ( 1 ... ( |_ ` Q ) ) ) -> { q } e. Fin )
+s23::fzofi |- ( 0 ..^ q ) e. Fin
+i24::rabfi
+s25:s23,i24:ax-mp |- { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } e. Fin
+s26:s25:a1i |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ q e. ( 1 ... ( |_ ` Q ) ) ) -> { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } e. Fin )
+i27::xpfi
+s28:s22,s26,i27:syl2anc |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ q e. ( 1 ... ( |_ ` Q ) ) ) -> ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) e. Fin )
+s29:s28:ralrimiva |- ( ( Q e. RR /\ 2 <_ Q ) -> A. q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) e. Fin )
+i30::iunfi
+s31:s20,s29,i30:syl2anc |- ( ( Q e. RR /\ 2 <_ Q ) -> U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) e. Fin )
+s32::simpr |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) )
+i33::lswinmem
+s34:s32,i33:syl |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( p = <. ( 1st ` p ) , ( 2nd ` p ) >. /\ ( 1st ` p ) e. ( 1 ... ( |_ ` Q ) ) /\ ( 2nd ` p ) e. { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } ) )
+s35:s34:simp1d |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> p = <. ( 1st ` p ) , ( 2nd ` p ) >. )
+s36:s34:simp2d |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 1st ` p ) e. ( 1 ... ( |_ ` Q ) ) )
+s37:s34:simp3d |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 2nd ` p ) e. { k e. ( 0 ..^ ( 1st ` p ) ) | ( k gcd ( 1st ` p ) ) = 1 } )
+i38::elfznn
+s39:s36,i38:syl |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 1st ` p ) e. NN )
+i40::elfzle2
+s41:s36,i40:syl |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 1st ` p ) <_ ( |_ ` Q ) )
+i42::elrabi
+s43:s37,i42:syl |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 2nd ` p ) e. ( 0 ..^ ( 1st ` p ) ) )
+i44::elfzoelz
+s45:s43,i44:syl |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 2nd ` p ) e. ZZ )
+s46:s45:zred |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 2nd ` p ) e. RR )
+s47:s39:nnred |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 1st ` p ) e. RR )
+s48:s39:nnne0d |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( 1st ` p ) =/= 0 )
+s49:s46,s47,s48:redivcld |- ( ( ( Q e. RR /\ 2 <_ Q ) /\ p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) ) -> ( ( 2nd ` p ) / ( 1st ` p ) ) e. RR )
+s50:s49:fmptd |- ( ( Q e. RR /\ 2 <_ Q ) -> ( p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) |-> ( ( 2nd ` p ) / ( 1st ` p ) ) ) : U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) --> RR )
+s51::1rp |- 1 e. RR+
+s52:s51:a1i |- ( ( Q e. RR /\ 2 <_ Q ) -> 1 e. RR+ )
+s53::2z |- 2 e. ZZ
+s54:s53:a1i |- ( ( Q e. RR /\ 2 <_ Q ) -> 2 e. ZZ )
+s55:s19,s54:rpexpcld |- ( ( Q e. RR /\ 2 <_ Q ) -> ( Q ^ 2 ) e. RR+ )
+s56:s52,s55:rpdivcld |- ( ( Q e. RR /\ 2 <_ Q ) -> ( 1 / ( Q ^ 2 ) ) e. RR+ )
+qed:s31,s50,s56:3jca |- ( ( Q e. RR /\ 2 <_ Q ) -> ( U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) e. Fin /\ ( p e. U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) |-> ( ( 2nd ` p ) / ( 1st ` p ) ) ) : U_ q e. ( 1 ... ( |_ ` Q ) ) ( { q } X. { k e. ( 0 ..^ q ) | ( k gcd q ) = 1 } ) --> RR /\ ( 1 / ( Q ^ 2 ) ) e. RR+ ) )
+$)

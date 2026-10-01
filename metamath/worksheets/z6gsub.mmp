@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=z6gsub  LOC_AFTER=?
+
+* A subset ` X ` of ` Y ` that avoids ` Q ` loses at most ` P ` against ` Y \ { P , Q } ` (~ ssdifpr ).
+
+s1::simpl |- ( ( X C_ Y /\ -. Q e. X ) -> X C_ Y )
+s2::simpr |- ( ( X C_ Y /\ -. Q e. X ) -> -. Q e. X )
+s3:s1:ssdifd |- ( ( X C_ Y /\ -. Q e. X ) -> ( X \ { P } ) C_ ( Y \ { P } ) )
+s4:s1,s2:jca |- ( ( X C_ Y /\ -. Q e. X ) -> ( X C_ Y /\ -. Q e. X ) )
+s5::ssdifsn |- ( X C_ ( Y \ { Q } ) <-> ( X C_ Y /\ -. Q e. X ) )
+s6:s5:a1i |- ( ( X C_ Y /\ -. Q e. X ) -> ( X C_ ( Y \ { Q } ) <-> ( X C_ Y /\ -. Q e. X ) ) )
+s7:s4,s6:mpbird |- ( ( X C_ Y /\ -. Q e. X ) -> X C_ ( Y \ { Q } ) )
+s8::difss |- ( X \ { P } ) C_ X
+s9:s8:a1i |- ( ( X C_ Y /\ -. Q e. X ) -> ( X \ { P } ) C_ X )
+s10:s9,s7:sstrd |- ( ( X C_ Y /\ -. Q e. X ) -> ( X \ { P } ) C_ ( Y \ { Q } ) )
+s11:s3,s10:jca |- ( ( X C_ Y /\ -. Q e. X ) -> ( ( X \ { P } ) C_ ( Y \ { P } ) /\ ( X \ { P } ) C_ ( Y \ { Q } ) ) )
+i12::ssdifpr
+qed:s11,i12:syl |- ( ( X C_ Y /\ -. Q e. X ) -> ( X \ { P } ) C_ ( Y \ { P , Q } ) )
+$)

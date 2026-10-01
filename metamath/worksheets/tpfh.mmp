@@ -1,0 +1,74 @@
+$( <MM> <PROOF_ASST> THEOREM=tpfh  LOC_AFTER=?
+
+* The kernel ` z |-> ( 1 / z ) ^ Y ` is holomorphic on ` CC \ { 0 } ` .
+
+s1::id |- ( Y e. NN -> Y e. NN )
+s2::ax-1cn |- 1 e. CC
+i3::dvrec
+s4:s2,i3:ax-mp |- ( CC _D ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ) = ( x e. ( CC \ { 0 } ) |-> -u ( 1 / ( x ^ 2 ) ) )
+s5:s4:a1i |- ( Y e. NN -> ( CC _D ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ) = ( x e. ( CC \ { 0 } ) |-> -u ( 1 / ( x ^ 2 ) ) ) )
+s6::simpr |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> x e. ( CC \ { 0 } ) )
+s7::eldifsn |- ( x e. ( CC \ { 0 } ) <-> ( x e. CC /\ x =/= 0 ) )
+s8:s6,s7:sylib |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> ( x e. CC /\ x =/= 0 ) )
+i9::simpl
+s10:s8,i9:syl |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> x e. CC )
+i11::simpr
+s12:s8,i11:syl |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> x =/= 0 )
+s13::2z |- 2 e. ZZ
+s14:s13:a1i |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> 2 e. ZZ )
+s15:s10,s12,s14:expne0d |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> ( x ^ 2 ) =/= 0 )
+s16::ax-1cn |- 1 e. CC
+s17:s16:a1i |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> 1 e. CC )
+s18::2nn0 |- 2 e. NN0
+s19:s18:a1i |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> 2 e. NN0 )
+s20:s10,s19:expcld |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> ( x ^ 2 ) e. CC )
+s21:s17,s20,s15:divcld |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> ( 1 / ( x ^ 2 ) ) e. CC )
+s22:s21:negcld |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> -u ( 1 / ( x ^ 2 ) ) e. CC )
+s23:s22:ralrimiva |- ( Y e. NN -> A. x e. ( CC \ { 0 } ) -u ( 1 / ( x ^ 2 ) ) e. CC )
+i24::dmmptg
+s25:s23,i24:syl |- ( Y e. NN -> dom ( x e. ( CC \ { 0 } ) |-> -u ( 1 / ( x ^ 2 ) ) ) = ( CC \ { 0 } ) )
+s26:s5:dmeqd |- ( Y e. NN -> dom ( CC _D ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ) = dom ( x e. ( CC \ { 0 } ) |-> -u ( 1 / ( x ^ 2 ) ) ) )
+s27:s26,s25:eqtrd |- ( Y e. NN -> dom ( CC _D ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ) = ( CC \ { 0 } ) )
+s28:s17,s10,s12:divcld |- ( ( Y e. NN /\ x e. ( CC \ { 0 } ) ) -> ( 1 / x ) e. CC )
+s29:s28:fmptd |- ( Y e. NN -> ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) : ( CC \ { 0 } ) --> CC )
+s30::ssid |- CC C_ CC
+s31:s30:a1i |- ( Y e. NN -> CC C_ CC )
+s32::difss |- ( CC \ { 0 } ) C_ CC
+s33:s32:a1i |- ( Y e. NN -> ( CC \ { 0 } ) C_ CC )
+s34:s31,s29,s33:3jca |- ( Y e. NN -> ( CC C_ CC /\ ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) : ( CC \ { 0 } ) --> CC /\ ( CC \ { 0 } ) C_ CC ) )
+i35::dvcn
+s36:s34,s27,i35:syl2anc |- ( Y e. NN -> ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) )
+s37:s27:eqcomd |- ( Y e. NN -> ( CC \ { 0 } ) = dom ( CC _D ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ) )
+s38:s37:eqimssd |- ( Y e. NN -> ( CC \ { 0 } ) C_ dom ( CC _D ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ) )
+s39:s36,s38:jca |- ( Y e. NN -> ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ) ) )
+i40::holexp
+s41:s39,s1,i40:syl2anc |- ( Y e. NN -> ( ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) ) ) )
+s42::simpr |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> z e. ( CC \ { 0 } ) )
+s43::eldifsn |- ( z e. ( CC \ { 0 } ) <-> ( z e. CC /\ z =/= 0 ) )
+s44:s42,s43:sylib |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> ( z e. CC /\ z =/= 0 ) )
+i45::simpl
+s46:s44,i45:syl |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> z e. CC )
+i47::simpr
+s48:s44,i47:syl |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> z =/= 0 )
+s49:s16:a1i |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> 1 e. CC )
+s50:s49,s46,s48:divcld |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> ( 1 / z ) e. CC )
+s51::id |- ( x = z -> x = z )
+c1:s51:oveq2d |- ( x = z -> ( 1 / x ) = ( 1 / z ) )
+s52:c1:adantl |- ( ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) /\ x = z ) -> ( 1 / x ) = ( 1 / z ) )
+s53::eqidd |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) = ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) )
+s54:s53,s52,s42,s50:fvmptd |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) = ( 1 / z ) )
+s55:s54:oveq1d |- ( ( Y e. NN /\ z e. ( CC \ { 0 } ) ) -> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) = ( ( 1 / z ) ^ Y ) )
+s56:s55:mpteq2dva |- ( Y e. NN -> ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) = ( z e. ( CC \ { 0 } ) |-> ( ( 1 / z ) ^ Y ) ) )
+s57::id |- ( z = o -> z = o )
+c2:s57:oveq2d |- ( z = o -> ( 1 / z ) = ( 1 / o ) )
+c3:c2:oveq1d |- ( z = o -> ( ( 1 / z ) ^ Y ) = ( ( 1 / o ) ^ Y ) )
+s58:c3:cbvmptv |- ( z e. ( CC \ { 0 } ) |-> ( ( 1 / z ) ^ Y ) ) = ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) )
+s59:s58:a1i |- ( Y e. NN -> ( z e. ( CC \ { 0 } ) |-> ( ( 1 / z ) ^ Y ) ) = ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) )
+s60:s56,s59:eqtrd |- ( Y e. NN -> ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) = ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) )
+c4:s60:eleq1d |- ( Y e. NN -> ( ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) <-> ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) ) )
+c5:s60:oveq2d |- ( Y e. NN -> ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) ) = ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) ) )
+c6:c5:dmeqd |- ( Y e. NN -> dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) ) = dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) ) )
+c7:c6:sseq2d |- ( Y e. NN -> ( ( CC \ { 0 } ) C_ dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) ) <-> ( CC \ { 0 } ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) ) ) )
+c8:c4,c7:anbi12d |- ( Y e. NN -> ( ( ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( z e. ( CC \ { 0 } ) |-> ( ( ( x e. ( CC \ { 0 } ) |-> ( 1 / x ) ) ` z ) ^ Y ) ) ) ) <-> ( ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) ) ) ) )
+qed:s41,c8:mpbid |- ( Y e. NN -> ( ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) e. ( ( CC \ { 0 } ) -cn-> CC ) /\ ( CC \ { 0 } ) C_ dom ( CC _D ( o e. ( CC \ { 0 } ) |-> ( ( 1 / o ) ^ Y ) ) ) ) )
+$)

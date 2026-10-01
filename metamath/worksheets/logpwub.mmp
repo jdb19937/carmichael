@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=logpwub  LOC_AFTER=?
+
+* From A < ( B + 1 ) ^ K, log A is at most K times log ( B + 1 ).
+
+s1::simpl1 |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> A e. NN )
+s2::simpl2 |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> B e. NN0 )
+s3::simpl3 |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> K e. NN0 )
+s4::simpr |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> A < ( ( B + 1 ) ^ K ) )
+s5:s1:nnrpd |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> A e. RR+ )
+s6:s5:rpred |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> A e. RR )
+i7::nn0p1nn
+s8:s2,i7:syl |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( B + 1 ) e. NN )
+s9:s8:nnrpd |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( B + 1 ) e. RR+ )
+s10:s9:rpred |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( B + 1 ) e. RR )
+s11:s3:nn0zd |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> K e. ZZ )
+s12:s9,s11:rpexpcld |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( ( B + 1 ) ^ K ) e. RR+ )
+s13:s12:rpred |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( ( B + 1 ) ^ K ) e. RR )
+s14:s6,s13,s4:ltled |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> A <_ ( ( B + 1 ) ^ K ) )
+i15::logleb
+s16:s5,s12,i15:syl2anc |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( A <_ ( ( B + 1 ) ^ K ) <-> ( log ` A ) <_ ( log ` ( ( B + 1 ) ^ K ) ) ) )
+s17:s16,s14:mpbid |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( log ` A ) <_ ( log ` ( ( B + 1 ) ^ K ) ) )
+i18::relogexp
+s19:s9,s11,i18:syl2anc |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( log ` ( ( B + 1 ) ^ K ) ) = ( K x. ( log ` ( B + 1 ) ) ) )
+s20:s17,s19:breqtrd |- ( ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) /\ A < ( ( B + 1 ) ^ K ) ) -> ( log ` A ) <_ ( K x. ( log ` ( B + 1 ) ) ) )
+qed:s20:ex |- ( ( A e. NN /\ B e. NN0 /\ K e. NN0 ) -> ( A < ( ( B + 1 ) ^ K ) -> ( log ` A ) <_ ( K x. ( log ` ( B + 1 ) ) ) ) )
+$)

@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=ld2rribl  LOC_AFTER=?
+
+* A mapping continuous on ` RR ` is integrable on every bounded open interval (~ rescncf , ~ cniccibl , ~ iblss ; Lean ` Integrable ` of the weighted mollifier on a truncation).
+
+h1::ld2rribl.1 |- ( ph -> ( A e. RR /\ B e. RR ) )
+h2::ld2rribl.2 |- ( ph -> ( u e. RR |-> X ) e. ( RR -cn-> CC ) )
+s1:h1:simpld |- ( ph -> A e. RR )
+s2:h1:simprd |- ( ph -> B e. RR )
+i3::iccssre
+s4:s1,s2,i3:syl2anc |- ( ph -> ( A [,] B ) C_ RR )
+s5::rescncf |- ( ( A [,] B ) C_ RR -> ( ( u e. RR |-> X ) e. ( RR -cn-> CC ) -> ( ( u e. RR |-> X ) |` ( A [,] B ) ) e. ( ( A [,] B ) -cn-> CC ) ) )
+s6:s5:a1i |- ( ph -> ( ( A [,] B ) C_ RR -> ( ( u e. RR |-> X ) e. ( RR -cn-> CC ) -> ( ( u e. RR |-> X ) |` ( A [,] B ) ) e. ( ( A [,] B ) -cn-> CC ) ) ) )
+s7:s4,s6:mpd |- ( ph -> ( ( u e. RR |-> X ) e. ( RR -cn-> CC ) -> ( ( u e. RR |-> X ) |` ( A [,] B ) ) e. ( ( A [,] B ) -cn-> CC ) ) )
+s8:h2,s7:mpd |- ( ph -> ( ( u e. RR |-> X ) |` ( A [,] B ) ) e. ( ( A [,] B ) -cn-> CC ) )
+i9::resmpt
+s10:s4,i9:syl |- ( ph -> ( ( u e. RR |-> X ) |` ( A [,] B ) ) = ( u e. ( A [,] B ) |-> X ) )
+s11:s10,s8:eqeltrrd |- ( ph -> ( u e. ( A [,] B ) |-> X ) e. ( ( A [,] B ) -cn-> CC ) )
+i12::cniccibl
+s13:s1,s2,s11,i12:syl3anc |- ( ph -> ( u e. ( A [,] B ) |-> X ) e. L^1 )
+i14::cncff
+s15:h2,i14:syl |- ( ph -> ( u e. RR |-> X ) : RR --> CC )
+s16::eqid |- ( u e. RR |-> X ) = ( u e. RR |-> X )
+s17:s16:fmpt |- ( A. u e. RR X e. CC <-> ( u e. RR |-> X ) : RR --> CC )
+s18:s15,s17:sylibr |- ( ph -> A. u e. RR X e. CC )
+s19:s4:adantr |- ( ( ph /\ u e. ( A [,] B ) ) -> ( A [,] B ) C_ RR )
+s20::simpr |- ( ( ph /\ u e. ( A [,] B ) ) -> u e. ( A [,] B ) )
+s21:s19,s20:sseldd |- ( ( ph /\ u e. ( A [,] B ) ) -> u e. RR )
+s22:s18:adantr |- ( ( ph /\ u e. ( A [,] B ) ) -> A. u e. RR X e. CC )
+i23::rspa
+s24:s22,s21,i23:syl2anc |- ( ( ph /\ u e. ( A [,] B ) ) -> X e. CC )
+s25::ioossicc |- ( A (,) B ) C_ ( A [,] B )
+s26:s25:a1i |- ( ph -> ( A (,) B ) C_ ( A [,] B ) )
+s27::ioombl |- ( A (,) B ) e. dom vol
+s28:s27:a1i |- ( ph -> ( A (,) B ) e. dom vol )
+qed:s26,s28,s24,s13:iblss |- ( ph -> ( u e. ( A (,) B ) |-> X ) e. L^1 )
+$)

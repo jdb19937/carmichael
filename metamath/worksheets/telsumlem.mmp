@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=telsumlem  LOC_AFTER=?
+
+* The telescoping identity for 1 / ( j - 1 ) - 1 / ( ( j + 1 ) - 1 ).
+
+s1::oveq1 |- ( k = j -> ( k - 1 ) = ( j - 1 ) )
+s2:s1:oveq2d |- ( k = j -> ( 1 / ( k - 1 ) ) = ( 1 / ( j - 1 ) ) )
+s3::oveq1 |- ( k = ( j + 1 ) -> ( k - 1 ) = ( ( j + 1 ) - 1 ) )
+s4:s3:oveq2d |- ( k = ( j + 1 ) -> ( 1 / ( k - 1 ) ) = ( 1 / ( ( j + 1 ) - 1 ) ) )
+s5::oveq1 |- ( k = 2 -> ( k - 1 ) = ( 2 - 1 ) )
+s6:s5:oveq2d |- ( k = 2 -> ( 1 / ( k - 1 ) ) = ( 1 / ( 2 - 1 ) ) )
+s7::oveq1 |- ( k = ( M + 1 ) -> ( k - 1 ) = ( ( M + 1 ) - 1 ) )
+s8:s7:oveq2d |- ( k = ( M + 1 ) -> ( 1 / ( k - 1 ) ) = ( 1 / ( ( M + 1 ) - 1 ) ) )
+s9::nnz |- ( M e. NN -> M e. ZZ )
+s10::2z |- 2 e. ZZ
+s11:s10:a1i |- ( M e. NN -> 2 e. ZZ )
+i12::peano2z
+s13:s9,i12:syl |- ( M e. NN -> ( M + 1 ) e. ZZ )
+s14::nnge1 |- ( M e. NN -> 1 <_ M )
+s15::nnred |- ( M e. NN -> M e. RR )
+s16::1red |- ( M e. NN -> 1 e. RR )
+s17:s16,s15,s16,s14:leadd1dd |- ( M e. NN -> ( 1 + 1 ) <_ ( M + 1 ) )
+s18::df-2 |- 2 = ( 1 + 1 )
+s19:s18:a1i |- ( M e. NN -> 2 = ( 1 + 1 ) )
+s20:s19,s17:eqbrtrd |- ( M e. NN -> 2 <_ ( M + 1 ) )
+i21::eluz2
+s22:s11,s13,s20,i21:syl3anbrc |- ( M e. NN -> ( M + 1 ) e. ( ZZ>= ` 2 ) )
+s23::simpr |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> k e. ( 2 ... ( M + 1 ) ) )
+i24::elfzelz
+s25:s23,i24:syl |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> k e. ZZ )
+s26:s25:zred |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> k e. RR )
+i27::elfzle1
+s28:s23,i27:syl |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> 2 <_ k )
+s29::1red |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> 1 e. RR )
+s30::2re |- 2 e. RR
+s31:s30:a1i |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> 2 e. RR )
+s32:s26,s29:resubcld |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> ( k - 1 ) e. RR )
+s33::0lt1 |- 0 < 1
+s34:s33:a1i |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> 0 < 1 )
+s35:s31,s26,s29,s28:lesub1dd |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> ( 2 - 1 ) <_ ( k - 1 ) )
+s36::2m1e1 |- ( 2 - 1 ) = 1
+s37:s36:a1i |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> ( 2 - 1 ) = 1 )
+s38:s37,s35:eqbrtrrd |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> 1 <_ ( k - 1 ) )
+s39:s34,s38:ltletrd |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> 0 < ( k - 1 ) )
+s40:s39:gt0ne0d |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> ( k - 1 ) =/= 0 )
+s41:s32:recnd |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> ( k - 1 ) e. CC )
+s42:s41,s40:reccld |- ( ( M e. NN /\ k e. ( 2 ... ( M + 1 ) ) ) -> ( 1 / ( k - 1 ) ) e. CC )
+qed:s2,s4,s6,s8,s9,s22,s42:telfsum |- ( M e. NN -> sum_ j e. ( 2 ... M ) ( ( 1 / ( j - 1 ) ) - ( 1 / ( ( j + 1 ) - 1 ) ) ) = ( ( 1 / ( 2 - 1 ) ) - ( 1 / ( ( M + 1 ) - 1 ) ) ) )
+$)

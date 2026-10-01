@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=primegospec  LOC_AFTER=?
+
+* primeGo reports true exactly when no candidate from D up to the square root divides M (Lean: primeGo_spec).
+
+s1::simpl1 |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> M e. NN0 )
+s2::simpl2 |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> D e. NN0 )
+s3::simpl3 |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> F e. NN0 )
+s4::simprl |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> 2 <_ D )
+s5::simprr |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> M < ( D + F ) )
+i6::primegospecl
+s7:s3,i6:syl |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> ( M e. NN0 -> A. d e. NN0 ( ( 2 <_ d /\ M < ( d + F ) ) -> ( ( 1st ` ( ( M PrimeGo d ) ` F ) ) = 1o <-> A. e e. NN0 ( ( d <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) ) ) )
+s8:s7,s1:mpd |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> A. d e. NN0 ( ( 2 <_ d /\ M < ( d + F ) ) -> ( ( 1st ` ( ( M PrimeGo d ) ` F ) ) = 1o <-> A. e e. NN0 ( ( d <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) ) )
+s9::id |- ( d = D -> d = D )
+c1:s9:breq2d |- ( d = D -> ( 2 <_ d <-> 2 <_ D ) )
+c2:s9:oveq1d |- ( d = D -> ( d + F ) = ( D + F ) )
+c3:c2:breq2d |- ( d = D -> ( M < ( d + F ) <-> M < ( D + F ) ) )
+c4:c1,c3:anbi12d |- ( d = D -> ( ( 2 <_ d /\ M < ( d + F ) ) <-> ( 2 <_ D /\ M < ( D + F ) ) ) )
+c5:s9:oveq2d |- ( d = D -> ( M PrimeGo d ) = ( M PrimeGo D ) )
+c6:c5:fveq1d |- ( d = D -> ( ( M PrimeGo d ) ` F ) = ( ( M PrimeGo D ) ` F ) )
+c7:c6:fveq2d |- ( d = D -> ( 1st ` ( ( M PrimeGo d ) ` F ) ) = ( 1st ` ( ( M PrimeGo D ) ` F ) ) )
+c8:c7:eqeq1d |- ( d = D -> ( ( 1st ` ( ( M PrimeGo d ) ` F ) ) = 1o <-> ( 1st ` ( ( M PrimeGo D ) ` F ) ) = 1o ) )
+c9:s9:breq1d |- ( d = D -> ( d <_ e <-> D <_ e ) )
+c10:c9:anbi1d |- ( d = D -> ( ( d <_ e /\ ( e x. e ) <_ M ) <-> ( D <_ e /\ ( e x. e ) <_ M ) ) )
+c11:c10:imbi1d |- ( d = D -> ( ( ( d <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) <-> ( ( D <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) )
+c12:c11:ralbidv |- ( d = D -> ( A. e e. NN0 ( ( d <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) <-> A. e e. NN0 ( ( D <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) )
+c13:c8,c12:bibi12d |- ( d = D -> ( ( ( 1st ` ( ( M PrimeGo d ) ` F ) ) = 1o <-> A. e e. NN0 ( ( d <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) <-> ( ( 1st ` ( ( M PrimeGo D ) ` F ) ) = 1o <-> A. e e. NN0 ( ( D <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) ) )
+c14:c4,c13:imbi12d |- ( d = D -> ( ( ( 2 <_ d /\ M < ( d + F ) ) -> ( ( 1st ` ( ( M PrimeGo d ) ` F ) ) = 1o <-> A. e e. NN0 ( ( d <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) ) <-> ( ( 2 <_ D /\ M < ( D + F ) ) -> ( ( 1st ` ( ( M PrimeGo D ) ` F ) ) = 1o <-> A. e e. NN0 ( ( D <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) ) ) )
+s10:c14,s8,s2:rspcdva |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> ( ( 2 <_ D /\ M < ( D + F ) ) -> ( ( 1st ` ( ( M PrimeGo D ) ` F ) ) = 1o <-> A. e e. NN0 ( ( D <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) ) )
+s11:s4,s5:jca |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> ( 2 <_ D /\ M < ( D + F ) ) )
+qed:s10,s11:mpd |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ ( 2 <_ D /\ M < ( D + F ) ) ) -> ( ( 1st ` ( ( M PrimeGo D ) ` F ) ) = 1o <-> A. e e. NN0 ( ( D <_ e /\ ( e x. e ) <_ M ) -> -. e || M ) ) )
+$)

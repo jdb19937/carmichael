@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=gamprt  LOC_AFTER=?
+
+* The tail block of Euler's product: the modulus at a complex argument never exceeds the value at the real part.
+
+s1::simpl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> ( Z e. CC /\ 0 < ( Re ` Z ) ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> Z e. CC )
+s4::simpl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> ( Z e. CC /\ 0 < ( Re ` Z ) ) )
+i5::simpr
+s6:s4,i5:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> 0 < ( Re ` Z ) )
+s7::simpr |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) )
+i8::simpl
+s9:s7,i8:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> M e. NN0 )
+i10::nn0p1nn
+s11:s9,i10:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> ( M + 1 ) e. NN )
+s12::nnuz |- NN = ( ZZ>= ` 1 )
+s13:s12:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> NN = ( ZZ>= ` 1 ) )
+s14:s11,s13:eleqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> ( M + 1 ) e. ( ZZ>= ` 1 ) )
+i15::fzss1
+s16:s14,i15:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> ( ( M + 1 ) ... N ) C_ ( 1 ... N ) )
+s17:s16:adantr |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( ( M + 1 ) ... N ) C_ ( 1 ... N ) )
+s18::simpr |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> k e. ( ( M + 1 ) ... N ) )
+s19:s17,s18:sseldd |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> k e. ( 1 ... N ) )
+i20::elfznn
+s21:s19,i20:syl |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> k e. NN )
+s22:s3:adantr |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> Z e. CC )
+s23:s6:adantr |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> 0 < ( Re ` Z ) )
+s24:s22,s23:jca |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( Z e. CC /\ 0 < ( Re ` Z ) ) )
+s25:s24,s21:jca |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) )
+i26::eutlev
+s27:s25,i26:syl |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( abs ` ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c Z ) / ( ( Z / m ) + 1 ) ) ) ` k ) ) <_ ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c ( Re ` Z ) ) / ( ( ( Re ` Z ) / m ) + 1 ) ) ) ` k ) )
+i28::eutzrp
+s29:s25,i28:syl |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( abs ` ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c Z ) / ( ( Z / m ) + 1 ) ) ) ` k ) ) e. RR+ )
+i30::eutxrp
+s31:s25,i30:syl |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c ( Re ` Z ) ) / ( ( ( Re ` Z ) / m ) + 1 ) ) ) ` k ) e. RR+ )
+s32::nfv |- F/ k ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) )
+s33::fzfid |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> ( ( M + 1 ) ... N ) e. Fin )
+s34:s29:rpred |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( abs ` ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c Z ) / ( ( Z / m ) + 1 ) ) ) ` k ) ) e. RR )
+s35:s29:rpge0d |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> 0 <_ ( abs ` ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c Z ) / ( ( Z / m ) + 1 ) ) ) ` k ) ) )
+s36:s31:rpred |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) /\ k e. ( ( M + 1 ) ... N ) ) -> ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c ( Re ` Z ) ) / ( ( ( Re ` Z ) / m ) + 1 ) ) ) ` k ) e. RR )
+qed:s32,s33,s34,s35,s36,s27:fprodle |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ ( M e. NN0 /\ N e. ( ZZ>= ` M ) ) ) -> prod_ k e. ( ( M + 1 ) ... N ) ( abs ` ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c Z ) / ( ( Z / m ) + 1 ) ) ) ` k ) ) <_ prod_ k e. ( ( M + 1 ) ... N ) ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c ( Re ` Z ) ) / ( ( ( Re ` Z ) / m ) + 1 ) ) ) ` k ) )
+$)

@@ -1,0 +1,68 @@
+$( <MM> <PROOF_ASST> THEOREM=ld1bvatau  LOC_AFTER=?
+
+* Lean ` abs_bvA_le_card_divisors ` : ` abs a ( n ) <_ tau ( n ) ` from ` abs lambda <_ 1 ` (~ bvaval , ~ fsumabs , ~ z5lamabs , ~ fsumconst ).
+
+s1::simpl |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) )
+s2:s1:simpld |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( A e. RR /\ 0 < A ) )
+s3:s2:simpld |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> A e. RR )
+s4:s2:simprd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> 0 < A )
+s5:s1:simprd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( B e. RR /\ A < B ) )
+s6:s5:simpld |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> B e. RR )
+s7:s5:simprd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> A < B )
+s8::simpr |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> N e. NN )
+s9:s3:elexd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> A e. _V )
+s10:s6:elexd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> B e. _V )
+s11:s9,s10:jca |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( A e. _V /\ B e. _V ) )
+i12::bvaval
+s13:s11,s8,i12:syl2anc |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( ( A bvA B ) ` N ) = sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) )
+i14::dvdsfi
+s15:s8,i14:syl |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> { x e. NN | x || N } e. Fin )
+s16::simpr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> d e. { x e. NN | x || N } )
+i17::elrabi
+s18:s16,i17:syl |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> d e. NN )
+s19:s1:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) )
+s20:s19,s18:jca |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ d e. NN ) )
+i21::z5lamabs
+s22:s20,i21:syl |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( abs ` ( ( A bvLam B ) ` d ) ) <_ 1 )
+s23:s3:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> A e. RR )
+s24:s4:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> 0 < A )
+s25:s23,s24:elrpd |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> A e. RR+ )
+s26:s6:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> B e. RR )
+s27::0red |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> 0 e. RR )
+s28:s3:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> A e. RR )
+s29:s6:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> B e. RR )
+s30:s4:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> 0 < A )
+s31:s7:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> A < B )
+s32:s27,s28,s29,s30,s31:lttrd |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> 0 < B )
+s33:s26,s32:elrpd |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> B e. RR+ )
+s34:s7:adantr |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> A < B )
+s35:s25,s33,s34:3jca |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( A e. RR+ /\ B e. RR+ /\ A < B ) )
+s36:s35,s18:jca |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( ( A e. RR+ /\ B e. RR+ /\ A < B ) /\ d e. NN ) )
+i37::bvlamre
+s38:s36,i37:syl |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( ( A bvLam B ) ` d ) e. RR )
+s39:s38:recnd |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( ( A bvLam B ) ` d ) e. CC )
+s40:s15,s39:fsumabs |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( abs ` sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) ) <_ sum_ d e. { x e. NN | x || N } ( abs ` ( ( A bvLam B ) ` d ) ) )
+s41:s39:abscld |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( abs ` ( ( A bvLam B ) ` d ) ) e. RR )
+s42::1red |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> 1 e. RR )
+s43:s15,s41,s42,s22:fsumle |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> sum_ d e. { x e. NN | x || N } ( abs ` ( ( A bvLam B ) ` d ) ) <_ sum_ d e. { x e. NN | x || N } 1 )
+s44::1cnd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> 1 e. CC )
+i45::fsumconst
+s46:s15,s44,i45:syl2anc |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> sum_ d e. { x e. NN | x || N } 1 = ( ( # ` { x e. NN | x || N } ) x. 1 ) )
+i47::hashcl
+s48:s15,i47:syl |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( # ` { x e. NN | x || N } ) e. NN0 )
+s49:s48:nn0red |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( # ` { x e. NN | x || N } ) e. RR )
+s50:s49:recnd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( # ` { x e. NN | x || N } ) e. CC )
+s51:s50:mulridd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( ( # ` { x e. NN | x || N } ) x. 1 ) = ( # ` { x e. NN | x || N } ) )
+s52:s15,s39:fsumcl |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) e. CC )
+s53:s52:abscld |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( abs ` sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) ) e. RR )
+s54:s39:abscld |- ( ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) /\ d e. { x e. NN | x || N } ) -> ( abs ` ( ( A bvLam B ) ` d ) ) e. RR )
+s55:s15,s54:fsumrecl |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> sum_ d e. { x e. NN | x || N } ( abs ` ( ( A bvLam B ) ` d ) ) e. RR )
+i56::hashcl
+s57:s15,i56:syl |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( # ` { x e. NN | x || N } ) e. NN0 )
+s58:s57:nn0red |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( # ` { x e. NN | x || N } ) e. RR )
+s59:s46,s51:eqtrd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> sum_ d e. { x e. NN | x || N } 1 = ( # ` { x e. NN | x || N } ) )
+s60:s43,s59:breqtrd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> sum_ d e. { x e. NN | x || N } ( abs ` ( ( A bvLam B ) ` d ) ) <_ ( # ` { x e. NN | x || N } ) )
+s61:s53,s55,s58,s40,s60:letrd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( abs ` sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) ) <_ ( # ` { x e. NN | x || N } ) )
+s62:s13:fveq2d |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( abs ` ( ( A bvA B ) ` N ) ) = ( abs ` sum_ d e. { x e. NN | x || N } ( ( A bvLam B ) ` d ) ) )
+qed:s62,s61:eqbrtrd |- ( ( ( ( A e. RR /\ 0 < A ) /\ ( B e. RR /\ A < B ) ) /\ N e. NN ) -> ( abs ` ( ( A bvA B ) ` N ) ) <_ ( # ` { x e. NN | x || N } ) )
+$)

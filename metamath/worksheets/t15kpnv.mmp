@@ -1,0 +1,218 @@
+$( <MM> <PROOF_ASST> THEOREM=t15kpnv  LOC_AFTER=?
+
+* The installation predicate ~ df-tmipnv holds at the concrete program.
+
+h1::t15kpnv.1 |- ( ph -> ( ( T e. _V /\ R e. _V ) /\ ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) )
+h2::t15kpnv.2 |- ( ph -> ( ( 0 ... ; 3 0 ) C_ A /\ A C_ NN0 ) )
+h3::t15kpnv.3 |- ( ph -> A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) )
+h4::t15kpnv.4 |- ( ph -> A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) )
+h5::t15kpnv.5 |- ( ph -> W e. Word A )
+h6::t15kpnv.6 |- ( ph -> ( ( # ` W ) + 1 ) <_ ; 3 0 )
+h7::t15kpnv.7 |- ( ph -> P = ( TMpnF W N X ) )
+h8::t15kpnv.8 |- ( ph -> E e. ( 2nd ` ( 1st ` T ) ) )
+h9::t15kpnv.9 |- ( ph -> ( R TMWalk W ) = ( TMnpnv K N T P E ) )
+h10::t15kpnv.10 |- ( ph -> K e. ( 0 ..^ 8 ) )
+h11::t15kpnv.11 |- ( ph -> E = X )
+h12::t15kpnv.12 |- ( ph -> N e. NN0 )
+h13::t15kpnv.13 |- ( ph -> ( 0 ... ( N + 1 ) ) C_ A )
+s1:h1:simp1d |- ( ph -> ( T e. _V /\ R e. _V ) )
+s2:s1:simpld |- ( ph -> T e. _V )
+s3:s1:simprd |- ( ph -> R e. _V )
+s4:h1:simp2d |- ( ph -> ( 1st ` ( 1st ` T ) ) = TMGam )
+s5:h1:simp3d |- ( ph -> ( 2nd ` T ) = TMSt )
+s6:h2:simprd |- ( ph -> A C_ NN0 )
+i7::encnatgamcl
+s8:h12,i7:syl |- ( ph -> ( encNatGam ` N ) e. Word Gamma' )
+i9::lencl
+s10:s8,i9:syl |- ( ph -> ( # ` ( encNatGam ` N ) ) e. NN0 )
+i11::peano2nn0
+s12:s10,i11:syl |- ( ph -> ( ( # ` ( encNatGam ` N ) ) + 1 ) e. NN0 )
+i13::peano2nn0
+s14:h12,i13:syl |- ( ph -> ( N + 1 ) e. NN0 )
+i15::t15enl
+s16:h12,i15:syl |- ( ph -> ( ( # ` ( encNatGam ` N ) ) + 1 ) <_ ( N + 1 ) )
+s17:s12:nn0zd |- ( ph -> ( ( # ` ( encNatGam ` N ) ) + 1 ) e. ZZ )
+s18:s14:nn0zd |- ( ph -> ( N + 1 ) e. ZZ )
+i19::eluz
+s20:s17,s18,i19:syl2anc |- ( ph -> ( ( N + 1 ) e. ( ZZ>= ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) <-> ( ( # ` ( encNatGam ` N ) ) + 1 ) <_ ( N + 1 ) ) )
+s21:s16,s20:mpbird |- ( ph -> ( N + 1 ) e. ( ZZ>= ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+i22::fzss2
+s23:s21,i22:syl |- ( ph -> ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) C_ ( 0 ... ( N + 1 ) ) )
+s24:s23,h13:sstrd |- ( ph -> ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) C_ A )
+s25::df-tmpnf |- ( TMpnF W N X ) = ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) )
+s26:h7,s25:eqtrdi |- ( ph -> P = ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) )
+s27:h11,h8:eqeltrrd |- ( ph -> X e. ( 2nd ` ( 1st ` T ) ) )
+s28::simpr |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+s29:s24:adantr |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) C_ A )
+s30:s29,s28:sseldd |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k e. A )
+s31:h5:adantr |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> W e. Word A )
+s32:h6:adantr |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( # ` W ) + 1 ) <_ ; 3 0 )
+s33:s6:adantr |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> A C_ NN0 )
+s34:s31,s32:jca |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( W e. Word A /\ ( ( # ` W ) + 1 ) <_ ; 3 0 ) )
+s35::0nn0 |- 0 e. NN0
+s36:s35:a1i |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> 0 e. NN0 )
+s37::0p1e1 |- ( 0 + 1 ) = 1
+s38:s37:a1i |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 0 + 1 ) = 1 )
+s39:s36,s38:jca |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) )
+s40:s30,s33:jca |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( k e. A /\ A C_ NN0 ) )
+s41:s39,s40:jca |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( k e. A /\ A C_ NN0 ) ) )
+s42:s34,s41:jca |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( W e. Word A /\ ( ( # ` W ) + 1 ) <_ ; 3 0 ) /\ ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( k e. A /\ A C_ NN0 ) ) ) )
+i43::t15ap
+s44:s42,i43:syl |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( ( TMLab ` W ) ` k ) = ( TMLab ` ( W ++ <" k "> ) ) /\ ( W ++ <" k "> ) e. Word A /\ ( ( # ` ( W ++ <" k "> ) ) + 0 ) <_ ; 3 0 ) )
+s45:s44:simp2d |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( W ++ <" k "> ) e. Word A )
+s46:s44:simp3d |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( # ` ( W ++ <" k "> ) ) + 0 ) <_ ; 3 0 )
+s47:h3:adantr |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s48:s45,s46,s36:3jca |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( W ++ <" k "> ) e. Word A /\ ( ( # ` ( W ++ <" k "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) )
+s49:s47,s48:jca |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ ( ( W ++ <" k "> ) e. Word A /\ ( ( # ` ( W ++ <" k "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) ) )
+i50::t15lab
+s51:s49,i50:syl |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( TMLab ` ( W ++ <" k "> ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s52:s27:adantr |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> X e. ( 2nd ` ( 1st ` T ) ) )
+s53:s52,s51:ifcld |- ( ( ph /\ k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s54:s53:fmptd |- ( ph -> ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) )
+s55:s26:feq1d |- ( ph -> ( P : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) <-> ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) ) )
+s56:s54,s55:mpbird |- ( ph -> P : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) )
+s57::simpr |- ( ( ph /\ k = ( ( # ` ( encNatGam ` N ) ) + 1 ) ) -> k = ( ( # ` ( encNatGam ` N ) ) + 1 ) )
+s58:s57:iftrued |- ( ( ph /\ k = ( ( # ` ( encNatGam ` N ) ) + 1 ) ) -> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) = X )
+s59::nn0fz0 |- ( ( ( # ` ( encNatGam ` N ) ) + 1 ) e. NN0 <-> ( ( # ` ( encNatGam ` N ) ) + 1 ) e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+s60:s12,s59:sylib |- ( ph -> ( ( # ` ( encNatGam ` N ) ) + 1 ) e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+s61:s27:elexd |- ( ph -> X e. _V )
+s62::eqid |- ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) = ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) )
+s63:s62:a1i |- ( ph -> ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) = ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) )
+s64:s63,s58,s60,s61:fvmptd |- ( ph -> ( ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) = X )
+s65:s26:fveq1d |- ( ph -> ( P ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) = ( ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+s66:h11:eqcomd |- ( ph -> X = E )
+s67:s65,s64,s66:3eqtrd |- ( ph -> ( P ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) = E )
+s68::simpr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+i69::elfzofz
+s70:s68,i69:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+i71::elfzonn0
+s72:s68,i71:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k e. NN0 )
+s73:s24:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) C_ A )
+s74:s73,s70:sseldd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k e. A )
+i75::elfzolt2
+s76:s68,i75:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k < ( ( # ` ( encNatGam ` N ) ) + 1 ) )
+s77:s76:ltned |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k =/= ( ( # ` ( encNatGam ` N ) ) + 1 ) )
+s78:s77:neneqd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> -. k = ( ( # ` ( encNatGam ` N ) ) + 1 ) )
+s79:s78:iffalsed |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) = ( TMLab ` ( W ++ <" k "> ) ) )
+s80:h5:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> W e. Word A )
+s81:h6:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( # ` W ) + 1 ) <_ ; 3 0 )
+s82:s6:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> A C_ NN0 )
+s83:s80,s81:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( W e. Word A /\ ( ( # ` W ) + 1 ) <_ ; 3 0 ) )
+s84::0nn0 |- 0 e. NN0
+s85:s84:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> 0 e. NN0 )
+s86::0p1e1 |- ( 0 + 1 ) = 1
+s87:s86:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 0 + 1 ) = 1 )
+s88:s85,s87:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) )
+s89:s74,s82:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( k e. A /\ A C_ NN0 ) )
+s90:s88,s89:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( k e. A /\ A C_ NN0 ) ) )
+s91:s83,s90:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( W e. Word A /\ ( ( # ` W ) + 1 ) <_ ; 3 0 ) /\ ( ( 0 e. NN0 /\ ( 0 + 1 ) = 1 ) /\ ( k e. A /\ A C_ NN0 ) ) ) )
+i92::t15ap
+s93:s91,i92:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( ( TMLab ` W ) ` k ) = ( TMLab ` ( W ++ <" k "> ) ) /\ ( W ++ <" k "> ) e. Word A /\ ( ( # ` ( W ++ <" k "> ) ) + 0 ) <_ ; 3 0 ) )
+s94:s93:simp2d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( W ++ <" k "> ) e. Word A )
+s95:s93:simp3d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( # ` ( W ++ <" k "> ) ) + 0 ) <_ ; 3 0 )
+s96::fvexd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( TMLab ` ( W ++ <" k "> ) ) e. _V )
+s97:s79,s96:eqeltrd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) e. _V )
+s98::eqid |- ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) = ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) )
+s100::eqid |- ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) = ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) )
+s101:s100:fvmpt2 |- ( ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) /\ if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) e. _V ) -> ( ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) ` k ) = if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) )
+s102:s70,s97,s101:syl2anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) ` k ) = if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) )
+s103:s26:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> P = ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) )
+s104:s103:fveq1d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( P ` k ) = ( ( k e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) |-> if ( k = ( ( # ` ( encNatGam ` N ) ) + 1 ) , X , ( TMLab ` ( W ++ <" k "> ) ) ) ) ` k ) )
+s105:s104,s102,s79:3eqtrd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( P ` k ) = ( TMLab ` ( W ++ <" k "> ) ) )
+s106:s3:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> R e. _V )
+s107:h5:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> W e. Word A )
+i108::tmwalks1
+s109:s106,s107,s74,i108:syl3anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( R TMWalk ( W ++ <" k "> ) ) = ( ( R TMWalk W ) ` k ) )
+s110:h9:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( R TMWalk W ) = ( TMnpnv K N T P E ) )
+s111:s110:fveq1d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( R TMWalk W ) ` k ) = ( ( TMnpnv K N T P E ) ` k ) )
+s112::df-tmnpnv |- ( TMnpnv K N T P E ) = ( j e. NN0 |-> <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) >. >. >. >. )
+s113:s112:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( TMnpnv K N T P E ) = ( j e. NN0 |-> <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) >. >. >. >. ) )
+s114::id |- ( j = k -> j = k )
+c126_1:s114:fveq2d |- ( j = k -> ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) = ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) )
+c126_2:c126_1:sneqd |- ( j = k -> { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } = { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } )
+c126_3:c126_2:xpeq2d |- ( j = k -> ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } ) = ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) )
+c126_4:s114:oveq1d |- ( j = k -> ( j + 1 ) = ( k + 1 ) )
+c126_5:c126_4:fveq2d |- ( j = k -> ( P ` ( j + 1 ) ) = ( P ` ( k + 1 ) ) )
+c126_6:c126_5:sneqd |- ( j = k -> { ( P ` ( j + 1 ) ) } = { ( P ` ( k + 1 ) ) } )
+c126_7:c126_6:xpeq2d |- ( j = k -> ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) = ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) )
+c126_8:c126_7:opeq2d |- ( j = k -> <. 5 , ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) >. = <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. )
+c126_9:c126_3,c126_8:opeq12d |- ( j = k -> <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) >. >. = <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. )
+c126_10:c126_9:opeq2d |- ( j = k -> <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) >. >. >. = <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. )
+c126_11:c126_10:opeq2d |- ( j = k -> <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) >. >. >. >. = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. )
+s115:c126_11:adantl |- ( ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) /\ j = k ) -> <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` j ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( j + 1 ) ) } ) >. >. >. >. = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. )
+s116::opex |- <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. e. _V
+s117:s116:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. e. _V )
+s118:s113,s115,s72,s117:fvmptd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( TMnpnv K N T P E ) ` k ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. )
+s119:s109,s111,s118:3eqtrd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( R TMWalk ( W ++ <" k "> ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. )
+s120:s4:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 1st ` ( 1st ` T ) ) = TMGam )
+s121:h10:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> K e. ( 0 ..^ 8 ) )
+s122:s120,s121:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) )
+i123::t15kdom
+s124:s122,i123:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( K e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 1st ` ( 1st ` T ) ) ` K ) = Gamma' ) )
+s125:s124:simpld |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> K e. dom ( 1st ` ( 1st ` T ) ) )
+s126:s124:simprd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 1st ` ( 1st ` T ) ) ` K ) = Gamma' )
+s127::gamma4 |- 4 e. Gamma'
+i128::s1cl
+s129:s127,i128:ax-mp |- <" 4 "> e. Word Gamma'
+s130:s129:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> <" 4 "> e. Word Gamma' )
+s131:s8:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( encNatGam ` N ) e. Word Gamma' )
+i132::revcl
+s133:s131,i132:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( reverse ` ( encNatGam ` N ) ) e. Word Gamma' )
+i134::ccatcl
+s135:s130,s133,i134:syl2anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) e. Word Gamma' )
+i136::ccatlen
+s137:s130,s133,i136:syl2anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( # ` ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ) = ( ( # ` <" 4 "> ) + ( # ` ( reverse ` ( encNatGam ` N ) ) ) ) )
+s138::s1len |- ( # ` <" 4 "> ) = 1
+s139:s138:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( # ` <" 4 "> ) = 1 )
+s140:s8:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( encNatGam ` N ) e. Word Gamma' )
+i141::revlen
+s142:s140,i141:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( # ` ( reverse ` ( encNatGam ` N ) ) ) = ( # ` ( encNatGam ` N ) ) )
+s143:s139,s142:oveq12d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( # ` <" 4 "> ) + ( # ` ( reverse ` ( encNatGam ` N ) ) ) ) = ( 1 + ( # ` ( encNatGam ` N ) ) ) )
+s144:s10:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( # ` ( encNatGam ` N ) ) e. NN0 )
+s145:s144:nn0cnd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( # ` ( encNatGam ` N ) ) e. CC )
+s146::ax-1cn |- 1 e. CC
+s147:s146:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> 1 e. CC )
+s148:s147,s145:addcomd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 1 + ( # ` ( encNatGam ` N ) ) ) = ( ( # ` ( encNatGam ` N ) ) + 1 ) )
+s149:s137,s143,s148:3eqtrd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( # ` ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ) = ( ( # ` ( encNatGam ` N ) ) + 1 ) )
+s150:s149:oveq2d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 0 ..^ ( # ` ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ) ) = ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+s151:s68,s150:eleqtrrd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> k e. ( 0 ..^ ( # ` ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ) ) )
+i152::wrdsymbcl
+s153:s135,s151,i152:syl2anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) e. Gamma' )
+s154::gammaex |- Gamma' e. _V
+s155:s154:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> Gamma' e. _V )
+s156:s155,s153:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( Gamma' e. _V /\ ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) e. Gamma' ) )
+i157::t15cst
+s158:s156,i157:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) e. ( Gamma' ^m ( 2nd ` T ) ) )
+s159:s126:oveq1d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( ( 1st ` ( 1st ` T ) ) ` K ) ^m ( 2nd ` T ) ) = ( Gamma' ^m ( 2nd ` T ) ) )
+s160:s158,s159:eleqtrrd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` K ) ^m ( 2nd ` T ) ) )
+i161::fzofzp1
+s162:s68,i161:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( k + 1 ) e. ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) )
+s163:s56:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> P : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) )
+s164:s163,s162:ffvelcdmd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( P ` ( k + 1 ) ) e. ( 2nd ` ( 1st ` T ) ) )
+s165::fvex |- ( 2nd ` ( 1st ` T ) ) e. _V
+s166:s165:a1i |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( 2nd ` ( 1st ` T ) ) e. _V )
+s167:s166,s164:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 2nd ` ( 1st ` T ) ) e. _V /\ ( P ` ( k + 1 ) ) e. ( 2nd ` ( 1st ` T ) ) ) )
+i168::t15cst
+s169:s167,i168:syl |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) e. ( ( 2nd ` ( 1st ` T ) ) ^m ( 2nd ` T ) ) )
+s170:s2:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> T e. _V )
+i171::tm2goto
+s172:s170,s169,i171:syl2anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. e. ( TM2Stmt ` T ) )
+s173:s125,s160:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( K e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) e. ( ( ( 1st ` ( 1st ` T ) ) ` K ) ^m ( 2nd ` T ) ) ) )
+i174::tm2push
+s175:s170,s173,s172,i174:syl3anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. e. ( TM2Stmt ` T ) )
+s176:h3:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s177:h4:adantr |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) )
+s178:s176,s177:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( A. v e. Word A ( ( # ` v ) <_ ; 3 0 -> ( TMLab ` v ) e. ( 2nd ` ( 1st ` T ) ) ) /\ A. v e. Word A ( ( ( # ` v ) <_ ; 3 0 /\ ( R TMWalk v ) e. ( TM2Stmt ` T ) ) -> ( M ` ( TMLab ` v ) ) = ( R TMWalk v ) ) ) )
+s179:s94,s95,s85:3jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( W ++ <" k "> ) e. Word A /\ ( ( # ` ( W ++ <" k "> ) ) + 0 ) <_ ; 3 0 /\ 0 e. NN0 ) )
+s180:s119,s175:jca |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( R TMWalk ( W ++ <" k "> ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. /\ <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. e. ( TM2Stmt ` T ) ) )
+i181::t15own
+s182:s178,s179,s180,i181:syl3anc |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( ( M ` ( TMLab ` ( W ++ <" k "> ) ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. /\ ( TMLab ` ( W ++ <" k "> ) ) e. ( 2nd ` ( 1st ` T ) ) ) )
+s183:s182:simpld |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( M ` ( TMLab ` ( W ++ <" k "> ) ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. )
+s184:s105:fveq2d |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( M ` ( P ` k ) ) = ( M ` ( TMLab ` ( W ++ <" k "> ) ) ) )
+s185:s184,s183:eqtrd |- ( ( ph /\ k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ) -> ( M ` ( P ` k ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. )
+s186:s185:ralrimiva |- ( ph -> A. k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ( M ` ( P ` k ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. )
+s187:s56,s67:jca |- ( ph -> ( P : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) /\ ( P ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) = E ) )
+s188:s187,s186:jca |- ( ph -> ( ( P : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) /\ ( P ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) = E ) /\ A. k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ( M ` ( P ` k ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. ) )
+s189::df-tmipnv |- ( TMIpnv K N T M P E <-> ( ( P : ( 0 ... ( ( # ` ( encNatGam ` N ) ) + 1 ) ) --> ( 2nd ` ( 1st ` T ) ) /\ ( P ` ( ( # ` ( encNatGam ` N ) ) + 1 ) ) = E ) /\ A. k e. ( 0 ..^ ( ( # ` ( encNatGam ` N ) ) + 1 ) ) ( M ` ( P ` k ) ) = <. 0 , <. K , <. ( ( 2nd ` T ) X. { ( ( <" 4 "> ++ ( reverse ` ( encNatGam ` N ) ) ) ` k ) } ) , <. 5 , ( ( 2nd ` T ) X. { ( P ` ( k + 1 ) ) } ) >. >. >. >. ) )
+qed:s188,s189:sylibr |- ( ph -> TMIpnv K N T M P E )
+$)

@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=pfprodmul  LOC_AFTER=?
+
+* A product over the prime divisors of a product of coprime positive integers splits as the product of the two factors.
+
+s1::simpl |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) )
+s2:s1:simp1d |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> A e. NN )
+s3:s1:simp2d |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> B e. NN )
+s4::simpr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> G : Prime --> CC )
+s5:s2,s3:nnmulcld |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> ( A x. B ) e. NN )
+i6::pffinq
+s7:s5,i6:syl |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> { q e. Prime | q || ( A x. B ) } e. Fin )
+i8::pfmul
+s9:s1,i8:syl |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> { q e. Prime | q || ( A x. B ) } = ( { q e. Prime | q || A } u. { q e. Prime | q || B } ) )
+i10::pfdisj
+s11:s1,i10:syl |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> ( { q e. Prime | q || A } i^i { q e. Prime | q || B } ) = (/) )
+s12::simpr |- ( ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) /\ p e. { q e. Prime | q || ( A x. B ) } ) -> p e. { q e. Prime | q || ( A x. B ) } )
+i13::elrabi
+s14:s12,i13:syl |- ( ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) /\ p e. { q e. Prime | q || ( A x. B ) } ) -> p e. Prime )
+s15:s4:adantr |- ( ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) /\ p e. { q e. Prime | q || ( A x. B ) } ) -> G : Prime --> CC )
+i16::ffvelcdm
+s17:s15,s14,i16:syl2anc |- ( ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) /\ p e. { q e. Prime | q || ( A x. B ) } ) -> ( G ` p ) e. CC )
+qed:s11,s9,s7,s17:fprodsplit |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ G : Prime --> CC ) -> prod_ p e. { q e. Prime | q || ( A x. B ) } ( G ` p ) = ( prod_ p e. { q e. Prime | q || A } ( G ` p ) x. prod_ p e. { q e. Prime | q || B } ( G ` p ) ) )
+$)

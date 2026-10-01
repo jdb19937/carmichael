@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=dlogcfb  LOC_AFTER=?
+
+* The shifted coefficient function of a logarithmically weighted Dirichlet series is bounded.
+
+s1::simpl |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) )
+i2::simp1
+s3:s1,i2:syl |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> A : NN --> CC )
+i4::simp2
+s5:s1,i4:syl |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> C e. RR )
+i6::simp3
+s7:s1,i6:syl |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> A. m e. NN ( abs ` ( A ` m ) ) <_ C )
+s8::simpr |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> E e. RR+ )
+s9:s8:rpred |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> E e. RR )
+s10:s8:rpne0d |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> E =/= 0 )
+s11:s5,s9,s10:redivcld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> ( C / E ) e. RR )
+s12::simpr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> q e. NN )
+s13:s3:adantr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> A : NN --> CC )
+s14:s13,s12:ffvelcdmd |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> ( A ` q ) e. CC )
+s15:s12:nnrpd |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> q e. RR+ )
+i16::relogcl
+s17:s15,i16:syl |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> ( log ` q ) e. RR )
+s18:s17:recnd |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> ( log ` q ) e. CC )
+s19:s9:renegcld |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> -u E e. RR )
+s20:s19:adantr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> -u E e. RR )
+s21:s15,s20:rpcxpcld |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> ( q ^c -u E ) e. RR+ )
+s22:s14,s18:mulcld |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> ( ( A ` q ) x. ( log ` q ) ) e. CC )
+s23:s21:rpcnd |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> ( q ^c -u E ) e. CC )
+s24:s22,s23:mulcld |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ q e. NN ) -> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) e. CC )
+s25::eqid |- ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) = ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) )
+s26:s24,s25:fmptd |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) : NN --> CC )
+s27::simpr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> d e. NN )
+i28::dshcval
+s29:s27,i28:syl |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) = ( ( ( A ` d ) x. ( log ` d ) ) x. ( d ^c -u E ) ) )
+s30:s3:adantr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> A : NN --> CC )
+s31:s30,s27:ffvelcdmd |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( A ` d ) e. CC )
+s32::fveq2 |- ( m = d -> ( A ` m ) = ( A ` d ) )
+s33:s32:fveq2d |- ( m = d -> ( abs ` ( A ` m ) ) = ( abs ` ( A ` d ) ) )
+s34:s33:breq1d |- ( m = d -> ( ( abs ` ( A ` m ) ) <_ C <-> ( abs ` ( A ` d ) ) <_ C ) )
+s35:s7:adantr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> A. m e. NN ( abs ` ( A ` m ) ) <_ C )
+s36:s34,s35,s27:rspcdva |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( abs ` ( A ` d ) ) <_ C )
+s37:s5:adantr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> C e. RR )
+s38:s31,s36,s37:3jca |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( ( A ` d ) e. CC /\ ( abs ` ( A ` d ) ) <_ C /\ C e. RR ) )
+s39:s38,s27:jca |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( ( ( A ` d ) e. CC /\ ( abs ` ( A ` d ) ) <_ C /\ C e. RR ) /\ d e. NN ) )
+s40:s8:adantr |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> E e. RR+ )
+s41:s39,s40:jca |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( ( ( ( A ` d ) e. CC /\ ( abs ` ( A ` d ) ) <_ C /\ C e. RR ) /\ d e. NN ) /\ E e. RR+ ) )
+i42::dshcbnd
+s43:s41,i42:syl |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( abs ` ( ( ( A ` d ) x. ( log ` d ) ) x. ( d ^c -u E ) ) ) <_ ( C / E ) )
+s44:s29:fveq2d |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) ) = ( abs ` ( ( ( A ` d ) x. ( log ` d ) ) x. ( d ^c -u E ) ) ) )
+s45:s44,s43:eqbrtrd |- ( ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) /\ d e. NN ) -> ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) ) <_ ( C / E ) )
+s46:s45:ralrimiva |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> A. d e. NN ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) ) <_ ( C / E ) )
+s47::fveq2 |- ( d = m -> ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) = ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` m ) )
+s48:s47:fveq2d |- ( d = m -> ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) ) = ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` m ) ) )
+s49:s48:breq1d |- ( d = m -> ( ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) ) <_ ( C / E ) <-> ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` m ) ) <_ ( C / E ) ) )
+s50:s49:cbvralvw |- ( A. d e. NN ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) ) <_ ( C / E ) <-> A. m e. NN ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` m ) ) <_ ( C / E ) )
+s51:s50:a1i |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> ( A. d e. NN ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` d ) ) <_ ( C / E ) <-> A. m e. NN ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` m ) ) <_ ( C / E ) ) )
+s52:s46,s51:mpbid |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> A. m e. NN ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` m ) ) <_ ( C / E ) )
+qed:s26,s11,s52:3jca |- ( ( ( A : NN --> CC /\ C e. RR /\ A. m e. NN ( abs ` ( A ` m ) ) <_ C ) /\ E e. RR+ ) -> ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) : NN --> CC /\ ( C / E ) e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( ( ( A ` q ) x. ( log ` q ) ) x. ( q ^c -u E ) ) ) ` m ) ) <_ ( C / E ) ) )
+$)

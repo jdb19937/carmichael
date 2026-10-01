@@ -1,0 +1,63 @@
+$( <MM> <PROOF_ASST> THEOREM=algrecmapl  LOC_AFTER=?
+
+* Every level of the recursion of ~ df-algrec maps the parameter space into the codomain, by induction on the level.  Used at ` C = ( Cod ^m Dom ) `, where it says that the step may apply the previous level to any parameter.  Deduction form: ~ algrecmap .
+
+s1::id |- ( x = 0 -> x = 0 )
+c1:s1:fveq2d |- ( x = 0 -> ( ( B AlgRec S ) ` x ) = ( ( B AlgRec S ) ` 0 ) )
+c2:c1:eleq1d |- ( x = 0 -> ( ( ( B AlgRec S ) ` x ) e. C <-> ( ( B AlgRec S ) ` 0 ) e. C ) )
+c3:c2:imbi2d |- ( x = 0 -> ( ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` x ) e. C ) <-> ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` 0 ) e. C ) ) )
+s2::id |- ( x = y -> x = y )
+c4:s2:fveq2d |- ( x = y -> ( ( B AlgRec S ) ` x ) = ( ( B AlgRec S ) ` y ) )
+c5:c4:eleq1d |- ( x = y -> ( ( ( B AlgRec S ) ` x ) e. C <-> ( ( B AlgRec S ) ` y ) e. C ) )
+c6:c5:imbi2d |- ( x = y -> ( ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` x ) e. C ) <-> ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` y ) e. C ) ) )
+s3::id |- ( x = ( y + 1 ) -> x = ( y + 1 ) )
+c7:s3:fveq2d |- ( x = ( y + 1 ) -> ( ( B AlgRec S ) ` x ) = ( ( B AlgRec S ) ` ( y + 1 ) ) )
+c8:c7:eleq1d |- ( x = ( y + 1 ) -> ( ( ( B AlgRec S ) ` x ) e. C <-> ( ( B AlgRec S ) ` ( y + 1 ) ) e. C ) )
+c9:c8:imbi2d |- ( x = ( y + 1 ) -> ( ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` x ) e. C ) <-> ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` ( y + 1 ) ) e. C ) ) )
+s4::id |- ( x = N -> x = N )
+c10:s4:fveq2d |- ( x = N -> ( ( B AlgRec S ) ` x ) = ( ( B AlgRec S ) ` N ) )
+c11:c10:eleq1d |- ( x = N -> ( ( ( B AlgRec S ) ` x ) e. C <-> ( ( B AlgRec S ) ` N ) e. C ) )
+c12:c11:imbi2d |- ( x = N -> ( ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` x ) e. C ) <-> ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` N ) e. C ) ) )
+s5::simp1 |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> C e. _V )
+s6::simp2 |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> B e. C )
+s7::simp3 |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> S : ( C X. NN0 ) --> C )
+i8::elex
+s9:s6,i8:syl |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> B e. _V )
+s10::nn0ex |- NN0 e. _V
+s11:s10:a1i |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> NN0 e. _V )
+i12::xpexg
+s13:s5,s11,i12:syl2anc |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( C X. NN0 ) e. _V )
+i14::fex
+s15:s7,s13,i14:syl2anc |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> S e. _V )
+i16::algrec0
+s17:s9,s15,i16:syl2anc |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` 0 ) = B )
+s18:s17,s6:eqeltrd |- ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` 0 ) e. C )
+s19::simpll |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> y e. NN0 )
+s20::simplr |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) )
+s21::simpr |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( ( B AlgRec S ) ` y ) e. C )
+s22:s20:simp1d |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> C e. _V )
+s23:s20:simp2d |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> B e. C )
+s24:s20:simp3d |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> S : ( C X. NN0 ) --> C )
+i25::elex
+s26:s23,i25:syl |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> B e. _V )
+s27::nn0ex |- NN0 e. _V
+s28:s27:a1i |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> NN0 e. _V )
+i29::xpexg
+s30:s22,s28,i29:syl2anc |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( C X. NN0 ) e. _V )
+i31::fex
+s32:s24,s30,i31:syl2anc |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> S e. _V )
+i33::algrecp1
+s34:s26,s32,s19,i33:syl3anc |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( ( B AlgRec S ) ` ( y + 1 ) ) = ( ( ( B AlgRec S ) ` y ) S y ) )
+s35::df-ov |- ( ( ( B AlgRec S ) ` y ) S y ) = ( S ` <. ( ( B AlgRec S ) ` y ) , y >. )
+s36:s35:a1i |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( ( ( B AlgRec S ) ` y ) S y ) = ( S ` <. ( ( B AlgRec S ) ` y ) , y >. ) )
+i37::opelxpi
+s38:s21,s19,i37:syl2anc |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> <. ( ( B AlgRec S ) ` y ) , y >. e. ( C X. NN0 ) )
+i39::ffvelcdm
+s40:s24,s38,i39:syl2anc |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( S ` <. ( ( B AlgRec S ) ` y ) , y >. ) e. C )
+s41:s34,s36:eqtrd |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( ( B AlgRec S ) ` ( y + 1 ) ) = ( S ` <. ( ( B AlgRec S ) ` y ) , y >. ) )
+s42:s41,s40:eqeltrd |- ( ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) /\ ( ( B AlgRec S ) ` y ) e. C ) -> ( ( B AlgRec S ) ` ( y + 1 ) ) e. C )
+s43:s42:ex |- ( ( y e. NN0 /\ ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) ) -> ( ( ( B AlgRec S ) ` y ) e. C -> ( ( B AlgRec S ) ` ( y + 1 ) ) e. C ) )
+s44:s43:ex |- ( y e. NN0 -> ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( ( B AlgRec S ) ` y ) e. C -> ( ( B AlgRec S ) ` ( y + 1 ) ) e. C ) ) )
+s45:s44:a2d |- ( y e. NN0 -> ( ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` y ) e. C ) -> ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` ( y + 1 ) ) e. C ) ) )
+qed:c3,c6,c9,c12,s18,s45:nn0ind |- ( N e. NN0 -> ( ( C e. _V /\ B e. C /\ S : ( C X. NN0 ) --> C ) -> ( ( B AlgRec S ) ` N ) e. C ) )
+$)

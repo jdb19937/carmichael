@@ -1,0 +1,52 @@
+$( <MM> <PROOF_ASST> THEOREM=csegaffss  LOC_AFTER=?
+
+* If the affine image of every point of a segment lies in a class, so does the whole image segment.
+
+s1::simp1 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( C e. CC /\ P e. CC ) )
+s2::simp2 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( S e. CC /\ T e. CC ) )
+s3::simp3 |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E )
+i4::simpl
+s5:s1,i4:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> C e. CC )
+i6::simpr
+s7:s1,i6:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> P e. CC )
+i8::simpl
+s9:s2,i8:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> S e. CC )
+i10::simpr
+s11:s2,i10:syl |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> T e. CC )
+s12:s9,s7:subcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( S - P ) e. CC )
+s13:s5,s12:mulcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( C x. ( S - P ) ) e. CC )
+s14:s11,s7:subcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( T - P ) e. CC )
+s15:s5,s14:mulcld |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( C x. ( T - P ) ) e. CC )
+s16::simpr |- ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) -> y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) )
+s17:s13:adantr |- ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) -> ( C x. ( S - P ) ) e. CC )
+s18:s15:adantr |- ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) -> ( C x. ( T - P ) ) e. CC )
+i19::csegel
+s20:s17,s18,i19:syl2anc |- ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) -> ( y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) <-> E. t e. ( 0 [,] 1 ) y = ( ( C x. ( S - P ) ) + ( t x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) ) )
+s21:s20,s16:mpbid |- ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) -> E. t e. ( 0 [,] 1 ) y = ( ( C x. ( S - P ) ) + ( t x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) )
+s22::simpr |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> t e. ( 0 [,] 1 ) )
+s23::unitsscn |- ( 0 [,] 1 ) C_ CC
+s24:s23:a1i |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( 0 [,] 1 ) C_ CC )
+s25:s24,s22:sseldd |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> t e. CC )
+s26:s5:ad2antrr |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> C e. CC )
+s27:s7:ad2antrr |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> P e. CC )
+s28:s9:ad2antrr |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> S e. CC )
+s29:s11:ad2antrr |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> T e. CC )
+s30:s26,s27:jca |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( C e. CC /\ P e. CC ) )
+s31:s28,s29:jca |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( S e. CC /\ T e. CC ) )
+i32::csegaffeq
+s33:s30,s31,s25,i32:syl3anc |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( ( C x. ( S - P ) ) + ( t x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) = ( C x. ( ( S + ( t x. ( T - S ) ) ) - P ) ) )
+i34::cseglin
+s35:s28,s29,s22,i34:syl3anc |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( S + ( t x. ( T - S ) ) ) e. ( S cseg T ) )
+s36::oveq1 |- ( z = ( S + ( t x. ( T - S ) ) ) -> ( z - P ) = ( ( S + ( t x. ( T - S ) ) ) - P ) )
+s37:s36:oveq2d |- ( z = ( S + ( t x. ( T - S ) ) ) -> ( C x. ( z - P ) ) = ( C x. ( ( S + ( t x. ( T - S ) ) ) - P ) ) )
+s38:s37:eleq1d |- ( z = ( S + ( t x. ( T - S ) ) ) -> ( ( C x. ( z - P ) ) e. E <-> ( C x. ( ( S + ( t x. ( T - S ) ) ) - P ) ) e. E ) )
+s39:s3:ad2antrr |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E )
+s40:s38,s39,s35:rspcdva |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( C x. ( ( S + ( t x. ( T - S ) ) ) - P ) ) e. E )
+s41:s33,s40:eqeltrd |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( ( C x. ( S - P ) ) + ( t x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) e. E )
+i42::eleq1a
+s43:s41,i42:syl |- ( ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) /\ t e. ( 0 [,] 1 ) ) -> ( y = ( ( C x. ( S - P ) ) + ( t x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) -> y e. E ) )
+s44:s43:rexlimdva |- ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) -> ( E. t e. ( 0 [,] 1 ) y = ( ( C x. ( S - P ) ) + ( t x. ( ( C x. ( T - P ) ) - ( C x. ( S - P ) ) ) ) ) -> y e. E ) )
+s45:s44,s21:mpd |- ( ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) /\ y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) ) -> y e. E )
+s46:s45:ex |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( y e. ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) -> y e. E ) )
+qed:s46:ssrdv |- ( ( ( C e. CC /\ P e. CC ) /\ ( S e. CC /\ T e. CC ) /\ A. z e. ( S cseg T ) ( C x. ( z - P ) ) e. E ) -> ( ( C x. ( S - P ) ) cseg ( C x. ( T - P ) ) ) C_ E )
+$)

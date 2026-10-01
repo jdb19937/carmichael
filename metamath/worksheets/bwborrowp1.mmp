@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=bwborrowp1  LOC_AFTER=?
+
+* The borrow into position I + 1 is the borrow of the two digits at I and the borrow into I (the recursive form, unconditionally).
+
+s1::simpl1 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> A e. ZZ )
+s2::simpl2 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> B e. ZZ )
+s3::simpl3 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> C e. 2o )
+s4::simpr |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> I e. NN0 )
+s5::1nn0 |- 1 e. NN0
+s6:s5:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> 1 e. NN0 )
+s7:s4,s6:nn0addcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( I + 1 ) e. NN0 )
+s8::simpl |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) )
+i9::bwborrow
+s10:s8,s7,i9:syl2anc |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( borrow ( A bwFold B ) C ) ` ( I + 1 ) ) = if ( ( A mod ( 2 ^ ( I + 1 ) ) ) < ( ( B mod ( 2 ^ ( I + 1 ) ) ) + ( bToNat ` C ) ) , 1o , (/) ) )
+s11::bwsublem4 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> if ( ( A mod ( 2 ^ ( I + 1 ) ) ) < ( ( B mod ( 2 ^ ( I + 1 ) ) ) + ( bToNat ` C ) ) , 1o , (/) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) borrow if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) )
+s12::bwborrow |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( borrow ( A bwFold B ) C ) ` I ) = if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) )
+s13:s12:fveq2d |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( if ( I e. ( bits ` A ) , 1o , (/) ) borrow if ( I e. ( bits ` B ) , 1o , (/) ) ) ` ( ( borrow ( A bwFold B ) C ) ` I ) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) borrow if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) )
+s14:s10,s11:eqtrd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( borrow ( A bwFold B ) C ) ` ( I + 1 ) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) borrow if ( I e. ( bits ` B ) , 1o , (/) ) ) ` if ( ( A mod ( 2 ^ I ) ) < ( ( B mod ( 2 ^ I ) ) + ( bToNat ` C ) ) , 1o , (/) ) ) )
+qed:s14,s13:eqtr4d |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( borrow ( A bwFold B ) C ) ` ( I + 1 ) ) = ( ( if ( I e. ( bits ` A ) , 1o , (/) ) borrow if ( I e. ( bits ` B ) , 1o , (/) ) ) ` ( ( borrow ( A bwFold B ) C ) ` I ) ) )
+$)

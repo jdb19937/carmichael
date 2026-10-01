@@ -1,0 +1,19 @@
+$( <MM> <PROOF_ASST> THEOREM=bwbnval  LOC_AFTER=?
+
+* Value of bToNat: 1 for true, 0 for false (Lean: Bool.toNat).
+
+s1::id |- ( C e. 2o -> C e. 2o )
+s2::id |- ( b = C -> b = C )
+c1:s2:eqeq1d |- ( b = C -> ( b = 1o <-> C = 1o ) )
+c2:c1:ifbid |- ( b = C -> if ( b = 1o , 1 , 0 ) = if ( C = 1o , 1 , 0 ) )
+s3::df-btonat |- bToNat = ( b e. 2o |-> if ( b = 1o , 1 , 0 ) )
+s4::ax-1cn |- 1 e. CC
+s5:s4:a1i |- ( C e. 2o -> 1 e. CC )
+s6:s5:elexd |- ( C e. 2o -> 1 e. _V )
+s7::0cn |- 0 e. CC
+s8:s7:a1i |- ( C e. 2o -> 0 e. CC )
+s9:s8:elexd |- ( C e. 2o -> 0 e. _V )
+s10:s6,s9:ifcld |- ( C e. 2o -> if ( C = 1o , 1 , 0 ) e. _V )
+s11:c2,s3:fvmptg |- ( ( C e. 2o /\ if ( C = 1o , 1 , 0 ) e. _V ) -> ( bToNat ` C ) = if ( C = 1o , 1 , 0 ) )
+qed:s1,s10,s11:syl2anc |- ( C e. 2o -> ( bToNat ` C ) = if ( C = 1o , 1 , 0 ) )
+$)

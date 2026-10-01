@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=goodprimesval  LOC_AFTER=?
+
+* Value of goodPrimes: the primes q in ( z ^ ( 99 / 100 ) , z ] with q - 1 smooth up to yscale (Lean: goodPrimes).
+
+s1::simpl |- ( ( c = C /\ n = N ) -> c = C )
+s2::simpr |- ( ( c = C /\ n = N ) -> n = N )
+c1:s1,s2:oveq12d |- ( ( c = C /\ n = N ) -> ( c zscale n ) = ( C zscale N ) )
+c2:c1:oveq2d |- ( ( c = C /\ n = N ) -> ( 0 ... ( c zscale n ) ) = ( 0 ... ( C zscale N ) ) )
+c3:s1,s2:oveq12d |- ( ( c = C /\ n = N ) -> ( c zscale n ) = ( C zscale N ) )
+c4:c3:oveq1d |- ( ( c = C /\ n = N ) -> ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) = ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) )
+c5:c4:breq1d |- ( ( c = C /\ n = N ) -> ( ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q <-> ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q ) )
+c6:s1,s2:oveq12d |- ( ( c = C /\ n = N ) -> ( c yscale n ) = ( C yscale N ) )
+c7:c6:breq2d |- ( ( c = C /\ n = N ) -> ( p <_ ( c yscale n ) <-> p <_ ( C yscale N ) ) )
+c8:c7:imbi2d |- ( ( c = C /\ n = N ) -> ( ( p || ( q - 1 ) -> p <_ ( c yscale n ) ) <-> ( p || ( q - 1 ) -> p <_ ( C yscale N ) ) ) )
+c9:c8:ralbidv |- ( ( c = C /\ n = N ) -> ( A. p e. Prime ( p || ( q - 1 ) -> p <_ ( c yscale n ) ) <-> A. p e. Prime ( p || ( q - 1 ) -> p <_ ( C yscale N ) ) ) )
+c10::biidd |- ( ( c = C /\ n = N ) -> ( q e. Prime <-> q e. Prime ) )
+c11:c10,c5,c9:3anbi123d |- ( ( c = C /\ n = N ) -> ( ( q e. Prime /\ ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ ( c yscale n ) ) ) <-> ( q e. Prime /\ ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ ( C yscale N ) ) ) ) )
+c12:c2,c11:rabeqbidv |- ( ( c = C /\ n = N ) -> { q e. ( 0 ... ( c zscale n ) ) | ( q e. Prime /\ ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ ( c yscale n ) ) ) } = { q e. ( 0 ... ( C zscale N ) ) | ( q e. Prime /\ ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ ( C yscale N ) ) ) } )
+s3::df-goodprimes |- goodPrimes = ( c e. RR , n e. NN0 |-> { q e. ( 0 ... ( c zscale n ) ) | ( q e. Prime /\ ( ( c zscale n ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ ( c yscale n ) ) ) } )
+s4::ovex |- ( 0 ... ( C zscale N ) ) e. _V
+s5:s4:rabex |- { q e. ( 0 ... ( C zscale N ) ) | ( q e. Prime /\ ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ ( C yscale N ) ) ) } e. _V
+qed:c12,s3,s5:ovmpoa |- ( ( C e. RR /\ N e. NN0 ) -> ( C goodPrimes N ) = { q e. ( 0 ... ( C zscale N ) ) | ( q e. Prime /\ ( ( C zscale N ) ^c ( ; 9 9 / ; ; 1 0 0 ) ) < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ ( C yscale N ) ) ) } )
+$)

@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=cseglinre  LOC_AFTER=?
+
+* The real part of a point of the parametrisation of a segment.
+
+s1::simp1 |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> A e. CC )
+s2::simp2 |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> B e. CC )
+s3::simp3 |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> T e. RR )
+s4:s3:recnd |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> T e. CC )
+s5:s2,s1:subcld |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( B - A ) e. CC )
+s6:s4,s5:mulcld |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( T x. ( B - A ) ) e. CC )
+i7::readd
+s8:s1,s6,i7:syl2anc |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( Re ` ( A + ( T x. ( B - A ) ) ) ) = ( ( Re ` A ) + ( Re ` ( T x. ( B - A ) ) ) ) )
+i9::remul2
+s10:s3,s5,i9:syl2anc |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( Re ` ( T x. ( B - A ) ) ) = ( T x. ( Re ` ( B - A ) ) ) )
+i11::resub
+s12:s2,s1,i11:syl2anc |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( Re ` ( B - A ) ) = ( ( Re ` B ) - ( Re ` A ) ) )
+s13:s12:oveq2d |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( T x. ( Re ` ( B - A ) ) ) = ( T x. ( ( Re ` B ) - ( Re ` A ) ) ) )
+s14:s10,s13:eqtrd |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( Re ` ( T x. ( B - A ) ) ) = ( T x. ( ( Re ` B ) - ( Re ` A ) ) ) )
+s15:s14:oveq2d |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( ( Re ` A ) + ( Re ` ( T x. ( B - A ) ) ) ) = ( ( Re ` A ) + ( T x. ( ( Re ` B ) - ( Re ` A ) ) ) ) )
+qed:s8,s15:eqtrd |- ( ( A e. CC /\ B e. CC /\ T e. RR ) -> ( Re ` ( A + ( T x. ( B - A ) ) ) ) = ( ( Re ` A ) + ( T x. ( ( Re ` B ) - ( Re ` A ) ) ) ) )
+$)

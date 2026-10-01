@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2clcong6  LOC_AFTER=?
+
+* The clauses of halt agree for the depth-N function and TM2sa.
+
+s1::simpll |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> T e. V )
+s2::simplr |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> N e. _om )
+s3::simpr |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+s4:s1,s2:jca |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( T e. V /\ N e. _om ) )
+i5::tm2layssstmt
+s6:s1,s2,i5:syl2anc |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) C_ ( TM2Stmt ` T ) )
+i7::tm2halt
+s8:s1,i7:syl |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> <. 6 , (/) >. e. ( TM2Stmt ` T ) )
+s9:s8,s3:jca |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. e. ( TM2Stmt ` T ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+s10::fvex |- ( 2nd ` ( rec ( ( z e. _V |-> <. ( T TM2lay ( 1st ` z ) ) , ( ( 2nd ` z ) u. ( q e. ( ( T TM2lay ( 1st ` z ) ) \ ( 1st ` z ) ) , p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) |-> ( q ( T TM2cl ( 2nd ` z ) ) p ) ) ) >. ) , <. (/) , (/) >. ) ` N ) ) e. _V
+s11:s10:a1i |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( 2nd ` ( rec ( ( z e. _V |-> <. ( T TM2lay ( 1st ` z ) ) , ( ( 2nd ` z ) u. ( q e. ( ( T TM2lay ( 1st ` z ) ) \ ( 1st ` z ) ) , p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) |-> ( q ( T TM2cl ( 2nd ` z ) ) p ) ) ) >. ) , <. (/) , (/) >. ) ` N ) ) e. _V )
+s12:s1,s11:jca |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( T e. V /\ ( 2nd ` ( rec ( ( z e. _V |-> <. ( T TM2lay ( 1st ` z ) ) , ( ( 2nd ` z ) u. ( q e. ( ( T TM2lay ( 1st ` z ) ) \ ( 1st ` z ) ) , p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) |-> ( q ( T TM2cl ( 2nd ` z ) ) p ) ) ) >. ) , <. (/) , (/) >. ) ` N ) ) e. _V ) )
+i13::tm2clhalt
+s14:s12,s9,i13:syl2anc |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( T TM2cl ( 2nd ` ( rec ( ( z e. _V |-> <. ( T TM2lay ( 1st ` z ) ) , ( ( 2nd ` z ) u. ( q e. ( ( T TM2lay ( 1st ` z ) ) \ ( 1st ` z ) ) , p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) |-> ( q ( T TM2cl ( 2nd ` z ) ) p ) ) ) >. ) , <. (/) , (/) >. ) ` N ) ) ) P ) = <. ( inr ` (/) ) , P >. )
+s15::fvex |- ( TM2sa ` T ) e. _V
+s16:s15:a1i |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( TM2sa ` T ) e. _V )
+s17:s1,s16:jca |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( T e. V /\ ( TM2sa ` T ) e. _V ) )
+i18::tm2clhalt
+s19:s17,s9,i18:syl2anc |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( T TM2cl ( TM2sa ` T ) ) P ) = <. ( inr ` (/) ) , P >. )
+qed:s14,s19:eqtr4d |- ( ( ( T e. V /\ N e. _om ) /\ P e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( T TM2cl ( 2nd ` ( rec ( ( z e. _V |-> <. ( T TM2lay ( 1st ` z ) ) , ( ( 2nd ` z ) u. ( q e. ( ( T TM2lay ( 1st ` z ) ) \ ( 1st ` z ) ) , p e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) |-> ( q ( T TM2cl ( 2nd ` z ) ) p ) ) ) >. ) , <. (/) , (/) >. ) ` N ) ) ) P ) = ( <. 6 , (/) >. ( T TM2cl ( TM2sa ` T ) ) P ) )
+$)

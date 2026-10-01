@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=notmemtdcl  LOC_AFTER=?
+
+* The value of ~ df-notmemtd is a pair of a result and an operation count.  Lean: notMemTD, the non-membership test of step 5.
+
+s1::simpr |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> S e. Word NN0 )
+s2::simpl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> Q e. NN0 )
+s3::simpl |- ( ( p = Q /\ l = S ) -> p = Q )
+s4::simpr |- ( ( p = Q /\ l = S ) -> l = S )
+c1:s3:fveq2d |- ( ( p = Q /\ l = S ) -> ( NotMemS ` p ) = ( NotMemS ` Q ) )
+c2:c1:oveq2d |- ( ( p = Q /\ l = S ) -> ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` p ) ) = ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) )
+c3:s4:fveq2d |- ( ( p = Q /\ l = S ) -> ( # ` l ) = ( # ` S ) )
+c4:c2,c3:fveq12d |- ( ( p = Q /\ l = S ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` p ) ) ` ( # ` l ) ) = ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) )
+c5:c4,s4:fveq12d |- ( ( p = Q /\ l = S ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` p ) ) ` ( # ` l ) ) ` l ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) )
+s5::df-notmemtd |- NotMemTD = ( p e. NN0 , l e. Word NN0 |-> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` p ) ) ` ( # ` l ) ) ` l ) )
+s6::fvex |- ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) e. _V
+s7:s6:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) e. _V )
+s8:c5,s5:ovmpoga |- ( ( Q e. NN0 /\ S e. Word NN0 /\ ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) e. _V ) -> ( Q NotMemTD S ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) )
+s9:s2,s1,s7,s8:syl3anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( Q NotMemTD S ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) )
+s10::lencl |- ( S e. Word NN0 -> ( # ` S ) e. NN0 )
+s11:s1,s10:syl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( # ` S ) e. NN0 )
+s12::ovex |- ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V
+s13:s12:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V )
+s14::simpr |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> g e. Word NN0 )
+s15::1oel2o |- 1o e. 2o
+s16:s15:a1i |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> 1o e. 2o )
+s17::0nn0 |- 0 e. NN0
+s18:s17:a1i |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> 0 e. NN0 )
+s19::opelxpi |- ( ( 1o e. 2o /\ 0 e. NN0 ) -> <. 1o , 0 >. e. ( 2o X. NN0 ) )
+s20:s16,s18,s19:syl2anc |- ( ( ( Q e. NN0 /\ S e. Word NN0 ) /\ g e. Word NN0 ) -> <. 1o , 0 >. e. ( 2o X. NN0 ) )
+s21::eqid |- ( g e. Word NN0 |-> <. 1o , 0 >. ) = ( g e. Word NN0 |-> <. 1o , 0 >. )
+s22:s20,s21:fmptd |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) )
+s23::2oex |- 2o e. _V
+s24:s23:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> 2o e. _V )
+s25::nn0ex |- NN0 e. _V
+s26:s25:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> NN0 e. _V )
+s27::xpexg |- ( ( 2o e. _V /\ NN0 e. _V ) -> ( 2o X. NN0 ) e. _V )
+s28:s24,s26,s27:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( 2o X. NN0 ) e. _V )
+s29::wrdexi |- Word NN0 e. _V
+s30:s29:a1i |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> Word NN0 e. _V )
+s31::elmapg |- ( ( ( 2o X. NN0 ) e. _V /\ Word NN0 e. _V ) -> ( ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) <-> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) ) )
+s32:s28,s30,s31:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) <-> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) ) )
+s33:s22,s32:mpbird |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s34::notmemtdsf |- ( Q e. NN0 -> ( NotMemS ` Q ) : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s35:s2,s34:syl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( NotMemS ` Q ) : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s36:s13,s33,s35:3jca |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V /\ ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) /\ ( NotMemS ` Q ) : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) ) )
+s37::algrecmap |- ( ( ( ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V /\ ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) /\ ( NotMemS ` Q ) : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) ) /\ ( # ` S ) e. NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s38:s36,s11,s37:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s39::elmapi |- ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) : Word NN0 --> ( 2o X. NN0 ) )
+s40:s38,s39:syl |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) : Word NN0 --> ( 2o X. NN0 ) )
+s41::ffvelcdm |- ( ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) : Word NN0 --> ( 2o X. NN0 ) /\ S e. Word NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) e. ( 2o X. NN0 ) )
+s42:s40,s1,s41:syl2anc |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( NotMemS ` Q ) ) ` ( # ` S ) ) ` S ) e. ( 2o X. NN0 ) )
+qed:s9,s42:eqeltrd |- ( ( Q e. NN0 /\ S e. Word NN0 ) -> ( Q NotMemTD S ) e. ( 2o X. NN0 ) )
+$)

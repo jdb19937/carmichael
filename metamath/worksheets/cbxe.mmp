@@ -1,0 +1,204 @@
+$( <MM> <PROOF_ASST> THEOREM=cbxe  LOC_AFTER=?
+
+* The scan bound X = L ^ 5 is below exp ( 75 M ) (Lean AlgBudget.lean, ` hxE ` of costPieces_bound).
+
+h1::cbxe.1 |- ( ph -> M e. RR )
+h2::cbxe.2 |- ( ph -> L e. RR )
+h3::cbxe.3 |- ( ph -> 0 <_ L )
+h4::cbxe.4 |- ( ph -> L <_ ( exp ` ( ; 1 5 x. M ) ) )
+h5::cbxe.5 |- ( ph -> X e. RR )
+h6::cbxe.6 |- ( ph -> X = ( L ^ 5 ) )
+s1::1nn0 |- 1 e. NN0
+s2::5nn0 |- 5 e. NN0
+s3:s1,s2:deccl |- ; 1 5 e. NN0
+s4:s3:nn0rei |- ; 1 5 e. RR
+s5:s4:a1i |- ( ph -> ; 1 5 e. RR )
+s6:s5,1:remulcld |- ( ph -> ( ; 1 5 x. M ) e. RR )
+s7:s6:reefcld |- ( ph -> ( exp ` ( ; 1 5 x. M ) ) e. RR )
+s8:s2:a1i |- ( ph -> 5 e. NN0 )
+s9:2,s7,s8:3jca |- ( ph -> ( L e. RR /\ ( exp ` ( ; 1 5 x. M ) ) e. RR /\ 5 e. NN0 ) )
+s10:3,4:jca |- ( ph -> ( 0 <_ L /\ L <_ ( exp ` ( ; 1 5 x. M ) ) ) )
+s11:s9,s10:jca |- ( ph -> ( ( L e. RR /\ ( exp ` ( ; 1 5 x. M ) ) e. RR /\ 5 e. NN0 ) /\ ( 0 <_ L /\ L <_ ( exp ` ( ; 1 5 x. M ) ) ) ) )
+i12::leexp1a
+s13:s11,i12:syl |- ( ph -> ( L ^ 5 ) <_ ( ( exp ` ( ; 1 5 x. M ) ) ^ 5 ) )
+s14:s3:nn0cni |- ; 1 5 e. CC
+s15:s14:a1i |- ( ph -> ; 1 5 e. CC )
+s16:1:recnd |- ( ph -> M e. CC )
+s17:s15,s16:mulcld |- ( ph -> ( ; 1 5 x. M ) e. CC )
+s18:s8:nn0zd |- ( ph -> 5 e. ZZ )
+i19::efexp
+s20:s17,s18,i19:syl2anc |- ( ph -> ( exp ` ( 5 x. ( ; 1 5 x. M ) ) ) = ( ( exp ` ( ; 1 5 x. M ) ) ^ 5 ) )
+s21::5re |- 5 e. RR
+s22:s21:a1i |- ( ph -> 5 e. RR )
+s23:s22,s6:remulcld |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) e. RR )
+s24::7nn0 |- 7 e. NN0
+s25:s24,s2:deccl |- ; 7 5 e. NN0
+s26:s25:nn0rei |- ; 7 5 e. RR
+s27:s26:a1i |- ( ph -> ; 7 5 e. RR )
+s28:s27,1:remulcld |- ( ph -> ( ; 7 5 x. M ) e. RR )
+s29::0le0 |- 0 <_ 0
+s30:s29:a1i |- ( ph -> 0 <_ 0 )
+s31::eqidd |- ( ph -> 0 = 0 )
+s32:s25:nn0cni |- ; 7 5 e. CC
+s33:s32:a1i |- ( ph -> ; 7 5 e. CC )
+s34:1:recnd |- ( ph -> M e. CC )
+s35:s33,s34:mulcld |- ( ph -> ( ; 7 5 x. M ) e. CC )
+s36::5cn |- 5 e. CC
+s37:s36:a1i |- ( ph -> 5 e. CC )
+s38:s14:a1i |- ( ph -> ; 1 5 e. CC )
+s39:s38,s34:mulcld |- ( ph -> ( ; 1 5 x. M ) e. CC )
+s40:s37,s39:mulcld |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) e. CC )
+s41:s35,s40:negsubd |- ( ph -> ( ( ; 7 5 x. M ) + -u ( 5 x. ( ; 1 5 x. M ) ) ) = ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) )
+s42:s41:eqcomd |- ( ph -> ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) = ( ( ; 7 5 x. M ) + -u ( 5 x. ( ; 1 5 x. M ) ) ) )
+s43:s40:mulm1d |- ( ph -> ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) = -u ( 5 x. ( ; 1 5 x. M ) ) )
+s44:s43:eqcomd |- ( ph -> -u ( 5 x. ( ; 1 5 x. M ) ) = ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) )
+s45:s44:oveq2d |- ( ph -> ( ( ; 7 5 x. M ) + -u ( 5 x. ( ; 1 5 x. M ) ) ) = ( ( ; 7 5 x. M ) + ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) ) )
+s46:s35:addlidd |- ( ph -> ( 0 + ( ; 7 5 x. M ) ) = ( ; 7 5 x. M ) )
+s47:s46:eqcomd |- ( ph -> ( ; 7 5 x. M ) = ( 0 + ( ; 7 5 x. M ) ) )
+s48::ax-1cn |- 1 e. CC
+s49:s48:negcli |- -u 1 e. CC
+s50:s49:a1i |- ( ph -> -u 1 e. CC )
+s51:s50,s37,s39:mulassd |- ( ph -> ( ( -u 1 x. 5 ) x. ( ; 1 5 x. M ) ) = ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) )
+s52:s51:eqcomd |- ( ph -> ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) = ( ( -u 1 x. 5 ) x. ( ; 1 5 x. M ) ) )
+s53:s36:mullidi |- ( 1 x. 5 ) = 5
+s54:s48,s36:mulneg1i |- ( -u 1 x. 5 ) = -u ( 1 x. 5 )
+s55:s53:negeqi |- -u ( 1 x. 5 ) = -u 5
+s56:s54,s55:eqtri |- ( -u 1 x. 5 ) = -u 5
+s57:s56:a1i |- ( ph -> ( -u 1 x. 5 ) = -u 5 )
+s58:s57:oveq1d |- ( ph -> ( ( -u 1 x. 5 ) x. ( ; 1 5 x. M ) ) = ( -u 5 x. ( ; 1 5 x. M ) ) )
+s59:s36:negcli |- -u 5 e. CC
+s60:s59:a1i |- ( ph -> -u 5 e. CC )
+s61:s60,s38,s34:mulassd |- ( ph -> ( ( -u 5 x. ; 1 5 ) x. M ) = ( -u 5 x. ( ; 1 5 x. M ) ) )
+s62:s61:eqcomd |- ( ph -> ( -u 5 x. ( ; 1 5 x. M ) ) = ( ( -u 5 x. ; 1 5 ) x. M ) )
+s63:s36,s14:mulcomi |- ( 5 x. ; 1 5 ) = ( ; 1 5 x. 5 )
+s64:s53:oveq1i |- ( ( 1 x. 5 ) + 2 ) = ( 5 + 2 )
+s65::5p2e7 |- ( 5 + 2 ) = 7
+s66:s64,s65:eqtri |- ( ( 1 x. 5 ) + 2 ) = 7
+s67::eqid |- ; 1 5 = ; 1 5
+s68::2nn0 |- 2 e. NN0
+s69::5t5e25 |- ( 5 x. 5 ) = ; 2 5
+s70:s2,s1,s2,s67,s2,s68,s66,s69:decmul1c |- ( ; 1 5 x. 5 ) = ; 7 5
+s71:s63,s70:eqtri |- ( 5 x. ; 1 5 ) = ; 7 5
+s72:s36,s14:mulneg1i |- ( -u 5 x. ; 1 5 ) = -u ( 5 x. ; 1 5 )
+s73:s71:negeqi |- -u ( 5 x. ; 1 5 ) = -u ; 7 5
+s74:s72,s73:eqtri |- ( -u 5 x. ; 1 5 ) = -u ; 7 5
+s75:s74:a1i |- ( ph -> ( -u 5 x. ; 1 5 ) = -u ; 7 5 )
+s76:s75:oveq1d |- ( ph -> ( ( -u 5 x. ; 1 5 ) x. M ) = ( -u ; 7 5 x. M ) )
+s77:s32:negcli |- -u ; 7 5 e. CC
+s78:s77:a1i |- ( ph -> -u ; 7 5 e. CC )
+s79:s78,s34:mulcld |- ( ph -> ( -u ; 7 5 x. M ) e. CC )
+s80:s79:addlidd |- ( ph -> ( 0 + ( -u ; 7 5 x. M ) ) = ( -u ; 7 5 x. M ) )
+s81:s80:eqcomd |- ( ph -> ( -u ; 7 5 x. M ) = ( 0 + ( -u ; 7 5 x. M ) ) )
+s82:s62,s76:eqtrd |- ( ph -> ( -u 5 x. ( ; 1 5 x. M ) ) = ( -u ; 7 5 x. M ) )
+s83:s82,s81:eqtrd |- ( ph -> ( -u 5 x. ( ; 1 5 x. M ) ) = ( 0 + ( -u ; 7 5 x. M ) ) )
+s84:s52,s58:eqtrd |- ( ph -> ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) = ( -u 5 x. ( ; 1 5 x. M ) ) )
+s85:s84,s83:eqtrd |- ( ph -> ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) = ( 0 + ( -u ; 7 5 x. M ) ) )
+s86:s47,s85:oveq12d |- ( ph -> ( ( ; 7 5 x. M ) + ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) ) = ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) )
+s87::0cn |- 0 e. CC
+s88:s87:a1i |- ( ph -> 0 e. CC )
+s89:s88,s35,s88,s79:add4d |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = ( ( 0 + 0 ) + ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) ) )
+s90:s87:addlidi |- ( 0 + 0 ) = 0
+s91:s90:a1i |- ( ph -> ( 0 + 0 ) = 0 )
+s92:s33,s78,s34:adddird |- ( ph -> ( ( ; 7 5 + -u ; 7 5 ) x. M ) = ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) )
+s93:s92:eqcomd |- ( ph -> ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) = ( ( ; 7 5 + -u ; 7 5 ) x. M ) )
+s94:s32:negidi |- ( ; 7 5 + -u ; 7 5 ) = 0
+s95:s94:a1i |- ( ph -> ( ; 7 5 + -u ; 7 5 ) = 0 )
+s96:s95:oveq1d |- ( ph -> ( ( ; 7 5 + -u ; 7 5 ) x. M ) = ( 0 x. M ) )
+s97:s93,s96:eqtrd |- ( ph -> ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) = ( 0 x. M ) )
+s98:s91,s97:oveq12d |- ( ph -> ( ( 0 + 0 ) + ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) ) = ( 0 + ( 0 x. M ) ) )
+s99:s89,s98:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = ( 0 + ( 0 x. M ) ) )
+s100:s34:mul02d |- ( ph -> ( 0 x. M ) = 0 )
+s101:s100:oveq2d |- ( ph -> ( 0 + ( 0 x. M ) ) = ( 0 + 0 ) )
+s102:s88:addridd |- ( ph -> ( 0 + 0 ) = 0 )
+s103:s99,s101:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = ( 0 + 0 ) )
+s104:s103,s102:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = 0 )
+s105:s42,s45:eqtrd |- ( ph -> ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) = ( ( ; 7 5 x. M ) + ( -u 1 x. ( 5 x. ( ; 1 5 x. M ) ) ) ) )
+s106:s105,s86:eqtrd |- ( ph -> ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) = ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) )
+s107:s106,s104:eqtrd |- ( ph -> ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) = 0 )
+s108:s31,s107:eqtr4d |- ( ph -> 0 = ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) )
+s109:s30,s108:breqtrd |- ( ph -> 0 <_ ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) )
+s110:s21:a1i |- ( ph -> 5 e. RR )
+s111:s4:a1i |- ( ph -> ; 1 5 e. RR )
+s112:s111,1:remulcld |- ( ph -> ( ; 1 5 x. M ) e. RR )
+s113:s110,s112:remulcld |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) e. RR )
+s114:s26:a1i |- ( ph -> ; 7 5 e. RR )
+s115:s114,1:remulcld |- ( ph -> ( ; 7 5 x. M ) e. RR )
+s116:s115,s113:subge0d |- ( ph -> ( 0 <_ ( ( ; 7 5 x. M ) - ( 5 x. ( ; 1 5 x. M ) ) ) <-> ( 5 x. ( ; 1 5 x. M ) ) <_ ( ; 7 5 x. M ) ) )
+s117:s109,s116:mpbid |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) <_ ( ; 7 5 x. M ) )
+s118:s29:a1i |- ( ph -> 0 <_ 0 )
+s119::eqidd |- ( ph -> 0 = 0 )
+s120:s36:a1i |- ( ph -> 5 e. CC )
+s121:s14:a1i |- ( ph -> ; 1 5 e. CC )
+s122:1:recnd |- ( ph -> M e. CC )
+s123:s121,s122:mulcld |- ( ph -> ( ; 1 5 x. M ) e. CC )
+s124:s120,s123:mulcld |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) e. CC )
+s125:s32:a1i |- ( ph -> ; 7 5 e. CC )
+s126:s125,s122:mulcld |- ( ph -> ( ; 7 5 x. M ) e. CC )
+s127:s124,s126:negsubd |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) + -u ( ; 7 5 x. M ) ) = ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) )
+s128:s127:eqcomd |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) = ( ( 5 x. ( ; 1 5 x. M ) ) + -u ( ; 7 5 x. M ) ) )
+s129:s126:mulm1d |- ( ph -> ( -u 1 x. ( ; 7 5 x. M ) ) = -u ( ; 7 5 x. M ) )
+s130:s129:eqcomd |- ( ph -> -u ( ; 7 5 x. M ) = ( -u 1 x. ( ; 7 5 x. M ) ) )
+s131:s130:oveq2d |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) + -u ( ; 7 5 x. M ) ) = ( ( 5 x. ( ; 1 5 x. M ) ) + ( -u 1 x. ( ; 7 5 x. M ) ) ) )
+s132:s120,s121,s122:mulassd |- ( ph -> ( ( 5 x. ; 1 5 ) x. M ) = ( 5 x. ( ; 1 5 x. M ) ) )
+s133:s132:eqcomd |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) = ( ( 5 x. ; 1 5 ) x. M ) )
+s134:s71:a1i |- ( ph -> ( 5 x. ; 1 5 ) = ; 7 5 )
+s135:s134:oveq1d |- ( ph -> ( ( 5 x. ; 1 5 ) x. M ) = ( ; 7 5 x. M ) )
+s136:s126:addlidd |- ( ph -> ( 0 + ( ; 7 5 x. M ) ) = ( ; 7 5 x. M ) )
+s137:s136:eqcomd |- ( ph -> ( ; 7 5 x. M ) = ( 0 + ( ; 7 5 x. M ) ) )
+s138:s133,s135:eqtrd |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) = ( ; 7 5 x. M ) )
+s139:s138,s137:eqtrd |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) = ( 0 + ( ; 7 5 x. M ) ) )
+s140:s49:a1i |- ( ph -> -u 1 e. CC )
+s141:s140,s125,s122:mulassd |- ( ph -> ( ( -u 1 x. ; 7 5 ) x. M ) = ( -u 1 x. ( ; 7 5 x. M ) ) )
+s142:s141:eqcomd |- ( ph -> ( -u 1 x. ( ; 7 5 x. M ) ) = ( ( -u 1 x. ; 7 5 ) x. M ) )
+s143:s32:mullidi |- ( 1 x. ; 7 5 ) = ; 7 5
+s144:s48,s32:mulneg1i |- ( -u 1 x. ; 7 5 ) = -u ( 1 x. ; 7 5 )
+s145:s143:negeqi |- -u ( 1 x. ; 7 5 ) = -u ; 7 5
+s146:s144,s145:eqtri |- ( -u 1 x. ; 7 5 ) = -u ; 7 5
+s147:s146:a1i |- ( ph -> ( -u 1 x. ; 7 5 ) = -u ; 7 5 )
+s148:s147:oveq1d |- ( ph -> ( ( -u 1 x. ; 7 5 ) x. M ) = ( -u ; 7 5 x. M ) )
+s149:s77:a1i |- ( ph -> -u ; 7 5 e. CC )
+s150:s149,s122:mulcld |- ( ph -> ( -u ; 7 5 x. M ) e. CC )
+s151:s150:addlidd |- ( ph -> ( 0 + ( -u ; 7 5 x. M ) ) = ( -u ; 7 5 x. M ) )
+s152:s151:eqcomd |- ( ph -> ( -u ; 7 5 x. M ) = ( 0 + ( -u ; 7 5 x. M ) ) )
+s153:s142,s148:eqtrd |- ( ph -> ( -u 1 x. ( ; 7 5 x. M ) ) = ( -u ; 7 5 x. M ) )
+s154:s153,s152:eqtrd |- ( ph -> ( -u 1 x. ( ; 7 5 x. M ) ) = ( 0 + ( -u ; 7 5 x. M ) ) )
+s155:s139,s154:oveq12d |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) + ( -u 1 x. ( ; 7 5 x. M ) ) ) = ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) )
+s156:s87:a1i |- ( ph -> 0 e. CC )
+s157:s156,s126,s156,s150:add4d |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = ( ( 0 + 0 ) + ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) ) )
+s158:s90:a1i |- ( ph -> ( 0 + 0 ) = 0 )
+s159:s125,s149,s122:adddird |- ( ph -> ( ( ; 7 5 + -u ; 7 5 ) x. M ) = ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) )
+s160:s159:eqcomd |- ( ph -> ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) = ( ( ; 7 5 + -u ; 7 5 ) x. M ) )
+s161:s94:a1i |- ( ph -> ( ; 7 5 + -u ; 7 5 ) = 0 )
+s162:s161:oveq1d |- ( ph -> ( ( ; 7 5 + -u ; 7 5 ) x. M ) = ( 0 x. M ) )
+s163:s160,s162:eqtrd |- ( ph -> ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) = ( 0 x. M ) )
+s164:s158,s163:oveq12d |- ( ph -> ( ( 0 + 0 ) + ( ( ; 7 5 x. M ) + ( -u ; 7 5 x. M ) ) ) = ( 0 + ( 0 x. M ) ) )
+s165:s157,s164:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = ( 0 + ( 0 x. M ) ) )
+s166:s122:mul02d |- ( ph -> ( 0 x. M ) = 0 )
+s167:s166:oveq2d |- ( ph -> ( 0 + ( 0 x. M ) ) = ( 0 + 0 ) )
+s168:s156:addridd |- ( ph -> ( 0 + 0 ) = 0 )
+s169:s165,s167:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = ( 0 + 0 ) )
+s170:s169,s168:eqtrd |- ( ph -> ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) = 0 )
+s171:s128,s131:eqtrd |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) = ( ( 5 x. ( ; 1 5 x. M ) ) + ( -u 1 x. ( ; 7 5 x. M ) ) ) )
+s172:s171,s155:eqtrd |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) = ( ( 0 + ( ; 7 5 x. M ) ) + ( 0 + ( -u ; 7 5 x. M ) ) ) )
+s173:s172,s170:eqtrd |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) = 0 )
+s174:s119,s173:eqtr4d |- ( ph -> 0 = ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) )
+s175:s118,s174:breqtrd |- ( ph -> 0 <_ ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) )
+s176:s26:a1i |- ( ph -> ; 7 5 e. RR )
+s177:s176,1:remulcld |- ( ph -> ( ; 7 5 x. M ) e. RR )
+s178:s21:a1i |- ( ph -> 5 e. RR )
+s179:s4:a1i |- ( ph -> ; 1 5 e. RR )
+s180:s179,1:remulcld |- ( ph -> ( ; 1 5 x. M ) e. RR )
+s181:s178,s180:remulcld |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) e. RR )
+s182:s181,s177:subge0d |- ( ph -> ( 0 <_ ( ( 5 x. ( ; 1 5 x. M ) ) - ( ; 7 5 x. M ) ) <-> ( ; 7 5 x. M ) <_ ( 5 x. ( ; 1 5 x. M ) ) ) )
+s183:s175,s182:mpbid |- ( ph -> ( ; 7 5 x. M ) <_ ( 5 x. ( ; 1 5 x. M ) ) )
+i184::letri3
+s185:s23,s28,i184:syl2anc |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) = ( ; 7 5 x. M ) <-> ( ( 5 x. ( ; 1 5 x. M ) ) <_ ( ; 7 5 x. M ) /\ ( ; 7 5 x. M ) <_ ( 5 x. ( ; 1 5 x. M ) ) ) ) )
+s186:s117,s183:jca |- ( ph -> ( ( 5 x. ( ; 1 5 x. M ) ) <_ ( ; 7 5 x. M ) /\ ( ; 7 5 x. M ) <_ ( 5 x. ( ; 1 5 x. M ) ) ) )
+s187:s185,s186:mpbird |- ( ph -> ( 5 x. ( ; 1 5 x. M ) ) = ( ; 7 5 x. M ) )
+s188:s187:eqcomd |- ( ph -> ( ; 7 5 x. M ) = ( 5 x. ( ; 1 5 x. M ) ) )
+s189:s188:fveq2d |- ( ph -> ( exp ` ( ; 7 5 x. M ) ) = ( exp ` ( 5 x. ( ; 1 5 x. M ) ) ) )
+s190:s189,s20:eqtrd |- ( ph -> ( exp ` ( ; 7 5 x. M ) ) = ( ( exp ` ( ; 1 5 x. M ) ) ^ 5 ) )
+s191:s190:eqcomd |- ( ph -> ( ( exp ` ( ; 1 5 x. M ) ) ^ 5 ) = ( exp ` ( ; 7 5 x. M ) ) )
+s192:s13,s191:breqtrd |- ( ph -> ( L ^ 5 ) <_ ( exp ` ( ; 7 5 x. M ) ) )
+qed:6,s192:eqbrtrd |- ( ph -> X <_ ( exp ` ( ; 7 5 x. M ) ) )
+$)

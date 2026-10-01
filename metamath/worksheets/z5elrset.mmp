@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=z5elrset  LOC_AFTER=?
+
+* Lean mem_Rset: r e. ( N RSet R ) iff r e. ( 1 ... ( |_ ` R ) ), r is squarefree and coprime to N.
+
+s1::id |- ( ( N e. V /\ R e. W ) -> ( N e. V /\ R e. W ) )
+i2::z5rsetval
+s3:s1,i2:syl |- ( ( N e. V /\ R e. W ) -> ( N RSet R ) = { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } )
+s4:s3:eleq2d |- ( ( N e. V /\ R e. W ) -> ( K e. ( N RSet R ) <-> K e. { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } ) )
+s5::id |- ( k = K -> k = K )
+c1:s5:fveq2d |- ( k = K -> ( mmu ` k ) = ( mmu ` K ) )
+c2:c1:neeq1d |- ( k = K -> ( ( mmu ` k ) =/= 0 <-> ( mmu ` K ) =/= 0 ) )
+c3:s5:oveq1d |- ( k = K -> ( k gcd N ) = ( K gcd N ) )
+c4:c3:eqeq1d |- ( k = K -> ( ( k gcd N ) = 1 <-> ( K gcd N ) = 1 ) )
+c5:c2,c4:anbi12d |- ( k = K -> ( ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) <-> ( ( mmu ` K ) =/= 0 /\ ( K gcd N ) = 1 ) ) )
+s6:c5:elrab |- ( K e. { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } <-> ( K e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` K ) =/= 0 /\ ( K gcd N ) = 1 ) ) )
+s7:s6:a1i |- ( ( N e. V /\ R e. W ) -> ( K e. { k e. ( 1 ... ( |_ ` R ) ) | ( ( mmu ` k ) =/= 0 /\ ( k gcd N ) = 1 ) } <-> ( K e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` K ) =/= 0 /\ ( K gcd N ) = 1 ) ) ) )
+qed:s4,s7:bitrd |- ( ( N e. V /\ R e. W ) -> ( K e. ( N RSet R ) <-> ( K e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` K ) =/= 0 /\ ( K gcd N ) = 1 ) ) ) )
+$)

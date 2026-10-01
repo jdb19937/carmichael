@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=gamrre  LOC_AFTER=?
+
+* The gamma function at a positive real argument is real: its Euler product ( ~ gamcvg2 ) has real partial products.
+
+s1::simpl |- ( ( X e. RR /\ 0 < X ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ 0 < X ) -> 0 < X )
+s3:s1:recnd |- ( ( X e. RR /\ 0 < X ) -> X e. CC )
+s4:s1:rered |- ( ( X e. RR /\ 0 < X ) -> ( Re ` X ) = X )
+s5:s2,s4:breqtrrd |- ( ( X e. RR /\ 0 < X ) -> 0 < ( Re ` X ) )
+s6:s3,s5:jca |- ( ( X e. RR /\ 0 < X ) -> ( X e. CC /\ 0 < ( Re ` X ) ) )
+i7::zrenn
+s8:s6,i7:syl |- ( ( X e. RR /\ 0 < X ) -> X e. ( CC \ ( ZZ \ NN ) ) )
+s9::eqid |- ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) ) = ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) )
+s10:s9,s8:gamcvg2 |- ( ( X e. RR /\ 0 < X ) -> seq 1 ( x. , ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) ) ) ~~> ( ( _G ` X ) x. X ) )
+s11::simpr |- ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) -> k e. ( ZZ>= ` 1 ) )
+s12::simpr |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> a e. ( 1 ... k ) )
+i13::elfznn
+s14:s12,i13:syl |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> a e. NN )
+s15::simplll |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> X e. RR )
+s16::simpllr |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> 0 < X )
+s17:s15,s16:jca |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> ( X e. RR /\ 0 < X ) )
+s18:s17,s14:jca |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> ( ( X e. RR /\ 0 < X ) /\ a e. NN ) )
+i19::eutrrp
+s20:s18,i19:syl |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) ) ` a ) e. RR+ )
+s21:s20:rpred |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ a e. ( 1 ... k ) ) -> ( ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) ) ` a ) e. RR )
+s22::simprl |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ ( a e. RR /\ b e. RR ) ) -> a e. RR )
+s23::simprr |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ ( a e. RR /\ b e. RR ) ) -> b e. RR )
+s24:s22,s23:remulcld |- ( ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) /\ ( a e. RR /\ b e. RR ) ) -> ( a x. b ) e. RR )
+s25:s11,s21,s24:seqcl |- ( ( ( X e. RR /\ 0 < X ) /\ k e. ( ZZ>= ` 1 ) ) -> ( seq 1 ( x. , ( m e. NN |-> ( ( ( ( m + 1 ) / m ) ^c X ) / ( ( X / m ) + 1 ) ) ) ) ` k ) e. RR )
+s26::eqid |- ( ZZ>= ` 1 ) = ( ZZ>= ` 1 )
+s27::1z |- 1 e. ZZ
+s28:s27:a1i |- ( ( X e. RR /\ 0 < X ) -> 1 e. ZZ )
+s29:s26,s28,s10,s25:climrecl |- ( ( X e. RR /\ 0 < X ) -> ( ( _G ` X ) x. X ) e. RR )
+s30:s2:gt0ne0d |- ( ( X e. RR /\ 0 < X ) -> X =/= 0 )
+i31::gamcl
+s32:s8,i31:syl |- ( ( X e. RR /\ 0 < X ) -> ( _G ` X ) e. CC )
+s33:s32,s3,s30:divcan4d |- ( ( X e. RR /\ 0 < X ) -> ( ( ( _G ` X ) x. X ) / X ) = ( _G ` X ) )
+s34:s33:eqcomd |- ( ( X e. RR /\ 0 < X ) -> ( _G ` X ) = ( ( ( _G ` X ) x. X ) / X ) )
+s35:s29,s1,s30:redivcld |- ( ( X e. RR /\ 0 < X ) -> ( ( ( _G ` X ) x. X ) / X ) e. RR )
+qed:s34,s35:eqeltrd |- ( ( X e. RR /\ 0 < X ) -> ( _G ` X ) e. RR )
+$)

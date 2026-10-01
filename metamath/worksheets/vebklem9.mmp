@@ -1,0 +1,70 @@
+$( <MM> <PROOF_ASST> THEOREM=vebklem9  LOC_AFTER=?
+
+* Lemma for vebkz: ( 1 - 1 / E ) ^ K <= exp ( - K / E ) for every E e. NN and K e. NN0.
+
+1::simpl    |- ( ( E e. NN /\ K e. NN0 ) -> E e. NN )
+2::simpr    |- ( ( E e. NN /\ K e. NN0 ) -> K e. NN0 )
+3::simpr    |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> E = 1 )
+4:3:oveq2d  |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( 1 / E ) = ( 1 / 1 ) )
+5::1div1e1  |- ( 1 / 1 ) = 1
+6:4,5:eqtrdi |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( 1 / E ) = 1 )
+7:6:oveq2d  |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( 1 - ( 1 / E ) ) = ( 1 - 1 ) )
+8::1m1e0    |- ( 1 - 1 ) = 0
+9:7,8:eqtrdi |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( 1 - ( 1 / E ) ) = 0 )
+10:1:adantr |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> E e. NN )
+11:10:nnrpd |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> E e. RR+ )
+12:2:adantr |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> K e. NN0 )
+13:12:nn0red |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> K e. RR )
+14:13,11:rerpdivcld |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( K / E ) e. RR )
+15:14:renegcld |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> -u ( K / E ) e. RR )
+16:15:rpefcld |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( exp ` -u ( K / E ) ) e. RR+ )
+17:16:rpred |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( exp ` -u ( K / E ) ) e. RR )
+18:16:rpge0d |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> 0 <_ ( exp ` -u ( K / E ) ) )
+19::simpr   |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> K = 0 )
+20:19:oveq2d |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) = ( ( 1 - ( 1 / E ) ) ^ 0 ) )
+21::ax-1cn  |- 1 e. CC
+22:21:a1i   |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> 1 e. CC )
+23:11:adantr |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> E e. RR+ )
+22r::1re    |- 1 e. RR
+22r2:22r:a1i |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> 1 e. RR )
+24:22r2,23:rerpdivcld |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( 1 / E ) e. RR )
+25:24:recnd |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( 1 / E ) e. CC )
+26:22,25:subcld |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( 1 - ( 1 / E ) ) e. CC )
+27a::exp0
+27:26,27a:syl |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ 0 ) = 1 )
+28:20,27:eqtrd |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) = 1 )
+29:19:oveq1d |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( K / E ) = ( 0 / E ) )
+30:23:rpcnne0d |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( E e. CC /\ E =/= 0 ) )
+31a::div0
+31:30,31a:syl |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( 0 / E ) = 0 )
+32:29,31:eqtrd |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( K / E ) = 0 )
+33:32:negeqd |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> -u ( K / E ) = -u 0 )
+34::neg0    |- -u 0 = 0
+35:33,34:eqtrdi |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> -u ( K / E ) = 0 )
+36:35:fveq2d |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( exp ` -u ( K / E ) ) = ( exp ` 0 ) )
+37::ef0     |- ( exp ` 0 ) = 1
+38:36,37:eqtrdi |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( exp ` -u ( K / E ) ) = 1 )
+39:28,38:eqtr4d |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) = ( exp ` -u ( K / E ) ) )
+40:39:eqled |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) <_ ( exp ` -u ( K / E ) ) )
+41::simpr   |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> -. K = 0 )
+42:41:neqned |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> K =/= 0 )
+43:12:adantr |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> K e. NN0 )
+44a::elnnne0
+44:43,42,44a:sylanbrc |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> K e. NN )
+45:9:adantr |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> ( 1 - ( 1 / E ) ) = 0 )
+46:45:oveq1d |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) = ( 0 ^ K ) )
+47:44:0expd |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> ( 0 ^ K ) = 0 )
+48:46,47:eqtrd |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) = 0 )
+49:18:adantr |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> 0 <_ ( exp ` -u ( K / E ) ) )
+50:48,49:eqbrtrd |- ( ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) /\ -. K = 0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) <_ ( exp ` -u ( K / E ) ) )
+51:40,50:pm2.61dan |- ( ( ( E e. NN /\ K e. NN0 ) /\ E = 1 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) <_ ( exp ` -u ( K / E ) ) )
+52::simpr   |- ( ( ( E e. NN /\ K e. NN0 ) /\ -. E = 1 ) -> -. E = 1 )
+53:52:neqned |- ( ( ( E e. NN /\ K e. NN0 ) /\ -. E = 1 ) -> E =/= 1 )
+54:1:adantr |- ( ( ( E e. NN /\ K e. NN0 ) /\ -. E = 1 ) -> E e. NN )
+55a::eluz2b3
+55:54,53,55a:sylanbrc |- ( ( ( E e. NN /\ K e. NN0 ) /\ -. E = 1 ) -> E e. ( ZZ>= ` 2 ) )
+56:2:adantr |- ( ( ( E e. NN /\ K e. NN0 ) /\ -. E = 1 ) -> K e. NN0 )
+57a::vebklem9a
+57:55,56,57a:syl2anc |- ( ( ( E e. NN /\ K e. NN0 ) /\ -. E = 1 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) <_ ( exp ` -u ( K / E ) ) )
+qed:51,57:pm2.61dan |- ( ( E e. NN /\ K e. NN0 ) -> ( ( 1 - ( 1 / E ) ) ^ K ) <_ ( exp ` -u ( K / E ) ) )
+$)

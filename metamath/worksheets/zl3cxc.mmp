@@ -1,0 +1,74 @@
+$( <MM> <PROOF_ASST> THEOREM=zl3cxc  LOC_AFTER=?
+
+* On a compact interval of positive reals, ` x ^c S ` and ` log x x. x ^c S ` are continuous ( ~ relogcn , ~ efcn , ~ cxpef ).
+
+s1::simpl |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> S e. CC )
+s2::simprl |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> P e. RR+ )
+s3::simprr |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> Q e. RR )
+s4:s2:rpred |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> P e. RR )
+s5:s4:adantr |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> P e. RR )
+s6:s3:adantr |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> Q e. RR )
+i7::elicc2
+s8:s5,s6,i7:syl2anc |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> ( x e. ( P [,] Q ) <-> ( x e. RR /\ P <_ x /\ x <_ Q ) ) )
+s9::simpr |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> x e. ( P [,] Q ) )
+s10:s9,s8:mpbid |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> ( x e. RR /\ P <_ x /\ x <_ Q ) )
+s11:s10:simp1d |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> x e. RR )
+s12:s10:simp2d |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> P <_ x )
+s13::0re |- 0 e. RR
+s14:s13:a1i |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> 0 e. RR )
+s15:s4:adantr |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> P e. RR )
+s16:s2:adantr |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> P e. RR+ )
+s17:s16:rpgt0d |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> 0 < P )
+s18:s14,s15,s11,s17,s12:ltletrd |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> 0 < x )
+s19:s11,s18:elrpd |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> x e. RR+ )
+s20:s19:rpcnd |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> x e. CC )
+s21:s19:rpne0d |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> x =/= 0 )
+s22:s19:ex |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) -> x e. RR+ ) )
+s23:s22:ssrdv |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( P [,] Q ) C_ RR+ )
+s24:s20,s21:jca |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> ( x e. CC /\ x =/= 0 ) )
+s25::eldifsn |- ( x e. ( CC \ { 0 } ) <-> ( x e. CC /\ x =/= 0 ) )
+s26:s24,s25:sylibr |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> x e. ( CC \ { 0 } ) )
+s27:s26:ex |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) -> x e. ( CC \ { 0 } ) ) )
+s28:s27:ssrdv |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( P [,] Q ) C_ ( CC \ { 0 } ) )
+s29:s20:ex |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) -> x e. CC ) )
+s30:s29:ssrdv |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( P [,] Q ) C_ CC )
+s31::relogcn |- ( log |` RR+ ) e. ( RR+ -cn-> RR )
+s32:s31:a1i |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( log |` RR+ ) e. ( RR+ -cn-> RR ) )
+i33::rescncf
+s34:s23,s32,i33:sylc |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( ( log |` RR+ ) |` ( P [,] Q ) ) e. ( ( P [,] Q ) -cn-> RR ) )
+i35::resabs1
+s36:s23,i35:syl |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( ( log |` RR+ ) |` ( P [,] Q ) ) = ( log |` ( P [,] Q ) ) )
+s37:s36,s34:eqeltrrd |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( log |` ( P [,] Q ) ) e. ( ( P [,] Q ) -cn-> RR ) )
+s38::ax-resscn |- RR C_ CC
+s39::ssid |- CC C_ CC
+i40::cncfss
+s41:s38,s39,i40:mp2an |- ( ( P [,] Q ) -cn-> RR ) C_ ( ( P [,] Q ) -cn-> CC )
+s42:s41:a1i |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( ( P [,] Q ) -cn-> RR ) C_ ( ( P [,] Q ) -cn-> CC ) )
+s43:s42,s37:sseldd |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( log |` ( P [,] Q ) ) e. ( ( P [,] Q ) -cn-> CC ) )
+s44::logf1o |- log : ( CC \ { 0 } ) -1-1-onto-> ran log
+i45::f1of
+s46:s44,i45:ax-mp |- log : ( CC \ { 0 } ) --> ran log
+s47::logrncn |- ( x e. ran log -> x e. CC )
+s48:s47:ssriv |- ran log C_ CC
+i49::fss
+s50:s46,s48,i49:mp2an |- log : ( CC \ { 0 } ) --> CC
+s51:s50:a1i |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> log : ( CC \ { 0 } ) --> CC )
+s52:s51,s28:feqresmpt |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( log |` ( P [,] Q ) ) = ( x e. ( P [,] Q ) |-> ( log ` x ) ) )
+s53:s52:eqcomd |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> ( log ` x ) ) = ( log |` ( P [,] Q ) ) )
+s54:s53,s43:eqeltrd |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> ( log ` x ) ) e. ( ( P [,] Q ) -cn-> CC ) )
+s55::ssid |- CC C_ CC
+s56:s55:a1i |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> CC C_ CC )
+i57::cncfmptc
+s58:s1,s30,s56,i57:syl3anc |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> S ) e. ( ( P [,] Q ) -cn-> CC ) )
+s59:s58,s54:mulcncf |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> ( S x. ( log ` x ) ) ) e. ( ( P [,] Q ) -cn-> CC ) )
+s60::efcn |- exp e. ( CC -cn-> CC )
+s61:s60:a1i |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> exp e. ( CC -cn-> CC ) )
+s62:s61,s59:cncfmpt1f |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> ( exp ` ( S x. ( log ` x ) ) ) ) e. ( ( P [,] Q ) -cn-> CC ) )
+s63:s1:adantr |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> S e. CC )
+i64::cxpef
+s65:s20,s21,s63,i64:syl3anc |- ( ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) /\ x e. ( P [,] Q ) ) -> ( x ^c S ) = ( exp ` ( S x. ( log ` x ) ) ) )
+s66:s65:mpteq2dva |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> ( x ^c S ) ) = ( x e. ( P [,] Q ) |-> ( exp ` ( S x. ( log ` x ) ) ) ) )
+s67:s66,s62:eqeltrd |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> ( x ^c S ) ) e. ( ( P [,] Q ) -cn-> CC ) )
+s68:s54,s67:mulcncf |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( x e. ( P [,] Q ) |-> ( ( log ` x ) x. ( x ^c S ) ) ) e. ( ( P [,] Q ) -cn-> CC ) )
+qed:s67,s68:jca |- ( ( S e. CC /\ ( P e. RR+ /\ Q e. RR ) ) -> ( ( x e. ( P [,] Q ) |-> ( x ^c S ) ) e. ( ( P [,] Q ) -cn-> CC ) /\ ( x e. ( P [,] Q ) |-> ( ( log ` x ) x. ( x ^c S ) ) ) e. ( ( P [,] Q ) -cn-> CC ) ) )
+$)

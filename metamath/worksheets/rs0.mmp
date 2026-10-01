@@ -1,0 +1,100 @@
+$( <MM> <PROOF_ASST> THEOREM=rs0  LOC_AFTER=?
+
+* The base case of the radical-fibre Euler-product bound: only 1 has an empty set of prime divisors.
+
+s1::simp3 |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> C e. NN )
+s2::simpr |- ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) -> v e. ( 1 ... C ) )
+i3::elfznn
+s4:s2,i3:syl |- ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) -> v e. NN )
+s5::simpr |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> { r e. Prime | r || v } = (/) )
+s6::rabeq0 |- ( { r e. Prime | r || v } = (/) <-> A. r e. Prime -. r || v )
+s7:s6:a1i |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> ( { r e. Prime | r || v } = (/) <-> A. r e. Prime -. r || v ) )
+s8:s7,s5:mpbid |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> A. r e. Prime -. r || v )
+s9::ralnex |- ( A. r e. Prime -. r || v <-> -. E. r e. Prime r || v )
+s10:s9:a1i |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> ( A. r e. Prime -. r || v <-> -. E. r e. Prime r || v ) )
+s11:s10,s8:mpbid |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> -. E. r e. Prime r || v )
+s12:s4:adantr |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> v e. NN )
+s13:s12:adantr |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> v e. NN )
+s14::simpr |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> 1 < v )
+s15:s13,s14:jca |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> ( v e. NN /\ 1 < v ) )
+s16::eluz2b2 |- ( v e. ( ZZ>= ` 2 ) <-> ( v e. NN /\ 1 < v ) )
+s17:s16:a1i |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> ( v e. ( ZZ>= ` 2 ) <-> ( v e. NN /\ 1 < v ) ) )
+s18:s15,s17:mpbird |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> v e. ( ZZ>= ` 2 ) )
+i19::exprmfct
+s20:s18,i19:syl |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> E. p e. Prime p || v )
+s21::breq1 |- ( p = r -> ( p || v <-> r || v ) )
+s22:s21:cbvrexvw |- ( E. p e. Prime p || v <-> E. r e. Prime r || v )
+s23:s22:a1i |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> ( E. p e. Prime p || v <-> E. r e. Prime r || v ) )
+s24:s23,s20:mpbid |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> E. r e. Prime r || v )
+s25:s11:adantr |- ( ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) /\ 1 < v ) -> -. E. r e. Prime r || v )
+s26:s24,s25:pm2.65da |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> -. 1 < v )
+s27:s4:adantr |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> v e. NN )
+i28::nngt1ne1
+s29:s27,i28:syl |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> ( 1 < v <-> v =/= 1 ) )
+s30:s29,s26:mtbid |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> -. v =/= 1 )
+i31::nne
+s32:s30,i31:sylib |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ { r e. Prime | r || v } = (/) ) -> v = 1 )
+s33:s32:ex |- ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) -> ( { r e. Prime | r || v } = (/) -> v = 1 ) )
+s34::simpr |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ v = 1 ) -> v = 1 )
+s35:s34:breq2d |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ v = 1 ) -> ( r || v <-> r || 1 ) )
+s36:s35:rabbidv |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ v = 1 ) -> { r e. Prime | r || v } = { r e. Prime | r || 1 } )
+s37::nprmdvds1 |- ( r e. Prime -> -. r || 1 )
+s38:s37:rgen |- A. r e. Prime -. r || 1
+s39::rabeq0 |- ( { r e. Prime | r || 1 } = (/) <-> A. r e. Prime -. r || 1 )
+s40:s39,s38:mpbir |- { r e. Prime | r || 1 } = (/)
+s41:s40:a1i |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ v = 1 ) -> { r e. Prime | r || 1 } = (/) )
+s42:s36,s41:eqtrd |- ( ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) /\ v = 1 ) -> { r e. Prime | r || v } = (/) )
+s43:s42:ex |- ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) -> ( v = 1 -> { r e. Prime | r || v } = (/) ) )
+s44:s33,s43:impbid |- ( ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) /\ v e. ( 1 ... C ) ) -> ( { r e. Prime | r || v } = (/) <-> v = 1 ) )
+s45:s44:rabbidva |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> { v e. ( 1 ... C ) | { r e. Prime | r || v } = (/) } = { v e. ( 1 ... C ) | v = 1 } )
+s46::1nn |- 1 e. NN
+s47:s46:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 e. NN )
+i48::nnge1
+s49:s1,i48:syl |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 <_ C )
+s50:s47,s1,s49:3jca |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 1 e. NN /\ C e. NN /\ 1 <_ C ) )
+s51::elfz1b |- ( 1 e. ( 1 ... C ) <-> ( 1 e. NN /\ C e. NN /\ 1 <_ C ) )
+s52:s51:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 1 e. ( 1 ... C ) <-> ( 1 e. NN /\ C e. NN /\ 1 <_ C ) ) )
+s53:s50,s52:mpbird |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 e. ( 1 ... C ) )
+i54::rabsn
+s55:s53,i54:syl |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> { v e. ( 1 ... C ) | v = 1 } = { 1 } )
+s56:s45,s55:eqtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> { v e. ( 1 ... C ) | { r e. Prime | r || v } = (/) } = { 1 } )
+s57::2prm |- 2 e. Prime
+s58:s57:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 2 e. Prime )
+s59::0nn0 |- 0 e. NN0
+s60:s59:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 0 e. NN0 )
+i61::0sgmppw
+s62:s58,s60,i61:syl2anc |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 0 sigma ( 2 ^ 0 ) ) = ( 0 + 1 ) )
+s64::2cnd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 2 e. CC )
+i65::exp0
+s66:s64,i65:syl |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 2 ^ 0 ) = 1 )
+s67:s66:eqcomd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 = ( 2 ^ 0 ) )
+s68:s67:oveq2d |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 0 sigma 1 ) = ( 0 sigma ( 2 ^ 0 ) ) )
+s69::0p1e1 |- ( 0 + 1 ) = 1
+s70:s69:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 0 + 1 ) = 1 )
+s71:s62,s70:eqtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 0 sigma ( 2 ^ 0 ) ) = 1 )
+s72:s68,s71:eqtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 0 sigma 1 ) = 1 )
+s73:s72:oveq1d |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( ( 0 sigma 1 ) / 1 ) = ( 1 / 1 ) )
+s74::1div1e1 |- ( 1 / 1 ) = 1
+s75:s74:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 1 / 1 ) = 1 )
+s76:s73,s75:eqtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( ( 0 sigma 1 ) / 1 ) = 1 )
+s77::ax-1cn |- 1 e. CC
+s78:s77:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 e. CC )
+s79:s76,s78:eqeltrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( ( 0 sigma 1 ) / 1 ) e. CC )
+s80::oveq2 |- ( j = 1 -> ( 0 sigma j ) = ( 0 sigma 1 ) )
+s81::id |- ( j = 1 -> j = 1 )
+s82:s80,s81:oveq12d |- ( j = 1 -> ( ( 0 sigma j ) / j ) = ( ( 0 sigma 1 ) / 1 ) )
+s83:s53,s79:jca |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( 1 e. ( 1 ... C ) /\ ( ( 0 sigma 1 ) / 1 ) e. CC ) )
+s84:s82:sumsn |- ( ( 1 e. ( 1 ... C ) /\ ( ( 0 sigma 1 ) / 1 ) e. CC ) -> sum_ j e. { 1 } ( ( 0 sigma j ) / j ) = ( ( 0 sigma 1 ) / 1 ) )
+s85:s84:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> ( ( 1 e. ( 1 ... C ) /\ ( ( 0 sigma 1 ) / 1 ) e. CC ) -> sum_ j e. { 1 } ( ( 0 sigma j ) / j ) = ( ( 0 sigma 1 ) / 1 ) ) )
+s86:s83,s85:mpd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> sum_ j e. { 1 } ( ( 0 sigma j ) / j ) = ( ( 0 sigma 1 ) / 1 ) )
+s87:s56:sumeq1d |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> sum_ j e. { v e. ( 1 ... C ) | { r e. Prime | r || v } = (/) } ( ( 0 sigma j ) / j ) = sum_ j e. { 1 } ( ( 0 sigma j ) / j ) )
+s88:s87,s86:eqtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> sum_ j e. { v e. ( 1 ... C ) | { r e. Prime | r || v } = (/) } ( ( 0 sigma j ) / j ) = ( ( 0 sigma 1 ) / 1 ) )
+s89:s88,s76:eqtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> sum_ j e. { v e. ( 1 ... C ) | { r e. Prime | r || v } = (/) } ( ( 0 sigma j ) / j ) = 1 )
+s90::prod0 |- prod_ n e. (/) ( ( 2 / n ) / ( 1 - ( 2 / n ) ) ) = 1
+s91:s90:a1i |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> prod_ n e. (/) ( ( 2 / n ) / ( 1 - ( 2 / n ) ) ) = 1 )
+s92::1red |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 e. RR )
+s93:s92:leidd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 <_ 1 )
+s94:s91:eqcomd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 = prod_ n e. (/) ( ( 2 / n ) / ( 1 - ( 2 / n ) ) ) )
+s95:s93,s94:breqtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> 1 <_ prod_ n e. (/) ( ( 2 / n ) / ( 1 - ( 2 / n ) ) ) )
+qed:s89,s95:eqbrtrd |- ( ( (/) C_ Prime /\ A. e e. (/) 3 <_ e /\ C e. NN ) -> sum_ j e. { v e. ( 1 ... C ) | { r e. Prime | r || v } = (/) } ( ( 0 sigma j ) / j ) <_ prod_ n e. (/) ( ( 2 / n ) / ( 1 - ( 2 / n ) ) ) )
+$)

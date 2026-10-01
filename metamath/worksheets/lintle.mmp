@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=lintle  LOC_AFTER=?
+
+* The segment integral is at most the integral of any real dominating function of the parameter: ~ lintabs with the constant bound replaced by a function, which is what an edge of a Perron contour needs.
+
+h1::lintle.a |- ( ph -> A e. CC )
+h2::lintle.b |- ( ph -> B e. CC )
+h3::lintle.f |- ( ph -> F e. ( D -cn-> CC ) )
+h4::lintle.s |- ( ph -> ( A cseg B ) C_ D )
+h5::lintle.i |- ( ph -> ( t e. ( 0 (,) 1 ) |-> H ) e. L^1 )
+h6::lintle.h |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> H e. RR )
+h7::lintle.l |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) <_ H )
+i1::elex
+s2:3,i1:syl |- ( ph -> F e. _V )
+i3::lintval
+s4:s2,1,2,i3:syl3anc |- ( ph -> ( F lint <. A , B >. ) = S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+s5:1,2:jca |- ( ph -> ( A e. CC /\ B e. CC ) )
+s6:3,4:jca |- ( ph -> ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) )
+s7:s5,s6:jca |- ( ph -> ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) )
+i8::lintibl
+s9:s7,i8:syl |- ( ph -> ( t e. ( 0 (,) 1 ) |-> ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) e. L^1 )
+s10::ovex |- ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) e. _V
+s11:s10:a1i |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) e. _V )
+s12:s11,s9:itgabs |- ( ph -> ( abs ` S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t ) <_ S. ( 0 (,) 1 ) ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t )
+s13:s11,s9:iblabs |- ( ph -> ( t e. ( 0 (,) 1 ) |-> ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) ) e. L^1 )
+s14::ioossicc |- ( 0 (,) 1 ) C_ ( 0 [,] 1 )
+s15:s14:a1i |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( 0 (,) 1 ) C_ ( 0 [,] 1 ) )
+s16::simpr |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> t e. ( 0 (,) 1 ) )
+s17:s15,s16:sseldd |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> t e. ( 0 [,] 1 ) )
+s18:1:adantr |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> A e. CC )
+s19:2:adantr |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> B e. CC )
+s20:3:adantr |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> F e. ( D -cn-> CC ) )
+s21:4:adantr |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( A cseg B ) C_ D )
+i22::cseglin
+s23:s18,s19,s17,i22:syl3anc |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( A + ( t x. ( B - A ) ) ) e. ( A cseg B ) )
+s24:s21,s23:sseldd |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( A + ( t x. ( B - A ) ) ) e. D )
+i25::cncff
+s26:s20,i25:syl |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> F : D --> CC )
+s27:s26,s24:ffvelcdmd |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( F ` ( A + ( t x. ( B - A ) ) ) ) e. CC )
+s28:s19,s18:subcld |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( B - A ) e. CC )
+s29:s27,s28:mulcld |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) e. CC )
+s30:s29:abscld |- ( ( ph /\ t e. ( 0 (,) 1 ) ) -> ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) e. RR )
+s31:s13,5,s30,6,7:itgle |- ( ph -> S. ( 0 (,) 1 ) ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t <_ S. ( 0 (,) 1 ) H _d t )
+s32:s4:fveq2d |- ( ph -> ( abs ` ( F lint <. A , B >. ) ) = ( abs ` S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t ) )
+s33:s32,s12:eqbrtrd |- ( ph -> ( abs ` ( F lint <. A , B >. ) ) <_ S. ( 0 (,) 1 ) ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t )
+s34:s11,s9:itgcl |- ( ph -> S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t e. CC )
+s35:s4,s34:eqeltrd |- ( ph -> ( F lint <. A , B >. ) e. CC )
+s36:s30,s13:itgcl |- ( ph -> S. ( 0 (,) 1 ) ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t e. CC )
+s37:6,5:itgcl |- ( ph -> S. ( 0 (,) 1 ) H _d t e. CC )
+s38:s30,s13:itgrecl |- ( ph -> S. ( 0 (,) 1 ) ( abs ` ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t e. RR )
+s39:6,5:itgrecl |- ( ph -> S. ( 0 (,) 1 ) H _d t e. RR )
+s40:s35:abscld |- ( ph -> ( abs ` ( F lint <. A , B >. ) ) e. RR )
+qed:s40,s38,s39,s33,s31:letrd |- ( ph -> ( abs ` ( F lint <. A , B >. ) ) <_ S. ( 0 (,) 1 ) H _d t )
+$)

@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=cof1  LOC_AFTER=?
+
+* The map taking a positive integer to its K-smooth part and its part coprime to K is injective into the product of the two ranges.
+
+s1::simpl |- ( ( K e. NN /\ W e. NN ) -> K e. NN )
+s2::simpr |- ( ( K e. NN /\ W e. NN ) -> W e. NN )
+s3::id |- ( t = s -> t = s )
+s4:s3:oveq2d |- ( t = s -> ( K ^ t ) = ( K ^ s ) )
+s5:s3,s4:oveq12d |- ( t = s -> ( t gcd ( K ^ t ) ) = ( s gcd ( K ^ s ) ) )
+s6:s3,s5:oveq12d |- ( t = s -> ( t / ( t gcd ( K ^ t ) ) ) = ( s / ( s gcd ( K ^ s ) ) ) )
+s7:s5,s6:opeq12d |- ( t = s -> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. )
+s8::eqid |- ( t e. ( 1 ... W ) |-> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. ) = ( t e. ( 1 ... W ) |-> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. )
+s9:s8,s7:f1mpt |- ( ( t e. ( 1 ... W ) |-> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. ) : ( 1 ... W ) -1-1-> ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) <-> ( A. t e. ( 1 ... W ) <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. e. ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) /\ A. t e. ( 1 ... W ) A. s e. ( 1 ... W ) ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. -> t = s ) ) )
+s10::id |- ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) -> ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) )
+i11::cosplit
+s12:s10,i11:syl |- ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) -> ( ( t gcd ( K ^ t ) ) e. { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } /\ ( t / ( t gcd ( K ^ t ) ) ) e. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } /\ ( ( t gcd ( K ^ t ) ) x. ( t / ( t gcd ( K ^ t ) ) ) ) = t ) )
+s13:s12:simp1d |- ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) -> ( t gcd ( K ^ t ) ) e. { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } )
+s14:s12:simp2d |- ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) -> ( t / ( t gcd ( K ^ t ) ) ) e. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } )
+i15::opelxpi
+s16:s13,s14,i15:syl2anc |- ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) -> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. e. ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) )
+s17:s16:ralrimiva |- ( ( K e. NN /\ W e. NN ) -> A. t e. ( 1 ... W ) <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. e. ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) )
+s18::simpl |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) )
+s19:s18:simpld |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( K e. NN /\ W e. NN ) )
+s20::simpr |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> s e. ( 1 ... W ) )
+s21:s19,s20:jca |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( ( K e. NN /\ W e. NN ) /\ s e. ( 1 ... W ) ) )
+i22::cosplit
+s23:s21,i22:syl |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( ( s gcd ( K ^ s ) ) e. { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } /\ ( s / ( s gcd ( K ^ s ) ) ) e. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } /\ ( ( s gcd ( K ^ s ) ) x. ( s / ( s gcd ( K ^ s ) ) ) ) = s ) )
+s24:s23:simp3d |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( ( s gcd ( K ^ s ) ) x. ( s / ( s gcd ( K ^ s ) ) ) ) = s )
+s25:s12:adantr |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( ( t gcd ( K ^ t ) ) e. { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } /\ ( t / ( t gcd ( K ^ t ) ) ) e. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } /\ ( ( t gcd ( K ^ t ) ) x. ( t / ( t gcd ( K ^ t ) ) ) ) = t ) )
+s26:s25:simp3d |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( ( t gcd ( K ^ t ) ) x. ( t / ( t gcd ( K ^ t ) ) ) ) = t )
+s27::ovex |- ( t gcd ( K ^ t ) ) e. _V
+s28::ovex |- ( t / ( t gcd ( K ^ t ) ) ) e. _V
+s29:s27,s28:opth |- ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. <-> ( ( t gcd ( K ^ t ) ) = ( s gcd ( K ^ s ) ) /\ ( t / ( t gcd ( K ^ t ) ) ) = ( s / ( s gcd ( K ^ s ) ) ) ) )
+s30:s29:a1i |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. <-> ( ( t gcd ( K ^ t ) ) = ( s gcd ( K ^ s ) ) /\ ( t / ( t gcd ( K ^ t ) ) ) = ( s / ( s gcd ( K ^ s ) ) ) ) ) )
+s31::simpr |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. )
+s32:s30,s31:mpbid |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( ( t gcd ( K ^ t ) ) = ( s gcd ( K ^ s ) ) /\ ( t / ( t gcd ( K ^ t ) ) ) = ( s / ( s gcd ( K ^ s ) ) ) ) )
+s33:s32:simpld |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( t gcd ( K ^ t ) ) = ( s gcd ( K ^ s ) ) )
+s34:s32:simprd |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( t / ( t gcd ( K ^ t ) ) ) = ( s / ( s gcd ( K ^ s ) ) ) )
+s35:s33,s34:oveq12d |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( ( t gcd ( K ^ t ) ) x. ( t / ( t gcd ( K ^ t ) ) ) ) = ( ( s gcd ( K ^ s ) ) x. ( s / ( s gcd ( K ^ s ) ) ) ) )
+s36:s26:adantr |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( ( t gcd ( K ^ t ) ) x. ( t / ( t gcd ( K ^ t ) ) ) ) = t )
+s37:s36:eqcomd |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> t = ( ( t gcd ( K ^ t ) ) x. ( t / ( t gcd ( K ^ t ) ) ) ) )
+s38:s24:adantr |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( ( s gcd ( K ^ s ) ) x. ( s / ( s gcd ( K ^ s ) ) ) ) = s )
+s39:s35,s38:eqtrd |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> ( ( t gcd ( K ^ t ) ) x. ( t / ( t gcd ( K ^ t ) ) ) ) = s )
+s40:s37,s39:eqtrd |- ( ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) /\ <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. ) -> t = s )
+s41:s40:ex |- ( ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) /\ s e. ( 1 ... W ) ) -> ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. -> t = s ) )
+s42:s41:ralrimiva |- ( ( ( K e. NN /\ W e. NN ) /\ t e. ( 1 ... W ) ) -> A. s e. ( 1 ... W ) ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. -> t = s ) )
+s43:s42:ralrimiva |- ( ( K e. NN /\ W e. NN ) -> A. t e. ( 1 ... W ) A. s e. ( 1 ... W ) ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. -> t = s ) )
+s44:s17,s43:jca |- ( ( K e. NN /\ W e. NN ) -> ( A. t e. ( 1 ... W ) <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. e. ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) /\ A. t e. ( 1 ... W ) A. s e. ( 1 ... W ) ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. -> t = s ) ) )
+s45:s9:a1i |- ( ( K e. NN /\ W e. NN ) -> ( ( t e. ( 1 ... W ) |-> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. ) : ( 1 ... W ) -1-1-> ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) <-> ( A. t e. ( 1 ... W ) <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. e. ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) /\ A. t e. ( 1 ... W ) A. s e. ( 1 ... W ) ( <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. = <. ( s gcd ( K ^ s ) ) , ( s / ( s gcd ( K ^ s ) ) ) >. -> t = s ) ) ) )
+qed:s45,s44:mpbird |- ( ( K e. NN /\ W e. NN ) -> ( t e. ( 1 ... W ) |-> <. ( t gcd ( K ^ t ) ) , ( t / ( t gcd ( K ^ t ) ) ) >. ) : ( 1 ... W ) -1-1-> ( { v e. ( 1 ... W ) | { r e. Prime | r || v } C_ { q e. Prime | q || K } } X. { x e. ( 1 ... W ) | ( x gcd K ) = 1 } ) )
+$)

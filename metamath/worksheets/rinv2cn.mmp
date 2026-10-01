@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=rinv2cn  LOC_AFTER=?
+
+* The reciprocal of the square of z - P is continuous off P.
+
+s1::simpl |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> P e. CC )
+s2::simpr |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> E C_ ( CC \ { P } ) )
+s3::id |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( P e. CC /\ E C_ ( CC \ { P } ) ) )
+i4::rinvcnss
+s5:s3,i4:syl |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( z e. E |-> ( 1 / ( z - P ) ) ) e. ( E -cn-> CC ) )
+s6::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s7:s6:mulcn |- x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s8:s7:a1i |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> x. e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s9:s6,s8,s5,s5:cncfmpt2f |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( z e. E |-> ( ( 1 / ( z - P ) ) x. ( 1 / ( z - P ) ) ) ) e. ( E -cn-> CC ) )
+s10:s1:adantr |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> P e. CC )
+s11:s2:adantr |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> E C_ ( CC \ { P } ) )
+s12::simpr |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> z e. E )
+s13:s11,s12:sseldd |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> z e. ( CC \ { P } ) )
+i14::eldifsn
+s15:s13,i14:sylib |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( z e. CC /\ z =/= P ) )
+i16::simpl
+s17:s15,i16:syl |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> z e. CC )
+i18::simpr
+s19:s15,i18:syl |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> z =/= P )
+s20:s17,s10:subcld |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( z - P ) e. CC )
+s21:s17,s10,s19:subne0d |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( z - P ) =/= 0 )
+s22::ax-1cn |- 1 e. CC
+s23:s22:a1i |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> 1 e. CC )
+s24:s23,s20,s23,s20,s21,s21:divmuldivd |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( ( 1 / ( z - P ) ) x. ( 1 / ( z - P ) ) ) = ( ( 1 x. 1 ) / ( ( z - P ) x. ( z - P ) ) ) )
+s25::1t1e1 |- ( 1 x. 1 ) = 1
+s26:s25:a1i |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( 1 x. 1 ) = 1 )
+s27:s20:sqvald |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( ( z - P ) ^ 2 ) = ( ( z - P ) x. ( z - P ) ) )
+s28:s27:eqcomd |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( ( z - P ) x. ( z - P ) ) = ( ( z - P ) ^ 2 ) )
+s29:s26,s28:oveq12d |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( ( 1 x. 1 ) / ( ( z - P ) x. ( z - P ) ) ) = ( 1 / ( ( z - P ) ^ 2 ) ) )
+s30:s24,s29:eqtrd |- ( ( ( P e. CC /\ E C_ ( CC \ { P } ) ) /\ z e. E ) -> ( ( 1 / ( z - P ) ) x. ( 1 / ( z - P ) ) ) = ( 1 / ( ( z - P ) ^ 2 ) ) )
+s31:s30:mpteq2dva |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( z e. E |-> ( ( 1 / ( z - P ) ) x. ( 1 / ( z - P ) ) ) ) = ( z e. E |-> ( 1 / ( ( z - P ) ^ 2 ) ) ) )
+qed:s31,s9:eqeltrrd |- ( ( P e. CC /\ E C_ ( CC \ { P } ) ) -> ( z e. E |-> ( 1 / ( ( z - P ) ^ 2 ) ) ) e. ( E -cn-> CC ) )
+$)

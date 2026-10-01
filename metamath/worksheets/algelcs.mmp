@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=algelcs  LOC_AFTER=?
+
+* Membership in a cons (Lean: List.mem_cons).
+
+s1::simpl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> ( P e. NN0 /\ W e. Word NN0 ) )
+s2::simpr |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> Q e. NN0 )
+i3::algrncs
+s4:s1,i3:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> ran ( <" P "> ++ W ) = ( { P } u. ran W ) )
+s5:s4:eleq2d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> ( Q e. ran ( <" P "> ++ W ) <-> Q e. ( { P } u. ran W ) ) )
+s6::elun |- ( Q e. ( { P } u. ran W ) <-> ( Q e. { P } \/ Q e. ran W ) )
+s7:s6:a1i |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> ( Q e. ( { P } u. ran W ) <-> ( Q e. { P } \/ Q e. ran W ) ) )
+i8::elsng
+s9:s2,i8:syl |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> ( Q e. { P } <-> Q = P ) )
+s10:s9:orbi1d |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> ( ( Q e. { P } \/ Q e. ran W ) <-> ( Q = P \/ Q e. ran W ) ) )
+qed:s5,s7,s10:3bitrd |- ( ( ( P e. NN0 /\ W e. Word NN0 ) /\ Q e. NN0 ) -> ( Q e. ran ( <" P "> ++ W ) <-> ( Q = P \/ Q e. ran W ) ) )
+$)

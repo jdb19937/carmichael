@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcsbcp  LOC_AFTER=?
+
+* The borrow recursion of the subtractor (Lean ` borrow ` ), ~ bwborrowp1 at the operands' values.
+
+s1::simpll |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> L e. Word 2o )
+s2::simplr |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> L' e. Word 2o )
+s3::simpr |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> N e. NN0 )
+i4::tonatcl
+s5:s1,i4:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L ) e. NN0 )
+i6::tonatcl
+s7:s2,i6:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L' ) e. NN0 )
+i8::lencl
+s9:s1,i8:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( # ` L ) e. NN0 )
+i10::lencl
+s11:s2,i10:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( # ` L' ) e. NN0 )
+s12:s5:nn0zd |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L ) e. ZZ )
+s13:s7:nn0zd |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( toNat ` L' ) e. ZZ )
+s14::0el2o |- (/) e. 2o
+s15:s14:a1i |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> (/) e. 2o )
+s16:s12,s13,s15:3jca |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) )
+s17:s16,s3:jca |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( ( toNat ` L ) e. ZZ /\ ( toNat ` L' ) e. ZZ /\ (/) e. 2o ) /\ N e. NN0 ) )
+i18::bwborrowp1
+qed:s17,i18:syl |- ( ( ( L e. Word 2o /\ L' e. Word 2o ) /\ N e. NN0 ) -> ( ( borrow ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` ( N + 1 ) ) = ( ( if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) borrow if ( N e. ( bits ` ( toNat ` L' ) ) , 1o , (/) ) ) ` ( ( borrow ( ( toNat ` L ) bwFold ( toNat ` L' ) ) (/) ) ` N ) ) )
+$)

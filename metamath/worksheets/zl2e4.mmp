@@ -1,0 +1,50 @@
+$( <MM> <PROOF_ASST> THEOREM=zl2e4  LOC_AFTER=?
+
+* ` e ^ 4 <_ 81 ` ( Lean ` exp_four_le ` ).
+
+s1::ax-1cn |- 1 e. CC
+s2::4z |- 4 e. ZZ
+s3::efexp |- ( ( 1 e. CC /\ 4 e. ZZ ) -> ( exp ` ( 4 x. 1 ) ) = ( ( exp ` 1 ) ^ 4 ) )
+s4:s1,s2,s3:mp2an |- ( exp ` ( 4 x. 1 ) ) = ( ( exp ` 1 ) ^ 4 )
+s5::4cn |- 4 e. CC
+s6:s5:mulridi |- ( 4 x. 1 ) = 4
+s7:s6:fveq2i |- ( exp ` ( 4 x. 1 ) ) = ( exp ` 4 )
+s8:s7,s4:eqtr3i |- ( exp ` 4 ) = ( ( exp ` 1 ) ^ 4 )
+s9::df-e |- _e = ( exp ` 1 )
+s10:s9:eqcomi |- ( exp ` 1 ) = _e
+s11:s10:oveq1i |- ( ( exp ` 1 ) ^ 4 ) = ( _e ^ 4 )
+s12:s8,s11:eqtri |- ( exp ` 4 ) = ( _e ^ 4 )
+s13::ere |- _e e. RR
+s14::3re |- 3 e. RR
+s15::4nn0 |- 4 e. NN0
+s16::0re |- 0 e. RR
+s17::epos |- 0 < _e
+s18:s16,s13,s17:ltleii |- 0 <_ _e
+s19::egt2lt3 |- ( 2 < _e /\ _e < 3 )
+s20:s19:simpri |- _e < 3
+s21::ere |- _e e. RR
+s22::3re |- 3 e. RR
+s23:s21,s22,s20:ltleii |- _e <_ 3
+s24::leexp1a |- ( ( ( _e e. RR /\ 3 e. RR /\ 4 e. NN0 ) /\ ( 0 <_ _e /\ _e <_ 3 ) ) -> ( _e ^ 4 ) <_ ( 3 ^ 4 ) )
+s25:s13,s14,s15:3pm3.2i |- ( _e e. RR /\ 3 e. RR /\ 4 e. NN0 )
+s26:s18,s23:pm3.2i |- ( 0 <_ _e /\ _e <_ 3 )
+s27:s25,s26,s24:mp2an |- ( _e ^ 4 ) <_ ( 3 ^ 4 )
+s28::3cn |- 3 e. CC
+s29::2nn0 |- 2 e. NN0
+s30::expmul |- ( ( 3 e. CC /\ 2 e. NN0 /\ 2 e. NN0 ) -> ( 3 ^ ( 2 x. 2 ) ) = ( ( 3 ^ 2 ) ^ 2 ) )
+s31:s28,s29,s29:3pm3.2i |- ( 3 e. CC /\ 2 e. NN0 /\ 2 e. NN0 )
+s32:s31,s30:ax-mp |- ( 3 ^ ( 2 x. 2 ) ) = ( ( 3 ^ 2 ) ^ 2 )
+s33::2t2e4 |- ( 2 x. 2 ) = 4
+s34:s33:oveq2i |- ( 3 ^ ( 2 x. 2 ) ) = ( 3 ^ 4 )
+s35:s34,s32:eqtr3i |- ( 3 ^ 4 ) = ( ( 3 ^ 2 ) ^ 2 )
+s36::sq3 |- ( 3 ^ 2 ) = 9
+s37:s36:oveq1i |- ( ( 3 ^ 2 ) ^ 2 ) = ( 9 ^ 2 )
+s38::9cn |- 9 e. CC
+s39:s38:sqvali |- ( 9 ^ 2 ) = ( 9 x. 9 )
+s40::9t9e81 |- ( 9 x. 9 ) = ; 8 1
+s41:s35,s37:eqtri |- ( 3 ^ 4 ) = ( 9 ^ 2 )
+s42:s41,s39:eqtri |- ( 3 ^ 4 ) = ( 9 x. 9 )
+s43:s42,s40:eqtri |- ( 3 ^ 4 ) = ; 8 1
+s44:s27,s43:breqtri |- ( _e ^ 4 ) <_ ; 8 1
+qed:s12,s44:eqbrtri |- ( exp ` 4 ) <_ ; 8 1
+$)

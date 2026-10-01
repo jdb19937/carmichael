@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2sahalt  LOC_AFTER=?
+
+* Equation of stepAux for halt: ` stepAux halt v S = <. none , v , S >. `.
+
+s1::simpl |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> T e. V )
+s2::simpr |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) )
+s3:s2:simpld |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> A e. ( 2nd ` T ) )
+s4:s2:simprd |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> D e. ( TM2Stk ` T ) )
+i5::opelxpi
+s6:s3,s4,i5:syl2anc |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. A , D >. e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) )
+i7::tm2halt
+s8:s1,i7:syl |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> <. 6 , (/) >. e. ( TM2Stmt ` T ) )
+i9::tm2safix
+s10:s1,s8,s6,i9:syl3anc |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( TM2sa ` T ) <. A , D >. ) = ( <. 6 , (/) >. ( T TM2cl ( TM2sa ` T ) ) <. A , D >. ) )
+s11::fvex |- ( TM2sa ` T ) e. _V
+s12:s11:a1i |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( TM2sa ` T ) e. _V )
+s13:s1,s12:jca |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( T e. V /\ ( TM2sa ` T ) e. _V ) )
+s14:s8,s6:jca |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. e. ( TM2Stmt ` T ) /\ <. A , D >. e. ( ( 2nd ` T ) X. ( TM2Stk ` T ) ) ) )
+i15::tm2clhalt
+s16:s13,s14,i15:syl2anc |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( T TM2cl ( TM2sa ` T ) ) <. A , D >. ) = <. ( inr ` (/) ) , <. A , D >. >. )
+s17:s3:elexd |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> A e. _V )
+s18:s4:elexd |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> D e. _V )
+qed:s10,s16:eqtrd |- ( ( T e. V /\ ( A e. ( 2nd ` T ) /\ D e. ( TM2Stk ` T ) ) ) -> ( <. 6 , (/) >. ( TM2sa ` T ) <. A , D >. ) = <. ( inr ` (/) ) , <. A , D >. >. )
+$)

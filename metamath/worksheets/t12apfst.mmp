@@ -1,0 +1,64 @@
+$( <MM> <PROOF_ASST> THEOREM=t12apfst  LOC_AFTER=?
+
+* The machine's allPrime flag (the conjunction of ` isPrimeTD ` over the entries) is A1b's ` ( 1st ( AllPrimeTD S ) ) ` (~ allprimetdfst , ~ isprimetdspec , ~ ralrn ).
+
+s1::id |- ( W e. Word NN0 -> W e. Word NN0 )
+i2::allprimetdfst
+s3:s1,i2:syl |- ( W e. Word NN0 -> ( ( 1st ` ( AllPrimeTD ` W ) ) = 1o <-> A. p e. ran W p e. Prime ) )
+i4::wrdf
+s5:s1,i4:syl |- ( W e. Word NN0 -> W : ( 0 ..^ ( # ` W ) ) --> NN0 )
+i6::frn
+s7:s5,i6:syl |- ( W e. Word NN0 -> ran W C_ NN0 )
+s8:s7:adantr |- ( ( W e. Word NN0 /\ p e. ran W ) -> ran W C_ NN0 )
+s9::simpr |- ( ( W e. Word NN0 /\ p e. ran W ) -> p e. ran W )
+s10:s8,s9:sseldd |- ( ( W e. Word NN0 /\ p e. ran W ) -> p e. NN0 )
+i11::isprimetdspec
+s12:s10,i11:syl |- ( ( W e. Word NN0 /\ p e. ran W ) -> ( ( 1st ` ( IsPrimeTD ` p ) ) = 1o <-> p e. Prime ) )
+s13:s12:ralbidva |- ( W e. Word NN0 -> ( A. p e. ran W ( 1st ` ( IsPrimeTD ` p ) ) = 1o <-> A. p e. ran W p e. Prime ) )
+s14::id |- ( p = ( W ` i ) -> p = ( W ` i ) )
+c1:s14:fveq2d |- ( p = ( W ` i ) -> ( IsPrimeTD ` p ) = ( IsPrimeTD ` ( W ` i ) ) )
+c2:c1:fveq2d |- ( p = ( W ` i ) -> ( 1st ` ( IsPrimeTD ` p ) ) = ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) )
+c3:c2:eqeq1d |- ( p = ( W ` i ) -> ( ( 1st ` ( IsPrimeTD ` p ) ) = 1o <-> ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) )
+i15::wrdfn
+s16:s1,i15:syl |- ( W e. Word NN0 -> W Fn ( 0 ..^ ( # ` W ) ) )
+s17:c3:ralrn |- ( W Fn ( 0 ..^ ( # ` W ) ) -> ( A. p e. ran W ( 1st ` ( IsPrimeTD ` p ) ) = 1o <-> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) )
+s18:s16,s17:syl |- ( W e. Word NN0 -> ( A. p e. ran W ( 1st ` ( IsPrimeTD ` p ) ) = 1o <-> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) )
+s19:s13:bicomd |- ( W e. Word NN0 -> ( A. p e. ran W p e. Prime <-> A. p e. ran W ( 1st ` ( IsPrimeTD ` p ) ) = 1o ) )
+s20:s19,s18:bitrd |- ( W e. Word NN0 -> ( A. p e. ran W p e. Prime <-> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) )
+s21:s3,s20:bitrd |- ( W e. Word NN0 -> ( ( 1st ` ( AllPrimeTD ` W ) ) = 1o <-> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) )
+i22::allprimetdcl
+s23:s1,i22:syl |- ( W e. Word NN0 -> ( AllPrimeTD ` W ) e. ( 2o X. NN0 ) )
+i24::xp1st
+s25:s23,i24:syl |- ( W e. Word NN0 -> ( 1st ` ( AllPrimeTD ` W ) ) e. 2o )
+s26::simpr |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o )
+s27:s26:iftrued |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 1 )
+s28:s27:eqeq1d |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 <-> 1 = 0 ) )
+s29::ax-1ne0 |- 1 =/= 0
+s30:s29:a1i |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> 1 =/= 0 )
+s31:s30:neneqd |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> -. 1 = 0 )
+s32:s28,s31:mtbird |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> -. if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 )
+s33:s32:iffalsed |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> if ( if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 , (/) , 1o ) = 1o )
+s34::simpr |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o )
+s35:s21:adantr |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( ( 1st ` ( AllPrimeTD ` W ) ) = 1o <-> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) )
+s36:s34,s35:mpbird |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( 1st ` ( AllPrimeTD ` W ) ) = 1o )
+s37:s36,s33:eqtr4d |- ( ( W e. Word NN0 /\ A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( 1st ` ( AllPrimeTD ` W ) ) = if ( if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 , (/) , 1o ) )
+s38::simpr |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o )
+s39:s38:iffalsed |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 )
+s40:s39:iftrued |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> if ( if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 , (/) , 1o ) = (/) )
+s41::simpr |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o )
+s42:s21:adantr |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( ( 1st ` ( AllPrimeTD ` W ) ) = 1o <-> A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) )
+s43:s41,s42:mtbird |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> -. ( 1st ` ( AllPrimeTD ` W ) ) = 1o )
+s44:s25:adantr |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( 1st ` ( AllPrimeTD ` W ) ) e. 2o )
+s45::df2o3 |- 2o = { (/) , 1o }
+s46:s45:a1i |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> 2o = { (/) , 1o } )
+s47:s44,s46:eleqtrd |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( 1st ` ( AllPrimeTD ` W ) ) e. { (/) , 1o } )
+i48::elpri
+s49:s47,i48:syl |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( ( 1st ` ( AllPrimeTD ` W ) ) = (/) \/ ( 1st ` ( AllPrimeTD ` W ) ) = 1o ) )
+s50:s49:orcomd |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( ( 1st ` ( AllPrimeTD ` W ) ) = 1o \/ ( 1st ` ( AllPrimeTD ` W ) ) = (/) ) )
+s51:s50:ord |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( -. ( 1st ` ( AllPrimeTD ` W ) ) = 1o -> ( 1st ` ( AllPrimeTD ` W ) ) = (/) ) )
+s52:s43,s51:mpd |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( 1st ` ( AllPrimeTD ` W ) ) = (/) )
+s53:s52,s40:eqtr4d |- ( ( W e. Word NN0 /\ -. A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o ) -> ( 1st ` ( AllPrimeTD ` W ) ) = if ( if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 , (/) , 1o ) )
+s54:s37,s53:pm2.61dan |- ( W e. Word NN0 -> ( 1st ` ( AllPrimeTD ` W ) ) = if ( if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 , (/) , 1o ) )
+i55::biid
+qed:s54,i55:mpbi |- ( W e. Word NN0 -> ( 1st ` ( AllPrimeTD ` W ) ) = if ( if ( A. i e. ( 0 ..^ ( # ` W ) ) ( 1st ` ( IsPrimeTD ` ( W ` i ) ) ) = 1o , 1 , 0 ) = 0 , (/) , 1o ) )
+$)

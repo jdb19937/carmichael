@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=etaalt  LOC_AFTER=?
+
+* The eta series regrouped: ` eta ( Z ) = sum_ ( 2 ( k mod 2 ) - 1 ) k ^c -u Z ` on ` Re Z > 1 ` (Abel summation in reverse, ~ abagr at the alternating coefficients).
+
+s1::simpl |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> Z e. CC )
+s2::simpr |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> 1 < ( Re ` Z ) )
+s3:s1:recld |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( Re ` Z ) e. RR )
+s4:s1:negcld |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> -u Z e. CC )
+s5::altabs |- ( ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` m ) ) <_ 1 ) /\ A. m e. NN ( abs ` sum_ i e. ( 1 ... m ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) ) <_ 1 )
+s6:s5:a1i |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` m ) ) <_ 1 ) /\ A. m e. NN ( abs ` sum_ i e. ( 1 ... m ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) ) <_ 1 ) )
+i7::simpl
+s8:s6,i7:syl |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` m ) ) <_ 1 ) )
+s9::id |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( Z e. CC /\ 1 < ( Re ` Z ) ) )
+s10:s8,s9:jca |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` m ) ) <_ 1 ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) )
+s11::1re |- 1 e. RR
+s12:s11:a1i |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> 1 e. RR )
+i13::simpr
+s14:s6,i13:syl |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> A. m e. NN ( abs ` sum_ i e. ( 1 ... m ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) ) <_ 1 )
+s15:s12,s14:jca |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( 1 e. RR /\ A. m e. NN ( abs ` sum_ i e. ( 1 ... m ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) ) <_ 1 ) )
+s16:s10,s15:jca |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> ( ( ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) : NN --> CC /\ 1 e. RR /\ A. m e. NN ( abs ` ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` m ) ) <_ 1 ) /\ ( Z e. CC /\ 1 < ( Re ` Z ) ) ) /\ ( 1 e. RR /\ A. m e. NN ( abs ` sum_ i e. ( 1 ... m ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) ) <_ 1 ) ) )
+i17::abagr
+s18:s16,i17:syl |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> sum_ k e. NN ( sum_ i e. ( 1 ... k ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = sum_ k e. NN ( ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` k ) x. ( k ^c -u Z ) ) )
+s19::simpr |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> k e. NN )
+i20::altps
+s21:s19,i20:syl |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> sum_ i e. ( 1 ... k ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) = ( k mod 2 ) )
+s22:s21:oveq1d |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( sum_ i e. ( 1 ... k ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) )
+s23:s22:sumeq2dv |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> sum_ k e. NN ( sum_ i e. ( 1 ... k ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) )
+s24:s23:eqcomd |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = sum_ k e. NN ( sum_ i e. ( 1 ... k ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) )
+s25::oveq1 |- ( q = k -> ( q mod 2 ) = ( k mod 2 ) )
+s26:s25:oveq2d |- ( q = k -> ( 2 x. ( q mod 2 ) ) = ( 2 x. ( k mod 2 ) ) )
+s27:s26:oveq1d |- ( q = k -> ( ( 2 x. ( q mod 2 ) ) - 1 ) = ( ( 2 x. ( k mod 2 ) ) - 1 ) )
+s28::ovex |- ( ( 2 x. ( k mod 2 ) ) - 1 ) e. _V
+s29:s28:a1i |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( 2 x. ( k mod 2 ) ) - 1 ) e. _V )
+s30::eqid |- ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) = ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) )
+s31:s27,s30:fvmptg |- ( ( k e. NN /\ ( ( 2 x. ( k mod 2 ) ) - 1 ) e. _V ) -> ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` k ) = ( ( 2 x. ( k mod 2 ) ) - 1 ) )
+s32:s19,s29,s31:syl2anc |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` k ) = ( ( 2 x. ( k mod 2 ) ) - 1 ) )
+s33:s32:oveq1d |- ( ( ( Z e. CC /\ 1 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` k ) x. ( k ^c -u Z ) ) = ( ( ( 2 x. ( k mod 2 ) ) - 1 ) x. ( k ^c -u Z ) ) )
+s34:s33:sumeq2dv |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> sum_ k e. NN ( ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` k ) x. ( k ^c -u Z ) ) = sum_ k e. NN ( ( ( 2 x. ( k mod 2 ) ) - 1 ) x. ( k ^c -u Z ) ) )
+s35:s18,s34:eqtrd |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> sum_ k e. NN ( sum_ i e. ( 1 ... k ) ( ( q e. NN |-> ( ( 2 x. ( q mod 2 ) ) - 1 ) ) ` i ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = sum_ k e. NN ( ( ( 2 x. ( k mod 2 ) ) - 1 ) x. ( k ^c -u Z ) ) )
+qed:s24,s35:eqtrd |- ( ( Z e. CC /\ 1 < ( Re ` Z ) ) -> sum_ k e. NN ( ( k mod 2 ) x. ( ( k ^c -u Z ) - ( ( k + 1 ) ^c -u Z ) ) ) = sum_ k e. NN ( ( ( 2 x. ( k mod 2 ) ) - 1 ) x. ( k ^c -u Z ) ) )
+$)

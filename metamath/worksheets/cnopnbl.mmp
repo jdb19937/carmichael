@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=cnopnbl  LOC_AFTER=?
+
+* An open subset of the complex plane contains a disc about each of its points.
+
+s1::cnxmet |- ( abs o. - ) e. ( *Met ` CC )
+s2:s1:a1i |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> ( abs o. - ) e. ( *Met ` CC ) )
+s3::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s4:s3:cnfldtopn |- ( TopOpen ` CCfld ) = ( MetOpen ` ( abs o. - ) )
+s5::simpl |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> E e. ( TopOpen ` CCfld ) )
+s6::simpr |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> P e. E )
+s7:s4:mopni2 |- ( ( ( abs o. - ) e. ( *Met ` CC ) /\ E e. ( TopOpen ` CCfld ) /\ P e. E ) -> E. r e. RR+ ( P ( ball ` ( abs o. - ) ) r ) C_ E )
+s8:s2,s5,s6,s7:syl3anc |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> E. r e. RR+ ( P ( ball ` ( abs o. - ) ) r ) C_ E )
+s9::unicntop |- CC = U. ( TopOpen ` CCfld )
+i10::elssuni
+s11:s5,i10:syl |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> E C_ U. ( TopOpen ` CCfld ) )
+s12:s9:eqcomi |- U. ( TopOpen ` CCfld ) = CC
+s13:s11,s12:sseqtrdi |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> E C_ CC )
+s14:s13,s6:sseldd |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> P e. CC )
+s15::simpr |- ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) -> z e. CC )
+s16:s15:adantr |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> z e. CC )
+s17:s14:ad4antr |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> P e. CC )
+s18::simpr |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) -> r e. RR+ )
+s19:s18:ad3antrrr |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> r e. RR+ )
+s20:s19:rpxrd |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> r e. RR* )
+s21::cnxmet |- ( abs o. - ) e. ( *Met ` CC )
+s22:s21:a1i |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( abs o. - ) e. ( *Met ` CC ) )
+s23:s22,s20:jca |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( ( abs o. - ) e. ( *Met ` CC ) /\ r e. RR* ) )
+s24:s17,s16:jca |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( P e. CC /\ z e. CC ) )
+i25::elbl2
+s26:s23,s24,i25:syl2anc |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( z e. ( P ( ball ` ( abs o. - ) ) r ) <-> ( P ( abs o. - ) z ) < r ) )
+s27::eqid |- ( abs o. - ) = ( abs o. - )
+s28:s27:cnmetdval |- ( ( P e. CC /\ z e. CC ) -> ( P ( abs o. - ) z ) = ( abs ` ( P - z ) ) )
+s29:s17,s16,s28:syl2anc |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( P ( abs o. - ) z ) = ( abs ` ( P - z ) ) )
+i30::abssub
+s31:s17,s16,i30:syl2anc |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( abs ` ( P - z ) ) = ( abs ` ( z - P ) ) )
+s32:s29,s31:eqtrd |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( P ( abs o. - ) z ) = ( abs ` ( z - P ) ) )
+s33::simpr |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( abs ` ( z - P ) ) < r )
+s34:s32,s33:eqbrtrd |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( P ( abs o. - ) z ) < r )
+s35:s34,s26:mpbird |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> z e. ( P ( ball ` ( abs o. - ) ) r ) )
+s36::simpr |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) -> ( P ( ball ` ( abs o. - ) ) r ) C_ E )
+s37:s36:ad2antrr |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> ( P ( ball ` ( abs o. - ) ) r ) C_ E )
+s38:s37,s35:sseldd |- ( ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) /\ ( abs ` ( z - P ) ) < r ) -> z e. E )
+s39:s38:ex |- ( ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) /\ z e. CC ) -> ( ( abs ` ( z - P ) ) < r -> z e. E ) )
+s40:s39:ralrimiva |- ( ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) /\ ( P ( ball ` ( abs o. - ) ) r ) C_ E ) -> A. z e. CC ( ( abs ` ( z - P ) ) < r -> z e. E ) )
+s41:s40:ex |- ( ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) /\ r e. RR+ ) -> ( ( P ( ball ` ( abs o. - ) ) r ) C_ E -> A. z e. CC ( ( abs ` ( z - P ) ) < r -> z e. E ) ) )
+s42:s41:reximdva |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> ( E. r e. RR+ ( P ( ball ` ( abs o. - ) ) r ) C_ E -> E. r e. RR+ A. z e. CC ( ( abs ` ( z - P ) ) < r -> z e. E ) ) )
+qed:s8,s42:mpd |- ( ( E e. ( TopOpen ` CCfld ) /\ P e. E ) -> E. r e. RR+ A. z e. CC ( ( abs ` ( z - P ) ) < r -> z e. E ) )
+$)

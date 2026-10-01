@@ -1,0 +1,56 @@
+$( <MM> <PROOF_ASST> THEOREM=ef3sgri  LOC_AFTER=?
+
+* A point of a segment: its real and imaginary parts lie on the segments of the real and imaginary parts.
+
+s1::simpll |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> A e. CC )
+s2::simplr |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> B e. CC )
+s3::simpr |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> X e. ( A cseg B ) )
+i4::csegcl
+s5:s1,s2,i4:syl2anc |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> ( A cseg B ) C_ CC )
+s6:s5,s3:sseldd |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> X e. CC )
+i7::replim
+s8:s6,i7:syl |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> X = ( ( Re ` X ) + ( _i x. ( Im ` X ) ) ) )
+i9::csegel
+s10:s1,s2,i9:syl2anc |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> ( X e. ( A cseg B ) <-> E. t e. ( 0 [,] 1 ) X = ( A + ( t x. ( B - A ) ) ) ) )
+s11:s3,s10:mpbid |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> E. t e. ( 0 [,] 1 ) X = ( A + ( t x. ( B - A ) ) ) )
+s12::simpr |- ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) -> t e. ( 0 [,] 1 ) )
+s13:s12:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> t e. ( 0 [,] 1 ) )
+i14::elunitrn
+s15:s13,i14:syl |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> t e. RR )
+s16::simpr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> X = ( A + ( t x. ( B - A ) ) ) )
+s17:s1:adantr |- ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) -> A e. CC )
+s18:s17:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> A e. CC )
+s19:s2:adantr |- ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) -> B e. CC )
+s20:s19:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> B e. CC )
+s21:s16:fveq2d |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` X ) = ( Re ` ( A + ( t x. ( B - A ) ) ) ) )
+i22::cseglinre
+s23:s18,s20,s15,i22:syl3anc |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` ( A + ( t x. ( B - A ) ) ) ) = ( ( Re ` A ) + ( t x. ( ( Re ` B ) - ( Re ` A ) ) ) ) )
+s24:s18:recld |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` A ) e. RR )
+s25:s24:recnd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` A ) e. CC )
+s26:s20:recld |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` B ) e. RR )
+s27:s26:recnd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` B ) e. CC )
+i28::cseglin
+s29:s25,s27,s13,i28:syl3anc |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( ( Re ` A ) + ( t x. ( ( Re ` B ) - ( Re ` A ) ) ) ) e. ( ( Re ` A ) cseg ( Re ` B ) ) )
+s30:s21,s23:eqtrd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` X ) = ( ( Re ` A ) + ( t x. ( ( Re ` B ) - ( Re ` A ) ) ) ) )
+s31:s30,s29:eqeltrd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Re ` X ) e. ( ( Re ` A ) cseg ( Re ` B ) ) )
+s32:s16:fveq2d |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` X ) = ( Im ` ( A + ( t x. ( B - A ) ) ) ) )
+i33::cseglinim
+s34:s18,s20,s15,i33:syl3anc |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` ( A + ( t x. ( B - A ) ) ) ) = ( ( Im ` A ) + ( t x. ( ( Im ` B ) - ( Im ` A ) ) ) ) )
+s35:s18:imcld |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` A ) e. RR )
+s36:s35:recnd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` A ) e. CC )
+s37:s20:imcld |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` B ) e. RR )
+s38:s37:recnd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` B ) e. CC )
+i39::cseglin
+s40:s36,s38,s13,i39:syl3anc |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( ( Im ` A ) + ( t x. ( ( Im ` B ) - ( Im ` A ) ) ) ) e. ( ( Im ` A ) cseg ( Im ` B ) ) )
+s41:s32,s34:eqtrd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` X ) = ( ( Im ` A ) + ( t x. ( ( Im ` B ) - ( Im ` A ) ) ) ) )
+s42:s41,s40:eqeltrd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( Im ` X ) e. ( ( Im ` A ) cseg ( Im ` B ) ) )
+s43:s31,s42:jca |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) /\ X = ( A + ( t x. ( B - A ) ) ) ) -> ( ( Re ` X ) e. ( ( Re ` A ) cseg ( Re ` B ) ) /\ ( Im ` X ) e. ( ( Im ` A ) cseg ( Im ` B ) ) ) )
+s44:s43:ex |- ( ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) /\ t e. ( 0 [,] 1 ) ) -> ( X = ( A + ( t x. ( B - A ) ) ) -> ( ( Re ` X ) e. ( ( Re ` A ) cseg ( Re ` B ) ) /\ ( Im ` X ) e. ( ( Im ` A ) cseg ( Im ` B ) ) ) ) )
+s45:s44:rexlimdva |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> ( E. t e. ( 0 [,] 1 ) X = ( A + ( t x. ( B - A ) ) ) -> ( ( Re ` X ) e. ( ( Re ` A ) cseg ( Re ` B ) ) /\ ( Im ` X ) e. ( ( Im ` A ) cseg ( Im ` B ) ) ) ) )
+s46:s11,s45:mpd |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> ( ( Re ` X ) e. ( ( Re ` A ) cseg ( Re ` B ) ) /\ ( Im ` X ) e. ( ( Im ` A ) cseg ( Im ` B ) ) ) )
+i47::simpl
+s48:s46,i47:syl |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> ( Re ` X ) e. ( ( Re ` A ) cseg ( Re ` B ) ) )
+i49::simpr
+s50:s46,i49:syl |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> ( Im ` X ) e. ( ( Im ` A ) cseg ( Im ` B ) ) )
+qed:s8,s48,s50:3jca |- ( ( ( A e. CC /\ B e. CC ) /\ X e. ( A cseg B ) ) -> ( X = ( ( Re ` X ) + ( _i x. ( Im ` X ) ) ) /\ ( Re ` X ) e. ( ( Re ` A ) cseg ( Re ` B ) ) /\ ( Im ` X ) e. ( ( Im ` A ) cseg ( Im ` B ) ) ) )
+$)

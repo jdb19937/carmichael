@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrindtr  LOC_AFTER=?
+
+* Inducing from N to M and then to K is inducing from N to K (Mathlib changeLevel_trans).
+
+s1::simp11 |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simp12 |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> M e. NN )
+s3::simp13 |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> K e. NN )
+s4::simp2l |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> N || M )
+s5::simp2r |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> M || K )
+s6::simp3 |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s7:s1:nnzd |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. ZZ )
+s8:s2:nnzd |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> M e. ZZ )
+s9:s3:nnzd |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> K e. ZZ )
+s10:s7,s8,s9,s4,s5:dvdstrd |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> N || K )
+s11:s1,s2,s4:3jca |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N e. NN /\ M e. NN /\ N || M ) )
+s12:s2,s3,s5:3jca |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( M e. NN /\ K e. NN /\ M || K ) )
+s13:s1,s3,s10:3jca |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N e. NN /\ K e. NN /\ N || K ) )
+s14:s11,s6:jca |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) )
+i15::dchrindcl
+s16:s14,i15:syl |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N DChrInd M ) ` X ) e. ( Base ` ( DChr ` M ) ) )
+s17:s12,s16:jca |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( M e. NN /\ K e. NN /\ M || K ) /\ ( ( N DChrInd M ) ` X ) e. ( Base ` ( DChr ` M ) ) ) )
+i18::dchrindcl
+s19:s17,i18:syl |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( M DChrInd K ) ` ( ( N DChrInd M ) ` X ) ) e. ( Base ` ( DChr ` K ) ) )
+s20:s13,s6:jca |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( N e. NN /\ K e. NN /\ N || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s21::simplr |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> a e. ZZ )
+s22::simpr |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( a gcd K ) = 1 )
+s23:s8:ad2antrr |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> M e. ZZ )
+s24:s9:ad2antrr |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> K e. ZZ )
+s25:s21,s23,s24:3jca |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( a e. ZZ /\ M e. ZZ /\ K e. ZZ ) )
+s26:s5:ad2antrr |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> M || K )
+i27::coprmdvdsr
+s28:s25,s26,s22,i27:syl3anc |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( a gcd M ) = 1 )
+s29:s17:ad2antrr |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( ( M e. NN /\ K e. NN /\ M || K ) /\ ( ( N DChrInd M ) ` X ) e. ( Base ` ( DChr ` M ) ) ) )
+i30::dchrindval1
+s31:s29,s21,s22,i30:syl3anc |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( ( ( M DChrInd K ) ` ( ( N DChrInd M ) ` X ) ) ` ( ( ZRHom ` ( Z/nZ ` K ) ) ` a ) ) = ( ( ( N DChrInd M ) ` X ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` a ) ) )
+s32:s14:ad2antrr |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( ( N e. NN /\ M e. NN /\ N || M ) /\ X e. ( Base ` ( DChr ` N ) ) ) )
+i33::dchrindval1
+s34:s32,s21,s28,i33:syl3anc |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( ( ( N DChrInd M ) ` X ) ` ( ( ZRHom ` ( Z/nZ ` M ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+s35:s31,s34:eqtrd |- ( ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) /\ ( a gcd K ) = 1 ) -> ( ( ( M DChrInd K ) ` ( ( N DChrInd M ) ` X ) ) ` ( ( ZRHom ` ( Z/nZ ` K ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) )
+s36:s35:ex |- ( ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) /\ a e. ZZ ) -> ( ( a gcd K ) = 1 -> ( ( ( M DChrInd K ) ` ( ( N DChrInd M ) ` X ) ) ` ( ( ZRHom ` ( Z/nZ ` K ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) )
+s37:s36:ralrimiva |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> A. a e. ZZ ( ( a gcd K ) = 1 -> ( ( ( M DChrInd K ) ` ( ( N DChrInd M ) ` X ) ) ` ( ( ZRHom ` ( Z/nZ ` K ) ) ` a ) ) = ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) ) )
+i38::dchrindeq
+qed:s20,s19,s37,i38:syl3anc |- ( ( ( N e. NN /\ M e. NN /\ K e. NN ) /\ ( N || M /\ M || K ) /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( ( M DChrInd K ) ` ( ( N DChrInd M ) ` X ) ) = ( ( N DChrInd K ) ` X ) )
+$)

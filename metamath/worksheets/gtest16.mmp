@@ -1,0 +1,84 @@
+$( <MM> <PROOF_ASST> THEOREM=gtest16  LOC_AFTER=?
+
+* finite-sum test: fsumle with the termwise inequality k <_ ( 2 x. k ) proved by linarith under the child antecedent.
+
+s1::id |- ( N e. NN -> N e. NN )
+s2::fzfid |- ( N e. NN -> ( 1 ... N ) e. Fin )
+s3::simpr |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i4::elfznn
+s5:s3,i4:syl |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. NN )
+s6:s5:nnrpd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. RR+ )
+s7:s6:rpred |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. RR )
+s8::2re |- 2 e. RR
+s9:s8:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 2 e. RR )
+s10:s9,s7:remulcld |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 2 x. k ) e. RR )
+s11:s6:rpge0d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 0 <_ k )
+s12::0re |- 0 e. RR
+s13:s12:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 0 e. RR )
+s14:s7,s13:subge0d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 0 <_ ( k - 0 ) <-> 0 <_ k ) )
+s15:s11,s14:mpbird |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 0 <_ ( k - 0 ) )
+s16:s7:recnd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. CC )
+s17::0cn |- 0 e. CC
+s18:s17:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 0 e. CC )
+s19:s16,s18:negsubd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k + -u 0 ) = ( k - 0 ) )
+s20:s19:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k - 0 ) = ( k + -u 0 ) )
+s21:s18:mulm1d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( -u 1 x. 0 ) = -u 0 )
+s22:s21:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> -u 0 = ( -u 1 x. 0 ) )
+s23:s22:oveq2d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k + -u 0 ) = ( k + ( -u 1 x. 0 ) ) )
+s24::ax-1cn |- 1 e. CC
+s25:s24:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 1 e. CC )
+s26:s25,s16:mulcld |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 1 x. k ) e. CC )
+s27:s26:addlidd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 0 + ( 1 x. k ) ) = ( 1 x. k ) )
+s28:s27:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 1 x. k ) = ( 0 + ( 1 x. k ) ) )
+s29:s16:mullidd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 1 x. k ) = k )
+s30:s29:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k = ( 1 x. k ) )
+s31:s30,s28:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k = ( 0 + ( 1 x. k ) ) )
+s32:s24:negcli |- -u 1 e. CC
+s33:s32:mul01i |- ( -u 1 x. 0 ) = 0
+s34:s33:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( -u 1 x. 0 ) = 0 )
+s35:s31,s34:oveq12d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k + ( -u 1 x. 0 ) ) = ( ( 0 + ( 1 x. k ) ) + 0 ) )
+s36:s18,s26,s18:add32d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 0 + ( 1 x. k ) ) + 0 ) = ( ( 0 + 0 ) + ( 1 x. k ) ) )
+s37:s17:addlidi |- ( 0 + 0 ) = 0
+s38:s37:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 0 + 0 ) = 0 )
+s39:s38:oveq1d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 0 + 0 ) + ( 1 x. k ) ) = ( 0 + ( 1 x. k ) ) )
+s40:s36,s39:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 0 + ( 1 x. k ) ) + 0 ) = ( 0 + ( 1 x. k ) ) )
+s41:s20,s23:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k - 0 ) = ( k + ( -u 1 x. 0 ) ) )
+s42:s41,s35:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k - 0 ) = ( ( 0 + ( 1 x. k ) ) + 0 ) )
+s43:s42,s40:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k - 0 ) = ( 0 + ( 1 x. k ) ) )
+s44::2cn |- 2 e. CC
+s45:s44:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 2 e. CC )
+s46:s45,s16:mulcld |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 2 x. k ) e. CC )
+s47:s46,s16:negsubd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) + -u k ) = ( ( 2 x. k ) - k ) )
+s48:s47:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) - k ) = ( ( 2 x. k ) + -u k ) )
+s49:s16:mulm1d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( -u 1 x. k ) = -u k )
+s50:s49:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> -u k = ( -u 1 x. k ) )
+s51:s50:oveq2d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) + -u k ) = ( ( 2 x. k ) + ( -u 1 x. k ) ) )
+s52:s46:addlidd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 0 + ( 2 x. k ) ) = ( 2 x. k ) )
+s53:s52:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 2 x. k ) = ( 0 + ( 2 x. k ) ) )
+s54:s32:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> -u 1 e. CC )
+s55:s54,s16:mulcld |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( -u 1 x. k ) e. CC )
+s56:s55:addlidd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 0 + ( -u 1 x. k ) ) = ( -u 1 x. k ) )
+s57:s56:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( -u 1 x. k ) = ( 0 + ( -u 1 x. k ) ) )
+s58:s53,s57:oveq12d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) + ( -u 1 x. k ) ) = ( ( 0 + ( 2 x. k ) ) + ( 0 + ( -u 1 x. k ) ) ) )
+s59:s18,s46,s18,s55:add4d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 0 + ( 2 x. k ) ) + ( 0 + ( -u 1 x. k ) ) ) = ( ( 0 + 0 ) + ( ( 2 x. k ) + ( -u 1 x. k ) ) ) )
+s60:s37:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 0 + 0 ) = 0 )
+s61:s45,s54,s16:adddird |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 + -u 1 ) x. k ) = ( ( 2 x. k ) + ( -u 1 x. k ) ) )
+s62:s61:eqcomd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) + ( -u 1 x. k ) ) = ( ( 2 + -u 1 ) x. k ) )
+s63:s44,s24:negsubi |- ( 2 + -u 1 ) = ( 2 - 1 )
+s64::1p1e2 |- ( 1 + 1 ) = 2
+s65:s44,s24,s24,s64:subaddrii |- ( 2 - 1 ) = 1
+s66:s63,s65:eqtri |- ( 2 + -u 1 ) = 1
+s67:s66:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 2 + -u 1 ) = 1 )
+s68:s67:oveq1d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 + -u 1 ) x. k ) = ( 1 x. k ) )
+s69:s62,s68:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) + ( -u 1 x. k ) ) = ( 1 x. k ) )
+s70:s60,s69:oveq12d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 0 + 0 ) + ( ( 2 x. k ) + ( -u 1 x. k ) ) ) = ( 0 + ( 1 x. k ) ) )
+s71:s59,s70:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 0 + ( 2 x. k ) ) + ( 0 + ( -u 1 x. k ) ) ) = ( 0 + ( 1 x. k ) ) )
+s72:s48,s51:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) - k ) = ( ( 2 x. k ) + ( -u 1 x. k ) ) )
+s73:s72,s58:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) - k ) = ( ( 0 + ( 2 x. k ) ) + ( 0 + ( -u 1 x. k ) ) ) )
+s74:s73,s71:eqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( ( 2 x. k ) - k ) = ( 0 + ( 1 x. k ) ) )
+s75:s43,s74:eqtr4d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( k - 0 ) = ( ( 2 x. k ) - k ) )
+s76:s15,s75:breqtrd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 0 <_ ( ( 2 x. k ) - k ) )
+s77:s10,s7:subge0d |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> ( 0 <_ ( ( 2 x. k ) - k ) <-> k <_ ( 2 x. k ) ) )
+s78:s76,s77:mpbid |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k <_ ( 2 x. k ) )
+qed:s2,s7,s10,s78:fsumle |- ( N e. NN -> sum_ k e. ( 1 ... N ) k <_ sum_ k e. ( 1 ... N ) ( 2 x. k ) )
+$)

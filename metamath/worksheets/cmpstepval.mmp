@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=cmpstepval  LOC_AFTER=?
+
+* Value of cmpStep: a differing bit overrides the verdict so far (Lean: cmpStep).
+
+s1::simp1 |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> A e. 2o )
+s2::simp2 |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> B e. 2o )
+s3::simp3 |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> C e. 3o )
+s4::simpl |- ( ( a = A /\ b = B ) -> a = A )
+s5::simpr |- ( ( a = A /\ b = B ) -> b = B )
+c1:s4,s5:eqeq12d |- ( ( a = A /\ b = B ) -> ( a = b <-> A = B ) )
+c2:s4:eqeq1d |- ( ( a = A /\ b = B ) -> ( a = 1o <-> A = 1o ) )
+c3:c2:ifbid |- ( ( a = A /\ b = B ) -> if ( a = 1o , 2o , (/) ) = if ( A = 1o , 2o , (/) ) )
+c4:c1,c3:ifbieq2d |- ( ( a = A /\ b = B ) -> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) = if ( A = B , c , if ( A = 1o , 2o , (/) ) ) )
+c5:c4:mpteq2dv |- ( ( a = A /\ b = B ) -> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) = ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) )
+s6::df-cmpstep |- cmpStep = ( a e. 2o , b e. 2o |-> ( c e. 3o |-> if ( a = b , c , if ( a = 1o , 2o , (/) ) ) ) )
+s7::bw3oex |- 3o e. _V
+s8:s7:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> 3o e. _V )
+i9::mptexg
+s10:s8,i9:syl |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) e. _V )
+s11:c5,s6:ovmpoga |- ( ( A e. 2o /\ B e. 2o /\ ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) e. _V ) -> ( A cmpStep B ) = ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) )
+s12:s1,s2,s10,s11:syl3anc |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> ( A cmpStep B ) = ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) )
+s13:s12:fveq1d |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> ( ( A cmpStep B ) ` C ) = ( ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) ` C ) )
+s14::id |- ( c = C -> c = C )
+c6:s14:ifeq1d |- ( c = C -> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) = if ( A = B , C , if ( A = 1o , 2o , (/) ) ) )
+s15::eqid |- ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) = ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) )
+s16::bw2oel3o |- 2o e. 3o
+s17:s16:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> 2o e. 3o )
+s18::bw0el3o |- (/) e. 3o
+s19:s18:a1i |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> (/) e. 3o )
+s20:s17,s19:ifcld |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> if ( A = 1o , 2o , (/) ) e. 3o )
+s21:s3,s20:ifcld |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> if ( A = B , C , if ( A = 1o , 2o , (/) ) ) e. 3o )
+s22:s21:elexd |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> if ( A = B , C , if ( A = 1o , 2o , (/) ) ) e. _V )
+s23:c6,s15:fvmptg |- ( ( C e. 3o /\ if ( A = B , C , if ( A = 1o , 2o , (/) ) ) e. _V ) -> ( ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) ` C ) = if ( A = B , C , if ( A = 1o , 2o , (/) ) ) )
+s24:s3,s22,s23:syl2anc |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> ( ( c e. 3o |-> if ( A = B , c , if ( A = 1o , 2o , (/) ) ) ) ` C ) = if ( A = B , C , if ( A = 1o , 2o , (/) ) ) )
+qed:s13,s24:eqtrd |- ( ( A e. 2o /\ B e. 2o /\ C e. 3o ) -> ( ( A cmpStep B ) ` C ) = if ( A = B , C , if ( A = 1o , 2o , (/) ) ) )
+$)

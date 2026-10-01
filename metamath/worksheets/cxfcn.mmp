@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=cxfcn  LOC_AFTER=?
+
+* The exponential map ` z |-> ( U ^c z ) ` of a positive real base is continuous on any set of complex numbers: it is ` exp ` composed with a linear map ( ~ cxpef ).
+
+s1::simpl |- ( ( U e. RR+ /\ E C_ CC ) -> U e. RR+ )
+s2::simpr |- ( ( U e. RR+ /\ E C_ CC ) -> E C_ CC )
+i3::relogcl
+s4:s1,i3:syl |- ( ( U e. RR+ /\ E C_ CC ) -> ( log ` U ) e. RR )
+s5:s4:recnd |- ( ( U e. RR+ /\ E C_ CC ) -> ( log ` U ) e. CC )
+s6::ssid |- CC C_ CC
+s7:s6:a1i |- ( ( U e. RR+ /\ E C_ CC ) -> CC C_ CC )
+i8::cncfmptid
+s9:s2,s7,i8:syl2anc |- ( ( U e. RR+ /\ E C_ CC ) -> ( z e. E |-> z ) e. ( E -cn-> CC ) )
+s10::ssid |- CC C_ CC
+s11:s10:a1i |- ( ( U e. RR+ /\ E C_ CC ) -> CC C_ CC )
+i12::cncfmptc
+s13:s5,s2,s11,i12:syl3anc |- ( ( U e. RR+ /\ E C_ CC ) -> ( z e. E |-> ( log ` U ) ) e. ( E -cn-> CC ) )
+s14:s9,s13:mulcncf |- ( ( U e. RR+ /\ E C_ CC ) -> ( z e. E |-> ( z x. ( log ` U ) ) ) e. ( E -cn-> CC ) )
+s15::efcn |- exp e. ( CC -cn-> CC )
+s16:s15:a1i |- ( ( U e. RR+ /\ E C_ CC ) -> exp e. ( CC -cn-> CC ) )
+s17:s16,s14:cncfmpt1f |- ( ( U e. RR+ /\ E C_ CC ) -> ( z e. E |-> ( exp ` ( z x. ( log ` U ) ) ) ) e. ( E -cn-> CC ) )
+s18:s2:adantr |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> E C_ CC )
+s19::simpr |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> z e. E )
+s20:s18,s19:sseldd |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> z e. CC )
+s21:s1:adantr |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> U e. RR+ )
+s22:s21:rpcnd |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> U e. CC )
+s24:s1:adantr |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> U e. RR+ )
+s25:s24:rpcnd |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> U e. CC )
+s26:s1:adantr |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> U e. RR+ )
+s27:s26:rpne0d |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> U =/= 0 )
+i28::cxpef
+s29:s25,s27,s20,i28:syl3anc |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> ( U ^c z ) = ( exp ` ( z x. ( log ` U ) ) ) )
+s30:s29:eqcomd |- ( ( ( U e. RR+ /\ E C_ CC ) /\ z e. E ) -> ( exp ` ( z x. ( log ` U ) ) ) = ( U ^c z ) )
+s31:s30:mpteq2dva |- ( ( U e. RR+ /\ E C_ CC ) -> ( z e. E |-> ( exp ` ( z x. ( log ` U ) ) ) ) = ( z e. E |-> ( U ^c z ) ) )
+qed:s31,s17:eqeltrrd |- ( ( U e. RR+ /\ E C_ CC ) -> ( z e. E |-> ( U ^c z ) ) e. ( E -cn-> CC ) )
+$)

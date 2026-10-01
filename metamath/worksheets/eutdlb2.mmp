@@ -1,0 +1,72 @@
+$( <MM> <PROOF_ASST> THEOREM=eutdlb2  LOC_AFTER=?
+
+* The denominator of Euler's term has modulus at least the height of the argument divided by the index.
+
+s1::simpll |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> Z e. CC )
+s2::simplr |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 0 < ( Re ` Z ) )
+s3::simpr |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> M e. NN )
+s4:s1:recld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Re ` Z ) e. RR )
+s5:s4,s2:elrpd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Re ` Z ) e. RR+ )
+s6:s3:nnrpd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> M e. RR+ )
+s7:s3:nnred |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> M e. RR )
+s8:s6:rpcnd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> M e. CC )
+s9:s6:rpne0d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> M =/= 0 )
+s10::1rp |- 1 e. RR+
+s11:s10:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 1 e. RR+ )
+s12:s6,s11:rpaddcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( M + 1 ) e. RR+ )
+s13:s12,s6:rpdivcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( M + 1 ) / M ) e. RR+ )
+s14:s13,s4:rpcxpcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( ( M + 1 ) / M ) ^c ( Re ` Z ) ) e. RR+ )
+s15:s1,s8,s9:divcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Z / M ) e. CC )
+s16::ax-1cn |- 1 e. CC
+s17:s16:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 1 e. CC )
+s18:s15,s17:addcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Z / M ) + 1 ) e. CC )
+s19:s16:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 1 e. CC )
+s20:s15,s19:readdd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Re ` ( ( Z / M ) + 1 ) ) = ( ( Re ` ( Z / M ) ) + ( Re ` 1 ) ) )
+s21:s7,s9,s1:redivd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Re ` ( Z / M ) ) = ( ( Re ` Z ) / M ) )
+s22::re1 |- ( Re ` 1 ) = 1
+s23:s22:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Re ` 1 ) = 1 )
+s24:s21,s23:oveq12d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Re ` ( Z / M ) ) + ( Re ` 1 ) ) = ( ( ( Re ` Z ) / M ) + 1 ) )
+s25:s20,s24:eqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Re ` ( ( Z / M ) + 1 ) ) = ( ( ( Re ` Z ) / M ) + 1 ) )
+s26:s5,s6:rpdivcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Re ` Z ) / M ) e. RR+ )
+s27:s26,s11:rpaddcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( ( Re ` Z ) / M ) + 1 ) e. RR+ )
+s28::re0 |- ( Re ` 0 ) = 0
+s29:s27:rpgt0d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 0 < ( ( ( Re ` Z ) / M ) + 1 ) )
+s30:s25,s29:breqtrrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 0 < ( Re ` ( ( Z / M ) + 1 ) ) )
+s31::simpr |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) /\ ( ( Z / M ) + 1 ) = 0 ) -> ( ( Z / M ) + 1 ) = 0 )
+s32:s31:fveq2d |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) /\ ( ( Z / M ) + 1 ) = 0 ) -> ( Re ` ( ( Z / M ) + 1 ) ) = ( Re ` 0 ) )
+s33:s28:a1i |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) /\ ( ( Z / M ) + 1 ) = 0 ) -> ( Re ` 0 ) = 0 )
+s34:s32,s33:eqtrd |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) /\ ( ( Z / M ) + 1 ) = 0 ) -> ( Re ` ( ( Z / M ) + 1 ) ) = 0 )
+s35:s30:adantr |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) /\ ( ( Z / M ) + 1 ) = 0 ) -> 0 < ( Re ` ( ( Z / M ) + 1 ) ) )
+s36:s35,s34:breqtrd |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) /\ ( ( Z / M ) + 1 ) = 0 ) -> 0 < 0 )
+s37::0re |- 0 e. RR
+i38::ltnr
+s39:s37,i38:ax-mp |- -. 0 < 0
+s40:s39:a1i |- ( ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) /\ ( ( Z / M ) + 1 ) = 0 ) -> -. 0 < 0 )
+s41:s36,s40:pm2.65da |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> -. ( ( Z / M ) + 1 ) = 0 )
+s42:s41:neqned |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Z / M ) + 1 ) =/= 0 )
+s43:s18,s42:absrpcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( abs ` ( ( Z / M ) + 1 ) ) e. RR+ )
+s44:s7,s9,s1:imdivd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Im ` ( Z / M ) ) = ( ( Im ` Z ) / M ) )
+s45::ax-1cn |- 1 e. CC
+s46:s45:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 1 e. CC )
+s47:s15,s46:imaddd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Im ` ( ( Z / M ) + 1 ) ) = ( ( Im ` ( Z / M ) ) + ( Im ` 1 ) ) )
+s48::im1 |- ( Im ` 1 ) = 0
+s49:s48:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Im ` 1 ) = 0 )
+s50:s44,s49:oveq12d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Im ` ( Z / M ) ) + ( Im ` 1 ) ) = ( ( ( Im ` Z ) / M ) + 0 ) )
+s51:s1:imcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Im ` Z ) e. RR )
+s52:s51,s7,s9:redivcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Im ` Z ) / M ) e. RR )
+s53:s52:recnd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Im ` Z ) / M ) e. CC )
+s54:s53:addridd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( ( Im ` Z ) / M ) + 0 ) = ( ( Im ` Z ) / M ) )
+s55:s50,s54:eqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( Im ` ( Z / M ) ) + ( Im ` 1 ) ) = ( ( Im ` Z ) / M ) )
+s56:s47,s55:eqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Im ` ( ( Z / M ) + 1 ) ) = ( ( Im ` Z ) / M ) )
+i57::absimle
+s58:s18,i57:syl |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( abs ` ( Im ` ( ( Z / M ) + 1 ) ) ) <_ ( abs ` ( ( Z / M ) + 1 ) ) )
+s59:s56:fveq2d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( abs ` ( Im ` ( ( Z / M ) + 1 ) ) ) = ( abs ` ( ( Im ` Z ) / M ) ) )
+s60:s51:recnd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( Im ` Z ) e. CC )
+s61:s60,s8,s9:absdivd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( abs ` ( ( Im ` Z ) / M ) ) = ( ( abs ` ( Im ` Z ) ) / ( abs ` M ) ) )
+s62:s6:rpge0d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> 0 <_ M )
+s63:s7,s62:absidd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( abs ` M ) = M )
+s64:s63:oveq2d |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( abs ` ( Im ` Z ) ) / ( abs ` M ) ) = ( ( abs ` ( Im ` Z ) ) / M ) )
+s65:s61,s64:eqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( abs ` ( ( Im ` Z ) / M ) ) = ( ( abs ` ( Im ` Z ) ) / M ) )
+s66:s59,s65:eqtrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( abs ` ( Im ` ( ( Z / M ) + 1 ) ) ) = ( ( abs ` ( Im ` Z ) ) / M ) )
+qed:s58,s66:eqbrtrrd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ M e. NN ) -> ( ( abs ` ( Im ` Z ) ) / M ) <_ ( abs ` ( ( Z / M ) + 1 ) ) )
+$)

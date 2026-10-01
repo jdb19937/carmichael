@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=ell2le  LOC_AFTER=?
+
+* ell2 is monotone for arguments >= 2 (Lean: Real.log_le_log twice; ScalesTM.lean hlogM_lo).
+
+s1::simpl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> M e. ( ZZ>= ` 2 ) )
+s2::simpr |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> N e. ( ZZ>= ` M ) )
+i3::uztrn
+s4:s2,s1,i3:syl2anc |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> N e. ( ZZ>= ` 2 ) )
+i5::eluz2nn
+s6:s1,i5:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> M e. NN )
+s7:s6:nnnn0d |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> M e. NN0 )
+s8:s6:nnrpd |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> M e. RR+ )
+i9::eluz2gt1
+s10:s1,i9:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> 1 < M )
+i11::loggt0b
+s12:s8,i11:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( 0 < ( log ` M ) <-> 1 < M ) )
+s13:s10,s12:mpbird |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> 0 < ( log ` M ) )
+i14::relogcl
+s15:s8,i14:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( log ` M ) e. RR )
+s16:s15,s13:elrpd |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( log ` M ) e. RR+ )
+i17::ell2val
+s18:s7,i17:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell2 ` M ) = ( log ` ( log ` M ) ) )
+i19::eluz2nn
+s20:s4,i19:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> N e. NN )
+s21:s20:nnnn0d |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> N e. NN0 )
+s22:s20:nnrpd |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> N e. RR+ )
+i23::eluz2gt1
+s24:s4,i23:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> 1 < N )
+i25::loggt0b
+s26:s22,i25:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( 0 < ( log ` N ) <-> 1 < N ) )
+s27:s24,s26:mpbird |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> 0 < ( log ` N ) )
+i28::relogcl
+s29:s22,i28:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( log ` N ) e. RR )
+s30:s29,s27:elrpd |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( log ` N ) e. RR+ )
+i31::ell2val
+s32:s21,i31:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell2 ` N ) = ( log ` ( log ` N ) ) )
+i33::eluzle
+s34:s2,i33:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> M <_ N )
+i35::logleb
+s36:s8,s22,i35:syl2anc |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( M <_ N <-> ( log ` M ) <_ ( log ` N ) ) )
+s37:s34,s36:mpbid |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( log ` M ) <_ ( log ` N ) )
+i38::logleb
+s39:s16,s30,i38:syl2anc |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( ( log ` M ) <_ ( log ` N ) <-> ( log ` ( log ` M ) ) <_ ( log ` ( log ` N ) ) ) )
+s40:s37,s39:mpbid |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( log ` ( log ` M ) ) <_ ( log ` ( log ` N ) ) )
+s41:s18,s40:eqbrtrd |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell2 ` M ) <_ ( log ` ( log ` N ) ) )
+qed:s41,s32:breqtrrd |- ( ( M e. ( ZZ>= ` 2 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell2 ` M ) <_ ( ell2 ` N ) )
+$)

@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=prmprodlb  LOC_AFTER=?
+
+* 2 ^ ( # Q ) <_ Lmod Q for a finite set of primes (Lean: Step3W.lean hL2T).
+
+s1::id |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P Prime i^i Fin ) )
+i2::elfpw
+s3:s1,i2:sylib |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s4:s3:simpld |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ Prime )
+s5:s3:simprd |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. Fin )
+s6::prmssnn |- Prime C_ NN
+s7::nnssnn0 |- NN C_ NN0
+s8:s6,s7:sstri |- Prime C_ NN0
+s9:s8:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ NN0 )
+s10:s4,s9:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ NN0 )
+s11:s10,s5:jca |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i12::elfpw
+s13:s11,i12:sylibr |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P NN0 i^i Fin ) )
+s14::nnssz |- NN C_ ZZ
+s15:s6,s14:sstri |- Prime C_ ZZ
+s16:s15:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ ZZ )
+s17:s4,s16:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ ZZ )
+s18::nfv |- F/ q Q e. ( ~P Prime i^i Fin )
+s19::simpr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. Q )
+s20:s4:adantr |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> Q C_ Prime )
+s21:s20,s19:sseldd |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. Prime )
+i22::prmnn
+s23:s21,i22:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. NN )
+s24:s23:nnred |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. RR )
+i25::prmuz2
+s26:s21,i25:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> q e. ( ZZ>= ` 2 ) )
+i27::eluzle
+s28:s26,i27:syl |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> 2 <_ q )
+s29::2re |- 2 e. RR
+s30:s29:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> 2 e. RR )
+s31::0le2 |- 0 <_ 2
+s32:s31:a1i |- ( ( Q e. ( ~P Prime i^i Fin ) /\ q e. Q ) -> 0 <_ 2 )
+s33:s18,s5,s30,s32,s24,s28:fprodle |- ( Q e. ( ~P Prime i^i Fin ) -> prod_ q e. Q 2 <_ prod_ q e. Q q )
+s34::2cn |- 2 e. CC
+s35:s34:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> 2 e. CC )
+i36::fprodconst
+s37:s5,s35,i36:syl2anc |- ( Q e. ( ~P Prime i^i Fin ) -> prod_ q e. Q 2 = ( 2 ^ ( # ` Q ) ) )
+s38:s37:eqcomd |- ( Q e. ( ~P Prime i^i Fin ) -> ( 2 ^ ( # ` Q ) ) = prod_ q e. Q 2 )
+s39:s38,s33:eqbrtrd |- ( Q e. ( ~P Prime i^i Fin ) -> ( 2 ^ ( # ` Q ) ) <_ prod_ q e. Q q )
+i40::lmodqval
+s41:s13,i40:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( Lmod ` Q ) = prod_ q e. Q q )
+s42:s41:eqcomd |- ( Q e. ( ~P Prime i^i Fin ) -> prod_ q e. Q q = ( Lmod ` Q ) )
+qed:s39,s42:breqtrd |- ( Q e. ( ~P Prime i^i Fin ) -> ( 2 ^ ( # ` Q ) ) <_ ( Lmod ` Q ) )
+$)

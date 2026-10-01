@@ -1,0 +1,82 @@
+$( <MM> <PROOF_ASST> THEOREM=carriesle  LOC_AFTER=?
+
+* The carries of an increment are at most the length (Lean: carries_le_length).
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+s6::carriesval |- ( L e. Word 2o -> ( carries ` L ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) )
+s7::simpr |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) )
+s8:s7:iftrued |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) = ( # ` L ) )
+s9:s6:adantr |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( carries ` L ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) )
+s10:s9,s8:eqtrd |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( carries ` L ) = ( # ` L ) )
+i11::lencl
+s12:s1,i11:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s13:s12:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s14:s13:zred |- ( L e. Word 2o -> ( # ` L ) e. RR )
+s15:s14:adantr |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. RR )
+s16:s15:leidd |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) <_ ( # ` L ) )
+s17:s10,s16:eqbrtrd |- ( ( L e. Word 2o /\ ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( carries ` L ) <_ ( # ` L ) )
+s18::simpr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) )
+s19:s18:iffalsed |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) = ( 2 pCnt ( ( toNat ` L ) + 1 ) ) )
+s20:s6:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( carries ` L ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) )
+s21:s20,s19:eqtrd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( carries ` L ) = ( 2 pCnt ( ( toNat ` L ) + 1 ) ) )
+s22::2prm |- 2 e. Prime
+s23:s22:a1i |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> 2 e. Prime )
+s24:s5:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) e. NN )
+i25::pcdvds
+s26:s23,s24,i25:syl2anc |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) || ( ( toNat ` L ) + 1 ) )
+s27::2z |- 2 e. ZZ
+s28:s27:a1i |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> 2 e. ZZ )
+s29:s22:a1i |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> 2 e. Prime )
+s30:s1:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> L e. Word 2o )
+i31::tonatcl
+s32:s30,i31:syl |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( toNat ` L ) e. NN0 )
+s33::1nn |- 1 e. NN
+s34:s33:a1i |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> 1 e. NN )
+i35::nn0nnaddcl
+s36:s32,s34,i35:syl2anc |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) e. NN )
+i37::pccl
+s38:s29,s36,i37:syl2anc |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 pCnt ( ( toNat ` L ) + 1 ) ) e. NN0 )
+s39:s28,s38:zexpcld |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) e. ZZ )
+s40:s5:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) e. NN )
+i41::dvdsle
+s42:s39,s40,i41:syl2anc |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) || ( ( toNat ` L ) + 1 ) -> ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) <_ ( ( toNat ` L ) + 1 ) ) )
+s43:s26,s42:mpd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) <_ ( ( toNat ` L ) + 1 ) )
+s44:s1:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> L e. Word 2o )
+i45::tonatlt
+s46:s44,i45:syl |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( toNat ` L ) < ( 2 ^ ( # ` L ) ) )
+s47:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+s48:s47:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( toNat ` L ) e. ZZ )
+s49:s27:a1i |- ( L e. Word 2o -> 2 e. ZZ )
+s50:s49,s12:zexpcld |- ( L e. Word 2o -> ( 2 ^ ( # ` L ) ) e. ZZ )
+s51:s50:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 ^ ( # ` L ) ) e. ZZ )
+i52::zltp1le
+s53:s48,s51,i52:syl2anc |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) < ( 2 ^ ( # ` L ) ) <-> ( ( toNat ` L ) + 1 ) <_ ( 2 ^ ( # ` L ) ) ) )
+s54:s46,s53:mpbid |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) <_ ( 2 ^ ( # ` L ) ) )
+s55::2re |- 2 e. RR
+s56:s55:a1i |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> 2 e. RR )
+s57:s56,s38:reexpcld |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) e. RR )
+s58:s47:zred |- ( L e. Word 2o -> ( toNat ` L ) e. RR )
+s59::1re |- 1 e. RR
+s60:s59:a1i |- ( L e. Word 2o -> 1 e. RR )
+s61:s58,s60:readdcld |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. RR )
+s62:s61:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( toNat ` L ) + 1 ) e. RR )
+s63:s55:a1i |- ( L e. Word 2o -> 2 e. RR )
+s64:s63,s12:reexpcld |- ( L e. Word 2o -> ( 2 ^ ( # ` L ) ) e. RR )
+s65:s64:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 ^ ( # ` L ) ) e. RR )
+s66:s57,s62,s65,s43,s54:letrd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) <_ ( 2 ^ ( # ` L ) ) )
+s67:s55:a1i |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> 2 e. RR )
+s68:s38:nn0zd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 pCnt ( ( toNat ` L ) + 1 ) ) e. ZZ )
+s69:s13:adantr |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( # ` L ) e. ZZ )
+s70:s67,s68,s69:3jca |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 e. RR /\ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) e. ZZ /\ ( # ` L ) e. ZZ ) )
+s71::1lt2 |- 1 < 2
+s72:s71:a1i |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> 1 < 2 )
+i73::leexp2
+s74:s70,s72,i73:syl2anc |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( ( 2 pCnt ( ( toNat ` L ) + 1 ) ) <_ ( # ` L ) <-> ( 2 ^ ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) <_ ( 2 ^ ( # ` L ) ) ) )
+s75:s66,s74:mpbird |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( 2 pCnt ( ( toNat ` L ) + 1 ) ) <_ ( # ` L ) )
+s76:s21,s75:eqbrtrd |- ( ( L e. Word 2o /\ -. ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) -> ( carries ` L ) <_ ( # ` L ) )
+qed:s17,s76:pm2.61dan |- ( L e. Word 2o -> ( carries ` L ) <_ ( # ` L ) )
+$)

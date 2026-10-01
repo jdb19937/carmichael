@@ -1,0 +1,156 @@
+$( <MM> <PROOF_ASST> THEOREM=zdz12  LOC_AFTER=?
+
+* The Barban-Vehov cuts z1 = D ^c ( 31 / 50 ) < z2 = D ^c ( 63 / 100 ) are positive reals for 1 < D.
+
+s1::simpl |- ( ( D e. RR /\ 1 < D ) -> D e. RR )
+s2::simpr |- ( ( D e. RR /\ 1 < D ) -> 1 < D )
+s3::0le1 |- 0 <_ 1
+s4:s3:a1i |- ( ( D e. RR /\ 1 < D ) -> 0 <_ 1 )
+s5::0re |- 0 e. RR
+s6:s5:a1i |- ( ( D e. RR /\ 1 < D ) -> 0 e. RR )
+s7::1re |- 1 e. RR
+s8:s7:a1i |- ( ( D e. RR /\ 1 < D ) -> 1 e. RR )
+s9:s6,s8,s1,s4,s2:lelttrd |- ( ( D e. RR /\ 1 < D ) -> 0 < D )
+s10:s1,s9:elrpd |- ( ( D e. RR /\ 1 < D ) -> D e. RR+ )
+i11::rpre
+i12::rpdivcl
+i13::nnrp
+s14::3nn0 |- 3 e. NN0
+s15::1nn |- 1 e. NN
+s16:s14,s15:decnncl |- ; 3 1 e. NN
+s17:s16,i13:ax-mp |- ; 3 1 e. RR+
+i18::nnrp
+s19::5nn |- 5 e. NN
+s20:s19:decnncl2 |- ; 5 0 e. NN
+s21:s20,i18:ax-mp |- ; 5 0 e. RR+
+s22:s17,s21,i12:mp2an |- ( ; 3 1 / ; 5 0 ) e. RR+
+s23:s22,i11:ax-mp |- ( ; 3 1 / ; 5 0 ) e. RR
+s24:s23:a1i |- ( ( D e. RR /\ 1 < D ) -> ( ; 3 1 / ; 5 0 ) e. RR )
+s25:s10,s24:rpcxpcld |- ( ( D e. RR /\ 1 < D ) -> ( D ^c ( ; 3 1 / ; 5 0 ) ) e. RR+ )
+i26::rpre
+i27::rpdivcl
+i28::nnrp
+s29::6nn0 |- 6 e. NN0
+s30::3nn |- 3 e. NN
+s31:s29,s30:decnncl |- ; 6 3 e. NN
+s32:s31,i28:ax-mp |- ; 6 3 e. RR+
+i33::nnrp
+s34:s15:decnncl2 |- ; 1 0 e. NN
+s35:s34:decnncl2 |- ; ; 1 0 0 e. NN
+s36:s35,i33:ax-mp |- ; ; 1 0 0 e. RR+
+s37:s32,s36,i27:mp2an |- ( ; 6 3 / ; ; 1 0 0 ) e. RR+
+s38:s37,i26:ax-mp |- ( ; 6 3 / ; ; 1 0 0 ) e. RR
+s39:s38:a1i |- ( ( D e. RR /\ 1 < D ) -> ( ; 6 3 / ; ; 1 0 0 ) e. RR )
+s40:s10,s39:rpcxpcld |- ( ( D e. RR /\ 1 < D ) -> ( D ^c ( ; 6 3 / ; ; 1 0 0 ) ) e. RR+ )
+i41::ltdivmul
+s42::1nn0 |- 1 e. NN0
+s43:s14,s42:deccl |- ; 3 1 e. NN0
+s44:s43:nn0rei |- ; 3 1 e. RR
+i45::rpre
+i46::rpdivcl
+i47::nnrp
+i48::nnrp
+s49::5nn0 |- 5 e. NN0
+s50::0nn0 |- 0 e. NN0
+s51:s49,s50:deccl |- ; 5 0 e. NN0
+s52:s51:nn0rei |- ; 5 0 e. RR
+s53:s20:nngt0i |- 0 < ; 5 0
+s54:s52,s53:pm3.2i |- ( ; 5 0 e. RR /\ 0 < ; 5 0 )
+s55:s44,s38,s54,i41:mp3an |- ( ( ; 3 1 / ; 5 0 ) < ( ; 6 3 / ; ; 1 0 0 ) <-> ; 3 1 < ( ; 5 0 x. ( ; 6 3 / ; ; 1 0 0 ) ) )
+i56::ltmuldiv
+s57:s29,s14:deccl |- ; 6 3 e. NN0
+s58:s57:nn0rei |- ; 6 3 e. RR
+s59::2re |- 2 e. RR
+s60::2pos |- 0 < 2
+s61:s59,s60:pm3.2i |- ( 2 e. RR /\ 0 < 2 )
+s62:s44,s58,s61,i56:mp3an |- ( ( ; 3 1 x. 2 ) < ; 6 3 <-> ; 3 1 < ( ; 6 3 / 2 ) )
+i63::ltaddpos
+s64::2nn0 |- 2 e. NN0
+s65:s29,s64:deccl |- ; 6 2 e. NN0
+s66:s65:nn0rei |- ; 6 2 e. RR
+s67:s7,s66,i63:mp2an |- ( 0 < 1 <-> ; 6 2 < ( ; 6 2 + 1 ) )
+s68::0lt1 |- 0 < 1
+s69:s68,s67:mpbi |- ; 6 2 < ( ; 6 2 + 1 )
+s70::eqid |- ; 6 2 = ; 6 2
+s71::2p1e3 |- ( 2 + 1 ) = 3
+s72:s29,s64,s42,s70,s71:decaddi |- ( ; 6 2 + 1 ) = ; 6 3
+s73:s69,s72:breqtri |- ; 6 2 < ; 6 3
+s74::eqid |- ; 3 1 = ; 3 1
+s75::3t2e6 |- ( 3 x. 2 ) = 6
+s76::2cn |- 2 e. CC
+s77:s76:mullidi |- ( 1 x. 2 ) = 2
+s78:s64,s14,s42,s74,s75,s77:decmul1 |- ( ; 3 1 x. 2 ) = ; 6 2
+s79:s78,s73:eqbrtri |- ( ; 3 1 x. 2 ) < ; 6 3
+s80:s79,s62:mpbi |- ; 3 1 < ( ; 6 3 / 2 )
+s81:s51:nn0cni |- ; 5 0 e. CC
+s82:s57:nn0cni |- ; 6 3 e. CC
+s83:s42,s50:deccl |- ; 1 0 e. NN0
+s84:s83,s50:deccl |- ; ; 1 0 0 e. NN0
+s85:s84:nn0cni |- ; ; 1 0 0 e. CC
+s86:s35:nnne0i |- ; ; 1 0 0 =/= 0
+s87:s81,s82,s85,s86:divassi |- ( ( ; 5 0 x. ; 6 3 ) / ; ; 1 0 0 ) = ( ; 5 0 x. ( ; 6 3 / ; ; 1 0 0 ) )
+s88:s87:eqcomi |- ( ; 5 0 x. ( ; 6 3 / ; ; 1 0 0 ) ) = ( ( ; 5 0 x. ; 6 3 ) / ; ; 1 0 0 )
+s89::eqid |- ; 5 0 = ; 5 0
+s90::5cn |- 5 e. CC
+s91::6cn |- 6 e. CC
+s92:s90,s91:mulcomi |- ( 5 x. 6 ) = ( 6 x. 5 )
+s93::6t5e30 |- ( 6 x. 5 ) = ; 3 0
+s94:s92,s93:eqtri |- ( 5 x. 6 ) = ; 3 0
+s95:s91:mul02i |- ( 0 x. 6 ) = 0
+s96:s29,s49,s50,s89,s94,s95:decmul1 |- ( ; 5 0 x. 6 ) = ; ; 3 0 0
+s97:s96:eqcomi |- ; ; 3 0 0 = ( ; 5 0 x. 6 )
+s98::5t3e15 |- ( 5 x. 3 ) = ; 1 5
+s99::3cn |- 3 e. CC
+s100:s99:mul02i |- ( 0 x. 3 ) = 0
+s101:s14,s49,s50,s89,s98,s100:decmul1 |- ( ; 5 0 x. 3 ) = ; ; 1 5 0
+s102:s101:eqcomi |- ; ; 1 5 0 = ( ; 5 0 x. 3 )
+s103:s29,s14,s51,s97,s102:decmul10add |- ( ; 5 0 x. ; 6 3 ) = ( ; ; ; 3 0 0 0 + ; ; 1 5 0 )
+s104:s14,s50:deccl |- ; 3 0 e. NN0
+s105:s104,s50:deccl |- ; ; 3 0 0 e. NN0
+s106:s42,s49:deccl |- ; 1 5 e. NN0
+s107::eqid |- ; ; ; 3 0 0 0 = ; ; ; 3 0 0 0
+s108::eqid |- ; ; 1 5 0 = ; ; 1 5 0
+s109::eqid |- ; ; 3 0 0 = ; ; 3 0 0
+s110::eqid |- ; 1 5 = ; 1 5
+s111::eqid |- ; 3 0 = ; 3 0
+s112::ax-1cn |- 1 e. CC
+s113:s112:addlidi |- ( 0 + 1 ) = 1
+s114:s14,s50,s42,s111,s113:decaddi |- ( ; 3 0 + 1 ) = ; 3 1
+s115:s90:addlidi |- ( 0 + 5 ) = 5
+s116:s104,s50,s42,s49,s109,s110,s114,s115:decadd |- ( ; ; 3 0 0 + ; 1 5 ) = ; ; 3 1 5
+s117::0cn |- 0 e. CC
+s118:s117:addlidi |- ( 0 + 0 ) = 0
+s119:s105,s50,s106,s50,s107,s108,s116,s118:decadd |- ( ; ; ; 3 0 0 0 + ; ; 1 5 0 ) = ; ; ; 3 1 5 0
+s120:s103,s119:eqtri |- ( ; 5 0 x. ; 6 3 ) = ; ; ; 3 1 5 0
+s121:s120:oveq1i |- ( ( ; 5 0 x. ; 6 3 ) / ; ; 1 0 0 ) = ( ; ; ; 3 1 5 0 / ; ; 1 0 0 )
+s122:s88,s121:eqtri |- ( ; 5 0 x. ( ; 6 3 / ; ; 1 0 0 ) ) = ( ; ; ; 3 1 5 0 / ; ; 1 0 0 )
+s123::2ne0 |- 2 =/= 0
+s124:s76,s123:pm3.2i |- ( 2 e. CC /\ 2 =/= 0 )
+s125:s20:nnne0i |- ; 5 0 =/= 0
+s126:s81,s125:pm3.2i |- ( ; 5 0 e. CC /\ ; 5 0 =/= 0 )
+i127::divcan5
+s128:s82,s124,s126,i127:mp3an |- ( ( ; 5 0 x. ; 6 3 ) / ( ; 5 0 x. 2 ) ) = ( ; 6 3 / 2 )
+s129::5t2e10 |- ( 5 x. 2 ) = ; 1 0
+s130:s76:mul02i |- ( 0 x. 2 ) = 0
+s131:s64,s49,s50,s89,s129,s130:decmul1 |- ( ; 5 0 x. 2 ) = ; ; 1 0 0
+s132:s120,s131:oveq12i |- ( ( ; 5 0 x. ; 6 3 ) / ( ; 5 0 x. 2 ) ) = ( ; ; ; 3 1 5 0 / ; ; 1 0 0 )
+s133:s132:eqcomi |- ( ; ; ; 3 1 5 0 / ; ; 1 0 0 ) = ( ( ; 5 0 x. ; 6 3 ) / ( ; 5 0 x. 2 ) )
+s134:s133,s128:eqtri |- ( ; ; ; 3 1 5 0 / ; ; 1 0 0 ) = ( ; 6 3 / 2 )
+s135:s122,s134:eqtri |- ( ; 5 0 x. ( ; 6 3 / ; ; 1 0 0 ) ) = ( ; 6 3 / 2 )
+s136:s80,s135:breqtrri |- ; 3 1 < ( ; 5 0 x. ( ; 6 3 / ; ; 1 0 0 ) )
+s137:s136,s55:mpbir |- ( ; 3 1 / ; 5 0 ) < ( ; 6 3 / ; ; 1 0 0 )
+s138:s137:a1i |- ( ( D e. RR /\ 1 < D ) -> ( ; 3 1 / ; 5 0 ) < ( ; 6 3 / ; ; 1 0 0 ) )
+i139::rpre
+i140::rpdivcl
+i141::nnrp
+i142::nnrp
+s143:s23:a1i |- ( ( D e. RR /\ 1 < D ) -> ( ; 3 1 / ; 5 0 ) e. RR )
+i144::rpre
+i145::rpdivcl
+i146::nnrp
+i147::nnrp
+s148:s38:a1i |- ( ( D e. RR /\ 1 < D ) -> ( ; 6 3 / ; ; 1 0 0 ) e. RR )
+s149:s1,s2,s143,s148:cxpltd |- ( ( D e. RR /\ 1 < D ) -> ( ( ; 3 1 / ; 5 0 ) < ( ; 6 3 / ; ; 1 0 0 ) <-> ( D ^c ( ; 3 1 / ; 5 0 ) ) < ( D ^c ( ; 6 3 / ; ; 1 0 0 ) ) ) )
+s150:s138,s149:mpbid |- ( ( D e. RR /\ 1 < D ) -> ( D ^c ( ; 3 1 / ; 5 0 ) ) < ( D ^c ( ; 6 3 / ; ; 1 0 0 ) ) )
+qed:s25,s40,s150:3jca |- ( ( D e. RR /\ 1 < D ) -> ( ( D ^c ( ; 3 1 / ; 5 0 ) ) e. RR+ /\ ( D ^c ( ; 6 3 / ; ; 1 0 0 ) ) e. RR+ /\ ( D ^c ( ; 3 1 / ; 5 0 ) ) < ( D ^c ( ; 6 3 / ; ; 1 0 0 ) ) ) )
+$)

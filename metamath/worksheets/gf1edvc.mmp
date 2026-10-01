@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=gf1edvc  LOC_AFTER=?
+
+* The complex derivative of ` s |-> exp ( W s ) ` is ` exp ( W s ) W ` ( ~ dvmptco , ~ dvef ).
+
+s1::id |- ( W e. CC -> W e. CC )
+s2::cnelprrecn |- CC e. { RR , CC }
+s3:s2:a1i |- ( W e. CC -> CC e. { RR , CC } )
+s4:s3:dvmptid |- ( W e. CC -> ( CC _D ( s e. CC |-> s ) ) = ( s e. CC |-> 1 ) )
+s5::simpr |- ( ( W e. CC /\ s e. CC ) -> s e. CC )
+s6::1cnd |- ( ( W e. CC /\ s e. CC ) -> 1 e. CC )
+s7:s3,s5,s6,s4,s1:dvmptcmul |- ( W e. CC -> ( CC _D ( s e. CC |-> ( W x. s ) ) ) = ( s e. CC |-> ( W x. 1 ) ) )
+s8:s1:adantr |- ( ( W e. CC /\ s e. CC ) -> W e. CC )
+s9:s8,s5:mulcld |- ( ( W e. CC /\ s e. CC ) -> ( W x. s ) e. CC )
+s10:s8,s6:mulcld |- ( ( W e. CC /\ s e. CC ) -> ( W x. 1 ) e. CC )
+s11::simpr |- ( ( W e. CC /\ y e. CC ) -> y e. CC )
+s12:s11:efcld |- ( ( W e. CC /\ y e. CC ) -> ( exp ` y ) e. CC )
+s13::eff |- exp : CC --> CC
+s14:s13:a1i |- ( W e. CC -> exp : CC --> CC )
+s15:s14:feqmptd |- ( W e. CC -> exp = ( y e. CC |-> ( exp ` y ) ) )
+s16::dvef |- ( CC _D exp ) = exp
+s17:s16:a1i |- ( W e. CC -> ( CC _D exp ) = exp )
+s18:s15:eqcomd |- ( W e. CC -> ( y e. CC |-> ( exp ` y ) ) = exp )
+s19:s18:oveq2d |- ( W e. CC -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = ( CC _D exp ) )
+s20:s19,s17:eqtrd |- ( W e. CC -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = exp )
+s21:s20,s15:eqtrd |- ( W e. CC -> ( CC _D ( y e. CC |-> ( exp ` y ) ) ) = ( y e. CC |-> ( exp ` y ) ) )
+s22::fveq2 |- ( y = ( W x. s ) -> ( exp ` y ) = ( exp ` ( W x. s ) ) )
+s23:s3,s3,s9,s10,s12,s12,s7,s21,s22,s22:dvmptco |- ( W e. CC -> ( CC _D ( s e. CC |-> ( exp ` ( W x. s ) ) ) ) = ( s e. CC |-> ( ( exp ` ( W x. s ) ) x. ( W x. 1 ) ) ) )
+s24:s8:mulridd |- ( ( W e. CC /\ s e. CC ) -> ( W x. 1 ) = W )
+s25:s24:oveq2d |- ( ( W e. CC /\ s e. CC ) -> ( ( exp ` ( W x. s ) ) x. ( W x. 1 ) ) = ( ( exp ` ( W x. s ) ) x. W ) )
+s26:s25:mpteq2dva |- ( W e. CC -> ( s e. CC |-> ( ( exp ` ( W x. s ) ) x. ( W x. 1 ) ) ) = ( s e. CC |-> ( ( exp ` ( W x. s ) ) x. W ) ) )
+s27:s23,s26:eqtrd |- ( W e. CC -> ( CC _D ( s e. CC |-> ( exp ` ( W x. s ) ) ) ) = ( s e. CC |-> ( ( exp ` ( W x. s ) ) x. W ) ) )
+qed:s27:idi |- ( W e. CC -> ( CC _D ( s e. CC |-> ( exp ` ( W x. s ) ) ) ) = ( s e. CC |-> ( ( exp ` ( W x. s ) ) x. W ) ) )
+$)

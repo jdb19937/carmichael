@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=bwmaxp1  LOC_AFTER=?
+
+* The larger of two successors is the successor of the larger.
+
+s1::simpl |- ( ( M e. NN0 /\ N e. NN0 ) -> M e. NN0 )
+s2::simpr |- ( ( M e. NN0 /\ N e. NN0 ) -> N e. NN0 )
+s3::1red |- ( ( M e. NN0 /\ N e. NN0 ) -> 1 e. RR )
+s4:s1:nn0zd |- ( ( M e. NN0 /\ N e. NN0 ) -> M e. ZZ )
+s5:s4:zred |- ( ( M e. NN0 /\ N e. NN0 ) -> M e. RR )
+s6:s2:nn0zd |- ( ( M e. NN0 /\ N e. NN0 ) -> N e. ZZ )
+s7:s6:zred |- ( ( M e. NN0 /\ N e. NN0 ) -> N e. RR )
+i8::leadd2
+s9:s5,s7,s3,i8:syl3anc |- ( ( M e. NN0 /\ N e. NN0 ) -> ( M <_ N <-> ( 1 + M ) <_ ( 1 + N ) ) )
+s10:s9:ifbid |- ( ( M e. NN0 /\ N e. NN0 ) -> if ( M <_ N , ( 1 + N ) , ( 1 + M ) ) = if ( ( 1 + M ) <_ ( 1 + N ) , ( 1 + N ) , ( 1 + M ) ) )
+s11::ovif2 |- ( 1 + if ( M <_ N , N , M ) ) = if ( M <_ N , ( 1 + N ) , ( 1 + M ) )
+s12:s11:a1i |- ( ( M e. NN0 /\ N e. NN0 ) -> ( 1 + if ( M <_ N , N , M ) ) = if ( M <_ N , ( 1 + N ) , ( 1 + M ) ) )
+qed:s12,s10:eqtr2d |- ( ( M e. NN0 /\ N e. NN0 ) -> if ( ( 1 + M ) <_ ( 1 + N ) , ( 1 + N ) , ( 1 + M ) ) = ( 1 + if ( M <_ N , N , M ) ) )
+$)

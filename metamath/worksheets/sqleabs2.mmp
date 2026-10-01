@@ -1,0 +1,68 @@
+$( <MM> <PROOF_ASST> THEOREM=sqleabs2  LOC_AFTER=?
+
+* A point of a real interval has square below the square of the sum of the moduli of the endpoints.
+
+s1::simpl1 |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> X e. RR )
+s2::simpl2 |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> Y e. RR )
+s3::simpl3 |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> V e. RR )
+s4::simprl |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> X <_ V )
+s5::simprr |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> V <_ Y )
+s6:s1:recnd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> X e. CC )
+s7:s6:abscld |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` X ) e. RR )
+i8::absle
+s9:s1,s7,i8:syl2anc |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` X ) <_ ( abs ` X ) <-> ( -u ( abs ` X ) <_ X /\ X <_ ( abs ` X ) ) ) )
+s10:s7:leidd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` X ) <_ ( abs ` X ) )
+s11:s10,s9:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( -u ( abs ` X ) <_ X /\ X <_ ( abs ` X ) ) )
+i12::simpl
+s13:s11,i12:syl |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> -u ( abs ` X ) <_ X )
+i14::simpr
+s15:s11,i14:syl |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> X <_ ( abs ` X ) )
+s16:s2:recnd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> Y e. CC )
+s17:s16:abscld |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` Y ) e. RR )
+i18::absle
+s19:s2,s17,i18:syl2anc |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` Y ) <_ ( abs ` Y ) <-> ( -u ( abs ` Y ) <_ Y /\ Y <_ ( abs ` Y ) ) ) )
+s20:s17:leidd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` Y ) <_ ( abs ` Y ) )
+s21:s20,s19:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( -u ( abs ` Y ) <_ Y /\ Y <_ ( abs ` Y ) ) )
+i22::simpl
+s23:s21,i22:syl |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> -u ( abs ` Y ) <_ Y )
+i24::simpr
+s25:s21,i24:syl |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> Y <_ ( abs ` Y ) )
+s26:s1:recnd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> X e. CC )
+s27:s26:absge0d |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> 0 <_ ( abs ` X ) )
+s28:s2:recnd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> Y e. CC )
+s29:s28:absge0d |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> 0 <_ ( abs ` Y ) )
+s30:s7,s17:readdcld |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` X ) + ( abs ` Y ) ) e. RR )
+s31::0red |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> 0 e. RR )
+i32::addge01
+s33:s7,s17,i32:syl2anc |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( 0 <_ ( abs ` Y ) <-> ( abs ` X ) <_ ( ( abs ` X ) + ( abs ` Y ) ) ) )
+s34:s29,s33:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` X ) <_ ( ( abs ` X ) + ( abs ` Y ) ) )
+s35:s31,s7,s30,s27,s34:letrd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> 0 <_ ( ( abs ` X ) + ( abs ` Y ) ) )
+i36::addge01
+s37:s7,s17,i36:syl2anc |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( 0 <_ ( abs ` Y ) <-> ( abs ` X ) <_ ( ( abs ` X ) + ( abs ` Y ) ) ) )
+s38:s29,s37:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` X ) <_ ( ( abs ` X ) + ( abs ` Y ) ) )
+i39::addge02
+s40:s17,s7,i39:syl2anc |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( 0 <_ ( abs ` X ) <-> ( abs ` Y ) <_ ( ( abs ` X ) + ( abs ` Y ) ) ) )
+s41:s27,s40:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` Y ) <_ ( ( abs ` X ) + ( abs ` Y ) ) )
+s42:s7,s30:lenegd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` X ) <_ ( ( abs ` X ) + ( abs ` Y ) ) <-> -u ( ( abs ` X ) + ( abs ` Y ) ) <_ -u ( abs ` X ) ) )
+s43:s38,s42:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> -u ( ( abs ` X ) + ( abs ` Y ) ) <_ -u ( abs ` X ) )
+s44:s30:renegcld |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> -u ( ( abs ` X ) + ( abs ` Y ) ) e. RR )
+s45:s7:renegcld |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> -u ( abs ` X ) e. RR )
+s46:s45,s1,s3,s13,s4:letrd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> -u ( abs ` X ) <_ V )
+s47:s44,s45,s3,s43,s46:letrd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> -u ( ( abs ` X ) + ( abs ` Y ) ) <_ V )
+s48:s3,s2,s17,s5,s25:letrd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> V <_ ( abs ` Y ) )
+s49:s3,s17,s30,s48,s41:letrd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> V <_ ( ( abs ` X ) + ( abs ` Y ) ) )
+s50:s47,s49:jca |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( -u ( ( abs ` X ) + ( abs ` Y ) ) <_ V /\ V <_ ( ( abs ` X ) + ( abs ` Y ) ) ) )
+i51::absle
+s52:s3,s30,i51:syl2anc |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` V ) <_ ( ( abs ` X ) + ( abs ` Y ) ) <-> ( -u ( ( abs ` X ) + ( abs ` Y ) ) <_ V /\ V <_ ( ( abs ` X ) + ( abs ` Y ) ) ) ) )
+s53:s50,s52:mpbird |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` V ) <_ ( ( abs ` X ) + ( abs ` Y ) ) )
+s54:s3:recnd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> V e. CC )
+s55:s54:abscld |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( abs ` V ) e. RR )
+s56:s3:recnd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> V e. CC )
+s57:s56:absge0d |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> 0 <_ ( abs ` V ) )
+s58:s55,s30,s57,s35:le2sqd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` V ) <_ ( ( abs ` X ) + ( abs ` Y ) ) <-> ( ( abs ` V ) ^ 2 ) <_ ( ( ( abs ` X ) + ( abs ` Y ) ) ^ 2 ) ) )
+s59:s53,s58:mpbid |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` V ) ^ 2 ) <_ ( ( ( abs ` X ) + ( abs ` Y ) ) ^ 2 ) )
+i60::absresq
+s61:s3,i60:syl |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( ( abs ` V ) ^ 2 ) = ( V ^ 2 ) )
+s62:s61:eqcomd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( V ^ 2 ) = ( ( abs ` V ) ^ 2 ) )
+qed:s62,s59:eqbrtrd |- ( ( ( X e. RR /\ Y e. RR /\ V e. RR ) /\ ( X <_ V /\ V <_ Y ) ) -> ( V ^ 2 ) <_ ( ( ( abs ` X ) + ( abs ` Y ) ) ^ 2 ) )
+$)

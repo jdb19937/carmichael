@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=coprmdvdsr  LOC_AFTER=?
+
+* An integer coprime to M is coprime to every divisor N of M.
+
+s1::simp11 |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> A e. ZZ )
+s2::simp12 |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> N e. ZZ )
+s3::simp13 |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> M e. ZZ )
+s4::simp2 |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> N || M )
+s5::simp3 |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd M ) = 1 )
+i6::gcdcl
+s7:s1,s2,i6:syl2anc |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) e. NN0 )
+s8:s7:nn0zd |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) e. ZZ )
+i9::gcddvds
+s10:s1,s2,i9:syl2anc |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( ( A gcd N ) || A /\ ( A gcd N ) || N ) )
+s11:s10:simpld |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) || A )
+s12:s10:simprd |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) || N )
+s13:s8,s2,s3,s12,s4:dvdstrd |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) || M )
+s14:s8,s1,s3:3jca |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( ( A gcd N ) e. ZZ /\ A e. ZZ /\ M e. ZZ ) )
+s15:s11,s13:jca |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( ( A gcd N ) || A /\ ( A gcd N ) || M ) )
+i16::dvdsgcd
+s17:s14,s15,i16:sylc |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) || ( A gcd M ) )
+s18:s17,s5:breqtrd |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) || 1 )
+i19::dvds1
+s20:s7,i19:syl |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( ( A gcd N ) || 1 <-> ( A gcd N ) = 1 ) )
+qed:s18,s20:mpbid |- ( ( ( A e. ZZ /\ N e. ZZ /\ M e. ZZ ) /\ N || M /\ ( A gcd M ) = 1 ) -> ( A gcd N ) = 1 )
+$)

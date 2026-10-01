@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=cencjcx  LOC_AFTER=?
+
+* Conjugation of a power of a positive integer: ` * ( K ^c S ) = K ^c ( * S ) ` (Lean Census ` conj_natCast_cpow_mul_I ` , ` conj_natCast_cpow_ofReal ` , ` conj_natCast_cpow_neg_mul_I ` ).
+
+s1::simpl |- ( ( K e. NN /\ S e. CC ) -> K e. NN )
+s2::simpr |- ( ( K e. NN /\ S e. CC ) -> S e. CC )
+s3:s1:nncnd |- ( ( K e. NN /\ S e. CC ) -> K e. CC )
+s4:s1:nnne0d |- ( ( K e. NN /\ S e. CC ) -> K =/= 0 )
+s5:s1:nnrpd |- ( ( K e. NN /\ S e. CC ) -> K e. RR+ )
+s6:s5:relogcld |- ( ( K e. NN /\ S e. CC ) -> ( log ` K ) e. RR )
+s7:s6:recnd |- ( ( K e. NN /\ S e. CC ) -> ( log ` K ) e. CC )
+s8:s3,s4,s2:cxpefd |- ( ( K e. NN /\ S e. CC ) -> ( K ^c S ) = ( exp ` ( S x. ( log ` K ) ) ) )
+s9:s8:fveq2d |- ( ( K e. NN /\ S e. CC ) -> ( * ` ( K ^c S ) ) = ( * ` ( exp ` ( S x. ( log ` K ) ) ) ) )
+s10:s2,s7:mulcld |- ( ( K e. NN /\ S e. CC ) -> ( S x. ( log ` K ) ) e. CC )
+i11::efcj
+s12:s10,i11:syl |- ( ( K e. NN /\ S e. CC ) -> ( exp ` ( * ` ( S x. ( log ` K ) ) ) ) = ( * ` ( exp ` ( S x. ( log ` K ) ) ) ) )
+s13:s2,s7:cjmuld |- ( ( K e. NN /\ S e. CC ) -> ( * ` ( S x. ( log ` K ) ) ) = ( ( * ` S ) x. ( * ` ( log ` K ) ) ) )
+s14:s6:cjred |- ( ( K e. NN /\ S e. CC ) -> ( * ` ( log ` K ) ) = ( log ` K ) )
+s15:s14:oveq2d |- ( ( K e. NN /\ S e. CC ) -> ( ( * ` S ) x. ( * ` ( log ` K ) ) ) = ( ( * ` S ) x. ( log ` K ) ) )
+s16:s13,s15:eqtrd |- ( ( K e. NN /\ S e. CC ) -> ( * ` ( S x. ( log ` K ) ) ) = ( ( * ` S ) x. ( log ` K ) ) )
+s17:s16:fveq2d |- ( ( K e. NN /\ S e. CC ) -> ( exp ` ( * ` ( S x. ( log ` K ) ) ) ) = ( exp ` ( ( * ` S ) x. ( log ` K ) ) ) )
+s18:s2:cjcld |- ( ( K e. NN /\ S e. CC ) -> ( * ` S ) e. CC )
+s19:s3,s4,s18:cxpefd |- ( ( K e. NN /\ S e. CC ) -> ( K ^c ( * ` S ) ) = ( exp ` ( ( * ` S ) x. ( log ` K ) ) ) )
+s20:s9,s12:eqtr4d |- ( ( K e. NN /\ S e. CC ) -> ( * ` ( K ^c S ) ) = ( exp ` ( * ` ( S x. ( log ` K ) ) ) ) )
+s21:s20,s17:eqtrd |- ( ( K e. NN /\ S e. CC ) -> ( * ` ( K ^c S ) ) = ( exp ` ( ( * ` S ) x. ( log ` K ) ) ) )
+qed:s21,s19:eqtr4d |- ( ( K e. NN /\ S e. CC ) -> ( * ` ( K ^c S ) ) = ( K ^c ( * ` S ) ) )
+$)

@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=sub4tel  LOC_AFTER=?
+
+* Exchanging the subtrahends of two differences leaves their sum unchanged.
+
+s1::simpll |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> W e. CC )
+s2::simplr |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> X e. CC )
+s3::simprl |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> Y e. CC )
+s4::simprr |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> Z e. CC )
+s5:s1,s3:jca |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( W e. CC /\ Y e. CC ) )
+s6:s2,s4:jca |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( X e. CC /\ Z e. CC ) )
+i7::addsub4
+s8:s5,s6,i7:syl2anc |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( ( W + Y ) - ( X + Z ) ) = ( ( W - X ) + ( Y - Z ) ) )
+s9:s4,s2:jca |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( Z e. CC /\ X e. CC ) )
+i10::addsub4
+s11:s5,s9,i10:syl2anc |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( ( W + Y ) - ( Z + X ) ) = ( ( W - Z ) + ( Y - X ) ) )
+s12:s2,s4:addcomd |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( X + Z ) = ( Z + X ) )
+s13:s12:oveq2d |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( ( W + Y ) - ( X + Z ) ) = ( ( W + Y ) - ( Z + X ) ) )
+s14:s8,s13:eqtr3d |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( ( W - X ) + ( Y - Z ) ) = ( ( W + Y ) - ( Z + X ) ) )
+qed:s14,s11:eqtrd |- ( ( ( W e. CC /\ X e. CC ) /\ ( Y e. CC /\ Z e. CC ) ) -> ( ( W - X ) + ( Y - Z ) ) = ( ( W - Z ) + ( Y - X ) ) )
+$)

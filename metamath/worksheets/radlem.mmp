@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=radlem  LOC_AFTER=?
+
+* The radical of a positive integer is a squarefree positive integer with the same prime divisors, and it divides that integer.
+
+s1::id |- ( J e. NN -> J e. NN )
+i2::pffinq
+s3:s1,i2:syl |- ( J e. NN -> { q e. Prime | q || J } e. Fin )
+s4::breq1 |- ( q = u -> ( q || J <-> u || J ) )
+s5:s4:cbvrabv |- { q e. Prime | q || J } = { u e. Prime | u || J }
+s6:s5:a1i |- ( J e. NN -> { q e. Prime | q || J } = { u e. Prime | u || J } )
+s7:s6,s3:eqeltrrd |- ( J e. NN -> { u e. Prime | u || J } e. Fin )
+s8::ssrab2 |- { u e. Prime | u || J } C_ Prime
+s9:s8:a1i |- ( J e. NN -> { u e. Prime | u || J } C_ Prime )
+s10:s7,s9:jca |- ( J e. NN -> ( { u e. Prime | u || J } e. Fin /\ { u e. Prime | u || J } C_ Prime ) )
+i11::sqfprod
+s12:s10,i11:syl |- ( J e. NN -> ( ( prod_ p e. { u e. Prime | u || J } p e. NN /\ ( mmu ` prod_ p e. { u e. Prime | u || J } p ) =/= 0 ) /\ { q e. Prime | q || prod_ p e. { u e. Prime | u || J } p } = { u e. Prime | u || J } ) )
+s13::id |- ( p = e -> p = e )
+s14:s13:cbvprodv |- prod_ p e. { u e. Prime | u || J } p = prod_ e e. { u e. Prime | u || J } e
+s15:s14:a1i |- ( J e. NN -> prod_ p e. { u e. Prime | u || J } p = prod_ e e. { u e. Prime | u || J } e )
+s16:s12:simpld |- ( J e. NN -> ( prod_ p e. { u e. Prime | u || J } p e. NN /\ ( mmu ` prod_ p e. { u e. Prime | u || J } p ) =/= 0 ) )
+s17:s16:simpld |- ( J e. NN -> prod_ p e. { u e. Prime | u || J } p e. NN )
+s18:s15,s17:eqeltrrd |- ( J e. NN -> prod_ e e. { u e. Prime | u || J } e e. NN )
+s19:s15:fveq2d |- ( J e. NN -> ( mmu ` prod_ p e. { u e. Prime | u || J } p ) = ( mmu ` prod_ e e. { u e. Prime | u || J } e ) )
+s20:s19:neeq1d |- ( J e. NN -> ( ( mmu ` prod_ p e. { u e. Prime | u || J } p ) =/= 0 <-> ( mmu ` prod_ e e. { u e. Prime | u || J } e ) =/= 0 ) )
+s21:s16:simprd |- ( J e. NN -> ( mmu ` prod_ p e. { u e. Prime | u || J } p ) =/= 0 )
+s22:s20,s21:mpbid |- ( J e. NN -> ( mmu ` prod_ e e. { u e. Prime | u || J } e ) =/= 0 )
+s23:s18,s22:jca |- ( J e. NN -> ( prod_ e e. { u e. Prime | u || J } e e. NN /\ ( mmu ` prod_ e e. { u e. Prime | u || J } e ) =/= 0 ) )
+s24:s15:breq2d |- ( J e. NN -> ( q || prod_ p e. { u e. Prime | u || J } p <-> q || prod_ e e. { u e. Prime | u || J } e ) )
+s25:s24:rabbidv |- ( J e. NN -> { q e. Prime | q || prod_ p e. { u e. Prime | u || J } p } = { q e. Prime | q || prod_ e e. { u e. Prime | u || J } e } )
+s26:s12:simprd |- ( J e. NN -> { q e. Prime | q || prod_ p e. { u e. Prime | u || J } p } = { u e. Prime | u || J } )
+s27:s25,s26:eqtr3d |- ( J e. NN -> { q e. Prime | q || prod_ e e. { u e. Prime | u || J } e } = { u e. Prime | u || J } )
+s28::breq1 |- ( u = j -> ( u || J <-> j || J ) )
+s29:s28:elrab |- ( j e. { u e. Prime | u || J } <-> ( j e. Prime /\ j || J ) )
+s30:s29:biimpi |- ( j e. { u e. Prime | u || J } -> ( j e. Prime /\ j || J ) )
+s31:s30:simprd |- ( j e. { u e. Prime | u || J } -> j || J )
+s32:s31:rgen |- A. j e. { u e. Prime | u || J } j || J
+s33:s32:a1i |- ( J e. NN -> A. j e. { u e. Prime | u || J } j || J )
+s34:s7,s9:jca |- ( J e. NN -> ( { u e. Prime | u || J } e. Fin /\ { u e. Prime | u || J } C_ Prime ) )
+i35::extrwprmdvds
+s36:s34,i35:syl |- ( J e. NN -> ( ( J e. ZZ /\ A. j e. { u e. Prime | u || J } j || J ) -> prod_ j e. { u e. Prime | u || J } j || J ) )
+s37:s1:nnzd |- ( J e. NN -> J e. ZZ )
+s38:s37,s33:jca |- ( J e. NN -> ( J e. ZZ /\ A. j e. { u e. Prime | u || J } j || J ) )
+s39:s36,s38:mpd |- ( J e. NN -> prod_ j e. { u e. Prime | u || J } j || J )
+s40::id |- ( j = e -> j = e )
+s41:s40:cbvprodv |- prod_ j e. { u e. Prime | u || J } j = prod_ e e. { u e. Prime | u || J } e
+s42:s41:a1i |- ( J e. NN -> prod_ j e. { u e. Prime | u || J } j = prod_ e e. { u e. Prime | u || J } e )
+s43:s42,s39:eqbrtrrd |- ( J e. NN -> prod_ e e. { u e. Prime | u || J } e || J )
+qed:s23,s27,s43:3jca |- ( J e. NN -> ( ( prod_ e e. { u e. Prime | u || J } e e. NN /\ ( mmu ` prod_ e e. { u e. Prime | u || J } e ) =/= 0 ) /\ { q e. Prime | q || prod_ e e. { u e. Prime | u || J } e } = { u e. Prime | u || J } /\ prod_ e e. { u e. Prime | u || J } e || J ) )
+$)

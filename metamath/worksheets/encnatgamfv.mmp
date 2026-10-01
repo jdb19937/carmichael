@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatgamfv  LOC_AFTER=?
+
+* The I-th letter of encNatGam N is the I-th digit of N as a bit letter.
+
+s1::simpl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> N e. NN0 )
+s2::simpr |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) )
+i3::encnatgamval
+s4:s1,i3:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( encNatGam ` N ) = ( inclBool o. ( encodeNat ` N ) ) )
+s5:s4:fveq1d |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( encNatGam ` N ) ` I ) = ( ( inclBool o. ( encodeNat ` N ) ) ` I ) )
+i6::encnatcl
+s7:s1,i6:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( encodeNat ` N ) e. Word 2o )
+i8::wrdf
+s9:s7,i8:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( encodeNat ` N ) : ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) --> 2o )
+i10::fvco3
+s11:s9,s2,i10:syl2anc |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( inclBool o. ( encodeNat ` N ) ) ` I ) = ( inclBool ` ( ( encodeNat ` N ) ` I ) ) )
+i12::ffvelcdm
+s13:s9,s2,i12:syl2anc |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( encodeNat ` N ) ` I ) e. 2o )
+i14::inclboolfv
+s15:s13,i14:syl |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( inclBool ` ( ( encodeNat ` N ) ` I ) ) = <. 1 , ( ( encodeNat ` N ) ` I ) >. )
+s16:s11,s15:eqtrd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( inclBool o. ( encodeNat ` N ) ) ` I ) = <. 1 , ( ( encodeNat ` N ) ` I ) >. )
+qed:s5,s16:eqtrd |- ( ( N e. NN0 /\ I e. ( 0 ..^ ( # ` ( encodeNat ` N ) ) ) ) -> ( ( encNatGam ` N ) ` I ) = <. 1 , ( ( encodeNat ` N ) ` I ) >. )
+$)

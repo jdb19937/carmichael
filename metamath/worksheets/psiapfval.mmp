@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=psiapfval  LOC_AFTER=?
+
+* Value of the function psiAP at a modulus: the operation sending a residue and a real to the psi sum of the residue class.
+
+s1::oveq2 |- ( q = Q -> ( n mod q ) = ( n mod Q ) )
+s2::oveq2 |- ( q = Q -> ( a mod q ) = ( a mod Q ) )
+s3:s1,s2:eqeq12d |- ( q = Q -> ( ( n mod q ) = ( a mod q ) <-> ( n mod Q ) = ( a mod Q ) ) )
+s4:s3:ifbid |- ( q = Q -> if ( ( n mod q ) = ( a mod q ) , ( Lam ` n ) , 0 ) = if ( ( n mod Q ) = ( a mod Q ) , ( Lam ` n ) , 0 ) )
+s5:s4:sumeq2sdv |- ( q = Q -> sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod q ) = ( a mod q ) , ( Lam ` n ) , 0 ) = sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod Q ) = ( a mod Q ) , ( Lam ` n ) , 0 ) )
+s6:s5:mpoeq3dv |- ( q = Q -> ( a e. ZZ , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod q ) = ( a mod q ) , ( Lam ` n ) , 0 ) ) = ( a e. ZZ , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod Q ) = ( a mod Q ) , ( Lam ` n ) , 0 ) ) )
+s7::df-psiap |- psiAP = ( q e. NN |-> ( a e. ZZ , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod q ) = ( a mod q ) , ( Lam ` n ) , 0 ) ) )
+s8::zex |- ZZ e. _V
+s9::reex |- RR e. _V
+s10::mpoexga |- ( ( ZZ e. _V /\ RR e. _V ) -> ( a e. ZZ , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod Q ) = ( a mod Q ) , ( Lam ` n ) , 0 ) ) e. _V )
+s11:s8,s9,s10:mp2an |- ( a e. ZZ , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod Q ) = ( a mod Q ) , ( Lam ` n ) , 0 ) ) e. _V
+qed:s6,s7,s11:fvmpt |- ( Q e. NN -> ( psiAP ` Q ) = ( a e. ZZ , y e. RR |-> sum_ n e. ( 1 ... ( |_ ` y ) ) if ( ( n mod Q ) = ( a mod Q ) , ( Lam ` n ) , 0 ) ) )
+$)

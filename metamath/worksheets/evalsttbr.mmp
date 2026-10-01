@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=evalsttbr  LOC_AFTER=?
+
+* Membership in the EvalsToInTime relation: A evaluates to B within M steps iff some iterate n <= M of the option-lifted step function sends some A to B.
+
+1::simp1    |- ( ( F e. V /\ M e. NN0 /\ ( A e. W /\ B e. X ) ) -> F e. V )
+2::simp2    |- ( ( F e. V /\ M e. NN0 /\ ( A e. W /\ B e. X ) ) -> M e. NN0 )
+3::simp3    |- ( ( F e. V /\ M e. NN0 /\ ( A e. W /\ B e. X ) ) -> ( A e. W /\ B e. X ) )
+4a::evalsttval
+4:1,2,4a:syl2anc |- ( ( F e. V /\ M e. NN0 /\ ( A e. W /\ B e. X ) ) -> ( F EvalsToInTime M ) = { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } )
+5:4:breqd   |- ( ( F e. V /\ M e. NN0 /\ ( A e. W /\ B e. X ) ) -> ( A ( F EvalsToInTime M ) B <-> A { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } B ) )
+6::eleq1    |- ( a = A -> ( a e. dom F <-> A e. dom F ) )
+7:6:adantr  |- ( ( a = A /\ b = B ) -> ( a e. dom F <-> A e. dom F ) )
+8::eleq1    |- ( b = B -> ( b e. ( dom F |_| 1o ) <-> B e. ( dom F |_| 1o ) ) )
+9:8:adantl  |- ( ( a = A /\ b = B ) -> ( b e. ( dom F |_| 1o ) <-> B e. ( dom F |_| 1o ) ) )
+10:7,9:anbi12d |- ( ( a = A /\ b = B ) -> ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) <-> ( A e. dom F /\ B e. ( dom F |_| 1o ) ) ) )
+11::fveq2   |- ( a = A -> ( inl ` a ) = ( inl ` A ) )
+12:11:fveq2d |- ( a = A -> ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) )
+13:12:adantr |- ( ( a = A /\ b = B ) -> ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) )
+14::simpr   |- ( ( a = A /\ b = B ) -> b = B )
+15:13,14:eqeq12d |- ( ( a = A /\ b = B ) -> ( ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b <-> ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) = B ) )
+16:15:rexbidv |- ( ( a = A /\ b = B ) -> ( E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b <-> E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) = B ) )
+17:10,16:anbi12d |- ( ( a = A /\ b = B ) -> ( ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) <-> ( ( A e. dom F /\ B e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) = B ) ) )
+18::eqid    |- { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } = { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) }
+19:17,18:brabga |- ( ( A e. W /\ B e. X ) -> ( A { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } B <-> ( ( A e. dom F /\ B e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) = B ) ) )
+20:3,19:syl |- ( ( F e. V /\ M e. NN0 /\ ( A e. W /\ B e. X ) ) -> ( A { <. a , b >. | ( ( a e. dom F /\ b e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` a ) ) = b ) } B <-> ( ( A e. dom F /\ B e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) = B ) ) )
+qed:5,20:bitrd |- ( ( F e. V /\ M e. NN0 /\ ( A e. W /\ B e. X ) ) -> ( A ( F EvalsToInTime M ) B <-> ( ( A e. dom F /\ B e. ( dom F |_| 1o ) ) /\ E. n e. ( 0 ... M ) ( ( ( OptStep ` F ) ^r n ) ` ( inl ` A ) ) = B ) ) )
+$)

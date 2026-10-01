@@ -1,0 +1,86 @@
+$( <MM> <PROOF_ASST> THEOREM=bwrdp1  LOC_AFTER=?
+
+* One more digit: the digits word of length M + 1 is the one of length M followed by the M-th digit.
+
+s1::simpl |- ( ( N e. ZZ /\ M e. NN0 ) -> N e. ZZ )
+s2::simpr |- ( ( N e. ZZ /\ M e. NN0 ) -> M e. NN0 )
+s3::1nn0 |- 1 e. NN0
+s4:s3:a1i |- ( ( N e. ZZ /\ M e. NN0 ) -> 1 e. NN0 )
+s5:s2,s4:nn0addcld |- ( ( N e. ZZ /\ M e. NN0 ) -> ( M + 1 ) e. NN0 )
+i6::bwrdcl
+s7:s1,s5,i6:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N bwrd ( M + 1 ) ) e. Word 2o )
+i8::bwrdcl
+s9:s1,s2,i8:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N bwrd M ) e. Word 2o )
+s10::1oel2o |- 1o e. 2o
+s11:s10:a1i |- ( ( N e. ZZ /\ M e. NN0 ) -> 1o e. 2o )
+s12::0el2o |- (/) e. 2o
+s13:s12:a1i |- ( ( N e. ZZ /\ M e. NN0 ) -> (/) e. 2o )
+s14:s11,s13:ifcld |- ( ( N e. ZZ /\ M e. NN0 ) -> if ( M e. ( bits ` N ) , 1o , (/) ) e. 2o )
+i15::s1cl
+s16:s14,i15:syl |- ( ( N e. ZZ /\ M e. NN0 ) -> <" if ( M e. ( bits ` N ) , 1o , (/) ) "> e. Word 2o )
+i17::ccatcl
+s18:s9,s16,i17:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) e. Word 2o )
+i19::bwrdlen
+s20:s1,s5,i19:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( # ` ( N bwrd ( M + 1 ) ) ) = ( M + 1 ) )
+i21::bwrdlen
+s22:s1,s2,i21:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( # ` ( N bwrd M ) ) = M )
+i23::ccatlen
+s24:s9,s16,i23:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( # ` ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ) = ( ( # ` ( N bwrd M ) ) + ( # ` <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ) )
+s25::s1len |- ( # ` <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) = 1
+s26:s25:a1i |- ( ( N e. ZZ /\ M e. NN0 ) -> ( # ` <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) = 1 )
+s27:s22,s26:oveq12d |- ( ( N e. ZZ /\ M e. NN0 ) -> ( ( # ` ( N bwrd M ) ) + ( # ` <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ) = ( M + 1 ) )
+s28:s24,s27:eqtrd |- ( ( N e. ZZ /\ M e. NN0 ) -> ( # ` ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ) = ( M + 1 ) )
+s29:s20,s28:eqtr4d |- ( ( N e. ZZ /\ M e. NN0 ) -> ( # ` ( N bwrd ( M + 1 ) ) ) = ( # ` ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ) )
+s30::simpr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) )
+s31:s20:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( # ` ( N bwrd ( M + 1 ) ) ) = ( M + 1 ) )
+s32:s31:oveq2d |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) = ( 0 ..^ ( M + 1 ) ) )
+s33:s30,s32:eleqtrd |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> i e. ( 0 ..^ ( M + 1 ) ) )
+s34:s1:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> N e. ZZ )
+s35:s5:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( M + 1 ) e. NN0 )
+i36::bwrdfv
+s37:s34,s35,s33,i36:syl3anc |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( ( N bwrd ( M + 1 ) ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s38:s2:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> M e. NN0 )
+s39::nn0uz |- NN0 = ( ZZ>= ` 0 )
+s40:s38,s39:eleqtrdi |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> M e. ( ZZ>= ` 0 ) )
+i41::fzosplitsni
+s42:s40,i41:syl |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( i e. ( 0 ..^ ( M + 1 ) ) <-> ( i e. ( 0 ..^ M ) \/ i = M ) ) )
+s43:s33,s42:mpbid |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( i e. ( 0 ..^ M ) \/ i = M ) )
+s44::simpr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> i e. ( 0 ..^ M ) )
+s45:s9:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( N bwrd M ) e. Word 2o )
+s46:s45:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( N bwrd M ) e. Word 2o )
+s47:s22:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( # ` ( N bwrd M ) ) = M )
+s48:s47:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( # ` ( N bwrd M ) ) = M )
+s49:s48:oveq2d |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( 0 ..^ ( # ` ( N bwrd M ) ) ) = ( 0 ..^ M ) )
+s50:s44,s49:eleqtrrd |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> i e. ( 0 ..^ ( # ` ( N bwrd M ) ) ) )
+i51::ccats1val1
+s52:s46,s50,i51:syl2anc |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) = ( ( N bwrd M ) ` i ) )
+s53:s34:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> N e. ZZ )
+s54:s38:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> M e. NN0 )
+i55::bwrdfv
+s56:s53,s54,s44,i55:syl3anc |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( ( N bwrd M ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s57:s52,s56:eqtrd |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s58:s37:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( ( N bwrd ( M + 1 ) ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s59:s58,s57:eqtr4d |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i e. ( 0 ..^ M ) ) -> ( ( N bwrd ( M + 1 ) ) ` i ) = ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) )
+s60::simpr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> i = M )
+s61:s9:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( N bwrd M ) e. Word 2o )
+s62:s61:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> ( N bwrd M ) e. Word 2o )
+s63:s10:a1i |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> 1o e. 2o )
+s64:s12:a1i |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> (/) e. 2o )
+s65:s63,s64:ifcld |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> if ( M e. ( bits ` N ) , 1o , (/) ) e. 2o )
+s66:s22:adantr |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( # ` ( N bwrd M ) ) = M )
+s67:s66:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> ( # ` ( N bwrd M ) ) = M )
+s68:s60,s67:eqtr4d |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> i = ( # ` ( N bwrd M ) ) )
+i69::ccats1val2
+s70:s62,s65,s68,i69:syl3anc |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) = if ( M e. ( bits ` N ) , 1o , (/) ) )
+s71:s37:adantr |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> ( ( N bwrd ( M + 1 ) ) ` i ) = if ( i e. ( bits ` N ) , 1o , (/) ) )
+s72:s60:eleq1d |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> ( i e. ( bits ` N ) <-> M e. ( bits ` N ) ) )
+s73:s72:ifbid |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> if ( i e. ( bits ` N ) , 1o , (/) ) = if ( M e. ( bits ` N ) , 1o , (/) ) )
+s74:s71,s73:eqtrd |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> ( ( N bwrd ( M + 1 ) ) ` i ) = if ( M e. ( bits ` N ) , 1o , (/) ) )
+s75:s74,s70:eqtr4d |- ( ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) /\ i = M ) -> ( ( N bwrd ( M + 1 ) ) ` i ) = ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) )
+s76:s59,s75,s43:mpjaodan |- ( ( ( N e. ZZ /\ M e. NN0 ) /\ i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ) -> ( ( N bwrd ( M + 1 ) ) ` i ) = ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) )
+s77:s76:ralrimiva |- ( ( N e. ZZ /\ M e. NN0 ) -> A. i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ( ( N bwrd ( M + 1 ) ) ` i ) = ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) )
+s78:s29,s77:jca |- ( ( N e. ZZ /\ M e. NN0 ) -> ( ( # ` ( N bwrd ( M + 1 ) ) ) = ( # ` ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ) /\ A. i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ( ( N bwrd ( M + 1 ) ) ` i ) = ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) ) )
+i79::eqwrd
+s80:s7,s18,i79:syl2anc |- ( ( N e. ZZ /\ M e. NN0 ) -> ( ( N bwrd ( M + 1 ) ) = ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) <-> ( ( # ` ( N bwrd ( M + 1 ) ) ) = ( # ` ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ) /\ A. i e. ( 0 ..^ ( # ` ( N bwrd ( M + 1 ) ) ) ) ( ( N bwrd ( M + 1 ) ) ` i ) = ( ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) ` i ) ) ) )
+qed:s78,s80:mpbird |- ( ( N e. ZZ /\ M e. NN0 ) -> ( N bwrd ( M + 1 ) ) = ( ( N bwrd M ) ++ <" if ( M e. ( bits ` N ) , 1o , (/) ) "> ) )
+$)

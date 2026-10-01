@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=bweqwrd  LOC_AFTER=?
+
+* A bit word is the digits word of its value at its length: the value and the length determine the word.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+s4:s3:nn0zd |- ( L e. Word 2o -> ( toNat ` L ) e. ZZ )
+i5::lencl
+s6:s1,i5:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+i7::bwrdcl
+s8:s4,s6,i7:syl2anc |- ( L e. Word 2o -> ( ( toNat ` L ) bwrd ( # ` L ) ) e. Word 2o )
+i9::bwrdlen
+s10:s4,s6,i9:syl2anc |- ( L e. Word 2o -> ( # ` ( ( toNat ` L ) bwrd ( # ` L ) ) ) = ( # ` L ) )
+s11:s10:eqcomd |- ( L e. Word 2o -> ( # ` L ) = ( # ` ( ( toNat ` L ) bwrd ( # ` L ) ) ) )
+s12::id |- ( L e. Word 2o -> L e. Word 2o )
+s13::simpr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> i e. ( 0 ..^ ( # ` L ) ) )
+s14::bwfv |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) = if ( i e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+s15:s4:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( toNat ` L ) e. ZZ )
+s16:s6:adantr |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( # ` L ) e. NN0 )
+i17::bwrdfv
+s18:s15,s16,s13,i17:syl3anc |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( ( ( toNat ` L ) bwrd ( # ` L ) ) ` i ) = if ( i e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+s19:s14,s18:eqtr4d |- ( ( L e. Word 2o /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) = ( ( ( toNat ` L ) bwrd ( # ` L ) ) ` i ) )
+s20:s19:ralrimiva |- ( L e. Word 2o -> A. i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) = ( ( ( toNat ` L ) bwrd ( # ` L ) ) ` i ) )
+s21:s11,s20:jca |- ( L e. Word 2o -> ( ( # ` L ) = ( # ` ( ( toNat ` L ) bwrd ( # ` L ) ) ) /\ A. i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) = ( ( ( toNat ` L ) bwrd ( # ` L ) ) ` i ) ) )
+i22::eqwrd
+s23:s12,s8,i22:syl2anc |- ( L e. Word 2o -> ( L = ( ( toNat ` L ) bwrd ( # ` L ) ) <-> ( ( # ` L ) = ( # ` ( ( toNat ` L ) bwrd ( # ` L ) ) ) /\ A. i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) = ( ( ( toNat ` L ) bwrd ( # ` L ) ) ` i ) ) ) )
+qed:s21,s23:mpbird |- ( L e. Word 2o -> L = ( ( toNat ` L ) bwrd ( # ` L ) ) )
+$)

@@ -1,0 +1,80 @@
+$( <MM> <PROOF_ASST> THEOREM=ttabtbll  LOC_AFTER=?
+
+* The length of the DP table on ` [ 0 , L ) ` on a stack, every slot bounded.  Lean: ` encTblAsc_length_le ` (the bound over every residue, blueprint D9, used below ` L ` ).
+
+s1::simp1 |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( L e. NN0 /\ T e. Tbl ) )
+s2:s1:simpld |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> L e. NN0 )
+s3:s1:simprd |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> T e. Tbl )
+s4::simp2 |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( N e. NN0 /\ B e. NN0 ) )
+s5:s4:simpld |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> N e. NN0 )
+s6:s4:simprd |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> B e. NN0 )
+s7::simp3 |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) )
+i8::tblf
+s9:s3,i8:syl |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> T : NN0 --> ( Word NN0 |_| 1o ) )
+s10::0nn0 |- 0 e. NN0
+s11::fzossnn0 |- ( 0 e. NN0 -> ( 0 ..^ L ) C_ NN0 )
+s12:s10,s11:ax-mp |- ( 0 ..^ L ) C_ NN0
+s13:s12:a1i |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( 0 ..^ L ) C_ NN0 )
+s14:s9,s13:fssresd |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( T |` ( 0 ..^ L ) ) : ( 0 ..^ L ) --> ( Word NN0 |_| 1o ) )
+s15::ttabslotf |- encSlot : ( Word NN0 |_| 1o ) --> Word Gamma'
+s16:s15:a1i |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> encSlot : ( Word NN0 |_| 1o ) --> Word Gamma' )
+i17::fco
+s18:s16,s14,i17:syl2anc |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( encSlot o. ( T |` ( 0 ..^ L ) ) ) : ( 0 ..^ L ) --> Word Gamma' )
+i19::iswrdi
+s20:s18,i19:syl |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( encSlot o. ( T |` ( 0 ..^ L ) ) ) e. Word Word Gamma' )
+i21::fnfzo0hash
+s22:s2,s18,i21:syl2anc |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( # ` ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) = L )
+s23::simpr |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> y e. ( 0 ..^ L ) )
+i24::elfzonn0
+s25:s23,i24:syl |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> y e. NN0 )
+s26:s14:adantr |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( T |` ( 0 ..^ L ) ) : ( 0 ..^ L ) --> ( Word NN0 |_| 1o ) )
+i27::fvco3
+s28:s26,s23,i27:syl2anc |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) = ( encSlot ` ( ( T |` ( 0 ..^ L ) ) ` y ) ) )
+i29::fvres
+s30:s23,i29:syl |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( ( T |` ( 0 ..^ L ) ) ` y ) = ( T ` y ) )
+s31:s30:fveq2d |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( encSlot ` ( ( T |` ( 0 ..^ L ) ) ` y ) ) = ( encSlot ` ( T ` y ) ) )
+s32:s28,s31:eqtrd |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) = ( encSlot ` ( T ` y ) ) )
+s33:s3:adantr |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> T e. Tbl )
+i34::tblfv
+s35:s33,s25,i34:syl2anc |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( T ` y ) e. ( Word NN0 |_| 1o ) )
+s36::id |- ( d = y -> d = y )
+c1:s36:fveq2d |- ( d = y -> ( T ` d ) = ( T ` y ) )
+c2:c1:neeq1d |- ( d = y -> ( ( T ` d ) =/= ( inr ` (/) ) <-> ( T ` y ) =/= ( inr ` (/) ) ) )
+c3:s36:fveq2d |- ( d = y -> ( T ` d ) = ( T ` y ) )
+c4:c3:fveq2d |- ( d = y -> ( 2nd ` ( T ` d ) ) = ( 2nd ` ( T ` y ) ) )
+c5:c4:fveq2d |- ( d = y -> ( # ` ( 2nd ` ( T ` d ) ) ) = ( # ` ( 2nd ` ( T ` y ) ) ) )
+c6:c5:breq1d |- ( d = y -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N <-> ( # ` ( 2nd ` ( T ` y ) ) ) <_ N ) )
+c7:s36:fveq2d |- ( d = y -> ( T ` d ) = ( T ` y ) )
+c8:c7:fveq2d |- ( d = y -> ( 2nd ` ( T ` d ) ) = ( 2nd ` ( T ` y ) ) )
+c9:c8:rneqd |- ( d = y -> ran ( 2nd ` ( T ` d ) ) = ran ( 2nd ` ( T ` y ) ) )
+c10:c9:raleqdv |- ( d = y -> ( A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) <-> A. q e. ran ( 2nd ` ( T ` y ) ) q < ( 2 ^ B ) ) )
+c11:c6,c10:anbi12d |- ( d = y -> ( ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) <-> ( ( # ` ( 2nd ` ( T ` y ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` y ) ) q < ( 2 ^ B ) ) ) )
+c12:c2,c11:imbi12d |- ( d = y -> ( ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) <-> ( ( T ` y ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` y ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` y ) ) q < ( 2 ^ B ) ) ) ) )
+s37:s7:adantr |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) )
+s38:c12,s37,s25:rspcdva |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( ( T ` y ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` y ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` y ) ) q < ( 2 ^ B ) ) ) )
+s39:s4:adantr |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( N e. NN0 /\ B e. NN0 ) )
+i40::ttabslen
+s41:s35,s39,s38,i40:syl3anc |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( # ` ( encSlot ` ( T ` y ) ) ) <_ ( ( N x. ( B + 1 ) ) + 1 ) )
+s42:s32:fveq2d |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( # ` ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) ) = ( # ` ( encSlot ` ( T ` y ) ) ) )
+s43:s42,s41:eqbrtrd |- ( ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) /\ y e. ( 0 ..^ L ) ) -> ( # ` ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) ) <_ ( ( N x. ( B + 1 ) ) + 1 ) )
+s44:s43:ralrimiva |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> A. y e. ( 0 ..^ L ) ( # ` ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) ) <_ ( ( N x. ( B + 1 ) ) + 1 ) )
+s45::fveq2 |- ( w = ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) -> ( # ` w ) = ( # ` ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) ) )
+s46:s45:breq1d |- ( w = ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) -> ( ( # ` w ) <_ ( ( N x. ( B + 1 ) ) + 1 ) <-> ( # ` ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) ) <_ ( ( N x. ( B + 1 ) ) + 1 ) ) )
+s47:s46:ralrn |- ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) Fn ( 0 ..^ L ) -> ( A. w e. ran ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ( # ` w ) <_ ( ( N x. ( B + 1 ) ) + 1 ) <-> A. y e. ( 0 ..^ L ) ( # ` ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) ) <_ ( ( N x. ( B + 1 ) ) + 1 ) ) )
+s48:s18:ffnd |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( encSlot o. ( T |` ( 0 ..^ L ) ) ) Fn ( 0 ..^ L ) )
+s49:s48,s47:syl |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( A. w e. ran ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ( # ` w ) <_ ( ( N x. ( B + 1 ) ) + 1 ) <-> A. y e. ( 0 ..^ L ) ( # ` ( ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ` y ) ) <_ ( ( N x. ( B + 1 ) ) + 1 ) ) )
+s50:s44,s49:mpbird |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> A. w e. ran ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ( # ` w ) <_ ( ( N x. ( B + 1 ) ) + 1 ) )
+s51::1nn0 |- 1 e. NN0
+s52:s51:a1i |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> 1 e. NN0 )
+s53:s6,s52:nn0addcld |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( B + 1 ) e. NN0 )
+s54:s5,s53:nn0mulcld |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( N x. ( B + 1 ) ) e. NN0 )
+s55:s54,s52:nn0addcld |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( ( N x. ( B + 1 ) ) + 1 ) e. NN0 )
+i56::ttabgsln
+s57:s20,s55,s50,i56:syl3anc |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( # ` ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) ) <_ ( ( # ` ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) x. ( ( N x. ( B + 1 ) ) + 1 ) ) )
+s58:s22:oveq1d |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( ( # ` ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) x. ( ( N x. ( B + 1 ) ) + 1 ) ) = ( L x. ( ( N x. ( B + 1 ) ) + 1 ) ) )
+s59:s57,s58:breqtrd |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( # ` ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) ) <_ ( L x. ( ( N x. ( B + 1 ) ) + 1 ) ) )
+i60::ttabtbav
+s61:s2,s3,i60:syl2anc |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( L encTblAsc T ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) )
+s62:s61:fveq2d |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( # ` ( L encTblAsc T ) ) = ( # ` ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( T |` ( 0 ..^ L ) ) ) ) ) )
+qed:s62,s59:eqbrtrd |- ( ( ( L e. NN0 /\ T e. Tbl ) /\ ( N e. NN0 /\ B e. NN0 ) /\ A. d e. NN0 ( ( T ` d ) =/= ( inr ` (/) ) -> ( ( # ` ( 2nd ` ( T ` d ) ) ) <_ N /\ A. q e. ran ( 2nd ` ( T ` d ) ) q < ( 2 ^ B ) ) ) ) -> ( # ` ( L encTblAsc T ) ) <_ ( L x. ( ( N x. ( B + 1 ) ) + 1 ) ) )
+$)

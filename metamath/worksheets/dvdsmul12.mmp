@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=dvdsmul12  LOC_AFTER=?
+
+* Divisibility of a product by a product of divisors.
+
+s1::simp1 |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K e. ZZ /\ L e. ZZ ) )
+s2:s1:simpld |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> K e. ZZ )
+s3::simp1 |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K e. ZZ /\ L e. ZZ ) )
+s4:s3:simprd |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> L e. ZZ )
+s5::simp2 |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( M e. ZZ /\ N e. ZZ ) )
+s6:s5:simpld |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> M e. ZZ )
+s7::simp2 |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( M e. ZZ /\ N e. ZZ ) )
+s8:s7:simprd |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> N e. ZZ )
+s9::simp3 |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K || M /\ L || N ) )
+s10:s9:simpld |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> K || M )
+s11::simp3 |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K || M /\ L || N ) )
+s12:s11:simprd |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> L || N )
+i13::dvdsmulc
+s14:s2,s6,s4,i13:syl3anc |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K || M -> ( K x. L ) || ( M x. L ) ) )
+s15:s10,s14:mpd |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K x. L ) || ( M x. L ) )
+i16::dvdscmul
+s17:s4,s8,s6,i16:syl3anc |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( L || N -> ( M x. L ) || ( M x. N ) ) )
+s18:s12,s17:mpd |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( M x. L ) || ( M x. N ) )
+s19:s15,s18:jca |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( ( K x. L ) || ( M x. L ) /\ ( M x. L ) || ( M x. N ) ) )
+s20:s2,s4:zmulcld |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K x. L ) e. ZZ )
+s21:s6,s4:zmulcld |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( M x. L ) e. ZZ )
+s22:s6,s8:zmulcld |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( M x. N ) e. ZZ )
+i23::dvdstr
+s24:s20,s21,s22,i23:syl3anc |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( ( ( K x. L ) || ( M x. L ) /\ ( M x. L ) || ( M x. N ) ) -> ( K x. L ) || ( M x. N ) ) )
+qed:s19,s24:mpd |- ( ( ( K e. ZZ /\ L e. ZZ ) /\ ( M e. ZZ /\ N e. ZZ ) /\ ( K || M /\ L || N ) ) -> ( K x. L ) || ( M x. N ) )
+$)

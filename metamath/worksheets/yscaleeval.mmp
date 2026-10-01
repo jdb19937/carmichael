@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=yscaleeval  LOC_AFTER=?
+
+* Value of yscaleE: the natural ceiling of z ^ ( 1 - E ) (Lean: yscaleE).
+
+s1::simp1 |- ( ( C e. RR /\ N e. NN0 /\ E e. RR ) -> C e. RR )
+s2::simp2 |- ( ( C e. RR /\ N e. NN0 /\ E e. RR ) -> N e. NN0 )
+s3::simp3 |- ( ( C e. RR /\ N e. NN0 /\ E e. RR ) -> E e. RR )
+i4::yscaleefval
+s5:s1,s2,i4:syl2anc |- ( ( C e. RR /\ N e. NN0 /\ E e. RR ) -> ( C yscaleE N ) = ( e e. RR |-> ( Nceil ` ( ( C zscale N ) ^c ( 1 - e ) ) ) ) )
+s6::simpr |- ( ( ( C e. RR /\ N e. NN0 /\ E e. RR ) /\ e = E ) -> e = E )
+c1:s6:oveq2d |- ( ( ( C e. RR /\ N e. NN0 /\ E e. RR ) /\ e = E ) -> ( 1 - e ) = ( 1 - E ) )
+c2:c1:oveq2d |- ( ( ( C e. RR /\ N e. NN0 /\ E e. RR ) /\ e = E ) -> ( ( C zscale N ) ^c ( 1 - e ) ) = ( ( C zscale N ) ^c ( 1 - E ) ) )
+c3:c2:fveq2d |- ( ( ( C e. RR /\ N e. NN0 /\ E e. RR ) /\ e = E ) -> ( Nceil ` ( ( C zscale N ) ^c ( 1 - e ) ) ) = ( Nceil ` ( ( C zscale N ) ^c ( 1 - E ) ) ) )
+s7::fvex |- ( Nceil ` ( ( C zscale N ) ^c ( 1 - E ) ) ) e. _V
+s8:s7:a1i |- ( ( C e. RR /\ N e. NN0 /\ E e. RR ) -> ( Nceil ` ( ( C zscale N ) ^c ( 1 - E ) ) ) e. _V )
+qed:s5,c3,s3,s8:fvmptd |- ( ( C e. RR /\ N e. NN0 /\ E e. RR ) -> ( ( C yscaleE N ) ` E ) = ( Nceil ` ( ( C zscale N ) ^c ( 1 - E ) ) ) )
+$)

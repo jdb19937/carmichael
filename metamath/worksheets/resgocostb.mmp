@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=resgocostb  LOC_AFTER=?
+
+* Base of the induction for the cost of the reservoir loop.
+
+s1::simpl1 |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> Z e. NN0 )
+s2::simpl2 |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> Y e. NN )
+s3::simpl3 |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> M e. NN0 )
+s4::simpr |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> q e. NN )
+s5:s1,s2:jca |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( Z e. NN0 /\ Y e. NN ) )
+i6::resgo0
+s7:s5,s4,i6:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( ( ( Z ResGo Y ) ` q ) ` 0 ) = <. (/) , 0 >. )
+s8::0ex |- (/) e. _V
+s9:s8:a1i |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> (/) e. _V )
+s10::c0ex |- 0 e. _V
+s11:s10:a1i |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> 0 e. _V )
+s12:s7:fveq2d |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( 2nd ` ( ( ( Z ResGo Y ) ` q ) ` 0 ) ) = ( 2nd ` <. (/) , 0 >. ) )
+i13::op2ndg
+s14:s9,s11,i13:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( 2nd ` <. (/) , 0 >. ) = 0 )
+s15:s12,s14:eqtrd |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( 2nd ` ( ( ( Z ResGo Y ) ` q ) ` 0 ) ) = 0 )
+i16::nsqrtcl
+s17:s3,i16:syl |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( Nfloor ` ( sqrt ` M ) ) e. NN0 )
+s18::2nn0 |- 2 e. NN0
+s19:s18:a1i |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> 2 e. NN0 )
+i20::nlogcl
+s21:s19,s3,i20:syl2anc |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( 2 Nlog M ) e. NN0 )
+s22:s2:nnnn0d |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> Y e. NN0 )
+s23:s17,s22:nn0addcld |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( ( Nfloor ` ( sqrt ` M ) ) + Y ) e. NN0 )
+s24:s23,s21:nn0addcld |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) e. NN0 )
+s25::4nn0 |- 4 e. NN0
+s26:s25:a1i |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> 4 e. NN0 )
+s27:s24,s26:nn0addcld |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) + 4 ) e. NN0 )
+s28:s27:nn0cnd |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) + 4 ) e. CC )
+s29:s28:mul02d |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( 0 x. ( ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) + 4 ) ) = 0 )
+s30::0re |- 0 e. RR
+i31::leid
+s32:s30,i31:ax-mp |- 0 <_ 0
+s33:s32:a1i |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> 0 <_ 0 )
+s34:s33,s29:breqtrrd |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> 0 <_ ( 0 x. ( ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) + 4 ) ) )
+s35:s15,s34:eqbrtrd |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( 2nd ` ( ( ( Z ResGo Y ) ` q ) ` 0 ) ) <_ ( 0 x. ( ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) + 4 ) ) )
+s36:s35:a1d |- ( ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) /\ q e. NN ) -> ( ( q + 0 ) <_ ( M + 1 ) -> ( 2nd ` ( ( ( Z ResGo Y ) ` q ) ` 0 ) ) <_ ( 0 x. ( ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) + 4 ) ) ) )
+qed:s36:ralrimiva |- ( ( Z e. NN0 /\ Y e. NN /\ M e. NN0 ) -> A. q e. NN ( ( q + 0 ) <_ ( M + 1 ) -> ( 2nd ` ( ( ( Z ResGo Y ) ` q ) ` 0 ) ) <_ ( 0 x. ( ( ( ( Nfloor ` ( sqrt ` M ) ) + Y ) + ( 2 Nlog M ) ) + 4 ) ) ) )
+$)

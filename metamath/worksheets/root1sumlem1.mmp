@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=root1sumlem1  LOC_AFTER=?
+
+* Lemma for root1sum: the orthogonality sum as a geometric sum.
+
+s1::simpl |- ( ( N e. NN /\ W e. ZZ ) -> N e. NN )
+s2:s1:adantr |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> N e. NN )
+s3::simpr |- ( ( N e. NN /\ W e. ZZ ) -> W e. ZZ )
+s4:s3:adantr |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> W e. ZZ )
+s5::simpr |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> a e. ( 0 ..^ N ) )
+i6::elfzoelz
+s7:s5,i6:syl |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> a e. ZZ )
+i8::root1cl
+s9:s2,i8:syl |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( ( -u 1 ^c ( 2 / N ) ) e. CC /\ ( -u 1 ^c ( 2 / N ) ) =/= 0 ) )
+s10:s9:simpld |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( -u 1 ^c ( 2 / N ) ) e. CC )
+s11:s9:simprd |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( -u 1 ^c ( 2 / N ) ) =/= 0 )
+s12:s7:zcnd |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> a e. CC )
+s13:s4:zcnd |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> W e. CC )
+s14:s12,s13:mulcomd |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( a x. W ) = ( W x. a ) )
+s15:s10,s11:jca |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( ( -u 1 ^c ( 2 / N ) ) e. CC /\ ( -u 1 ^c ( 2 / N ) ) =/= 0 ) )
+s16:s4,s7:jca |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( W e. ZZ /\ a e. ZZ ) )
+i17::expmulz
+s18:s15,s16,i17:syl2anc |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ ( W x. a ) ) = ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) )
+s19:s14:oveq2d |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ ( W x. a ) ) )
+s20:s19,s18:eqtrd |- ( ( ( N e. NN /\ W e. ZZ ) /\ a e. ( 0 ..^ N ) ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) )
+qed:s20:sumeq2dv |- ( ( N e. NN /\ W e. ZZ ) -> sum_ a e. ( 0 ..^ N ) ( ( -u 1 ^c ( 2 / N ) ) ^ ( a x. W ) ) = sum_ a e. ( 0 ..^ N ) ( ( ( -u 1 ^c ( 2 / N ) ) ^ W ) ^ a ) )
+$)

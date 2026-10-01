@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=cmpbitscl  LOC_AFTER=?
+
+* Closure of cmpbits.
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> C e. 3o )
+s4::cmpbitsval |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( X cmpBits Y ) ` C ) = if ( ( toNat ` X ) = ( toNat ` Y ) , C , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) )
+i5::tonatcl
+s6:s1,i5:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` X ) e. NN0 )
+i7::tonatcl
+s8:s2,i7:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( toNat ` Y ) e. NN0 )
+i9::ncmpcl
+s10:s6,s8,i9:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) e. 3o )
+s11:s3,s10:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> if ( ( toNat ` X ) = ( toNat ` Y ) , C , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) e. 3o )
+qed:s4,s11:eqeltrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 3o ) -> ( ( X cmpBits Y ) ` C ) e. 3o )
+$)

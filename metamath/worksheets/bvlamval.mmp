@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=bvlamval  LOC_AFTER=?
+
+* Value of the Barban-Vehov weight operation: ( A bvLam B ) is the function on NN with value mmu ( z ) ( log+ ( B / z ) - log+ ( A / z ) ) / log ( B / A ) (Lean bvLam, Detector.lean).
+
+s1::id |- ( a = A -> a = A )
+c1:s1:oveq1d |- ( a = A -> ( a / z ) = ( A / z ) )
+c2:c1:breq2d |- ( a = A -> ( 1 <_ ( a / z ) <-> 1 <_ ( A / z ) ) )
+c3:s1:oveq1d |- ( a = A -> ( a / z ) = ( A / z ) )
+c4:c3:fveq2d |- ( a = A -> ( log ` ( a / z ) ) = ( log ` ( A / z ) ) )
+c5:c2,c4:ifbieq1d |- ( a = A -> if ( 1 <_ ( a / z ) , ( log ` ( a / z ) ) , 0 ) = if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) )
+c6:c5:oveq2d |- ( a = A -> ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( a / z ) , ( log ` ( a / z ) ) , 0 ) ) = ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) )
+c7:c6:oveq2d |- ( a = A -> ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( a / z ) , ( log ` ( a / z ) ) , 0 ) ) ) = ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) )
+c8:s1:oveq2d |- ( a = A -> ( b / a ) = ( b / A ) )
+c9:c8:fveq2d |- ( a = A -> ( log ` ( b / a ) ) = ( log ` ( b / A ) ) )
+c10:c7,c9:oveq12d |- ( a = A -> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( a / z ) , ( log ` ( a / z ) ) , 0 ) ) ) / ( log ` ( b / a ) ) ) = ( ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( b / A ) ) ) )
+c11:c10:mpteq2dv |- ( a = A -> ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( a / z ) , ( log ` ( a / z ) ) , 0 ) ) ) / ( log ` ( b / a ) ) ) ) = ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( b / A ) ) ) ) )
+s2::id |- ( b = B -> b = B )
+c12:s2:oveq1d |- ( b = B -> ( b / z ) = ( B / z ) )
+c13:c12:breq2d |- ( b = B -> ( 1 <_ ( b / z ) <-> 1 <_ ( B / z ) ) )
+c14:s2:oveq1d |- ( b = B -> ( b / z ) = ( B / z ) )
+c15:c14:fveq2d |- ( b = B -> ( log ` ( b / z ) ) = ( log ` ( B / z ) ) )
+c16:c13,c15:ifbieq1d |- ( b = B -> if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) = if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) )
+c17:c16:oveq1d |- ( b = B -> ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) = ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) )
+c18:c17:oveq2d |- ( b = B -> ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) = ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) )
+c19:s2:oveq1d |- ( b = B -> ( b / A ) = ( B / A ) )
+c20:c19:fveq2d |- ( b = B -> ( log ` ( b / A ) ) = ( log ` ( B / A ) ) )
+c21:c18,c20:oveq12d |- ( b = B -> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( b / A ) ) ) = ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) )
+c22:c21:mpteq2dv |- ( b = B -> ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( b / A ) ) ) ) = ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) )
+s3::df-bvlam |- bvLam = ( a e. _V , b e. _V |-> ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( b / z ) , ( log ` ( b / z ) ) , 0 ) - if ( 1 <_ ( a / z ) , ( log ` ( a / z ) ) , 0 ) ) ) / ( log ` ( b / a ) ) ) ) )
+s4::nnex |- NN e. _V
+s5:s4:mptex |- ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) e. _V
+s6:c11,c22,s3,s5:ovmpo |- ( ( A e. _V /\ B e. _V ) -> ( A bvLam B ) = ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) )
+s7::elex |- ( A e. V -> A e. _V )
+s8::elex |- ( B e. W -> B e. _V )
+s9:s7,s8:anim12i |- ( ( A e. V /\ B e. W ) -> ( A e. _V /\ B e. _V ) )
+qed:s9,s6:syl |- ( ( A e. V /\ B e. W ) -> ( A bvLam B ) = ( z e. NN |-> ( ( ( mmu ` z ) x. ( if ( 1 <_ ( B / z ) , ( log ` ( B / z ) ) , 0 ) - if ( 1 <_ ( A / z ) , ( log ` ( A / z ) ) , 0 ) ) ) / ( log ` ( B / A ) ) ) ) )
+$)

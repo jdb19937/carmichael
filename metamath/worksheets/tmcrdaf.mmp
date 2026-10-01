@@ -1,0 +1,70 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcrdaf  LOC_AFTER=?
+
+* The handler ` readA ` is a function on the states and the popped symbols (Lean: its type ` St -> Option Gamma' -> St ` ), the shape ~ df-tm2stmt 's pop and peek take.
+
+s1::simpl |- ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) -> v e. TMSt )
+s2:s1:adantr |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> v e. TMSt )
+s3::simpr |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) )
+s4:s3:simprd |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( 2nd ` o ) e. ( { 1 } X. 2o ) )
+i5::tmcbit2
+s6:s4,i5:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( 2nd ` ( 2nd ` o ) ) e. 2o )
+i7::djulcl
+s8:s6,i7:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( inl ` ( 2nd ` ( 2nd ` o ) ) ) e. ( 2o |_| 1o ) )
+i9::tmccarcl
+s10:s2,i9:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMcar ` v ) e. 2o )
+i11::tmcrbcl
+s12:s2,i11:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMrb ` v ) e. ( 2o |_| 1o ) )
+i13::tmcdacl
+s14:s2,i13:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMda ` v ) e. 2o )
+i15::tmcdbcl
+s16:s2,i15:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMdb ` v ) e. 2o )
+i17::tmccmpcl
+s18:s2,i17:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMcmp ` v ) e. 3o )
+i19::tmcflcl
+s20:s2,i19:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMfl ` v ) e. 2o )
+s21:s10,s8,s12:3jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( TMcar ` v ) e. 2o /\ ( inl ` ( 2nd ` ( 2nd ` o ) ) ) e. ( 2o |_| 1o ) /\ ( TMrb ` v ) e. ( 2o |_| 1o ) ) )
+s22:s14,s16:jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( TMda ` v ) e. 2o /\ ( TMdb ` v ) e. 2o ) )
+s23:s18,s20:jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( TMcmp ` v ) e. 3o /\ ( TMfl ` v ) e. 2o ) )
+s24:s21,s22,s23:3jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( ( TMcar ` v ) e. 2o /\ ( inl ` ( 2nd ` ( 2nd ` o ) ) ) e. ( 2o |_| 1o ) /\ ( TMrb ` v ) e. ( 2o |_| 1o ) ) /\ ( ( TMda ` v ) e. 2o /\ ( TMdb ` v ) e. 2o ) /\ ( ( TMcmp ` v ) e. 3o /\ ( TMfl ` v ) e. 2o ) ) )
+i25::tmcstmk
+s26:s24,i25:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> <. ( TMcar ` v ) , <. ( inl ` ( 2nd ` ( 2nd ` o ) ) ) , <. ( TMrb ` v ) , <. ( TMda ` v ) , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. e. TMSt )
+s27:s1:adantr |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> v e. TMSt )
+i28::tmccarcl
+s29:s27,i28:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMcar ` v ) e. 2o )
+s30::0lt1o |- (/) e. 1o
+i31::djurcl
+s32:s30,i31:ax-mp |- ( inr ` (/) ) e. ( 2o |_| 1o )
+s33:s32:a1i |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( inr ` (/) ) e. ( 2o |_| 1o ) )
+i34::tmcrbcl
+s35:s27,i34:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMrb ` v ) e. ( 2o |_| 1o ) )
+s36::1oel2o |- 1o e. 2o
+s37:s36:a1i |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> 1o e. 2o )
+i38::tmcdbcl
+s39:s27,i38:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMdb ` v ) e. 2o )
+i40::tmccmpcl
+s41:s27,i40:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMcmp ` v ) e. 3o )
+i42::tmcflcl
+s43:s27,i42:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( TMfl ` v ) e. 2o )
+s44:s29,s33,s35:3jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( TMcar ` v ) e. 2o /\ ( inr ` (/) ) e. ( 2o |_| 1o ) /\ ( TMrb ` v ) e. ( 2o |_| 1o ) ) )
+s45:s37,s39:jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( 1o e. 2o /\ ( TMdb ` v ) e. 2o ) )
+s46:s41,s43:jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( TMcmp ` v ) e. 3o /\ ( TMfl ` v ) e. 2o ) )
+s47:s44,s45,s46:3jca |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> ( ( ( TMcar ` v ) e. 2o /\ ( inr ` (/) ) e. ( 2o |_| 1o ) /\ ( TMrb ` v ) e. ( 2o |_| 1o ) ) /\ ( 1o e. 2o /\ ( TMdb ` v ) e. 2o ) /\ ( ( TMcmp ` v ) e. 3o /\ ( TMfl ` v ) e. 2o ) ) )
+i48::tmcstmk
+s49:s47,i48:syl |- ( ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) /\ -. ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) ) -> <. ( TMcar ` v ) , <. ( inr ` (/) ) , <. ( TMrb ` v ) , <. 1o , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. e. TMSt )
+s50:s26,s49:ifclda |- ( ( v e. TMSt /\ o e. ( Gamma' |_| 1o ) ) -> if ( ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) , <. ( TMcar ` v ) , <. ( inl ` ( 2nd ` ( 2nd ` o ) ) ) , <. ( TMrb ` v ) , <. ( TMda ` v ) , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. , <. ( TMcar ` v ) , <. ( inr ` (/) ) , <. ( TMrb ` v ) , <. 1o , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. ) e. TMSt )
+s51:s50:rgen2 |- A. v e. TMSt A. o e. ( Gamma' |_| 1o ) if ( ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) , <. ( TMcar ` v ) , <. ( inl ` ( 2nd ` ( 2nd ` o ) ) ) , <. ( TMrb ` v ) , <. ( TMda ` v ) , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. , <. ( TMcar ` v ) , <. ( inr ` (/) ) , <. ( TMrb ` v ) , <. 1o , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. ) e. TMSt
+s52::df-tmrda |- TMrdA = ( v e. TMSt , o e. ( Gamma' |_| 1o ) |-> if ( ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) , <. ( TMcar ` v ) , <. ( inl ` ( 2nd ` ( 2nd ` o ) ) ) , <. ( TMrb ` v ) , <. ( TMda ` v ) , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. , <. ( TMcar ` v ) , <. ( inr ` (/) ) , <. ( TMrb ` v ) , <. 1o , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. ) )
+s53:s52:fmpo |- ( A. v e. TMSt A. o e. ( Gamma' |_| 1o ) if ( ( ( 1st ` o ) = (/) /\ ( 2nd ` o ) e. ( { 1 } X. 2o ) ) , <. ( TMcar ` v ) , <. ( inl ` ( 2nd ` ( 2nd ` o ) ) ) , <. ( TMrb ` v ) , <. ( TMda ` v ) , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. , <. ( TMcar ` v ) , <. ( inr ` (/) ) , <. ( TMrb ` v ) , <. 1o , <. ( TMdb ` v ) , <. ( TMcmp ` v ) , ( TMfl ` v ) >. >. >. >. >. >. ) e. TMSt <-> TMrdA : ( TMSt X. ( Gamma' |_| 1o ) ) --> TMSt )
+s54:s51,s53:mpbi |- TMrdA : ( TMSt X. ( Gamma' |_| 1o ) ) --> TMSt
+s55::tmstfi |- TMSt e. Fin
+s56:s55:elexi |- TMSt e. _V
+s57::gammaex |- Gamma' e. _V
+s58::1oex |- 1o e. _V
+i59::djuex
+s60:s57,s58,i59:mp2an |- ( Gamma' |_| 1o ) e. _V
+i61::xpexg
+s62:s56,s60,i61:mp2an |- ( TMSt X. ( Gamma' |_| 1o ) ) e. _V
+i63::elmapg
+s64:s56,s62,i63:mp2an |- ( TMrdA e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) <-> TMrdA : ( TMSt X. ( Gamma' |_| 1o ) ) --> TMSt )
+qed:s54,s64:mpbir |- TMrdA e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+$)

@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=dpgocost  LOC_AFTER=?
+
+* The dpGo loop charges one unit per residue (Lean: dpGo_cost).
+
+s1::simprl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> F e. NN0 )
+i2::dpgocostl
+s3:s1,i2:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> A. a e. Tbl ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` F ) ` a ) ) = F ) )
+s4::simpl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) )
+s5:s3,s4:mpd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> A. a e. Tbl ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` F ) ` a ) ) = F )
+s6::simprr |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> A e. Tbl )
+s7::id |- ( a = A -> a = A )
+c1:s7:fveq2d |- ( a = A -> ( ( ( ( L DpGo P ) ` T ) ` F ) ` a ) = ( ( ( ( L DpGo P ) ` T ) ` F ) ` A ) )
+c2:c1:fveq2d |- ( a = A -> ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` F ) ` a ) ) = ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` F ) ` A ) ) )
+c3:c2:eqeq1d |- ( a = A -> ( ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` F ) ` a ) ) = F <-> ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` F ) ` A ) ) = F ) )
+qed:c3,s5,s6:rspcdva |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) ) -> ( 2nd ` ( ( ( ( L DpGo P ) ` T ) ` F ) ` A ) ) = F )
+$)

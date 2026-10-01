@@ -1,0 +1,35 @@
+$( <MM> <PROOF_ASST> THEOREM=dsvaln  LOC_AFTER=?
+
+* The value of the extended difference quotient away from the base point.
+
+s1::simpll |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> F e. ( D -cn-> CC ) )
+s2::simplr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> P e. D )
+s3::simprl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> Z e. D )
+s4::simprr |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> Z =/= P )
+i5::cncfrss
+s6:s1,i5:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> D C_ CC )
+i7::cncff
+s8:s1,i7:syl |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> F : D --> CC )
+s9:s6,s3:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> Z e. CC )
+s10:s6,s2:sseldd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> P e. CC )
+s11:s9,s10,s4:subne0d |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( Z - P ) =/= 0 )
+s12:s9,s10:subcld |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( Z - P ) e. CC )
+s13:s8,s3:ffvelcdmd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( F ` Z ) e. CC )
+s14:s8,s2:ffvelcdmd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( F ` P ) e. CC )
+s15:s13,s14:subcld |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( ( F ` Z ) - ( F ` P ) ) e. CC )
+s16:s15,s12,s11:divcld |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( ( ( F ` Z ) - ( F ` P ) ) / ( Z - P ) ) e. CC )
+s17::simpr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) /\ z = Z ) -> z = Z )
+s18:s4:adantr |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) /\ z = Z ) -> Z =/= P )
+s19:s17,s18:eqnetrd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) /\ z = Z ) -> z =/= P )
+s20:s19:neneqd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) /\ z = Z ) -> -. z = P )
+i21::iffalse
+s22:s20,i21:syl |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) /\ z = Z ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) = ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) )
+s23::fveq2 |- ( z = Z -> ( F ` z ) = ( F ` Z ) )
+s24:s23:oveq1d |- ( z = Z -> ( ( F ` z ) - ( F ` P ) ) = ( ( F ` Z ) - ( F ` P ) ) )
+s25::oveq1 |- ( z = Z -> ( z - P ) = ( Z - P ) )
+s26:s24,s25:oveq12d |- ( z = Z -> ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) = ( ( ( F ` Z ) - ( F ` P ) ) / ( Z - P ) ) )
+s27:s17,s26:syl |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) /\ z = Z ) -> ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) = ( ( ( F ` Z ) - ( F ` P ) ) / ( Z - P ) ) )
+s28:s22,s27:eqtrd |- ( ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) /\ z = Z ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) = ( ( ( F ` Z ) - ( F ` P ) ) / ( Z - P ) ) )
+s29::eqidd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) = ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) )
+qed:s29,s28,s3,s16:fvmptd |- ( ( ( F e. ( D -cn-> CC ) /\ P e. D ) /\ ( Z e. D /\ Z =/= P ) ) -> ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` Z ) = ( ( ( F ` Z ) - ( F ` P ) ) / ( Z - P ) ) )
+$)

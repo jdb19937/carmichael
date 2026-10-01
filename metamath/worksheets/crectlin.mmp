@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=crectlin  LOC_AFTER=?
+
+* A convex combination of the endpoints lies in the closed interval.
+
+s1::simpl1 |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> M e. RR )
+s2::simpl2 |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> N e. RR )
+s3::simpl3 |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> M <_ N )
+s4::simpr |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> S e. ( 0 [,] 1 ) )
+s5:s1:recnd |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> M e. CC )
+s6:s2:recnd |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> N e. CC )
+i7::elunitcn
+s8:s4,i7:syl |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> S e. CC )
+i9::cvxid
+s10:s5,s6,s8,i9:syl3anc |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> ( M + ( S x. ( N - M ) ) ) = ( ( ( 1 - S ) x. M ) + ( S x. N ) ) )
+i11::rexr
+s12:s1,i11:syl |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> M e. RR* )
+i13::rexr
+s14:s2,i13:syl |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> N e. RR* )
+i15::lbicc2
+s16:s12,s14,s3,i15:syl3anc |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> M e. ( M [,] N ) )
+i17::ubicc2
+s18:s12,s14,s3,i17:syl3anc |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> N e. ( M [,] N ) )
+s19:s16,s18,s4:jca31 |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> ( ( M e. ( M [,] N ) /\ N e. ( M [,] N ) ) /\ S e. ( 0 [,] 1 ) ) )
+s20:s16,s18,s4:3jca |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> ( M e. ( M [,] N ) /\ N e. ( M [,] N ) /\ S e. ( 0 [,] 1 ) ) )
+i21::icccvx
+s22:s1,s2,i21:syl2anc |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> ( ( M e. ( M [,] N ) /\ N e. ( M [,] N ) /\ S e. ( 0 [,] 1 ) ) -> ( ( ( 1 - S ) x. M ) + ( S x. N ) ) e. ( M [,] N ) ) )
+s23:s20,s22:mpd |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> ( ( ( 1 - S ) x. M ) + ( S x. N ) ) e. ( M [,] N ) )
+qed:s10,s23:eqeltrd |- ( ( ( M e. RR /\ N e. RR /\ M <_ N ) /\ S e. ( 0 [,] 1 ) ) -> ( M + ( S x. ( N - M ) ) ) e. ( M [,] N ) )
+$)

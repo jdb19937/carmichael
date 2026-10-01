@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=dpstepacl  LOC_AFTER=?
+
+* The table a DP step starts the propagation from.
+
+s1::id |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) )
+s2:s1:simpld |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( L e. NN /\ P e. NN0 ) )
+s3:s2:simpld |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> L e. NN )
+s4:s1:simpld |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( L e. NN /\ P e. NN0 ) )
+s5:s4:simprd |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> P e. NN0 )
+s6:s1:simprd |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> T e. Tbl )
+s7:s3:nnnn0d |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> L e. NN0 )
+s8:s3,s5:jca |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( L e. NN /\ P e. NN0 ) )
+i9::dpstepmcl
+s10:s8,i9:syl |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( P mod L ) e. NN0 )
+i11::s1cl
+s12:s5,i11:syl |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> <" P "> e. Word NN0 )
+s13:s6,s10:jca |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( T e. Tbl /\ ( P mod L ) e. NN0 ) )
+s14:s13,s12:jca |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( ( T e. Tbl /\ ( P mod L ) e. NN0 ) /\ <" P "> e. Word NN0 ) )
+i15::setifnonecl
+qed:s14,i15:syl |- ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) -> ( ( T SetIfNone ( P mod L ) ) ` <" P "> ) e. Tbl )
+$)

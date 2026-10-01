@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=pfdisj  LOC_AFTER=?
+
+* Coprime positive integers have no common prime divisor.
+
+s1::simp1 |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> A e. NN )
+s2:s1:nnzd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> A e. ZZ )
+s3::simp2 |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> B e. NN )
+s4:s3:nnzd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> B e. ZZ )
+s5::simp3 |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( A gcd B ) = 1 )
+s6::simpr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> q e. Prime )
+i7::prmnn
+s8:s6,i7:syl |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> q e. NN )
+s9:s8:nnzd |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> q e. ZZ )
+s10:s2:adantr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> A e. ZZ )
+s11:s4:adantr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> B e. ZZ )
+i12::dvdsgcdb
+s13:s9,s10,s11,i12:syl3anc |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> ( ( q || A /\ q || B ) <-> q || ( A gcd B ) ) )
+s14:s5:adantr |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> ( A gcd B ) = 1 )
+s15:s14:breq2d |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> ( q || ( A gcd B ) <-> q || 1 ) )
+s16:s13,s15:bitrd |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> ( ( q || A /\ q || B ) <-> q || 1 ) )
+i17::nprmdvds1
+s18:s6,i17:syl |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> -. q || 1 )
+s19:s16,s18:mtbird |- ( ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) /\ q e. Prime ) -> -. ( q || A /\ q || B ) )
+s20:s19:ralrimiva |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> A. q e. Prime -. ( q || A /\ q || B ) )
+s21::rabeq0 |- ( { q e. Prime | ( q || A /\ q || B ) } = (/) <-> A. q e. Prime -. ( q || A /\ q || B ) )
+s22:s21:a1i |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( { q e. Prime | ( q || A /\ q || B ) } = (/) <-> A. q e. Prime -. ( q || A /\ q || B ) ) )
+s23:s22,s20:mpbird |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> { q e. Prime | ( q || A /\ q || B ) } = (/) )
+s24::inrab |- ( { q e. Prime | q || A } i^i { q e. Prime | q || B } ) = { q e. Prime | ( q || A /\ q || B ) }
+s25:s24:a1i |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( { q e. Prime | q || A } i^i { q e. Prime | q || B } ) = { q e. Prime | ( q || A /\ q || B ) } )
+qed:s25,s23:eqtrd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( { q e. Prime | q || A } i^i { q e. Prime | q || B } ) = (/) )
+$)

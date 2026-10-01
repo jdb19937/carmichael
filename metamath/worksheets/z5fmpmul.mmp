@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=z5fmpmul  LOC_AFTER=?
+
+* Lean fmp_mul_coprime: f = mmu phi is multiplicative, f ( A B ) = f ( A ) f ( B ) for coprime A, B.
+
+s1::id |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) )
+i2::mumul
+s3:s1,i2:syl |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( mmu ` ( A x. B ) ) = ( ( mmu ` A ) x. ( mmu ` B ) ) )
+i4::phimul
+s5:s1,i4:syl |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( phi ` ( A x. B ) ) = ( ( phi ` A ) x. ( phi ` B ) ) )
+s6:s3,s5:oveq12d |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( ( mmu ` ( A x. B ) ) x. ( phi ` ( A x. B ) ) ) = ( ( ( mmu ` A ) x. ( mmu ` B ) ) x. ( ( phi ` A ) x. ( phi ` B ) ) ) )
+s7::simp1 |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> A e. NN )
+s8::simp2 |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> B e. NN )
+i9::mucl
+s10:s7,i9:syl |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( mmu ` A ) e. ZZ )
+s11:s10:zcnd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( mmu ` A ) e. CC )
+i12::phicl
+s13:s7,i12:syl |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( phi ` A ) e. NN )
+s14:s13:nncnd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( phi ` A ) e. CC )
+i15::mucl
+s16:s8,i15:syl |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( mmu ` B ) e. ZZ )
+s17:s16:zcnd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( mmu ` B ) e. CC )
+i18::phicl
+s19:s8,i18:syl |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( phi ` B ) e. NN )
+s20:s19:nncnd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( phi ` B ) e. CC )
+s21:s11,s17,s14,s20:mul4d |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( ( ( mmu ` A ) x. ( mmu ` B ) ) x. ( ( phi ` A ) x. ( phi ` B ) ) ) = ( ( ( mmu ` A ) x. ( phi ` A ) ) x. ( ( mmu ` B ) x. ( phi ` B ) ) ) )
+qed:s6,s21:eqtrd |- ( ( A e. NN /\ B e. NN /\ ( A gcd B ) = 1 ) -> ( ( mmu ` ( A x. B ) ) x. ( phi ` ( A x. B ) ) ) = ( ( ( mmu ` A ) x. ( phi ` A ) ) x. ( ( mmu ` B ) x. ( phi ` B ) ) ) )
+$)

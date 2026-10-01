@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stepval  LOC_AFTER=?
+
+* Value of TM2step: the step function of program M as a mapping on configurations.
+
+s1::simpl |- ( ( t = T /\ m = M ) -> t = T )
+s2::simpr |- ( ( t = T /\ m = M ) -> m = M )
+c1:s1:fveq2d |- ( ( t = T /\ m = M ) -> ( TM2Cfg ` t ) = ( TM2Cfg ` T ) )
+c2:s2:fveq1d |- ( ( t = T /\ m = M ) -> ( m ` ( 2nd ` ( 1st ` c ) ) ) = ( M ` ( 2nd ` ( 1st ` c ) ) ) )
+c3:s1:fveq2d |- ( ( t = T /\ m = M ) -> ( TM2sa ` t ) = ( TM2sa ` T ) )
+c4::eqidd |- ( ( t = T /\ m = M ) -> ( 2nd ` c ) = ( 2nd ` c ) )
+c5:c2,c3,c4:oveq123d |- ( ( t = T /\ m = M ) -> ( ( m ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` t ) ( 2nd ` c ) ) = ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) )
+c6:c5:fveq2d |- ( ( t = T /\ m = M ) -> ( inl ` ( ( m ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` t ) ( 2nd ` c ) ) ) = ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) )
+c7:c6:ifeq2d |- ( ( t = T /\ m = M ) -> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( m ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` t ) ( 2nd ` c ) ) ) ) = if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) ) )
+c8:c1,c7:mpteq12dv |- ( ( t = T /\ m = M ) -> ( c e. ( TM2Cfg ` t ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( m ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` t ) ( 2nd ` c ) ) ) ) ) = ( c e. ( TM2Cfg ` T ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) ) ) )
+s3::df-tm2step |- TM2step = ( t e. _V , m e. _V |-> ( c e. ( TM2Cfg ` t ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( m ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` t ) ( 2nd ` c ) ) ) ) ) )
+s4:c8,s3:ovmpoga |- ( ( T e. _V /\ M e. _V /\ ( c e. ( TM2Cfg ` T ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) ) ) e. _V ) -> ( T TM2step M ) = ( c e. ( TM2Cfg ` T ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) ) ) )
+s5::fvex |- ( TM2Cfg ` T ) e. _V
+i6::mptexg
+s7:s5,i6:ax-mp |- ( c e. ( TM2Cfg ` T ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) ) ) e. _V
+s8::elex |- ( T e. V -> T e. _V )
+s9::elex |- ( M e. W -> M e. _V )
+s10:s8:adantr |- ( ( T e. V /\ M e. W ) -> T e. _V )
+s11:s9:adantl |- ( ( T e. V /\ M e. W ) -> M e. _V )
+s12:s7:a1i |- ( ( T e. V /\ M e. W ) -> ( c e. ( TM2Cfg ` T ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) ) ) e. _V )
+qed:s10,s11,s12,s4:syl3anc |- ( ( T e. V /\ M e. W ) -> ( T TM2step M ) = ( c e. ( TM2Cfg ` T ) |-> if ( ( 1st ` c ) = ( inr ` (/) ) , ( inr ` (/) ) , ( inl ` ( ( M ` ( 2nd ` ( 1st ` c ) ) ) ( TM2sa ` T ) ( 2nd ` c ) ) ) ) ) )
+$)

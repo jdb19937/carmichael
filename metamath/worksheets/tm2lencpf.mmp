@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lencpf  LOC_AFTER=?
+
+* The entry mapping of ` encList ` is the entry mapping of ` entries ` after the binary encoding.
+
+s1::df-encnatgam |- encNatGam = ( n e. NN0 |-> ( inclBool o. ( encodeNat ` n ) ) )
+s2::fveq2 |- ( n = p -> ( encodeNat ` n ) = ( encodeNat ` p ) )
+s3:s2:coeq2d |- ( n = p -> ( inclBool o. ( encodeNat ` n ) ) = ( inclBool o. ( encodeNat ` p ) ) )
+s4:s3:cbvmptv |- ( n e. NN0 |-> ( inclBool o. ( encodeNat ` n ) ) ) = ( p e. NN0 |-> ( inclBool o. ( encodeNat ` p ) ) )
+s5:s1,s4:eqtri |- encNatGam = ( p e. NN0 |-> ( inclBool o. ( encodeNat ` p ) ) )
+s6:s5:a1i |- ( T. -> encNatGam = ( p e. NN0 |-> ( inclBool o. ( encodeNat ` p ) ) ) )
+s7::simpr |- ( ( T. /\ p e. NN0 ) -> p e. NN0 )
+s8::encnatf |- encodeNat : NN0 --> Word 2o
+s9:s8:a1i |- ( ( T. /\ p e. NN0 ) -> encodeNat : NN0 --> Word 2o )
+i10::ffvelcdm
+s11:s9,s7,i10:syl2anc |- ( ( T. /\ p e. NN0 ) -> ( encodeNat ` p ) e. Word 2o )
+s12::tm2linclf |- inclBool : 2o --> ( { 1 } X. 2o )
+s13:s12:a1i |- ( ( T. /\ p e. NN0 ) -> inclBool : 2o --> ( { 1 } X. 2o ) )
+i14::wrdco
+s15:s11,s13,i14:syl2anc |- ( ( T. /\ p e. NN0 ) -> ( inclBool o. ( encodeNat ` p ) ) e. Word ( { 1 } X. 2o ) )
+s16::eqid |- ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) = ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) )
+s17:s16:a1i |- ( T. -> ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) = ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) )
+s18::oveq1 |- ( w = ( inclBool o. ( encodeNat ` p ) ) -> ( w ++ <" 4 "> ) = ( ( inclBool o. ( encodeNat ` p ) ) ++ <" 4 "> ) )
+s19:s15,s6,s17,s18:fmptco |- ( T. -> ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) = ( p e. NN0 |-> ( ( inclBool o. ( encodeNat ` p ) ) ++ <" 4 "> ) ) )
+s20:s19:mptru |- ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) = ( p e. NN0 |-> ( ( inclBool o. ( encodeNat ` p ) ) ++ <" 4 "> ) )
+s21::encnatgamval |- ( p e. NN0 -> ( encNatGam ` p ) = ( inclBool o. ( encodeNat ` p ) ) )
+s22:s21:oveq1d |- ( p e. NN0 -> ( ( encNatGam ` p ) ++ <" 4 "> ) = ( ( inclBool o. ( encodeNat ` p ) ) ++ <" 4 "> ) )
+s23:s22:mpteq2ia |- ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) ) = ( p e. NN0 |-> ( ( inclBool o. ( encodeNat ` p ) ) ++ <" 4 "> ) )
+qed:s20,s23:eqtr4i |- ( ( w e. Word ( { 1 } X. 2o ) |-> ( w ++ <" 4 "> ) ) o. encNatGam ) = ( p e. NN0 |-> ( ( encNatGam ` p ) ++ <" 4 "> ) )
+$)

@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=bwcmpfcl  LOC_AFTER=?
+
+* The verdict is an ordering.
+
+s1::simpl1 |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> A e. NN0 )
+s2::simpl2 |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> B e. NN0 )
+s3::simpl3 |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> C e. 3o )
+s4::simpr |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> I e. NN0 )
+s5::bwcmpf |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( cmpStep ( A bwFold B ) C ) ` I ) = if ( ( A mod ( 2 ^ I ) ) = ( B mod ( 2 ^ I ) ) , C , ( ( A mod ( 2 ^ I ) ) Ncmp ( B mod ( 2 ^ I ) ) ) ) )
+s6:s1:nn0zd |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> A e. ZZ )
+s7::2nn |- 2 e. NN
+s8:s7:a1i |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> 2 e. NN )
+i9::nnexpcl
+s10:s8,s4,i9:syl2anc |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( 2 ^ I ) e. NN )
+i11::zmodcl
+s12:s6,s10,i11:syl2anc |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( A mod ( 2 ^ I ) ) e. NN0 )
+s13:s2:nn0zd |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> B e. ZZ )
+i14::zmodcl
+s15:s13,s10,i14:syl2anc |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( B mod ( 2 ^ I ) ) e. NN0 )
+i16::ncmpcl
+s17:s12,s15,i16:syl2anc |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( A mod ( 2 ^ I ) ) Ncmp ( B mod ( 2 ^ I ) ) ) e. 3o )
+s18:s3,s17:ifcld |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> if ( ( A mod ( 2 ^ I ) ) = ( B mod ( 2 ^ I ) ) , C , ( ( A mod ( 2 ^ I ) ) Ncmp ( B mod ( 2 ^ I ) ) ) ) e. 3o )
+qed:s5,s18:eqeltrd |- ( ( ( A e. NN0 /\ B e. NN0 /\ C e. 3o ) /\ I e. NN0 ) -> ( ( cmpStep ( A bwFold B ) C ) ` I ) e. 3o )
+$)

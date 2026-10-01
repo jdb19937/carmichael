@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrgsabs  LOC_AFTER=?
+
+* The squared modulus of the Gauss sum of a primitive character mod N is N (Lean LConvexity norm_gaussSum_sq, LargeSieve norm_sq_gaussSum_primitive; Mathlib gaussSum_mul_gaussSum_eq_card is the prime-modulus case).
+
+s1::simpl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) )
+s2:s1:simpld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> N e. NN )
+i3::dchrgspar
+s4:s1,i3:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> sum_ k e. ( 0 ..^ N ) ( sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ ( k x. a ) ) ) x. ( * ` sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ ( k x. a ) ) ) ) ) = ( N x. ( phi ` N ) ) )
+s5::dchrgsabslem |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> sum_ k e. ( 0 ..^ N ) ( sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ ( k x. a ) ) ) x. ( * ` sum_ a e. ( 0 ..^ N ) ( ( X ` ( ( ZRHom ` ( Z/nZ ` N ) ) ` a ) ) x. ( ( -u 1 ^c ( 2 / N ) ) ^ ( k x. a ) ) ) ) ) = ( ( phi ` N ) x. ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) ) )
+i6::dchrgscl
+s7:s1,i6:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( N DChrGS X ) e. CC )
+s8:s7:cjcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( * ` ( N DChrGS X ) ) e. CC )
+s9:s7,s8:mulcld |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) e. CC )
+i10::phicl
+s11:s2,i10:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( phi ` N ) e. NN )
+s12:s5,s4:eqtr3d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( ( phi ` N ) x. ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) ) = ( N x. ( phi ` N ) ) )
+s13:s2:nncnd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> N e. CC )
+s14:s11:nncnd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( phi ` N ) e. CC )
+s15:s11:nnne0d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( phi ` N ) =/= 0 )
+s16:s9,s13,s14,s15:mulcand |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( ( ( phi ` N ) x. ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) ) = ( ( phi ` N ) x. N ) <-> ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) = N ) )
+s17:s2:nncnd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> N e. CC )
+s18:s11:nncnd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( phi ` N ) e. CC )
+s19:s17,s18:mulcomd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( N x. ( phi ` N ) ) = ( ( phi ` N ) x. N ) )
+s20:s12,s19:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( ( phi ` N ) x. ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) ) = ( ( phi ` N ) x. N ) )
+i21::absvalsq
+s22:s7,i21:syl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( ( abs ` ( N DChrGS X ) ) ^ 2 ) = ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) )
+s23:s20,s16:mpbid |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( ( N DChrGS X ) x. ( * ` ( N DChrGS X ) ) ) = N )
+qed:s22,s23:eqtrd |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( N DChrCond X ) = N ) -> ( ( abs ` ( N DChrGS X ) ) ^ 2 ) = N )
+$)

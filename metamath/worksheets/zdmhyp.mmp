@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=zdmhyp  LOC_AFTER=?
+
+* MertensHyp of ZeroDensity.lean discharged: there is a nonnegative constant c with the Mertens product up to r at most c log r for every real r >= 2.
+
+s1::4rp |- 4 e. RR+
+i2::relogcl
+s3:s1,i2:ax-mp |- ( log ` 4 ) e. RR
+s4::4re |- 4 e. RR
+s5:s3,s4:readdcli |- ( ( log ` 4 ) + 4 ) e. RR
+s6::2re |- 2 e. RR
+s7::1lt2 |- 1 < 2
+i8::rplogcl
+s9:s6,s7,i8:mp2an |- ( log ` 2 ) e. RR+
+s10:s5:a1i |- ( T. -> ( ( log ` 4 ) + 4 ) e. RR )
+s11:s9:a1i |- ( T. -> ( log ` 2 ) e. RR+ )
+s12::2re |- 2 e. RR
+s13:s12:a1i |- ( T. -> 2 e. RR )
+s14:s13,s10:remulcld |- ( T. -> ( 2 x. ( ( log ` 4 ) + 4 ) ) e. RR )
+s15:s14,s11:rerpdivcld |- ( T. -> ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) e. RR )
+s16:s11:relogcld |- ( T. -> ( log ` ( log ` 2 ) ) e. RR )
+s17::3re |- 3 e. RR
+s18:s17:a1i |- ( T. -> 3 e. RR )
+s19:s18,s15:readdcld |- ( T. -> ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) e. RR )
+s20:s19,s16:resubcld |- ( T. -> ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) e. RR )
+s21::tru |- T.
+s22:s21,s20:ax-mp |- ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) e. RR
+i23::reefcl
+s24:s22,i23:ax-mp |- ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) e. RR
+s25::0re |- 0 e. RR
+i26::efgt0
+s27:s22,i26:ax-mp |- 0 < ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) )
+s28:s25,s24,s27:ltleii |- 0 <_ ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) )
+s29::zdmert |- ( ( r e. RR /\ 2 <_ r ) -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) )
+s30:s29:ex |- ( r e. RR -> ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) )
+s31:s30:rgen |- A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) )
+s32:s28,s31:pm3.2i |- ( 0 <_ ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) /\ A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) )
+s33::id |- ( c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) -> c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) )
+c1:s33:breq2d |- ( c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) -> ( 0 <_ c <-> 0 <_ ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) ) )
+c2:s33:oveq1d |- ( c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) -> ( c x. ( log ` r ) ) = ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) )
+c3:c2:breq2d |- ( c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) -> ( prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( c x. ( log ` r ) ) <-> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) )
+c4:c3:imbi2d |- ( c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) -> ( ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( c x. ( log ` r ) ) ) <-> ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) ) )
+c5:c4:ralbidv |- ( c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) -> ( A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( c x. ( log ` r ) ) ) <-> A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) ) )
+c6:c1,c5:anbi12d |- ( c = ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) -> ( ( 0 <_ c /\ A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( c x. ( log ` r ) ) ) ) <-> ( 0 <_ ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) /\ A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) ) ) )
+s34:s24,s32:pm3.2i |- ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) e. RR /\ ( 0 <_ ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) /\ A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) ) )
+s35:c6:rspcev |- ( ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) e. RR /\ ( 0 <_ ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) /\ A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( ( exp ` ( ( 3 + ( ( 2 x. ( ( log ` 4 ) + 4 ) ) / ( log ` 2 ) ) ) - ( log ` ( log ` 2 ) ) ) ) x. ( log ` r ) ) ) ) ) -> E. c e. RR ( 0 <_ c /\ A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( c x. ( log ` r ) ) ) ) )
+qed:s34,s35:ax-mp |- E. c e. RR ( 0 <_ c /\ A. r e. RR ( 2 <_ r -> prod_ p e. ( ( 1 ... ( |_ ` r ) ) i^i Prime ) ( 1 / ( 1 - ( 1 / p ) ) ) <_ ( c x. ( log ` r ) ) ) )
+$)

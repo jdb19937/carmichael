@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=ppiubeps  LOC_AFTER=?
+
+* Chebyshev's upper bound with an explicit constant: for every eps > 0 and all sufficiently large integers z, pi ( z ) <_ ( log 4 + eps ) z / log z (Lean: eventually_primePi_le, via pnt).
+
+s1::ppiubepslem2 |- ( E e. RR+ -> E. y e. RR A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) )
+s2::simpl |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> E e. RR+ )
+s3::simprl |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> y e. RR )
+s4::simprr |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) )
+s5:s3:recnd |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> y e. CC )
+s6:s5:abscld |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> ( abs ` y ) e. RR )
+s7:s5:absge0d |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> 0 <_ ( abs ` y ) )
+i8::flge0nn0
+s9:s6,s7,i8:syl2anc |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> ( |_ ` ( abs ` y ) ) e. NN0 )
+i10::nn0p1nn
+s11:s9,i10:syl |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> ( ( |_ ` ( abs ` y ) ) + 1 ) e. NN )
+i12::peano2nn
+s13:s11,i12:syl |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) e. NN )
+i14::ppiubepslem3
+s15:s2,s3,s4,i14:syl3anc |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> A. z e. ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) )
+s16::fveq2 |- ( m = ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) -> ( ZZ>= ` m ) = ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) )
+s17:s16:raleqdv |- ( m = ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) -> ( A. z e. ( ZZ>= ` m ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) <-> A. z e. ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) ) )
+s18:s17:rspcev |- ( ( ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) e. NN /\ A. z e. ( ZZ>= ` ( ( ( |_ ` ( abs ` y ) ) + 1 ) + 1 ) ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) ) -> E. m e. NN A. z e. ( ZZ>= ` m ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) )
+s19:s13,s15,s18:syl2anc |- ( ( E e. RR+ /\ ( y e. RR /\ A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) ) ) -> E. m e. NN A. z e. ( ZZ>= ` m ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) )
+s20:s19:rexlimdvaa |- ( E e. RR+ -> ( E. y e. RR A. x e. ( 1 (,) +oo ) ( y <_ x -> ( abs ` ( ( ( ppi ` x ) / ( x / ( log ` x ) ) ) - 1 ) ) < E ) -> E. m e. NN A. z e. ( ZZ>= ` m ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) ) )
+qed:s1,s20:mpd |- ( E e. RR+ -> E. m e. NN A. z e. ( ZZ>= ` m ) ( ppi ` z ) <_ ( ( ( ( log ` 4 ) + E ) x. z ) / ( log ` z ) ) )
+$)

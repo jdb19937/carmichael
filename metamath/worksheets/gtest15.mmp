@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=gtest15  LOC_AFTER=?
+
+* finite-sum test: fsumadd on ( k + 1 ) over ( 1 ... N ).
+
+s1::id |- ( N e. NN -> N e. NN )
+s2::fzfid |- ( N e. NN -> ( 1 ... N ) e. Fin )
+s3::simpr |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i4::elfznn
+s5:s3,i4:syl |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. NN )
+s6:s5:nnrpd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. RR+ )
+s7:s6:rpred |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. RR )
+s8:s7:recnd |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> k e. CC )
+s9::ax-1cn |- 1 e. CC
+s10:s9:a1i |- ( ( N e. NN /\ k e. ( 1 ... N ) ) -> 1 e. CC )
+qed:s2,s8,s10:fsumadd |- ( N e. NN -> sum_ k e. ( 1 ... N ) ( k + 1 ) = ( sum_ k e. ( 1 ... N ) k + sum_ k e. ( 1 ... N ) 1 ) )
+$)

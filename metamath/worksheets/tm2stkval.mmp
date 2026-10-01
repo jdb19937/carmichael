@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stkval  LOC_AFTER=?
+
+* Value of TM2Stk: the stacks of a machine with stack alphabets G, one word over ( G ` k ) per stack index k.
+
+s1::id |- ( t = T -> t = T )
+c1:s1:fveq2d |- ( t = T -> ( 1st ` t ) = ( 1st ` T ) )
+c2:c1:fveq2d |- ( t = T -> ( 1st ` ( 1st ` t ) ) = ( 1st ` ( 1st ` T ) ) )
+c3:c2:dmeqd |- ( t = T -> dom ( 1st ` ( 1st ` t ) ) = dom ( 1st ` ( 1st ` T ) ) )
+c4:s1:fveq2d |- ( t = T -> ( 1st ` t ) = ( 1st ` T ) )
+c5:c4:fveq2d |- ( t = T -> ( 1st ` ( 1st ` t ) ) = ( 1st ` ( 1st ` T ) ) )
+c6:c5:fveq1d |- ( t = T -> ( ( 1st ` ( 1st ` t ) ) ` k ) = ( ( 1st ` ( 1st ` T ) ) ` k ) )
+c7::wrdeq |- ( ( ( 1st ` ( 1st ` t ) ) ` k ) = ( ( 1st ` ( 1st ` T ) ) ` k ) -> Word ( ( 1st ` ( 1st ` t ) ) ` k ) = Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+c8:c6,c7:syl |- ( t = T -> Word ( ( 1st ` ( 1st ` t ) ) ` k ) = Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+c9:c3,c8:ixpeq12dv |- ( t = T -> X_ k e. dom ( 1st ` ( 1st ` t ) ) Word ( ( 1st ` ( 1st ` t ) ) ` k ) = X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+s2::df-tm2stk |- TM2Stk = ( t e. _V |-> X_ k e. dom ( 1st ` ( 1st ` t ) ) Word ( ( 1st ` ( 1st ` t ) ) ` k ) )
+s3:c9,s2:fvmptg |- ( ( T e. _V /\ X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) e. _V ) -> ( TM2Stk ` T ) = X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+s4::fvex |- ( ( 1st ` ( 1st ` T ) ) ` k ) e. _V
+i5::wrdexg
+s6:s4,i5:ax-mp |- Word ( ( 1st ` ( 1st ` T ) ) ` k ) e. _V
+s7:s6:rgenw |- A. k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) e. _V
+i8::ixpexg
+s9:s7,i8:ax-mp |- X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) e. _V
+s10:s9,s3:mpan2 |- ( T e. _V -> ( TM2Stk ` T ) = X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+s11::elex |- ( T e. V -> T e. _V )
+qed:s11,s10:syl |- ( T e. V -> ( TM2Stk ` T ) = X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+$)

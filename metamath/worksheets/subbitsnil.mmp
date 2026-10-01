@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=subbitsnil  LOC_AFTER=?
+
+* Lean clause 1 of subBits: the difference of two empty words is empty.
+
+s1::id |- ( C e. 2o -> C e. 2o )
+s2::wrd0 |- (/) e. Word 2o
+s3:s2:a1i |- ( C e. 2o -> (/) e. Word 2o )
+s4::tonat0 |- ( toNat ` (/) ) = 0
+s5:s4:a1i |- ( C e. 2o -> ( toNat ` (/) ) = 0 )
+s6::hash0 |- ( # ` (/) ) = 0
+s7:s6:a1i |- ( C e. 2o -> ( # ` (/) ) = 0 )
+s8::ifid |- if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = ( # ` (/) )
+s9:s8,s6:eqtri |- if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = 0
+s10:s9:a1i |- ( C e. 2o -> if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) = 0 )
+i11::subbitsval
+s12:s3,s3,s1,i11:syl3anc |- ( C e. 2o -> ( ( (/) subBits (/) ) ` C ) = ( ( ( toNat ` (/) ) - ( ( toNat ` (/) ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) )
+s13:s10:oveq2d |- ( C e. 2o -> ( ( ( toNat ` (/) ) - ( ( toNat ` (/) ) + ( bToNat ` C ) ) ) bwrd if ( ( # ` (/) ) <_ ( # ` (/) ) , ( # ` (/) ) , ( # ` (/) ) ) ) = ( ( ( toNat ` (/) ) - ( ( toNat ` (/) ) + ( bToNat ` C ) ) ) bwrd 0 ) )
+s14::wrd0 |- (/) e. Word 2o
+s15:s14:a1i |- ( C e. 2o -> (/) e. Word 2o )
+i16::tonatcl
+s17:s15,i16:syl |- ( C e. 2o -> ( toNat ` (/) ) e. NN0 )
+s18:s17:nn0zd |- ( C e. 2o -> ( toNat ` (/) ) e. ZZ )
+i19::bwbncl
+s20:s1,i19:syl |- ( C e. 2o -> ( bToNat ` C ) e. NN0 )
+s21:s20:nn0zd |- ( C e. 2o -> ( bToNat ` C ) e. ZZ )
+s22:s18,s21:zaddcld |- ( C e. 2o -> ( ( toNat ` (/) ) + ( bToNat ` C ) ) e. ZZ )
+s23:s18,s22:zsubcld |- ( C e. 2o -> ( ( toNat ` (/) ) - ( ( toNat ` (/) ) + ( bToNat ` C ) ) ) e. ZZ )
+i24::bwrd0
+s25:s23,i24:syl |- ( C e. 2o -> ( ( ( toNat ` (/) ) - ( ( toNat ` (/) ) + ( bToNat ` C ) ) ) bwrd 0 ) = (/) )
+qed:s12,s13,s25:3eqtrd |- ( C e. 2o -> ( ( (/) subBits (/) ) ` C ) = (/) )
+$)

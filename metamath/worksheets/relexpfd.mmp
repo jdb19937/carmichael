@@ -1,0 +1,56 @@
+$( <MM> <PROOF_ASST> THEOREM=relexpfd  LOC_AFTER=?
+
+* The N-th relation power of a function B --> B is a function B --> B: Lean's Nat.iterate as a relation power.
+
+e1::oveq2   |- ( v = 0 -> ( G ^r v ) = ( G ^r 0 ) )
+e2:e1:feq1d |- ( v = 0 -> ( ( G ^r v ) : B --> B <-> ( G ^r 0 ) : B --> B ) )
+e3:e2:imbi2d |- ( v = 0 -> ( ( ( B e. V /\ G : B --> B ) -> ( G ^r v ) : B --> B ) <-> ( ( B e. V /\ G : B --> B ) -> ( G ^r 0 ) : B --> B ) ) )
+y1::oveq2   |- ( v = y -> ( G ^r v ) = ( G ^r y ) )
+y2:y1:feq1d |- ( v = y -> ( ( G ^r v ) : B --> B <-> ( G ^r y ) : B --> B ) )
+y3:y2:imbi2d |- ( v = y -> ( ( ( B e. V /\ G : B --> B ) -> ( G ^r v ) : B --> B ) <-> ( ( B e. V /\ G : B --> B ) -> ( G ^r y ) : B --> B ) ) )
+u1::oveq2   |- ( v = ( y + 1 ) -> ( G ^r v ) = ( G ^r ( y + 1 ) ) )
+u2:u1:feq1d |- ( v = ( y + 1 ) -> ( ( G ^r v ) : B --> B <-> ( G ^r ( y + 1 ) ) : B --> B ) )
+u3:u2:imbi2d |- ( v = ( y + 1 ) -> ( ( ( B e. V /\ G : B --> B ) -> ( G ^r v ) : B --> B ) <-> ( ( B e. V /\ G : B --> B ) -> ( G ^r ( y + 1 ) ) : B --> B ) ) )
+n1::oveq2   |- ( v = N -> ( G ^r v ) = ( G ^r N ) )
+n2:n1:feq1d |- ( v = N -> ( ( G ^r v ) : B --> B <-> ( G ^r N ) : B --> B ) )
+n3:n2:imbi2d |- ( v = N -> ( ( ( B e. V /\ G : B --> B ) -> ( G ^r v ) : B --> B ) <-> ( ( B e. V /\ G : B --> B ) -> ( G ^r N ) : B --> B ) ) )
+b1::simpl   |- ( ( B e. V /\ G : B --> B ) -> B e. V )
+b2::simpr   |- ( ( B e. V /\ G : B --> B ) -> G : B --> B )
+b3a::fex
+b3:b2,b1,b3a:syl2anc |- ( ( B e. V /\ G : B --> B ) -> G e. _V )
+b4a::relexp0g
+b4:b3,b4a:syl |- ( ( B e. V /\ G : B --> B ) -> ( G ^r 0 ) = ( _I |` ( dom G u. ran G ) ) )
+b5a::fdm
+b5:b2,b5a:syl |- ( ( B e. V /\ G : B --> B ) -> dom G = B )
+b6a::frn
+b6:b2,b6a:syl |- ( ( B e. V /\ G : B --> B ) -> ran G C_ B )
+b7::ssequn2 |- ( ran G C_ B <-> ( B u. ran G ) = B )
+b8:b6,b7:sylib |- ( ( B e. V /\ G : B --> B ) -> ( B u. ran G ) = B )
+b9:b5:uneq1d |- ( ( B e. V /\ G : B --> B ) -> ( dom G u. ran G ) = ( B u. ran G ) )
+b10:b9,b8:eqtrd |- ( ( B e. V /\ G : B --> B ) -> ( dom G u. ran G ) = B )
+b11:b10:reseq2d |- ( ( B e. V /\ G : B --> B ) -> ( _I |` ( dom G u. ran G ) ) = ( _I |` B ) )
+b12:b4,b11:eqtrd |- ( ( B e. V /\ G : B --> B ) -> ( G ^r 0 ) = ( _I |` B ) )
+b13::f1oi   |- ( _I |` B ) : B -1-1-onto-> B
+b14a::f1of
+b14:b13,b14a:ax-mp |- ( _I |` B ) : B --> B
+b15:b14:a1i |- ( ( B e. V /\ G : B --> B ) -> ( _I |` B ) : B --> B )
+b16:b12:feq1d |- ( ( B e. V /\ G : B --> B ) -> ( ( G ^r 0 ) : B --> B <-> ( _I |` B ) : B --> B ) )
+b17:b15,b16:mpbird |- ( ( B e. V /\ G : B --> B ) -> ( G ^r 0 ) : B --> B )
+s1::simpr   |- ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) -> ( B e. V /\ G : B --> B ) )
+s2:s1:simprd |- ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) -> G : B --> B )
+s3a::frel
+s3:s2,s3a:syl |- ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) -> Rel G )
+s4::simpl   |- ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) -> y e. NN0 )
+s5:s3,s4:relexpsucld |- ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) -> ( G ^r ( y + 1 ) ) = ( G o. ( G ^r y ) ) )
+s6:s5:adantr |- ( ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) /\ ( G ^r y ) : B --> B ) -> ( G ^r ( y + 1 ) ) = ( G o. ( G ^r y ) ) )
+s7:s2:adantr |- ( ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) /\ ( G ^r y ) : B --> B ) -> G : B --> B )
+s8::simpr   |- ( ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) /\ ( G ^r y ) : B --> B ) -> ( G ^r y ) : B --> B )
+s9a::fco
+s9:s7,s8,s9a:syl2anc |- ( ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) /\ ( G ^r y ) : B --> B ) -> ( G o. ( G ^r y ) ) : B --> B )
+s10:s6:feq1d |- ( ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) /\ ( G ^r y ) : B --> B ) -> ( ( G ^r ( y + 1 ) ) : B --> B <-> ( G o. ( G ^r y ) ) : B --> B ) )
+s11:s9,s10:mpbird |- ( ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) /\ ( G ^r y ) : B --> B ) -> ( G ^r ( y + 1 ) ) : B --> B )
+s12:s11:ex  |- ( ( y e. NN0 /\ ( B e. V /\ G : B --> B ) ) -> ( ( G ^r y ) : B --> B -> ( G ^r ( y + 1 ) ) : B --> B ) )
+s13:s12:ex  |- ( y e. NN0 -> ( ( B e. V /\ G : B --> B ) -> ( ( G ^r y ) : B --> B -> ( G ^r ( y + 1 ) ) : B --> B ) ) )
+s14:s13:a2d |- ( y e. NN0 -> ( ( ( B e. V /\ G : B --> B ) -> ( G ^r y ) : B --> B ) -> ( ( B e. V /\ G : B --> B ) -> ( G ^r ( y + 1 ) ) : B --> B ) ) )
+qed:e3,y3,u3,n3,b17,s14:nn0ind |- ( N e. NN0 -> ( ( B e. V /\ G : B --> B ) -> ( G ^r N ) : B --> B ) )
+$)

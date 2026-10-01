@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=vsqfprod  LOC_AFTER=?
+
+* The value of a multiplicative function at a squarefree number is the product of its values at the prime divisors.
+
+s1::simpl |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) )
+s2::simprl |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> D e. NN )
+s3::simprr |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> ( mmu ` D ) =/= 0 )
+s4::cbvrabv |- { q e. Prime | q || D } = { r e. Prime | r || D }
+s5:s4:a1i |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> { q e. Prime | q || D } = { r e. Prime | r || D } )
+s6::cbvrabv |- { p e. Prime | p || D } = { r e. Prime | r || D }
+s7:s6:a1i |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> { p e. Prime | p || D } = { r e. Prime | r || D } )
+i8::prmdvdsfi
+s9:s2,i8:syl |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> { p e. Prime | p || D } e. Fin )
+s10:s7,s9:eqeltrrd |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> { r e. Prime | r || D } e. Fin )
+s11::ssrab2 |- { r e. Prime | r || D } C_ Prime
+s12:s11:a1i |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> { r e. Prime | r || D } C_ Prime )
+s13:s10,s12:jca |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> ( { r e. Prime | r || D } e. Fin /\ { r e. Prime | r || D } C_ Prime ) )
+i14::vfprod
+s15:s1,s13,i14:syl2anc |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> ( V ` prod_ p e. { r e. Prime | r || D } p ) = prod_ p e. { r e. Prime | r || D } ( V ` p ) )
+s16:s2,s3:jca |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> ( D e. NN /\ ( mmu ` D ) =/= 0 ) )
+i17::sqfprodid
+s18:s16,i17:syl |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> prod_ p e. { q e. Prime | q || D } p = D )
+s19:s5:prodeq1d |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> prod_ p e. { q e. Prime | q || D } p = prod_ p e. { r e. Prime | r || D } p )
+s20:s19,s18:eqtr3d |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> prod_ p e. { r e. Prime | r || D } p = D )
+s21:s20:fveq2d |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> ( V ` prod_ p e. { r e. Prime | r || D } p ) = ( V ` D ) )
+qed:s21,s15:eqtr3d |- ( ( ( V : NN --> RR /\ ( V ` 1 ) = 1 /\ A. a e. NN A. b e. NN ( ( a gcd b ) = 1 -> ( V ` ( a x. b ) ) = ( ( V ` a ) x. ( V ` b ) ) ) ) /\ ( D e. NN /\ ( mmu ` D ) =/= 0 ) ) -> ( V ` D ) = prod_ p e. { r e. Prime | r || D } ( V ` p ) )
+$)

@@ -1,0 +1,93 @@
+$( <MM> <PROOF_ASST> THEOREM=mertens1  LOC_AFTER=?
+
+* Mertens estimate with an explicit constant: the sum of ( Lam ` d ) / d over d up to X differs from log X by at most ( log 4 ) + 4 (Lean: Mertens.lean).
+
+s1::simpl |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR )
+s2::simpr |- ( ( X e. RR /\ 1 <_ X ) -> 1 <_ X )
+s3::0red |- ( ( X e. RR /\ 1 <_ X ) -> 0 e. RR )
+s4::1red |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. RR )
+s5::0lt1 |- 0 < 1
+s6:s5:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 0 < 1 )
+s7:s3,s4,s1,s6,s2:ltletrd |- ( ( X e. RR /\ 1 <_ X ) -> 0 < X )
+s8:s1,s7:elrpd |- ( ( X e. RR /\ 1 <_ X ) -> X e. RR+ )
+s9:s3,s1,s7:ltled |- ( ( X e. RR /\ 1 <_ X ) -> 0 <_ X )
+i10::relogcl
+s11:s8,i10:syl |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) e. RR )
+s12::fzfid |- ( ( X e. RR /\ 1 <_ X ) -> ( 1 ... ( |_ ` X ) ) e. Fin )
+s13::simpr |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d e. ( 1 ... ( |_ ` X ) ) )
+i14::elfznn
+s15:s13,i14:syl |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d e. NN )
+i16::vmacl
+s17:s15,i16:syl |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( Lam ` d ) e. RR )
+s18:s15:nnrpd |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> d e. RR+ )
+s19:s17,s18:rerpdivcld |- ( ( ( X e. RR /\ 1 <_ X ) /\ d e. ( 1 ... ( |_ ` X ) ) ) -> ( ( Lam ` d ) / d ) e. RR )
+s20:s12,s19:fsumrecl |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) e. RR )
+s21::4rp |- 4 e. RR+
+i22::relogcl
+s23:s21,i22:ax-mp |- ( log ` 4 ) e. RR
+s24::2rp |- 2 e. RR+
+s25::2z |- 2 e. ZZ
+i26::relogexp
+s27:s24,s25,i26:mp2an |- ( log ` ( 2 ^ 2 ) ) = ( 2 x. ( log ` 2 ) )
+s28::sq2 |- ( 2 ^ 2 ) = 4
+s29:s28:fveq2i |- ( log ` ( 2 ^ 2 ) ) = ( log ` 4 )
+s30:s29,s27:eqtr3i |- ( log ` 4 ) = ( 2 x. ( log ` 2 ) )
+s31:s23:a1i |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` 4 ) e. RR )
+s32::4re |- 4 e. RR
+s33:s32:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 4 e. RR )
+s34::1red |- ( ( X e. RR /\ 1 <_ X ) -> 1 e. RR )
+s35::2re |- 2 e. RR
+s36:s35:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 2 e. RR )
+s37:s31,s33:readdcld |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` 4 ) + 4 ) e. RR )
+i38::mertens1ge
+s39:s1,s2,i38:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` X ) - 2 ) <_ sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) )
+i40::mertens1le
+s41:s1,s2,i40:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) <_ ( ( log ` X ) + ( ( log ` 4 ) + 4 ) ) )
+s42:s20,s11:resubcld |- ( ( X e. RR /\ 1 <_ X ) -> ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) e. RR )
+i43::lesubadd
+s44:s20,s11,s37,i43:syl3anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) <_ ( ( log ` 4 ) + 4 ) <-> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) <_ ( ( ( log ` 4 ) + 4 ) + ( log ` X ) ) ) )
+s45:s11:recnd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) e. CC )
+s46:s37:recnd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` 4 ) + 4 ) e. CC )
+s47:s45,s46:addcomd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` X ) + ( ( log ` 4 ) + 4 ) ) = ( ( ( log ` 4 ) + 4 ) + ( log ` X ) ) )
+s48:s41,s47:breqtrd |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) <_ ( ( ( log ` 4 ) + 4 ) + ( log ` X ) ) )
+s49:s48,s44:mpbird |- ( ( X e. RR /\ 1 <_ X ) -> ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) <_ ( ( log ` 4 ) + 4 ) )
+s50::ppiubepslem0 |- 1 < ( log ` 4 )
+s51:s50:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 1 < ( log ` 4 ) )
+s52:s34,s31,s51:ltled |- ( ( X e. RR /\ 1 <_ X ) -> 1 <_ ( log ` 4 ) )
+s53:s34,s31,s33,s52:leadd1dd |- ( ( X e. RR /\ 1 <_ X ) -> ( 1 + 4 ) <_ ( ( log ` 4 ) + 4 ) )
+s54::1p4e5 |- ( 1 + 4 ) = 5
+s55:s54:a1i |- ( ( X e. RR /\ 1 <_ X ) -> ( 1 + 4 ) = 5 )
+s56:s55,s53:eqbrtrrd |- ( ( X e. RR /\ 1 <_ X ) -> 5 <_ ( ( log ` 4 ) + 4 ) )
+s57::5re |- 5 e. RR
+s58:s57:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 5 e. RR )
+s59::2re |- 2 e. RR
+s60::5re |- 5 e. RR
+s61::2lt5 |- 2 < 5
+s62:s59,s60,s61:ltleii |- 2 <_ 5
+s63:s62:a1i |- ( ( X e. RR /\ 1 <_ X ) -> 2 <_ 5 )
+s64:s36,s58,s37,s63,s56:letrd |- ( ( X e. RR /\ 1 <_ X ) -> 2 <_ ( ( log ` 4 ) + 4 ) )
+i65::lesubadd
+s66:s11,s36,s20,i65:syl3anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` X ) - 2 ) <_ sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) <-> ( log ` X ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + 2 ) ) )
+s67:s39,s66:mpbid |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + 2 ) )
+s68:s36,s37,s20,s64:leadd2dd |- ( ( X e. RR /\ 1 <_ X ) -> ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + 2 ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + ( ( log ` 4 ) + 4 ) ) )
+s69:s20,s36:readdcld |- ( ( X e. RR /\ 1 <_ X ) -> ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + 2 ) e. RR )
+s70:s20,s37:readdcld |- ( ( X e. RR /\ 1 <_ X ) -> ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + ( ( log ` 4 ) + 4 ) ) e. RR )
+s71:s11,s69,s70,s67,s68:letrd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + ( ( log ` 4 ) + 4 ) ) )
+s72:s20:recnd |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) e. CC )
+s73:s37:recnd |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` 4 ) + 4 ) e. CC )
+s74:s72,s73:addcomd |- ( ( X e. RR /\ 1 <_ X ) -> ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) + ( ( log ` 4 ) + 4 ) ) = ( ( ( log ` 4 ) + 4 ) + sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) )
+s75:s71,s74:breqtrd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) <_ ( ( ( log ` 4 ) + 4 ) + sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) )
+i76::lesubadd
+s77:s11,s20,s37,i76:syl3anc |- ( ( X e. RR /\ 1 <_ X ) -> ( ( ( log ` X ) - sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) <_ ( ( log ` 4 ) + 4 ) <-> ( log ` X ) <_ ( ( ( log ` 4 ) + 4 ) + sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) ) )
+s78:s75,s77:mpbird |- ( ( X e. RR /\ 1 <_ X ) -> ( ( log ` X ) - sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) <_ ( ( log ` 4 ) + 4 ) )
+s79:s20:recnd |- ( ( X e. RR /\ 1 <_ X ) -> sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) e. CC )
+s80:s11:recnd |- ( ( X e. RR /\ 1 <_ X ) -> ( log ` X ) e. CC )
+s81:s79,s80:negsubdi2d |- ( ( X e. RR /\ 1 <_ X ) -> -u ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) = ( ( log ` X ) - sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) ) )
+s82:s81,s78:eqbrtrd |- ( ( X e. RR /\ 1 <_ X ) -> -u ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) <_ ( ( log ` 4 ) + 4 ) )
+i83::lenegcon1
+s84:s42,s37,i83:syl2anc |- ( ( X e. RR /\ 1 <_ X ) -> ( -u ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) <_ ( ( log ` 4 ) + 4 ) <-> -u ( ( log ` 4 ) + 4 ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) ) )
+s85:s82,s84:mpbid |- ( ( X e. RR /\ 1 <_ X ) -> -u ( ( log ` 4 ) + 4 ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) )
+s86:s42,s37:absled |- ( ( X e. RR /\ 1 <_ X ) -> ( ( abs ` ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) ) <_ ( ( log ` 4 ) + 4 ) <-> ( -u ( ( log ` 4 ) + 4 ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) /\ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) <_ ( ( log ` 4 ) + 4 ) ) ) )
+s87:s85,s49:jca |- ( ( X e. RR /\ 1 <_ X ) -> ( -u ( ( log ` 4 ) + 4 ) <_ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) /\ ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) <_ ( ( log ` 4 ) + 4 ) ) )
+qed:s87,s86:mpbird |- ( ( X e. RR /\ 1 <_ X ) -> ( abs ` ( sum_ d e. ( 1 ... ( |_ ` X ) ) ( ( Lam ` d ) / d ) - ( log ` X ) ) ) <_ ( ( log ` 4 ) + 4 ) )
+$)

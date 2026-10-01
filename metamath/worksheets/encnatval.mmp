@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatval  LOC_AFTER=?
+
+* Value of encodeNat: the word of the binary digits of N, least significant first, of length |_ log2 N _| + 1 (empty for N = 0).
+
+s1::id |- ( n = N -> n = N )
+c1:s1:eqeq1d |- ( n = N -> ( n = 0 <-> N = 0 ) )
+c2:s1:oveq2d |- ( n = N -> ( 2 logb n ) = ( 2 logb N ) )
+c3:c2:fveq2d |- ( n = N -> ( |_ ` ( 2 logb n ) ) = ( |_ ` ( 2 logb N ) ) )
+c4:c3:oveq1d |- ( n = N -> ( ( |_ ` ( 2 logb n ) ) + 1 ) = ( ( |_ ` ( 2 logb N ) ) + 1 ) )
+c5:c1,c4:ifbieq2d |- ( n = N -> if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) = if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) )
+c6:c5:oveq2d |- ( n = N -> ( 0 ..^ if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) ) = ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) )
+c7:s1:oveq1d |- ( n = N -> ( n / ( 2 ^ i ) ) = ( N / ( 2 ^ i ) ) )
+c8:c7:fveq2d |- ( n = N -> ( |_ ` ( n / ( 2 ^ i ) ) ) = ( |_ ` ( N / ( 2 ^ i ) ) ) )
+c9:c8:oveq1d |- ( n = N -> ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) )
+c10:c9:eqeq1d |- ( n = N -> ( ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = 1 <-> ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 ) )
+c11:c10:ifbid |- ( n = N -> if ( ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) = if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) )
+c12:c6,c11:mpteq12dv |- ( n = N -> ( i e. ( 0 ..^ if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) = ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) )
+s2::df-encnat |- encodeNat = ( n e. NN0 |-> ( i e. ( 0 ..^ if ( n = 0 , 0 , ( ( |_ ` ( 2 logb n ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( n / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) )
+s3::ovex |- ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) e. _V
+i4::mptexg
+s5:s3,i4:ax-mp |- ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) e. _V
+qed:c12,s2,s5:fvmpt |- ( N e. NN0 -> ( encodeNat ` N ) = ( i e. ( 0 ..^ if ( N = 0 , 0 , ( ( |_ ` ( 2 logb N ) ) + 1 ) ) ) |-> if ( ( ( |_ ` ( N / ( 2 ^ i ) ) ) mod 2 ) = 1 , 1o , (/) ) ) )
+$)

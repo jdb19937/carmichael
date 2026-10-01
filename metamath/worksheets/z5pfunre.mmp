@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=z5pfunre  LOC_AFTER=?
+
+* The pseudocharacter sum is real (Lean Pfun : RR).
+
+s1::simpll |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> N e. V )
+s2::simplr |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> R e. W )
+s3::simpr |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> K e. NN )
+i4::z5pfunval
+s5:s1,s2,s3,i4:syl21anc |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> ( ( N PFun R ) ` K ) = sum_ r e. ( N RSet R ) ( ( ( mmu ` ( r gcd K ) ) x. ( phi ` ( r gcd K ) ) ) / r ) )
+i6::z5rsetfi
+s7:s1,s2,i6:syl2anc |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> ( ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) /\ ( N RSet R ) e. Fin ) )
+s8:s7:simprd |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> ( N RSet R ) e. Fin )
+s9:s1:adantr |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> N e. V )
+s10:s2:adantr |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> R e. W )
+i11::z5elrset
+s12:s9,s10,i11:syl2anc |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( r e. ( N RSet R ) <-> ( r e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` r ) =/= 0 /\ ( r gcd N ) = 1 ) ) ) )
+s13::simpr |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> r e. ( N RSet R ) )
+s14:s13,s12:mpbid |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( r e. ( 1 ... ( |_ ` R ) ) /\ ( ( mmu ` r ) =/= 0 /\ ( r gcd N ) = 1 ) ) )
+s15:s14:simpld |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> r e. ( 1 ... ( |_ ` R ) ) )
+i16::elfznn
+s17:s15,i16:syl |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> r e. NN )
+s18:s3:adantr |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> K e. NN )
+i19::gcdnncl
+s20:s17,s18,i19:syl2anc |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( r gcd K ) e. NN )
+i21::mucl
+s22:s20,i21:syl |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( mmu ` ( r gcd K ) ) e. ZZ )
+i23::phicl
+s24:s20,i23:syl |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( phi ` ( r gcd K ) ) e. NN )
+s25:s22:zred |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( mmu ` ( r gcd K ) ) e. RR )
+s26:s24:nnred |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( phi ` ( r gcd K ) ) e. RR )
+s27:s25,s26:remulcld |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( ( mmu ` ( r gcd K ) ) x. ( phi ` ( r gcd K ) ) ) e. RR )
+s28:s17:nnrpd |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> r e. RR+ )
+s29:s27,s28:rerpdivcld |- ( ( ( ( N e. V /\ R e. W ) /\ K e. NN ) /\ r e. ( N RSet R ) ) -> ( ( ( mmu ` ( r gcd K ) ) x. ( phi ` ( r gcd K ) ) ) / r ) e. RR )
+s30:s8,s29:fsumrecl |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> sum_ r e. ( N RSet R ) ( ( ( mmu ` ( r gcd K ) ) x. ( phi ` ( r gcd K ) ) ) / r ) e. RR )
+qed:s5,s30:eqeltrd |- ( ( ( N e. V /\ R e. W ) /\ K e. NN ) -> ( ( N PFun R ) ` K ) e. RR )
+$)

@@ -1,0 +1,57 @@
+$( <MM> <PROOF_ASST> THEOREM=ld2wtcn  LOC_AFTER=?
+
+* The weight ` u |-> e ^ -( A abs u ) ` is continuous on ` RR ` (~ efcn , ~ abscncf , ~ mulcncf ).
+
+s1::id |- ( A e. RR -> A e. RR )
+s2:s1:adantr |- ( ( A e. RR /\ u e. RR ) -> A e. RR )
+s3::simpr |- ( ( A e. RR /\ u e. RR ) -> u e. RR )
+s4::ax-resscn |- RR C_ CC
+s5:s4:a1i |- ( A e. RR -> RR C_ CC )
+s6::ssid |- CC C_ CC
+s7:s6:a1i |- ( A e. RR -> CC C_ CC )
+s8::efcn |- exp e. ( CC -cn-> CC )
+s9:s8:a1i |- ( A e. RR -> exp e. ( CC -cn-> CC ) )
+s10::ssid |- CC C_ CC
+s11:s10:a1i |- ( A e. RR -> CC C_ CC )
+s12:s2:recnd |- ( ( A e. RR /\ u e. RR ) -> A e. CC )
+s13:s3:recnd |- ( ( A e. RR /\ u e. RR ) -> u e. CC )
+s14:s13:abscld |- ( ( A e. RR /\ u e. RR ) -> ( abs ` u ) e. RR )
+s15:s14:recnd |- ( ( A e. RR /\ u e. RR ) -> ( abs ` u ) e. CC )
+s16:s12,s15:mulcld |- ( ( A e. RR /\ u e. RR ) -> ( A x. ( abs ` u ) ) e. CC )
+s17:s16:mulm1d |- ( ( A e. RR /\ u e. RR ) -> ( -u 1 x. ( A x. ( abs ` u ) ) ) = -u ( A x. ( abs ` u ) ) )
+s18:s17:mpteq2dva |- ( A e. RR -> ( u e. RR |-> ( -u 1 x. ( A x. ( abs ` u ) ) ) ) = ( u e. RR |-> -u ( A x. ( abs ` u ) ) ) )
+s19::ssid |- CC C_ CC
+s20:s19:a1i |- ( A e. RR -> CC C_ CC )
+s21::ssid |- CC C_ CC
+s22:s21:a1i |- ( A e. RR -> CC C_ CC )
+s23::ax-1cn |- 1 e. CC
+s24:s23:negcli |- -u 1 e. CC
+s25:s24:a1i |- ( A e. RR -> -u 1 e. CC )
+i26::cncfmptc
+s27:s25,s5,s22,i26:syl3anc |- ( A e. RR -> ( u e. RR |-> -u 1 ) e. ( RR -cn-> CC ) )
+s28::ssid |- CC C_ CC
+s29:s28:a1i |- ( A e. RR -> CC C_ CC )
+s30::ssid |- CC C_ CC
+s31:s30:a1i |- ( A e. RR -> CC C_ CC )
+s32:s1:recnd |- ( A e. RR -> A e. CC )
+i33::cncfmptc
+s34:s32,s5,s31,i33:syl3anc |- ( A e. RR -> ( u e. RR |-> A ) e. ( RR -cn-> CC ) )
+s35::ssid |- CC C_ CC
+s36:s35:a1i |- ( A e. RR -> CC C_ CC )
+s37::ax-resscn |- RR C_ CC
+s38::ssid |- CC C_ CC
+i39::cncfss
+s40:s37,s38,i39:mp2an |- ( CC -cn-> RR ) C_ ( CC -cn-> CC )
+s41::abscncf |- abs e. ( CC -cn-> RR )
+s42:s40,s41:sselii |- abs e. ( CC -cn-> CC )
+s43:s42:a1i |- ( A e. RR -> abs e. ( CC -cn-> CC ) )
+s44::ssid |- CC C_ CC
+s45:s44:a1i |- ( A e. RR -> CC C_ CC )
+i46::cncfmptid
+s47:s5,s45,i46:syl2anc |- ( A e. RR -> ( u e. RR |-> u ) e. ( RR -cn-> CC ) )
+s48:s43,s47:cncfmpt1f |- ( A e. RR -> ( u e. RR |-> ( abs ` u ) ) e. ( RR -cn-> CC ) )
+s49:s34,s48:mulcncf |- ( A e. RR -> ( u e. RR |-> ( A x. ( abs ` u ) ) ) e. ( RR -cn-> CC ) )
+s50:s27,s49:mulcncf |- ( A e. RR -> ( u e. RR |-> ( -u 1 x. ( A x. ( abs ` u ) ) ) ) e. ( RR -cn-> CC ) )
+s51:s18,s50:eqeltrrd |- ( A e. RR -> ( u e. RR |-> -u ( A x. ( abs ` u ) ) ) e. ( RR -cn-> CC ) )
+qed:s9,s51:cncfmpt1f |- ( A e. RR -> ( u e. RR |-> ( exp ` -u ( A x. ( abs ` u ) ) ) ) e. ( RR -cn-> CC ) )
+$)

@@ -1,0 +1,788 @@
+"""Sortie T4b, group C: predBits, borrows, predRest, the run decomposition of
+the borrow chain (T4b-blueprint 1.3).  predrestval, predrestcl, predrestlen and
+predbitseq need the repaired df-predrest (T4b-blueprint section 0): run them
+with MM_DB=scratch/t4bfix.mm until carmichael.mm carries the fix."""
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+from t4blib import *
+from lin import linarith, lineq
+import num
+
+only = sys.argv[1:]
+
+
+def want(label):
+    return not only or label in only
+
+
+AL = 'L e. Word 2o'
+T = TN('L'); H = LEN('L'); PH = P2(H); Tm1 = '( %s - 1 )' % T; Hm1 = '( %s - 1 )' % H
+MPv = MP(T, H); BORVv = BORV(T, H); CONDP = '( 2 x. %s ) = %s' % (T, PH); COND0 = '%s = 0' % T
+BR = '( borrows ` L )'; PRED = '( predBits ` L )'; PR = '( predRest ` L )'
+NP = LEN(PRED); PC = '( 2 pCnt %s )' % T
+R = '( |_ ` ( %s / ( 2 ^ %s ) ) )' % (Tm1, BR); DP = '( %s - %s )' % (NP, BR)
+
+
+def base(w, ante=AL):
+    if ante == AL:
+        l = w.s([], 'id', '( %s -> L e. Word 2o )' % AL)
+    else:
+        l = w.s([], 'simpl', '( %s -> L e. Word 2o )' % ante)
+    cl = Cl(w, ante, {'L': ('Word 2o', l)})
+    return cl, l
+
+
+def pow_case(w, cl, ante, h1):
+    """under h1 : ( ante -> ( 2 x. T ) = ( 2 ^ H ) ): H e. NN, ( H - 1 ) e. NN0, T = ( 2 ^ ( H - 1 ) )"""
+    hnn = w.s([cl.mem('L', 'Word 2o'), h1, w.inst('bwpredlem')], 'syl2anc', '( %s -> %s e. NN )' % (ante, H)); cl.have(H, 'NN', hnn)
+    hm1 = w.s([hnn, w.inst('nnm1nn0')], 'syl', '( %s -> %s e. NN0 )' % (ante, Hm1)); cl.have(Hm1, 'NN0', hm1)
+    ep = exp_p1(w, cl, ante, Hm1)
+    np = w.s([cl.mem(H, 'CC'), w.s([], '1cnd', '( %s -> 1 e. CC )' % ante)], 'npcand', '( %s -> ( %s + 1 ) = %s )' % (ante, Hm1, H))
+    o = w.s([np], 'oveq2d', '( %s -> ( 2 ^ ( %s + 1 ) ) = %s )' % (ante, Hm1, PH))
+    e = w.s([o, ep], 'eqtr3d', '( %s -> %s = ( ( 2 ^ %s ) x. 2 ) )' % (ante, PH, Hm1))
+    mc = w.s([w.s([], '2cnd', '( %s -> 2 e. CC )' % ante), cl.mem(T, 'CC')], 'mulcomd', '( %s -> ( 2 x. %s ) = ( %s x. 2 ) )' % (ante, T, T))
+    e2 = w.s([mc, h1, e], '3eqtr3d', '( %s -> ( %s x. 2 ) = ( ( 2 ^ %s ) x. 2 ) )' % (ante, T, Hm1))
+    twoc = w.s([], '2cnd', '( %s -> 2 e. CC )' % ante); twone = w.s([num.closed(w, [], '2ne0', '2 =/= 0')], 'a1i', '( %s -> 2 =/= 0 )' % ante)
+    can = w.s([cl.mem(T, 'CC'), cl.mem(P2(Hm1), 'CC'), twoc, twone], 'mulcan2d', '( %s -> ( ( %s x. 2 ) = ( ( 2 ^ %s ) x. 2 ) <-> %s = ( 2 ^ %s ) ) )' % (ante, T, Hm1, T, Hm1))
+    eqT = w.s([e2, can], 'mpbid', '( %s -> %s = ( 2 ^ %s ) )' % (ante, T, Hm1))
+    return eqT, hnn, hm1
+
+
+def mp_nn0(w, cl, ante):
+    """( ante -> MPv e. NN0 ), recorded in cl"""
+    def bt(a1, h1):
+        c1 = subcl(w, cl, ante, a1)
+        eqT, hnn, hm1 = pow_case(w, c1, a1, h1)
+        i = w.s([h1], 'iftrued', '( %s -> %s = %s )' % (a1, MPv, Hm1))
+        return w.s([i, hm1], 'eqeltrd', '( %s -> %s e. NN0 )' % (a1, MPv))
+    def bf(a2, h2):
+        i = w.s([h2], 'iffalsed', '( %s -> %s = %s )' % (a2, MPv, H))
+        return w.s([i, lift(w, cl.mem(H, 'NN0'), a2)], 'eqeltrd', '( %s -> %s e. NN0 )' % (a2, MPv))
+    st = cases_if(w, ante, CONDP, bt, bf, '%s e. NN0' % MPv)
+    cl.have(MPv, 'NN0', st)
+    return st
+
+
+def borrows_cases(w, cl, ante, v, body_t, body_f, concl):
+    """case split on T = 0 with v : ( ante -> BR = BORV ); body_t(a1, h1, eq) with eq : BR = H;
+    body_f(a2, h2, eq, c2) with eq : BR = ( 2 pCnt T ) and c2 a child closure knowing T e. NN"""
+    def bt(a1, h1):
+        i = w.s([h1], 'iftrued', '( %s -> %s = %s )' % (a1, BORVv, H))
+        eq = w.s([lift(w, v, a1), i], 'eqtrd', '( %s -> %s = %s )' % (a1, BR, H))
+        return body_t(a1, h1, eq)
+    def bf(a2, h2):
+        i = w.s([h2], 'iffalsed', '( %s -> %s = %s )' % (a2, BORVv, PC))
+        eq = w.s([lift(w, v, a2), i], 'eqtrd', '( %s -> %s = %s )' % (a2, BR, PC))
+        c2 = subcl(w, cl, ante, a2)
+        ne = w.s([h2], 'neqned', '( %s -> %s =/= 0 )' % (a2, T))
+        tnn = w.s([lift(w, cl.mem(T, 'NN0'), a2), ne, w.inst('elnnne0')], 'sylanbrc', '( %s -> %s e. NN )' % (a2, T))
+        c2.have(T, 'NN', tnn)
+        return body_f(a2, h2, eq, c2)
+    return cases_if(w, ante, COND0, bt, bf, concl)
+
+
+def cons_setup(w, cl, ante, B):
+    LB = CONS(B, 'L')
+    tc = w.s([cl.mem(B, '2o'), cl.mem('L', 'Word 2o'), w.inst('tonatcons')], 'syl2anc', '( %s -> ( toNat ` %s ) = ( ( bToNat ` %s ) + ( 2 x. %s ) ) )' % (ante, LB, B, T))
+    ln = conslen(w, cl, ante, B, 'L')
+    return LB, tc, ln
+
+
+def bn_lits(w, ante):
+    b0 = w.s([num.closed(w, [], 'bwbn0', '( bToNat ` (/) ) = 0')], 'a1i', '( %s -> ( bToNat ` (/) ) = 0 )' % ante)
+    b1 = w.s([num.closed(w, [], 'bwbn1', '( bToNat ` 1o ) = 1')], 'a1i', '( %s -> ( bToNat ` 1o ) = 1 )' % ante)
+    return b0, b1
+
+
+def pcnt2_is_1(w, ante):
+    e1 = num.closed(w, [num.closed(w, [], '2cn', '2 e. CC'), w.inst('exp1')], 'ax-mp', '( 2 ^ 1 ) = 2')
+    pi = num.closed(w, [num.closed(w, [], '2prm', '2 e. Prime'), num.closed(w, [], '1nn0', '1 e. NN0'), w.inst('pcidlem')], 'mp2an', '( 2 pCnt ( 2 ^ 1 ) ) = 1')
+    oe = num.closed(w, [e1], 'oveq2i', '( 2 pCnt ( 2 ^ 1 ) ) = ( 2 pCnt 2 )')
+    p21 = num.closed(w, [oe, pi], 'eqtr3i', '( 2 pCnt 2 ) = 1')
+    return w.s([p21], 'a1i', '( %s -> ( 2 pCnt 2 ) = 1 )' % ante)
+
+
+if __name__ == '__main__':
+    if want('predbitsval'):
+        w = W('predbitsval', 'Value of predBits: the digits of toNat L - 1, at the length of L or one less when L is a single one at the top.')
+        cl, l = base(w)
+        st, val = defval(w, cl, 'df-predbits', 'predBits', ['L']); assert val == BWRD(Tm1, MPv), val
+        promote(w, st); w.run()
+    if want('bwpredlem'):
+        A2 = '( %s /\\ %s )' % (AL, CONDP)
+        w = W('bwpredlem', 'A word whose value is half a power of two at its length is not empty.')
+        cl, l = base(w, A2)
+        h2 = w.s([], 'simpr', '( %s -> %s )' % (A2, CONDP))
+        a3 = '( %s /\\ %s = 0 )' % (A2, H)
+        h3 = w.s([], 'simpr', '( %s -> %s = 0 )' % (a3, H))
+        o = w.s([h3], 'oveq2d', '( %s -> %s = ( 2 ^ 0 ) )' % (a3, PH))
+        e0 = num.closed(w, [num.closed(w, [], '2cn', '2 e. CC'), w.inst('exp0')], 'ax-mp', '( 2 ^ 0 ) = 1'); e0d = w.s([e0], 'a1i', '( %s -> ( 2 ^ 0 ) = 1 )' % a3)
+        o2 = w.s([lift(w, h2, a3), o, e0d], '3eqtrd', '( %s -> ( 2 x. %s ) = 1 )' % (a3, T))
+        z = num.closed(w, [], '2t0e0', '( 2 x. 0 ) = 0'); z1 = num.closed(w, [z], 'oveq1i', '( ( 2 x. 0 ) + 1 ) = ( 0 + 1 )')
+        z2 = num.closed(w, [z1, num.closed(w, [], '0p1e1', '( 0 + 1 ) = 1')], 'eqtri', '( ( 2 x. 0 ) + 1 ) = 1'); z2d = w.s([z2], 'a1i', '( %s -> ( ( 2 x. 0 ) + 1 ) = 1 )' % a3)
+        e = w.s([z2d, o2], 'eqtr4d', '( %s -> ( ( 2 x. 0 ) + 1 ) = ( 2 x. %s ) )' % (a3, T))
+        zz = w.s([num.closed(w, [], '0z', '0 e. ZZ')], 'a1i', '( %s -> 0 e. ZZ )' % a3)
+        ne = w.s([zz, lift(w, cl.mem(T, 'ZZ'), a3), w.inst('bwoddne')], 'syl2anc', '( %s -> -. ( ( 2 x. 0 ) + 1 ) = ( 2 x. %s ) )' % (a3, T))
+        n0 = w.s([e, ne], 'pm2.65da', '( %s -> -. %s = 0 )' % (A2, H))
+        ne2 = w.s([n0], 'neqned', '( %s -> %s =/= 0 )' % (A2, H))
+        w.qed([cl.mem(H, 'NN0'), ne2, w.inst('elnnne0')], 'sylanbrc', '( %s -> %s e. NN )' % (A2, H)); w.run()
+    if want('predbitscl'):
+        w = W('predbitscl', 'Closure of predBits: a bit word.')
+        cl, l = base(w)
+        mp_nn0(w, cl, AL)
+        v = w.s([], 'predbitsval', '( %s -> %s = %s )' % (AL, PRED, BWRD(Tm1, MPv)))
+        w.qed([v, cl.mem(BWRD(Tm1, MPv), 'Word 2o')], 'eqeltrd', '( %s -> %s e. Word 2o )' % (AL, PRED)); w.run()
+    if want('predbitslen2'):
+        w = W('predbitslen2', 'The length of predBits L, as an if.')
+        cl, l = base(w)
+        mp_nn0(w, cl, AL)
+        v = w.s([], 'predbitsval', '( %s -> %s = %s )' % (AL, PRED, BWRD(Tm1, MPv)))
+        f = w.s([v], 'fveq2d', '( %s -> ( # ` %s ) = ( # ` %s ) )' % (AL, PRED, BWRD(Tm1, MPv)))
+        bl = w.s([cl.mem(Tm1, 'ZZ'), cl.mem(MPv, 'NN0'), w.inst('bwrdlen')], 'syl2anc', '( %s -> ( # ` %s ) = %s )' % (AL, BWRD(Tm1, MPv), MPv))
+        w.qed([f, bl], 'eqtrd', '( %s -> ( # ` %s ) = %s )' % (AL, PRED, MPv)); w.run()
+    if want('predbitslen'):
+        w = W('predbitslen', 'predBits L is at most as long as L (Lean: predBits_length).')
+        cl, l = base(w)
+        l2 = w.s([], 'predbitslen2', '( %s -> %s = %s )' % (AL, NP, MPv))
+        def bt(a1, h1):
+            i = w.s([h1], 'iftrued', '( %s -> %s = %s )' % (a1, MPv, Hm1))
+            le = w.s([lift(w, cl.mem(H, 'RR'), a1)], 'lem1d', '( %s -> %s <_ %s )' % (a1, Hm1, H))
+            return w.s([i, le], 'eqbrtrd', '( %s -> %s <_ %s )' % (a1, MPv, H))
+        def bf(a2, h2):
+            i = w.s([h2], 'iffalsed', '( %s -> %s = %s )' % (a2, MPv, H))
+            le = w.s([lift(w, cl.mem(H, 'RR'), a2)], 'leidd', '( %s -> %s <_ %s )' % (a2, H, H))
+            return w.s([i, le], 'eqbrtrd', '( %s -> %s <_ %s )' % (a2, MPv, H))
+        c = cases_if(w, AL, CONDP, bt, bf, '%s <_ %s' % (MPv, H))
+        w.qed([l2, c], 'eqbrtrd', '( %s -> %s <_ %s )' % (AL, NP, H)); w.run()
+    if want('tonatpredbits'):
+        A2 = '( %s /\\ 1 <_ %s )' % (AL, T)
+        w = W('tonatpredbits', 'The value of predBits L is toNat L - 1 when toNat L is positive (Lean: toNat_predBits).')
+        cl, l = base(w, A2)
+        h = w.s([], 'simpr', '( %s -> 1 <_ %s )' % (A2, T))
+        tnn = w.s([cl.mem(T, 'ZZ'), h, w.inst('elnnz1')], 'sylanbrc', '( %s -> %s e. NN )' % (A2, T)); cl.have(T, 'NN', tnn)
+        tm = w.s([tnn, w.inst('nnm1nn0')], 'syl', '( %s -> %s e. NN0 )' % (A2, Tm1)); cl.have(Tm1, 'NN0', tm)
+        mp_nn0(w, cl, A2)
+        v = w.s([l, w.inst('predbitsval')], 'syl', '( %s -> %s = %s )' % (A2, PRED, BWRD(Tm1, MPv)))
+        f = w.s([v], 'fveq2d', '( %s -> ( toNat ` %s ) = ( toNat ` %s ) )' % (A2, PRED, BWRD(Tm1, MPv)))
+        ltm = w.s([cl.mem(T, 'RR')], 'ltm1d', '( %s -> %s < %s )' % (A2, Tm1, T))
+        def bt(a1, h1):
+            c1 = subcl(w, cl, A2, a1)
+            eqT, hnn, hm1 = pow_case(w, c1, a1, h1)
+            i = w.s([h1], 'iftrued', '( %s -> %s = %s )' % (a1, MPv, Hm1))
+            o = w.s([i], 'oveq2d', '( %s -> ( 2 ^ %s ) = ( 2 ^ %s ) )' % (a1, MPv, Hm1))
+            lt = w.s([lift(w, ltm, a1), eqT], 'breqtrd', '( %s -> %s < ( 2 ^ %s ) )' % (a1, Tm1, Hm1))
+            return w.s([lt, o], 'breqtrrd', '( %s -> %s < ( 2 ^ %s ) )' % (a1, Tm1, MPv))
+        def bf(a2, h2):
+            i = w.s([h2], 'iffalsed', '( %s -> %s = %s )' % (a2, MPv, H))
+            o = w.s([i], 'oveq2d', '( %s -> ( 2 ^ %s ) = %s )' % (a2, MPv, PH))
+            ltT = w.s([lift(w, l, a2), w.inst('tonatlt')], 'syl', '( %s -> %s < %s )' % (a2, T, PH))
+            lt = w.s([lift(w, cl.mem(Tm1, 'RR'), a2), lift(w, cl.mem(T, 'RR'), a2), lift(w, cl.mem(PH, 'RR'), a2), lift(w, ltm, a2), ltT], 'lttrd', '( %s -> %s < %s )' % (a2, Tm1, PH))
+            return w.s([lt, o], 'breqtrrd', '( %s -> %s < ( 2 ^ %s ) )' % (a2, Tm1, MPv))
+        lt = cases_if(w, A2, CONDP, bt, bf, '%s < ( 2 ^ %s )' % (Tm1, MPv))
+        tb = w.s([tm, cl.mem(MPv, 'NN0'), lt, w.inst('tonatbwrd2')], 'syl3anc', '( %s -> ( toNat ` %s ) = %s )' % (A2, BWRD(Tm1, MPv), Tm1))
+        e = w.s([f, tb], 'eqtrd', '( %s -> ( toNat ` %s ) = %s )' % (A2, PRED, Tm1))
+        o = w.s([e], 'oveq1d', '( %s -> ( ( toNat ` %s ) + 1 ) = ( %s + 1 ) )' % (A2, PRED, Tm1))
+        np = w.s([cl.mem(T, 'CC'), w.s([], '1cnd', '( %s -> 1 e. CC )' % A2)], 'npcand', '( %s -> ( %s + 1 ) = %s )' % (A2, Tm1, T))
+        w.qed([o, np], 'eqtrd', '( %s -> ( ( toNat ` %s ) + 1 ) = %s )' % (A2, PRED, T)); w.run()
+
+    if want('predbitsnil'):
+        w = W('predbitsnil', 'Lean clause 1 of predBits: the predecessor of the empty word is the empty word.')
+        V0 = BWRD('( ( toNat ` (/) ) - 1 )', MP('( toNat ` (/) )', '( # ` (/) )'))
+        v0 = w.s([], 'predbitsval', '( (/) e. Word 2o -> ( predBits ` (/) ) = %s )' % V0)
+        v1 = num.closed(w, [num.closed(w, [], 'wrd0', '(/) e. Word 2o'), v0], 'ax-mp', '( predBits ` (/) ) = %s' % V0)
+        vd = w.s([v1], 'a1i', '( T. -> ( predBits ` (/) ) = %s )' % V0)
+        t0 = w.s([num.closed(w, [], 'tonat0', '( toNat ` (/) ) = 0')], 'a1i', '( T. -> ( toNat ` (/) ) = 0 )')
+        h0 = w.s([num.closed(w, [], 'hash0', '( # ` (/) ) = 0')], 'a1i', '( T. -> ( # ` (/) ) = 0 )')
+        z = w.s([num.closed(w, [], '2t0e0', '( 2 x. 0 ) = 0')], 'a1i', '( T. -> ( 2 x. 0 ) = 0 )')
+        e0 = num.closed(w, [num.closed(w, [], '2cn', '2 e. CC'), w.inst('exp0')], 'ax-mp', '( 2 ^ 0 ) = 1'); e0d = w.s([e0], 'a1i', '( T. -> ( 2 ^ 0 ) = 1 )')
+        st, cur = rewrite_chain(w, 'T.', V0, [{'( toNat ` (/) )': ('0', t0), '( # ` (/) )': ('0', h0)}, {'( 2 x. 0 )': ('0', z), '( 2 ^ 0 )': ('1', e0d)}])
+        assert cur == '( ( 0 - 1 ) bwrd if ( 0 = 1 , ( 0 - 1 ) , 0 ) )', cur
+        n01 = num.closed(w, [num.closed(w, [], '0ne1', '0 =/= 1')], 'neii', '-. 0 = 1')
+        it = num.closed(w, [n01], 'iffalsei', 'if ( 0 = 1 , ( 0 - 1 ) , 0 ) = 0'); itd = w.s([it], 'a1i', '( T. -> if ( 0 = 1 , ( 0 - 1 ) , 0 ) = 0 )')
+        st2, cur2 = w.rewrite(cur, {'if ( 0 = 1 , ( 0 - 1 ) , 0 )': ('0', itd)}, 'T.')
+        assert cur2 == '( ( 0 - 1 ) bwrd 0 )', cur2
+        mz = num.closed(w, [num.closed(w, [], '0z', '0 e. ZZ'), num.closed(w, [], '1z', '1 e. ZZ'), w.inst('zsubcl')], 'mp2an', '( 0 - 1 ) e. ZZ')
+        b0 = num.closed(w, [mz, w.inst('bwrd0')], 'ax-mp', '( ( 0 - 1 ) bwrd 0 ) = (/)'); b0d = w.s([b0], 'a1i', '( T. -> ( ( 0 - 1 ) bwrd 0 ) = (/) )')
+        fin = w.s([w.s([vd, st, st2], '3eqtrd', '( T. -> ( predBits ` (/) ) = ( ( 0 - 1 ) bwrd 0 ) )'), b0d], 'eqtrd', '( T. -> ( predBits ` (/) ) = (/) )')
+        w.qed([fin], 'mptru', '( predBits ` (/) ) = (/)'); w.run()
+    if want('predbits1'):
+        w = W('predbits1', 'Lean clause 3 of predBits: the predecessor of the one-letter word true is the empty word.')
+        S1 = '<" 1o ">'
+        V0 = BWRD('( ( toNat ` %s ) - 1 )' % S1, MP('( toNat ` %s )' % S1, '( # ` %s )' % S1))
+        s1w = num.closed(w, [num.closed(w, [], '1oel2o', '1o e. 2o'), w.inst('s1cl')], 'ax-mp', '%s e. Word 2o' % S1)
+        v0 = w.s([], 'predbitsval', '( %s e. Word 2o -> ( predBits ` %s ) = %s )' % (S1, S1, V0))
+        v1 = num.closed(w, [s1w, v0], 'ax-mp', '( predBits ` %s ) = %s' % (S1, V0))
+        vd = w.s([v1], 'a1i', '( T. -> ( predBits ` %s ) = %s )' % (S1, V0))
+        ts = num.closed(w, [num.closed(w, [], '1oel2o', '1o e. 2o'), w.inst('tonats1')], 'ax-mp', '( toNat ` %s ) = ( bToNat ` 1o )' % S1)
+        ts2 = num.closed(w, [ts, num.closed(w, [], 'bwbn1', '( bToNat ` 1o ) = 1')], 'eqtri', '( toNat ` %s ) = 1' % S1); tsd = w.s([ts2], 'a1i', '( T. -> ( toNat ` %s ) = 1 )' % S1)
+        sl = w.s([num.closed(w, [], 's1len', '( # ` %s ) = 1' % S1)], 'a1i', '( T. -> ( # ` %s ) = 1 )' % S1)
+        t2 = w.s([num.closed(w, [], '2t1e2', '( 2 x. 1 ) = 2')], 'a1i', '( T. -> ( 2 x. 1 ) = 2 )')
+        e1 = num.closed(w, [num.closed(w, [], '2cn', '2 e. CC'), w.inst('exp1')], 'ax-mp', '( 2 ^ 1 ) = 2'); e1d = w.s([e1], 'a1i', '( T. -> ( 2 ^ 1 ) = 2 )')
+        st, cur = rewrite_chain(w, 'T.', V0, [{'( toNat ` %s )' % S1: ('1', tsd), '( # ` %s )' % S1: ('1', sl)}, {'( 2 x. 1 )': ('2', t2), '( 2 ^ 1 )': ('2', e1d)}])
+        assert cur == '( ( 1 - 1 ) bwrd if ( 2 = 2 , ( 1 - 1 ) , 1 ) )', cur
+        it = num.closed(w, [num.closed(w, [], 'eqid', '2 = 2')], 'iftruei', 'if ( 2 = 2 , ( 1 - 1 ) , 1 ) = ( 1 - 1 )'); itd = w.s([it], 'a1i', '( T. -> if ( 2 = 2 , ( 1 - 1 ) , 1 ) = ( 1 - 1 ) )')
+        st2, cur2 = w.rewrite(cur, {'if ( 2 = 2 , ( 1 - 1 ) , 1 )': ('( 1 - 1 )', itd)}, 'T.')
+        m0 = w.s([num.closed(w, [], '1m1e0', '( 1 - 1 ) = 0')], 'a1i', '( T. -> ( 1 - 1 ) = 0 )')
+        st3, cur3 = w.rewrite(cur2, {'( 1 - 1 )': ('0', m0)}, 'T.')
+        assert cur3 == '( 0 bwrd 0 )', cur3
+        b0 = num.closed(w, [num.closed(w, [], '0z', '0 e. ZZ'), w.inst('bwrd0')], 'ax-mp', '( 0 bwrd 0 ) = (/)'); b0d = w.s([b0], 'a1i', '( T. -> ( 0 bwrd 0 ) = (/) )')
+        c1 = w.s([vd, st, st2], '3eqtrd', '( T. -> ( predBits ` %s ) = %s )' % (S1, cur2))
+        fin = w.s([c1, st3, b0d], '3eqtrd', '( T. -> ( predBits ` %s ) = (/) )' % S1)
+        w.qed([fin], 'mptru', '( predBits ` %s ) = (/)' % S1); w.run()
+    if want('predbitscons0'):
+        w = W('predbitscons0', 'Lean clause 2 of predBits: a false letter in front becomes true and the rest is decremented.')
+        cl, l = base(w)
+        L0, tc, ln = cons_setup(w, cl, AL, '(/)')
+        T0 = TN(L0); H0 = LEN(L0); T0m = '( %s - 1 )' % T0
+        b0, b1 = bn_lits(w, AL)
+        for E in (T0, T, BN('(/)'), BN('1o')):
+            cl.leaf(E, 'RR', cl.mem(E, 'RR'))
+        S = '( ( bToNat ` 1o ) + ( 2 x. %s ) )' % Tm1
+        D2 = '( 2 x. ( 2 x. %s ) )' % T
+        eqS = lineq(w, AL, T0m, S, hyps=[tc, b0, b1], closure=cl)
+        eqD = lineq(w, AL, '( 2 x. %s )' % T0, D2, hyps=[tc, b0], closure=cl)
+        mp_nn0(w, cl, AL)
+        v = w.s([cl.mem(L0, 'Word 2o'), w.inst('predbitsval')], 'syl', '( %s -> ( predBits ` %s ) = %s )' % (AL, L0, BWRD(T0m, MP(T0, H0))))
+        H1 = '( %s + 1 )' % H
+        pe = w.s([ln], 'oveq2d', '( %s -> ( 2 ^ %s ) = ( 2 ^ %s ) )' % (AL, H0, H1))
+        ec = exp_p1c(w, cl, AL, H)
+        pe2 = w.s([pe, ec], 'eqtrd', '( %s -> ( 2 ^ %s ) = ( 2 x. %s ) )' % (AL, H0, PH))
+        bi1 = w.s([eqD, pe2], 'eqeq12d', '( %s -> ( ( 2 x. %s ) = ( 2 ^ %s ) <-> %s = ( 2 x. %s ) ) )' % (AL, T0, H0, D2, PH))
+        twoc = w.s([], '2cnd', '( %s -> 2 e. CC )' % AL); twone = w.s([num.closed(w, [], '2ne0', '2 =/= 0')], 'a1i', '( %s -> 2 =/= 0 )' % AL)
+        mc = w.s([cl.mem('( 2 x. %s )' % T, 'CC'), cl.mem(PH, 'CC'), twoc, twone], 'mulcand', '( %s -> ( %s = ( 2 x. %s ) <-> %s ) )' % (AL, D2, PH, CONDP))
+        bi = w.s([bi1, mc], 'bitrd', '( %s -> ( ( 2 x. %s ) = ( 2 ^ %s ) <-> %s ) )' % (AL, T0, H0, CONDP))
+        H0m = '( %s - 1 )' % H0; H1m = '( %s - 1 )' % H1
+        ib = w.s([bi], 'ifbid', '( %s -> %s = if ( %s , %s , %s ) )' % (AL, MP(T0, H0), CONDP, H0m, H0))
+        l1 = w.s([ln], 'oveq1d', '( %s -> %s = %s )' % (AL, H0m, H1m))
+        pc = w.s([cl.mem(H, 'CC'), w.s([], '1cnd', '( %s -> 1 e. CC )' % AL)], 'pncand', '( %s -> %s = %s )' % (AL, H1m, H))
+        l2 = w.s([l1, pc], 'eqtrd', '( %s -> %s = %s )' % (AL, H0m, H))
+        ie = w.s([l2, ln], 'ifeq12d', '( %s -> if ( %s , %s , %s ) = if ( %s , %s , %s ) )' % (AL, CONDP, H0m, H0, CONDP, H, H1))
+        Hm1p = '( %s + 1 )' % Hm1
+        ov = w.s([num.closed(w, [], 'ovif', '( %s + 1 ) = if ( %s , %s , %s )' % (MPv, CONDP, Hm1p, H1))], 'a1i', '( %s -> ( %s + 1 ) = if ( %s , %s , %s ) )' % (AL, MPv, CONDP, Hm1p, H1))
+        np = w.s([cl.mem(H, 'CC'), w.s([], '1cnd', '( %s -> 1 e. CC )' % AL)], 'npcand', '( %s -> %s = %s )' % (AL, Hm1p, H))
+        ie2 = w.s([np], 'ifeq1d', '( %s -> if ( %s , %s , %s ) = if ( %s , %s , %s ) )' % (AL, CONDP, Hm1p, H1, CONDP, H, H1))
+        ov2 = w.s([ov, ie2], 'eqtrd', '( %s -> ( %s + 1 ) = if ( %s , %s , %s ) )' % (AL, MPv, CONDP, H, H1))
+        mi = w.s([w.s([ib, ie], 'eqtrd', '( %s -> %s = if ( %s , %s , %s ) )' % (AL, MP(T0, H0), CONDP, H, H1)), ov2], 'eqtr4d', '( %s -> %s = ( %s + 1 ) )' % (AL, MP(T0, H0), MPv))
+        o = w.s([eqS, mi], 'oveq12d', '( %s -> %s = %s )' % (AL, BWRD(T0m, MP(T0, H0)), BWRD(S, '( %s + 1 )' % MPv)))
+        bc = w.s([cl.mem(S, 'ZZ'), cl.mem(MPv, 'NN0'), w.inst('bwrdcons')], 'syl2anc', '( %s -> %s = ( <" %s "> ++ %s ) )' % (AL, BWRD(S, '( %s + 1 )' % MPv), BIT(S, '0'), BWRD('( |_ ` ( %s / 2 ) )' % S, MPv)))
+        one = w.s([num.closed(w, [], '1oel2o', '1o e. 2o')], 'a1i', '( %s -> 1o e. 2o )' % AL)
+        bb = w.s([one, cl.mem(Tm1, 'ZZ'), w.inst('bwbit0')], 'syl2anc', '( %s -> ( 0 e. ( bits ` %s ) <-> 1o = 1o ) )' % (AL, S))
+        el = w.s([w.s([], 'eqidd', '( %s -> 1o = 1o )' % AL), bb], 'mpbird', '( %s -> 0 e. ( bits ` %s ) )' % (AL, S))
+        it = w.s([el], 'iftrued', '( %s -> %s = 1o )' % (AL, BIT(S, '0')))
+        se = w.s([it], 's1eqd', '( %s -> <" %s "> = <" 1o "> )' % (AL, BIT(S, '0')))
+        fh = w.s([one, cl.mem(Tm1, 'ZZ'), w.inst('bwflhalf')], 'syl2anc', '( %s -> ( |_ ` ( %s / 2 ) ) = %s )' % (AL, S, Tm1))
+        fo = w.s([fh], 'oveq1d', '( %s -> %s = %s )' % (AL, BWRD('( |_ ` ( %s / 2 ) )' % S, MPv), BWRD(Tm1, MPv)))
+        pv = w.s([], 'predbitsval', '( %s -> %s = %s )' % (AL, PRED, BWRD(Tm1, MPv)))
+        fo2 = w.s([fo, pv], 'eqtr4d', '( %s -> %s = %s )' % (AL, BWRD('( |_ ` ( %s / 2 ) )' % S, MPv), PRED))
+        cc = w.s([se, fo2], 'oveq12d', '( %s -> ( <" %s "> ++ %s ) = ( <" 1o "> ++ %s ) )' % (AL, BIT(S, '0'), BWRD('( |_ ` ( %s / 2 ) )' % S, MPv), PRED))
+        c1 = w.s([v, o, bc], '3eqtrd', '( %s -> ( predBits ` %s ) = ( <" %s "> ++ %s ) )' % (AL, L0, BIT(S, '0'), BWRD('( |_ ` ( %s / 2 ) )' % S, MPv)))
+        w.qed([c1, cc], 'eqtrd', '( %s -> ( predBits ` %s ) = ( <" 1o "> ++ %s ) )' % (AL, L0, PRED)); w.run()
+    if want('predbitscons1'):
+        AB2 = '( B e. 2o /\\ L e. Word 2o )'
+        w = W('predbitscons1', 'Lean clause 4 of predBits: a true letter in front of a nonempty word becomes false and the rest is unchanged.')
+        b = w.s([], 'simpl', '( %s -> B e. 2o )' % AB2); l = w.s([], 'simpr', '( %s -> L e. Word 2o )' % AB2)
+        cl = Cl(w, AB2, {'B': ('2o', b), 'L': ('Word 2o', l)})
+        LB = CONS('B', 'L'); L2 = CONS('1o', LB)
+        X = TN(LB); HB = LEN(LB); T2 = TN(L2); H2 = LEN(L2); T2m = '( %s - 1 )' % T2
+        tc2 = w.s([cl.mem('1o', '2o'), cl.mem(LB, 'Word 2o'), w.inst('tonatcons')], 'syl2anc', '( %s -> %s = ( ( bToNat ` 1o ) + ( 2 x. %s ) ) )' % (AB2, T2, X))
+        ln2 = conslen(w, cl, AB2, '1o', LB)
+        b0, b1 = bn_lits(w, AB2)
+        for E in (T2, X, BN('(/)'), BN('1o')):
+            cl.leaf(E, 'RR', cl.mem(E, 'RR'))
+        S = '( ( bToNat ` (/) ) + ( 2 x. %s ) )' % X
+        Sp = '( ( 2 x. %s ) + 1 )' % X; D2 = '( 2 x. %s )' % Sp
+        eqS = lineq(w, AB2, T2m, S, hyps=[tc2, b0, b1], closure=cl)
+        eqD = lineq(w, AB2, '( 2 x. %s )' % T2, D2, hyps=[tc2, b1], closure=cl)
+        v = w.s([cl.mem(L2, 'Word 2o'), w.inst('predbitsval')], 'syl', '( %s -> ( predBits ` %s ) = %s )' % (AB2, L2, BWRD(T2m, MP(T2, H2))))
+        HB1 = '( %s + 1 )' % HB; PHB = P2(HB)
+        pe = w.s([ln2], 'oveq2d', '( %s -> ( 2 ^ %s ) = ( 2 ^ %s ) )' % (AB2, H2, HB1))
+        ec = exp_p1c(w, cl, AB2, HB)
+        pe2 = w.s([pe, ec], 'eqtrd', '( %s -> ( 2 ^ %s ) = ( 2 x. %s ) )' % (AB2, H2, PHB))
+        bi1 = w.s([eqD, pe2], 'eqeq12d', '( %s -> ( ( 2 x. %s ) = ( 2 ^ %s ) <-> %s = ( 2 x. %s ) ) )' % (AB2, T2, H2, D2, PHB))
+        twoc = w.s([], '2cnd', '( %s -> 2 e. CC )' % AB2); twone = w.s([num.closed(w, [], '2ne0', '2 =/= 0')], 'a1i', '( %s -> 2 =/= 0 )' % AB2)
+        mc = w.s([cl.mem(Sp, 'CC'), cl.mem(PHB, 'CC'), twoc, twone], 'mulcand', '( %s -> ( %s = ( 2 x. %s ) <-> %s = %s ) )' % (AB2, D2, PHB, Sp, PHB))
+        bi = w.s([bi1, mc], 'bitrd', '( %s -> ( ( 2 x. %s ) = ( 2 ^ %s ) <-> %s = %s ) )' % (AB2, T2, H2, Sp, PHB))
+        lnB = conslen(w, cl, AB2, 'B', 'L')
+        peB = w.s([lnB], 'oveq2d', '( %s -> %s = ( 2 ^ ( %s + 1 ) ) )' % (AB2, PHB, H))
+        ecB = exp_p1c(w, cl, AB2, H)
+        peB2 = w.s([peB, ecB], 'eqtrd', '( %s -> %s = ( 2 x. %s ) )' % (AB2, PHB, PH))
+        ne = ne_from_oddne(w, cl, AB2, X, PH)
+        bi2 = w.s([peB2], 'eqeq2d', '( %s -> ( %s = %s <-> %s = ( 2 x. %s ) ) )' % (AB2, Sp, PHB, Sp, PH))
+        ne2 = w.s([ne, bi2], 'mtbird', '( %s -> -. %s = %s )' % (AB2, Sp, PHB))
+        nc = w.s([ne2, bi], 'mtbird', '( %s -> -. ( 2 x. %s ) = ( 2 ^ %s ) )' % (AB2, T2, H2))
+        i = w.s([nc], 'iffalsed', '( %s -> %s = %s )' % (AB2, MP(T2, H2), H2))
+        i2 = w.s([i, ln2], 'eqtrd', '( %s -> %s = %s )' % (AB2, MP(T2, H2), HB1))
+        o = w.s([eqS, i2], 'oveq12d', '( %s -> %s = %s )' % (AB2, BWRD(T2m, MP(T2, H2)), BWRD(S, HB1)))
+        bc = w.s([cl.mem(S, 'ZZ'), cl.mem(HB, 'NN0'), w.inst('bwrdcons')], 'syl2anc', '( %s -> %s = ( <" %s "> ++ %s ) )' % (AB2, BWRD(S, HB1), BIT(S, '0'), BWRD('( |_ ` ( %s / 2 ) )' % S, HB)))
+        zero = w.s([num.closed(w, [], '0el2o', '(/) e. 2o')], 'a1i', '( %s -> (/) e. 2o )' % AB2)
+        bb = w.s([zero, cl.mem(X, 'ZZ'), w.inst('bwbit0')], 'syl2anc', '( %s -> ( 0 e. ( bits ` %s ) <-> (/) = 1o ) )' % (AB2, S))
+        nn = num.closed(w, [num.closed(w, [], '1n0', '1o =/= (/)')], 'nesymi', '-. (/) = 1o'); nnd = w.s([nn], 'a1i', '( %s -> -. (/) = 1o )' % AB2)
+        nel = w.s([nnd, bb], 'mtbird', '( %s -> -. 0 e. ( bits ` %s ) )' % (AB2, S))
+        it = w.s([nel], 'iffalsed', '( %s -> %s = (/) )' % (AB2, BIT(S, '0')))
+        se = w.s([it], 's1eqd', '( %s -> <" %s "> = <" (/) "> )' % (AB2, BIT(S, '0')))
+        fh = w.s([zero, cl.mem(X, 'ZZ'), w.inst('bwflhalf')], 'syl2anc', '( %s -> ( |_ ` ( %s / 2 ) ) = %s )' % (AB2, S, X))
+        fo = w.s([fh], 'oveq1d', '( %s -> %s = %s )' % (AB2, BWRD('( |_ ` ( %s / 2 ) )' % S, HB), BWRD(X, HB)))
+        ew = w.s([cl.mem(LB, 'Word 2o'), w.inst('bweqwrd')], 'syl', '( %s -> %s = %s )' % (AB2, LB, BWRD(X, HB)))
+        fo2 = w.s([fo, ew], 'eqtr4d', '( %s -> %s = %s )' % (AB2, BWRD('( |_ ` ( %s / 2 ) )' % S, HB), LB))
+        cc = w.s([se, fo2], 'oveq12d', '( %s -> ( <" %s "> ++ %s ) = ( <" (/) "> ++ %s ) )' % (AB2, BIT(S, '0'), BWRD('( |_ ` ( %s / 2 ) )' % S, HB), LB))
+        c1 = w.s([v, o, bc], '3eqtrd', '( %s -> ( predBits ` %s ) = ( <" %s "> ++ %s ) )' % (AB2, L2, BIT(S, '0'), BWRD('( |_ ` ( %s / 2 ) )' % S, HB)))
+        w.qed([c1, cc], 'eqtrd', '( %s -> ( predBits ` %s ) = ( <" (/) "> ++ %s ) )' % (AB2, L2, LB)); w.run()
+
+    # ---- borrows
+    def borrows_val_set(w, cl, ante):
+        pv = w.s([cl.mem(H, '_V'), cl.mem(PC, '_V'), w.inst('ifexg')], 'syl2anc', '( %s -> %s e. _V )' % (ante, BORVv))
+        cl.have(BORVv, '_V', pv)
+    if want('borrowsval'):
+        w = W('borrowsval', 'Value of borrows: the 2-adic valuation of toNat L, or the length when the value is 0.')
+        cl, l = base(w)
+        borrows_val_set(w, cl, AL)
+        st, val = defval(w, cl, 'df-borrows', 'borrows', ['L']); assert val == BORVv, val
+        promote(w, st); w.run()
+    if want('borrowscl'):
+        w = W('borrowscl', 'Closure of borrows: a nonnegative integer.')
+        cl, l = base(w)
+        v = w.s([], 'borrowsval', '( %s -> %s = %s )' % (AL, BR, BORVv))
+        def bt(a1, h1, eq):
+            return w.s([eq, lift(w, cl.mem(H, 'NN0'), a1)], 'eqeltrd', '( %s -> %s e. NN0 )' % (a1, BR))
+        def bf(a2, h2, eq, c2):
+            return w.s([eq, c2.mem(PC, 'NN0')], 'eqeltrd', '( %s -> %s e. NN0 )' % (a2, BR))
+        c = borrows_cases(w, cl, AL, v, bt, bf, '%s e. NN0' % BR)
+        promote(w, c); w.run()
+    if want('borrowsle'):
+        w = W('borrowsle', 'The borrows of a decrement are at most the length (Lean: borrows_le_length).')
+        cl, l = base(w)
+        v = w.s([], 'borrowsval', '( %s -> %s = %s )' % (AL, BR, BORVv))
+        def bt(a1, h1, eq):
+            le = w.s([lift(w, cl.mem(H, 'RR'), a1)], 'leidd', '( %s -> %s <_ %s )' % (a1, H, H))
+            return w.s([eq, le], 'eqbrtrd', '( %s -> %s <_ %s )' % (a1, BR, H))
+        def bf(a2, h2, eq, c2):
+            tp = two_prime(w, a2)
+            dv = w.s([tp, c2.mem(T, 'NN'), w.inst('pcdvds')], 'syl2anc', '( %s -> ( 2 ^ %s ) || %s )' % (a2, PC, T))
+            dl = w.s([c2.mem(P2(PC), 'ZZ'), c2.mem(T, 'NN'), w.inst('dvdsle')], 'syl2anc', '( %s -> ( ( 2 ^ %s ) || %s -> ( 2 ^ %s ) <_ %s ) )' % (a2, PC, T, PC, T))
+            le1 = w.s([dv, dl], 'mpd', '( %s -> ( 2 ^ %s ) <_ %s )' % (a2, PC, T))
+            ltT = w.s([lift(w, l, a2), w.inst('tonatlt')], 'syl', '( %s -> %s < %s )' % (a2, T, PH))
+            lt = w.s([c2.mem(P2(PC), 'RR'), c2.mem(T, 'RR'), c2.mem(PH, 'RR'), le1, ltT], 'lelttrd', '( %s -> ( 2 ^ %s ) < %s )' % (a2, PC, PH))
+            le2 = ltexp2(w, a2, c2, PC, H)
+            lt2 = w.s([lt, le2], 'mpbird', '( %s -> %s < %s )' % (a2, PC, H))
+            le3 = w.s([c2.mem(PC, 'RR'), c2.mem(H, 'RR'), lt2], 'ltled', '( %s -> %s <_ %s )' % (a2, PC, H))
+            return w.s([eq, le3], 'eqbrtrd', '( %s -> %s <_ %s )' % (a2, BR, H))
+        c = borrows_cases(w, cl, AL, v, bt, bf, '%s <_ %s' % (BR, H))
+        promote(w, c); w.run()
+    if want('borrowsle2'):
+        w = W('borrowsle2', 'The borrows of a decrement are at most the length of predBits.')
+        cl, l = base(w)
+        l2 = w.s([], 'predbitslen2', '( %s -> %s = %s )' % (AL, NP, MPv))
+        v = w.s([], 'borrowsval', '( %s -> %s = %s )' % (AL, BR, BORVv))
+        def bt(a1, h1):
+            c1 = subcl(w, cl, AL, a1)
+            eqT, hnn, hm1 = pow_case(w, c1, a1, h1)
+            i = w.s([h1], 'iftrued', '( %s -> %s = %s )' % (a1, MPv, Hm1))
+            # T =/= 0 so BR = 2 pCnt T = H - 1
+            pn = c1.mem(P2(Hm1), 'NN')
+            tnn = w.s([eqT, pn], 'eqeltrd', '( %s -> %s e. NN )' % (a1, T))
+            ne = w.s([tnn], 'nnne0d', '( %s -> %s =/= 0 )' % (a1, T)); nn = w.s([ne], 'neneqd', '( %s -> -. %s = 0 )' % (a1, T))
+            ib = w.s([nn], 'iffalsed', '( %s -> %s = %s )' % (a1, BORVv, PC))
+            o = w.s([eqT], 'oveq2d', '( %s -> %s = ( 2 pCnt ( 2 ^ %s ) ) )' % (a1, PC, Hm1))
+            pi = w.s([two_prime(w, a1), hm1, w.inst('pcidlem')], 'syl2anc', '( %s -> ( 2 pCnt ( 2 ^ %s ) ) = %s )' % (a1, Hm1, Hm1))
+            eq = w.s([lift(w, v, a1), ib, o], '3eqtrd', '( %s -> %s = ( 2 pCnt ( 2 ^ %s ) ) )' % (a1, BR, Hm1))
+            eq2 = w.s([eq, pi], 'eqtrd', '( %s -> %s = %s )' % (a1, BR, Hm1))
+            eq3 = w.s([eq2, i], 'eqtr4d', '( %s -> %s = %s )' % (a1, BR, MPv))
+            le = w.s([c1.mem(MPv, 'RR') if False else lift(w, cl.mem(H, 'RR'), a1)], 'leidd', '( %s -> %s <_ %s )' % (a1, H, H)) if False else None
+            lem = w.s([c1.mem(Hm1, 'RR')], 'leidd', '( %s -> %s <_ %s )' % (a1, Hm1, Hm1))
+            r = w.s([eq2, lem], 'eqbrtrd', '( %s -> %s <_ %s )' % (a1, BR, Hm1))
+            return w.s([r, i], 'breqtrrd', '( %s -> %s <_ %s )' % (a1, BR, MPv))
+        def bf(a2, h2):
+            i = w.s([h2], 'iffalsed', '( %s -> %s = %s )' % (a2, MPv, H))
+            le = w.s([lift(w, l, a2), w.inst('borrowsle')], 'syl', '( %s -> %s <_ %s )' % (a2, BR, H))
+            return w.s([le, i], 'breqtrrd', '( %s -> %s <_ %s )' % (a2, BR, MPv))
+        c = cases_if(w, AL, CONDP, bt, bf, '%s <_ %s' % (BR, MPv))
+        w.qed([c, l2], 'breqtrrd', '( %s -> %s <_ %s )' % (AL, BR, NP)); w.run()
+    if want('borrowsdvds'):
+        w = W('borrowsdvds', '2 to the borrows divides toNat L.')
+        cl, l = base(w)
+        v = w.s([], 'borrowsval', '( %s -> %s = %s )' % (AL, BR, BORVv))
+        def bt(a1, h1, eq):
+            d0 = w.s([lift(w, cl.mem(P2(BR), 'ZZ'), a1), w.inst('dvds0')], 'syl', '( %s -> ( 2 ^ %s ) || 0 )' % (a1, BR))
+            return w.s([d0, h1], 'breqtrrd', '( %s -> ( 2 ^ %s ) || %s )' % (a1, BR, T))
+        def bf(a2, h2, eq, c2):
+            dv = w.s([two_prime(w, a2), c2.mem(T, 'NN'), w.inst('pcdvds')], 'syl2anc', '( %s -> ( 2 ^ %s ) || %s )' % (a2, PC, T))
+            o = w.s([eq], 'oveq2d', '( %s -> ( 2 ^ %s ) = ( 2 ^ %s ) )' % (a2, BR, PC))
+            return w.s([o, dv], 'eqbrtrd', '( %s -> ( 2 ^ %s ) || %s )' % (a2, BR, T))
+        c = borrows_cases(w, cl, AL, v, bt, bf, '( 2 ^ %s ) || %s' % (BR, T))
+        promote(w, c); w.run()
+    if want('borrowsndvds'):
+        A2 = '( %s /\\ %s =/= 0 )' % (AL, T)
+        w = W('borrowsndvds', '2 to the borrows plus one does not divide a nonzero toNat L.')
+        cl, l = base(w, A2)
+        hne = w.s([], 'simpr', '( %s -> %s =/= 0 )' % (A2, T))
+        tnn = w.s([cl.mem(T, 'NN0'), hne, w.inst('elnnne0')], 'sylanbrc', '( %s -> %s e. NN )' % (A2, T)); cl.have(T, 'NN', tnn)
+        v = w.s([l, w.inst('borrowsval')], 'syl', '( %s -> %s = %s )' % (A2, BR, BORVv))
+        nn = w.s([hne], 'neneqd', '( %s -> -. %s = 0 )' % (A2, T))
+        i = w.s([nn], 'iffalsed', '( %s -> %s = %s )' % (A2, BORVv, PC))
+        eq = w.s([v, i], 'eqtrd', '( %s -> %s = %s )' % (A2, BR, PC))
+        nd = w.s([two_prime(w, A2), tnn, w.inst('pcndvds')], 'syl2anc', '( %s -> -. ( 2 ^ ( %s + 1 ) ) || %s )' % (A2, PC, T))
+        o = w.s([w.s([eq], 'oveq1d', '( %s -> ( %s + 1 ) = ( %s + 1 ) )' % (A2, BR, PC))], 'oveq2d', '( %s -> ( 2 ^ ( %s + 1 ) ) = ( 2 ^ ( %s + 1 ) ) )' % (A2, BR, PC))
+        br = w.s([o], 'breq1d', '( %s -> ( ( 2 ^ ( %s + 1 ) ) || %s <-> ( 2 ^ ( %s + 1 ) ) || %s ) )' % (A2, BR, T, PC, T))
+        w.qed([nd, br], 'mtbird', '( %s -> -. ( 2 ^ ( %s + 1 ) ) || %s )' % (A2, BR, T)); w.run()
+    if want('borrowsnil'):
+        w = W('borrowsnil', 'The empty word has no borrows.')
+        V0 = BORV('( toNat ` (/) )', '( # ` (/) )')
+        v0 = w.s([], 'borrowsval', '( (/) e. Word 2o -> ( borrows ` (/) ) = %s )' % V0)
+        v1 = num.closed(w, [num.closed(w, [], 'wrd0', '(/) e. Word 2o'), v0], 'ax-mp', '( borrows ` (/) ) = %s' % V0)
+        vd = w.s([v1], 'a1i', '( T. -> ( borrows ` (/) ) = %s )' % V0)
+        t0 = w.s([num.closed(w, [], 'tonat0', '( toNat ` (/) ) = 0')], 'a1i', '( T. -> ( toNat ` (/) ) = 0 )')
+        h0 = w.s([num.closed(w, [], 'hash0', '( # ` (/) ) = 0')], 'a1i', '( T. -> ( # ` (/) ) = 0 )')
+        st, cur = w.rewrite(V0, {'( toNat ` (/) )': ('0', t0), '( # ` (/) )': ('0', h0)}, 'T.')
+        assert cur == 'if ( 0 = 0 , 0 , ( 2 pCnt 0 ) )', cur
+        it = num.closed(w, [num.closed(w, [], 'eqid', '0 = 0')], 'iftruei', '%s = 0' % cur); itd = w.s([it], 'a1i', '( T. -> %s = 0 )' % cur)
+        fin = w.s([vd, st, itd], '3eqtrd', '( T. -> ( borrows ` (/) ) = 0 )')
+        w.qed([fin], 'mptru', '( borrows ` (/) ) = 0'); w.run()
+    if want('borrowscons0'):
+        w = W('borrowscons0', 'A false letter in front adds one borrow.')
+        cl, l = base(w)
+        L0, tc, ln = cons_setup(w, cl, AL, '(/)')
+        T0 = TN(L0); H0 = LEN(L0)
+        b0, b1 = bn_lits(w, AL)
+        for E in (T0, T, BN('(/)')):
+            cl.leaf(E, 'RR', cl.mem(E, 'RR'))
+        D2 = '( 2 x. %s )' % T
+        eqD = lineq(w, AL, T0, D2, hyps=[tc, b0], closure=cl)
+        v = w.s([cl.mem(L0, 'Word 2o'), w.inst('borrowsval')], 'syl', '( %s -> ( borrows ` %s ) = %s )' % (AL, L0, BORV(T0, H0)))
+        H1 = '( %s + 1 )' % H
+        twoc = w.s([], '2cnd', '( %s -> 2 e. CC )' % AL); twone = w.s([num.closed(w, [], '2ne0', '2 =/= 0')], 'a1i', '( %s -> 2 =/= 0 )' % AL)
+        mc = w.s([cl.mem(T, 'CC'), w.s([], '0cnd', '( %s -> 0 e. CC )' % AL), twoc, twone], 'mulcand', '( %s -> ( ( 2 x. %s ) = ( 2 x. 0 ) <-> %s = 0 ) )' % (AL, T, T))
+        z = w.s([num.closed(w, [], '2t0e0', '( 2 x. 0 ) = 0')], 'a1i', '( %s -> ( 2 x. 0 ) = 0 )' % AL)
+        ez = w.s([z], 'eqeq2d', '( %s -> ( ( 2 x. %s ) = ( 2 x. 0 ) <-> ( 2 x. %s ) = 0 ) )' % (AL, T, T))
+        bi0 = w.s([ez, mc], 'bitr3d', '( %s -> ( ( 2 x. %s ) = 0 <-> %s = 0 ) )' % (AL, T, T))
+        e1 = w.s([eqD], 'eqeq1d', '( %s -> ( %s = 0 <-> ( 2 x. %s ) = 0 ) )' % (AL, T0, T))
+        bi = w.s([e1, bi0], 'bitrd', '( %s -> ( %s = 0 <-> %s ) )' % (AL, T0, COND0))
+        PC0 = '( 2 pCnt %s )' % T0; PCD = '( 2 pCnt %s )' % D2
+        ib = w.s([bi], 'ifbid', '( %s -> %s = if ( %s , %s , %s ) )' % (AL, BORV(T0, H0), COND0, H0, PC0))
+        pcd = w.s([eqD], 'oveq2d', '( %s -> %s = %s )' % (AL, PC0, PCD))
+        ie = w.s([ln, pcd], 'ifeq12d', '( %s -> if ( %s , %s , %s ) = if ( %s , %s , %s ) )' % (AL, COND0, H0, PC0, COND0, H1, PCD))
+        VAL = 'if ( %s , %s , %s )' % (COND0, H1, PCD)
+        v2 = w.s([v, ib, ie], '3eqtrd', '( %s -> ( borrows ` %s ) = %s )' % (AL, L0, VAL))
+        bv = w.s([], 'borrowsval', '( %s -> %s = %s )' % (AL, BR, BORVv))
+        def bt(a1, h1, eq):
+            i = w.s([h1], 'iftrued', '( %s -> %s = %s )' % (a1, VAL, H1))
+            o = w.s([eq], 'oveq1d', '( %s -> ( %s + 1 ) = %s )' % (a1, BR, H1))
+            return w.s([i, o], 'eqtr4d', '( %s -> %s = ( %s + 1 ) )' % (a1, VAL, BR))
+        def bf(a2, h2, eq, c2):
+            i = w.s([h2], 'iffalsed', '( %s -> %s = %s )' % (a2, VAL, PCD))
+            tz = w.s([num.closed(w, [], '2z', '2 e. ZZ')], 'a1i', '( %s -> 2 e. ZZ )' % a2); tne = w.s([num.closed(w, [], '2ne0', '2 =/= 0')], 'a1i', '( %s -> 2 =/= 0 )' % a2)
+            j2 = w.s([tz, tne], 'jca', '( %s -> ( 2 e. ZZ /\\ 2 =/= 0 ) )' % a2)
+            jt = w.s([c2.mem(T, 'ZZ'), w.s([c2.mem(T, 'NN')], 'nnne0d', '( %s -> %s =/= 0 )' % (a2, T))], 'jca', '( %s -> ( %s e. ZZ /\\ %s =/= 0 ) )' % (a2, T, T))
+            pm = w.s([two_prime(w, a2), j2, jt, w.inst('pcmul')], 'syl3anc', '( %s -> %s = ( ( 2 pCnt 2 ) + %s ) )' % (a2, PCD, PC))
+            p21d = pcnt2_is_1(w, a2)
+            o = w.s([p21d], 'oveq1d', '( %s -> ( ( 2 pCnt 2 ) + %s ) = ( 1 + %s ) )' % (a2, PC, PC))
+            ac = w.s([w.s([], '1cnd', '( %s -> 1 e. CC )' % a2), c2.mem(PC, 'CC')], 'addcomd', '( %s -> ( 1 + %s ) = ( %s + 1 ) )' % (a2, PC, PC))
+            oc = w.s([eq], 'oveq1d', '( %s -> ( %s + 1 ) = ( %s + 1 ) )' % (a2, BR, PC))
+            ch = w.s([i, pm, o], '3eqtrd', '( %s -> %s = ( 1 + %s ) )' % (a2, VAL, PC))
+            ch2 = w.s([ch, ac], 'eqtrd', '( %s -> %s = ( %s + 1 ) )' % (a2, VAL, PC))
+            return w.s([ch2, oc], 'eqtr4d', '( %s -> %s = ( %s + 1 ) )' % (a2, VAL, BR))
+        c = borrows_cases(w, cl, AL, bv, bt, bf, '%s = ( %s + 1 )' % (VAL, BR))
+        w.qed([v2, c], 'eqtrd', '( %s -> ( borrows ` %s ) = ( %s + 1 ) )' % (AL, L0, BR)); w.run()
+    if want('borrowscons1'):
+        w = W('borrowscons1', 'A word starting with true has no borrows.')
+        cl, l = base(w)
+        L1, tc, ln = cons_setup(w, cl, AL, '1o')
+        Tb = TN(L1); Hb = LEN(L1)
+        b0, b1 = bn_lits(w, AL)
+        for E in (Tb, T, BN('1o')):
+            cl.leaf(E, 'RR', cl.mem(E, 'RR'))
+        Sp = '( ( 2 x. %s ) + 1 )' % T
+        eqS = lineq(w, AL, Tb, Sp, hyps=[tc, b1], closure=cl)
+        v = w.s([cl.mem(L1, 'Word 2o'), w.inst('borrowsval')], 'syl', '( %s -> ( borrows ` %s ) = %s )' % (AL, L1, BORV(Tb, Hb)))
+        spn = w.s([cl.mem('( 2 x. %s )' % T, 'NN0'), w.inst('nn0p1nn')], 'syl', '( %s -> %s e. NN )' % (AL, Sp))
+        spne = w.s([spn], 'nnne0d', '( %s -> %s =/= 0 )' % (AL, Sp))
+        tne = w.s([eqS, spne], 'eqnetrd', '( %s -> %s =/= 0 )' % (AL, Tb))
+        nn = w.s([tne], 'neneqd', '( %s -> -. %s = 0 )' % (AL, Tb))
+        i = w.s([nn], 'iffalsed', '( %s -> %s = ( 2 pCnt %s ) )' % (AL, BORV(Tb, Hb), Tb))
+        o = w.s([eqS], 'oveq2d', '( %s -> ( 2 pCnt %s ) = ( 2 pCnt %s ) )' % (AL, Tb, Sp))
+        pz = w.s([two_prime(w, AL), spn, w.inst('pceq0')], 'syl2anc', '( %s -> ( ( 2 pCnt %s ) = 0 <-> -. 2 || %s ) )' % (AL, Sp, Sp))
+        od = w.s([cl.mem(T, 'ZZ'), w.s([], 'eqidd', '( %s -> %s = %s )' % (AL, Sp, Sp)), w.inst('2tp1odd')], 'syl2anc', '( %s -> -. 2 || %s )' % (AL, Sp))
+        z = w.s([od, pz], 'mpbird', '( %s -> ( 2 pCnt %s ) = 0 )' % (AL, Sp))
+        c1 = w.s([v, i, o], '3eqtrd', '( %s -> ( borrows ` %s ) = ( 2 pCnt %s ) )' % (AL, L1, Sp))
+        w.qed([c1, z], 'eqtrd', '( %s -> ( borrows ` %s ) = 0 )' % (AL, L1)); w.run()
+
+    # ---- the run decomposition of the borrow chain
+    RB = SWRD('L', BR, H)
+    def dec_setup(w, cl, ante):
+        lA = cl.mem('L', 'Word 2o')
+        le1 = w.s([lA, w.inst('borrowsle')], 'syl', '( %s -> %s <_ %s )' % (ante, BR, H))
+        bfz = w.s([cl.mem(BR, 'NN0'), cl.mem(H, 'NN0'), le1, w.inst('elfz2nn0')], 'syl3anbrc', '( %s -> %s e. ( 0 ... %s ) )' % (ante, BR, H))
+        hle = w.s([cl.mem(H, 'RR')], 'leidd', '( %s -> %s <_ %s )' % (ante, H, H))
+        hfz = w.s([cl.mem(H, 'NN0'), cl.mem(H, 'NN0'), hle, w.inst('elfz2nn0')], 'syl3anbrc', '( %s -> %s e. ( 0 ... %s ) )' % (ante, H, H))
+        return le1, bfz, hfz
+    if want('bwborrowsdec1'):
+        w = W('bwborrowsdec1', 'The run decomposition of the borrow chain: L is its borrows false letters followed by the rest.')
+        cl, l = base(w)
+        le1, bfz, hfz = dec_setup(w, cl, AL)
+        Pf = PFX('L', BR); R0 = REP('(/)', BR)
+        cp = w.s([l, bfz, hfz, w.inst('ccatpfx')], 'syl3anc', '( %s -> ( %s ++ %s ) = %s )' % (AL, Pf, RB, PFX('L', H)))
+        pid = w.s([l, w.inst('pfxid')], 'syl', '( %s -> %s = L )' % (AL, PFX('L', H)))
+        sp = w.s([cp, pid], 'eqtrd', '( %s -> ( %s ++ %s ) = L )' % (AL, Pf, RB))
+        pw = cl.mem(Pf, 'Word 2o')
+        pl = w.s([l, bfz, w.inst('pfxlen')], 'syl2anc', '( %s -> ( # ` %s ) = %s )' % (AL, Pf, BR))
+        dv = w.s([], 'borrowsdvds', '( %s -> ( 2 ^ %s ) || %s )' % (AL, BR, T))
+        bu = w.s([cl.mem(T, 'ZZ'), cl.mem(BR, 'NN0'), w.inst('bitsuz')], 'syl2anc', '( %s -> ( ( 2 ^ %s ) || %s <-> ( bits ` %s ) C_ ( ZZ>= ` %s ) ) )' % (AL, BR, T, T, BR))
+        ss = w.s([dv, bu], 'mpbid', '( %s -> ( bits ` %s ) C_ ( ZZ>= ` %s ) )' % (AL, T, BR))
+        a2 = '( %s /\\ i e. ( 0 ..^ %s ) )' % (AL, BR)
+        ist = w.s([], 'simpr', '( %s -> i e. ( 0 ..^ %s ) )' % (a2, BR))
+        pf = w.s([lift(w, l, a2), lift(w, bfz, a2), ist, w.inst('pfxfv')], 'syl3anc', '( %s -> ( %s ` i ) = ( L ` i ) )' % (a2, Pf))
+        inn = w.s([ist, w.inst('elfzonn0')], 'syl', '( %s -> i e. NN0 )' % a2)
+        ilt = w.s([ist, w.inst('elfzolt2')], 'syl', '( %s -> i < %s )' % (a2, BR))
+        c2 = subcl(w, cl, AL, a2); c2.have('i', 'NN0', inn)
+        ilt2 = w.s([c2.mem('i', 'RR'), lift(w, cl.mem(BR, 'RR'), a2), lift(w, cl.mem(H, 'RR'), a2), ilt, lift(w, le1, a2)], 'ltletrd', '( %s -> i < %s )' % (a2, H))
+        ih = w.s([inn, lift(w, cl.mem(H, 'ZZ'), a2), ilt2, w.inst('elfzo0z')], 'syl3anbrc', '( %s -> i e. ( 0 ..^ %s ) )' % (a2, H))
+        fb = w.s([lift(w, l, a2), ih, w.inst('bwfvb')], 'syl2anc', '( %s -> ( ( L ` i ) = 1o <-> i e. ( bits ` %s ) ) )' % (a2, T))
+        nl = w.s([c2.mem('i', 'RR'), lift(w, cl.mem(BR, 'RR'), a2)], 'ltnled', '( %s -> ( i < %s <-> -. %s <_ i ) )' % (a2, BR, BR))
+        nle = w.s([ilt, nl], 'mpbid', '( %s -> -. %s <_ i )' % (a2, BR))
+        sd = w.s([lift(w, ss, a2)], 'sseld', '( %s -> ( i e. ( bits ` %s ) -> i e. ( ZZ>= ` %s ) ) )' % (a2, T, BR))
+        ul = w.s([sd, w.inst('eluzle')], 'syl6', '( %s -> ( i e. ( bits ` %s ) -> %s <_ i ) )' % (a2, T, BR))
+        nel = w.s([nle, ul], 'mtod', '( %s -> -. i e. ( bits ` %s ) )' % (a2, T))
+        n1 = w.s([nel, fb], 'mtbird', '( %s -> -. ( L ` i ) = 1o )' % a2)
+        sym = w.s([lift(w, l, a2), ih, w.inst('wrdsymbcl')], 'syl2anc', '( %s -> ( L ` i ) e. 2o )' % a2)
+        e2 = w.s([sym, w.inst('bwel2on')], 'syl', '( %s -> ( -. ( L ` i ) = 1o <-> ( L ` i ) = (/) ) )' % a2)
+        z = w.s([n1, e2], 'mpbid', '( %s -> ( L ` i ) = (/) )' % a2)
+        lt = w.s([pf, z], 'eqtrd', '( %s -> ( %s ` i ) = (/) )' % (a2, Pf))
+        al = w.s([lt], 'ralrimiva', '( %s -> A. i e. ( 0 ..^ %s ) ( %s ` i ) = (/) )' % (AL, BR, Pf))
+        j = w.s([pw, pl, al], '3jca', '( %s -> ( %s e. Word 2o /\\ ( # ` %s ) = %s /\\ A. i e. ( 0 ..^ %s ) ( %s ` i ) = (/) ) )' % (AL, Pf, Pf, BR, BR, Pf))
+        zero = w.s([num.closed(w, [], '0el2o', '(/) e. 2o')], 'a1i', '( %s -> (/) e. 2o )' % AL)
+        df = w.s([zero, cl.mem(BR, 'NN0'), w.inst('repsdf2')], 'syl2anc', '( %s -> ( %s = %s <-> ( %s e. Word 2o /\\ ( # ` %s ) = %s /\\ A. i e. ( 0 ..^ %s ) ( %s ` i ) = (/) ) ) )' % (AL, Pf, R0, Pf, Pf, BR, BR, Pf))
+        pe = w.s([j, df], 'mpbird', '( %s -> %s = %s )' % (AL, Pf, R0))
+        o = w.s([pe], 'oveq1d', '( %s -> ( %s ++ %s ) = ( %s ++ %s ) )' % (AL, Pf, RB, R0, RB))
+        fin = w.s([o, sp], 'eqtr3d', '( %s -> ( %s ++ %s ) = L )' % (AL, R0, RB))
+        w.qed([fin], 'eqcomd', '( %s -> L = ( %s ++ %s ) )' % (AL, R0, RB)); w.run()
+    if want('bwborrowsdec2'):
+        A2 = '( %s /\\ %s =/= (/) )' % (AL, RB)
+        w = W('bwborrowsdec2', 'The run decomposition of the borrow chain: the rest, when not empty, starts with a true letter.')
+        cl, l = base(w, A2)
+        hne = w.s([], 'simpr', '( %s -> %s =/= (/) )' % (A2, RB))
+        le1, bfz, hfz = dec_setup(w, cl, A2)
+        sl = w.s([l, bfz, hfz, w.inst('swrdlen')], 'syl3anc', '( %s -> ( # ` %s ) = ( %s - %s ) )' % (A2, RB, H, BR))
+        rv = w.s([cl.mem(RB, 'Word 2o')], 'elexd', '( %s -> %s e. _V )' % (A2, RB))
+        hq = w.s([rv, w.inst('hasheq0')], 'syl', '( %s -> ( ( # ` %s ) = 0 <-> %s = (/) ) )' % (A2, RB, RB))
+        nn = w.s([hne], 'neneqd', '( %s -> -. %s = (/) )' % (A2, RB))
+        n0 = w.s([nn, hq], 'mtbird', '( %s -> -. ( # ` %s ) = 0 )' % (A2, RB))
+        n0b = w.s([n0], 'neqned', '( %s -> ( # ` %s ) =/= 0 )' % (A2, RB))
+        n0c = w.s([sl, n0b], 'eqnetrrd', '( %s -> ( %s - %s ) =/= 0 )' % (A2, H, BR))
+        ns = w.s([cl.mem(BR, 'NN0'), cl.mem(H, 'NN0'), w.inst('nn0sub')], 'syl2anc', '( %s -> ( %s <_ %s <-> ( %s - %s ) e. NN0 ) )' % (A2, BR, H, H, BR))
+        dn = w.s([le1, ns], 'mpbid', '( %s -> ( %s - %s ) e. NN0 )' % (A2, H, BR))
+        dnn = w.s([dn, n0c, w.inst('elnnne0')], 'sylanbrc', '( %s -> ( %s - %s ) e. NN )' % (A2, H, BR))
+        gt = w.s([dnn], 'nngt0d', '( %s -> 0 < ( %s - %s ) )' % (A2, H, BR))
+        pd = w.s([cl.mem(BR, 'RR'), cl.mem(H, 'RR')], 'posdifd', '( %s -> ( %s < %s <-> 0 < ( %s - %s ) ) )' % (A2, BR, H, H, BR))
+        lt = w.s([gt, pd], 'mpbird', '( %s -> %s < %s )' % (A2, BR, H))
+        bfo = w.s([cl.mem(BR, 'NN0'), cl.mem(H, 'ZZ'), lt, w.inst('elfzo0z')], 'syl3anbrc', '( %s -> %s e. ( 0 ..^ %s ) )' % (A2, BR, H))
+        f0 = w.s([l, bfo, hfz, w.inst('swrdfv0')], 'syl3anc', '( %s -> ( %s ` 0 ) = ( L ` %s ) )' % (A2, RB, BR))
+        # T =/= 0 (else BR = H)
+        v = w.s([l, w.inst('borrowsval')], 'syl', '( %s -> %s = %s )' % (A2, BR, BORVv))
+        a3 = '( %s /\\ %s = 0 )' % (A2, T)
+        h3 = w.s([], 'simpr', '( %s -> %s = 0 )' % (a3, T))
+        i3 = w.s([h3], 'iftrued', '( %s -> %s = %s )' % (a3, BORVv, H))
+        eq3 = w.s([lift(w, v, a3), i3], 'eqtrd', '( %s -> %s = %s )' % (a3, BR, H))
+        lt3 = w.s([lift(w, lt, a3), eq3], 'eqbrtrrd', '( %s -> %s < %s )' % (a3, H, H))
+        nr = w.s([lift(w, cl.mem(H, 'RR'), a3)], 'ltnrd', '( %s -> -. %s < %s )' % (a3, H, H))
+        nt0 = w.s([lt3, nr], 'pm2.65da', '( %s -> -. %s = 0 )' % (A2, T))
+        tne = w.s([nt0], 'neqned', '( %s -> %s =/= 0 )' % (A2, T))
+        tnn = w.s([cl.mem(T, 'NN0'), tne, w.inst('elnnne0')], 'sylanbrc', '( %s -> %s e. NN )' % (A2, T)); cl.have(T, 'NN', tnn)
+        # q = T / 2 ^ BR e. NN, -. 2 || q
+        Qb = '( %s / ( 2 ^ %s ) )' % (T, BR)
+        dv = w.s([l, w.inst('borrowsdvds')], 'syl', '( %s -> ( 2 ^ %s ) || %s )' % (A2, BR, T))
+        ndq = w.s([tnn, cl.mem(P2(BR), 'NN'), w.inst('nndivdvds')], 'syl2anc', '( %s -> ( ( 2 ^ %s ) || %s <-> %s e. NN ) )' % (A2, BR, T, Qb))
+        qn = w.s([dv, ndq], 'mpbid', '( %s -> %s e. NN )' % (A2, Qb)); cl.have(Qb, 'NN', qn)
+        nd = w.s([l, tne, w.inst('borrowsndvds')], 'syl2anc', '( %s -> -. ( 2 ^ ( %s + 1 ) ) || %s )' % (A2, BR, T))
+        a4 = '( %s /\\ 2 || %s )' % (A2, Qb)
+        h4 = w.s([], 'simpr', '( %s -> 2 || %s )' % (a4, Qb))
+        c4 = subcl(w, cl, A2, a4)
+        tz = w.s([num.closed(w, [], '2z', '2 e. ZZ')], 'a1i', '( %s -> 2 e. ZZ )' % a4)
+        dcm = w.s([tz, lift(w, cl.mem(Qb, 'ZZ'), a4), lift(w, cl.mem(P2(BR), 'ZZ'), a4), w.inst('dvdscmul')], 'syl3anc', '( %s -> ( 2 || %s -> ( ( 2 ^ %s ) x. 2 ) || ( ( 2 ^ %s ) x. %s ) ) )' % (a4, Qb, BR, BR, Qb))
+        d3 = w.s([h4, dcm], 'mpd', '( %s -> ( ( 2 ^ %s ) x. 2 ) || ( ( 2 ^ %s ) x. %s ) )' % (a4, BR, BR, Qb))
+        ep = exp_p1(w, c4, a4, BR)
+        dc2 = w.s([lift(w, cl.mem(T, 'CC'), a4), lift(w, cl.mem(P2(BR), 'CC'), a4), lift(w, cl.ne0(P2(BR)), a4)], 'divcan2d', '( %s -> ( ( 2 ^ %s ) x. %s ) = %s )' % (a4, BR, Qb, T))
+        dc2r = w.s([dc2], 'eqcomd', '( %s -> %s = ( ( 2 ^ %s ) x. %s ) )' % (a4, T, BR, Qb))
+        br = w.s([ep, dc2r], 'breq12d', '( %s -> ( ( 2 ^ ( %s + 1 ) ) || %s <-> ( ( 2 ^ %s ) x. 2 ) || ( ( 2 ^ %s ) x. %s ) ) )' % (a4, BR, T, BR, BR, Qb))
+        d4 = w.s([d3, br], 'mpbird', '( %s -> ( 2 ^ ( %s + 1 ) ) || %s )' % (a4, BR, T))
+        nq = w.s([d4, lift(w, nd, a4)], 'pm2.65da', '( %s -> -. 2 || %s )' % (A2, Qb))
+        bv = w.s([cl.mem(T, 'ZZ'), cl.mem(BR, 'NN0'), w.inst('bitsval2')], 'syl2anc', '( %s -> ( %s e. ( bits ` %s ) <-> -. 2 || ( |_ ` %s ) ) )' % (A2, BR, T, Qb))
+        fi = w.s([cl.mem(Qb, 'ZZ'), w.inst('flid')], 'syl', '( %s -> ( |_ ` %s ) = %s )' % (A2, Qb, Qb))
+        br2 = w.s([fi], 'breq2d', '( %s -> ( 2 || ( |_ ` %s ) <-> 2 || %s ) )' % (A2, Qb, Qb))
+        nq2 = w.s([nq, br2], 'mtbird', '( %s -> -. 2 || ( |_ ` %s ) )' % (A2, Qb))
+        eb = w.s([nq2, bv], 'mpbird', '( %s -> %s e. ( bits ` %s ) )' % (A2, BR, T))
+        fb = w.s([l, bfo, w.inst('bwfvb')], 'syl2anc', '( %s -> ( ( L ` %s ) = 1o <-> %s e. ( bits ` %s ) ) )' % (A2, BR, BR, T))
+        one = w.s([eb, fb], 'mpbird', '( %s -> ( L ` %s ) = 1o )' % (A2, BR))
+        w.qed([f0, one], 'eqtrd', '( %s -> ( %s ` 0 ) = 1o )' % (A2, RB)); w.run()
+    if want('bwborrowsdec'):
+        w = W('bwborrowsdec', 'The run decomposition of the borrow chain (the interface predLoop reads): L is borrows false letters followed by a rest that is empty or starts with true.')
+        d1 = w.s([], 'bwborrowsdec1', '( %s -> L = ( %s ++ %s ) )' % (AL, REP('(/)', BR), RB))
+        d2 = w.s([], 'bwborrowsdec2', '( ( %s /\\ %s =/= (/) ) -> ( %s ` 0 ) = 1o )' % (AL, RB, RB))
+        d2e = w.s([d2], 'ex', '( %s -> ( %s =/= (/) -> ( %s ` 0 ) = 1o ) )' % (AL, RB, RB))
+        w.qed([d1, d2e], 'jca', '( %s -> ( L = ( %s ++ %s ) /\\ ( %s =/= (/) -> ( %s ` 0 ) = 1o ) ) )' % (AL, REP('(/)', BR), RB, RB, RB)); w.run()
+
+    # ---- predRest (needs the repaired df-predrest)
+    def predrest_facts(w, cl, ante):
+        lA = cl.mem('L', 'Word 2o')
+        rz = cl.mem(R, 'ZZ')
+        le = w.s([lA, w.inst('borrowsle2')], 'syl', '( %s -> %s <_ %s )' % (ante, BR, NP))
+        ns = w.s([cl.mem(BR, 'NN0'), cl.mem(NP, 'NN0'), w.inst('nn0sub')], 'syl2anc', '( %s -> ( %s <_ %s <-> %s e. NN0 ) )' % (ante, BR, NP, DP))
+        dn = w.s([le, ns], 'mpbid', '( %s -> %s e. NN0 )' % (ante, DP)); cl.have(DP, 'NN0', dn)
+        return rz, dn, le
+    if want('predrestval'):
+        w = W('predrestval', 'Value of predRest: the digits of predBits L above the borrow chain.')
+        cl, l = base(w)
+        # the repaired body (T4b-blueprint section 0): tm.defbody reads carmichael.mm, which
+        # an include hides, so the text is taken from the patched copy when it is in use
+        import a1blib as _a1
+        src = 'scratch/carmichael-t4bfix.mm' if 't4bfix' in os.environ.get('MM_DB', '') else 'carmichael.mm'
+        txt = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', src)).read()
+        i0 = txt.index('df-predrest $a'); j0 = txt.index('$.', i0); toks = txt[i0:j0].split()
+        assert toks[:4] == ['df-predrest', '$a', '|-', 'predRest'] and toks[4] == '='
+        st, val = _a1.defapply(w, cl, 'df-predrest', 'predRest', ['L'], body=' '.join(toks[5:])); assert val == BWRD(R, DP), val
+        promote(w, st); w.run()
+    if want('predrestcl'):
+        w = W('predrestcl', 'Closure of predRest: a bit word.')
+        cl, l = base(w)
+        predrest_facts(w, cl, AL)
+        v = w.s([], 'predrestval', '( %s -> %s = %s )' % (AL, PR, BWRD(R, DP)))
+        w.qed([v, cl.mem(BWRD(R, DP), 'Word 2o')], 'eqeltrd', '( %s -> %s e. Word 2o )' % (AL, PR)); w.run()
+    if want('predrestlen'):
+        w = W('predrestlen', 'predRest L is at most as long as L.')
+        cl, l = base(w)
+        predrest_facts(w, cl, AL)
+        v = w.s([], 'predrestval', '( %s -> %s = %s )' % (AL, PR, BWRD(R, DP)))
+        f = w.s([v], 'fveq2d', '( %s -> ( # ` %s ) = ( # ` %s ) )' % (AL, PR, BWRD(R, DP)))
+        bl = w.s([cl.mem(R, 'ZZ'), cl.mem(DP, 'NN0'), w.inst('bwrdlen')], 'syl2anc', '( %s -> ( # ` %s ) = %s )' % (AL, BWRD(R, DP), DP))
+        e = w.s([f, bl], 'eqtrd', '( %s -> ( # ` %s ) = %s )' % (AL, PR, DP))
+        pl = w.s([], 'predbitslen', '( %s -> %s <_ %s )' % (AL, NP, H))
+        g = cl.ge0(BR)
+        for E in (BR, NP, H):
+            cl.leaf(E, 'RR', cl.mem(E, 'RR'))
+        la = linarith(w, AL, [pl, g], '%s <_ %s' % (DP, H), closure=cl)
+        w.qed([e, la], 'eqbrtrd', '( %s -> ( # ` %s ) <_ %s )' % (AL, PR, H)); w.run()
+    if want('predbitseq'):
+        w = W('predbitseq', 'predBits L is the borrow chain of true letters followed by predRest L (Lean: predBits_eq).')
+        cl, l = base(w)
+        rz, dn, le = predrest_facts(w, cl, AL)
+        v = w.s([], 'predrestval', '( %s -> %s = %s )' % (AL, PR, BWRD(R, DP)))
+        pv = w.s([], 'predbitsval', '( %s -> %s = %s )' % (AL, PRED, BWRD(Tm1, MPv)))
+        R1 = REP('1o', BR); RHS = '( %s ++ %s )' % (R1, PR)
+        bv = w.s([], 'borrowsval', '( %s -> %s = %s )' % (AL, BR, BORVv))
+        l2 = w.s([], 'predbitslen2', '( %s -> %s = %s )' % (AL, NP, MPv))
+        # case T = 0: PRED = ( -u 1 bwrd H ) = ( 1o repeatS H ), PR = (/), BR = H
+        a1 = '( %s /\\ %s )' % (AL, COND0); h1 = w.s([], 'simpr', '( %s -> %s )' % (a1, COND0))
+        c1 = subcl(w, cl, AL, a1)
+        i1 = w.s([h1], 'iftrued', '( %s -> %s = %s )' % (a1, BORVv, H))
+        eqb = w.s([lift(w, bv, a1), i1], 'eqtrd', '( %s -> %s = %s )' % (a1, BR, H))
+        # -. ( 2 x. T ) = 2 ^ H
+        z2 = w.s([h1], 'oveq2d', '( %s -> ( 2 x. %s ) = ( 2 x. 0 ) )' % (a1, T))
+        z = w.s([num.closed(w, [], '2t0e0', '( 2 x. 0 ) = 0')], 'a1i', '( %s -> ( 2 x. 0 ) = 0 )' % a1)
+        z3 = w.s([z2, z], 'eqtrd', '( %s -> ( 2 x. %s ) = 0 )' % (a1, T))
+        pne = w.s([lift(w, cl.mem(PH, 'NN'), a1)], 'nnne0d', '( %s -> %s =/= 0 )' % (a1, PH))
+        pne2 = w.s([pne], 'necomd', '( %s -> 0 =/= %s )' % (a1, PH))
+        ne = w.s([z3, pne2], 'eqnetrd', '( %s -> ( 2 x. %s ) =/= %s )' % (a1, T, PH))
+        nc = w.s([ne], 'neneqd', '( %s -> -. %s )' % (a1, CONDP))
+        im = w.s([nc], 'iffalsed', '( %s -> %s = %s )' % (a1, MPv, H))
+        np1 = w.s([lift(w, l2, a1), im], 'eqtrd', '( %s -> %s = %s )' % (a1, NP, H))
+        # PR = (/)
+        dp0 = w.s([np1, eqb], 'oveq12d', '( %s -> %s = ( %s - %s ) )' % (a1, DP, H, H))
+        si = w.s([lift(w, cl.mem(H, 'CC'), a1)], 'subidd', '( %s -> ( %s - %s ) = 0 )' % (a1, H, H))
+        dp1 = w.s([dp0, si], 'eqtrd', '( %s -> %s = 0 )' % (a1, DP))
+        o1 = w.s([dp1], 'oveq2d', '( %s -> %s = ( %s bwrd 0 ) )' % (a1, BWRD(R, DP), R))
+        b0 = w.s([lift(w, rz, a1), w.inst('bwrd0')], 'syl', '( %s -> ( %s bwrd 0 ) = (/) )' % (a1, R))
+        pr0 = w.s([lift(w, v, a1), o1, b0], '3eqtrd', '( %s -> %s = (/) )' % (a1, PR))
+        # RHS = ( 1o repeatS H )
+        rr = w.s([w.s([eqb], 'oveq2d', '( %s -> %s = %s )' % (a1, R1, REP('1o', H))), pr0], 'oveq12d', '( %s -> %s = ( %s ++ (/) ) )' % (a1, RHS, REP('1o', H)))
+        cr = w.s([c1.mem(REP('1o', H), 'Word 2o'), w.inst('ccatrid')], 'syl', '( %s -> ( %s ++ (/) ) = %s )' % (a1, REP('1o', H), REP('1o', H)))
+        rr2 = w.s([rr, cr], 'eqtrd', '( %s -> %s = %s )' % (a1, RHS, REP('1o', H)))
+        # PRED = ( -u 1 bwrd H )
+        m1 = w.s([h1], 'oveq1d', '( %s -> %s = ( 0 - 1 ) )' % (a1, Tm1))
+        dn1 = num.closed(w, [], 'df-neg', '-u 1 = ( 0 - 1 )'); dn1d = w.s([dn1], 'a1i', '( %s -> -u 1 = ( 0 - 1 ) )' % a1)
+        m1b = w.s([m1, dn1d], 'eqtr4d', '( %s -> %s = -u 1 )' % (a1, Tm1))
+        o2 = w.s([m1b, im], 'oveq12d', '( %s -> %s = ( -u 1 bwrd %s ) )' % (a1, BWRD(Tm1, MPv), H))
+        br1 = w.s([lift(w, cl.mem(H, 'NN0'), a1), w.inst('bwrep1')], 'syl', '( %s -> %s = ( -u 1 bwrd %s ) )' % (a1, REP('1o', H), H))
+        pe1 = w.s([lift(w, pv, a1), o2], 'eqtrd', '( %s -> %s = ( -u 1 bwrd %s ) )' % (a1, PRED, H))
+        pe2 = w.s([pe1, br1], 'eqtr4d', '( %s -> %s = %s )' % (a1, PRED, REP('1o', H)))
+        s1 = w.s([pe2, rr2], 'eqtr4d', '( %s -> %s = %s )' % (a1, PRED, RHS))
+        # case T =/= 0
+        a2 = '( %s /\\ -. %s )' % (AL, COND0); h2 = w.s([], 'simpr', '( %s -> -. %s )' % (a2, COND0))
+        c2 = subcl(w, cl, AL, a2)
+        tne = w.s([h2], 'neqned', '( %s -> %s =/= 0 )' % (a2, T))
+        tnn = w.s([lift(w, cl.mem(T, 'NN0'), a2), tne, w.inst('elnnne0')], 'sylanbrc', '( %s -> %s e. NN )' % (a2, T)); c2.have(T, 'NN', tnn)
+        g1 = w.s([tnn], 'nnge1d', '( %s -> 1 <_ %s )' % (a2, T))
+        Qb = '( %s / ( 2 ^ %s ) )' % (T, BR); PB = P2(BR)
+        dv = w.s([lift(w, l, a2), w.inst('borrowsdvds')], 'syl', '( %s -> %s || %s )' % (a2, PB, T))
+        ndq = w.s([tnn, c2.mem(PB, 'NN'), w.inst('nndivdvds')], 'syl2anc', '( %s -> ( %s || %s <-> %s e. NN ) )' % (a2, PB, T, Qb))
+        qn = w.s([dv, ndq], 'mpbid', '( %s -> %s e. NN )' % (a2, Qb)); c2.have(Qb, 'NN', qn)
+        Qm = '( %s - 1 )' % Qb
+        qm = w.s([qn, w.inst('nnm1nn0')], 'syl', '( %s -> %s e. NN0 )' % (a2, Qm)); c2.have(Qm, 'NN0', qm)
+        dc1 = w.s([c2.mem(T, 'CC'), c2.mem(PB, 'CC'), c2.ne0(PB)], 'divcan1d', '( %s -> ( %s x. %s ) = %s )' % (a2, Qb, PB, T))
+        dc2 = w.s([c2.mem(T, 'CC'), c2.mem(PB, 'CC'), c2.ne0(PB)], 'divcan2d', '( %s -> ( %s x. %s ) = %s )' % (a2, PB, Qb, T))
+        # R = Qb - 1 by flbi
+        X = '( %s / %s )' % (Tm1, PB)
+        sd = w.s([c2.mem(Qb, 'CC'), w.s([], '1cnd', '( %s -> 1 e. CC )' % a2), c2.mem(PB, 'CC')], 'subdird', '( %s -> ( %s x. %s ) = ( ( %s x. %s ) - ( 1 x. %s ) ) )' % (a2, Qm, PB, Qb, PB, PB))
+        m1 = w.s([c2.mem(PB, 'CC')], 'mullidd', '( %s -> ( 1 x. %s ) = %s )' % (a2, PB, PB))
+        sd2 = w.s([dc1, m1], 'oveq12d', '( %s -> ( ( %s x. %s ) - ( 1 x. %s ) ) = ( %s - %s ) )' % (a2, Qb, PB, PB, T, PB))
+        sd3 = w.s([sd, sd2], 'eqtrd', '( %s -> ( %s x. %s ) = ( %s - %s ) )' % (a2, Qm, PB, T, PB))
+        ge1 = w.s([c2.mem(PB, 'NN')], 'nnge1d', '( %s -> 1 <_ %s )' % (a2, PB))
+        for E in ('( %s x. %s )' % (Qm, PB), T, PB, Qb):
+            c2.leaf(E, 'RR', c2.mem(E, 'RR'))
+        lo = linarith(w, a2, [sd3, ge1], '( %s x. %s ) <_ %s' % (Qm, PB, Tm1), closure=c2)
+        j3 = w.s([c2.mem(PB, 'RR'), c2.gt0(PB)], 'jca', '( %s -> ( %s e. RR /\\ 0 < %s ) )' % (a2, PB, PB))
+        lmd = w.s([c2.mem(Qm, 'RR'), c2.mem(Tm1, 'RR'), j3, w.inst('lemuldiv')], 'syl3anc', '( %s -> ( ( %s x. %s ) <_ %s <-> %s <_ %s ) )' % (a2, Qm, PB, Tm1, Qm, X))
+        lo2 = w.s([lo, lmd], 'mpbid', '( %s -> %s <_ %s )' % (a2, Qm, X))
+        ltm = w.s([c2.mem(T, 'RR')], 'ltm1d', '( %s -> %s < %s )' % (a2, Tm1, T))
+        hi0 = w.s([ltm, dc2], 'breqtrrd', '( %s -> %s < ( %s x. %s ) )' % (a2, Tm1, PB, Qb))
+        ldm = w.s([c2.mem(Tm1, 'RR'), c2.mem(Qb, 'RR'), j3, w.inst('ltdivmul')], 'syl3anc', '( %s -> ( %s < %s <-> %s < ( %s x. %s ) ) )' % (a2, X, Qb, Tm1, PB, Qb))
+        hi1 = w.s([hi0, ldm], 'mpbird', '( %s -> %s < %s )' % (a2, X, Qb))
+        np = w.s([c2.mem(Qb, 'CC'), w.s([], '1cnd', '( %s -> 1 e. CC )' % a2)], 'npcand', '( %s -> ( %s + 1 ) = %s )' % (a2, Qm, Qb))
+        hi = w.s([hi1, np], 'breqtrrd', '( %s -> %s < ( %s + 1 ) )' % (a2, X, Qm))
+        jf = w.s([lo2, hi], 'jca', '( %s -> ( %s <_ %s /\\ %s < ( %s + 1 ) ) )' % (a2, Qm, X, X, Qm))
+        fb = w.s([c2.mem(X, 'RR'), c2.mem(Qm, 'ZZ'), w.inst('flbi')], 'syl2anc', '( %s -> ( ( |_ ` %s ) = %s <-> ( %s <_ %s /\\ %s < ( %s + 1 ) ) ) )' % (a2, X, Qm, Qm, X, X, Qm))
+        req = w.s([jf, fb], 'mpbird', '( %s -> %s = %s )' % (a2, R, Qm))
+        # lengths
+        lr = w.s([c2.mem(R1, 'Word 2o'), c2.mem(PR, 'Word 2o'), w.inst('ccatlen')], 'syl2anc', '( %s -> ( # ` %s ) = ( ( # ` %s ) + ( # ` %s ) ) )' % (a2, RHS, R1, PR))
+        l0 = w.s([c2.mem('1o', '_V'), c2.mem(BR, 'NN0'), w.inst('repswlen')], 'syl2anc', '( %s -> ( # ` %s ) = %s )' % (a2, R1, BR))
+        f = w.s([lift(w, v, a2)], 'fveq2d', '( %s -> ( # ` %s ) = ( # ` %s ) )' % (a2, PR, BWRD(R, DP)))
+        bl = w.s([lift(w, rz, a2), lift(w, dn, a2), w.inst('bwrdlen')], 'syl2anc', '( %s -> ( # ` %s ) = %s )' % (a2, BWRD(R, DP), DP))
+        li = w.s([f, bl], 'eqtrd', '( %s -> ( # ` %s ) = %s )' % (a2, PR, DP))
+        ad = w.s([l0, li], 'oveq12d', '( %s -> ( ( # ` %s ) + ( # ` %s ) ) = ( %s + %s ) )' % (a2, R1, PR, BR, DP))
+        pc = w.s([c2.mem(BR, 'CC'), c2.mem(NP, 'CC')], 'pncan3d', '( %s -> ( %s + %s ) = %s )' % (a2, BR, DP, NP))
+        lr2 = w.s([lr, ad, pc], '3eqtrd', '( %s -> ( # ` %s ) = %s )' % (a2, RHS, NP))
+        leneq = w.s([lr2], 'eqcomd', '( %s -> ( # ` %s ) = ( # ` %s ) )' % (a2, PRED, RHS))
+        # values
+        tp = w.s([lift(w, l, a2), g1, w.inst('tonatpredbits')], 'syl2anc', '( %s -> ( ( toNat ` %s ) + 1 ) = %s )' % (a2, PRED, T))
+        c2.leaf(TN(PRED), 'RR', c2.mem(TN(PRED), 'RR'))
+        tpe = lineq(w, a2, TN(PRED), Tm1, hyps=[tp], closure=c2)
+        tr = w.s([c2.mem(R1, 'Word 2o'), c2.mem(PR, 'Word 2o'), w.inst('tonatccat')], 'syl2anc', '( %s -> ( toNat ` %s ) = ( ( toNat ` %s ) + ( ( 2 ^ ( # ` %s ) ) x. ( toNat ` %s ) ) ) )' % (a2, RHS, R1, R1, PR))
+        t1 = w.s([c2.mem(BR, 'NN0'), w.inst('tonatrep1')], 'syl', '( %s -> ( toNat ` %s ) = ( %s - 1 ) )' % (a2, R1, PB))
+        # toNat PR = Qm : Qm < 2 ^ DP
+        ltP = w.s([c2.mem(PRED, 'Word 2o'), w.inst('tonatlt')], 'syl', '( %s -> ( toNat ` %s ) < ( 2 ^ %s ) )' % (a2, PRED, NP))
+        lt1 = w.s([tpe, ltP], 'eqbrtrrd', '( %s -> %s < ( 2 ^ %s ) )' % (a2, Tm1, NP))
+        pcr = w.s([pc], 'eqcomd', '( %s -> %s = ( %s + %s ) )' % (a2, NP, BR, DP))
+        o1 = w.s([pcr], 'oveq2d', '( %s -> ( 2 ^ %s ) = ( 2 ^ ( %s + %s ) ) )' % (a2, NP, BR, DP))
+        ea = w.s([w.s([], '2cnd', '( %s -> 2 e. CC )' % a2), c2.mem(BR, 'NN0'), c2.mem(DP, 'NN0'), w.inst('expadd')], 'syl3anc', '( %s -> ( 2 ^ ( %s + %s ) ) = ( %s x. ( 2 ^ %s ) ) )' % (a2, BR, DP, PB, DP))
+        mc = w.s([c2.mem(PB, 'CC'), c2.mem(P2(DP), 'CC')], 'mulcomd', '( %s -> ( %s x. ( 2 ^ %s ) ) = ( ( 2 ^ %s ) x. %s ) )' % (a2, PB, DP, DP, PB))
+        o2 = w.s([o1, ea, mc], '3eqtrd', '( %s -> ( 2 ^ %s ) = ( ( 2 ^ %s ) x. %s ) )' % (a2, NP, DP, PB))
+        lt2 = w.s([lt1, o2], 'breqtrd', '( %s -> %s < ( ( 2 ^ %s ) x. %s ) )' % (a2, Tm1, DP, PB))
+        lt3 = w.s([c2.mem('( %s x. %s )' % (Qm, PB), 'RR'), c2.mem(Tm1, 'RR'), c2.mem('( ( 2 ^ %s ) x. %s )' % (DP, PB), 'RR'), lo, lt2], 'lelttrd', '( %s -> ( %s x. %s ) < ( ( 2 ^ %s ) x. %s ) )' % (a2, Qm, PB, DP, PB))
+        lm = w.s([c2.mem(Qm, 'RR'), c2.mem(P2(DP), 'RR'), j3, w.inst('ltmul1')], 'syl3anc', '( %s -> ( %s < ( 2 ^ %s ) <-> ( %s x. %s ) < ( ( 2 ^ %s ) x. %s ) ) )' % (a2, Qm, DP, Qm, PB, DP, PB))
+        ltQ = w.s([lt3, lm], 'mpbird', '( %s -> %s < ( 2 ^ %s ) )' % (a2, Qm, DP))
+        fv = w.s([lift(w, v, a2)], 'fveq2d', '( %s -> ( toNat ` %s ) = ( toNat ` %s ) )' % (a2, PR, BWRD(R, DP)))
+        o3 = w.s([req], 'oveq1d', '( %s -> %s = %s )' % (a2, BWRD(R, DP), BWRD(Qm, DP)))
+        fv2 = w.s([o3], 'fveq2d', '( %s -> ( toNat ` %s ) = ( toNat ` %s ) )' % (a2, BWRD(R, DP), BWRD(Qm, DP)))
+        tb = w.s([qm, lift(w, dn, a2), ltQ, w.inst('tonatbwrd2')], 'syl3anc', '( %s -> ( toNat ` %s ) = %s )' % (a2, BWRD(Qm, DP), Qm))
+        tpr = w.s([fv, fv2, tb], '3eqtrd', '( %s -> ( toNat ` %s ) = %s )' % (a2, PR, Qm))
+        # ( 2 ^ ( # ` R1 ) ) = PB
+        pl = w.s([l0], 'oveq2d', '( %s -> ( 2 ^ ( # ` %s ) ) = %s )' % (a2, R1, PB))
+        prod = w.s([pl, tpr], 'oveq12d', '( %s -> ( ( 2 ^ ( # ` %s ) ) x. ( toNat ` %s ) ) = ( %s x. %s ) )' % (a2, R1, PR, PB, Qm))
+        sdi = w.s([c2.mem(PB, 'CC'), c2.mem(Qb, 'CC'), w.s([], '1cnd', '( %s -> 1 e. CC )' % a2)], 'subdid', '( %s -> ( %s x. %s ) = ( ( %s x. %s ) - ( %s x. 1 ) ) )' % (a2, PB, Qm, PB, Qb, PB))
+        mr = w.s([c2.mem(PB, 'CC')], 'mulridd', '( %s -> ( %s x. 1 ) = %s )' % (a2, PB, PB))
+        sdi2 = w.s([dc2, mr], 'oveq12d', '( %s -> ( ( %s x. %s ) - ( %s x. 1 ) ) = ( %s - %s ) )' % (a2, PB, Qb, PB, T, PB))
+        prod2 = w.s([prod, sdi, sdi2], '3eqtrd', '( %s -> ( ( 2 ^ ( # ` %s ) ) x. ( toNat ` %s ) ) = ( %s - %s ) )' % (a2, R1, PR, T, PB))
+        sm = w.s([t1, prod2], 'oveq12d', '( %s -> ( ( toNat ` %s ) + ( ( 2 ^ ( # ` %s ) ) x. ( toNat ` %s ) ) ) = ( ( %s - 1 ) + ( %s - %s ) ) )' % (a2, R1, R1, PR, PB, T, PB))
+        idn = lineq(w, a2, '( ( %s - 1 ) + ( %s - %s ) )' % (PB, T, PB), Tm1, closure=c2)
+        trh = w.s([tr, sm, idn], '3eqtrd', '( %s -> ( toNat ` %s ) = %s )' % (a2, RHS, Tm1))
+        veq = w.s([tpe, trh], 'eqtr4d', '( %s -> ( toNat ` %s ) = ( toNat ` %s ) )' % (a2, PRED, RHS))
+        j = w.s([leneq, veq], 'jca', '( %s -> ( ( # ` %s ) = ( # ` %s ) /\\ ( toNat ` %s ) = ( toNat ` %s ) ) )' % (a2, PRED, RHS, PRED, RHS))
+        u = w.s([c2.mem(PRED, 'Word 2o'), c2.mem(RHS, 'Word 2o'), w.inst('bwuniq')], 'syl2anc', '( %s -> ( %s = %s <-> ( ( # ` %s ) = ( # ` %s ) /\\ ( toNat ` %s ) = ( toNat ` %s ) ) ) )' % (a2, PRED, RHS, PRED, RHS, PRED, RHS))
+        s2 = w.s([j, u], 'mpbird', '( %s -> %s = %s )' % (a2, PRED, RHS))
+        w.qed([s1, s2], 'pm2.61dan', '( %s -> %s = %s )' % (AL, PRED, RHS)); w.run()

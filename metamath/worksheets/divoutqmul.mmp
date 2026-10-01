@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutqmul  LOC_AFTER=?
+
+* The divisor times the exact quotient is the dividend.
+
+s1::simpll |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D e. NN )
+s2::simplr |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> R e. NN0 )
+s3::simpr |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( R mod D ) = 0 )
+s4:s1:nnzd |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D e. ZZ )
+s5:s2:nn0zd |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> R e. ZZ )
+s6:s1:nnne0d |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D =/= 0 )
+i7::dvdsval3
+s8:s1,s5,i7:syl2anc |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( D || R <-> ( R mod D ) = 0 ) )
+s9:s8,s3:mpbird |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D || R )
+s10:s4,s6,s5:3jca |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( D e. ZZ /\ D =/= 0 /\ R e. ZZ ) )
+i11::dvdsval2
+s12:s10,i11:syl |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( D || R <-> ( R / D ) e. ZZ ) )
+s13:s12,s9:mpbid |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( R / D ) e. ZZ )
+i14::flid
+s15:s13,i14:syl |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( |_ ` ( R / D ) ) = ( R / D ) )
+s16:s2:nn0red |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> R e. RR )
+s17:s2:nn0ge0d |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> 0 <_ R )
+s18:s16,s17:jca |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( R e. RR /\ 0 <_ R ) )
+s19:s1:nnred |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D e. RR )
+s20:s1:nngt0d |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> 0 < D )
+s21:s19,s20:jca |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( D e. RR /\ 0 < D ) )
+i22::divge0
+s23:s18,s21,i22:syl2anc |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> 0 <_ ( R / D ) )
+i24::elnn0z
+s25:s13,s23,i24:sylanbrc |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( R / D ) e. NN0 )
+s26:s15,s25:eqeltrd |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( |_ ` ( R / D ) ) e. NN0 )
+s27:s1:nnred |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D e. RR )
+s28:s27:recnd |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D e. CC )
+s29:s2:nn0cnd |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> R e. CC )
+s30:s1:nnne0d |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> D =/= 0 )
+i31::divcan2
+s32:s29,s28,s30,i31:syl3anc |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( D x. ( R / D ) ) = R )
+s33:s15:oveq2d |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( D x. ( |_ ` ( R / D ) ) ) = ( D x. ( R / D ) ) )
+qed:s33,s32:eqtrd |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) -> ( D x. ( |_ ` ( R / D ) ) ) = R )
+$)

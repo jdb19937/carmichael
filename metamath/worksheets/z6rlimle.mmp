@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=z6rlimle  LOC_AFTER=?
+
+* A limit of a function on ` RR+ ` bounded in absolute value by ` B ` is bounded by ` B ` ( ~ z6rlimlem ; the norm bound of an integral passes to the limit ` t -> +oo ` ).
+
+s1::simpl |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> ( t e. RR+ |-> A ) ~~>r W )
+s2::simprl |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> B e. RR )
+s3::simprr |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> A. t e. RR+ ( abs ` A ) <_ B )
+s4::z6absle |- ( ( abs ` A ) <_ B -> A e. CC )
+s5:s4:ralimi |- ( A. t e. RR+ ( abs ` A ) <_ B -> A. t e. RR+ A e. CC )
+s6::eqid |- ( t e. RR+ |-> A ) = ( t e. RR+ |-> A )
+s7:s6:fmpt |- ( A. t e. RR+ A e. CC <-> ( t e. RR+ |-> A ) : RR+ --> CC )
+s8:s3,s5:syl |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> A. t e. RR+ A e. CC )
+s9:s8,s7:sylib |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> ( t e. RR+ |-> A ) : RR+ --> CC )
+s10::simpr |- ( ( t e. RR+ /\ ( abs ` A ) <_ B ) -> ( abs ` A ) <_ B )
+i11::z6absle
+s12:s10,i11:syl |- ( ( t e. RR+ /\ ( abs ` A ) <_ B ) -> A e. CC )
+s13::simpl |- ( ( t e. RR+ /\ ( abs ` A ) <_ B ) -> t e. RR+ )
+s14::eqid |- ( t e. RR+ |-> A ) = ( t e. RR+ |-> A )
+s15:s14:fvmpt2 |- ( ( t e. RR+ /\ A e. CC ) -> ( ( t e. RR+ |-> A ) ` t ) = A )
+s16:s13,s12,s15:syl2anc |- ( ( t e. RR+ /\ ( abs ` A ) <_ B ) -> ( ( t e. RR+ |-> A ) ` t ) = A )
+s17:s16:fveq2d |- ( ( t e. RR+ /\ ( abs ` A ) <_ B ) -> ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) = ( abs ` A ) )
+s18::simpr |- ( ( t e. RR+ /\ ( abs ` A ) <_ B ) -> ( abs ` A ) <_ B )
+s19:s17,s18:eqbrtrd |- ( ( t e. RR+ /\ ( abs ` A ) <_ B ) -> ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) <_ B )
+s20:s19:ex |- ( t e. RR+ -> ( ( abs ` A ) <_ B -> ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) <_ B ) )
+s21:s20:ralimia |- ( A. t e. RR+ ( abs ` A ) <_ B -> A. t e. RR+ ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) <_ B )
+s22::nfv |- F/ s ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) <_ B
+s23::nfmpt1 |- F/_ t ( t e. RR+ |-> A )
+s24::nfcv |- F/_ t s
+s25:s23,s24:nffv |- F/_ t ( ( t e. RR+ |-> A ) ` s )
+s26::nfcv |- F/_ t abs
+s27:s26,s25:nffv |- F/_ t ( abs ` ( ( t e. RR+ |-> A ) ` s ) )
+s28::nfcv |- F/_ t <_
+s29::nfcv |- F/_ t B
+s30:s27,s28,s29:nfbr |- F/ t ( abs ` ( ( t e. RR+ |-> A ) ` s ) ) <_ B
+s31::fveq2 |- ( t = s -> ( ( t e. RR+ |-> A ) ` t ) = ( ( t e. RR+ |-> A ) ` s ) )
+s32:s31:fveq2d |- ( t = s -> ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) = ( abs ` ( ( t e. RR+ |-> A ) ` s ) ) )
+s33:s32:breq1d |- ( t = s -> ( ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) <_ B <-> ( abs ` ( ( t e. RR+ |-> A ) ` s ) ) <_ B ) )
+s34:s22,s30,s33:cbvralw |- ( A. t e. RR+ ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) <_ B <-> A. s e. RR+ ( abs ` ( ( t e. RR+ |-> A ) ` s ) ) <_ B )
+s35:s3,s21:syl |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> A. t e. RR+ ( abs ` ( ( t e. RR+ |-> A ) ` t ) ) <_ B )
+s36:s35,s34:sylib |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> A. s e. RR+ ( abs ` ( ( t e. RR+ |-> A ) ` s ) ) <_ B )
+s37:s1,s9:jca |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> ( ( t e. RR+ |-> A ) ~~>r W /\ ( t e. RR+ |-> A ) : RR+ --> CC ) )
+s38:s2,s36:jca |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> ( B e. RR /\ A. s e. RR+ ( abs ` ( ( t e. RR+ |-> A ) ` s ) ) <_ B ) )
+s39:s37,s38:jca |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( t e. RR+ |-> A ) : RR+ --> CC ) /\ ( B e. RR /\ A. s e. RR+ ( abs ` ( ( t e. RR+ |-> A ) ` s ) ) <_ B ) ) )
+i40::z6rlimlem
+qed:s39,i40:syl |- ( ( ( t e. RR+ |-> A ) ~~>r W /\ ( B e. RR /\ A. t e. RR+ ( abs ` A ) <_ B ) ) -> ( abs ` W ) <_ B )
+$)

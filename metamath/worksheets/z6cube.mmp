@@ -1,0 +1,109 @@
+$( <MM> <PROOF_ASST> THEOREM=z6cube  LOC_AFTER=?
+
+* Lean sum_inv_mul_cube_le: sum over ( N RSet R ) of ( 1 / r ) r ^ 3 <_ R ^ 3 (each term is r ^ 2 <_ R ^ 2, at most |_ R <_ R terms).
+
+s1::simpl |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> N e. NN )
+s2::simprl |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> R e. RR )
+s3::simprr |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 1 <_ R )
+i4::z5rsetfi
+s5:s1,s2,i4:syl2anc |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) /\ ( N RSet R ) e. Fin ) )
+s6:s5:simpld |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) )
+s7:s5:simprd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( N RSet R ) e. Fin )
+s8:s6:adantr |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) )
+s9::simpr |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r e. ( N RSet R ) )
+s10:s8,s9:sseldd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r e. ( 1 ... ( |_ ` R ) ) )
+i11::elfznn
+s12:s10,i11:syl |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r e. NN )
+i13::elfzle2
+s14:s10,i13:syl |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r <_ ( |_ ` R ) )
+s15:s12:nncnd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r e. CC )
+s16:s12:nnred |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r e. RR )
+s17:s12:nnne0d |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r =/= 0 )
+s18::2nn0 |- 2 e. NN0
+s19:s18:a1i |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> 2 e. NN0 )
+i20::expp1
+s21:s15,s19,i20:syl2anc |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( r ^ ( 2 + 1 ) ) = ( ( r ^ 2 ) x. r ) )
+s22::2p1e3 |- ( 2 + 1 ) = 3
+s23:s22:oveq2i |- ( r ^ ( 2 + 1 ) ) = ( r ^ 3 )
+s24:s23,s21:eqtr3id |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( r ^ 3 ) = ( ( r ^ 2 ) x. r ) )
+s25:s24:oveq2d |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. ( r ^ 3 ) ) = ( ( 1 / r ) x. ( ( r ^ 2 ) x. r ) ) )
+s26:s15,s17:reccld |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( 1 / r ) e. CC )
+s27::2nn0 |- 2 e. NN0
+s28:s27:a1i |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> 2 e. NN0 )
+s29:s15,s28:expcld |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( r ^ 2 ) e. CC )
+s30:s26,s29,s15:mul12d |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. ( ( r ^ 2 ) x. r ) ) = ( ( r ^ 2 ) x. ( ( 1 / r ) x. r ) ) )
+i31::recid2
+s32:s15,s17,i31:syl2anc |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. r ) = 1 )
+s33:s32:oveq2d |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( r ^ 2 ) x. ( ( 1 / r ) x. r ) ) = ( ( r ^ 2 ) x. 1 ) )
+s34:s29:mulridd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( r ^ 2 ) x. 1 ) = ( r ^ 2 ) )
+s35:s25,s30:eqtrd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. ( r ^ 3 ) ) = ( ( r ^ 2 ) x. ( ( 1 / r ) x. r ) ) )
+s36:s35,s33:eqtrd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. ( r ^ 3 ) ) = ( ( r ^ 2 ) x. 1 ) )
+s37:s36,s34:eqtrd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. ( r ^ 3 ) ) = ( r ^ 2 ) )
+s38:s2:adantr |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> R e. RR )
+i39::flle
+s40:s38,i39:syl |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( |_ ` R ) <_ R )
+i41::reflcl
+s42:s38,i41:syl |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( |_ ` R ) e. RR )
+s43:s16,s42,s38,s14,s40:letrd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r <_ R )
+s44:s12:nnnn0d |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> r e. NN0 )
+s45:s44:nn0ge0d |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> 0 <_ r )
+s46:s16,s45:jca |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( r e. RR /\ 0 <_ r ) )
+s47:s38,s43:jca |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( R e. RR /\ r <_ R ) )
+i48::le2sq2
+s49:s46,s47,i48:syl2anc |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( r ^ 2 ) <_ ( R ^ 2 ) )
+s50:s37,s49:eqbrtrd |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. ( r ^ 3 ) ) <_ ( R ^ 2 ) )
+i51::nnrecre
+s52:s12,i51:syl |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( 1 / r ) e. RR )
+s53::3nn0 |- 3 e. NN0
+s54:s53:a1i |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> 3 e. NN0 )
+s55:s16,s54:reexpcld |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( r ^ 3 ) e. RR )
+s56:s52,s55:remulcld |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( ( 1 / r ) x. ( r ^ 3 ) ) e. RR )
+s57:s2:resqcld |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R ^ 2 ) e. RR )
+s58:s57:adantr |- ( ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) /\ r e. ( N RSet R ) ) -> ( R ^ 2 ) e. RR )
+s59:s7,s56,s58,s50:fsumle |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> sum_ r e. ( N RSet R ) ( ( 1 / r ) x. ( r ^ 3 ) ) <_ sum_ r e. ( N RSet R ) ( R ^ 2 ) )
+s60:s57:recnd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R ^ 2 ) e. CC )
+i61::fsumconst
+s62:s7,s60,i61:syl2anc |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> sum_ r e. ( N RSet R ) ( R ^ 2 ) = ( ( # ` ( N RSet R ) ) x. ( R ^ 2 ) ) )
+s63::0le1 |- 0 <_ 1
+s64:s63:a1i |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 0 <_ 1 )
+s65:s64,s3:jca |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( 0 <_ 1 /\ 1 <_ R ) )
+s66::0re |- 0 e. RR
+s67:s66:a1i |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 0 e. RR )
+s68::1re |- 1 e. RR
+s69:s68:a1i |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 1 e. RR )
+s70::0le1 |- 0 <_ 1
+s71:s70:a1i |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 0 <_ 1 )
+s72:s67,s69,s2,s71,s3:letrd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 0 <_ R )
+s73:s2,s72:jca |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R e. RR /\ 0 <_ R ) )
+i74::z5rsetcard
+s75:s1,s73,i74:syl2anc |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( # ` ( N RSet R ) ) <_ ( |_ ` R ) )
+i76::hashcl
+s77:s7,i76:syl |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( # ` ( N RSet R ) ) e. NN0 )
+s78:s77:nn0red |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( # ` ( N RSet R ) ) e. RR )
+i79::reflcl
+s80:s2,i79:syl |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( |_ ` R ) e. RR )
+i81::flle
+s82:s2,i81:syl |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( |_ ` R ) <_ R )
+s83:s78,s80,s2,s75,s82:letrd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( # ` ( N RSet R ) ) <_ R )
+s84:s2:sqge0d |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 0 <_ ( R ^ 2 ) )
+s85:s78,s2,s57,s84,s83:lemul1ad |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( ( # ` ( N RSet R ) ) x. ( R ^ 2 ) ) <_ ( R x. ( R ^ 2 ) ) )
+s86:s2:recnd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> R e. CC )
+s87::2nn0 |- 2 e. NN0
+s88:s87:a1i |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 2 e. NN0 )
+i89::expp1
+s90:s86,s88,i89:syl2anc |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R ^ ( 2 + 1 ) ) = ( ( R ^ 2 ) x. R ) )
+s91::2p1e3 |- ( 2 + 1 ) = 3
+s92:s91:oveq2i |- ( R ^ ( 2 + 1 ) ) = ( R ^ 3 )
+s93:s92,s90:eqtr3id |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R ^ 3 ) = ( ( R ^ 2 ) x. R ) )
+s94:s57:recnd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R ^ 2 ) e. CC )
+s95:s94,s86:mulcomd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( ( R ^ 2 ) x. R ) = ( R x. ( R ^ 2 ) ) )
+s96:s93,s95:eqtrd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R ^ 3 ) = ( R x. ( R ^ 2 ) ) )
+s97:s85,s96:breqtrrd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( ( # ` ( N RSet R ) ) x. ( R ^ 2 ) ) <_ ( R ^ 3 ) )
+s98:s62,s97:eqbrtrd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> sum_ r e. ( N RSet R ) ( R ^ 2 ) <_ ( R ^ 3 ) )
+s99:s7,s56:fsumrecl |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> sum_ r e. ( N RSet R ) ( ( 1 / r ) x. ( r ^ 3 ) ) e. RR )
+s100:s7,s58:fsumrecl |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> sum_ r e. ( N RSet R ) ( R ^ 2 ) e. RR )
+s101::3nn0 |- 3 e. NN0
+s102:s101:a1i |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> 3 e. NN0 )
+s103:s2,s102:reexpcld |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> ( R ^ 3 ) e. RR )
+qed:s99,s100,s103,s59,s98:letrd |- ( ( N e. NN /\ ( R e. RR /\ 1 <_ R ) ) -> sum_ r e. ( N RSet R ) ( ( 1 / r ) x. ( r ^ 3 ) ) <_ ( R ^ 3 ) )
+$)

@@ -1,0 +1,16 @@
+$( <MM> <PROOF_ASST> THEOREM=bwcarrycl  LOC_AFTER=?
+
+* The carry is a Boolean.
+
+s1::simpl1 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> A e. ZZ )
+s2::simpl2 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> B e. ZZ )
+s3::simpl3 |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> C e. 2o )
+s4::simpr |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> I e. NN0 )
+s5::bwcarry |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( majBit ( A bwFold B ) C ) ` I ) = if ( ( 2 ^ I ) <_ ( ( ( A mod ( 2 ^ I ) ) + ( B mod ( 2 ^ I ) ) ) + ( bToNat ` C ) ) , 1o , (/) ) )
+s6::1oel2o |- 1o e. 2o
+s7:s6:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> 1o e. 2o )
+s8::0el2o |- (/) e. 2o
+s9:s8:a1i |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> (/) e. 2o )
+s10:s7,s9:ifcld |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> if ( ( 2 ^ I ) <_ ( ( ( A mod ( 2 ^ I ) ) + ( B mod ( 2 ^ I ) ) ) + ( bToNat ` C ) ) , 1o , (/) ) e. 2o )
+qed:s5,s10:eqeltrd |- ( ( ( A e. ZZ /\ B e. ZZ /\ C e. 2o ) /\ I e. NN0 ) -> ( ( majBit ( A bwFold B ) C ) ` I ) e. 2o )
+$)

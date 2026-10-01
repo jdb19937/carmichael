@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=g2t5  LOC_AFTER=?
+
+* Closure rules of tools/cl.py for complex exponentiation, the natural-number ceiling and floor, the iterated logarithm and the Moebius function.
+
+s1::simpll |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> X e. RR+ )
+s2::simplr |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> Y e. RR )
+s3::simpr |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> N e. NN )
+s4:s1:rpred |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> X e. RR )
+s5:s1:rpge0d |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> 0 <_ X )
+s6:s4,s5,s2:recxpcld |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( X ^c Y ) e. RR )
+i7::nceilcl
+s8:s2,i7:syl |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( Nceil ` Y ) e. NN0 )
+s9:s8:nn0zd |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( Nceil ` Y ) e. ZZ )
+s10:s9:zred |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( Nceil ` Y ) e. RR )
+i11::nfloorcl
+s12:s2,i11:syl |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( Nfloor ` Y ) e. NN0 )
+s13:s12:nn0zd |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( Nfloor ` Y ) e. ZZ )
+s14:s13:zred |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( Nfloor ` Y ) e. RR )
+s15:s10,s14:readdcld |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( ( Nceil ` Y ) + ( Nfloor ` Y ) ) e. RR )
+s16:s6,s15:remulcld |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( ( X ^c Y ) x. ( ( Nceil ` Y ) + ( Nfloor ` Y ) ) ) e. RR )
+s17::2nn0 |- 2 e. NN0
+s18:s17:a1i |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> 2 e. NN0 )
+s19:s3:nnnn0d |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> N e. NN0 )
+i20::nlogcl
+s21:s18,s19,i20:syl2anc |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( 2 Nlog N ) e. NN0 )
+s22:s21:nn0zd |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( 2 Nlog N ) e. ZZ )
+s23:s22:zred |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( 2 Nlog N ) e. RR )
+i24::mucl
+s25:s3,i24:syl |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( mmu ` N ) e. ZZ )
+s26:s25:zred |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( mmu ` N ) e. RR )
+s27:s23,s26:resubcld |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( ( 2 Nlog N ) - ( mmu ` N ) ) e. RR )
+s28:s16,s27:readdcld |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( ( ( X ^c Y ) x. ( ( Nceil ` Y ) + ( Nfloor ` Y ) ) ) + ( ( 2 Nlog N ) - ( mmu ` N ) ) ) e. RR )
+qed:s28:idi |- ( ( ( X e. RR+ /\ Y e. RR ) /\ N e. NN ) -> ( ( ( X ^c Y ) x. ( ( Nceil ` Y ) + ( Nfloor ` Y ) ) ) + ( ( 2 Nlog N ) - ( mmu ` N ) ) ) e. RR )
+$)

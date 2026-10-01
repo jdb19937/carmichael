@@ -1,0 +1,81 @@
+$( <MM> <PROOF_ASST> THEOREM=t21zs  LOC_AFTER=?
+
+* ` sum_ ( 1 <_ n <_ M ) n ^ - ( 1 + U ) <_ 1 + 1 / U ` for ` U > 0 ` (Lean ` sum_rpow_neg_one_sub_le ` ; ~ zserbnd , ~ isumless ).
+
+s1::id |- ( ( U e. RR+ /\ M e. ZZ ) -> ( U e. RR+ /\ M e. ZZ ) )
+s2:s1:simpld |- ( ( U e. RR+ /\ M e. ZZ ) -> U e. RR+ )
+s3:s1:simprd |- ( ( U e. RR+ /\ M e. ZZ ) -> M e. ZZ )
+s4:s2:rpred |- ( ( U e. RR+ /\ M e. ZZ ) -> U e. RR )
+s5::1re |- 1 e. RR
+s6:s5:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 e. RR )
+s7:s6,s4:readdcld |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 + U ) e. RR )
+s8:s2:rpgt0d |- ( ( U e. RR+ /\ M e. ZZ ) -> 0 < U )
+i9::leid
+s10::1re |- 1 e. RR
+s11:s10,i9:ax-mp |- 1 <_ 1
+s12:s11:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 <_ 1 )
+s13:s10:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 e. RR )
+s14::0re |- 0 e. RR
+s15:s14:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 0 e. RR )
+s16:s13,s15,s13,s4,s12,s8:leltaddd |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 + 0 ) < ( 1 + U ) )
+s17::ax-1cn |- 1 e. CC
+s18:s17:addridi |- ( 1 + 0 ) = 1
+s19:s18:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 + 0 ) = 1 )
+s20:s19,s16:eqbrtrrd |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 < ( 1 + U ) )
+s21::nnuz |- NN = ( ZZ>= ` 1 )
+s22::1z |- 1 e. ZZ
+s23:s22:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 e. ZZ )
+s24::fzfid |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 ... M ) e. Fin )
+s25::1nn |- 1 e. NN
+s26:s25:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 e. NN )
+i27::fzssnn
+s28:s26,i27:syl |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 ... M ) C_ NN )
+s29::simpr |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> k e. NN )
+s30:s29:nnrpd |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> k e. RR+ )
+s31:s7:adantr |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> ( 1 + U ) e. RR )
+s32:s31:renegcld |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> -u ( 1 + U ) e. RR )
+s33:s30,s32:rpcxpcld |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> ( k ^c -u ( 1 + U ) ) e. RR+ )
+s34::eqid |- ( n e. NN |-> ( n ^c -u ( 1 + U ) ) ) = ( n e. NN |-> ( n ^c -u ( 1 + U ) ) )
+s35:s34:a1i |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> ( n e. NN |-> ( n ^c -u ( 1 + U ) ) ) = ( n e. NN |-> ( n ^c -u ( 1 + U ) ) ) )
+s36::simpr |- ( ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) /\ n = k ) -> n = k )
+s37:s36:oveq1d |- ( ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) /\ n = k ) -> ( n ^c -u ( 1 + U ) ) = ( k ^c -u ( 1 + U ) ) )
+s38:s35,s37,s29,s33:fvmptd |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> ( ( n e. NN |-> ( n ^c -u ( 1 + U ) ) ) ` k ) = ( k ^c -u ( 1 + U ) ) )
+s39:s7,s20:jca |- ( ( U e. RR+ /\ M e. ZZ ) -> ( ( 1 + U ) e. RR /\ 1 < ( 1 + U ) ) )
+i40::zsercvg
+s41:s39,i40:syl |- ( ( U e. RR+ /\ M e. ZZ ) -> seq 1 ( + , ( n e. NN |-> ( n ^c -u ( 1 + U ) ) ) ) e. dom ~~> )
+s42:s33:rpred |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> ( k ^c -u ( 1 + U ) ) e. RR )
+s43:s33:rpge0d |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> 0 <_ ( k ^c -u ( 1 + U ) ) )
+s44:s21,s23,s24,s28,s38,s42,s43,s41:isumless |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ k e. ( 1 ... M ) ( k ^c -u ( 1 + U ) ) <_ sum_ k e. NN ( k ^c -u ( 1 + U ) ) )
+s45:s7,s20:jca |- ( ( U e. RR+ /\ M e. ZZ ) -> ( ( 1 + U ) e. RR /\ 1 < ( 1 + U ) ) )
+i46::zserbnd
+s47:s45,i46:syl |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ k e. NN ( k ^c -u ( 1 + U ) ) <_ ( 1 + ( 1 / ( ( 1 + U ) - 1 ) ) ) )
+s48::ax-1cn |- 1 e. CC
+s49:s48:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 e. CC )
+s50:s4:recnd |- ( ( U e. RR+ /\ M e. ZZ ) -> U e. CC )
+s51:s49,s50:pncan2d |- ( ( U e. RR+ /\ M e. ZZ ) -> ( ( 1 + U ) - 1 ) = U )
+s52:s51:oveq2d |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 / ( ( 1 + U ) - 1 ) ) = ( 1 / U ) )
+s53:s52:oveq2d |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 + ( 1 / ( ( 1 + U ) - 1 ) ) ) = ( 1 + ( 1 / U ) ) )
+s54:s47,s53:breqtrd |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ k e. NN ( k ^c -u ( 1 + U ) ) <_ ( 1 + ( 1 / U ) ) )
+s55::oveq1 |- ( k = n -> ( k ^c -u ( 1 + U ) ) = ( n ^c -u ( 1 + U ) ) )
+s56:s55:cbvsumv |- sum_ k e. ( 1 ... M ) ( k ^c -u ( 1 + U ) ) = sum_ n e. ( 1 ... M ) ( n ^c -u ( 1 + U ) )
+s57::simpr |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. ( 1 ... M ) ) -> k e. ( 1 ... M ) )
+i58::elfznn
+s59:s57,i58:syl |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. ( 1 ... M ) ) -> k e. NN )
+s60:s59:nnrpd |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. ( 1 ... M ) ) -> k e. RR+ )
+s61:s7:adantr |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. ( 1 ... M ) ) -> ( 1 + U ) e. RR )
+s62:s61:renegcld |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. ( 1 ... M ) ) -> -u ( 1 + U ) e. RR )
+s63:s60,s62:rpcxpcld |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. ( 1 ... M ) ) -> ( k ^c -u ( 1 + U ) ) e. RR+ )
+s64:s63:rpred |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. ( 1 ... M ) ) -> ( k ^c -u ( 1 + U ) ) e. RR )
+s65:s24,s64:fsumrecl |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ k e. ( 1 ... M ) ( k ^c -u ( 1 + U ) ) e. RR )
+s66::1re |- 1 e. RR
+s67:s66:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> 1 e. RR )
+s68:s2:rpreccld |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 / U ) e. RR+ )
+s69:s68:rpred |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 / U ) e. RR )
+s70:s67,s69:readdcld |- ( ( U e. RR+ /\ M e. ZZ ) -> ( 1 + ( 1 / U ) ) e. RR )
+s71:s33:rpred |- ( ( ( U e. RR+ /\ M e. ZZ ) /\ k e. NN ) -> ( k ^c -u ( 1 + U ) ) e. RR )
+s72:s21,s23,s38,s71,s41:isumrecl |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ k e. NN ( k ^c -u ( 1 + U ) ) e. RR )
+s73:s65,s72,s70,s44,s54:letrd |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ k e. ( 1 ... M ) ( k ^c -u ( 1 + U ) ) <_ ( 1 + ( 1 / U ) ) )
+s74:s56:a1i |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ k e. ( 1 ... M ) ( k ^c -u ( 1 + U ) ) = sum_ n e. ( 1 ... M ) ( n ^c -u ( 1 + U ) ) )
+s75:s74,s73:eqbrtrrd |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ n e. ( 1 ... M ) ( n ^c -u ( 1 + U ) ) <_ ( 1 + ( 1 / U ) ) )
+qed:s75:idi |- ( ( U e. RR+ /\ M e. ZZ ) -> sum_ n e. ( 1 ... M ) ( n ^c -u ( 1 + U ) ) <_ ( 1 + ( 1 / U ) ) )
+$)

@@ -1,0 +1,33 @@
+$( <MM> <PROOF_ASST> THEOREM=subborrowcons2  LOC_AFTER=?
+
+* Lean clause 3 of subBorrow: the first operand is empty.
+
+s1::simpll |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> B e. 2o )
+s2::simplr |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> C e. 2o )
+s3::simpr |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> Y e. Word 2o )
+s4::wrd0 |- (/) e. Word 2o
+s5:s4:a1i |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> (/) e. Word 2o )
+i6::s1cl
+s7:s1,i6:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> <" B "> e. Word 2o )
+i8::ccatcl
+s9:s7,s3,i8:syl2anc |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( <" B "> ++ Y ) e. Word 2o )
+i10::subborrowpad2
+s11:s5,s9,s2,i10:syl3anc |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( (/) subBorrow ( <" B "> ++ Y ) ) ` C ) = ( ( ( (/) ++ <" (/) "> ) subBorrow ( <" B "> ++ Y ) ) ` C ) )
+s12::0el2o |- (/) e. 2o
+s13:s12:a1i |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> (/) e. 2o )
+i14::s1cl
+s15:s13,i14:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> <" (/) "> e. Word 2o )
+i16::ccatlid
+s17:s15,i16:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) ++ <" (/) "> ) = <" (/) "> )
+i18::ccatrid
+s19:s15,i18:syl |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( <" (/) "> ++ (/) ) = <" (/) "> )
+s20:s19:eqcomd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> <" (/) "> = ( <" (/) "> ++ (/) ) )
+s21:s17,s20:eqtrd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) ++ <" (/) "> ) = ( <" (/) "> ++ (/) ) )
+s22:s21:oveq1d |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( (/) ++ <" (/) "> ) subBorrow ( <" B "> ++ Y ) ) = ( ( <" (/) "> ++ (/) ) subBorrow ( <" B "> ++ Y ) ) )
+s23:s22:fveq1d |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( ( (/) ++ <" (/) "> ) subBorrow ( <" B "> ++ Y ) ) ` C ) = ( ( ( <" (/) "> ++ (/) ) subBorrow ( <" B "> ++ Y ) ) ` C ) )
+s24:s13,s1,s2:3jca |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) e. 2o /\ B e. 2o /\ C e. 2o ) )
+s25:s5,s3:jca |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( (/) e. Word 2o /\ Y e. Word 2o ) )
+i26::subborrowcons
+s27:s24,s25,i26:syl2anc |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( ( <" (/) "> ++ (/) ) subBorrow ( <" B "> ++ Y ) ) ` C ) = ( ( (/) subBorrow Y ) ` ( ( (/) borrow B ) ` C ) ) )
+qed:s11,s23,s27:3eqtrd |- ( ( ( B e. 2o /\ C e. 2o ) /\ Y e. Word 2o ) -> ( ( (/) subBorrow ( <" B "> ++ Y ) ) ` C ) = ( ( (/) subBorrow Y ) ` ( ( (/) borrow B ) ` C ) ) )
+$)

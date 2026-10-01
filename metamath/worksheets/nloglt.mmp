@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=nloglt  LOC_AFTER=?
+
+* N < B ^ ( ( B Nlog N ) + 1 ) (Lean: Nat.lt_pow_succ_log_self).
+
+s1::simpl |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> B e. ( ZZ>= ` 2 ) )
+s2::simpr |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> N e. NN )
+i3::eluz2nn
+s4:s1,i3:syl |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> B e. NN )
+s5:s4:nnrpd |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> B e. RR+ )
+s6:s2:nnrpd |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> N e. RR+ )
+i7::eluz2gt1
+s8:s1,i7:syl |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> 1 < B )
+s9::1red |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> 1 e. RR )
+s10:s9,s8:gtned |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> B =/= 1 )
+i11::relogbcl
+s12:s5,s6,s10,i11:syl3anc |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B logb N ) e. RR )
+s13:s2:nnge1d |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> 1 <_ N )
+i14::logbge0b
+s15:s1,s6,i14:syl2anc |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( 0 <_ ( B logb N ) <-> 1 <_ N ) )
+s16:s15,s13:mpbird |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> 0 <_ ( B logb N ) )
+i17::flge0nn0
+s18:s12,s16,i17:syl2anc |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( |_ ` ( B logb N ) ) e. NN0 )
+s19:s18:nn0zd |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( |_ ` ( B logb N ) ) e. ZZ )
+s20::1z |- 1 e. ZZ
+s21:s20:a1i |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> 1 e. ZZ )
+s22:s19,s21:zaddcld |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( ( |_ ` ( B logb N ) ) + 1 ) e. ZZ )
+i23::rpexpcl
+s24:s5,s22,i23:syl2anc |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B ^ ( ( |_ ` ( B logb N ) ) + 1 ) ) e. RR+ )
+i25::nnlogbexp
+s26:s1,s22,i25:syl2anc |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B logb ( B ^ ( ( |_ ` ( B logb N ) ) + 1 ) ) ) = ( ( |_ ` ( B logb N ) ) + 1 ) )
+i27::logblt
+s28:s1,s6,s24,i27:syl3anc |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( N < ( B ^ ( ( |_ ` ( B logb N ) ) + 1 ) ) <-> ( B logb N ) < ( B logb ( B ^ ( ( |_ ` ( B logb N ) ) + 1 ) ) ) ) )
+i29::flltp1
+s30:s12,i29:syl |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B logb N ) < ( ( |_ ` ( B logb N ) ) + 1 ) )
+s31:s30,s26:breqtrrd |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B logb N ) < ( B logb ( B ^ ( ( |_ ` ( B logb N ) ) + 1 ) ) ) )
+s32:s28,s31:mpbird |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> N < ( B ^ ( ( |_ ` ( B logb N ) ) + 1 ) ) )
+s33::nlogvald |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B Nlog N ) = ( |_ ` ( B logb N ) ) )
+s34:s33:oveq1d |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( ( B Nlog N ) + 1 ) = ( ( |_ ` ( B logb N ) ) + 1 ) )
+s35:s34:oveq2d |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> ( B ^ ( ( B Nlog N ) + 1 ) ) = ( B ^ ( ( |_ ` ( B logb N ) ) + 1 ) ) )
+qed:s32,s35:breqtrrd |- ( ( B e. ( ZZ>= ` 2 ) /\ N e. NN ) -> N < ( B ^ ( ( B Nlog N ) + 1 ) ) )
+$)

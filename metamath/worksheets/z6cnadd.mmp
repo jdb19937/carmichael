@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=z6cnadd  LOC_AFTER=?
+
+* The pointwise sum of two continuous functions is continuous (~ offvalfv , ~ addcncf ).
+
+s1::simpl |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> F e. ( U -cn-> CC ) )
+s2::simpr |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> G e. ( U -cn-> CC ) )
+i3::cncfrss
+s4:s1,i3:syl |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> U C_ CC )
+s5::cnex |- CC e. _V
+s6:s5:a1i |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> CC e. _V )
+s7:s6,s4:ssexd |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> U e. _V )
+i8::cncff
+s9:s1,i8:syl |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> F : U --> CC )
+i10::cncff
+s11:s2,i10:syl |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> G : U --> CC )
+s12:s9:ffnd |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> F Fn U )
+s13:s11:ffnd |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> G Fn U )
+s14:s7,s12,s13:offvalfv |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( F oF + G ) = ( x e. U |-> ( ( F ` x ) + ( G ` x ) ) ) )
+i15::cncff
+s16:s1,i15:syl |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> F : U --> CC )
+s17:s16:feqmptd |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> F = ( x e. U |-> ( F ` x ) ) )
+s18:s17:eleq1d |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( F e. ( U -cn-> CC ) <-> ( x e. U |-> ( F ` x ) ) e. ( U -cn-> CC ) ) )
+s19:s1,s18:mpbid |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( x e. U |-> ( F ` x ) ) e. ( U -cn-> CC ) )
+i20::cncff
+s21:s2,i20:syl |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> G : U --> CC )
+s22:s21:feqmptd |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> G = ( x e. U |-> ( G ` x ) ) )
+s23:s22:eleq1d |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( G e. ( U -cn-> CC ) <-> ( x e. U |-> ( G ` x ) ) e. ( U -cn-> CC ) ) )
+s24:s2,s23:mpbid |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( x e. U |-> ( G ` x ) ) e. ( U -cn-> CC ) )
+s25:s19,s24:addcncf |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( x e. U |-> ( ( F ` x ) + ( G ` x ) ) ) e. ( U -cn-> CC ) )
+s26:s14:eleq1d |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( ( F oF + G ) e. ( U -cn-> CC ) <-> ( x e. U |-> ( ( F ` x ) + ( G ` x ) ) ) e. ( U -cn-> CC ) ) )
+qed:s25,s26:mpbird |- ( ( F e. ( U -cn-> CC ) /\ G e. ( U -cn-> CC ) ) -> ( F oF + G ) e. ( U -cn-> CC ) )
+$)

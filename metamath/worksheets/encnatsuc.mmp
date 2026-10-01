@@ -1,0 +1,129 @@
+$( <MM> <PROOF_ASST> THEOREM=encnatsuc  LOC_AFTER=?
+
+* encodeNat commutes with the successor: encodeNat ( N + 1 ) is incBits of encodeNat N (Lean: encodeNat_succ).
+
+s1::id |- ( N e. NN0 -> N e. NN0 )
+i2::encnatcl
+s3:s1,i2:syl |- ( N e. NN0 -> ( encodeNat ` N ) e. Word 2o )
+s4::1nn0 |- 1 e. NN0
+s5:s4:a1i |- ( N e. NN0 -> 1 e. NN0 )
+s6:s1,s5:nn0addcld |- ( N e. NN0 -> ( N + 1 ) e. NN0 )
+i7::encnatcl
+s8:s6,i7:syl |- ( N e. NN0 -> ( encodeNat ` ( N + 1 ) ) e. Word 2o )
+i9::incbitscl
+s10:s3,i9:syl |- ( N e. NN0 -> ( incBits ` ( encodeNat ` N ) ) e. Word 2o )
+s11::tonatencnat |- ( N e. NN0 -> ( toNat ` ( encodeNat ` N ) ) = N )
+i12::tonatencnat
+s13:s6,i12:syl |- ( N e. NN0 -> ( toNat ` ( encodeNat ` ( N + 1 ) ) ) = ( N + 1 ) )
+i14::tonatincbits
+s15:s3,i14:syl |- ( N e. NN0 -> ( toNat ` ( incBits ` ( encodeNat ` N ) ) ) = ( ( toNat ` ( encodeNat ` N ) ) + 1 ) )
+s16:s11:oveq1d |- ( N e. NN0 -> ( ( toNat ` ( encodeNat ` N ) ) + 1 ) = ( N + 1 ) )
+s17:s15,s16:eqtrd |- ( N e. NN0 -> ( toNat ` ( incBits ` ( encodeNat ` N ) ) ) = ( N + 1 ) )
+s18:s13,s17:eqtr4d |- ( N e. NN0 -> ( toNat ` ( encodeNat ` ( N + 1 ) ) ) = ( toNat ` ( incBits ` ( encodeNat ` N ) ) ) )
+i19::encnatlenbl
+s20:s6,i19:syl |- ( N e. NN0 -> ( # ` ( encodeNat ` ( N + 1 ) ) ) = ( bl ` ( N + 1 ) ) )
+s21::encnatlenbl |- ( N e. NN0 -> ( # ` ( encodeNat ` N ) ) = ( bl ` N ) )
+i22::incbitslen2
+s23:s3,i22:syl |- ( N e. NN0 -> ( # ` ( incBits ` ( encodeNat ` N ) ) ) = if ( ( ( toNat ` ( encodeNat ` N ) ) + 1 ) = ( 2 ^ ( # ` ( encodeNat ` N ) ) ) , ( ( # ` ( encodeNat ` N ) ) + 1 ) , ( # ` ( encodeNat ` N ) ) ) )
+c1:s11:oveq1d |- ( N e. NN0 -> ( ( toNat ` ( encodeNat ` N ) ) + 1 ) = ( N + 1 ) )
+c2:s21:oveq2d |- ( N e. NN0 -> ( 2 ^ ( # ` ( encodeNat ` N ) ) ) = ( 2 ^ ( bl ` N ) ) )
+c3:c1,c2:eqeq12d |- ( N e. NN0 -> ( ( ( toNat ` ( encodeNat ` N ) ) + 1 ) = ( 2 ^ ( # ` ( encodeNat ` N ) ) ) <-> ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) )
+c4:s21:oveq1d |- ( N e. NN0 -> ( ( # ` ( encodeNat ` N ) ) + 1 ) = ( ( bl ` N ) + 1 ) )
+c5:c3,c4,s21:ifbieq12d |- ( N e. NN0 -> if ( ( ( toNat ` ( encodeNat ` N ) ) + 1 ) = ( 2 ^ ( # ` ( encodeNat ` N ) ) ) , ( ( # ` ( encodeNat ` N ) ) + 1 ) , ( # ` ( encodeNat ` N ) ) ) = if ( ( N + 1 ) = ( 2 ^ ( bl ` N ) ) , ( ( bl ` N ) + 1 ) , ( bl ` N ) ) )
+s24:s23,c5:eqtrd |- ( N e. NN0 -> ( # ` ( incBits ` ( encodeNat ` N ) ) ) = if ( ( N + 1 ) = ( 2 ^ ( bl ` N ) ) , ( ( bl ` N ) + 1 ) , ( bl ` N ) ) )
+s25::blcl |- ( N e. NN0 -> ( bl ` N ) e. NN0 )
+s26::simpr |- ( ( N e. NN0 /\ ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( N + 1 ) = ( 2 ^ ( bl ` N ) ) )
+s27:s26:iftrued |- ( ( N e. NN0 /\ ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> if ( ( N + 1 ) = ( 2 ^ ( bl ` N ) ) , ( ( bl ` N ) + 1 ) , ( bl ` N ) ) = ( ( bl ` N ) + 1 ) )
+s28:s26:fveq2d |- ( ( N e. NN0 /\ ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` ( N + 1 ) ) = ( bl ` ( 2 ^ ( bl ` N ) ) ) )
+s29:s25:adantr |- ( ( N e. NN0 /\ ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` N ) e. NN0 )
+i30::blp2
+s31:s29,i30:syl |- ( ( N e. NN0 /\ ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` ( 2 ^ ( bl ` N ) ) ) = ( ( bl ` N ) + 1 ) )
+s32:s28,s31:eqtrd |- ( ( N e. NN0 /\ ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` ( N + 1 ) ) = ( ( bl ` N ) + 1 ) )
+s33:s32,s27:eqtr4d |- ( ( N e. NN0 /\ ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` ( N + 1 ) ) = if ( ( N + 1 ) = ( 2 ^ ( bl ` N ) ) , ( ( bl ` N ) + 1 ) , ( bl ` N ) ) )
+s34::simpr |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) )
+s35:s34:iffalsed |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> if ( ( N + 1 ) = ( 2 ^ ( bl ` N ) ) , ( ( bl ` N ) + 1 ) , ( bl ` N ) ) = ( bl ` N ) )
+s36::simpr |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> N = 0 )
+s37:s36:oveq1d |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( N + 1 ) = ( 0 + 1 ) )
+s38::0p1e1 |- ( 0 + 1 ) = 1
+s39:s38:a1i |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( 0 + 1 ) = 1 )
+s40:s37,s39:eqtrd |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( N + 1 ) = 1 )
+s41:s36:fveq2d |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( bl ` N ) = ( bl ` 0 ) )
+s42::bl0 |- ( bl ` 0 ) = 0
+s43:s42:a1i |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( bl ` 0 ) = 0 )
+s44:s41,s43:eqtrd |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( bl ` N ) = 0 )
+s45:s44:oveq2d |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( 2 ^ ( bl ` N ) ) = ( 2 ^ 0 ) )
+s46::2cn |- 2 e. CC
+i47::exp0
+s48:s46,i47:ax-mp |- ( 2 ^ 0 ) = 1
+s49:s48:a1i |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( 2 ^ 0 ) = 1 )
+s50:s45,s49:eqtrd |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( 2 ^ ( bl ` N ) ) = 1 )
+s51:s40,s50:eqtr4d |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> ( N + 1 ) = ( 2 ^ ( bl ` N ) ) )
+s52:s34:adantr |- ( ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) /\ N = 0 ) -> -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) )
+s53:s51,s52:pm2.65da |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> -. N = 0 )
+s54:s53:neqned |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N =/= 0 )
+s55:s1:adantr |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N e. NN0 )
+i56::elnnne0
+s57:s55,s54,i56:sylanbrc |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N e. NN )
+i58::blpos
+s59:s57,i58:syl |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` N ) = ( ( 2 Nlog N ) + 1 ) )
+s60::2nn0 |- 2 e. NN0
+s61:s60:a1i |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> 2 e. NN0 )
+s62:s57:nnnn0d |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N e. NN0 )
+i63::nlogcl
+s64:s61,s62,i63:syl2anc |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 Nlog N ) e. NN0 )
+s65::1nn |- 1 e. NN
+s66:s65:a1i |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> 1 e. NN )
+i67::nn0nnaddcl
+s68:s64,s66,i67:syl2anc |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( ( 2 Nlog N ) + 1 ) e. NN )
+s69:s59,s68:eqeltrd |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` N ) e. NN )
+s70:s57,s66:nnaddcld |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( N + 1 ) e. NN )
+i71::blle2
+s72:s57,i71:syl |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 ^ ( ( bl ` N ) - 1 ) ) <_ N )
+s73:s57:nnrpd |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N e. RR+ )
+s74:s73:rpred |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N e. RR )
+s75:s74:lep1d |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N <_ ( N + 1 ) )
+s76::2re |- 2 e. RR
+s77:s76:a1i |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> 2 e. RR )
+s78::2rp |- 2 e. RR+
+s79:s78:a1i |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> 2 e. RR+ )
+i80::blcl
+s81:s62,i80:syl |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` N ) e. NN0 )
+s82:s81:nn0zd |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` N ) e. ZZ )
+s83::1z |- 1 e. ZZ
+s84:s83:a1i |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> 1 e. ZZ )
+s85:s82,s84:zsubcld |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( ( bl ` N ) - 1 ) e. ZZ )
+s86:s79,s85:rpexpcld |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 ^ ( ( bl ` N ) - 1 ) ) e. RR+ )
+s87:s86:rpred |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 ^ ( ( bl ` N ) - 1 ) ) e. RR )
+s88::1re |- 1 e. RR
+s89:s88:a1i |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> 1 e. RR )
+s90:s74,s89:readdcld |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( N + 1 ) e. RR )
+s91:s87,s74,s90,s72,s75:letrd |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 ^ ( ( bl ` N ) - 1 ) ) <_ ( N + 1 ) )
+s92:s1:adantr |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N e. NN0 )
+i93::blpow2
+s94:s92,i93:syl |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N < ( 2 ^ ( bl ` N ) ) )
+s95:s62:nn0zd |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> N e. ZZ )
+s96::2z |- 2 e. ZZ
+s97:s96:a1i |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> 2 e. ZZ )
+s98:s97,s81:zexpcld |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 ^ ( bl ` N ) ) e. ZZ )
+i99::zltp1le
+s100:s95,s98,i99:syl2anc |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( N < ( 2 ^ ( bl ` N ) ) <-> ( N + 1 ) <_ ( 2 ^ ( bl ` N ) ) ) )
+s101:s94,s100:mpbid |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( N + 1 ) <_ ( 2 ^ ( bl ` N ) ) )
+s102:s34:neqned |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( N + 1 ) =/= ( 2 ^ ( bl ` N ) ) )
+s103:s102:necomd |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 ^ ( bl ` N ) ) =/= ( N + 1 ) )
+s104:s101,s103:jca |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( ( N + 1 ) <_ ( 2 ^ ( bl ` N ) ) /\ ( 2 ^ ( bl ` N ) ) =/= ( N + 1 ) ) )
+s105:s77,s81:reexpcld |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( 2 ^ ( bl ` N ) ) e. RR )
+i106::ltlen
+s107:s90,s105,i106:syl2anc |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( ( N + 1 ) < ( 2 ^ ( bl ` N ) ) <-> ( ( N + 1 ) <_ ( 2 ^ ( bl ` N ) ) /\ ( 2 ^ ( bl ` N ) ) =/= ( N + 1 ) ) ) )
+s108:s104,s107:mpbird |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( N + 1 ) < ( 2 ^ ( bl ` N ) ) )
+s109:s70,s69:jca |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( ( N + 1 ) e. NN /\ ( bl ` N ) e. NN ) )
+s110:s91,s108:jca |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( ( 2 ^ ( ( bl ` N ) - 1 ) ) <_ ( N + 1 ) /\ ( N + 1 ) < ( 2 ^ ( bl ` N ) ) ) )
+i111::blchar
+s112:s109,s110,i111:syl2anc |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` ( N + 1 ) ) = ( bl ` N ) )
+s113:s112,s35:eqtr4d |- ( ( N e. NN0 /\ -. ( N + 1 ) = ( 2 ^ ( bl ` N ) ) ) -> ( bl ` ( N + 1 ) ) = if ( ( N + 1 ) = ( 2 ^ ( bl ` N ) ) , ( ( bl ` N ) + 1 ) , ( bl ` N ) ) )
+s114:s33,s113:pm2.61dan |- ( N e. NN0 -> ( bl ` ( N + 1 ) ) = if ( ( N + 1 ) = ( 2 ^ ( bl ` N ) ) , ( ( bl ` N ) + 1 ) , ( bl ` N ) ) )
+s115:s20,s114,s24:3eqtr4d |- ( N e. NN0 -> ( # ` ( encodeNat ` ( N + 1 ) ) ) = ( # ` ( incBits ` ( encodeNat ` N ) ) ) )
+s116:s115,s18:jca |- ( N e. NN0 -> ( ( # ` ( encodeNat ` ( N + 1 ) ) ) = ( # ` ( incBits ` ( encodeNat ` N ) ) ) /\ ( toNat ` ( encodeNat ` ( N + 1 ) ) ) = ( toNat ` ( incBits ` ( encodeNat ` N ) ) ) ) )
+i117::bwuniq
+s118:s8,s10,i117:syl2anc |- ( N e. NN0 -> ( ( encodeNat ` ( N + 1 ) ) = ( incBits ` ( encodeNat ` N ) ) <-> ( ( # ` ( encodeNat ` ( N + 1 ) ) ) = ( # ` ( incBits ` ( encodeNat ` N ) ) ) /\ ( toNat ` ( encodeNat ` ( N + 1 ) ) ) = ( toNat ` ( incBits ` ( encodeNat ` N ) ) ) ) ) )
+qed:s116,s118:mpbird |- ( N e. NN0 -> ( encodeNat ` ( N + 1 ) ) = ( incBits ` ( encodeNat ` N ) ) )
+$)

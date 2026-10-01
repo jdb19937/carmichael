@@ -1,0 +1,31 @@
+$( <MM> <PROOF_ASST> THEOREM=poolgocostb  LOC_AFTER=?
+
+* Base of the induction for poolgocost.
+
+s1::simp1 |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> X e. NN0 )
+s2::simp2 |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> Z e. NN0 )
+s3::simp3 |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> K e. NN0 )
+s4:s1,s2:jca |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( X e. NN0 /\ Z e. NN0 ) )
+i5::poolgo0
+s6:s4,s3,i5:syl2anc |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( ( ( X PoolGo Z ) ` K ) ` (/) ) = <. (/) , 0 >. )
+s7::0ex |- (/) e. _V
+s8:s7:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> (/) e. _V )
+s9::c0ex |- 0 e. _V
+s10:s9:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> 0 e. _V )
+s11:s6:fveq2d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 2nd ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) = ( 2nd ` <. (/) , 0 >. ) )
+i12::op2ndg
+s13:s8,s10,i12:syl2anc |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 2nd ` <. (/) , 0 >. ) = 0 )
+s14:s11,s13:eqtrd |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 2nd ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) = 0 )
+s15::wrd0 |- (/) e. Word NN0
+i16::lencl
+s17:s15,i16:ax-mp |- ( # ` (/) ) e. NN0
+s18:s17:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( # ` (/) ) e. NN0 )
+i19::nsqrtcl
+s20:s1,i19:syl |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( Nfloor ` ( sqrt ` X ) ) e. NN0 )
+s21::2nn0 |- 2 e. NN0
+s22:s21:a1i |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> 2 e. NN0 )
+s23:s20,s22:nn0addcld |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( ( Nfloor ` ( sqrt ` X ) ) + 2 ) e. NN0 )
+s24:s18,s23:nn0mulcld |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( ( # ` (/) ) x. ( ( Nfloor ` ( sqrt ` X ) ) + 2 ) ) e. NN0 )
+s25:s24:nn0ge0d |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> 0 <_ ( ( # ` (/) ) x. ( ( Nfloor ` ( sqrt ` X ) ) + 2 ) ) )
+qed:s14,s25:eqbrtrd |- ( ( X e. NN0 /\ Z e. NN0 /\ K e. NN0 ) -> ( 2nd ` ( ( ( X PoolGo Z ) ` K ) ` (/) ) ) <_ ( ( # ` (/) ) x. ( ( Nfloor ` ( sqrt ` X ) ) + 2 ) ) )
+$)

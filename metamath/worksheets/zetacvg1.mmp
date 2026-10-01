@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=zetacvg1  LOC_AFTER=?
+
+* The zeta series at a real exponent above one converges (zetacvg for the mapping written out).
+
+s1::simpl |- ( ( S e. RR /\ 1 < S ) -> S e. RR )
+s2::simpr |- ( ( S e. RR /\ 1 < S ) -> 1 < S )
+s3:s1:recnd |- ( ( S e. RR /\ 1 < S ) -> S e. CC )
+s4:s1:renegcld |- ( ( S e. RR /\ 1 < S ) -> -u S e. RR )
+s5:s4:recnd |- ( ( S e. RR /\ 1 < S ) -> -u S e. CC )
+i6::rere
+s7:s1,i6:syl |- ( ( S e. RR /\ 1 < S ) -> ( Re ` S ) = S )
+s8:s2,s7:breqtrrd |- ( ( S e. RR /\ 1 < S ) -> 1 < ( Re ` S ) )
+s9::simpr |- ( ( ( S e. RR /\ 1 < S ) /\ k e. NN ) -> k e. NN )
+s10::id |- ( t = k -> t = k )
+m1:s10:oveq1d |- ( t = k -> ( t ^c -u S ) = ( k ^c -u S ) )
+s11::eqid |- ( t e. NN |-> ( t ^c -u S ) ) = ( t e. NN |-> ( t ^c -u S ) )
+s12:m1,s11:fvmptg |- ( ( k e. NN /\ ( k ^c -u S ) e. _V ) -> ( ( t e. NN |-> ( t ^c -u S ) ) ` k ) = ( k ^c -u S ) )
+s13::ovexd |- ( ( ( S e. RR /\ 1 < S ) /\ k e. NN ) -> ( k ^c -u S ) e. _V )
+s14:s9,s13,s12:syl2anc |- ( ( ( S e. RR /\ 1 < S ) /\ k e. NN ) -> ( ( t e. NN |-> ( t ^c -u S ) ) ` k ) = ( k ^c -u S ) )
+qed:s3,s8,s14:zetacvg |- ( ( S e. RR /\ 1 < S ) -> seq 1 ( + , ( t e. NN |-> ( t ^c -u S ) ) ) e. dom ~~> )
+$)

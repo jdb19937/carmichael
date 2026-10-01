@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=tmidvw1  LOC_AFTER=?
+
+* Shifting a bit word by one more zero puts the letter ` <. 1 , (/) >. ` on top of the stack (Lean ` bits ( false :: replicate e false ++ l ) ` ).
+
+s1::simpl |- ( ( L e. Word 2o /\ E e. NN0 ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ E e. NN0 ) -> E e. NN0 )
+s3::0el2o |- (/) e. 2o
+s4:s3:a1i |- ( ( L e. Word 2o /\ E e. NN0 ) -> (/) e. 2o )
+s5::1nn0 |- 1 e. NN0
+s6:s5:a1i |- ( ( L e. Word 2o /\ E e. NN0 ) -> 1 e. NN0 )
+i7::repswccat
+s8:s4,s6,s2,i7:syl3anc |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( ( (/) repeatS 1 ) ++ ( (/) repeatS E ) ) = ( (/) repeatS ( 1 + E ) ) )
+i9::repsw1
+s10:s4,i9:syl |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( (/) repeatS 1 ) = <" (/) "> )
+s11:s10:oveq1d |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( ( (/) repeatS 1 ) ++ ( (/) repeatS E ) ) = ( <" (/) "> ++ ( (/) repeatS E ) ) )
+s12:s2:nn0cnd |- ( ( L e. Word 2o /\ E e. NN0 ) -> E e. CC )
+s13::1cnd |- ( ( L e. Word 2o /\ E e. NN0 ) -> 1 e. CC )
+s14:s12,s13:addcomd |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( E + 1 ) = ( 1 + E ) )
+s15:s14:oveq2d |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( (/) repeatS ( E + 1 ) ) = ( (/) repeatS ( 1 + E ) ) )
+s16:s11,s8:eqtr3d |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( <" (/) "> ++ ( (/) repeatS E ) ) = ( (/) repeatS ( 1 + E ) ) )
+s17:s15,s16:eqtr4d |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( (/) repeatS ( E + 1 ) ) = ( <" (/) "> ++ ( (/) repeatS E ) ) )
+s18:s17:oveq1d |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( ( (/) repeatS ( E + 1 ) ) ++ L ) = ( ( <" (/) "> ++ ( (/) repeatS E ) ) ++ L ) )
+s19:s4:s1cld |- ( ( L e. Word 2o /\ E e. NN0 ) -> <" (/) "> e. Word 2o )
+i20::repsw
+s21:s4,s2,i20:syl2anc |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( (/) repeatS E ) e. Word 2o )
+i22::ccatass
+s23:s19,s21,s1,i22:syl3anc |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( ( <" (/) "> ++ ( (/) repeatS E ) ) ++ L ) = ( <" (/) "> ++ ( ( (/) repeatS E ) ++ L ) ) )
+s24:s18,s23:eqtrd |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( ( (/) repeatS ( E + 1 ) ) ++ L ) = ( <" (/) "> ++ ( ( (/) repeatS E ) ++ L ) ) )
+s25:s24:coeq2d |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( inclBool o. ( ( (/) repeatS ( E + 1 ) ) ++ L ) ) = ( inclBool o. ( <" (/) "> ++ ( ( (/) repeatS E ) ++ L ) ) ) )
+i26::ccatcl
+s27:s21,s1,i26:syl2anc |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( ( (/) repeatS E ) ++ L ) e. Word 2o )
+i28::bwmapccat
+s29:s19,s27,i28:syl2anc |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( inclBool o. ( <" (/) "> ++ ( ( (/) repeatS E ) ++ L ) ) ) = ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. ( ( (/) repeatS E ) ++ L ) ) ) )
+s30::inclboolf |- inclBool : 2o --> Gamma'
+s31:s30:a1i |- ( ( L e. Word 2o /\ E e. NN0 ) -> inclBool : 2o --> Gamma' )
+i32::s1co
+s33:s4,s31,i32:syl2anc |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( inclBool o. <" (/) "> ) = <" ( inclBool ` (/) ) "> )
+i34::inclboolfv
+s35:s4,i34:syl |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( inclBool ` (/) ) = <. 1 , (/) >. )
+s36:s35:s1eqd |- ( ( L e. Word 2o /\ E e. NN0 ) -> <" ( inclBool ` (/) ) "> = <" <. 1 , (/) >. "> )
+s37:s33,s36:eqtrd |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( inclBool o. <" (/) "> ) = <" <. 1 , (/) >. "> )
+s38:s37:oveq1d |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. ( ( (/) repeatS E ) ++ L ) ) ) = ( <" <. 1 , (/) >. "> ++ ( inclBool o. ( ( (/) repeatS E ) ++ L ) ) ) )
+s39:s25,s29:eqtrd |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( inclBool o. ( ( (/) repeatS ( E + 1 ) ) ++ L ) ) = ( ( inclBool o. <" (/) "> ) ++ ( inclBool o. ( ( (/) repeatS E ) ++ L ) ) ) )
+qed:s39,s38:eqtrd |- ( ( L e. Word 2o /\ E e. NN0 ) -> ( inclBool o. ( ( (/) repeatS ( E + 1 ) ) ++ L ) ) = ( <" <. 1 , (/) >. "> ++ ( inclBool o. ( ( (/) repeatS E ) ++ L ) ) ) )
+$)

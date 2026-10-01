@@ -1,0 +1,62 @@
+$( <MM> <PROOF_ASST> THEOREM=eatcj  LOC_AFTER=?
+
+* The conjugate of e ( V B ) for real V, B is e ( -u V B ).
+
+s1::simpl |- ( ( V e. RR /\ B e. RR ) -> V e. RR )
+s2::simpr |- ( ( V e. RR /\ B e. RR ) -> B e. RR )
+s3:s1:recnd |- ( ( V e. RR /\ B e. RR ) -> V e. CC )
+s4:s2:recnd |- ( ( V e. RR /\ B e. RR ) -> B e. CC )
+s5::2cnd |- ( ( V e. RR /\ B e. RR ) -> 2 e. CC )
+s6::ax-icn |- _i e. CC
+s7:s6:a1i |- ( ( V e. RR /\ B e. RR ) -> _i e. CC )
+s8::picn |- _pi e. CC
+s9:s8:a1i |- ( ( V e. RR /\ B e. RR ) -> _pi e. CC )
+s10:s3,s4:mulcld |- ( ( V e. RR /\ B e. RR ) -> ( V x. B ) e. CC )
+s11:s1,s2:remulcld |- ( ( V e. RR /\ B e. RR ) -> ( V x. B ) e. RR )
+s12:s5,s7,s9:mul12d |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. ( _i x. _pi ) ) = ( _i x. ( 2 x. _pi ) ) )
+s13:s12:oveq1d |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) = ( ( _i x. ( 2 x. _pi ) ) x. ( V x. B ) ) )
+s14:s5,s9:mulcld |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. _pi ) e. CC )
+s15:s7,s14,s10:mulassd |- ( ( V e. RR /\ B e. RR ) -> ( ( _i x. ( 2 x. _pi ) ) x. ( V x. B ) ) = ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s16:s13,s15:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) = ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s17::2re |- 2 e. RR
+s18::pire |- _pi e. RR
+s19:s17,s18:remulcli |- ( 2 x. _pi ) e. RR
+s20:s19:a1i |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. _pi ) e. RR )
+s21:s20,s11:remulcld |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. _pi ) x. ( V x. B ) ) e. RR )
+s22:s21:recnd |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. _pi ) x. ( V x. B ) ) e. CC )
+s23:s16:fveq2d |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) = ( * ` ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) )
+s24:s7,s22:cjmuld |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) = ( ( * ` _i ) x. ( * ` ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) )
+s25:s21:cjred |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( ( 2 x. _pi ) x. ( V x. B ) ) ) = ( ( 2 x. _pi ) x. ( V x. B ) ) )
+s26::cji |- ( * ` _i ) = -u _i
+s27:s26:a1i |- ( ( V e. RR /\ B e. RR ) -> ( * ` _i ) = -u _i )
+s28:s27,s25:oveq12d |- ( ( V e. RR /\ B e. RR ) -> ( ( * ` _i ) x. ( * ` ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) = ( -u _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s29:s7,s22:mulneg1d |- ( ( V e. RR /\ B e. RR ) -> ( -u _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) = -u ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s30:s16:eqcomd |- ( ( V e. RR /\ B e. RR ) -> ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) )
+s31:s30:negeqd |- ( ( V e. RR /\ B e. RR ) -> -u ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) = -u ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) )
+s32:s23,s24:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) = ( ( * ` _i ) x. ( * ` ( ( 2 x. _pi ) x. ( V x. B ) ) ) ) )
+s33:s32,s28:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) = ( -u _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s34:s33,s29:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) = -u ( _i x. ( ( 2 x. _pi ) x. ( V x. B ) ) ) )
+s35:s34,s31:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) = -u ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) )
+s36:s3,s4:mulneg1d |- ( ( V e. RR /\ B e. RR ) -> ( -u V x. B ) = -u ( V x. B ) )
+s37:s36:oveq2d |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( -u V x. B ) ) = ( ( 2 x. ( _i x. _pi ) ) x. -u ( V x. B ) ) )
+s38::ax-icn |- _i e. CC
+s39::picn |- _pi e. CC
+s40:s38,s39:mulcli |- ( _i x. _pi ) e. CC
+s41::2cn |- 2 e. CC
+s42:s41,s40:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s43:s42:a1i |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s44:s43,s10:mulneg2d |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. -u ( V x. B ) ) = -u ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) )
+s45:s37,s44:eqtrd |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( -u V x. B ) ) = -u ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) )
+s46:s35,s45:eqtr4d |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( -u V x. B ) ) )
+s47::ax-icn |- _i e. CC
+s48::picn |- _pi e. CC
+s49:s47,s48:mulcli |- ( _i x. _pi ) e. CC
+s50::2cn |- 2 e. CC
+s51:s50,s49:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s52:s51:a1i |- ( ( V e. RR /\ B e. RR ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s53:s52,s10:mulcld |- ( ( V e. RR /\ B e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) e. CC )
+i54::efcj
+s55:s53,i54:syl |- ( ( V e. RR /\ B e. RR ) -> ( exp ` ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) ) = ( * ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) ) )
+s56:s46:fveq2d |- ( ( V e. RR /\ B e. RR ) -> ( exp ` ( * ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( -u V x. B ) ) ) )
+qed:s55,s56:eqtr3d |- ( ( V e. RR /\ B e. RR ) -> ( * ` ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. B ) ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( -u V x. B ) ) ) )
+$)

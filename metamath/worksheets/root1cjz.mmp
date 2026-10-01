@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=root1cjz  LOC_AFTER=?
+
+* The conjugate of a power of the root of unity is the power at the negated exponent (Mathlib AddChar.map_neg_eq_conj).
+
+s1::simpl |- ( ( N e. NN /\ K e. ZZ ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ K e. ZZ ) -> K e. ZZ )
+i3::root1cj
+s4:s1,s2,i3:syl2anc |- ( ( N e. NN /\ K e. ZZ ) -> ( * ` ( ( -u 1 ^c ( 2 / N ) ) ^ K ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ ( N - K ) ) )
+s5:s1:nncnd |- ( ( N e. NN /\ K e. ZZ ) -> N e. CC )
+s6:s2:zcnd |- ( ( N e. NN /\ K e. ZZ ) -> K e. CC )
+s7:s5,s6:subcld |- ( ( N e. NN /\ K e. ZZ ) -> ( N - K ) e. CC )
+s8:s7,s6:subnegd |- ( ( N e. NN /\ K e. ZZ ) -> ( ( N - K ) - -u K ) = ( ( N - K ) + K ) )
+s9:s5,s6:npcand |- ( ( N e. NN /\ K e. ZZ ) -> ( ( N - K ) + K ) = N )
+s10:s8,s9:eqtrd |- ( ( N e. NN /\ K e. ZZ ) -> ( ( N - K ) - -u K ) = N )
+s11:s1:nnzd |- ( ( N e. NN /\ K e. ZZ ) -> N e. ZZ )
+i12::iddvds
+s13:s11,i12:syl |- ( ( N e. NN /\ K e. ZZ ) -> N || N )
+s14:s10:eqcomd |- ( ( N e. NN /\ K e. ZZ ) -> N = ( ( N - K ) - -u K ) )
+s15:s13,s14:breqtrd |- ( ( N e. NN /\ K e. ZZ ) -> N || ( ( N - K ) - -u K ) )
+s16:s1:nnzd |- ( ( N e. NN /\ K e. ZZ ) -> N e. ZZ )
+s17:s16,s2:zsubcld |- ( ( N e. NN /\ K e. ZZ ) -> ( N - K ) e. ZZ )
+s18:s2:znegcld |- ( ( N e. NN /\ K e. ZZ ) -> -u K e. ZZ )
+i19::root1dvds
+s20:s1,s17,s18,i19:syl3anc |- ( ( N e. NN /\ K e. ZZ ) -> ( N || ( ( N - K ) - -u K ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ ( N - K ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ -u K ) ) )
+s21:s15,s20:mpd |- ( ( N e. NN /\ K e. ZZ ) -> ( ( -u 1 ^c ( 2 / N ) ) ^ ( N - K ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ -u K ) )
+qed:s4,s21:eqtrd |- ( ( N e. NN /\ K e. ZZ ) -> ( * ` ( ( -u 1 ^c ( 2 / N ) ) ^ K ) ) = ( ( -u 1 ^c ( 2 / N ) ) ^ -u K ) )
+$)

@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=divoutqpos  LOC_AFTER=?
+
+* A successful division of a positive dividend leaves a positive quotient.
+
+s1::simp1l |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> D e. NN )
+s2::simp1r |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> R e. NN0 )
+s3::simp2l |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> ( R mod D ) = 0 )
+s4::simp3 |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> 1 <_ R )
+s5:s1,s2:jca |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> ( D e. NN /\ R e. NN0 ) )
+s6:s5,s3:jca |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> ( ( D e. NN /\ R e. NN0 ) /\ ( R mod D ) = 0 ) )
+i7::divoutqcl
+s8:s6,i7:syl |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> ( |_ ` ( R / D ) ) e. NN0 )
+i9::divoutqmul
+s10:s6,i9:syl |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> ( D x. ( |_ ` ( R / D ) ) ) = R )
+s11::simpr |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> ( |_ ` ( R / D ) ) = 0 )
+s12:s11:oveq2d |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> ( D x. ( |_ ` ( R / D ) ) ) = ( D x. 0 ) )
+s13:s1:adantr |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> D e. NN )
+s14:s13:nnred |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> D e. RR )
+s15:s14:recnd |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> D e. CC )
+i16::mul01
+s17:s15,i16:syl |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> ( D x. 0 ) = 0 )
+s18:s12,s17:eqtrd |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> ( D x. ( |_ ` ( R / D ) ) ) = 0 )
+s19:s10:adantr |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> ( D x. ( |_ ` ( R / D ) ) ) = R )
+s20:s19,s18:eqtr3d |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> R = 0 )
+s21:s4:adantr |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> 1 <_ R )
+s22:s21,s20:breqtrd |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> 1 <_ 0 )
+s23::0lt1 |- 0 < 1
+s24:s23:a1i |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> 0 < 1 )
+s25::0re |- 0 e. RR
+s26:s25:a1i |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> 0 e. RR )
+s27::1re |- 1 e. RR
+s28:s27:a1i |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> 1 e. RR )
+s29:s26,s28:ltnled |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> ( 0 < 1 <-> -. 1 <_ 0 ) )
+s30:s24,s29:mpbid |- ( ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) /\ ( |_ ` ( R / D ) ) = 0 ) -> -. 1 <_ 0 )
+s31:s22,s30:pm2.65da |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> -. ( |_ ` ( R / D ) ) = 0 )
+s32:s31:neqned |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> ( |_ ` ( R / D ) ) =/= 0 )
+i33::elnnne0
+s34:s8,s32,i33:sylanbrc |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> ( |_ ` ( R / D ) ) e. NN )
+qed:s34:nnge1d |- ( ( ( D e. NN /\ R e. NN0 ) /\ ( ( R mod D ) = 0 /\ 2 <_ D ) /\ 1 <_ R ) -> 1 <_ ( |_ ` ( R / D ) ) )
+$)

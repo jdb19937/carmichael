@@ -1,0 +1,55 @@
+$( <MM> <PROOF_ASST> THEOREM=lintmulc  LOC_AFTER=?
+
+* The segment integral of a constant multiple of a continuous function.
+
+s1::simplll |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> A e. CC )
+s2::simpllr |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> B e. CC )
+s3::simplrl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> F e. ( D -cn-> CC ) )
+s4::simplrr |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( A cseg B ) C_ D )
+s5::simpr |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> C e. CC )
+s6::simpl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) )
+s7::ovexd |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( ( D X. { C } ) oF x. F ) e. _V )
+i8::lintval
+s9:s7,s1,s2,i8:syl3anc |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( ( ( D X. { C } ) oF x. F ) lint <. A , B >. ) = S. ( 0 (,) 1 ) ( ( ( ( D X. { C } ) oF x. F ) ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+i10::lintval
+s11:s3,s1,s2,i10:syl3anc |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( F lint <. A , B >. ) = S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t )
+s12:s1:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> A e. CC )
+s13:s2:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> B e. CC )
+s14:s3:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> F e. ( D -cn-> CC ) )
+s15:s4:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( A cseg B ) C_ D )
+s16:s5:adantr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> C e. CC )
+s17::simpr |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> t e. ( 0 (,) 1 ) )
+s18::ioossicc |- ( 0 (,) 1 ) C_ ( 0 [,] 1 )
+s19:s18:a1i |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( 0 (,) 1 ) C_ ( 0 [,] 1 ) )
+s20:s19,s17:sseldd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> t e. ( 0 [,] 1 ) )
+i21::cseglin
+s22:s12,s13,s20,i21:syl3anc |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( A + ( t x. ( B - A ) ) ) e. ( A cseg B ) )
+s23:s15,s22:sseldd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( A + ( t x. ( B - A ) ) ) e. D )
+i24::cncff
+s25:s14,i24:syl |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> F : D --> CC )
+s26:s25,s23:ffvelcdmd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( F ` ( A + ( t x. ( B - A ) ) ) ) e. CC )
+s27:s13,s12:subcld |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( B - A ) e. CC )
+s28:s26,s27:mulcld |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) e. CC )
+s29:s25:ffnd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> F Fn D )
+i30::cncfrss
+s31:s14,i30:syl |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> D C_ CC )
+s32::cnex |- CC e. _V
+s33:s32:a1i |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> CC e. _V )
+s34:s33,s31:ssexd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> D e. _V )
+s35::eqidd |- ( ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) /\ ( A + ( t x. ( B - A ) ) ) e. D ) -> ( F ` ( A + ( t x. ( B - A ) ) ) ) = ( F ` ( A + ( t x. ( B - A ) ) ) ) )
+s36:s34,s16,s29,s35:ofc1 |- ( ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) /\ ( A + ( t x. ( B - A ) ) ) e. D ) -> ( ( ( D X. { C } ) oF x. F ) ` ( A + ( t x. ( B - A ) ) ) ) = ( C x. ( F ` ( A + ( t x. ( B - A ) ) ) ) ) )
+s37:s23,s36:mpdan |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( ( D X. { C } ) oF x. F ) ` ( A + ( t x. ( B - A ) ) ) ) = ( C x. ( F ` ( A + ( t x. ( B - A ) ) ) ) ) )
+s38:s37:oveq1d |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( ( ( D X. { C } ) oF x. F ) ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) = ( ( C x. ( F ` ( A + ( t x. ( B - A ) ) ) ) ) x. ( B - A ) ) )
+s39:s25,s23:ffvelcdmd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( F ` ( A + ( t x. ( B - A ) ) ) ) e. CC )
+s40:s13,s12:subcld |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( B - A ) e. CC )
+s41:s16,s39,s40:mulassd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( C x. ( F ` ( A + ( t x. ( B - A ) ) ) ) ) x. ( B - A ) ) = ( C x. ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) )
+s42:s38,s41:eqtrd |- ( ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) /\ t e. ( 0 (,) 1 ) ) -> ( ( ( ( D X. { C } ) oF x. F ) ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) = ( C x. ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) )
+s43:s42:itgeq2dv |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> S. ( 0 (,) 1 ) ( ( ( ( D X. { C } ) oF x. F ) ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t = S. ( 0 (,) 1 ) ( C x. ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t )
+i44::lintibl
+s45:s6,i44:syl |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( t e. ( 0 (,) 1 ) |-> ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) e. L^1 )
+s46:s5,s28,s45:itgmulc2 |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( C x. S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t ) = S. ( 0 (,) 1 ) ( C x. ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t )
+s47:s9,s43:eqtrd |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( ( ( D X. { C } ) oF x. F ) lint <. A , B >. ) = S. ( 0 (,) 1 ) ( C x. ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) ) _d t )
+s48:s47,s46:eqtr4d |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( ( ( D X. { C } ) oF x. F ) lint <. A , B >. ) = ( C x. S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t ) )
+s49:s11:oveq2d |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( C x. ( F lint <. A , B >. ) ) = ( C x. S. ( 0 (,) 1 ) ( ( F ` ( A + ( t x. ( B - A ) ) ) ) x. ( B - A ) ) _d t ) )
+qed:s48,s49:eqtr4d |- ( ( ( ( A e. CC /\ B e. CC ) /\ ( F e. ( D -cn-> CC ) /\ ( A cseg B ) C_ D ) ) /\ C e. CC ) -> ( ( ( D X. { C } ) oF x. F ) lint <. A , B >. ) = ( C x. ( F lint <. A , B >. ) ) )
+$)

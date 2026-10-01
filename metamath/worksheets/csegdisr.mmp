@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=csegdisr  LOC_AFTER=?
+
+* On a vertical segment every point is at least as far from P as the difference of the real parts.
+
+s1::simpl |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) )
+s2::simpr |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) )
+i3::simp1
+s4:s1,i3:syl |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> S e. CC )
+i5::simp2
+s6:s1,i5:syl |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> T e. CC )
+i7::simp1
+s8:s2,i7:syl |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> P e. CC )
+i9::simp2
+s10:s2,i9:syl |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> R e. RR )
+i11::simp3
+s12:s2,i11:syl |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) )
+i13::csegvre
+s14:s1,i13:syl |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> A. u e. ( S cseg T ) ( Re ` u ) = ( Re ` S ) )
+i15::csegcl
+s16:s4,s6,i15:syl2anc |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> ( S cseg T ) C_ CC )
+s17::simpr |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> u e. ( S cseg T ) )
+s18:s16:adantr |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( S cseg T ) C_ CC )
+s19:s18,s17:sseldd |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> u e. CC )
+s20:s8:adantr |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> P e. CC )
+s21:s14:adantr |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> A. u e. ( S cseg T ) ( Re ` u ) = ( Re ` S ) )
+i22::rspa
+s23:s21,s17,i22:syl2anc |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( Re ` u ) = ( Re ` S ) )
+s24:s19,s20:subcld |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( u - P ) e. CC )
+s25:s19,s20:resubd |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( Re ` ( u - P ) ) = ( ( Re ` u ) - ( Re ` P ) ) )
+s26:s23:oveq1d |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( ( Re ` u ) - ( Re ` P ) ) = ( ( Re ` S ) - ( Re ` P ) ) )
+s27:s25,s26:eqtrd |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( Re ` ( u - P ) ) = ( ( Re ` S ) - ( Re ` P ) ) )
+i28::absrele
+s29:s24,i28:syl |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( abs ` ( Re ` ( u - P ) ) ) <_ ( abs ` ( u - P ) ) )
+s30:s27:fveq2d |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( abs ` ( Re ` ( u - P ) ) ) = ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) )
+s31:s30,s29:eqbrtrrd |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) <_ ( abs ` ( u - P ) ) )
+s32:s4:adantr |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> S e. CC )
+s33:s32:recld |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( Re ` S ) e. RR )
+s34:s33:recnd |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( Re ` S ) e. CC )
+s35:s20:recld |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( Re ` P ) e. RR )
+s36:s35:recnd |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( Re ` P ) e. CC )
+s37:s34,s36:subcld |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( ( Re ` S ) - ( Re ` P ) ) e. CC )
+s38:s37:abscld |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) e. RR )
+s39:s24:abscld |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> ( abs ` ( u - P ) ) e. RR )
+s40:s10:adantr |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> R e. RR )
+s41:s12:adantr |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) )
+s42:s40,s38,s39,s41,s31:letrd |- ( ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) /\ u e. ( S cseg T ) ) -> R <_ ( abs ` ( u - P ) ) )
+qed:s42:ralrimiva |- ( ( ( S e. CC /\ T e. CC /\ ( Re ` S ) = ( Re ` T ) ) /\ ( P e. CC /\ R e. RR /\ R <_ ( abs ` ( ( Re ` S ) - ( Re ` P ) ) ) ) ) -> A. u e. ( S cseg T ) R <_ ( abs ` ( u - P ) ) )
+$)

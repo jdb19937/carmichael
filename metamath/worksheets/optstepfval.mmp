@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=optstepfval  LOC_AFTER=?
+
+* Value of OptStep at a set F: the option-lifted step function as a mapping.
+
+1::dmeq     |- ( f = F -> dom f = dom F )
+2a::djueq1
+2:1,2a:syl |- ( f = F -> ( dom f |_| 1o ) = ( dom F |_| 1o ) )
+3::fveq1    |- ( f = F -> ( f ` ( 2nd ` x ) ) = ( F ` ( 2nd ` x ) ) )
+4:3:ifeq2d  |- ( f = F -> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( f ` ( 2nd ` x ) ) ) = if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) )
+5:2,4:mpteq12dv |- ( f = F -> ( x e. ( dom f |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( f ` ( 2nd ` x ) ) ) ) = ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+6::df-optstep |- OptStep = ( f e. _V |-> ( x e. ( dom f |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( f ` ( 2nd ` x ) ) ) ) )
+7:5,6:fvmptg |- ( ( F e. _V /\ ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) e. _V ) -> ( OptStep ` F ) = ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+8::elex     |- ( F e. V -> F e. _V )
+9::dmexg    |- ( F e. V -> dom F e. _V )
+10::1oex    |- 1o e. _V
+11:10:a1i   |- ( F e. V -> 1o e. _V )
+12a::djuex
+12:9,11,12a:syl2anc |- ( F e. V -> ( dom F |_| 1o ) e. _V )
+13a::mptexg
+13:12,13a:syl |- ( F e. V -> ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) e. _V )
+qed:8,13,7:syl2anc |- ( F e. V -> ( OptStep ` F ) = ( x e. ( dom F |_| 1o ) |-> if ( x = ( inr ` (/) ) , ( inr ` (/) ) , ( F ` ( 2nd ` x ) ) ) ) )
+$)

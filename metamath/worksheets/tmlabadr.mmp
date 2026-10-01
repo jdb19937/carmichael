@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=tmlabadr  LOC_AFTER=?
+
+* The address label of W returns W at -u 1.
+
+s1::simpl |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> W e. Word NN0 )
+s2::simpr |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( # ` W ) <_ ; 3 0 )
+i3::lencl
+s4:s1,i3:syl |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( # ` W ) e. NN0 )
+s5::3nn0 |- 3 e. NN0
+s6::0nn0 |- 0 e. NN0
+s7:s5,s6:deccl |- ; 3 0 e. NN0
+s8:s7:a1i |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ; 3 0 e. NN0 )
+i9::nn0sub
+s10:s4,s8,i9:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( ( # ` W ) <_ ; 3 0 <-> ( ; 3 0 - ( # ` W ) ) e. NN0 ) )
+s11:s2,s10:mpbid |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( ; 3 0 - ( # ` W ) ) e. NN0 )
+s12::fvexd |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) e. _V )
+s13::id |- ( w = W -> w = W )
+c13_1:s13:fveq2d |- ( w = W -> ( # ` w ) = ( # ` W ) )
+c13_2:c13_1:oveq2d |- ( w = W -> ( ; 3 0 - ( # ` w ) ) = ( ; 3 0 - ( # ` W ) ) )
+c13_3:c13_2:fveq2d |- ( w = W -> ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) = ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) )
+c13_4:c13_3,s13:fveq12d |- ( w = W -> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) = ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) )
+s14::df-tmlab |- TMLab = ( w e. Word NN0 |-> ( ( TMFam ` ( ; 3 0 - ( # ` w ) ) ) ` w ) )
+s15:c13_4,s14:fvmptg |- ( ( W e. Word NN0 /\ ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) e. _V ) -> ( TMLab ` W ) = ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) )
+s16:s1,s12,s15:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( TMLab ` W ) = ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) )
+s17:s16:fveq1d |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( ( TMLab ` W ) ` -u 1 ) = ( ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) ` -u 1 ) )
+i18::tmfamadr
+s19:s11,s1,i18:syl2anc |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( ( ( TMFam ` ( ; 3 0 - ( # ` W ) ) ) ` W ) ` -u 1 ) = W )
+qed:s17,s19:eqtrd |- ( ( W e. Word NN0 /\ ( # ` W ) <_ ; 3 0 ) -> ( ( TMLab ` W ) ` -u 1 ) = W )
+$)

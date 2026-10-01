@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=blpow2  LOC_AFTER=?
+
+* A nonnegative integer is below 2 to its bit length.
+
+s1::simpr |- ( ( A e. NN0 /\ A = 0 ) -> A = 0 )
+s2:s1:fveq2d |- ( ( A e. NN0 /\ A = 0 ) -> ( bl ` A ) = ( bl ` 0 ) )
+s3::bl0 |- ( bl ` 0 ) = 0
+s4:s2,s3:eqtrdi |- ( ( A e. NN0 /\ A = 0 ) -> ( bl ` A ) = 0 )
+s5:s4:oveq2d |- ( ( A e. NN0 /\ A = 0 ) -> ( 2 ^ ( bl ` A ) ) = ( 2 ^ 0 ) )
+s6::2cn |- 2 e. CC
+i7::exp0
+s8:s6,i7:ax-mp |- ( 2 ^ 0 ) = 1
+s9:s5,s8:eqtrdi |- ( ( A e. NN0 /\ A = 0 ) -> ( 2 ^ ( bl ` A ) ) = 1 )
+s10::0lt1 |- 0 < 1
+s11:s10:a1i |- ( ( A e. NN0 /\ A = 0 ) -> 0 < 1 )
+s12:s1,s9,s11:3brtr4d |- ( ( A e. NN0 /\ A = 0 ) -> A < ( 2 ^ ( bl ` A ) ) )
+s13::elnnne0 |- ( A e. NN <-> ( A e. NN0 /\ A =/= 0 ) )
+s14:s13:biimpri |- ( ( A e. NN0 /\ A =/= 0 ) -> A e. NN )
+i15::blpos
+s16:s14,i15:syl |- ( ( A e. NN0 /\ A =/= 0 ) -> ( bl ` A ) = ( ( 2 Nlog A ) + 1 ) )
+s17:s16:oveq2d |- ( ( A e. NN0 /\ A =/= 0 ) -> ( 2 ^ ( bl ` A ) ) = ( 2 ^ ( ( 2 Nlog A ) + 1 ) ) )
+s18::2z |- 2 e. ZZ
+i19::uzid
+s20:s18,i19:ax-mp |- 2 e. ( ZZ>= ` 2 )
+s21:s20:a1i |- ( ( A e. NN0 /\ A =/= 0 ) -> 2 e. ( ZZ>= ` 2 ) )
+i22::nloglt
+s23:s21,s14,i22:syl2anc |- ( ( A e. NN0 /\ A =/= 0 ) -> A < ( 2 ^ ( ( 2 Nlog A ) + 1 ) ) )
+s24:s23,s17:breqtrrd |- ( ( A e. NN0 /\ A =/= 0 ) -> A < ( 2 ^ ( bl ` A ) ) )
+qed:s12,s24:pm2.61dane |- ( A e. NN0 -> A < ( 2 ^ ( bl ` A ) ) )
+$)

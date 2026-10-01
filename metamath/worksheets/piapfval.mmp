@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=piapfval  LOC_AFTER=?
+
+* Value of the function piAP at a modulus.
+
+s1::oveq2 |- ( q = Q -> ( n mod q ) = ( n mod Q ) )
+s2::oveq2 |- ( q = Q -> ( a mod q ) = ( a mod Q ) )
+s3:s1,s2:eqeq12d |- ( q = Q -> ( ( n mod q ) = ( a mod q ) <-> ( n mod Q ) = ( a mod Q ) ) )
+s4:s3:anbi2d |- ( q = Q -> ( ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) <-> ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) ) )
+s5:s4:rabbidv |- ( q = Q -> { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } = { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } )
+s6:s5:fveq2d |- ( q = Q -> ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } ) = ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ) )
+s7:s6:mpoeq3dv |- ( q = Q -> ( a e. ZZ , y e. RR |-> ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } ) ) = ( a e. ZZ , y e. RR |-> ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ) ) )
+s8::df-piap |- piAP = ( q e. NN |-> ( a e. ZZ , y e. RR |-> ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod q ) = ( a mod q ) ) } ) ) )
+s9::zex |- ZZ e. _V
+s10::reex |- RR e. _V
+s11::mpoexga |- ( ( ZZ e. _V /\ RR e. _V ) -> ( a e. ZZ , y e. RR |-> ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ) ) e. _V )
+s12:s9,s10,s11:mp2an |- ( a e. ZZ , y e. RR |-> ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ) ) e. _V
+qed:s7,s8,s12:fvmpt |- ( Q e. NN -> ( piAP ` Q ) = ( a e. ZZ , y e. RR |-> ( # ` { n e. ( 1 ... ( |_ ` y ) ) | ( n e. Prime /\ ( n mod Q ) = ( a mod Q ) ) } ) ) )
+$)

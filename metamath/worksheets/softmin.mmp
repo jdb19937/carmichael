@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=softmin  LOC_AFTER=?
+
+* The harmonic-type product of two positive reals is positive and below both.
+
+s1::simpl |- ( ( A e. RR+ /\ B e. RR+ ) -> A e. RR+ )
+s2::simpr |- ( ( A e. RR+ /\ B e. RR+ ) -> B e. RR+ )
+s3:s1,s2:rpaddcld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A + B ) e. RR+ )
+s4:s1,s2:rpmulcld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A x. B ) e. RR+ )
+s5:s4,s3:rpdivcld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( ( A x. B ) / ( A + B ) ) e. RR+ )
+i6::rpre
+s7:s1,i6:syl |- ( ( A e. RR+ /\ B e. RR+ ) -> A e. RR )
+i8::rpre
+s9:s2,i8:syl |- ( ( A e. RR+ /\ B e. RR+ ) -> B e. RR )
+i10::rpre
+s11:s4,i10:syl |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A x. B ) e. RR )
+s12:s7:recnd |- ( ( A e. RR+ /\ B e. RR+ ) -> A e. CC )
+s13:s9:recnd |- ( ( A e. RR+ /\ B e. RR+ ) -> B e. CC )
+i14::rpge0
+s15:s2,i14:syl |- ( ( A e. RR+ /\ B e. RR+ ) -> 0 <_ B )
+i16::rpge0
+s17:s1,i16:syl |- ( ( A e. RR+ /\ B e. RR+ ) -> 0 <_ A )
+s18:s7,s9:readdcld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A + B ) e. RR )
+s21:s9,s7:addge02d |- ( ( A e. RR+ /\ B e. RR+ ) -> ( 0 <_ A <-> B <_ ( A + B ) ) )
+s22:s21,s17:mpbid |- ( ( A e. RR+ /\ B e. RR+ ) -> B <_ ( A + B ) )
+s23:s7,s9:addge01d |- ( ( A e. RR+ /\ B e. RR+ ) -> ( 0 <_ B <-> A <_ ( A + B ) ) )
+s24:s23,s15:mpbid |- ( ( A e. RR+ /\ B e. RR+ ) -> A <_ ( A + B ) )
+s25:s7,s9:readdcld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A + B ) e. RR )
+s26:s7,s17:jca |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A e. RR /\ 0 <_ A ) )
+s27:s9,s25,s26:3jca |- ( ( A e. RR+ /\ B e. RR+ ) -> ( B e. RR /\ ( A + B ) e. RR /\ ( A e. RR /\ 0 <_ A ) ) )
+i28::lemul2a
+s29:s27,s22,i28:syl2anc |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A x. B ) <_ ( A x. ( A + B ) ) )
+s30:s11,s7,s3:ledivmuld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( ( ( A x. B ) / ( A + B ) ) <_ A <-> ( A x. B ) <_ ( ( A + B ) x. A ) ) )
+s31:s12,s13:addcld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A + B ) e. CC )
+s32:s12,s31:mulcomd |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A x. ( A + B ) ) = ( ( A + B ) x. A ) )
+s33:s29,s32:breqtrd |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A x. B ) <_ ( ( A + B ) x. A ) )
+s34:s30,s33:mpbird |- ( ( A e. RR+ /\ B e. RR+ ) -> ( ( A x. B ) / ( A + B ) ) <_ A )
+s35:s7,s9:readdcld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A + B ) e. RR )
+s36:s9,s15:jca |- ( ( A e. RR+ /\ B e. RR+ ) -> ( B e. RR /\ 0 <_ B ) )
+s37:s7,s35,s36:3jca |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A e. RR /\ ( A + B ) e. RR /\ ( B e. RR /\ 0 <_ B ) ) )
+i38::lemul1a
+s39:s37,s24,i38:syl2anc |- ( ( A e. RR+ /\ B e. RR+ ) -> ( A x. B ) <_ ( ( A + B ) x. B ) )
+s40:s11,s9,s3:ledivmuld |- ( ( A e. RR+ /\ B e. RR+ ) -> ( ( ( A x. B ) / ( A + B ) ) <_ B <-> ( A x. B ) <_ ( ( A + B ) x. B ) ) )
+s41:s40,s39:mpbird |- ( ( A e. RR+ /\ B e. RR+ ) -> ( ( A x. B ) / ( A + B ) ) <_ B )
+s42:s34,s41:jca |- ( ( A e. RR+ /\ B e. RR+ ) -> ( ( ( A x. B ) / ( A + B ) ) <_ A /\ ( ( A x. B ) / ( A + B ) ) <_ B ) )
+qed:s5,s42:jca |- ( ( A e. RR+ /\ B e. RR+ ) -> ( ( ( A x. B ) / ( A + B ) ) e. RR+ /\ ( ( ( A x. B ) / ( A + B ) ) <_ A /\ ( ( A x. B ) / ( A + B ) ) <_ B ) ) )
+$)

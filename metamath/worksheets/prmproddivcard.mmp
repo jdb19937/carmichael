@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=prmproddivcard  LOC_AFTER=?
+
+* L = Lmod Q has exactly 2 ^ ( # Q ) divisors (Lean: Step3W.lean hdivcard).
+
+s1::id |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P Prime i^i Fin ) )
+i2::elfpw
+s3:s1,i2:sylib |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ Prime /\ Q e. Fin ) )
+s4:s3:simpld |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ Prime )
+s5:s3:simprd |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. Fin )
+s6::prmssnn |- Prime C_ NN
+s7::nnssnn0 |- NN C_ NN0
+s8:s6,s7:sstri |- Prime C_ NN0
+s9:s8:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ NN0 )
+s10:s4,s9:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ NN0 )
+s11:s10,s5:jca |- ( Q e. ( ~P Prime i^i Fin ) -> ( Q C_ NN0 /\ Q e. Fin ) )
+i12::elfpw
+s13:s11,i12:sylibr |- ( Q e. ( ~P Prime i^i Fin ) -> Q e. ( ~P NN0 i^i Fin ) )
+s14::nnssz |- NN C_ ZZ
+s15:s6,s14:sstri |- Prime C_ ZZ
+s16:s15:a1i |- ( Q e. ( ~P Prime i^i Fin ) -> Prime C_ ZZ )
+s17:s4,s16:sstrd |- ( Q e. ( ~P Prime i^i Fin ) -> Q C_ ZZ )
+i18::lmodqcl
+s19:s1,i18:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( Lmod ` Q ) e. NN )
+i20::prmprodsqf
+s21:s1,i20:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( mmu ` ( Lmod ` Q ) ) =/= 0 )
+s22:s19,s21:jca |- ( Q e. ( ~P Prime i^i Fin ) -> ( ( Lmod ` Q ) e. NN /\ ( mmu ` ( Lmod ` Q ) ) =/= 0 ) )
+i23::divsetnn
+s24:s19,i23:syl |- ( Q e. ( ~P Prime i^i Fin ) -> { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } = { m e. NN | m || ( Lmod ` Q ) } )
+i25::sqfdivcard
+s26:s22,i25:syl |- ( Q e. ( ~P Prime i^i Fin ) -> ( # ` { m e. NN | m || ( Lmod ` Q ) } ) = ( 2 ^ ( # ` { p e. Prime | p || ( Lmod ` Q ) } ) ) )
+i27::prmprodset
+s28:s1,i27:syl |- ( Q e. ( ~P Prime i^i Fin ) -> { p e. Prime | p || ( Lmod ` Q ) } = Q )
+s29:s28:fveq2d |- ( Q e. ( ~P Prime i^i Fin ) -> ( # ` { p e. Prime | p || ( Lmod ` Q ) } ) = ( # ` Q ) )
+s30:s29:oveq2d |- ( Q e. ( ~P Prime i^i Fin ) -> ( 2 ^ ( # ` { p e. Prime | p || ( Lmod ` Q ) } ) ) = ( 2 ^ ( # ` Q ) ) )
+s31:s26,s30:eqtrd |- ( Q e. ( ~P Prime i^i Fin ) -> ( # ` { m e. NN | m || ( Lmod ` Q ) } ) = ( 2 ^ ( # ` Q ) ) )
+s32:s24:fveq2d |- ( Q e. ( ~P Prime i^i Fin ) -> ( # ` { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } ) = ( # ` { m e. NN | m || ( Lmod ` Q ) } ) )
+qed:s32,s31:eqtrd |- ( Q e. ( ~P Prime i^i Fin ) -> ( # ` { m e. ( 1 ... ( Lmod ` Q ) ) | m || ( Lmod ` Q ) } ) = ( 2 ^ ( # ` Q ) ) )
+$)

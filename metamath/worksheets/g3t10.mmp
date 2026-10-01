@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=g3t10  LOC_AFTER=?
+
+* An index shift of a finite sum through tools/fsum.py: the module writes the three integer closures, the body closure and the substitution hypothesis ` ( j = ( k - K ) -> A = B ) ` .
+
+s1::simpll |- ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) -> M e. ZZ )
+s2::simplr |- ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) -> N e. ZZ )
+s3::simpr |- ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) -> K e. ZZ )
+s4::simpr |- ( ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) /\ j e. ( M ... N ) ) -> j e. ( M ... N ) )
+i5::elfzelz
+s6:s4,i5:syl |- ( ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) /\ j e. ( M ... N ) ) -> j e. ZZ )
+s7:s6:zred |- ( ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) /\ j e. ( M ... N ) ) -> j e. RR )
+s8:s7:recnd |- ( ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) /\ j e. ( M ... N ) ) -> j e. CC )
+s9:s8,s8:mulcld |- ( ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) /\ j e. ( M ... N ) ) -> ( j x. j ) e. CC )
+s10::id |- ( j = ( k - K ) -> j = ( k - K ) )
+q1:s10,s10:oveq12d |- ( j = ( k - K ) -> ( j x. j ) = ( ( k - K ) x. ( k - K ) ) )
+qed:s3,s1,s2,s9,q1:fsumshft |- ( ( ( M e. ZZ /\ N e. ZZ ) /\ K e. ZZ ) -> sum_ j e. ( M ... N ) ( j x. j ) = sum_ k e. ( ( M + K ) ... ( N + K ) ) ( ( k - K ) x. ( k - K ) ) )
+$)

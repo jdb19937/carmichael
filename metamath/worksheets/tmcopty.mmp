@@ -1,0 +1,40 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcopty  LOC_AFTER=?
+
+* The stack of an operand of a two-operand loop after ` N ` reads is a word over the machine alphabet.
+
+s1::simp1 |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> L e. Word 2o )
+s2::simp2 |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> X e. Word Gamma' )
+s3::simp3 |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> N e. NN0 )
+i4::tmcibw
+s5:s1,i4:syl |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( inclBool o. L ) e. Word ( { 1 } X. 2o ) )
+s6::tm2lbits |- ( { 1 } X. 2o ) C_ Gamma'
+s7:s6:a1i |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( { 1 } X. 2o ) C_ Gamma' )
+i8::sswrd
+s9:s7,i8:syl |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> Word ( { 1 } X. 2o ) C_ Word Gamma' )
+s10:s9,s5:sseldd |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( inclBool o. L ) e. Word Gamma' )
+i11::bwmaplen
+s12:s1,i11:syl |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( # ` ( inclBool o. L ) ) = ( # ` L ) )
+i13::lencl
+s14:s1,i13:syl |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( # ` L ) e. NN0 )
+s15::gamma4 |- 4 e. Gamma'
+s16:s15:a1i |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> 4 e. Gamma' )
+s17:s16:s1cld |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> <" 4 "> e. Word Gamma' )
+i18::ccatcl
+s19:s17,s2,i18:syl2anc |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( <" 4 "> ++ X ) e. Word Gamma' )
+i20::swrdcl
+s21:s10,i20:syl |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) e. Word Gamma' )
+i22::ccatcl
+s23:s21,s19,i22:syl2anc |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) e. Word Gamma' )
+s24:s23,s2:ifcld |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> if ( N <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) e. Word Gamma' )
+s25:s24:elexd |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> if ( N <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) e. _V )
+s26::id |- ( j = N -> j = N )
+c1:s26:breq1d |- ( j = N -> ( j <_ ( # ` L ) <-> N <_ ( # ` L ) ) )
+c2:s26:opeq1d |- ( j = N -> <. j , ( # ` L ) >. = <. N , ( # ` L ) >. )
+c3:c2:oveq2d |- ( j = N -> ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) = ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) )
+c4:c3:oveq1d |- ( j = N -> ( ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) = ( ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) )
+c5:c1,c4:ifbieq1d |- ( j = N -> if ( j <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) = if ( N <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) )
+s27::eqidd |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( j e. NN0 |-> if ( j <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) ) = ( j e. NN0 |-> if ( j <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) ) )
+s28:c5:adantl |- ( ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) /\ j = N ) -> if ( j <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) = if ( N <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) )
+s29:s27,s28,s3,s25:fvmptd |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( ( j e. NN0 |-> if ( j <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) ) ` N ) = if ( N <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. N , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) )
+qed:s29,s24:eqeltrd |- ( ( L e. Word 2o /\ X e. Word Gamma' /\ N e. NN0 ) -> ( ( j e. NN0 |-> if ( j <_ ( # ` L ) , ( ( ( inclBool o. L ) substr <. j , ( # ` L ) >. ) ++ ( <" 4 "> ++ X ) ) , X ) ) ` N ) e. Word Gamma' )
+$)

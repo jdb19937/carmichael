@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=carriesval  LOC_AFTER=?
+
+* Value of carries: the 2-adic valuation of toNat L + 1, or the length when L is all ones.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+s6::id |- ( l = L -> l = L )
+c1:s6:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c2:c1:oveq1d |- ( l = L -> ( ( toNat ` l ) + 1 ) = ( ( toNat ` L ) + 1 ) )
+c3:s6:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c4:c3:oveq2d |- ( l = L -> ( 2 ^ ( # ` l ) ) = ( 2 ^ ( # ` L ) ) )
+c5:c2,c4:eqeq12d |- ( l = L -> ( ( ( toNat ` l ) + 1 ) = ( 2 ^ ( # ` l ) ) <-> ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) )
+c6:s6:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c7:s6:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c8:c7:oveq1d |- ( l = L -> ( ( toNat ` l ) + 1 ) = ( ( toNat ` L ) + 1 ) )
+c9:c8:oveq2d |- ( l = L -> ( 2 pCnt ( ( toNat ` l ) + 1 ) ) = ( 2 pCnt ( ( toNat ` L ) + 1 ) ) )
+c10:c5,c6,c9:ifbieq12d |- ( l = L -> if ( ( ( toNat ` l ) + 1 ) = ( 2 ^ ( # ` l ) ) , ( # ` l ) , ( 2 pCnt ( ( toNat ` l ) + 1 ) ) ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) )
+s7::df-carries |- carries = ( l e. Word 2o |-> if ( ( ( toNat ` l ) + 1 ) = ( 2 ^ ( # ` l ) ) , ( # ` l ) , ( 2 pCnt ( ( toNat ` l ) + 1 ) ) ) )
+i8::lencl
+s9:s1,i8:syl |- ( L e. Word 2o -> ( # ` L ) e. NN0 )
+s10:s9:nn0zd |- ( L e. Word 2o -> ( # ` L ) e. ZZ )
+s11::fvex |- ( # ` L ) e. _V
+s12:s11:a1i |- ( L e. Word 2o -> ( # ` L ) e. _V )
+s13::ovex |- ( 2 pCnt ( ( toNat ` L ) + 1 ) ) e. _V
+s14:s13:a1i |- ( L e. Word 2o -> ( 2 pCnt ( ( toNat ` L ) + 1 ) ) e. _V )
+s15:s12,s14:ifcld |- ( L e. Word 2o -> if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) e. _V )
+s16:c10,s7:fvmptg |- ( ( L e. Word 2o /\ if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) e. _V ) -> ( carries ` L ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) )
+qed:s1,s15,s16:syl2anc |- ( L e. Word 2o -> ( carries ` L ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( # ` L ) , ( 2 pCnt ( ( toNat ` L ) + 1 ) ) ) )
+$)

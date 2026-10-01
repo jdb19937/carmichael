@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=twinpp  LOC_AFTER=?
+
+* The sifting product of the twin sieve is a squarefree positive integer whose prime divisors are the sifting primes.
+
+s1::fzfid |- ( Z e. NN0 -> ( 0 ... Z ) e. Fin )
+s2::ssrab2 |- { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } C_ ( 0 ... Z )
+s3:s2:a1i |- ( Z e. NN0 -> { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } C_ ( 0 ... Z ) )
+s4:s1,s3:ssfid |- ( Z e. NN0 -> { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } e. Fin )
+s5::eleq1 |- ( u = d -> ( u e. Prime <-> d e. Prime ) )
+s6::breq1 |- ( u = d -> ( u || ( 2 x. M ) <-> d || ( 2 x. M ) ) )
+s7:s6:notbid |- ( u = d -> ( -. u || ( 2 x. M ) <-> -. d || ( 2 x. M ) ) )
+s8:s5,s7:anbi12d |- ( u = d -> ( ( u e. Prime /\ -. u || ( 2 x. M ) ) <-> ( d e. Prime /\ -. d || ( 2 x. M ) ) ) )
+s9:s8:elrab |- ( d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } <-> ( d e. ( 0 ... Z ) /\ ( d e. Prime /\ -. d || ( 2 x. M ) ) ) )
+s10:s9:a1i |- ( ( Z e. NN0 /\ d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } ) -> ( d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } <-> ( d e. ( 0 ... Z ) /\ ( d e. Prime /\ -. d || ( 2 x. M ) ) ) ) )
+s11::simpr |- ( ( Z e. NN0 /\ d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } ) -> d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } )
+s12:s10,s11:mpbid |- ( ( Z e. NN0 /\ d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } ) -> ( d e. ( 0 ... Z ) /\ ( d e. Prime /\ -. d || ( 2 x. M ) ) ) )
+s13:s12:simprd |- ( ( Z e. NN0 /\ d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } ) -> ( d e. Prime /\ -. d || ( 2 x. M ) ) )
+s14:s13:simpld |- ( ( Z e. NN0 /\ d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } ) -> d e. Prime )
+s15:s14:ex |- ( Z e. NN0 -> ( d e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } -> d e. Prime ) )
+s16:s15:ssrdv |- ( Z e. NN0 -> { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } C_ Prime )
+s17:s4,s16:jca |- ( Z e. NN0 -> ( { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } e. Fin /\ { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } C_ Prime ) )
+i18::sqfprod
+qed:s17,i18:syl |- ( Z e. NN0 -> ( ( prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } p e. NN /\ ( mmu ` prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } p ) =/= 0 ) /\ { q e. Prime | q || prod_ p e. { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } p } = { u e. ( 0 ... Z ) | ( u e. Prime /\ -. u || ( 2 x. M ) ) } ) )
+$)

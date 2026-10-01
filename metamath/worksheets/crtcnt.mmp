@@ -1,0 +1,46 @@
+$( <MM> <PROOF_ASST> THEOREM=crtcnt  LOC_AFTER=?
+
+* The count of the integers up to N that are 1 mod M and divisible by a D coprime to M is within 1 of N / ( D x. M ).
+
+s1::simpl |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) )
+s2:s1:simpld |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) )
+s3:s2:simp1d |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> D e. NN )
+s4:s2:simp2d |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> M e. NN )
+s5:s1:simprd |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> N e. NN0 )
+s6:s3,s4:nnmulcld |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( D x. M ) e. NN )
+s7::simprl |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> o e. ( 0 ..^ ( D x. M ) ) )
+s8::simprr |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) )
+s9::oveq1 |- ( i = x -> ( i mod M ) = ( x mod M ) )
+s10:s9:eqeq1d |- ( i = x -> ( ( i mod M ) = ( 1 mod M ) <-> ( x mod M ) = ( 1 mod M ) ) )
+s11::breq2 |- ( i = x -> ( D || i <-> D || x ) )
+s12:s10,s11:anbi12d |- ( i = x -> ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( ( x mod M ) = ( 1 mod M ) /\ D || x ) ) )
+s13:s12:cbvrabv |- { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } = { x e. ( 1 ... N ) | ( ( x mod M ) = ( 1 mod M ) /\ D || x ) }
+s14:s13:a1i |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } = { x e. ( 1 ... N ) | ( ( x mod M ) = ( 1 mod M ) /\ D || x ) } )
+s15::simpr |- ( ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) /\ x e. ( 1 ... N ) ) -> x e. ( 1 ... N ) )
+i16::elfzelz
+s17:s15,i16:syl |- ( ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) /\ x e. ( 1 ... N ) ) -> x e. ZZ )
+s18::oveq1 |- ( i = x -> ( i mod M ) = ( x mod M ) )
+s19:s18:eqeq1d |- ( i = x -> ( ( i mod M ) = ( 1 mod M ) <-> ( x mod M ) = ( 1 mod M ) ) )
+s20::breq2 |- ( i = x -> ( D || i <-> D || x ) )
+s21:s19,s20:anbi12d |- ( i = x -> ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( ( x mod M ) = ( 1 mod M ) /\ D || x ) ) )
+s22::oveq1 |- ( i = x -> ( i mod ( D x. M ) ) = ( x mod ( D x. M ) ) )
+s23:s22:eqeq1d |- ( i = x -> ( ( i mod ( D x. M ) ) = o <-> ( x mod ( D x. M ) ) = o ) )
+s24:s21,s23:bibi12d |- ( i = x -> ( ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) <-> ( ( ( x mod M ) = ( 1 mod M ) /\ D || x ) <-> ( x mod ( D x. M ) ) = o ) ) )
+s25:s24:rspcv |- ( x e. ZZ -> ( A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) -> ( ( ( x mod M ) = ( 1 mod M ) /\ D || x ) <-> ( x mod ( D x. M ) ) = o ) ) )
+s26:s17,s25:syl |- ( ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) /\ x e. ( 1 ... N ) ) -> ( A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) -> ( ( ( x mod M ) = ( 1 mod M ) /\ D || x ) <-> ( x mod ( D x. M ) ) = o ) ) )
+s27:s8:adantr |- ( ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) /\ x e. ( 1 ... N ) ) -> A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) )
+s28:s27,s26:mpd |- ( ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) /\ x e. ( 1 ... N ) ) -> ( ( ( x mod M ) = ( 1 mod M ) /\ D || x ) <-> ( x mod ( D x. M ) ) = o ) )
+s29:s28:rabbidva |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> { x e. ( 1 ... N ) | ( ( x mod M ) = ( 1 mod M ) /\ D || x ) } = { x e. ( 1 ... N ) | ( x mod ( D x. M ) ) = o } )
+s30:s14,s29:eqtrd |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } = { x e. ( 1 ... N ) | ( x mod ( D x. M ) ) = o } )
+s31:s30:fveq2d |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( # ` { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } ) = ( # ` { x e. ( 1 ... N ) | ( x mod ( D x. M ) ) = o } ) )
+i32::cntmod
+s33:s5,s6,s7,i32:syl3anc |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( abs ` ( ( # ` { x e. ( 1 ... N ) | ( x mod ( D x. M ) ) = o } ) - ( N / ( D x. M ) ) ) ) <_ 1 )
+s34:s31:oveq1d |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( ( # ` { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } ) - ( N / ( D x. M ) ) ) = ( ( # ` { x e. ( 1 ... N ) | ( x mod ( D x. M ) ) = o } ) - ( N / ( D x. M ) ) ) )
+s35:s34:fveq2d |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( abs ` ( ( # ` { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } ) - ( N / ( D x. M ) ) ) ) = ( abs ` ( ( # ` { x e. ( 1 ... N ) | ( x mod ( D x. M ) ) = o } ) - ( N / ( D x. M ) ) ) ) )
+s36:s35,s33:eqbrtrd |- ( ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) /\ ( o e. ( 0 ..^ ( D x. M ) ) /\ A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) ) ) -> ( abs ` ( ( # ` { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } ) - ( N / ( D x. M ) ) ) ) <_ 1 )
+s37:s36:rexlimdvaa |- ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) -> ( E. o e. ( 0 ..^ ( D x. M ) ) A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) -> ( abs ` ( ( # ` { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } ) - ( N / ( D x. M ) ) ) ) <_ 1 ) )
+s38::simpl |- ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) -> ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) )
+i39::crtres
+s40:s38,i39:syl |- ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) -> E. o e. ( 0 ..^ ( D x. M ) ) A. i e. ZZ ( ( ( i mod M ) = ( 1 mod M ) /\ D || i ) <-> ( i mod ( D x. M ) ) = o ) )
+qed:s37,s40:mpd |- ( ( ( D e. NN /\ M e. NN /\ ( D gcd M ) = 1 ) /\ N e. NN0 ) -> ( abs ` ( ( # ` { i e. ( 1 ... N ) | ( ( i mod M ) = ( 1 mod M ) /\ D || i ) } ) - ( N / ( D x. M ) ) ) ) <_ 1 )
+$)

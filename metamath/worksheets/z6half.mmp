@@ -1,0 +1,68 @@
+$( <MM> <PROOF_ASST> THEOREM=z6half  LOC_AFTER=?
+
+* One tail of a line integral against the exponential majorant ` M 2 ^ ( K v ) ` : ` | S. ( A , B ) F | <_ M ( 2 ^ ( K B ) - 2 ^ ( K A ) ) / ( K log 2 ) ` ( ~ itgabs , ~ itgle , ~ cxpaffitg2 ).
+
+h1::z6half.1 |- ( ph -> ( ( A e. RR /\ B e. RR ) /\ A <_ B ) )
+h2::z6half.2 |- ( ph -> ( K e. RR /\ K =/= 0 ) )
+h3::z6half.3 |- ( ph -> M e. RR )
+h4::z6half.4 |- ( ( ph /\ v e. ( A (,) B ) ) -> F e. CC )
+h5::z6half.5 |- ( ph -> ( v e. ( A (,) B ) |-> F ) e. L^1 )
+h6::z6half.6 |- ( ( ph /\ v e. ( A (,) B ) ) -> ( abs ` F ) <_ ( M x. ( 2 ^c ( K x. v ) ) ) )
+s1:1:simpld |- ( ph -> ( A e. RR /\ B e. RR ) )
+s2:s1:simpld |- ( ph -> A e. RR )
+s3:1:simpld |- ( ph -> ( A e. RR /\ B e. RR ) )
+s4:s3:simprd |- ( ph -> B e. RR )
+s5:1:simprd |- ( ph -> A <_ B )
+s6:2:simpld |- ( ph -> K e. RR )
+s7:2:simprd |- ( ph -> K =/= 0 )
+s8:4,5:itgabs |- ( ph -> ( abs ` S. ( A (,) B ) F _d v ) <_ S. ( A (,) B ) ( abs ` F ) _d v )
+s9:4,5:iblabs |- ( ph -> ( v e. ( A (,) B ) |-> ( abs ` F ) ) e. L^1 )
+s10::2rp |- 2 e. RR+
+s11:s10:a1i |- ( ph -> 2 e. RR+ )
+s12:s2,s4:jca |- ( ph -> ( A e. RR /\ B e. RR ) )
+s13:s6,s12:jca |- ( ph -> ( K e. RR /\ ( A e. RR /\ B e. RR ) ) )
+s14:s11,s13:jca |- ( ph -> ( 2 e. RR+ /\ ( K e. RR /\ ( A e. RR /\ B e. RR ) ) ) )
+i15::cxpaffibl2
+s16:s14,i15:syl |- ( ph -> ( ( v e. ( A (,) B ) |-> ( 2 ^c ( K x. v ) ) ) e. ( ( A (,) B ) -cn-> CC ) /\ ( v e. ( A (,) B ) |-> ( 2 ^c ( K x. v ) ) ) e. L^1 ) )
+s17:s16:simprd |- ( ph -> ( v e. ( A (,) B ) |-> ( 2 ^c ( K x. v ) ) ) e. L^1 )
+s18::simpr |- ( ( ph /\ v e. ( A (,) B ) ) -> v e. ( A (,) B ) )
+i19::elioore
+s20:s18,i19:syl |- ( ( ph /\ v e. ( A (,) B ) ) -> v e. RR )
+s21::2rp |- 2 e. RR+
+s22:s21:a1i |- ( ph -> 2 e. RR+ )
+s23:s22:adantr |- ( ( ph /\ v e. ( A (,) B ) ) -> 2 e. RR+ )
+s24:s6:adantr |- ( ( ph /\ v e. ( A (,) B ) ) -> K e. RR )
+s25:s24,s20:remulcld |- ( ( ph /\ v e. ( A (,) B ) ) -> ( K x. v ) e. RR )
+s26:s23,s25:rpcxpcld |- ( ( ph /\ v e. ( A (,) B ) ) -> ( 2 ^c ( K x. v ) ) e. RR+ )
+s27:s26:rpred |- ( ( ph /\ v e. ( A (,) B ) ) -> ( 2 ^c ( K x. v ) ) e. RR )
+s28:3:recnd |- ( ph -> M e. CC )
+s29:s27:recnd |- ( ( ph /\ v e. ( A (,) B ) ) -> ( 2 ^c ( K x. v ) ) e. CC )
+s30:s28,s29,s17:iblmulc2 |- ( ph -> ( v e. ( A (,) B ) |-> ( M x. ( 2 ^c ( K x. v ) ) ) ) e. L^1 )
+s31:4:abscld |- ( ( ph /\ v e. ( A (,) B ) ) -> ( abs ` F ) e. RR )
+s32:3:adantr |- ( ( ph /\ v e. ( A (,) B ) ) -> M e. RR )
+s33:s32,s27:remulcld |- ( ( ph /\ v e. ( A (,) B ) ) -> ( M x. ( 2 ^c ( K x. v ) ) ) e. RR )
+s34:s9,s30,s31,s33,6:itgle |- ( ph -> S. ( A (,) B ) ( abs ` F ) _d v <_ S. ( A (,) B ) ( M x. ( 2 ^c ( K x. v ) ) ) _d v )
+s35:s27:recnd |- ( ( ph /\ v e. ( A (,) B ) ) -> ( 2 ^c ( K x. v ) ) e. CC )
+s36:s28,s35,s17:itgmulc2 |- ( ph -> ( M x. S. ( A (,) B ) ( 2 ^c ( K x. v ) ) _d v ) = S. ( A (,) B ) ( M x. ( 2 ^c ( K x. v ) ) ) _d v )
+s37::2rp |- 2 e. RR+
+s38:s37:a1i |- ( ph -> 2 e. RR+ )
+s39::1ne2 |- 1 =/= 2
+s40:s39:necomi |- 2 =/= 1
+s41:s40:a1i |- ( ph -> 2 =/= 1 )
+s42:s38,s41:jca |- ( ph -> ( 2 e. RR+ /\ 2 =/= 1 ) )
+s43:s6,s7:jca |- ( ph -> ( K e. RR /\ K =/= 0 ) )
+s44:s2,s4,s5:3jca |- ( ph -> ( A e. RR /\ B e. RR /\ A <_ B ) )
+s45:s43,s44:jca |- ( ph -> ( ( K e. RR /\ K =/= 0 ) /\ ( A e. RR /\ B e. RR /\ A <_ B ) ) )
+i46::cxpaffitg2
+s47:s42,s45,i46:syl2anc |- ( ph -> S. ( A (,) B ) ( 2 ^c ( K x. v ) ) _d v = ( ( ( 2 ^c ( K x. B ) ) - ( 2 ^c ( K x. A ) ) ) / ( K x. ( log ` 2 ) ) ) )
+s48:s34,s36:breqtrrd |- ( ph -> S. ( A (,) B ) ( abs ` F ) _d v <_ ( M x. S. ( A (,) B ) ( 2 ^c ( K x. v ) ) _d v ) )
+s49:s47:oveq2d |- ( ph -> ( M x. S. ( A (,) B ) ( 2 ^c ( K x. v ) ) _d v ) = ( M x. ( ( ( 2 ^c ( K x. B ) ) - ( 2 ^c ( K x. A ) ) ) / ( K x. ( log ` 2 ) ) ) ) )
+s50:s48,s49:breqtrd |- ( ph -> S. ( A (,) B ) ( abs ` F ) _d v <_ ( M x. ( ( ( 2 ^c ( K x. B ) ) - ( 2 ^c ( K x. A ) ) ) / ( K x. ( log ` 2 ) ) ) ) )
+s51:4,5:itgcl |- ( ph -> S. ( A (,) B ) F _d v e. CC )
+s52:s51:abscld |- ( ph -> ( abs ` S. ( A (,) B ) F _d v ) e. RR )
+s53:s31,s9:itgrecl |- ( ph -> S. ( A (,) B ) ( abs ` F ) _d v e. RR )
+s54:s27,s17:itgrecl |- ( ph -> S. ( A (,) B ) ( 2 ^c ( K x. v ) ) _d v e. RR )
+s55:s47,s54:eqeltrrd |- ( ph -> ( ( ( 2 ^c ( K x. B ) ) - ( 2 ^c ( K x. A ) ) ) / ( K x. ( log ` 2 ) ) ) e. RR )
+s56:3,s55:remulcld |- ( ph -> ( M x. ( ( ( 2 ^c ( K x. B ) ) - ( 2 ^c ( K x. A ) ) ) / ( K x. ( log ` 2 ) ) ) ) e. RR )
+qed:s52,s53,s56,s8,s50:letrd |- ( ph -> ( abs ` S. ( A (,) B ) F _d v ) <_ ( M x. ( ( ( 2 ^c ( K x. B ) ) - ( 2 ^c ( K x. A ) ) ) / ( K x. ( log ` 2 ) ) ) ) )
+$)

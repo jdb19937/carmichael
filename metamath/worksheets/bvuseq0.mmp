@@ -1,0 +1,258 @@
+$( <MM> <PROOF_ASST> THEOREM=bvuseq0  LOC_AFTER=?
+
+* uSeq is nonnegative (Lean uSeq_nonneg, for n >= 2).
+
+s1::eluzelre |- ( N e. ( ZZ>= ` 2 ) -> N e. RR )
+s2::eluzle |- ( N e. ( ZZ>= ` 2 ) -> 2 <_ N )
+s3::1red |- ( N e. ( ZZ>= ` 2 ) -> 1 e. RR )
+s4::2re |- 2 e. RR
+s5:s4:a1i |- ( N e. ( ZZ>= ` 2 ) -> 2 e. RR )
+s6:s5,s1:remulcld |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. N ) e. RR )
+s7:s6,s3:resubcld |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - 1 ) e. RR )
+s8:s4:a1i |- ( N e. ( ZZ>= ` 2 ) -> 2 e. RR )
+s9:s1,s8:subge0d |- ( N e. ( ZZ>= ` 2 ) -> ( 0 <_ ( N - 2 ) <-> 2 <_ N ) )
+s10:s2,s9:mpbird |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ ( N - 2 ) )
+s11:s1,s8:resubcld |- ( N e. ( ZZ>= ` 2 ) -> ( N - 2 ) e. RR )
+s12::0le2 |- 0 <_ 2
+s13:s12:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ 2 )
+s14:s8,s11,s13,s10:mulge0d |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ ( 2 x. ( N - 2 ) ) )
+s15::3pos |- 0 < 3
+s16:s15:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 < 3 )
+s17:s8,s11:remulcld |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. ( N - 2 ) ) e. RR )
+s18::3re |- 3 e. RR
+s19:s18:a1i |- ( N e. ( ZZ>= ` 2 ) -> 3 e. RR )
+s20:s17,s19,s14,s16:addgegt0d |- ( N e. ( ZZ>= ` 2 ) -> 0 < ( ( 2 x. ( N - 2 ) ) + 3 ) )
+s21::2cn |- 2 e. CC
+s22:s21:a1i |- ( N e. ( ZZ>= ` 2 ) -> 2 e. CC )
+s23:s1:recnd |- ( N e. ( ZZ>= ` 2 ) -> N e. CC )
+s24:s22,s23,s22:subdid |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. ( N - 2 ) ) = ( ( 2 x. N ) - ( 2 x. 2 ) ) )
+s25:s22,s23:mulcld |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. N ) e. CC )
+s26:s22,s22:mulcld |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. 2 ) e. CC )
+s27:s25,s26:negsubd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) + -u ( 2 x. 2 ) ) = ( ( 2 x. N ) - ( 2 x. 2 ) ) )
+s28:s27:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - ( 2 x. 2 ) ) = ( ( 2 x. N ) + -u ( 2 x. 2 ) ) )
+s29:s22,s22:mulneg1d |- ( N e. ( ZZ>= ` 2 ) -> ( -u 2 x. 2 ) = -u ( 2 x. 2 ) )
+s30:s29:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> -u ( 2 x. 2 ) = ( -u 2 x. 2 ) )
+s31:s30:oveq2d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) + -u ( 2 x. 2 ) ) = ( ( 2 x. N ) + ( -u 2 x. 2 ) ) )
+s32:s25:addlidd |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + ( 2 x. N ) ) = ( 2 x. N ) )
+s33:s32:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. N ) = ( 0 + ( 2 x. N ) ) )
+s34::2t2e4 |- ( 2 x. 2 ) = 4
+s35:s21,s21:mulneg1i |- ( -u 2 x. 2 ) = -u ( 2 x. 2 )
+s36:s34:negeqi |- -u ( 2 x. 2 ) = -u 4
+s37:s35,s36:eqtri |- ( -u 2 x. 2 ) = -u 4
+s38:s37:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 2 x. 2 ) = -u 4 )
+s39:s33,s38:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) + ( -u 2 x. 2 ) ) = ( ( 0 + ( 2 x. N ) ) + -u 4 ) )
+s40::0cn |- 0 e. CC
+s41:s40:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 e. CC )
+s42::4cn |- 4 e. CC
+s43:s42:negcli |- -u 4 e. CC
+s44:s43:a1i |- ( N e. ( ZZ>= ` 2 ) -> -u 4 e. CC )
+s45:s41,s25,s44:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 2 x. N ) ) + -u 4 ) = ( ( 0 + -u 4 ) + ( 2 x. N ) ) )
+s46:s43:addlidi |- ( 0 + -u 4 ) = -u 4
+s47:s46:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + -u 4 ) = -u 4 )
+s48:s47:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + -u 4 ) + ( 2 x. N ) ) = ( -u 4 + ( 2 x. N ) ) )
+s49:s45,s48:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 2 x. N ) ) + -u 4 ) = ( -u 4 + ( 2 x. N ) ) )
+s50:s24,s28:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. ( N - 2 ) ) = ( ( 2 x. N ) + -u ( 2 x. 2 ) ) )
+s51:s50,s31:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. ( N - 2 ) ) = ( ( 2 x. N ) + ( -u 2 x. 2 ) ) )
+s52:s51,s39:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. ( N - 2 ) ) = ( ( 0 + ( 2 x. N ) ) + -u 4 ) )
+s53:s52,s49:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. ( N - 2 ) ) = ( -u 4 + ( 2 x. N ) ) )
+s54::eqidd |- ( N e. ( ZZ>= ` 2 ) -> 3 = 3 )
+s55:s53,s54:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. ( N - 2 ) ) + 3 ) = ( ( -u 4 + ( 2 x. N ) ) + 3 ) )
+s56::3cn |- 3 e. CC
+s57:s56:a1i |- ( N e. ( ZZ>= ` 2 ) -> 3 e. CC )
+s58:s44,s25,s57:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 4 + ( 2 x. N ) ) + 3 ) = ( ( -u 4 + 3 ) + ( 2 x. N ) ) )
+s59:s43,s56:addcomi |- ( -u 4 + 3 ) = ( 3 + -u 4 )
+s60:s56,s42:negsubi |- ( 3 + -u 4 ) = ( 3 - 4 )
+s61:s42,s56:negsubdi2i |- -u ( 4 - 3 ) = ( 3 - 4 )
+s62:s61:eqcomi |- ( 3 - 4 ) = -u ( 4 - 3 )
+s63::ax-1cn |- 1 e. CC
+s64::3p1e4 |- ( 3 + 1 ) = 4
+s65:s42,s56,s63,s64:subaddrii |- ( 4 - 3 ) = 1
+s66:s65:negeqi |- -u ( 4 - 3 ) = -u 1
+s67:s62,s66:eqtri |- ( 3 - 4 ) = -u 1
+s68:s60,s67:eqtri |- ( 3 + -u 4 ) = -u 1
+s69:s59,s68:eqtri |- ( -u 4 + 3 ) = -u 1
+s70:s69:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 4 + 3 ) = -u 1 )
+s71:s70:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 4 + 3 ) + ( 2 x. N ) ) = ( -u 1 + ( 2 x. N ) ) )
+s72:s58,s71:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 4 + ( 2 x. N ) ) + 3 ) = ( -u 1 + ( 2 x. N ) ) )
+s73:s55,s72:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. ( N - 2 ) ) + 3 ) = ( -u 1 + ( 2 x. N ) ) )
+s74:s63:a1i |- ( N e. ( ZZ>= ` 2 ) -> 1 e. CC )
+s75:s25,s74:subcld |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - 1 ) e. CC )
+s76:s75,s41:negsubd |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) + -u 0 ) = ( ( ( 2 x. N ) - 1 ) - 0 ) )
+s77:s76:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) - 0 ) = ( ( ( 2 x. N ) - 1 ) + -u 0 ) )
+s78:s41:mulm1d |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 0 ) = -u 0 )
+s79:s78:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> -u 0 = ( -u 1 x. 0 ) )
+s80:s79:oveq2d |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) + -u 0 ) = ( ( ( 2 x. N ) - 1 ) + ( -u 1 x. 0 ) ) )
+s81:s25,s74:negsubd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) + -u 1 ) = ( ( 2 x. N ) - 1 ) )
+s82:s81:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - 1 ) = ( ( 2 x. N ) + -u 1 ) )
+s83:s74:mulm1d |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 1 ) = -u 1 )
+s84:s83:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> -u 1 = ( -u 1 x. 1 ) )
+s85:s84:oveq2d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) + -u 1 ) = ( ( 2 x. N ) + ( -u 1 x. 1 ) ) )
+s86:s25:addlidd |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + ( 2 x. N ) ) = ( 2 x. N ) )
+s87:s86:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. N ) = ( 0 + ( 2 x. N ) ) )
+s88:s63:mullidi |- ( 1 x. 1 ) = 1
+s89:s63,s63:mulneg1i |- ( -u 1 x. 1 ) = -u ( 1 x. 1 )
+s90:s88:negeqi |- -u ( 1 x. 1 ) = -u 1
+s91:s89,s90:eqtri |- ( -u 1 x. 1 ) = -u 1
+s92:s91:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 1 ) = -u 1 )
+s93:s87,s92:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) + ( -u 1 x. 1 ) ) = ( ( 0 + ( 2 x. N ) ) + -u 1 ) )
+s94:s63:negcli |- -u 1 e. CC
+s95:s94:a1i |- ( N e. ( ZZ>= ` 2 ) -> -u 1 e. CC )
+s96:s41,s25,s95:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 2 x. N ) ) + -u 1 ) = ( ( 0 + -u 1 ) + ( 2 x. N ) ) )
+s97:s94:addlidi |- ( 0 + -u 1 ) = -u 1
+s98:s97:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + -u 1 ) = -u 1 )
+s99:s98:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + -u 1 ) + ( 2 x. N ) ) = ( -u 1 + ( 2 x. N ) ) )
+s100:s96,s99:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 2 x. N ) ) + -u 1 ) = ( -u 1 + ( 2 x. N ) ) )
+s101:s82,s85:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - 1 ) = ( ( 2 x. N ) + ( -u 1 x. 1 ) ) )
+s102:s101,s93:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - 1 ) = ( ( 0 + ( 2 x. N ) ) + -u 1 ) )
+s103:s102,s100:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - 1 ) = ( -u 1 + ( 2 x. N ) ) )
+s104:s94:mul01i |- ( -u 1 x. 0 ) = 0
+s105:s104:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 0 ) = 0 )
+s106:s103,s105:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) + ( -u 1 x. 0 ) ) = ( ( -u 1 + ( 2 x. N ) ) + 0 ) )
+s107:s95,s25,s41:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 1 + ( 2 x. N ) ) + 0 ) = ( ( -u 1 + 0 ) + ( 2 x. N ) ) )
+s108:s94:addridi |- ( -u 1 + 0 ) = -u 1
+s109:s108:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 + 0 ) = -u 1 )
+s110:s109:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 1 + 0 ) + ( 2 x. N ) ) = ( -u 1 + ( 2 x. N ) ) )
+s111:s107,s110:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 1 + ( 2 x. N ) ) + 0 ) = ( -u 1 + ( 2 x. N ) ) )
+s112:s77,s80:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) - 0 ) = ( ( ( 2 x. N ) - 1 ) + ( -u 1 x. 0 ) ) )
+s113:s112,s106:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) - 0 ) = ( ( -u 1 + ( 2 x. N ) ) + 0 ) )
+s114:s113,s111:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) - 0 ) = ( -u 1 + ( 2 x. N ) ) )
+s115:s73,s114:eqtr4d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. ( N - 2 ) ) + 3 ) = ( ( ( 2 x. N ) - 1 ) - 0 ) )
+s116:s20,s115:breqtrd |- ( N e. ( ZZ>= ` 2 ) -> 0 < ( ( ( 2 x. N ) - 1 ) - 0 ) )
+s117::0re |- 0 e. RR
+s118:s117:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 e. RR )
+s119:s8,s1:remulcld |- ( N e. ( ZZ>= ` 2 ) -> ( 2 x. N ) e. RR )
+s120::1re |- 1 e. RR
+s121:s120:a1i |- ( N e. ( ZZ>= ` 2 ) -> 1 e. RR )
+s122:s119,s121:resubcld |- ( N e. ( ZZ>= ` 2 ) -> ( ( 2 x. N ) - 1 ) e. RR )
+s123::0red |- ( N e. ( ZZ>= ` 2 ) -> 0 e. RR )
+s124:s122,s118:resubcld |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) - 0 ) e. RR )
+s125:s123,s124,s116:ltled |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ ( ( ( 2 x. N ) - 1 ) - 0 ) )
+s126:s122,s118:subge0d |- ( N e. ( ZZ>= ` 2 ) -> ( 0 <_ ( ( ( 2 x. N ) - 1 ) - 0 ) <-> 0 <_ ( ( 2 x. N ) - 1 ) ) )
+s127:s125,s126:mpbid |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ ( ( 2 x. N ) - 1 ) )
+s128::2pos |- 0 < 2
+s129:s128:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 < 2 )
+s130:s117:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 e. RR )
+s131:s4:a1i |- ( N e. ( ZZ>= ` 2 ) -> 2 e. RR )
+s132:s130,s131,s1,s129,s2:ltletrd |- ( N e. ( ZZ>= ` 2 ) -> 0 < N )
+s133:s1,s132:elrpd |- ( N e. ( ZZ>= ` 2 ) -> N e. RR+ )
+s134:s1,s3:resubcld |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) e. RR )
+s135:s4:a1i |- ( N e. ( ZZ>= ` 2 ) -> 2 e. RR )
+s136:s1,s135:subge0d |- ( N e. ( ZZ>= ` 2 ) -> ( 0 <_ ( N - 2 ) <-> 2 <_ N ) )
+s137:s2,s136:mpbird |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ ( N - 2 ) )
+s138::0lt1 |- 0 < 1
+s139:s138:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 < 1 )
+s140:s1,s135:resubcld |- ( N e. ( ZZ>= ` 2 ) -> ( N - 2 ) e. RR )
+s141:s120:a1i |- ( N e. ( ZZ>= ` 2 ) -> 1 e. RR )
+s142:s140,s141,s137,s139:addgegt0d |- ( N e. ( ZZ>= ` 2 ) -> 0 < ( ( N - 2 ) + 1 ) )
+s143:s1:recnd |- ( N e. ( ZZ>= ` 2 ) -> N e. CC )
+s144:s21:a1i |- ( N e. ( ZZ>= ` 2 ) -> 2 e. CC )
+s145:s143,s144:negsubd |- ( N e. ( ZZ>= ` 2 ) -> ( N + -u 2 ) = ( N - 2 ) )
+s146:s145:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 2 ) = ( N + -u 2 ) )
+s147:s144:mulm1d |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 2 ) = -u 2 )
+s148:s147:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> -u 2 = ( -u 1 x. 2 ) )
+s149:s148:oveq2d |- ( N e. ( ZZ>= ` 2 ) -> ( N + -u 2 ) = ( N + ( -u 1 x. 2 ) ) )
+s150:s63:a1i |- ( N e. ( ZZ>= ` 2 ) -> 1 e. CC )
+s151:s150,s143:mulcld |- ( N e. ( ZZ>= ` 2 ) -> ( 1 x. N ) e. CC )
+s152:s151:addlidd |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + ( 1 x. N ) ) = ( 1 x. N ) )
+s153:s152:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( 1 x. N ) = ( 0 + ( 1 x. N ) ) )
+s154:s143:mullidd |- ( N e. ( ZZ>= ` 2 ) -> ( 1 x. N ) = N )
+s155:s154:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> N = ( 1 x. N ) )
+s156:s155,s153:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> N = ( 0 + ( 1 x. N ) ) )
+s157:s21:mullidi |- ( 1 x. 2 ) = 2
+s158:s63,s21:mulneg1i |- ( -u 1 x. 2 ) = -u ( 1 x. 2 )
+s159:s157:negeqi |- -u ( 1 x. 2 ) = -u 2
+s160:s158,s159:eqtri |- ( -u 1 x. 2 ) = -u 2
+s161:s160:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 2 ) = -u 2 )
+s162:s156,s161:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( N + ( -u 1 x. 2 ) ) = ( ( 0 + ( 1 x. N ) ) + -u 2 ) )
+s163:s40:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 e. CC )
+s164:s21:negcli |- -u 2 e. CC
+s165:s164:a1i |- ( N e. ( ZZ>= ` 2 ) -> -u 2 e. CC )
+s166:s163,s151,s165:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 1 x. N ) ) + -u 2 ) = ( ( 0 + -u 2 ) + ( 1 x. N ) ) )
+s167:s164:addlidi |- ( 0 + -u 2 ) = -u 2
+s168:s167:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + -u 2 ) = -u 2 )
+s169:s168:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + -u 2 ) + ( 1 x. N ) ) = ( -u 2 + ( 1 x. N ) ) )
+s170:s166,s169:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 1 x. N ) ) + -u 2 ) = ( -u 2 + ( 1 x. N ) ) )
+s171:s146,s149:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 2 ) = ( N + ( -u 1 x. 2 ) ) )
+s172:s171,s162:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 2 ) = ( ( 0 + ( 1 x. N ) ) + -u 2 ) )
+s173:s172,s170:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 2 ) = ( -u 2 + ( 1 x. N ) ) )
+s174::eqidd |- ( N e. ( ZZ>= ` 2 ) -> 1 = 1 )
+s175:s173,s174:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 2 ) + 1 ) = ( ( -u 2 + ( 1 x. N ) ) + 1 ) )
+s176:s165,s151,s150:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 2 + ( 1 x. N ) ) + 1 ) = ( ( -u 2 + 1 ) + ( 1 x. N ) ) )
+s177:s164,s63:addcomi |- ( -u 2 + 1 ) = ( 1 + -u 2 )
+s178:s63,s21:negsubi |- ( 1 + -u 2 ) = ( 1 - 2 )
+s179:s21,s63:negsubdi2i |- -u ( 2 - 1 ) = ( 1 - 2 )
+s180:s179:eqcomi |- ( 1 - 2 ) = -u ( 2 - 1 )
+s181::1p1e2 |- ( 1 + 1 ) = 2
+s182:s21,s63,s63,s181:subaddrii |- ( 2 - 1 ) = 1
+s183:s182:negeqi |- -u ( 2 - 1 ) = -u 1
+s184:s180,s183:eqtri |- ( 1 - 2 ) = -u 1
+s185:s178,s184:eqtri |- ( 1 + -u 2 ) = -u 1
+s186:s177,s185:eqtri |- ( -u 2 + 1 ) = -u 1
+s187:s186:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 2 + 1 ) = -u 1 )
+s188:s187:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 2 + 1 ) + ( 1 x. N ) ) = ( -u 1 + ( 1 x. N ) ) )
+s189:s176,s188:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 2 + ( 1 x. N ) ) + 1 ) = ( -u 1 + ( 1 x. N ) ) )
+s190:s175,s189:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 2 ) + 1 ) = ( -u 1 + ( 1 x. N ) ) )
+s191:s143,s150:subcld |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) e. CC )
+s192:s191,s163:negsubd |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) + -u 0 ) = ( ( N - 1 ) - 0 ) )
+s193:s192:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) - 0 ) = ( ( N - 1 ) + -u 0 ) )
+s194:s163:mulm1d |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 0 ) = -u 0 )
+s195:s194:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> -u 0 = ( -u 1 x. 0 ) )
+s196:s195:oveq2d |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) + -u 0 ) = ( ( N - 1 ) + ( -u 1 x. 0 ) ) )
+s197:s143,s150:negsubd |- ( N e. ( ZZ>= ` 2 ) -> ( N + -u 1 ) = ( N - 1 ) )
+s198:s197:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) = ( N + -u 1 ) )
+s199:s150:mulm1d |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 1 ) = -u 1 )
+s200:s199:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> -u 1 = ( -u 1 x. 1 ) )
+s201:s200:oveq2d |- ( N e. ( ZZ>= ` 2 ) -> ( N + -u 1 ) = ( N + ( -u 1 x. 1 ) ) )
+s202:s151:addlidd |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + ( 1 x. N ) ) = ( 1 x. N ) )
+s203:s202:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> ( 1 x. N ) = ( 0 + ( 1 x. N ) ) )
+s204:s143:mullidd |- ( N e. ( ZZ>= ` 2 ) -> ( 1 x. N ) = N )
+s205:s204:eqcomd |- ( N e. ( ZZ>= ` 2 ) -> N = ( 1 x. N ) )
+s206:s205,s203:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> N = ( 0 + ( 1 x. N ) ) )
+s207:s91:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 1 ) = -u 1 )
+s208:s206,s207:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( N + ( -u 1 x. 1 ) ) = ( ( 0 + ( 1 x. N ) ) + -u 1 ) )
+s209:s94:a1i |- ( N e. ( ZZ>= ` 2 ) -> -u 1 e. CC )
+s210:s163,s151,s209:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 1 x. N ) ) + -u 1 ) = ( ( 0 + -u 1 ) + ( 1 x. N ) ) )
+s211:s97:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( 0 + -u 1 ) = -u 1 )
+s212:s211:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + -u 1 ) + ( 1 x. N ) ) = ( -u 1 + ( 1 x. N ) ) )
+s213:s210,s212:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( 0 + ( 1 x. N ) ) + -u 1 ) = ( -u 1 + ( 1 x. N ) ) )
+s214:s198,s201:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) = ( N + ( -u 1 x. 1 ) ) )
+s215:s214,s208:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) = ( ( 0 + ( 1 x. N ) ) + -u 1 ) )
+s216:s215,s213:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) = ( -u 1 + ( 1 x. N ) ) )
+s217:s104:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 x. 0 ) = 0 )
+s218:s216,s217:oveq12d |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) + ( -u 1 x. 0 ) ) = ( ( -u 1 + ( 1 x. N ) ) + 0 ) )
+s219:s209,s151,s163:add32d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 1 + ( 1 x. N ) ) + 0 ) = ( ( -u 1 + 0 ) + ( 1 x. N ) ) )
+s220:s108:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( -u 1 + 0 ) = -u 1 )
+s221:s220:oveq1d |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 1 + 0 ) + ( 1 x. N ) ) = ( -u 1 + ( 1 x. N ) ) )
+s222:s219,s221:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( -u 1 + ( 1 x. N ) ) + 0 ) = ( -u 1 + ( 1 x. N ) ) )
+s223:s193,s196:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) - 0 ) = ( ( N - 1 ) + ( -u 1 x. 0 ) ) )
+s224:s223,s218:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) - 0 ) = ( ( -u 1 + ( 1 x. N ) ) + 0 ) )
+s225:s224,s222:eqtrd |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) - 0 ) = ( -u 1 + ( 1 x. N ) ) )
+s226:s190,s225:eqtr4d |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 2 ) + 1 ) = ( ( N - 1 ) - 0 ) )
+s227:s142,s226:breqtrd |- ( N e. ( ZZ>= ` 2 ) -> 0 < ( ( N - 1 ) - 0 ) )
+s228:s117:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 e. RR )
+s229:s1,s141:resubcld |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) e. RR )
+s230:s228,s229:posdifd |- ( N e. ( ZZ>= ` 2 ) -> ( 0 < ( N - 1 ) <-> 0 < ( ( N - 1 ) - 0 ) ) )
+s231:s227,s230:mpbird |- ( N e. ( ZZ>= ` 2 ) -> 0 < ( N - 1 ) )
+s232:s231:gt0ne0d |- ( N e. ( ZZ>= ` 2 ) -> ( N - 1 ) =/= 0 )
+s233:s134,s232:sqgt0d |- ( N e. ( ZZ>= ` 2 ) -> 0 < ( ( N - 1 ) ^ 2 ) )
+s234::2nn0 |- 2 e. NN0
+s235:s234:a1i |- ( N e. ( ZZ>= ` 2 ) -> 2 e. NN0 )
+s236:s134,s235:reexpcld |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) ^ 2 ) e. RR )
+s237:s236,s233:elrpd |- ( N e. ( ZZ>= ` 2 ) -> ( ( N - 1 ) ^ 2 ) e. RR+ )
+s238:s133,s237:rpmulcld |- ( N e. ( ZZ>= ` 2 ) -> ( N x. ( ( N - 1 ) ^ 2 ) ) e. RR+ )
+s239:s7,s238:rerpdivcld |- ( N e. ( ZZ>= ` 2 ) -> ( ( ( 2 x. N ) - 1 ) / ( N x. ( ( N - 1 ) ^ 2 ) ) ) e. RR )
+s240:s7,s238,s127:divge0d |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ ( ( ( 2 x. N ) - 1 ) / ( N x. ( ( N - 1 ) ^ 2 ) ) ) )
+s241:s3,s239:readdcld |- ( N e. ( ZZ>= ` 2 ) -> ( 1 + ( ( ( 2 x. N ) - 1 ) / ( N x. ( ( N - 1 ) ^ 2 ) ) ) ) e. RR )
+i242::leid
+s243:s120,i242:ax-mp |- 1 <_ 1
+s244:s243:a1i |- ( N e. ( ZZ>= ` 2 ) -> 1 <_ 1 )
+s245:s120:a1i |- ( N e. ( ZZ>= ` 2 ) -> 1 e. RR )
+s246:s117:a1i |- ( N e. ( ZZ>= ` 2 ) -> 0 e. RR )
+s247:s245,s246,s245,s239,s244,s240:le2addd |- ( N e. ( ZZ>= ` 2 ) -> ( 1 + 0 ) <_ ( 1 + ( ( ( 2 x. N ) - 1 ) / ( N x. ( ( N - 1 ) ^ 2 ) ) ) ) )
+s248:s63:addridi |- ( 1 + 0 ) = 1
+s249:s248:a1i |- ( N e. ( ZZ>= ` 2 ) -> ( 1 + 0 ) = 1 )
+s250:s249,s247:eqbrtrrd |- ( N e. ( ZZ>= ` 2 ) -> 1 <_ ( 1 + ( ( ( 2 x. N ) - 1 ) / ( N x. ( ( N - 1 ) ^ 2 ) ) ) ) )
+s251:s241:recnd |- ( N e. ( ZZ>= ` 2 ) -> ( 1 + ( ( ( 2 x. N ) - 1 ) / ( N x. ( ( N - 1 ) ^ 2 ) ) ) ) e. CC )
+i252::id
+qed:s240,i252:syl |- ( N e. ( ZZ>= ` 2 ) -> 0 <_ ( ( ( 2 x. N ) - 1 ) / ( N x. ( ( N - 1 ) ^ 2 ) ) ) )
+$)

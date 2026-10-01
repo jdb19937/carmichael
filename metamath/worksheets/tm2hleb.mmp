@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hleb  LOC_AFTER=?
+
+* A Hoare triple weakened to the cost function ` TMB ` of TM/Cost.lean.  Every ` _le_B ` corollary of TM/Prims.lean is this theorem plus one inequality on bit lengths.
+
+s1::simpl |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) )
+s2::simpr |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> ( B e. NN0 /\ N <_ ( TMB ` B ) ) )
+s3:s2:simpld |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> B e. NN0 )
+s4:s2:simprd |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> N <_ ( TMB ` B ) )
+i5::tmbcl
+s6:s3,i5:syl |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> ( TMB ` B ) e. NN )
+i7::nnnn0
+s8:s6,i7:syl |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> ( TMB ` B ) e. NN0 )
+s9:s8,s4:jca |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> ( ( TMB ` B ) e. NN0 /\ N <_ ( TMB ` B ) ) )
+s10:s1,s9:jca |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( ( TMB ` B ) e. NN0 /\ N <_ ( TMB ` B ) ) ) )
+i11::tm2hle
+qed:s10,i11:syl |- ( ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ C ( T TM2Hoare M ) <. D , N >. ) /\ ( B e. NN0 /\ N <_ ( TMB ` B ) ) ) -> C ( T TM2Hoare M ) <. D , ( TMB ` B ) >. )
+$)

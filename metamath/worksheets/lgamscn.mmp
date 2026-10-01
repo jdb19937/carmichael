@@ -1,0 +1,43 @@
+$( <MM> <PROOF_ASST> THEOREM=lgamscn  LOC_AFTER=?
+
+* Each partial sum of the log-Gamma series is continuous on a subset of the open right half-plane ( ~ fsumcn ).
+
+s1::simpl |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s2::ref |- Re : CC --> RR
+i3::fdm
+s4:s2,i3:ax-mp |- dom Re = CC
+s5::cnvimass |- ( `' Re " ( 0 (,) +oo ) ) C_ dom Re
+s6:s5,s4:sseqtri |- ( `' Re " ( 0 (,) +oo ) ) C_ CC
+s7:s6:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( `' Re " ( 0 (,) +oo ) ) C_ CC )
+s8:s1,s7:sstrd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> S C_ CC )
+s9::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s10::eqid |- ( ( TopOpen ` CCfld ) |`t S ) = ( ( TopOpen ` CCfld ) |`t S )
+s11:s9:cnfldtopon |- ( TopOpen ` CCfld ) e. ( TopOn ` CC )
+s12:s11:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( TopOpen ` CCfld ) e. ( TopOn ` CC ) )
+i13::resttopon
+s14:s12,s8,i13:syl2anc |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( ( TopOpen ` CCfld ) |`t S ) e. ( TopOn ` S ) )
+s15:s9:cnfldtop |- ( TopOpen ` CCfld ) e. Top
+s16::unicntop |- CC = U. ( TopOpen ` CCfld )
+s17:s16:restid |- ( ( TopOpen ` CCfld ) e. Top -> ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld ) )
+s18:s15,s17:ax-mp |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s19:s18:oveq2i |- ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) = ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( TopOpen ` CCfld ) )
+s20::eqid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( ( TopOpen ` CCfld ) |`t CC )
+s21:s9,s10,s20:cncfcn |- ( ( S C_ CC /\ CC C_ CC ) -> ( S -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) )
+s22::ssid |- CC C_ CC
+s23:s22:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> CC C_ CC )
+s24:s8,s23,s21:syl2anc |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( S -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) )
+s25:s19:a1i |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( ( TopOpen ` CCfld ) |`t CC ) ) = ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( TopOpen ` CCfld ) ) )
+s26:s24,s25:eqtrd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( S -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( TopOpen ` CCfld ) ) )
+s27::simpr |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i28::elfznn
+s29:s27,i28:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s30:s1:adantr |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) /\ k e. ( 1 ... N ) ) -> S C_ ( `' Re " ( 0 (,) +oo ) ) )
+s31:s30,s29:jca |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) /\ k e. ( 1 ... N ) ) -> ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ k e. NN ) )
+i32::lgamtcn
+s33:s31,i32:syl |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) /\ k e. ( 1 ... N ) ) -> ( z e. S |-> ( ( z x. ( log ` ( ( k + 1 ) / k ) ) ) - ( log ` ( ( z / k ) + 1 ) ) ) ) e. ( S -cn-> CC ) )
+s34:s26:adantr |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) /\ k e. ( 1 ... N ) ) -> ( S -cn-> CC ) = ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( TopOpen ` CCfld ) ) )
+s35:s33,s34:eleqtrd |- ( ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) /\ k e. ( 1 ... N ) ) -> ( z e. S |-> ( ( z x. ( log ` ( ( k + 1 ) / k ) ) ) - ( log ` ( ( z / k ) + 1 ) ) ) ) e. ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( TopOpen ` CCfld ) ) )
+s36::fzfid |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( 1 ... N ) e. Fin )
+s37:s9,s14,s36,s35:fsumcn |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( z e. S |-> sum_ k e. ( 1 ... N ) ( ( z x. ( log ` ( ( k + 1 ) / k ) ) ) - ( log ` ( ( z / k ) + 1 ) ) ) ) e. ( ( ( TopOpen ` CCfld ) |`t S ) Cn ( TopOpen ` CCfld ) ) )
+qed:s37,s26:eleqtrrd |- ( ( S C_ ( `' Re " ( 0 (,) +oo ) ) /\ N e. NN ) -> ( z e. S |-> sum_ k e. ( 1 ... N ) ( ( z x. ( log ` ( ( k + 1 ) / k ) ) ) - ( log ` ( ( z / k ) + 1 ) ) ) ) e. ( S -cn-> CC ) )
+$)

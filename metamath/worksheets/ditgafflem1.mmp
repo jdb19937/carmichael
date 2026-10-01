@@ -1,0 +1,30 @@
+$( <MM> <PROOF_ASST> THEOREM=ditgafflem1  LOC_AFTER=?
+
+* The integrand of the affinely reparametrised integral is continuous on the closed unit interval.
+
+s1::simp1 |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> H e. ( ( 0 [,] 1 ) -cn-> CC ) )
+s2::simp2 |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> P e. ( 0 [,] 1 ) )
+s3::simp3 |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> Q e. ( 0 [,] 1 ) )
+i4::elunitcn
+s5:s2,i4:syl |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> P e. CC )
+i6::elunitcn
+s7:s3,i6:syl |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> Q e. CC )
+s8::0red |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> 0 e. RR )
+s9::1red |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> 1 e. RR )
+s10:s8,s9:jca |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( 0 e. RR /\ 1 e. RR ) )
+s11:s2,s3:jca |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) )
+i12::csegicc
+s13:s10,s11,i12:syl2anc |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( P cseg Q ) C_ ( 0 [,] 1 ) )
+s14:s5,s7:jca |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( P e. CC /\ Q e. CC ) )
+s15:s1,s13:jca |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ ( P cseg Q ) C_ ( 0 [,] 1 ) ) )
+s16::ssidd |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( 0 [,] 1 ) C_ ( 0 [,] 1 ) )
+i17::lintcnlem
+s18:s14,s15,s16,i17:syl3anc |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( t e. ( 0 [,] 1 ) |-> ( ( H ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+s19::oveq1 |- ( t = w -> ( t x. ( Q - P ) ) = ( w x. ( Q - P ) ) )
+s20:s19:oveq2d |- ( t = w -> ( P + ( t x. ( Q - P ) ) ) = ( P + ( w x. ( Q - P ) ) ) )
+s21:s20:fveq2d |- ( t = w -> ( H ` ( P + ( t x. ( Q - P ) ) ) ) = ( H ` ( P + ( w x. ( Q - P ) ) ) ) )
+s22:s21:oveq1d |- ( t = w -> ( ( H ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) = ( ( H ` ( P + ( w x. ( Q - P ) ) ) ) x. ( Q - P ) ) )
+s23:s22:cbvmptv |- ( t e. ( 0 [,] 1 ) |-> ( ( H ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) ) = ( w e. ( 0 [,] 1 ) |-> ( ( H ` ( P + ( w x. ( Q - P ) ) ) ) x. ( Q - P ) ) )
+s24:s23:a1i |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( t e. ( 0 [,] 1 ) |-> ( ( H ` ( P + ( t x. ( Q - P ) ) ) ) x. ( Q - P ) ) ) = ( w e. ( 0 [,] 1 ) |-> ( ( H ` ( P + ( w x. ( Q - P ) ) ) ) x. ( Q - P ) ) ) )
+qed:s24,s18:eqeltrrd |- ( ( H e. ( ( 0 [,] 1 ) -cn-> CC ) /\ P e. ( 0 [,] 1 ) /\ Q e. ( 0 [,] 1 ) ) -> ( w e. ( 0 [,] 1 ) |-> ( ( H ` ( P + ( w x. ( Q - P ) ) ) ) x. ( Q - P ) ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+$)

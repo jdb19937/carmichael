@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=zl1zcl  LOC_AFTER=?
+
+* The sum of the zeta continuation terms is a complex number on the open right half-plane ( ~ zl1zcv ).
+
+s1::simpl |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> Z e. CC )
+s2::zl1zcv |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> seq 1 ( + , ( m e. NN |-> ( ( ( m + Z ) x. ( ( m + 1 ) ^c -u Z ) ) - ( m x. ( m ^c -u Z ) ) ) ) ) e. dom ~~> )
+s3::simpr |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> k e. NN )
+s4:s1:adantr |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> Z e. CC )
+s5:s3:nnrpd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> k e. RR+ )
+s6:s5:rpred |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> k e. RR )
+s7:s6:recnd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> k e. CC )
+s8:s7,s4:addcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( k + Z ) e. CC )
+s9::ax-1cn |- 1 e. CC
+s10:s9:a1i |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> 1 e. CC )
+s11:s7,s10:addcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( k + 1 ) e. CC )
+s12:s4:negcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> -u Z e. CC )
+s13:s11,s12:cxpcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( k + 1 ) ^c -u Z ) e. CC )
+s14:s8,s13:mulcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) e. CC )
+s15:s7,s12:cxpcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( k ^c -u Z ) e. CC )
+s16:s7,s15:mulcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( k x. ( k ^c -u Z ) ) e. CC )
+s17:s14,s16:subcld |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) - ( k x. ( k ^c -u Z ) ) ) e. CC )
+s18::id |- ( m = k -> m = k )
+c1:s18:oveq1d |- ( m = k -> ( m + Z ) = ( k + Z ) )
+c2:s18:oveq1d |- ( m = k -> ( m + 1 ) = ( k + 1 ) )
+c3:c2:oveq1d |- ( m = k -> ( ( m + 1 ) ^c -u Z ) = ( ( k + 1 ) ^c -u Z ) )
+c4:c1,c3:oveq12d |- ( m = k -> ( ( m + Z ) x. ( ( m + 1 ) ^c -u Z ) ) = ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) )
+c5:s18:oveq1d |- ( m = k -> ( m ^c -u Z ) = ( k ^c -u Z ) )
+c6:s18,c5:oveq12d |- ( m = k -> ( m x. ( m ^c -u Z ) ) = ( k x. ( k ^c -u Z ) ) )
+c7:c4,c6:oveq12d |- ( m = k -> ( ( ( m + Z ) x. ( ( m + 1 ) ^c -u Z ) ) - ( m x. ( m ^c -u Z ) ) ) = ( ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) - ( k x. ( k ^c -u Z ) ) ) )
+s19::eqid |- ( m e. NN |-> ( ( ( m + Z ) x. ( ( m + 1 ) ^c -u Z ) ) - ( m x. ( m ^c -u Z ) ) ) ) = ( m e. NN |-> ( ( ( m + Z ) x. ( ( m + 1 ) ^c -u Z ) ) - ( m x. ( m ^c -u Z ) ) ) )
+s20:c7,s19:fvmptg |- ( ( k e. NN /\ ( ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) - ( k x. ( k ^c -u Z ) ) ) e. _V ) -> ( ( m e. NN |-> ( ( ( m + Z ) x. ( ( m + 1 ) ^c -u Z ) ) - ( m x. ( m ^c -u Z ) ) ) ) ` k ) = ( ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) - ( k x. ( k ^c -u Z ) ) ) )
+s21::ovexd |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) - ( k x. ( k ^c -u Z ) ) ) e. _V )
+s22:s3,s21,s20:syl2anc |- ( ( ( Z e. CC /\ 0 < ( Re ` Z ) ) /\ k e. NN ) -> ( ( m e. NN |-> ( ( ( m + Z ) x. ( ( m + 1 ) ^c -u Z ) ) - ( m x. ( m ^c -u Z ) ) ) ) ` k ) = ( ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) - ( k x. ( k ^c -u Z ) ) ) )
+s23::nnuz |- NN = ( ZZ>= ` 1 )
+s24::1z |- 1 e. ZZ
+s25:s24:a1i |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> 1 e. ZZ )
+qed:s23,s25,s22,s17,s2:isumcl |- ( ( Z e. CC /\ 0 < ( Re ` Z ) ) -> sum_ k e. NN ( ( ( k + Z ) x. ( ( k + 1 ) ^c -u Z ) ) - ( k x. ( k ^c -u Z ) ) ) e. CC )
+$)

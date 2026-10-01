@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatcl  LOC_AFTER=?
+
+* Closure of toNat: a nonnegative integer.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+s2::tonatval |- ( L e. Word 2o -> ( toNat ` L ) = sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) )
+s3::oveq2 |- ( i = n -> ( 2 ^ i ) = ( 2 ^ n ) )
+s4:s3:cbvsumv |- sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) = sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n )
+s5:s4:a1i |- ( L e. Word 2o -> sum_ i e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ i ) = sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n ) )
+s6:s2,s5:eqtrd |- ( L e. Word 2o -> ( toNat ` L ) = sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n ) )
+s7::fzofi |- ( 0 ..^ ( # ` L ) ) e. Fin
+s8:s7:a1i |- ( L e. Word 2o -> ( 0 ..^ ( # ` L ) ) e. Fin )
+s9::ssrab2 |- { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } C_ ( 0 ..^ ( # ` L ) )
+s10:s9:a1i |- ( L e. Word 2o -> { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } C_ ( 0 ..^ ( # ` L ) ) )
+s11:s8,s10:ssfid |- ( L e. Word 2o -> { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } e. Fin )
+s12::simpr |- ( ( L e. Word 2o /\ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ) -> n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } )
+s13::simpr |- ( ( L e. Word 2o /\ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ) -> n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } )
+i14::elrabi
+s15:s13,i14:syl |- ( ( L e. Word 2o /\ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ) -> n e. ( 0 ..^ ( # ` L ) ) )
+i16::elfzonn0
+s17:s15,i16:syl |- ( ( L e. Word 2o /\ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ) -> n e. NN0 )
+s18::2nn0 |- 2 e. NN0
+s19:s18:a1i |- ( ( L e. Word 2o /\ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ) -> 2 e. NN0 )
+s20:s19,s17:nn0expcld |- ( ( L e. Word 2o /\ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ) -> ( 2 ^ n ) e. NN0 )
+s21:s11,s20:fsumnn0cl |- ( L e. Word 2o -> sum_ n e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ( 2 ^ n ) e. NN0 )
+qed:s6,s21:eqeltrd |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+$)

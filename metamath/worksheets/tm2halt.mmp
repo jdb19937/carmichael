@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2halt  LOC_AFTER=?
+
+* halt is a statement.
+
+s1::id |- ( T e. V -> T e. V )
+s2::fvex |- ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) e. _V
+s3:s2:a1i |- ( T e. V -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) e. _V )
+s4:s1,s3:jca |- ( T e. V -> ( T e. V /\ ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) e. _V ) )
+i5::tm2layhalt
+s6:s4,i5:syl |- ( T e. V -> <. 6 , (/) >. e. ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) ) )
+s7::peano1 |- (/) e. _om
+s8:s7:a1i |- ( T e. V -> (/) e. _om )
+i9::tm2laysuc
+s10:s8,i9:syl |- ( T e. V -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc (/) ) = ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` (/) ) ) )
+s11:s6,s10:eleqtrrd |- ( T e. V -> <. 6 , (/) >. e. ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc (/) ) )
+i12::peano2
+s13:s8,i12:syl |- ( T e. V -> suc (/) e. _om )
+i14::tm2layssstmt
+s15:s1,s13,i14:syl2anc |- ( T e. V -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc (/) ) C_ ( TM2Stmt ` T ) )
+qed:s15,s11:sseldd |- ( T e. V -> <. 6 , (/) >. e. ( TM2Stmt ` T ) )
+$)

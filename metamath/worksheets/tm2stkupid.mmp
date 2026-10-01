@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stkupid  LOC_AFTER=?
+
+* Updating a stack assignment at an index with its own value changes nothing.
+
+s1::simp1 |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> T e. V )
+s2::simp2 |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> D e. ( TM2Stk ` T ) )
+s3::simp3 |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> K e. dom ( 1st ` ( 1st ` T ) ) )
+i4::tm2stkfv
+s5:s1,s2,s3,i4:syl3anc |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( D ` K ) e. Word ( ( 1st ` ( 1st ` T ) ) ` K ) )
+s6:s3,s5:jca |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( K e. dom ( 1st ` ( 1st ` T ) ) /\ ( D ` K ) e. Word ( ( 1st ` ( 1st ` T ) ) ` K ) ) )
+i7::tm2stkupd
+s8:s1,s2,s6,i7:syl3anc |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) e. ( TM2Stk ` T ) )
+i9::tm2stkfn
+s10:s1,s8,i9:syl2anc |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) Fn dom ( 1st ` ( 1st ` T ) ) )
+i11::tm2stkfn
+s12:s1,s2,i11:syl2anc |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> D Fn dom ( 1st ` ( 1st ` T ) ) )
+s13:s1:adantr |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> T e. V )
+s14:s2:adantr |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> D e. ( TM2Stk ` T ) )
+s15:s3:adantr |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> K e. dom ( 1st ` ( 1st ` T ) ) )
+s16:s5:adantr |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> ( D ` K ) e. Word ( ( 1st ` ( 1st ` T ) ) ` K ) )
+s17::simpr |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> j e. dom ( 1st ` ( 1st ` T ) ) )
+s18:s13,s14:jca |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> ( T e. V /\ D e. ( TM2Stk ` T ) ) )
+s19:s15,s16:jca |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> ( K e. dom ( 1st ` ( 1st ` T ) ) /\ ( D ` K ) e. Word ( ( 1st ` ( 1st ` T ) ) ` K ) ) )
+i20::tm2stkupv
+s21:s18,s19,s17,i20:syl3anc |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> ( ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) ` j ) = if ( j = K , ( D ` K ) , ( D ` j ) ) )
+s22::simpr |- ( ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) /\ j = K ) -> j = K )
+s23:s22:iftrued |- ( ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) /\ j = K ) -> if ( j = K , ( D ` K ) , ( D ` j ) ) = ( D ` K ) )
+s24:s22:fveq2d |- ( ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) /\ j = K ) -> ( D ` j ) = ( D ` K ) )
+s25:s23,s24:eqtr4d |- ( ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) /\ j = K ) -> if ( j = K , ( D ` K ) , ( D ` j ) ) = ( D ` j ) )
+s26::simpr |- ( ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) /\ -. j = K ) -> -. j = K )
+s27:s26:iffalsed |- ( ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) /\ -. j = K ) -> if ( j = K , ( D ` K ) , ( D ` j ) ) = ( D ` j ) )
+s28:s25,s27:pm2.61dan |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> if ( j = K , ( D ` K ) , ( D ` j ) ) = ( D ` j ) )
+s29:s21,s28:eqtrd |- ( ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) /\ j e. dom ( 1st ` ( 1st ` T ) ) ) -> ( ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) ` j ) = ( D ` j ) )
+s30:s29:ralrimiva |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> A. j e. dom ( 1st ` ( 1st ` T ) ) ( ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) ` j ) = ( D ` j ) )
+i31::eqfnfv
+s32:s10,s12,i31:syl2anc |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) = D <-> A. j e. dom ( 1st ` ( 1st ` T ) ) ( ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) ` j ) = ( D ` j ) ) )
+qed:s32,s30:mpbird |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( ( D |` ( dom ( 1st ` ( 1st ` T ) ) \ { K } ) ) u. { <. K , ( D ` K ) >. } ) = D )
+$)

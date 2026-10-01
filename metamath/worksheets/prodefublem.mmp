@@ -1,0 +1,68 @@
+$( <MM> <PROOF_ASST> THEOREM=prodefublem  LOC_AFTER=?
+
+* The product bound for M at least 2.
+
+s1::simpr |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> C e. RR+ )
+s2:s1:rpred |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> C e. RR )
+s3:s1:rpcnd |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> C e. CC )
+s4:s1:rpge0d |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> 0 <_ C )
+s5::simpl |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> M e. ( ZZ>= ` 2 ) )
+i6::eluz2nn
+s7:s5,i6:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> M e. NN )
+s8:s1:adantr |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> C e. RR+ )
+s9::simpr |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> n e. ( 2 ... M ) )
+i10::fz2m1rp
+s11:s9,i10:syl |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( n x. ( n - 1 ) ) e. RR+ )
+s12:s8,s11:rpdivcld |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( C / ( n x. ( n - 1 ) ) ) e. RR+ )
+s13:s12:rpred |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( C / ( n x. ( n - 1 ) ) ) e. RR )
+s14::1red |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> 1 e. RR )
+s15:s14,s13:readdcld |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) e. RR )
+s16::0le1 |- 0 <_ 1
+s17:s16:a1i |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> 0 <_ 1 )
+s18:s12:rpge0d |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> 0 <_ ( C / ( n x. ( n - 1 ) ) ) )
+s19:s14,s13,s17,s18:addge0d |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> 0 <_ ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) )
+s20:s13:reefcld |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( exp ` ( C / ( n x. ( n - 1 ) ) ) ) e. RR )
+i21::efgt1p
+s22:s12,i21:syl |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) < ( exp ` ( C / ( n x. ( n - 1 ) ) ) ) )
+s23:s22:ltled |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` ( C / ( n x. ( n - 1 ) ) ) ) )
+s24::nfv |- F/ n ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ )
+s25::fzfi |- ( 2 ... M ) e. Fin
+s26:s25:a1i |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( 2 ... M ) e. Fin )
+s27:s24,s26,s15,s19,s20,s23:fprodle |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) <_ prod_ n e. ( 2 ... M ) ( exp ` ( C / ( n x. ( n - 1 ) ) ) ) )
+s28::eqid |- ( ZZ>= ` 2 ) = ( ZZ>= ` 2 )
+s29:s1:adantr |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( ZZ>= ` 2 ) ) -> C e. RR+ )
+s30::simpr |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( ZZ>= ` 2 ) ) -> n e. ( ZZ>= ` 2 ) )
+i31::uz2m1rp
+s32:s30,i31:syl |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( ZZ>= ` 2 ) ) -> ( n x. ( n - 1 ) ) e. RR+ )
+s33:s29,s32:rpdivcld |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( ZZ>= ` 2 ) ) -> ( C / ( n x. ( n - 1 ) ) ) e. RR+ )
+s34:s33:rpcnd |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( ZZ>= ` 2 ) ) -> ( C / ( n x. ( n - 1 ) ) ) e. CC )
+s35:s28,s5,s34:fprodefsum |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( exp ` ( C / ( n x. ( n - 1 ) ) ) ) = ( exp ` sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) ) )
+s36:s11:rpreccld |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( 1 / ( n x. ( n - 1 ) ) ) e. RR+ )
+s37:s36:rpred |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( 1 / ( n x. ( n - 1 ) ) ) e. RR )
+s38:s37:recnd |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( 1 / ( n x. ( n - 1 ) ) ) e. CC )
+s39:s11:rpcnd |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( n x. ( n - 1 ) ) e. CC )
+s40:s11:rpne0d |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( n x. ( n - 1 ) ) =/= 0 )
+s41:s3:adantr |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> C e. CC )
+s42:s41,s39,s40:divrecd |- ( ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) /\ n e. ( 2 ... M ) ) -> ( C / ( n x. ( n - 1 ) ) ) = ( C x. ( 1 / ( n x. ( n - 1 ) ) ) ) )
+s43:s42:sumeq2dv |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) = sum_ n e. ( 2 ... M ) ( C x. ( 1 / ( n x. ( n - 1 ) ) ) ) )
+s44:s26,s3,s38:fsummulc2 |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( C x. sum_ n e. ( 2 ... M ) ( 1 / ( n x. ( n - 1 ) ) ) ) = sum_ n e. ( 2 ... M ) ( C x. ( 1 / ( n x. ( n - 1 ) ) ) ) )
+s45:s43,s44:eqtr4d |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) = ( C x. sum_ n e. ( 2 ... M ) ( 1 / ( n x. ( n - 1 ) ) ) ) )
+i46::telsum
+s47:s7,i46:syl |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> sum_ n e. ( 2 ... M ) ( 1 / ( n x. ( n - 1 ) ) ) <_ 1 )
+s48:s26,s37:fsumrecl |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> sum_ n e. ( 2 ... M ) ( 1 / ( n x. ( n - 1 ) ) ) e. RR )
+s49::1red |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> 1 e. RR )
+s50:s48,s49,s2,s4,s47:lemul2ad |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( C x. sum_ n e. ( 2 ... M ) ( 1 / ( n x. ( n - 1 ) ) ) ) <_ ( C x. 1 ) )
+s51:s3:mulridd |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( C x. 1 ) = C )
+s52:s50,s51:breqtrd |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( C x. sum_ n e. ( 2 ... M ) ( 1 / ( n x. ( n - 1 ) ) ) ) <_ C )
+s53:s45,s52:eqbrtrd |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) <_ C )
+s54:s48,s2:remulcld |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( C x. sum_ n e. ( 2 ... M ) ( 1 / ( n x. ( n - 1 ) ) ) ) e. RR )
+s55:s45,s54:eqeltrd |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) e. RR )
+i56::efle
+s57:s55,s2,i56:syl2anc |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) <_ C <-> ( exp ` sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) ) )
+s58:s57,s53:mpbid |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( exp ` sum_ n e. ( 2 ... M ) ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) )
+s59:s35,s58:eqbrtrd |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( exp ` ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) )
+s60:s26,s15:fprodrecl |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) e. RR )
+s61:s26,s20:fprodrecl |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( exp ` ( C / ( n x. ( n - 1 ) ) ) ) e. RR )
+s62:s2:reefcld |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> ( exp ` C ) e. RR )
+qed:s60,s61,s62,s27,s59:letrd |- ( ( M e. ( ZZ>= ` 2 ) /\ C e. RR+ ) -> prod_ n e. ( 2 ... M ) ( 1 + ( C / ( n x. ( n - 1 ) ) ) ) <_ ( exp ` C ) )
+$)

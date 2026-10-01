@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=goodprimeswfi  LOC_AFTER=?
+
+* The windowed reservoir is a finite set of primes.
+
+s1::goodprimeswval |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> ( ( Z goodPrimesW W ) ` Y ) = { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } )
+s2::simp1 |- ( ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) -> q e. Prime )
+s3:s2:a1i |- ( q e. ( 0 ... Z ) -> ( ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) -> q e. Prime ) )
+s4:s3:rgen |- A. q e. ( 0 ... Z ) ( ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) -> q e. Prime )
+i5::rabss
+s6:s4,i5:mpbir |- { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } C_ Prime
+s7::fzfi |- ( 0 ... Z ) e. Fin
+i8::rabfi
+s9:s7,i8:ax-mp |- { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } e. Fin
+i10::elfpw
+s11:s6,s9,i10:mpbir2an |- { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } e. ( ~P Prime i^i Fin )
+s12:s11:a1i |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> { q e. ( 0 ... Z ) | ( q e. Prime /\ W < q /\ A. p e. Prime ( p || ( q - 1 ) -> p <_ Y ) ) } e. ( ~P Prime i^i Fin ) )
+qed:s1,s12:eqeltrd |- ( ( Z e. NN0 /\ W e. NN0 /\ Y e. NN0 ) -> ( ( Z goodPrimesW W ) ` Y ) e. ( ~P Prime i^i Fin ) )
+$)

@@ -1,0 +1,42 @@
+$( <MM> <PROOF_ASST> THEOREM=gf1ser  LOC_AFTER=?
+
+* The partial sums ` sum_ ( n <_ m ) F ( n ) ` of a convergent series converge to ` sum_ n e. NN F ( n ) ` ( ~ isumclim2 , ~ fsumser , ~ climeq ).
+
+h1::gf1ser.1 |- ( ( ph /\ n e. NN ) -> ( F ` n ) e. CC )
+h2::gf1ser.2 |- ( ph -> seq 1 ( + , F ) e. dom ~~> )
+s1::nnuz |- NN = ( ZZ>= ` 1 )
+s2::1z |- 1 e. ZZ
+s3:s2:a1i |- ( ph -> 1 e. ZZ )
+s4::eqidd |- ( ( ph /\ n e. NN ) -> ( F ` n ) = ( F ` n ) )
+s5:s1,s3,s4,h1,h2:isumclim2 |- ( ph -> seq 1 ( + , F ) ~~> sum_ n e. NN ( F ` n ) )
+s6::simpr |- ( ( ph /\ k e. NN ) -> k e. NN )
+s7:s6,s1:eleqtrdi |- ( ( ph /\ k e. NN ) -> k e. ( ZZ>= ` 1 ) )
+s8::simpr |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> n e. ( 1 ... k ) )
+i9::elfznn
+s10:s8,i9:syl |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> n e. NN )
+s11::simpll |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ph )
+s12:s11,s10:jca |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( ph /\ n e. NN ) )
+s13:s12,h1:syl |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( F ` n ) e. CC )
+s14::eqidd |- ( ( ( ph /\ k e. NN ) /\ n e. ( 1 ... k ) ) -> ( F ` n ) = ( F ` n ) )
+s15:s14,s7,s13:fsumser |- ( ( ph /\ k e. NN ) -> sum_ n e. ( 1 ... k ) ( F ` n ) = ( seq 1 ( + , F ) ` k ) )
+s16::fzfid |- ( ( ph /\ k e. NN ) -> ( 1 ... k ) e. Fin )
+s17:s16,s13:fsumcl |- ( ( ph /\ k e. NN ) -> sum_ n e. ( 1 ... k ) ( F ` n ) e. CC )
+s18:s15,s17:eqeltrrd |- ( ( ph /\ k e. NN ) -> ( seq 1 ( + , F ) ` k ) e. CC )
+s19::fzfid |- ( ( ph /\ k e. NN ) -> ( 1 ... k ) e. Fin )
+s20:s19,s13:fsumcl |- ( ( ph /\ k e. NN ) -> sum_ n e. ( 1 ... k ) ( F ` n ) e. CC )
+s21::oveq2 |- ( m = k -> ( 1 ... m ) = ( 1 ... k ) )
+s22:s21:sumeq1d |- ( m = k -> sum_ n e. ( 1 ... m ) ( F ` n ) = sum_ n e. ( 1 ... k ) ( F ` n ) )
+s23::eqidd |- ( ( ph /\ k e. NN ) -> ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) = ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) )
+s24:s22:adantl |- ( ( ( ph /\ k e. NN ) /\ m = k ) -> sum_ n e. ( 1 ... m ) ( F ` n ) = sum_ n e. ( 1 ... k ) ( F ` n ) )
+s25:s23,s24,s6,s20:fvmptd |- ( ( ph /\ k e. NN ) -> ( ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) ` k ) = sum_ n e. ( 1 ... k ) ( F ` n ) )
+s26:s15:eqcomd |- ( ( ph /\ k e. NN ) -> ( seq 1 ( + , F ) ` k ) = sum_ n e. ( 1 ... k ) ( F ` n ) )
+s27:s26,s25:eqtr4d |- ( ( ph /\ k e. NN ) -> ( seq 1 ( + , F ) ` k ) = ( ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) ` k ) )
+s28::seqex |- seq 1 ( + , F ) e. _V
+s29:s28:a1i |- ( ph -> seq 1 ( + , F ) e. _V )
+s30::nnex |- NN e. _V
+s31:s30:mptex |- ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) e. _V
+s32:s31:a1i |- ( ph -> ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) e. _V )
+s33:s1,s29,s32,s3,s27:climeq |- ( ph -> ( seq 1 ( + , F ) ~~> sum_ n e. NN ( F ` n ) <-> ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) ~~> sum_ n e. NN ( F ` n ) ) )
+s34:s5,s33:mpbid |- ( ph -> ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) ~~> sum_ n e. NN ( F ` n ) )
+qed:s34:idi |- ( ph -> ( m e. NN |-> sum_ n e. ( 1 ... m ) ( F ` n ) ) ~~> sum_ n e. NN ( F ` n ) )
+$)

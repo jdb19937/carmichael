@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=ssdifpr  LOC_AFTER=?
+
+* A subset of two singleton-punctured sets is a subset of the pair-punctured set.
+
+s1::simpl |- ( ( E C_ ( X \ { P } ) /\ E C_ ( X \ { Q } ) ) -> E C_ ( X \ { P } ) )
+s2::simpr |- ( ( E C_ ( X \ { P } ) /\ E C_ ( X \ { Q } ) ) -> E C_ ( X \ { Q } ) )
+s3:s1,s2:ssind |- ( ( E C_ ( X \ { P } ) /\ E C_ ( X \ { Q } ) ) -> E C_ ( ( X \ { P } ) i^i ( X \ { Q } ) ) )
+s4::df-pr |- { P , Q } = ( { P } u. { Q } )
+s5:s4:difeq2i |- ( X \ { P , Q } ) = ( X \ ( { P } u. { Q } ) )
+s6::difundi |- ( X \ ( { P } u. { Q } ) ) = ( ( X \ { P } ) i^i ( X \ { Q } ) )
+s7:s5,s6:eqtri |- ( X \ { P , Q } ) = ( ( X \ { P } ) i^i ( X \ { Q } ) )
+s8:s7:a1i |- ( ( E C_ ( X \ { P } ) /\ E C_ ( X \ { Q } ) ) -> ( X \ { P , Q } ) = ( ( X \ { P } ) i^i ( X \ { Q } ) ) )
+qed:s3,s8:sseqtrrd |- ( ( E C_ ( X \ { P } ) /\ E C_ ( X \ { Q } ) ) -> E C_ ( X \ { P , Q } ) )
+$)

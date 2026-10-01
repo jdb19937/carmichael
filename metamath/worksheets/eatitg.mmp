@@ -1,0 +1,177 @@
+$( <MM> <PROOF_ASST> THEOREM=eatitg  LOC_AFTER=?
+
+* Period-1 orthogonality: the integral of e ( V t ) over a unit interval is 1 for V = 0 and 0 otherwise (LargeSieve integral_eAt).
+
+s1::simpl |- ( ( V e. ZZ /\ C e. RR ) -> V e. ZZ )
+s2::simpr |- ( ( V e. ZZ /\ C e. RR ) -> C e. RR )
+s3:s1:zcnd |- ( ( V e. ZZ /\ C e. RR ) -> V e. CC )
+s4::1red |- ( ( V e. ZZ /\ C e. RR ) -> 1 e. RR )
+s5:s2,s4:readdcld |- ( ( V e. ZZ /\ C e. RR ) -> ( C + 1 ) e. RR )
+s6:s2:ltp1d |- ( ( V e. ZZ /\ C e. RR ) -> C < ( C + 1 ) )
+s7:s2,s5,s6:ltled |- ( ( V e. ZZ /\ C e. RR ) -> C <_ ( C + 1 ) )
+s8::simpr |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> V = 0 )
+s9:s8:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> V = 0 )
+s10::simpr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> t e. ( C (,) ( C + 1 ) ) )
+i11::elioore
+s12:s10,i11:syl |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> t e. RR )
+s13:s12:recnd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> t e. CC )
+s14:s9:oveq1d |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( V x. t ) = ( 0 x. t ) )
+s15:s13:mul02d |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( 0 x. t ) = 0 )
+s16:s14,s15:eqtrd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( V x. t ) = 0 )
+s17:s16:oveq2d |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) = ( ( 2 x. ( _i x. _pi ) ) x. 0 ) )
+s18::ax-icn |- _i e. CC
+s19::picn |- _pi e. CC
+s20:s18,s19:mulcli |- ( _i x. _pi ) e. CC
+s21::2cn |- 2 e. CC
+s22:s21,s20:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s23:s22:a1i |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s24:s23:mul01d |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( ( 2 x. ( _i x. _pi ) ) x. 0 ) = 0 )
+s25:s17,s24:eqtrd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) = 0 )
+s26:s25:fveq2d |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) = ( exp ` 0 ) )
+s27::ef0 |- ( exp ` 0 ) = 1
+s28:s27:a1i |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( exp ` 0 ) = 1 )
+s29:s26,s28:eqtrd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) = 1 )
+s30:s29:itgeq2dv |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t = S. ( C (,) ( C + 1 ) ) 1 _d t )
+s31:s2:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> C e. RR )
+s32:s5:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( C + 1 ) e. RR )
+s33:s7:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> C <_ ( C + 1 ) )
+i34::volioo
+s35:s31,s32,s33,i34:syl3anc |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( vol ` ( C (,) ( C + 1 ) ) ) = ( ( C + 1 ) - C ) )
+s36:s2:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> C e. RR )
+s37:s36:recnd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> C e. CC )
+s38::1cnd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> 1 e. CC )
+s39:s37,s38:pncan2d |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( ( C + 1 ) - C ) = 1 )
+s40:s35,s39:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( vol ` ( C (,) ( C + 1 ) ) ) = 1 )
+s41::1red |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> 1 e. RR )
+s42:s40,s41:eqeltrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( vol ` ( C (,) ( C + 1 ) ) ) e. RR )
+s43::ioombl |- ( C (,) ( C + 1 ) ) e. dom vol
+s44:s43:a1i |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( C (,) ( C + 1 ) ) e. dom vol )
+s45::1cnd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> 1 e. CC )
+i46::itgconst
+s47:s44,s42,s45,i46:syl3anc |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> S. ( C (,) ( C + 1 ) ) 1 _d t = ( 1 x. ( vol ` ( C (,) ( C + 1 ) ) ) ) )
+s48:s40:oveq2d |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( 1 x. ( vol ` ( C (,) ( C + 1 ) ) ) ) = ( 1 x. 1 ) )
+s49::1t1e1 |- ( 1 x. 1 ) = 1
+s50:s49:a1i |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( 1 x. 1 ) = 1 )
+s51:s48,s50:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> ( 1 x. ( vol ` ( C (,) ( C + 1 ) ) ) ) = 1 )
+s52:s30,s47:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t = ( 1 x. ( vol ` ( C (,) ( C + 1 ) ) ) ) )
+s53:s52,s51:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t = 1 )
+s54:s53:eqcomd |- ( ( ( V e. ZZ /\ C e. RR ) /\ V = 0 ) -> 1 = S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t )
+s55:s3:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> V e. CC )
+s56::simpr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> -. V = 0 )
+s57:s56:neqned |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> V =/= 0 )
+s58::2cn |- 2 e. CC
+s59::ax-icn |- _i e. CC
+s60::picn |- _pi e. CC
+s61:s59,s60:mulcli |- ( _i x. _pi ) e. CC
+s62::2ne0 |- 2 =/= 0
+s63::ax-icn |- _i e. CC
+s64::picn |- _pi e. CC
+s65::ine0 |- _i =/= 0
+s66::pine0 |- _pi =/= 0
+s67:s63,s64,s65,s66:mulne0i |- ( _i x. _pi ) =/= 0
+s68:s58,s61,s62,s67:mulne0i |- ( 2 x. ( _i x. _pi ) ) =/= 0
+s69:s68:a1i |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( 2 x. ( _i x. _pi ) ) =/= 0 )
+s70::ax-icn |- _i e. CC
+s71::picn |- _pi e. CC
+s72:s70,s71:mulcli |- ( _i x. _pi ) e. CC
+s73::2cn |- 2 e. CC
+s74:s73,s72:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s75:s74:a1i |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s76:s75,s55:mulcld |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) e. CC )
+s77::ax-icn |- _i e. CC
+s78::picn |- _pi e. CC
+s79:s77,s78:mulcli |- ( _i x. _pi ) e. CC
+s80::2cn |- 2 e. CC
+s81:s80,s79:mulcli |- ( 2 x. ( _i x. _pi ) ) e. CC
+s82:s81:a1i |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( 2 x. ( _i x. _pi ) ) e. CC )
+s83:s82,s55,s69,s57:mulne0d |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) =/= 0 )
+s84::simpr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> x e. RR )
+s85:s84:recnd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> x e. CC )
+s86:s55:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> V e. CC )
+i87::eatcl
+s88:s86,s85,i87:syl2anc |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) e. CC )
+s89:s76:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) e. CC )
+s90:s83:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) =/= 0 )
+s91:s88,s89,s90:divcld |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) e. CC )
+s92:s91:fmptd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) : RR --> CC )
+i93::eatdv
+s94:s55,i93:syl |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( RR _D ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) ) = ( x e. RR |-> ( ( ( 2 x. ( _i x. _pi ) ) x. V ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) ) )
+s95:s76:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) e. CC )
+s96:s95,s88:mulcld |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( ( 2 x. ( _i x. _pi ) ) x. V ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) e. CC )
+s97::reelprrecn |- RR e. { RR , CC }
+s98:s97:a1i |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> RR e. { RR , CC } )
+s99:s98,s88,s96,s94,s76,s83:dvmptdivc |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( RR _D ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ) = ( x e. RR |-> ( ( ( ( 2 x. ( _i x. _pi ) ) x. V ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) )
+s100:s76:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) e. CC )
+s101:s83:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( 2 x. ( _i x. _pi ) ) x. V ) =/= 0 )
+s102:s88,s100,s101:divcan3d |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x e. RR ) -> ( ( ( ( 2 x. ( _i x. _pi ) ) x. V ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) )
+s103:s102:mpteq2dva |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( x e. RR |-> ( ( ( ( 2 x. ( _i x. _pi ) ) x. V ) x. ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) = ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) )
+s104:s99,s103:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( RR _D ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ) = ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) )
+i105::eatcn
+s106:s55,i105:syl |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) e. ( RR -cn-> CC ) )
+s107:s2:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> C e. RR )
+s108:s5:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( C + 1 ) e. RR )
+s109:s7:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> C <_ ( C + 1 ) )
+s110:s107,s108,s109:3jca |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( C e. RR /\ ( C + 1 ) e. RR /\ C <_ ( C + 1 ) ) )
+s111:s92,s104,s106:3jca |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) : RR --> CC /\ ( RR _D ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ) = ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) /\ ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) e. ( RR -cn-> CC ) ) )
+s112:s110,s111:jca |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( C e. RR /\ ( C + 1 ) e. RR /\ C <_ ( C + 1 ) ) /\ ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) : RR --> CC /\ ( RR _D ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ) = ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) /\ ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) e. ( RR -cn-> CC ) ) ) )
+i113::lsftc
+s114:s112,i113:syl |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) ` t ) _d t = ( ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` ( C + 1 ) ) - ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` C ) ) )
+s115::simpr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> t e. ( C (,) ( C + 1 ) ) )
+i116::elioore
+s117:s115,i116:syl |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> t e. RR )
+s118:s55:adantr |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> V e. CC )
+s119:s117:recnd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> t e. CC )
+i120::eatcl
+s121:s118,s119,i120:syl2anc |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) e. CC )
+s122::id |- ( x = t -> x = t )
+c1:s122:oveq2d |- ( x = t -> ( V x. x ) = ( V x. t ) )
+c2:c1:oveq2d |- ( x = t -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) )
+c3:c2:fveq2d |- ( x = t -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) )
+s123:c3:adantl |- ( ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) /\ x = t ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) )
+s124::eqidd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) = ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) )
+s125:s124,s123,s117,s121:fvmptd |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ t e. ( C (,) ( C + 1 ) ) ) -> ( ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) ` t ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) )
+s126:s125:itgeq2dv |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) ` t ) _d t = S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t )
+s127:s5:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( C + 1 ) e. RR )
+s128:s127:recnd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( C + 1 ) e. CC )
+s129:s2:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> C e. RR )
+s130:s129:recnd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> C e. CC )
+i131::eatcl
+s132:s55,s128,i131:syl2anc |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) e. CC )
+i133::eatcl
+s134:s55,s130,i133:syl2anc |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) e. CC )
+s135:s5:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( C + 1 ) e. RR )
+s136:s132,s76,s83:divcld |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) e. CC )
+s137::id |- ( x = ( C + 1 ) -> x = ( C + 1 ) )
+c4:s137:oveq2d |- ( x = ( C + 1 ) -> ( V x. x ) = ( V x. ( C + 1 ) ) )
+c5:c4:oveq2d |- ( x = ( C + 1 ) -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) )
+c6:c5:fveq2d |- ( x = ( C + 1 ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) )
+c7:c6:oveq1d |- ( x = ( C + 1 ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s138:c7:adantl |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x = ( C + 1 ) ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s139::eqidd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) = ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) )
+s140:s139,s138,s135,s136:fvmptd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` ( C + 1 ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s141:s2:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> C e. RR )
+s142:s134,s76,s83:divcld |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) e. CC )
+s143::id |- ( x = C -> x = C )
+c8:s143:oveq2d |- ( x = C -> ( V x. x ) = ( V x. C ) )
+c9:c8:oveq2d |- ( x = C -> ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) = ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) )
+c10:c9:fveq2d |- ( x = C -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) )
+c11:c10:oveq1d |- ( x = C -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s144:c11:adantl |- ( ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) /\ x = C ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s145::eqidd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) = ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) )
+s146:s145,s144,s141,s142:fvmptd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` C ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s147:s1:adantr |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> V e. ZZ )
+i148::eatper
+s149:s147,s130,i148:syl2anc |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) = ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) )
+s150:s149:oveq1d |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. ( C + 1 ) ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s151:s140,s150:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` ( C + 1 ) ) = ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) )
+s152:s151,s146:oveq12d |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` ( C + 1 ) ) - ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` C ) ) = ( ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) - ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) )
+s153:s134,s76,s83:divcld |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) e. CC )
+s154:s153:subidd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) - ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. C ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) = 0 )
+s155:s152,s154:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> ( ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` ( C + 1 ) ) - ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` C ) ) = 0 )
+s156:s126:eqcomd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t = S. ( C (,) ( C + 1 ) ) ( ( x e. RR |-> ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) ) ` t ) _d t )
+s157:s156,s114:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t = ( ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` ( C + 1 ) ) - ( ( x e. RR |-> ( ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. x ) ) ) / ( ( 2 x. ( _i x. _pi ) ) x. V ) ) ) ` C ) ) )
+s158:s157,s155:eqtrd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t = 0 )
+s159:s158:eqcomd |- ( ( ( V e. ZZ /\ C e. RR ) /\ -. V = 0 ) -> 0 = S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t )
+s160:s54,s159:ifeqda |- ( ( V e. ZZ /\ C e. RR ) -> if ( V = 0 , 1 , 0 ) = S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t )
+qed:s160:eqcomd |- ( ( V e. ZZ /\ C e. RR ) -> S. ( C (,) ( C + 1 ) ) ( exp ` ( ( 2 x. ( _i x. _pi ) ) x. ( V x. t ) ) ) _d t = if ( V = 0 , 1 , 0 ) )
+$)

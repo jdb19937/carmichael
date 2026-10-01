@@ -1,0 +1,12 @@
+$( <MM> <PROOF_ASST> THEOREM=nlogz  LOC_AFTER=?
+
+* Nlog is zero outside its main case (Lean: Nat.log_of_lt / Nat.log_zero_right).
+
+s1::simpll |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ -. ( 2 <_ B /\ 1 <_ N ) ) -> B e. NN0 )
+s2::simplr |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ -. ( 2 <_ B /\ 1 <_ N ) ) -> N e. NN0 )
+i3::nlogval
+s4:s1,s2,i3:syl2anc |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ -. ( 2 <_ B /\ 1 <_ N ) ) -> ( B Nlog N ) = if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) )
+s5::simpr |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ -. ( 2 <_ B /\ 1 <_ N ) ) -> -. ( 2 <_ B /\ 1 <_ N ) )
+s6:s5:iffalsed |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ -. ( 2 <_ B /\ 1 <_ N ) ) -> if ( ( 2 <_ B /\ 1 <_ N ) , ( |_ ` ( B logb N ) ) , 0 ) = 0 )
+qed:s4,s6:eqtrd |- ( ( ( B e. NN0 /\ N e. NN0 ) /\ -. ( 2 <_ B /\ 1 <_ N ) ) -> ( B Nlog N ) = 0 )
+$)

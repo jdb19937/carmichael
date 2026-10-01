@@ -1,0 +1,97 @@
+$( <MM> <PROOF_ASST> THEOREM=gamcnl  LOC_AFTER=?
+
+* The Gamma function is continuous along a vertical segment ` X + i [ -u T , T ] ` in the open right half-plane ( ~ gamcns on the segment, ~ segu ).  The continuity that set.mm lacks for ` _G `, in the form the line moment needs.
+
+s1::simpll |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> X e. RR )
+s2::simplr |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> 0 < X )
+s3::simpr |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> T e. RR+ )
+s4:s1:adantr |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> X e. RR )
+s5:s2:adantr |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> 0 < X )
+s6:s3:adantr |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> T e. RR+ )
+s7::simprl |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> r e. NN )
+s8::id |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) )
+i9::segu
+s10:s8,i9:syl |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) C_ { b e. CC | ( ( abs ` b ) <_ r /\ A. l e. NN0 ( 1 / r ) <_ ( abs ` ( b + l ) ) ) } /\ ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) C_ ( `' Re " ( 0 (,) +oo ) ) ) )
+s11::oveq2 |- ( u = o -> ( _i x. u ) = ( _i x. o ) )
+s12:s11:oveq2d |- ( u = o -> ( X + ( _i x. u ) ) = ( X + ( _i x. o ) ) )
+s13:s12:cbvmptv |- ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) = ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) )
+s14:s13:rneqi |- ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) = ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) )
+s15:s14:a1i |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) = ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) )
+i16::simpl
+s17:s10,i16:syl |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) C_ { b e. CC | ( ( abs ` b ) <_ r /\ A. l e. NN0 ( 1 / r ) <_ ( abs ` ( b + l ) ) ) } )
+s18:s17,s15:eqsstrrd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) C_ { b e. CC | ( ( abs ` b ) <_ r /\ A. l e. NN0 ( 1 / r ) <_ ( abs ` ( b + l ) ) ) } )
+i19::simpr
+s20:s10,i19:syl |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) C_ ( `' Re " ( 0 (,) +oo ) ) )
+s21:s20,s15:eqsstrrd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) C_ ( `' Re " ( 0 (,) +oo ) ) )
+s22::eqid |- { b e. CC | ( ( abs ` b ) <_ r /\ A. l e. NN0 ( 1 / r ) <_ ( abs ` ( b + l ) ) ) } = { b e. CC | ( ( abs ` b ) <_ r /\ A. l e. NN0 ( 1 / r ) <_ ( abs ` ( b + l ) ) ) }
+s23:s7,s22,s18,s21:gamcns |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) e. ( ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) -cn-> CC ) )
+s24:s6:rpred |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> T e. RR )
+s25:s24:renegcld |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> -u T e. RR )
+i26::iccssre
+s27:s25,s24,i26:syl2anc |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( -u T [,] T ) C_ RR )
+s28::ax-resscn |- RR C_ CC
+s29:s28:a1i |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> RR C_ CC )
+s30:s27,s29:sstrd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( -u T [,] T ) C_ CC )
+s31::ssid |- CC C_ CC
+s32:s31:a1i |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> CC C_ CC )
+s33::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+i34::cncfmptid
+s35:s30,s32,i34:syl2anc |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> u ) e. ( ( -u T [,] T ) -cn-> CC ) )
+s36:s4:recnd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> X e. CC )
+i37::cncfmptc
+s38:s36,s30,s32,i37:syl3anc |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> X ) e. ( ( -u T [,] T ) -cn-> CC ) )
+s39::ax-icn |- _i e. CC
+s40:s39:a1i |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> _i e. CC )
+i41::cncfmptc
+s42:s40,s30,s32,i41:syl3anc |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> _i ) e. ( ( -u T [,] T ) -cn-> CC ) )
+s43:s42,s35:mulcncf |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> ( _i x. u ) ) e. ( ( -u T [,] T ) -cn-> CC ) )
+s44:s33:addcn |- + e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) )
+s45:s44:a1i |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> + e. ( ( ( TopOpen ` CCfld ) tX ( TopOpen ` CCfld ) ) Cn ( TopOpen ` CCfld ) ) )
+s46:s33,s45,s38,s43:cncfmpt2f |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) e. ( ( -u T [,] T ) -cn-> CC ) )
+s47::eqid |- ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) = ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) )
+s48:s47:elrnmpt1 |- ( ( u e. ( -u T [,] T ) /\ ( X + ( _i x. u ) ) e. _V ) -> ( X + ( _i x. u ) ) e. ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) )
+s49::simpr |- ( ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) /\ u e. ( -u T [,] T ) ) -> u e. ( -u T [,] T ) )
+s50::ovex |- ( X + ( _i x. u ) ) e. _V
+s51:s50:a1i |- ( ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) /\ u e. ( -u T [,] T ) ) -> ( X + ( _i x. u ) ) e. _V )
+s52:s49,s51,s48:syl2anc |- ( ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) /\ u e. ( -u T [,] T ) ) -> ( X + ( _i x. u ) ) e. ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) )
+s53:s14:a1i |- ( ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) /\ u e. ( -u T [,] T ) ) -> ran ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) = ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) )
+s54:s52,s53:eleqtrd |- ( ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) /\ u e. ( -u T [,] T ) ) -> ( X + ( _i x. u ) ) e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) )
+s55::eqid |- ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) = ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) )
+s56:s54,s55:fmptd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) : ( -u T [,] T ) --> ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) )
+s57::ref |- Re : CC --> RR
+i58::fdm
+s59:s57,i58:ax-mp |- dom Re = CC
+s60::cnvimass |- ( `' Re " ( 0 (,) +oo ) ) C_ dom Re
+s61:s60,s59:sseqtri |- ( `' Re " ( 0 (,) +oo ) ) C_ CC
+s62:s61:a1i |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( `' Re " ( 0 (,) +oo ) ) C_ CC )
+s63:s21,s62:sstrd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) C_ CC )
+i64::cncfcdm
+s65:s63,s46,i64:syl2anc |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) e. ( ( -u T [,] T ) -cn-> ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) ) <-> ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) : ( -u T [,] T ) --> ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) ) )
+s66:s56,s65:mpbird |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) e. ( ( -u T [,] T ) -cn-> ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) ) )
+s67:s66,s23:cncfco |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) o. ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) ) e. ( ( -u T [,] T ) -cn-> CC ) )
+i68::cncff
+s69:s23,i68:syl |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) : ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) --> CC )
+s70:s69,s54:cofmpt |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) o. ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) ) = ( u e. ( -u T [,] T ) |-> ( ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) ` ( X + ( _i x. u ) ) ) ) )
+s71::fveq2 |- ( z = ( X + ( _i x. u ) ) -> ( _G ` z ) = ( _G ` ( X + ( _i x. u ) ) ) )
+s72::fvex |- ( _G ` ( X + ( _i x. u ) ) ) e. _V
+s73:s72:a1i |- ( ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) /\ u e. ( -u T [,] T ) ) -> ( _G ` ( X + ( _i x. u ) ) ) e. _V )
+s74::eqid |- ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) = ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) )
+s75:s71,s74:fvmptg |- ( ( ( X + ( _i x. u ) ) e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) /\ ( _G ` ( X + ( _i x. u ) ) ) e. _V ) -> ( ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) ` ( X + ( _i x. u ) ) ) = ( _G ` ( X + ( _i x. u ) ) ) )
+s76:s54,s73,s75:syl2anc |- ( ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) /\ u e. ( -u T [,] T ) ) -> ( ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) ` ( X + ( _i x. u ) ) ) = ( _G ` ( X + ( _i x. u ) ) ) )
+s77:s76:mpteq2dva |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> ( ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) ` ( X + ( _i x. u ) ) ) ) = ( u e. ( -u T [,] T ) |-> ( _G ` ( X + ( _i x. u ) ) ) ) )
+s78:s70,s77:eqtrd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( ( z e. ran ( o e. ( -u T [,] T ) |-> ( X + ( _i x. o ) ) ) |-> ( _G ` z ) ) o. ( u e. ( -u T [,] T ) |-> ( X + ( _i x. u ) ) ) ) = ( u e. ( -u T [,] T ) |-> ( _G ` ( X + ( _i x. u ) ) ) ) )
+s79:s78,s67:eqeltrrd |- ( ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) /\ ( r e. NN /\ ( ( 1 / X ) + ( X + T ) ) < r ) ) -> ( u e. ( -u T [,] T ) |-> ( _G ` ( X + ( _i x. u ) ) ) ) e. ( ( -u T [,] T ) -cn-> CC ) )
+s80::simpll |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> X e. RR )
+s81::simplr |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> 0 < X )
+s82::simpr |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> T e. RR+ )
+s83:s80,s81:elrpd |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> X e. RR+ )
+s84:s83:rpreccld |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> ( 1 / X ) e. RR+ )
+s85:s84:rpred |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> ( 1 / X ) e. RR )
+s86:s82:rpred |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> T e. RR )
+s87:s80,s86:readdcld |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> ( X + T ) e. RR )
+s88:s85,s87:readdcld |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> ( ( 1 / X ) + ( X + T ) ) e. RR )
+i89::arch
+s90:s88,i89:syl |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> E. r e. NN ( ( 1 / X ) + ( X + T ) ) < r )
+s91:s79:rexlimdvaa |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> ( E. r e. NN ( ( 1 / X ) + ( X + T ) ) < r -> ( u e. ( -u T [,] T ) |-> ( _G ` ( X + ( _i x. u ) ) ) ) e. ( ( -u T [,] T ) -cn-> CC ) ) )
+qed:s90,s91:mpd |- ( ( ( X e. RR /\ 0 < X ) /\ T e. RR+ ) -> ( u e. ( -u T [,] T ) |-> ( _G ` ( X + ( _i x. u ) ) ) ) e. ( ( -u T [,] T ) -cn-> CC ) )
+$)

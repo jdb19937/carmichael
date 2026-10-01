@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=coprimetocl  LOC_AFTER=?
+
+* The value of ~ df-coprimeto is a pair of a result and an operation count.  Lean: coprimeTo, the coprimality test of step 3.
+
+s1::simpr |- ( ( S e. Word NN0 /\ K e. NN0 ) -> K e. NN0 )
+s2::simpl |- ( ( S e. Word NN0 /\ K e. NN0 ) -> S e. Word NN0 )
+s3::simpl |- ( ( l = S /\ k = K ) -> l = S )
+s4::simpr |- ( ( l = S /\ k = K ) -> k = K )
+c1:s4:fveq2d |- ( ( l = S /\ k = K ) -> ( CoprimeToS ` k ) = ( CoprimeToS ` K ) )
+c2:c1:oveq2d |- ( ( l = S /\ k = K ) -> ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` k ) ) = ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) )
+c3:s3:fveq2d |- ( ( l = S /\ k = K ) -> ( # ` l ) = ( # ` S ) )
+c4:c2,c3:fveq12d |- ( ( l = S /\ k = K ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` k ) ) ` ( # ` l ) ) = ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) )
+c5:c4,s3:fveq12d |- ( ( l = S /\ k = K ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` k ) ) ` ( # ` l ) ) ` l ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) ` S ) )
+s5::df-coprimeto |- CoprimeTo = ( l e. Word NN0 , k e. NN0 |-> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` k ) ) ` ( # ` l ) ) ` l ) )
+s6::fvex |- ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) ` S ) e. _V
+s7:s6:a1i |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) ` S ) e. _V )
+s8:c5,s5:ovmpoga |- ( ( S e. Word NN0 /\ K e. NN0 /\ ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) ` S ) e. _V ) -> ( S CoprimeTo K ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) ` S ) )
+s9:s2,s1,s7,s8:syl3anc |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( S CoprimeTo K ) = ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) ` S ) )
+i10::lencl
+s11:s2,i10:syl |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( # ` S ) e. NN0 )
+s12::ovex |- ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V
+s13:s12:a1i |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V )
+s14::simpr |- ( ( ( S e. Word NN0 /\ K e. NN0 ) /\ g e. Word NN0 ) -> g e. Word NN0 )
+s15::1oel2o |- 1o e. 2o
+s16:s15:a1i |- ( ( ( S e. Word NN0 /\ K e. NN0 ) /\ g e. Word NN0 ) -> 1o e. 2o )
+s17::0nn0 |- 0 e. NN0
+s18:s17:a1i |- ( ( ( S e. Word NN0 /\ K e. NN0 ) /\ g e. Word NN0 ) -> 0 e. NN0 )
+i19::opelxpi
+s20:s16,s18,i19:syl2anc |- ( ( ( S e. Word NN0 /\ K e. NN0 ) /\ g e. Word NN0 ) -> <. 1o , 0 >. e. ( 2o X. NN0 ) )
+s21::eqid |- ( g e. Word NN0 |-> <. 1o , 0 >. ) = ( g e. Word NN0 |-> <. 1o , 0 >. )
+s22:s20,s21:fmptd |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) )
+s23::2oex |- 2o e. _V
+s24:s23:a1i |- ( ( S e. Word NN0 /\ K e. NN0 ) -> 2o e. _V )
+s25::nn0ex |- NN0 e. _V
+s26:s25:a1i |- ( ( S e. Word NN0 /\ K e. NN0 ) -> NN0 e. _V )
+i27::xpexg
+s28:s24,s26,i27:syl2anc |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( 2o X. NN0 ) e. _V )
+s29::wrdexi |- Word NN0 e. _V
+s30:s29:a1i |- ( ( S e. Word NN0 /\ K e. NN0 ) -> Word NN0 e. _V )
+i31::elmapg
+s32:s28,s30,i31:syl2anc |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) <-> ( g e. Word NN0 |-> <. 1o , 0 >. ) : Word NN0 --> ( 2o X. NN0 ) ) )
+s33:s22,s32:mpbird |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+i34::coprimetosf
+s35:s1,i34:syl |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( CoprimeToS ` K ) : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) )
+s36:s13,s33,s35:3jca |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( ( ( 2o X. NN0 ) ^m Word NN0 ) e. _V /\ ( g e. Word NN0 |-> <. 1o , 0 >. ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) /\ ( CoprimeToS ` K ) : ( ( ( 2o X. NN0 ) ^m Word NN0 ) X. NN0 ) --> ( ( 2o X. NN0 ) ^m Word NN0 ) ) )
+i37::algrecmap
+s38:s36,s11,i37:syl2anc |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) e. ( ( 2o X. NN0 ) ^m Word NN0 ) )
+i39::elmapi
+s40:s38,i39:syl |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) : Word NN0 --> ( 2o X. NN0 ) )
+i41::ffvelcdm
+s42:s40,s2,i41:syl2anc |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( ( ( ( g e. Word NN0 |-> <. 1o , 0 >. ) AlgRec ( CoprimeToS ` K ) ) ` ( # ` S ) ) ` S ) e. ( 2o X. NN0 ) )
+qed:s9,s42:eqeltrd |- ( ( S e. Word NN0 /\ K e. NN0 ) -> ( S CoprimeTo K ) e. ( 2o X. NN0 ) )
+$)

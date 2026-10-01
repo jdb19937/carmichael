@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=bwrdeq  LOC_AFTER=?
+
+* Two integers with the same residue modulo 2 ^ M have the same M low digits.
+
+s1::simpl1 |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> N e. ZZ )
+s2::simpl2 |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> O e. ZZ )
+s3::simpl3 |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> M e. NN0 )
+s4::simpr |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) )
+s5:s3:nn0zd |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> M e. ZZ )
+i6::uzid
+s7:s5,i6:syl |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> M e. ( ZZ>= ` M ) )
+i8::bwrdmod
+s9:s1,s3,s7,i8:syl3anc |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> ( ( N mod ( 2 ^ M ) ) bwrd M ) = ( N bwrd M ) )
+i10::bwrdmod
+s11:s2,s3,s7,i10:syl3anc |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> ( ( O mod ( 2 ^ M ) ) bwrd M ) = ( O bwrd M ) )
+s12:s4:oveq1d |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> ( ( N mod ( 2 ^ M ) ) bwrd M ) = ( ( O mod ( 2 ^ M ) ) bwrd M ) )
+qed:s9,s12,s11:3eqtr3d |- ( ( ( N e. ZZ /\ O e. ZZ /\ M e. NN0 ) /\ ( N mod ( 2 ^ M ) ) = ( O mod ( 2 ^ M ) ) ) -> ( N bwrd M ) = ( O bwrd M ) )
+$)

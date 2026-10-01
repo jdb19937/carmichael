@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=sqnest  LOC_AFTER=?
+
+* The corners of the square of half-side ` R ` moved out by ` T + i T ` are the corners of the square of half-side ` R + T ` .
+
+s1::simpl |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> C e. CC )
+s2::simprl |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> R e. CC )
+s3::simprr |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> T e. CC )
+s4::ax-icn |- _i e. CC
+s5:s4:a1i |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> _i e. CC )
+s6:s5,s2:mulcld |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( _i x. R ) e. CC )
+s7:s5,s3:mulcld |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( _i x. T ) e. CC )
+s8:s2,s6:addcld |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( R + ( _i x. R ) ) e. CC )
+s9:s3,s7:addcld |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( T + ( _i x. T ) ) e. CC )
+s10:s2,s6,s3,s7:add4d |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( R + ( _i x. R ) ) + ( T + ( _i x. T ) ) ) = ( ( R + T ) + ( ( _i x. R ) + ( _i x. T ) ) ) )
+s11:s5,s2,s3:adddid |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( _i x. ( R + T ) ) = ( ( _i x. R ) + ( _i x. T ) ) )
+s12:s11:eqcomd |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( _i x. R ) + ( _i x. T ) ) = ( _i x. ( R + T ) ) )
+s13:s12:oveq2d |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( R + T ) + ( ( _i x. R ) + ( _i x. T ) ) ) = ( ( R + T ) + ( _i x. ( R + T ) ) ) )
+s14:s10,s13:eqtrd |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( R + ( _i x. R ) ) + ( T + ( _i x. T ) ) ) = ( ( R + T ) + ( _i x. ( R + T ) ) ) )
+s15:s1,s8,s9:subsub4d |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( C - ( R + ( _i x. R ) ) ) - ( T + ( _i x. T ) ) ) = ( C - ( ( R + ( _i x. R ) ) + ( T + ( _i x. T ) ) ) ) )
+s16:s14:oveq2d |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( C - ( ( R + ( _i x. R ) ) + ( T + ( _i x. T ) ) ) ) = ( C - ( ( R + T ) + ( _i x. ( R + T ) ) ) ) )
+s17:s15,s16:eqtrd |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( C - ( R + ( _i x. R ) ) ) - ( T + ( _i x. T ) ) ) = ( C - ( ( R + T ) + ( _i x. ( R + T ) ) ) ) )
+s18:s1,s8,s9:addassd |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( C + ( R + ( _i x. R ) ) ) + ( T + ( _i x. T ) ) ) = ( C + ( ( R + ( _i x. R ) ) + ( T + ( _i x. T ) ) ) ) )
+s19:s14:oveq2d |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( C + ( ( R + ( _i x. R ) ) + ( T + ( _i x. T ) ) ) ) = ( C + ( ( R + T ) + ( _i x. ( R + T ) ) ) ) )
+s20:s18,s19:eqtrd |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( C + ( R + ( _i x. R ) ) ) + ( T + ( _i x. T ) ) ) = ( C + ( ( R + T ) + ( _i x. ( R + T ) ) ) ) )
+qed:s17,s20:jca |- ( ( C e. CC /\ ( R e. CC /\ T e. CC ) ) -> ( ( ( C - ( R + ( _i x. R ) ) ) - ( T + ( _i x. T ) ) ) = ( C - ( ( R + T ) + ( _i x. ( R + T ) ) ) ) /\ ( ( C + ( R + ( _i x. R ) ) ) + ( T + ( _i x. T ) ) ) = ( C + ( ( R + T ) + ( _i x. ( R + T ) ) ) ) ) )
+$)

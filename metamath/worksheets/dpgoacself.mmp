@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=dpgoacself  LOC_AFTER=?
+
+* The dpGo body fills the residue it writes to.
+
+s1::simp1 |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) )
+s2::simp2 |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( F e. NN0 /\ A e. Tbl ) )
+s3:s1:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( L e. NN /\ P e. NN0 ) )
+s4:s3:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> L e. NN )
+s5:s1:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( L e. NN /\ P e. NN0 ) )
+s6:s5:simprd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> P e. NN0 )
+s7:s1:simprd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> T e. Tbl )
+s8:s2:simpld |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> F e. NN0 )
+s9:s2:simprd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> A e. Tbl )
+s10::simp3 |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( T ` F ) =/= ( inr ` (/) ) )
+s11:s4,s6:jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( L e. NN /\ P e. NN0 ) )
+s12:s11,s8:jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( ( L e. NN /\ P e. NN0 ) /\ F e. NN0 ) )
+i13::dpgomcl
+s14:s12,i13:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( ( F x. P ) mod L ) e. NN0 )
+s15:s6,s7:jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( P e. NN0 /\ T e. Tbl ) )
+s16:s8,s10:jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( F e. NN0 /\ ( T ` F ) =/= ( inr ` (/) ) ) )
+s17:s15,s16:jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( ( P e. NN0 /\ T e. Tbl ) /\ ( F e. NN0 /\ ( T ` F ) =/= ( inr ` (/) ) ) ) )
+i18::dpgowcl
+s19:s17,i18:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) e. Word NN0 )
+s20:s9,s14,s19:3jca |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( A e. Tbl /\ ( ( F x. P ) mod L ) e. NN0 /\ ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) e. Word NN0 ) )
+i21::sinself
+s22:s20,i21:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ` ( ( F x. P ) mod L ) ) =/= ( inr ` (/) ) )
+i23::neneqd
+s24:s10,i23:syl |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> -. ( T ` F ) = ( inr ` (/) ) )
+s25:s24:iffalsed |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) = ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) )
+s26:s25:fveq1d |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) ` ( ( F x. P ) mod L ) ) = ( ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ` ( ( F x. P ) mod L ) ) )
+qed:s26,s22:eqnetrd |- ( ( ( ( L e. NN /\ P e. NN0 ) /\ T e. Tbl ) /\ ( F e. NN0 /\ A e. Tbl ) /\ ( T ` F ) =/= ( inr ` (/) ) ) -> ( if ( ( T ` F ) = ( inr ` (/) ) , A , ( ( A SetIfNone ( ( F x. P ) mod L ) ) ` ( <" P "> ++ ( 2nd ` ( T ` F ) ) ) ) ) ` ( ( F x. P ) mod L ) ) =/= ( inr ` (/) ) )
+$)

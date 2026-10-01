@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=bvprodle1  LOC_AFTER=?
+
+* A product of factors >= 1 grows with the index set (Lean prod_le_prod_subset_one_le).
+
+h1::bvprodle1.1 |- ( ph -> B e. Fin )
+h2::bvprodle1.2 |- ( ph -> A C_ B )
+h3::bvprodle1.3 |- ( ( ph /\ k e. B ) -> C e. RR )
+h4::bvprodle1.4 |- ( ( ph /\ k e. B ) -> 1 <_ C )
+i1::undif
+s2:2,i1:sylib |- ( ph -> ( A u. ( B \ A ) ) = B )
+s3:s2:eqcomd |- ( ph -> B = ( A u. ( B \ A ) ) )
+s4::disjdif |- ( A i^i ( B \ A ) ) = (/)
+s5:s4:a1i |- ( ph -> ( A i^i ( B \ A ) ) = (/) )
+s6:3:recnd |- ( ( ph /\ k e. B ) -> C e. CC )
+s7:s5,s3,1,s6:fprodsplit |- ( ph -> prod_ k e. B C = ( prod_ k e. A C x. prod_ k e. ( B \ A ) C ) )
+s8::nfv |- F/ k ph
+s9:1,2:ssfid |- ( ph -> A e. Fin )
+s10:2:adantr |- ( ( ph /\ k e. A ) -> A C_ B )
+s11::simpr |- ( ( ph /\ k e. A ) -> k e. A )
+s12:s10,s11:sseldd |- ( ( ph /\ k e. A ) -> k e. B )
+s13::simpl |- ( ( ph /\ k e. A ) -> ph )
+s14:s13,s12,3:syl2anc |- ( ( ph /\ k e. A ) -> C e. RR )
+s15::simpl |- ( ( ph /\ k e. A ) -> ph )
+s16:s15,s12,4:syl2anc |- ( ( ph /\ k e. A ) -> 1 <_ C )
+s17::0le1 |- 0 <_ 1
+s18:s17:a1i |- ( ( ph /\ k e. A ) -> 0 <_ 1 )
+s19::0re |- 0 e. RR
+s20:s19:a1i |- ( ( ph /\ k e. A ) -> 0 e. RR )
+s21::1re |- 1 e. RR
+s22:s21:a1i |- ( ( ph /\ k e. A ) -> 1 e. RR )
+s23:s20,s22,s14,s18,s16:letrd |- ( ( ph /\ k e. A ) -> 0 <_ C )
+s24:s8,s9,s14,s23:fprodge0 |- ( ph -> 0 <_ prod_ k e. A C )
+i25::diffi
+s26:1,i25:syl |- ( ph -> ( B \ A ) e. Fin )
+s27::simpr |- ( ( ph /\ k e. ( B \ A ) ) -> k e. ( B \ A ) )
+i28::eldifi
+s29:s27,i28:syl |- ( ( ph /\ k e. ( B \ A ) ) -> k e. B )
+s30::simpl |- ( ( ph /\ k e. ( B \ A ) ) -> ph )
+s31:s30,s29,3:syl2anc |- ( ( ph /\ k e. ( B \ A ) ) -> C e. RR )
+s32::simpl |- ( ( ph /\ k e. ( B \ A ) ) -> ph )
+s33:s32,s29,4:syl2anc |- ( ( ph /\ k e. ( B \ A ) ) -> 1 <_ C )
+s34:s8,s26,s31,s33:fprodge1 |- ( ph -> 1 <_ prod_ k e. ( B \ A ) C )
+s35:s9,s14:fprodrecl |- ( ph -> prod_ k e. A C e. RR )
+s36:s26,s31:fprodrecl |- ( ph -> prod_ k e. ( B \ A ) C e. RR )
+s37:s35,s36,s24,s34:lemulge11d |- ( ph -> prod_ k e. A C <_ ( prod_ k e. A C x. prod_ k e. ( B \ A ) C ) )
+qed:s37,s7:breqtrrd |- ( ph -> prod_ k e. A C <_ prod_ k e. B C )
+$)

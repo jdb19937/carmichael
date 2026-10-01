@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=bwfvb  LOC_AFTER=?
+
+* A letter of a bit word is true exactly when its position is a binary digit of the value.
+
+s1::simpl |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> I e. ( 0 ..^ ( # ` L ) ) )
+i3::bwbits
+s4:s1,i3:syl |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( bits ` ( toNat ` L ) ) = { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } )
+s5:s4:eleq2d |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( I e. ( bits ` ( toNat ` L ) ) <-> I e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } ) )
+s6::fveq2 |- ( i = I -> ( L ` i ) = ( L ` I ) )
+s7:s6:eqeq1d |- ( i = I -> ( ( L ` i ) = 1o <-> ( L ` I ) = 1o ) )
+s8:s7:elrab |- ( I e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } <-> ( I e. ( 0 ..^ ( # ` L ) ) /\ ( L ` I ) = 1o ) )
+s9:s8:a1i |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( I e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } <-> ( I e. ( 0 ..^ ( # ` L ) ) /\ ( L ` I ) = 1o ) ) )
+s10:s2:biantrurd |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L ` I ) = 1o <-> ( I e. ( 0 ..^ ( # ` L ) ) /\ ( L ` I ) = 1o ) ) )
+s11:s9,s10:bitr4d |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( I e. { i e. ( 0 ..^ ( # ` L ) ) | ( L ` i ) = 1o } <-> ( L ` I ) = 1o ) )
+s12:s5,s11:bitrd |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( I e. ( bits ` ( toNat ` L ) ) <-> ( L ` I ) = 1o ) )
+qed:s12:bicomd |- ( ( L e. Word 2o /\ I e. ( 0 ..^ ( # ` L ) ) ) -> ( ( L ` I ) = 1o <-> I e. ( bits ` ( toNat ` L ) ) ) )
+$)

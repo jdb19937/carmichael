@@ -1,0 +1,308 @@
+$( <MM> <PROOF_ASST> THEOREM=mvdisj  LOC_AFTER=?
+
+* Unit windows around 1-separated points of [ -u T , T ] are disjoint subintervals of ( -u ( T + 1 ) , T + 1 ): the window integrals of a nonnegative continuous function sum to at most its integral there (LargeValues per_char_sobolev, hsum_r).
+
+hp::mvdisj.p |- ( ph -> ( P e. Fin /\ Y : P --> RR /\ T e. RR ) )
+ha::mvdisj.a |- ( ph -> A. a e. P ( abs ` ( Y ` a ) ) <_ T )
+hs::mvdisj.s |- ( ph -> A. a e. P A. b e. P ( a =/= b -> 1 <_ ( abs ` ( ( Y ` a ) - ( Y ` b ) ) ) ) )
+hc::mvdisj.c |- ( ph -> ( t e. RR |-> X ) e. ( RR -cn-> CC ) )
+hr::mvdisj.r |- ( ( ph /\ t e. RR ) -> X e. RR )
+hn::mvdisj.n |- ( ( ph /\ t e. RR ) -> 0 <_ X )
+s1:p:simp1d |- ( ph -> P e. Fin )
+s2:p:simp2d |- ( ph -> Y : P --> RR )
+s3:p:simp3d |- ( ph -> T e. RR )
+s4::1re |- 1 e. RR
+s5:s4:a1i |- ( ph -> 1 e. RR )
+s6:s3,s5:readdcld |- ( ph -> ( T + 1 ) e. RR )
+s7:s6:renegcld |- ( ph -> -u ( T + 1 ) e. RR )
+s8::simpr |- ( ( ph /\ i e. P ) -> i e. P )
+s9:s2:adantr |- ( ( ph /\ i e. P ) -> Y : P --> RR )
+s10:s9,s8:ffvelcdmd |- ( ( ph /\ i e. P ) -> ( Y ` i ) e. RR )
+s11::id |- ( a = i -> a = i )
+c1:s11:fveq2d |- ( a = i -> ( Y ` a ) = ( Y ` i ) )
+c2:c1:fveq2d |- ( a = i -> ( abs ` ( Y ` a ) ) = ( abs ` ( Y ` i ) ) )
+c3:c2:breq1d |- ( a = i -> ( ( abs ` ( Y ` a ) ) <_ T <-> ( abs ` ( Y ` i ) ) <_ T ) )
+s12:a:adantr |- ( ( ph /\ i e. P ) -> A. a e. P ( abs ` ( Y ` a ) ) <_ T )
+s13:c3,s12,s8:rspcdva |- ( ( ph /\ i e. P ) -> ( abs ` ( Y ` i ) ) <_ T )
+s14:s3:adantr |- ( ( ph /\ i e. P ) -> T e. RR )
+s15:s10,s14:absled |- ( ( ph /\ i e. P ) -> ( ( abs ` ( Y ` i ) ) <_ T <-> ( -u T <_ ( Y ` i ) /\ ( Y ` i ) <_ T ) ) )
+s16:s13,s15:mpbid |- ( ( ph /\ i e. P ) -> ( -u T <_ ( Y ` i ) /\ ( Y ` i ) <_ T ) )
+s17:s3:adantr |- ( ( ph /\ i e. P ) -> T e. RR )
+s18:s16:simpld |- ( ( ph /\ i e. P ) -> -u T <_ ( Y ` i ) )
+s19:s17:renegcld |- ( ( ph /\ i e. P ) -> -u T e. RR )
+s20:s10,s19:subge0d |- ( ( ph /\ i e. P ) -> ( 0 <_ ( ( Y ` i ) - -u T ) <-> -u T <_ ( Y ` i ) ) )
+s21:s18,s20:mpbird |- ( ( ph /\ i e. P ) -> 0 <_ ( ( Y ` i ) - -u T ) )
+i22::rpgt0
+i23::rpdivcl
+s24::1rp |- 1 e. RR+
+s25::2rp |- 2 e. RR+
+s26:s24,s25,i23:mp2an |- ( 1 / 2 ) e. RR+
+s27:s26,i22:ax-mp |- 0 < ( 1 / 2 )
+s28:s27:a1i |- ( ( ph /\ i e. P ) -> 0 < ( 1 / 2 ) )
+s29:s10,s19:resubcld |- ( ( ph /\ i e. P ) -> ( ( Y ` i ) - -u T ) e. RR )
+i30::rpre
+i31::rpdivcl
+s32:s26,i30:ax-mp |- ( 1 / 2 ) e. RR
+s33:s32:a1i |- ( ( ph /\ i e. P ) -> ( 1 / 2 ) e. RR )
+s34:s29,s33,s21,s28:addgegt0d |- ( ( ph /\ i e. P ) -> 0 < ( ( ( Y ` i ) - -u T ) + ( 1 / 2 ) ) )
+s35::2cn |- 2 e. CC
+s36:s35:a1i |- ( ( ph /\ i e. P ) -> 2 e. CC )
+s37:s10:recnd |- ( ( ph /\ i e. P ) -> ( Y ` i ) e. CC )
+s38:s17:recnd |- ( ( ph /\ i e. P ) -> T e. CC )
+s39:s38:negcld |- ( ( ph /\ i e. P ) -> -u T e. CC )
+s40:s37,s39:subcld |- ( ( ph /\ i e. P ) -> ( ( Y ` i ) - -u T ) e. CC )
+i41::rpcn
+i42::rpdivcl
+s43:s26,i41:ax-mp |- ( 1 / 2 ) e. CC
+s44:s43:a1i |- ( ( ph /\ i e. P ) -> ( 1 / 2 ) e. CC )
+s45:s36,s40,s44:adddid |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - -u T ) + ( 1 / 2 ) ) ) = ( ( 2 x. ( ( Y ` i ) - -u T ) ) + ( 2 x. ( 1 / 2 ) ) ) )
+s46:s36,s37,s39:subdid |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - -u T ) ) = ( ( 2 x. ( Y ` i ) ) - ( 2 x. -u T ) ) )
+s47:s36,s37:mulcld |- ( ( ph /\ i e. P ) -> ( 2 x. ( Y ` i ) ) e. CC )
+s48:s36,s39:mulcld |- ( ( ph /\ i e. P ) -> ( 2 x. -u T ) e. CC )
+s49:s47,s48:negsubd |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. -u T ) ) = ( ( 2 x. ( Y ` i ) ) - ( 2 x. -u T ) ) )
+s50:s49:eqcomd |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) - ( 2 x. -u T ) ) = ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. -u T ) ) )
+s51:s36,s39:mulneg1d |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u T ) = -u ( 2 x. -u T ) )
+s52:s51:eqcomd |- ( ( ph /\ i e. P ) -> -u ( 2 x. -u T ) = ( -u 2 x. -u T ) )
+s53:s52:oveq2d |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. -u T ) ) = ( ( 2 x. ( Y ` i ) ) + ( -u 2 x. -u T ) ) )
+s54:s47:addlidd |- ( ( ph /\ i e. P ) -> ( 0 + ( 2 x. ( Y ` i ) ) ) = ( 2 x. ( Y ` i ) ) )
+s55:s54:eqcomd |- ( ( ph /\ i e. P ) -> ( 2 x. ( Y ` i ) ) = ( 0 + ( 2 x. ( Y ` i ) ) ) )
+s56:s35:negcli |- -u 2 e. CC
+s57:s56:a1i |- ( ( ph /\ i e. P ) -> -u 2 e. CC )
+s58:s57,s38:mulneg2d |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u T ) = -u ( -u 2 x. T ) )
+s59:s57,s38:mulneg1d |- ( ( ph /\ i e. P ) -> ( -u -u 2 x. T ) = -u ( -u 2 x. T ) )
+s60:s59:eqcomd |- ( ( ph /\ i e. P ) -> -u ( -u 2 x. T ) = ( -u -u 2 x. T ) )
+s61:s35:negnegi |- -u -u 2 = 2
+s62:s61:a1i |- ( ( ph /\ i e. P ) -> -u -u 2 = 2 )
+s63:s62:oveq1d |- ( ( ph /\ i e. P ) -> ( -u -u 2 x. T ) = ( 2 x. T ) )
+s64:s60,s63:eqtrd |- ( ( ph /\ i e. P ) -> -u ( -u 2 x. T ) = ( 2 x. T ) )
+s65:s36,s38:mulcld |- ( ( ph /\ i e. P ) -> ( 2 x. T ) e. CC )
+s66:s65:addlidd |- ( ( ph /\ i e. P ) -> ( 0 + ( 2 x. T ) ) = ( 2 x. T ) )
+s67:s66:eqcomd |- ( ( ph /\ i e. P ) -> ( 2 x. T ) = ( 0 + ( 2 x. T ) ) )
+s68:s58,s64:eqtrd |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u T ) = ( 2 x. T ) )
+s69:s68,s67:eqtrd |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u T ) = ( 0 + ( 2 x. T ) ) )
+s70:s55,s69:oveq12d |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) + ( -u 2 x. -u T ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 0 + ( 2 x. T ) ) ) )
+s71::0cn |- 0 e. CC
+s72:s71:a1i |- ( ( ph /\ i e. P ) -> 0 e. CC )
+s73:s72,s47:addcld |- ( ( ph /\ i e. P ) -> ( 0 + ( 2 x. ( Y ` i ) ) ) e. CC )
+s74:s73,s72,s65:addassd |- ( ( ph /\ i e. P ) -> ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 0 ) + ( 2 x. T ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 0 + ( 2 x. T ) ) ) )
+s75:s74:eqcomd |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 0 + ( 2 x. T ) ) ) = ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 0 ) + ( 2 x. T ) ) )
+s76:s72,s47,s72:add32d |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 0 ) = ( ( 0 + 0 ) + ( 2 x. ( Y ` i ) ) ) )
+s77:s71:addlidi |- ( 0 + 0 ) = 0
+s78:s77:a1i |- ( ( ph /\ i e. P ) -> ( 0 + 0 ) = 0 )
+s79:s78:oveq1d |- ( ( ph /\ i e. P ) -> ( ( 0 + 0 ) + ( 2 x. ( Y ` i ) ) ) = ( 0 + ( 2 x. ( Y ` i ) ) ) )
+s80:s76,s79:eqtrd |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 0 ) = ( 0 + ( 2 x. ( Y ` i ) ) ) )
+s81:s80:oveq1d |- ( ( ph /\ i e. P ) -> ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 0 ) + ( 2 x. T ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s82:s75,s81:eqtrd |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 0 + ( 2 x. T ) ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s83:s46,s50:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - -u T ) ) = ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. -u T ) ) )
+s84:s83,s53:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - -u T ) ) = ( ( 2 x. ( Y ` i ) ) + ( -u 2 x. -u T ) ) )
+s85:s84,s70:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - -u T ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 0 + ( 2 x. T ) ) ) )
+s86:s85,s82:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - -u T ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s87::ax-1cn |- 1 e. CC
+s88::2ne0 |- 2 =/= 0
+s89:s35,s87,s35,s88:divassi |- ( ( 2 x. 1 ) / 2 ) = ( 2 x. ( 1 / 2 ) )
+s90:s89:eqcomi |- ( 2 x. ( 1 / 2 ) ) = ( ( 2 x. 1 ) / 2 )
+s91:s35:mulridi |- ( 2 x. 1 ) = 2
+s92:s91:oveq1i |- ( ( 2 x. 1 ) / 2 ) = ( 2 / 2 )
+s93:s35,s35,s87,s88:divmuli |- ( ( 2 / 2 ) = 1 <-> ( 2 x. 1 ) = 2 )
+s94:s91,s93:mpbir |- ( 2 / 2 ) = 1
+s95:s92,s94:eqtri |- ( ( 2 x. 1 ) / 2 ) = 1
+s96:s90,s95:eqtri |- ( 2 x. ( 1 / 2 ) ) = 1
+s97:s96:a1i |- ( ( ph /\ i e. P ) -> ( 2 x. ( 1 / 2 ) ) = 1 )
+s98:s86,s97:oveq12d |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( ( Y ` i ) - -u T ) ) + ( 2 x. ( 1 / 2 ) ) ) = ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) + 1 ) )
+s99:s87:a1i |- ( ( ph /\ i e. P ) -> 1 e. CC )
+s100:s73,s65,s99:add32d |- ( ( ph /\ i e. P ) -> ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) + 1 ) = ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 1 ) + ( 2 x. T ) ) )
+s101:s72,s47,s99:add32d |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 1 ) = ( ( 0 + 1 ) + ( 2 x. ( Y ` i ) ) ) )
+s102:s87:addlidi |- ( 0 + 1 ) = 1
+s103:s102:a1i |- ( ( ph /\ i e. P ) -> ( 0 + 1 ) = 1 )
+s104:s103:oveq1d |- ( ( ph /\ i e. P ) -> ( ( 0 + 1 ) + ( 2 x. ( Y ` i ) ) ) = ( 1 + ( 2 x. ( Y ` i ) ) ) )
+s105:s101,s104:eqtrd |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 1 ) = ( 1 + ( 2 x. ( Y ` i ) ) ) )
+s106:s105:oveq1d |- ( ( ph /\ i e. P ) -> ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + 1 ) + ( 2 x. T ) ) = ( ( 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s107:s100,s106:eqtrd |- ( ( ph /\ i e. P ) -> ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) + 1 ) = ( ( 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s108:s45,s98:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - -u T ) + ( 1 / 2 ) ) ) = ( ( ( 0 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) + 1 ) )
+s109:s108,s107:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - -u T ) + ( 1 / 2 ) ) ) = ( ( 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s110:s37,s44:subcld |- ( ( ph /\ i e. P ) -> ( ( Y ` i ) - ( 1 / 2 ) ) e. CC )
+s111:s38,s99:addcld |- ( ( ph /\ i e. P ) -> ( T + 1 ) e. CC )
+s112:s111:negcld |- ( ( ph /\ i e. P ) -> -u ( T + 1 ) e. CC )
+s113:s36,s110,s112:subdid |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) ) = ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) - ( 2 x. -u ( T + 1 ) ) ) )
+s114:s36,s110:mulcld |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) e. CC )
+s115:s36,s112:mulcld |- ( ( ph /\ i e. P ) -> ( 2 x. -u ( T + 1 ) ) e. CC )
+s116:s114,s115:negsubd |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) + -u ( 2 x. -u ( T + 1 ) ) ) = ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) - ( 2 x. -u ( T + 1 ) ) ) )
+s117:s116:eqcomd |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) - ( 2 x. -u ( T + 1 ) ) ) = ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) + -u ( 2 x. -u ( T + 1 ) ) ) )
+s118:s36,s112:mulneg1d |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u ( T + 1 ) ) = -u ( 2 x. -u ( T + 1 ) ) )
+s119:s118:eqcomd |- ( ( ph /\ i e. P ) -> -u ( 2 x. -u ( T + 1 ) ) = ( -u 2 x. -u ( T + 1 ) ) )
+s120:s119:oveq2d |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) + -u ( 2 x. -u ( T + 1 ) ) ) = ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) + ( -u 2 x. -u ( T + 1 ) ) ) )
+s121:s36,s37,s44:subdid |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) = ( ( 2 x. ( Y ` i ) ) - ( 2 x. ( 1 / 2 ) ) ) )
+s122:s36,s44:mulcld |- ( ( ph /\ i e. P ) -> ( 2 x. ( 1 / 2 ) ) e. CC )
+s123:s47,s122:negsubd |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. ( 1 / 2 ) ) ) = ( ( 2 x. ( Y ` i ) ) - ( 2 x. ( 1 / 2 ) ) ) )
+s124:s123:eqcomd |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) - ( 2 x. ( 1 / 2 ) ) ) = ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. ( 1 / 2 ) ) ) )
+s125:s36,s44:mulneg1d |- ( ( ph /\ i e. P ) -> ( -u 2 x. ( 1 / 2 ) ) = -u ( 2 x. ( 1 / 2 ) ) )
+s126:s125:eqcomd |- ( ( ph /\ i e. P ) -> -u ( 2 x. ( 1 / 2 ) ) = ( -u 2 x. ( 1 / 2 ) ) )
+s127:s126:oveq2d |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. ( 1 / 2 ) ) ) = ( ( 2 x. ( Y ` i ) ) + ( -u 2 x. ( 1 / 2 ) ) ) )
+s128:s47:addlidd |- ( ( ph /\ i e. P ) -> ( 0 + ( 2 x. ( Y ` i ) ) ) = ( 2 x. ( Y ` i ) ) )
+s129:s128:eqcomd |- ( ( ph /\ i e. P ) -> ( 2 x. ( Y ` i ) ) = ( 0 + ( 2 x. ( Y ` i ) ) ) )
+i130::rpcn
+i131::rpdivcl
+s132:s35,s43:mulneg1i |- ( -u 2 x. ( 1 / 2 ) ) = -u ( 2 x. ( 1 / 2 ) )
+s133:s96:negeqi |- -u ( 2 x. ( 1 / 2 ) ) = -u 1
+s134:s132,s133:eqtri |- ( -u 2 x. ( 1 / 2 ) ) = -u 1
+s135:s134:a1i |- ( ( ph /\ i e. P ) -> ( -u 2 x. ( 1 / 2 ) ) = -u 1 )
+s136:s129,s135:oveq12d |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( Y ` i ) ) + ( -u 2 x. ( 1 / 2 ) ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + -u 1 ) )
+s137:s87:negcli |- -u 1 e. CC
+s138:s137:a1i |- ( ( ph /\ i e. P ) -> -u 1 e. CC )
+s139:s72,s47,s138:add32d |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + -u 1 ) = ( ( 0 + -u 1 ) + ( 2 x. ( Y ` i ) ) ) )
+s140:s137:addlidi |- ( 0 + -u 1 ) = -u 1
+s141:s140:a1i |- ( ( ph /\ i e. P ) -> ( 0 + -u 1 ) = -u 1 )
+s142:s141:oveq1d |- ( ( ph /\ i e. P ) -> ( ( 0 + -u 1 ) + ( 2 x. ( Y ` i ) ) ) = ( -u 1 + ( 2 x. ( Y ` i ) ) ) )
+s143:s139,s142:eqtrd |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. ( Y ` i ) ) ) + -u 1 ) = ( -u 1 + ( 2 x. ( Y ` i ) ) ) )
+s144:s121,s124:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) = ( ( 2 x. ( Y ` i ) ) + -u ( 2 x. ( 1 / 2 ) ) ) )
+s145:s144,s127:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) = ( ( 2 x. ( Y ` i ) ) + ( -u 2 x. ( 1 / 2 ) ) ) )
+s146:s145,s136:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) = ( ( 0 + ( 2 x. ( Y ` i ) ) ) + -u 1 ) )
+s147:s146,s143:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) = ( -u 1 + ( 2 x. ( Y ` i ) ) ) )
+s148:s57,s111:mulneg2d |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u ( T + 1 ) ) = -u ( -u 2 x. ( T + 1 ) ) )
+s149:s57,s111:mulneg1d |- ( ( ph /\ i e. P ) -> ( -u -u 2 x. ( T + 1 ) ) = -u ( -u 2 x. ( T + 1 ) ) )
+s150:s149:eqcomd |- ( ( ph /\ i e. P ) -> -u ( -u 2 x. ( T + 1 ) ) = ( -u -u 2 x. ( T + 1 ) ) )
+s151:s61:a1i |- ( ( ph /\ i e. P ) -> -u -u 2 = 2 )
+s152:s151:oveq1d |- ( ( ph /\ i e. P ) -> ( -u -u 2 x. ( T + 1 ) ) = ( 2 x. ( T + 1 ) ) )
+s153:s150,s152:eqtrd |- ( ( ph /\ i e. P ) -> -u ( -u 2 x. ( T + 1 ) ) = ( 2 x. ( T + 1 ) ) )
+s154:s36,s38,s99:adddid |- ( ( ph /\ i e. P ) -> ( 2 x. ( T + 1 ) ) = ( ( 2 x. T ) + ( 2 x. 1 ) ) )
+s155:s65:addlidd |- ( ( ph /\ i e. P ) -> ( 0 + ( 2 x. T ) ) = ( 2 x. T ) )
+s156:s155:eqcomd |- ( ( ph /\ i e. P ) -> ( 2 x. T ) = ( 0 + ( 2 x. T ) ) )
+s157:s91:a1i |- ( ( ph /\ i e. P ) -> ( 2 x. 1 ) = 2 )
+s158:s156,s157:oveq12d |- ( ( ph /\ i e. P ) -> ( ( 2 x. T ) + ( 2 x. 1 ) ) = ( ( 0 + ( 2 x. T ) ) + 2 ) )
+s159:s72,s65,s36:add32d |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. T ) ) + 2 ) = ( ( 0 + 2 ) + ( 2 x. T ) ) )
+s160:s35:addlidi |- ( 0 + 2 ) = 2
+s161:s160:a1i |- ( ( ph /\ i e. P ) -> ( 0 + 2 ) = 2 )
+s162:s161:oveq1d |- ( ( ph /\ i e. P ) -> ( ( 0 + 2 ) + ( 2 x. T ) ) = ( 2 + ( 2 x. T ) ) )
+s163:s159,s162:eqtrd |- ( ( ph /\ i e. P ) -> ( ( 0 + ( 2 x. T ) ) + 2 ) = ( 2 + ( 2 x. T ) ) )
+s164:s154,s158:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( T + 1 ) ) = ( ( 0 + ( 2 x. T ) ) + 2 ) )
+s165:s164,s163:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( T + 1 ) ) = ( 2 + ( 2 x. T ) ) )
+s166:s148,s153:eqtrd |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u ( T + 1 ) ) = ( 2 x. ( T + 1 ) ) )
+s167:s166,s165:eqtrd |- ( ( ph /\ i e. P ) -> ( -u 2 x. -u ( T + 1 ) ) = ( 2 + ( 2 x. T ) ) )
+s168:s147,s167:oveq12d |- ( ( ph /\ i e. P ) -> ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) + ( -u 2 x. -u ( T + 1 ) ) ) = ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 + ( 2 x. T ) ) ) )
+s169:s138,s47:addcld |- ( ( ph /\ i e. P ) -> ( -u 1 + ( 2 x. ( Y ` i ) ) ) e. CC )
+s170:s169,s36,s65:addassd |- ( ( ph /\ i e. P ) -> ( ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + 2 ) + ( 2 x. T ) ) = ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 + ( 2 x. T ) ) ) )
+s171:s170:eqcomd |- ( ( ph /\ i e. P ) -> ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 + ( 2 x. T ) ) ) = ( ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + 2 ) + ( 2 x. T ) ) )
+s172:s138,s47,s36:add32d |- ( ( ph /\ i e. P ) -> ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + 2 ) = ( ( -u 1 + 2 ) + ( 2 x. ( Y ` i ) ) ) )
+s173:s137,s35:addcomi |- ( -u 1 + 2 ) = ( 2 + -u 1 )
+s174:s35,s87:negsubi |- ( 2 + -u 1 ) = ( 2 - 1 )
+s175::1p1e2 |- ( 1 + 1 ) = 2
+s176:s35,s87,s87,s175:subaddrii |- ( 2 - 1 ) = 1
+s177:s174,s176:eqtri |- ( 2 + -u 1 ) = 1
+s178:s173,s177:eqtri |- ( -u 1 + 2 ) = 1
+s179:s178:a1i |- ( ( ph /\ i e. P ) -> ( -u 1 + 2 ) = 1 )
+s180:s179:oveq1d |- ( ( ph /\ i e. P ) -> ( ( -u 1 + 2 ) + ( 2 x. ( Y ` i ) ) ) = ( 1 + ( 2 x. ( Y ` i ) ) ) )
+s181:s172,s180:eqtrd |- ( ( ph /\ i e. P ) -> ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + 2 ) = ( 1 + ( 2 x. ( Y ` i ) ) ) )
+s182:s181:oveq1d |- ( ( ph /\ i e. P ) -> ( ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + 2 ) + ( 2 x. T ) ) = ( ( 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s183:s171,s182:eqtrd |- ( ( ph /\ i e. P ) -> ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 + ( 2 x. T ) ) ) = ( ( 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s184:s113,s117:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) ) = ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) + -u ( 2 x. -u ( T + 1 ) ) ) )
+s185:s184,s120:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) ) = ( ( 2 x. ( ( Y ` i ) - ( 1 / 2 ) ) ) + ( -u 2 x. -u ( T + 1 ) ) ) )
+s186:s185,s168:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) ) = ( ( -u 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 + ( 2 x. T ) ) ) )
+s187:s186,s183:eqtrd |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) ) = ( ( 1 + ( 2 x. ( Y ` i ) ) ) + ( 2 x. T ) ) )
+s188:s109,s187:eqtr4d |- ( ( ph /\ i e. P ) -> ( 2 x. ( ( ( Y ` i ) - -u T ) + ( 1 / 2 ) ) ) = ( 2 x. ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) ) )
+s189:s40,s44:addcld |- ( ( ph /\ i e. P ) -> ( ( ( Y ` i ) - -u T ) + ( 1 / 2 ) ) e. CC )
+s190:s110,s112:subcld |- ( ( ph /\ i e. P ) -> ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) e. CC )
+s191:s88:a1i |- ( ( ph /\ i e. P ) -> 2 =/= 0 )
+s192:s189,s190,s36,s191,s188:mulcanad |- ( ( ph /\ i e. P ) -> ( ( ( Y ` i ) - -u T ) + ( 1 / 2 ) ) = ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) )
+s193:s34,s192:breqtrd |- ( ( ph /\ i e. P ) -> 0 < ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) )
+s194:s4:a1i |- ( ( ph /\ i e. P ) -> 1 e. RR )
+s195:s17,s194:readdcld |- ( ( ph /\ i e. P ) -> ( T + 1 ) e. RR )
+s196:s195:renegcld |- ( ( ph /\ i e. P ) -> -u ( T + 1 ) e. RR )
+s197:s10,s33:resubcld |- ( ( ph /\ i e. P ) -> ( ( Y ` i ) - ( 1 / 2 ) ) e. RR )
+s198::0red |- ( ( ph /\ i e. P ) -> 0 e. RR )
+s199:s197,s196:resubcld |- ( ( ph /\ i e. P ) -> ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) e. RR )
+s200:s198,s199,s193:ltled |- ( ( ph /\ i e. P ) -> 0 <_ ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) )
+s201:s197,s196:subge0d |- ( ( ph /\ i e. P ) -> ( 0 <_ ( ( ( Y ` i ) - ( 1 / 2 ) ) - -u ( T + 1 ) ) <-> -u ( T + 1 ) <_ ( ( Y ` i ) - ( 1 / 2 ) ) ) )
+s202:s200,s201:mpbid |- ( ( ph /\ i e. P ) -> -u ( T + 1 ) <_ ( ( Y ` i ) - ( 1 / 2 ) ) )
+s203:s16:simprd |- ( ( ph /\ i e. P ) -> ( Y ` i ) <_ T )
+i204::ledivmul
+s205::2re |- 2 e. RR
+s206::2pos |- 0 < 2
+s207:s205,s206:pm3.2i |- ( 2 e. RR /\ 0 < 2 )
+s208:s4,s4,s207,i204:mp3an |- ( ( 1 / 2 ) <_ 1 <-> 1 <_ ( 2 x. 1 ) )
+i209::addge01
+s210:s4,s4,i209:mp2an |- ( 0 <_ 1 <-> 1 <_ ( 1 + 1 ) )
+s211::0le1 |- 0 <_ 1
+s212:s211,s210:mpbi |- 1 <_ ( 1 + 1 )
+s213:s212,s175:breqtri |- 1 <_ 2
+s214:s213,s91:breqtrri |- 1 <_ ( 2 x. 1 )
+s215:s214,s208:mpbir |- ( 1 / 2 ) <_ 1
+s216:s215:a1i |- ( ( ph /\ i e. P ) -> ( 1 / 2 ) <_ 1 )
+s217:s10,s33,s17,s194,s203,s216:le2addd |- ( ( ph /\ i e. P ) -> ( ( Y ` i ) + ( 1 / 2 ) ) <_ ( T + 1 ) )
+s218:s7:adantr |- ( ( ph /\ i e. P ) -> -u ( T + 1 ) e. RR )
+s219:s218:rexrd |- ( ( ph /\ i e. P ) -> -u ( T + 1 ) e. RR* )
+s220:s6:adantr |- ( ( ph /\ i e. P ) -> ( T + 1 ) e. RR )
+s221:s220:rexrd |- ( ( ph /\ i e. P ) -> ( T + 1 ) e. RR* )
+s222:s219,s221:jca |- ( ( ph /\ i e. P ) -> ( -u ( T + 1 ) e. RR* /\ ( T + 1 ) e. RR* ) )
+s223:s202,s217:jca |- ( ( ph /\ i e. P ) -> ( -u ( T + 1 ) <_ ( ( Y ` i ) - ( 1 / 2 ) ) /\ ( ( Y ` i ) + ( 1 / 2 ) ) <_ ( T + 1 ) ) )
+i224::ioossioo
+s225:s222,s223,i224:syl2anc |- ( ( ph /\ i e. P ) -> ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) C_ ( -u ( T + 1 ) (,) ( T + 1 ) ) )
+s226::simpr |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) )
+i227::iftrue
+s228:s226,i227:syl |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) = X )
+s229:s228:itgeq2dv |- ( ( ph /\ i e. P ) -> S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t = S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) X _d t )
+s230:s229:eqcomd |- ( ( ph /\ i e. P ) -> S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) X _d t = S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t )
+s231::simpr |- ( ( ( ph /\ i e. P ) /\ t e. ( ( -u ( T + 1 ) (,) ( T + 1 ) ) \ ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) ) -> t e. ( ( -u ( T + 1 ) (,) ( T + 1 ) ) \ ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) )
+s232:s231:eldifbd |- ( ( ( ph /\ i e. P ) /\ t e. ( ( -u ( T + 1 ) (,) ( T + 1 ) ) \ ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) ) -> -. t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) )
+i233::iffalse
+s234:s232,i233:syl |- ( ( ( ph /\ i e. P ) /\ t e. ( ( -u ( T + 1 ) (,) ( T + 1 ) ) \ ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) ) -> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) = 0 )
+s235:s225,s234:itgss |- ( ( ph /\ i e. P ) -> S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t = S. ( -u ( T + 1 ) (,) ( T + 1 ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t )
+s236:s230,s235:eqtrd |- ( ( ph /\ i e. P ) -> S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) X _d t = S. ( -u ( T + 1 ) (,) ( T + 1 ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t )
+i237::elioore
+s238:i237,r:sylan2 |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> X e. RR )
+s239::simpl |- ( ( ph /\ ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) /\ i e. P ) ) -> ph )
+s240::simprl |- ( ( ph /\ ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) /\ i e. P ) ) -> t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) )
+s241:s239,s240:jca |- ( ( ph /\ ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) /\ i e. P ) ) -> ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) )
+s242:s241,s238:syl |- ( ( ph /\ ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) /\ i e. P ) ) -> X e. RR )
+s243::0re |- 0 e. RR
+s244:s243:a1i |- ( ( ph /\ ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) /\ i e. P ) ) -> 0 e. RR )
+s245:s242,s244:ifcld |- ( ( ph /\ ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) /\ i e. P ) ) -> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) e. RR )
+s246:s245:recnd |- ( ( ph /\ ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) /\ i e. P ) ) -> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) e. CC )
+s247:s10,s33:readdcld |- ( ( ph /\ i e. P ) -> ( ( Y ` i ) + ( 1 / 2 ) ) e. RR )
+s248:c:adantr |- ( ( ph /\ i e. P ) -> ( t e. RR |-> X ) e. ( RR -cn-> CC ) )
+s249:s197,s247,s248:lsibl |- ( ( ph /\ i e. P ) -> ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) |-> X ) e. L^1 )
+s250:s228:mpteq2dva |- ( ( ph /\ i e. P ) -> ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) |-> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) ) = ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) |-> X ) )
+s251:s250,s249:eqeltrd |- ( ( ph /\ i e. P ) -> ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) |-> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) ) e. L^1 )
+s252::simpl |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> ( ph /\ i e. P ) )
+i253::simpl
+s254:s252,i253:syl |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> ph )
+s255::simpr |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) )
+i256::elioore
+s257:s255,i256:syl |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> t e. RR )
+s258:s254,s257,r:syl2anc |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> X e. RR )
+s259::0re |- 0 e. RR
+s260:s259:a1i |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> 0 e. RR )
+s261:s258,s260:ifcld |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) e. RR )
+s262:s261:recnd |- ( ( ( ph /\ i e. P ) /\ t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) ) -> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) e. CC )
+s263::ioombl |- ( -u ( T + 1 ) (,) ( T + 1 ) ) e. dom vol
+s264:s263:a1i |- ( ( ph /\ i e. P ) -> ( -u ( T + 1 ) (,) ( T + 1 ) ) e. dom vol )
+s265:s225,s264,s262,s234,s251:iblss2 |- ( ( ph /\ i e. P ) -> ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) |-> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) ) e. L^1 )
+s266::ioombl |- ( -u ( T + 1 ) (,) ( T + 1 ) ) e. dom vol
+s267:s266:a1i |- ( ph -> ( -u ( T + 1 ) (,) ( T + 1 ) ) e. dom vol )
+s268:s267,s1,s246,s265:itgfsum |- ( ph -> ( ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) |-> sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) ) e. L^1 /\ S. ( -u ( T + 1 ) (,) ( T + 1 ) ) sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t = sum_ i e. P S. ( -u ( T + 1 ) (,) ( T + 1 ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t ) )
+s269:s268:simpld |- ( ph -> ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) |-> sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) ) e. L^1 )
+s270:s268:simprd |- ( ph -> S. ( -u ( T + 1 ) (,) ( T + 1 ) ) sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t = sum_ i e. P S. ( -u ( T + 1 ) (,) ( T + 1 ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t )
+s271:s236:sumeq2dv |- ( ph -> sum_ i e. P S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) X _d t = sum_ i e. P S. ( -u ( T + 1 ) (,) ( T + 1 ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t )
+i272::elioore
+s273:i272,n:sylan2 |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> 0 <_ X )
+s274:s1:adantr |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> P e. Fin )
+s275:s2:adantr |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> Y : P --> RR )
+s276::1rp |- 1 e. RR+
+s277:s276:a1i |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> 1 e. RR+ )
+s278:s274,s275,s277:3jca |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> ( P e. Fin /\ Y : P --> RR /\ 1 e. RR+ ) )
+s279:s:adantr |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> A. a e. P A. b e. P ( a =/= b -> 1 <_ ( abs ` ( ( Y ` a ) - ( Y ` b ) ) ) ) )
+s280:s238,s273:jca |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> ( X e. RR /\ 0 <_ X ) )
+s281:s278,s279,s280:3jca |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> ( ( P e. Fin /\ Y : P --> RR /\ 1 e. RR+ ) /\ A. a e. P A. b e. P ( a =/= b -> 1 <_ ( abs ` ( ( Y ` a ) - ( Y ` b ) ) ) ) /\ ( X e. RR /\ 0 <_ X ) ) )
+i282::lsdisjpt
+s283:s281,i282:syl |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) <_ X )
+s284:s1:adantr |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> P e. Fin )
+s285:s238:adantr |- ( ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) /\ i e. P ) -> X e. RR )
+s286::0re |- 0 e. RR
+s287:s286:a1i |- ( ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) /\ i e. P ) -> 0 e. RR )
+s288:s285,s287:ifcld |- ( ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) /\ i e. P ) -> if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) e. RR )
+s289:s284,s288:fsumrecl |- ( ( ph /\ t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) ) -> sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) e. RR )
+s290:s7,s6,c:lsibl |- ( ph -> ( t e. ( -u ( T + 1 ) (,) ( T + 1 ) ) |-> X ) e. L^1 )
+s291:s269,s290,s289,s238,s283:itgle |- ( ph -> S. ( -u ( T + 1 ) (,) ( T + 1 ) ) sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t <_ S. ( -u ( T + 1 ) (,) ( T + 1 ) ) X _d t )
+s292:s270:eqcomd |- ( ph -> sum_ i e. P S. ( -u ( T + 1 ) (,) ( T + 1 ) ) if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t = S. ( -u ( T + 1 ) (,) ( T + 1 ) ) sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t )
+s293:s271,s292:eqtrd |- ( ph -> sum_ i e. P S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) X _d t = S. ( -u ( T + 1 ) (,) ( T + 1 ) ) sum_ i e. P if ( t e. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) , X , 0 ) _d t )
+qed:s293,s291:eqbrtrd |- ( ph -> sum_ i e. P S. ( ( ( Y ` i ) - ( 1 / 2 ) ) (,) ( ( Y ` i ) + ( 1 / 2 ) ) ) X _d t <_ S. ( -u ( T + 1 ) (,) ( T + 1 ) ) X _d t )
+$)

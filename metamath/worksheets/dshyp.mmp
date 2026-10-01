@@ -1,0 +1,44 @@
+$( <MM> <PROOF_ASST> THEOREM=dshyp  LOC_AFTER=?
+
+* Lean ` Ypar_pos ` , ` one_lt_Ypar ` : for ` 1 < D ` , ` Ypar D = D ^ ( 151 / 100 ) ` is positive and larger than 1.
+
+s1::simpl |- ( ( D e. RR /\ 1 < D ) -> D e. RR )
+s2::simpr |- ( ( D e. RR /\ 1 < D ) -> 1 < D )
+s3::id |- ( ( D e. RR /\ 1 < D ) -> ( D e. RR /\ 1 < D ) )
+i4::dshzz
+s5:s3,i4:syl |- ( ( D e. RR /\ 1 < D ) -> ( D e. RR+ /\ ( 2 x. D ) e. RR+ /\ D < ( 2 x. D ) ) )
+s6:s5:simp1d |- ( ( D e. RR /\ 1 < D ) -> D e. RR+ )
+i7::rpre
+i8::rpdivcl
+i9::nnrp
+s10::1nn0 |- 1 e. NN0
+s11::5nn0 |- 5 e. NN0
+s12:s10,s11:deccl |- ; 1 5 e. NN0
+s13::1nn |- 1 e. NN
+s14:s12,s13:decnncl |- ; ; 1 5 1 e. NN
+s15:s14,i9:ax-mp |- ; ; 1 5 1 e. RR+
+i16::nnrp
+s17:s13:decnncl2 |- ; 1 0 e. NN
+s18:s17:decnncl2 |- ; ; 1 0 0 e. NN
+s19:s18,i16:ax-mp |- ; ; 1 0 0 e. RR+
+s20:s15,s19,i8:mp2an |- ( ; ; 1 5 1 / ; ; 1 0 0 ) e. RR+
+s21:s20,i7:ax-mp |- ( ; ; 1 5 1 / ; ; 1 0 0 ) e. RR
+s22:s21:a1i |- ( ( D e. RR /\ 1 < D ) -> ( ; ; 1 5 1 / ; ; 1 0 0 ) e. RR )
+s23:s6,s22:rpcxpcld |- ( ( D e. RR /\ 1 < D ) -> ( D ^c ( ; ; 1 5 1 / ; ; 1 0 0 ) ) e. RR+ )
+s24::0re |- 0 e. RR
+s25:s24:a1i |- ( ( D e. RR /\ 1 < D ) -> 0 e. RR )
+s26::dsh151rp |- ( ; ; 1 5 1 / ; ; 1 0 0 ) e. RR+
+s27:s26:a1i |- ( ( D e. RR /\ 1 < D ) -> ( ; ; 1 5 1 / ; ; 1 0 0 ) e. RR+ )
+s28:s27:rpgt0d |- ( ( D e. RR /\ 1 < D ) -> 0 < ( ; ; 1 5 1 / ; ; 1 0 0 ) )
+s29:s1,s2:jca |- ( ( D e. RR /\ 1 < D ) -> ( D e. RR /\ 1 < D ) )
+s30:s25,s22:jca |- ( ( D e. RR /\ 1 < D ) -> ( 0 e. RR /\ ( ; ; 1 5 1 / ; ; 1 0 0 ) e. RR ) )
+s31:s29,s30:jca |- ( ( D e. RR /\ 1 < D ) -> ( ( D e. RR /\ 1 < D ) /\ ( 0 e. RR /\ ( ; ; 1 5 1 / ; ; 1 0 0 ) e. RR ) ) )
+i32::cxplt
+s33:s31,i32:syl |- ( ( D e. RR /\ 1 < D ) -> ( 0 < ( ; ; 1 5 1 / ; ; 1 0 0 ) <-> ( D ^c 0 ) < ( D ^c ( ; ; 1 5 1 / ; ; 1 0 0 ) ) ) )
+s34:s28,s33:mpbid |- ( ( D e. RR /\ 1 < D ) -> ( D ^c 0 ) < ( D ^c ( ; ; 1 5 1 / ; ; 1 0 0 ) ) )
+s35:s1:recnd |- ( ( D e. RR /\ 1 < D ) -> D e. CC )
+i36::cxp0
+s37:s35,i36:syl |- ( ( D e. RR /\ 1 < D ) -> ( D ^c 0 ) = 1 )
+s38:s37,s34:eqbrtrrd |- ( ( D e. RR /\ 1 < D ) -> 1 < ( D ^c ( ; ; 1 5 1 / ; ; 1 0 0 ) ) )
+qed:s23,s38:jca |- ( ( D e. RR /\ 1 < D ) -> ( ( D ^c ( ; ; 1 5 1 / ; ; 1 0 0 ) ) e. RR+ /\ 1 < ( D ^c ( ; ; 1 5 1 / ; ; 1 0 0 ) ) ) )
+$)

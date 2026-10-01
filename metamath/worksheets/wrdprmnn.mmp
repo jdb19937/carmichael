@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=wrdprmnn  LOC_AFTER=?
+
+* The product of a word of primes is a positive integer.
+
+s1::simpl |- ( ( W e. Word NN0 /\ A. q e. ran W q e. Prime ) -> W e. Word NN0 )
+s2::simpr |- ( ( W e. Word NN0 /\ A. q e. ran W q e. Prime ) -> A. q e. ran W q e. Prime )
+s3::prmnn |- ( q e. Prime -> q e. NN )
+i4::nnge1
+s5:s3,i4:syl |- ( q e. Prime -> 1 <_ q )
+s6:s5:a1i |- ( q e. ran W -> ( q e. Prime -> 1 <_ q ) )
+s7:s6:rgen |- A. q e. ran W ( q e. Prime -> 1 <_ q )
+i8::ralim
+s9:s7,i8:ax-mp |- ( A. q e. ran W q e. Prime -> A. q e. ran W 1 <_ q )
+s10:s9:a1i |- ( ( W e. Word NN0 /\ A. q e. ran W q e. Prime ) -> ( A. q e. ran W q e. Prime -> A. q e. ran W 1 <_ q ) )
+s11:s2,s10:mpd |- ( ( W e. Word NN0 /\ A. q e. ran W q e. Prime ) -> A. q e. ran W 1 <_ q )
+i12::algprodnn
+qed:s1,s11,i12:syl2anc |- ( ( W e. Word NN0 /\ A. q e. ran W q e. Prime ) -> prod_ i e. ( 0 ..^ ( # ` W ) ) ( W ` i ) e. NN )
+$)

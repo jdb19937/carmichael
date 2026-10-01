@@ -1,0 +1,53 @@
+$( <MM> <PROOF_ASST> THEOREM=tplprodle  LOC_AFTER=?
+
+* The product of a list of numbers below ` 2 ^ b ` is at most ` 2 ^ ( |l| b ) ` (` prodL_le_two_pow ` of TM/PrimList.lean, read by Step4, Steps23 and Step5), on A1b's ~ prodlspec by ~ fprodle .
+
+s1::simp1 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> L e. Word NN0 )
+s2::simp2 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> B e. NN0 )
+s3::simp3 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> A. p e. ran L p < ( 2 ^ B ) )
+i4::prodlspec
+s5:s1,i4:syl |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( 1st ` ( ProdL ` L ) ) = prod_ i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) )
+s6::nfv |- F/ i ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) )
+s7::fzofi |- ( 0 ..^ ( # ` L ) ) e. Fin
+s8:s7:a1i |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( 0 ..^ ( # ` L ) ) e. Fin )
+s9:s1:adantr |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> L e. Word NN0 )
+s10::simpr |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> i e. ( 0 ..^ ( # ` L ) ) )
+i11::wrdsymbcl
+s12:s9,s10,i11:syl2anc |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) e. NN0 )
+s13:s12:nn0red |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) e. RR )
+s14:s12:nn0ge0d |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> 0 <_ ( L ` i ) )
+s15::2re |- 2 e. RR
+s16:s15:a1i |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> 2 e. RR )
+s17:s16,s2:reexpcld |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( 2 ^ B ) e. RR )
+s18:s17:adantr |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( 2 ^ B ) e. RR )
+i19::wrdfn
+s20:s9,i19:syl |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> L Fn ( 0 ..^ ( # ` L ) ) )
+i21::fnfvelrn
+s22:s20,s10,i21:syl2anc |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) e. ran L )
+s23::breq1 |- ( p = ( L ` i ) -> ( p < ( 2 ^ B ) <-> ( L ` i ) < ( 2 ^ B ) ) )
+s24:s3:adantr |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> A. p e. ran L p < ( 2 ^ B ) )
+s25:s23,s24,s22:rspcdva |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) < ( 2 ^ B ) )
+s26:s25:ltled |- ( ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) /\ i e. ( 0 ..^ ( # ` L ) ) ) -> ( L ` i ) <_ ( 2 ^ B ) )
+s27:s6,s8,s13,s14,s18,s26:fprodle |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> prod_ i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) <_ prod_ i e. ( 0 ..^ ( # ` L ) ) ( 2 ^ B ) )
+s28:s17:recnd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( 2 ^ B ) e. CC )
+i29::fprodconst
+s30:s8,s28,i29:syl2anc |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> prod_ i e. ( 0 ..^ ( # ` L ) ) ( 2 ^ B ) = ( ( 2 ^ B ) ^ ( # ` ( 0 ..^ ( # ` L ) ) ) ) )
+i31::lencl
+s32:s1,i31:syl |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( # ` L ) e. NN0 )
+i33::hashfzo0
+s34:s32,i33:syl |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( # ` ( 0 ..^ ( # ` L ) ) ) = ( # ` L ) )
+s35:s34:oveq2d |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( ( 2 ^ B ) ^ ( # ` ( 0 ..^ ( # ` L ) ) ) ) = ( ( 2 ^ B ) ^ ( # ` L ) ) )
+s36::2cn |- 2 e. CC
+s37:s36:a1i |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> 2 e. CC )
+i38::expmul
+s39:s37,s2,s32,i38:syl3anc |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( 2 ^ ( B x. ( # ` L ) ) ) = ( ( 2 ^ B ) ^ ( # ` L ) ) )
+s40:s2:nn0cnd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> B e. CC )
+s41:s32:nn0cnd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( # ` L ) e. CC )
+s42:s40,s41:mulcomd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( B x. ( # ` L ) ) = ( ( # ` L ) x. B ) )
+s43:s42:oveq2d |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( 2 ^ ( B x. ( # ` L ) ) ) = ( 2 ^ ( ( # ` L ) x. B ) ) )
+s44:s30,s35:eqtrd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> prod_ i e. ( 0 ..^ ( # ` L ) ) ( 2 ^ B ) = ( ( 2 ^ B ) ^ ( # ` L ) ) )
+s45:s39,s43:eqtr3d |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( ( 2 ^ B ) ^ ( # ` L ) ) = ( 2 ^ ( ( # ` L ) x. B ) ) )
+s46:s44,s45:eqtrd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> prod_ i e. ( 0 ..^ ( # ` L ) ) ( 2 ^ B ) = ( 2 ^ ( ( # ` L ) x. B ) ) )
+s47:s27,s46:breqtrd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> prod_ i e. ( 0 ..^ ( # ` L ) ) ( L ` i ) <_ ( 2 ^ ( ( # ` L ) x. B ) ) )
+qed:s5,s47:eqbrtrd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. p e. ran L p < ( 2 ^ B ) ) -> ( 1st ` ( ProdL ` L ) ) <_ ( 2 ^ ( ( # ` L ) x. B ) ) )
+$)

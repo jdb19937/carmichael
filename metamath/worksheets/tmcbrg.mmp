@@ -1,0 +1,49 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcbrg  LOC_AFTER=?
+
+* The bit a two-operand loop sees in the register after its ` N ` -th read of ` L ` is the ` N ` -th bit of the value of ` L ` , zero past the word (Lean ` bitOf ( l.get? n ) ` ).
+
+s1::simpl |- ( ( L e. Word 2o /\ N e. NN0 ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ N e. NN0 ) -> N e. NN0 )
+i3::lencl
+s4:s1,i3:syl |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( # ` L ) e. NN0 )
+s5::simpr |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> N < ( # ` L ) )
+s6:s1:adantr |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> L e. Word 2o )
+s7:s2:adantr |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> N e. NN0 )
+s8:s4:adantr |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( # ` L ) e. NN0 )
+s9:s7:nn0zd |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> N e. ZZ )
+s10::0z |- 0 e. ZZ
+s11:s10:a1i |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> 0 e. ZZ )
+s12:s8:nn0zd |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( # ` L ) e. ZZ )
+i13::elfzo
+s14:s9,s11,s12,i13:syl3anc |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( N e. ( 0 ..^ ( # ` L ) ) <-> ( 0 <_ N /\ N < ( # ` L ) ) ) )
+s15:s9:zred |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> N e. RR )
+s16:s7:nn0ge0d |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> 0 <_ N )
+s17:s16,s5:jca |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( 0 <_ N /\ N < ( # ` L ) ) )
+s18:s14,s17:mpbird |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> N e. ( 0 ..^ ( # ` L ) ) )
+i19::wrdsymbcl
+s20:s6,s18,i19:syl2anc |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( L ` N ) e. 2o )
+s21:s5:iftrued |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) = ( inl ` ( L ` N ) ) )
+s22:s21:fveq2d |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( bitOf ` if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) ) = ( bitOf ` ( inl ` ( L ` N ) ) ) )
+i23::bitofsome
+s24:s20,i23:syl |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( bitOf ` ( inl ` ( L ` N ) ) ) = ( L ` N ) )
+i25::bwfv
+s26:s6,s18,i25:syl2anc |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( L ` N ) = if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+s27:s22,s24:eqtrd |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( bitOf ` if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) ) = ( L ` N ) )
+s28:s27,s26:eqtrd |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ N < ( # ` L ) ) -> ( bitOf ` if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) ) = if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+s29::simpr |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> -. N < ( # ` L ) )
+s30:s1:adantr |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> L e. Word 2o )
+s31:s29:iffalsed |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) = ( inr ` (/) ) )
+s32:s31:fveq2d |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> ( bitOf ` if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) ) = ( bitOf ` ( inr ` (/) ) ) )
+s33::bitofnone |- ( bitOf ` ( inr ` (/) ) ) = (/)
+s34:s33:a1i |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> ( bitOf ` ( inr ` (/) ) ) = (/) )
+s35:s32,s34:eqtrd |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> ( bitOf ` if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) ) = (/) )
+s36::elfzolt2 |- ( N e. ( 0 ..^ ( # ` L ) ) -> N < ( # ` L ) )
+s37:s36:a1i |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> ( N e. ( 0 ..^ ( # ` L ) ) -> N < ( # ` L ) ) )
+s38:s29,s37:mtod |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> -. N e. ( 0 ..^ ( # ` L ) ) )
+i39::bwbitsss
+s40:s30,i39:syl |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> ( bits ` ( toNat ` L ) ) C_ ( 0 ..^ ( # ` L ) ) )
+s41:s40,s38:ssneldd |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> -. N e. ( bits ` ( toNat ` L ) ) )
+s42:s41:iffalsed |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) = (/) )
+s43:s35,s42:eqtr4d |- ( ( ( L e. Word 2o /\ N e. NN0 ) /\ -. N < ( # ` L ) ) -> ( bitOf ` if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) ) = if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+qed:s28,s43:pm2.61dan |- ( ( L e. Word 2o /\ N e. NN0 ) -> ( bitOf ` if ( N < ( # ` L ) , ( inl ` ( L ` N ) ) , ( inr ` (/) ) ) ) = if ( N e. ( bits ` ( toNat ` L ) ) , 1o , (/) ) )
+$)

@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=incbitsval  LOC_AFTER=?
+
+* Value of incBits: the digits of toNat L + 1, at the length of L or one more when L is all ones.
+
+s1::id |- ( L e. Word 2o -> L e. Word 2o )
+i2::tonatcl
+s3:s1,i2:syl |- ( L e. Word 2o -> ( toNat ` L ) e. NN0 )
+i4::nn0p1nn
+s5:s3,i4:syl |- ( L e. Word 2o -> ( ( toNat ` L ) + 1 ) e. NN )
+s6::id |- ( l = L -> l = L )
+c1:s6:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c2:c1:oveq1d |- ( l = L -> ( ( toNat ` l ) + 1 ) = ( ( toNat ` L ) + 1 ) )
+c3:s6:fveq2d |- ( l = L -> ( toNat ` l ) = ( toNat ` L ) )
+c4:c3:oveq1d |- ( l = L -> ( ( toNat ` l ) + 1 ) = ( ( toNat ` L ) + 1 ) )
+c5:s6:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c6:c5:oveq2d |- ( l = L -> ( 2 ^ ( # ` l ) ) = ( 2 ^ ( # ` L ) ) )
+c7:c4,c6:eqeq12d |- ( l = L -> ( ( ( toNat ` l ) + 1 ) = ( 2 ^ ( # ` l ) ) <-> ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) ) )
+c8:s6:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c9:c8:oveq1d |- ( l = L -> ( ( # ` l ) + 1 ) = ( ( # ` L ) + 1 ) )
+c10:s6:fveq2d |- ( l = L -> ( # ` l ) = ( # ` L ) )
+c11:c7,c9,c10:ifbieq12d |- ( l = L -> if ( ( ( toNat ` l ) + 1 ) = ( 2 ^ ( # ` l ) ) , ( ( # ` l ) + 1 ) , ( # ` l ) ) = if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) )
+c12:c2,c11:oveq12d |- ( l = L -> ( ( ( toNat ` l ) + 1 ) bwrd if ( ( ( toNat ` l ) + 1 ) = ( 2 ^ ( # ` l ) ) , ( ( # ` l ) + 1 ) , ( # ` l ) ) ) = ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) )
+s7::df-incbits |- incBits = ( l e. Word 2o |-> ( ( ( toNat ` l ) + 1 ) bwrd if ( ( ( toNat ` l ) + 1 ) = ( 2 ^ ( # ` l ) ) , ( ( # ` l ) + 1 ) , ( # ` l ) ) ) )
+s8::ovex |- ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) e. _V
+s9:s8:a1i |- ( L e. Word 2o -> ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) e. _V )
+s10:c12,s7:fvmptg |- ( ( L e. Word 2o /\ ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) e. _V ) -> ( incBits ` L ) = ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) )
+qed:s1,s9,s10:syl2anc |- ( L e. Word 2o -> ( incBits ` L ) = ( ( ( toNat ` L ) + 1 ) bwrd if ( ( ( toNat ` L ) + 1 ) = ( 2 ^ ( # ` L ) ) , ( ( # ` L ) + 1 ) , ( # ` L ) ) ) )
+$)

@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=sqfdivcard  LOC_AFTER=?
+
+* A squarefree L has exactly 2 ^ omega ( L ) divisors (Lean: Nat.card_divisors, Step3W.lean hdivcard).
+
+s1::simpl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> L e. NN )
+s2::eqid |- { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } = { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) }
+s3::eqid |- ( k e. { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } |-> { p e. Prime | p || k } ) = ( k e. { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } |-> { p e. Prime | p || k } )
+s4::pcntmpt |- ( a e. NN |-> ( b e. Prime |-> ( b pCnt a ) ) ) = ( k e. NN |-> ( p e. Prime |-> ( p pCnt k ) ) )
+s5:s2,s3,s4:sqff1o |- ( L e. NN -> ( k e. { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } |-> { p e. Prime | p || k } ) : { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } -1-1-onto-> ~P { p e. Prime | p || L } )
+s6:s1,s5:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( k e. { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } |-> { p e. Prime | p || k } ) : { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } -1-1-onto-> ~P { p e. Prime | p || L } )
+s7::nnex |- NN e. _V
+s8:s7:rabex |- { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } e. _V
+s9:s8:a1i |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } e. _V )
+i10::f1oeng
+s11:s9,s6,i10:syl2anc |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } ~~ ~P { p e. Prime | p || L } )
+i12::hasheni
+s13:s11,i12:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( # ` { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } ) = ( # ` ~P { p e. Prime | p || L } ) )
+i14::prmdvdsfi
+s15:s1,i14:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { p e. Prime | p || L } e. Fin )
+i16::hashpw
+s17:s15,i16:syl |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( # ` ~P { p e. Prime | p || L } ) = ( 2 ^ ( # ` { p e. Prime | p || L } ) ) )
+s18:s13,s17:eqtrd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( # ` { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } ) = ( 2 ^ ( # ` { p e. Prime | p || L } ) ) )
+s19::sqfdivset |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } = { m e. NN | m || L } )
+s20:s19:eqcomd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> { m e. NN | m || L } = { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } )
+s21:s20:fveq2d |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( # ` { m e. NN | m || L } ) = ( # ` { m e. NN | ( ( mmu ` m ) =/= 0 /\ m || L ) } ) )
+qed:s21,s18:eqtrd |- ( ( L e. NN /\ ( mmu ` L ) =/= 0 ) -> ( # ` { m e. NN | m || L } ) = ( 2 ^ ( # ` { p e. Prime | p || L } ) ) )
+$)

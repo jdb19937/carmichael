@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=t15ifle  LOC_AFTER=?
+
+* The larger of two nonnegative reals is at most their sum.
+
+s1::simpll |- ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) -> A e. RR )
+s2::simplr |- ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) -> B e. RR )
+s3::simprl |- ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) -> 0 <_ A )
+s4::simprr |- ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) -> 0 <_ B )
+s5::simpr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> A <_ B )
+s6:s5:iftrued |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> if ( A <_ B , B , A ) = B )
+s7:s1:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> A e. RR )
+s8:s2:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> B e. RR )
+s9:s3:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> 0 <_ A )
+s10:s8,s7:addge02d |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> ( 0 <_ A <-> B <_ ( A + B ) ) )
+s11:s9,s10:mpbid |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> B <_ ( A + B ) )
+s12:s6,s11:eqbrtrd |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ A <_ B ) -> if ( A <_ B , B , A ) <_ ( A + B ) )
+s13::simpr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> -. A <_ B )
+s14:s13:iffalsed |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> if ( A <_ B , B , A ) = A )
+s15:s1:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> A e. RR )
+s16:s2:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> B e. RR )
+s17:s4:adantr |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> 0 <_ B )
+s18:s15,s16:addge01d |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> ( 0 <_ B <-> A <_ ( A + B ) ) )
+s19:s17,s18:mpbid |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> A <_ ( A + B ) )
+s20:s14,s19:eqbrtrd |- ( ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) /\ -. A <_ B ) -> if ( A <_ B , B , A ) <_ ( A + B ) )
+qed:s12,s20:pm2.61dan |- ( ( ( A e. RR /\ B e. RR ) /\ ( 0 <_ A /\ 0 <_ B ) ) -> if ( A <_ B , B , A ) <_ ( A + B ) )
+$)

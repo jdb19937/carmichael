@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=tmchdl  LOC_AFTER=?
+
+* The five concrete pop/peek handlers typed at the alphabet of stack ` K ` of the type triple, as the generic fragment lemmas want them (blueprint D1).
+
+s1::simpl |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) )
+s2:s1:simpld |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( 1st ` ( 1st ` T ) ) = TMGam )
+s3::simpl |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) )
+s4:s3:simprd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( 2nd ` T ) = TMSt )
+s5::simpr |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> K e. ( 0 ..^ 8 ) )
+s6:s2,s5:jca |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( ( 1st ` ( 1st ` T ) ) = TMGam /\ K e. ( 0 ..^ 8 ) ) )
+i7::tmcgk
+s8:s6,i7:syl |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( K e. dom ( 1st ` ( 1st ` T ) ) /\ ( ( 1st ` ( 1st ` T ) ) ` K ) = Gamma' ) )
+s9:s8:simprd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( ( 1st ` ( 1st ` T ) ) ` K ) = Gamma' )
+s10:s4:eqcomd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMSt = ( 2nd ` T ) )
+s11:s9:eqcomd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> Gamma' = ( ( 1st ` ( 1st ` T ) ) ` K ) )
+i12::djueq1
+s13:s11,i12:syl |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( Gamma' |_| 1o ) = ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) )
+s14:s10,s13:xpeq12d |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( TMSt X. ( Gamma' |_| 1o ) ) = ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) )
+s15:s10,s14:oveq12d |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) = ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) )
+s16::tmcrdaf |- TMrdA e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+s17:s16:a1i |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdA e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) )
+s18:s17,s15:eleqtrd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdA e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) )
+s19::tmcrdbf |- TMrdB e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+s20:s19:a1i |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdB e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) )
+s21:s20,s15:eleqtrd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdB e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) )
+s22::tmcrdbitf |- TMrdBit e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+s23:s22:a1i |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdBit e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) )
+s24:s23,s15:eleqtrd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdBit e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) )
+s25::tmcrdendf |- TMrdEnd e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+s26:s25:a1i |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdEnd e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) )
+s27:s26,s15:eleqtrd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> TMrdEnd e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) )
+s28::tmcpidf |- ( 1st |` ( TMSt X. ( Gamma' |_| 1o ) ) ) e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) )
+s29:s28:a1i |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( 1st |` ( TMSt X. ( Gamma' |_| 1o ) ) ) e. ( TMSt ^m ( TMSt X. ( Gamma' |_| 1o ) ) ) )
+s30:s29,s15:eleqtrd |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( 1st |` ( TMSt X. ( Gamma' |_| 1o ) ) ) e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) )
+s31:s18,s21:jca |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( TMrdA e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) /\ TMrdB e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) ) )
+s32:s24,s27:jca |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( TMrdBit e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) /\ TMrdEnd e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) ) )
+qed:s31,s32,s30:3jca |- ( ( ( ( 1st ` ( 1st ` T ) ) = TMGam /\ ( 2nd ` T ) = TMSt ) /\ K e. ( 0 ..^ 8 ) ) -> ( ( TMrdA e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) /\ TMrdB e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) ) /\ ( TMrdBit e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) /\ TMrdEnd e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) ) /\ ( 1st |` ( TMSt X. ( Gamma' |_| 1o ) ) ) e. ( ( 2nd ` T ) ^m ( ( 2nd ` T ) X. ( ( ( 1st ` ( 1st ` T ) ) ` K ) |_| 1o ) ) ) ) )
+$)

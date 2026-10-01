@@ -1,0 +1,51 @@
+$( <MM> <PROOF_ASST> THEOREM=ttetb0  LOC_AFTER=?
+
+* The empty table on ` [ 0 , L ) ` is ` L ` kets (Lean ` encTblAsc_emptyTbl ` ).
+
+s1::id |- ( L e. NN0 -> L e. NN0 )
+s2::emptytblcl |- EmptyTbl e. Tbl
+s3:s2:a1i |- ( L e. NN0 -> EmptyTbl e. Tbl )
+i4::ttabtbav
+s5:s1,s3,i4:syl2anc |- ( L e. NN0 -> ( L encTblAsc EmptyTbl ) = ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( EmptyTbl |` ( 0 ..^ L ) ) ) ) )
+s6::df-emptytbl |- EmptyTbl = ( r e. NN0 |-> ( inr ` (/) ) )
+s7::fconstmpt |- ( NN0 X. { ( inr ` (/) ) } ) = ( r e. NN0 |-> ( inr ` (/) ) )
+s8:s6,s7:eqtr4i |- EmptyTbl = ( NN0 X. { ( inr ` (/) ) } )
+s9:s8:reseq1i |- ( EmptyTbl |` ( 0 ..^ L ) ) = ( ( NN0 X. { ( inr ` (/) ) } ) |` ( 0 ..^ L ) )
+s10::fzo0ssnn0 |- ( 0 ..^ L ) C_ NN0
+i11::xpssres
+s12:s10,i11:ax-mp |- ( ( NN0 X. { ( inr ` (/) ) } ) |` ( 0 ..^ L ) ) = ( ( 0 ..^ L ) X. { ( inr ` (/) ) } )
+s13:s9,s12:eqtri |- ( EmptyTbl |` ( 0 ..^ L ) ) = ( ( 0 ..^ L ) X. { ( inr ` (/) ) } )
+s14:s13:coeq2i |- ( encSlot o. ( EmptyTbl |` ( 0 ..^ L ) ) ) = ( encSlot o. ( ( 0 ..^ L ) X. { ( inr ` (/) ) } ) )
+s15::ttabslotf |- encSlot : ( Word NN0 |_| 1o ) --> Word Gamma'
+i16::ffn
+s17:s15,i16:ax-mp |- encSlot Fn ( Word NN0 |_| 1o )
+s18::0lt1o |- (/) e. 1o
+i19::djurcl
+s20:s18,i19:ax-mp |- ( inr ` (/) ) e. ( Word NN0 |_| 1o )
+i21::fcoconst
+s22:s17,s20,i21:mp2an |- ( encSlot o. ( ( 0 ..^ L ) X. { ( inr ` (/) ) } ) ) = ( ( 0 ..^ L ) X. { ( encSlot ` ( inr ` (/) ) ) } )
+i23::ttabslotv
+s24:s20,i23:ax-mp |- ( encSlot ` ( inr ` (/) ) ) = if ( ( inr ` (/) ) = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` ( inr ` (/) ) ) ) )
+s25::eqid |- ( inr ` (/) ) = ( inr ` (/) )
+s26:s25:iftruei |- if ( ( inr ` (/) ) = ( inr ` (/) ) , <" 3 "> , ( encList ` ( 2nd ` ( inr ` (/) ) ) ) ) = <" 3 ">
+s27:s24,s26:eqtri |- ( encSlot ` ( inr ` (/) ) ) = <" 3 ">
+s28:s27:sneqi |- { ( encSlot ` ( inr ` (/) ) ) } = { <" 3 "> }
+s29:s28:xpeq2i |- ( ( 0 ..^ L ) X. { ( encSlot ` ( inr ` (/) ) ) } ) = ( ( 0 ..^ L ) X. { <" 3 "> } )
+s30:s14,s22:eqtri |- ( encSlot o. ( EmptyTbl |` ( 0 ..^ L ) ) ) = ( ( 0 ..^ L ) X. { ( encSlot ` ( inr ` (/) ) ) } )
+s31:s30,s29:eqtri |- ( encSlot o. ( EmptyTbl |` ( 0 ..^ L ) ) ) = ( ( 0 ..^ L ) X. { <" 3 "> } )
+s32::gamma3 |- 3 e. Gamma'
+i33::s1cl
+s34:s32,i33:ax-mp |- <" 3 "> e. Word Gamma'
+s35:s34:a1i |- ( L e. NN0 -> <" 3 "> e. Word Gamma' )
+i36::repsconst
+s37:s35,s1,i36:syl2anc |- ( L e. NN0 -> ( <" 3 "> repeatS L ) = ( ( 0 ..^ L ) X. { <" 3 "> } ) )
+s38:s31:a1i |- ( L e. NN0 -> ( encSlot o. ( EmptyTbl |` ( 0 ..^ L ) ) ) = ( ( 0 ..^ L ) X. { <" 3 "> } ) )
+s39:s38,s37:eqtr4d |- ( L e. NN0 -> ( encSlot o. ( EmptyTbl |` ( 0 ..^ L ) ) ) = ( <" 3 "> repeatS L ) )
+s40:s39:oveq2d |- ( L e. NN0 -> ( ( freeMnd ` Gamma' ) gsum ( encSlot o. ( EmptyTbl |` ( 0 ..^ L ) ) ) ) = ( ( freeMnd ` Gamma' ) gsum ( <" 3 "> repeatS L ) ) )
+s41::gamma3 |- 3 e. Gamma'
+s42:s41:a1i |- ( L e. NN0 -> 3 e. Gamma' )
+i43::ttreps
+s44:s42,s1,i43:syl2anc |- ( L e. NN0 -> ( ( freeMnd ` Gamma' ) gsum ( <" 3 "> repeatS L ) ) = ( 3 repeatS L ) )
+s45:s5,s40:eqtrd |- ( L e. NN0 -> ( L encTblAsc EmptyTbl ) = ( ( freeMnd ` Gamma' ) gsum ( <" 3 "> repeatS L ) ) )
+qed:s45,s44:eqtrd |- ( L e. NN0 -> ( L encTblAsc EmptyTbl ) = ( 3 repeatS L ) )
+$)

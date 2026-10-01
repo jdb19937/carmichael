@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=t15prog  LOC_AFTER=?
+
+* The program of the concrete machine is a function from its labels to statements.
+
+s1::df-tmprog |- ( TMProg C K ) = ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) )
+s2::simpr |- ( ( ( ( C e. NN0 /\ K e. NN ) /\ x e. ( TMLbl C K ) ) /\ ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) ) -> ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) )
+s3::df-tmty |- ( TMTy C K ) = <. <. TMGam , ( TMLbl C K ) >. , TMSt >.
+s4::opex |- <. <. TMGam , ( TMLbl C K ) >. , TMSt >. e. _V
+s5:s3,s4:eqeltri |- ( TMTy C K ) e. _V
+i6::tm2halt
+s7:s5,i6:ax-mp |- <. 6 , (/) >. e. ( TM2Stmt ` ( TMTy C K ) )
+s8:s7:a1i |- ( ( ( ( C e. NN0 /\ K e. NN ) /\ x e. ( TMLbl C K ) ) /\ -. ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) ) -> <. 6 , (/) >. e. ( TM2Stmt ` ( TMTy C K ) ) )
+s9:s2,s8:ifclda |- ( ( ( C e. NN0 /\ K e. NN ) /\ x e. ( TMLbl C K ) ) -> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) e. ( TM2Stmt ` ( TMTy C K ) ) )
+s10:s9:fmptd |- ( ( C e. NN0 /\ K e. NN ) -> ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) ) : ( TMLbl C K ) --> ( TM2Stmt ` ( TMTy C K ) ) )
+s11:s1:a1i |- ( ( C e. NN0 /\ K e. NN ) -> ( TMProg C K ) = ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) ) )
+s12:s11:feq1d |- ( ( C e. NN0 /\ K e. NN ) -> ( ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` ( TMTy C K ) ) <-> ( x e. ( TMLbl C K ) |-> if ( ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) e. ( TM2Stmt ` ( TMTy C K ) ) , ( ( TMRoot C K ) TMWalk ( x ` -u 1 ) ) , <. 6 , (/) >. ) ) : ( TMLbl C K ) --> ( TM2Stmt ` ( TMTy C K ) ) ) )
+s13:s10,s12:mpbird |- ( ( C e. NN0 /\ K e. NN ) -> ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` ( TMTy C K ) ) )
+s14::t15typ |- ( ( 1st ` ( 1st ` ( TMTy C K ) ) ) = TMGam /\ ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K ) /\ ( 2nd ` ( TMTy C K ) ) = TMSt )
+s15:s14:simp2i |- ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K )
+s16:s15:a1i |- ( ( C e. NN0 /\ K e. NN ) -> ( 2nd ` ( 1st ` ( TMTy C K ) ) ) = ( TMLbl C K ) )
+s17:s16:feq2d |- ( ( C e. NN0 /\ K e. NN ) -> ( ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) <-> ( TMProg C K ) : ( TMLbl C K ) --> ( TM2Stmt ` ( TMTy C K ) ) ) )
+qed:s13,s17:mpbird |- ( ( C e. NN0 /\ K e. NN ) -> ( TMProg C K ) : ( 2nd ` ( 1st ` ( TMTy C K ) ) ) --> ( TM2Stmt ` ( TMTy C K ) ) )
+$)

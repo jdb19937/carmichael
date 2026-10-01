@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=revtail  LOC_AFTER=?
+
+* Reversing a nonempty word: the reverse of the tail followed by the first letter.
+
+s1::simp1 |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> U e. Word A )
+s2::simp2 |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> U =/= (/) )
+s3::simp3 |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> W e. Word A )
+i4::wrdfv0
+s5:s1,s2,i4:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U ` 0 ) e. A )
+i6::s1cl
+s7:s5,i6:syl |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> <" ( U ` 0 ) "> e. Word A )
+i8::swrdcl
+s9:s1,i8:syl |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( U substr <. 1 , ( # ` U ) >. ) e. Word A )
+i10::wrdhdtl
+s11:s1,s2,i10:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> U = ( <" ( U ` 0 ) "> ++ ( U substr <. 1 , ( # ` U ) >. ) ) )
+s12:s11:fveq2d |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( reverse ` U ) = ( reverse ` ( <" ( U ` 0 ) "> ++ ( U substr <. 1 , ( # ` U ) >. ) ) ) )
+i13::revccat
+s14:s7,s9,i13:syl2anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( reverse ` ( <" ( U ` 0 ) "> ++ ( U substr <. 1 , ( # ` U ) >. ) ) ) = ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ ( reverse ` <" ( U ` 0 ) "> ) ) )
+s15::revs1 |- ( reverse ` <" ( U ` 0 ) "> ) = <" ( U ` 0 ) ">
+s16:s15:oveq2i |- ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ ( reverse ` <" ( U ` 0 ) "> ) ) = ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ <" ( U ` 0 ) "> )
+s17:s12,s14:eqtrd |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( reverse ` U ) = ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ ( reverse ` <" ( U ` 0 ) "> ) ) )
+s18:s17,s16:eqtrdi |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( reverse ` U ) = ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ <" ( U ` 0 ) "> ) )
+s19:s18:oveq1d |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( reverse ` U ) ++ W ) = ( ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ <" ( U ` 0 ) "> ) ++ W ) )
+i20::revcl
+s21:s9,i20:syl |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) e. Word A )
+i22::ccatass
+s23:s21,s7,s3,i22:syl3anc |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ <" ( U ` 0 ) "> ) ++ W ) = ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ ( <" ( U ` 0 ) "> ++ W ) ) )
+qed:s19,s23:eqtrd |- ( ( U e. Word A /\ U =/= (/) /\ W e. Word A ) -> ( ( reverse ` U ) ++ W ) = ( ( reverse ` ( U substr <. 1 , ( # ` U ) >. ) ) ++ ( <" ( U ` 0 ) "> ++ W ) ) )
+$)

@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=revfpushel  LOC_AFTER=?
+
+* The push function of the reverse machine has the type required by push.
+
+s1::simpl |- ( ( A e. V /\ Z e. A ) -> A e. V )
+s2::simpr |- ( ( A e. V /\ Z e. A ) -> Z e. A )
+s3:s1:elexd |- ( ( A e. V /\ Z e. A ) -> A e. _V )
+s4::1oex |- 1o e. _V
+s5:s4:a1i |- ( ( A e. V /\ Z e. A ) -> 1o e. _V )
+i6::djuex
+s7:s3,s5,i6:syl2anc |- ( ( A e. V /\ Z e. A ) -> ( A |_| 1o ) e. _V )
+s8:s2:ad2antrr |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ v = ( inr ` (/) ) ) -> Z e. A )
+s9::simplr |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) -> v e. ( A |_| 1o ) )
+s10::simpr |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) -> -. v = ( inr ` (/) ) )
+i11::djur
+s12:s9,i11:syl |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) -> ( E. l e. A v = ( inl ` l ) \/ E. l e. 1o v = ( inr ` l ) ) )
+s13::simprl |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> l e. A )
+s14::simprr |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> v = ( inl ` l ) )
+s15:s13:elexd |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> l e. _V )
+i16::inlval
+s17:s15,i16:syl |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> ( inl ` l ) = <. (/) , l >. )
+s18:s14,s17:eqtrd |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> v = <. (/) , l >. )
+s19:s18:fveq2d |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> ( 2nd ` v ) = ( 2nd ` <. (/) , l >. ) )
+s20::0ex |- (/) e. _V
+s21:s20:a1i |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> (/) e. _V )
+i22::op2ndg
+s23:s21,s15,i22:syl2anc |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> ( 2nd ` <. (/) , l >. ) = l )
+s24:s19,s23:eqtrd |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> ( 2nd ` v ) = l )
+s25:s24,s13:eqeltrd |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. A /\ v = ( inl ` l ) ) ) -> ( 2nd ` v ) e. A )
+s26:s25:rexlimdvaa |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) -> ( E. l e. A v = ( inl ` l ) -> ( 2nd ` v ) e. A ) )
+s27::simprl |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. 1o /\ v = ( inr ` l ) ) ) -> l e. 1o )
+s28::simprr |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. 1o /\ v = ( inr ` l ) ) ) -> v = ( inr ` l ) )
+s29::el1o |- ( l e. 1o <-> l = (/) )
+s30:s27,s29:sylib |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. 1o /\ v = ( inr ` l ) ) ) -> l = (/) )
+s31:s30:fveq2d |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. 1o /\ v = ( inr ` l ) ) ) -> ( inr ` l ) = ( inr ` (/) ) )
+s32:s28,s31:eqtrd |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. 1o /\ v = ( inr ` l ) ) ) -> v = ( inr ` (/) ) )
+s33:s10:adantr |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. 1o /\ v = ( inr ` l ) ) ) -> -. v = ( inr ` (/) ) )
+s34:s32,s33:pm2.21dd |- ( ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) /\ ( l e. 1o /\ v = ( inr ` l ) ) ) -> ( 2nd ` v ) e. A )
+s35:s34:rexlimdvaa |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) -> ( E. l e. 1o v = ( inr ` l ) -> ( 2nd ` v ) e. A ) )
+s36:s26,s35:jaod |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) -> ( ( E. l e. A v = ( inl ` l ) \/ E. l e. 1o v = ( inr ` l ) ) -> ( 2nd ` v ) e. A ) )
+s37:s12,s36:mpd |- ( ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) /\ -. v = ( inr ` (/) ) ) -> ( 2nd ` v ) e. A )
+s38:s8,s37:ifclda |- ( ( ( A e. V /\ Z e. A ) /\ v e. ( A |_| 1o ) ) -> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) e. A )
+s39:s38:fmptd |- ( ( A e. V /\ Z e. A ) -> ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) ) : ( A |_| 1o ) --> A )
+i40::elmapg
+s41:s3,s7,i40:syl2anc |- ( ( A e. V /\ Z e. A ) -> ( ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) ) e. ( A ^m ( A |_| 1o ) ) <-> ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) ) : ( A |_| 1o ) --> A ) )
+qed:s39,s41:mpbird |- ( ( A e. V /\ Z e. A ) -> ( v e. ( A |_| 1o ) |-> if ( v = ( inr ` (/) ) , Z , ( 2nd ` v ) ) ) e. ( A ^m ( A |_| 1o ) ) )
+$)

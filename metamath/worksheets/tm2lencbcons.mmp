@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lencbcons  LOC_AFTER=?
+
+* A list with a new head entry on a stack.  Lean: ` encListB_cons ` .
+
+s1::simpl |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> W e. Word ( { 1 } X. 2o ) )
+s2::simpr |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> L e. Word Word ( { 1 } X. 2o ) )
+s3:s1:s1cld |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> <" W "> e. Word Word ( { 1 } X. 2o ) )
+i4::ccatcl
+s5:s3,s2,i4:syl2anc |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( <" W "> ++ L ) e. Word Word ( { 1 } X. 2o ) )
+i6::tm2lencbval
+s7:s5,i6:syl |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( encListB ` ( <" W "> ++ L ) ) = ( ( entries ` ( <" W "> ++ L ) ) ++ <" 2 "> ) )
+s8::tm2lentcons |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` ( <" W "> ++ L ) ) = ( W ++ ( <" 4 "> ++ ( entries ` L ) ) ) )
+s9:s8:oveq1d |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( entries ` ( <" W "> ++ L ) ) ++ <" 2 "> ) = ( ( W ++ ( <" 4 "> ++ ( entries ` L ) ) ) ++ <" 2 "> ) )
+s10::tm2lwbss |- Word ( { 1 } X. 2o ) C_ Word Gamma'
+s11:s10:a1i |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> Word ( { 1 } X. 2o ) C_ Word Gamma' )
+s12:s11,s1:sseldd |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> W e. Word Gamma' )
+s13::gamma4 |- 4 e. Gamma'
+s14:s13:a1i |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> 4 e. Gamma' )
+s15:s14:s1cld |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> <" 4 "> e. Word Gamma' )
+s16::gamma2 |- 2 e. Gamma'
+s17:s16:a1i |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> 2 e. Gamma' )
+s18:s17:s1cld |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> <" 2 "> e. Word Gamma' )
+i19::tm2lentcl
+s20:s2,i19:syl |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( entries ` L ) e. Word Gamma' )
+i21::ccatcl
+s22:s15,s20,i21:syl2anc |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( <" 4 "> ++ ( entries ` L ) ) e. Word Gamma' )
+i23::ccatass
+s24:s12,s22,s18,i23:syl3anc |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( W ++ ( <" 4 "> ++ ( entries ` L ) ) ) ++ <" 2 "> ) = ( W ++ ( ( <" 4 "> ++ ( entries ` L ) ) ++ <" 2 "> ) ) )
+i25::ccatass
+s26:s15,s20,s18,i25:syl3anc |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( <" 4 "> ++ ( entries ` L ) ) ++ <" 2 "> ) = ( <" 4 "> ++ ( ( entries ` L ) ++ <" 2 "> ) ) )
+i27::tm2lencbval
+s28:s2,i27:syl |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( encListB ` L ) = ( ( entries ` L ) ++ <" 2 "> ) )
+s29:s28:oveq2d |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( <" 4 "> ++ ( encListB ` L ) ) = ( <" 4 "> ++ ( ( entries ` L ) ++ <" 2 "> ) ) )
+s30:s26,s29:eqtr4d |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( <" 4 "> ++ ( entries ` L ) ) ++ <" 2 "> ) = ( <" 4 "> ++ ( encListB ` L ) ) )
+s31:s30:oveq2d |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( W ++ ( ( <" 4 "> ++ ( entries ` L ) ) ++ <" 2 "> ) ) = ( W ++ ( <" 4 "> ++ ( encListB ` L ) ) ) )
+s32:s24,s31:eqtrd |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( W ++ ( <" 4 "> ++ ( entries ` L ) ) ) ++ <" 2 "> ) = ( W ++ ( <" 4 "> ++ ( encListB ` L ) ) ) )
+s33:s9,s32:eqtrd |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( ( entries ` ( <" W "> ++ L ) ) ++ <" 2 "> ) = ( W ++ ( <" 4 "> ++ ( encListB ` L ) ) ) )
+qed:s7,s33:eqtrd |- ( ( W e. Word ( { 1 } X. 2o ) /\ L e. Word Word ( { 1 } X. 2o ) ) -> ( encListB ` ( <" W "> ++ L ) ) = ( W ++ ( <" 4 "> ++ ( encListB ` L ) ) ) )
+$)

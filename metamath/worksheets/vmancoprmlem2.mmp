@@ -1,0 +1,58 @@
+$( <MM> <PROOF_ASST> THEOREM=vmancoprmlem2  LOC_AFTER=?
+
+* Lemma for vmancoprm: a number with nonzero von Mangoldt value that is not coprime to D is divisible by a prime factor of D.
+
+s1::simp1 |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> D e. NN )
+s2::simp2 |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> N e. NN )
+s3::simp3l |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> ( N gcd D ) =/= 1 )
+s4::simp3r |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> ( Lam ` N ) =/= 0 )
+i5::vmancoprmlem0
+s6:s2,i5:syl |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> ( ( Lam ` N ) =/= 0 <-> E. u e. Prime E. j e. NN N = ( u ^ j ) ) )
+s7:s4,s6:mpbid |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> E. u e. Prime E. j e. NN N = ( u ^ j ) )
+s8::simpr |- ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) -> u e. Prime )
+s9:s8:adantr |- ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) -> u e. Prime )
+s10:s9:adantr |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u e. Prime )
+s11::simpr |- ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) -> j e. NN )
+s12:s11:adantr |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> j e. NN )
+s13::simpr |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> N = ( u ^ j ) )
+s14:s1:ad3antrrr |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> D e. NN )
+s15:s3:ad3antrrr |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( N gcd D ) =/= 1 )
+s16:s14:nnzd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> D e. ZZ )
+i17::prmz
+s18:s10,i17:syl |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u e. ZZ )
+s19:s13:oveq1d |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( N gcd D ) = ( ( u ^ j ) gcd D ) )
+s20:s19:eqcomd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( ( u ^ j ) gcd D ) = ( N gcd D ) )
+s21:s20,s15:eqnetrd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( ( u ^ j ) gcd D ) =/= 1 )
+s22:s21:neneqd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> -. ( ( u ^ j ) gcd D ) = 1 )
+i23::rpexp
+s24:s18,s16,s12,i23:syl3anc |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( ( ( u ^ j ) gcd D ) = 1 <-> ( u gcd D ) = 1 ) )
+s25:s22,s24:mtbid |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> -. ( u gcd D ) = 1 )
+i26::coprm
+s27:s10,s16,i26:syl2anc |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( -. u || D <-> ( u gcd D ) = 1 ) )
+s28:s25,s27:mtbird |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> -. -. u || D )
+s29:s28:notnotrd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u || D )
+i30::elnnuz
+s31:s12,i30:sylib |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> j e. ( ZZ>= ` 1 ) )
+s32::1nn0 |- 1 e. NN0
+s33:s32:a1i |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> 1 e. NN0 )
+i34::dvdsexp
+s35:s18,s33,s31,i34:syl3anc |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( u ^ 1 ) || ( u ^ j ) )
+s36:s18:zcnd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u e. CC )
+i37::exp1
+s38:s36,i37:syl |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( u ^ 1 ) = u )
+s39:s38:eqcomd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u = ( u ^ 1 ) )
+s40:s39,s35:eqbrtrd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u || ( u ^ j ) )
+s41:s13:eqcomd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( u ^ j ) = N )
+s42:s40,s41:breqtrd |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u || N )
+s43::breq1 |- ( p = u -> ( p || D <-> u || D ) )
+s44:s43:elrab |- ( u e. { p e. Prime | p || D } <-> ( u e. Prime /\ u || D ) )
+s45:s10,s29:jca |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> ( u e. Prime /\ u || D ) )
+s46:s45,s44:sylibr |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> u e. { p e. Prime | p || D } )
+s47::breq1 |- ( q = u -> ( q || N <-> u || N ) )
+s48:s47:rspcev |- ( ( u e. { p e. Prime | p || D } /\ u || N ) -> E. q e. { p e. Prime | p || D } q || N )
+s49:s46,s42,s48:syl2anc |- ( ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) /\ N = ( u ^ j ) ) -> E. q e. { p e. Prime | p || D } q || N )
+s50:s49:ex |- ( ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) /\ j e. NN ) -> ( N = ( u ^ j ) -> E. q e. { p e. Prime | p || D } q || N ) )
+s51:s50:rexlimdva |- ( ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) /\ u e. Prime ) -> ( E. j e. NN N = ( u ^ j ) -> E. q e. { p e. Prime | p || D } q || N ) )
+s52:s51:rexlimdva |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> ( E. u e. Prime E. j e. NN N = ( u ^ j ) -> E. q e. { p e. Prime | p || D } q || N ) )
+qed:s7,s52:mpd |- ( ( D e. NN /\ N e. NN /\ ( ( N gcd D ) =/= 1 /\ ( Lam ` N ) =/= 0 ) ) -> E. q e. { p e. Prime | p || D } q || N )
+$)

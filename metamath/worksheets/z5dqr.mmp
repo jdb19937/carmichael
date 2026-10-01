@@ -1,0 +1,48 @@
+$( <MM> <PROOF_ASST> THEOREM=z5dqr  LOC_AFTER=?
+
+* The R-smooth radical q_R = prod over the primes p || N with p <_ R of p (Lean qR) is a squarefree positive integer whose prime factors are exactly those primes, and phi ( q_R ) / q_R is the sifted factor Q_R = prod ( 1 - 1 / p ) (Lean qR_squarefree, qR_pos, qR_primeFactors, QR, QR_eq_prod).
+
+s1::id |- ( N e. NN -> N e. NN )
+s2::simpl |- ( ( u || N /\ u <_ R ) -> u || N )
+s3:s2:a1i |- ( u e. Prime -> ( ( u || N /\ u <_ R ) -> u || N ) )
+s4:s3:ss2rabi |- { u e. Prime | ( u || N /\ u <_ R ) } C_ { u e. Prime | u || N }
+s5::breq1 |- ( p = u -> ( p || N <-> u || N ) )
+s6:s5:cbvrabv |- { p e. Prime | p || N } = { u e. Prime | u || N }
+s7:s6:a1i |- ( N e. NN -> { p e. Prime | p || N } = { u e. Prime | u || N } )
+i8::prmdvdsfi
+s9:s1,i8:syl |- ( N e. NN -> { p e. Prime | p || N } e. Fin )
+s10:s7,s9:eqeltrrd |- ( N e. NN -> { u e. Prime | u || N } e. Fin )
+s11:s4:a1i |- ( N e. NN -> { u e. Prime | ( u || N /\ u <_ R ) } C_ { u e. Prime | u || N } )
+s12:s10,s11:ssfid |- ( N e. NN -> { u e. Prime | ( u || N /\ u <_ R ) } e. Fin )
+s13::ssrab2 |- { u e. Prime | ( u || N /\ u <_ R ) } C_ Prime
+s14:s13:a1i |- ( N e. NN -> { u e. Prime | ( u || N /\ u <_ R ) } C_ Prime )
+s15::breq1 |- ( u = q -> ( u || N <-> q || N ) )
+s16::breq1 |- ( u = q -> ( u <_ R <-> q <_ R ) )
+s17:s15,s16:anbi12d |- ( u = q -> ( ( u || N /\ u <_ R ) <-> ( q || N /\ q <_ R ) ) )
+s18:s17:cbvrabv |- { u e. Prime | ( u || N /\ u <_ R ) } = { q e. Prime | ( q || N /\ q <_ R ) }
+i19::sqfprod
+s20:s12,s14,i19:syl2anc |- ( N e. NN -> ( ( prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p e. NN /\ ( mmu ` prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p ) =/= 0 ) /\ { q e. Prime | q || prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p } = { u e. Prime | ( u || N /\ u <_ R ) } ) )
+s21::id |- ( p = w -> p = w )
+s22:s21:cbvprodv |- prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p = prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w
+s23:s22:a1i |- ( N e. NN -> prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p = prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w )
+s24:s20:simpld |- ( N e. NN -> ( prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p e. NN /\ ( mmu ` prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p ) =/= 0 ) )
+s25:s24:simpld |- ( N e. NN -> prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p e. NN )
+s26:s23,s25:eqeltrrd |- ( N e. NN -> prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w e. NN )
+s27:s23:fveq2d |- ( N e. NN -> ( mmu ` prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p ) = ( mmu ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) )
+s28:s24:simprd |- ( N e. NN -> ( mmu ` prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p ) =/= 0 )
+s29:s27,s28:eqnetrrd |- ( N e. NN -> ( mmu ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) =/= 0 )
+s30:s20:simprd |- ( N e. NN -> { q e. Prime | q || prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p } = { u e. Prime | ( u || N /\ u <_ R ) } )
+s31:s23:breq2d |- ( N e. NN -> ( q || prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p <-> q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) )
+s32:s31:rabbidv |- ( N e. NN -> { q e. Prime | q || prod_ p e. { u e. Prime | ( u || N /\ u <_ R ) } p } = { q e. Prime | q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w } )
+s33:s32,s30:eqtr3d |- ( N e. NN -> { q e. Prime | q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w } = { u e. Prime | ( u || N /\ u <_ R ) } )
+s34:s18:a1i |- ( N e. NN -> { u e. Prime | ( u || N /\ u <_ R ) } = { q e. Prime | ( q || N /\ q <_ R ) } )
+s35:s33,s34:eqtrd |- ( N e. NN -> { q e. Prime | q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w } = { q e. Prime | ( q || N /\ q <_ R ) } )
+i36::phipfprod
+s37:s26,i36:syl |- ( N e. NN -> prod_ p e. { q e. Prime | q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w } ( 1 - ( 1 / p ) ) = ( ( phi ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) / prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) )
+s38:s35:prodeq1d |- ( N e. NN -> prod_ p e. { q e. Prime | q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w } ( 1 - ( 1 / p ) ) = prod_ p e. { q e. Prime | ( q || N /\ q <_ R ) } ( 1 - ( 1 / p ) ) )
+s39:s38,s37:eqtr3d |- ( N e. NN -> prod_ p e. { q e. Prime | ( q || N /\ q <_ R ) } ( 1 - ( 1 / p ) ) = ( ( phi ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) / prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) )
+s40:s26,s29:jca |- ( N e. NN -> ( prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w e. NN /\ ( mmu ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) =/= 0 ) )
+s41:s39:eqcomd |- ( N e. NN -> ( ( phi ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) / prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) = prod_ p e. { q e. Prime | ( q || N /\ q <_ R ) } ( 1 - ( 1 / p ) ) )
+s42:s35,s41:jca |- ( N e. NN -> ( { q e. Prime | q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w } = { q e. Prime | ( q || N /\ q <_ R ) } /\ ( ( phi ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) / prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) = prod_ p e. { q e. Prime | ( q || N /\ q <_ R ) } ( 1 - ( 1 / p ) ) ) )
+qed:s40,s42:jca |- ( N e. NN -> ( ( prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w e. NN /\ ( mmu ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) =/= 0 ) /\ ( { q e. Prime | q || prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w } = { q e. Prime | ( q || N /\ q <_ R ) } /\ ( ( phi ` prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) / prod_ w e. { u e. Prime | ( u || N /\ u <_ R ) } w ) = prod_ p e. { q e. Prime | ( q || N /\ q <_ R ) } ( 1 - ( 1 / p ) ) ) ) )
+$)

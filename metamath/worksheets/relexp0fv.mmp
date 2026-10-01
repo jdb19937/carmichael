@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=relexp0fv  LOC_AFTER=?
+
+* The zeroth iterate of a function B --> B is the identity on B.
+
+1::simp1    |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> B e. V )
+2::simp2    |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> G : B --> B )
+3::simp3    |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> X e. B )
+4a::fex
+4:2,1,4a:syl2anc |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> G e. _V )
+5a::relexp0g
+5:4,5a:syl  |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( G ^r 0 ) = ( _I |` ( dom G u. ran G ) ) )
+6a::fdm
+6:2,6a:syl  |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> dom G = B )
+7a::frn
+7:2,7a:syl  |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ran G C_ B )
+8::ssequn2  |- ( ran G C_ B <-> ( B u. ran G ) = B )
+9:7,8:sylib |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( B u. ran G ) = B )
+10:6:uneq1d |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( dom G u. ran G ) = ( B u. ran G ) )
+11:10,9:eqtrd |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( dom G u. ran G ) = B )
+12:11:reseq2d |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( _I |` ( dom G u. ran G ) ) = ( _I |` B ) )
+13:5,12:eqtrd |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( G ^r 0 ) = ( _I |` B ) )
+14:13:fveq1d |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( ( G ^r 0 ) ` X ) = ( ( _I |` B ) ` X ) )
+15a::fvresi
+15:3,15a:syl |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( ( _I |` B ) ` X ) = X )
+qed:14,15:eqtrd |- ( ( B e. V /\ G : B --> B /\ X e. B ) -> ( ( G ^r 0 ) ` X ) = X )
+$)

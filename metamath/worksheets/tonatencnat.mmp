@@ -1,0 +1,14 @@
+$( <MM> <PROOF_ASST> THEOREM=tonatencnat  LOC_AFTER=?
+
+* The value of encodeNat N is N (Lean: toNat_encodeNat).
+
+s1::id |- ( N e. NN0 -> N e. NN0 )
+s2::encnatbwrd |- ( N e. NN0 -> ( encodeNat ` N ) = ( N bwrd ( bl ` N ) ) )
+s3:s2:fveq2d |- ( N e. NN0 -> ( toNat ` ( encodeNat ` N ) ) = ( toNat ` ( N bwrd ( bl ` N ) ) ) )
+i4::blcl
+s5:s1,i4:syl |- ( N e. NN0 -> ( bl ` N ) e. NN0 )
+s6::blpow2 |- ( N e. NN0 -> N < ( 2 ^ ( bl ` N ) ) )
+i7::tonatbwrd2
+s8:s1,s5,s6,i7:syl3anc |- ( N e. NN0 -> ( toNat ` ( N bwrd ( bl ` N ) ) ) = N )
+qed:s3,s8:eqtrd |- ( N e. NN0 -> ( toNat ` ( encodeNat ` N ) ) = N )
+$)

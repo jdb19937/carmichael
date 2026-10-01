@@ -1,0 +1,36 @@
+$( <MM> <PROOF_ASST> THEOREM=ell3le  LOC_AFTER=?
+
+* ell3 is monotone for arguments >= 3.
+
+s1::simpl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> M e. ( ZZ>= ` 3 ) )
+s2::simpr |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> N e. ( ZZ>= ` M ) )
+i3::uztrn
+s4:s2,s1,i3:syl2anc |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> N e. ( ZZ>= ` 3 ) )
+i5::uzuzle23
+s6:s1,i5:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> M e. ( ZZ>= ` 2 ) )
+i7::ell2le
+s8:s6,s2,i7:syl2anc |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell2 ` M ) <_ ( ell2 ` N ) )
+i9::ell2rp
+s10:s1,i9:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell2 ` M ) e. RR+ )
+i11::ell2rp
+s12:s4,i11:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell2 ` N ) e. RR+ )
+i13::logleb
+s14:s10,s12,i13:syl2anc |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ( ell2 ` M ) <_ ( ell2 ` N ) <-> ( log ` ( ell2 ` M ) ) <_ ( log ` ( ell2 ` N ) ) ) )
+s15:s8,s14:mpbid |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( log ` ( ell2 ` M ) ) <_ ( log ` ( ell2 ` N ) ) )
+i16::uzuzle23
+s17:s1,i16:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> M e. ( ZZ>= ` 2 ) )
+i18::eluz2nn
+s19:s17,i18:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> M e. NN )
+s20:s19:nnnn0d |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> M e. NN0 )
+i21::uzuzle23
+s22:s4,i21:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> N e. ( ZZ>= ` 2 ) )
+i23::eluz2nn
+s24:s22,i23:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> N e. NN )
+s25:s24:nnnn0d |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> N e. NN0 )
+i26::ell3val
+s27:s20,i26:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell3 ` M ) = ( log ` ( ell2 ` M ) ) )
+i28::ell3val
+s29:s25,i28:syl |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell3 ` N ) = ( log ` ( ell2 ` N ) ) )
+s30:s27,s15:eqbrtrd |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell3 ` M ) <_ ( log ` ( ell2 ` N ) ) )
+qed:s30,s29:breqtrrd |- ( ( M e. ( ZZ>= ` 3 ) /\ N e. ( ZZ>= ` M ) ) -> ( ell3 ` M ) <_ ( ell3 ` N ) )
+$)

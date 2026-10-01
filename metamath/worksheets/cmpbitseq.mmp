@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=cmpbitseq  LOC_AFTER=?
+
+* The comparison from the neutral verdict is the comparison of the values (Lean: cmpBits_eq_compare).
+
+s1::simpl |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> X e. Word 2o )
+s2::simpr |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> Y e. Word 2o )
+s3::bw1oel3o |- 1o e. 3o
+s4:s3:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> 1o e. 3o )
+i5::cmpbitsval
+s6:s1,s2,s4,i5:syl3anc |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> ( ( X cmpBits Y ) ` 1o ) = if ( ( toNat ` X ) = ( toNat ` Y ) , 1o , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) )
+i7::tonatcl
+s8:s1,i7:syl |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> ( toNat ` X ) e. NN0 )
+i9::tonatcl
+s10:s2,i9:syl |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> ( toNat ` Y ) e. NN0 )
+i11::ncmpeq
+s12:s8,s10,i11:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> ( ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) = 1o <-> ( toNat ` X ) = ( toNat ` Y ) ) )
+s13::simpr |- ( ( ( X e. Word 2o /\ Y e. Word 2o ) /\ ( toNat ` X ) = ( toNat ` Y ) ) -> ( toNat ` X ) = ( toNat ` Y ) )
+s14:s13:iftrued |- ( ( ( X e. Word 2o /\ Y e. Word 2o ) /\ ( toNat ` X ) = ( toNat ` Y ) ) -> if ( ( toNat ` X ) = ( toNat ` Y ) , 1o , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) = 1o )
+s15:s12:adantr |- ( ( ( X e. Word 2o /\ Y e. Word 2o ) /\ ( toNat ` X ) = ( toNat ` Y ) ) -> ( ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) = 1o <-> ( toNat ` X ) = ( toNat ` Y ) ) )
+s16:s13,s15:mpbird |- ( ( ( X e. Word 2o /\ Y e. Word 2o ) /\ ( toNat ` X ) = ( toNat ` Y ) ) -> ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) = 1o )
+s17:s14,s16:eqtr4d |- ( ( ( X e. Word 2o /\ Y e. Word 2o ) /\ ( toNat ` X ) = ( toNat ` Y ) ) -> if ( ( toNat ` X ) = ( toNat ` Y ) , 1o , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) = ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) )
+s18::simpr |- ( ( ( X e. Word 2o /\ Y e. Word 2o ) /\ -. ( toNat ` X ) = ( toNat ` Y ) ) -> -. ( toNat ` X ) = ( toNat ` Y ) )
+s19:s18:iffalsed |- ( ( ( X e. Word 2o /\ Y e. Word 2o ) /\ -. ( toNat ` X ) = ( toNat ` Y ) ) -> if ( ( toNat ` X ) = ( toNat ` Y ) , 1o , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) = ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) )
+s20:s17,s19:pm2.61dan |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> if ( ( toNat ` X ) = ( toNat ` Y ) , 1o , ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) ) = ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) )
+qed:s6,s20:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o ) -> ( ( X cmpBits Y ) ` 1o ) = ( ( toNat ` X ) Ncmp ( toNat ` Y ) ) )
+$)

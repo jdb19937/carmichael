@@ -1,0 +1,22 @@
+$( <MM> <PROOF_ASST> THEOREM=primegocost  LOC_AFTER=?
+
+* The cost of primeGo (Lean: primeGo_cost).
+
+s1::simpl1 |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> M e. NN0 )
+s2::simpl2 |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> D e. NN0 )
+s3::simpl3 |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> F e. NN0 )
+s4::simpr |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) )
+i5::primegocostl
+s6:s3,i5:syl |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> ( M e. NN0 -> A. d e. NN0 ( d <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) -> ( 2nd ` ( ( M PrimeGo d ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - d ) ) ) )
+s7:s6,s1:mpd |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> A. d e. NN0 ( d <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) -> ( 2nd ` ( ( M PrimeGo d ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - d ) ) )
+s8::id |- ( d = D -> d = D )
+c1:s8:breq1d |- ( d = D -> ( d <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) <-> D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) )
+c2:s8:oveq2d |- ( d = D -> ( M PrimeGo d ) = ( M PrimeGo D ) )
+c3:c2:fveq1d |- ( d = D -> ( ( M PrimeGo d ) ` F ) = ( ( M PrimeGo D ) ` F ) )
+c4:c3:fveq2d |- ( d = D -> ( 2nd ` ( ( M PrimeGo d ) ` F ) ) = ( 2nd ` ( ( M PrimeGo D ) ` F ) ) )
+c5:s8:oveq2d |- ( d = D -> ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - d ) = ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - D ) )
+c6:c4,c5:breq12d |- ( d = D -> ( ( 2nd ` ( ( M PrimeGo d ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - d ) <-> ( 2nd ` ( ( M PrimeGo D ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - D ) ) )
+c7:c1,c6:imbi12d |- ( d = D -> ( ( d <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) -> ( 2nd ` ( ( M PrimeGo d ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - d ) ) <-> ( D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) -> ( 2nd ` ( ( M PrimeGo D ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - D ) ) ) )
+s9:c7,s7,s2:rspcdva |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> ( D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) -> ( 2nd ` ( ( M PrimeGo D ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - D ) ) )
+qed:s9,s4:mpd |- ( ( ( M e. NN0 /\ D e. NN0 /\ F e. NN0 ) /\ D <_ ( ( Nfloor ` ( sqrt ` M ) ) + 1 ) ) -> ( 2nd ` ( ( M PrimeGo D ) ` F ) ) <_ ( ( ( Nfloor ` ( sqrt ` M ) ) + 2 ) - D ) )
+$)

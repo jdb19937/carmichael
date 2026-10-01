@@ -1,0 +1,37 @@
+$( <MM> <PROOF_ASST> THEOREM=tonats1  LOC_AFTER=?
+
+* The value of a one-letter bit word is the value of its letter.
+
+s1::id |- ( B e. 2o -> B e. 2o )
+i2::s1cl
+s3:s1,i2:syl |- ( B e. 2o -> <" B "> e. Word 2o )
+i4::ccatlid
+s5:s3,i4:syl |- ( B e. 2o -> ( (/) ++ <" B "> ) = <" B "> )
+s6::wrd0 |- (/) e. Word 2o
+s7:s6:a1i |- ( B e. 2o -> (/) e. Word 2o )
+i8::tonatsnoc
+s9:s7,s1,i8:syl2anc |- ( B e. 2o -> ( toNat ` ( (/) ++ <" B "> ) ) = ( ( toNat ` (/) ) + ( ( bToNat ` B ) x. ( 2 ^ ( # ` (/) ) ) ) ) )
+s10::tonat0 |- ( toNat ` (/) ) = 0
+s11:s10:a1i |- ( B e. 2o -> ( toNat ` (/) ) = 0 )
+s12::hash0 |- ( # ` (/) ) = 0
+s13:s12:a1i |- ( B e. 2o -> ( # ` (/) ) = 0 )
+s14:s13:oveq2d |- ( B e. 2o -> ( 2 ^ ( # ` (/) ) ) = ( 2 ^ 0 ) )
+s15::2cn |- 2 e. CC
+i16::exp0
+s17:s15,i16:ax-mp |- ( 2 ^ 0 ) = 1
+s18:s17:a1i |- ( B e. 2o -> ( 2 ^ 0 ) = 1 )
+s19:s14,s18:eqtrd |- ( B e. 2o -> ( 2 ^ ( # ` (/) ) ) = 1 )
+s20:s19:oveq2d |- ( B e. 2o -> ( ( bToNat ` B ) x. ( 2 ^ ( # ` (/) ) ) ) = ( ( bToNat ` B ) x. 1 ) )
+i21::bwbncl
+s22:s1,i21:syl |- ( B e. 2o -> ( bToNat ` B ) e. NN0 )
+s23:s22:nn0zd |- ( B e. 2o -> ( bToNat ` B ) e. ZZ )
+s24:s23:zred |- ( B e. 2o -> ( bToNat ` B ) e. RR )
+s25:s24:recnd |- ( B e. 2o -> ( bToNat ` B ) e. CC )
+s26:s25:mulridd |- ( B e. 2o -> ( ( bToNat ` B ) x. 1 ) = ( bToNat ` B ) )
+s27:s20,s26:eqtrd |- ( B e. 2o -> ( ( bToNat ` B ) x. ( 2 ^ ( # ` (/) ) ) ) = ( bToNat ` B ) )
+s28:s11,s27:oveq12d |- ( B e. 2o -> ( ( toNat ` (/) ) + ( ( bToNat ` B ) x. ( 2 ^ ( # ` (/) ) ) ) ) = ( 0 + ( bToNat ` B ) ) )
+s29:s25:addlidd |- ( B e. 2o -> ( 0 + ( bToNat ` B ) ) = ( bToNat ` B ) )
+s30:s9,s28,s29:3eqtrd |- ( B e. 2o -> ( toNat ` ( (/) ++ <" B "> ) ) = ( bToNat ` B ) )
+s31:s5:fveq2d |- ( B e. 2o -> ( toNat ` ( (/) ++ <" B "> ) ) = ( toNat ` <" B "> ) )
+qed:s31,s30:eqtr3d |- ( B e. 2o -> ( toNat ` <" B "> ) = ( bToNat ` B ) )
+$)

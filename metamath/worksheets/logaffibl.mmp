@@ -1,0 +1,84 @@
+$( <MM> <PROOF_ASST> THEOREM=logaffibl  LOC_AFTER=?
+
+* The logarithmic affine integrand is continuous and integrable on the open unit parameter interval (continuous on the closed one, ~ divcncf , ~ cniccibl ).
+
+s1::simpl |- ( ( P e. RR+ /\ Q e. RR+ ) -> P e. RR+ )
+s2::simpr |- ( ( P e. RR+ /\ Q e. RR+ ) -> Q e. RR+ )
+s3:s1:rpred |- ( ( P e. RR+ /\ Q e. RR+ ) -> P e. RR )
+s4:s2:rpred |- ( ( P e. RR+ /\ Q e. RR+ ) -> Q e. RR )
+s5:s3:recnd |- ( ( P e. RR+ /\ Q e. RR+ ) -> P e. CC )
+s6:s4:recnd |- ( ( P e. RR+ /\ Q e. RR+ ) -> Q e. CC )
+s7:s4,s3:resubcld |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( Q - P ) e. RR )
+s8:s7:recnd |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( Q - P ) e. CC )
+s9::unitssre |- ( 0 [,] 1 ) C_ RR
+s10:s9:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( 0 [,] 1 ) C_ RR )
+s11::ax-resscn |- RR C_ CC
+s12:s11:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> RR C_ CC )
+s13:s10,s12:sstrd |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( 0 [,] 1 ) C_ CC )
+s14::ssid |- CC C_ CC
+s15:s14:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> CC C_ CC )
+i16::cncfmptid
+s17:s13,s15,i16:syl2anc |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> t ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+i18::cncfmptc
+s19:s8,s13,s15,i18:syl3anc |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> ( Q - P ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+i20::cncfmptc
+s21:s5,s13,s15,i20:syl3anc |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> P ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+s22:s17,s19:mulcncf |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> ( t x. ( Q - P ) ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+s23:s21,s22:addcncf |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> ( P + ( t x. ( Q - P ) ) ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+s24::simpr |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> t e. ( 0 [,] 1 ) )
+s25:s1:adantr |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> P e. RR+ )
+s26:s2:adantr |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> Q e. RR+ )
+s27:s25,s26:jca |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P e. RR+ /\ Q e. RR+ ) )
+s28:s27,s24:jca |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) )
+i29::affpos
+s30:s28,i29:syl |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> 0 < ( P + ( t x. ( Q - P ) ) ) )
+s31:s25:rpred |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> P e. RR )
+s32::unitssre |- ( 0 [,] 1 ) C_ RR
+s33:s32:a1i |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( 0 [,] 1 ) C_ RR )
+s34:s33,s24:sseldd |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> t e. RR )
+s35:s26:rpred |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> Q e. RR )
+s36:s25:rpred |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> P e. RR )
+s37:s35,s36:resubcld |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( Q - P ) e. RR )
+s38:s34,s37:remulcld |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( t x. ( Q - P ) ) e. RR )
+s39:s31,s38:readdcld |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) e. RR )
+s40:s39,s30:elrpd |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) e. RR+ )
+s41:s40:rpcnd |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) e. CC )
+s42:s40:rpne0d |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) =/= 0 )
+i43::eldifsn
+s44:s41,s42,i43:sylanbrc |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) e. ( CC \ { 0 } ) )
+s45::eqid |- ( t e. ( 0 [,] 1 ) |-> ( P + ( t x. ( Q - P ) ) ) ) = ( t e. ( 0 [,] 1 ) |-> ( P + ( t x. ( Q - P ) ) ) )
+s46:s44,s45:fmptd |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> ( P + ( t x. ( Q - P ) ) ) ) : ( 0 [,] 1 ) --> ( CC \ { 0 } ) )
+s47::difss |- ( CC \ { 0 } ) C_ CC
+s48:s47:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( CC \ { 0 } ) C_ CC )
+i49::cncfcdm
+s50:s48,s23,i49:syl2anc |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( ( t e. ( 0 [,] 1 ) |-> ( P + ( t x. ( Q - P ) ) ) ) e. ( ( 0 [,] 1 ) -cn-> ( CC \ { 0 } ) ) <-> ( t e. ( 0 [,] 1 ) |-> ( P + ( t x. ( Q - P ) ) ) ) : ( 0 [,] 1 ) --> ( CC \ { 0 } ) ) )
+s51:s46,s50:mpbird |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> ( P + ( t x. ( Q - P ) ) ) ) e. ( ( 0 [,] 1 ) -cn-> ( CC \ { 0 } ) ) )
+s52:s19,s51:divcncf |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) )
+s53:s8:adantr |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( Q - P ) e. CC )
+s54:s40:rpcnd |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) e. CC )
+s55:s40:rpne0d |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( P + ( t x. ( Q - P ) ) ) =/= 0 )
+s56:s53,s54,s55:divcld |- ( ( ( P e. RR+ /\ Q e. RR+ ) /\ t e. ( 0 [,] 1 ) ) -> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) e. CC )
+s57::ioossicc |- ( 0 (,) 1 ) C_ ( 0 [,] 1 )
+s58:s57:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( 0 (,) 1 ) C_ ( 0 [,] 1 ) )
+s59::ioossicc |- ( 0 (,) 1 ) C_ ( 0 [,] 1 )
+i60::rescncf
+s61:s59,i60:ax-mp |- ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) -> ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) |` ( 0 (,) 1 ) ) e. ( ( 0 (,) 1 ) -cn-> CC ) )
+s62:s61:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. ( ( 0 [,] 1 ) -cn-> CC ) -> ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) |` ( 0 (,) 1 ) ) e. ( ( 0 (,) 1 ) -cn-> CC ) ) )
+s63:s52,s62:mpd |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) |` ( 0 (,) 1 ) ) e. ( ( 0 (,) 1 ) -cn-> CC ) )
+s64::ioossicc |- ( 0 (,) 1 ) C_ ( 0 [,] 1 )
+i65::resmpt
+s66:s64,i65:ax-mp |- ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) |` ( 0 (,) 1 ) ) = ( t e. ( 0 (,) 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) )
+s67:s66:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) |` ( 0 (,) 1 ) ) = ( t e. ( 0 (,) 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) )
+s68:s67:eqcomd |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 (,) 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) = ( ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) |` ( 0 (,) 1 ) ) )
+s69:s68,s63:eqeltrd |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 (,) 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. ( ( 0 (,) 1 ) -cn-> CC ) )
+s70::0re |- 0 e. RR
+s71:s70:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> 0 e. RR )
+s72::1re |- 1 e. RR
+s73:s72:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> 1 e. RR )
+i74::cniccibl
+s75:s71,s73,s52,i74:syl3anc |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 [,] 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. L^1 )
+s76::ioombl |- ( 0 (,) 1 ) e. dom vol
+s77:s76:a1i |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( 0 (,) 1 ) e. dom vol )
+s78:s58,s77,s56,s75:iblss |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( t e. ( 0 (,) 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. L^1 )
+qed:s69,s78:jca |- ( ( P e. RR+ /\ Q e. RR+ ) -> ( ( t e. ( 0 (,) 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. ( ( 0 (,) 1 ) -cn-> CC ) /\ ( t e. ( 0 (,) 1 ) |-> ( ( Q - P ) / ( P + ( t x. ( Q - P ) ) ) ) ) e. L^1 ) )
+$)

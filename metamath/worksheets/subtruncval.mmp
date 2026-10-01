@@ -1,0 +1,45 @@
+$( <MM> <PROOF_ASST> THEOREM=subtruncval  LOC_AFTER=?
+
+* Value of subTrunc (Lean: subTrunc).
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> C e. 2o )
+s4::simpl |- ( ( x = X /\ y = Y ) -> x = X )
+s5::simpr |- ( ( x = X /\ y = Y ) -> y = Y )
+c1:s4,s5:oveq12d |- ( ( x = X /\ y = Y ) -> ( x subBorrow y ) = ( X subBorrow Y ) )
+c2:c1:fveq1d |- ( ( x = X /\ y = Y ) -> ( ( x subBorrow y ) ` c ) = ( ( X subBorrow Y ) ` c ) )
+c3:c2:eqeq1d |- ( ( x = X /\ y = Y ) -> ( ( ( x subBorrow y ) ` c ) = 1o <-> ( ( X subBorrow Y ) ` c ) = 1o ) )
+c4:s4,s5:oveq12d |- ( ( x = X /\ y = Y ) -> ( x subBits y ) = ( X subBits Y ) )
+c5:c4:fveq1d |- ( ( x = X /\ y = Y ) -> ( ( x subBits y ) ` c ) = ( ( X subBits Y ) ` c ) )
+c6:c3,c5:ifbieq2d |- ( ( x = X /\ y = Y ) -> if ( ( ( x subBorrow y ) ` c ) = 1o , (/) , ( ( x subBits y ) ` c ) ) = if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) )
+c7:c6:mpteq2dv |- ( ( x = X /\ y = Y ) -> ( c e. 2o |-> if ( ( ( x subBorrow y ) ` c ) = 1o , (/) , ( ( x subBits y ) ` c ) ) ) = ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) )
+s6::df-subtrunc |- subTrunc = ( x e. Word 2o , y e. Word 2o |-> ( c e. 2o |-> if ( ( ( x subBorrow y ) ` c ) = 1o , (/) , ( ( x subBits y ) ` c ) ) ) )
+s7::2oex |- 2o e. _V
+s8:s7:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> 2o e. _V )
+i9::mptexg
+s10:s8,i9:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) e. _V )
+s11:c7,s6:ovmpoga |- ( ( X e. Word 2o /\ Y e. Word 2o /\ ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) e. _V ) -> ( X subTrunc Y ) = ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) )
+s12:s1,s2,s10,s11:syl3anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( X subTrunc Y ) = ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) )
+s13:s12:fveq1d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subTrunc Y ) ` C ) = ( ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) ` C ) )
+s14::id |- ( c = C -> c = C )
+c8:s14:fveq2d |- ( c = C -> ( ( X subBorrow Y ) ` c ) = ( ( X subBorrow Y ) ` C ) )
+c9:c8:eqeq1d |- ( c = C -> ( ( ( X subBorrow Y ) ` c ) = 1o <-> ( ( X subBorrow Y ) ` C ) = 1o ) )
+c10:s14:fveq2d |- ( c = C -> ( ( X subBits Y ) ` c ) = ( ( X subBits Y ) ` C ) )
+c11:c9,c10:ifbieq2d |- ( c = C -> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) = if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) )
+s15::eqid |- ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) = ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) )
+s16::0el2o |- (/) e. 2o
+s17:s16:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> (/) e. 2o )
+s18::bw0el3o |- (/) e. 3o
+s19:s18:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> (/) e. 3o )
+s20::wrd0 |- (/) e. Word 2o
+s21:s20:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> (/) e. Word 2o )
+s22:s1,s2,s3:3jca |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) )
+i23::subbitscl
+s24:s22,i23:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBits Y ) ` C ) e. Word 2o )
+s25:s21,s24:ifcld |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) e. Word 2o )
+s26:s25:elexd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) e. _V )
+s27:c11,s15:fvmptg |- ( ( C e. 2o /\ if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) e. _V ) -> ( ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) ` C ) = if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) )
+s28:s3,s26,s27:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( c e. 2o |-> if ( ( ( X subBorrow Y ) ` c ) = 1o , (/) , ( ( X subBits Y ) ` c ) ) ) ` C ) = if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) )
+qed:s13,s28:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subTrunc Y ) ` C ) = if ( ( ( X subBorrow Y ) ` C ) = 1o , (/) , ( ( X subBits Y ) ` C ) ) )
+$)

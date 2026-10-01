@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=ncmpval  LOC_AFTER=?
+
+* Value of Ncmp: the comparison of two natural numbers as an ordering (Lean: compare).
+
+s1::simpl |- ( ( A e. NN0 /\ B e. NN0 ) -> A e. NN0 )
+s2::simpr |- ( ( A e. NN0 /\ B e. NN0 ) -> B e. NN0 )
+s3::simpl |- ( ( a = A /\ b = B ) -> a = A )
+s4::simpr |- ( ( a = A /\ b = B ) -> b = B )
+c1:s3,s4:eqeq12d |- ( ( a = A /\ b = B ) -> ( a = b <-> A = B ) )
+c2:s3,s4:breq12d |- ( ( a = A /\ b = B ) -> ( a < b <-> A < B ) )
+c3:c2:ifbid |- ( ( a = A /\ b = B ) -> if ( a < b , (/) , 2o ) = if ( A < B , (/) , 2o ) )
+c4:c1,c3:ifbieq2d |- ( ( a = A /\ b = B ) -> if ( a = b , 1o , if ( a < b , (/) , 2o ) ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+s5::df-ncmp |- Ncmp = ( a e. NN0 , b e. NN0 |-> if ( a = b , 1o , if ( a < b , (/) , 2o ) ) )
+s6::1oex |- 1o e. _V
+s7:s6:a1i |- ( ( A e. NN0 /\ B e. NN0 ) -> 1o e. _V )
+s8::0ex |- (/) e. _V
+s9:s8:a1i |- ( ( A e. NN0 /\ B e. NN0 ) -> (/) e. _V )
+s10::2oex |- 2o e. _V
+s11:s10:a1i |- ( ( A e. NN0 /\ B e. NN0 ) -> 2o e. _V )
+s12:s9,s11:ifcld |- ( ( A e. NN0 /\ B e. NN0 ) -> if ( A < B , (/) , 2o ) e. _V )
+s13:s7,s12:ifcld |- ( ( A e. NN0 /\ B e. NN0 ) -> if ( A = B , 1o , if ( A < B , (/) , 2o ) ) e. _V )
+s14:c4,s5:ovmpoga |- ( ( A e. NN0 /\ B e. NN0 /\ if ( A = B , 1o , if ( A < B , (/) , 2o ) ) e. _V ) -> ( A Ncmp B ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+qed:s1,s2,s13,s14:syl3anc |- ( ( A e. NN0 /\ B e. NN0 ) -> ( A Ncmp B ) = if ( A = B , 1o , if ( A < B , (/) , 2o ) ) )
+$)

@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=bwfold0  LOC_AFTER=?
+
+* The fold at position 0 is the start value.
+
+s1::simpll |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> A e. ZZ )
+s2::simplr |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> B e. ZZ )
+s3::simprl |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) )
+s4::simprr |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> C e. 3o )
+s5::bwfoldval |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( F ( A bwFold B ) C ) = ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) )
+s6:s5:fveq1d |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( ( F ( A bwFold B ) C ) ` 0 ) = ( ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ` 0 ) )
+s7:s4:elexd |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> C e. _V )
+s8::bw3oex |- 3o e. _V
+s9:s8:a1i |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> 3o e. _V )
+s10::nn0ex |- NN0 e. _V
+s11:s10:a1i |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> NN0 e. _V )
+i12::mpoexga
+s13:s9,s11,i12:syl2anc |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) e. _V )
+i14::algrec0
+s15:s7,s13,i14:syl2anc |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( ( C AlgRec ( u e. 3o , k e. NN0 |-> ( ( if ( k e. ( bits ` A ) , 1o , (/) ) F if ( k e. ( bits ` B ) , 1o , (/) ) ) ` u ) ) ) ` 0 ) = C )
+qed:s6,s15:eqtrd |- ( ( ( A e. ZZ /\ B e. ZZ ) /\ ( F e. ~P ( ( 2o X. 2o ) X. ~P ( 3o X. 3o ) ) /\ C e. 3o ) ) -> ( ( F ( A bwFold B ) C ) ` 0 ) = C )
+$)

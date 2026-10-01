@@ -1,0 +1,28 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stmtval  LOC_AFTER=?
+
+* Value of TM2Stmt: the statements over T are the union of the depth layers of the constructor operator.
+
+1::oveq1    |- ( t = T -> ( t TM2lay x ) = ( T TM2lay x ) )
+2:1:mpteq2dv |- ( t = T -> ( x e. _V |-> ( t TM2lay x ) ) = ( x e. _V |-> ( T TM2lay x ) ) )
+3a::rdgeq1
+3:2,3a:syl  |- ( t = T -> rec ( ( x e. _V |-> ( t TM2lay x ) ) , (/) ) = rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) )
+4:3:reseq1d |- ( t = T -> ( rec ( ( x e. _V |-> ( t TM2lay x ) ) , (/) ) |` _om ) = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) )
+5:4:rneqd   |- ( t = T -> ran ( rec ( ( x e. _V |-> ( t TM2lay x ) ) , (/) ) |` _om ) = ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) )
+6:5:unieqd  |- ( t = T -> U. ran ( rec ( ( x e. _V |-> ( t TM2lay x ) ) , (/) ) |` _om ) = U. ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) )
+7::df-tm2stmt |- TM2Stmt = ( t e. _V |-> U. ran ( rec ( ( x e. _V |-> ( t TM2lay x ) ) , (/) ) |` _om ) )
+8:6,7:fvmptg |- ( ( T e. _V /\ U. ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) e. _V ) -> ( TM2Stmt ` T ) = U. ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) )
+9::rdgfnon  |- rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) Fn On
+10::omsson  |- _om C_ On
+11a::fnssres
+11:9,10,11a:mp2an |- ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) Fn _om
+12::omex    |- _om e. _V
+13a::fnex
+13:11,12,13a:mp2an |- ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) e. _V
+14a::rnexg
+14:13,14a:ax-mp |- ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) e. _V
+15a::uniexg
+15:14,15a:ax-mp |- U. ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) e. _V
+16::elex    |- ( T e. V -> T e. _V )
+17:15,8:mpan2 |- ( T e. _V -> ( TM2Stmt ` T ) = U. ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) )
+qed:16,17:syl |- ( T e. V -> ( TM2Stmt ` T ) = U. ran ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) |` _om ) )
+$)

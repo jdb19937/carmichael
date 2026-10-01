@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=g4t3  LOC_AFTER=?
+
+* A shorter sum of nonnegative terms is smaller, through tools/fsum.py and ` fsumless ` .
+
+s1::simpl |- ( ( N e. NN /\ M e. ( 1 ... N ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ M e. ( 1 ... N ) ) -> M e. ( 1 ... N ) )
+i3::elfzuz3
+s4:s2,i3:syl |- ( ( N e. NN /\ M e. ( 1 ... N ) ) -> N e. ( ZZ>= ` M ) )
+i5::fzss2
+s6:s4,i5:syl |- ( ( N e. NN /\ M e. ( 1 ... N ) ) -> ( 1 ... M ) C_ ( 1 ... N ) )
+s7::fzfid |- ( ( N e. NN /\ M e. ( 1 ... N ) ) -> ( 1 ... N ) e. Fin )
+s8::simpr |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> k e. ( 1 ... N ) )
+i9::elfznn
+s10:s8,i9:syl |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> k e. NN )
+s11:s10:nnrpd |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> k e. RR+ )
+s12:s11:rpred |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> k e. RR )
+s13::2nn0 |- 2 e. NN0
+s14:s13:a1i |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> 2 e. NN0 )
+s15:s12,s14:reexpcld |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> ( k ^ 2 ) e. RR )
+s16:s11:rpge0d |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> 0 <_ k )
+s17:s12,s14,s16:expge0d |- ( ( ( N e. NN /\ M e. ( 1 ... N ) ) /\ k e. ( 1 ... N ) ) -> 0 <_ ( k ^ 2 ) )
+qed:s7,s15,s17,s6:fsumless |- ( ( N e. NN /\ M e. ( 1 ... N ) ) -> sum_ k e. ( 1 ... M ) ( k ^ 2 ) <_ sum_ k e. ( 1 ... N ) ( k ^ 2 ) )
+$)

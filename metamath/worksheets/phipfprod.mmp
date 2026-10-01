@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=phipfprod  LOC_AFTER=?
+
+* Euler product for phi ( M ) / M over the prime divisors of M.
+
+s1::simpr |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. { q e. Prime | q || M } )
+i2::elrabi
+s3:s1,i2:syl |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. Prime )
+i4::prmnn
+s5:s3,i4:syl |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. NN )
+s6:s5:nnrpd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. RR+ )
+s7:s5:nncnd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p e. CC )
+s8:s6:rpne0d |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> p =/= 0 )
+s9::1red |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> 1 e. RR )
+s10:s9:recnd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> 1 e. CC )
+s11:s7,s10,s7,s8:divsubdird |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( ( p - 1 ) / p ) = ( ( p / p ) - ( 1 / p ) ) )
+s12:s7,s8:dividd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( p / p ) = 1 )
+s13:s12:oveq1d |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( ( p / p ) - ( 1 / p ) ) = ( 1 - ( 1 / p ) ) )
+s14:s11,s13:eqtrd |- ( ( M e. NN /\ p e. { q e. Prime | q || M } ) -> ( ( p - 1 ) / p ) = ( 1 - ( 1 / p ) ) )
+s15:s14:prodeq2dv |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } ( ( p - 1 ) / p ) = prod_ p e. { q e. Prime | q || M } ( 1 - ( 1 / p ) ) )
+s16::phiradlem |- ( M e. NN -> ( ( phi ` M ) / M ) = prod_ p e. { q e. Prime | q || M } ( ( p - 1 ) / p ) )
+s17:s16,s15:eqtrd |- ( M e. NN -> ( ( phi ` M ) / M ) = prod_ p e. { q e. Prime | q || M } ( 1 - ( 1 / p ) ) )
+qed:s17:eqcomd |- ( M e. NN -> prod_ p e. { q e. Prime | q || M } ( 1 - ( 1 / p ) ) = ( ( phi ` M ) / M ) )
+$)

@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=z5pl0  LOC_AFTER=?
+
+* Lean posLog_of_le_one: log+ x = 0 for x <_ 1 (log+ x written if ( 1 <_ x , log x , 0 )).
+
+s1::simpll |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> X e. RR )
+s2::1red |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> 1 e. RR )
+s3:s1,s2:letri3d |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> ( X = 1 <-> ( X <_ 1 /\ 1 <_ X ) ) )
+s4::simplr |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> X <_ 1 )
+s5::simpr |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> 1 <_ X )
+s6:s4,s5:jca |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> ( X <_ 1 /\ 1 <_ X ) )
+s7:s6,s3:mpbird |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> X = 1 )
+s8:s7:fveq2d |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> ( log ` X ) = ( log ` 1 ) )
+s9::log1 |- ( log ` 1 ) = 0
+s10:s9:a1i |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> ( log ` 1 ) = 0 )
+s11:s8,s10:eqtrd |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> ( log ` X ) = 0 )
+s12::simpr |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> 1 <_ X )
+i13::iftrue
+s14:s12,i13:syl |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = ( log ` X ) )
+s15:s14,s11:eqtrd |- ( ( ( X e. RR /\ X <_ 1 ) /\ 1 <_ X ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = 0 )
+s16::simpr |- ( ( ( X e. RR /\ X <_ 1 ) /\ -. 1 <_ X ) -> -. 1 <_ X )
+i17::iffalse
+s18:s16,i17:syl |- ( ( ( X e. RR /\ X <_ 1 ) /\ -. 1 <_ X ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = 0 )
+qed:s15,s18:pm2.61dan |- ( ( X e. RR /\ X <_ 1 ) -> if ( 1 <_ X , ( log ` X ) , 0 ) = 0 )
+$)

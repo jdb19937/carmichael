@@ -1,0 +1,41 @@
+$( <MM> <PROOF_ASST> THEOREM=bitofcl  LOC_AFTER=?
+
+* Closure of bitOf: a Boolean.
+
+s1::id |- ( O e. ( 2o |_| 1o ) -> O e. ( 2o |_| 1o ) )
+s2::bitofval |- ( O e. ( 2o |_| 1o ) -> ( bitOf ` O ) = if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) )
+i3::eldju1st
+s4:s1,i3:syl |- ( O e. ( 2o |_| 1o ) -> ( ( 1st ` O ) = (/) \/ ( 1st ` O ) = 1o ) )
+s5::eldju2ndl |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = (/) ) -> ( 2nd ` O ) e. 2o )
+s6::0el2o |- (/) e. 2o
+s7:s6:a1i |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = (/) ) -> (/) e. 2o )
+s8:s7,s5:ifcld |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = (/) ) -> if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) e. 2o )
+s9:s2:adantr |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = (/) ) -> ( bitOf ` O ) = if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) )
+s10:s9,s8:eqeltrd |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = (/) ) -> ( bitOf ` O ) e. 2o )
+s11::simpr |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( 1st ` O ) = 1o )
+s12::simpl |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> O e. ( 2o |_| 1o ) )
+s13::1n0 |- 1o =/= (/)
+s14:s13:a1i |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> 1o =/= (/) )
+s15:s11,s14:eqnetrd |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( 1st ` O ) =/= (/) )
+i16::eldju2ndr
+s17:s12,s15,i16:syl2anc |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( 2nd ` O ) e. 1o )
+s18::el1o |- ( ( 2nd ` O ) e. 1o <-> ( 2nd ` O ) = (/) )
+s19:s17,s18:sylib |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( 2nd ` O ) = (/) )
+s20::djuss |- ( 2o |_| 1o ) C_ ( { (/) , 1o } X. ( 2o u. 1o ) )
+s21:s20:a1i |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( 2o |_| 1o ) C_ ( { (/) , 1o } X. ( 2o u. 1o ) ) )
+s22:s21,s12:sseldd |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> O e. ( { (/) , 1o } X. ( 2o u. 1o ) ) )
+i23::1st2nd2
+s24:s22,i23:syl |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> O = <. ( 1st ` O ) , ( 2nd ` O ) >. )
+s25:s11,s19:opeq12d |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> <. ( 1st ` O ) , ( 2nd ` O ) >. = <. 1o , (/) >. )
+s26::0ex |- (/) e. _V
+i27::inrval
+s28:s26,i27:ax-mp |- ( inr ` (/) ) = <. 1o , (/) >.
+s29:s28:a1i |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( inr ` (/) ) = <. 1o , (/) >. )
+s30:s24,s25,s29:3eqtr4d |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> O = ( inr ` (/) ) )
+s31:s30:iftrued |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) = (/) )
+s32:s2:adantr |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( bitOf ` O ) = if ( O = ( inr ` (/) ) , (/) , ( 2nd ` O ) ) )
+s33:s32,s31:eqtrd |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( bitOf ` O ) = (/) )
+s34:s6:a1i |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> (/) e. 2o )
+s35:s33,s34:eqeltrd |- ( ( O e. ( 2o |_| 1o ) /\ ( 1st ` O ) = 1o ) -> ( bitOf ` O ) e. 2o )
+qed:s10,s35,s4:mpjaodan |- ( O e. ( 2o |_| 1o ) -> ( bitOf ` O ) e. 2o )
+$)

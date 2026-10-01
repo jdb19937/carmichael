@@ -1,0 +1,128 @@
+$( <MM> <PROOF_ASST> THEOREM=ldenhiu  LOC_AFTER=?
+
+* Lean ` Finset.card_biUnion_le ` in function form: the cardinality of a finite union ` U_ x e. A ( F ` x ) ` of finite sets is at most the sum of their cardinalities (induction on the index set, ~ findcard2d , ~ hashun2 ).
+
+s1::id |- ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) -> ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) -> A e. Fin )
+s4::id |- ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) -> ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) )
+i5::simpr
+s6:s4,i5:syl |- ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) -> A. x e. A ( F ` x ) e. Fin )
+s7::iuneq1 |- ( y = (/) -> U_ x e. y ( F ` x ) = U_ x e. (/) ( F ` x ) )
+s8:s7:fveq2d |- ( y = (/) -> ( # ` U_ x e. y ( F ` x ) ) = ( # ` U_ x e. (/) ( F ` x ) ) )
+s9::sumeq1 |- ( y = (/) -> sum_ x e. y ( # ` ( F ` x ) ) = sum_ x e. (/) ( # ` ( F ` x ) ) )
+s10:s8,s9:breq12d |- ( y = (/) -> ( ( # ` U_ x e. y ( F ` x ) ) <_ sum_ x e. y ( # ` ( F ` x ) ) <-> ( # ` U_ x e. (/) ( F ` x ) ) <_ sum_ x e. (/) ( # ` ( F ` x ) ) ) )
+s11::iuneq1 |- ( y = s -> U_ x e. y ( F ` x ) = U_ x e. s ( F ` x ) )
+s12:s11:fveq2d |- ( y = s -> ( # ` U_ x e. y ( F ` x ) ) = ( # ` U_ x e. s ( F ` x ) ) )
+s13::sumeq1 |- ( y = s -> sum_ x e. y ( # ` ( F ` x ) ) = sum_ x e. s ( # ` ( F ` x ) ) )
+s14:s12,s13:breq12d |- ( y = s -> ( ( # ` U_ x e. y ( F ` x ) ) <_ sum_ x e. y ( # ` ( F ` x ) ) <-> ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) )
+s15::iuneq1 |- ( y = ( s u. { t } ) -> U_ x e. y ( F ` x ) = U_ x e. ( s u. { t } ) ( F ` x ) )
+s16:s15:fveq2d |- ( y = ( s u. { t } ) -> ( # ` U_ x e. y ( F ` x ) ) = ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) )
+s17::sumeq1 |- ( y = ( s u. { t } ) -> sum_ x e. y ( # ` ( F ` x ) ) = sum_ x e. ( s u. { t } ) ( # ` ( F ` x ) ) )
+s18:s16,s17:breq12d |- ( y = ( s u. { t } ) -> ( ( # ` U_ x e. y ( F ` x ) ) <_ sum_ x e. y ( # ` ( F ` x ) ) <-> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) <_ sum_ x e. ( s u. { t } ) ( # ` ( F ` x ) ) ) )
+s19::iuneq1 |- ( y = A -> U_ x e. y ( F ` x ) = U_ x e. A ( F ` x ) )
+s20:s19:fveq2d |- ( y = A -> ( # ` U_ x e. y ( F ` x ) ) = ( # ` U_ x e. A ( F ` x ) ) )
+s21::sumeq1 |- ( y = A -> sum_ x e. y ( # ` ( F ` x ) ) = sum_ x e. A ( # ` ( F ` x ) ) )
+s22:s20,s21:breq12d |- ( y = A -> ( ( # ` U_ x e. y ( F ` x ) ) <_ sum_ x e. y ( # ` ( F ` x ) ) <-> ( # ` U_ x e. A ( F ` x ) ) <_ sum_ x e. A ( # ` ( F ` x ) ) ) )
+s23::0iun |- U_ x e. (/) ( F ` x ) = (/)
+s24:s23:fveq2i |- ( # ` U_ x e. (/) ( F ` x ) ) = ( # ` (/) )
+s25::hash0 |- ( # ` (/) ) = 0
+s26:s24,s25:eqtri |- ( # ` U_ x e. (/) ( F ` x ) ) = 0
+s27::sum0 |- sum_ x e. (/) ( # ` ( F ` x ) ) = 0
+s28::0le0 |- 0 <_ 0
+s29:s26,s28:eqbrtri |- ( # ` U_ x e. (/) ( F ` x ) ) <_ 0
+s30:s27:eqcomi |- 0 = sum_ x e. (/) ( # ` ( F ` x ) )
+s31:s29,s30:breqtri |- ( # ` U_ x e. (/) ( F ` x ) ) <_ sum_ x e. (/) ( # ` ( F ` x ) )
+s32:s31:a1i |- ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) -> ( # ` U_ x e. (/) ( F ` x ) ) <_ sum_ x e. (/) ( # ` ( F ` x ) ) )
+s33::simpr |- ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) -> ( s C_ A /\ t e. ( A \ s ) ) )
+s34:s33:adantr |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( s C_ A /\ t e. ( A \ s ) ) )
+s35:s34:simpld |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> s C_ A )
+s36:s34:simprd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> t e. ( A \ s ) )
+s37:s36:eldifad |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> t e. A )
+s38:s36:eldifbd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> -. t e. s )
+s39:s3:adantr |- ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) -> A e. Fin )
+s40:s39:adantr |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> A e. Fin )
+s41:s6:adantr |- ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) -> A. x e. A ( F ` x ) e. Fin )
+s42:s41:adantr |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> A. x e. A ( F ` x ) e. Fin )
+s43:s40,s35:ssfid |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> s e. Fin )
+i44::ssralv
+s45:s35,i44:syl |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( A. x e. A ( F ` x ) e. Fin -> A. x e. s ( F ` x ) e. Fin ) )
+s46:s42,s45:mpd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> A. x e. s ( F ` x ) e. Fin )
+i47::iunfi
+s48:s43,s46,i47:syl2anc |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> U_ x e. s ( F ` x ) e. Fin )
+s49::fveq2 |- ( x = t -> ( F ` x ) = ( F ` t ) )
+s50:s49:eleq1d |- ( x = t -> ( ( F ` x ) e. Fin <-> ( F ` t ) e. Fin ) )
+s51:s50,s42,s37:rspcdva |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( F ` t ) e. Fin )
+s52::iunxun |- U_ x e. ( s u. { t } ) ( F ` x ) = ( U_ x e. s ( F ` x ) u. U_ x e. { t } ( F ` x ) )
+s53::vex |- t e. _V
+s54::fveq2 |- ( x = t -> ( F ` x ) = ( F ` t ) )
+s55:s54:iunxsng |- ( t e. _V -> U_ x e. { t } ( F ` x ) = ( F ` t ) )
+s56:s53,s55:ax-mp |- U_ x e. { t } ( F ` x ) = ( F ` t )
+s57:s56:uneq2i |- ( U_ x e. s ( F ` x ) u. U_ x e. { t } ( F ` x ) ) = ( U_ x e. s ( F ` x ) u. ( F ` t ) )
+s58:s52,s57:eqtri |- U_ x e. ( s u. { t } ) ( F ` x ) = ( U_ x e. s ( F ` x ) u. ( F ` t ) )
+i59::hashun2
+s60:s48,s51,i59:syl2anc |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` ( U_ x e. s ( F ` x ) u. ( F ` t ) ) ) <_ ( ( # ` U_ x e. s ( F ` x ) ) + ( # ` ( F ` t ) ) ) )
+s61:s58:fveq2i |- ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) = ( # ` ( U_ x e. s ( F ` x ) u. ( F ` t ) ) )
+s62:s61:a1i |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) = ( # ` ( U_ x e. s ( F ` x ) u. ( F ` t ) ) ) )
+s63:s62,s60:eqbrtrd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) <_ ( ( # ` U_ x e. s ( F ` x ) ) + ( # ` ( F ` t ) ) ) )
+s64::nfv |- F/ x A e. Fin
+s65::nfra1 |- F/ x A. x e. A ( F ` x ) e. Fin
+s66:s64,s65:nfan |- F/ x ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin )
+s67::nfv |- F/ x ( s C_ A /\ t e. ( A \ s ) )
+s68:s66,s67:nfan |- F/ x ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) )
+s69::nfcv |- F/_ x #
+s70::nfiu1 |- F/_ x U_ x e. s ( F ` x )
+s71:s69,s70:nffv |- F/_ x ( # ` U_ x e. s ( F ` x ) )
+s72::nfsum1 |- F/_ x sum_ x e. s ( # ` ( F ` x ) )
+s73::nfcv |- F/_ x <_
+s74:s71,s73,s72:nfbr |- F/ x ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) )
+s75:s68,s74:nfan |- F/ x ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) )
+s76::nfcv |- F/_ x ( # ` ( F ` t ) )
+s77:s46:r19.21bi |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ x e. s ) -> ( F ` x ) e. Fin )
+i78::hashcl
+s79:s77,i78:syl |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ x e. s ) -> ( # ` ( F ` x ) ) e. NN0 )
+s80:s79:nn0cnd |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ x e. s ) -> ( # ` ( F ` x ) ) e. CC )
+s81::fveq2 |- ( x = t -> ( F ` x ) = ( F ` t ) )
+s82:s81:fveq2d |- ( x = t -> ( # ` ( F ` x ) ) = ( # ` ( F ` t ) ) )
+i83::hashcl
+s84:s51,i83:syl |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` ( F ` t ) ) e. NN0 )
+s85:s84:nn0cnd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` ( F ` t ) ) e. CC )
+s86::vex |- t e. _V
+s87:s86:a1i |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> t e. _V )
+s88:s75,s76,s43,s87,s38,s80,s82,s85:fsumsplitsn |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> sum_ x e. ( s u. { t } ) ( # ` ( F ` x ) ) = ( sum_ x e. s ( # ` ( F ` x ) ) + ( # ` ( F ` t ) ) ) )
+s89::fveq2 |- ( x = v -> ( F ` x ) = ( F ` v ) )
+s90:s89:fveq2d |- ( x = v -> ( # ` ( F ` x ) ) = ( # ` ( F ` v ) ) )
+s91:s90:cbvsumv |- sum_ x e. s ( # ` ( F ` x ) ) = sum_ v e. s ( # ` ( F ` v ) )
+s92::fveq2 |- ( x = v -> ( F ` x ) = ( F ` v ) )
+s93:s92:eleq1d |- ( x = v -> ( ( F ` x ) e. Fin <-> ( F ` v ) e. Fin ) )
+s94:s46:adantr |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ v e. s ) -> A. x e. s ( F ` x ) e. Fin )
+s95::simpr |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ v e. s ) -> v e. s )
+s96:s93,s94,s95:rspcdva |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ v e. s ) -> ( F ` v ) e. Fin )
+i97::hashcl
+s98:s96,i97:syl |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ v e. s ) -> ( # ` ( F ` v ) ) e. NN0 )
+s99:s98:nn0red |- ( ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) /\ v e. s ) -> ( # ` ( F ` v ) ) e. RR )
+s100:s43,s99:fsumrecl |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> sum_ v e. s ( # ` ( F ` v ) ) e. RR )
+s101:s91:a1i |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> sum_ x e. s ( # ` ( F ` x ) ) = sum_ v e. s ( # ` ( F ` v ) ) )
+s102:s101,s100:eqeltrd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> sum_ x e. s ( # ` ( F ` x ) ) e. RR )
+s103::simpr |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) )
+i104::hashcl
+s105:s48,i104:syl |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. s ( F ` x ) ) e. NN0 )
+s106:s105:nn0red |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. s ( F ` x ) ) e. RR )
+s107:s84:nn0red |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` ( F ` t ) ) e. RR )
+s108:s106,s102,s107,s103:leadd1dd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( ( # ` U_ x e. s ( F ` x ) ) + ( # ` ( F ` t ) ) ) <_ ( sum_ x e. s ( # ` ( F ` x ) ) + ( # ` ( F ` t ) ) ) )
+s109:s58:a1i |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> U_ x e. ( s u. { t } ) ( F ` x ) = ( U_ x e. s ( F ` x ) u. ( F ` t ) ) )
+i110::unfi
+s111:s48,s51,i110:syl2anc |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( U_ x e. s ( F ` x ) u. ( F ` t ) ) e. Fin )
+s112:s109,s111:eqeltrd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> U_ x e. ( s u. { t } ) ( F ` x ) e. Fin )
+i113::hashcl
+s114:s112,i113:syl |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) e. NN0 )
+s115:s114:nn0red |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) e. RR )
+s116:s106,s107:readdcld |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( ( # ` U_ x e. s ( F ` x ) ) + ( # ` ( F ` t ) ) ) e. RR )
+s117:s102,s107:readdcld |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( sum_ x e. s ( # ` ( F ` x ) ) + ( # ` ( F ` t ) ) ) e. RR )
+s118:s115,s116,s117,s63,s108:letrd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) <_ ( sum_ x e. s ( # ` ( F ` x ) ) + ( # ` ( F ` t ) ) ) )
+s119:s88:eqcomd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( sum_ x e. s ( # ` ( F ` x ) ) + ( # ` ( F ` t ) ) ) = sum_ x e. ( s u. { t } ) ( # ` ( F ` x ) ) )
+s120:s118,s119:breqtrd |- ( ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) /\ ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) ) -> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) <_ sum_ x e. ( s u. { t } ) ( # ` ( F ` x ) ) )
+s121:s120:ex |- ( ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) /\ ( s C_ A /\ t e. ( A \ s ) ) ) -> ( ( # ` U_ x e. s ( F ` x ) ) <_ sum_ x e. s ( # ` ( F ` x ) ) -> ( # ` U_ x e. ( s u. { t } ) ( F ` x ) ) <_ sum_ x e. ( s u. { t } ) ( # ` ( F ` x ) ) ) )
+s122:s10,s14,s18,s22,s32,s121,s3:findcard2d |- ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) -> ( # ` U_ x e. A ( F ` x ) ) <_ sum_ x e. A ( # ` ( F ` x ) ) )
+qed:s122:idi |- ( ( A e. Fin /\ A. x e. A ( F ` x ) e. Fin ) -> ( # ` U_ x e. A ( F ` x ) ) <_ sum_ x e. A ( # ` ( F ` x ) ) )
+$)

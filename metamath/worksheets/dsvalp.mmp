@@ -1,0 +1,12 @@
+$( <MM> <PROOF_ASST> THEOREM=dsvalp  LOC_AFTER=?
+
+* The value of the extended difference quotient at the base point.
+
+s1::simpl |- ( ( P e. D /\ C e. CC ) -> P e. D )
+s2::simpr |- ( ( P e. D /\ C e. CC ) -> C e. CC )
+s3::eqidd |- ( ( P e. D /\ C e. CC ) -> ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) = ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) )
+s4::simpr |- ( ( ( P e. D /\ C e. CC ) /\ z = P ) -> z = P )
+i5::iftrue
+s6:s4,i5:syl |- ( ( ( P e. D /\ C e. CC ) /\ z = P ) -> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) = C )
+qed:s3,s6,s1,s2:fvmptd |- ( ( P e. D /\ C e. CC ) -> ( ( z e. D |-> if ( z = P , C , ( ( ( F ` z ) - ( F ` P ) ) / ( z - P ) ) ) ) ` P ) = C )
+$)

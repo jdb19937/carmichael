@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=zmoddvds  LOC_AFTER=?
+
+* N divides the difference of an integer and its residue.
+
+s1::simpl |- ( ( N e. NN /\ A e. ZZ ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ A e. ZZ ) -> A e. ZZ )
+i3::zmodcl
+s4:s2,s1,i3:syl2anc |- ( ( N e. NN /\ A e. ZZ ) -> ( A mod N ) e. NN0 )
+s5:s4:nn0zd |- ( ( N e. NN /\ A e. ZZ ) -> ( A mod N ) e. ZZ )
+s6:s2:zred |- ( ( N e. NN /\ A e. ZZ ) -> A e. RR )
+s7:s1:nnrpd |- ( ( N e. NN /\ A e. ZZ ) -> N e. RR+ )
+i8::modabs2
+s9:s6,s7,i8:syl2anc |- ( ( N e. NN /\ A e. ZZ ) -> ( ( A mod N ) mod N ) = ( A mod N ) )
+i10::moddvds
+s11:s1,s5,s2,i10:syl3anc |- ( ( N e. NN /\ A e. ZZ ) -> ( ( ( A mod N ) mod N ) = ( A mod N ) <-> N || ( ( A mod N ) - A ) ) )
+qed:s9,s11:mpbid |- ( ( N e. NN /\ A e. ZZ ) -> N || ( ( A mod N ) - A ) )
+$)

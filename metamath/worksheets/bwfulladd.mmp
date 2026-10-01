@@ -1,0 +1,582 @@
+$( <MM> <PROOF_ASST> THEOREM=bwfulladd  LOC_AFTER=?
+
+* The full adder: the three input bits sum to the sum bit plus twice the carry bit.
+
+s1::simp1 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> A e. 2o )
+s2::simp2 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> B e. 2o )
+s3::simp3 |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> C e. 2o )
+i4::bwel2o
+s5:s1,i4:syl |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( A = (/) \/ A = 1o ) )
+s6::simpr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) -> A = (/) )
+s7:s2:adantr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) -> B e. 2o )
+i8::bwel2o
+s9:s7,i8:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) -> ( B = (/) \/ B = 1o ) )
+s10::simpr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) -> B = (/) )
+s11:s3:adantr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) -> C e. 2o )
+s12:s11:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) -> C e. 2o )
+i13::bwel2o
+s14:s12,i13:syl |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) -> ( C = (/) \/ C = 1o ) )
+s15::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> C = (/) )
+s16:s6:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) -> A = (/) )
+s17:s16:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> A = (/) )
+s18:s10:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> B = (/) )
+c1:s17:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` A ) = ( bToNat ` (/) ) )
+c2:s18:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` B ) = ( bToNat ` (/) ) )
+c3:c1,c2:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) )
+c4:s15:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` C ) = ( bToNat ` (/) ) )
+c5:c3,c4:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) )
+c6:s17,s18:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( A sumBit B ) = ( (/) sumBit (/) ) )
+c7:c6,s15:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( ( A sumBit B ) ` C ) = ( ( (/) sumBit (/) ) ` (/) ) )
+c8:c7:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) )
+c9:s17,s18:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( A majBit B ) = ( (/) majBit (/) ) )
+c10:c9,s15:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( ( A majBit B ) ` C ) = ( ( (/) majBit (/) ) ` (/) ) )
+c11:c10:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) )
+c12:c11:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) )
+c13:c8,c12:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) ) )
+c14:c5,c13:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) ) ) )
+s19::bwbn0 |- ( bToNat ` (/) ) = 0
+s20:s19,s19:oveq12i |- ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) = ( 0 + 0 )
+s21::0cn |- 0 e. CC
+s22:s21:addlidi |- ( 0 + 0 ) = 0
+s23:s20,s22:eqtri |- ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) = 0
+s24:s23,s19:oveq12i |- ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = ( 0 + 0 )
+s25:s24,s22:eqtri |- ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = 0
+s26::0el2o |- (/) e. 2o
+i27::sumbitval
+s28:s26,s26,s26,i27:mp3an |- ( ( (/) sumBit (/) ) ` (/) ) = if ( ( ( (/) = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) , 1o , (/) )
+s29:s28:a1i |- ( T. -> ( ( (/) sumBit (/) ) ` (/) ) = if ( ( ( (/) = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) , 1o , (/) ) )
+s30::1n0 |- 1o =/= (/)
+s31:s30:nesymi |- -. (/) = 1o
+s32:s31:a1i |- ( T. -> -. (/) = 1o )
+s33:s32,s32:2falsed |- ( T. -> ( (/) = 1o <-> (/) = 1o ) )
+i34::df-xor
+s35:s33:notnotd |- ( T. -> -. -. ( (/) = 1o <-> (/) = 1o ) )
+s36:s35,i34:sylnibr |- ( T. -> -. ( (/) = 1o \/_ (/) = 1o ) )
+s37:s36,s32:2falsed |- ( T. -> ( ( (/) = 1o \/_ (/) = 1o ) <-> (/) = 1o ) )
+i38::df-xor
+s39:s37:notnotd |- ( T. -> -. -. ( ( (/) = 1o \/_ (/) = 1o ) <-> (/) = 1o ) )
+s40:s39,i38:sylnibr |- ( T. -> -. ( ( (/) = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) )
+s41:s40:iffalsed |- ( T. -> if ( ( ( (/) = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) , 1o , (/) ) = (/) )
+s42:s29,s41:eqtrd |- ( T. -> ( ( (/) sumBit (/) ) ` (/) ) = (/) )
+s43::tru |- T.
+s44:s43,s42:ax-mp |- ( ( (/) sumBit (/) ) ` (/) ) = (/)
+i45::majval
+s46:s26,s26,s26,i45:mp3an |- ( ( (/) majBit (/) ) ` (/) ) = if ( ( ( (/) = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) , 1o , (/) )
+s47:s46:a1i |- ( T. -> ( ( (/) majBit (/) ) ` (/) ) = if ( ( ( (/) = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) )
+s48:s31:a1i |- ( T. -> -. (/) = 1o )
+i49::simpl
+i50::con3i
+s51:s48:intnanrd |- ( T. -> -. ( (/) = 1o /\ (/) = 1o ) )
+s52:s48,s48:jca |- ( T. -> ( -. (/) = 1o /\ -. (/) = 1o ) )
+i53::ioran
+s54:s52,i53:sylibr |- ( T. -> -. ( (/) = 1o \/ (/) = 1o ) )
+i55::simpl
+i56::con3i
+s57:s48:intnanrd |- ( T. -> -. ( (/) = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) )
+s58:s51,s57:jca |- ( T. -> ( -. ( (/) = 1o /\ (/) = 1o ) /\ -. ( (/) = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) )
+i59::ioran
+s60:s58,i59:sylibr |- ( T. -> -. ( ( (/) = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) )
+s61:s60:iffalsed |- ( T. -> if ( ( ( (/) = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) = (/) )
+s62:s47,s61:eqtrd |- ( T. -> ( ( (/) majBit (/) ) ` (/) ) = (/) )
+s63:s43,s62:ax-mp |- ( ( (/) majBit (/) ) ` (/) ) = (/)
+s64:s44:fveq2i |- ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) = ( bToNat ` (/) )
+s65:s64,s19:eqtri |- ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) = 0
+s66:s63:fveq2i |- ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) = ( bToNat ` (/) )
+s67:s66,s19:eqtri |- ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) = 0
+s68:s67:oveq2i |- ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) = ( 2 x. 0 )
+s69::2cn |- 2 e. CC
+s70:s69:mul01i |- ( 2 x. 0 ) = 0
+s71:s68,s70:eqtri |- ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) = 0
+s72:s65,s71:oveq12i |- ( ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) ) = ( 0 + 0 )
+s73:s72,s22:eqtri |- ( ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) ) = 0
+s74:s25,s73:eqtr4i |- ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( (/) sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` (/) ) ) ) )
+s75:s74,c14:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s76::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> C = 1o )
+s77:s6:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) -> A = (/) )
+s78:s77:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> A = (/) )
+s79:s10:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> B = (/) )
+c15:s78:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` A ) = ( bToNat ` (/) ) )
+c16:s79:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` B ) = ( bToNat ` (/) ) )
+c17:c15,c16:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) )
+c18:s76:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` C ) = ( bToNat ` 1o ) )
+c19:c17,c18:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) )
+c20:s78,s79:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( A sumBit B ) = ( (/) sumBit (/) ) )
+c21:c20,s76:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( ( A sumBit B ) ` C ) = ( ( (/) sumBit (/) ) ` 1o ) )
+c22:c21:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) )
+c23:s78,s79:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( A majBit B ) = ( (/) majBit (/) ) )
+c24:c23,s76:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( ( A majBit B ) ` C ) = ( ( (/) majBit (/) ) ` 1o ) )
+c25:c24:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) )
+c26:c25:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) )
+c27:c22,c26:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) ) )
+c28:c19,c27:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) ) ) )
+s80:s19,s19:oveq12i |- ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) = ( 0 + 0 )
+s81:s80,s22:eqtri |- ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) = 0
+s82::bwbn1 |- ( bToNat ` 1o ) = 1
+s83:s81,s82:oveq12i |- ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = ( 0 + 1 )
+s84::ax-1cn |- 1 e. CC
+s85:s84:addlidi |- ( 0 + 1 ) = 1
+s86:s83,s85:eqtri |- ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = 1
+s87::1oel2o |- 1o e. 2o
+i88::sumbitval
+s89:s26,s26,s87,i88:mp3an |- ( ( (/) sumBit (/) ) ` 1o ) = if ( ( ( (/) = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) , 1o , (/) )
+s90:s89:a1i |- ( T. -> ( ( (/) sumBit (/) ) ` 1o ) = if ( ( ( (/) = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) , 1o , (/) ) )
+s91:s31:a1i |- ( T. -> -. (/) = 1o )
+s92:s91,s91:2falsed |- ( T. -> ( (/) = 1o <-> (/) = 1o ) )
+i93::df-xor
+s94:s92:notnotd |- ( T. -> -. -. ( (/) = 1o <-> (/) = 1o ) )
+s95:s94,i93:sylnibr |- ( T. -> -. ( (/) = 1o \/_ (/) = 1o ) )
+s96::eqid |- 1o = 1o
+s97:s96:a1i |- ( T. -> 1o = 1o )
+i98::nbn2
+s99:s95,i98:syl |- ( T. -> ( -. 1o = 1o <-> ( ( (/) = 1o \/_ (/) = 1o ) <-> 1o = 1o ) ) )
+s100:s97:notnotd |- ( T. -> -. -. 1o = 1o )
+s101:s100,s99:mtbid |- ( T. -> -. ( ( (/) = 1o \/_ (/) = 1o ) <-> 1o = 1o ) )
+i102::df-xor
+s103:s101,i102:sylibr |- ( T. -> ( ( (/) = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) )
+s104:s103:iftrued |- ( T. -> if ( ( ( (/) = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) , 1o , (/) ) = 1o )
+s105:s90,s104:eqtrd |- ( T. -> ( ( (/) sumBit (/) ) ` 1o ) = 1o )
+s106:s43,s105:ax-mp |- ( ( (/) sumBit (/) ) ` 1o ) = 1o
+i107::majval
+s108:s26,s26,s87,i107:mp3an |- ( ( (/) majBit (/) ) ` 1o ) = if ( ( ( (/) = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) , 1o , (/) )
+s109:s108:a1i |- ( T. -> ( ( (/) majBit (/) ) ` 1o ) = if ( ( ( (/) = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) )
+s110:s31:a1i |- ( T. -> -. (/) = 1o )
+i111::simpl
+i112::con3i
+s113:s110:intnanrd |- ( T. -> -. ( (/) = 1o /\ (/) = 1o ) )
+s114:s96:a1i |- ( T. -> 1o = 1o )
+s115:s110,s110:jca |- ( T. -> ( -. (/) = 1o /\ -. (/) = 1o ) )
+i116::ioran
+s117:s115,i116:sylibr |- ( T. -> -. ( (/) = 1o \/ (/) = 1o ) )
+s118:s117:intnand |- ( T. -> -. ( 1o = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) )
+s119:s113,s118:jca |- ( T. -> ( -. ( (/) = 1o /\ (/) = 1o ) /\ -. ( 1o = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) )
+i120::ioran
+s121:s119,i120:sylibr |- ( T. -> -. ( ( (/) = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) )
+s122:s121:iffalsed |- ( T. -> if ( ( ( (/) = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) = (/) )
+s123:s109,s122:eqtrd |- ( T. -> ( ( (/) majBit (/) ) ` 1o ) = (/) )
+s124:s43,s123:ax-mp |- ( ( (/) majBit (/) ) ` 1o ) = (/)
+s125:s106:fveq2i |- ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) = ( bToNat ` 1o )
+s126:s125,s82:eqtri |- ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) = 1
+s127:s124:fveq2i |- ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) = ( bToNat ` (/) )
+s128:s127,s19:eqtri |- ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) = 0
+s129:s128:oveq2i |- ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) = ( 2 x. 0 )
+s130:s129,s70:eqtri |- ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) = 0
+s131:s126,s130:oveq12i |- ( ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) ) = ( 1 + 0 )
+s132:s84:addridi |- ( 1 + 0 ) = 1
+s133:s131,s132:eqtri |- ( ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) ) = 1
+s134:s86,s133:eqtr4i |- ( ( ( bToNat ` (/) ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( (/) sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit (/) ) ` 1o ) ) ) )
+s135:s134,c28:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s136:s75,s135,s14:mpjaodan |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s137::simpr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) -> B = 1o )
+s138:s3:adantr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) -> C e. 2o )
+s139:s138:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) -> C e. 2o )
+i140::bwel2o
+s141:s139,i140:syl |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) -> ( C = (/) \/ C = 1o ) )
+s142::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> C = (/) )
+s143:s6:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) -> A = (/) )
+s144:s143:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> A = (/) )
+s145:s137:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> B = 1o )
+c29:s144:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` A ) = ( bToNat ` (/) ) )
+c30:s145:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` B ) = ( bToNat ` 1o ) )
+c31:c29,c30:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) )
+c32:s142:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` C ) = ( bToNat ` (/) ) )
+c33:c31,c32:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) )
+c34:s144,s145:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( A sumBit B ) = ( (/) sumBit 1o ) )
+c35:c34,s142:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( ( A sumBit B ) ` C ) = ( ( (/) sumBit 1o ) ` (/) ) )
+c36:c35:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) )
+c37:s144,s145:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( A majBit B ) = ( (/) majBit 1o ) )
+c38:c37,s142:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( ( A majBit B ) ` C ) = ( ( (/) majBit 1o ) ` (/) ) )
+c39:c38:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) )
+c40:c39:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) )
+c41:c36,c40:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) ) )
+c42:c33,c41:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) ) ) )
+s146:s19,s82:oveq12i |- ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) = ( 0 + 1 )
+s147:s146,s85:eqtri |- ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) = 1
+s148:s147,s19:oveq12i |- ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = ( 1 + 0 )
+s149:s148,s132:eqtri |- ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = 1
+i150::sumbitval
+s151:s26,s87,s26,i150:mp3an |- ( ( (/) sumBit 1o ) ` (/) ) = if ( ( ( (/) = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) , 1o , (/) )
+s152:s151:a1i |- ( T. -> ( ( (/) sumBit 1o ) ` (/) ) = if ( ( ( (/) = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) , 1o , (/) ) )
+s153:s31:a1i |- ( T. -> -. (/) = 1o )
+s154:s96:a1i |- ( T. -> 1o = 1o )
+i155::nbn2
+s156:s153,i155:syl |- ( T. -> ( -. 1o = 1o <-> ( (/) = 1o <-> 1o = 1o ) ) )
+s157:s154:notnotd |- ( T. -> -. -. 1o = 1o )
+s158:s157,s156:mtbid |- ( T. -> -. ( (/) = 1o <-> 1o = 1o ) )
+i159::df-xor
+s160:s158,i159:sylibr |- ( T. -> ( (/) = 1o \/_ 1o = 1o ) )
+i161::pm5.501
+s162:s160,i161:syl |- ( T. -> ( (/) = 1o <-> ( ( (/) = 1o \/_ 1o = 1o ) <-> (/) = 1o ) ) )
+s163:s153,s162:mtbid |- ( T. -> -. ( ( (/) = 1o \/_ 1o = 1o ) <-> (/) = 1o ) )
+i164::df-xor
+s165:s163,i164:sylibr |- ( T. -> ( ( (/) = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) )
+s166:s165:iftrued |- ( T. -> if ( ( ( (/) = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) , 1o , (/) ) = 1o )
+s167:s152,s166:eqtrd |- ( T. -> ( ( (/) sumBit 1o ) ` (/) ) = 1o )
+s168:s43,s167:ax-mp |- ( ( (/) sumBit 1o ) ` (/) ) = 1o
+i169::majval
+s170:s26,s87,s26,i169:mp3an |- ( ( (/) majBit 1o ) ` (/) ) = if ( ( ( (/) = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) , 1o , (/) )
+s171:s170:a1i |- ( T. -> ( ( (/) majBit 1o ) ` (/) ) = if ( ( ( (/) = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) )
+s172:s31:a1i |- ( T. -> -. (/) = 1o )
+s173:s96:a1i |- ( T. -> 1o = 1o )
+i174::simpl
+i175::con3i
+s176:s172:intnanrd |- ( T. -> -. ( (/) = 1o /\ 1o = 1o ) )
+s177:s173:olcd |- ( T. -> ( (/) = 1o \/ 1o = 1o ) )
+i178::simpl
+i179::con3i
+s180:s172:intnanrd |- ( T. -> -. ( (/) = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) )
+s181:s176,s180:jca |- ( T. -> ( -. ( (/) = 1o /\ 1o = 1o ) /\ -. ( (/) = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) )
+i182::ioran
+s183:s181,i182:sylibr |- ( T. -> -. ( ( (/) = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) )
+s184:s183:iffalsed |- ( T. -> if ( ( ( (/) = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) = (/) )
+s185:s171,s184:eqtrd |- ( T. -> ( ( (/) majBit 1o ) ` (/) ) = (/) )
+s186:s43,s185:ax-mp |- ( ( (/) majBit 1o ) ` (/) ) = (/)
+s187:s168:fveq2i |- ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) = ( bToNat ` 1o )
+s188:s187,s82:eqtri |- ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) = 1
+s189:s186:fveq2i |- ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) = ( bToNat ` (/) )
+s190:s189,s19:eqtri |- ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) = 0
+s191:s190:oveq2i |- ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) = ( 2 x. 0 )
+s192:s191,s70:eqtri |- ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) = 0
+s193:s188,s192:oveq12i |- ( ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) ) = ( 1 + 0 )
+s194:s193,s132:eqtri |- ( ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) ) = 1
+s195:s149,s194:eqtr4i |- ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( (/) sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` (/) ) ) ) )
+s196:s195,c42:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s197::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> C = 1o )
+s198:s6:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) -> A = (/) )
+s199:s198:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> A = (/) )
+s200:s137:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> B = 1o )
+c43:s199:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` A ) = ( bToNat ` (/) ) )
+c44:s200:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` B ) = ( bToNat ` 1o ) )
+c45:c43,c44:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) )
+c46:s197:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` C ) = ( bToNat ` 1o ) )
+c47:c45,c46:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) )
+c48:s199,s200:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( A sumBit B ) = ( (/) sumBit 1o ) )
+c49:c48,s197:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( ( A sumBit B ) ` C ) = ( ( (/) sumBit 1o ) ` 1o ) )
+c50:c49:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) )
+c51:s199,s200:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( A majBit B ) = ( (/) majBit 1o ) )
+c52:c51,s197:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( ( A majBit B ) ` C ) = ( ( (/) majBit 1o ) ` 1o ) )
+c53:c52:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) )
+c54:c53:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) )
+c55:c50,c54:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) ) )
+c56:c47,c55:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) ) ) )
+s201:s19,s82:oveq12i |- ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) = ( 0 + 1 )
+s202:s201,s85:eqtri |- ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) = 1
+s203:s202,s82:oveq12i |- ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = ( 1 + 1 )
+s204::1p1e2 |- ( 1 + 1 ) = 2
+s205:s203,s204:eqtri |- ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = 2
+i206::sumbitval
+s207:s26,s87,s87,i206:mp3an |- ( ( (/) sumBit 1o ) ` 1o ) = if ( ( ( (/) = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) , 1o , (/) )
+s208:s207:a1i |- ( T. -> ( ( (/) sumBit 1o ) ` 1o ) = if ( ( ( (/) = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) , 1o , (/) ) )
+s209:s31:a1i |- ( T. -> -. (/) = 1o )
+s210:s96:a1i |- ( T. -> 1o = 1o )
+i211::nbn2
+s212:s209,i211:syl |- ( T. -> ( -. 1o = 1o <-> ( (/) = 1o <-> 1o = 1o ) ) )
+s213:s210:notnotd |- ( T. -> -. -. 1o = 1o )
+s214:s213,s212:mtbid |- ( T. -> -. ( (/) = 1o <-> 1o = 1o ) )
+i215::df-xor
+s216:s214,i215:sylibr |- ( T. -> ( (/) = 1o \/_ 1o = 1o ) )
+s217:s216,s210:2thd |- ( T. -> ( ( (/) = 1o \/_ 1o = 1o ) <-> 1o = 1o ) )
+i218::df-xor
+s219:s217:notnotd |- ( T. -> -. -. ( ( (/) = 1o \/_ 1o = 1o ) <-> 1o = 1o ) )
+s220:s219,i218:sylnibr |- ( T. -> -. ( ( (/) = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) )
+s221:s220:iffalsed |- ( T. -> if ( ( ( (/) = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) , 1o , (/) ) = (/) )
+s222:s208,s221:eqtrd |- ( T. -> ( ( (/) sumBit 1o ) ` 1o ) = (/) )
+s223:s43,s222:ax-mp |- ( ( (/) sumBit 1o ) ` 1o ) = (/)
+i224::majval
+s225:s26,s87,s87,i224:mp3an |- ( ( (/) majBit 1o ) ` 1o ) = if ( ( ( (/) = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) , 1o , (/) )
+s226:s225:a1i |- ( T. -> ( ( (/) majBit 1o ) ` 1o ) = if ( ( ( (/) = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) )
+s227:s31:a1i |- ( T. -> -. (/) = 1o )
+s228:s96:a1i |- ( T. -> 1o = 1o )
+i229::simpl
+i230::con3i
+s231:s227:intnanrd |- ( T. -> -. ( (/) = 1o /\ 1o = 1o ) )
+s232:s228:olcd |- ( T. -> ( (/) = 1o \/ 1o = 1o ) )
+s233:s228,s232:jca |- ( T. -> ( 1o = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) )
+s234:s233:olcd |- ( T. -> ( ( (/) = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) )
+s235:s234:iftrued |- ( T. -> if ( ( ( (/) = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( (/) = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) = 1o )
+s236:s226,s235:eqtrd |- ( T. -> ( ( (/) majBit 1o ) ` 1o ) = 1o )
+s237:s43,s236:ax-mp |- ( ( (/) majBit 1o ) ` 1o ) = 1o
+s238:s223:fveq2i |- ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) = ( bToNat ` (/) )
+s239:s238,s19:eqtri |- ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) = 0
+s240:s237:fveq2i |- ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) = ( bToNat ` 1o )
+s241:s240,s82:eqtri |- ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) = 1
+s242:s241:oveq2i |- ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) = ( 2 x. 1 )
+s243:s69:mulridi |- ( 2 x. 1 ) = 2
+s244:s242,s243:eqtri |- ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) = 2
+s245:s239,s244:oveq12i |- ( ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) ) = ( 0 + 2 )
+s246:s69:addlidi |- ( 0 + 2 ) = 2
+s247:s245,s246:eqtri |- ( ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) ) = 2
+s248:s205,s247:eqtr4i |- ( ( ( bToNat ` (/) ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( (/) sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( (/) majBit 1o ) ` 1o ) ) ) )
+s249:s248,c56:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s250:s196,s249,s141:mpjaodan |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) /\ B = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s251:s136,s250,s9:mpjaodan |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s252::simpr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) -> A = 1o )
+s253:s2:adantr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) -> B e. 2o )
+i254::bwel2o
+s255:s253,i254:syl |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) -> ( B = (/) \/ B = 1o ) )
+s256::simpr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) -> B = (/) )
+s257:s3:adantr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) -> C e. 2o )
+s258:s257:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) -> C e. 2o )
+i259::bwel2o
+s260:s258,i259:syl |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) -> ( C = (/) \/ C = 1o ) )
+s261::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> C = (/) )
+s262:s252:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) -> A = 1o )
+s263:s262:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> A = 1o )
+s264:s256:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> B = (/) )
+c57:s263:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` A ) = ( bToNat ` 1o ) )
+c58:s264:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` B ) = ( bToNat ` (/) ) )
+c59:c57,c58:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) )
+c60:s261:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` C ) = ( bToNat ` (/) ) )
+c61:c59,c60:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) )
+c62:s263,s264:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( A sumBit B ) = ( 1o sumBit (/) ) )
+c63:c62,s261:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( ( A sumBit B ) ` C ) = ( ( 1o sumBit (/) ) ` (/) ) )
+c64:c63:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) )
+c65:s263,s264:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( A majBit B ) = ( 1o majBit (/) ) )
+c66:c65,s261:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( ( A majBit B ) ` C ) = ( ( 1o majBit (/) ) ` (/) ) )
+c67:c66:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) )
+c68:c67:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) )
+c69:c64,c68:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) ) )
+c70:c61,c69:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) ) ) )
+s265:s82,s19:oveq12i |- ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) = ( 1 + 0 )
+s266:s265,s132:eqtri |- ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) = 1
+s267:s266,s19:oveq12i |- ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = ( 1 + 0 )
+s268:s267,s132:eqtri |- ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = 1
+i269::sumbitval
+s270:s87,s26,s26,i269:mp3an |- ( ( 1o sumBit (/) ) ` (/) ) = if ( ( ( 1o = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) , 1o , (/) )
+s271:s270:a1i |- ( T. -> ( ( 1o sumBit (/) ) ` (/) ) = if ( ( ( 1o = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) , 1o , (/) ) )
+s272:s96:a1i |- ( T. -> 1o = 1o )
+s273:s31:a1i |- ( T. -> -. (/) = 1o )
+i274::pm5.501
+s275:s272,i274:syl |- ( T. -> ( (/) = 1o <-> ( 1o = 1o <-> (/) = 1o ) ) )
+s276:s273,s275:mtbid |- ( T. -> -. ( 1o = 1o <-> (/) = 1o ) )
+i277::df-xor
+s278:s276,i277:sylibr |- ( T. -> ( 1o = 1o \/_ (/) = 1o ) )
+i279::pm5.501
+s280:s278,i279:syl |- ( T. -> ( (/) = 1o <-> ( ( 1o = 1o \/_ (/) = 1o ) <-> (/) = 1o ) ) )
+s281:s273,s280:mtbid |- ( T. -> -. ( ( 1o = 1o \/_ (/) = 1o ) <-> (/) = 1o ) )
+i282::df-xor
+s283:s281,i282:sylibr |- ( T. -> ( ( 1o = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) )
+s284:s283:iftrued |- ( T. -> if ( ( ( 1o = 1o \/_ (/) = 1o ) \/_ (/) = 1o ) , 1o , (/) ) = 1o )
+s285:s271,s284:eqtrd |- ( T. -> ( ( 1o sumBit (/) ) ` (/) ) = 1o )
+s286:s43,s285:ax-mp |- ( ( 1o sumBit (/) ) ` (/) ) = 1o
+i287::majval
+s288:s87,s26,s26,i287:mp3an |- ( ( 1o majBit (/) ) ` (/) ) = if ( ( ( 1o = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) , 1o , (/) )
+s289:s288:a1i |- ( T. -> ( ( 1o majBit (/) ) ` (/) ) = if ( ( ( 1o = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) )
+s290:s96:a1i |- ( T. -> 1o = 1o )
+s291:s31:a1i |- ( T. -> -. (/) = 1o )
+s292:s291:intnand |- ( T. -> -. ( 1o = 1o /\ (/) = 1o ) )
+s293:s290:orcd |- ( T. -> ( 1o = 1o \/ (/) = 1o ) )
+i294::simpl
+i295::con3i
+s296:s291:intnanrd |- ( T. -> -. ( (/) = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) )
+s297:s292,s296:jca |- ( T. -> ( -. ( 1o = 1o /\ (/) = 1o ) /\ -. ( (/) = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) )
+i298::ioran
+s299:s297,i298:sylibr |- ( T. -> -. ( ( 1o = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) )
+s300:s299:iffalsed |- ( T. -> if ( ( ( 1o = 1o /\ (/) = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) = (/) )
+s301:s289,s300:eqtrd |- ( T. -> ( ( 1o majBit (/) ) ` (/) ) = (/) )
+s302:s43,s301:ax-mp |- ( ( 1o majBit (/) ) ` (/) ) = (/)
+s303:s286:fveq2i |- ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) = ( bToNat ` 1o )
+s304:s303,s82:eqtri |- ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) = 1
+s305:s302:fveq2i |- ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) = ( bToNat ` (/) )
+s306:s305,s19:eqtri |- ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) = 0
+s307:s306:oveq2i |- ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) = ( 2 x. 0 )
+s308:s307,s70:eqtri |- ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) = 0
+s309:s304,s308:oveq12i |- ( ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) ) = ( 1 + 0 )
+s310:s309,s132:eqtri |- ( ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) ) = 1
+s311:s268,s310:eqtr4i |- ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( 1o sumBit (/) ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` (/) ) ) ) )
+s312:s311,c70:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s313::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> C = 1o )
+s314:s252:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) -> A = 1o )
+s315:s314:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> A = 1o )
+s316:s256:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> B = (/) )
+c71:s315:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` A ) = ( bToNat ` 1o ) )
+c72:s316:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` B ) = ( bToNat ` (/) ) )
+c73:c71,c72:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) )
+c74:s313:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` C ) = ( bToNat ` 1o ) )
+c75:c73,c74:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) )
+c76:s315,s316:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( A sumBit B ) = ( 1o sumBit (/) ) )
+c77:c76,s313:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( ( A sumBit B ) ` C ) = ( ( 1o sumBit (/) ) ` 1o ) )
+c78:c77:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) )
+c79:s315,s316:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( A majBit B ) = ( 1o majBit (/) ) )
+c80:c79,s313:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( ( A majBit B ) ` C ) = ( ( 1o majBit (/) ) ` 1o ) )
+c81:c80:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) )
+c82:c81:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) )
+c83:c78,c82:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) ) )
+c84:c75,c83:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) ) ) )
+s317:s82,s19:oveq12i |- ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) = ( 1 + 0 )
+s318:s317,s132:eqtri |- ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) = 1
+s319:s318,s82:oveq12i |- ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = ( 1 + 1 )
+s320:s319,s204:eqtri |- ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = 2
+i321::sumbitval
+s322:s87,s26,s87,i321:mp3an |- ( ( 1o sumBit (/) ) ` 1o ) = if ( ( ( 1o = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) , 1o , (/) )
+s323:s322:a1i |- ( T. -> ( ( 1o sumBit (/) ) ` 1o ) = if ( ( ( 1o = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) , 1o , (/) ) )
+s324:s96:a1i |- ( T. -> 1o = 1o )
+s325:s31:a1i |- ( T. -> -. (/) = 1o )
+i326::pm5.501
+s327:s324,i326:syl |- ( T. -> ( (/) = 1o <-> ( 1o = 1o <-> (/) = 1o ) ) )
+s328:s325,s327:mtbid |- ( T. -> -. ( 1o = 1o <-> (/) = 1o ) )
+i329::df-xor
+s330:s328,i329:sylibr |- ( T. -> ( 1o = 1o \/_ (/) = 1o ) )
+s331:s330,s324:2thd |- ( T. -> ( ( 1o = 1o \/_ (/) = 1o ) <-> 1o = 1o ) )
+i332::df-xor
+s333:s331:notnotd |- ( T. -> -. -. ( ( 1o = 1o \/_ (/) = 1o ) <-> 1o = 1o ) )
+s334:s333,i332:sylnibr |- ( T. -> -. ( ( 1o = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) )
+s335:s334:iffalsed |- ( T. -> if ( ( ( 1o = 1o \/_ (/) = 1o ) \/_ 1o = 1o ) , 1o , (/) ) = (/) )
+s336:s323,s335:eqtrd |- ( T. -> ( ( 1o sumBit (/) ) ` 1o ) = (/) )
+s337:s43,s336:ax-mp |- ( ( 1o sumBit (/) ) ` 1o ) = (/)
+i338::majval
+s339:s87,s26,s87,i338:mp3an |- ( ( 1o majBit (/) ) ` 1o ) = if ( ( ( 1o = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) , 1o , (/) )
+s340:s339:a1i |- ( T. -> ( ( 1o majBit (/) ) ` 1o ) = if ( ( ( 1o = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) )
+s341:s96:a1i |- ( T. -> 1o = 1o )
+s342:s31:a1i |- ( T. -> -. (/) = 1o )
+s343:s342:intnand |- ( T. -> -. ( 1o = 1o /\ (/) = 1o ) )
+s344:s341:orcd |- ( T. -> ( 1o = 1o \/ (/) = 1o ) )
+s345:s341,s344:jca |- ( T. -> ( 1o = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) )
+s346:s345:olcd |- ( T. -> ( ( 1o = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) )
+s347:s346:iftrued |- ( T. -> if ( ( ( 1o = 1o /\ (/) = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ (/) = 1o ) ) ) , 1o , (/) ) = 1o )
+s348:s340,s347:eqtrd |- ( T. -> ( ( 1o majBit (/) ) ` 1o ) = 1o )
+s349:s43,s348:ax-mp |- ( ( 1o majBit (/) ) ` 1o ) = 1o
+s350:s337:fveq2i |- ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) = ( bToNat ` (/) )
+s351:s350,s19:eqtri |- ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) = 0
+s352:s349:fveq2i |- ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) = ( bToNat ` 1o )
+s353:s352,s82:eqtri |- ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) = 1
+s354:s353:oveq2i |- ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) = ( 2 x. 1 )
+s355:s354,s243:eqtri |- ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) = 2
+s356:s351,s355:oveq12i |- ( ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) ) = ( 0 + 2 )
+s357:s356,s246:eqtri |- ( ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) ) = 2
+s358:s320,s357:eqtr4i |- ( ( ( bToNat ` 1o ) + ( bToNat ` (/) ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( 1o sumBit (/) ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit (/) ) ` 1o ) ) ) )
+s359:s358,c84:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s360:s312,s359,s260:mpjaodan |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s361::simpr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) -> B = 1o )
+s362:s3:adantr |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) -> C e. 2o )
+s363:s362:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) -> C e. 2o )
+i364::bwel2o
+s365:s363,i364:syl |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) -> ( C = (/) \/ C = 1o ) )
+s366::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> C = (/) )
+s367:s252:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) -> A = 1o )
+s368:s367:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> A = 1o )
+s369:s361:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> B = 1o )
+c85:s368:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` A ) = ( bToNat ` 1o ) )
+c86:s369:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` B ) = ( bToNat ` 1o ) )
+c87:c85,c86:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) )
+c88:s366:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` C ) = ( bToNat ` (/) ) )
+c89:c87,c88:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) )
+c90:s368,s369:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( A sumBit B ) = ( 1o sumBit 1o ) )
+c91:c90,s366:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( ( A sumBit B ) ` C ) = ( ( 1o sumBit 1o ) ` (/) ) )
+c92:c91:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) )
+c93:s368,s369:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( A majBit B ) = ( 1o majBit 1o ) )
+c94:c93,s366:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( ( A majBit B ) ` C ) = ( ( 1o majBit 1o ) ` (/) ) )
+c95:c94:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) )
+c96:c95:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) )
+c97:c92,c96:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) ) )
+c98:c89,c97:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) ) ) )
+s370:s82,s82:oveq12i |- ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) = ( 1 + 1 )
+s371:s370,s204:eqtri |- ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) = 2
+s372:s371,s19:oveq12i |- ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = ( 2 + 0 )
+s373:s69:addridi |- ( 2 + 0 ) = 2
+s374:s372,s373:eqtri |- ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = 2
+i375::sumbitval
+s376:s87,s87,s26,i375:mp3an |- ( ( 1o sumBit 1o ) ` (/) ) = if ( ( ( 1o = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) , 1o , (/) )
+s377:s376:a1i |- ( T. -> ( ( 1o sumBit 1o ) ` (/) ) = if ( ( ( 1o = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) , 1o , (/) ) )
+s378:s96:a1i |- ( T. -> 1o = 1o )
+s379:s378,s378:2thd |- ( T. -> ( 1o = 1o <-> 1o = 1o ) )
+i380::df-xor
+s381:s379:notnotd |- ( T. -> -. -. ( 1o = 1o <-> 1o = 1o ) )
+s382:s381,i380:sylnibr |- ( T. -> -. ( 1o = 1o \/_ 1o = 1o ) )
+s383:s31:a1i |- ( T. -> -. (/) = 1o )
+s384:s382,s383:2falsed |- ( T. -> ( ( 1o = 1o \/_ 1o = 1o ) <-> (/) = 1o ) )
+i385::df-xor
+s386:s384:notnotd |- ( T. -> -. -. ( ( 1o = 1o \/_ 1o = 1o ) <-> (/) = 1o ) )
+s387:s386,i385:sylnibr |- ( T. -> -. ( ( 1o = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) )
+s388:s387:iffalsed |- ( T. -> if ( ( ( 1o = 1o \/_ 1o = 1o ) \/_ (/) = 1o ) , 1o , (/) ) = (/) )
+s389:s377,s388:eqtrd |- ( T. -> ( ( 1o sumBit 1o ) ` (/) ) = (/) )
+s390:s43,s389:ax-mp |- ( ( 1o sumBit 1o ) ` (/) ) = (/)
+i391::majval
+s392:s87,s87,s26,i391:mp3an |- ( ( 1o majBit 1o ) ` (/) ) = if ( ( ( 1o = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) , 1o , (/) )
+s393:s392:a1i |- ( T. -> ( ( 1o majBit 1o ) ` (/) ) = if ( ( ( 1o = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) )
+s394:s96:a1i |- ( T. -> 1o = 1o )
+s395:s394,s394:jca |- ( T. -> ( 1o = 1o /\ 1o = 1o ) )
+s396:s31:a1i |- ( T. -> -. (/) = 1o )
+s397:s394:orcd |- ( T. -> ( 1o = 1o \/ 1o = 1o ) )
+i398::simpl
+i399::con3i
+s400:s396:intnanrd |- ( T. -> -. ( (/) = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) )
+s401:s395:orcd |- ( T. -> ( ( 1o = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) )
+s402:s401:iftrued |- ( T. -> if ( ( ( 1o = 1o /\ 1o = 1o ) \/ ( (/) = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) = 1o )
+s403:s393,s402:eqtrd |- ( T. -> ( ( 1o majBit 1o ) ` (/) ) = 1o )
+s404:s43,s403:ax-mp |- ( ( 1o majBit 1o ) ` (/) ) = 1o
+s405:s390:fveq2i |- ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) = ( bToNat ` (/) )
+s406:s405,s19:eqtri |- ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) = 0
+s407:s404:fveq2i |- ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) = ( bToNat ` 1o )
+s408:s407,s82:eqtri |- ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) = 1
+s409:s408:oveq2i |- ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) = ( 2 x. 1 )
+s410:s409,s243:eqtri |- ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) = 2
+s411:s406,s410:oveq12i |- ( ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) ) = ( 0 + 2 )
+s412:s411,s246:eqtri |- ( ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) ) = 2
+s413:s374,s412:eqtr4i |- ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` (/) ) ) = ( ( bToNat ` ( ( 1o sumBit 1o ) ` (/) ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` (/) ) ) ) )
+s414:s413,c98:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = (/) ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s415::simpr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> C = 1o )
+s416:s252:adantr |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) -> A = 1o )
+s417:s416:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> A = 1o )
+s418:s361:adantr |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> B = 1o )
+c99:s417:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` A ) = ( bToNat ` 1o ) )
+c100:s418:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` B ) = ( bToNat ` 1o ) )
+c101:c99,c100:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( ( bToNat ` A ) + ( bToNat ` B ) ) = ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) )
+c102:s415:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` C ) = ( bToNat ` 1o ) )
+c103:c101,c102:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) )
+c104:s417,s418:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( A sumBit B ) = ( 1o sumBit 1o ) )
+c105:c104,s415:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( ( A sumBit B ) ` C ) = ( ( 1o sumBit 1o ) ` 1o ) )
+c106:c105:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` ( ( A sumBit B ) ` C ) ) = ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) )
+c107:s417,s418:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( A majBit B ) = ( 1o majBit 1o ) )
+c108:c107,s415:fveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( ( A majBit B ) ` C ) = ( ( 1o majBit 1o ) ` 1o ) )
+c109:c108:fveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( bToNat ` ( ( A majBit B ) ` C ) ) = ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) )
+c110:c109:oveq2d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) = ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) )
+c111:c106,c110:oveq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) = ( ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) ) )
+c112:c103,c111:eqeq12d |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) <-> ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) ) ) )
+s419:s82,s82:oveq12i |- ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) = ( 1 + 1 )
+s420:s419,s204:eqtri |- ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) = 2
+s421:s420,s82:oveq12i |- ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = ( 2 + 1 )
+s422::2p1e3 |- ( 2 + 1 ) = 3
+s423:s421,s422:eqtri |- ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = 3
+i424::sumbitval
+s425:s87,s87,s87,i424:mp3an |- ( ( 1o sumBit 1o ) ` 1o ) = if ( ( ( 1o = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) , 1o , (/) )
+s426:s425:a1i |- ( T. -> ( ( 1o sumBit 1o ) ` 1o ) = if ( ( ( 1o = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) , 1o , (/) ) )
+s427:s96:a1i |- ( T. -> 1o = 1o )
+s428:s427,s427:2thd |- ( T. -> ( 1o = 1o <-> 1o = 1o ) )
+i429::df-xor
+s430:s428:notnotd |- ( T. -> -. -. ( 1o = 1o <-> 1o = 1o ) )
+s431:s430,i429:sylnibr |- ( T. -> -. ( 1o = 1o \/_ 1o = 1o ) )
+i432::nbn2
+s433:s431,i432:syl |- ( T. -> ( -. 1o = 1o <-> ( ( 1o = 1o \/_ 1o = 1o ) <-> 1o = 1o ) ) )
+s434:s427:notnotd |- ( T. -> -. -. 1o = 1o )
+s435:s434,s433:mtbid |- ( T. -> -. ( ( 1o = 1o \/_ 1o = 1o ) <-> 1o = 1o ) )
+i436::df-xor
+s437:s435,i436:sylibr |- ( T. -> ( ( 1o = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) )
+s438:s437:iftrued |- ( T. -> if ( ( ( 1o = 1o \/_ 1o = 1o ) \/_ 1o = 1o ) , 1o , (/) ) = 1o )
+s439:s426,s438:eqtrd |- ( T. -> ( ( 1o sumBit 1o ) ` 1o ) = 1o )
+s440:s43,s439:ax-mp |- ( ( 1o sumBit 1o ) ` 1o ) = 1o
+i441::majval
+s442:s87,s87,s87,i441:mp3an |- ( ( 1o majBit 1o ) ` 1o ) = if ( ( ( 1o = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) , 1o , (/) )
+s443:s442:a1i |- ( T. -> ( ( 1o majBit 1o ) ` 1o ) = if ( ( ( 1o = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) )
+s444:s96:a1i |- ( T. -> 1o = 1o )
+s445:s444,s444:jca |- ( T. -> ( 1o = 1o /\ 1o = 1o ) )
+s446:s444:orcd |- ( T. -> ( 1o = 1o \/ 1o = 1o ) )
+s447:s444,s446:jca |- ( T. -> ( 1o = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) )
+s448:s445:orcd |- ( T. -> ( ( 1o = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) )
+s449:s448:iftrued |- ( T. -> if ( ( ( 1o = 1o /\ 1o = 1o ) \/ ( 1o = 1o /\ ( 1o = 1o \/ 1o = 1o ) ) ) , 1o , (/) ) = 1o )
+s450:s443,s449:eqtrd |- ( T. -> ( ( 1o majBit 1o ) ` 1o ) = 1o )
+s451:s43,s450:ax-mp |- ( ( 1o majBit 1o ) ` 1o ) = 1o
+s452:s440:fveq2i |- ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) = ( bToNat ` 1o )
+s453:s452,s82:eqtri |- ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) = 1
+s454:s451:fveq2i |- ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) = ( bToNat ` 1o )
+s455:s454,s82:eqtri |- ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) = 1
+s456:s455:oveq2i |- ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) = ( 2 x. 1 )
+s457:s456,s243:eqtri |- ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) = 2
+s458:s453,s457:oveq12i |- ( ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) ) = ( 1 + 2 )
+s459::1p2e3 |- ( 1 + 2 ) = 3
+s460:s458,s459:eqtri |- ( ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) ) = 3
+s461:s423,s460:eqtr4i |- ( ( ( bToNat ` 1o ) + ( bToNat ` 1o ) ) + ( bToNat ` 1o ) ) = ( ( bToNat ` ( ( 1o sumBit 1o ) ` 1o ) ) + ( 2 x. ( bToNat ` ( ( 1o majBit 1o ) ` 1o ) ) ) )
+s462:s461,c112:mpbiri |- ( ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) /\ C = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s463:s414,s462,s365:mpjaodan |- ( ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) /\ B = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+s464:s360,s463,s255:mpjaodan |- ( ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) /\ A = 1o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+qed:s251,s464,s5:mpjaodan |- ( ( A e. 2o /\ B e. 2o /\ C e. 2o ) -> ( ( ( bToNat ` A ) + ( bToNat ` B ) ) + ( bToNat ` C ) ) = ( ( bToNat ` ( ( A sumBit B ) ` C ) ) + ( 2 x. ( bToNat ` ( ( A majBit B ) ` C ) ) ) ) )
+$)

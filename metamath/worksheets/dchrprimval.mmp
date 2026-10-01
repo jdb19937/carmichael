@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=dchrprimval  LOC_AFTER=?
+
+* Value of the primitive character (Mathlib primitiveCharacter): the unique character mod the conductor inducing X.
+
+s1::simpl |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> N e. NN )
+s2::simpr |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> X e. ( Base ` ( DChr ` N ) ) )
+s3::df-dchrprim |- DChrPrim = ( n e. NN , x e. ( Base ` ( DChr ` n ) ) |-> ( iota_ y e. ( Base ` ( DChr ` ( n DChrCond x ) ) ) x = ( ( ( n DChrCond x ) DChrInd n ) ` y ) ) )
+s4:s3:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> DChrPrim = ( n e. NN , x e. ( Base ` ( DChr ` n ) ) |-> ( iota_ y e. ( Base ` ( DChr ` ( n DChrCond x ) ) ) x = ( ( ( n DChrCond x ) DChrInd n ) ` y ) ) ) )
+s5::simprl |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> n = N )
+s6::simprr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> x = X )
+s7:s5,s6:oveq12d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( n DChrCond x ) = ( N DChrCond X ) )
+s8:s7:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( DChr ` ( n DChrCond x ) ) = ( DChr ` ( N DChrCond X ) ) )
+s9:s8:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( Base ` ( DChr ` ( n DChrCond x ) ) ) = ( Base ` ( DChr ` ( N DChrCond X ) ) ) )
+s10:s7,s5:oveq12d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ( n DChrCond x ) DChrInd n ) = ( ( N DChrCond X ) DChrInd N ) )
+s11:s10:fveq1d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( ( ( n DChrCond x ) DChrInd n ) ` y ) = ( ( ( N DChrCond X ) DChrInd N ) ` y ) )
+s12:s6,s11:eqeq12d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( x = ( ( ( n DChrCond x ) DChrInd n ) ` y ) <-> X = ( ( ( N DChrCond X ) DChrInd N ) ` y ) ) )
+s13:s9,s12:riotaeqbidv |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ ( n = N /\ x = X ) ) -> ( iota_ y e. ( Base ` ( DChr ` ( n DChrCond x ) ) ) x = ( ( ( n DChrCond x ) DChrInd n ) ` y ) ) = ( iota_ y e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) X = ( ( ( N DChrCond X ) DChrInd N ) ` y ) ) )
+s14::simpr |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> n = N )
+s15:s14:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> ( DChr ` n ) = ( DChr ` N ) )
+s16:s15:fveq2d |- ( ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) /\ n = N ) -> ( Base ` ( DChr ` n ) ) = ( Base ` ( DChr ` N ) ) )
+s17::riotaex |- ( iota_ y e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) X = ( ( ( N DChrCond X ) DChrInd N ) ` y ) ) e. _V
+s18:s17:a1i |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( iota_ y e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) X = ( ( ( N DChrCond X ) DChrInd N ) ` y ) ) e. _V )
+qed:s4,s13,s16,s1,s2,s18:ovmpodx |- ( ( N e. NN /\ X e. ( Base ` ( DChr ` N ) ) ) -> ( N DChrPrim X ) = ( iota_ y e. ( Base ` ( DChr ` ( N DChrCond X ) ) ) X = ( ( ( N DChrCond X ) DChrInd N ) ` y ) ) )
+$)

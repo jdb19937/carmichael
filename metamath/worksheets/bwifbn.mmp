@@ -1,0 +1,32 @@
+$( <MM> <PROOF_ASST> THEOREM=bwifbn  LOC_AFTER=?
+
+* A digit weight as a product: if ( ph , 2 ^ I , 0 ) is 2 ^ I times the value of the Boolean of ph.
+
+s1::id |- ( I e. NN0 -> I e. NN0 )
+s2::2cn |- 2 e. CC
+s3:s2:a1i |- ( I e. NN0 -> 2 e. CC )
+s4:s3,s1:expcld |- ( I e. NN0 -> ( 2 ^ I ) e. CC )
+s5::simpr |- ( ( I e. NN0 /\ ph ) -> ph )
+s6:s5:iftrued |- ( ( I e. NN0 /\ ph ) -> if ( ph , ( 2 ^ I ) , 0 ) = ( 2 ^ I ) )
+s7:s5:iftrued |- ( ( I e. NN0 /\ ph ) -> if ( ph , 1o , (/) ) = 1o )
+s8:s7:fveq2d |- ( ( I e. NN0 /\ ph ) -> ( bToNat ` if ( ph , 1o , (/) ) ) = ( bToNat ` 1o ) )
+s9::bwbn1 |- ( bToNat ` 1o ) = 1
+s10:s8,s9:eqtrdi |- ( ( I e. NN0 /\ ph ) -> ( bToNat ` if ( ph , 1o , (/) ) ) = 1 )
+s11:s10:oveq2d |- ( ( I e. NN0 /\ ph ) -> ( ( 2 ^ I ) x. ( bToNat ` if ( ph , 1o , (/) ) ) ) = ( ( 2 ^ I ) x. 1 ) )
+s12:s4:adantr |- ( ( I e. NN0 /\ ph ) -> ( 2 ^ I ) e. CC )
+s13:s12:mulridd |- ( ( I e. NN0 /\ ph ) -> ( ( 2 ^ I ) x. 1 ) = ( 2 ^ I ) )
+s14:s11,s13:eqtrd |- ( ( I e. NN0 /\ ph ) -> ( ( 2 ^ I ) x. ( bToNat ` if ( ph , 1o , (/) ) ) ) = ( 2 ^ I ) )
+s15:s6,s14:eqtr4d |- ( ( I e. NN0 /\ ph ) -> if ( ph , ( 2 ^ I ) , 0 ) = ( ( 2 ^ I ) x. ( bToNat ` if ( ph , 1o , (/) ) ) ) )
+s16::simpr |- ( ( I e. NN0 /\ -. ph ) -> -. ph )
+s17:s16:iffalsed |- ( ( I e. NN0 /\ -. ph ) -> if ( ph , ( 2 ^ I ) , 0 ) = 0 )
+s18:s16:iffalsed |- ( ( I e. NN0 /\ -. ph ) -> if ( ph , 1o , (/) ) = (/) )
+s19:s18:fveq2d |- ( ( I e. NN0 /\ -. ph ) -> ( bToNat ` if ( ph , 1o , (/) ) ) = ( bToNat ` (/) ) )
+s20::bwbn0 |- ( bToNat ` (/) ) = 0
+s21:s19,s20:eqtrdi |- ( ( I e. NN0 /\ -. ph ) -> ( bToNat ` if ( ph , 1o , (/) ) ) = 0 )
+s22:s21:oveq2d |- ( ( I e. NN0 /\ -. ph ) -> ( ( 2 ^ I ) x. ( bToNat ` if ( ph , 1o , (/) ) ) ) = ( ( 2 ^ I ) x. 0 ) )
+s23:s4:adantr |- ( ( I e. NN0 /\ -. ph ) -> ( 2 ^ I ) e. CC )
+s24:s23:mul01d |- ( ( I e. NN0 /\ -. ph ) -> ( ( 2 ^ I ) x. 0 ) = 0 )
+s25:s22,s24:eqtrd |- ( ( I e. NN0 /\ -. ph ) -> ( ( 2 ^ I ) x. ( bToNat ` if ( ph , 1o , (/) ) ) ) = 0 )
+s26:s17,s25:eqtr4d |- ( ( I e. NN0 /\ -. ph ) -> if ( ph , ( 2 ^ I ) , 0 ) = ( ( 2 ^ I ) x. ( bToNat ` if ( ph , 1o , (/) ) ) ) )
+qed:s15,s26:pm2.61dan |- ( I e. NN0 -> if ( ph , ( 2 ^ I ) , 0 ) = ( ( 2 ^ I ) x. ( bToNat ` if ( ph , 1o , (/) ) ) ) )
+$)

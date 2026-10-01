@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=carriesnil  LOC_AFTER=?
+
+* The empty word has no carries.
+
+s1::carriesval |- ( (/) e. Word 2o -> ( carries ` (/) ) = if ( ( ( toNat ` (/) ) + 1 ) = ( 2 ^ ( # ` (/) ) ) , ( # ` (/) ) , ( 2 pCnt ( ( toNat ` (/) ) + 1 ) ) ) )
+s2::wrd0 |- (/) e. Word 2o
+s3:s2,s1:ax-mp |- ( carries ` (/) ) = if ( ( ( toNat ` (/) ) + 1 ) = ( 2 ^ ( # ` (/) ) ) , ( # ` (/) ) , ( 2 pCnt ( ( toNat ` (/) ) + 1 ) ) )
+s4:s3:a1i |- ( T. -> ( carries ` (/) ) = if ( ( ( toNat ` (/) ) + 1 ) = ( 2 ^ ( # ` (/) ) ) , ( # ` (/) ) , ( 2 pCnt ( ( toNat ` (/) ) + 1 ) ) ) )
+s5::tonat0 |- ( toNat ` (/) ) = 0
+s6:s5:a1i |- ( T. -> ( toNat ` (/) ) = 0 )
+s7::hash0 |- ( # ` (/) ) = 0
+s8:s7:a1i |- ( T. -> ( # ` (/) ) = 0 )
+s9::0p1e1 |- ( 0 + 1 ) = 1
+s10:s9:a1i |- ( T. -> ( 0 + 1 ) = 1 )
+s11::2cn |- 2 e. CC
+i12::exp0
+s13:s11,i12:ax-mp |- ( 2 ^ 0 ) = 1
+s14:s13:a1i |- ( T. -> ( 2 ^ 0 ) = 1 )
+c1:s6:oveq1d |- ( T. -> ( ( toNat ` (/) ) + 1 ) = ( 0 + 1 ) )
+c2:s8:oveq2d |- ( T. -> ( 2 ^ ( # ` (/) ) ) = ( 2 ^ 0 ) )
+c3:c1,c2:eqeq12d |- ( T. -> ( ( ( toNat ` (/) ) + 1 ) = ( 2 ^ ( # ` (/) ) ) <-> ( 0 + 1 ) = ( 2 ^ 0 ) ) )
+c4:s6:oveq1d |- ( T. -> ( ( toNat ` (/) ) + 1 ) = ( 0 + 1 ) )
+c5:c4:oveq2d |- ( T. -> ( 2 pCnt ( ( toNat ` (/) ) + 1 ) ) = ( 2 pCnt ( 0 + 1 ) ) )
+c6:c3,s8,c5:ifbieq12d |- ( T. -> if ( ( ( toNat ` (/) ) + 1 ) = ( 2 ^ ( # ` (/) ) ) , ( # ` (/) ) , ( 2 pCnt ( ( toNat ` (/) ) + 1 ) ) ) = if ( ( 0 + 1 ) = ( 2 ^ 0 ) , 0 , ( 2 pCnt ( 0 + 1 ) ) ) )
+c7:s10,s14:eqeq12d |- ( T. -> ( ( 0 + 1 ) = ( 2 ^ 0 ) <-> 1 = 1 ) )
+c8:s10:oveq2d |- ( T. -> ( 2 pCnt ( 0 + 1 ) ) = ( 2 pCnt 1 ) )
+c9:c7,c8:ifbieq2d |- ( T. -> if ( ( 0 + 1 ) = ( 2 ^ 0 ) , 0 , ( 2 pCnt ( 0 + 1 ) ) ) = if ( 1 = 1 , 0 , ( 2 pCnt 1 ) ) )
+s15:c6,c9:eqtrd |- ( T. -> if ( ( ( toNat ` (/) ) + 1 ) = ( 2 ^ ( # ` (/) ) ) , ( # ` (/) ) , ( 2 pCnt ( ( toNat ` (/) ) + 1 ) ) ) = if ( 1 = 1 , 0 , ( 2 pCnt 1 ) ) )
+s16::eqid |- 1 = 1
+s17:s16:iftruei |- if ( 1 = 1 , 0 , ( 2 pCnt 1 ) ) = 0
+s18:s17:a1i |- ( T. -> if ( 1 = 1 , 0 , ( 2 pCnt 1 ) ) = 0 )
+s19:s4,s15,s18:3eqtrd |- ( T. -> ( carries ` (/) ) = 0 )
+qed:s19:mptru |- ( carries ` (/) ) = 0
+$)

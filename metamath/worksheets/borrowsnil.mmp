@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=borrowsnil  LOC_AFTER=?
+
+* The empty word has no borrows.
+
+s1::borrowsval |- ( (/) e. Word 2o -> ( borrows ` (/) ) = if ( ( toNat ` (/) ) = 0 , ( # ` (/) ) , ( 2 pCnt ( toNat ` (/) ) ) ) )
+s2::wrd0 |- (/) e. Word 2o
+s3:s2,s1:ax-mp |- ( borrows ` (/) ) = if ( ( toNat ` (/) ) = 0 , ( # ` (/) ) , ( 2 pCnt ( toNat ` (/) ) ) )
+s4:s3:a1i |- ( T. -> ( borrows ` (/) ) = if ( ( toNat ` (/) ) = 0 , ( # ` (/) ) , ( 2 pCnt ( toNat ` (/) ) ) ) )
+s5::tonat0 |- ( toNat ` (/) ) = 0
+s6:s5:a1i |- ( T. -> ( toNat ` (/) ) = 0 )
+s7::hash0 |- ( # ` (/) ) = 0
+s8:s7:a1i |- ( T. -> ( # ` (/) ) = 0 )
+c1:s6:eqeq1d |- ( T. -> ( ( toNat ` (/) ) = 0 <-> 0 = 0 ) )
+c2:s6:oveq2d |- ( T. -> ( 2 pCnt ( toNat ` (/) ) ) = ( 2 pCnt 0 ) )
+c3:c1,s8,c2:ifbieq12d |- ( T. -> if ( ( toNat ` (/) ) = 0 , ( # ` (/) ) , ( 2 pCnt ( toNat ` (/) ) ) ) = if ( 0 = 0 , 0 , ( 2 pCnt 0 ) ) )
+s9::eqid |- 0 = 0
+s10:s9:iftruei |- if ( 0 = 0 , 0 , ( 2 pCnt 0 ) ) = 0
+s11:s10:a1i |- ( T. -> if ( 0 = 0 , 0 , ( 2 pCnt 0 ) ) = 0 )
+s12:s4,c3,s11:3eqtrd |- ( T. -> ( borrows ` (/) ) = 0 )
+qed:s12:mptru |- ( borrows ` (/) ) = 0
+$)

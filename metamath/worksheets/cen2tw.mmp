@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=cen2tw  LOC_AFTER=?
+
+* The twist ` k ^c -u ( _i T ) ` for real ` T ` has absolute value 1 (Lean Census ` hph_le ` ).
+
+s1::simpl |- ( ( k e. NN /\ T e. RR ) -> k e. NN )
+s2::simpr |- ( ( k e. NN /\ T e. RR ) -> T e. RR )
+s3::ax-icn |- _i e. CC
+s4:s3:a1i |- ( ( k e. NN /\ T e. RR ) -> _i e. CC )
+s5:s2:recnd |- ( ( k e. NN /\ T e. RR ) -> T e. CC )
+s6:s4,s5:mulcld |- ( ( k e. NN /\ T e. RR ) -> ( _i x. T ) e. CC )
+s7:s6:negcld |- ( ( k e. NN /\ T e. RR ) -> -u ( _i x. T ) e. CC )
+s8:s1:nnrpd |- ( ( k e. NN /\ T e. RR ) -> k e. RR+ )
+s9:s8:rpred |- ( ( k e. NN /\ T e. RR ) -> k e. RR )
+s10:s9:recnd |- ( ( k e. NN /\ T e. RR ) -> k e. CC )
+s11:s10,s7:cxpcld |- ( ( k e. NN /\ T e. RR ) -> ( k ^c -u ( _i x. T ) ) e. CC )
+i12::abscxp
+s13:s8,s7,i12:syl2anc |- ( ( k e. NN /\ T e. RR ) -> ( abs ` ( k ^c -u ( _i x. T ) ) ) = ( k ^c ( Re ` -u ( _i x. T ) ) ) )
+s14:s6:renegd |- ( ( k e. NN /\ T e. RR ) -> ( Re ` -u ( _i x. T ) ) = -u ( Re ` ( _i x. T ) ) )
+s15:s4,s5:mulcomd |- ( ( k e. NN /\ T e. RR ) -> ( _i x. T ) = ( T x. _i ) )
+s16:s2,s4:remul2d |- ( ( k e. NN /\ T e. RR ) -> ( Re ` ( T x. _i ) ) = ( T x. ( Re ` _i ) ) )
+s17::rei |- ( Re ` _i ) = 0
+s18:s17:a1i |- ( ( k e. NN /\ T e. RR ) -> ( Re ` _i ) = 0 )
+s19:s18:oveq2d |- ( ( k e. NN /\ T e. RR ) -> ( T x. ( Re ` _i ) ) = ( T x. 0 ) )
+s20:s5:mul01d |- ( ( k e. NN /\ T e. RR ) -> ( T x. 0 ) = 0 )
+s21:s15:fveq2d |- ( ( k e. NN /\ T e. RR ) -> ( Re ` ( _i x. T ) ) = ( Re ` ( T x. _i ) ) )
+s22:s21,s16:eqtrd |- ( ( k e. NN /\ T e. RR ) -> ( Re ` ( _i x. T ) ) = ( T x. ( Re ` _i ) ) )
+s23:s22,s19:eqtrd |- ( ( k e. NN /\ T e. RR ) -> ( Re ` ( _i x. T ) ) = ( T x. 0 ) )
+s24:s23,s20:eqtrd |- ( ( k e. NN /\ T e. RR ) -> ( Re ` ( _i x. T ) ) = 0 )
+s25:s24:negeqd |- ( ( k e. NN /\ T e. RR ) -> -u ( Re ` ( _i x. T ) ) = -u 0 )
+s26:s14,s25:eqtrd |- ( ( k e. NN /\ T e. RR ) -> ( Re ` -u ( _i x. T ) ) = -u 0 )
+s27::neg0 |- -u 0 = 0
+s28:s27:a1i |- ( ( k e. NN /\ T e. RR ) -> -u 0 = 0 )
+s29:s26,s28:eqtrd |- ( ( k e. NN /\ T e. RR ) -> ( Re ` -u ( _i x. T ) ) = 0 )
+s30:s29:oveq2d |- ( ( k e. NN /\ T e. RR ) -> ( k ^c ( Re ` -u ( _i x. T ) ) ) = ( k ^c 0 ) )
+s31:s10:cxp0d |- ( ( k e. NN /\ T e. RR ) -> ( k ^c 0 ) = 1 )
+s32:s30,s31:eqtrd |- ( ( k e. NN /\ T e. RR ) -> ( k ^c ( Re ` -u ( _i x. T ) ) ) = 1 )
+s33:s13,s32:eqtrd |- ( ( k e. NN /\ T e. RR ) -> ( abs ` ( k ^c -u ( _i x. T ) ) ) = 1 )
+qed:s11,s33:jca |- ( ( k e. NN /\ T e. RR ) -> ( ( k ^c -u ( _i x. T ) ) e. CC /\ ( abs ` ( k ^c -u ( _i x. T ) ) ) = 1 ) )
+$)

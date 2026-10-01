@@ -1,0 +1,26 @@
+$( <MM> <PROOF_ASST> THEOREM=tmcdacl  LOC_AFTER=?
+
+* Closure of the ` da ` field of a machine state (Lean: the type of ` St.da ` ).
+
+s1::id |- ( V e. TMSt -> V e. TMSt )
+s2::df-tmda |- TMda = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) )
+s3:s2:a1i |- ( V e. TMSt -> TMda = ( v e. TMSt |-> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) ) )
+s4::fveq2 |- ( v = V -> ( 2nd ` v ) = ( 2nd ` V ) )
+s5:s4:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` v ) ) = ( 2nd ` ( 2nd ` V ) ) )
+s6:s5:fveq2d |- ( v = V -> ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) = ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) )
+s7:s6:fveq2d |- ( v = V -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) )
+s8:s7:adantl |- ( ( V e. TMSt /\ v = V ) -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` v ) ) ) ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) )
+s9::fvexd |- ( V e. TMSt -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) e. _V )
+s10:s3,s8,s1,s9:fvmptd |- ( V e. TMSt -> ( TMda ` V ) = ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) )
+s11::df-tmst |- TMSt = ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+s12:s1,s11:eleqtrdi |- ( V e. TMSt -> V e. ( 2o X. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) ) )
+i13::xp2nd
+s14:s12,i13:syl |- ( V e. TMSt -> ( 2nd ` V ) e. ( ( 2o |_| 1o ) X. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) ) )
+i15::xp2nd
+s16:s14,i15:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` V ) ) e. ( ( 2o |_| 1o ) X. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) ) )
+i17::xp2nd
+s18:s16,i17:syl |- ( V e. TMSt -> ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) e. ( 2o X. ( 2o X. ( 3o X. 2o ) ) ) )
+i19::xp1st
+s20:s18,i19:syl |- ( V e. TMSt -> ( 1st ` ( 2nd ` ( 2nd ` ( 2nd ` V ) ) ) ) e. 2o )
+qed:s10,s20:eqeltrd |- ( V e. TMSt -> ( TMda ` V ) e. 2o )
+$)

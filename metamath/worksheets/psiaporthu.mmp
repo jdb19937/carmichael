@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=psiaporthu  LOC_AFTER=?
+
+* Character orthogonality for psi in a residue class, with the inverse supplied: for A coprime to Q there is an integer b inverse to A mod Q for which psiAP is the character average weighted at b (Lean: psiAP_eq_inv_totient_mul_sum_psiChar).
+
+s1::simpl |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) -> ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) )
+s2::simpr |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) -> Y e. RR )
+i3::zinvex
+s4:s1,i3:syl |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) -> E. b e. ZZ Q || ( ( A x. b ) - 1 ) )
+s5:s1:simp1d |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) -> Q e. NN )
+s6:s5:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) -> Q e. NN )
+s7:s1:simp2d |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) -> A e. ZZ )
+s8:s7:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) -> A e. ZZ )
+s9::simpr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) -> b e. ZZ )
+s10:s2:adantr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) -> Y e. RR )
+s11:s6:adantr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> Q e. NN )
+s12:s8:adantr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> A e. ZZ )
+s13:s9:adantr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> b e. ZZ )
+s14:s10:adantr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> Y e. RR )
+s15::simpr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> Q || ( ( A x. b ) - 1 ) )
+s16:s11,s12,s13:3jca |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> ( Q e. NN /\ A e. ZZ /\ b e. ZZ ) )
+i17::psiaporth
+s18:s16,s15,s14,i17:syl3anc |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> ( A ( psiAP ` Q ) Y ) = ( ( 1 / ( phi ` Q ) ) x. sum_ x e. ( Base ` ( DChr ` Q ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` b ) ) x. ( x ( psiChar ` Q ) Y ) ) ) )
+s19:s15,s18:jca |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) /\ Q || ( ( A x. b ) - 1 ) ) -> ( Q || ( ( A x. b ) - 1 ) /\ ( A ( psiAP ` Q ) Y ) = ( ( 1 / ( phi ` Q ) ) x. sum_ x e. ( Base ` ( DChr ` Q ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` b ) ) x. ( x ( psiChar ` Q ) Y ) ) ) ) )
+s20:s19:ex |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) /\ b e. ZZ ) -> ( Q || ( ( A x. b ) - 1 ) -> ( Q || ( ( A x. b ) - 1 ) /\ ( A ( psiAP ` Q ) Y ) = ( ( 1 / ( phi ` Q ) ) x. sum_ x e. ( Base ` ( DChr ` Q ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` b ) ) x. ( x ( psiChar ` Q ) Y ) ) ) ) ) )
+s21:s20:reximdva |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) -> ( E. b e. ZZ Q || ( ( A x. b ) - 1 ) -> E. b e. ZZ ( Q || ( ( A x. b ) - 1 ) /\ ( A ( psiAP ` Q ) Y ) = ( ( 1 / ( phi ` Q ) ) x. sum_ x e. ( Base ` ( DChr ` Q ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` b ) ) x. ( x ( psiChar ` Q ) Y ) ) ) ) ) )
+qed:s4,s21:mpd |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ Y e. RR ) -> E. b e. ZZ ( Q || ( ( A x. b ) - 1 ) /\ ( A ( psiAP ` Q ) Y ) = ( ( 1 / ( phi ` Q ) ) x. sum_ x e. ( Base ` ( DChr ` Q ) ) ( ( x ` ( ( ZRHom ` ( Z/nZ ` Q ) ) ` b ) ) x. ( x ( psiChar ` Q ) Y ) ) ) ) )
+$)

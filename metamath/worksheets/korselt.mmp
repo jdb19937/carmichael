@@ -1,0 +1,47 @@
+$( <MM> <PROOF_ASST> THEOREM=korselt  LOC_AFTER=?
+
+* Korselt's criterion, sufficiency: a squarefree N such that ( q - 1 )
+  divides ( N - 1 ) for every prime q dividing N satisfies
+  a ^ N == a mod N for every integer a. (The Carmichael property, with
+  compositeness stated separately.)
+
+1::simpll1  |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> N e. NN )
+2::simpll2  |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> ( mmu ` N ) =/= 0 )
+3::simplr   |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> a e. ZZ )
+4::simpr    |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> q e. Prime )
+5::simpl3   |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) )
+5b:5:adantr |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) )
+5c::breq1   |- ( p = q -> ( p || N <-> q || N ) )
+5d::oveq1   |- ( p = q -> ( p - 1 ) = ( q - 1 ) )
+5e:5d:breq1d |- ( p = q -> ( ( p - 1 ) || ( N - 1 ) <-> ( q - 1 ) || ( N - 1 ) ) )
+5f:5c,5e:imbi12d |- ( p = q -> ( ( p || N -> ( p - 1 ) || ( N - 1 ) ) <-> ( q || N -> ( q - 1 ) || ( N - 1 ) ) ) )
+6:5f,5b,4:rspcdva |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> ( q || N -> ( q - 1 ) || ( N - 1 ) ) )
+7:6:imp     |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ q || N ) -> ( q - 1 ) || ( N - 1 ) )
+8:4:adantr  |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ q || N ) -> q e. Prime )
+9:1,2:jca   |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> ( N e. NN /\ ( mmu ` N ) =/= 0 ) )
+10:9:adantr |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ q || N ) -> ( N e. NN /\ ( mmu ` N ) =/= 0 ) )
+11:3:adantr |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ q || N ) -> a e. ZZ )
+12:7,11:jca |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ q || N ) -> ( ( q - 1 ) || ( N - 1 ) /\ a e. ZZ ) )
+13a::korseltlem1
+13:8,10,12,13a:syl3anc |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ q || N ) -> ( q pCnt N ) <_ ( q pCnt ( ( a ^ N ) - a ) ) )
+14:4:adantr |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ -. q || N ) -> q e. Prime )
+15:1:adantr |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ -. q || N ) -> N e. NN )
+16:3:adantr |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ -. q || N ) -> a e. ZZ )
+17::simpr   |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ -. q || N ) -> -. q || N )
+18:16,17:jca |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ -. q || N ) -> ( a e. ZZ /\ -. q || N ) )
+19a::korseltlem2
+19:14,15,18,19a:syl3anc |- ( ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) /\ -. q || N ) -> ( q pCnt N ) <_ ( q pCnt ( ( a ^ N ) - a ) ) )
+20:13,19:pm2.61dan |- ( ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) /\ q e. Prime ) -> ( q pCnt N ) <_ ( q pCnt ( ( a ^ N ) - a ) ) )
+21:20:ralrimiva |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> A. q e. Prime ( q pCnt N ) <_ ( q pCnt ( ( a ^ N ) - a ) ) )
+22::simpl1  |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> N e. NN )
+23:22:nnzd  |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> N e. ZZ )
+24::simpr   |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> a e. ZZ )
+25:22:nnnn0d |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> N e. NN0 )
+26a::zexpcl
+26:24,25,26a:syl2anc |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> ( a ^ N ) e. ZZ )
+27:26,24:zsubcld |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> ( ( a ^ N ) - a ) e. ZZ )
+28a::pc2dvds
+28:23,27,28a:syl2anc |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> ( N || ( ( a ^ N ) - a ) <-> A. q e. Prime ( q pCnt N ) <_ ( q pCnt ( ( a ^ N ) - a ) ) ) )
+29:21,28:mpbird |- ( ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) /\ a e. ZZ ) -> N || ( ( a ^ N ) - a ) )
+qed:29:ralrimiva |- ( ( N e. NN /\ ( mmu ` N ) =/= 0 /\ A. p e. Prime ( p || N -> ( p - 1 ) || ( N - 1 ) ) ) -> A. a e. ZZ N || ( ( a ^ N ) - a ) )
+$)

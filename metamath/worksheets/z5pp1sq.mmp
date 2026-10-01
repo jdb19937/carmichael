@@ -1,0 +1,171 @@
+$( <MM> <PROOF_ASST> THEOREM=z5pp1sq  LOC_AFTER=?
+
+* Lean prod_primeFactors_add_one_le: for squarefree R, prod_ ( p | R ) ( p + 1 ) <_ R ^ 2 (p + 1 <_ 2 p <_ p p, and prod_ ( p | R ) p = R).
+
+s1::simpl |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> R e. NN )
+s2::simpr |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> ( mmu ` R ) =/= 0 )
+i3::pffinq
+s4:s1,i3:syl |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> { q e. Prime | q || R } e. Fin )
+s5::simpr |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p e. { q e. Prime | q || R } )
+i6::elrabi
+s7:s5,i6:syl |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p e. Prime )
+i8::prmnn
+s9:s7,i8:syl |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p e. NN )
+s10:s9:nnred |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p e. RR )
+i11::prmuz2
+s12:s7,i11:syl |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p e. ( ZZ>= ` 2 ) )
+i13::eluzle
+s14:s12,i13:syl |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 2 <_ p )
+s15::2re |- 2 e. RR
+s16:s15:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 2 e. RR )
+s17:s10,s16:subge0d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 <_ ( p - 2 ) <-> 2 <_ p ) )
+s18:s14,s17:mpbird |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ ( p - 2 ) )
+s19::0lt1 |- 0 < 1
+s20:s19:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 < 1 )
+s21:s10,s16:resubcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p - 2 ) e. RR )
+s22::1re |- 1 e. RR
+s23:s22:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 1 e. RR )
+s24:s21,s23,s18,s20:addgegt0d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 < ( ( p - 2 ) + 1 ) )
+s25:s10:recnd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p e. CC )
+s26::2cn |- 2 e. CC
+s27:s26:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 2 e. CC )
+s28:s25,s27:negsubd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + -u 2 ) = ( p - 2 ) )
+s29:s28:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p - 2 ) = ( p + -u 2 ) )
+s30:s27:mulm1d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. 2 ) = -u 2 )
+s31:s30:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> -u 2 = ( -u 1 x. 2 ) )
+s32:s31:oveq2d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + -u 2 ) = ( p + ( -u 1 x. 2 ) ) )
+s33::ax-1cn |- 1 e. CC
+s34:s33:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 1 e. CC )
+s35:s34,s25:mulcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 1 x. p ) e. CC )
+s36:s35:addlidd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + ( 1 x. p ) ) = ( 1 x. p ) )
+s37:s36:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 1 x. p ) = ( 0 + ( 1 x. p ) ) )
+s38:s25:mullidd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 1 x. p ) = p )
+s39:s38:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p = ( 1 x. p ) )
+s40:s39,s37:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p = ( 0 + ( 1 x. p ) ) )
+s41:s26:mullidi |- ( 1 x. 2 ) = 2
+s42:s33,s26:mulneg1i |- ( -u 1 x. 2 ) = -u ( 1 x. 2 )
+s43:s41:negeqi |- -u ( 1 x. 2 ) = -u 2
+s44:s42,s43:eqtri |- ( -u 1 x. 2 ) = -u 2
+s45:s44:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. 2 ) = -u 2 )
+s46:s40,s45:oveq12d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + ( -u 1 x. 2 ) ) = ( ( 0 + ( 1 x. p ) ) + -u 2 ) )
+s47::0cn |- 0 e. CC
+s48:s47:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 e. CC )
+s49:s26:negcli |- -u 2 e. CC
+s50:s49:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> -u 2 e. CC )
+s51:s48,s35,s50:add32d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + ( 1 x. p ) ) + -u 2 ) = ( ( 0 + -u 2 ) + ( 1 x. p ) ) )
+s52:s49:addlidi |- ( 0 + -u 2 ) = -u 2
+s53:s52:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + -u 2 ) = -u 2 )
+s54:s53:oveq1d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + -u 2 ) + ( 1 x. p ) ) = ( -u 2 + ( 1 x. p ) ) )
+s55:s51,s54:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + ( 1 x. p ) ) + -u 2 ) = ( -u 2 + ( 1 x. p ) ) )
+s56:s29,s32:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p - 2 ) = ( p + ( -u 1 x. 2 ) ) )
+s57:s56,s46:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p - 2 ) = ( ( 0 + ( 1 x. p ) ) + -u 2 ) )
+s58:s57,s55:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p - 2 ) = ( -u 2 + ( 1 x. p ) ) )
+s59::eqidd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 1 = 1 )
+s60:s58,s59:oveq12d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( p - 2 ) + 1 ) = ( ( -u 2 + ( 1 x. p ) ) + 1 ) )
+s61:s50,s35,s34:add32d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( -u 2 + ( 1 x. p ) ) + 1 ) = ( ( -u 2 + 1 ) + ( 1 x. p ) ) )
+s62:s49,s33:addcomi |- ( -u 2 + 1 ) = ( 1 + -u 2 )
+s63:s33,s26:negsubi |- ( 1 + -u 2 ) = ( 1 - 2 )
+s64:s26,s33:negsubdi2i |- -u ( 2 - 1 ) = ( 1 - 2 )
+s65:s64:eqcomi |- ( 1 - 2 ) = -u ( 2 - 1 )
+s66::1p1e2 |- ( 1 + 1 ) = 2
+s67:s26,s33,s33,s66:subaddrii |- ( 2 - 1 ) = 1
+s68:s67:negeqi |- -u ( 2 - 1 ) = -u 1
+s69:s65,s68:eqtri |- ( 1 - 2 ) = -u 1
+s70:s63,s69:eqtri |- ( 1 + -u 2 ) = -u 1
+s71:s62,s70:eqtri |- ( -u 2 + 1 ) = -u 1
+s72:s71:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 2 + 1 ) = -u 1 )
+s73:s72:oveq1d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( -u 2 + 1 ) + ( 1 x. p ) ) = ( -u 1 + ( 1 x. p ) ) )
+s74:s61,s73:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( -u 2 + ( 1 x. p ) ) + 1 ) = ( -u 1 + ( 1 x. p ) ) )
+s75:s60,s74:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( p - 2 ) + 1 ) = ( -u 1 + ( 1 x. p ) ) )
+s76:s27,s25:mulcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 2 x. p ) e. CC )
+s77:s25,s34:addcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + 1 ) e. CC )
+s78:s76,s77:negsubd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) + -u ( p + 1 ) ) = ( ( 2 x. p ) - ( p + 1 ) ) )
+s79:s78:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) - ( p + 1 ) ) = ( ( 2 x. p ) + -u ( p + 1 ) ) )
+s80:s77:mulm1d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. ( p + 1 ) ) = -u ( p + 1 ) )
+s81:s80:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> -u ( p + 1 ) = ( -u 1 x. ( p + 1 ) ) )
+s82:s81:oveq2d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) + -u ( p + 1 ) ) = ( ( 2 x. p ) + ( -u 1 x. ( p + 1 ) ) ) )
+s83:s76:addlidd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + ( 2 x. p ) ) = ( 2 x. p ) )
+s84:s83:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 2 x. p ) = ( 0 + ( 2 x. p ) ) )
+s85:s33:negcli |- -u 1 e. CC
+s86:s85:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> -u 1 e. CC )
+s87:s86,s25,s34:adddid |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. ( p + 1 ) ) = ( ( -u 1 x. p ) + ( -u 1 x. 1 ) ) )
+s88:s86,s25:mulcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. p ) e. CC )
+s89:s88:addlidd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + ( -u 1 x. p ) ) = ( -u 1 x. p ) )
+s90:s89:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. p ) = ( 0 + ( -u 1 x. p ) ) )
+s91:s33:mullidi |- ( 1 x. 1 ) = 1
+s92:s33,s33:mulneg1i |- ( -u 1 x. 1 ) = -u ( 1 x. 1 )
+s93:s91:negeqi |- -u ( 1 x. 1 ) = -u 1
+s94:s92,s93:eqtri |- ( -u 1 x. 1 ) = -u 1
+s95:s94:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. 1 ) = -u 1 )
+s96:s90,s95:oveq12d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( -u 1 x. p ) + ( -u 1 x. 1 ) ) = ( ( 0 + ( -u 1 x. p ) ) + -u 1 ) )
+s97:s48,s88,s86:add32d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + ( -u 1 x. p ) ) + -u 1 ) = ( ( 0 + -u 1 ) + ( -u 1 x. p ) ) )
+s98:s85:addlidi |- ( 0 + -u 1 ) = -u 1
+s99:s98:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + -u 1 ) = -u 1 )
+s100:s99:oveq1d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + -u 1 ) + ( -u 1 x. p ) ) = ( -u 1 + ( -u 1 x. p ) ) )
+s101:s97,s100:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + ( -u 1 x. p ) ) + -u 1 ) = ( -u 1 + ( -u 1 x. p ) ) )
+s102:s87,s96:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. ( p + 1 ) ) = ( ( 0 + ( -u 1 x. p ) ) + -u 1 ) )
+s103:s102,s101:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( -u 1 x. ( p + 1 ) ) = ( -u 1 + ( -u 1 x. p ) ) )
+s104:s84,s103:oveq12d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) + ( -u 1 x. ( p + 1 ) ) ) = ( ( 0 + ( 2 x. p ) ) + ( -u 1 + ( -u 1 x. p ) ) ) )
+s105:s48,s76,s86,s88:add4d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + ( 2 x. p ) ) + ( -u 1 + ( -u 1 x. p ) ) ) = ( ( 0 + -u 1 ) + ( ( 2 x. p ) + ( -u 1 x. p ) ) ) )
+s106:s98:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + -u 1 ) = -u 1 )
+s107:s27,s86,s25:adddird |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 + -u 1 ) x. p ) = ( ( 2 x. p ) + ( -u 1 x. p ) ) )
+s108:s107:eqcomd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) + ( -u 1 x. p ) ) = ( ( 2 + -u 1 ) x. p ) )
+s109:s26,s33:negsubi |- ( 2 + -u 1 ) = ( 2 - 1 )
+s110:s109,s67:eqtri |- ( 2 + -u 1 ) = 1
+s111:s110:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 2 + -u 1 ) = 1 )
+s112:s111:oveq1d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 + -u 1 ) x. p ) = ( 1 x. p ) )
+s113:s108,s112:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) + ( -u 1 x. p ) ) = ( 1 x. p ) )
+s114:s106,s113:oveq12d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + -u 1 ) + ( ( 2 x. p ) + ( -u 1 x. p ) ) ) = ( -u 1 + ( 1 x. p ) ) )
+s115:s105,s114:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 0 + ( 2 x. p ) ) + ( -u 1 + ( -u 1 x. p ) ) ) = ( -u 1 + ( 1 x. p ) ) )
+s116:s79,s82:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) - ( p + 1 ) ) = ( ( 2 x. p ) + ( -u 1 x. ( p + 1 ) ) ) )
+s117:s116,s104:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) - ( p + 1 ) ) = ( ( 0 + ( 2 x. p ) ) + ( -u 1 + ( -u 1 x. p ) ) ) )
+s118:s117,s115:eqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) - ( p + 1 ) ) = ( -u 1 + ( 1 x. p ) ) )
+s119:s75,s118:eqtr4d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( p - 2 ) + 1 ) = ( ( 2 x. p ) - ( p + 1 ) ) )
+s120:s24,s119:breqtrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 < ( ( 2 x. p ) - ( p + 1 ) ) )
+s121:s10,s23:readdcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + 1 ) e. RR )
+s122:s16,s10:remulcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 2 x. p ) e. RR )
+s123::0red |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 e. RR )
+s124:s122,s121:resubcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( ( 2 x. p ) - ( p + 1 ) ) e. RR )
+s125:s123,s124,s120:ltled |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ ( ( 2 x. p ) - ( p + 1 ) ) )
+s126:s122,s121:subge0d |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 <_ ( ( 2 x. p ) - ( p + 1 ) ) <-> ( p + 1 ) <_ ( 2 x. p ) ) )
+s127:s125,s126:mpbid |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + 1 ) <_ ( 2 x. p ) )
+s128::0le2 |- 0 <_ 2
+s129:s128:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ 2 )
+s130::0re |- 0 e. RR
+s131:s130:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 e. RR )
+s132:s15:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 2 e. RR )
+s133:s131,s132,s10,s129,s14:letrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ p )
+s134::2re |- 2 e. RR
+s135:s134:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 2 e. RR )
+s136:s135,s10,s10,s133,s14:lemul1ad |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 2 x. p ) <_ ( p x. p ) )
+s137::1red |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 1 e. RR )
+s138:s10,s137:readdcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + 1 ) e. RR )
+s139:s10,s10:remulcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p x. p ) e. RR )
+s140::2re |- 2 e. RR
+s141:s140:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 2 e. RR )
+s142:s141,s10:remulcld |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 2 x. p ) e. RR )
+s143:s138,s142,s139,s127,s136:letrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( p + 1 ) <_ ( p x. p ) )
+s144:s128:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ 2 )
+s145:s130:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 e. RR )
+s146:s15:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 2 e. RR )
+s147:s145,s146,s10,s144,s14:letrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ p )
+s148::0le1 |- 0 <_ 1
+s149:s148:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ 1 )
+s150:s22:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 1 e. RR )
+s151:s145,s145,s10,s150,s147,s149:le2addd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + 0 ) <_ ( p + 1 ) )
+s152:s47:addlidi |- ( 0 + 0 ) = 0
+s153:s152:a1i |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> ( 0 + 0 ) = 0 )
+s154:s153,s151:eqbrtrrd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> 0 <_ ( p + 1 ) )
+s155::nfv |- F/ p ( R e. NN /\ ( mmu ` R ) =/= 0 )
+s156:s155,s4,s138,s154,s139,s143:fprodle |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> prod_ p e. { q e. Prime | q || R } ( p + 1 ) <_ prod_ p e. { q e. Prime | q || R } ( p x. p ) )
+s157:s9:nncnd |- ( ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) /\ p e. { q e. Prime | q || R } ) -> p e. CC )
+s158:s4,s157,s157:fprodmul |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> prod_ p e. { q e. Prime | q || R } ( p x. p ) = ( prod_ p e. { q e. Prime | q || R } p x. prod_ p e. { q e. Prime | q || R } p ) )
+i159::sqfprodid
+s160:s1,s2,i159:syl2anc |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> prod_ p e. { q e. Prime | q || R } p = R )
+s161:s160,s160:oveq12d |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> ( prod_ p e. { q e. Prime | q || R } p x. prod_ p e. { q e. Prime | q || R } p ) = ( R x. R ) )
+s162:s158,s161:eqtrd |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> prod_ p e. { q e. Prime | q || R } ( p x. p ) = ( R x. R ) )
+s163:s1:nncnd |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> R e. CC )
+s164:s163:sqvald |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> ( R ^ 2 ) = ( R x. R ) )
+s165:s162,s164:eqtr4d |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> prod_ p e. { q e. Prime | q || R } ( p x. p ) = ( R ^ 2 ) )
+qed:s156,s165:breqtrd |- ( ( R e. NN /\ ( mmu ` R ) =/= 0 ) -> prod_ p e. { q e. Prime | q || R } ( p + 1 ) <_ ( R ^ 2 ) )
+$)

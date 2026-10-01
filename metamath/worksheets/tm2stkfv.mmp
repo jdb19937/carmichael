@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2stkfv  LOC_AFTER=?
+
+* Each stack is a word over its alphabet.
+
+s1::simp1 |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> T e. V )
+s2::simp2 |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> D e. ( TM2Stk ` T ) )
+s3::simp3 |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> K e. dom ( 1st ` ( 1st ` T ) ) )
+i4::tm2stkval
+s5:s1,i4:syl |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( TM2Stk ` T ) = X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+s6:s2,s5:eleqtrd |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> D e. X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+s7::elixp2 |- ( D e. X_ k e. dom ( 1st ` ( 1st ` T ) ) Word ( ( 1st ` ( 1st ` T ) ) ` k ) <-> ( D e. _V /\ D Fn dom ( 1st ` ( 1st ` T ) ) /\ A. k e. dom ( 1st ` ( 1st ` T ) ) ( D ` k ) e. Word ( ( 1st ` ( 1st ` T ) ) ` k ) ) )
+s8:s6,s7:sylib |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( D e. _V /\ D Fn dom ( 1st ` ( 1st ` T ) ) /\ A. k e. dom ( 1st ` ( 1st ` T ) ) ( D ` k ) e. Word ( ( 1st ` ( 1st ` T ) ) ` k ) ) )
+s9:s8:simp3d |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> A. k e. dom ( 1st ` ( 1st ` T ) ) ( D ` k ) e. Word ( ( 1st ` ( 1st ` T ) ) ` k ) )
+s10::id |- ( k = K -> k = K )
+c1:s10:fveq2d |- ( k = K -> ( D ` k ) = ( D ` K ) )
+c2:s10:fveq2d |- ( k = K -> ( ( 1st ` ( 1st ` T ) ) ` k ) = ( ( 1st ` ( 1st ` T ) ) ` K ) )
+c3::wrdeq |- ( ( ( 1st ` ( 1st ` T ) ) ` k ) = ( ( 1st ` ( 1st ` T ) ) ` K ) -> Word ( ( 1st ` ( 1st ` T ) ) ` k ) = Word ( ( 1st ` ( 1st ` T ) ) ` K ) )
+c4:c2,c3:syl |- ( k = K -> Word ( ( 1st ` ( 1st ` T ) ) ` k ) = Word ( ( 1st ` ( 1st ` T ) ) ` K ) )
+c5:c1,c4:eleq12d |- ( k = K -> ( ( D ` k ) e. Word ( ( 1st ` ( 1st ` T ) ) ` k ) <-> ( D ` K ) e. Word ( ( 1st ` ( 1st ` T ) ) ` K ) ) )
+qed:c5,s9,s3:rspcdva |- ( ( T e. V /\ D e. ( TM2Stk ` T ) /\ K e. dom ( 1st ` ( 1st ` T ) ) ) -> ( D ` K ) e. Word ( ( 1st ` ( 1st ` T ) ) ` K ) )
+$)

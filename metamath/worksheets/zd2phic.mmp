@@ -1,0 +1,34 @@
+$( <MM> <PROOF_ASST> THEOREM=zd2phic  LOC_AFTER=?
+
+* Detector's ` PhiR = sum_ r e. Rset ( phi r / r ^ 2 ) ` is a complex number (a closure lemma; the sum binds ` r ` , which the parity-system objects bind too, so it is proved under a clean antecedent).
+
+s1::id |- ( ( N e. NN /\ R e. RR ) -> ( N e. NN /\ R e. RR ) )
+i2::simpl
+s3:s1,i2:syl |- ( ( N e. NN /\ R e. RR ) -> N e. NN )
+s4::id |- ( ( N e. NN /\ R e. RR ) -> ( N e. NN /\ R e. RR ) )
+i5::simpr
+s6:s4,i5:syl |- ( ( N e. NN /\ R e. RR ) -> R e. RR )
+i7::z5rsetfi
+s8:s3,s6,i7:syl2anc |- ( ( N e. NN /\ R e. RR ) -> ( ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) /\ ( N RSet R ) e. Fin ) )
+s9:s8:simpld |- ( ( N e. NN /\ R e. RR ) -> ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) )
+s10:s8:simprd |- ( ( N e. NN /\ R e. RR ) -> ( N RSet R ) e. Fin )
+s11:s9:adantr |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> ( N RSet R ) C_ ( 1 ... ( |_ ` R ) ) )
+s12::simpr |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> r e. ( N RSet R ) )
+s13:s11,s12:sseldd |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> r e. ( 1 ... ( |_ ` R ) ) )
+i14::elfznn
+s15:s13,i14:syl |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> r e. NN )
+i16::phicl
+s17:s15,i16:syl |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> ( phi ` r ) e. NN )
+s18:s17:nncnd |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> ( phi ` r ) e. CC )
+s19:s15:nncnd |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> r e. CC )
+s20::2nn0 |- 2 e. NN0
+s21:s20:a1i |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> 2 e. NN0 )
+s22:s19,s21:expcld |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> ( r ^ 2 ) e. CC )
+s23:s15:nncnd |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> r e. CC )
+s24:s15:nnne0d |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> r =/= 0 )
+s25::2z |- 2 e. ZZ
+s26:s25:a1i |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> 2 e. ZZ )
+s27:s23,s24,s26:expne0d |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> ( r ^ 2 ) =/= 0 )
+s28:s18,s22,s27:divcld |- ( ( ( N e. NN /\ R e. RR ) /\ r e. ( N RSet R ) ) -> ( ( phi ` r ) / ( r ^ 2 ) ) e. CC )
+qed:s10,s28:fsumcl |- ( ( N e. NN /\ R e. RR ) -> sum_ r e. ( N RSet R ) ( ( phi ` r ) / ( r ^ 2 ) ) e. CC )
+$)

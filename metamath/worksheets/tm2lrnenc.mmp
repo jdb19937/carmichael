@@ -1,0 +1,39 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lrnenc  LOC_AFTER=?
+
+* The entry-size bound of an encoded list from the value bound: every entry of ` ( encNatGam o. L ) ` has at most ` B ` bits when every value of ` L ` is below ` 2 ^ B ` .  Lean: ` entry_length_le_of_lt_pow ` .
+
+s1::simp1 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> L e. Word NN0 )
+s2::simp2 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> B e. NN0 )
+s3::simp3 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> A. a e. ran L a < ( 2 ^ B ) )
+s4::tm2lbitf |- encNatGam : NN0 --> Word ( { 1 } X. 2o )
+i5::ffn
+s6:s4,i5:ax-mp |- encNatGam Fn NN0
+s7:s6:a1i |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> encNatGam Fn NN0 )
+i8::wrdf
+s9:s1,i8:syl |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> L : ( 0 ..^ ( # ` L ) ) --> NN0 )
+i10::frn
+s11:s9,i10:syl |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ran L C_ NN0 )
+s12::fveq2 |- ( w = ( encNatGam ` a ) -> ( # ` w ) = ( # ` ( encNatGam ` a ) ) )
+s13:s12:breq1d |- ( w = ( encNatGam ` a ) -> ( ( # ` w ) <_ B <-> ( # ` ( encNatGam ` a ) ) <_ B ) )
+s14:s13:ralima |- ( ( encNatGam Fn NN0 /\ ran L C_ NN0 ) -> ( A. w e. ( encNatGam " ran L ) ( # ` w ) <_ B <-> A. a e. ran L ( # ` ( encNatGam ` a ) ) <_ B ) )
+s15:s7,s11,s14:syl2anc |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( A. w e. ( encNatGam " ran L ) ( # ` w ) <_ B <-> A. a e. ran L ( # ` ( encNatGam ` a ) ) <_ B ) )
+s16::simpl |- ( ( L e. Word NN0 /\ B e. NN0 ) -> L e. Word NN0 )
+s17::simpr |- ( ( L e. Word NN0 /\ B e. NN0 ) -> B e. NN0 )
+i18::wrdf
+s19:s16,i18:syl |- ( ( L e. Word NN0 /\ B e. NN0 ) -> L : ( 0 ..^ ( # ` L ) ) --> NN0 )
+i20::frn
+s21:s19,i20:syl |- ( ( L e. Word NN0 /\ B e. NN0 ) -> ran L C_ NN0 )
+s22::simpr |- ( ( ( L e. Word NN0 /\ B e. NN0 ) /\ a e. ran L ) -> a e. ran L )
+s23:s21:adantr |- ( ( ( L e. Word NN0 /\ B e. NN0 ) /\ a e. ran L ) -> ran L C_ NN0 )
+s24:s23,s22:sseldd |- ( ( ( L e. Word NN0 /\ B e. NN0 ) /\ a e. ran L ) -> a e. NN0 )
+s25:s17:adantr |- ( ( ( L e. Word NN0 /\ B e. NN0 ) /\ a e. ran L ) -> B e. NN0 )
+i26::tm2lentlt
+s27:i26:3expia |- ( ( a e. NN0 /\ B e. NN0 ) -> ( a < ( 2 ^ B ) -> ( # ` ( encNatGam ` a ) ) <_ B ) )
+s28:s24,s25,s27:syl2anc |- ( ( ( L e. Word NN0 /\ B e. NN0 ) /\ a e. ran L ) -> ( a < ( 2 ^ B ) -> ( # ` ( encNatGam ` a ) ) <_ B ) )
+s29:s28:ralimdva |- ( ( L e. Word NN0 /\ B e. NN0 ) -> ( A. a e. ran L a < ( 2 ^ B ) -> A. a e. ran L ( # ` ( encNatGam ` a ) ) <_ B ) )
+s30:s29:3impia |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> A. a e. ran L ( # ` ( encNatGam ` a ) ) <_ B )
+s31:s15,s30:mpbird |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> A. w e. ( encNatGam " ran L ) ( # ` w ) <_ B )
+s32::rnco2 |- ran ( encNatGam o. L ) = ( encNatGam " ran L )
+s33:s32:raleqi |- ( A. w e. ran ( encNatGam o. L ) ( # ` w ) <_ B <-> A. w e. ( encNatGam " ran L ) ( # ` w ) <_ B )
+qed:s31,s33:sylibr |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> A. w e. ran ( encNatGam o. L ) ( # ` w ) <_ B )
+$)

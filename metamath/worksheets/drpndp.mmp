@@ -1,0 +1,24 @@
+$( <MM> <PROOF_ASST> THEOREM=drpndp  LOC_AFTER=?
+
+* The tail of a duplicate-free word is duplicate-free (Lean: List.Nodup.sublist).
+
+s1::simpl |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( V e. Word S /\ Fun `' V ) )
+s2:s1:simpld |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> V e. Word S )
+s3:s1:simprd |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> Fun `' V )
+s4::simpr |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> T e. ( 0 ... ( # ` V ) ) )
+s5:s2,s4:jca |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( V e. Word S /\ T e. ( 0 ... ( # ` V ) ) ) )
+i6::drpfz
+s7:s5,i6:syl |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( # ` V ) - T ) e. ( 0 ... ( # ` V ) ) )
+i8::lencl
+s9:s2,i8:syl |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. NN0 )
+i10::nn0fz0
+s11:s9,i10:sylib |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( # ` V ) e. ( 0 ... ( # ` V ) ) )
+s12:s2,s3:jca |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( V e. Word S /\ Fun `' V ) )
+i13::wrdf1x
+s14:s12,i13:syl |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> V : dom V -1-1-> S )
+s15:s2,s7,s11,s14:swrdf1 |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) : dom ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) -1-1-> S )
+s16::df-f1 |- ( ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) : dom ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) -1-1-> S <-> ( ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) : dom ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) --> S /\ Fun `' ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) ) )
+s17:s16:a1i |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) : dom ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) -1-1-> S <-> ( ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) : dom ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) --> S /\ Fun `' ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) ) ) )
+s18:s15,s17:mpbid |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> ( ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) : dom ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) --> S /\ Fun `' ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) ) )
+qed:s18:simprd |- ( ( ( V e. Word S /\ Fun `' V ) /\ T e. ( 0 ... ( # ` V ) ) ) -> Fun `' ( V substr <. ( ( # ` V ) - T ) , ( # ` V ) >. ) )
+$)

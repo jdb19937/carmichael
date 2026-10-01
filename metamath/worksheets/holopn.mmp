@@ -1,0 +1,29 @@
+$( <MM> <PROOF_ASST> THEOREM=holopn  LOC_AFTER=?
+
+* The domain of a function holomorphic on its whole domain is open.
+
+s1::simpl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> F e. ( D -cn-> CC ) )
+s2::simpr |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> D C_ dom ( CC _D F ) )
+i3::cncfrss
+s4:s1,i3:syl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> D C_ CC )
+i5::cncff
+s6:s1,i5:syl |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> F : D --> CC )
+s7::ssid |- CC C_ CC
+s8:s7:a1i |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> CC C_ CC )
+s9::eqid |- ( TopOpen ` CCfld ) = ( TopOpen ` CCfld )
+s10::cnrestid |- ( ( TopOpen ` CCfld ) |`t CC ) = ( TopOpen ` CCfld )
+s11:s10:eqcomi |- ( TopOpen ` CCfld ) = ( ( TopOpen ` CCfld ) |`t CC )
+s12:s8,s6,s4,s11,s9:dvbssntr |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> dom ( CC _D F ) C_ ( ( int ` ( TopOpen ` CCfld ) ) ` D ) )
+s13:s2,s12:sstrd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> D C_ ( ( int ` ( TopOpen ` CCfld ) ) ` D ) )
+s14::unicntop |- CC = U. ( TopOpen ` CCfld )
+s15:s14:eqcomi |- U. ( TopOpen ` CCfld ) = CC
+s16:s15:eqcomi |- CC = U. ( TopOpen ` CCfld )
+s17:s9:cnfldtop |- ( TopOpen ` CCfld ) e. Top
+s18:s17:a1i |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( TopOpen ` CCfld ) e. Top )
+s19:s16:ntrss2 |- ( ( ( TopOpen ` CCfld ) e. Top /\ D C_ CC ) -> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) C_ D )
+s20:s18,s4,s19:syl2anc |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) C_ D )
+s21:s20,s13:eqssd |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) = D )
+s22:s16:isopn3 |- ( ( ( TopOpen ` CCfld ) e. Top /\ D C_ CC ) -> ( D e. ( TopOpen ` CCfld ) <-> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) = D ) )
+s23:s18,s4,s22:syl2anc |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> ( D e. ( TopOpen ` CCfld ) <-> ( ( int ` ( TopOpen ` CCfld ) ) ` D ) = D ) )
+qed:s21,s23:mpbird |- ( ( F e. ( D -cn-> CC ) /\ D C_ dom ( CC _D F ) ) -> D e. ( TopOpen ` CCfld ) )
+$)

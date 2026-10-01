@@ -1,0 +1,61 @@
+$( <MM> <PROOF_ASST> THEOREM=lsitgmono  LOC_AFTER=?
+
+* The integral of a nonnegative continuous function over a subinterval is at most its integral over the interval.
+
+ha::lsitgmono.a |- ( ph -> A e. RR )
+hb::lsitgmono.b |- ( ph -> B e. RR )
+hu::lsitgmono.u |- ( ph -> U e. RR )
+hv::lsitgmono.v |- ( ph -> V e. RR )
+hau::lsitgmono.au |- ( ph -> A <_ U )
+huv::lsitgmono.uv |- ( ph -> U <_ V )
+hvb::lsitgmono.vb |- ( ph -> V <_ B )
+hc::lsitgmono.c |- ( ph -> ( t e. RR |-> X ) e. ( RR -cn-> CC ) )
+hr::lsitgmono.r |- ( ( ph /\ t e. RR ) -> X e. RR )
+hp::lsitgmono.p |- ( ( ph /\ t e. RR ) -> 0 <_ X )
+s1:u,v,b,uv,vb:letrd |- ( ph -> U <_ B )
+i2::elicc2
+s3:a,b,i2:syl2anc |- ( ph -> ( U e. ( A [,] B ) <-> ( U e. RR /\ A <_ U /\ U <_ B ) ) )
+s4:u,au,s1:3jca |- ( ph -> ( U e. RR /\ A <_ U /\ U <_ B ) )
+s5:s3,s4:mpbird |- ( ph -> U e. ( A [,] B ) )
+i6::elicc2
+s7:u,b,i6:syl2anc |- ( ph -> ( V e. ( U [,] B ) <-> ( V e. RR /\ U <_ V /\ V <_ B ) ) )
+s8:v,uv,vb:3jca |- ( ph -> ( V e. RR /\ U <_ V /\ V <_ B ) )
+s9:s7,s8:mpbird |- ( ph -> V e. ( U [,] B ) )
+i10::elioore
+s11:i10,r:sylan2 |- ( ( ph /\ t e. ( A (,) B ) ) -> X e. RR )
+s12:s11:recnd |- ( ( ph /\ t e. ( A (,) B ) ) -> X e. CC )
+s13:a,u,c:lsibl |- ( ph -> ( t e. ( A (,) U ) |-> X ) e. L^1 )
+s14:u,b,c:lsibl |- ( ph -> ( t e. ( U (,) B ) |-> X ) e. L^1 )
+s15:a,b,s5,s12,s13,s14:itgsplitioo |- ( ph -> S. ( A (,) B ) X _d t = ( S. ( A (,) U ) X _d t + S. ( U (,) B ) X _d t ) )
+i16::elioore
+s17:i16,r:sylan2 |- ( ( ph /\ t e. ( U (,) B ) ) -> X e. RR )
+s18:s17:recnd |- ( ( ph /\ t e. ( U (,) B ) ) -> X e. CC )
+s19:u,v,c:lsibl |- ( ph -> ( t e. ( U (,) V ) |-> X ) e. L^1 )
+s20:v,b,c:lsibl |- ( ph -> ( t e. ( V (,) B ) |-> X ) e. L^1 )
+s21:u,b,s9,s18,s19,s20:itgsplitioo |- ( ph -> S. ( U (,) B ) X _d t = ( S. ( U (,) V ) X _d t + S. ( V (,) B ) X _d t ) )
+i22::elioore
+s23:i22,r:sylan2 |- ( ( ph /\ t e. ( A (,) U ) ) -> X e. RR )
+i24::elioore
+s25:i24,p:sylan2 |- ( ( ph /\ t e. ( A (,) U ) ) -> 0 <_ X )
+s26:s13,s23,s25:itgge0 |- ( ph -> 0 <_ S. ( A (,) U ) X _d t )
+i27::elioore
+s28:i27,r:sylan2 |- ( ( ph /\ t e. ( V (,) B ) ) -> X e. RR )
+i29::elioore
+s30:i29,p:sylan2 |- ( ( ph /\ t e. ( V (,) B ) ) -> 0 <_ X )
+s31:s20,s28,s30:itgge0 |- ( ph -> 0 <_ S. ( V (,) B ) X _d t )
+s32:a,b,c:lsibl |- ( ph -> ( t e. ( A (,) B ) |-> X ) e. L^1 )
+s33:s11,s32:itgrecl |- ( ph -> S. ( A (,) B ) X _d t e. RR )
+s34:s23,s13:itgrecl |- ( ph -> S. ( A (,) U ) X _d t e. RR )
+s35:s17,s14:itgrecl |- ( ph -> S. ( U (,) B ) X _d t e. RR )
+i36::elioore
+s37:i36,r:sylan2 |- ( ( ph /\ t e. ( U (,) V ) ) -> X e. RR )
+s38:s37,s19:itgrecl |- ( ph -> S. ( U (,) V ) X _d t e. RR )
+s39:s28,s20:itgrecl |- ( ph -> S. ( V (,) B ) X _d t e. RR )
+s40:s38,s39:addge01d |- ( ph -> ( 0 <_ S. ( V (,) B ) X _d t <-> S. ( U (,) V ) X _d t <_ ( S. ( U (,) V ) X _d t + S. ( V (,) B ) X _d t ) ) )
+s41:s31,s40:mpbid |- ( ph -> S. ( U (,) V ) X _d t <_ ( S. ( U (,) V ) X _d t + S. ( V (,) B ) X _d t ) )
+s42:s41,s21:breqtrrd |- ( ph -> S. ( U (,) V ) X _d t <_ S. ( U (,) B ) X _d t )
+s43:s35,s34:addge02d |- ( ph -> ( 0 <_ S. ( A (,) U ) X _d t <-> S. ( U (,) B ) X _d t <_ ( S. ( A (,) U ) X _d t + S. ( U (,) B ) X _d t ) ) )
+s44:s26,s43:mpbid |- ( ph -> S. ( U (,) B ) X _d t <_ ( S. ( A (,) U ) X _d t + S. ( U (,) B ) X _d t ) )
+s45:s44,s15:breqtrrd |- ( ph -> S. ( U (,) B ) X _d t <_ S. ( A (,) B ) X _d t )
+qed:s38,s35,s33,s42,s45:letrd |- ( ph -> S. ( U (,) V ) X _d t <_ S. ( A (,) B ) X _d t )
+$)

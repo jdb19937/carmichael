@@ -1,0 +1,38 @@
+$( <MM> <PROOF_ASST> THEOREM=a5pc  LOC_AFTER=?
+
+* The pool has at most 2^T elements, T being the number of reservoir primes (Lean: hP2T of SearchAlg.lean).
+
+h1::a5pc.1 |- ( ph -> ( ran Q e. ( ~P Prime i^i Fin ) /\ Z e. NN0 /\ K e. NN ) )
+h2::a5pc.2 |- ( ph -> ( # ` ran Q ) = T )
+s1:1:simp1d |- ( ph -> ran Q e. ( ~P Prime i^i Fin ) )
+s2:1:simp2d |- ( ph -> Z e. NN0 )
+s3:1:simp3d |- ( ph -> K e. NN )
+i4::elfpw
+s5:s1,i4:sylib |- ( ph -> ( ran Q C_ Prime /\ ran Q e. Fin ) )
+s6:s5:simpld |- ( ph -> ran Q C_ Prime )
+s7:s5:simprd |- ( ph -> ran Q e. Fin )
+s8::prmssnn |- Prime C_ NN
+s9::nnssnn0 |- NN C_ NN0
+s10:s8,s9:sstri |- Prime C_ NN0
+s11:s10:a1i |- ( ph -> Prime C_ NN0 )
+s12:s6,s11:sstrd |- ( ph -> ran Q C_ NN0 )
+s13:s12,s7:jca |- ( ph -> ( ran Q C_ NN0 /\ ran Q e. Fin ) )
+i14::elfpw
+s15:s13,i14:sylibr |- ( ph -> ran Q e. ( ~P NN0 i^i Fin ) )
+s16:s15,s2,s3:3jca |- ( ph -> ( ran Q e. ( ~P NN0 i^i Fin ) /\ Z e. NN0 /\ K e. NN ) )
+i17::poolcard
+s18:s16,i17:syl |- ( ph -> ( # ` { d e. { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } | ( ( ( d x. K ) + 1 ) <_ ( xceil ` ran Q ) /\ ( ( d x. K ) + 1 ) e. Prime /\ Z < ( ( d x. K ) + 1 ) ) } ) = ( # ` ( ( ran Q pool Z ) ` K ) ) )
+s19::ssrab2 |- { d e. { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } | ( ( ( d x. K ) + 1 ) <_ ( xceil ` ran Q ) /\ ( ( d x. K ) + 1 ) e. Prime /\ Z < ( ( d x. K ) + 1 ) ) } C_ { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) }
+s20:s19:a1i |- ( ph -> { d e. { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } | ( ( ( d x. K ) + 1 ) <_ ( xceil ` ran Q ) /\ ( ( d x. K ) + 1 ) e. Prime /\ Z < ( ( d x. K ) + 1 ) ) } C_ { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } )
+s21::divsetfi |- { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } e. Fin
+s22:s21:a1i |- ( ph -> { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } e. Fin )
+i23::hashssle
+s24:s22,s20,i23:syl2anc |- ( ph -> ( # ` { d e. { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } | ( ( ( d x. K ) + 1 ) <_ ( xceil ` ran Q ) /\ ( ( d x. K ) + 1 ) e. Prime /\ Z < ( ( d x. K ) + 1 ) ) } ) <_ ( # ` { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } ) )
+i25::prmproddivcard
+s26:s1,i25:syl |- ( ph -> ( # ` { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } ) = ( 2 ^ ( # ` ran Q ) ) )
+s27:2:oveq2d |- ( ph -> ( 2 ^ ( # ` ran Q ) ) = ( 2 ^ T ) )
+s28:s26,s27:eqtrd |- ( ph -> ( # ` { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } ) = ( 2 ^ T ) )
+s29:s18:eqcomd |- ( ph -> ( # ` ( ( ran Q pool Z ) ` K ) ) = ( # ` { d e. { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } | ( ( ( d x. K ) + 1 ) <_ ( xceil ` ran Q ) /\ ( ( d x. K ) + 1 ) e. Prime /\ Z < ( ( d x. K ) + 1 ) ) } ) )
+s30:s24,s28:breqtrd |- ( ph -> ( # ` { d e. { m e. ( 1 ... ( Lmod ` ran Q ) ) | m || ( Lmod ` ran Q ) } | ( ( ( d x. K ) + 1 ) <_ ( xceil ` ran Q ) /\ ( ( d x. K ) + 1 ) e. Prime /\ Z < ( ( d x. K ) + 1 ) ) } ) <_ ( 2 ^ T ) )
+qed:s29,s30:eqbrtrd |- ( ph -> ( # ` ( ( ran Q pool Z ) ` K ) ) <_ ( 2 ^ T ) )
+$)

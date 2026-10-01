@@ -1,0 +1,27 @@
+$( <MM> <PROOF_ASST> THEOREM=bvmchkq0  LOC_AFTER=?
+
+* The check sum vanishes for X < 1: the range ( 1 ... |_ X ) is empty (Lean mCheckQ_of_lt_one).
+
+s1::simp1 |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> S e. RR )
+s2::simp2 |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> Q e. NN )
+s3::simp3 |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( X e. RR /\ X < 1 ) )
+s4:s3:simpld |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> X e. RR )
+s5:s3:simprd |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> X < 1 )
+i6::bvmchkqval
+s7:s1,s2,s4,i6:syl3anc |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( Q ( mChkQ ` S ) X ) = sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+s8::1z |- 1 e. ZZ
+s9:s8:a1i |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> 1 e. ZZ )
+i10::fllt
+s11:s4,s9,i10:syl2anc |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( X < 1 <-> ( |_ ` X ) < 1 ) )
+s12:s5,s11:mpbid |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( |_ ` X ) < 1 )
+i13::flcl
+s14:s4,i13:syl |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( |_ ` X ) e. ZZ )
+i15::fzn
+s16:s9,s14,i15:syl2anc |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( ( |_ ` X ) < 1 <-> ( 1 ... ( |_ ` X ) ) = (/) ) )
+s17:s12,s16:mpbid |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( 1 ... ( |_ ` X ) ) = (/) )
+s18:s17:sumeq1d |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) = sum_ n e. (/) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) )
+s19::sum0 |- sum_ n e. (/) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) = 0
+s20:s19:a1i |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> sum_ n e. (/) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) = 0 )
+s21:s18,s20:eqtrd |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> sum_ n e. ( 1 ... ( |_ ` X ) ) if ( ( n gcd Q ) = 1 , ( ( ( mmu ` n ) x. ( n ^c -u S ) ) x. ( log ` ( X / n ) ) ) , 0 ) = 0 )
+qed:s7,s21:eqtrd |- ( ( S e. RR /\ Q e. NN /\ ( X e. RR /\ X < 1 ) ) -> ( Q ( mChkQ ` S ) X ) = 0 )
+$)

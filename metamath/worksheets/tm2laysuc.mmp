@@ -1,0 +1,21 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2laysuc  LOC_AFTER=?
+
+* Depth layer N + 1 of the statements is the constructor layer over depth layer N.
+
+1::rdgfnon  |- rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) Fn On
+2a::fndm
+2:1,2a:ax-mp |- dom rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) = On
+3::nnon     |- ( N e. _om -> N e. On )
+4:2:eleq2i  |- ( N e. dom rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) <-> N e. On )
+5:3,4:sylibr |- ( N e. _om -> N e. dom rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) )
+6a::rdgsucg
+6:5,6a:syl  |- ( N e. _om -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc N ) = ( ( x e. _V |-> ( T TM2lay x ) ) ` ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+7::oveq2    |- ( y = ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) -> ( T TM2lay y ) = ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+8a::oveq2   |- ( x = y -> ( T TM2lay x ) = ( T TM2lay y ) )
+8:8a:cbvmptv |- ( x e. _V |-> ( T TM2lay x ) ) = ( y e. _V |-> ( T TM2lay y ) )
+9:7,8:fvmptg |- ( ( ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) e. _V /\ ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) e. _V ) -> ( ( x e. _V |-> ( T TM2lay x ) ) ` ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) = ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+10::fvex    |- ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) e. _V
+11::ovex    |- ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) e. _V
+12:10,11,9:mp2an |- ( ( x e. _V |-> ( T TM2lay x ) ) ` ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) = ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) )
+qed:6,12:eqtrdi |- ( N e. _om -> ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` suc N ) = ( T TM2lay ( rec ( ( x e. _V |-> ( T TM2lay x ) ) , (/) ) ` N ) ) )
+$)

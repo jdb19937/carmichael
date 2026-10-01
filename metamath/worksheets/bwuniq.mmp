@@ -1,0 +1,23 @@
+$( <MM> <PROOF_ASST> THEOREM=bwuniq  LOC_AFTER=?
+
+* Two bit words are equal exactly when they have the same length and the same value (Lean: Canon.unique, in the length form).
+
+s1::simpl |- ( ( L e. Word 2o /\ K e. Word 2o ) -> L e. Word 2o )
+s2::simpr |- ( ( L e. Word 2o /\ K e. Word 2o ) -> K e. Word 2o )
+s3::fveq2 |- ( L = K -> ( # ` L ) = ( # ` K ) )
+s4::fveq2 |- ( L = K -> ( toNat ` L ) = ( toNat ` K ) )
+s5:s3,s4:jca |- ( L = K -> ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) )
+s6:s5:a1i |- ( ( L e. Word 2o /\ K e. Word 2o ) -> ( L = K -> ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) )
+s7::simprl |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> ( # ` L ) = ( # ` K ) )
+s8::simprr |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> ( toNat ` L ) = ( toNat ` K ) )
+s9:s1:adantr |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> L e. Word 2o )
+s10:s2:adantr |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> K e. Word 2o )
+i11::bweqwrd
+s12:s9,i11:syl |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> L = ( ( toNat ` L ) bwrd ( # ` L ) ) )
+i13::bweqwrd
+s14:s10,i13:syl |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> K = ( ( toNat ` K ) bwrd ( # ` K ) ) )
+s15:s8,s7:oveq12d |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> ( ( toNat ` L ) bwrd ( # ` L ) ) = ( ( toNat ` K ) bwrd ( # ` K ) ) )
+s16:s12,s15,s14:3eqtr4d |- ( ( ( L e. Word 2o /\ K e. Word 2o ) /\ ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) -> L = K )
+s17:s16:ex |- ( ( L e. Word 2o /\ K e. Word 2o ) -> ( ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) -> L = K ) )
+qed:s6,s17:impbid |- ( ( L e. Word 2o /\ K e. Word 2o ) -> ( L = K <-> ( ( # ` L ) = ( # ` K ) /\ ( toNat ` L ) = ( toNat ` K ) ) ) )
+$)

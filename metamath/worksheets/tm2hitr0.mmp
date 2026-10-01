@@ -1,0 +1,17 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2hitr0  LOC_AFTER=?
+
+* The base case of the iteration rule of the machine layer: no iterations, no steps.
+
+s1::simp1 |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) )
+s2::simp2l |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> ( I ` 0 ) C_ ( TM2Cfg ` T ) )
+s3::simp2r |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> P e. NN0 )
+i4::tm2hid
+s5:s1,s2,i4:syl2anc |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> ( I ` 0 ) ( T TM2Hoare M ) <. ( I ` 0 ) , 0 >. )
+s6:s3:nn0cnd |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> P e. CC )
+i7::mul02
+s8:s6,i7:syl |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> ( 0 x. P ) = 0 )
+s9:s8:eqcomd |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> 0 = ( 0 x. P ) )
+s10:s9:opeq2d |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> <. ( I ` 0 ) , 0 >. = <. ( I ` 0 ) , ( 0 x. P ) >. )
+s11:s10:breq2d |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> ( ( I ` 0 ) ( T TM2Hoare M ) <. ( I ` 0 ) , 0 >. <-> ( I ` 0 ) ( T TM2Hoare M ) <. ( I ` 0 ) , ( 0 x. P ) >. ) )
+qed:s11,s5:mpbid |- ( ( ( T e. V /\ M : ( 2nd ` ( 1st ` T ) ) --> ( TM2Stmt ` T ) ) /\ ( ( I ` 0 ) C_ ( TM2Cfg ` T ) /\ P e. NN0 ) /\ A. i e. ( 0 ..^ 0 ) ( I ` i ) ( T TM2Hoare M ) <. ( I ` ( i + 1 ) ) , P >. ) -> ( I ` 0 ) ( T TM2Hoare M ) <. ( I ` 0 ) , ( 0 x. P ) >. )
+$)

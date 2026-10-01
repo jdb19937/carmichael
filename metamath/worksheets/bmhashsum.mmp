@@ -1,0 +1,18 @@
+$( <MM> <PROOF_ASST> THEOREM=bmhashsum  LOC_AFTER=?
+
+* The number of elements of a finite set satisfying a condition is the sum of the indicator of the condition (~ sumhash , ~ elrab3 ).
+
+h1::bmhashsum.1 |- ( x = y -> ( ph <-> ps ) )
+s1::ssrab2 |- { x e. A | ph } C_ A
+s2::id |- ( A e. Fin -> A e. Fin )
+s3:s1:a1i |- ( A e. Fin -> { x e. A | ph } C_ A )
+s4:s2,s3:jca |- ( A e. Fin -> ( A e. Fin /\ { x e. A | ph } C_ A ) )
+i5::sumhash
+s6:s4,i5:syl |- ( A e. Fin -> sum_ y e. A if ( y e. { x e. A | ph } , 1 , 0 ) = ( # ` { x e. A | ph } ) )
+s7::simpr |- ( ( A e. Fin /\ y e. A ) -> y e. A )
+s8:h1:elrab3 |- ( y e. A -> ( y e. { x e. A | ph } <-> ps ) )
+s9:s7,s8:syl |- ( ( A e. Fin /\ y e. A ) -> ( y e. { x e. A | ph } <-> ps ) )
+s10:s9:ifbid |- ( ( A e. Fin /\ y e. A ) -> if ( y e. { x e. A | ph } , 1 , 0 ) = if ( ps , 1 , 0 ) )
+s11:s10:sumeq2dv |- ( A e. Fin -> sum_ y e. A if ( y e. { x e. A | ph } , 1 , 0 ) = sum_ y e. A if ( ps , 1 , 0 ) )
+qed:s6,s11:eqtr3d |- ( A e. Fin -> ( # ` { x e. A | ph } ) = sum_ y e. A if ( ps , 1 , 0 ) )
+$)

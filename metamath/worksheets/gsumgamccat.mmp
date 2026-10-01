@@ -1,0 +1,20 @@
+$( <MM> <PROOF_ASST> THEOREM=gsumgamccat  LOC_AFTER=?
+
+* The monoid sum of a concatenation of words of words over Gamma' is the concatenation of the sums.
+
+s1::frmdgambas |- ( Base ` ( freeMnd ` Gamma' ) ) = Word Gamma'
+s2:s1:eqcomi |- Word Gamma' = ( Base ` ( freeMnd ` Gamma' ) )
+s3::eqid |- ( +g ` ( freeMnd ` Gamma' ) ) = ( +g ` ( freeMnd ` Gamma' ) )
+s4::frmdgam |- ( freeMnd ` Gamma' ) e. Mnd
+s5:s2,s3:gsumccat |- ( ( ( freeMnd ` Gamma' ) e. Mnd /\ W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> ( ( freeMnd ` Gamma' ) gsum ( W ++ X ) ) = ( ( ( freeMnd ` Gamma' ) gsum W ) ( +g ` ( freeMnd ` Gamma' ) ) ( ( freeMnd ` Gamma' ) gsum X ) ) )
+s6:s4,s5:mp3an1 |- ( ( W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> ( ( freeMnd ` Gamma' ) gsum ( W ++ X ) ) = ( ( ( freeMnd ` Gamma' ) gsum W ) ( +g ` ( freeMnd ` Gamma' ) ) ( ( freeMnd ` Gamma' ) gsum X ) ) )
+s7::simpl |- ( ( W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> W e. Word Word Gamma' )
+s8::simpr |- ( ( W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> X e. Word Word Gamma' )
+i9::gsumgamcl
+s10:s7,i9:syl |- ( ( W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> ( ( freeMnd ` Gamma' ) gsum W ) e. Word Gamma' )
+i11::gsumgamcl
+s12:s8,i11:syl |- ( ( W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> ( ( freeMnd ` Gamma' ) gsum X ) e. Word Gamma' )
+i13::frmdgamadd
+s14:s10,s12,i13:syl2anc |- ( ( W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> ( ( ( freeMnd ` Gamma' ) gsum W ) ( +g ` ( freeMnd ` Gamma' ) ) ( ( freeMnd ` Gamma' ) gsum X ) ) = ( ( ( freeMnd ` Gamma' ) gsum W ) ++ ( ( freeMnd ` Gamma' ) gsum X ) ) )
+qed:s6,s14:eqtrd |- ( ( W e. Word Word Gamma' /\ X e. Word Word Gamma' ) -> ( ( freeMnd ` Gamma' ) gsum ( W ++ X ) ) = ( ( ( freeMnd ` Gamma' ) gsum W ) ++ ( ( freeMnd ` Gamma' ) gsum X ) ) )
+$)

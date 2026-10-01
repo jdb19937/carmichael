@@ -1,0 +1,50 @@
+$( <MM> <PROOF_ASST> THEOREM=zinvex  LOC_AFTER=?
+
+* An integer coprime to the modulus has a modular inverse: there is an integer b with Q dividing ( A x. b ) - 1.
+
+s1::simp1 |- ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) -> Q e. NN )
+s2::simp2 |- ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) -> A e. ZZ )
+s3::simp3 |- ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) -> ( A gcd Q ) = 1 )
+s4:s1:nnzd |- ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) -> Q e. ZZ )
+i5::bezout
+s6:s2,s4,i5:syl2anc |- ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) -> E. x e. ZZ E. y e. ZZ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) )
+s7:s2:ad3antrrr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> A e. ZZ )
+s8:s4:ad3antrrr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> Q e. ZZ )
+s9::simplr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) -> x e. ZZ )
+s10:s9:adantr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> x e. ZZ )
+s11::simpr |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) -> y e. ZZ )
+s12:s11:adantr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> y e. ZZ )
+s13:s3:ad3antrrr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( A gcd Q ) = 1 )
+s14::simpr |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) )
+s15:s13,s14:eqtr3d |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> 1 = ( ( A x. x ) + ( Q x. y ) ) )
+i16::zmulcl
+s17:s7,s10,i16:syl2anc |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( A x. x ) e. ZZ )
+i18::zmulcl
+s19:s8,s12,i18:syl2anc |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( Q x. y ) e. ZZ )
+s20:s17:zcnd |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( A x. x ) e. CC )
+s21:s19:zcnd |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( Q x. y ) e. CC )
+s22:s15:oveq1d |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( 1 - ( A x. x ) ) = ( ( ( A x. x ) + ( Q x. y ) ) - ( A x. x ) ) )
+s23:s20,s21:pncan2d |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( ( ( A x. x ) + ( Q x. y ) ) - ( A x. x ) ) = ( Q x. y ) )
+s24:s22,s23:eqtrd |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( 1 - ( A x. x ) ) = ( Q x. y ) )
+i25::dvdsmul1
+s26:s8,s12,i25:syl2anc |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> Q || ( Q x. y ) )
+s27:s26,s24:breqtrrd |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> Q || ( 1 - ( A x. x ) ) )
+s28::1zzd |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> 1 e. ZZ )
+i29::zsubcl
+s30:s28,s17,i29:syl2anc |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( 1 - ( A x. x ) ) e. ZZ )
+i31::dvdsnegb
+s32:s8,s30,i31:syl2anc |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> ( Q || ( 1 - ( A x. x ) ) <-> Q || -u ( 1 - ( A x. x ) ) ) )
+s33:s27,s32:mpbid |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> Q || -u ( 1 - ( A x. x ) ) )
+s34::1cnd |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> 1 e. CC )
+s35:s34,s20:negsubdi2d |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> -u ( 1 - ( A x. x ) ) = ( ( A x. x ) - 1 ) )
+s36:s33,s35:breqtrd |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> Q || ( ( A x. x ) - 1 ) )
+s37::oveq2 |- ( b = x -> ( A x. b ) = ( A x. x ) )
+s38:s37:oveq1d |- ( b = x -> ( ( A x. b ) - 1 ) = ( ( A x. x ) - 1 ) )
+s39:s38:breq2d |- ( b = x -> ( Q || ( ( A x. b ) - 1 ) <-> Q || ( ( A x. x ) - 1 ) ) )
+s40:s39:rspcev |- ( ( x e. ZZ /\ Q || ( ( A x. x ) - 1 ) ) -> E. b e. ZZ Q || ( ( A x. b ) - 1 ) )
+s41:s10,s36,s40:syl2anc |- ( ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) /\ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) ) -> E. b e. ZZ Q || ( ( A x. b ) - 1 ) )
+s42:s41:ex |- ( ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) /\ y e. ZZ ) -> ( ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) -> E. b e. ZZ Q || ( ( A x. b ) - 1 ) ) )
+s43:s42:rexlimdva |- ( ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) /\ x e. ZZ ) -> ( E. y e. ZZ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) -> E. b e. ZZ Q || ( ( A x. b ) - 1 ) ) )
+s44:s43:rexlimdva |- ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) -> ( E. x e. ZZ E. y e. ZZ ( A gcd Q ) = ( ( A x. x ) + ( Q x. y ) ) -> E. b e. ZZ Q || ( ( A x. b ) - 1 ) ) )
+qed:s6,s44:mpd |- ( ( Q e. NN /\ A e. ZZ /\ ( A gcd Q ) = 1 ) -> E. b e. ZZ Q || ( ( A x. b ) - 1 ) )
+$)

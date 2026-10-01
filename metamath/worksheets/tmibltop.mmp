@@ -1,0 +1,75 @@
+$( <MM> <PROOF_ASST> THEOREM=tmibltop  LOC_AFTER=?
+
+* The number on ` x ` after one more bit of ` bitlen ` 's scan: ` floor ( F / 2 ^ M ) ` is twice ` floor ( F / 2 ^ ( M + 1 ) ) ` plus the bit ` M ` of ` F ` .
+
+s1::simpl |- ( ( F e. NN0 /\ M e. NN0 ) -> F e. NN0 )
+s2::simpr |- ( ( F e. NN0 /\ M e. NN0 ) -> M e. NN0 )
+s3::2nn |- 2 e. NN
+s4:s3:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> 2 e. NN )
+i5::nnexpcl
+s6:s4,s2,i5:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( 2 ^ M ) e. NN )
+i7::fldivnn0
+s8:s1,s6,i7:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. NN0 )
+s9:s1:nn0red |- ( ( F e. NN0 /\ M e. NN0 ) -> F e. RR )
+s10::2nn |- 2 e. NN
+s11:s10:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> 2 e. NN )
+i12::fldiv2
+s13:s9,s6,s11,i12:syl3anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) = ( |_ ` ( F / ( ( 2 ^ M ) x. 2 ) ) ) )
+s14::2cn |- 2 e. CC
+s15:s14:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> 2 e. CC )
+i16::expp1
+s17:s15,s2,i16:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( 2 ^ ( M + 1 ) ) = ( ( 2 ^ M ) x. 2 ) )
+s18:s17:eqcomd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( 2 ^ M ) x. 2 ) = ( 2 ^ ( M + 1 ) ) )
+s19:s18:oveq2d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( F / ( ( 2 ^ M ) x. 2 ) ) = ( F / ( 2 ^ ( M + 1 ) ) ) )
+s20:s19:fveq2d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( ( 2 ^ M ) x. 2 ) ) ) = ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) )
+s21:s13,s20:eqtrd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) = ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) )
+s22:s1:nn0zd |- ( ( F e. NN0 /\ M e. NN0 ) -> F e. ZZ )
+i23::bitsval2
+s24:s22,s2,i23:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( M e. ( bits ` F ) <-> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s25:s8:nn0red |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. RR )
+s26::2rp |- 2 e. RR+
+s27:s26:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> 2 e. RR+ )
+i28::flpmodeq
+s29:s25,s27,i28:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) x. 2 ) + ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) ) = ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s30:s8:nn0zd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. ZZ )
+s31::simpr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> M e. ( bits ` F ) )
+s32:s24:adantr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> ( M e. ( bits ` F ) <-> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s33:s31,s32:mpbid |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s34:s30:adantr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. ZZ )
+i35::mod2eq1n2dvds
+s36:s34,i35:syl |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> ( ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) = 1 <-> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s37:s33,s36:mpbird |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) = 1 )
+s38::simpr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> M e. ( bits ` F ) )
+s39:s38:iftrued |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> if ( M e. ( bits ` F ) , 1 , 0 ) = 1 )
+s40:s37,s39:eqtr4d |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ M e. ( bits ` F ) ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) = if ( M e. ( bits ` F ) , 1 , 0 ) )
+s41::simpr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> -. M e. ( bits ` F ) )
+s42:s24:adantr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> ( M e. ( bits ` F ) <-> -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s43:s41,s42:mtbid |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> -. -. 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s44:s43:notnotrd |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) )
+s45:s30:adantr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) e. ZZ )
+i46::mod2eq0even
+s47:s45,i46:syl |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> ( ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) = 0 <-> 2 || ( |_ ` ( F / ( 2 ^ M ) ) ) ) )
+s48:s44,s47:mpbird |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) = 0 )
+s49::simpr |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> -. M e. ( bits ` F ) )
+s50:s49:iffalsed |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> if ( M e. ( bits ` F ) , 1 , 0 ) = 0 )
+s51:s48,s50:eqtr4d |- ( ( ( F e. NN0 /\ M e. NN0 ) /\ -. M e. ( bits ` F ) ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) = if ( M e. ( bits ` F ) , 1 , 0 ) )
+s52:s40,s51:pm2.61dan |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) = if ( M e. ( bits ` F ) , 1 , 0 ) )
+s53::2nn |- 2 e. NN
+s54:s53:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> 2 e. NN )
+i55::peano2nn0
+s56:s2,i55:syl |- ( ( F e. NN0 /\ M e. NN0 ) -> ( M + 1 ) e. NN0 )
+i57::nnexpcl
+s58:s54,s56,i57:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( 2 ^ ( M + 1 ) ) e. NN )
+i59::fldivnn0
+s60:s1,s58,i59:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) e. NN0 )
+s61:s60:nn0cnd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) e. CC )
+s62:s21:oveq1d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) x. 2 ) = ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) x. 2 ) )
+s63:s62,s52:oveq12d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( ( |_ ` ( ( |_ ` ( F / ( 2 ^ M ) ) ) / 2 ) ) x. 2 ) + ( ( |_ ` ( F / ( 2 ^ M ) ) ) mod 2 ) ) = ( ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) x. 2 ) + if ( M e. ( bits ` F ) , 1 , 0 ) ) )
+s64:s63,s29:eqtr3d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) = ( ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) x. 2 ) + if ( M e. ( bits ` F ) , 1 , 0 ) ) )
+s65::2cn |- 2 e. CC
+s66:s65:a1i |- ( ( F e. NN0 /\ M e. NN0 ) -> 2 e. CC )
+i67::mulcom
+s68:s61,s66,i67:syl2anc |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) x. 2 ) = ( 2 x. ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) ) )
+s69:s68:oveq1d |- ( ( F e. NN0 /\ M e. NN0 ) -> ( ( ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) x. 2 ) + if ( M e. ( bits ` F ) , 1 , 0 ) ) = ( ( 2 x. ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) ) + if ( M e. ( bits ` F ) , 1 , 0 ) ) )
+qed:s64,s69:eqtrd |- ( ( F e. NN0 /\ M e. NN0 ) -> ( |_ ` ( F / ( 2 ^ M ) ) ) = ( ( 2 x. ( |_ ` ( F / ( 2 ^ ( M + 1 ) ) ) ) ) + if ( M e. ( bits ` F ) , 1 , 0 ) ) )
+$)

@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=subborrowpad  LOC_AFTER=?
+
+* Padding the second operand of subBorrow with a false letter does not change the result.
+
+s1::simp1 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> X e. Word 2o )
+s2::simp2 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> Y e. Word 2o )
+s3::simp3 |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> C e. 2o )
+i4::subborrowval
+s5:s1,s2,s3,i4:syl3anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBorrow Y ) ` C ) = if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) )
+s6::0el2o |- (/) e. 2o
+s7:s6:a1i |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> (/) e. 2o )
+i8::s1cl
+s9:s7,i8:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> <" (/) "> e. Word 2o )
+i10::ccatcl
+s11:s2,s9,i10:syl2anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( Y ++ <" (/) "> ) e. Word 2o )
+i12::subborrowval
+s13:s1,s11,s3,i12:syl3anc |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBorrow ( Y ++ <" (/) "> ) ) ` C ) = if ( ( toNat ` X ) < ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) , 1o , (/) ) )
+i14::tonatpad
+s15:s2,i14:syl |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( toNat ` ( Y ++ <" (/) "> ) ) = ( toNat ` Y ) )
+c1:s15:oveq1d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) = ( ( toNat ` Y ) + ( bToNat ` C ) ) )
+c2:c1:breq2d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( toNat ` X ) < ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) <-> ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) ) )
+c3:c2:ifbid |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> if ( ( toNat ` X ) < ( ( toNat ` ( Y ++ <" (/) "> ) ) + ( bToNat ` C ) ) , 1o , (/) ) = if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) )
+s16:s13,c3:eqtrd |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBorrow ( Y ++ <" (/) "> ) ) ` C ) = if ( ( toNat ` X ) < ( ( toNat ` Y ) + ( bToNat ` C ) ) , 1o , (/) ) )
+qed:s5,s16:eqtr4d |- ( ( X e. Word 2o /\ Y e. Word 2o /\ C e. 2o ) -> ( ( X subBorrow Y ) ` C ) = ( ( X subBorrow ( Y ++ <" (/) "> ) ) ` C ) )
+$)

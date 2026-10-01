@@ -1,0 +1,25 @@
+$( <MM> <PROOF_ASST> THEOREM=tm2lenclen  LOC_AFTER=?
+
+* The length of an encoded list of numbers below ` 2 ^ B ` .  Lean: ` encList_length_le_of_lt_pow ` ; ~ tm2lencblen at ` ( encNatGam o. L ) ` with ~ tm2lrnenc .
+
+s1::simp1 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> L e. Word NN0 )
+s2::simp2 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> B e. NN0 )
+s3::simp3 |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> A. a e. ran L a < ( 2 ^ B ) )
+i4::tm2lencgam
+s5:s1,i4:syl |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( encNatGam o. L ) e. Word Word ( { 1 } X. 2o ) )
+i6::tm2lrnenc
+s7:s1,s2,s3,i6:syl3anc |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> A. w e. ran ( encNatGam o. L ) ( # ` w ) <_ B )
+i8::tm2lencblen
+s9:s5,s2,s7,i8:syl3anc |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( # ` ( encListB ` ( encNatGam o. L ) ) ) <_ ( ( ( # ` ( encNatGam o. L ) ) x. ( B + 1 ) ) + 1 ) )
+i10::tm2lenceq
+s11:s1,i10:syl |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( encList ` L ) = ( encListB ` ( encNatGam o. L ) ) )
+s12:s11:fveq2d |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( # ` ( encList ` L ) ) = ( # ` ( encListB ` ( encNatGam o. L ) ) ) )
+s13:s12:eqcomd |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( # ` ( encListB ` ( encNatGam o. L ) ) ) = ( # ` ( encList ` L ) ) )
+s14::tm2lbitf |- encNatGam : NN0 --> Word ( { 1 } X. 2o )
+s15:s14:a1i |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> encNatGam : NN0 --> Word ( { 1 } X. 2o ) )
+i16::lenco
+s17:s1,s15,i16:syl2anc |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( # ` ( encNatGam o. L ) ) = ( # ` L ) )
+s18:s17:oveq1d |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( ( # ` ( encNatGam o. L ) ) x. ( B + 1 ) ) = ( ( # ` L ) x. ( B + 1 ) ) )
+s19:s18:oveq1d |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( ( ( # ` ( encNatGam o. L ) ) x. ( B + 1 ) ) + 1 ) = ( ( ( # ` L ) x. ( B + 1 ) ) + 1 ) )
+qed:s13,s19,s9:3brtr3d |- ( ( L e. Word NN0 /\ B e. NN0 /\ A. a e. ran L a < ( 2 ^ B ) ) -> ( # ` ( encList ` L ) ) <_ ( ( ( # ` L ) x. ( B + 1 ) ) + 1 ) )
+$)
